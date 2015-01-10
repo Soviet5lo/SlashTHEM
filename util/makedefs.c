@@ -593,7 +593,7 @@ const char *build_date;
 void
 do_date()
 {
-	long clocktim = 0;
+	long long clocktim = 0; /* 5lo: Fix makedefs crash on windows */
 	char *c,  *cbuf, buf[BUFSZ];
 	const char *ul_sfx;
 
