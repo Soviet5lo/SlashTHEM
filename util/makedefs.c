@@ -1904,7 +1904,7 @@ do_objs()
 		    case AMULET_CLASS:
 			/* avoid trouble with stupid C preprocessors */
 			Fprintf(ofp,"#define\t");
-			if(objects[i].oc_material == PLASTIC) {
+			if(objects[i].oc_material == PLASTIC && objects[i].oc_nutrition == 1) {
 			    Fprintf(ofp,"FAKE_AMULET_OF_YENDOR\t%d\n", i);
 			    prefix = -1;
 			    break;
