@@ -30,8 +30,8 @@ moveloop()
 #if defined(MICRO) || defined(WIN32)
     char ch;
     int abort_lev;
-	struct obj *pobj;
 #endif
+	struct obj *pobj; /* 5lo: *pobj exists on other platforms, not just Windows */
     int moveamt = 0, wtcap = 0, change = 0;
 	int randsp;
 	int randmnst;

@@ -126,16 +126,21 @@ CHGRP = chgrp
 
 DATHELP = help hh cmdhelp history opthelp wizhelp gypsy.txt
 
-SPEC_LEVS = asmodeus.lev baalz.lev bigrm-?.lev castle.lev fakewiz?.lev \
+SPEC_LEVS = asmodeus.lev baalz.lev bigrm-*.lev castle-?.lev fakewiz?.lev \
 	juiblex.lev knox.lev medusa-?.lev minend-?.lev minefill.lev \
-	minetn-?.lev oracle.lev orcus.lev sanctum.lev soko?-?.lev \
+	minetn-?.lev oracle.lev orcus.lev sanctum.lev soko?-*.lev \
 	tower?.lev valley.lev wizard?.lev \
 	astral.lev air.lev earth.lev fire.lev water.lev \
 	beholder.lev blkmar.lev cav2fill.lev \
 	grund-?.lev demogorg.lev dispater.lev dragons.lev geryon.lev \
 	guild.lev kobold-?.lev lich.lev mall-?.lev mall.lev mineking.lev \
 	mtemple.lev nymph.lev rats.lev sea.lev spiders.lev stor-?.lev \
-	tomb.lev yeenoghu.lev frnknstn.lev nightmar.lev
+	tomb.lev yeenoghu.lev frnknstn.lev nightmar.lev \
+    heck-*.lev unhck-*.lev exmall-?.lev hellma-?.lev \
+    sheolfil.lev sheolmid.lev palace_e.lev palace_f.lev \
+    intpla-?.lev town-?.lev rndmaze.lev rndmazea.lev \
+    compu.lev key.lev hitch.lev school.lev forge.lev
+
 QUEST_LEVS = ???-goal.lev ???-fil?.lev ???-loca.lev ???-strt.lev
 
 SHARE_DATNODLB = $(CNF_SHARE_DATND)
