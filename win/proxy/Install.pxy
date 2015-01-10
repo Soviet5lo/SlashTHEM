@@ -1,0 +1,150 @@
+The proxy window interface allows the game to be built with support
+for external window interfaces. These have many advantages over
+internal interfaces: they can be added later by groups other than
+the dev-team with no need for changes to the game source; they can
+run in seperate processes and even on seperate machines; they can
+run as different users (which avoids security problems when the
+game is run as setuid or setgid).
+
+External window interfaces are not without their disadvantages.
+There is an overhead associated with the NhExt protocol and more
+information needs to be shared (since less can be assumed). This
+takes time to do, especially during startup.
+
+The following configurations currently exist:
+
+A. Plug-in window interfaces
+
+In this configuration the game itself is built with the proxy interface
+as a window interface. Typically just two windowing systems will be
+installed in the main executable - tty and proxy. The tty interface
+should be the default windowing system.
+
+Each windowing system which needs to be supported is then supplied
+as a plug-in window interface.
+
+The game and plug-in interface consist of the following systems:
+
+Game:
+	WINPROXY	Game side proxy support
+	PROXYCOM	Common proxy support
+	PROXYUTL	Interfaces between proxy and the game
+	NHWIN		Tile support
+	WINTTY		TTY window interface
+	HACK		The game core
+
+Plug-in interface:
+	WINDOW		The window interface (eg., GTK)
+	NHPROXY		Plug-in side proxy support
+
+To build:
+
+	1. Configure config.h as follows:
+		Define PROXY_GRAPHICS and TTY_GRAPHICS
+	   You may also define other _GRAPHICS symbols for multiple
+	   windowing ports in the same executable if you so desire.
+
+	2. [UNIX] Configure toplevel Makefile for proxy use:
+	
+	   Add $(CNF_SHARE_PROXYND) to the definition of CNF_SHARE_DATND.
+
+	3. Configure src/Makefile for proxy use:
+
+	   [UNIX]
+
+	   Add the following to WINSRC, WINOBJ, and WINLIB and compile:
+
+	    [WINSRC]   $(WINTTYSRC) $(WINPROXYSRC) $(PROXYUTLSRC) $(PROXYCOMSRC)
+	    [WINOBJ]   $(WINTTYOBJ) $(WINPROXYOBJ) $(PROXYUTLOBJ) $(PROXYCOMOBJ)
+	    [WINLIB]   $(WINTTYLIB) $(WINPROXYLIB)
+
+	   This will give you an executable supporting both tty and plug-in
+	   windowing ports.
+
+	   To support multiple windowing ports, change the definitions
+	   of WINSRC, WINOBJ and WINLIB to include all the relevant
+	   variables.
+
+	   [MS-Windows]
+
+	   Change the definition of USE_GTK and USE_PROXY as follows and
+	   compile:
+
+	    USE_GTK = N
+	    USE_PROXY = Y
+
+	   This will give you an executable supporting both tty and plug-in
+	   windowing ports. Multiple windowing ports are not supported under
+	   MS-Windows.
+
+	4. Follow all the instructions in ../../sys/unix/Install.unx or the
+	   appropriate documentation in ../../sys/winnt for the remainder of
+	   the installation process.
+
+	5. Build proxy library by "make nhproxy.a" in src
+
+	6. Follow the instructions in ../../win/<port> to build an external
+	   window interface for the relevant windowing systems you want to
+	   make available (and which support external interfaces).
+
+	7. If you want to enable users on remote computers to play games
+	   on your computer over the network, then you need to configure
+	   your system for this. The details of this will vary from system
+	   to system, but this is how you do it for systems running xinetd:
+
+	   a. Add a line to /etc/services such as the following:
+
+	      slashem         2700/tcp            # Slash'EM game server
+
+	      (the choice of port 2700 is arbitary.)
+
+	   b. Add a file to /etc/xinetd.d (called eg., slashem) with the
+	      following contents:
+
+	      # default: on
+	      # description: The slashem server serves NhExt connections.
+	      service slashem
+	      {
+	      		disable			= no
+			socket_type		= stream
+			wait			= no
+			user			= games
+			server			= /usr/local/bin/slashem
+			server_args		= --proxy
+			env			= HOME=/etc/slashem
+			log_on_success		+= DURATION USERID
+			log_on_failure		+= USERID
+			nice			= 10
+	      }
+
+	      (you will need to alter the location of the server if it is
+	      installed in a different directory, or with a different name.)
+	
+	   c. Create a configuration file /etc/slashem/.slashemrc which is
+	      readable by user games. It is probably better if the file (and
+	      the /etc/slashem directory) is owned by root.
+
+	   d. In /etc/slashem/.slashemrc you can specify the tilesets that
+	      the proxy server will allow access to (remote clients are not
+	      permitted to override TILESET settings). You can also specify
+	      default options if you are not happy with the ones hardcoded
+	      into slashem.
+
+	      Example contents:
+
+	      TILESET=name:Small tiles, file:gltile16.png
+	      TILESET=name:Big tiles, file:gltile32.png, transparent
+	      TILESET=name:Big 3D tiles, file:gltile64.png, transparent, pseudo3D
+
+	   e. Cause xinetd to re-read its configuration files. See the
+	      xinetd manual page for details.
+
+B. Proxified window interfaces
+
+This configuration uses dual processes (which has the advantage of
+allowing the windowing interface to run without elevated privileges -
+necessary for GTK).  It is somewhat simpler than plug-in window
+interfaces but is much less flexible.
+
+To build these interfaces follow the instructions in the directory
+containing the relevant window interface (currently only GTK).

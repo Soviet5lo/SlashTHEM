@@ -1,0 +1,91 @@
+#
+# The guild of disgruntled adventurers.
+#
+
+LEVEL: "guild"
+
+ROOM: "ordinary", lit, random, random, (12,6)
+NAME: "central"
+# stuff for them to use on you...
+OBJECT: '?',random,random
+OBJECT: '?',random,random
+OBJECT: '?',random,random
+OBJECT: '?',random,random
+OBJECT: '/',random,random
+OBJECT: '/',random,random
+OBJECT: '!',random,random
+OBJECT: '!',random,random
+OBJECT: '!',random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+OBJECT: random,random,random
+MONSTER: '@', "archeologist", random, hostile
+MONSTER: '@', "barbarian", random, hostile
+MONSTER: '@', "caveman", random, hostile
+MONSTER: '@', "cavewoman", random, hostile
+MONSTER: '@', "convict", random, hostile
+MONSTER: '@', "doppelganger", random, hostile
+MONSTER: '@', "elf", random, hostile
+MONSTER: '@', "flame mage", random, hostile
+MONSTER: '@', "geek", random, hostile
+MONSTER: '@', "healer", random, hostile
+MONSTER: '@', "ice mage", random, hostile
+MONSTER: '@', "jedi", random, hostile
+MONSTER: '@', "padawan", random, hostile
+MONSTER: '@', "knight", random, hostile
+MONSTER: '@', "monk", random, hostile
+MONSTER: '@', "necromancer", random, hostile
+MONSTER: '@', "priest", random, hostile
+MONSTER: '@', "priestess", random, hostile
+MONSTER: '@', "rogue", random, hostile
+MONSTER: '@', "samurai", random, hostile
+MONSTER: '@', "tourist", random, hostile
+MONSTER: '@', "undead slayer", random, hostile
+MONSTER: '@', "valkyrie", random, hostile
+MONSTER: '@', "warrior", random, hostile
+MONSTER: '@', "wizard", random, hostile
+MONSTER: '@', "gangster", random, hostile
+MONSTER: '@', "pokemon", random, hostile
+MONSTER: '@', "death eater", random, hostile
+MONSTER: '@', "pirate", random, hostile
+MONSTER: '@', "nobleman", random, hostile
+MONSTER: '@', "noblewoman", random, hostile
+MONSTER: '@', "electric mage", random, hostile
+MONSTER: '@', "transvestite", random, hostile
+MONSTER: '@', "courier", random, hostile
+MONSTER: '@', "chevalier", random, hostile
+MONSTER: '@', "zyborg", random, hostile
+MONSTER: '@', "rocker", random, hostile
+MONSTER: '@', "acid mage", random, hostile
+MONSTER: '@', "spacewars fighter", random, hostile
+MONSTER: '@', "elph", random, hostile
+  
+ROOM: "ordinary" , random, random, random, random
+STAIR: random, up
+OBJECT: random,random,random
+
+ROOM: "ordinary" , random, random, random, random
+STAIR: random, down
+OBJECT: random, random, random
+TRAP: random, random
+
+ROOM: "ordinary" , random, random, random, random
+OBJECT: random, random, random
+OBJECT: random, random, random
+
+ROOM: "ordinary" , random, random, random, random
+OBJECT: random, random, random
+TRAP: random, random
+
+ROOM: "ordinary" , random, random, random, random
+OBJECT: random, random, random
+TRAP: random, random
+
+RANDOM_CORRIDORS

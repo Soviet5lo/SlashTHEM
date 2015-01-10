@@ -1,0 +1,1 @@
+gcc -mms-bitfields -c -O -I../include -DDLB -DWIN32CON -omonst.o monst.c

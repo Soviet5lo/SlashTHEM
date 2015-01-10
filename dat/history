@@ -1,0 +1,255 @@
+SLASH'EM History file for release 0.0.7
+
+Behold, mortal, the origins of SLASH'EM...
+
+Jay Fenlason wrote the original Hack with help from Kenny Woodland,
+Mike Thome, and Jon Payne.
+
+Andries Brouwer did a major re-write, transforming Hack into a very different
+game, and published (at least) three versions (1.0.1, 1.0.2, and 1.0.3) for
+UNIX(tm) machines to the Usenet.
+
+Don G. Kneller ported Hack 1.0.3 to Microsoft(tm) C and MS-DOS(tm), producing
+PC HACK 1.01e, added support for DEC Rainbow graphics in version 1.03g, and
+went on to produce at least four more versions (3.0, 3.2, 3.51, and 3.6).
+
+R. Black ported PC HACK 3.51 to Lattice(tm) C and the Atari 520/1040ST,
+producing ST Hack 1.03.
+
+Mike Stephenson merged these various versions back together, incorporating
+many of the added features, and produced NetHack version 1.4.  He then
+coordinated a cast of thousands in enhancing and debugging NetHack 1.4 and
+released NetHack versions 2.2 and 2.3.
+ 
+Later, Mike coordinated a major rewrite of the game, heading a team which
+included Ken Arromdee, Jean-Christophe Collet, Steve Creps, Eric Hendrickson,
+Izchak Miller, Eric S. Raymond, John Rupley, Mike Threepoint, and Janet Walz,
+to produce NetHack 3.0c.  The same group subsequently released ten patch-
+level revisions and updates of 3.0.
+
+NetHack 3.0 was ported to the Atari by Eric R. Smith, to OS/2 by Timo
+Hakulinen, and to VMS by David Gentzel.  The three of them and Kevin Darcy
+later joined the main development team to produce subsequent revisions of
+3.0.
+
+Olaf Seibert ported NetHack 2.3 and 3.0 to the Amiga.  Norm Meluch, Stephen
+Spackman and Pierre Martineau designed overlay code for PC NetHack 3.0.
+Johnny Lee ported NetHack 3.0 to the Macintosh.  Along with various other
+Dungeoneers, they continued to enhance the PC, Macintosh, and Amiga ports
+through the later revisions of 3.0.
+
+A scant one month before the next major version  release  of Nethack,  two  
+adventurous souls undertook their own modification to the sacred Nethack
+formula. Tom Proudfoot and  Yuval  released Nethack++,   which  was rapidly
+renamed Nethack--,  containeing new monsters,  items and other miscellaneous
+modifications.
+ 
+Headed by Mike Stephenson and coordinated by Izchak Miller and Janet Walz,
+the development team which now included Ken Arromdee, David Cohrs,
+Jean-Christophe Collet, Kevin Darcy, Matt Day, Timo Hakulinen, Steve Linhart,
+Dean Luick, Pat Rankin, Eric Raymond, and Eric Smith undertook a radical
+revision of 3.0.  They re-structured the game's design, and re-wrote major
+parts of the code.  They added multiple dungeons, a new display, special
+individual character quests, a new endgame and many other new features, and
+produced NetHack 3.1.
+
+Ken Lorber, Gregg Wonderly and Greg Olson, with help from Richard Addison,
+Mike Passaretti, and Olaf Seibert, developed NetHack 3.1 for the Amiga.
+
+Norm Meluch and Kevin Smolkowski, with help from Carl Schelin, Stephen
+Spackman, Steve VanDevender, and Paul Winner, ported NetHack 3.1 to the PC.
+
+Jon Watte and Hao-yang Wang, with help from Ross Brown, Mike Engber, David
+Hairston, Michael Hamel, Jonathan Handler, Johnny Lee, Tim Lennan, Rob Menke,
+and Andy Swanson developed NetHack 3.1 for the Macintosh, porting it for
+MPW.  Building on their development, Barton House added a Think C port.  
+
+Timo Hakulinen ported NetHack 3.1 to OS/2.  Eric Smith ported NetHack 3.1
+to the Atari.  Pat Rankin, with help from Joshua Delahunty, is responsible
+for the VMS version of NetHack 3.1.  Michael Allison ported NetHack 3.1 to
+Windows NT.
+
+Dean Luick, with help from David Cohrs, developed NetHack 3.1 for X11.
+Warwick Allison added in the "tiled" version of the game and generated most
+of the individual tiles for NetHack 3.2.
+
+Time passed,  and Nethack-- was ported to 3.11 by Chris.
+
+Stephen White then released his own  modification  known  as Nethack  Plus,
+which  contained  new  character classes.  Unbeknownst to the world at large,
+Tom Proudfoot  took  this  source and combined it with his Nethack--.
+Stephen White went on to add weapon skills,  which were eventually integrated
+into  the  next version of Nethack,  and other features.
+
+In February 1996,  Tom Proudfoot released SLASH V1.  Including part of
+Stephen White's Nethack Plus and his  own  Nethack--, leaving  unmentioned
+his own slew of further modifications,  this is perhaps the best known of
+the Nethack modifications.  Six versions of this,  ending with SLASH V6,
+are known to exist.
+
+The 3.2 development team, comprised of: Michael Allison; Ken Arromdee; David
+Cohrs; Jessie Collet; Steve Creps; Kevin Darcy; Timo Hakulinen; Steve
+Linhart; Dean Luick; Pat Rankin; Eric Smith; Mike Stephenson; Janet Walz; and
+Paul Winner, released version 3.2 in April of 1996.
+
+Version 3.2 marks the tenth anniversary of the formation of the development
+team.  In a testament to their dedication to the game, all thirteen members
+of the original development team remained on the team at the start of work
+on the current release.  During the interval between the release of 3.1.3
+and 3.2, one of the founding members of the development team, Dr. Izchak
+Miller, passed away.  This release of the game is dedicated to him by the
+development and porting teams.
+
+Version 3.2 proved to be more stable than previous versions.  Many bugs
+were fixed, abuses eliminated, and game features tuned for better game
+play.
+
+SLASH V6 was picked up by Enrico Horn managed to synchronize it  with the
+3.2 source.  The new SLASH 4.1.2 was released as far back as November 1996
+went through at least 4 editlevels (E5, E6, E7)  with  the  latest  version
+being 4.1.2E8,  synchronized with Nethack 3.2.2 and the Blackmarket option
+available,  released in June 1997.
+
+Nathan La began the arduous task of drawing  tiles  for  the SLASH monsters.
+
+Kentaro Shirakata ported SLASH 4.1.2E8 to Unix.
+
+Lief Clennon ported SLASH 4.1.2E8 to OS/2.
+
+Romain Dolbeau ported SLASH 4.1.2E8 to Macintosh.
+
+Warren Cheung combined SLASH 4.1.2 and Wizard Patch to  create SLASH'EM 0.1
+in November 1997.  Several revisions including new spells and other minor
+additions have led to SLASH'EM  0.0.3. Steven Uy has generously made
+additional modifications.
+
+Dirk  Schoenberger has continued updating the SLASH/SLASH'EM monster tiles.
+He has also ported SLASH'EM to Linux.
+
+Lief Clennon ported SLASH'EM to OS/2 EMX.
+
+Kevin Hugo ported SLASH'EM to Macintosh,  and has also contributed
+additional changes and improvements.
+
+Robin Johnson finished arduous task of drawing tiles for the SLASH'EM
+monsters.  He has also contributed many more new tiles.
+
+Kevin later joined the DevTeam and incorporated the best of these ideas
+in NetHack 3.3.
+
+JNetHack (the Japanese version of NetHack) has been around since at least
+1994, developed by Issei Numata and others. The GTK interface was written
+for this variant and released in 1999.
+
+Mitsuhiro Itakura headed a team which began the process of redrawing the
+NetHack tiles in 8-bit color at 32x32 pixels.
+
+The final update to 3.2 was the bug fix release 3.2.3, which was released
+simultaneously with 3.3.0 in December 1999 just in time for the Year 2000.
+
+The 3.3 development team, consisting of Michael Allison, Ken Arromdee,
+David Cohrs, Jessie Collet, Steve Creps, Kevin Darcy, Timo Hakulinen,
+Kevin Hugo, Steve Linhart, Ken Lorber, Dean Luick, Pat Rankin, Eric Smith,
+Mike Stephenson, Janet Walz, and Paul Winner, released 3.3.0 in
+December 1999 and 3.3.1 in August of 2000.
+
+Version 3.3 offered many firsts. It was the first version to separate race
+and profession. The Elf class was removed in preference to an elf race,
+and the races of dwarves, gnomes, and orcs made their first appearance in
+the game alongside the familiar human race.  Monk and Ranger roles joined
+Archeologists, Barbarians, Cavemen, Healers, Knights, Priests, Rogues,
+Samurai, Tourists, Valkyries and of course, Wizards.  It was also the first
+version to allow you to ride a steed, and was the first version to have a
+publicly available web-site listing all the bugs that had been discovered.
+Despite that constantly growing bug list, 3.3 proved stable enough to last
+for more than a year and a half.
+
+Warren Cheung combined SLASH'EM 0.0.5E7F1 and NetHack 3.3 to create
+SLASH'EM 0.0.6 and maintained the DOS and Microsoft Windows ports.
+
+J. Ali Harlow incorporated the GTK interface and Mitsuhiro Itakura's 32x32
+tileset into SLASH'EM 0.0.6 and maintained the UNIX port of SLASH'EM 0.0.6.
+Peter Makholm maintained the Debian package.
+
+Paul Hurtley maintained the MAC port of SLASH'EM 0.0.6.
+
+The 3.4 development team initially consisted of Michael Allison, Ken Arromdee,
+David Cohrs, Jessie Collet, Kevin Hugo, Ken Lorber, Dean Luick, Pat Rankin,
+Mike Stephenson, Janet Walz, and Paul Winner, with Warwick Allison joining
+just before the release of NetHack 3.4.0 in March 2002.
+
+As with version 3.3, various people contributed to the game as a whole as
+well as supporting ports on the different platforms that NetHack runs on:
+
+Pat Rankin maintained 3.4 for VMS.
+
+Michael Allison maintained NetHack 3.4 for the MS-DOS platform.
+Paul Winner and Yitzhak Sapir provided encouragement.
+
+Dean Luick, Mark Modrall, and Kevin Hugo maintained and enhanced the
+Macintosh port of 3.4.
+
+Michael Allison, David Cohrs, Alex Kompel, Dion Nicolaas, and Yitzhak Sapir
+maintained and enhanced 3.4 for the Microsoft Windows platform. Alex Kompel
+contributed a new graphical interface for the Windows port. Alex Kompel also
+contributed a Windows CE port for 3.4.1.
+
+Ron Van Iwaarden maintained 3.4 for OS/2.
+
+Janne Salmijarvi and Teemu Suikki maintained and enhanced the
+Amiga port of 3.4 after Janne Salmijarvi resurrected it for 3.3.1.
+
+Christian `Marvin' Bressler maintained 3.4 for the Atari after he
+resurrected it for 3.3.1.
+
+Warren Cheung, Christian Cooper, J. Ali Harlow, Paul Hurtley, Pekka Rousu
+and Darshan Shaligram combined SLASH'EM 0.0.6E5F2 and Nethack 3.4
+to create SLASH'EM 0.0.7
+
+The Slash'EM home page is at http://www.slashem.org/.
+
+			   - - - - - - - - - -
+
+From time to time, some depraved individual out there in netland sends a
+particularly intriguing modification to help out with the game.  The Gods of
+the Dungeon sometimes make note of the names of the worst of these miscreants
+in this, the list of Dungeoneers:
+
+    Adam Aronow               Izchak Miller             Mike Stephenson
+    Alex Kompel               J. Ali Harlow             Norm Meluch
+    Andreas Dorn              Janet Walz                Olaf Seibert
+    Andy Church               Janne Salmijarvi          Pasi Kallinen
+    Andy Swanson              Jean-Christophe Collet    Pat Rankin
+    Ari Huttunen              Jochen Erwied             Paul Winner
+    Barton House              John Kallen               Pierre Martineau
+    Benson I. Margulies       John Rupley               Ralf Brown
+    Bill Dyer                 John S. Bien              Ray Chason
+    Boudewijn Waijers         Johnny Lee                Richard Addison
+    Bruce Cox                 Jon W{tte                 Richard Beigel
+    Bruce Holloway            Jonathan Handler          Richard P. Hughey
+    Bruce Mewborne            Joshua Delahunty          Rob Menke
+    Carl Schelin              Keizo Yamamoto            Robin Johnson
+    Chris Russo               Ken Arnold                Roderick Schertler
+    David Cohrs               Ken Arromdee              Roland McGrath
+    David Damerell            Ken Lorber                Ron Van Iwaarden
+    David Gentzel             Ken Washikita             Ronnen Miller
+    David Hairston            Kevin Darcy               Ross Brown
+    Dean Luick                Kevin Hugo                Sascha Wostmann
+    Del Lamb                  Kevin Sitze               Scott Bigham
+    Deron Meranda             Kevin Smolkowski          Scott R. Turner
+    Dion Nicolaas             Kevin Sweet               Stephen Spackman
+    Dylan O'Donnell           Lars Huttar               Stephen White
+    Eric Backus               Malcolm Ryan              Steve Creps
+    Eric Hendrickson          Mark Gooderum             Steve Linhart
+    Eric R. Smith             Mark Modrall              Steve VanDevender
+    Eric S. Raymond           Marvin Bressler           Teemu Suikki
+    Erik Andersen             Matthew Day               Tim Lennan
+    Frederick Roeber          Merlyn LeRoy              Timo Hakulinen
+    Gil Neiger                Michael Allison           Tom Almy
+    Greg Laskin               Michael Feir              Tom West
+    Greg Olson                Michael Hamel             Warren Cheung
+    Gregg Wonderly            Michael Sokolov           Warwick Allison
+    Hao-yang Wang             Mike Engber               Yitzhak Sapir
+    Helge Hafting             Mike Gallop               
+    Irina Rempt-Drijfhout     Mike Passaretti           
+
