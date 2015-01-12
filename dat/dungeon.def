@@ -52,8 +52,8 @@ BRANCH:	"Town" @ (10, 3) up -1
 
 # Levels between the Oracle and the Quest.
 #   There's no guarantee that all will be created.
-LEVEL:		"rats" "R" @ (10, 2) 20
-RNDLEVEL:	"kobold" "K" @ (11, 2) 20 2
+LEVEL:		"rats" "R" @ (10, 2) 50
+RNDLEVEL:	"kobold" "K" @ (11, 2) 50 2
 BRANCH: 	"Grund's Stronghold" @ (12, 2)
 
 
@@ -92,9 +92,9 @@ LEVALIGN:		chaotic
 LEVELDESC:	town
 #   Storage room (treasure) on levels 19-26, 66% of the time
 #   "Unused 'cause they suck"?
-RNDLEVEL:	"stor" "S" @ (19, 21) 30 3
+RNDLEVEL:	"stor" "S" @ (19, 21) 66 3
 #   Rounding out the bottom levels
-LEVEL:		"guild" "G" @ (26, 14) 10
+LEVEL:		"guild" "G" @ (26, 14) 20
 
 
 
@@ -191,10 +191,10 @@ LEVEL:		"school" "C" @ (2, 22) 20
 DUNGEON:	"The Gnomish Mines" "M" (8, 2)
 ALIGNMENT:	lawful
 DESCRIPTION:	mazelike
-RNDLEVEL:	"minetn" "T" @ (3, 2) 98 9
+RNDLEVEL:	"minetn" "T" @ (3, 2) 9
 LEVELDESC:	town
-RNDLEVEL:	"minend" "E" @ (-2, 0) 95 3
-LEVEL:		"mineking" "M" @ (-1, 0) 90
+RNDLEVEL:	"minend" "E" @ (-2, 0) 3
+LEVEL:		"mineking" "M" @ (-1, 0)
 
 
 ### The Quest Dungeon ###
@@ -231,17 +231,17 @@ LEVEL:			"lich" "none" @ (1, 0)
 DUNGEON:		"Sokoban" "none" (4, 0)
 DESCRIPTION:    mazelike
 ALIGNMENT:      neutral
-RNDLEVEL:		"soko1" "none" @ (1, 0) 95 6
-RNDLEVEL:		"soko2" "none" @ (2, 0) 95 14
-RNDLEVEL:		"soko3" "none" @ (3, 0) 95 8
-RNDLEVEL:		"soko4" "none" @ (4, 0) 95 7
+RNDLEVEL:		"soko1" "none" @ (1, 0) 6
+RNDLEVEL:		"soko2" "none" @ (2, 0) 14
+RNDLEVEL:		"soko3" "none" @ (3, 0) 8
+RNDLEVEL:		"soko4" "none" @ (4, 0) 7
 
 #
 #   The city of Angband
 #
 DUNGEON:	"Town" "A" (5, 0)
 LEVALIGN:       lawful
-RNDLEVEL:       "town" "T" @ (1, 0) 98 2
+RNDLEVEL:       "town" "T" @ (1, 0) 2
 RNDLEVEL:          "unhck" "X" @ (2, 0) 5 87
 RNDLEVEL:	"bigrm" "B" @ (3, 0) 5 21
 RNDLEVEL:	"intpla" "J" @ (4, 0) 5 5
@@ -252,7 +252,7 @@ LEVELDESC:      town
 DUNGEON:        "Grund's Stronghold" "Z" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-RNDLEVEL:       "grund" "Z" @ (1, 0) 40 3
+RNDLEVEL:       "grund" "Z" @ (1, 0) 3
 
 ### Fort Ludios ###
 # (The Central Vault of Croesus.)
@@ -260,49 +260,49 @@ RNDLEVEL:       "grund" "Z" @ (1, 0) 40 3
 DUNGEON:        "Fort Ludios" "K" (1, 0)
 DESCRIPTION:    mazelike
 ALIGNMENT:      unaligned
-LEVEL:          "knox" "K" @ (-1, 0) 50
+LEVEL:          "knox" "K" @ (-1, 0)
 
 ### The Wyrm Caves ###
 DUNGEON:        "The Wyrm Caves" "D" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "dragons" "D" @ (1, 0) 30
+LEVEL:          "dragons" "D" @ (1, 0)
 
 ### The Black Market ###
 DUNGEON:        "One-eyed Sam's Market" "D" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "blkmar" "D" @ (1, 0) 20
+LEVEL:          "blkmar" "D" @ (1, 0)
 
 ### The Lost Tomb ###
 DUNGEON:        "The Lost Tomb" "L" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "tomb" "L" @ (1, 0) 15
+LEVEL:          "tomb" "L" @ (1, 0)
 
 ### The Spider Caves ###
 DUNGEON:        "The Spider Caves" "S" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "spiders" "S" @ (1, 0) 20
+LEVEL:          "spiders" "S" @ (1, 0)
 
 ### The Sunless Sea ###
 DUNGEON:        "The Sunless Sea" "none" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "sea" "none" @ (1, 0) 20
+LEVEL:          "sea" "none" @ (1, 0)
 
 ### The Temple of Moloch ###
 DUNGEON:        "The Temple of Moloch" "none" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "mtemple" "none" @ (1, 0) 25
+LEVEL:          "mtemple" "none" @ (1, 0)
 
 ### The Giant Caverns ###
 DUNGEON:        "The Giant Caverns" "H" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "cav2fill" "H" @ (1, 0) 10
+LEVEL:          "cav2fill" "H" @ (1, 0)
 
 ### Vlad's Tower ###
 #   It has been removed from Gehennom, and it is surrounded by stone.
@@ -316,18 +316,18 @@ ALIGNMENT:      chaotic
 DUNGEON:        "Frankenstein's Lab" "none" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
-LEVEL:          "frnknstn" "none" @ (1, 0) 50
+LEVEL:          "frnknstn" "none" @ (1, 0)
 
 
 DUNGEON:        "Sheol" "V" (6, 2)
 ALIGNMENT:      noalign
 DESCRIPTION:    hellish
-LEVEL:          "sheolfil" "A" @ (1, 0) 95
-LEVEL:          "sheolmid" "H" @ (2, 0) 95
-LEVEL:          "sheolfil" "B" @ (3, 0) 95
-LEVEL:          "sheolfil" "C" @ (4, 0) 95
-LEVEL:          "palace_f" "P" @ (-2, 0) 95
-LEVEL:          "palace_e" "U" @ (-1, 0) 95
+LEVEL:          "sheolfil" "A" @ (1, 0)
+LEVEL:          "sheolmid" "H" @ (2, 0)
+LEVEL:          "sheolfil" "B" @ (3, 0)
+LEVEL:          "sheolfil" "C" @ (4, 0)
+LEVEL:          "palace_f" "P" @ (-2, 0)
+LEVEL:          "palace_e" "U" @ (-1, 0)
 
 
 ### The Endgame levels ###
