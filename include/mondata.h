@@ -89,7 +89,14 @@
 #define herbivorous(ptr)	(((ptr)->mflags1 & M1_HERBIVORE) != 0L)
 #define metallivorous(ptr)	(((ptr)->mflags1 & M1_METALLIVORE) != 0L)
 #define monpolyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L) /* monsters may poly into this */
-#define polyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L && (ptr)->mlevel < 30 && (ptr) != &mons[PM_LEPRECHAUN_KING] && (ptr) != &mons[PM_NYMPH_QUEEN] && (ptr) != &mons[PM_MIGO_QUEEN] && (ptr) != &mons[PM_MIGO_EMPRESS] && (ptr) != &mons[PM_QUEEN_BEE] && (ptr) != &mons[PM_CATOBLEPAS] && (ptr) != &mons[PM_DEEP_THOUGHT] && (ptr) != &mons[PM_EDDIE] && (ptr) != &mons[PM_ANCIENT_MULTI_HUED_DRAGON] && (ptr) != &mons[PM_DRAGON_LORD] && (ptr) != &mons[PM_VORPAL_JABBERWOCK] && (ptr) != &mons[PM_KOP_KATCHER] && (ptr) != &mons[PM_POLICEMAN_KATCHER] && (ptr) != &mons[PM_OFFICER_KATCHER] && (ptr) != &mons[PM_WARDER_KATCHER] && (ptr) != &mons[PM_DETECTIVE_KATCHER] && (ptr) != &mons[PM_PROSTETNIK_VOGON_JELTZ] && (ptr) != &mons[PM_MARVIN] && (ptr) != &mons[PM_ZAPHOD_BREEBLEBROX] && (ptr) != &mons[PM_SIZZLE] && (ptr) != &mons[PM_UNDEAD_KATCHER]) /* players may poly into this */
+#define polyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L && (ptr) != &mons[PM_LEPRECHAUN_KING] \\
+	&& (ptr) != &mons[PM_NYMPH_QUEEN] && (ptr) != &mons[PM_MIGO_QUEEN] && (ptr) != &mons[PM_MIGO_EMPRESS] \\
+	&& (ptr) != &mons[PM_QUEEN_BEE] && (ptr) != &mons[PM_CATOBLEPAS] && (ptr) != &mons[PM_DEEP_THOUGHT] \\
+	&& (ptr) != &mons[PM_EDDIE] && (ptr) != &mons[PM_ANCIENT_MULTI_HUED_DRAGON] && (ptr) != &mons[PM_DRAGON_LORD] \\
+	&& (ptr) != &mons[PM_VORPAL_JABBERWOCK] && (ptr) != &mons[PM_KOP_KATCHER] && (ptr) != &mons[PM_POLICEMAN_KATCHER] \\
+	&& (ptr) != &mons[PM_OFFICER_KATCHER] && (ptr) != &mons[PM_WARDER_KATCHER] && (ptr) != &mons[PM_DETECTIVE_KATCHER] \\
+	&& (ptr) != &mons[PM_PROSTETNIK_VOGON_JELTZ] && (ptr) != &mons[PM_MARVIN] && (ptr) != &mons[PM_ZAPHOD_BREEBLEBROX] \\
+	&& (ptr) != &mons[PM_SIZZLE] && (ptr) != &mons[PM_UNDEAD_KATCHER]) /* players may poly into this */
 #define is_undead(ptr)		(((ptr)->mflags2 & M2_UNDEAD) != 0L)
 #define is_were(ptr)		(((ptr)->mflags2 & M2_WERE) != 0L)
 #define is_vampire(ptr)		(((ptr)->mflags2 & M2_VAMPIRE) != 0L)
