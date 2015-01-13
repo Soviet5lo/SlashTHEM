@@ -3271,6 +3271,7 @@ struct monst *mtmp;
 	case PM_CHEVALIER:
 	    return ("Salutations"); /* Olde English */
 	case PM_SAMURAI:
+	case PM_NINJA:
 	    return (mtmp && mtmp->data == &mons[PM_SHOPKEEPER] ?
 	    		"Irasshaimase" : "Konnichi wa"); /* Japanese */
 	case PM_PIRATE:
@@ -3299,6 +3300,7 @@ Goodbye()
 	case PM_CHEVALIER:
 	    return ("Fare thee well");  /* Olde English */
 	case PM_SAMURAI:
+	case PM_NINJA:
 	    return ("Sayonara");        /* Japanese */
 #ifdef TOURIST
 	case PM_TOURIST:
