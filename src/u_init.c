@@ -5939,21 +5939,21 @@ register struct trobj *trop;
 #ifdef ELBERETH
 				|| otyp == RIN_LEVITATION
 #endif
-	/*			|| ((Role_if(PM_FLAME_MAGE) || Role_if(PM_ICE_MAGE))
+				|| ((Role_if(PM_FLAME_MAGE) || Role_if(PM_ICE_MAGE))
 						&&
 				    (otyp == RIN_FIRE_RESISTANCE || 
 				     otyp == RIN_COLD_RESISTANCE ||
 				     otyp == SPE_ENDURE_HEAT ||
-				     otyp == SPE_ENDURE_COLD)) */
+				     otyp == SPE_ENDURE_COLD))
 
 				/* KMH -- Hobbits shouldn't get ring of invis. */
-				/* || (Role_if(PM_HOBBIT) && otyp == RIN_INVISIBILITY) */
+				 || (Role_if(PM_HOBBIT) && otyp == RIN_INVISIBILITY)
 
 				/* KMH, balance patch -- now an amulet */
-				/*|| (Role_if(PM_NECROMANCER) &&
-						otyp == AMULET_OF_DRAIN_RESISTANCE)*/
+				|| (Role_if(PM_NECROMANCER) &&
+						otyp == AMULET_OF_DRAIN_RESISTANCE)
 				/* 'useless' or over powerful items */
-				/*|| otyp == POT_HALLUCINATION
+				|| otyp == POT_HALLUCINATION
 				|| otyp == POT_ACID
 				|| otyp == SCR_AMNESIA
 				|| otyp == SCR_FIRE
@@ -5962,24 +5962,25 @@ register struct trobj *trop;
 				|| otyp == RIN_AGGRAVATE_MONSTER
 				|| otyp == RIN_HUNGER
 				|| otyp == RIN_SLEEPING
-				|| otyp == WAN_NOTHING*/
+				|| otyp == WAN_NOTHING
 				/* Monks don't use weapons */
-				/*|| (otyp == SCR_ENCHANT_WEAPON &&
-				    Role_if(PM_MONK))*/
+				|| (otyp == SCR_ENCHANT_WEAPON &&
+				    Role_if(PM_MONK))
 				/* wizard patch -- they already have one */
-				/*|| (otyp == SPE_FORCE_BOLT &&
-				    Role_if(PM_WIZARD))*/
+				|| (otyp == SPE_FORCE_BOLT &&
+				    Role_if(PM_WIZARD))
 				/* powerful spells are either useless to
 				   low level players or unbalancing; also
 				   spells in restricted skill categories */
-				/*|| (obj->oclass == SPBOOK_CLASS &&
+				|| (obj->oclass == SPBOOK_CLASS &&
 				    (objects[otyp].oc_level > 3 ||
-				    restricted_spell_discipline(otyp)))*/
+				    restricted_spell_discipline(otyp)))
 							) {
 				dealloc_obj(obj);
 				obj = mkobj(trop->trclass, FALSE);
 				otyp = obj->otyp;
 			} /* re-enabled a lot of stuff. Startscum if you really have to. --Amy */
+			/* 5lo: Re-disabled everything from above.  Wastes spots in inventory for some roles. */
 
 #ifdef JEDI
 			if (is_lightsaber(obj))
@@ -6014,9 +6015,9 @@ register struct trobj *trop;
 				nocreate3 = POT_POLYMORPH;
 			}
 			/* Don't have 2 of the same ring or spellbook */
-			/*if (obj->oclass == RING_CLASS ||
+			if (obj->oclass == RING_CLASS ||
 			    obj->oclass == SPBOOK_CLASS)
-				nocreate4 = otyp;*/
+				nocreate4 = otyp;
 		}
 
 #ifdef GOLDOBJ
