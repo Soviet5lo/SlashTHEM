@@ -3360,6 +3360,13 @@ const char *str;
 		makeknown(AMULET_OF_REFLECTION);
 	    }
 	    return TRUE;
+	} else if ((orefl = which_armor(mon, W_ARMG)) &&
+				orefl->otyp == GAUNTLETS_OF_REFLECTION) {
+		if (str) {
+		    pline(str, s_suffix(mon_nam(mon)), "gauntlets");
+		    makeknown(GAUNTLETS_OF_REFLECTION);
+	    }
+	    return TRUE;	
 	} else if ((orefl = which_armor(mon, W_AMUL)) &&
 				orefl->otyp == AMULET_OF_DATA_STORAGE) {
 	    if (str) {
@@ -3429,6 +3436,12 @@ const char *fmt, *str;
 	    /* Due to wielded artifact weapon */
 	    if (fmt && str)
 	    	pline(fmt, str, "weapon");
+	    return TRUE;
+	} else if (EReflecting & W_ARMG) {
+	    if (fmt && str) {
+		pline(fmt, str, "gauntlets");
+		makeknown(GAUNTLETS_OF_REFLECTION);
+	    }
 	    return TRUE;
 	} else if (EReflecting & W_AMUL) {
 	    if (fmt && str) {

@@ -5202,6 +5202,10 @@ register int osym, dmgtyp;
 			case RING_CLASS:
 			    if(obj->otyp == RIN_SHOCK_RESISTANCE)
 				    { skip++; break; }
+			    /* worn rubber gloves protect rings */
+			    if (uarmg && uarmg->otyp == RUBBER_GLOVES &&
+			    (obj == uleft || obj == uright))
+				    { skip++; break; }
 			    dindx = 4;
 			    dmg = 0;
 			    break;

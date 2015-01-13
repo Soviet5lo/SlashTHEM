@@ -386,7 +386,6 @@ Helmet_on()
 	case PLASTEEL_HELM:
 #endif
 	case HELMET:
-	case HELM_OF_STEEL:
 	case DENTED_POT:
 	case ELVEN_LEATHER_HELM:
 	case DWARVISH_IRON_HELM:
@@ -454,7 +453,6 @@ Helmet_off()
 	case PLASTEEL_HELM:
 #endif
 	case HELMET:
-	case HELM_OF_STEEL:
 	case DENTED_POT:
 	case ELVEN_LEATHER_HELM:
 	case DWARVISH_IRON_HELM:
@@ -502,7 +500,8 @@ Gloves_on()
 	case PLASTEEL_GLOVES:
 #endif
 	case LEATHER_GLOVES:
-	case GAUNTLETS_OF_STEEL:
+	case RUBBER_GLOVES:
+	case GAUNTLETS_OF_REFLECTION:
 	case GAUNTLETS_OF_TYPING:
 		break;
 	case GAUNTLETS_OF_SWIMMING:
@@ -541,7 +540,8 @@ Gloves_off()
 	case PLASTEEL_GLOVES:
 #endif
 	case LEATHER_GLOVES:
-	case GAUNTLETS_OF_STEEL:
+	case RUBBER_GLOVES:
+	case GAUNTLETS_OF_REFLECTION:
 	case GAUNTLETS_OF_TYPING:
 	    break;
 	case GAUNTLETS_OF_SWIMMING:
