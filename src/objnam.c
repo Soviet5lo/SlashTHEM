@@ -140,7 +140,7 @@ register int otyp;
 	register const char *un = ocl->oc_uname;
 	register int nn = ocl->oc_name_known;
 
-	if (Role_if(PM_SAMURAI) && Alternate_item_name(otyp,Japanese_items))
+	if ( (Role_if(PM_SAMURAI) || Role_if(PM_NINA) ) && Alternate_item_name(otyp,Japanese_items))
 		actualn = Alternate_item_name(otyp,Japanese_items);
 	if ( (Role_if(PM_PIRATE) || Role_if(PM_KORSAIR) ) && Alternate_item_name(otyp,Pirate_items))
 		actualn = Alternate_item_name(otyp,Pirate_items);
@@ -290,7 +290,7 @@ register struct obj *obj;
 	register const char *un = ocl->oc_uname;
 
 	buf = nextobuf() + PREFIX;	/* leave room for "17 -3 " */
-	if (Role_if(PM_SAMURAI) && Alternate_item_name(typ,Japanese_items))
+	if ( (Role_if(PM_SAMURAI) || Role_if(PM_NINJA) ) && Alternate_item_name(typ,Japanese_items))
 		actualn = Alternate_item_name(typ,Japanese_items);
 	if ( (Role_if(PM_PIRATE) || Role_if(PM_KORSAIR) ) && Alternate_item_name(typ,Pirate_items))
 		actualn = Alternate_item_name(typ,Pirate_items);
