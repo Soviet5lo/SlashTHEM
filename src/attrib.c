@@ -254,7 +254,7 @@ const struct innate {
 
 	/* Intrinsics conferred by race */
 	dop_abil[] = {/* {   1, &(HPolymorph), "", "" },*/
-		       {   9, &(HPolymorph_control), "your choices improve", "choiceless" },
+		       {   25, &(HPolymorph_control), "your choices improve", "choiceless" },
 		       {   0, 0, 0, 0 } },
 
 #ifdef DWARF
