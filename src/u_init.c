@@ -5949,6 +5949,9 @@ register struct trobj *trop;
 				/* KMH -- Hobbits shouldn't get ring of invis. */
 				 || (Role_if(PM_HOBBIT) && otyp == RIN_INVISIBILITY)
 
+				/* 5lo -- Doppelgangers shouldn't get ring of poly control. */
+				 || (Race_if(PM_DOPPELGANGER) && otyp == RIN_POLYMORPH_CONTROL)
+
 				/* KMH, balance patch -- now an amulet */
 				|| (Role_if(PM_NECROMANCER) &&
 						otyp == AMULET_OF_DRAIN_RESISTANCE)
