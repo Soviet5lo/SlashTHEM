@@ -140,7 +140,7 @@ register int otyp;
 	register const char *un = ocl->oc_uname;
 	register int nn = ocl->oc_name_known;
 
-	if ( (Role_if(PM_SAMURAI) || Role_if(PM_NINA) ) && Alternate_item_name(otyp,Japanese_items))
+	if ( (Role_if(PM_SAMURAI) || Role_if(PM_NINJA) ) && Alternate_item_name(otyp,Japanese_items))
 		actualn = Alternate_item_name(otyp,Japanese_items);
 	if ( (Role_if(PM_PIRATE) || Role_if(PM_KORSAIR) ) && Alternate_item_name(otyp,Pirate_items))
 		actualn = Alternate_item_name(otyp,Pirate_items);
