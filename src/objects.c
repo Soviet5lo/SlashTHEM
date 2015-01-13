@@ -301,9 +301,11 @@ WEAPON("spiked battle boot", (char *)0,
 
 /* Quarterstaves */
 WEAPON("quarterstaff", "staff",
-	0, 0, 1, 12, 16,  5,  9,  9, 0, B,   P_QUARTERSTAFF, WOOD, HI_WOOD),
+	0, 0, 1, 10, 16,  5,  9,  9, 0, B,   P_QUARTERSTAFF, WOOD, HI_WOOD),
+WEAPON("silver capped staff", (char *)0,
+	0, 0, 1, 2,  16, 100, 9,  9, 0, B,	 P_QUARTERSTAFF, SILVER, HI_SILVER),
 WEAPON("battle staff", (char *)0,
-	0, 0, 1, 1, 16,  5,  15,  15, 0, B,   P_QUARTERSTAFF, METAL, HI_METAL),
+	0, 0, 1, 1, 16,  155,  15,  15, 0, B,   P_QUARTERSTAFF, METAL, HI_METAL),
 
 /* Polearms */
 /* (also weptool fishing pole) */
