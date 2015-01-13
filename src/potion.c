@@ -1120,7 +1120,7 @@ peffects(otmp)
 
 		}
 
-		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Role_if(PM_GOFF) ) {
+		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Role_if(PM_GOFF) || Race_if(PM_GASTLY)) {
 		    violated_vegetarian();
 		    if (otmp->cursed)
 			pline("Yecch!  This %s.", Hallucination ?
