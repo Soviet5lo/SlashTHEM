@@ -3369,6 +3369,7 @@ gethungry()	/* as time goes by - called by moveloop() and domove() */
         /* Convicts can last twice as long at hungry and below */
         && (!Role_if(PM_CONVICT) || (moves % 2) || (u.uhs < HUNGRY))
 #endif /* CONVICT */
+		&& (!Race_if(PM_VAMPIRE) || (moves % 2) || (u.uhs < HUNGRY))
 		&& !Slow_digestion)
 	    u.uhunger--;		/* ordinary food consumption */
 
