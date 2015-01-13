@@ -1191,9 +1191,14 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	}
 	if (attacks(AD_ELEC, otmp)) {
 	    if (realizes_damage)
-		pline_The("massive hammer hits%s %s%c",
-			  !spec_dbon_applies ? "" : "!  Lightning strikes",
-			  hittee, !spec_dbon_applies ? '.' : '!');
+		if(otmp->oartifact == ART_MJOLLNIR)
+		    pline_The("massive hammer hits%s %s%c",
+		    !spec_dbon_applies ? "" : "!  Lightning strikes",
+		    hittee, !spec_dbon_applies ? '.' : '!');
+		else
+		    pline_The("sparking blade %s %s%c",
+		    !spec_dbon_applies ? "hits" : "shocks",
+		    hittee, !spec_dbon_applies ? '.' : '!');
 	    if (!rn2(150)) (void) destroy_mitem(mdef, RING_CLASS, AD_ELEC);
 	    if (!rn2(150)) (void) destroy_mitem(mdef, WAND_CLASS, AD_ELEC);
 	    return realizes_damage;
