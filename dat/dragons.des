@@ -92,6 +92,8 @@ MONSTER: 'D', random, random, hostile
 MONSTER: 'D', random, random, hostile
 MONSTER: 'D', random, random, hostile
 MONSTER: 'D', random, random, hostile
+# 5lo: Adding the otherwise unused Dragon Lord
+MONSTER: 'D', "Dragon Lord", random, hostile
 MONSTER: 'w', random, random, hostile
 MONSTER: 'w', random, random, hostile
 MONSTER: 'w', random, random, hostile
