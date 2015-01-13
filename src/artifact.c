@@ -498,6 +498,8 @@ long wp_mask;
 	    mask = &ECold_resistance;
 	else if (dtyp == AD_ELEC)
 	    mask = &EShock_resistance;
+    else if (dtyp == AD_ACID)
+        mask = &EAcid_resistance;
 	else if (dtyp == AD_MAGM)
 	    mask = &EAntimagic;
 	else if (dtyp == AD_DISN)
@@ -767,6 +769,10 @@ struct monst *mtmp;
 			if (yours ? Shock_resistance : resists_elec(mtmp))
 			    retval = FALSE;
 			break;
+        case AD_ACID:
+            if (yours ? Acid_resistance : resists_acid(mtmp))
+                retval = FALSE;
+            break;
 		case AD_MAGM:
 		case AD_STUN:
 			if (yours ? Antimagic : (rn2(100) < ptr->mr))
@@ -1192,6 +1198,14 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	    if (!rn2(150)) (void) destroy_mitem(mdef, WAND_CLASS, AD_ELEC);
 	    return realizes_damage;
 	}
+    if (attacks(AD_ACID, otmp)) {   /* 5lo: Adapted from BarclayII's Slashem-up */
+        if (realizes_damage)
+        pline_The("acidic blade %s %s%c",
+              !spec_dbon_applies ? "hits" :
+              "burns",
+              hittee, !spec_dbon_applies ? '.' : '!');
+        return realizes_damage;
+    }
 	if (attacks(AD_MAGM, otmp)) {
 	    if (realizes_damage)
 		pline_The("imaginary widget hits%s %s%c",
@@ -2035,6 +2049,12 @@ boolean silent;
 						the(xname(obj)));
 			 }
 			 return (AD_ELEC);
+         case AD_ACID:
+             if (!silent) {
+                pline("Foul slimy water drips from %s.",
+                        the(xname(obj)));
+             }
+             return (AD_ACID);
 		 case AD_DRLI:
 			 if (!silent) {
 				pline("%s absorbs the water!", The(xname(obj)));
