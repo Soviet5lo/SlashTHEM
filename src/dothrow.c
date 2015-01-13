@@ -222,9 +222,9 @@ int thrown;
 		if (obj->otyp == ORCISH_ARROW && uwep &&
 				uwep->otyp == ORCISH_BOW) multishot++;
 		break;
-        case PM_HOBBIT:
-        if (skill == P_SLING) multishot++;
-        break;
+		case PM_HOBBIT:
+		if (skill == P_SLING) multishot++;
+		break;
 	    default:
 		break;	/* No bonus */
 	    }
