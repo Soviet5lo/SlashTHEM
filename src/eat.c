@@ -2055,7 +2055,7 @@ struct obj *obj;
 	if(Race_if(PM_GASTLY)){
 	pline("Yum!  Rotten %s!", foodword(obj));
 	healup(d(2,2) + rnz(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
-	return 1;
+	return(0);
 	}
 	pline("Blecch!  Rotten %s!", foodword(obj));
 	if(!rn2(4)) {
