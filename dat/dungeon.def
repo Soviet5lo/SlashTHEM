@@ -44,7 +44,7 @@ LEVALIGN:	lawful
 LEVELDESC:	town
 #
 #   Oracle on levels 7 to 9.
-LEVEL:		"oracle" "O" @ (7, 3) 70
+LEVEL:		"oracle" "O" @ (7, 3)
 LEVALIGN:	neutral
 BRANCH:	"Sokoban" @ (8, 2) up -1
 BRANCH:	"Town" @ (10, 3) up -1
