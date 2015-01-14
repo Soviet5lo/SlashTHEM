@@ -27,7 +27,9 @@ STATIC_DCL boolean FDECL(wrong_elem_type, (struct permonst *));
 STATIC_DCL void FDECL(m_initgrp,(struct monst *,int,int,int));
 STATIC_DCL void FDECL(m_initthrow,(struct monst *,int,int));
 STATIC_DCL void FDECL(m_initweap,(struct monst *));
+#ifdef EASY_MODE
 STATIC_DCL void FDECL(m_initxtraitem,(struct monst *));
+#endif EASY_MODE
 STATIC_DCL void FDECL(m_initweap_normal,(struct monst *));
 #ifdef OVL1
 STATIC_DCL void FDECL(m_initinv,(struct monst *));
@@ -214,7 +216,7 @@ register struct monst *mtmp;
 
 	return;
 }
-
+#ifdef EASY_MODE
 STATIC_OVL void
 m_initxtraitem(mtmp)
 register struct monst *mtmp;
@@ -271,7 +273,7 @@ register struct monst *mtmp;
 	}
 
 }
-
+#endif
 STATIC_OVL void
 m_initweap(mtmp)
 register struct monst *mtmp;

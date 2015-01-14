@@ -436,6 +436,7 @@ typedef unsigned char	uchar;
 #define ELBERETH	/* Engraving the E-word repels monsters */
 /* #define NOARTIFACTWISH */  /* No wishing for special artifacts -- swhite@cs.mun.ca */
 /* #define NO_BONES */	/*Disables loading and saving bones levels*/
+/* #define EASY_MODE */  /* 5lo: Enables monsters dropping helpful scrolls more often */
 
 /* The following are best left disabled until their bugs are completely fixed */
 

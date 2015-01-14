@@ -796,7 +796,7 @@ static struct trobj LostSoulItemY[] = {
 	{ TORCH, 0, TOOL_CLASS, 3, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#ifdef EASY_MODE
 static struct trobj AlwaysStartItem[] = {
 	{ SCR_HEALING, 0, SCROLL_CLASS, 5, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -806,7 +806,7 @@ static struct trobj AlwaysStartItemB[] = {
 	{ SCR_STANDARD_ID, 0, SCROLL_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#endif /* EASY_MODE */
 static struct trobj UberLostSoulItemA[] = {
 	{ TALLOW_CANDLE, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -3587,11 +3587,11 @@ u_init()
 	default:	/* impossible */
 		break;
 	}
-
+#ifdef EASY_MODE
 		/* Players will start with a few healing and identify items now. --Amy */
           ini_inv(AlwaysStartItem);
           ini_inv(AlwaysStartItemB);
-
+#endif /* EASY_MODE */
 	if (!strncmpi(plname, "lostsoul", 8)) { 
           ini_inv(LostSoulItem);  /* In Angband or TOME these would be scrolls of cure hunger instead of food rations. */
           ini_inv(LostSoulItemX);

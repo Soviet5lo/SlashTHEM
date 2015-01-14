@@ -2450,10 +2450,10 @@ xkilled(mtmp, dest)
 		if ((mdat == &mons[PM_SQUIRREL] || mdat == &mons[PM_IGUANA] || mdat == &mons[PM_HELPFUL_SQUIRREL] || mdat == &mons[PM_BIG_IGUANA]) && !rn2(50)) otmp = mksobj_at(ASIAN_PEAR, x, y, TRUE, FALSE);
 
 		if ((mdat == &mons[PM_GECKO] || mdat == &mons[PM_GIANT_GECKO]) && !rn2(40)) otmp = mksobj_at(EUCALYPTUS_LEAF, x, y, TRUE, FALSE);
-
+#ifdef EASY_MODE
 		if (!rn2(100)) otmp = mksobj_at(SCR_STANDARD_ID, x, y, TRUE, FALSE);
 		if (!rn2(40)) otmp = mksobj_at(SCR_HEALING, x, y, TRUE, FALSE);
-
+#endif /* EASY_MODE */
 		if (!rn2(20) /*&& !(mvitals[mndx].mvflags & G_NOCORPSE) && !(nohands(mdat))*/
 	/* lowered overall chance, but see below for a chance to get extra items --Amy */
 #ifdef KOPS
