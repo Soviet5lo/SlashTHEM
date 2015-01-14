@@ -29,7 +29,7 @@ STATIC_DCL void FDECL(m_initthrow,(struct monst *,int,int));
 STATIC_DCL void FDECL(m_initweap,(struct monst *));
 #ifdef EASY_MODE
 STATIC_DCL void FDECL(m_initxtraitem,(struct monst *));
-#endif EASY_MODE
+#endif /* EASY_MODE */
 STATIC_DCL void FDECL(m_initweap_normal,(struct monst *));
 #ifdef OVL1
 STATIC_DCL void FDECL(m_initinv,(struct monst *));
@@ -3765,9 +3765,9 @@ register struct monst *mtmp;
 			(void) mpickobj(mtmp, otmp);
 			}
 #endif
-	if (rn2(5)) { (void)moongets(mtmp, GNOMISH_HELM); }
-	if (!rn2(3)) { (void)moongets(mtmp, GNOMISH_BOOTS); }
-	if (!rn2(5)) { (void)moongets(mtmp, GNOMISH_SUIT); }
+	if (rn2(5)) { (void)mongets(mtmp, GNOMISH_HELM); }
+	if (!rn2(3)) { (void)mongets(mtmp, GNOMISH_BOOTS); }
+	if (!rn2(5)) { (void)mongets(mtmp, GNOMISH_SUIT); }
 		switch (mm) {
 		    case PM_GNOLL:
 			if(!rn2(3)) (void) mongets(mtmp, ORCISH_HELM);
@@ -5377,13 +5377,17 @@ register int	mmflags;
 	    if(is_armed(ptr))
 		m_initweap(mtmp);	/* equip with weapons / armor */
 	    m_initinv(mtmp);  /* add on a few special items incl. more armor */
+#ifdef EASY_MODE
 		m_initxtraitem(mtmp);
+#endif /* EASY_MODE */
 	    m_dowear(mtmp, TRUE);
 	} else {
 	    if (mtmp->minvent) discard_minvent(mtmp);
 	    mtmp->minvent = (struct obj *)0;    /* caller expects this */
 	    mtmp->minvent = (struct obj *)0;    /* caller expects this */
+#ifdef EASY_MODE
 		m_initxtraitem(mtmp);
+#endif /* EASY_MODE */
 	}
 	if ((ptr->mflags3 & M3_WAITMASK) && !(mmflags & MM_NOWAIT)) {
 		if (ptr->mflags3 & M3_WAITFORU)
