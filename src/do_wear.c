@@ -108,6 +108,7 @@ Boots_on()
 	case PLASTEEL_BOOTS:
 #endif
 	case LOW_BOOTS:
+	case GNOMISH_BOOTS:
 	case IRON_SHOES:
 	case HIGH_BOOTS:
 	case WEDGE_SANDALS:
@@ -217,6 +218,7 @@ Boots_off()
 		    set_wounded_legs(RIGHT_SIDE, rn1(35, 41));
 		break;
 	case LOW_BOOTS:
+	case GNOMISH_BOOTS:
 	case IRON_SHOES:
 	case WEDGE_SANDALS:
 	case FEMININE_PUMPS:
@@ -389,6 +391,7 @@ Helmet_on()
 	case DENTED_POT:
 	case ELVEN_LEATHER_HELM:
 	case DWARVISH_IRON_HELM:
+	case GNOMISH_HELM:
 	case ORCISH_HELM:
 	/* KMH, balance patch -- removed
 	case FIRE_HELMET: */
@@ -456,6 +459,7 @@ Helmet_off()
 	case DENTED_POT:
 	case ELVEN_LEATHER_HELM:
 	case DWARVISH_IRON_HELM:
+	case GNOMISH_HELM:
 	case ORCISH_HELM:
 	/* KMH, balance patch -- removed
 	case FIRE_HELMET: */

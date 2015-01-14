@@ -3746,7 +3746,7 @@ register struct monst *mtmp;
 		break;
 
 	    case S_GNOME:
-
+#if 0 /* Replaced by Gnomish armor */
 			if (!rn2(20) ) {
 
 			otmp = mksobj(rnd_class(ORCISH_DAGGER,HAWAIIAN_SHIRT-1),
@@ -3764,8 +3764,10 @@ register struct monst *mtmp;
 			otmp->owt = weight(otmp);
 			(void) mpickobj(mtmp, otmp);
 			}
-
-
+#endif
+	if (rn2(5)) { (void)moongets(mtmp, GNOMISH_HELM); }
+	if (!rn2(3)) { (void)moongets(mtmp, GNOMISH_BOOTS); }
+	if (!rn2(5)) { (void)moongets(mtmp, GNOMISH_SUIT); }
 		switch (mm) {
 		    case PM_GNOLL:
 			if(!rn2(3)) (void) mongets(mtmp, ORCISH_HELM);

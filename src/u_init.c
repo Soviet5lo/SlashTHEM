@@ -1075,6 +1075,10 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
  { PM_DWARF, PICK_AXE,		DWARVISH_MATTOCK      },
     { PM_GNOME, BOW,			CROSSBOW	      },
     { PM_GNOME, ARROW,			CROSSBOW_BOLT	      },
+    { PM_GNOME, HELMET, GNOMISH_HELM },
+    { PM_GNOME, LOW_BOOTS, GNOMISH_BOOTS },
+    { PM_GNOME, HIGH_BOOTS, GNOMISH_BOOTS },
+    { PM_GNOME, LEATHER_ARMOR, GNOMISH_SUIT },
     { PM_HUMAN_WEREWOLF,FOOD_RATION,		TRIPE_RATION	      },
     { PM_HUMAN_WEREWOLF,SILVER_SPEAR,		SPEAR		      },
     { PM_HUMAN_WEREWOLF,SILVER_DAGGER,		DAGGER		      },
@@ -3492,6 +3496,9 @@ u_init()
 	    break;
 
 	case PM_GNOME:
+	    knows_object(GNOMISH_HELM);
+	    knows_object(GNOMISH_BOOTS);
+	    knows_object(GNOMISH_SUIT);
 	    break;
 	case PM_HUMAN_WEREWOLF:
 	    if (!Role_if(PM_LUNATIC)) u.ulycn = PM_WEREWOLF;
