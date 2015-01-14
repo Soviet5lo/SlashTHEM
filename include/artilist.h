@@ -146,7 +146,7 @@ A("Reaper",                     HALBERD,
 
 A("Holy Spear of Light",        SILVER_SPEAR,
        (SPFX_RESTR|SPFX_INTEL|SPFX_DFLAG2), 0, M2_UNDEAD,
-       PHYS(5,5),      NO_DFNS,  NO_CARY,     LIGHT_AREA, A_LAWFUL, NON_PM, NON_PM, 4000L ),
+       PHYS(5,5),      NO_DFNS,  NO_CARY,     LIGHT_AREA, A_LAWFUL, PM_UNDEAD_SLAYER, NON_PM, 4000L ),
 
 A("Rod of Lordly Might", MACE, /*needs quote*/
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
@@ -206,7 +206,7 @@ A("Mirrorbright",               SHIELD_OF_REFLECTION,
 
 A("Deluder",               CLOAK_OF_DISPLACEMENT,
 	(SPFX_RESTR|SPFX_STLTH|SPFX_LUCK), 0, 0,
-	NO_ATTK,      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, PM_WIZARD, NON_PM, 5000L ),
+	NO_ATTK,      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, PM_JEDI, NON_PM, 5000L ),
 
 #ifdef TOURIST
 A("Whisperfeet",               SPEED_BOOTS,
@@ -267,7 +267,7 @@ A("Thiefbane",                  LONG_SWORD,
 
 A("Deathsword",                   TWO_HANDED_SWORD,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, M2_HUMAN,
-	PHYS(5,7),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_BARBARIAN, NON_PM, 5000L ),
+	PHYS(5,7),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_WARRIOR, NON_PM, 5000L ),
 
 A("Bat from Hell",                BASEBALL_BAT,
 	(SPFX_RESTR), 0, 0,
@@ -294,9 +294,9 @@ A("Wormbiter",			CRYSKNIFE,
 	0,		A_NEUTRAL,	NON_PM, NON_PM, 2000L ),
 
 A("Shocker",			ELECTRIC_SWORD,
-	SPFX_RESTR, 0, 0,
+	(SPFX_RESTR|SPFX_ATTK), 0, 0,
 	ELEC(3,0),	NO_DFNS,	NO_CARY,
-	0,		A_NEUTRAL,	NON_PM, NON_PM, 1000L ),
+	0,		A_NEUTRAL,	PM_GEEK, NON_PM, 1000L ),
 
 A("Scales of the Dragon Lord",	GRAY_DRAGON_SCALE_MAIL,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_PROTEC), 0, 0,
