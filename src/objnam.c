@@ -74,6 +74,7 @@ STATIC_OVL struct Jitem Japanese_items[] = {
 	{ TWO_HANDED_SWORD, "no-dachi" },
 	{ WAR_HAMMER, "dai tsuchi" },
 	{ WOODEN_HARP, "koto" },
+	{ DOUGHNUT, "onigiri" }, /* 4kids dubbing */
 	{0, "" }
 };
 

@@ -213,7 +213,7 @@ static struct trobj Officer[] = {
 	{ LEATHER_ARMOR, 0, ARMOR_SYM, 1, UNDEF_BLESS },
 	{ WAN_MAGIC_MISSILE, UNDEF_SPE, WAND_SYM, 1, UNDEF_BLESS },
 	{ WAN_STRIKING, UNDEF_SPE, WAND_SYM, 1, UNDEF_BLESS },
-	{ HACKER_S_FOOD, 0, FOOD_SYM, 6, 0 },
+	{ DOUGHNUT, 0, FOOD_SYM, 6, 0 },
 	{ 0, 0, 0, 0, 0, }
 };
 
