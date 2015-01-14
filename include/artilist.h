@@ -85,9 +85,9 @@ A("Excalibur",                  LONG_SWORD, /* removed NOGEN --Amy */
 	PHYS(5,5),	DRLI(0,0),	NO_CARY,	0, A_LAWFUL, PM_KNIGHT, NON_PM, 4000L ),
 
 #ifdef CONVICT
-A("Luck Blade",			BROADSWORD,
-	(SPFX_RESTR|SPFX_LUCK|SPFX_INTEL),0,0,
-	PHYS(5,3),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_CONVICT, NON_PM, 3000L ),
+A("Shadowblade",			KNIFE,
+	(SPFX_RESTR|SPFX_STLTH),0,0,
+	PHYS(5,6),	NO_DFNS,	NO_CARY,	INVIS, A_CHAOTIC, PM_CONVICT, NON_PM, 3000L ),
 #endif /* CONVICT */
 A("Sunsword",                   LONG_SWORD,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, M2_UNDEAD,
