@@ -66,13 +66,10 @@ static struct trobj Bleeder[] = {
 	{ KNIFE, 0, WEAPON_CLASS, 1, 0 },
 	{ POT_VAMPIRE_BLOOD, 0, POTION_CLASS, 2, 0 },
 	{ LAB_COAT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ RIN_TIMELY_BACKUP, UNDEF_SPE, RING_CLASS, 1, UNDEF_BLESS },
-	{ AMULET_OF_DATA_STORAGE, 0, AMULET_CLASS, 1, UNDEF_BLESS },
 	{ ICE_BOX, 0, TOOL_CLASS, 1, 0 },
 	{ MIRROR, 0, TOOL_CLASS, 1, 0 },
 	{ CAN_OF_GREASE, UNDEF_SPE, TOOL_CLASS, 1, 0 },
 	{ FOOD_RATION, 0, FOOD_CLASS, 2, 0 },
-	{ SCR_ROOT_PASSWORD_DETECTION, 0, SCROLL_CLASS, 1, 1 },
 	{ SPE_PROTECTION, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ SPE_RESIST_POISON, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ SPE_BOTOX_RESIST, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
@@ -84,6 +81,7 @@ static struct trobj Bard[] = {
 #define BARD_INSTR 0
 #define BARD_BOOZE 4
 #define BARD_WHISTLE 5
+	{ DAGGER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ WOODEN_HARP, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
 	{ LEATHER_CLOAK, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ APPLE, 0, FOOD_CLASS, 3, 0 },
@@ -234,6 +232,8 @@ static struct trobj Undertaker[] = {
 	{ WAN_UNDEAD_TURNING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ WAN_UNDEAD_TURNING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
+	{ BRASS_LANTERN, 1, TOOL_CLASS, 1, 0 }, /* Graveyards are dark places */
+	{ PICK_AXE, 0, TOOL_CLASS, 1, UNDEF_BLESS }, /* They dig graves after all */
 	{ 0, 0, 0, 0, 0, }
 };
 
@@ -253,6 +253,7 @@ static struct trobj Firefighter[] = {
 };
 
 static struct trobj Locksmith[] = {
+	{ DAGGER, 0, WEAPON_CLASS, 5, UNDEF_BLESS },
 	{ WAN_OPENING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ WAN_LOCKING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ SKELETON_KEY, 0, TOOL_CLASS, 1, 0 },
@@ -274,6 +275,7 @@ static struct trobj Ninja[] = {
 };
 
 static struct trobj Gangster[] = {
+	{ KNIFE, 0, WEAPON_CLASS, 1, UNDEF_BLESS }, /* That ammo won't carry them far.  Give them a knife.  */
 	{ SUBMACHINE_GUN, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
 	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
@@ -2323,6 +2325,7 @@ static const struct def_skill Skill_Unt[] = {
     { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_SCIMITAR, P_EXPERT },
     { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_EXPERT },
     { P_BOW, P_EXPERT },			        { P_SLING, P_EXPERT },
+    { P_PICK_AXE, P_EXPERT }, /* C'mon, they dig graves. */
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
