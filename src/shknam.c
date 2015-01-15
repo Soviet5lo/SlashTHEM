@@ -274,12 +274,10 @@ const struct shclass shtypes[] = {
 		{{90, -CORPSE}, {5, -TIN}, {5, FOOD_CLASS}, {0, 0}}, shkfoods},
 #ifdef FIREARMS	/* KMH -- no longer "antique" */
 
-	{"gun shop", WEAPON_CLASS, 1, D_SHOP, {
-{16, -PISTOL}, {17, -SUBMACHINE_GUN}, {17, -HEAVY_MACHINE_GUN}, {16, -RIFLE}, {17, -ASSAULT_RIFLE}, {17, -SNIPER_RIFLE},
+	{"gun shop", WEAPON_CLASS, 2, D_SHOP, { /* 5lo: Banging shop removed and merged with gun shop */
+{30, -PISTOL}, {10, -SUBMACHINE_GUN}, {10, -HEAVY_MACHINE_GUN}, {10, -RIFLE}, {10, -ASSAULT_RIFLE}, {5, -SNIPER_RIFLE},
+{10, -SHOTGUN}, {5, -AUTO_SHOTGUN}, {5, -ROCKET_LAUNCHER}, {5, -GRENADE_LAUNCHER},
           {0, 0}}, shkweapons},
-
-	{"banging shop", WEAPON_CLASS, 1, D_SHOP, {
- {25, -SHOTGUN}, {25, -AUTO_SHOTGUN}, {25, -ROCKET_LAUNCHER}, {25, -GRENADE_LAUNCHER},          {0, 0}}, shkweapons},
 
 	{"ammo shop", WEAPON_CLASS, 1, D_SHOP, {
 {15, -BULLET}, {15, -SILVER_BULLET}, {14, -SHOTGUN_SHELL}, {14, -ROCKET}, {14, -FRAG_GRENADE}, {14, -GAS_GRENADE}, {14, -STICK_OF_DYNAMITE} }, shkweapons},
