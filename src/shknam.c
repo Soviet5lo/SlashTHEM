@@ -222,8 +222,6 @@ static const char *shkpet[] = {
 const struct shclass shtypes[] = {
 	{"general store", RANDOM_CLASS, 23,
 	    D_SHOP, {{100, RANDOM_CLASS}, {0, 0}, {0, 0}}, shkgeneral},
-	{"zorkmid store", RANDOM_CLASS, 1,
-	    D_SHOP, {{100, COIN_CLASS}, {0, 0}, {0, 0}}, shkgeneral},
 	{"used armor dealership", ARMOR_CLASS, 17,
 	    D_SHOP, {{90, ARMOR_CLASS}, {10, WEAPON_CLASS}, {0, 0}},
 	     shkarmors},
@@ -279,7 +277,7 @@ const struct shclass shtypes[] = {
 {10, -SHOTGUN}, {5, -AUTO_SHOTGUN}, {5, -ROCKET_LAUNCHER}, {5, -GRENADE_LAUNCHER},
           {0, 0}}, shkweapons},
 
-	{"ammo shop", WEAPON_CLASS, 1, D_SHOP, {
+	{"ammo shop", WEAPON_CLASS, 2, D_SHOP, {
 {15, -BULLET}, {15, -SILVER_BULLET}, {14, -SHOTGUN_SHELL}, {14, -ROCKET}, {14, -FRAG_GRENADE}, {14, -GAS_GRENADE}, {14, -STICK_OF_DYNAMITE} }, shkweapons},
 
 
