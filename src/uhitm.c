@@ -835,14 +835,25 @@ int thrown;
 
 	    valid_weapon_attack = (tmp > 0);
 
-	    /* blessed gloves give bonuses when fighting 'bare-handed' */
-	    if (uarmg && uarmg->blessed && (is_undead(mdat) || is_demon(mdat)))
+            /* silver gloves give bonuses against silver haters */
+            if (uarmg && objects[uarmg->otyp].oc_material == SILVER
+                && hates_silver(mdat)) {
+                tmp += rnd(20);
+                silvermsg = TRUE;
+                silverobj = TRUE;
+                Strcpy(saved_oname, "gloves");
+            }
+	    /* Blessed gloves give bonuses when fighting 'bare-handed'.
+             * Only one of the silver/blessed bonuses applies.
+             */
+	    else if (uarmg && uarmg->blessed &&
+                     (is_undead(mdat) || is_demon(mdat)))
 		tmp += rnd(4);
 	    
 	    if (uarmg && uarmg->spe) tmp += uarmg->spe; /* WAC plusses from gloves */
 
-	    /* So do silver rings.  Note: rings are worn under gloves, so you
-	     * don't get both bonuses.
+	    /* Silver rings also give bonuses.  Note: rings are worn under
+             * gloves, so you don't get bonuses from both rings and gloves.
 	     */
 	    if (!uarmg) {
 		if (uleft && objects[uleft->otyp].oc_material == SILVER)
