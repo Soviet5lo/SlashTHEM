@@ -76,5 +76,7 @@ struct artifact {
 #define IDENTIFY	(LAST_PROP+20)
 #define DRAGON_BREATH	(LAST_PROP+21)
 #define OBJECT_DET	(LAST_PROP+22)
+#define SMOKE_CLOUD	(LAST_PROP+23)
+#define SHARPEN		(LAST_PROP+24)
  
 #endif /* ARTIFACT_H */

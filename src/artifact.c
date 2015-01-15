@@ -499,7 +499,7 @@ long wp_mask;
 	else if (dtyp == AD_ELEC)
 	    mask = &EShock_resistance;
 	else if (dtyp == AD_ACID)
-		mask = &EAcid_resistance;
+	    mask = &EAcid_resistance;
 	else if (dtyp == AD_MAGM)
 	    mask = &EAntimagic;
 	else if (dtyp == AD_DISN)
@@ -1998,6 +1998,44 @@ arti_invoke(obj)
         obj->age += Phasing; /* Time begins after phasing ends */
         break;
 #endif /* CONVICT */
+	case SMOKE_CLOUD: { /* 5lo: from Itlachiayaque patch, credits to L */
+	coord cc;
+	cc.x = u.ux;
+	cc.y = u.uy;
+	/* Cause trouble if cursed or player is wrong role */
+	if (obj->cursed || (Role_switch == oart->role || !oart->role)) {
+	    You("may summon a stinking cloud.");
+	    pline("Where do you want to center the cloud?");
+	    if (getpos(&cc, TRUE, "the desired position") < 0) {
+		pline(Never_mind);
+		obj->age = 0;
+		return 0;
+	    }
+	    if (!cansee(cc.x, cc.y) || distu(cc.x, cc.y) >= 32) {
+		You("smell rotten eggs.");
+		return 0;
+	    }
+	}
+	pline("A cloud of toxic smoke pours out!");
+	(void) create_gas_cloud(cc.x, cc.y, 3+bcsign(obj),
+	8+4*bcsign(obj));
+	break;
+	}
+    case SHARPEN: { /* 5lo: from Invoke Muramasa patch by L */
+	int sharpnum = (obj->cursed ? -1 : (obj->blessed ? 1 : 0));
+
+	if (obj->spe >= sharpnum) {
+	    pline("%s is %ssharp enough already.", The(xname(obj)), 
+	    (obj->spe > -1 ? (obj->spe > 0 ? "more than " : ""): "almost "));
+	    obj->age = 0;
+	    return 0;
+	}
+	obj->spe = sharpnum;
+	pline("%s is restored to %sits original keenness!", The(xname(obj)),
+	(obj->spe > -1 ? (obj->spe > 0 ? "better than " : ""): "slightly less than "));
+	break;
+	   }
+
 	  }
 	}
     } else {
