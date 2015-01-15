@@ -694,8 +694,8 @@ HELM("helm of telepathy", "visored helmet",
 		0, 1, TELEPAT,		2, 1, 20,  50, 9, 0, IRON, HI_METAL),
 
 /* Gloves */
-/* these have their color but not material shuffled, so the IRON must stay
- * CLR_BROWN (== HI_LEATHER)
+/* these have their color but not material shuffled, so the IRON and PLASTIC
+ * must stay CLR_BROWN (== HI_LEATHER)
  */
 #ifdef JEDI
 GLOVES("plasteel gloves", "white gloves",
