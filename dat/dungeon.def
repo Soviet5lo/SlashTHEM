@@ -99,11 +99,7 @@ LEVEL:		"guild" "G" @ (26, 14) 20
 
 
 
-LEVEL:		"rndmaze" "Z" @ (5, 35) 30
-LEVEL:		"rndmazea" "Q" @ (5, 35) 30
 RNDLEVEL:	"intpla" "J" @ (5, 35) 30 5
-LEVEL:		"makemais" "C" @ (5, 35) 30
-LEVEL:		"makemase" "D" @ (5, 35) 30
 RNDLEVEL:          "unhck" "X" @ (5, 35) 30 87
 RNDLEVEL:          "unhck" "X" @ (5, 35) 30 87
 RNDLEVEL:          "unhck" "X" @ (5, 35) 30 87
