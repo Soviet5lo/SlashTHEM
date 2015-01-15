@@ -151,7 +151,13 @@ A("Holy Spear of Light",        SILVER_SPEAR,
 A("Rod of Lordly Might", MACE, /*needs quote*/
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
 	PHYS(3,0),	NO_DFNS,	NO_CARY,
-	0,	A_LAWFUL, PM_NOBLEMAN, NON_PM, 4000L ), 
+	0,	A_LAWFUL, PM_NOBLEMAN, NON_PM, 4000L ),
+
+A("Itlachiayaque",             SHIELD_OF_REFLECTION,
+	(SPFX_RESTR), (SPFX_HSPDAM), 0,
+	NO_ATTK,        NO_DFNS,        CARY(AD_FIRE),
+	SMOKE_CLOUD,    A_LAWFUL, PM_ARCHEOLOGIST, NON_PM, 2000L ),
+
 
 /*** Neutral artifacts ***/
 A("Magicbane",                  ATHAME,
@@ -207,6 +213,46 @@ A("Mirrorbright",               SHIELD_OF_REFLECTION,
 A("Deluder",               CLOAK_OF_DISPLACEMENT,
 	(SPFX_RESTR|SPFX_STLTH|SPFX_LUCK), 0, 0,
 	NO_ATTK,      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, PM_JEDI, NON_PM, 5000L ),
+
+A("Snakeskin",             ROBE,
+    (SPFX_RESTR|SPFX_HALRES), 0, 0,
+    NO_ATTK,    ACID(0,0),   NO_CARY,    0, A_NEUTRAL, NON_PM, NON_PM, 500L ),
+
+A("Debugger",       ATHAME,
+    (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
+    ELEC(5,5),  ELEC(0,0), NO_CARY,     0, A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 400L ),
+    
+A("Hanging Call",       ATHAME, /* temp name */
+    (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
+    ACID(5,5),  ACID(0,0), NO_CARY,     0, A_NEUTRAL, PM_ACID_MAGE, NON_PM, 400L ),
+
+A("Straightshot",   BOW,
+    SPFX_RESTR, 0, 0,
+    PHYS(10,3),     NO_DFNS,    NO_CARY,    0, A_NEUTRAL, PM_RANGER, NON_PM, 1000L ),
+    
+A("Shimmerstaff",   SILVER_CAPPED_STAFF,
+    SPFX_RESTR, 0, 0,
+    PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NONE, PM_BARD, NON_PM, 1000L ),
+
+A("Jacket of Style",   LEATHER_JACKET, /* Temp name */
+    (SPFX_RESTR|SPFX_DEFN), (SPFX_HALRES|SPFX_PROTEC), 0,
+    NO_ATTK,    FIRE(0,0),    NO_CARY,   0, A_NEUTRAL, PM_ROCKER, NON_PM, 1500L ), 
+    
+A("Tesla's Coat", LAB_COAT,
+    (SPFX_RESTR|SPFX_DEFN), SPFX_HPHDAM, 0,
+    NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, PM_SCIENTIST, NON_PM, 3000L ),
+/* 5lo: Some more artifacts... */
+A("Fungisword", LONG_SWORD,
+    (SPFX_RESTR|SPFX_DCLAS), SPFX_HALRES, S_FUNGUS,
+    PHYS(10,0), NO_DFNS, NO_CARY, 0, A_LAWFUL, NON_PM, NON_PM, 400L ),
+    
+A("Diplomat", GOLDEN_SABER,
+    (SPFX_RESTR), 0, M2_PNAME,
+    PHYS(10,25), NO_DFNS, NO_CARY, 0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
+    
+A("Petslayer", CLUB,
+    (SPFX_RESTR), 0, M2_DOMESTIC,
+    PHYS(5,10), NO_DFNS, NO_CARY, 0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
 
 #ifdef NEWHON_ARTIFACTS
 A("Mouser's Scalpel",			RAPIER,
