@@ -105,6 +105,10 @@ A("Snickersnee",                KATANA,
 	SPFX_RESTR, 0, 0,
 	PHYS(0,4),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_SAMURAI, NON_PM, 1200L ),
 
+A("Yoichi no yumi",                YUMI, /* 5lo: Artifact from dNethack */
+	SPFX_RESTR, 0, 0,
+	PHYS(20,0),	NO_DFNS,	NO_CARY,	CREATE_AMMO, A_LAWFUL, NON_PM, NON_PM, 1200L ),
+
 #ifdef YEOMAN
 /* KMH -- Renamed from Holy Sword of Law (Stephen White)
  * This is an actual sword used in British coronations!

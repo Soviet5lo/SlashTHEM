@@ -1948,7 +1948,10 @@ arti_invoke(obj)
 	    enlightenment(0);
 	    break;
 	case CREATE_AMMO: {
-	    struct obj *otmp = mksobj(ARROW, TRUE, FALSE);
+	    struct obj *otmp;
+	    if(obj->oartifact == ART_LONGBOW_OF_DIANA) otmp = mksobj(ARROW, TRUE, FALSE);
+	    else if(obj->oartifact == ART_YOICHI_NO_YUMI) otmp = mksobj(YA, TRUE, FALSE);
+	    else otmp = mksobj(ARROW, TRUE, FALSE);
 
 	    if (!otmp) goto nothing_special;
 	    otmp->blessed = obj->blessed;
