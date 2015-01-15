@@ -396,18 +396,18 @@ pick_lock(pickp) /* pick a lock with a given object */
 				*pickp = (struct obj *)0;
 				return(1);
 			    }
-			    ch = ACURR(A_DEX) + 20*Role_if(PM_ROGUE);
+			    ch = ACURR(A_DEX) + 20*(Role_if(PM_ROGUE) || Role_if(PM_LOCKSMITH));
 			    break;
 #endif
 			case LOCK_PICK:
-			    if(!rn2(Role_if(PM_ROGUE) ? 40 : 30) &&
+			    if(!rn2((Role_if(PM_ROGUE) || Role_if(PM_LOCKSMITH))? 40 : 30) &&
 			    		!pick->blessed && !pick->oartifact) {
 				You("break your pick!");
 				useup(pick);
 				*pickp = (struct obj *)0;
 				return(1);
 			    }
-			    ch = 4*ACURR(A_DEX) + 25*Role_if(PM_ROGUE);
+			    ch = 4*ACURR(A_DEX) + 25*(Role_if(PM_ROGUE) || Role_if(PM_LOCKSMITH));
 			    break;
 			case SKELETON_KEY:
 			    if(!rn2(15) && !pick->blessed && !pick->oartifact) {
@@ -492,25 +492,25 @@ pick_lock(pickp) /* pick a lock with a given object */
 		    switch(picktyp) {
 #ifdef TOURIST
 			case CREDIT_CARD:
-			    if(!rn2(Role_if(PM_TOURIST) ? 30 : 20) &&
+			    if(!rn2((Role_if(PM_TOURIST) || Role_if(PM_LOCKSMITH)) ? 30 : 20) &&
 				    !pick->blessed && !pick->oartifact) {
 				You("break your card off in the door!");
 				useup(pick);
 				*pickp = (struct obj *)0;
 				return(0);
 			    }
-			    ch = 2*ACURR(A_DEX) + 20*Role_if(PM_ROGUE);
+			    ch = 2*ACURR(A_DEX) + 20*(Role_if(PM_ROGUE) || Role_if(PM_LOCKSMITH));
 			    break;
 #endif
 			case LOCK_PICK:
-			    if(!rn2(Role_if(PM_ROGUE) ? 40 : 30) &&
+			    if(!rn2((Role_if(PM_ROGUE) || Role_if(PM_LOCKSMITH))? 40 : 30) &&
 				    !pick->blessed && !pick->oartifact) {
 				You("break your pick!");
 				useup(pick);
 				*pickp = (struct obj *)0;
 				return(0);
 			    }
-			    ch = 3*ACURR(A_DEX) + 30*Role_if(PM_ROGUE);
+			    ch = 3*ACURR(A_DEX) + 30*(Role_if(PM_ROGUE) || Role_if(PM_LOCKSMITH));
 			    break;
 			case SKELETON_KEY:
 			    if(!rn2(15) && !pick->blessed && !pick->oartifact) {
