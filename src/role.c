@@ -66,10 +66,10 @@ const struct Role roles[] = {
 	{"Spiller",     0},
 	{"Corroder",       0},
 	{"Acidsplasher",      0},
-	{"Hazardous Materials Specialist",   0},
-	{"Laboratory Science PhD", 0},
+	{"Dissolver",   0},
+	{"Dissolver", 0},
 	{"Acid-Master",  0} },
-	"The Lord of the Pit", "Goldblight of the Flame", "Warpfire Hellspawn", /* Special */
+	"Tartarica", "Acetica", "Hydrocloria", /* Special - Based on chemical acids */
 	"Aci", "Slime Pit", "Electric Power Station",
 	PM_ACID_MAGE, NON_PM, PM_UNDEAD_ACID_MAGE, NON_PM, PM_ACID_HOUND_PUP,
 	PM_ACIDSNORT, PM_ATTENDANT, PM_LIGHTNINGROD,
@@ -453,7 +453,7 @@ const struct Role roles[] = {
 	{"Captain",			0},
 	{"Pirate Lord",   	0},
 	{"Dread Pirate",  	0} },
-	"the Lord", "_the deep blue sea", "the Devil",	/* Christian, sorta */
+	"Nereus", "Neptune", "Proteus"	/* Classical sea gods */
 	"Pir", "Tortuga", "Shipwreck Island",
 	PM_PIRATE, NON_PM, PM_UNDEAD_PIRATE, NON_PM, NON_PM,
 	PM_MAYOR_CUMMERBUND, PM_PIRATE_BROTHER, PM_BLACKBEARD_S_GHOST,
@@ -1045,7 +1045,7 @@ const struct Role roles[] = {
 	{"Volt Technician",   0},
 	{"Thundermage", 0},
 	{"Shock-Master",  0} },
-	"Thomas Alva Edison", "Benjamin Franklin", "_Marilyn Monroe", /* associated with electricity */
+	"Static", "Magnet", "Lightning", /* Special */
 	"Ele", "Bolttown", "Celebrity Graveyard",
 	PM_ELECTRIC_MAGE, NON_PM, PM_UNDEAD_ELECTRIC_MAGE, NON_PM, PM_SHOCK_HOUND_PUP,
 	PM_GUITAR_HERO, PM_SHOCKER, PM_ELVIS_PRESLEY,
@@ -1166,7 +1166,7 @@ const struct Role roles[] = {
 	{"Celestial",        0},
 	{"Decomposer",   0},
 	{"Annihilator", 0} },
-	"Buddha", "Jahwe", "Allah",	/* major real-world religions */
+	0, 0, 0,	/* randomly chosen from other roles */
 	"Che", "Ancient Temple", "the World-Eater's domain",
 	PM_CHEVALIER, NON_PM, PM_UNDEAD_CHEVALIER, NON_PM, NON_PM,
 	PM_EREC, PM_ACOLYTE, PM_ALDUIN,
@@ -1362,14 +1362,14 @@ const struct Role roles[] = {
 },
 
 {	{"Lunatic", 0}, {
-	{"Howler",     0},
-	{"Crazy Person",   0},
+	{"Infected",     0},
+	{"Summoner",   0},
 	{"Moon Worshipper",0},
-	{"Weirdo",0},
-	{"Shapeshifter",    0},
-	{"Warped Person",   0},
-	{"Wereperson",     0},
-	{"Asylum Escapee",    0},
+	{"Render",0},
+	{"Fiend",    0},
+	{"Nightmare",   0},
+	{"Devourer",     0},
+	{"Greater Fiend",    0},
 	{"Master Shapeshifter",  0} },
 	"Eluvian", "Moon", "Lycanthus",	/* from an old SLASH version without extended magic */
 	"Lun", "Wolfhowl Castle", "Slayer Domain",
@@ -1429,7 +1429,7 @@ const struct Role roles[] = {
 	{"Lorist",      0},
 	{"Well-known Bard",        0},
 	{"Master Bard", 0} },
-	"Garl Glittergold", "Flandal Steelskin", "Urdlen",
+	"_Minerva", "Apollo", "Linus", /* classical gods of music */
 	"Brd", "the Conservatorium", "the Island of Anthemoessa",
 	PM_BARD, NON_PM, PM_UNDEAD_BARD, NON_PM, NON_PM,
 	PM_PINDAR, PM_RHYMER, PM_AGLAOPE,
@@ -1448,16 +1448,16 @@ const struct Role roles[] = {
 },
 
 {	{"Drunk", 0}, {
-	{"Drinker",     0},
+	{"Wino",     0},
 	{"Boozer",   0},
+	{"Drinker",0},
 	{"Alcoholic",0},
-	{"Winetester",0},
-	{"Vodkaholic",    0},
-	{"Scrapper",   0},
-	{"Bar-Brawler",     0},
-	{"Beer King",    "Beer Queen"},
-	{"Ethanol Addict",  0} },
-	"Apollo", "Dionysus", "Pan", /* Drunken */
+	{"Slosh",    0},
+	{"Partier",   0},
+	{"Tastetester",     0},
+	{"Winetaster",    0},
+	{"Socialite",  0} },
+	"Fufluns", "Dionysus", "Pan",	/* Classical gods of Wine */
 	"Dru", "Brass Lantern Bar", "Moriarty's Saloon",
 	PM_DRUNK, NON_PM, PM_UNDEAD_DRUNK, NON_PM, NON_PM,
 	PM_ANDY_STAHL, PM_ATTENDANT, PM_COLIN_MORIARTY,
@@ -1563,15 +1563,15 @@ const struct Role roles[] = {
 },
 
 {	{"Locksmith", 0}, {
-	{"Key User",     0},
-	{"Door-opener",    0},
+	{"Listener",     0},
+	{"Lockpicker",    0},
 	{"Lock Breaker",       0},
 	{"Lock Trickster",    0},
-	{"Safecutter",      0},
+	{"Safecracker",     0},
 	{"Keymaster",     0},
-	{"Emergency Key Carrier",     0},
-	{"Door Safety Assistant",     0},
-	{"Supreme Lockpicker",       0} },
+	{"Slim Jim",     "Slim Jane"},
+	{"Keymaker",     0},
+	{"Supreme Locksmith",       0} },
 	"Nuada", "Dagda", "Morrigan", /* Celtic */
 	"Loc", "Emergency Base", "Locked Room",
 	PM_LOCKSMITH, NON_PM, PM_UNDEAD_LOCKSMITH, NON_PM, NON_PM,
@@ -1592,15 +1592,15 @@ const struct Role roles[] = {
 },
 
 {	{"Musician", 0}, {
-	{"Doodler", 0},
 	{"Whistler", 0},
-	{"Flute Player", 0},
-	{"Harp Player", 0},
-	{"Orchestrator",	0},
+	{"Drummer", 0},
+	{"Fiddler", 0},
+	{"Singer",	0},
+	{"Entertainer", 0},
 	{"Concertist", 0},
-	{"Virtue", 0},
-	{"Piano Master", 0},
-	{"Godly Voice", 0} },
+	{"Meistersinger", "Primadonna"},
+	{"Conductor", 0},
+	{"Virtuoso", 0} },
 	"Donblas", "Grome", "Arioch", /* Melnibonean */
 
 	"Mus", "Wild West Bar", "High Noon Plains",
@@ -1650,15 +1650,15 @@ const struct Role roles[] = {
 },
 
 {	{"Officer", 0}, {
-	{"Street Cop",     0},
-	{"Traffic Officer",   0},
-	{"Patrolling Cop",0},
-	{"Strifer",0},
-	{"Crime Scene Cop",    0},
-	{"Junior Sheriff",   0},
-	{"Deputy Sheriff",     0},
-	{"Wild-West Sheriff",    0},
-	{"Cop Chief",  0} },
+	{"Coffee Boy", "Coffee Girl"},
+	{"Cadet",   0},
+	{"Meter Man", "Meter Maid"},
+	{"Rookie",0},
+	{"Beat Cop",    0},
+	{"Sergeant",   0},
+	{"Captain",     0},
+	{"Police Chief",    0},
+	{"Commissioner",  0} },
 	"Magnum", "Smith", "Wesson", /* guns */
 	"Off", "Central Cop Station", "Tank Breaker Hideout",
 	PM_OFFICER, NON_PM, PM_UNDEAD_OFFICER, NON_PM, PM_OFFICER,
@@ -1707,15 +1707,15 @@ const struct Role roles[] = {
 },
 
 {	{"Zookeeper", 0}, {
-	{"Dog Feeder",      0},
-	{"Cat Tamer",0},
-	{"Wolf Feeder",0},
-	{"Lion Tamer",     0},
-	{"Mastodon Feeder",   0},
-	{"Dragon Tamer",   0},
-	{"Tyrannosaurus Feeder",0},
-	{"Kangaroo Tamer",   0},
-	{"Zouthern Petkeeper",     0} },
+	{"Feeder",      0},
+	{"Feeder",0},
+	{"Tamer",0},
+	{"Tamer",     0},
+	{"Trainer",   0},
+	{"Chief Tamer",   0},
+	{"Vet",0},
+	{"Zookeeper",   0},
+	{"Curator",     0} },
 	"Balder", "Edda", "Hagen", /* Norse mythology */
 	"Zoo", "Yellowstone Park", "Jurassic Park",
 	PM_ZOOKEEPER, NON_PM, PM_UNDEAD_ZOOKEEPER, NON_PM, PM_PLATYPUS,
