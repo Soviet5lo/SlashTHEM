@@ -663,7 +663,7 @@ makevtele()
 {
 	makeniche(TELEP_TRAP);
 }
-
+#ifdef UNDERGROUND_RIVERS
 STATIC_OVL void
 makeriver(x1,y1,x2,y2,lava,rndom)
 int x1,y1,x2,y2;
@@ -768,7 +768,7 @@ mkrivers()
 	else makeriver(rn2(COLNO), 0, rn2(COLNO), ROWNO-1, lava, rndom);
     }
 }
-
+#endif /* UNDERGROUND_RIVERS */
 
 
 /* clear out various globals that keep information on the current level.
@@ -1058,10 +1058,11 @@ makelevel()
 	else if (u_depth > 3 && !rn2(24)) mkroom(GOLEMHALL);
 	else if (u_depth > 1 && !rn2(25)) mkroom(GRUEROOM);
 	else if (u_depth > 1 && !rn2(25)) mkroom(TENSHALL);
-
+#ifdef UNDERGROUND_RIVERS
 	    /* Underground rivers */
 	    if ( u_depth > 13 && !rn2(7)) mkrivers();
 	    if ( u_depth <= 13 && !rn2(15) && rn2(u_depth) ) mkrivers();
+#endif /* UNDERGROUND_RIVERS */
     }
 
 #ifdef REINCARNATION
