@@ -1382,15 +1382,23 @@ int dieroll; /* needed for Magicbane and vorpal blades */
        }
       /* END OF STEPHEN WHITE'S NEW CODE */
 
-#if 0
-	   if (otmp->oartifact == ART_SCALPEL && dieroll < 5) {
+#ifdef NEWHON_ARTIFACTS /* 5lo: Reviving these from Slash 6 */
+	   if (otmp->oartifact == ART_MOUSER_S_SCALPEL && dieroll < 10) { /* Credits to BarclayII for Mouser's Scalpel rename and mechanic */
 		/* faster than a speeding bullet is the Gray Mouser... */
 		pline("There is a flurry of blows!");
+		int time = 1;
 		/* I suppose this could theoretically continue forever... */
 		while (dieroll < 5) {
 		   *dmgptr += rnd(8) + 1 + otmp->spe;
+		   time++;l
 		   dieroll = rn2(11);
 		}
+		if (time == 1)
+			pline_The("rapier strikes %s!", hittee);
+		else if (time == 2)
+			pline_The("rapier strikes %s twice!", hittee);
+		else
+			pline_The("rapier strikes %s %d times in a row!", hittee, time); 
 	   }
 	   if (otmp->oartifact == ART_HEARTSEEKER && dieroll < 3) {
 		/* this weapon just sounds nasty... yuck... */
@@ -1401,7 +1409,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 		}
 		*dmgptr += rnd(6)+rnd(6)+rnd(6)+rnd(6)+4;
 	   }
-#endif
+#endif /* NEWHON_ARTIFACTS */
 
 
 	/* We really want "on a natural 20" but Nethack does it in */

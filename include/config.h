@@ -408,6 +408,7 @@ typedef unsigned char	uchar;
 #define FIREARMS	/* KMH -- Guns and bullets */
 #define EATEN_MEMORY	/* WAC -- Remember which monsters have been eaten */
 #define STEED		/* The ability to ride monsters */
+#define NEWHON_ARTIFACTS /* 5lo: Reviving these artifacts from SLASH 6 */
 
 /* Roles */
 #define DWARF		/* Dwarf Patch, Osku Salerma (osku@iki.fi) */
