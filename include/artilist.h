@@ -385,6 +385,11 @@ A("The Key Of Access",		SKELETON_KEY,
 	NO_ATTK,	NO_DFNS,	NO_CARY,
 	CREATE_PORTAL,	A_NONE,		NON_PM, NON_PM, 200L ),
 
+A("Crown Royal Cloak",	LEATHER_CLOAK,
+	(SPFX_RESTR|SPFX_PROTEC), SPFX_LUCK, 0,
+	NO_ATTK,	ACID(0,0),	NO_CARY,
+	0,	A_NEUTRAL,	 PM_DRUNK, NON_PM, 1000L),
+
 A("Hellfire", CROSSBOW,	/* WAC */
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
 	PHYS(5,4),        FIRE(0,0),  NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 4000L ),
@@ -640,10 +645,10 @@ A("The Vestment of Hell",	LEATHER_CLOAK, /*Actually an opera cloak in game*/
 	NO_ATTK,	ACID(0,0),	FIRE(0,0), /* Plus double AC bonus */
 	0,	A_CHAOTIC,	 PM_NOBLEMAN, NON_PM, 2500L),
 
-A("The Cloak of Neutrality",	LEATHER_CLOAK, /*Actually an opera cloak in game*/
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_EREGEN), 0, 0,
-	NO_ATTK,	DRLI(0,0),	ACID(0,0), /* Plus double AC bonus */
-	0,	A_NEUTRAL,	 PM_DRUNK, NON_PM, 2500L),
+A("The Gourd of Infinity", HORN_OF_PLENTY,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_ESP|SPFX_HSPDAM|SPFX_HALRES), 0,
+	NO_ATTK,    NO_DFNS,    DRLI(0,0),
+	CHARGE_OBJ, A_NEUTRAL,  PM_DRUNK,   NON_PM, 2500L),
 
 A("The Great Dagger of Glaurgnaa",       GREAT_DAGGER,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK|SPFX_INTEL|SPFX_DRLI|SPFX_DALIGN), 0, 0,

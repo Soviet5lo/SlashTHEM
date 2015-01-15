@@ -291,7 +291,7 @@ NON_DIGGABLE:(00,00,75,19)
 # The altar.  This is not a shrine.
 ALTAR:(16,11),noncoaligned,altar
 # Objects
-OBJECT:'[',"leather cloak",(16,11),blessed,0,"The Cloak of Neutrality"
+OBJECT:'(',"horn of plenty",(16,11),blessed,0,"The Gourd of Infinity"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
