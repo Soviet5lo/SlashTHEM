@@ -551,10 +551,11 @@ A("The Storm Whistle",          MAGIC_WHISTLE,
 	NO_ATTK,        NO_DFNS,        CARY(AD_FIRE),
 	SUMMON_WATER_ELEMENTAL,         A_LAWFUL, PM_ICE_MAGE, NON_PM, 1000L ),
 
-A("The Thunder Whistle",          MAGIC_WHISTLE,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,
-	NO_ATTK,        NO_DFNS,        CARY(AD_ELEC),
-	0,         A_CHAOTIC, PM_ELECTRIC_MAGE, NON_PM, 1000L ),
+A("The Harp of Lightning",          MAGIC_HARP, 
+ 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,
+ 	NO_ATTK,        NO_DFNS,        CARY(AD_ELEC),
+	SUMMON_AIR_ELEMENTAL,         A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 1000L ),
+/* Air is associated with Electricity in D&D */
 
 A("Blackharp",          MAGIC_HARP,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,

@@ -242,7 +242,7 @@ STAIR:(36,05),up
 ALTAR:(63,04),noncoaligned,altar
 NON_DIGGABLE:(00,00,75,19)
 # Objects
-OBJECT:'(',"magic whistle",(63,04),blessed,0,"The Thunder Whistle"
+OBJECT:'(',"magic harp",(63,04),blessed,0,"The Harp Of Lightning"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
