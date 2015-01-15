@@ -277,7 +277,7 @@ STAIR:place[0],up
 # Non diggable walls
 NON_DIGGABLE:(00,00,44,19)
 # Objects
-OBJECT:')',"katana",(22,10),blessed,0,"Dragonclan Sword"
+OBJECT:')',"broadsword",(22,10),blessed,0,"Fuma-itto no Ken"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random

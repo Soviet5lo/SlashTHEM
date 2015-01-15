@@ -313,6 +313,10 @@ A("Cleaver",                    BATTLE_AXE,
 A("Doomblade",                  ORCISH_SHORT_SWORD,
 	SPFX_RESTR, 0, 0,
 	PHYS(0,5),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_HUMAN_WEREWOLF, NON_PM, 1000L ),
+A("Nightingale",                KATANA,
+	SPFX_RESTR, 0, 0,
+	PHYS(6,3),	NO_DFNS,	NO_CARY,	INVIS, A_CHAOTIC, PM_NINJA, NON_PM, 2000L ),
+	/* 5lo: Sacrifice gift for Ninja */
 
 /*
  *	Stormbringer only has a 2 because it can drain a level,
@@ -484,9 +488,9 @@ A("Liontamer",                BULLWHIP,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, S_FELINE,
 	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
 
-A("Dragonclan Sword",                KATANA,
-	(SPFX_RESTR|SPFX_BEHEAD), 0, 0,
-	PHYS(3,10),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_NINJA, NON_PM, 5000L ),
+A("Fuma-itto no Ken",                BROADSWORD,    /* 5lo: New quest artifact for Ninja - Credit to Chris as this comes from dNethack with minor changes */
+	(SPFX_RESTR|SPFX_DALIGN), 0, 0, /* This artifact has special privilage to not go by "the X of (the) Y" format */
+	PHYS(8,8),      NO_DFNS,     CARY(AD_DRLI),        CREATE_AMMO, A_CHAOTIC, PM_NINJA, NON_PM, 5000L ),
 
 A("Black Death",                     HALBERD,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,

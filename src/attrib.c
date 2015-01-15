@@ -65,7 +65,11 @@ const struct innate {
 		     {   0, 0, 0, 0 } },
 
 	nin_abil[] = { {   1, &(HStealth), "", ""  },
-		     {   3, &(HInvis), "hidden", "more visible" },
+		  /* {   3, &(HInvis), "hidden", "more visible" }, */
+		     {   3, &(HSearching), "perceptive", "unaware" },
+		     {   5, &(HFast), "quick", "slow" },
+		     {  10, &(HSwimming), "ready to swim", "afraid of water" }, /* Ninja were trained in swimming */
+		     {  15, &(HWarning), "sensitive", "careless" },
 		     {   0, 0, 0, 0 } },
 
 	off_abil[] = { {   1, &(HSearching), "", "" },

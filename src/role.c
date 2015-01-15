@@ -729,6 +729,7 @@ const struct Role roles[] = {
 #endif
 
 {	{"Samurai", 0}, {
+#if 0
 	{"Hatamoto",    0},  /* Banner Knight */
 	{"Ronin",       0},  /* no allegiance */
 	{"Ninja Gaiden",       "Kunoichi"},  /* secret society */
@@ -738,6 +739,16 @@ const struct Role roles[] = {
 	{"Daimyo",      0},  /* a samurai lord */
 	{"Kuge",        0},  /* Noble of the Court */
 	{"Shogun",      0} },/* supreme commander, warlord */
+#endif
+	{"Ashigaru",	0},	/* footman */
+	{"Hatamoto",	0},	/* banner knight */
+	{"Kumigashira",	0},	/* squad leader */
+	{"Bangashira",	0},	/* leader of Kumigashira */
+	{"Samurai-Daisho",	0},	/* lieutenant */
+	{"Bushou",	0},	/* general */
+	{"Ryoshu",	0},	/* has a territory */
+	{"Joshu",	0},	/* heads a castle */
+	{"Kokushu",	0} },	/* heads a province */
 	"_Amaterasu Omikami", "Raijin", "Susanowo", /* Japanese */
 	"Sam", "the Castle of the Taro Clan", "the Shogun's Castle",
 	PM_SAMURAI, NON_PM, PM_UNDEAD_SAMURAI, NON_PM, PM_LITTLE_DOG,
@@ -1610,23 +1621,23 @@ const struct Role roles[] = {
 	10, 9, 2, 1, 10, A_INT, SPE_CAUSE_FEAR,   -4
 },
 
-{	{"Ninja", 0}, {
-	{"Sword Trainee",    0},
-	{"Dual-wield wannabee",       0},
-	{"Whiffer", 0},
-	{"Bladebearer",       0},
-	{"Double-edge Sword",      0},
-	{"Master Blade",     0},
-	{"Katana Knight",      0},
-	{"Sword Acrobat",        0},
-	{"Shadowblade",      0} },
-	"Votishal", "Raiden", "Rat God", /* Nehwon */
+{	{"Ninja", "Kunoichi"}, { /* Kunoichi is the name for a female ninja */
+	{"Kukkyu",     0},
+	{"Hakkyu",    0},
+	{"Nanakyu",       0},
+	{"Rokkyu",    0},
+	{"Gokyu",      0},
+	{"Yonkyu",     0},
+	{"Sankyu",     0},
+	{"Nikyu",     0},
+	{"Ikkyu",       0} },
+	"Jiraiya", "_Tsunade", "Orochimaru", /* from Jiraiya Goketsu Monogatari */
 	"Nin", "Green Plains", "Demon Orb Lair",
 	PM_NINJA, NON_PM, PM_UNDEAD_NINJA, NON_PM, PM_LITTLE_DOG,
 	PM_KEN_HAYABUSA, PM_ROSHI, PM_JAQUIO,
 	PM_CARNIVOROUS_APE, PM_NIGHTGAUNT, S_YETI, S_BAT,
 
-	ART_DRAGONCLAN_SWORD,
+	ART_FUMA_ITTO_NO_KEN,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
 	/*{  10,  8,  7, 10, 17,  6 },*/

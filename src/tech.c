@@ -149,6 +149,8 @@ static const struct innate_tech
 		       {  10, T_BOOZE, 1},
 		       {  20, T_RAGE, 1},
 		       {   0, 0, 0} },
+	nin_tech[] = { {   1, T_VANISH, 1},
+		       {   0, 0, 0} },
 	aci_tech[] = { {   1, T_REINFORCE, 1},
 		       {   3, T_POWER_SURGE, 1},
 		       {   5, T_DRAW_ENERGY, 1},
@@ -2317,6 +2319,7 @@ role_tech()
 		case PM_GANGSTER: 		return (gan_tech);
 		case PM_ROCKER: 		return (roc_tech);
 		case PM_NECROMANCER:	return (nec_tech);
+		case PM_NINJA:		return (nin_tech);
 		case PM_PRIEST:		return (pri_tech);
 		case PM_CHEVALIER:		return (che_tech);
 		case PM_RANGER:		return (ran_tech);

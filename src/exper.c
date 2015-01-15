@@ -802,6 +802,9 @@ boolean incr;	/* true iff via incremental experience growth */
 	    ++u.ulevel;
 	    if (u.ulevelmax < u.ulevel) u.ulevelmax = u.ulevel;
 	    pline("Welcome to experience level %d.", u.ulevel);
+	    if (Role_if(PM_NINJA) && (Hallucination)) { /* 5lo: This is the only Naruto reference I'm doing */
+		pline("Dattebayo!");
+	    }
 	    adjabil(u.ulevel - 1, u.ulevel);	/* give new intrinsics */
 	    reset_rndmonst(NON_PM);		/* new monster selection */
 	}

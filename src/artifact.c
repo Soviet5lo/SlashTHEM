@@ -1411,11 +1411,16 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	   }
 #endif /* NEWHON_ARTIFACTS */
 
+	if (otmp->oartifact == ART_NIGHTINGALE && dieroll < 3 ) { /* 5lo: Nightingale special effect */
+	    pline_The("night blade howls as it slices through %s!", hittee);
+	    *dmgptr += rnd(5) * 6;
+	    return TRUE;
+	}
 
 	/* We really want "on a natural 20" but Nethack does it in */
 	/* reverse from AD&D. */
 	if (spec_ability(otmp, SPFX_BEHEAD)) {
-	    if ( (otmp->oartifact == ART_TSURUGI_OF_MURAMASA || otmp->oartifact == ART_DRAGONCLAN_SWORD) && dieroll < 3) {
+	    if ( (otmp->oartifact == ART_TSURUGI_OF_MURAMASA) && dieroll < 3) {
 		wepdesc = "The razor-sharp blade";
 		/* not really beheading, but so close, why add another SPFX */
 		if (youattack && u.uswallow && mdef == u.ustuck) {
@@ -1951,7 +1956,8 @@ arti_invoke(obj)
 	    struct obj *otmp;
 	    if(obj->oartifact == ART_LONGBOW_OF_DIANA) otmp = mksobj(ARROW, TRUE, FALSE);
 	    else if(obj->oartifact == ART_YOICHI_NO_YUMI) otmp = mksobj(YA, TRUE, FALSE);
-	    else otmp = mksobj(ARROW, TRUE, FALSE);
+	    else if(obj->oartifact == ART_FUMA_ITTO_NO_KEN) otmp = mksobj(SHURIKEN, TRUE, FALSE);
+	    else otmp = mksobj(ARROW, TRUE, FALSE); /* default */
 
 	    if (!otmp) goto nothing_special;
 	    otmp->blessed = obj->blessed;
