@@ -1838,6 +1838,9 @@ arti_invoke(obj)
 	    break;
 	case SUMMON_WATER_ELEMENTAL:
 	    pm = rn2(4) ? &mons[PM_WATER_ELEMENTAL] : &monst[PM_GREATER_WATER_ELEMENTAL];
+	    if(Role_if(PM_ICE_MAGE)) {
+		pm = &monst[PM_ICE_ELEMENTAL];
+	    }
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");
