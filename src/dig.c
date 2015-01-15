@@ -1274,6 +1274,7 @@ zap_dig()
 			s_suffix(mon_nam(mtmp)), mbodypart(mtmp, STOMACH));
 		mtmp->mhp *= 4;
 		mtmp->mhp /= 5; /* prevent easy Jubilex killing --Amy */
+		if (mtmp->mhp < 1) mtmp->mhp = 1; /* fixes the bug where killing gray newts causes error messages */
 		expels(mtmp, mtmp->data, !is_animal(mtmp->data));
 	    }
 	    return;

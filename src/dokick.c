@@ -764,6 +764,12 @@ dokick()
 	x = u.ux + u.dx;
 	y = u.uy + u.dy;
 
+	if(!isok(x, y)) { /* gotta fix that unneccessary segfault for once and for all! --Amy */
+
+	pline(Hallucination ? "You get a great rebound effect!" : "Your kick hits an invisible barrier.");
+	return(1);
+	}
+
 	/* KMH -- Kicking boots always succeed */
 	if (uarmf && uarmf->otyp == KICKING_BOOTS)
 	    avrg_attrib = 99;
