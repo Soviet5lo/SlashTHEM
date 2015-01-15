@@ -1390,7 +1390,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 		/* I suppose this could theoretically continue forever... */
 		while (dieroll < 5) {
 		   *dmgptr += rnd(8) + 1 + otmp->spe;
-		   time++;l
+		   time++;
 		   dieroll = rn2(11);
 		}
 		if (time == 1)
@@ -1835,7 +1835,7 @@ arti_invoke(obj)
 	    rescham();
 	    break;
 	case SUMMON_FIRE_ELEMENTAL:
-	    pm = rn2(4) ? &mons[PM_FIRE_ELEMENTAL] : &monst[PM_GREATER_FIRE_ELEMENTAL];
+	    pm = rn2(4) ? &mons[PM_FIRE_ELEMENTAL] : &mons[PM_GREATER_FIRE_ELEMENTAL];
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");
@@ -1845,9 +1845,9 @@ arti_invoke(obj)
 	    mtmp->mtame = 30;
 	    break;
 	case SUMMON_WATER_ELEMENTAL:
-	    pm = rn2(4) ? &mons[PM_WATER_ELEMENTAL] : &monst[PM_GREATER_WATER_ELEMENTAL];
+	    pm = rn2(4) ? &mons[PM_WATER_ELEMENTAL] : &mons[PM_GREATER_WATER_ELEMENTAL];
 	    if(Role_if(PM_ICE_MAGE)) {
-		pm = &monst[PM_ICE_ELEMENTAL];
+		pm = &mons[PM_ICE_ELEMENTAL];
 	    }
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
