@@ -1827,7 +1827,7 @@ arti_invoke(obj)
 	    rescham();
 	    break;
 	case SUMMON_FIRE_ELEMENTAL:
-	    pm = &mons[PM_FIRE_ELEMENTAL];
+	    pm = rn2(4) ? &mons[PM_FIRE_ELEMENTAL] : &monst[PM_GREATER_FIRE_ELEMENTAL];
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");
@@ -1837,7 +1837,27 @@ arti_invoke(obj)
 	    mtmp->mtame = 30;
 	    break;
 	case SUMMON_WATER_ELEMENTAL:
-	    pm = &mons[PM_WATER_ELEMENTAL];
+	    pm = rn2(4) ? &mons[PM_WATER_ELEMENTAL] : &monst[PM_GREATER_WATER_ELEMENTAL];
+	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
+   
+	    pline("You summon an elemental.");
+	    
+	    if ((mtmp2 = tamedog(mtmp, (struct obj *)0)) != 0)
+			mtmp = mtmp2;
+	    mtmp->mtame = 30;
+	    break;
+	case SUMMON_EARTH_ELEMENTAL: /* 5lo: New summons */
+            pm = rn2(4) ? &mons[PM_EARTH_ELEMENTAL] : &mons[PM_GREATER_EARTH_ELEMENTAL];
+	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
+   
+	    pline("You summon an elemental.");
+	    
+	    if ((mtmp2 = tamedog(mtmp, (struct obj *)0)) != 0)
+			mtmp = mtmp2;
+	    mtmp->mtame = 30;
+	    break;
+	case SUMMON_AIR_ELEMENTAL:
+            pm = rn2(4) ? &mons[PM_AIR_ELEMENTAL] : &mons[PM_GREATER_AIR_ELEMENTAL];
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");

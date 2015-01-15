@@ -69,10 +69,12 @@ struct artifact {
 #define PROT_POLY       (LAST_PROP+13)
 #define SUMMON_FIRE_ELEMENTAL           (LAST_PROP+14)
 #define SUMMON_WATER_ELEMENTAL          (LAST_PROP+15)
-#define OBJ_DETECTION	(LAST_PROP+16)
-#define PHASING		(LAST_PROP+17) /* convict role */
-#define IDENTIFY	(LAST_PROP+18)
-#define DRAGON_BREATH	(LAST_PROP+19)
-#define OBJECT_DET	(LAST_PROP+20)
+#define SUMMON_EARTH_ELEMENTAL		(LAST_PROT+16)
+#define SUMMON_AIR_ELEMENTAL		(LAST_PROT+17)
+#define OBJ_DETECTION	(LAST_PROP+18)
+#define PHASING		(LAST_PROP+19) /* convict role */
+#define IDENTIFY	(LAST_PROP+20)
+#define DRAGON_BREATH	(LAST_PROP+21)
+#define OBJECT_DET	(LAST_PROP+22)
  
 #endif /* ARTIFACT_H */
