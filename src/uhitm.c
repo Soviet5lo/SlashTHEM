@@ -1724,7 +1724,7 @@ int thrown;
 				canseemon(mon))
 			    pline("%s appears confused.", Monnam(mon));
 		}
-	}
+	} if (!destroyed) wounds_message(mon);
 
 #ifdef SHOW_DMG
 	if (!destroyed) showdmg(tmp);
