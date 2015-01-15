@@ -3537,9 +3537,12 @@ u_init()
 	    break;
 	case PM_VAMPIRE:
 	    /* Vampires start off with gods not as pleased, luck penalty */
+	    /* 5lo: Unless they're a necromancer */
+	    if (!Role_if(PM_NECROMANCER) && u.ualign.type == A_CHAOTIC ) {
 	    adjalign(-5); 
 	    u.ualign.sins += 5;
 	    change_luck(-1);
+	    }
 		{
 		static int trotyp[] = {POT_BLOOD, POT_VAMPIRE_BLOOD};
 		Xtra_food[0].trotyp = trotyp[rn2(SIZE(trotyp))];
