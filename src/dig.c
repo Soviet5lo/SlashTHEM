@@ -860,6 +860,9 @@ dig_up_grave()
 	} else if ((u.ualign.type == A_LAWFUL) && (u.ualign.record > -10)) {
 	    adjalign(-sgn(u.ualign.type)*2);
 	    You("have violated the sanctity of this grave!");
+	} else if ((u.ualign.type == A_CHAOTIC) && Role_if(PM_NECROMANCER)) {
+	    adjalign(-sgn(u.ualign.type));
+	    You("feel like a proper gravedigger.");
 	}
 
 	switch (rn2(5)) {
