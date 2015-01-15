@@ -217,7 +217,7 @@ STAIR:(19,10),up
 # Non diggable walls
 NON_DIGGABLE:(00,00,75,19)
 # Objects
-OBJECT:')',"orcish short sword",(37,10),blessed,0,"Slow Blade"
+OBJECT:'(',"magic flute",(37,10),blessed,0,"The Flute Of Slime"
 OBJECT:'(',"chest",(37,10)
 OBJECT:random,random,(36,09)
 OBJECT:random,random,(36,10)

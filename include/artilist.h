@@ -348,6 +348,9 @@ A("Bat from Hell",                BASEBALL_BAT,
 A("Elfrist",                    ORCISH_SPEAR,
 	SPFX_DFLAG2, 0, M2_ELF,
 	PHYS(5,8),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_HUMAN_WEREWOLF, PM_ORC, 300L ),
+A("Slow Blade",                ORCISH_SHORT_SWORD, /* 5lo: Now opposite of Quickblade... */
+	SPFX_RESTR, 0, 0,
+	PHYS(1,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
 
 A("Plague", DARK_ELVEN_BOW,	/* KMH */
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
@@ -501,9 +504,11 @@ A("Black Death",                     HALBERD,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,
 	DRLI(5,5),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_UNDERTAKER, NON_PM, 3000L ),
 
-A("Slow Blade",                ORCISH_SHORT_SWORD,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_SEARCH|SPFX_REGEN ), 0,
-	PHYS(2,1),      NO_DFNS,        NO_CARY,        HEALING, A_LAWFUL, PM_ACID_MAGE, NON_PM, 1000L ),
+A("The Flute of Slime",          MAGIC_FLUTE, /* 5lo: temp name */
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,
+	NO_ATTK,        NO_DFNS,        CARY(AD_ACID),
+	SUMMON_EARTH_ELEMENTAL,         A_CHAOTIC, PM_ACID_MAGE, NON_PM, 1000L ),
+/* Earth is associated with Acid in D&D */
 
 A("Fire-Brigade Reel",                RUBBER_HOSE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_HSPDAM|SPFX_HPHDAM ), 0,
