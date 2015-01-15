@@ -226,7 +226,7 @@ A("Debugger",       ATHAME,
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
     ELEC(5,5),  ELEC(0,0), NO_CARY,     0, A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 400L ),
     
-A("Hanging Call",       ATHAME, /* temp name */
+A("Acidtester",       ATHAME, /* temp name */
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
     ACID(5,5),  ACID(0,0), NO_CARY,     0, A_NEUTRAL, PM_ACID_MAGE, NON_PM, 400L ),
 
@@ -238,7 +238,7 @@ A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     SPFX_RESTR, 0, 0,
     PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NONE, PM_BARD, NON_PM, 1000L ),
 
-A("Jacket of Style",   LEATHER_JACKET, /* Temp name */
+A("Full Metal Jacket",   LEATHER_JACKET, /* Temp name */
     (SPFX_RESTR|SPFX_DEFN), (SPFX_HALRES|SPFX_PROTEC), 0,
     NO_ATTK,    FIRE(0,0),    NO_CARY,   0, A_NEUTRAL, PM_ROCKER, NON_PM, 1500L ), 
     
