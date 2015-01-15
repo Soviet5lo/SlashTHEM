@@ -1349,7 +1349,7 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	}
 	/*if (u.urealedibility) you_can("recognize detrimental food");*/
 
-	if (u.urealedibility) {
+	if (u.urealedibility || is_animal(youmonst.data) || u.ulycn != NON_PM) {
 		Sprintf(buf, "recognize detrimental food");
 	   Sprintf(eos(buf), " (%d)", u.urealedibility);
 		you_can(buf);

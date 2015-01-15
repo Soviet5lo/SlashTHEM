@@ -2927,6 +2927,9 @@ struct obj *otmp;
 		if (mnum == PM_GREEN_SLIME)
 		    stoneorslime = (!Unchanging && !flaming(youmonst.data) &&
 			youmonst.data != &mons[PM_GREEN_SLIME]);
+               	if (is_rider(&mons[mnum]))
+                    stoneorslime = TRUE;
+
 
 		if (cadaver && mnum != PM_LIZARD && mnum != PM_CAVE_LIZARD && mnum != PM_CHAOS_LIZARD && mnum != PM_LIZARD_EEL && mnum != PM_LIZARD_MAN && mnum != PM_EEL_LIZARD && mnum != PM_ANTI_STONE_LIZARD && mnum != PM_LICHEN && mnum != PM_SQUIRREL && mnum != PM_GECKO && mnum != PM_GIANT_GECKO && mnum != PM_IGUANA && mnum != PM_BIG_IGUANA && mnum != PM_HUGE_LIZARD && mnum != PM_KARMIC_LIZARD && mnum != PM_FIRE_LIZARD && mnum != PM_LIGHTNING_LIZARD && mnum != PM_ICE_LIZARD && mnum != PM_GIANT_LIZARD && mnum != PM_HELPFUL_SQUIRREL && mnum != PM_RHAUMBUSUN && mnum != PM_BIG_RHAUMBUSUN) {
 			long age = peek_at_iced_corpse_age(otmp);
@@ -2991,6 +2994,23 @@ struct obj *otmp;
 		else return 2;
 	}
 
+	if (dmgtype(&mons[mnum], AD_STUN) || dmgtype(&mons[mnum], AD_HALU) ||
+		    mnum == PM_VIOLET_FUNGUS) {
+		Sprintf(buf, "%s like %s may be %s! %s",
+			foodsmell, it_or_they,
+			Hallucination ? "some real hard stuff"
+			: "hallucinogenic", eat_it_anyway);
+		if (yn_function(buf,ynchars,'n')=='n') return 1;
+		adjalign(-sgn(u.ualign.type)); /* you took it knowingly */
+		return 2;
+	}
+	if (is_were(&mons[mnum]) && u.ulycn != mnum) {
+		Sprintf(buf, "%s like %s might be diseased. %s",
+			foodsmell, it_or_they, eat_it_anyway);
+		if (yn_function(buf,ynchars,'n')=='n') return 1;
+		else return 2;
+	}
+
 	/*
 	 * Breaks conduct, but otherwise safe.
 	 */
@@ -3050,7 +3070,10 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 	if (!(otmp = floorfood("eat"))) return 0;
 	if (check_capacity((char *)0)) return 0;
 
-	if (u.urealedibility) {
+	if (is_animal(youmonst.data) || u.ulycn != NON_PM) {
+	/* don't use up u.uedibility */
+	if (edibility_prompts(otmp) == 1) return 0;
+    	} else if (u.urealedibility) {
 		int res = edibility_prompts(otmp);
 		if (res) {
 		    u.urealedibility -= 1;
