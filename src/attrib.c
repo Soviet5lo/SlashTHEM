@@ -193,7 +193,7 @@ const struct innate {
 		     {  10, &(HAggravate_monster), "noisy", "quiet" },
 		     {  15, &(HWarning), "sensitive", "careless" },
 		     {	 0, 0, 0, 0 } },
-	kor_abil[] = {	{ 	1, &(HSwimming, "", "" },
+	kor_abil[] = {	{ 	1, &(HSwimming), "", "" },
 			 {2, &(HSearching), "perceptive", "unaware"  },
 			 {	7, &(HStealth), "stealthy", "noisy"  },	/* with cat-like tread ... */
 		     {	 0, 0, 0, 0 } },

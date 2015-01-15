@@ -453,7 +453,7 @@ const struct Role roles[] = {
 	{"Captain",			0},
 	{"Pirate Lord",   	0},
 	{"Dread Pirate",  	0} },
-	"Nereus", "Neptune", "Proteus"	/* Classical sea gods */
+	"Nereus", "Neptune", "Proteus",	/* Classical sea gods */
 	"Pir", "Tortuga", "Shipwreck Island",
 	PM_PIRATE, NON_PM, PM_UNDEAD_PIRATE, NON_PM, NON_PM,
 	PM_MAYOR_CUMMERBUND, PM_PIRATE_BROTHER, PM_BLACKBEARD_S_GHOST,
