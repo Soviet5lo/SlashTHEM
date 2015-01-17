@@ -663,7 +663,7 @@ char *outbuf;
 	if (!rn2(3) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor) /* increased random rumor chance --Amy */
 	    Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
 
-	if (!rn2(5)) wipeout_text(outbuf, (int)(strlen(outbuf) / 4), 0);
+	/*if (!rn2(5))*/ wipeout_text(outbuf, (int)(strlen(outbuf) / 4), 0);
 	return outbuf;
 }
 
@@ -877,8 +877,12 @@ register xchar x,y,cnt;
 	if(ep && ep->engr_type != HEADSTONE){
 	    if(ep->engr_type != BURN || is_ice(x,y)) {
 		if(ep->engr_type != DUST && ep->engr_type != ENGR_BLOOD) {
+#if 0
 			cnt = /*rn2(1 + 40/(cnt+1)) ? 0 : 1)*/rnd(cnt) ; /* nerf to semi-permanent Elbereths --Amy */
 			if (rn2(5)) cnt /= 2;
+#endif
+			/* 5lo: Reverted */
+			cnt = rn2(1+ 50/(cnt+1)) ? 0 : 1;
 		}
 		wipeout_text(ep->engr_txt, (int)cnt, 0);
 		while(ep->engr_txt[0] == ' ')
@@ -1548,7 +1552,7 @@ doengrave()
 
 #ifdef LIGHTSABERS
 		if (is_lightsaber(otmp)) {
-		    if (otmp->lamplit) type = /*BURN*/ENGRAVE;
+		    if (otmp->lamplit) type = BURN;
 		    else Your("%s is deactivated!", aobjnam(otmp,"are"));
 		} else
 #endif
