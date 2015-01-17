@@ -295,6 +295,27 @@ short *otyp;
 
     return (char *)0;
 }
+/* 5lo: Function for the Forge */
+int
+artifact_name2no(name)
+const char *name;
+{
+	register const struct artifact *a;
+	register int i;
+	register const char *aname;
+
+	if (!strncmpi(name,"the ",4)) name += 4;
+	
+	for (a = artilist+1,i=1; a->otyp; a++,i++) {
+		aname = a->name;
+		if (!strncmpi(aname,"the ",4)) aname += 4;
+		if (!strcmpi(name, aname)) {
+			return(i);
+		}
+	}
+    
+    return(0);
+}
 
 boolean
 exist_artifact(otyp, name)
@@ -713,6 +734,22 @@ touch_artifact(obj,mon)
 
 #endif /* OVLB */
 #ifdef OVL1
+
+/* 5lo: Functions for the forge */
+boolean nogen_nrartifact(int artino)
+{
+    return(artilist[artino].spfx % SPFX_NOGEN);
+}
+
+boolean exists_nrartifact(int artino)
+{
+    return(artiexist[artino]);
+}
+
+int nrartifact_obtype(int artino)
+{
+    return(artilist[artino].otyp);
+}
 
 /* decide whether an artifact's special attacks apply against mtmp */
 STATIC_OVL int
