@@ -31,7 +31,6 @@ compile
 
 # /doc/
 /doc/Makefile
-/doc/Guidebook.txt
 
 # /include/
 /include/autoconf.h
