@@ -1189,15 +1189,15 @@ boolean telekinesis;
 	result = -1;	/* nothing lifted */
 
 /* Trying to allow the player to pick up as much as they want. --Amy */
-
-/* #ifndef GOLDOBJ
+/* 5lo: Reverted */
+ #ifndef GOLDOBJ
     } else if (obj->oclass != COIN_CLASS && inv_cnt() >= 52 &&
 		!merge_choice(invent, obj)) {
 #else
     } else if (inv_cnt() >= 52 && !merge_choice(invent, obj)) {
 #endif
 	Your("knapsack cannot accommodate any more items.");
-	result = -1;*/	/* nothing lifted */
+	result = -1;	/* nothing lifted */
     } else {
 	result = 1;
 	prev_encumbr = near_capacity();
