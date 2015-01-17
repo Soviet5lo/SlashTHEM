@@ -31,45 +31,38 @@ struct icp {
 /* STEPHEN WHITE'S NEW CODE */   
 /* [Tom] tried to fix this back up a little... */
 /* KMH, balance patch -- changed again */
+/* 5lo: Made these more sensible compared to BSOD layouts */
 const struct icp mkobjprobs[] = {
-{110, WEAPON_CLASS},
-{ 80, ARMOR_CLASS},
-{160, FOOD_CLASS},
-{ 60, TOOL_CLASS},
-{ 26, GEM_CLASS},
-{120, POTION_CLASS},
-{120, SCROLL_CLASS},
-{ 30, SPBOOK_CLASS},
+{100, WEAPON_CLASS},
+{100, ARMOR_CLASS},
+{200, FOOD_CLASS},
+{100, TOOL_CLASS},
+{ 60, GEM_CLASS},
+{150, POTION_CLASS},
+{150, SCROLL_CLASS},
+{ 40, SPBOOK_CLASS},
 { 40, WAND_CLASS},
 { 40, RING_CLASS},
 { 10, AMULET_CLASS},
-{200, COIN_CLASS},
-{  1, VENOM_CLASS},
-{  1, ROCK_CLASS},
-{  1, BALL_CLASS},
-{  1, CHAIN_CLASS}
+{ 10, BALL_CLASS},
+{ 10, CHAIN_CLASS}
 
 /* KMH -- amulets now appear later in the game */
 /*{ 0, AMULET_CLASS}*/
 };
 
 const struct icp boxiprobs[] = {
-{ 70, WEAPON_CLASS},
-{ 50, ARMOR_CLASS},
-{ 16, GEM_CLASS},
-{ 40, TOOL_CLASS},
-{160, FOOD_CLASS},
-{120, POTION_CLASS},
-{120, SCROLL_CLASS},
-{ 50, SPBOOK_CLASS},
-{250, COIN_CLASS},
-{ 40, WAND_CLASS},
-{ 50, RING_CLASS},
+{150, GEM_CLASS},
+{100, FOOD_CLASS},
+{200, POTION_CLASS},
+{200, SCROLL_CLASS},
+{100, SPBOOK_CLASS},
+{ 70, COIN_CLASS},
+{ 70, WAND_CLASS},
+{ 60, RING_CLASS},
 { 30, AMULET_CLASS},
-{  1, VENOM_CLASS},
-{  1, ROCK_CLASS},
-{  1, BALL_CLASS},
-{  1, CHAIN_CLASS}
+{ 10, WEAPON_CLASS},
+{ 10, ARMOR_CLASS}
 };
 
 #ifdef REINCARNATION
@@ -85,22 +78,16 @@ const struct icp rogueprobs[] = {
 #endif
 
 const struct icp hellprobs[] = {
-{120, WEAPON_CLASS},
-{ 70, ARMOR_CLASS},
-{150, FOOD_CLASS},
-{ 60, TOOL_CLASS},
-{ 36, GEM_CLASS},
-{ 60, POTION_CLASS},
-{ 60, SCROLL_CLASS},
-{ 60, WAND_CLASS},
-{ 50, RING_CLASS},
-{ 40, AMULET_CLASS},
-{ 40, SPBOOK_CLASS},
-{250, COIN_CLASS},
-{  1, VENOM_CLASS},
-{  1, ROCK_CLASS},
-{  1, BALL_CLASS},
-{  1, CHAIN_CLASS}
+{150, WEAPON_CLASS},
+{150, ARMOR_CLASS},
+{160, FOOD_CLASS},
+{140, TOOL_CLASS},
+{120, GEM_CLASS},
+{ 20, POTION_CLASS},
+{ 20, SCROLL_CLASS},
+{100, WAND_CLASS},
+{100, RING_CLASS},
+{ 40, AMULET_CLASS}
 };
 
 struct obj *
