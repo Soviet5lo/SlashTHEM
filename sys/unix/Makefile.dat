@@ -366,12 +366,14 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Ninja.des
 	../util/lev_comp Noble.des
 	../util/lev_comp Offic.des
+	../util/lev_comp Pirate.des
 	../util/lev_comp Priest.des
 	../util/lev_comp Psion.des
 	../util/lev_comp Ranger.des
 	../util/lev_comp Rocker.des
 	../util/lev_comp Rogue.des
 	../util/lev_comp Samurai.des
+	../util/lev_comp Scient.des
 	../util/lev_comp Slayer.des
 	../util/lev_comp Spacew.des
 	../util/lev_comp Top.des
