@@ -59,7 +59,7 @@ register struct attack *mattk;
 		case AT_CLAW:
 			pline("%s claws you!", Monnam(mtmp));
 
-			if (flags.female && !rn2(5) ) { 
+			if (flags.female && !rn2(20) ) {
 				pline("%s rips into your breast with maniacal fervor!", Monnam(mtmp));
 
 			monsterlev = ((mtmp->m_lev) + 1);
@@ -72,8 +72,9 @@ register struct attack *mattk;
 		case AT_BITE:
 			pline("%s bites you!", Monnam(mtmp));
 			armproX = magic_negation(&youmonst);
-			if (!rn2(100) && ((rn2(3) >= armproX) || !rn2(20)) ) {
-			if (!Drain_resistance || !rn2(20)) {
+			/* 5lo: This happens way too often.  Decreased chances. */
+			if (!rn2(200) && ((rn2(3) >= armproX) || !rn2(50)) ) {
+			if (!Drain_resistance) {
 			pline("%s sinks %s teeth deep into your skin and drinks your blood!", Monnam(mtmp), mhis(mtmp));
 		      losexp("life drainage", FALSE);
 			}
@@ -83,7 +84,7 @@ register struct attack *mattk;
 			pline("%s kicks you%c", Monnam(mtmp),
 				    thick_skinned(youmonst.data) ? '.' : '!');
 
-			if (!flags.female && !rn2(5) ) { 
+			if (!flags.female && !rn2(20) ) {
 				pline("%s's kick painfully slams into your nuts!", Monnam(mtmp));
 
 			monsterlev = ((mtmp->m_lev) + 1);
@@ -94,14 +95,14 @@ register struct attack *mattk;
 			}
 
 			struct obj *footwear = which_armor(mtmp, W_ARMF);
-			if (!rn2(3) && ((footwear && footwear->otyp == WEDGE_SANDALS) || mtmp->data == &mons[PM_ANIMATED_WEDGE_SANDAL]) ) {
+			if (!rn2(10) && ((footwear && footwear->otyp == WEDGE_SANDALS) || mtmp->data == &mons[PM_ANIMATED_WEDGE_SANDAL]) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("%s slams %s sandals against your shins! It hurts!", Monnam(mtmp), mhis(mtmp) );
 				losehp(d(1,monsterlev), "sandal to the shin bone", KILLED_BY_AN);
 			}
 
-			if (!rn2(3) && (footwear && footwear->otyp == DANCING_SHOES) ) {
+			if (!rn2(10) && (footwear && footwear->otyp == DANCING_SHOES) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("%s slams %s dancing shoes against your shins! You stagger...", Monnam(mtmp), mhis(mtmp) );
@@ -109,14 +110,14 @@ register struct attack *mattk;
 				losehp(1, "soft dancing shoe", KILLED_BY_AN);
 			}
 
-			if (!rn2(3) && (footwear && footwear->otyp == SWEET_MOCASSINS) ) {
+			if (!rn2(10) && (footwear && footwear->otyp == SWEET_MOCASSINS) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("%s slides %s mocassins over your hands, opening your arteries and squirting blood everywhere!", Monnam(mtmp), mhis(mtmp) );
 				    incr_itimeout(&Glib, monsterlev);
 			}
 
-			if (!rn2(3) && (footwear && footwear->otyp == SOFT_SNEAKERS) ) {
+			if (!rn2(10) && (footwear && footwear->otyp == SOFT_SNEAKERS) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("%s hits your hand with %s sneakers!", Monnam(mtmp), mhis(mtmp) );
@@ -124,7 +125,7 @@ register struct attack *mattk;
 				losehp(d(1,monsterlev), "soft sneaker to the hand", KILLED_BY_AN);
 			}
 
-			if (!rn2(3) && (footwear && footwear->otyp == HIPPIE_HEELS) ) {
+			if (!rn2(10) && (footwear && footwear->otyp == HIPPIE_HEELS) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				randomkick = rnd(11);
@@ -221,7 +222,7 @@ register struct attack *mattk;
 
 			}
 
-			if (!rn2(3) && ((footwear && footwear->otyp == LEATHER_PEEP_TOES) || mtmp->data == &mons[PM_ANIMATED_LEATHER_PEEP_TOE]) ) {
+			if (!rn2(10) && ((footwear && footwear->otyp == LEATHER_PEEP_TOES) || mtmp->data == &mons[PM_ANIMATED_LEATHER_PEEP_TOE]) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("%s slams %s leather peep-toes against your shins!", Monnam(mtmp), mhis(mtmp) );
@@ -244,7 +245,7 @@ register struct attack *mattk;
 				}
 			}
 
-			if (!rn2(3) && ((footwear && footwear->otyp == FEMININE_PUMPS) || mtmp->data == &mons[PM_ANIMATED_SEXY_LEATHER_PUMP] || mtmp->data == &mons[PM_BLOODY_BEAUTIES]) ) {
+			if (!rn2(10) && ((footwear && footwear->otyp == FEMININE_PUMPS) || mtmp->data == &mons[PM_ANIMATED_SEXY_LEATHER_PUMP] || mtmp->data == &mons[PM_BLOODY_BEAUTIES]) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("%s scratches up and down your legs with %s heels!", Monnam(mtmp), mhis(mtmp) );
@@ -272,7 +273,7 @@ register struct attack *mattk;
 			    exercise(A_STR, FALSE);
 			    exercise(A_DEX, FALSE);
 			}
-			if (!rn2(3) && ((footwear && footwear->otyp == COMBAT_STILETTOS) || mtmp->data == &mons[PM_ANIMATED_COMBAT_STILETTO]) ) {
+			if (!rn2(10) && ((footwear && footwear->otyp == COMBAT_STILETTOS) || mtmp->data == &mons[PM_ANIMATED_COMBAT_STILETTO]) ) {
 				monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("%s does a round-house and painfully hits you with %s combat boots!", Monnam(mtmp), mhis(mtmp) );
@@ -323,7 +324,7 @@ register struct attack *mattk;
 			break;
 		case AT_LASH:
 			pline("%s lashes you!", Monnam(mtmp));
-			if (!rn2(10)) {
+			if (!rn2(30)) {
 			monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("Your head spins in confusion.");
@@ -332,7 +333,7 @@ register struct attack *mattk;
 			break;
 		case AT_TRAM:
 			pline("%s tramples over you!", Monnam(mtmp));
-			if (!rn2(5)) {
+			if (!rn2(20)) {
 			monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("You can't think straight as your every muscle is aching!");
