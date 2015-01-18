@@ -11,11 +11,12 @@ STATIC_DCL int FDECL(enermod, (int));
 newuexp(lev)
 int lev;
 {
+#ifndef EASY_MODE
 	/* KMH, balance patch -- changed again! */
-	/*if (lev < 9) return (10L * (1L << lev));
+	if (lev < 9) return (10L * (1L << lev));
 	if (lev < 13) return (10000L * (1L << (lev - 9)));
 	if (lev == 13) return (150000L);
-	return (50000L * ((long)(lev - 9)));*/
+	return (50000L * ((long)(lev - 9)));
 	/*              Old XP routine */
 	/* if (lev < 10) return (10L * (1L << lev));            */
 	/* if (lev < 20) return (10000L * (1L << (lev - 10)));  */
@@ -25,7 +26,7 @@ int lev;
 	if (lev == 3)  return (300L);
 	if (lev == 4)  return (600L);
 	if (lev == 5)  return (1200L); */
-
+#else /* 5lo: Easy mode restores the modified level values BSOD gave */
 	/* completely overhauled by Amy */
 	if (lev == 1)  return (20L);     /* need 20           */
 	if (lev == 2)  return (40L);    /* need 20           */
@@ -57,7 +58,7 @@ int lev;
 	if (lev == 28) return (930000L); /* need 70000       */
 	if (lev == 29) return (1000000L); /* need 70000      */
 	return (1500000L);
-
+#endif
 }
 
 STATIC_OVL int
