@@ -1774,35 +1774,35 @@ coord *tm;
 		/* reject "too hard" traps */
 		switch (kind) {
 		    case MAGIC_PORTAL:
-				kind = NO_TRAP; break;
+			    kind = NO_TRAP; break;
 		    case ROLLING_BOULDER_TRAP:
 		    case SLP_GAS_TRAP:
-				if (lvl < 2) kind = NO_TRAP; break;
+			    if (lvl < 2) kind = NO_TRAP; break;
 		    case LEVEL_TELEP:
-				if (level.flags.noteleport) kind = NO_TRAP; break;
+			    if (level.flags.noteleport) kind = NO_TRAP; break;
 		    case SPIKED_PIT:
-				if (lvl < 5) kind = NO_TRAP; break;
+			    if (lvl < 5) kind = NO_TRAP; break;
 		    case LANDMINE:
-			case SPEAR_TRAP:
-				if (lvl < 6) kind = NO_TRAP; break;
+		    case SPEAR_TRAP:
+			    if (lvl < 6) kind = NO_TRAP; break;
 		    case WEB:
-				if (lvl < 7) kind = NO_TRAP; break;
+			    if (lvl < 7) kind = NO_TRAP; break;
 		    case STATUE_TRAP:
 		    case POLY_TRAP:
-			case SHIT_TRAP:
-				if (lvl < 8) kind = NO_TRAP; break;
-			case COLLAPSE_TRAP:
-			case MAGIC_BEAM_TRAP:
-				if (lvl < 16) kind = NO_TRAP; break;
+		    case SHIT_TRAP:
+			    if (lvl < 8) kind = NO_TRAP; break;
+		    case COLLAPSE_TRAP:
+		    case MAGIC_BEAM_TRAP:
+			    if (lvl < 16) kind = NO_TRAP; break;
 		    case FIRE_TRAP:
-				if (!Inhell) kind = NO_TRAP; break;
-			case ICE_TRAP:
-				if (!Insheol) kind = NO_TRAP; break;
+			    if (!Inhell) kind = NO_TRAP; break;
+		    case ICE_TRAP:
+			    if (!Insheol) kind = NO_TRAP; break;
 		    case TELEP_TRAP:
-				if (level.flags.noteleport) kind = NO_TRAP; break;
+			    if (level.flags.noteleport) kind = NO_TRAP; break;
 		    case HOLE:
 			/* make these much less often than other traps */
-				if (rn2(7)) kind = NO_TRAP; break;
+			    if (rn2(7)) kind = NO_TRAP; break;
 		}
 /*		if (!rn2(12)) kind = STATUE_TRAP; */
 

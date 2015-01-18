@@ -1744,9 +1744,9 @@ gluttonous()
 void
 violated_vegetarian()
 {
-	if (Race_if(PM_VAMPIRE) || Race_if(PM_GASTLY)) {
-	return;
-	}
+    if (Race_if(PM_VAMPIRE) || Race_if(PM_GASTLY)) {
+    return;
+    }
     u.uconduct.unvegetarian++;
     if (Role_if(PM_MONK) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF) ) {
 	You_feel("guilty.");
