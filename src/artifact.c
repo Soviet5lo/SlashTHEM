@@ -1454,6 +1454,18 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	    return TRUE;
 	}
 
+	if (otmp->oartifact == ART_WARFORGER && dieroll < 5) { /* 5lo: Warforger special effect. */
+		pline("The slag of the forge sears %s!", hittee);
+		*dmgptr += rnd(6) * 6; /* Best be kind to him, now */
+		if (!rn2(50)) (void) destroy_mitem(mdef, POTION_CLASS, AD_FIRE);
+		if (!rn2(50)) (void) destroy_mitem(mdef, SCROLL_CLASS, AD_FIRE);
+		if (!rn2(75)) (void) destroy_mitem(mdef, SPBOOK_CLASS, AD_FIRE);
+		/* Note: Warforger doesn't use fire as its element.  This is
+		* to prevent people having fire resistance from ignoring the
+		* extra damage it can do.  It still burns things, however. */
+		return TRUE;
+	}
+
 	/* We really want "on a natural 20" but Nethack does it in */
 	/* reverse from AD&D. */
 	if (spec_ability(otmp, SPFX_BEHEAD)) {

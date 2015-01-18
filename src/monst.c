@@ -13772,8 +13772,8 @@ struct permonst _mons2[] = {
 	  M2_HUMAN|M2_COLLECT|M2_STALK|M2_HOSTILE, 0, HI_LORD),
 
     MON("blacksmith", S_HUMAN,
-	LVL(12, 18, 0, 0, 0), G_NOGEN, 
-	A(ATTK(AT_WEAP, AD_PHYS, 4, 4), ATTK(AT_WEAP, AD_PHYS, 4, 4),
+	LVL(25, 18, 0, 0, 0), G_NOGEN, /* 5lo: Boosted to black marketeer level */
+	A(ATTK(AT_WEAP, AD_PHYS, 4, 10), ATTK(AT_WEAP, AD_PHYS, 4, 10), /* Better attacks too */
 	    NO_ATTK, NO_ATTK, NO_ATTK, NO_ATTK),
 	SIZ(WT_HUMAN, 400, 0, MS_SMITH, MZ_HUMAN), 0, 0,
 	  M1_HUMANOID|M1_OMNIVORE, 
