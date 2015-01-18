@@ -996,8 +996,8 @@ makelevel()
 #ifdef WIZARD
 	if(wizard && nh_getenv("SHOPTYPE")) mkroom(SHOPBASE); else
 #endif
-	if (u_depth > 1 /*&&
-	    u_depth < depth(&medusa_level)*/ &&
+	if (u_depth > 1 &&
+	    u_depth < depth(&medusa_level) &&
 	    nroom >= room_threshold &&
 	    rn2(u_depth) < 3) mkroom(SHOPBASE);
  
@@ -1009,55 +1009,55 @@ makelevel()
 	    if(depth(&u.uz) > 4 && !rn2(12)) mkroom(COURT);
 		else if (depth(&u.uz) > 5 && !rn2(8)) mkroom(LEPREHALL);
 	    else if(depth(&u.uz) > 14 && !rn2(16)) mkroom(GIANTCOURT);
-	    else if(depth(&u.uz) > 10 && !rn2(10)) mkroom(BARRACKS);
-	else if (u_depth > 3 && !rn2(16)) mkroom(HUMANHALL);
-	else if (u_depth > 1 && !rn2(25)) mkroom(TRAPROOM);
-	else if (u_depth > 1 && !rn2(25)) mkroom(TENSHALL);
+	    else if(depth(&u.uz) > 14 && !rn2(10)) mkroom(BARRACKS);
+	    else if (u_depth > 9 && !rn2(16)) mkroom(HUMANHALL);
+	    else if (u_depth > 9 && !rn2(25)) mkroom(TRAPROOM);
+	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 
 	    /* hives */
-	    if(depth(&u.uz) > 5 && !rn2(12)) mkroom(BEEHIVE);
-	else if (u_depth > 8 && !rn2(8)) mkroom(ANTHOLE);
-	else if (u_depth > 3 && !rn2(12)) mkroom(NYMPHHALL);
-	else if (u_depth > 2 && !rn2(13)) mkroom(COINHALL);
-	else if (u_depth > 7 && !rn2(16)) mkroom(ARMORY);
-	else if (u_depth > 1 && !rn2(25)) mkroom(POOLROOM);
-	else if (u_depth > 1 && !rn2(25)) mkroom(TENSHALL);
+	    if(depth(&u.uz) > 9 && !rn2(12)) mkroom(BEEHIVE);
+	    else if (u_depth > 12 && !rn2(8)) mkroom(ANTHOLE);
+	    else if (u_depth > 8 && !rn2(12)) mkroom(NYMPHHALL);
+	    else if (u_depth > 13 && !rn2(13)) mkroom(COINHALL);
+	    else if (u_depth > 8 && !rn2(16)) mkroom(ARMORY);
+	    else if (u_depth > 10 && !rn2(25)) mkroom(POOLROOM);
+	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 
 
 	    /* zoos */
-	    if(depth(&u.uz) > 5 && !rn2(12)) mkroom(ZOO);
+	    if(depth(&u.uz) > 6 && !rn2(12)) mkroom(ZOO);
 	    /* fungus farms are rare... */
-	    else if (u_depth > 3 && !rn2(25)) mkroom(FUNGUSFARM);
+	    else if (u_depth > 7 && !rn2(25)) mkroom(FUNGUSFARM);
 	    else if(depth(&u.uz) > 9 && !rn2(18)) mkroom(REALZOO);
-	    else if(depth(&u.uz) > 9 && !rn2(20)) mkroom(ELEMHALL);
+	    else if(depth(&u.uz) > 11 && !rn2(20)) mkroom(ELEMHALL);
 	    else if(depth(&u.uz) > 12 && !rn2(25)) mkroom(ANGELHALL);
-	    else if(depth(&u.uz) > 2 && !rn2(17)) mkroom(MIMICHALL);
-	else if (u_depth > 3 && !rn2(15)) mkroom(SPIDERHALL);
-	else if (u_depth > 1 && /*!*/rn2(25)) mkroom(STATUEROOM);
-	else if (u_depth > 1 && !rn2(25)) mkroom(TENSHALL);
+	    else if(depth(&u.uz) > 12 && !rn2(17)) mkroom(MIMICHALL);
+	    else if (u_depth > 8 && !rn2(15)) mkroom(SPIDERHALL);
+	    else if (u_depth > 11 && !rn2(25)) mkroom(STATUEROOM);
+	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 
 	    /* neat rooms */
-	    if(depth(&u.uz) > 1 && !rn2(13)) mkroom(TEMPLE);
-	    else if(depth(&u.uz) > 4 && !rn2(14)) mkroom(MORGUE);
-	    else if(depth(&u.uz) > 1 && !rn2(15)) mkroom(BADFOODSHOP);
-	    else if(depth(&u.uz) > 1 && !rn2(7)) mkroom(SWAMP);
-        else if (depth(&u.uz) > 10 && !rn2(40)) mkroom(CLINIC); /*supposed to be very rare --Amy*/
-        else if (depth(&u.uz) > 3 && !rn2(20)) mkroom(TERRORHALL);
-        else if (depth(&u.uz) > 10 && !rn2(24)) mkroom(TROLLHALL);
- 	else if(depth(&u.uz) > 10 && !rn2(16)) mkroom(DOUGROOM);
-	else if (u_depth > 1 && !rn2(25)) mkroom(TENSHALL);
+	    if(depth(&u.uz) > 8 && !rn2(13)) mkroom(TEMPLE);
+	    else if(depth(&u.uz) > 11 && !rn2(14)) mkroom(MORGUE);
+	    else if(depth(&u.uz) > 13 && !rn2(15)) mkroom(BADFOODSHOP);
+	    else if(depth(&u.uz) > 18 && !rn2(7)) mkroom(SWAMP);
+	    else if (depth(&u.uz) > 10 && !rn2(40)) mkroom(CLINIC); /*supposed to be very rare --Amy*/
+	    else if (depth(&u.uz) > 9 && !rn2(20)) mkroom(TERRORHALL);
+	    else if (depth(&u.uz) > 10 && !rn2(24)) mkroom(TROLLHALL);
+	    else if(depth(&u.uz) > 10 && !rn2(16)) mkroom(DOUGROOM);
+	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 
 	    /* dangerous ones */
-	    if (u_depth > 10 && !rn2(25)) mkroom(COCKNEST);
-	    else if(depth(&u.uz) > 2 && !rn2(24)) mkroom(DRAGONLAIR);
-	    else if (u_depth > 12 && !rn2(30)) mkroom(MIGOHIVE);
+	    if (u_depth > 16 && !rn2(25)) mkroom(COCKNEST);
+	    else if(depth(&u.uz) > 20 && !rn2(24)) mkroom(DRAGONLAIR);
+	    else if (u_depth > 25 && !rn2(30)) mkroom(MIGOHIVE);
 	    /* [DS] the restriction of lemure pits to Gehennom means they're
 	     *      never going to show up randomly (no random room+corridor
 	     *      levels in Gehennom). Perhaps this should be removed? */
-	    else if (depth(&u.uz) > 5 && !rn2(22)) mkroom(LEMUREPIT);
-	else if (u_depth > 3 && !rn2(24)) mkroom(GOLEMHALL);
-	else if (u_depth > 1 && !rn2(25)) mkroom(GRUEROOM);
-	else if (u_depth > 1 && !rn2(25)) mkroom(TENSHALL);
+	    else if (In_hell(&u.uz) && !rn2(22)) mkroom(LEMUREPIT);
+	    else if (u_depth > 15 && !rn2(24)) mkroom(GOLEMHALL);
+	    else if (u_depth > 15 && !rn2(25)) mkroom(GRUEROOM);
+	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 #ifdef UNDERGROUND_RIVERS
 	    /* Underground rivers */
 	    if ( u_depth > 13 && !rn2(7)) mkrivers();
