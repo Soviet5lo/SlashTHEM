@@ -22,30 +22,42 @@ struct prices_t
 /* the code relies on that a) the artifacts are presented in ascending */
 /*			      order of price */
 /*		       and b) no two given artifacts have the same price. */
+/* 5lo: Guidelines I'm setting for this are: No sacrifice gifts (to prevent
+ * characters from buying their gift), No non-weapons (only for now?) and
+ * no artifacts set to nogen.
+ */
 static struct prices_t prices[] = {
 	{ ART_STING,			500 },
 	{ ART_ORCRIST,			600 },
+	{ ART_SLOW_BLADE,       700 },
+	{ ART_QUICK_BLADE,      750 },
+	{ ART_ELFRIST,          800 },
+	{ ART_FUNGISWORD,       900 },
 	{ ART_MUMAKBANE,		1000 },
-	{ ART_SHOCKER,			2000 },
+	{ ART_LUCKBLADE,        1200 },
+	{ ART_SWORD_OF_BALANCE, 1500 },
+	{ ART_PETSLAYER,        2000 },
 	{ ART_GRIMTOOTH,		2500 },
-	{ ART_CLEAVER,			3000 },
+	{ ART_YOICHI_NO_YUMI,   3000 },
 	{ ART_OGRESMASHER,		3500 },
 	{ ART_TROLLSBANE,		4000 },
 	{ ART_WORMBITER,		4500 },
 	{ ART_DRAGONBANE,		5000 },
 	{ ART_WEREBANE,			5200 },
+	{ ART_DOOMBLADE,        6000 },
 	{ ART_FIRE_BRAND,		6500 },
 	{ ART_FROST_BRAND,		6750 },
 	{ ART_SUNSWORD,			7000 },
-	{ ART_MAGICBANE,		8000 },
-	{ ART_GIANTSLAYER,		8500 },
+	{ ART_DIPLOMAT,         8000 },
+	{ ART_GIANTKILLER,		8500 },
 	{ ART_DEMONBANE,		9000 },
-	{ ART_SNICKERSNEE,		9500 },
-	{ ART_EXCALIBUR,		10000 },
-	{ ART_MJOLLNIR,			11000 },
+/*	{ ART_SNICKERSNEE,		9500 }, */ /* Enabled later? */
+	{ ART_PLAGUE,			10000 },
+	{ ART_HELLFIRE,			11000 },
 	{ ART_STORMBRINGER,		12000 },
 	{ ART_VORPAL_BLADE,		15000 },
 	{ ART_GRAYSWANDIR,		17500 },
+	{ ART_HOUCHOU,          1000000 }, /* Good luck getting this */
 	{ 0,				0 }
 };
 
