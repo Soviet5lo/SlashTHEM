@@ -2490,7 +2490,7 @@ xkilled(mtmp, dest)
 			}
 			/* Don't create large objects from small monsters */
 			typ = otmp->otyp;
-			/*if (mdat->msize < MZ_HUMAN && typ != FOOD_RATION 
+			if (mdat->msize < MZ_HUMAN && typ != FOOD_RATION 
 			    && typ != LEASH
 			    && typ != FIGURINE
 			    && (otmp->owt > 3 ||
@@ -2498,7 +2498,7 @@ xkilled(mtmp, dest)
 				is_spear(otmp) || is_pole(otmp) ||
 				typ == MORNING_STAR)) {
 			    delobj(otmp);
-			} else */redisp = TRUE; /*just always create the object --Amy*/
+			} else redisp = TRUE;
 		}
 		/* Whether or not it always makes a corpse is, in theory,
 		 * different from whether or not the corpse is "special";
