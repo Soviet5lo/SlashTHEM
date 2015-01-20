@@ -2494,7 +2494,7 @@ xkilled(mtmp, dest)
 			    && typ != LEASH
 			    && typ != FIGURINE
 			    && (otmp->owt > 3 ||
-				objects[typ].oc_big oc_bimanual/oc_bulky ||
+				objects[typ].oc_big /*oc_bimanual/oc_bulky*/ ||
 				is_spear(otmp) || is_pole(otmp) ||
 				typ == MORNING_STAR)) {
 			    delobj(otmp);
