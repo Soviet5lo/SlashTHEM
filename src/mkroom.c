@@ -217,8 +217,8 @@ mkshop()
 	    /* big rooms cannot be wand or book shops,
 	     * - so make them general stores
 	     */
-	    /*if(isbig(sroom) && (shtypes[i].symb == WAND_CLASS
-				|| shtypes[i].symb == SPBOOK_CLASS)) i = 0;*/
+	    if(isbig(sroom) && (shtypes[i].symb == WAND_CLASS
+				|| shtypes[i].symb == SPBOOK_CLASS)) i = 0;
 	}
 	sroom->rtype = SHOPBASE + i;
 
