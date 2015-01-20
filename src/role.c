@@ -1420,8 +1420,8 @@ const struct Role roles[] = {
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
-	{  10,  7,  7,  7, 13,  6 },
-	{  20, 20, 10, 20, 20, 10 },
+	{   7, 10,  6,  6, 14, 10 },
+	{  15, 15,  7, 15, 30, 15 },
 	/* Init   Lower  Higher */
 	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
 	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
@@ -1448,8 +1448,8 @@ const struct Role roles[] = {
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */  /* Direct copy from Wizard */
-	{   7, 10,  7,  7,  7,  7 },
-	{  10, 30, 10, 20, 20, 10 },
+	{  13,  7, 10,  8, 12, 12 },
+	{  20, 15, 15, 10, 20, 20 },
 	/* Init   Lower  Higher */
 	{ 15, 0,  0, 8,  1, 0 },	/* Hit points */
 	{ 15, 3,  0, 2,  0, 3 },12,	/* Energy */
@@ -1504,8 +1504,8 @@ const struct Role roles[] = {
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
 	ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
-	{  10, 10, 10,  8,  9, 7 },
-	{  30, 15, 15, 10, 20, 10 },
+	{   7, 14,  6,  7,  7,  5 },
+	{  10, 20, 10, 10, 30, 10 },
 	/* Init   Lower  Higher */
 	{ 18, 0,  0, 8,  1, 0 },	/* Hit points */
 	{ 20, 4,  0, 1,  0, 2 },20,	/* Energy */
@@ -1532,8 +1532,8 @@ const struct Role roles[] = {
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
-	{   7,  7,  7, 10,  7,  6 },
-	{  20, 10, 10, 30, 20, 10 },
+	{   7, 10,  7, 10,  7,  6 },
+	{  20, 15, 10, 30, 10, 20 },
 	/* Init   Lower  Higher */
 	{ 15, 0,  0, 8,  1, 0 },	/* Hit points */
 	{  3, 0,  0, 1,  0, 1 },11,	/* Energy */
@@ -1561,8 +1561,8 @@ const struct Role roles[] = {
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
 	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  30, 10, 10, 20, 20, 10 },
+	{   7, 10,  7, 10,  7, 10 },
+	{  20, 15, 10, 30, 10, 20 },
 	/* Init   Lower  Higher */
 	{ 18, 0,  0, 6,  1, 0 },	/* Hit points */
 	{  8, 0,  0, 2,  0, 2 },12,	/* Energy */
@@ -1588,8 +1588,8 @@ const struct Role roles[] = {
 	ART_FUMA_ITTO_NO_KEN,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
-	{  10,  8,  7, 10, 17,  6 },
-	{  30, 10,  8, 30, 14,  8 },
+	{   7,  7,  7, 15,  7,  6 },
+	{  15, 10, 10, 30, 10, 10 },
 	/* Init   Lower  Higher */
 	{ 19, 0,  0, 8,  1, 0 },	/* Hit points */
 	{  7, 0,  0, 1,  0, 1 },11,	/* Energy */
@@ -1615,8 +1615,8 @@ const struct Role roles[] = {
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
-	{  10,  7,  7,  7, 13,  6 },
-	{  20, 20, 10, 20, 20, 10 },
+	{  12, 11, 10, 13, 10, 10 },
+	{  20, 15, 15, 10, 20, 10 },
 	/* Init   Lower  Higher */
 	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
 	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
@@ -1642,9 +1642,9 @@ const struct Role roles[] = {
 	ART_BLACK_DEATH,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
 	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */ /* Modified from Knight */
-	{  13,  7, 14,  8, 10, 10 },
-	{  20, 15, 15, 20, 20, 10 },
+	/* Str Int Wis Dex Con Cha */
+	{   7,  7, 13, 10, 13,  6 },
+	{  15, 20, 20, 15, 25, 10 },
 	/* Init   Lower  Higher */
 	{ 22, 0,  0, 8,  2, 0 },	/* Hit points */
 	{ 16, 4,  0, 1,  0, 2 },10,	/* Energy */
