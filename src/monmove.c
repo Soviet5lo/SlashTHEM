@@ -1034,9 +1034,9 @@ not_special:
 		/* look for gold or jewels nearby */
 		likegold = (likes_gold(ptr) && pctload < 95);
 		likegems = (likes_gems(ptr) && pctload < 85);
-		uses_items = (/*!mindless(ptr) && !is_animal(ptr)
-			&& */pctload < 75); /* I just decided that "mindless" isn't the same as "stupid". --Amy */
-		likeobjs = (likes_objs(ptr) && pctload < 75);
+		uses_items = (!mindless(ptr) && !is_animal(ptr)
+			&& pctload < 75); /* I just decided that "mindless" isn't the same as "stupid". --Amy */
+		likeobjs = (likes_objs(ptr) && pctload < 75); /* 5lo: Reverted above. */
 		likemagic = (likes_magic(ptr) && pctload < 85);
 		likerock = (throws_rocks(ptr) && pctload < 50 && !In_sokoban(&u.uz));
 		conceals = hides_under(ptr);

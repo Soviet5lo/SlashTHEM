@@ -510,8 +510,8 @@ struct monst *mtmp;
 	boolean immobile = (mtmp->data->mmove == 0);
 	int fraction;
 
-	/*if (is_animal(mtmp->data) || mindless(mtmp->data))
-		return FALSE;*/
+	if (is_animal(mtmp->data) || mindless(mtmp->data))
+		return FALSE;
 	if(dist2(x, y, mtmp->mux, mtmp->muy) > 25)
 		return FALSE;
 	if (u.uswallow && stuck) return FALSE;
@@ -1530,12 +1530,12 @@ struct monst *mtmp;
 	int difficulty = monstr[(monsndx(pm))];
 	int trycnt = 0;
 
-	/*if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
+	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
 			|| pm->mlet == S_GHOST
 # ifdef KOPS
 			|| pm->mlet == S_KOP
 # endif
-		) return 0;*/
+		) return 0;
     try_again:
 	switch (rn2(8 + (difficulty > 3) + (difficulty > 6) +
 				(difficulty > 8))) {
@@ -1571,12 +1571,12 @@ struct monst *mtmp;
 {
 	struct permonst *pm = mtmp->data;
 
-/*	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
+	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
 			|| pm->mlet == S_GHOST
 # ifdef KOPS
 			|| pm->mlet == S_KOP
 # endif
-		) return 0;*/
+		) return 0;
 	switch (rn2(21)) {
 
 		case 0: return SCR_TELEPORTATION;
@@ -1657,8 +1657,8 @@ struct monst *mtmp;
 
 	m.offensive = (struct obj *)0;
 	m.has_offense = 0;
-	if (mtmp->mpeaceful /*|| is_animal(mtmp->data) ||
-				mindless(mtmp->data) || nohands(mtmp->data)*/ )
+	if (mtmp->mpeaceful || is_animal(mtmp->data) ||
+				mindless(mtmp->data) || nohands(mtmp->data) )
 		return FALSE;
 	if (u.uswallow) return FALSE;
 	if (in_your_sanctuary(mtmp, 0, 0)) return FALSE;
@@ -2681,12 +2681,12 @@ struct monst *mtmp;
 	struct permonst *pm = mtmp->data;
 	int difficulty = monstr[(monsndx(pm))];
 
-	/*if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
+	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
 			|| pm->mlet == S_GHOST
 # ifdef KOPS
 			|| pm->mlet == S_KOP
 # endif
-		) return 0;*/
+		) return 0;
 	if (difficulty > 7 && !rn2(350)) return WAN_DEATH;
 	if (difficulty > 6 && !rn2(125)) return WAN_FIREBALL;
 	switch (rn2(9 - (difficulty < 4) + 4 * (difficulty > 6))) {
@@ -2720,12 +2720,12 @@ struct monst *mtmp;
 {
 	struct permonst *pm = mtmp->data;
 
-/*	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
+	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
 			|| pm->mlet == S_GHOST
 # ifdef KOPS
 			|| pm->mlet == S_KOP
 # endif
-		) return 0;*/
+		) return 0;
 	switch (rn2(34)) {
 
 		case 0: return WAN_DEATH;
@@ -2798,8 +2798,8 @@ struct monst *mtmp;
 
 	m.misc = (struct obj *)0;
 	m.has_misc = 0;
-	/*if (is_animal(mdat) || mindless(mdat))
-		return 0;*/
+	if (is_animal(mdat) || mindless(mdat))
+		return 0;
 	if (u.uswallow && stuck) return FALSE;
 
 	/* We arbitrarily limit to times when a player is nearby for the
@@ -3168,12 +3168,12 @@ struct monst *mtmp;
 	struct permonst *pm = mtmp->data;
 	int difficulty = monstr[(monsndx(pm))];
 
-	/*if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
+	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
 			|| pm->mlet == S_GHOST
 # ifdef KOPS
 			|| pm->mlet == S_KOP
 # endif
-		) return 0;*/
+		) return 0;
 	/* Unlike other rnd_item functions, we only allow _weak_ monsters
 	 * to have this item; after all, the item will be used to strengthen
 	 * the monster and strong monsters won't use it at all...
@@ -3203,12 +3203,12 @@ struct monst *mtmp;
 {
 	struct permonst *pm = mtmp->data;
 
-/*	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
+	if(is_animal(pm) || attacktype(pm, AT_EXPL) || mindless(mtmp->data)
 			|| pm->mlet == S_GHOST
 # ifdef KOPS
 			|| pm->mlet == S_KOP
 # endif
-		) return 0;*/
+		) return 0;
 	switch (rn2(10)) {
 
 		case 0: return POT_GAIN_LEVEL;
@@ -3234,10 +3234,10 @@ struct obj *obj;
 {
 	int typ = obj->otyp;
 
-	/*if (is_animal(mon->data) ||
+	if (is_animal(mon->data) ||
 		mindless(mon->data) ||
-		mon->data == &mons[PM_GHOST])*/	/* don't loot bones piles */
-	    /*return FALSE;*/
+		mon->data == &mons[PM_GHOST])	/* don't loot bones piles */
+	    return FALSE;
 
 	if (typ == WAN_MAKE_INVISIBLE || typ == POT_INVISIBILITY)
 	    return (boolean)(!mon->minvis && !mon->invis_blkd && !attacktype(mon->data, AT_GAZE));
