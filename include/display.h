@@ -25,7 +25,6 @@
  * monsters that are hiding or mimicing other monsters.
  */
 #define tp_sensemon(mon) (	/* The hero can always sense a monster IF:  */\
-      (mon)->mhp % 3 != 0 && /* 0. the monster passes a 66 percent chance check to be visible (addition by Amy) AND */\
 	(!mindless((mon)->data)) &&	/* 1. the monster has a brain to sense AND  */\
       ((Blind && Blind_telepat) ||	/* 2a. hero is blind and telepathic OR	    */\
 				/* 2b. hero is using a telepathy inducing   */\
@@ -41,8 +40,7 @@
  * vicinity, and a glyph representing the warning level is displayed.
  */
 
-/* Only 50 percent of monsters are visible to warning. --Amy */
-#define mon_warning(mon) ((mon)->mhp % 2 != 0 && Warning && !(mon)->mpeaceful && 				\
+#define mon_warning(mon) (Warning && !(mon)->mpeaceful && 				\
 			 (distu((mon)->mx, (mon)->my) < 100) &&				\
 			 (((int) ((mon)->m_lev / 6)) >= flags.warnlevel))
 
