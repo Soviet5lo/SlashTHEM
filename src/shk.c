@@ -1157,11 +1157,11 @@ register boolean killkops;
 	(void) mnearto(shkp, x, y, TRUE);
 	level.flags.has_shop = 1;
 	if (killkops) {
-/*#ifdef KOPS
+#ifdef KOPS
 		kops_gone(TRUE);
 #else
 		You_feel("vaguely apprehensive.");
-#endif*/
+#endif
 		pacify_guards();
 	}
 	after_shk_move(shkp);
@@ -1275,9 +1275,9 @@ register boolean silentkops;
 		pline("%s calms down.", Monnam(shkp));
 
 	if(!angry_shk_exists()) {
-/*#ifdef KOPS
+#ifdef KOPS
 		kops_gone(silentkops);
-#endif*/
+#endif
 		pacify_guards();
 	}
 }
@@ -4584,7 +4584,7 @@ struct monst *shkp;
 
 #ifdef KOPS
 STATIC_OVL void
-kops_gone(silent) /* will no longer be called --Amy */
+kops_gone(silent)
 register boolean silent;
 {
 	register int cnt = 0;
