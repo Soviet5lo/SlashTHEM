@@ -497,7 +497,7 @@ A("Liontamer",                BULLWHIP,
 	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
 
 A("Fuma-itto no Ken",                BROADSWORD,    /* 5lo: New quest artifact for Ninja - Credit to Chris as this comes from dNethack with minor changes */
-	(SPFX_RESTR|SPFX_DALIGN), 0, 0, /* This artifact has special privilage to not go by "the X of (the) Y" format */
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_DALIGN), 0, 0, /* This artifact has special privilage to not go by "the X of (the) Y" format */
 	PHYS(8,8),      NO_DFNS,     CARY(AD_DRLI),        CREATE_AMMO, A_CHAOTIC, PM_NINJA, NON_PM, 5000L ),
 
 A("Black Death",                     HALBERD,
