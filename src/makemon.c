@@ -4477,7 +4477,7 @@ register struct	monst	*mtmp;
 		    			/* They're going to need it :-) */
 			mongets(mtmp,rn2(3) ? RING_MAIL : PLATE_MAIL);
 			
-        } else if (ptr == &mons[PM_BLACKSMITH]) { /* Give him sone strong stuff to deter fighting */
+        } else if (ptr == &mons[PM_BLACKSMITH]) { /* Give him some strong stuff to deter fighting */
 			struct obj *otmp = mksobj(HEAVY_HAMMER,TRUE,FALSE);
 			otmp = oname(otmp,artiname(ART_WARFORGER));
 			mpickobj(mtmp,otmp);
