@@ -1104,7 +1104,7 @@ register struct monst *mtmp;
 		     if (!rn2(100)) (void) mongets(mtmp, rnd_offensive_item_new(mtmp));
 		     if (!rn2(100)) (void) mongets(mtmp, rnd_defensive_item_new(mtmp));
 		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     (void)mongets(mtmp, STEEL_SHIELD);
+		     (void)mongets(mtmp, LARGE_SHIELD);
 		     (void)mongets(mtmp, STEEL_WHIP);
 
 		   break;

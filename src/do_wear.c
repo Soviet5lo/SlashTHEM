@@ -611,7 +611,6 @@ Shield_on()
 	case ORCISH_SHIELD:
 	case DWARVISH_ROUNDSHIELD:
 	case LARGE_SHIELD:
-	case STEEL_SHIELD:
 	case SHIELD_OF_REFLECTION:
 		break;
 	default: impossible(unknown_type, c_shield, uarms->otyp);
@@ -632,7 +631,6 @@ Shield_off()
 	case ORCISH_SHIELD:
 	case DWARVISH_ROUNDSHIELD:
 	case LARGE_SHIELD:
-	case STEEL_SHIELD:
 	case SHIELD_OF_REFLECTION:
 		break;
 	default: impossible(unknown_type, c_shield, uarms->otyp);
