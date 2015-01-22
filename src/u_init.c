@@ -184,13 +184,10 @@ static struct trobj Zyborg[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Lunatic[] = {
-	{ HELMET, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ LEATHER_GLOVES, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ STEEL_SHIELD, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ KICKING_BOOTS, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ STEEL_WHIP, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ TRIPE_RATION, 0, FOOD_CLASS, 5, 0 },
+static struct trobj Lunatic[] = { /* 5lo: Changing to starting objects from Slash 6 Lycanthrope role */
+	{ ORCISH_SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ POT_SICKNESS, 0, POTION_CLASS, 2, 0 },
+	{ UNDEF_TYP, UNDEF_SPE, SCROLL_CLASS, 2, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -2921,7 +2918,7 @@ u_init()
 	case PM_LUNATIC:
         ini_inv(Lunatic);
         skill_init(Skill_Lun);
-
+        u.nv_range = 2;
 		switch (rnd(7)) {
 		case 1: 	    u.ulycn = PM_WEREWOLF; break;
 		case 2: 	    u.ulycn = PM_WEREJACKAL; break;
@@ -2931,9 +2928,7 @@ u_init()
 		case 6: 	    u.ulycn = PM_WERESNAKE; break;
 		case 7: 	    u.ulycn = PM_WERESPIDER; break;
 		default: 	    u.ulycn = PM_WEREWOLF; break;
-
 		}
-
 		break;
 
 #ifdef CONVICT
