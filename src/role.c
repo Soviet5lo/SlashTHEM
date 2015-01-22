@@ -1717,7 +1717,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     16,     20, 16, 16, 16, 16 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
@@ -1730,7 +1730,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  2, 0,  3, 0,  3, 0 }		/* Energy */
@@ -1743,7 +1743,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  5, 0,  4, 0,  4, 0 }		/* Energy */
@@ -1792,7 +1792,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     19,     17, 17, 15, 18, 15 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  1, 0 },	/* Hit points */
 	{  1, 0,  2, 0,  2, 0 }		/* Energy */
@@ -1805,7 +1805,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     25,     17, 17, 15, 20, 16 },
 	/* Init   Lower  Higher */
 	{  5, 0,  0, 4,  4, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
@@ -1817,7 +1817,7 @@ const struct Race races[] = {
 	MH_HOBBIT, MH_HOBBIT, MH_GNOME|MH_ORC,
 	/*  Str    Int Wis Dex Con Cha */
 	{   3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{  18,     16, 18, 18, 20, 20 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  1, 0 },	/* Hit points */
 	{  4, 0,  2, 1,  2, 0 }		/* Energy */
@@ -1843,7 +1843,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  3, 0,  0, 3,  5, 0 },	/* Hit points */
 	{  3, 0,  3, 0,  5, 0 }		/* Energy */
@@ -1856,7 +1856,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
@@ -1869,7 +1869,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 3,  3, 0 },	/* Hit points */
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
@@ -1882,7 +1882,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     17,     17, 16, 20, 18, 16 },
 	/* Init   Lower  Higher */
 	{  3, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  3, 0,  2, 0,  1, 0 }		/* Energy */
@@ -1907,7 +1907,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  4, 0,  4, 0,  4, 0 }		/* Energy */
@@ -1919,7 +1919,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_ELF|MH_GNOME|MH_HOBBIT|MH_DWARF|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      4,      0,  0,  4,  3,  4 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     18,     18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  4, 0,  4, 0,  4, 0 }		/* Energy */
@@ -1932,7 +1932,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 2,  1, 0 },	/* Hit points */
 	{  1, 0,  4, 0,  4, 0 }		/* Energy */
@@ -1945,7 +1945,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     16,     18, 18, 25, 15, 21 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  3, 0,  3, 0,  3, 0 }		/* Energy */
@@ -1958,7 +1958,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     23,     15, 15, 15, 20, 15 },
 	/* Init   Lower  Higher */
 	{  4, 0,  0, 3,  3, 0 },	/* Hit points */
 	{  3, 0,  1, 0,  1, 0 }		/* Energy */
@@ -1981,8 +1981,8 @@ const struct Race races[] = {
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, MH_DWARF, MH_GNOME,
 	/*    Str     Int Wis Dex Con Cha */
-	{   3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{   3,         3,  3,  3,  3,  3 },
+	{STR18(100),  18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  3, 0,  3, 0,  3, 0 },	/* Hit points */
 	{  3, 0,  3, 0,  3, 0 },	/* Energy */
@@ -1995,7 +1995,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  10, 0,  0, 6,  4, 0 },	/* Hit points */
 	{  0, 0,  0, 0,  0, 0 }		/* Energy */
@@ -2008,7 +2008,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  3, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  2, 0,  1, 0,  1, 0 }		/* Energy */
@@ -2021,7 +2021,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  4, 0,  0, 2,  3, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
@@ -2034,7 +2034,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     23,     17, 15, 16, 25, 15 },
 	/* Init   Lower  Higher */
 	{  0, 0,  0, 0,  0, 0 },	/* Hit points */
 	{  0, 0,  0, 0,  0, 0 }		/* Energy */
@@ -2046,7 +2046,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_ELF|MH_GNOME|MH_HOBBIT|MH_DWARF|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      4,      0,  0,  4,  3,  4 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     18,     18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  4, 0,  0, 4,  4, 0 },	/* Hit points */
 	{  7, 0,  7, 0,  7, 0 }		/* Energy */
@@ -2071,7 +2071,7 @@ const struct Race races[] = {
 	MH_DWARF, MH_DWARF, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     18,     25, 23, 18, 17, 16 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
@@ -2084,7 +2084,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  0, 2 },	/* Hit points */
 	{  0, 0,  10, 0, 10, 0 },		/* Energy */
@@ -2121,7 +2121,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  4, 0,  0, 4,  4, 0 },	/* Hit points */
 	{  4, 0,  4, 0,  4, 0 }		/* Energy */
@@ -2134,7 +2134,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC|MH_ELF|MH_HUMAN|MH_DWARF|MH_HOBBIT|MH_WERE|MH_VAMPIRE,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{     18,     20, 20, 18, 16, 18 },
 	/* Init   Lower  Higher */
 	{  8, 0,  0, 6,  4, 0 },	/* Hit points */
 	{  8, 0,  6, 0,  4, 0 }		/* Energy */
@@ -2147,7 +2147,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  4, 0,  0, 3,  2, 0 },	/* Hit points */
 	{  3, 0,  2, 0,  1, 0 }		/* Energy */
@@ -2160,7 +2160,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 4,  4, 0 },	/* Hit points */
 	{  2, 0,  1, 0,  1, 0 }		/* Energy */
@@ -2173,7 +2173,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{ STR19(25), 25, 25, 25, 25, 25 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  3, 0,  0, 3,  5, 0 },	/* Hit points */
 	{  3, 0,  3, 0,  5, 0 }		/* Energy */
