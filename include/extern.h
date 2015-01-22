@@ -60,6 +60,7 @@ E void FDECL(restore_artifacts, (int));
 E const char *FDECL(artiname, (int));
 E struct obj *FDECL(mk_artifact, (struct obj *,ALIGNTYP_P));
 E const char *FDECL(artifact_name, (const char *,short *));
+E int FDECL(artifact_name2no, (const char *name)); /* 5lo: Function for Forge */
 E boolean FDECL(exist_artifact, (int,const char *));
 E void FDECL(artifact_exists, (struct obj *,const char *,BOOLEAN_P));
 E int NDECL(nartifact_exist);
@@ -79,6 +80,9 @@ E int FDECL(disp_artifact_discoveries, (winid));
 E boolean FDECL(artifact_hit, (struct monst *,struct monst *,
 				struct obj *,int *,int));
 E int NDECL(doinvoke);
+E boolean FDECL(nogen_nrartifact,(int artino)); /* 5lo: Functions for Forge */
+E boolean FDECL(exists_nrartifact,(int artino));
+E int FDECL(nrartifact_obtype,(int artino));
 E void FDECL(arti_speak, (struct obj *));
 E boolean FDECL(artifact_light, (struct obj *));
 E int FDECL(artifact_wet, (struct obj *, BOOLEAN_P));
@@ -1997,6 +2001,10 @@ E void NDECL(take_gold);
 E int NDECL(dosit);
 E void NDECL(rndcurse);
 E void NDECL(attrcurse);
+
+/* ### smith.c ### */
+
+E void FDECL(smith_selling, (struct monst *));
 
 /* ### sounds.c ### */
 

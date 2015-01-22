@@ -295,6 +295,27 @@ short *otyp;
 
     return (char *)0;
 }
+/* 5lo: Function for the Forge */
+int
+artifact_name2no(name)
+const char *name;
+{
+	register const struct artifact *a;
+	register int i;
+	register const char *aname;
+
+	if (!strncmpi(name,"the ",4)) name += 4;
+	
+	for (a = artilist+1,i=1; a->otyp; a++,i++) {
+		aname = a->name;
+		if (!strncmpi(aname,"the ",4)) aname += 4;
+		if (!strcmpi(name, aname)) {
+			return(i);
+		}
+	}
+    
+    return(0);
+}
 
 boolean
 exist_artifact(otyp, name)
@@ -713,6 +734,22 @@ touch_artifact(obj,mon)
 
 #endif /* OVLB */
 #ifdef OVL1
+
+/* 5lo: Functions for the forge */
+boolean nogen_nrartifact(int artino)
+{
+    return(artilist[artino].spfx % SPFX_NOGEN);
+}
+
+boolean exists_nrartifact(int artino)
+{
+    return(artiexist[artino]);
+}
+
+int nrartifact_obtype(int artino)
+{
+    return(artilist[artino].otyp);
+}
 
 /* decide whether an artifact's special attacks apply against mtmp */
 STATIC_OVL int
@@ -1415,6 +1452,18 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	    pline_The("night blade howls as it slices through %s!", hittee);
 	    *dmgptr += rnd(5) * 6;
 	    return TRUE;
+	}
+
+	if (otmp->oartifact == ART_WARFORGER && dieroll < 5) { /* 5lo: Warforger special effect. */
+		pline("The slag of the forge sears %s!", hittee);
+		*dmgptr += rnd(6) * 6; /* Best be kind to him, now */
+		if (!rn2(50)) (void) destroy_mitem(mdef, POTION_CLASS, AD_FIRE);
+		if (!rn2(50)) (void) destroy_mitem(mdef, SCROLL_CLASS, AD_FIRE);
+		if (!rn2(75)) (void) destroy_mitem(mdef, SPBOOK_CLASS, AD_FIRE);
+		/* Note: Warforger doesn't use fire as its element.  This is
+		* to prevent people having fire resistance from ignoring the
+		* extra damage it can do.  It still burns things, however. */
+		return TRUE;
 	}
 
 	/* We really want "on a natural 20" but Nethack does it in */

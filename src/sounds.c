@@ -1261,7 +1261,7 @@ register struct monst *mtmp;
 		break;
 
 	case MS_SMITH:
-		verbalize("I'm working. Please don't disturb me again!");
+		smith_selling(mtmp); /* 5lo: Forge dialog */
 		break;
 
     }
