@@ -3657,7 +3657,7 @@ u_init()
 	if (u.umoney0) ini_inv(Money);
 	u.umoney0 += hidden_gold();	/* in case sack has gold in it */
 #endif
-
+#if 0 /* 5lo: Not used because it breaks existing stat spread system */
 	/* Starting stat point totals will be higher or lower depending on the player character. --Amy */
 
 	rolebounus = racebounus = genderbounus = alignbounus = 0;
@@ -3723,7 +3723,8 @@ u_init()
 
 	temp = 30 + rolebounus + racebounus + alignbounus + genderbounus; /* new algorithm --Amy */
 	if (temp > maxbounus) temp = maxbounus; /* prevent value from randomly becoming too high */
-	/*temp = rn1(10,70);*/
+#endif
+	temp = rn1(10,70);
 	init_attr(temp);		/* init attribute values */
 	find_ac();			/* get initial ac value */
 	max_rank_sz();			/* set max str size for class ranks */
