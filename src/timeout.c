@@ -215,12 +215,12 @@ nh_timeout()
 		You_hear("maniacal laughter!");
 	    attrcurse();
 	}
-
+#if 0 /* 5lo: No longer needed */
 	/* Nymph race randomly gets punished --Amy */
 	if (!rn2(2000) && Race_if(PM_NYMPH)) {
 			punishx();
 	}
-
+#endif
 	/* special bleeder handling --Amy */
 	if (!rn2(200) && Role_if(PM_BLEEDER)) {
 		You("are losing blood!");

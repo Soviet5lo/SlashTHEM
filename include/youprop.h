@@ -37,7 +37,7 @@
 
 #define HSleep_resistance	u.uprops[SLEEP_RES].intrinsic
 #define ESleep_resistance	u.uprops[SLEEP_RES].extrinsic
-#define Sleep_resistance	( !Race_if(PM_KOBOLT) && (HSleep_resistance || ESleep_resistance || \
+#define Sleep_resistance	( /*!Race_if(PM_KOBOLT) &&*/ (HSleep_resistance || ESleep_resistance || \
 				 resists_sleep(&youmonst)) )
 
 #define HDisint_resistance	u.uprops[DISINT_RES].intrinsic
@@ -141,7 +141,7 @@
 
 #define HSleeping		u.uprops[SLEEPING].intrinsic
 #define ESleeping		u.uprops[SLEEPING].extrinsic
-#define Sleeping		(HSleeping || ESleeping || Race_if(PM_KOBOLT))
+#define Sleeping		(HSleeping || ESleeping /*|| Race_if(PM_KOBOLT)*/)
 
 #define HHunger			u.uprops[HUNGER].intrinsic
 #define EHunger			u.uprops[HUNGER].extrinsic

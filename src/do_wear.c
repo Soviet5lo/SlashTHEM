@@ -809,7 +809,7 @@ Amulet_on()
 		Strangled = 6;
 		break;
 	case AMULET_OF_RESTFUL_SLEEP:
-		if Race_if(PM_KOBOLT) break;
+		/*if Race_if(PM_KOBOLT) break;*/
 		if(uamul->blessed) {
 			char buf[BUFSZ];
 			int sleeptime;
@@ -907,7 +907,7 @@ Amulet_off()
 		break;
 	case AMULET_OF_RESTFUL_SLEEP:
 		setworn((struct obj *)0, W_AMUL);
-		if (!ESleeping && !Race_if(PM_KOBOLT))
+		/*if (!ESleeping && !Race_if(PM_KOBOLT))*/
 			HSleeping = 0;
 		return;
 	case AMULET_OF_DATA_STORAGE:
@@ -965,7 +965,7 @@ register struct obj *obj;
 	case MEAT_RING:
 		break;
 	case RIN_SLEEPING:        
-		if Race_if(PM_KOBOLT) break;
+		/*if Race_if(PM_KOBOLT) break;*/
 		HSleeping = rnd(1000);
 		break;
 #if 0
@@ -1111,7 +1111,7 @@ boolean gone;
 	case MEAT_RING:
 		break;
 	case RIN_SLEEPING:
-		if (!ESleeping && !Race_if(PM_KOBOLT))
+		/*if (!ESleeping && !Race_if(PM_KOBOLT))*/
 			HSleeping = 0;
 		break;
 #if 0
@@ -1636,15 +1636,16 @@ boolean noisy;
 	/* Actually, you got shot in the head by Benny, so you aren't technically without a head. But for the sake of it,
 	   let's pretend the courier actually doesn't have one. By the way, Benny is the "some random guy" quest nemesis
 	   in the courier quest, since all Fallout New Vegas NPCs are undistinguishable clones of each other. --Amy */
-
+#if 0 /* 5lo: Not needed - May extend to Courier above in the future */
 	} else if (Race_if(PM_ILLITHID)) {
 	    if (noisy)
 		pline("Your tentacles prevent that action!");
 	    err++;
-
+#endif
 #ifdef JEDI
 	} else if (Upolyd && (youmonst.data == &mons[PM_MIND_FLAYER] ||
-			      youmonst.data == &mons[PM_MASTER_MIND_FLAYER]) &&
+			      youmonst.data == &mons[PM_MASTER_MIND_FLAYER]) ||
+				Race_if(PM_ILLITHID) &&
 			otmp->otyp == PLASTEEL_HELM){
 		if (noisy)
 			pline_The("%s won't fit over your tentacles.", xname(otmp));

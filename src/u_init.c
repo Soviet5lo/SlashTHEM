@@ -3560,7 +3560,7 @@ u_init()
           ini_inv(KoboltItem);		
           ini_inv(KoboltItemB);		
           ini_inv(KoboltItemC);		
-		HSleeping = 5;
+		/*HSleeping = 5;*/
 		break;
 	case PM_GASTLY:
           ini_inv(GhastFood);		
