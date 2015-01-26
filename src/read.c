@@ -2609,14 +2609,12 @@ register struct obj	*sobj;
 		}
 		}
 		else{ /* sobj is an artifact */
-			if (u.ublesscnt > 0) {pline("The map reveals nothing."); break;}
 			if(sobj->age > monstermoves){
 				pline("The map %s hard to see.", vtense((char *)0,"are"));
 				nomul(rnd(3));
 				sobj->age += (long) d(3,10);
 			} else sobj->age = monstermoves + (long) d(3,10);
 			do_vicinity_map();
-			u.ublesscnt += rnz(300);
 		}
 		break;
 	case SCR_AMNESIA:
