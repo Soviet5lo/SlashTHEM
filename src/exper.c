@@ -13,7 +13,7 @@ int lev;
 {
 #ifndef EASY_MODE
 	/* KMH, balance patch -- changed again! */
-	if (lev < 9) return (10L * (1L << lev));
+	if (lev < 9) return (20L * (1L << lev));
 	if (lev < 13) return (10000L * (1L << (lev - 9)));
 	if (lev == 13) return (150000L);
 	return (50000L * ((long)(lev - 9)));
