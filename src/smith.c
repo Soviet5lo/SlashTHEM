@@ -51,7 +51,7 @@ static struct prices_t prices[] = {
 	{ ART_DIPLOMAT,         8000 },
 	{ ART_GIANTKILLER,		8500 },
 	{ ART_DEMONBANE,		9000 },
-/*	{ ART_SNICKERSNEE,		9500 }, */ /* Enabled later? */
+	{ ART_SNICKERSNEE,		9500 },
 	{ ART_PLAGUE,			10000 },
 	{ ART_HELLFIRE,			11000 },
 	{ ART_STORMBRINGER,		12000 },

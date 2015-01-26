@@ -103,11 +103,15 @@ A("Sunsword",                   LONG_SWORD,
  */
 A("Snickersnee",                KATANA,
 	SPFX_RESTR, 0, 0,
-	PHYS(0,4),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_SAMURAI, NON_PM, 1200L ),
+	PHYS(0,4),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, NON_PM, NON_PM, 1200L ),
 
 A("Yoichi no yumi",                YUMI, /* 5lo: Artifact from dNethack */
 	SPFX_RESTR, 0, 0,
 	PHYS(20,0),	NO_DFNS,	NO_CARY,	CREATE_AMMO, A_LAWFUL, NON_PM, NON_PM, 1200L ),
+
+A("Kiku-ichimonji",                KATANA, /* 5lo: New sacrifice gift for Samurai */
+	SPFX_RESTR, 0, 0,
+	PHYS(4,12),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_SAMURAI, NON_PM, 1200L ),
 
 #ifdef YEOMAN
 /* KMH -- Renamed from Holy Sword of Law (Stephen White)
