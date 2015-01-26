@@ -76,6 +76,10 @@ STATIC_OVL struct Jitem Japanese_items[] = {
 	{ WOODEN_HARP, "koto" },
 	{ DOUGHNUT, "onigiri" }, /* 4kids dubbing */
 	{ WEDGE_SANDALS, "jika-tabi" }, /* 5lo: I know they're not the same, close enough though */
+	{ WATER_WALKING_BOOTS, "mizugumo" },
+	{ GRAPPLING_HOOK, "kaginawa" },
+	{ BOW, "dai-kyu" }, /* Nethack-- */
+	{ SMALL_SHIELD, "timbe" }, /* Nethack-- */
 	{0, "" }
 };
 
