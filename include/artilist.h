@@ -134,6 +134,11 @@ A("Skullcrusher",               CLUB,
 	SPFX_RESTR, 0, 0,
 	PHYS(3,5),     NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CAVEMAN, NON_PM, 300L ),
 
+A("Liontamer",                BULLWHIP, /* 5lo: was quest artifact */
+	(SPFX_RESTR|SPFX_ATTK), 0, S_FELINE,
+	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
+
+
 A("Trollsbane",                 MORNING_STAR,
 	(SPFX_RESTR|SPFX_DCLAS), 0, S_TROLL,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 200L ),
@@ -497,9 +502,10 @@ A("The Sling of David",                SLING,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK|SPFX_HPHDAM), 0, M2_GIANT,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,	PHASING, A_NEUTRAL, PM_ROCKER, NON_PM, 800L ),
 
-A("Liontamer",                BULLWHIP,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, S_FELINE,
-	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
+A("The Golden Whistle of Nora",          MAGIC_WHISTLE, /* 5lo: temp name? */
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_HPHDAM|SPFX_ESP), 0,
+	NO_ATTK,        NO_DFNS,        NO_CARY,
+	TAMING,         A_LAWFUL, PM_ZOOKEEPER, NON_PM, 1000L ),
 
 A("Fuma-itto no Ken",                BROADSWORD,    /* 5lo: New quest artifact for Ninja - Credit to Chris as this comes from dNethack with minor changes */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_DALIGN), 0, 0, /* This artifact has special privilage to not go by "the X of (the) Y" format */

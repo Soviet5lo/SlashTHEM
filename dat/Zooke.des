@@ -321,7 +321,7 @@ NON_DIGGABLE:(00,00,75,19)
 # The altar of Huhetotl.  Unattended.
 ALTAR:(50,14),chaos,altar
 # Objects
-OBJECT:')',"bullwhip",(50,14),blessed,5,"Liontamer"
+OBJECT:'(',"magic whistle",(50,14),blessed,"The Golden Whistle of Nora"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
