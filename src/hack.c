@@ -2442,40 +2442,40 @@ register boolean newlev;
 		/* edit by Amy - removed that stupidity. Why the heck would a swamp turn into an ordinary room??? 
 		 * Besides, I _like_ ambient level messages! They can be anything from soothing to terrifying!
 		 * There's no reason to get rid of them if you enter a room, and it's OK to get a message every time, too. */
-	    switch (rt) {
+	    switch (rt) { /* 5lo: Removed wake_nearby, gets really annoying */
 		case ZOO:
 		    pline("Welcome to David's treasure zoo!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case SWAMP:
 		    pline("It %s rather %s down here.",
 			  Blind ? "feels" : "looks",
 			  Blind ? "humid" : "muddy");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case COURT:
 		    You("enter an opulent throne room!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case REALZOO:
 		    You("enter a smelly zoo!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case GIANTCOURT:
 		    You("enter a giant throne room!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case DRAGONLAIR:
 		    You("enter a dragon lair...");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case BADFOODSHOP:
 		    You("enter an abandoned store...");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case LEPREHALL:
 		    You("enter a leprechaun hall!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case MORGUE:
 		    if(midnight()) {
@@ -2483,79 +2483,79 @@ register boolean newlev;
 			pline("%s away!  %s away!", run, run);
 		    } else
 			{ You("have an uncanny feeling..."); }
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case BEEHIVE:
 		    You("enter a giant beehive!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case LEMUREPIT:
 		    You("enter a pit of screaming lemures!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case MIGOHIVE:
 		    You("enter a strange hive!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case FUNGUSFARM:
 		    You("enter a room full of fungi!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case COCKNEST:
 		    You("enter a disgusting nest!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case ANTHOLE:
 		    You("enter an anthole!");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
             case CLINIC:
                 You("enter a modern hospital.");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
             case ANGELHALL:
                 You("enter a radiating hall of Angels!");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case TERRORHALL:
                 You("enter a terrifying hall.");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case TENSHALL:
                 You("enter a killer room! This is actually an ADOM tension room.");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case ELEMHALL:
                 You("enter a room full of elementals!");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case NYMPHHALL:
                 You("enter a beautiful garden!");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
             case ARMORY:
                 You("enter a dilapidated armory.");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case COINHALL:
                 You("enter a room filled with money!");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case TROLLHALL:
                 You("enter a room full of stinking trolls...");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case HUMANHALL:
                 You("encounter a living room!");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case SPIDERHALL:
                 You("stumble into a nest of spiders...");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case GOLEMHALL:
                 You("enter a room full of golems!");
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 	      case TRAPROOM:
                 if (wizard) You("enter a trapped room!");
@@ -2572,7 +2572,7 @@ register boolean newlev;
 	    do_clear_areaX(u.ux,u.uy,		/* extra darkness --Amy */
 		15, set_litX, (genericptr_t)((char *)0));
 		/* IMHO grue rooms may remove light every time you enter them. --Amy */
-		    wake_nearby();
+		    /*wake_nearby();*/
                 break;
 		case BARRACKS:
 		    if(monstinroom(&mons[PM_SOLDIER], roomno) ||
@@ -2583,17 +2583,17 @@ register boolean newlev;
 			You("enter a military barracks!");
 		    else
 			{ You("enter an abandoned barracks."); }
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case DELPHI:
 		    if(monstinroom(&mons[PM_ORACLE], roomno))
 			verbalize("%s, %s, welcome to Delphi!",
 					Hello((struct monst *) 0), plname);
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case DOUGROOM:
 		    You("feel 42.");
-		    wake_nearby();
+		    /*wake_nearby();*/
 		    break;
 		case TEMPLE:
 		    intemple(roomno + ROOMOFFSET);
