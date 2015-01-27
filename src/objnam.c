@@ -621,7 +621,7 @@ char *prefix;
 	boolean iscrys = (obj->otyp == CRYSKNIFE);
 
 
-	if (/*!is_damageable(obj) && !iscrys || */Hallucination) return;
+	if (!is_damageable(obj) && !iscrys || Hallucination) return;
 
 	/* The only cases where any of these bits do double duty are for
 	 * rotted food and diluted potions, which are all not is_damageable().
@@ -730,9 +730,9 @@ register struct obj *obj;
 	if (Hallucination ? !rn2(100) : obj->greased) Strcat(prefix, "greased ");
 
 	switch(obj->oclass) {
-	case SCROLL_CLASS:
+	/*case SCROLL_CLASS:
 		add_erosion_words(obj, prefix);
-		break;
+		break;*/
 	case AMULET_CLASS:
 		add_erosion_words(obj, prefix);
 		if(obj->owornmask & W_AMUL)
@@ -821,7 +821,7 @@ plus:
 		    goto charges;
 		break;
 	case SPBOOK_CLASS: /* WAC spellbooks have charges now */
-		add_erosion_words(obj, prefix);
+		/*add_erosion_words(obj, prefix);*/
 #ifdef WIZARD
 		if (wizard) {
 		    if (Hallucination)
@@ -846,7 +846,7 @@ charges:
 			break;
 		if (obj->otyp == POT_OIL && obj->lamplit)
 		    Strcat(bp, " (lit)");
-		add_erosion_words(obj, prefix);
+		/*add_erosion_words(obj, prefix);*/
 		break;
 	case RING_CLASS:
 		add_erosion_words(obj, prefix);
@@ -865,7 +865,7 @@ ring:
 		}
 		break;
 	case FOOD_CLASS:
-		add_erosion_words(obj, prefix);
+		/*add_erosion_words(obj, prefix);*/
 		if (obj->otyp == CORPSE && obj->odrained) {
 #ifdef WIZARD
 		    if (wizard && obj->oeaten < drainlevel(obj))
@@ -909,10 +909,10 @@ ring:
 		}
 		if (obj->otyp == MEAT_RING) goto ring;
 		break;
-	case VENOM_CLASS:
+	/*case VENOM_CLASS:
 	case ROCK_CLASS:
 		add_erosion_words(obj, prefix);
-		break;
+		break;*/
 	case BALL_CLASS:
 	case CHAIN_CLASS:
 		goto plus;
