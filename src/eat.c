@@ -1745,6 +1745,7 @@ void
 violated_vegetarian()
 {
     if (Race_if(PM_VAMPIRE) || Race_if(PM_GASTLY)) {
+    u.uconduct.unvegetarian++;
     return;
     }
     u.uconduct.unvegetarian++;
