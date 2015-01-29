@@ -336,12 +336,12 @@ static void make_buy2()
 static void hand_object(void)
 {
 	if (weapon == NULL) {
-		impossible("no blade to give?");
+		impossible("no weapon to give?");
 		return;
 	}
 
-	verbalize("This is your blade. It shall be known as %s from now on.",artiname(weapon->oartifact));
-	hold_another_object(weapon,"Oops! You accidentally drop your new blade!",(const char *) 0,(const char *) 0);
+	verbalize("This is your weapon. It shall be known as %s from now on.",artiname(weapon->oartifact));
+	hold_another_object(weapon,"Oops! You accidentally drop your new weapon!",(const char *) 0,(const char *) 0);
 	time_finished = -1;
 	weapon = NULL;
 }
