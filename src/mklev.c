@@ -1780,7 +1780,8 @@ coord *tm;
 		    case SLP_GAS_TRAP:
 			    if (lvl < 2) kind = NO_TRAP; break;
 		    case LEVEL_TELEP:
-			    if (level.flags.noteleport) kind = NO_TRAP; break;
+			    if (lvl < 5 || level.flags.noteleport)
+				kind = NO_TRAP; break;
 		    case SPIKED_PIT:
 			    if (lvl < 5) kind = NO_TRAP; break;
 		    case LANDMINE:
