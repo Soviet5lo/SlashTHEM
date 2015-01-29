@@ -764,6 +764,8 @@ int thrown;
 	boolean hittxt = FALSE, destroyed = FALSE, already_killed = FALSE;
 	boolean get_dmg_bonus = TRUE;
 	boolean ispoisoned = FALSE, needpoismsg = FALSE, poiskilled = FALSE;
+	/* Giants instakiilled with sling + stone */
+	boolean giantkill = FALSE;
 	boolean silvermsg = FALSE, silverobj = FALSE;
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
@@ -1456,6 +1458,14 @@ int thrown;
 	    else if (u.twoweap) use_skill(P_TWO_WEAPON_COMBAT,1);
 	}
 
+	if (uslinging() && ammo_and_launcher(obj, uwep)
+	   		&& (P_SKILL(wtype) >= P_EXPERT ||
+			uwep->oartifact == ART_SLING_OF_DAVID)
+			&& mdat->mlet == S_GIANT)
+	{
+		giantkill = TRUE;
+	}
+
 	if (ispoisoned) {
 	    int nopoison = (10 - (obj->owt/10));            
 	    if(nopoison < 2) nopoison = 2;
@@ -1709,6 +1719,14 @@ int thrown;
 		if (!noncorporeal(mdat))
 		    whom = strcat(s_suffix(whom), " flesh");
 		pline(fmt, whom);
+	}
+
+	if(giantkill)
+	{
+		You("smite %s on the forehead!", mon_nam(mon));
+		if(!already_killed) {
+			xkilled(mon, 1);
+		}
 	}
 
 	if (needpoismsg)
