@@ -44,9 +44,9 @@ STATIC_DCL void FDECL(create_corridor, (corridor *));
 
 STATIC_DCL boolean FDECL(create_subroom, (struct mkroom *, XCHAR_P, XCHAR_P,
 					XCHAR_P, XCHAR_P, XCHAR_P, XCHAR_P));
-
+#if 0 /* Deferred for now */
 STATIC_DCL void FDECL(mkfeature,(int,int));
-
+#endif
 #define LEFT	1
 #define H_LEFT	2
 #define CENTER	3
@@ -98,7 +98,7 @@ char *lev_message = 0;
 lev_region *lregions = 0;
 int num_lregions = 0;
 lev_init init_lev;
-
+#if 0 /* Deferred for now */
 /* Make a random dungeon feature --Amy */
 STATIC_OVL void
 mkfeature(x,y)
@@ -299,7 +299,7 @@ register int x, y;
 	}
 
 }
-
+#endif
 /*
  * Make walls of the area (x1, y1, x2, y2) non diggable/non passwall-able
  */
@@ -1654,8 +1654,10 @@ schar ftyp, btyp;
 				(void) maketrap(xx, yy, rndtrap());
 		    else if(/*nxcor &&*/ !rn2(200)) 
 				(void) makemon((struct permonst *)0, xx, yy, NO_MM_FLAGS);
+#if 0 /* Deferred for now */
 		    else if(/*nxcor &&*/ !rn2(20)) 
 				(void) mkfeature(xx, yy);
+#endif
 		} else {
 			crm->typ = SCORR;
 		}

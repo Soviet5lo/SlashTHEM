@@ -1112,6 +1112,7 @@ skip0:
 		    if(!rn2(3)) mktoilet(croom);
 		}
 #endif
+#if 0
 		if(!rn2(50)) {
 		    mkstone(croom);
 		    if(!rn2(3)) mkstone(croom);
@@ -1215,7 +1216,7 @@ skip0:
 
 		if(!rn2(1000)) mkironbarsX(rnz(10),croom);
 		if(!rn2(5000)) mkironbarsX(rnz(25),croom);
-
+#endif
 		x = 80 - (depth(&u.uz) * 2);
 		if (x < 2) x = 2;
 		if(!rn2(x)) mkgrave(croom);
