@@ -1629,6 +1629,7 @@ boolean noisy;
 		pline_The("%s won't fit over your horn%s.",
 			  c_helmet, plur(num_horns(youmonst.data)));
 	    err++;
+#if 0 /* 5lo: This makes no sense at all -- removed */
 	} else if (Role_if(PM_COURIER)) {
 	    if (noisy)
 		pline("You have no head!");
@@ -1636,7 +1637,6 @@ boolean noisy;
 	/* Actually, you got shot in the head by Benny, so you aren't technically without a head. But for the sake of it,
 	   let's pretend the courier actually doesn't have one. By the way, Benny is the "some random guy" quest nemesis
 	   in the courier quest, since all Fallout New Vegas NPCs are undistinguishable clones of each other. --Amy */
-#if 0 /* 5lo: Not needed - May extend to Courier above in the future */
 	} else if (Race_if(PM_ILLITHID)) {
 	    if (noisy)
 		pline("Your tentacles prevent that action!");
