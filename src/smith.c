@@ -57,7 +57,7 @@ static struct prices_t prices[] = {
 	{ ART_STORMBRINGER,		12000 },
 	{ ART_VORPAL_BLADE,		15000 },
 	{ ART_GRAYSWANDIR,		17500 },
-	{ ART_HOUCHOU,			1000000 }, /* Good luck getting this */
+	{ ART_HOUCHOU,			50000 }, /* Price adjusted to be less sadistic */
 	{ 0,				0 }
 };
 
