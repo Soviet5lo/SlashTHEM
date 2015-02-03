@@ -779,7 +779,9 @@ boolean artif;
 
 		} else if (rn2(10)) otmp->spe = rnd( (objects[otmp->otyp].oc_dir == NODIR) ? 15 : 8);
 			else otmp->spe = rnd( (objects[otmp->otyp].oc_dir == NODIR) ? 30 : 16); /* low chance for extra charges --Amy */
+#if 0 /* 5lo: No more useless wand spawning */
 		if (rn2(2)) otmp->spe -= rnd(3); /* allow random useless wands to spawn --Amy */
+#endif
 		blessorcurse(otmp, 17);
 		if (otmp->otyp != WAN_WISHING && otmp->otyp != WAN_ACQUIREMENT) otmp->recharged = 0; /* used to control recharging */
 		if (!rn2(10)) otmp->recharged = rnd(7); /* allow recharged wands to spawn --Amy */
