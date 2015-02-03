@@ -231,14 +231,14 @@ use_stethoscope(obj)
 	int rx, ry, res;
 	boolean interference = (u.uswallow && is_whirly(u.ustuck->data) &&
 				!rn2(Role_if(PM_HEALER) ? 10 : 3));
-
+#if 0 /* 5lo: What? */
 	if (!rn2(100)) {
 	    useup(obj);
 	    pline("Your stethoscope breaks!");
 		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return;
 		}
-
+#endif
 	if (nohands(youmonst.data)) {	/* should also check for no ears and/or deaf */
 		You("have no hands!");	/* not `body_part(HAND)' */
 		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
@@ -301,7 +301,8 @@ use_stethoscope(obj)
 	}
 	rx = u.ux + u.dx; ry = u.uy + u.dy;
 	if (!isok(rx,ry)) {
-		You_hear("a faint typing noise.");
+		You_hear(Hallucination ? "two robots and a human heckling you." 
+			: "a faint typing noise.");
 		return 0;
 	}
 	if ((mtmp = m_at(rx,ry)) != 0) {
