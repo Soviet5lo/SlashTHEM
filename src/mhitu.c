@@ -4487,9 +4487,10 @@ register struct monst *mon;
 		adjalign(1);
 
 	/* yay graphical descriptions! --Amy */
+#if 0 /* 5lo: Just...no */
 	if (!flags.female) pline("%s starts to gently pull down your pants with her soft, fleecy hands...", Monnam(mon));
 	else pline("%s softly caresses your fleecy bra, and gently pulls it off to reveal your breasts...", Monnam(mon));
-
+#endif
 	if (rnd(ACURR(A_CHA)) < 3) { /* random chance of being betrayed by your love interest... */
 
 	monsterlev = ((mon->m_lev) + 1);
