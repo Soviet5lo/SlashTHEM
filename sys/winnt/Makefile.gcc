@@ -485,9 +485,9 @@ VOBJ12 = music.o    o_init.o   objects.o  objnam.o   options.o
 VOBJ13 = pickup.o   pline.o    polyself.o potion.o   quest.o
 VOBJ14 = questpgr.o pager.o    pray.o	  priest.o   read.o
 VOBJ15 = rect.o	    restore.o  rip.o	  rnd.o	     role.o
-VOBJ16 = rumors.o   save.o     shk.o      shknam.o   sit.o
-VOBJ17 = smith.o    sounds.o   sp_lev.o   spell.o    steal.o
-VOBJ18 = steed.o    timeout.o  topten.o   track.o
+VOBJ16 = rumors.o   save.o     school.o   shk.o      shknam.o
+VOBJ17 = sit.o      smith.o    sounds.o   sp_lev.o   spell.o
+VOBJ18 = steal.o    steed.o    timeout.o  topten.o   track.o
 VOBJ19 = trap.o     u_init.o   uhitm.o    vault.o    vision.o
 VOBJ20 = vis_tab.o  weapon.o   were.o	  wield.o    windows.o
 VOBJ21 = wizard.o   worm.o     worn.o     write.o
@@ -2043,6 +2043,7 @@ rnd.o: rnd.c $(HACK_H)
 role.o: role.c $(HACK_H)
 rumors.o: rumors.c $(HACK_H) $(INCL)/lev.h $(INCL)/dlb.h
 save.o: save.c $(HACK_H) $(INCL)/lev.h
+school.o: school.c $(HACK_H)
 shk.o: shk.c $(HACK_H) $(INCL)/eshk.h
 shknam.o: shknam.c $(HACK_H) $(INCL)/eshk.h
 sit.o: sit.c $(HACK_H) $(INCL)/artifact.h

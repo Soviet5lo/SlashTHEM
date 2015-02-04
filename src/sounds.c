@@ -1134,21 +1134,7 @@ register struct monst *mtmp;
 	    }
 	    break;
 	case MS_PUPIL:
-
-		{
-		static const char *pupil_msgs[] = {
-			"Today no homework ... *please*",
-			"six times nine is ... um ... uh ... ... forty-two",
-			"you ... Strange word",	/* You're not expected to understand this ... */
-			"Bugger off!",
-			"*uck off!",
-			"What are the newest news about the Super Information Highway?",
-			"What do you want?",
-			"Do the world a favour---jump out of the 20th story of the Uni-Center!",
-		};
-
-		verbalize(pupil_msgs[rn2(SIZE(pupil_msgs))]);
-		}
+	    	pupil_sound(mtmp);
 		break;
 
 	case MS_WHORE:
@@ -1202,62 +1188,11 @@ register struct monst *mtmp;
 		break;
 
 	case MS_TEACHER:
-		{
-	   	 static const char *teacher_msgs[] = {
-			"No chance! Every day you'll get homework!",
-			"Is it really true? Does really _everybody_ have the homework?",
-			"That usage of the word 'goes' does harm to my ears!",
-			"Your attitude is really unacceptable!",
-			"The \"Stigel-Brauerei\" was founded 1492. Well, in that year was that affair with that guy, Columbus, but that really isn't important.",
-			"Why are you going? I'm only 20 minutes late!",
-			"Where's your problem? I'll be happy to help you",
-			"You didn't understand? Then let's begin again ... (*sigh*)",
-			"No homework yet? - This can be changed!",
-			"Overbecks - das Ueberbier",
-			"How about dehydrating carbonhydrates today?",
-			"Back when I was a pupil, the following thing happened ...",
-			"Back when I was studying chemistry, the following thing happened ...",
-			"... dann ist die Scheisse am dampfen",
-			"NIKI forever!",
-			"Pascal forever!",
-			"Yes ... I know that everything is easier in C, but I simply love Pascal ...",
-			"You have Str:0 (at most), so bugger off!",
-			"Do it - who cares about the odd broken bone?",
-			"You are sick because you were running for 30 minutes? So run another hour!",
-			"Shall I help you? (takes the whip)",
-			"We'll do that diagonally. *grin* (wipes sweat off head)",
-			"*grin*",
-			"You know, (*grin*) we'll have to do something now! (*grin*)",
-			"How about a pupil experiment - cut off your ears?",
-			"Yet another pupil experiment: the consequences of KCN ingested.",
-			"Don't expect to get away without homework!",
-			"No homework in the holidays? You must have something to do, after all!",
-			"The low level of you all is really beyond acception!",
-			"There was endless work in the supervision and administration of the farm ...",
-			/* it's really a shame that I can't think of more messages for him */
-			"I expect you to do your homework _regularly_ and _carefully_!",
-			"The level of work is really very low nowadays!",
-			"In _our_ times pupils were real pupils and teachers were real teachers!",
-			"Back when pupils where real pupils and teachers were real teachers, everything was better!",
-		};
-
-		verbalize(teacher_msgs[rn2(SIZE(teacher_msgs))]);
-
-		}
+		teacher_sound(mtmp);
 		break;
 
 	case MS_PRINCIPAL:
-
-		{
-		static const char *principal_msgs[] = {
-		"What's up?",
-		"I really feel sick - there are so many things to do!",
-		"Help me, I faint!",
-		"We'll do that in groups of one person!",
-		};
-
-		verbalize(principal_msgs[rn2(SIZE(principal_msgs))]);
-		}
+		principal_sound(mtmp);
 		break;
 
 	case MS_SMITH:

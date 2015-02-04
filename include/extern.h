@@ -1909,19 +1909,17 @@ E void FDECL(bflush, (int));
 E void FDECL(bwrite, (int,genericptr_t,unsigned int));
 E void FDECL(bclose, (int));
 E void FDECL(savefruitchn, (int,int));
+E void NDECL(free_dungeons);
+E void NDECL(freedynamicdata);
+
 /* ### school.c ### */
 
 E boolean FDECL(is_principal, (struct monst *));
 E boolean FDECL(is_teacher, (struct monst *));
 E boolean FDECL(is_educator, (struct monst *));
-#ifdef SOUNDS
 E void FDECL(pupil_sound, (struct monst *));
 E void FDECL(teacher_sound, (struct monst *));
 E void FDECL(principal_sound, (struct monst *));
-#endif
-
-E void NDECL(free_dungeons);
-E void NDECL(freedynamicdata);
 
 /* ### shk.c ### */
 

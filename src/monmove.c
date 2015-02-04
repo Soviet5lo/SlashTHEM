@@ -680,9 +680,9 @@ toofar:
 	/* extra emotional attack for vile monsters */
 	/* Come on, monsters can still cuss at you if you can't see them. Seriously, what the heck. --Amy */
 	    if(inrange && mtmp->data->msound == MS_CUSS && !mtmp->mpeaceful &&
-		/*couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis &&*/ !rn2(5))
+		couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis && !rn2(5))
 	    cuss(mtmp);
-
+#if 0 /* 5lo: No longer used */
 	    if(inrange && mtmp->data->msound == MS_PUPIL && !mtmp->mpeaceful &&
 		/*couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis &&*/ !rn2(5))
 
@@ -810,7 +810,7 @@ toofar:
 		verbalize(teacher_msgs[rn2(SIZE(teacher_msgs))]);
 
 		}
-
+#endif
 	return(tmp == 2);
 }
 

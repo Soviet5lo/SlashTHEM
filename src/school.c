@@ -5,7 +5,6 @@
 #include "hack.h"
 #include <stdio.h>
 
-#ifdef SOUNDS
 #ifdef OVL0
 
 static char *pupil_msgs[] = {
@@ -186,7 +185,5 @@ void principal_sound(struct monst *mon)
 }
 
 #endif /* OVL0 */
-
-#endif /* SOUNDS */
 
 /* school.c */
