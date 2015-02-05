@@ -241,6 +241,8 @@ struct instance_flags {
 	boolean lan_mail_fetched; /* mail is awaiting display */
 #endif
 	boolean death_expl;	/* prompt for explore mode at death */
+	boolean hilite_hidden_stairs;
+	boolean hilite_obj_piles;
 /*
  * Window capability support.
  */
