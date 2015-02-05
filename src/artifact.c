@@ -1453,6 +1453,17 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	    *dmgptr += rnd(5) * 6;
 	    return TRUE;
 	}
+	if (otmp->oartifact == ART_SPINESEEKER && dieroll < 5 ) { /* 5lo: Another artifact effect */
+	    if(!youdefend) {
+	    	pline_The("gleaming blade cuts into %s %s!", hittee, mbodypart(mdef,SPINE));
+		mdef->mcanmove = 0;
+		mdef->mfrozen = rnd(5);
+	    } else {
+	    	pline_The("gleaming blade cuts into your %s!", body_part(SPINE));
+		nomovemsg = "";
+		nomul(-rnd(5));
+	    }
+	}
 
 	if (otmp->oartifact == ART_WARFORGER && dieroll < 5) { /* 5lo: Warforger special effect. */
 		pline("The slag of the forge sears %s!", hittee);

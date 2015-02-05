@@ -361,6 +361,10 @@ A("Slow Blade",                ORCISH_SHORT_SWORD, /* 5lo: Now opposite of Quick
 	SPFX_RESTR, 0, 0,
 	PHYS(1,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
 
+A("Spineseeker",	STILETTO,
+	SPFX_RESTR, 0, 0,
+	PHYS(5,5),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, NON_PM, NON_PM, 1500L ),
+
 A("Plague", DARK_ELVEN_BOW,	/* KMH */
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
 	PHYS(5,4),        DFNS(AD_DRST),  NO_CARY,        0, A_CHAOTIC, PM_DROW, NON_PM, 6000L ),
