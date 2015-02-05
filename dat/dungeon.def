@@ -100,9 +100,9 @@ LEVEL:		"guild" "G" @ (26, 14) 20
 
 
 RNDLEVEL:	"intpla" "J" @ (5, 35) 30 5
-RNDLEVEL:          "unhck" "X" @ (5, 35) 30 87
-RNDLEVEL:          "unhck" "X" @ (5, 35) 30 87
-RNDLEVEL:          "unhck" "X" @ (5, 35) 30 87
+RNDLEVEL:          "unhck" "X" @ (5, 35) 30 84
+RNDLEVEL:          "unhck" "X" @ (5, 35) 30 84
+RNDLEVEL:          "unhck" "X" @ (5, 35) 30 84
 LEVEL:          "forge" "F" @ (15, 5) 50
 LEVEL:          "hitch" "H" @ (5, 35) 5
 LEVEL:		"compu" "P" @ (5, 35) 10 
@@ -174,11 +174,11 @@ LEVEL:          "asmodeus" "A" @ (2, 22) 95
 RNDLEVEL:	"hellma" "H" @ (2, 22) 75 6
 BRANCH:         "Sheol" @ (3, 20) down
 
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 87
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 87
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 87
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 87
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 87
+RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
+RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
+RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
+RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
+RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
 LEVEL:		"school" "C" @ (2, 22) 20
 
 ### Gnomish Mines ###
@@ -238,7 +238,7 @@ RNDLEVEL:		"soko4" "none" @ (4, 0) 7
 DUNGEON:	"Town" "A" (5, 0)
 LEVALIGN:       lawful
 RNDLEVEL:       "town" "T" @ (1, 0) 2
-RNDLEVEL:          "unhck" "X" @ (2, 0) 5 87
+RNDLEVEL:          "unhck" "X" @ (2, 0) 5 84
 RNDLEVEL:	"bigrm" "B" @ (3, 0) 5 21
 RNDLEVEL:	"intpla" "J" @ (4, 0) 5 5
 LEVEL:		"school" "C" @ (5, 0) 5
