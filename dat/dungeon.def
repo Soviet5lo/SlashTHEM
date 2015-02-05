@@ -99,7 +99,6 @@ LEVEL:		"guild" "G" @ (26, 14) 20
 
 
 
-RNDLEVEL:	"intpla" "J" @ (5, 35) 30 5
 RNDLEVEL:          "unhck" "X" @ (5, 35) 30 84
 RNDLEVEL:          "unhck" "X" @ (5, 35) 30 84
 RNDLEVEL:          "unhck" "X" @ (5, 35) 30 84
@@ -240,7 +239,6 @@ LEVALIGN:       lawful
 RNDLEVEL:       "town" "T" @ (1, 0) 2
 RNDLEVEL:          "unhck" "X" @ (2, 0) 5 84
 RNDLEVEL:	"bigrm" "B" @ (3, 0) 5 21
-RNDLEVEL:	"intpla" "J" @ (4, 0) 5 5
 LEVEL:		"school" "C" @ (5, 0) 5
 LEVELDESC:      town
 

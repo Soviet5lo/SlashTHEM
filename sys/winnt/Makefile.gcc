@@ -1441,7 +1441,7 @@ $(DAT)\oracles:	     utility.tag    $(DAT)\oracles.txt
 sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 		$(DAT)\blkmar.des   $(DAT)\castle.des   $(DAT)\bleeder.des   $(DAT)\grund.des \
 		$(DAT)\dragons.des  $(DAT)\endgame.des  $(DAT)\exmall.des  $(DAT)\gehennom.des \
-		$(DAT)\giants.des   $(DAT)\guild.des    $(DAT)\intpla.des    $(DAT)\knox.des \
+		$(DAT)\giants.des   $(DAT)\guild.des    $(DAT)\knox.des \
 		$(DAT)\kobold-1.des $(DAT)\kobold-2.des $(DAT)\unheck.des $(DAT)\lich.des \
 		$(DAT)\mall-1.des   $(DAT)\mall-2.des   $(DAT)\geek.des   $(DAT)\medusa.des \
 		$(DAT)\sokoban.des  $(DAT)\heck.des    $(DAT)\mines.des    $(DAT)\mtemple.des \
@@ -1486,7 +1486,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/unheck.des
 	lev_comp $(DDAT)/hellma.des
 	lev_comp $(DDAT)/hitch.des
-	lev_comp $(DDAT)/intpla.des
 	lev_comp $(DDAT)/key.des
 	lev_comp $(DDAT)/knox.des
 	lev_comp $(DDAT)/kobold-1.des

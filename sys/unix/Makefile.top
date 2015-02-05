@@ -138,7 +138,7 @@ SPEC_LEVS = asmodeus.lev baalz.lev bigrm-*.lev castle-?.lev fakewiz?.lev \
 	tomb.lev yeenoghu.lev frnknstn.lev nightmar.lev \
     heck-*.lev unhck-*.lev exmall-?.lev hellma-?.lev \
     sheolfil.lev sheolmid.lev palace_e.lev palace_f.lev \
-    intpla-?.lev town-?.lev rndmaze.lev rndmazea.lev \
+    town-?.lev rndmaze.lev rndmazea.lev \
     compu.lev key.lev hitch.lev school.lev forge.lev
 
 QUEST_LEVS = ???-goal.lev ???-fil?.lev ???-loca.lev ???-strt.lev

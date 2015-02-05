@@ -257,7 +257,7 @@ spec_levs: ../util/lev_comp \
 	beholder.des bigroom.des blkmar.des castle.des compu.des \
 	dragons.des endgame.des exmall.des forge.des frnknstn.des gehennom.des \
 	giants.des grund.des guild.des heck.des hellma.des hitch.des \
-	intpla.des key.des knox.des kobold-1.des kobold-2.des \
+	key.des knox.des kobold-1.des kobold-2.des \
 	lich.des mall-1.des mall-2.des mall-3.des medusa.des mines.des \
 	mtemple.des newmall.des nightmar.des nymph.des oracle.des \
 	rats.des rndmazea.des rndmaze.des sea.des sheol.des \
@@ -280,7 +280,6 @@ spec_levs: ../util/lev_comp \
 	../util/lev_comp heck.des
 	../util/lev_comp hellma.des
 	../util/lev_comp hitch.des
-	../util/lev_comp intpla.des
 	../util/lev_comp key.des
 	../util/lev_comp knox.des
 	../util/lev_comp kobold-1.des
