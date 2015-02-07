@@ -3118,6 +3118,8 @@ typfnd:
 	        otmp->oartifact == ART_EYE_OF_THE_BEHOLDER ||
 	        otmp->oartifact == ART_NIGHTHORN ||
 			otmp->oartifact == ART_WARFORGER || /* No wishing for blacksmith artifact */
+			otmp->oartifact == ART_SCALES_OF_THE_DRAGON_LORD || /* Also adding the special TNG artifacts */
+			otmp->oartifact == ART_KEY_OF_ACCESS ||
 	        otmp->oartifact == ART_THIEFBANE)) ||
 # ifdef NOARTIFACTWISH
 /* Wishing for a "weak" artifact is easier than for a stronger one */
