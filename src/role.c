@@ -224,7 +224,7 @@ const struct Role roles[] = {
 	/* Init   Lower  Higher */
 	{ 17, 0,  0, 8,  1, 0 },	/* Hit points */
 	{ 15, 3,  0, 2,  0, 3 },12,	/* Energy */
-	0, 1, 0, 
+	-5, 1, 0, 
 	2, 10, A_INT, SPE_FINGER_OF_DEATH,   -4
 },
 
@@ -279,7 +279,7 @@ const struct Role roles[] = {
 	/* Init   Lower  Higher */
 	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
 	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
-	-10, 5, 0, 2, 10, A_INT, SPE_CONFUSE_MONSTER,   -4
+	-5, 5, 0, 2, 10, A_INT, SPE_CONFUSE_MONSTER,   -4
 },
 
 {	{"Geek", 0}, {
@@ -1171,7 +1171,7 @@ const struct Role roles[] = {
 	/* Init   Lower  Higher */
 	{  10, 0,  0, 5,  0, 0 },	/* Hit points */
 	{  1, 0,  0, 1,  0, 1 },10,	/* Energy */
-	-10, 5, 0, 2, 10, A_INT, SPE_ENDURE_HEAT,   -4
+	0, 5, 0, 2, 10, A_INT, SPE_ENDURE_HEAT,   -4
 },
 
 {	{"Priest", "Priestess"}, {
@@ -1258,7 +1258,7 @@ const struct Role roles[] = {
 	/* Init   Lower  Higher */
 	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
 	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
-	-10, 5, 0, 2, 10, A_INT, SPE_FORCE_BOLT,   -4
+	0, 5, 0, 2, 10, A_INT, SPE_FORCE_BOLT,   -4
 },
 
 {	{"Activistor", 0}, {
@@ -1342,7 +1342,7 @@ const struct Role roles[] = {
 	/* Init   Lower  Higher */
 	{  18, 0,  0, 8,  6, 0 },	/* Hit points */
 	{  5, 0,  0, 3,  0, 3 },10,	/* Energy */
-	-10, 5, 0, 2, 10, A_INT, SPE_GODMODE,   -4
+	-3, 5, 0, 2, 10, A_INT, SPE_GODMODE,   -4
 },
 
 
