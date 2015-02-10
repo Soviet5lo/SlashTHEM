@@ -3010,15 +3010,15 @@ u_init()
 	case PM_GRADUATE:
 		ini_inv(Graduate);
 		skill_init(Skill_Gra);
-		knows_class(WEAPON_CLASS);
-		knows_class(ARMOR_CLASS);
+		/*knows_class(WEAPON_CLASS);*/
+		/*knows_class(ARMOR_CLASS);*/
 		break;
 
 	case PM_SCIENTIST:
 		ini_inv(Scientist);
 		skill_init(Skill_Sci);
-		knows_class(WEAPON_CLASS);
-		knows_class(ARMOR_CLASS);
+		/*knows_class(WEAPON_CLASS);*/
+		/*knows_class(ARMOR_CLASS);*/
 		knows_object(CHEMISTRY_SET);
 		knows_class(POTION_CLASS);
 		break;
