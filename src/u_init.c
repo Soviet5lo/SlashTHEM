@@ -5978,6 +5978,10 @@ register struct trobj *trop;
 				|| otyp == RIN_HUNGER
 				|| otyp == RIN_SLEEPING
 				|| otyp == WAN_NOTHING
+				/* 5lo: Adding TnG special objects */
+				|| otyp == SCR_ROOT_PASSWORD_DETECTION
+				|| otyp == AMULET_OF_DATA_STORAGE
+				|| otyp == RIN_TIMELY_BACKUP
 				/* Monks don't use weapons */
 				|| (otyp == SCR_ENCHANT_WEAPON &&
 				    Role_if(PM_MONK))
