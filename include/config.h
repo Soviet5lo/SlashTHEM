@@ -518,6 +518,8 @@ typedef unsigned char	uchar;
 /*#define AUTOPICKUP_EXCEPTIONS */ /* exceptions to autopickup */
 /*#define UNDERGROUND_RIVERS */ /* 5lo: Wrapped these into a define, currently a bit buggy. */
 
+/*#define SIMPLE_MAIL */ /* dgamelaunch simple mail */
+
 /* End of Section 5 */
 
 #include "global.h"	/* Define everything else according to choices above */
