@@ -21,7 +21,7 @@ Finish giving every role a sacrifice gift.
 
 Overhaul a few of the lazily done quests.
 
-More balance changes.
+More balance changes. (Role/Race stats, weapon damage.)
 
 A massive cleanup of monsters, objects and roles.
 
@@ -33,12 +33,14 @@ Bugs
 ----
 Monsters using a wand of banishment tends to cause a segfault.  Will probably disable/remove.
 
-Wands for roles occasionally start with no charges (or negative charges).
+Traps are sometimes generated outside of defined levels (still?)
+
+Some roles aren't possible to choose on a a 80x24 terminal due to sharing the same character (eg: Lunatic/Locksmith)
 
 Probably a ton of others.
 
 Credits
 -------
-Credits go to Chris for dNethack (Used a few artifacts), Grunt for Grunthack, BarclayII for Slashem-up, (Some balance changes come from this) and of course Bluescreenofdeath on Nethackwiki for Slash'EM Extended.  
+Credits go to Chris for dNethack (Used a few artifacts), Grunt for Grunthack, BarclayII for Slashem-up (some balance changes come from this), and of course AmyBSOD for Slash'EM Extended.  
 
-Credits also go to Percival Tiglao for the minor sling upgrade patch, Mikael Lind for Rubber Gloves and Gauntlets of Reflection patches, and L for various patches implemented in this fork.
+Credits also go to Percival Tiglao for the minor sling upgrade patch, Mikael Lind for Rubber Gloves and Gauntlets of Reflection patches, Paxed for the "highlight object piles/hidden stairs" patch, and L for various patches implemented in this fork.
