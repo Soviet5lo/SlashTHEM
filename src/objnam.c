@@ -2647,7 +2647,7 @@ srch:
 	}
 
 	if(!oclass && actualn) {
-	    short objtyp;
+	    int objtyp;
 
 	    /* Perhaps it's an artifact specified by name, not type */
 	    name = artifact_name(actualn, &objtyp);
@@ -3081,7 +3081,7 @@ typfnd:
 
 	if (name) {
 		const char *aname;
-		short objtyp;
+		int objtyp;
 		char nname[256];
 		strcpy(nname,name);
 

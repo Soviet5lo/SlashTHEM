@@ -19,7 +19,7 @@ STATIC_DCL struct artifact artilist[];
 extern boolean notonhead;	/* for long worms */
 
 #define get_artifact(o) \
-		(((o)&&(o)->oartifact) ? &artilist[(int) (o)->oartifact] : 0)
+		(((o)&&(o)->oartifact) ? &artilist[(int) ((unsigned char) (o)->oartifact)] : 0)
 
 STATIC_DCL int FDECL(spec_applies, (const struct artifact *,struct monst *));
 STATIC_DCL int FDECL(arti_invoke, (struct obj*));
@@ -38,7 +38,7 @@ STATIC_DCL boolean FDECL(Mb_hit, (struct monst *magr,struct monst *mdef,
 
 #ifndef OVLB
 STATIC_DCL int spec_dbon_applies;
-STATIC_DCL xchar artidisco[NROFARTIFACTS];
+STATIC_DCL int artidisco[NROFARTIFACTS];
 #else	/* OVLB */
 /* coordinate effects from spec_dbon() with messages in artifact_hit() */
 STATIC_OVL int spec_dbon_applies = 0;
@@ -47,7 +47,7 @@ STATIC_OVL int spec_dbon_applies = 0;
 static boolean artiexist[1+NROFARTIFACTS+1];
 /* and a discovery list for them (no dummy first entry here) */
 
-STATIC_OVL xchar artidisco[NROFARTIFACTS];
+STATIC_OVL int artidisco[NROFARTIFACTS];
 
 STATIC_DCL void NDECL(hack_artifacts);
 STATIC_DCL boolean FDECL(attacks, (int,struct obj *));
@@ -189,9 +189,9 @@ aligntyp alignment;	/* target alignment, or A_NONE */
 	const struct artifact *a;
 	int n, m;
 	boolean by_align = (alignment != A_NONE);
-	short o_typ = (by_align || !otmp) ? 0 : otmp->otyp;
+	int o_typ = (by_align || !otmp) ? 0 : otmp->otyp;
 	boolean unique = !by_align && otmp && objects[o_typ].oc_unique;
-	short eligible[NROFARTIFACTS];
+	int eligible[NROFARTIFACTS];
 
 
 #if 0
@@ -276,7 +276,7 @@ make_artif: if (by_align) otmp = mksobj((int)a->otyp, TRUE, FALSE);
 const char*
 artifact_name(name, otyp)
 const char *name;
-short *otyp;
+int *otyp;
 {
     register const struct artifact *a;
     register const char *aname;
@@ -891,7 +891,7 @@ int tmp;
 /* add identified artifact to discoveries list */
 void
 discover_artifact(m)
-xchar m;
+int m;
 {
     int i;
 
@@ -910,7 +910,7 @@ xchar m;
 /* used to decide whether an artifact has been fully identified */
 boolean
 undiscovered_artifact(m)
-xchar m;
+int m;
 {
     int i;
 

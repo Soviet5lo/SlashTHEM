@@ -59,7 +59,7 @@ E void FDECL(save_artifacts, (int));
 E void FDECL(restore_artifacts, (int));
 E const char *FDECL(artiname, (int));
 E struct obj *FDECL(mk_artifact, (struct obj *,ALIGNTYP_P));
-E const char *FDECL(artifact_name, (const char *,short *));
+E const char *FDECL(artifact_name, (const char *,int *));
 E int FDECL(artifact_name2no, (const char *name)); /* 5lo: Function for Forge */
 E boolean FDECL(exist_artifact, (int,const char *));
 E void FDECL(artifact_exists, (struct obj *,const char *,BOOLEAN_P));
@@ -74,8 +74,8 @@ E void FDECL(set_artifact_intrinsic, (struct obj *,BOOLEAN_P,long));
 E int FDECL(touch_artifact, (struct obj *,struct monst *));
 E int FDECL(spec_abon, (struct obj *,struct monst *));
 E int FDECL(spec_dbon, (struct obj *,struct monst *,int));
-E void FDECL(discover_artifact, (XCHAR_P));
-E boolean FDECL(undiscovered_artifact, (XCHAR_P));
+E void FDECL(discover_artifact, (int));
+E boolean FDECL(undiscovered_artifact, (int));
 E int FDECL(disp_artifact_discoveries, (winid));
 E boolean FDECL(artifact_hit, (struct monst *,struct monst *,
 				struct obj *,int *,int));
