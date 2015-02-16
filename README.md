@@ -35,8 +35,6 @@ Monsters using a wand of banishment tends to cause a segfault.  Will probably di
 
 Traps are sometimes generated outside of defined levels (still?)
 
-Some roles aren't possible to choose on a a 80x24 terminal due to sharing the same character (eg: Lunatic/Locksmith)
-
 Probably a ton of others.
 
 Credits
