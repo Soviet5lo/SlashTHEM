@@ -35,6 +35,8 @@ Monsters using a wand of banishment tends to cause a segfault.  Will probably di
 
 Traps are sometimes generated outside of defined levels (still?)
 
+A few init inventory bugs (No daggers for bards, multiple leather jackets for pirates?)
+
 Probably a ton of others.
 
 Credits
