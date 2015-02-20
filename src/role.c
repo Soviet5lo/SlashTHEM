@@ -972,7 +972,7 @@ const struct Role roles[] = {
 	2, 10, A_INT, SPE_SUMMON_UNDEAD,   -4
 },
 
-{	{"Ninja", "Kunoichi"}, { /* Kunoichi is the name for a female ninja */
+{	{"Ninja", "Kunoichi"}, {
 	{"Kukkyu",     0},
 	{"Hakkyu",    0},
 	{"Nanakyu",       0},
