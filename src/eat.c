@@ -957,7 +957,7 @@ register struct permonst *ptr;
 #endif
 	/* some intrinsics are easier to get than others */
 	switch (type) {
-		/* case POISON_RES:
+		case POISON_RES:
 			if ((ptr == &mons[PM_KILLER_BEE] ||
 					ptr == &mons[PM_SCORPION]) && !rn2(4))
 				chance = 1;
@@ -972,13 +972,13 @@ register struct permonst *ptr;
 			break;
 		case TELEPAT:
 			chance = 1;
-			break; */
-		default:
-			chance = (Race_if(PM_ILLITHID) ? 105 : 35); /*much lower chance now --Amy */
+			break;
+		default: /* 5lo: Still low chance, but not as low */
+			chance = (Race_if(PM_ILLITHID) ? 100 : 25); /*much lower chance now --Amy */
 			break;
 	}
 
-	if (ptr->mlevel <= rn2(chance) || !rn2(4) )
+	if (ptr->mlevel <= rn2(chance)) /* 5lo: Reverted back to Vanilla */
 		return;		/* failed die roll */
 
 	switch (type) {
