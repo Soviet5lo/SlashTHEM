@@ -150,6 +150,8 @@ static const struct innate_tech
 		       {  20, T_RAGE, 1},
 		       {   0, 0, 0} },
 	nin_tech[] = { {   1, T_VANISH, 1},
+		       {   1, T_CRIT_STRIKE, 1},
+		       {  10, T_CUTTHROAT, 1},
 		       {   0, 0, 0} },
 	aci_tech[] = { {   1, T_REINFORCE, 1},
 		       {   3, T_POWER_SURGE, 1},
