@@ -762,15 +762,13 @@ register struct monst *mtmp;
 	    }
 	    return (1);
 	}
-    } /*else {*/
+    } else {
 	/* but eels have a difficult time outside */
-	/*if (mtmp->data->mlet == S_EEL && !Is_waterlevel(&u.uz)) {
+	if (mtmp->data->mlet == S_EEL && !Is_waterlevel(&u.uz)) {
 	    if(mtmp->mhp > 1) mtmp->mhp--;
 	    monflee(mtmp, 2, FALSE, FALSE);
-	}*/
-
-	/* commented out - would just make the game easier, and we don't want that --Amy */
-    /*}*/
+	}
+    }
     return (0);
 }
 
