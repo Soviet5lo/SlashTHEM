@@ -21,8 +21,8 @@
 
 boolean	known;
 
-static NEARDATA const char readable[] = {
-		   SCROLL_CLASS, SPBOOK_CLASS, RING_CLASS, 0 };
+static NEARDATA const char readable[] = 
+		   { COIN_CLASS, ALL_CLASSES, SCROLL_CLASS, SPBOOK_CLASS, RING_CLASS, 0 };
 static const char all_count[] = { ALLOW_COUNT, ALL_CLASSES, 0 };
 
 
@@ -532,7 +532,119 @@ doread()
 			     scroll->o_id ^ (unsigned)u.ubirthday);
 	    pline("\"%s\"", buf);
 	    return 1;
-#endif	/* TOURIST */
+        } else if (scroll->otyp == CREDIT_CARD) {
+            static const char *card_msgs[] = {
+	     "Leprechaun Gold Tru$t - Shamrock Card",
+	     "Magic Memory Vault Charge Card",
+	     "Larn National Bank", /* Larn */
+	     "First Bank of Omega", /* Omega */
+	     "Bank of Zork - Frobozz Magic Card", /* Zork */
+	     "Ankh-Morpork Merchant's Guild Barter Card",
+	     "Ankh-Morpork Thieves' Guild Unlimited Transaction Card",
+	     "Ransmannsby Moneylenders Association",
+	     "Bank of Gehennom - 99% Interest Card",
+	     "Yendorian Express - Copper Card",
+	     "Yendorian Express - Silver Card",
+	     "Yendorian Express - Gold Card",
+	     "Yendorian Express - Mithril Card",
+	     "Yendorian Express - Platinum Card",
+            };
+            if (Blind) {
+                You("feel the embossed numbers:");
+            } else {
+               if(flags.verbose)
+                    pline("It reads:");
+                pline("\"%s\"", scroll->oartifact ? card_msgs[SIZE(card_msgs)-1]
+                        : card_msgs[scroll->o_id % (SIZE(card_msgs)-1)]);
+            }
+            /* Make a credit card number */
+                pline("\"%d0%d %d%d1 0%d%d0\"", ((scroll->o_id % 89)+10), (scroll->o_id % 4),
+                 (((scroll->o_id * 499) % 899999) + 100000), (scroll->o_id % 10), 
+                 (!(scroll->o_id % 3)), ((scroll->o_id * 7) % 10));
+            u.uconduct.literate++;
+            return 1;
+#endif /* TOURIST */
+        } else if ((scroll->otyp == TIN) ||
+                  (scroll->otyp == CAN_OF_GREASE) ||
+                  (scroll->otyp == CANDY_BAR)) {
+            pline("This %s has no %s.", singular(scroll, xname),
+                (scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
+            return(0);
+        } else if (scroll->otyp == MAGIC_MARKER) {
+            if (Blind) {
+                You_cant("feel any Braille writing.");
+                return 0;
+            }
+            if(flags.verbose)
+                pline("It reads:");
+            pline("\"Magic Marker(TM) Red Ink Marker Pen. Water Soluble.\"");
+             u.uconduct.literate++;
+             return 1;
+	} else if (scroll->oclass == COIN_CLASS) {
+	   if (Blind)
+                You("feel the embossed words:");
+            else if(flags.verbose)
+                You("read:");
+	    pline("\"1 Zorkmid. 857 GUE. In Frobs We Trust.\"");
+            u.uconduct.literate++;
+#ifndef GOLDOBJ 
+	    /* Give it back to them, then */
+	    u.ugold = scroll->quan;
+	    dealloc_obj(scroll);
+#endif
+	    return 1;
+	} else if (scroll->oartifact == ART_ORB_OF_FATE) {
+	    if (Blind)
+                You("feel the engraved signature:");
+            else pline("It is signed:");
+	    pline("\"Odin.\"");
+            u.uconduct.literate++;
+	    return 1;
+	} else if (OBJ_DESCR(objects[scroll->otyp]) &&
+		!strncmp(OBJ_DESCR(objects[scroll->otyp]), "runed", 5)) {
+	    if (scroll->otyp == RUNESWORD) {
+	        You_cant("decipher the arcane runes.");
+		return 0;
+	    } if ((!Race_if(PM_ELF) && !Race_if(PM_DROW)) && !Role_if(PM_ARCHEOLOGIST)) {
+	        You_cant("decipher the Elvish runes.");
+		return 0;
+	    } 
+            u.uconduct.literate++;
+	    if (objects[scroll->otyp].oc_merge) {
+		if (Blind)
+		    You("feel the engraved runes:");
+		else if (flags.verbose) pline("The runes read:");
+		pline("\"Made in Elfheim.\"");
+		return 1;
+	    } else {
+		/* "Avoid any artifact with Runes on it, even if the Runes
+		 *  prove only to spell the maker's name." -- Diana Wynne Jones
+		 */
+		/* Elf name fragments courtesy of ToME */
+            static const char *elf_syllable1[] = {
+            "Al", "An", "Bal", "Bel", "Cal", "Cel", "El", "Elr", "Elv", "Eow",
+            "Ear", "F", "Fal", "Fel", "Fin", "G", "Gal", "Gel", "Gl", "Is", "Lan",
+            "Leg", "Lom", "N", "Nal","Nel", "S", "Sal", "Sel", "T", "Tal", "Tel",
+            "Thr", "Tin",
+            };
+            static const char *elf_syllable2[] = {
+            "a", "adrie", "ara", "e", "ebri", "ele", "ere", "i", "io", "ithra",
+            "ilma", "il-Ga", "ili", "o", "orfi", "u", "y",
+            };
+            static const char *elf_syllable3[] = {
+            "l", "las", "lad", "ldor", "ldur", "linde", "lith", "mir", "n", "nd",
+            "ndel", "ndil", "ndir", "nduil", "ng", "mbor", "r", "rith", "ril",
+            "riand", "rion", "s", "thien", "viel", "wen", "wyn",
+            };
+		if (Blind)
+		    You("feel the engraved signature:");
+		else pline("It is signed:");
+	        pline("\"%s%s%s\"", 
+		    elf_syllable1[scroll->o_id % SIZE(elf_syllable1)],
+		    elf_syllable2[scroll->o_id % SIZE(elf_syllable2)],
+		    elf_syllable3[scroll->o_id % SIZE(elf_syllable3)]);
+	        return 1;
+	    }
 	} else if (scroll->otyp == PACK_OF_FLOPPIES) {
 		use_floppies(scroll);
 	} else if (scroll->oclass != SCROLL_CLASS

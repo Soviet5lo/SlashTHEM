@@ -1007,6 +1007,9 @@ struct obj *otmp;
 		      otyp != STICK_OF_DYNAMITE &&
 #endif
 		      !is_axe(otmp) && !is_antibar(otmp) && !is_pole(otmp) && otyp != BULLWHIP) ||
+#ifdef GOLDOBJ
+			otmp->oclass == COIN_CLASS ||
+#endif
 		    (otmp->oclass == POTION_CLASS &&
 		     /* only applicable potion is oil, and it will only
 			be offered as a choice when already discovered */
@@ -1096,11 +1099,12 @@ register const char *let,*word;
 	int floorfollow;
 
 	if(*let == ALLOW_COUNT) let++, allowcnt = 1;
+
+	if(*let == COIN_CLASS) let++, usegold = TRUE
 #ifndef GOLDOBJ
-	if(*let == COIN_CLASS) let++,
-		usegold = TRUE, allowgold = (u.ugold ? TRUE : FALSE);
+		, allowgold = (u.ugold ? TRUE : FALSE);
 #else
-	if(*let == COIN_CLASS) let++, usegold = TRUE;
+		;
 #endif
 
 	/* Equivalent of an "ugly check" for gold */
@@ -1135,7 +1139,12 @@ register const char *let,*word;
 	 * them is handled a bit differently (and also requires that we set
 	 * allowall in the caller)
 	 */
-	if(allowall && !strcmp(word, "read")) allowall = FALSE;
+	if(allowall && !strcmp(word, "read")) allowall = FALSE
+#ifdef GOLDOBJ
+								, usegold = FALSE;
+#else
+								;
+#endif
 
 	/* another ugly check: show boulders (not statues) */
 	if(*let == WEAPON_CLASS &&
@@ -1144,7 +1153,11 @@ register const char *let,*word;
 
 	if(allownone) *bp++ = '-';
 #ifndef GOLDOBJ
-	if(allowgold) *bp++ = def_oc_syms[COIN_CLASS];
+	if(allowgold &&
+	/* ugly gold check: don't list gold for the following verbs */
+	    strcmp(word, "read") &&
+	    strcmp(word, "use or apply")
+	    ) *bp++ = def_oc_syms[COIN_CLASS];
 #endif
 	if(bp > buf && bp[-1] == '-') *bp++ = ' ';
 	ap = altlets;
@@ -1183,15 +1196,31 @@ register const char *let,*word;
 		/* "ugly check" for reading fortune cookies, part 2 */
 		if ((!strcmp(word, "read") &&
 		    (otmp->otyp == FORTUNE_COOKIE
+		        || otmp->otyp == TIN
+			|| otmp->otyp == CAN_OF_GREASE
+			|| otmp->otyp == CANDY_BAR
 #ifdef TOURIST
 			|| otmp->otyp == T_SHIRT
 			|| otmp->otyp == STRIPED_SHIRT
 			|| otmp->otyp == HAWAIIAN_SHIRT
 			|| otmp->otyp == RUFFLED_SHIRT
 			|| otmp->otyp == VICTORIAN_UNDERWEAR
+			|| otmp->otyp == CREDIT_CARD
 #endif
+			|| otmp->otyp == MAGIC_MARKER
+#ifdef GOLDOBJ
+			|| otmp->oclass == COIN_CLASS
+#endif
+			|| otmp->oartifact == ART_ORB_OF_FATE
+			|| (OBJ_DESCR(objects[otmp->otyp]) &&
+			    !strncmp(OBJ_DESCR(objects[otmp->otyp]), "runed", 5))
 		    )))
-			allowall = TRUE;
+			allowall = TRUE
+#ifdef GOLDOBJ
+			, usegold = TRUE;
+#else
+			;
+#endif
 	    }
 
 	    if(ilet == 'z') ilet = 'A'; else ilet++;

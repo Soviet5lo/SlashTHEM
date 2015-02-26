@@ -9,7 +9,7 @@
 
 static const char tools[] = { TOOL_CLASS, WEAPON_CLASS, WAND_CLASS, 0 };
 static const char all_count[] = { ALLOW_COUNT, ALL_CLASSES, 0 };
-static const char tools_too[] = { ALL_CLASSES, TOOL_CLASS, POTION_CLASS,
+static const char tools_too[] = { COIN_CLASS, ALL_CLASSES, TOOL_CLASS, POTION_CLASS,
 				  WEAPON_CLASS, WAND_CLASS, GEM_CLASS, 0 };
 static const char tinnables[] = { ALLOW_FLOOROBJ, FOOD_CLASS, 0 };
 
@@ -40,6 +40,7 @@ STATIC_DCL int FDECL(use_pole, (struct obj *));
 STATIC_DCL int FDECL(use_cream_pie, (struct obj *));
 STATIC_DCL int FDECL(use_grapple, (struct obj *));
 STATIC_DCL int FDECL(do_break_wand, (struct obj *));
+STATIC_DCL int FDECL(do_flip_coin, (struct obj*));
 STATIC_DCL boolean FDECL(figurine_location_checks,
 				(struct obj *, coord *, BOOLEAN_P));
 STATIC_DCL boolean NDECL(uhave_graystone);
@@ -3496,6 +3497,79 @@ wand_explode(obj, hero_broke)
     return 1;
 }
 
+STATIC_OVL int
+do_flip_coin(obj)
+struct obj *obj;
+{
+    boolean land_in, caught, land = TRUE;
+#ifndef GOLDOBJ
+    u.ugold += obj->quan;
+    dealloc_obj(obj);
+#endif
+
+    if (nohands(youmonst.data)) {
+	pline("And how would you flip the coin without hands?");
+	return 0;
+    } else if (!freehand()) {
+	You("need at least one free %s.", body_part(HAND));
+	return 0;
+    } else if (Underwater) {
+	pline("This coin wasn't designed to be flipped underwater.");
+	return 0;
+    }
+
+    You("flip %s coin.",
+#ifndef GOLDOBJ
+	(u.ugold > 1)
+#else
+	(obj->quan > 1)
+#endif
+	? "a" : "the");
+    land_in = ((is_pool(u.ux, u.uy) || (is_lava(u.ux, u.uy))));
+    if (Fumbling || Glib || Blind || ((ACURR(A_DEX) + Luck) <= 0) ||
+					!rn2((ACURR(A_DEX) + Luck))) {
+	struct obj *gold;
+	register int typ = levl[u.ux][u.uy].typ;
+	You("try to catch the coin but it slips from your %s.",
+	    makeplural(body_part(HAND)));
+	if ((Is_waterlevel(&u.uz) && !(land_in)) || Is_airlevel(&u.uz)) {
+	    pline("It spins in the air.");
+	    land = FALSE;
+	} else if (t_at(u.ux, u.uy) && t_at(u.ux, u.uy)->ttyp == HOLE)
+	    land = FALSE;
+	else {
+            if (Blind && is_pool(u.ux, u.uy))
+	        You_hear("a tiny %s.", Hallucination ? "meow" : "plop");
+	    else {
+                pline("It lands %s the %s.", land_in ? "in" : "on", surface(u.ux,u.uy));
+                if (land_in) {
+                    pline("It sinks without a trace!");
+                    land = FALSE;
+                }
+            }
+	}
+#ifndef GOLDOBJ
+	gold = mkgoldobj(1);
+#else
+	if (obj->quan > 1) gold = splitobj(obj, 1L);
+	else gold = obj;
+#endif
+	dropx(gold);
+	caught = FALSE;
+    } else caught = TRUE;
+    if (land && (!Blind || caught)) {
+	boolean ht = rn2(2);
+	if (!caught && !rnl(1000000)) /* a one-in-a-million chance */
+	    pline(!Hallucination ? "It landed on its edge! Wow!" :
+		(rn2(2) ? "Headtails." : "Tailheads."));
+	else {
+	    pline("%s.", ht ? "Heads" : "Tails");
+	    if (Hallucination && ht && !rn2(8))
+		pline("Oh my, it winks at you!");
+	} return 1;
+    } return 0;
+}
+
 STATIC_OVL boolean
 uhave_graystone()
 {
@@ -3662,7 +3736,13 @@ doapply()
 
 	if(check_capacity((char *)0)) return (0);
 
-	if (carrying(POT_OIL) || uhave_graystone())
+	if (carrying(POT_OIL) ||
+#ifndef GOLDOBJ
+	u.ugold
+#else
+	money_cnt(invent)
+#endif
+	|| uhave_graystone())
 		Strcpy(class_list, tools_too);
 	else
 		Strcpy(class_list, tools);
@@ -3678,6 +3758,8 @@ doapply()
 
 	if (obj->oclass == WAND_CLASS)
 	    return do_break_wand(obj);
+	else if (obj->oclass == COIN_CLASS)
+	    return do_flip_coin(obj);
 
 	switch(obj->otyp){
 	case BLINDFOLD:
