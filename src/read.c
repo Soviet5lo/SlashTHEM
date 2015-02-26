@@ -137,8 +137,7 @@ doread()
 	    else useupf(scroll, 1L);
 	    return(1);
 #ifdef TOURIST
-	} else if (scroll->otyp == T_SHIRT || scroll->otyp == HAWAIIAN_SHIRT || scroll->otyp == STRIPED_SHIRT
-	|| scroll->otyp == VICTORIAN_UNDERWEAR || scroll->otyp == RUFFLED_SHIRT) {
+	} else if (scroll->otyp == T_SHIRT) {
 	    static const char *shirt_msgs[] = { /* Scott Bigham */
 	"I explored the Dungeons of Doom and all I got was this lousy T-shirt!",
 	"Is that Mjollnir in your pocket or are you just happy to see me?",
