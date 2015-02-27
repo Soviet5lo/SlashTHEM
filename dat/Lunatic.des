@@ -1,118 +1,132 @@
-#	SCCS Id: @(#)Valkyrie.des	3.4	2002/05/02
-#	Copyright (c) 1989 by Jean-Christophe Collet
-#	Copyright (c) 1991-2 by M. Stephenson
+#       SCCS Id: @(#)Barb.des   3.1     91/12/22
+#       Copyright (c) 1989 by Jean-Christophe Collet
+#       Copyright (c) 1991 by M. Stephenson
 # NetHack may be freely redistributed.  See license for details.
 #
-#	The "start" level for the quest.
+#       The "start" level for the quest.
 #
-#	Here you meet your (besieged) class leader, the Norn,
-#	and receive your quest assignment.
+#       Here you meet your (besieged) class leader, Pelias,
+#       and receive your quest assignment.
 #
 MAZE: "Lun-strt",' '
 FLAGS: noteleport,hardfloor
 GEOMETRY:center,center
 MAP
-IIIIIIPPPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-IIIIPPPPPIIIIIIII..IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII...IIIIIIIIIIIIIIIIIIIII
-IIIIPLLPPIIIIIII..IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII..{..IIIIIIIIIIIIIIIIIIII
-IIIIPLPPIIIIIII..IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII.....IIIIIIPPPIIIIIIIIII
-IIIPPPPPIIIIII..IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII.IIIIIPPLPIIIIIIIIII
-IIIIPIIIIIIII..IIIIPPPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII.IIIIIPLPPIIIIIIIIII
-IIIIIIIIIIII..IIIIIPLPPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII..IIIIIPPPIIIIIIIIIII
-IIIIIIII.....IIIIIIPPPIIII|----------------|IIIIIPPPIII.IIIIIIIIIIIIIIIIIIII
-IIIIIII..III...IIIIIIIIIII|................|IIIIIPLPII..IIIIIIIIIIIIIIIIIIII
-IIIIII..IIIIII......IIIII.|................|.IIIIPPPII.IIIIIIIIIIIIIIIIIIIII
-IIIII..IIIIIIIIIIII.......+................+...IIIIIII.IIIIIIIIIIIIIIIIIIIII
-IIII..IIIIIIIII.....IIIII.|................|.I...IIIII.IIIIIIIIIIIIIIIIIIIII
-III..IIIIIIIII..IIIIIIIIII|................|IIII.......IIIIIIIIIIIIIIIIIIIII
-IIII..IIIIIII..IIIIIIIIIII|----------------|IIIIIIIIII...IIIIIIIIIIIIIIIIIII
-IIIIII..IIII..IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIPPPPIIII...IIIIIIIIIIIIIIIII
-IIIIIII......IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIPLLPPIIIII...IIIIIIIIIIIIIII
-IIIIPPPIP...IIIIIIIIIIIPIIIIIIIIIIIIIIIIIIIIIIIIPPPPIIIIIIII...I......IIIIII
-IIIPPLPPIIIIIIIIIIIIIIPPPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII.........IIIII
-IIIIPPPIIIIIIIIIIIIIIPPLPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII.......IIIIII
-IIIIIIIIIIIIIIIIIIIIIIPPPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP...P.P.P.........PPP..........
+PPPPPPPPPPPP...........PPPPPPPPPPPPPPPPPPPPPPP.PP.P..........PPPP...........
+PPPP.........................PPPPPPPPPPPPPPPPPPPPPPPP.......PP..............
+PP...............................PPPPPPPPPP.P.PPPP..PPP...PPP...............
+........--------.-----.......----..PPPPPPPPP.PPPPP.PP.PPPPP.................
+........|...S........|......+...|...PPPPPPPPPPPPP..P.PP.PP..................
+........|----...............|........PPPPPPPPPPPPPP.PP.P.PP.................
+........|.\..........+......-...-......PPPPPPPPPPPPPPPPPPPPP................
+........|----........................PPPPPPPPPPPPPPPPPPPPPPPP...............
+........|...S........|....-.--.......PPPPPPPPPPPPPPPPPPPPPPPPP..............
+........-------.---.--...+..........PPPPPPPPPPPPPPPPPPPPPPPPPP..............
+P........................|...|.......PPPPPPPPPPPPPPPPPPPPPPPP...............
+PPP.----......--.--......-..--........PPPPPPPPPPPPPPPPPPPPPP................
+PPPPP..+......|...+..-.+-...........PPPPPPPPPPPPPPPPPPPPPP..................
+PPPPPPPPPPP...|......|...|.........PPPPPPPPPPPPPPPPPPPPPPPP.................
+PPPPPPPPPPPPPP---.-..|PPPPPPPPPPPPPPP..PPPPPPPPPPPPPPPPPP...................
+PPPPPPPPPPPPPPPPPPP..-PPPPPPPPPPPPP...PPPPPPPPPPPPPPPPPPP...................
+PPPPPPPPPPPPP........................PPPPPPPPPPPPPPPPPP.....................
+PPPPPPPPPPPPPP......................PPPPPPPPPPPPPPPPPPPP....................
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP.....................
 ENDMAP
+# Random Monsters
+RANDOM_MONSTERS: '@', 'C'
 # Dungeon Description
 REGION:(00,00,75,19),lit,"ordinary"
-REGION:(27,08,42,12),lit,"ordinary"
-# Portal arrival point
-BRANCH:(66,17,66,17),(0,0,0,0)
 # Stairs
-STAIR:(18,01),down
-FOUNTAIN:(53,02)
+STAIR:(70,09),down
+# Portal arrival point
+BRANCH:(32,12,32,12),(0,0,0,0)
 # Doors
-DOOR:locked,(26,10)
-DOOR:locked,(43,10)
-# Norn
-MONSTER:'@',"Driud the Druid",(35,10)
-# The treasure of the Norn
-OBJECT:'(',"chest",(36,10)
-# valkyrie guards for the audience chamber
-MONSTER:'@',"attendant",(27,08)
-MONSTER:'@',"attendant",(27,09)
-MONSTER:'@',"attendant",(27,11)
-MONSTER:'@',"attendant",(27,12)
-MONSTER:'@',"attendant",(42,08)
-MONSTER:'@',"attendant",(42,09)
-MONSTER:'@',"attendant",(42,11)
-MONSTER:'@',"attendant",(42,12)
+DOOR:locked,(12,05)
+DOOR:locked,(12,09)
+DOOR:closed,(21,07)
+DOOR:open,(07,13)
+DOOR:open,(18,13)
+DOOR:open,(23,13)
+DOOR:open,(25,10)
+DOOR:open,(28,05)
+# Elder
+MONSTER:'@',"High Lycanthrope",(10,07)
+# The treasure of High Lycanthrope
+OBJECT:'(',"chest",(09,05)
+# guards for the audience chamber
+MONSTER:'@',"fiend",(10,05)
+MONSTER:'@',"fiend",(10,09)
+MONSTER:'@',"fiend",(11,05)
+MONSTER:'@',"fiend",(11,09)
+MONSTER:'@',"fiend",(14,05)
+MONSTER:'@',"fiend",(14,09)
+MONSTER:'@',"fiend",(16,05)
+MONSTER:'@',"fiend",(16,09)
 # Non diggable walls
-NON_DIGGABLE:(26,07,43,13)
-# Random traps
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
+NON_DIGGABLE:(00,00,75,19)
+# A few traps ...
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+# Eels in the lake
+MONSTER:';',"giant eel",(36,01)
+MONSTER:';',"giant eel",(37,09)
+MONSTER:';',"giant eel",(38,15)
+MONSTER:';',"giant eel",(37,09)
+MONSTER:';',"giant eel",(38,15)
 # Monsters on siege duty.
-MONSTER: random,random,(04,12),hostile
-MONSTER: random,random,(08,08),hostile
-MONSTER: random,random,(14,04),hostile
-MONSTER: random,random,(17,11),hostile
-MONSTER: random,random,(24,10),hostile
-MONSTER: random,random,(45,10),hostile
-MONSTER: random,random,(54,02),hostile
-MONSTER: random,random,(55,07),hostile
-MONSTER: random,random,(58,14),hostile
-MONSTER: random,random,(63,17),hostile
-MONSTER: random,random,(18,01),hostile
-MONSTER: random,random,(10,16),hostile
-
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'C', "forest centaur",random,hostile
+MONSTER:'C', "forest centaur",random,hostile
+MONSTER:'C', "forest centaur",random,hostile
+MONSTER:'C', "forest centaur",random,hostile
+ 
 #
-#	The "locate" level for the quest.
+#       The "locate" level for the quest.
 #
-#	Here you have to find the cave of Surtur to go
-#	further towards your assigned quest.
+#       Here you have to infiltrate the Swamp of Horror too
+#       further towards your assigned quest.
 #
 
 MAZE: "Lun-loca",' '
 FLAGS: hardfloor
-INIT_MAP: '.' , 'I' , true , true , lit , false
 GEOMETRY:center,center
 MAP
-PPPP....                      ....PPPPP.
-PLP...                          .PPLLLPP
-PPP    .......................    PPPLLP
-..   ............................   PPPP
-.  ...............................  ....
-  .................................   ..
-....................................   .
-  ...................................   
-.  ..................................  .
-..   ..............................   PP
-.PPP  ..........................     PLP
-.PLLP                             ..PLLP
-.PPPP..                         ....PPPP
-ENDMAP
+......................................................                      
+............. .........................................        .......      
+......P............................  .......... . ......     ..........     
+..................... ..P.........    ....... ............  ............    
+...P.P......P..............P....     ......................  .............  
+.P.............P...P..........P    .... ..P.........  .....  .............  
+....P..P..P.......... ..P........   ......    ....P......................   
+......P................... P.....   .......  ....... ...................    
+...P...P......P.....P..........P    ........ ..P........          ...       
+...P.....P....P....... ..........   ...P........... .P....         ...      
+......P........P..... .P.. .P....  ........................      ........   
+..P.P...P..P.P...... ....................... .........  .....   ..........  
+................P.....P...... ........ ... .....    ..........  ..........  
+...P....P....P......P........ ...P....... ....... ...... ......   ........  
+.......P..P....P.......... ......... ............. .... ........    .....   
+..P..P...P.....P.P......P...P......... ............  ...........     ....   
+................P....P....... ......... ..... ..................       .    
+..P.....P..P..P.... ..... ....P...................................          
+.P..P.P....P....P.............. .......... ..........................       
+..........P....... ...................................................      
+ENDMAP            
+# Random Monsters
+RANDOM_MONSTERS: '@', 'C'
 # Dungeon Description
-REGION:(00,00,39,12),lit,"ordinary"
+REGION:(00,00,75,19),unlit,"ordinary"
 # Stairs
-STAIR:(48,14),up
-STAIR:(20,06),down
-# Non diggable walls
-NON_DIGGABLE:(00,00,39,12)
+STAIR:(03,02),up
+STAIR:(70,13),down
 # Objects
 OBJECT:random,random,random
 OBJECT:random,random,random
@@ -120,152 +134,103 @@ OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 # Random traps
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
+TRAP:"spiked pit",random
+TRAP:"spiked pit",random
+TRAP:"spiked pit",random
+TRAP:"spiked pit",random
+TRAP:random,random
+TRAP:random,random
 TRAP:random,random
 TRAP:random,random
 # Random monsters.
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'C',"forest centaur",random,hostile
+MONSTER:'C',"forest centaur",random,hostile
+MONSTER:'C',"forest centaur",random,hostile
+MONSTER:'C',random,random,hostile
+MONSTER:'C',random,random,hostile
 
 #
-#	The "goal" level for the quest.
+#       The "goal" level for the quest.
 #
-#	Here you meet Lord Surtur your nemesis monster.  You have to
-#	defeat Lord Surtur in combat to gain the artifact you have
-#	been assigned to retrieve.
+#       Here you meet Sir Lorimar your nemesis monster.  You have to
+#       defeat Sir Lorimar in combat to gain the artifact you have
+#       been assigned to retrieve.
 #
 
-MAZE: "Lun-goal", 'L'
-INIT_MAP: '.' , 'L' , true , true , lit , false
+MAZE: "Lun-goal", ' '
 GEOMETRY:center,center
 MAP
-.L............................LLLLL
-LLL.........LLLLL.LLLLL.........LLL
-.LLL......LLLLLLLLLLLLLLL.......LL.
-.LLL.....LLL|---------|LLL.....L...
-..LL....LL|--.........--|LL.....LLL
-.......LL|-...LLLLLLL...-|LL.....L.
-.......LL|...LL.....LL...|LL.......
-......LL|-..LL.......LL..-|LL......
-......LL|.................|LL......
-......LL|-..LL.......LL..-|LL......
-.......LL|...LL.....LL...|LL.......
-.......LL|-...LLLLLLL...-|LL.......
-..L.....LL|--.........--|LL.....LL.
-..LL.....LLL|---------|LLL....LLLL.
-..LLL.....LLLLLLLLLLLLLLL...LLLLL..
-.LLLL.......LLLLL.LLLLL.....LLLL...
-..LL...............................
+.......... ... ............................................................
+.......... ............... .............. ......... .... ..................
+.......... .................................................... ...........
+...... ............ ... ......            ... .................... ........
+....... .....   .............  ..........  ... .. ... ......... ............
+................... ........  ............  ............. .... ............
+............. .............  ..............  .................  ...........
+... ... ............ .....  ................  ............. ...............
+............ . ..............................  .. .... ....................
+............... ..........  ...............  ..............................
+....... ...................  .............  ...... ........................
+... .... ...................  ...........  ..................... ..........
+.................. ..........  .........  ......... ......... ...... ......
+. ......... ..................           ..................................
+......... ............ ........................... .......... .............
+...... .............................................. .....................
+.............. ...................... ........................... .........
+...........................................................................
 ENDMAP
+# Random Monsters
+RANDOM_MONSTERS: '@', 'C'
 # Dungeon Description
-REGION:(00,00,34,16),lit,"ordinary"
+REGION:(00,00,74,17),unlit,"ordinary"
 # Stairs
-# Note:  The up stairs are *intentionally* off of the map.
-STAIR:(45,10),up
+STAIR:(57,11),up
 # Non diggable walls
-NON_DIGGABLE:(00,00,34,16)
-# Drawbridges
-DRAWBRIDGE:(17,02),south,open
-DRAWBRIDGE:(17,14),north,open
+NON_DIGGABLE:(00,00,74,17)
 # Objects
-OBJECT:')',"bullwhip",(17,08),blessed,10,"Vampire Killer"
+OBJECT:')',"quarterstaff",(35,8),blessed,0,"The Staff of Withering"
+OBJECT:'(',"chest",(34,8)
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-# Traps
-TRAP:"board",(13,08)
-TRAP:"board",(21,08)
 # Random traps
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"fire",random
-TRAP:"board",random
+TRAP:random,random
+TRAP:random,random
 TRAP:random,random
 TRAP:random,random
 # Random monsters.
-MONSTER:'@',"Buffy the Vampire Slayer",(17,08),hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,(10,06),hostile
-MONSTER:random,random,(10,07),hostile
-MONSTER:random,random,(10,08),hostile
-MONSTER:random,random,(10,09),hostile
-MONSTER:random,random,(10,10),hostile
-MONSTER:random,random,(24,06),hostile
-MONSTER:random,random,(24,07),hostile
-MONSTER:random,random,(24,08),hostile
-MONSTER:random,random,(24,09),hostile
-MONSTER:random,random,(24,10),hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
+MONSTER:'@',"Sir Lorimar",(35,8),hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'@', "Woodland-elf",random,hostile
+MONSTER:'C',"forest centaur",random,hostile
+MONSTER:'C',"forest centaur",random,hostile
+MONSTER:'C',"forest centaur",random,hostile
+MONSTER:'C',random,random,hostile
 
 #
-#	The "fill" levels for the quest.
+#       The "fill" levels for the quest.
 #
-#	These levels are used to fill out any levels not occupied by specific
-#	levels as defined above. "filla" is the upper filler, between the
-#	start and locate levels, and "fillb" the lower between the locate
-#	and goal levels.
+#       These levels are used to fill out any levels not occupied by specific
+#       levels as defined above. "filla" is the upper filler, between the
+#       start and locate levels, and "fillb" the lower between the locate
+#       and goal levels.
 #
 
-MAZE: "Lun-fila" , 'I'
-INIT_MAP: '.' , 'I' , true , true , lit, false
+MAZE: "Lun-fila" , ' '
+INIT_MAP: '.' , '.' , true , true , unlit , false
 NOMAP
+# Random Monsters
+RANDOM_MONSTERS: '@', 'C'
 #
 STAIR: random, up
 STAIR: random, down
@@ -278,27 +243,26 @@ OBJECT: random, random, random
 OBJECT: random, random, random
 OBJECT: random, random, random
 OBJECT: random, random, random
-OBJECT: random, random, random
-#
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
 #
 TRAP: random, random
 TRAP: random, random
 TRAP: random, random
 TRAP: random, random
-TRAP: random, random
-TRAP: random, random
-TRAP: random, random
+#
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: 'C', "forest centaur", random, hostile
+MONSTER: 'C', "forest centaur", random, hostile
+MONSTER: 'C', "forest centaur", random, hostile
+MONSTER: 'C', random, random, hostile
 
-MAZE: "Lun-filb" , 'L'
-INIT_MAP: '.' , 'L' , true , true , lit, false
+MAZE: "Lun-filb" , ' '
+INIT_MAP: '.' , ' ' , true , true , unlit , true
 NOMAP
+# Random Monsters
+RANDOM_MONSTERS: '@', 'C'
 #
 STAIR: random, up
 STAIR: random, down
@@ -307,26 +271,17 @@ OBJECT: random, random, random
 OBJECT: random, random, random
 OBJECT: random, random, random
 OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
 #
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-MONSTER:random,random,random,hostile
-#
-TRAP: "fire", random
-TRAP: "fire", random
-TRAP: "fire", random
-TRAP: "fire", random
-TRAP: "fire", random
 TRAP: random, random
 TRAP: random, random
+TRAP: random, random
+TRAP: random, random
+#
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: '@', "Woodland-elf", random, hostile
+MONSTER: 'C', "forest centaur", random, hostile
+MONSTER: 'C', "forest centaur", random, hostile
+MONSTER: 'C', "forest centaur", random, hostile
+MONSTER: 'C', random , random, hostile

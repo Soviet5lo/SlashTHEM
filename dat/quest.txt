@@ -592,244 +592,237 @@ essential in locating the Amulet of Yendor."
 #       Lunatic
 #
 %Cc Lun 00001
-You are suddenly in familiar surroundings.  The buildings in the distance
-appear to be those of your old alma mater, but something is wrong.  It looks
-as if there has been a riot recently, or %H has
-been under siege.
+Warily you scan your surroundings and sniff the air for signs of 
+possible danger.  Off in the distance, you can see the familiar shapes
+of %H.
 
-All of the windows are boarded up, and there are objects scattered around
-the entrance.
+But why, you think, would %l call you back?
 
-Strange forbidding shapes seem to be moving in the distance.
+Suddenly, you catch the scent of elves and other forest creatures ...
+how could they be HERE?!
+
+Without another thought you dash off towards the ruins that you 
+call home...
 %E
 %Cp Lun 00002
-Once again, you are back at %H.
+Once again, you near %H.  You know that %l
+will be waiting.
 %E
 %Cp Lun 00003
-You are back at %H.
-You have an odd feeling this may be the last time you ever come here.
+Again, and you think possibly for the last time, you approach
+%H.
 %E
 %Cp Lun 00005
-"Did you see Lash LaRue in 'Song of Old Wyoming' the other night?"
+"The battles here have been good... elf meat really suits my taste!"
 %E
 %Cp Lun 00006
-"Hey man, got any potions of hallucination for sale?"
+"So, you're back, %p. Eaten any good corpses lately? *snicker*"
 %E
 %Cp Lun 00007
-"Did you see the artifact %l brought back from the last dig?"
+"For some strange reason the wolves will no longer answer our calls."
 %E
 %Cp Lun 00008
-"So what species do *you* think we evolved from?"
+"There are too many 'forest creatures' here, the air reeks of them!"
 %E
 %Cp Lun 00009
-"So you're %ls prize pupil!  I don't know what he sees in you."
+"%lC is a mighty leader, but without people to command..."
 %E
 %Cp Lun 00010
-"Did you see Lash LaRue in 'Song of Old Wyoming' the other night?"
+"The battles here have been good... elf meat really suits my taste!"
 %E
 %Cp Lun 00011
-"Hey man, got any potions of hallucination for sale?"
+"So, you're back, %p. Eaten any good corpses lately? *snicker*"
 %E
 %Cp Lun 00012
-"I guess you are guaranteed to make full professor now."
+"For some strange reason the wolves will no longer answer our calls."
 %E
 %Cp Lun 00013
-"So, what was worse, %n or your entrance exams?"
+"There are too many 'forest creatures' here, the air reeks of them!"
 %E
 %Cp Lun 00014
-"%oC is impressive, but nothing like the bones I dug up!"
+"%lC is a mighty leader, but without people to command..."
 %E
 %Cc Lun 00015
-"Finally you have returned, %p.  You were always
-my most promising student.  Allow me to see if you are ready for the
-most difficult task of your career."
+"Ah, %p. It's about time you got here! As much as I dislike to
+say so, we need your help. Those accursed elves have mounted an
+assault on us... wait... before I continue, I must see if you have
+the potential to aid us"
+
 %E
 %Cp Lun 00016
-"Again, %p, you stand before me.
-Let me see if you have gained experience in the interim."
+"%p, you are back.  Are you ready YET?"
 %E
 %Cp Lun 00017
-"Once more, %p, you have returned from the field.
-Are you finally ready for the task that must be accomplished?"
+"Again, you stand before me, %p.  Surely you HAVE to be ready now!"
 %E
 %Cc Lun 00018
-"%p, you have failed us.  All of my careful training has been in
-vain.  Begone!  Your tenure at this college has been revoked!
-
-"You are a disgrace to the profession!"
+"*growl*  You have betrayed us, %p.  You will never attain
+that for which you search!  Now begone from my sight, and be thankful
+I let you live!
 %E
 %Cc Lun 00019
-"%p, you are yet too inexperienced to undertake such a demanding
-quest.  A mere %r could not possibly face the rigors demanded and
-survive.  Go forth, and come here again when your adventures have further
-taught you."
+"%p, I fear that you are as yet too inexperienced to face
+%n.  Only %Ra with the help of %d could ever hope to
+defeat him."
 %E
 %Cc Lun 00020
-"%pC!  I've heard that you've been using sloppy techniques.  Your
-results lately can hardly be called suitable for %ra!
-
-"How could you have strayed from the %a path?  Go from here, and come
-back only when you have purified yourself."
+"%p!  You have wandered from the path of the %a!
+You have become weak and have faulted in your thinking.
+Go forth and restore youself in the eyes of %d."
 %E
 %Cc Lun 00021
-"Grave times have befallen the college, for %na has
-stolen %o.  Without it, the board of directors of
-the university will soon have no choice but to revoke our research grants.
+"Our forest is great need of your assistance, %p.
 
-"You must locate the entrance to %i.  Within it,
-you will find %n.
+"About six months ago, I learned that the elves were banding together
+with a human by the name of %n. At first, I paid it no 
+mind, but then I heard reports of a huge army of 'forest folk' that was 
+planning to invade our island.
 
-"You must then defeat %n and return %o
-to me.
+"By now I had began to assemble my own army and ready my defenses. Then
+disaster struck. While we were hunting for food one day, the elves 
+attacked and stole %o from the ruins.
 
-"Only in this way will we be able to prevent the budget cuts that could
-close this college.
-
-"May the wisdom of %d be your guide."
+"We can not defeat %n while he has the %o. 
+Find him, kill him, and return the %o to me. You will be 
+rewarded greatly if you succeed.
 %E
 %Cp Lun 00025
-"Beware, for %n is powerful and cunning."
+"%nC is a powerful force, but no match for one of our kind!"
 %E
 %Cp Lun 00026
-"To locate the entrance to %i, you must pass
-many traps."
+"Remember that %n is only human ... he can not match our 
+power."
 %E
 %Cp Lun 00027
-"A %nt may be vulnerable to attacks by magical cold."
+"If you fail, %p, we will have to abandon this forest."
 %E
 %Cp Lun 00028
-"Call upon %d when you encounter %n."
+"To enter %i, you must be very stealthy.  Those damn elves are
+everywhere!"
 %E
 %Cp Lun 00029
-"You must destroy %n.  It will pursue you otherwise."
+"Call upon %d in your time of need."
 %E
 %Cp Lun 00030
-"%oC is a mighty talisman.  With it you
-can destroy %n."
+"May %d favour your actions and guide your steps."
 %E
 %Cp Lun 00031
-"Go forth with the blessings of %d."
+"If you can lay hands upon %o, do not fail to use its might!"
 %E
 %Cp Lun 00032
-"I will have my %gP watch for your return."
+"I cannot stand against %ns.  The wolves no longer answer
+our calls."
 %E
 %Cp Lun 00033
-"Remember not to stray from the true %a path."
+"Do not fear %n.  I know you shall feast on his bones!"
 %E
 %Cp Lun 00034
-"You may be able to sense %o when you are near."
+"You have a great road to travel, %p, but only after you defeat
+%n."
 %E
 %Cc Lun 00035
-A plain opens before you.  Beyond the plain lies a foreboding edifice.
-
-You have the feeling that you will soon find the entrance to
-%i.
+The smell of swamp water and rotting trees washes over you. You have
+finally located %i.
 %E
 %Cp Lun 00036
-Once again, you are near the entrance to %i.
+Yet again you have a chance to infiltrate %i.
 %E
 %Cc Lun 00040
-A strange feeling washes over you, and you think back to things you
-learned during the many lectures of %l.
-
-You realize the feeling must be the presence of %o.
+You sniff the air ... yes, the human is here. You would never mistake
+that disgusting scent. Fortunately, they taste better than they smell.
 %E
 %Cp Lun 00041
-The familiar presence of %o is in the ether.
+Yet again you detect the presence of the human.
 %E
 %Cc Lun 00050
-"So, %p, you think that you can succeed in recovering
-%o, when your teacher, %l, has already failed.
+"So.  You have come for the staff. You shall never take it! So long as
+I live it shall stay with me, your kind must be destroyed!
 
-"Come, try your best!  I shall destroy you, and gnaw on your bones."
+"By the powers of good!  Prepare to die, %c."
 %E
 %Cc Lun 00051
-"Again you try to best me, eh %p?  Well, you shall fail again.
-
-"You shall never recover %o.
-
-"I shall bear your soul to the Plane of Origins for my master's pleasure."
+"So you have returned. Good... let's finish it this time!"
 %E
 %Cp Lun 00052
-"You persist yet %p!  Good.  Now, you shall die!"
+"You again? Don't you ever learn, %c! Are you prepared to be extinct now?"
 %E
 %Cp Lun 00053
-"I shall have %o from you, %p, then feast
-upon your entrails!"
+"I must regain the %o! You will cause too much pain with it!
 %E
 %Cp Lun 00060
-"Try your best, %p.  You cannot defeat me."
+"I and the elves will defeat your kind!"
 %E
 %Cp Lun 00061
-"I shall rend the flesh from your body whilst you still breathe!"
+"You are a sorry excuse for %ra."
 %E
 %Cp Lun 00062
-"First you, %p, then I shall destroy your mentor, %l."
+"Run while you can, %c.  I am a man of honour, I will let you go."
 %E
 %Cp Lun 00063
-"Tiring yet, %p?  I draw my power from my master and cannot
-falter!"
+"I shall be merciful and kill you quickly."
 %E
 %Cp Lun 00064
-"I shall rend thy soul from thy body and consume it!"
+"%d cannot protect you now.  Here, you die."
 %E
 %Cp Lun 00065
-"You are far too %a -- it weakens you.  You shall die in this place."
+"Your %a nature makes you weak.  You cannot defeat me."
 %E
 %Cp Lun 00066
-"%d has forsaken you!  You are lost now!"
+"Come, %c.  I shall kill you, then we shall destroy your 'horde'"
 %E
 %Cp Lun 00067
-"A mere %r cannot hope to defeat me!"
+"Once you are dead, my friends shall finish off %l, and your 'pack'."
 %E
 %Cp Lun 00068
-"If you are the best %l can send, I have nothing to fear."
+"Fight, %c, or are you afraid of the mighty %n?"
 %E
 %Cp Lun 00069
-"Die %c!  I shall exhibit your carcass as a trophy."
+"You have failed, %c.  Now, my victory is complete."
 %E
 %Cc Lun 00070
-The power of %o flows through your body!  You feel
-as if you could now take on the Wizard of Yendor himself and win, but
-you know you must return %o to %l.
+As you pick up %o, you feel the power of it
+flowing through your hands.  It pulses with black light and you feel
+as though it wants to kill something.
 %E
 %Cp Lun 00080
-The body of %n dissipates in a cloud of noxious fumes.
+%nC falls to the ground, and utters a last curse at you.  Then he
+slowly slumps over in a pool of his own blood and dies!
 %E
 %Cc Lun 00081
-%lC touches %o briefly, gazes into it,
-then smiles at you and says:
+When %l sees %o, he grins, and says:
 
-"Well done, %p.  You have defeated %n and
-recovered %o.  But I fear that it shall never be safe
-here.
+    Well done, %p.  You have saved our race from certain genocide!
+    What, now, should be done with %o?
 
-Please take %o with you.  You, %p, can
-guard it now far better than I.
+    My people are weak... that has been proven. Our only hope is that
+    you retrieve The Amulet and make %d head of the gods!
 
-May the blessings of %d follow you and guard you."
+    Take %o with you, %p. It will help you destroy 
+    all who stand in you path.
+    
+    Remember me, %p, and return when you have triumphed.  I
+    will tell you then of what you must do.  You will understand when the
+    time comes.
 %E
-# assumes Orb of Detection (glass object)
-%Cc Lun 00082
-"Careful, %p!  %oC might break, and that would be
-a tragic loss.  You are its keeper now, and the time has come to
-resume your search for the Amulet.  %Z await your
-return through the magic portal that brought you here."
+Cp Lun 00082
+%l handles %o for a moment, then looks at you.
+
+"You are its keeper now, and the time has come to resume your search
+for the Amulet.  %Z await your return through the
+magic portal which brought you here."
 %E
-%Cc Lun 00090
-"Welcome back, %p.  Have you progressed with your quest to
-regain the Amulet of Yendor for %d?"
+%Cp Lun 00090
+"Tell us, %p, have you fared well on your great quest?"
 %E
 %Cc Lun 00091
-"Congratulations, %p.  I wondered if anyone could prevail against
-the Wizard and the minions of Moloch.  Now, you must embark on one
-final adventure.
+"This is wondrous, %p.  I feared that you could not possibly
+succeed in your quest, but here you are in possession of the Amulet
+of Yendor!
 
-"Take the Amulet, and find your way onto the astral plane.
-There you must find the altar of %d and sacrifice the
-Amulet on that altar to fulfill your destiny.
+"Return to the dungeon and make you way to the surface. When you
+reach the Astral Plane sacrifice it on %ds altar.
 
-"Remember, your path now should always be upwards."
+"This is all I know, %p.  I hope it will help you."
 %E
 %Cc Lun 00095
 "You have betrayed all those who hold allegiance to %d, as you once did.

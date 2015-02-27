@@ -866,11 +866,11 @@ const struct Role roles[] = {
 	{"Greater Fiend",    0},
 	{"Master Shapeshifter",  0} },
 	"Eluvian", "Moon", "Lycanthus",	/* from an old SLASH version without extended magic */
-	"Lun", "Wolfhowl Castle", "Slayer Domain",
+	"Lun", "the Calerin Forest", "the Nightmare Forest",
 	PM_LUNATIC, NON_PM, PM_UNDEAD_LUNATIC, NON_PM, NON_PM,
-	PM_DRIUD_THE_DRUID, PM_ATTENDANT, PM_BUFFY_THE_VAMPIRE_SLAYER,
-	PM_SOLDIER, PM_CAPTAIN, S_HUMAN, S_HUMAN,
-	ART_VAMPIRE_KILLER,
+	PM_HIGH_LYCANTHROPE, PM_FIEND, PM_SIR_LORIMAR,
+	PM_WOODLAND_ELF, PM_FOREST_CENTAUR, S_HUMAN, S_CENTAUR,
+	ART_STAFF_OF_WITHERING,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
