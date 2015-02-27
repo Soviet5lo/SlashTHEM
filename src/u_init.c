@@ -78,10 +78,10 @@ static struct trobj Bleeder[] = {
 };
 
 static struct trobj Bard[] = {
-#define BARD_INSTR 0
-#define BARD_BOOZE 4
-#define BARD_WHISTLE 5
-	{ DAGGER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
+#define BARD_INSTR 1
+#define BARD_BOOZE 5
+#define BARD_WHISTLE 6
+	{ SILVER_DAGGER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ WOODEN_HARP, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
 	{ LEATHER_CLOAK, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ APPLE, 0, FOOD_CLASS, 3, 0 },
@@ -454,9 +454,9 @@ static struct trobj Noble[] = {
 };
 static struct trobj Pirate[] = {
 #define PIR_KNIVES	1
-#define PIR_SNACK 5
-#define PIR_JEWELRY 7
-#define PIR_TOOL 8
+#define PIR_SNACK 7
+#define PIR_JEWELRY 9
+#define PIR_TOOL 10
 	{ SCIMITAR, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ KNIFE, 1, WEAPON_CLASS, 2, 0 },
 	{ PISTOL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
