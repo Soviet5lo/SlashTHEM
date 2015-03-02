@@ -242,7 +242,7 @@ STAIR:(36,05),up
 ALTAR:(63,04),noncoaligned,altar
 NON_DIGGABLE:(00,00,75,19)
 # Objects
-OBJECT:')',"athame",(63,04),blessed,0,"the Pen of the Void"
+OBJECT:'(',"mirror",(63,04),blessed,0,"The Hand-Mirror of Cthylla"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random

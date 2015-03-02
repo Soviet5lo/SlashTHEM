@@ -415,6 +415,11 @@ A("Hellfire", CROSSBOW,	/* WAC */
 	PHYS(5,4),        FIRE(0,0),  NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 4000L ),
 	/* Auto-explode code in dothrow.c, uhitm.c */
 
+A("the Pen of the Void",	ATHAME,
+	(SPFX_RESTR|SPFX_ATTK), 0, 0,
+	PHYS(5,0),	NO_DFNS,	NO_CARY,
+	0,	A_NONE, PM_BINDER, NON_PM, 2000L),
+
 #ifdef P_SPOON
 A("Houchou",                SPOON,
 	(SPFX_RESTR), 0, 0,
@@ -649,10 +654,10 @@ A("The Mantle of Knowledge",    HELM_OF_BRILLIANCE,
 	NO_ATTK,        NO_DFNS,        CARY(AD_MAGM),
 	ENERGY_BOOST, A_NEUTRAL, PM_PSION, NON_PM, 5000L ),
 
-A("the Pen of the Void",	ATHAME,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,
-	PHYS(5,0),	NO_DFNS,	NO_CARY,
-	0,	A_NEUTRAL, PM_BINDER, NON_PM, 2500L),
+A("The Hand Mirror of Cthylla",	MIRROR, /* 5lo: replaces Pen of the Void */
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_TCTRL|SPFX_SEARCH), 0,
+	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
+	ENERGY_BOOST,	A_NONE, PM_BINDER, NON_PM, 5000L),
 
 A("Bloody Beauty",	BLOCK_HEELED_COMBAT_BOOT,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,
