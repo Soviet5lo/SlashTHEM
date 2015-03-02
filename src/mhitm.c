@@ -1190,7 +1190,7 @@ physical:
                                 if (vis) pline("The silver sears %s!", mon_nam(mdef));
                         }
                         /* Stakes do extra dmg agains vamps */
-                        if (otmp && (otmp->otyp == WOODEN_STAKE || otmp->oartifact == ART_VAMPIRE_KILLER) && is_vampire(pd)) {
+                        if (otmp && (otmp->otyp == WOODEN_STAKE) && is_vampire(pd)) {
                                 if(otmp->oartifact == ART_STAKE_OF_VAN_HELSING) {
                                         if (!rn2(10)) {
                                                 if (vis) {
@@ -1210,13 +1210,13 @@ physical:
                                                 }
                                                 tmp += rnd(6) + 2;
                                         }
-                                }else if (otmp->oartifact == ART_VAMPIRE_KILLER) {
+                                /*}else if (otmp->oartifact == ART_VAMPIRE_KILLER) {
                                         if (vis) {
                                                 Strcpy(buf, Monnam(magr));
                                                 pline("%s whips %s good!",
                                                         buf, mon_nam(mdef));
                                         }
-                                        tmp += rnd(6);
+                                        tmp += rnd(6);*/
                                 }
 					 else {
                                         if (vis) {

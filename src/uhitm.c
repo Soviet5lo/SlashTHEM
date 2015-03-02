@@ -1560,7 +1560,7 @@ int thrown;
         /* WAC Added instant kill from wooden stakes vs vampire */
         /* based off Poison Code */
         /* fixed stupid mistake - check that obj exists before comparing...*/
-        if (obj && (obj->otyp == WOODEN_STAKE || obj->oartifact == ART_VAMPIRE_KILLER) && is_vampire(mdat)) {
+        if (obj && (obj->otyp == WOODEN_STAKE) && is_vampire(mdat)) {
             if (Role_if(PM_UNDEAD_SLAYER) 
               || (P_SKILL(weapon_type(obj)) >= P_EXPERT)
               || obj->oartifact == ART_STAKE_OF_VAN_HELSING) {
@@ -1573,12 +1573,12 @@ int thrown;
                     tmp += rnd(6) + 2;
                     hittxt = TRUE;
                 }
-            } else if (obj->oartifact == ART_VAMPIRE_KILLER) {
+            } /*else if (obj->oartifact == ART_VAMPIRE_KILLER) {
                 You("whip %s good!", mon_nam(mon));
                 tmp += rnd(6);
                 hittxt = TRUE;
 
-		} else {
+		}*/ else {
                 You("drive your stake into %s.", mon_nam(mon));
                 tmp += rnd(6);
                 hittxt = TRUE;

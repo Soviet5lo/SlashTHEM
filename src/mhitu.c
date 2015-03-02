@@ -1655,7 +1655,7 @@ hitmu(mtmp, mattk)
 			    pline("The silver sears your flesh!");
 			}
 			/* Stakes do extra dmg agains vamps */
-			if ((otmp->otyp == WOODEN_STAKE || otmp->oartifact == ART_VAMPIRE_KILLER) &&
+			if ((otmp->otyp == WOODEN_STAKE) &&
 				is_vampire(youmonst.data)) {
 			    if (otmp->oartifact == ART_STAKE_OF_VAN_HELSING) {
 				if (!rn2(10)) {
@@ -1670,11 +1670,11 @@ hitmu(mtmp, mattk)
 					    Monnam(mtmp));
 				    dmg += rnd(6) + 2;
 				}
-			    }else if (otmp->oartifact == ART_VAMPIRE_KILLER) {
+			    }/*else if (otmp->oartifact == ART_VAMPIRE_KILLER) {
 				pline("%s whips you good!",
 					Monnam(mtmp));
 				dmg += rnd(6);
-			    } else {
+			    }*/ else {
 				pline("%s drives the stake into you.",
 					Monnam(mtmp));
 				dmg += rnd(6);

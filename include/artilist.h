@@ -172,9 +172,9 @@ A("Itlachiayaque",             SHIELD_OF_REFLECTION,
 	SMOKE_CLOUD,    A_LAWFUL, PM_ARCHEOLOGIST, NON_PM, 2000L ),
 
 A("Vampire Killer",        BULLWHIP,
-	(SPFX_RESTR), 0, 0,
-	PHYS(5,6),    NO_DFNS,        CARY(AD_MAGM),
-	0,              A_LAWFUL, NON_PM, NON_PM, 5000L ),
+	(SPFX_RESTR|SPFX_DFLAG2), 0, (M2_UNDEAD|M2_DEMON|M2_WERE),
+	PHYS(10,20),    DRLI(0,0),        NO_CARY,
+	0,              A_LAWFUL, NON_PM, NON_PM, 2500L ),
 
 /*** Neutral artifacts ***/
 A("Magicbane",                  ATHAME,
