@@ -78,5 +78,6 @@ struct artifact {
 #define OBJECT_DET	(LAST_PROP+22)
 #define SMOKE_CLOUD	(LAST_PROP+23)
 #define SHARPEN		(LAST_PROP+24)
+#define BLESS		(LAST_PROP+25)
  
 #endif /* ARTIFACT_H */

@@ -174,7 +174,7 @@ A("Itlachiayaque",             SHIELD_OF_REFLECTION,
 A("Vampire Killer",        BULLWHIP,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, (M2_UNDEAD|M2_DEMON|M2_WERE),
 	PHYS(10,20),    DRLI(0,0),        NO_CARY,
-	0,              A_LAWFUL, NON_PM, NON_PM, 2500L ),
+	BLESS,              A_LAWFUL, NON_PM, NON_PM, 2500L ),
 
 /*** Neutral artifacts ***/
 A("Magicbane",                  ATHAME,

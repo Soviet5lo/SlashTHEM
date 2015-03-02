@@ -2104,6 +2104,22 @@ arti_invoke(obj)
 	(obj->spe > -1 ? (obj->spe > 0 ? "better than " : ""): "slightly less than "));
 	break;
 	   }
+    case BLESS:
+	if(obj->owornmask&(~(W_ART|W_ARTI))){
+		You("can't bless your artifact while it is worn, wielded, or readied.");
+		obj->age = 0;
+	} else {
+		You("bless your artifact.");
+	if(cansee(u.ux, u.uy)) pline("Holy light shines upon it!");
+	obj->cursed = 0;
+	obj->blessed = 1;
+	obj->oeroded = 0;
+	obj->oeroded2 = 0;
+	obj->oerodeproof = 1;
+	if(obj->spe < 3) {
+		obj->spe = 3;
+	}
+	}	
 
 	  }
 	}
