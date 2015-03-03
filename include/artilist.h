@@ -142,7 +142,6 @@ A("Liontamer",                BULLWHIP, /* 5lo: was quest artifact */
 	(SPFX_RESTR|SPFX_ATTK), 0, S_FELINE,
 	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
 
-
 A("Trollsbane",                 MORNING_STAR,
 	(SPFX_RESTR|SPFX_DCLAS), 0, S_TROLL,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 200L ),
@@ -258,6 +257,11 @@ A("Full Metal Jacket",   LEATHER_JACKET, /* Temp name */
 A("Tesla's Coat", LAB_COAT,
     (SPFX_RESTR|SPFX_DEFN), SPFX_HPHDAM, 0,
     NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, PM_SCIENTIST, NON_PM, 3000L ),
+
+A("Silvershard", SILVER_DAGGER,
+    (SPFX_RESTR), 0, 0,
+    PHYS(2,0),	NO_DFNS,	NO_CARY, 0, A_NONE, NON_PM, NON_PM, 1000L ),
+
 /* 5lo: Some more artifacts... */
 A("Fungisword", LONG_SWORD,
     (SPFX_RESTR|SPFX_DCLAS), SPFX_HALRES, S_FUNGUS,
@@ -308,7 +312,6 @@ A("Deep Freeze",                ATHAME,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
 	COLD(5,3),      COLD(0,0),      NO_CARY,        0, A_CHAOTIC, PM_ICE_MAGE, NON_PM, 400L ),
 
-
 A("Serpent's Tongue",            DAGGER,
 	SPFX_RESTR, 0, 0,
         PHYS(2,0),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_NECROMANCER, NON_PM, 400L ),
@@ -318,7 +321,6 @@ A("The Marauder's Map", SCR_MAGIC_MAPPING,
 	(SPFX_RESTR), 0, 0, NO_ATTK,	NO_DFNS,	NO_CARY,
 	OBJECT_DET,	A_CHAOTIC, PM_PIRATE, NON_PM, 2000L ),
 
-
 A("Cleaver",                    BATTLE_AXE,
 	SPFX_RESTR, 0, 0,
 	PHYS(3,3),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_BARBARIAN, NON_PM, 1500L ),
@@ -326,6 +328,7 @@ A("Cleaver",                    BATTLE_AXE,
 A("Doomblade",                  ORCISH_SHORT_SWORD,
 	SPFX_RESTR, 0, 0,
 	PHYS(0,5),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_LUNATIC, NON_PM, 1000L ),
+
 A("Nightingale",                KATANA,
 	SPFX_RESTR, 0, 0,
 	PHYS(6,3),	NO_DFNS,	NO_CARY,	INVIS, A_CHAOTIC, PM_NINJA, NON_PM, 2000L ),
@@ -338,7 +341,6 @@ A("Nightingale",                KATANA,
 A("Stormbringer",               RUNESWORD,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN|SPFX_INTEL|SPFX_DRLI), 0, 0,
 	DRLI(5,1),	DRLI(0,0),	NO_CARY,	0, A_CHAOTIC, NON_PM, NON_PM, 8000L ),
-
 
 A("Reaver",			SCIMITAR,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL),0,0,
@@ -373,7 +375,6 @@ A("Plague", DARK_ELVEN_BOW,	/* KMH */
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
 	PHYS(5,4),        DFNS(AD_DRST),  NO_CARY,        0, A_CHAOTIC, PM_DROW, NON_PM, 6000L ),
 	/* Auto-poison code in dothrow.c */
-
 
 A("Mumakbane",			LONG_SWORD,
 	(SPFX_RESTR|SPFX_DMONS), 0, PM_MUMAK,
@@ -742,7 +743,6 @@ A("The Tsurugi of Muramasa",	TSURUGI,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_BEHEAD|SPFX_LUCK), 0, 0,
 	NO_ATTK,        NO_DFNS,        NO_CARY,
 	0,		A_LAWFUL, PM_SAMURAI, NON_PM, 4500L ),
-
 
 # ifdef TOURIST
 A("The Platinum Yendorian Express Card", CREDIT_CARD,
