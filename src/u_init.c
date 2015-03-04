@@ -263,7 +263,7 @@ static struct trobj Ninja[] = {
 	{ SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },      /* the wakizashi */
 	{ SHURIKEN, 0, WEAPON_CLASS, 9, UNDEF_BLESS },        /* quan is variable */
 	{ LEATHER_CLOAK, 1, ARMOR_CLASS, 1, 0 },
-	{ WEDGE_SANDALS, 1, ARMOR_CLASS, 1, 0 },
+	{ LOW_BOOTS, 1, ARMOR_CLASS, 1, 0 },
 	{ POT_SICKNESS, 0, POTION_CLASS, 1, 0 },
 	{ POT_INVISIBILITY, UNDEF_SPE, POTION_CLASS, 1, 1 },
 	{ LOCK_PICK, 9, TOOL_CLASS, 1, 0 },
