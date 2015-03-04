@@ -614,7 +614,7 @@ A("Chekhov's Gun", PISTOL,	/* KMH */
 
 A("Shiny Magnum", PISTOL,	/* KMH */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_DEFN|SPFX_INTEL), 0, 0,
-	PHYS(10,8),        DFNS(AD_DETH),  NO_CARY,        0, A_LAWFUL, PM_OFFICER, NON_PM, 10000L ),
+	PHYS(10,8),        DFNS(AD_DRLI),  NO_CARY,        0, A_LAWFUL, PM_OFFICER, NON_PM, 10000L ),
 
 A("Withered Nine Millimeter", PISTOL,	/* KMH */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_DEFN|SPFX_INTEL), 0, 0,
