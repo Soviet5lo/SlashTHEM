@@ -252,10 +252,12 @@ struct obj *otmp;
 	case SPE_TELEPORT_AWAY:
 		reveal_invis = !u_teleport_mon(mtmp, TRUE);
 		break;
+#if 0 /* 5lo: Removed */
 	case WAN_BANISHMENT:
 		if (u.uevent.udemigod) { reveal_invis = !u_teleport_mon(mtmp, TRUE); break; }
 		reveal_invis = !u_teleport_monB(mtmp, TRUE);
 		break;
+#endif
 	case WAN_MAKE_INVISIBLE:
 	    {
 		int oldinvis = mtmp->minvis;
@@ -1933,7 +1935,7 @@ struct obj *obj, *otmp;
 		(void) drain_item(obj);
 		break;
 	case WAN_TELEPORTATION:
-	case WAN_BANISHMENT:
+	/*case WAN_BANISHMENT:*/
 	case SPE_TELEPORT_AWAY:
 		rloco(obj);
 		break;
@@ -2951,6 +2953,7 @@ boolean ordinary;
 		    tele();
 			makeknown(obj->otyp);
 		    break;
+#if 0 /* 5lo: Removed because this never worked correctly in the first place */
 		case WAN_BANISHMENT:
 			makeknown(obj->otyp);
 			if (u.uevent.udemigod) { pline("You shudder for a moment."); (void) safe_teleds(FALSE); break;}
@@ -2969,6 +2972,7 @@ boolean ordinary;
 			get_level(&newlevel, newlev);
 			goto_level(&newlevel, TRUE, FALSE, FALSE);
 		    break;
+#endif
 		case WAN_DEATH:
 		case SPE_FINGER_OF_DEATH:
 		    if (nonliving(youmonst.data) || is_demon(youmonst.data)) {
@@ -3119,7 +3123,7 @@ struct obj *obj;	/* wand or spell */
 				makeknown(obj->otyp);
 		    steedhit = TRUE;
 		    break;
-
+#if 0
 		case WAN_BANISHMENT:
 			makeknown(obj->otyp);
 			if (u.uevent.udemigod) { pline("You shudder for a moment."); break;}
@@ -3131,7 +3135,7 @@ struct obj *obj;	/* wand or spell */
 			if (rn2(2)) {(void) safe_teleds(FALSE); goto_level(&medusa_level, TRUE, FALSE, FALSE); level_tele(); }
 			else {(void) safe_teleds(FALSE); goto_level(&portal_level, TRUE, FALSE, FALSE); level_tele(); }
 			break;
-
+#endif
 		/* Default processing via bhitm() for these */
 		case SPE_CURE_SICKNESS:
 		case WAN_MAKE_INVISIBLE:
@@ -3402,7 +3406,7 @@ struct obj *obj;	/* wand or spell */
 		case WAN_CANCELLATION:
 		case SPE_CANCELLATION:
 		case WAN_MAKE_INVISIBLE:
-		case WAN_BANISHMENT:
+		/*case WAN_BANISHMENT:*/
 		    del_engr(e);
 		    break;
 		case WAN_TELEPORTATION:

@@ -1444,7 +1444,7 @@ doengrave()
 			    break;
 		    case WAN_CANCELLATION:
 		    case WAN_MAKE_INVISIBLE:
-		    case WAN_BANISHMENT:
+		    /*case WAN_BANISHMENT:*/
 			if (oep && oep->engr_type != HEADSTONE) {
 			    if (!Blind)
 				pline_The("engraving on the %s vanishes!",

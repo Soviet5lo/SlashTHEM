@@ -1641,7 +1641,7 @@ struct monst *mtmp;
 #define MUSE_SCR_BARRHING 32
 #define MUSE_WAN_SOLAR_BEAM 33
 #define MUSE_SCR_LOCKOUT 34
-#define MUSE_WAN_BANISHMENT 35
+/*#define MUSE_WAN_BANISHMENT 35*/
 
 /* Select an offensive item/action for a monster.  Returns TRUE iff one is
  * found.
@@ -1742,11 +1742,13 @@ struct monst *mtmp;
 			m.offensive = obj;
 			m.has_offense = MUSE_WAN_STRIKING;
 		}
+#if 0 /* 5lo: Removed */
 		nomore(MUSE_WAN_BANISHMENT);
 		if(obj->otyp == WAN_BANISHMENT && obj->spe > 0) {
 			m.offensive = obj;
 			m.has_offense = MUSE_WAN_BANISHMENT;
 		}
+#endif
 		nomore(MUSE_POT_PARALYSIS);
 		if(obj->otyp == POT_PARALYSIS && multi >= 0) {
 			m.offensive = obj;
@@ -1938,6 +1940,7 @@ register struct obj *otmp;
 			    (void) rloc(mtmp, FALSE);
 		}
 		break;
+#if 0 /* 5lo: Removed */
 	case WAN_BANISHMENT:
 		if (u.uevent.udemigod) { pline("You shudder for a moment."); (void) safe_teleds(FALSE);  break; }
 
@@ -1966,6 +1969,7 @@ register struct obj *otmp;
 		} /*else !u_teleport_monB(mtmp, TRUE);*/ /*doesn't seem to work as intended... --Amy*/
 
 		break;
+#endif
 	case WAN_CANCELLATION:
 	case SPE_CANCELLATION:
 		(void) cancel_monst(mtmp, otmp, FALSE, TRUE, FALSE);
@@ -2176,6 +2180,7 @@ struct monst *mtmp;
 		mbhit(mtmp,rn1(8,6),mbhitm,bhito,otmp);
 		m_using = FALSE;
 		return 2;
+#if 0
 	case MUSE_WAN_BANISHMENT:
 		zap_oseen = oseen;
 		mzapmsg(mtmp, otmp, FALSE);
@@ -2184,6 +2189,7 @@ struct monst *mtmp;
 		mbhitm(&youmonst,otmp);
 		m_using = FALSE;
 		return 2;
+#endif
 	case MUSE_SCR_TRAP_CREATION:
 
 		mreadmsg(mtmp, otmp);
@@ -2732,7 +2738,7 @@ struct monst *mtmp;
 			|| pm->mlet == S_KOP
 # endif
 		) return 0;
-	switch (rn2(34)) {
+	switch (rn2(33)) {
 
 		case 0: return WAN_DEATH;
 		case 1: return WAN_SLEEP;
@@ -2767,7 +2773,7 @@ struct monst *mtmp;
 		case 30: return SCR_BARRHING;
 		case 31: return WAN_SOLAR_BEAM;
 		case 32: return SCR_LOCKOUT;
-		case 33: return WAN_BANISHMENT;
+		/*case 33: return WAN_BANISHMENT;*/
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -3260,7 +3266,7 @@ struct obj *obj;
 		return (boolean)(monstr[monsndx(mon->data)] < 6);
 	    if (objects[typ].oc_dir == RAY ||
 		    typ == WAN_STRIKING ||
-		    typ == WAN_BANISHMENT ||
+		    /*typ == WAN_BANISHMENT ||*/
 		    typ == WAN_TELEPORTATION ||
 		    typ == WAN_CREATE_MONSTER ||
 		    typ == WAN_SUMMON_UNDEAD ||

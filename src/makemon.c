@@ -2015,7 +2015,7 @@ register struct monst *mtmp;
 
 			(void)mongets(mtmp, HUGGING_BOOT);
 			(void)mongets(mtmp, SPEED_BOOTS);
-			(void)mongets(mtmp, WAN_BANISHMENT);
+			/*(void)mongets(mtmp, WAN_BANISHMENT);*/
 
 			if (!rn2(20) ) {
 

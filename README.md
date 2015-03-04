@@ -31,8 +31,6 @@ Plenty of stuff not yet listed here.
 
 Bugs
 ----
-Monsters using a wand of banishment tends to cause a segfault.  Will probably disable/remove.
-
 Traps are sometimes generated outside of defined levels (still?)
 
 Probably a ton of others.

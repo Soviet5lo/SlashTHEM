@@ -3386,6 +3386,7 @@ wand_explode(obj, hero_broke)
 		}
 	affects_objects = TRUE;
 	break;
+#if 0
     case WAN_BANISHMENT:
 
 	    if ((obj->spe > 2) && rn2(obj->spe - 2) && !level.flags.noteleport &&
@@ -3407,7 +3408,7 @@ wand_explode(obj, hero_broke)
 		}
 	affects_objects = TRUE;
 	break;
-
+#endif
     case WAN_CREATE_HORDE: /* More damage than Create monster */
 	        dmg *= 2;
 	        break;
