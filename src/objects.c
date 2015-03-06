@@ -564,13 +564,13 @@ ARMOR("leather jacket", (char *)0,
 /* Robes */
 /* STEPHEN WHITE'S NEW CODE */
 ARMOR("robe", "red robe",
-	0, 0, 0, 0,		1, 1,  16,  50,  9, 0, ARM_SUIT, LEATHER, CLR_RED),
+	0, 0, 0, 0,		1, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_RED),
 ARMOR("robe of protection", "blue robe",
-	0, 1, 0, PROTECTION,	1, 1,  16,  50,  5, 0, ARM_SUIT, LEATHER, CLR_BRIGHT_BLUE),
+	0, 1, 0, PROTECTION,	1, 1,  16,  50,  5, 0, ARM_SUIT, CLOTH, CLR_BRIGHT_BLUE),
 ARMOR("robe of power", "orange robe",
-	0, 1, 0, 0,		1, 1,  16,  50,  9, 0, ARM_SUIT, LEATHER, CLR_ORANGE),
+	0, 1, 0, 0,		1, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_ORANGE),
 ARMOR("robe of weakness", "green robe",
-	0, 1, 0, STUNNED,		1, 1,  16,  50,  9, 0, ARM_SUIT, LEATHER, CLR_GREEN),
+	0, 1, 0, STUNNED,		1, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_GREEN),
 
 /*
  * Dragon suits
