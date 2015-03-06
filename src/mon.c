@@ -826,6 +826,13 @@ mcalcdistress()
 		    cansee(mtmp->mx,mtmp->my) && flags.verbose, FALSE, FALSE);
 	were_change(mtmp);
 
+	if(!mtmp->mcansee && (mtmp->data == &mons[PM_SHOGGOTH] ||
+			 mtmp->data == &mons[PM_DARK_SHOGGOTH] ||
+			 mtmp->data == &mons[PM_GIANT_SHOGGOTH])){
+ 	    if(canspotmon(mtmp)) pline("%s forms new eyes!", Monnam(mtmp));
+	    mtmp->mblinded = 1;
+	}
+
 	/* gradually time out temporary problems */
 	if (mtmp->mblinded && !--mtmp->mblinded)
 	    mtmp->mcansee = 1;

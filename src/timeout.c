@@ -295,7 +295,15 @@ nh_timeout()
 	}
 #endif
 
-	for(upp = u.uprops; upp < u.uprops+SIZE(u.uprops); upp++)
+	for(upp = u.uprops; upp < u.uprops+SIZE(u.uprops); upp++){
+		if(Upolyd && (youmonst.data == &mons[PM_SHOGGOTH] ||
+		youmonst.data == &mons[PM_DARK_SHOGGOTH] ||
+		youmonst.data == &mons[PM_GIANT_SHOGGOTH])
+		&& upp - u.uprops == BLINDED && upp->intrinsic & TIMEOUT){
+			upp->intrinsic &= ~TIMEOUT;
+			upp->intrinsic++;
+			You("form new eyes.");
+		}
 	    if((upp->intrinsic & TIMEOUT) && !(--upp->intrinsic & TIMEOUT)) {
 		switch(upp - u.uprops){
 		case STONED:
@@ -494,6 +502,7 @@ nh_timeout()
 		case DETECT_MONSTERS:
 			see_monsters();
 			break;
+		}
 		}
 	}
 
