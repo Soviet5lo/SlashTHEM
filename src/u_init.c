@@ -6060,6 +6060,7 @@ register struct trobj *trop;
                 obj->cursed = TRUE;
             }
 #endif /* CONVICT */
+	    /*
             if (obj->otyp == VICTORIAN_UNDERWEAR ) {
                 obj->cursed = TRUE;
             }
@@ -6072,6 +6073,7 @@ register struct trobj *trop;
             if (obj->otyp == RUFFLED_SHIRT ) {
                 obj->cursed = TRUE;
             }
+	    */
             if (obj->otyp == LOADSTONE ) {
                 obj->cursed = TRUE;
             }
