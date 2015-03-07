@@ -201,6 +201,14 @@ unsigned *ospecial;
 					color = CLR_BRIGHT_CYAN;
 				}
 				else cmap_color(offset);
+		} 	else if(In_mines(&u.uz) && !*in_rooms(x,y,0)) {
+				if(offset >= S_vwall && offset <= S_hcdoor){
+					color = CLR_BROWN;
+				}
+				else if(offset >= S_corr && offset <= S_litcorr){
+					color = CLR_BROWN;
+				}
+				else cmap_color(offset);
 		} 	else if(*in_rooms(x,y,BEEHIVE)) {
 				if(offset >= S_vwall && offset <= S_hcdoor){
 					color = CLR_YELLOW;
