@@ -251,7 +251,7 @@ A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NONE, PM_BARD, NON_PM, 1000L ),
 
 A("Full Metal Jacket",   LEATHER_JACKET, /* Temp name */
-    (SPFX_RESTR|SPFX_DEFN), (SPFX_HALRES|SPFX_PROTEC), 0,
+    (SPFX_RESTR|SPFX_DEFN|SPFX_PROTEC), (SPFX_HALRES), 0,
     NO_ATTK,    FIRE(0,0),    NO_CARY,   0, A_NEUTRAL, PM_ROCKER, NON_PM, 1500L ), 
     
 A("Tesla's Coat", LAB_COAT,
