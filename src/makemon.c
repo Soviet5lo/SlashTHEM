@@ -5100,13 +5100,13 @@ register int	mmflags;
 	mtmp->mcansee = mtmp->mcanmove = TRUE;
 	mtmp->mpeaceful = (mmflags & MM_ANGRY) ? FALSE : peace_minded(ptr);
 	mtmp->mtraitor  = FALSE;
-
+#if 0 /* 5lo: Very huge potential for abuse */
 	/* Everything that can hide under an object will now do so. --Amy */
       if(x && y && hides_under(ptr) )
 	  (void) mkobj_at(0, x, y, TRUE);
 	if(/*in_mklev && */hides_under(ptr) && OBJ_AT(x, y))
 	  mtmp->mundetected = TRUE;
-
+#endif
 	switch(ptr->mlet) {
 		case S_MIMIC:
 			set_mimic_sym(mtmp);
@@ -5171,11 +5171,11 @@ register int	mmflags;
 			break;
 		case S_SPIDER:
 		case S_SNAKE:
-			/* if(in_mklev)
+			if(in_mklev)
 			    if(x && y)
 				(void) mkobj_at(0, x, y, TRUE);
-			if(in_mklev && hides_under(ptr) && OBJ_AT(x, y))
-			    mtmp->mundetected = TRUE;*/
+			if(hides_under(ptr) && OBJ_AT(x, y))
+			    mtmp->mundetected = TRUE;
 			break;
 		case S_LIGHT:
 		case S_ELEMENTAL:
