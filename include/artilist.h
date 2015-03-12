@@ -535,7 +535,7 @@ A("Black Death",                     HALBERD,
 
 A("The Flute of Slime",          MAGIC_FLUTE, /* 5lo: temp name */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,
-	NO_ATTK,        NO_DFNS,        CARY(AD_ACID),
+	NO_ATTK,        NO_DFNS,        CARY(AD_ELEC),
 	SUMMON_EARTH_ELEMENTAL,         A_CHAOTIC, PM_ACID_MAGE, NON_PM, 1000L ),
 /* Earth is associated with Acid in D&D */
 
@@ -582,7 +582,7 @@ A("The Storm Whistle",          MAGIC_WHISTLE,
 
 A("The Harp of Lightning",          MAGIC_HARP, 
  	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,
- 	NO_ATTK,        NO_DFNS,        CARY(AD_ELEC),
+ 	NO_ATTK,        NO_DFNS,        CARY(AD_ACID),
 	SUMMON_AIR_ELEMENTAL,         A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 1000L ),
 /* Air is associated with Electricity in D&D */
 
