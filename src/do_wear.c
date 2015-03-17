@@ -305,6 +305,9 @@ Cloak_on()
 	case OILSKIN_CLOAK:
 		pline("%s very tightly.", Tobjnam(uarmc, "fit"));
 		break;
+	case EXPENSIVE_SUIT:
+		ABON(A_CHA) += 2;
+		break;
 	/* Alchemy smock gives poison _and_ acid resistance */
 #if 0
 	case ALCHEMY_SMOCK:
@@ -366,6 +369,9 @@ Cloak_off()
 			: see_yourself);
 		}
 		break;
+	case EXPENSIVE_SUIT:
+		ABON(A_CHA) -= 2;
+		break;
 #if 0
 	/* Alchemy smock gives poison _and_ acid resistance */
 	case ALCHEMY_SMOCK:
@@ -394,7 +400,8 @@ Helmet_on()
 	case GNOMISH_HELM:
 	case ORCISH_HELM:
 	/* KMH, balance patch -- removed
-	case FIRE_HELMET: */
+	 * 5lo: Restored */
+	case FIRE_HELMET:
 	case HELM_OF_TELEPATHY:
 		break;
 	case HELM_OF_BRILLIANCE:
@@ -462,7 +469,8 @@ Helmet_off()
 	case GNOMISH_HELM:
 	case ORCISH_HELM:
 	/* KMH, balance patch -- removed
-	case FIRE_HELMET: */
+	 * 5lo: Restored */
+	case FIRE_HELMET:
 	    break;
 	case DUNCE_CAP:
 	    flags.botl = 1;

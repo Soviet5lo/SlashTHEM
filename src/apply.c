@@ -3790,6 +3790,7 @@ doapply()
 	case BAG_OF_HOLDING:
 	case OILSKIN_SACK:
 	case BAG_OF_DIGESTION:
+	case UGLY_BACKPACK:
 		res = use_container(&obj, 1);
 		break;
 	case BAG_OF_TRICKS:

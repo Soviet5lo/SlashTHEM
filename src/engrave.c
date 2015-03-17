@@ -1811,7 +1811,7 @@ doengrave()
 		multi = -(len/10);
 		if (otmp->otyp == WAN_DIGGING) multi /= 5; /* otherwise engraving with them would be useless --Amy */
 		if ((otmp->oclass == WEAPON_CLASS) &&
-		    ( ((otmp->otyp != ATHAME) && (!is_lightsaber(otmp))) || otmp->cursed)) {
+		    ( ((otmp->otyp != ATHAME) && (!is_lightsaber(otmp)) && (otmp->otyp !=SHARPENED_PENCIL)) || otmp->cursed)) {
 		    multi = -len;
 		    maxelen = ((otmp->spe + 3) * 2) + 1;
 			/* -2 = 3, -1 = 5, 0 = 7, +1 = 9, +2 = 11

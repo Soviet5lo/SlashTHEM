@@ -686,7 +686,7 @@ DOOR:locked,(10,17)
 #	After bathing, the Knights of the Bath would feast with
 #	the monarch in this room.
 DOOR:closed,(09,04)
-OBJECT:'(',"sack",(01,10),blessed,0,"Goffic Backpack"
+OBJECT:'(',"ugly backpack",(01,10),blessed,0,"Goffic Backpack"
 MONSTER:'T',"Tara Gilesbie",(01,10),hostile
 REGION:(02,05,08,16),unlit,"humanhall"
 # The Chapel of Saint John

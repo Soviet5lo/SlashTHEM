@@ -105,9 +105,13 @@ WEAPON("silver dagger", (char *)0,
 	/* WAC silver dagger now pierces, to be same as other daggers
         allows it to be thrown without penalty as well*/
 WEAPON("elven dagger", "runed dagger",
-	0, 1, 0,  6, 4,  4,  3,  3, 1, P,   P_DAGGER, WOOD, HI_METAL),
+	0, 1, 0,  5, 4,  4,  3,  3, 1, P,   P_DAGGER, WOOD, HI_METAL),
 WEAPON("dark elven dagger", "black runed dagger",
 	0, 1, 0,  2, 4,  4,  4,  4, 1, P,   P_DAGGER, WOOD, CLR_BLACK),
+
+WEAPON("sharpened pencil", (char *)0,
+	1, 1, 0,  1, 2,  4,  2,  2, 1, P,   P_DAGGER, WOOD, CLR_YELLOW),
+/* 5lo: From Nethack--, very low damage but can engrave without dulling */
 WEAPON("wooden stake", (char *)0,
 	1, 0, 0,  2, 8, 50,  4,  3, 1, P,   P_DAGGER, WOOD, HI_WOOD),
 	/* STEPHEN WHITE'S NEW CODE */
@@ -628,7 +632,7 @@ CLOAK("dwarvish cloak", "hooded cloak",
 CLOAK("oilskin cloak", "slippery cloak",
 		0, 0,	0,	    7, 0, 4, 50,  9, 3, CLOTH, HI_CLOTH),
 CLOAK("elven cloak", "faded pall",
-		0, 1,	STEALTH,    8, 0, 4, 60,  9, 3, CLOTH, CLR_BLACK),
+		0, 1,	STEALTH,    6, 0, 4, 60,  9, 3, CLOTH, CLR_BLACK),
 CLOAK("lab coat", "white coat",
 		0, 1,   POISON_RES,10, 0, 4, 60,  9, 3, CLOTH, CLR_WHITE),
 CLOAK("leather cloak", (char *)0,
@@ -641,6 +645,10 @@ CLOAK("cloak of grounding", "granite cloak",
 		0, 1,	SHOCK_RES,  1, 0, 4, 50,  8, 2, MINERAL, CLR_GRAY),
 CLOAK("cloak of quenching", "asbestos cloak",
 		0, 1,	FIRE_RES,  1, 0, 4, 50,  9, 3, MITHRIL, CLR_ORANGE),
+/* 5lo: Expensive suit from Nethack--, grants a charisma bonus and a MC 2 */
+CLOAK("expensive suit", (char *)0,
+		0, 0,   0,	    2, 0,20, 90,10, 3, CLOTH, CLR_BLACK),
+
 #if 0
 CLOAK("robe", (char *)0,
 		1, 1,	0,	    3, 0, 7, 50,  8, 3, CLOTH, CLR_RED),
@@ -679,13 +687,16 @@ HELM("dunce cap", "conical hat",
 		0, 1, 0,			3, 1,  2,  80,10, 0, CLOTH, CLR_BRIGHT_BLUE),
 HELM("dented pot", (char *)0,
 		1, 0, 0,			2, 0, 4,   8, 9, 0, IRON, CLR_BLACK),
+/* 5lo: Fire Helmet from SLASH 6, grants Fire Resistance */
+HELM("fire helmet", "red shiny helmet",
+		0, 0, FIRE_RES,			2, 1, 25, 50, 9, 0, IRON, CLR_RED),
 #ifdef JEDI
 HELM("plasteel helm", (char *)0,
 		1, 0, 0,                        1, 1,  2,  20, 7, 9, PLASTIC, CLR_WHITE),
 #endif
 /* ...with shuffled appearances */
 HELM("helmet", "plumed helmet",
-		0, 0, 0,		   8, 1, 12,  50, 9, 0, IRON, HI_METAL),
+		0, 0, 0,		   6, 1, 12,  50, 9, 0, IRON, HI_METAL),
 HELM("helm of brilliance", "etched helmet",
 		0, 1, 0,			6, 1, 20,  50, 9, 0, IRON, CLR_GREEN),
 HELM("helm of opposite alignment", "crested helmet",
@@ -973,6 +984,7 @@ CONTAINER("chest", (char *)0,           1, 0, 0, 1,  35,60,  16, WOOD, HI_WOOD),
 CONTAINER("ice box", (char *)0,         1, 0, 0, 1,  10,90,  42, PLASTIC, CLR_WHITE),
 CONTAINER("sack", "bag",                0, 0, 0, 0,  30, 5, 100, CLOTH, HI_CLOTH),
 CONTAINER("oilskin sack", "bag",        0, 0, 0, 0,  20, 5, 100, CLOTH, HI_CLOTH),
+CONTAINER("ugly backpack", (char *)0,   0, 0, 0, 0,   0, 5, 100, CLOTH, CLR_MAGENTA),
 CONTAINER("bag of holding", "bag",      0, 1, 0, 0,  20, 5, 100, CLOTH, HI_CLOTH),
 CONTAINER("bag of digestion","bag",     0, 1, 0, 0,   5, 5, 100, CLOTH, HI_CLOTH),
 CONTAINER("bag of tricks", "bag",       0, 1, 1, 0,  20, 5, 100, CLOTH, HI_CLOTH),
@@ -1668,7 +1680,7 @@ WAND("teleportation",  "iridium",  45, 500, 1, IMMEDIATE, METAL,    CLR_BRIGHT_C
 /*WAND("banishment",  "cocky",   5, 500, 1, IMMEDIATE, METAL,    CLR_BRIGHT_GREEN),*/
 WAND("create horde",   "black",     5, 500, 1, NODIR,     PLASTIC,  CLR_BLACK),
 WAND("extra healing",  "bronze",   30, 500, 1, IMMEDIATE, COPPER,   CLR_YELLOW),
-WAND("full healing",   "hawthorn",  10, 500, 1, IMMEDIATE, LEATHER,  CLR_BROWN),
+WAND("full healing",   "hawthorn", 10, 500, 1, IMMEDIATE, LEATHER,  CLR_BROWN),
 WAND("wonder",	"elven-lettered", 5, 500, 1, NODIR,     IRON,	 HI_METAL),
 WAND("bugging",	"wooden",		5, 500, 1, NODIR,     WOOD,	 HI_METAL),
 WAND("wishing",        "pine",      5, 500, 1, NODIR,     WOOD,     HI_WOOD),

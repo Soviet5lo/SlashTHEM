@@ -225,7 +225,7 @@ static struct trobj Musician[] = {
 
 static struct trobj Undertaker[] = {
 	{ SCALPEL, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ VICTORIAN_UNDERWEAR, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
+	{ EXPENSIVE_SUIT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ WAN_UNDEAD_TURNING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ WAN_UNDEAD_TURNING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
@@ -243,6 +243,8 @@ static struct trobj Zookeeper[] = {
 };
 static struct trobj Firefighter[] = {
 	{ AXE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ FIRE_HELMET, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ CLOAK_OF_QUENCHING, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ POT_WATER, 0, POTION_CLASS, 5, 0 },
 	{ SCR_FIRE, UNDEF_SPE, SCROLL_CLASS, 4, UNDEF_BLESS },
 	{ WAN_FIRE, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
@@ -313,10 +315,10 @@ static struct trobj Geek[] = {
 };
 
 static struct trobj Graduate[] = {
-	{ SPOON, 3, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ SHARPENED_PENCIL, 3, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ CANDY_BAR, 0, FOOD_CLASS, 5, 0 },
 	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
-	{ SACK, 0, TOOL_CLASS, 1, 0 },
+	{ UGLY_BACKPACK, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 

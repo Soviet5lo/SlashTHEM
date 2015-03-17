@@ -167,6 +167,7 @@ struct obj *box;
 	case LARGE_BOX:		n = 3; break;
 	case SACK:
 	case OILSKIN_SACK:
+	case UGLY_BACKPACK:
 				/* initial inventory: sack starts out empty */
 				if (moves <= 1 && !in_mklev) { n = 0; break; }
 				/*else FALLTHRU*/
@@ -616,6 +617,7 @@ boolean artif;
 		case ICE_BOX:
 		case SACK:
 		case OILSKIN_SACK:
+		case UGLY_BACKPACK:
 		case BAG_OF_HOLDING:
 		case MEDICAL_KIT:
 			mkbox_cnts(otmp);
