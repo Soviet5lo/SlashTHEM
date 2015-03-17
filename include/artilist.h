@@ -367,6 +367,11 @@ A("Bat from Hell",                BASEBALL_BAT,
 A("Elfrist",                    ORCISH_SPEAR,
 	SPFX_DFLAG2, 0, M2_ELF,
 	PHYS(5,8),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_HUMAN_WEREWOLF, PM_ORC, 300L ),
+
+A("Bloodmarker",		KNIFE,
+	(SPFX_RESTR), 0, 0,
+	PHYS(3,7),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_BLEEDER, NON_PM, 1000L ),
+
 A("Slow Blade",                ORCISH_SHORT_SWORD, /* 5lo: Now opposite of Quickblade... */
 	SPFX_RESTR, 0, 0,
 	PHYS(1,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
@@ -665,10 +670,10 @@ A("The Hand Mirror of Cthylla",	MIRROR, /* 5lo: replaces Pen of the Void */
 	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
 	ENERGY_BOOST,	A_NONE, PM_BINDER, NON_PM, 5000L),
 
-A("Bloody Beauty",	BLOCK_HEELED_COMBAT_BOOT,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,
-	DRLI(4,2),	NO_DFNS,	NO_CARY,
-	0,	A_NEUTRAL, PM_BLEEDER, NON_PM, 2500L),
+A("The Scalpel of the Bloodletter",	SCALPEL,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK|SPFX_DRLI|SPFX_HPHDAM), SPFX_REGEN, 0,
+	DRLI(9,10),	NO_DFNS,	NO_CARY,
+	HEALING,	A_NEUTRAL, PM_BLEEDER, NON_PM, 2500L),
 
 A("Goffic Backpack",	UGLY_BACKPACK,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL),
