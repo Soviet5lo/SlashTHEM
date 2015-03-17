@@ -217,7 +217,7 @@ STAIR:(19,10),up
 # Non diggable walls
 NON_DIGGABLE:(00,00,75,19)
 # Objects
-OBJECT:')',"rubber hose",(37,10),blessed,0,"Fire-Brigade Reel"
+OBJECT:'[',"fire helmet",(37,10),blessed,0,"The Fire Chief Helmet"
 OBJECT:'(',"chest",(37,10)
 OBJECT:random,random,(36,09)
 OBJECT:random,random,(36,10)
