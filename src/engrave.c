@@ -660,10 +660,10 @@ char *outbuf;
 
 	/* a random engraving may come from the "rumors" file,
 	   or from the list above */
-	if (!rn2(3) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor) /* increased random rumor chance --Amy */
+	if (!rn2(4) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor) /* increased random rumor chance --Amy */
 	    Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
 
-	/*if (!rn2(5))*/ wipeout_text(outbuf, (int)(strlen(outbuf) / 4), 0);
+	/*if (!rn2(5))*/ wipeout_text(outbuf, (int)(strlen(outbuf) / 8), 0);
 	return outbuf;
 }
 
