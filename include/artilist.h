@@ -150,11 +150,9 @@ A("Ogresmasher",		WAR_HAMMER,
 	(SPFX_RESTR|SPFX_DCLAS), 0, S_OGRE,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 200L ),
 
-#ifdef YEOMAN
 A("Reaper",                     HALBERD,
 	SPFX_RESTR, 0, 0,
-	PHYS(5,10),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_YEOMAN, NON_PM, 1000L ),
-#endif
+	PHYS(5,10),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CHEVALIER, NON_PM, 1000L ),
 
 A("Holy Spear of Light",        SILVER_SPEAR,
        (SPFX_RESTR|SPFX_INTEL|SPFX_DFLAG2), 0, M2_UNDEAD,
