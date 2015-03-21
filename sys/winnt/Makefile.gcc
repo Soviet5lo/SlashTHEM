@@ -1446,7 +1446,7 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 		$(DAT)\mall-1.des   $(DAT)\mall-2.des   $(DAT)\geek.des   $(DAT)\medusa.des \
 		$(DAT)\sokoban.des  $(DAT)\heck.des    $(DAT)\mines.des    $(DAT)\mtemple.des \
 		$(DAT)\newmall.des  $(DAT)\nymph.des    $(DAT)\hellma.des    $(DAT)\oracle.des \
-		$(DAT)\rats.des     $(DAT)\sea.des      $(DAT)\spiders.des \
+		$(DAT)\rats.des     $(DAT)\sea.des      $(DAT)\spiders.des $(DAT)\village.des \
 		$(DAT)\stor-1.des   $(DAT)\stor-2.des   $(DAT)\act.des   $(DAT)\stor-3.des \
 		$(DAT)\tomb.des     $(DAT)\tower.des    $(DAT)\warrior.des    $(DAT)\yendor.des \
 		$(DAT)\arch.des     $(DAT)\barb.des 	$(DAT)\binder.des 	$(DAT)\caveman.des \
@@ -1499,6 +1499,7 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/mtemple.des
 	lev_comp $(DDAT)/newmall.des
 	lev_comp $(DDAT)/nymph.des
+	lev_comp $(DDAT)/village.des
 	lev_comp $(DDAT)/noble.des
 	lev_comp $(DDAT)/electric.des
 	lev_comp $(DDAT)/acid.des
