@@ -207,6 +207,8 @@ nh_timeout()
 	int m_idx;
 	int baseluck = (flags.moonphase == FULL_MOON) ? 1 : 0;
 
+	if(Race_if(PM_HOBBIT)) /* 5lo: from the hobbit nethack patch, hobbits are lucky folk */
+	    baseluck++;
 	if (flags.friday13) baseluck -= 1;
 
 	if (u.legscratching > 1 && !Role_if(PM_BLEEDER) && moves % 1000 == 0) u.legscratching--; /* always time out once per 1000 turns --Amy */
