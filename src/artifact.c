@@ -52,7 +52,22 @@ STATIC_OVL int artidisco[NROFARTIFACTS];
 STATIC_DCL void NDECL(hack_artifacts);
 STATIC_DCL boolean FDECL(attacks, (int,struct obj *));
 
-
+boolean
+CountsAgainstGifts(x)
+int x;
+{
+	return (x != ART_WARFORGER && \
+			ART_KEY_OF_LAW && \
+			ART_KEY_OF_NEUTRALITY && \
+			ART_KEY_OF_CHAOS && \
+			ART_HAND_OF_VECNA && \
+			ART_NIGHTHORN && \
+			ART_EYE_OF_THE_BEHOLDER && \
+			ART_THIEFBANE && \
+			ART_KEY_OF_ACCESS && \
+			ART_BURNED_MOTH_RELAY && \
+			ART_SCALES_OF_THE_DRAGON_LORD);
+}
 /* handle some special cases; must be called after role_init() */
 STATIC_OVL void
 hack_artifacts()
@@ -379,7 +394,7 @@ nartifact_exist()
     int n = SIZE(artiexist);
 
     while(n > 1)
-	if(artiexist[--n]) a++;
+	if(artiexist[--n] && CountsAgainstGifts(n)) a++;
 
     return a;
 }
