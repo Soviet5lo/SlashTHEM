@@ -6061,7 +6061,7 @@ register struct permonst *ptr;
 	if (ptr->mlet == S_SPIDER && Race_if(PM_SPIDERMAN) && !Role_if(PM_CONVICT)) return TRUE;
 	if (ptr->mlet == S_LIZARD && Race_if(PM_ARGONIAN) && !Role_if(PM_CONVICT)) return TRUE;
 	if (ptr->mlet == S_NYMPH && Race_if(PM_NYMPH) && !Role_if(PM_CONVICT)) return TRUE;
-	if (ptr->mlet == S_HUMANOID && Race_if(PM_ILLITHID) && !Role_if(PM_CONVICT)) return TRUE;
+	if (is_mind_flayer(ptr) && Race_if(PM_ILLITHID) && !Role_if(PM_CONVICT)) return TRUE;
 
 	if (always_hostile(ptr)) return FALSE;
 	if (ptr->msound == MS_LEADER || ptr->msound == MS_GUARDIAN)
