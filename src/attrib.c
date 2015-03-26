@@ -38,7 +38,7 @@ const struct innate {
 
 	cou_abil[] = { {	 1, &(HHunger), "", "" },
 		     {   1, &(HAggravate_monster), "", "" },
-		     {  1, &(HConflict), "", "" },
+		     /*{  1, &(HConflict), "", "" },*/
 		     {	 0, 0, 0, 0 } },
 
 	brd_abil[] = { {	5, &(HSleep_resistance), "awake", "tired" },
