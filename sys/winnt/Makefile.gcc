@@ -32,7 +32,7 @@
 
 # Game Installation Variables
 
-GAME = slashem
+GAME = slashthem
 # The GNU Make has a problem if you include a drive spec below (unfortunately).
 GAMEDIR = \games\slam32d
 

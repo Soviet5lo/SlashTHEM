@@ -15,8 +15,8 @@
 
 # make NetHack
 PREFIX   = /usr
-GAME     = slashem
-# GAME     = slashem.prg
+GAME     = slashthem
+# GAME     = slashthem.prg
 GAMEUID  = games
 GAMEGRP  = bin
 

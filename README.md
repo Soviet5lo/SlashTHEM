@@ -1,7 +1,7 @@
-Slash'EM Extended Mod
+SlashTHEM
 =====================
 
-Slash'EM Extended Mod is a fork of Slash'EM Extended version 75.  It's primary goals are to add more flavor to the game, create unique quests for most of the new roles, and apply some much needed balance changes.  Overall, the difficulty will be a bit higher than Slash'EM, but nowhere near the difficulty of Slash'EM Extended.
+Slash'THEM (Previously known as Slash'EM Extended Mod) is a fork of Slash'EM Extended version 75.  It's primary goals are to add more flavor to the game, create unique quests for most of the new roles, and apply some much needed balance changes.  Overall, the difficulty will be a bit higher than Slash'EM, but nowhere near the difficulty of Slash'EM Extended.
 
 This should compile fine on Windows (with MinGW) and Unix systems.  I haven't done any testing on other platforms.
 

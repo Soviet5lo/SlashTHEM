@@ -5,11 +5,7 @@
 /*The name of the compiled game- should be same as stuff in makefile*/
 /*for makedefs*/
 /* KMH -- Made it mixed case, from which upper & lower case versions are made */
-#ifdef WIN32 /* Workaround for reading the config on unix systems */
-#define DEF_GAME_NAME   "SlashEM Extended"
-#else
-#define DEF_GAME_NAME   "SlashEM_Extended"
-#endif
+#define DEF_GAME_NAME   "SlashTHEM"
 /*#define DEF_GAME_NAME   "NetHack"*/
 
 /* Version */
@@ -23,16 +19,16 @@
 /*#define FIXLEVEL        0*/
 
 #define COPYRIGHT_BANNER_A \
-"This is SuperLotsoAddedStuffHack-Extended Magic 1997-2005"
+"This is SuperLotsoAddedStuffHack-The Heavily Extended Mod 2014-2015"
 
 #define COPYRIGHT_BANNER_B \
 "NetHack, Copyright 1985-2003 Stichting Mathematisch Centrum, M. Stephenson."
 
 #define COPYRIGHT_BANNER_C \
-"Slash'EM Extended version by Amy (user Bluescreenofdeath at Nethackwiki)."
+"Slash'EM by the Slash'EM dev team.  Slash'EM Extended by Amy-BSOD at Github."
 
 #define COPYRIGHT_BANNER_D \
-"See license for details. Bug reports to Bluescreenofdeath's user talk page."
+"SlashTHEM by Soviet5lo at Github.  See license for details."
 
 #if 1
 /*
