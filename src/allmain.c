@@ -1176,6 +1176,11 @@ boolean new_game;	/* false => restoring an old game */
  		You_feel("dead inside.");
 
 	}
+#ifdef LIVELOGFILE
+	/* Start live reporting */
+		  livelog_start();
+#endif
+
 }
 
 #ifdef POSITIONBAR
