@@ -25,7 +25,7 @@
 "NetHack, Copyright 1985-2003 Stichting Mathematisch Centrum, M. Stephenson."
 
 #define COPYRIGHT_BANNER_C \
-"Slash'EM by the Slash'EM dev team.  Slash'EM Extended by Amy-BSOD at Github."
+"Slash'EM by the Slash'EM Dev Team.  Slash'EM Extended by AmyBSOD at Github."
 
 #define COPYRIGHT_BANNER_D \
 "SlashTHEM by Soviet5lo at Github.  See license for details."
