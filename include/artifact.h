@@ -79,5 +79,6 @@ struct artifact {
 #define SMOKE_CLOUD	(LAST_PROP+23)
 #define SHARPEN		(LAST_PROP+24)
 #define BLESS		(LAST_PROP+25)
+#define LEADERSHIP 	(LAST_PROP+26)
  
 #endif /* ARTIFACT_H */

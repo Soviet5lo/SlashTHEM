@@ -2134,7 +2134,11 @@ arti_invoke(obj)
 	if(obj->spe < 3) {
 		obj->spe = 3;
 	}
-	}	
+	}
+    case LEADERSHIP: {
+	    (void) pet_detect_and_tame(obj);
+	    break;
+	}
 
 	  }
 	}
