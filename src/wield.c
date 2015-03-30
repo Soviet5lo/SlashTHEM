@@ -96,7 +96,8 @@ boolean put_away;
 	 * *whenever* Sunsword is unwielded, from whatever cause.
 	 */
 	setworn(obj, W_WEP);
-	if (uwep == obj && artifact_light(olduwep) && olduwep->lamplit) {
+	if (uwep == obj && olduwep && olduwep->oartifact == ART_SUNSWORD &&
+		olduwep->lamplit) {
 	    end_burn(olduwep, FALSE);
 	    if (!Blind) pline("%s glowing.", Tobjnam(olduwep, "stop"));
 	}
@@ -199,7 +200,7 @@ boolean put_away;
 	    /* KMH -- Talking artifacts are finally implemented */
 	    arti_speak(wep);
 
-	    if (artifact_light(wep) && !wep->lamplit) {
+	    if (wep->oartifact == ART_SUNSWORD && !wep->lamplit) {
 		begin_burn(wep, FALSE);
 		if (!Blind)
 		    pline("%s to glow brilliantly!", Tobjnam(wep, "begin"));

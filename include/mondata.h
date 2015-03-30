@@ -211,7 +211,8 @@
 				 ((ptr) == &mons[PM_GREATER_FIRE_ELEMENTAL]) ? 3 : \
 				 ((ptr) == &mons[PM_FIRE_VAMPIRE])? 2 : \
 				 ((ptr) == &mons[PM_FLAMING_SPHERE]) ? 1 : \
-				 ((ptr) == &mons[PM_SHOCKING_SPHERE]) ? 1 : 0)
+				 ((ptr) == &mons[PM_SHOCKING_SPHERE]) ? 1 : \
+				 ((ptr) == &mons[PM_WAX_GOLEM]) ? 1 : 0)
 /*	[note: the light ranges above were reduced to 1 for performance...] */
 /*  WAC increased to 3 and 2?*/
 #define likes_lava(ptr)		(ptr == &mons[PM_FIRE_ELEMENTAL] || ptr == &mons[PM_GREATER_FIRE_ELEMENTAL] || \

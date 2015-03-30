@@ -2345,6 +2345,7 @@ boolean from_user;
          && !strstri(bp, "medallion ")
          && !strstri(bp, "stake ")
          && !strstri(bp, "potion ")
+         && !strstri(bp, "potions ")
 	 && !strstri(bp, "finger ")) {
 	    if ((p = strstri(bp, " of ")) != 0
 		&& (mntmp = name_to_mon(p+4)) >= LOW_PM)
@@ -3099,7 +3100,9 @@ typfnd:
 		    nname[n] = (nname[n] == c1) ? c2 : highc(c2);  /* keep same case */
 		}
 # endif
+		place_object(otmp, u.ux, u.uy);/* make it viable light source */
 		otmp = oname(otmp, nname);
+		obj_extract_self(otmp);	 /* now release it for caller's use */
 		if (otmp->oartifact) {
 			otmp->quan = 1L;
 			u.uconduct.wisharti++;	/* KMH, conduct */
@@ -3163,7 +3166,7 @@ typfnd:
 		/* (do this adjustment before setting up object's weight) */
 		consume_oeaten(otmp, 1);
 	}
-	if (isdrained && otmp->otyp == CORPSE) {
+	if (isdrained && otmp->otyp == CORPSE && mons[otmp->corpsenm].cnutrit) {
 		int amt;
 		otmp->odrained = 1;
 		amt = mons[otmp->corpsenm].cnutrit - drainlevel(otmp);

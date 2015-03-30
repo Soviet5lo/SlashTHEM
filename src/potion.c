@@ -529,6 +529,7 @@ peffects(otmp)
 	case POT_HALLUCINATION:
             makeknown (POT_HALLUCINATION);
 		if (Hallucination || Halluc_resistance) nothing++;
+		else makeknown(otmp->otyp);
 		(void) make_hallucinated(itimeout_incr(HHallucination,
 					   rn1(200, 600 - 300 * bcsign(otmp))),
 				  TRUE, 0L);
@@ -1900,7 +1901,7 @@ register struct obj *obj;
 	    if (kn)
 		makeknown(obj->otyp);
 	    else if (!objects[obj->otyp].oc_name_known &&
-						!objects[obj->otyp].oc_uname)
+						!objects[obj->otyp].oc_uname && !Blind)
 		docall(obj);
 	}
 }
@@ -2426,6 +2427,7 @@ register struct obj *obj;
 	long owornmask;
 	struct obj *otmp;
 	boolean explodes;
+	char buf[BUFSZ];
 
 	/* Check to see if object is valid */
 	if (!obj)
@@ -2757,6 +2759,19 @@ register struct obj *obj;
 			return 0;
 	}
 
+	if (artifact_name(ONAME(obj), &otyp2) && otyp2 == obj->otyp) {
+	    int n;
+	    char c1, c2;
+
+	    Strcpy(buf, ONAME(obj));
+	    n = rn2((int)strlen(buf));
+	    c1 = lowc(buf[n]);
+	    do c2 = 'a' + rn2('z'-'a'); while (c1 == c2);
+	    buf[n] = (buf[n] == c1) ? c2 : highc(c2);  /* keep same case */
+	    if (oname(obj, buf) != obj)
+		panic("upgrade_obj: unhandled realloc");
+	}
+
 	if ((!carried(obj) || obj->unpaid) &&
 #ifdef UNPOLYPILE
 		!is_hazy(obj) &&
@@ -2996,6 +3011,7 @@ dodip()
 	 * 	 Give out name of new object and allow user to name the potion
 	 */
 	/* KMH, balance patch -- idea by Dylan O'Donnell <dylanw@demon.net> */
+#if 0
 	else if (potion->otyp == POT_GAIN_LEVEL && obj->oclass != POTION_CLASS) { /* this should fix it --Amy */
 	/* thanks to the guy/girl figuring it out */
 	    res = upgrade_obj(obj);
@@ -3017,6 +3033,8 @@ dodip()
 	    }
 	    /* no return here, go for Interesting... message */
 	} else if (obj->otyp == POT_POLYMORPH ||
+#endif
+	else if (obj->otyp == POT_POLYMORPH ||
 		potion->otyp == POT_POLYMORPH) {
 	    /* some objects can't be polymorphed */
 	    if (obj->otyp == potion->otyp ||	/* both POT_POLY */
@@ -3231,6 +3249,23 @@ dodip()
 	    makeknown(potion->otyp);
 	    useup(potion);
 	    return 1;
+	} else if (potion->otyp == POT_GAIN_LEVEL) {
+	    res = upgrade_obj(obj);
+	    if (res != 0) {
+		if (res == 1) {
+		    /* The object was upgraded */
+		    pline("Hmm!  You don't recall dipping that into the potion.");
+		    prinv((char *)0, obj, 0L);
+		} /* else potion exploded */
+		if (!objects[potion->otyp].oc_name_known &&
+			!objects[potion->otyp].oc_uname)
+		    docall(potion);
+		useup(potion);
+		update_inventory();
+		exercise(A_WIS, TRUE);
+		return 1;
+	    }
+	    /* no return here, go for Interesting... message */
 	}
 
 	/* KMH, balance patch -- acid affects damage(proofing) */

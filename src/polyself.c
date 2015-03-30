@@ -1719,9 +1719,6 @@ polyatwill()      /* Polymorph under conscious control (#youpoly) */
 			  (uarm && uarm->otyp == WHITE_DRAGON_SCALE_MAIL 
 				&& Role_if(PM_ICE_MAGE)));
 
-	/* Set to TRUE when you can polyatwill but choose not to */
-	boolean can_polyatwill = FALSE; 
-	
 	/* KMH, balance patch -- new intrinsic */
 	if (Unchanging) {
 	    pline("You cannot change your form.");
@@ -1781,7 +1778,7 @@ polyatwill()      /* Polymorph under conscious control (#youpoly) */
 	     * is unaffected by blindness, confusion, stun etc. 
 	     */
 	    if (yn("Transform into your draconic form?") == 'n') 
-		can_polyatwill = TRUE;
+		return 0;
 	    else if (!scales && !scale_mail && u.uen <= EN_BABY_DRAGON) {
 		You("don't have the energy to polymorph. You need at least %d!",EN_BABY_DRAGON);
 		return 0;		
@@ -1820,7 +1817,7 @@ polyatwill()      /* Polymorph under conscious control (#youpoly) */
 
 	if (Race_if(PM_DOPPELGANGER) || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD)) {
 	    if (yn("Polymorph at will?") == 'n')	    
-	    	can_polyatwill = TRUE;
+		return 0;
 	    else if (u.uen < EN_DOPP) {
 		You("don't have the energy to polymorph! You need at least %d!",EN_DOPP);
 		return 0;
@@ -1843,7 +1840,7 @@ polyatwill()      /* Polymorph under conscious control (#youpoly) */
 	} else if ( (Race_if(PM_HUMAN_WEREWOLF) || Role_if(PM_LUNATIC) ) &&
 		(!Upolyd || u.umonnum == u.ulycn)) {
 	    if (yn("Change form?") == 'n')
-	    	can_polyatwill = TRUE;
+		return 0;
 	    else if (u.ulycn == NON_PM) {
 	    	/* Very serious */
 	    	You("are no longer a lycanthrope!");
@@ -1862,13 +1859,12 @@ polyatwill()      /* Polymorph under conscious control (#youpoly) */
 			else nomul(0);
 		    }
 		    you_were();
-		    return 1;
 		} else {
 		    rehumanize();
-		    return 1;
 		}
+		return 1;
 	    }
-	} else if (!can_polyatwill) {
+	} else {
 	    pline("You can't polymorph at will%s.", 
 		    ((Role_if(PM_FLAME_MAGE) || Role_if(PM_ELECTRIC_MAGE) || Role_if(PM_LUNATIC) || Role_if(PM_ACID_MAGE) || Role_if(PM_ICE_MAGE) || Race_if(PM_HUMAN_WEREWOLF) || Race_if(PM_DOPPELGANGER)) ?
 		    " yet" : ""));

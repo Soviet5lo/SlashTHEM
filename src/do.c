@@ -1759,11 +1759,12 @@ moldy_corpse(arg, timeout)
 genericptr_t arg;
 long timeout;
 {
-    int pmtype, oldtyp, oldquan;
+    int pmtype, oldtyp, oldquan, oldnamelth;
     struct obj *body = (struct obj *) arg;
 
     /* Turn the corpse into a mold corpse if molds are available */
     oldtyp = body->corpsenm;
+    oldnamelth = body->onamelth;
 
     /* Weight towards non-motile fungi.
      */
@@ -1795,6 +1796,7 @@ long timeout;
 	    pmtype = -1; /* cantcreate might have changed it so change it back */
     	else {
 	    	body->corpsenm = pmtype;
+		body->onamelth = 0;	/* Molds shouldn't be named */
 
 		/* oeaten isn't used for hp calc here, and zeroing it 
 		 * prevents eaten_stat() from worrying when you've eaten more
@@ -1831,6 +1833,7 @@ long timeout;
      */
     if (body) {
     	body->corpsenm = oldtyp; /* Fixup corpse after (attempted) revival */
+	body->onamelth = oldnamelth;
 	body->owt = weight(body);
 	(void) start_timer(250L - (monstermoves-peek_at_iced_corpse_age(body)),
 					TIMER_OBJECT, ROT_CORPSE, arg);

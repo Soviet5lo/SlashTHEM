@@ -389,6 +389,7 @@ Helmet_on()
     switch(uarmh->otyp) {
 	case FEDORA:
 		set_moreluck();
+		flags.botl = 1;
 		break;
 #ifdef JEDI
 	case PLASTEEL_HELM:
@@ -458,6 +459,7 @@ Helmet_off()
 	case FEDORA:
 	    setworn((struct obj *)0, W_ARMH);
 	    set_moreluck();
+	    flags.botl = 1;
 	    return 0;
 #ifdef JEDI
 	case PLASTEEL_HELM:
