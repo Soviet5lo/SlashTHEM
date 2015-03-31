@@ -651,19 +651,6 @@ int how;
 
 	}
 
-	/* cursed ruffled shirt or victorian underwear may actually be helpful... */
-	if (uarmu && how <= GENOCIDED && (uarmu->otyp == RUFFLED_SHIRT || uarmu->otyp == VICTORIAN_UNDERWEAR) && uarmu->cursed && !rn2(4) ) {
-		pline("But wait...");
-		pline("For some reason, you're not dead!");
-		if(u.uhpmax <= 0) u.uhpmax = 1;	/* arbitrary */
-		savelife(how);
-		killer = 0;
-		killer_format = 0;
-		return;
-
-	}
-
-
 	if ((Second_chance || Lifesaved) && how <= GENOCIDED) {
 		pline("But wait...");
 		makeknown(Lifesaved ? AMULET_OF_LIFE_SAVING : AMULET_OF_SECOND_CHANCE);

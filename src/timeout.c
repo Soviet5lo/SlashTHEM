@@ -213,10 +213,6 @@ nh_timeout()
 
 	if (u.legscratching > 1 && !Role_if(PM_BLEEDER) && moves % 1000 == 0) u.legscratching--; /* always time out once per 1000 turns --Amy */
 
-	if (!rn2(1000) && Role_if(PM_ACTIVISTOR) && ( !( uarmu && (uarmu->otyp == RUFFLED_SHIRT || uarmu->otyp == VICTORIAN_UNDERWEAR)) || !rn2(10)) ) {
-		You_hear("maniacal laughter!");
-	    attrcurse();
-	}
 #if 0 /* 5lo: No longer needed */
 	/* Nymph race randomly gets punished --Amy */
 	if (!rn2(2000) && Race_if(PM_NYMPH)) {

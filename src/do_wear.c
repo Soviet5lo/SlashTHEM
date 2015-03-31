@@ -654,37 +654,24 @@ Shield_off()
 int
 Shirt_on()
 {
-/*
+
     switch (uarmu->otyp) {
 	case HAWAIIAN_SHIRT:
 	case T_SHIRT:
 		break;
+	case RUFFLED_SHIRT:
+		You("%s very dashing in your %s.", Blind ||
+			(Invis && !See_invisible) ? "feel" : "look",
+			OBJ_NAME(objects[uarmu->otyp]));
+		ABON(A_CHA) += 1;
+		break;
+	case VICTORIAN_UNDERWEAR:
+		pline("The %s shapes your figure, but it isn't very practical to fight in.",
+			OBJ_NAME(objects[uarmu->otyp]));
+		ABON(A_CHA) += 2;
+		break;
 	default: impossible(unknown_type, c_shirt, uarmu->otyp);
     }
-*/
-
-	/* Cursed underwear/shirt may lifesave a player. It is therefore a good idea to curse them. --Amy
-	   Nobles and activistors will be able to voluntarily make them cursed. */
-
-	if(uarmu->otyp == VICTORIAN_UNDERWEAR){
-
-		if ((Role_if(PM_NOBLEMAN) || Role_if(PM_NOBLEWOMAN) || Role_if(PM_ACTIVISTOR)) && !uarmu->cursed ) {if (yn_function("Do you want your sexy underwear to stick?", ynchars, 'n') == 'y') { curse(uarmu);
-			pline("Your fleecy underwear gently welds itself to your curved body!");
-			}
-		}
-
-		pline("The %s shapes your figure, but it isn't very practical to fight in.",
-				OBJ_NAME(objects[uarmu->otyp]));
-	}
-
-	if(uarmu->otyp == RUFFLED_SHIRT){
-
-		if ((Role_if(PM_NOBLEMAN) || Role_if(PM_NOBLEWOMAN) || Role_if(PM_ACTIVISTOR)) && !uarmu->cursed ) {if (yn_function("Do you want your noble shirt to stick?", ynchars, 'n') == 'y') { curse(uarmu);
-			pline("Your shirt tickles comfortably on your smooth skin!");
-			}
-		}
-
-	}
 
     return 0;
 }
@@ -693,14 +680,20 @@ int
 Shirt_off()
 {
     takeoff_mask &= ~W_ARMU;
-/*
+
     switch (uarmu->otyp) {
 	case HAWAIIAN_SHIRT:
 	case T_SHIRT:
 		break;
+	case RUFFLED_SHIRT:
+	     ABON(A_CHA) -= 1;
+	     break;
+	case VICTORIAN_UNDERWEAR:
+	     ABON(A_CHA) -= 2;
+	     break;
 	default: impossible(unknown_type, c_shirt, uarmu->otyp);
     }
-*/
+
     setworn((struct obj *)0, W_ARMU);
     return 0;
 }
