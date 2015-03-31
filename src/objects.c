@@ -519,6 +519,10 @@ ARMOR("ruffled shirt", (char *)0,
 /* victorian underwear, on the other hand, inflicts a penalty to AC but grants MC 3 */
 ARMOR("victorian underwear", (char *)0,
 	1, 0, 0, 0,	 1, 5,	 5,   2, 10, 3, ARM_SHIRT, CLOTH, CLR_WHITE),
+/* 5lo: Expensive suit from Nethack--, grants a charisma bonus and a MC 2 */
+ARMOR("expensive suit", (char *)0,
+	1, 0, 0, 0,	 2, 0,   5,  50, 10, 2, ARM_SHIRT, CLOTH, CLR_BLACK), 
+
 
 /* Suits of armor */
 ARMOR("plate mail", (char *)0,
@@ -645,9 +649,6 @@ CLOAK("cloak of grounding", "granite cloak",
 		0, 1,	SHOCK_RES,  1, 0, 4, 50,  8, 2, MINERAL, CLR_GRAY),
 CLOAK("cloak of quenching", "asbestos cloak",
 		0, 1,	FIRE_RES,  1, 0, 4, 50,  9, 3, MITHRIL, CLR_ORANGE),
-/* 5lo: Expensive suit from Nethack--, grants a charisma bonus and a MC 2 */
-CLOAK("expensive suit", (char *)0,
-		0, 0,   0,	    2, 0,20, 90,10, 3, CLOTH, CLR_BLACK),
 
 #if 0
 CLOAK("robe", (char *)0,

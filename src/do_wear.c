@@ -305,9 +305,6 @@ Cloak_on()
 	case OILSKIN_CLOAK:
 		pline("%s very tightly.", Tobjnam(uarmc, "fit"));
 		break;
-	case EXPENSIVE_SUIT:
-		ABON(A_CHA) += 2;
-		break;
 	/* Alchemy smock gives poison _and_ acid resistance */
 #if 0
 	case ALCHEMY_SMOCK:
@@ -368,9 +365,6 @@ Cloak_off()
 			See_invisible ? "no longer see through yourself"
 			: see_yourself);
 		}
-		break;
-	case EXPENSIVE_SUIT:
-		ABON(A_CHA) -= 2;
 		break;
 #if 0
 	/* Alchemy smock gives poison _and_ acid resistance */
@@ -670,6 +664,9 @@ Shirt_on()
 			OBJ_NAME(objects[uarmu->otyp]));
 		ABON(A_CHA) += 2;
 		break;
+	case EXPENSIVE_SUIT:
+		ABON(A_CHA) += 2;
+		break;
 	default: impossible(unknown_type, c_shirt, uarmu->otyp);
     }
 
@@ -689,6 +686,9 @@ Shirt_off()
 	     ABON(A_CHA) -= 1;
 	     break;
 	case VICTORIAN_UNDERWEAR:
+	     ABON(A_CHA) -= 2;
+	     break;
+	case EXPENSIVE_SUIT:
 	     ABON(A_CHA) -= 2;
 	     break;
 	default: impossible(unknown_type, c_shirt, uarmu->otyp);
