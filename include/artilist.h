@@ -52,7 +52,7 @@ A("",				STRANGE_OBJECT,
 /*** Lawful artifacts ***/
 A("Firewall",                  ATHAME,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
-	FIRE(4,2),      FIRE(0,0),      NO_CARY,        0, A_LAWFUL, PM_FLAME_MAGE, NON_PM, 400L ),
+	FIRE(4,4),      FIRE(0,0),      NO_CARY,        0, A_LAWFUL, PM_FLAME_MAGE, NON_PM, 400L ),
 
 /*
  *	The combination of SPFX_WARN and M2_something on an artifact
@@ -70,7 +70,7 @@ A("Giantkiller",                AXE,
 
 A("Quick Blade",                ELVEN_SHORT_SWORD,
 	SPFX_RESTR, 0, 0,
-	PHYS(9,1),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, NON_PM, NON_PM, 1000L ),
+	PHYS(9,2),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, NON_PM, NON_PM, 1000L ),
 
 A("Orcrist",                    ELVEN_BROADSWORD,
 	SPFX_DFLAG2, 0, M2_ORC,
@@ -82,7 +82,7 @@ A("Dragonbane",			BROADSWORD,
 
 A("Excalibur",                  LONG_SWORD, /* removed NOGEN --Amy */
 	(SPFX_RESTR|SPFX_SEEK|SPFX_DEFN|SPFX_INTEL|SPFX_SEARCH),0,0,
-	PHYS(5,5),	DRLI(0,0),	NO_CARY,	0, A_LAWFUL, PM_KNIGHT, NON_PM, 4000L ),
+	PHYS(5,10),	DRLI(0,0),	NO_CARY,	0, A_LAWFUL, PM_KNIGHT, NON_PM, 4000L ),
 
 #ifdef CONVICT
 A("Shadowblade",			KNIFE,
@@ -103,7 +103,7 @@ A("Sunsword",                   LONG_SWORD,
  */
 A("Snickersnee",                KATANA,
 	SPFX_RESTR, 0, 0,
-	PHYS(0,4),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, NON_PM, NON_PM, 1200L ),
+	PHYS(0,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, NON_PM, NON_PM, 1200L ),
 
 A("Yoichi no yumi",                YUMI, /* 5lo: Artifact from dNethack */
 	SPFX_RESTR, 0, 0,
@@ -119,7 +119,7 @@ A("Kiku-ichimonji",                KATANA, /* 5lo: New sacrifice gift for Samura
  */
 A("Sword of Justice",           LONG_SWORD,
 	(SPFX_RESTR|SPFX_DALIGN), 0, 0,
-	PHYS(5,6),     NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_YEOMAN, NON_PM, 1500L ),
+	PHYS(5,12),     NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_YEOMAN, NON_PM, 1500L ),
 #endif
 
 A("Demonbane",			LONG_SWORD,
@@ -136,7 +136,7 @@ A("Grayswandir",		SILVER_SABER,
 
 A("Skullcrusher",               CLUB,
 	SPFX_RESTR, 0, 0,
-	PHYS(3,5),     NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CAVEMAN, NON_PM, 300L ),
+	PHYS(3,10),     NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CAVEMAN, NON_PM, 300L ),
 
 A("Liontamer",                BULLWHIP, /* 5lo: was quest artifact */
 	(SPFX_RESTR|SPFX_ATTK), 0, S_FELINE,
@@ -152,11 +152,11 @@ A("Ogresmasher",		WAR_HAMMER,
 
 A("Reaper",                     HALBERD,
 	SPFX_RESTR, 0, 0,
-	PHYS(5,10),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CHEVALIER, NON_PM, 1000L ),
+	PHYS(5,20),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CHEVALIER, NON_PM, 1000L ),
 
 A("Holy Spear of Light",        SILVER_SPEAR,
        (SPFX_RESTR|SPFX_INTEL|SPFX_DFLAG2), 0, M2_UNDEAD,
-       PHYS(5,5),      NO_DFNS,  NO_CARY,     LIGHT_AREA, A_LAWFUL, PM_UNDEAD_SLAYER, NON_PM, 4000L ),
+       PHYS(5,10),      NO_DFNS,  NO_CARY,     LIGHT_AREA, A_LAWFUL, PM_UNDEAD_SLAYER, NON_PM, 4000L ),
 
 A("Rod of Lordly Might", MACE, /*needs quote*/
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
@@ -190,15 +190,15 @@ A("Vampire Killer",        BULLWHIP,
 /*** Neutral artifacts ***/
 A("Magicbane",                  ATHAME,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
-	STUN(3,2),	DFNS(AD_MAGM),	NO_CARY,	0, A_NEUTRAL, PM_WIZARD, NON_PM, 3500L ),
+	STUN(3,4),	DFNS(AD_MAGM),	NO_CARY,	0, A_NEUTRAL, PM_WIZARD, NON_PM, 3500L ),
 
 A("Luckblade",                  SHORT_SWORD,
 	(SPFX_RESTR|SPFX_LUCK), 0, 0,
-	PHYS(5,3),      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, NON_PM, PM_GNOME, 1000L ),
+	PHYS(5,5),      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, NON_PM, PM_GNOME, 1000L ),
 
 A("Sword of Balance",           SILVER_SHORT_SWORD,
 	(SPFX_RESTR|SPFX_DALIGN), 0, 0,
-	PHYS(2,3),      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, NON_PM, NON_PM, 5000L ),
+	PHYS(2,5),      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, NON_PM, NON_PM, 5000L ),
 
 A("Frost Brand",                LONG_SWORD,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
@@ -219,7 +219,7 @@ A("Vorpal Blade",		LONG_SWORD,
 
 A("Disrupter",                  MACE,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, M2_UNDEAD,
-	PHYS(5,15),     NO_DFNS,        NO_CARY,        0, A_NEUTRAL, PM_PRIEST, NON_PM, 500L ),
+	PHYS(5,30),     NO_DFNS,        NO_CARY,        0, A_NEUTRAL, PM_PRIEST, NON_PM, 500L ),
 
 /*
  *	Mjollnir will return to the hand of a Valkyrie when thrown
@@ -227,7 +227,7 @@ A("Disrupter",                  MACE,
  */
 A("Mjollnir",                   HEAVY_HAMMER,           /* Mjo:llnir */
 	(SPFX_RESTR|SPFX_ATTK),  0, 0,
-	ELEC(5,12),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_VALKYRIE, NON_PM, 4000L ),
+	ELEC(5,24),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_VALKYRIE, NON_PM, 4000L ),
 
 /* STEPHEN WHITE'S NEW CODE */
 A("Gauntlets of Defense",    GAUNTLETS_OF_DEXTERITY,
@@ -322,11 +322,11 @@ A("Whisperfeet",               SPEED_BOOTS,
 /*** Chaotic artifacts ***/
 A("Grimtooth",                  ORCISH_DAGGER,
 	SPFX_RESTR, 0, 0,
-	PHYS(2,3),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, NON_PM, PM_ORC, 300L ),
+	PHYS(2,6),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, NON_PM, PM_ORC, 300L ),
 
 A("Deep Freeze",                ATHAME,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
-	COLD(5,3),      COLD(0,0),      NO_CARY,        0, A_CHAOTIC, PM_ICE_MAGE, NON_PM, 400L ),
+	COLD(5,5),      COLD(0,0),      NO_CARY,        0, A_CHAOTIC, PM_ICE_MAGE, NON_PM, 400L ),
 
 A("Serpent's Tongue",            DAGGER,
 	SPFX_RESTR, 0, 0,
@@ -339,11 +339,11 @@ A("The Marauder's Map", SCR_MAGIC_MAPPING,
 
 A("Cleaver",                    BATTLE_AXE,
 	SPFX_RESTR, 0, 0,
-	PHYS(3,3),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_BARBARIAN, NON_PM, 1500L ),
+	PHYS(3,6),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_BARBARIAN, NON_PM, 1500L ),
 
 A("Doomblade",                  ORCISH_SHORT_SWORD,
 	SPFX_RESTR, 0, 0,
-	PHYS(0,5),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_LUNATIC, NON_PM, 1000L ),
+	PHYS(0,10),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_LUNATIC, NON_PM, 1000L ),
 
 A("Nightingale",                KATANA,
 	SPFX_RESTR, 0, 0,
@@ -356,11 +356,11 @@ A("Nightingale",                KATANA,
  */
 A("Stormbringer",               RUNESWORD,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN|SPFX_INTEL|SPFX_DRLI), 0, 0,
-	DRLI(5,1),	DRLI(0,0),	NO_CARY,	0, A_CHAOTIC, NON_PM, NON_PM, 8000L ),
+	DRLI(5,2),	DRLI(0,0),	NO_CARY,	0, A_CHAOTIC, NON_PM, NON_PM, 8000L ),
 
 A("Reaver",			SCIMITAR,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL),0,0,
-	PHYS(5,4),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_PIRATE, NON_PM, 6000L ),
+	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_PIRATE, NON_PM, 6000L ),
 
 #ifdef BLACKMARKET
 A("Thiefbane",                  LONG_SWORD,
@@ -370,15 +370,15 @@ A("Thiefbane",                  LONG_SWORD,
 
 A("Deathsword",                   TWO_HANDED_SWORD,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, M2_HUMAN,
-	PHYS(5,7),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_WARRIOR, NON_PM, 5000L ),
+	PHYS(5,14),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_WARRIOR, NON_PM, 5000L ),
 
 A("Bat from Hell",                BASEBALL_BAT,
 	(SPFX_RESTR), 0, 0,
-	PHYS(3,10),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_ROGUE, NON_PM, 5000L ),
+	PHYS(3,20),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_ROGUE, NON_PM, 5000L ),
 
 A("Elfrist",                    ORCISH_SPEAR,
 	SPFX_DFLAG2, 0, M2_ELF,
-	PHYS(5,8),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_HUMAN_WEREWOLF, PM_ORC, 300L ),
+	PHYS(5,15),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_HUMAN_WEREWOLF, PM_ORC, 300L ),
 
 A("Bloodmarker",		KNIFE,
 	(SPFX_RESTR), 0, 0,
@@ -386,7 +386,7 @@ A("Bloodmarker",		KNIFE,
 
 A("Slow Blade",                ORCISH_SHORT_SWORD, /* 5lo: Now opposite of Quickblade... */
 	SPFX_RESTR, 0, 0,
-	PHYS(1,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
+	PHYS(2,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
 
 A("Spineseeker",	STILETTO,
 	SPFX_RESTR, 0, 0,
@@ -394,12 +394,12 @@ A("Spineseeker",	STILETTO,
 
 A("Plague", DARK_ELVEN_BOW,	/* KMH */
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
-	PHYS(5,4),        DFNS(AD_DRST),  NO_CARY,        0, A_CHAOTIC, PM_DROW, NON_PM, 6000L ),
+	PHYS(5,7),        DFNS(AD_DRST),  NO_CARY,        0, A_CHAOTIC, PM_DROW, NON_PM, 6000L ),
 	/* Auto-poison code in dothrow.c */
 
 A("Mumakbane",			LONG_SWORD,
 	(SPFX_RESTR|SPFX_DMONS), 0, PM_MUMAK,
-	FIRE(5,30),	NO_DFNS,	NO_CARY,
+	FIRE(5,60),	NO_DFNS,	NO_CARY,
 	0, 		A_NEUTRAL,	NON_PM, NON_PM, 500L ),
 
 A("Wormbiter",			CRYSKNIFE,
@@ -434,7 +434,7 @@ A("Crown Royal Cloak",	LEATHER_CLOAK,
 
 A("Hellfire", CROSSBOW,	/* WAC */
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
-	PHYS(5,4),        FIRE(0,0),  NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 4000L ),
+	PHYS(5,7),        FIRE(0,0),  NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 4000L ),
 	/* Auto-explode code in dothrow.c, uhitm.c */
 
 A("the Pen of the Void",	ATHAME,
@@ -509,7 +509,7 @@ A("The Heart of Ahriman",	LUCKSTONE,
 
 A("The Sceptre of Might",	MACE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DALIGN), 0, 0,
-	PHYS(3,3),      NO_DFNS,        CARY(AD_MAGM),
+	PHYS(3,5),      NO_DFNS,        CARY(AD_MAGM),
 	CONFLICT,	A_LAWFUL, PM_CAVEMAN, NON_PM, 2500L ),
 
 #ifdef CONVICT
@@ -632,7 +632,7 @@ A("Magic Mirror of Jason", MIRROR,
 
 A("Chekhov's Gun", PISTOL,	/* KMH */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_DEFN|SPFX_INTEL), 0, 0,
-	PHYS(5,4),        DFNS(AD_DRST),  NO_CARY,        0, A_CHAOTIC, PM_GANGSTER, NON_PM, 6000L ),
+	PHYS(5,7),        DFNS(AD_DRST),  NO_CARY,        0, A_CHAOTIC, PM_GANGSTER, NON_PM, 6000L ),
 
 A("The Whistle of the Warden", MAGIC_WHISTLE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_ESP|SPFX_TCTRL), 0,
@@ -641,7 +641,7 @@ A("The Whistle of the Warden", MAGIC_WHISTLE,
 
 A("Withered Nine Millimeter", PISTOL,	/* KMH */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_DEFN|SPFX_INTEL), 0, 0,
-	PHYS(5,4),        NO_DFNS,  NO_CARY,        0, A_NEUTRAL, PM_COURIER, NON_PM, 3000L ),
+	PHYS(5,7),        NO_DFNS,  NO_CARY,        0, A_NEUTRAL, PM_COURIER, NON_PM, 3000L ),
 
 A("Verbal Blade",		ELVEN_SHORT_SWORD,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_BEHEAD), 0, 0,
@@ -711,7 +711,7 @@ A("The Gourd of Infinity", HORN_OF_PLENTY,
 
 A("The Great Dagger of Glaurgnaa",       GREAT_DAGGER,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK|SPFX_INTEL|SPFX_DRLI|SPFX_DALIGN), 0, 0,
-	DRLI(8,2),      NO_DFNS,        CARY(AD_MAGM),
+	DRLI(8,4),      NO_DFNS,        CARY(AD_MAGM),
 	ENERGY_BOOST,   A_CHAOTIC, PM_NECROMANCER, NON_PM, 50000L ),
 
 A("The Mitre of Holiness",	HELM_OF_BRILLIANCE,
@@ -780,7 +780,7 @@ A("The Platinum Yendorian Express Card", CREDIT_CARD,
  */
 A("The Stake of Van Helsing",        WOODEN_STAKE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), 0, 0,
-	PHYS(5,6),    NO_DFNS,        CARY(AD_MAGM),
+	PHYS(5,12),    NO_DFNS,        CARY(AD_MAGM),
 	0,              A_LAWFUL, PM_UNDEAD_SLAYER, NON_PM, 5000L ),
 
 A("The Staff of Withering",	QUARTERSTAFF,
@@ -809,7 +809,7 @@ A("The Crown of Saint Edward", HELM_OF_TELEPATHY,
 #ifdef JEDI
 A("The Lightsaber Prototype", RED_LIGHTSABER,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_REFLECT), 0, 0,
-	PHYS(5, 5),	NO_DFNS, NO_CARY,
+	PHYS(5, 10),	NO_DFNS, NO_CARY,
 	ENERGY_BOOST,	A_LAWFUL, PM_JEDI, NON_PM, 3500L ),
 #endif
 
