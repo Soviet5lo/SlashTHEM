@@ -1246,6 +1246,10 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 		    pline_The("massive hammer hits%s %s%c",
 		    !spec_dbon_applies ? "" : "!  Lightning strikes",
 		    hittee, !spec_dbon_applies ? '.' : '!');
+		else if (otmp->oartifact == ART_POSEIDON_S_TREASURE)
+		    pline_The("mystic trident %s %s%c",
+		    !spec_dbon_applies ? "strikes" : "shocks",
+		    hittee, !spec_dbon_applies ? '.' : '!');
 		else
 		    pline_The("sparking blade %s %s%c",
 		    !spec_dbon_applies ? "hits" : "shocks",
@@ -1467,7 +1471,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	}
 	if (otmp->oartifact == ART_SPINESEEKER && dieroll < 5 ) { /* 5lo: Another artifact effect */
 	    if(!youdefend) {
-	    	pline_The("gleaming blade cuts into %s %s!", hittee, mbodypart(mdef,SPINE));
+	    	pline_The("gleaming blade cuts into %s's %s!", hittee, mbodypart(mdef,SPINE));
 		mdef->mcanmove = 0;
 		mdef->mfrozen = rnd(5);
 	    } else {

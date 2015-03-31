@@ -161,7 +161,7 @@ A("Holy Spear of Light",        SILVER_SPEAR,
 A("Rod of Lordly Might", MACE, /*needs quote*/
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
 	PHYS(3,0),	NO_DFNS,	NO_CARY,
-	0,	A_LAWFUL, PM_NOBLEMAN, NON_PM, 4000L ),
+	LEADERSHIP,	A_LAWFUL, PM_NOBLEMAN, NON_PM, 4000L ),
 
 A("Itlachiayaque",             SHIELD_OF_REFLECTION,
 	(SPFX_RESTR), (SPFX_HSPDAM), 0,
@@ -245,6 +245,10 @@ A("Deluder",               CLOAK_OF_DISPLACEMENT,
 A("Snakeskin",             ROBE,
     (SPFX_RESTR|SPFX_HALRES), 0, 0,
     NO_ATTK,    ACID(0,0),   NO_CARY,    0, A_NEUTRAL, NON_PM, NON_PM, 500L ),
+
+A("Poseidon's Treasure",	TRIDENT,
+	(SPFX_RESTR|SPFX_ATTK), 0, 0,
+	ELEC(10, 10),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_DIVER, NON_PM, 2000L ),
 
 A("Debugger",       ATHAME,
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
