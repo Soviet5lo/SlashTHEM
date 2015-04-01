@@ -210,7 +210,7 @@ const struct Role roles[] = {
 	{"Cursed King",    "Cursed Queen"} },
 	"Glycocalyx", "Fibrinogen", "_Hemophilia", /* hereditary disease */
 	"Ble", "hemorrhagic hospital", "red-sprinkled battle area",
-	PM_BLEEDER, NON_PM, PM_UNDEAD_BLEEDER, NON_PM, PM_ANIMATED_WEDGE_SANDAL,
+	PM_BLEEDER, NON_PM, PM_UNDEAD_BLEEDER, NON_PM, NON_PM,
 	PM_DISEASED_HEIR, PM_UNFORTUNATE_VICTIM, PM_BLOODY_BEAUTIES,
 	PM_BATTLE_GIRL, PM_ANIMATED_SEXY_LEATHER_PUMP, S_GOLEM, S_HUMAN,
 	ART_SCALPEL_OF_THE_BLOODLETTER,
