@@ -106,8 +106,9 @@ void livelog_achieve_update() {
 	}
 
 	snprintf(strbuf, STRBUF_LEN,
-		"player=%s:turns=%ld:achieve=0x%lx:achieve_diff=0x%lx\n",
+		"player=%s:role=%s:race=%s:gender=%s:align=%s:turns=%ld:achieve=0x%lx:achieve_diff=0x%lx\n",
 		plname, 
+		urole.filecode, urace.filecode, genders[flags.female].filecode, aligns[1-u.ualign.type].filecode,
 		moves, 
 		achieve_int,
 		achieve_diff);
@@ -122,10 +123,24 @@ livelog_wish(item)
 char *item;
 {
 	snprintf(strbuf, STRBUF_LEN,
-		"player=%s:turns=%ld:wish=%s\n",
+		"player=%s:role=%s:race=%s:gender=%s:align=%s:turns=%ld:wish=%s\n",
 		plname,
+		urole.filecode, urace.filecode, genders[flags.female].filecode, aligns[1-u.ualign.type].filecode,
 		moves,
 		item);
+	livelog_write_string(strbuf);
+}
+
+/* Reports wishes */
+void
+livelog_avert_death()
+{
+	snprintf(strbuf, STRBUF_LEN,
+		"player=%s:role=%s:race=%s:gender=%s:align=%s:turns=%ld:message=%s\n",
+		plname,
+		urole.filecode, urace.filecode, genders[flags.female].filecode, aligns[1-u.ualign.type].filecode,
+		moves,
+		"averted death");
 	livelog_write_string(strbuf);
 }
 
@@ -149,8 +164,9 @@ doshout()
 			*p = ' ';
 
 	snprintf(strbuf, STRBUF_LEN,
-		"player=%s:turns=%ld:shout=%s\n",
+		"player=%s:role=%s:race=%s:gender=%s:align=%s:turns=%ld:shout=%s\n",
 		plname,
+		urole.filecode, urace.filecode, genders[flags.female].filecode, aligns[1-u.ualign.type].filecode,
 		moves,
 		buf);
 	livelog_write_string(strbuf);
@@ -159,5 +175,44 @@ doshout()
 }
 
 #endif /* LIVELOG_SHOUT */
+
+#ifdef LIVELOG_BONES_KILLER 
+void 
+livelog_bones_killed(mtmp) 
+struct monst *mtmp; 
+{ 
+	char *name = NAME(mtmp); 
+ 
+	if (name && mtmp->former_rank && mtmp->former_rank[0]) {
+		/* $player killed the $bones_monst of $bones_killed the former 
+		 * $bones_rank on $turns on dungeon level $dlev! */ 
+		snprintf(strbuf, STRBUF_LEN, 
+				"player=%s:role=%s:race=%s:gender=%s:align=%s:turns=%ld:dlev=%d:" 
+				"bones_killed=%s:bones_rank=%s:bones_monst=%s\n", 
+				plname, 
+				urole.filecode, urace.filecode, genders[flags.female].filecode, aligns[1-u.ualign.type].filecode,
+				moves, 
+				depth(&u.uz), 
+				name, 
+				mtmp->former_rank, 
+				mtmp->data->mname); 
+		livelog_write_string(strbuf); 
+	} else if ((mtmp->data->geno & G_UNIQ) 
+#ifdef BLACKMARKET 
+	           || (mtmp->data == &mons[PM_BLACK_MARKETEER]) 
+#endif 
+		  ) { 
+		char *n = noit_mon_nam(mtmp); 
+		/* $player killed a uniq monster */ 
+		snprintf(strbuf, STRBUF_LEN, 
+				"player=%s:role=%s:race=%s:gender=%s:align=%s:turns=%ld:killed_uniq=%s\n", 
+				plname, 
+				urole.filecode, urace.filecode, genders[flags.female].filecode, aligns[1-u.ualign.type].filecode,
+				moves, 
+				n); 
+		livelog_write_string(strbuf); 
+	} 
+} 
+#endif /* LIVELOG_BONES_KILLER */ 
 
 #endif /* LIVELOGFILE */

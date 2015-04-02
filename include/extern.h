@@ -151,6 +151,7 @@ E void NDECL(max_rank_sz);
 E long NDECL(botl_score);
 #endif
 E int FDECL(describe_level, (char *, int));
+E const char *NDECL(rank);
 E const char *FDECL(rank_of, (int,SHORT_P,BOOLEAN_P));
 E void FDECL(bot_set_handler, (void (*)()));
 E void NDECL(bot_reconfig);
@@ -2633,6 +2634,7 @@ E void NDECL(throwspell);
 E boolean NDECL(livelog_start);
 E void NDECL(livelog_achieve_update);
 E void FDECL(livelog_wish, (char*));
+E void NDECL(livelog_avert_death);
 #ifdef LIVELOG_SHOUT
 E int NDECL(doshout);
 #endif

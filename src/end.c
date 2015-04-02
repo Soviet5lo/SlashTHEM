@@ -634,6 +634,10 @@ int how;
 		savelife(how);
 		killer = 0;
 		killer_format = 0;
+
+#ifdef LIVELOGFILE
+		livelog_avert_death();
+#endif
 		return;
 	}
 
@@ -647,6 +651,14 @@ int how;
 		savelife(how);
 		killer = 0;
 		killer_format = 0;
+
+#ifdef LIVELOGFILE
+		livelog_avert_death();
+#endif
+
+#ifdef LIVELOGFILE
+		livelog_avert_death();
+#endif
 		return;
 
 	}
@@ -672,8 +684,12 @@ int how;
 		if (how == GENOCIDED)
 			pline("Unfortunately you are still genocided...");
 		else {
+
 			killer = 0;
 			killer_format = 0;
+#ifdef LIVELOGFILE
+			livelog_avert_death();
+#endif
 			return;
 		}
 	}

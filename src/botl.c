@@ -63,8 +63,6 @@ STATIC_DCL int mrank_sz;
 STATIC_OVL NEARDATA int mrank_sz = 0; /* loaded by max_rank_sz (from u_init) */
 #endif /* OVLB */
 
-STATIC_DCL const char *NDECL(rank);
-
 #ifdef OVL1
 
 #ifdef ALLEG_FX
@@ -127,7 +125,7 @@ boolean female;
 }
 
 
-STATIC_OVL const char *
+const char *
 rank()
 {
 	return(rank_of(u.ulevel, Role_switch, flags.female));
