@@ -652,6 +652,9 @@ Shirt_on()
     switch (uarmu->otyp) {
 	case HAWAIIAN_SHIRT:
 	case T_SHIRT:
+#ifdef CONVICT
+	case STRIPED_SHIRT:
+#endif
 		break;
 	case RUFFLED_SHIRT:
 		You("%s very dashing in your %s.", Blind ||
@@ -681,6 +684,9 @@ Shirt_off()
     switch (uarmu->otyp) {
 	case HAWAIIAN_SHIRT:
 	case T_SHIRT:
+#ifdef CONVICT
+	case STRIPED_SHIRT:
+#endif
 		break;
 	case RUFFLED_SHIRT:
 	     ABON(A_CHA) -= 1;
