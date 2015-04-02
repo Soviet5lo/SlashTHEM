@@ -3636,10 +3636,10 @@ boolean incr;
 				  "You still have the munchies." :
       "The munchies are interfering with your motor capabilities.");
 			else if (incr &&
-				(Role_if(PM_WIZARD) || Role_if(PM_WARRIOR) || Role_if(PM_ELPH) || Role_if(PM_COURIER) || Role_if(PM_SPACEWARS_FIGHTER) || Role_if(PM_CONVICT) || Race_if(PM_ELF) || Race_if(PM_ASGARDIAN) || Race_if(PM_HERETIC) || Race_if(PM_ALBAE) ||
-				 Role_if(PM_VALKYRIE)))
+				(Role_if(PM_WIZARD) || Race_if(PM_ELF) ||
+				 Role_if(PM_WARRIOR) || Role_if(PM_VALKYRIE)))
 			    pline("%s needs food, badly!", (!rn2(10)) ? urace.noun/*urole.name.m*/ :
-				  (Role_if(PM_WIZARD) || Role_if(PM_WARRIOR) || Role_if(PM_ELPH) || Role_if(PM_COURIER) || Role_if(PM_SPACEWARS_FIGHTER) || Role_if(PM_CONVICT) || Race_if(PM_ASGARDIAN) || Race_if(PM_HERETIC) || Race_if(PM_ALBAE) || Role_if(PM_VALKYRIE)) ?
+				  (Role_if(PM_WIZARD) || Role_if(PM_VALKYRIE) || Role_if(PM_WARRIOR)) ?
 				  urole.name.m : "Elf");
 			else
 			    You((!incr) ? "feel weak now." :
