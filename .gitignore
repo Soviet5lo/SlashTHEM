@@ -1,82 +1,36 @@
-# Gitignore tailored to Nethack/Slash'EM.
-# It's basically unnethack's but with a
-# few additions and changes.
+/local.mk
+/GNUmakefile
 
-*.swp
-*.swo
-compile
+*.o
+*.d
+dat/*.lev
+dat/*.tag
 
-# /
-/Makefile
-/config.log
-/config.status
-/tags
-/TAGS
-/.svn
+dat/data
+dat/dungeon
+dat/dungeon.pdf
+dat/nhdat
+dat/options
+dat/oracles
+dat/quest.dat
+dat/rumors
 
-# /dat/
-/dat/Makefile
-/dat/*.lev
-/dat/data
-/dat/dungeon.pdf
-/dat/dungeon
-/dat/nhdat
-/dat/options
-/dat/oracles
-/dat/quest.dat
-/dat/quest_levs
-/dat/rumors
-/dat/spec_levs
-/dat/vaults.dat
+include/date.h
+include/dgn_comp.h
+include/filename.h
+include/lev_comp.h
+include/onames.h
+include/pm.h
+include/verinfo.h
 
-# /doc/
-/doc/Makefile
+src/monstr.c
+src/slashthem
 
-# /include/
-/include/autoconf.h
-/include/autoconf_paths.h
-/include/date.h
-/include/dgn_comp.h
-/include/lev_comp.h
-/include/onames.h
-/include/pm.h
-/include/vis_tab.h
-/include/win32api.h
-
-# /src/
-/src/*.o
-/src/nhwin.a
-/src/slashem
-/src/Makefile
-/src/Sysunix
-/src/config.h-t
-/src/hack.h-t
-/src/vis_tab.c
-/src/monstr.c
-/src/tile.c
-
-# /util/
-/util/*.o
-/util/Makefile
-/util/dgn_comp
-/util/dgn_lex.c
-/util/dgn_yacc.c
-/util/dlb
-/util/lev_comp
-/util/lev_lex.c
-/util/lev_yacc.c
-/util/makedefs
-/util/recover
-/util/tilemap
-
-# /win/
-/win/*/*.o
-
-# Windows-only stuff
-compile.bat
-clean.bat
-/src/Makefile*
-/src/*.lev
-/src/*.exe
-/src/*.tag
-/src/*.lnk
+util/dgn_comp
+util/dgn_lex.c
+util/dgn_yacc.c
+util/dlb
+util/lev_comp
+util/lev_lex.c
+util/lev_yacc.c
+util/makedefs

@@ -1866,7 +1866,9 @@ doattributes()
 static const struct menu_tab game_menu[] = {
 	{'O', TRUE, doset, "Options"},
 	{'r', TRUE, doredraw, "Redraw Screen"},
+#ifndef PUBLIC_SERVER
 	{'x', TRUE, enter_explore_mode, "Enter Explore Mode"},
+#endif
 #ifdef SHELL
 	{'!', TRUE, dosh, "Jump to Shell"},
 #endif
@@ -2383,7 +2385,7 @@ static const struct func_tab cmdlist[] = {
 	{'W', FALSE, dowear},
 	{M('w'), FALSE, dowipe},
 	{'x', FALSE, doswapweapon},                    /* [Tom] */        
-	{'X', TRUE, enter_explore_mode},
+	{'X', FALSE, dotwoweapon},
 #if 0
         {M('x'), TRUE, dovspell},                  /* Mike Stephenson */
 #endif
@@ -2438,7 +2440,9 @@ struct ext_func_tab extcmdlist[] = {
 #if 0
 	{"ethics", "list which challenges you have adhered to", doethics, TRUE},
 #endif
+#ifndef PUBLIC_SERVER
 	{"explore", "enter explore mode", enter_explore_mode, TRUE},
+#endif
 	{"force", "force a lock", doforce, FALSE},
 	{"invoke", "invoke an object's powers", doinvoke, TRUE},
 	{"jump", "jump to a location", dojump, FALSE},

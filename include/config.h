@@ -217,7 +217,9 @@
 #define PANICLOG "paniclog"	/* log of panic and impossible events */
 #define LIVELOGFILE "livelog" /* live game progress log file */
 
-/* #define LIVELOG_SHOUT */
+#ifdef PUBLIC_SERVER
+#define LIVELOG_SHOUT
+#endif
 
 /*
  *	If COMPRESS is defined, it should contain the full path name of your
@@ -232,6 +234,7 @@
  *	compression.
  */
 
+#if 0 /* why bother? it's 2015 */
 #ifdef UNIX
 /* path and file name extension for compression program */
 # define COMPRESS "/usr/bin/compress" /* Lempel-Ziv compression */
@@ -246,6 +249,7 @@
 #endif
 #ifndef COMPRESS
 # define INTERNAL_COMP	/* control use of NetHack's compression routines */
+#endif
 #endif
 
 /*
@@ -272,11 +276,7 @@
  * otherwise it will be the current directory.
  */
 # ifndef HACKDIR
-#  ifdef __APPLE__
-#    define HACKDIR "nethackdir"      /* nethack directory */
-#  else
-#    define HACKDIR "."
-#  endif
+#  define HACKDIR "."
 # endif
 
 /*
@@ -350,8 +350,8 @@ typedef unsigned char	uchar;
 
 #define RECORD_CONDUCT /* Record conduct challenges in logfile and xlogfile */
 
-/* #define REALTIME_ON_BOTL */  /* Show elapsed time on bottom line.  Note:
-                                 * this breaks savefile compatibility. */
+#define REALTIME_ON_BOTL  /* Show elapsed time on bottom line.  Note:
+                           * this breaks savefile compatibility. */
 
 /* The options in this section require the extended logfile support */
 #ifdef XLOGFILE
@@ -491,7 +491,7 @@ typedef unsigned char	uchar;
 #endif
 
 #define EXP_ON_BOTL	/* Show experience on bottom line */
-/* #define SCORE_ON_BOTL */	/* added by Gary Erickson (erickson@ucivax) */
+#define SCORE_ON_BOTL	/* added by Gary Erickson (erickson@ucivax) */
 /* #define BORG */            /* Works only under DOS */
 /* #define KEEP_SAVE */       /* Keep savefiles after Restore (wac@intergate.bc.ca)*/
 /* #define CHARON */	/* Charon's boat, enables Cerebus - not implemented */
@@ -515,7 +515,7 @@ typedef unsigned char	uchar;
  */
 
 /*#define GOLDOBJ */	/* Gold is kept on obj chains - Helge Hafting */
-/*#define AUTOPICKUP_EXCEPTIONS */ /* exceptions to autopickup */
+#define AUTOPICKUP_EXCEPTIONS /* exceptions to autopickup */
 /*#define UNDERGROUND_RIVERS */ /* 5lo: Wrapped these into a define, currently a bit buggy. */
 
 /*#define SIMPLE_MAIL */ /* dgamelaunch simple mail */

@@ -49,6 +49,8 @@ static void NDECL(wd_message);
 static boolean wiz_error_flag = FALSE;
 #endif
 
+extern int recover_main(int, char **);
+
 int
 main(argc,argv)
 int argc;
@@ -59,6 +61,14 @@ char *argv[];
 	register char *dir;
 #endif
 	boolean exact_username;
+
+        if (argc > 1 && !strcmp(argv[1], "--recover")) {
+#ifdef UNIX
+            setgid(getgid());
+            setuid(getuid());
+#endif
+            return recover_main(argc - 1, argv + 1);
+        }
 
 #ifdef SIMPLE_MAIL
 	char *e_simple = NULL;
@@ -177,8 +187,7 @@ char *argv[];
 		Strcpy(plname, "wizard");
 	else
 #endif
-	if(!*plname || !strncmp(plname, "player", 4)
-		    || !strncmp(plname, "games", 4)) {
+	if(!*plname) {
 		askname();
 	} else if (exact_username) {
 		/* guard against user names with hyphens in them */
@@ -311,6 +320,10 @@ char *argv[];
 		case 'D':
 		case 'Z':
 #ifdef WIZARD
+# ifdef PUBLIC_SERVER
+                    wizard = TRUE;
+                    break;
+# else
 			{
 			  char *user;
 			  int uid;
@@ -339,6 +352,7 @@ char *argv[];
 			}
 			/* otherwise fall thru to discover */
 			wiz_error_flag = TRUE;
+# endif /* PUBLIC_SERVER */
 #endif
 		case 'X':
 			discover = TRUE;

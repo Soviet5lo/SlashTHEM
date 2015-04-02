@@ -57,6 +57,7 @@ static	const char	SCCS_Id[] = "@(#)makedefs.c\t3.4\t2002/02/03";
 #define DATE_FILE	"date.h"
 #define MONST_FILE	"pm.h"
 #define ONAME_FILE	"onames.h"
+#define VERINFO_FILE	"verinfo.h"
 #ifndef NH_OPTIONS_FILE
 #define OPTIONS_FILE	"options"
 #else
@@ -167,7 +168,7 @@ void FDECL(do_makedefs, (char *));
 void NDECL(do_objs);
 void NDECL(do_data);
 void NDECL(do_dungeon);
-void NDECL(do_date);
+void FDECL(do_date, (int));
 void NDECL(do_options);
 void NDECL(do_monstr);
 void NDECL(do_permonst);
@@ -318,8 +319,17 @@ char	*options;
 		case 'M':	do_monstr();
 				break;
 		case 'v':
-		case 'V':	do_date();
+		case 'V':	do_date(0);
 				do_options();
+				break;
+		case 'w':
+		case 'W':	do_date(1);
+				break;
+		case 't':
+		case 'T':	do_options();
+				break;
+		case 'a':
+		case 'A':	do_date(0);
 				break;
 		case 'p':
 		case 'P':	do_permonst();
@@ -458,7 +468,11 @@ make_version()
 	version.incarnation = ((unsigned long)VERSION_MAJOR << 24) |
 				((unsigned long)VERSION_MINOR << 16) |
 				((unsigned long)PATCHLEVEL << 8) |
+#ifdef EDITLEVEL
 				((unsigned long)EDITLEVEL);
+#else
+				((unsigned long)0);
+#endif
 	/*
 	 * encoded feature list
 	 * Note:  if any of these magic numbers are changed or reassigned,
@@ -585,13 +599,21 @@ const char *build_date;
     Strcat(subbuf, " Beta");
 #endif
 
-    Sprintf(outbuf, "%s %s%s Version %s - last build %s.",
-	    PORT_ID, DEF_GAME_NAME, subbuf, version_string(versbuf), build_date);
+    if (getenv("VCS_DESCRIPTION") && getenv("VCS_DESCRIPTION")[0])
+        Sprintf(outbuf, "%s %s%s Version %s (%s) - last build %s.",
+                PORT_ID, DEF_GAME_NAME, subbuf, version_string(versbuf),
+                getenv("VCS_DESCRIPTION"), build_date);
+    else
+        Sprintf(outbuf, "%s %s%s Version %s - last build %s.",
+                PORT_ID, DEF_GAME_NAME, subbuf, version_string(versbuf),
+                build_date);
+
     return outbuf;
 }
 
 void
-do_date()
+do_date(verinfo)
+int verinfo;
 {
 	long long clocktim = 0; /* 5lo: Fix makedefs crash on windows */
 	char *c,  *cbuf, buf[BUFSZ];
@@ -602,7 +624,10 @@ do_date()
 #ifdef FILE_PREFIX
 	Strcat(filename,file_prefix);
 #endif
-	Sprintf(eos(filename), INCLUDE_TEMPLATE, DATE_FILE);
+	if (verinfo)
+		Sprintf(eos(filename), INCLUDE_TEMPLATE, VERINFO_FILE);
+	else
+		Sprintf(eos(filename), INCLUDE_TEMPLATE, DATE_FILE);
 	if (!(ofp = fopen(filename, WRTMODE))) {
 		perror(filename);
 		exit(EXIT_FAILURE);
@@ -624,8 +649,10 @@ do_date()
 #else
 	ul_sfx = "L";
 #endif
-	Fprintf(ofp,"#define BUILD_DATE \"%s\"\n", cbuf);
-	Fprintf(ofp,"#define BUILD_TIME (%ldL)\n", clocktim);
+	if (!verinfo) {
+		Fprintf(ofp,"#define BUILD_DATE \"%s\"\n", cbuf);
+		Fprintf(ofp,"#define BUILD_TIME (%ldL)\n", clocktim);
+	}
 	Fprintf(ofp,"\n");
 	Fprintf(ofp,"#define VERSION_NUMBER 0x%08lx%s\n",
 		version.incarnation, ul_sfx);
@@ -641,8 +668,9 @@ do_date()
 		version.struct_sizes, ul_sfx);
 	Fprintf(ofp,"\n");
 	Fprintf(ofp,"#define VERSION_STRING \"%s\"\n", version_string(buf));
-	Fprintf(ofp,"#define VERSION_ID \\\n \"%s\"\n",
-		version_id_string(buf, cbuf));
+	if (!verinfo)
+		Fprintf(ofp,"#define VERSION_ID \\\n \"%s\"\n",
+			version_id_string(buf, cbuf));
 #ifdef AMIGA
 	{
 	struct tm *tm = localtime((time_t *) &clocktim);
@@ -664,6 +692,8 @@ build_savebones_compat_string()
 {
 #ifdef VERSION_COMPATIBILITY
 	unsigned long uver = VERSION_COMPATIBILITY;
+#else
+	unsigned long uver = 0;
 #endif
 	char editsuffix[20], ueditsuffix[20];
 	/* Add edit level suffices if either EDITLEVEL is defined, or

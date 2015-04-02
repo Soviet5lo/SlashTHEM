@@ -325,7 +325,9 @@
 # endif
 #endif
 #if defined(BSD_JOB_CONTROL) || defined(POSIX_JOB_CONTROL) || defined(AUX)
+#ifndef PUBLIC_SERVER
 #define SUSPEND		/* let ^Z suspend the game */
+#endif
 #endif
 
 
@@ -343,7 +345,7 @@
 #endif
 #define tgetch getchar
 
-#define SHELL		/* do not delete the '!' command */
+/*#define SHELL*/		/* do not delete the '!' command */
 
 /* -AJA- Escaping to a shell doesn't work when SDL port is running
  *       fullscreen (makes the computer seem frozen).  Undefining
