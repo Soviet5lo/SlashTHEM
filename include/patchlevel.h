@@ -19,7 +19,7 @@
 /*#define FIXLEVEL        0*/
 
 #define COPYRIGHT_BANNER_A \
-"This is SuperLotsoAddedStuffHack-The Heavily Extended Mod 2014-2015"
+"This is SuperLotsaAddedStuffHack-The Heavily Extended Mod 2014-2015"
 
 #define COPYRIGHT_BANNER_B \
 "NetHack, Copyright 1985-2003 Stichting Mathematisch Centrum, M. Stephenson."
