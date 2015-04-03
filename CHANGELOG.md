@@ -433,7 +433,7 @@
 
 ### Misc
 - New versioning scheme.
-- Added Server support (http://)
+- Added Server support
     - Implemented the Xlogfile and Livelog patch.
     - Added automatic unix recovery (Implemented by Eduardo Spadolini).
     - Added the FCNTL locking patch (Implemented by Eduardo Spadolini).
