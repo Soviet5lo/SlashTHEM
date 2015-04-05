@@ -1038,7 +1038,7 @@ const struct Role roles[] = {
 	{"Commissioner",  0} },
 	"Magnum", "Smith", "Wesson", /* guns */
 	"Off", "Central Cop Station", "Tank Breaker Hideout",
-	PM_OFFICER, NON_PM, PM_UNDEAD_OFFICER, NON_PM, PM_OFFICER,
+	PM_OFFICER, NON_PM, PM_UNDEAD_OFFICER, NON_PM, PM_LITTLE_DOG,
 	PM_COMMISSIONER_HUNTER, PM_STUDENT, PM_GRANDPA_TANK_BREAKER,
 	PM_TANK_BREAKER, PM_KOP_KCHIEF, S_HUMAN, S_KOP,
 	ART_WHISTLE_OF_THE_WARDEN,
