@@ -5250,7 +5250,11 @@ register int	mmflags;
 				mtmp->mpeaceful = TRUE;
 			break;
 		case S_BAT:
-			if ((Race_if(PM_IMPERIAL) || (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7)) && is_bat(ptr))
+			if (((Inhell && !Race_if(PM_HERETIC)) ||
+#ifdef ELDER_SCROLLS
+			    Race_if(PM_IMPERIAL) || 
+#endif /* ELDER_SCROLLS */
+					!strncmpi(plname, "Gehenna", 7)) && is_bat(ptr))
 			    mon_adjust_speed(mtmp, 2, (struct obj *)0);
 			break;
 		case S_VAMPIRE:
@@ -6059,7 +6063,9 @@ register struct permonst *ptr;
 	if (ptr->mlet == S_ANT && Race_if(PM_INSECTOID) && !Role_if(PM_CONVICT)) return TRUE; /* Go Team Ant! --Amy */
 	if (ptr->mlet == S_SNAKE && Race_if(PM_SNAKEMAN) && !Role_if(PM_CONVICT)) return TRUE;
 	if (ptr->mlet == S_SPIDER && Race_if(PM_SPIDERMAN) && !Role_if(PM_CONVICT)) return TRUE;
+#ifdef ELDER_SCROLLS
 	if (ptr->mlet == S_LIZARD && Race_if(PM_ARGONIAN) && !Role_if(PM_CONVICT)) return TRUE;
+#endif /* ELDER_SCROLLS */
 	if (ptr->mlet == S_NYMPH && Race_if(PM_NYMPH) && !Role_if(PM_CONVICT)) return TRUE;
 	if (is_mind_flayer(ptr) && Race_if(PM_ILLITHID) && !Role_if(PM_CONVICT)) return TRUE;
 

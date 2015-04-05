@@ -1738,7 +1738,7 @@ const struct Race races[] = {
 	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
 },
-
+#ifdef ELDER_SCROLLS
 {	"argonian", "argonian", "argohood", "Arg",
 	{0, 0},
 	PM_ARGONIAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1780,7 +1780,7 @@ const struct Race races[] = {
 	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  5, 0,  4, 0,  4, 0 }		/* Energy */
 },
-
+#endif /* ELDER_SCROLLS */
 {	"clockwork automaton", "automatic", "clockwork-kind", "Clk",
 	{0, 0},
 	PM_CLOCKWORK_AUTOMATON, NON_PM, NON_PM, NON_PM,
@@ -1954,7 +1954,7 @@ const struct Race races[] = {
 	{  1, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
 },
-
+#ifdef ELDER_SCROLLS
 {	"imperial", "imperial", "imperialism", "Imp",
 	{0, 0},
 	PM_IMPERIAL, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1968,7 +1968,7 @@ const struct Race races[] = {
 	{  3, 0,  0, 3,  5, 0 },	/* Hit points */
 	{  3, 0,  3, 0,  5, 0 }		/* Energy */
 },
-
+#endif /* ELDER_SCROLLS */
 {	"incantifier", "incantifier", "wanterkind", "Inc",
 	{0, 0},
 	PM_INCANTIFIER, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1996,7 +1996,7 @@ const struct Race races[] = {
 	{  2, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
 },
-
+#ifdef ELDER_SCROLLS
 {	"khajiit", "khajiit", "cathood", "Kha",
 	{0, 0},
 	PM_KHAJIIT, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -2010,7 +2010,7 @@ const struct Race races[] = {
 	{  2, 0,  0, 3,  3, 0 },	/* Hit points */
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
 },
-
+#endif /* ELDER_SCROLLS */
 {	"kobolt", "koboltic", "kobolthood", "Kob",
 	{0, 0},
 	PM_KOBOLT, NON_PM, PM_KOBOLD_MUMMY, PM_KOBOLD_ZOMBIE,
@@ -2078,7 +2078,7 @@ const struct Race races[] = {
 	{  1, 0,  0, 2,  1, 0 },	/* Hit points */
 	{  1, 0,  4, 0,  4, 0 }		/* Energy */
 },
-
+#ifdef ELDER_SCROLLS
 {	"nord", "nordish", "nordhood", "Nor",
 	{0, 0},
 	PM_NORD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -2092,7 +2092,7 @@ const struct Race races[] = {
 	{  4, 0,  0, 3,  2, 0 },	/* Hit points */
 	{  3, 0,  2, 0,  1, 0 }		/* Energy */
 },
-
+#endif /* ELDER_SCROLLS */
 {	"nymph", "nymphian", "nymphhood", "Nym", /* suggestion by BellisColdwine */
 	{0, 0},
 	PM_NYMPH, NON_PM, NON_PM, PM_UNDEAD_NYMPH,
@@ -2133,7 +2133,7 @@ const struct Race races[] = {
 	{  1, 0,  0, 1,  0, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
 },
-
+#ifdef ELDER_SCROLLS
 {	"redguard", "redguardian", "redguardhood", "Red",
 	{0, 0},
 	PM_REDGUARD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -2147,7 +2147,7 @@ const struct Race races[] = {
 	{  10, 0,  0, 6,  4, 0 },	/* Hit points */
 	{  0, 0,  0, 0,  0, 0 }		/* Energy */
 },
-
+#endif /* ELDER_SCROLLS */
 {	"snakeman", "snakey", "snakehood", "Sna",
 	{0, 0},
 	PM_SNAKEMAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,

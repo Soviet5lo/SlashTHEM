@@ -310,10 +310,6 @@ static const struct innate_tech
 		       {  20, T_SIGIL_DISCHARGE, 1},
 		       {   0, 0, 0} },		       
 	/* Races */
-	arg_tech[] = { {   1, T_HEAL_HANDS, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   0, 0, 0} },
 	dop_tech[] = { {   1, T_LIQUID_LEAP, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
@@ -383,22 +379,11 @@ static const struct innate_tech
 		       {   20, T_BLINK, 1},
 		       {   25, T_JEDI_JUMP, 1},
 		       {   0, 0, 0} },
-
-	nor_tech[] = { {   1, T_BERSERK, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   10, T_RAGE, 1},
-		       {   0, 0, 0} },
-
 	ins_tech[] = { {   1, T_SUMMON_TEAM_ANT, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
 	kob_tech[] = { {   10, T_TINKER, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   0, 0, 0} },
-	kha_tech[] = { {   1, T_EVISCERATE, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
@@ -412,6 +397,21 @@ static const struct innate_tech
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   1, T_DRAW_BLOOD, 1},
 		       {   0, 0, 0} },
+#ifdef ELDER_SCROLLS
+	nor_tech[] = { {   1, T_BERSERK, 1},
+		       {   1, T_APPRAISAL, 1},
+		       {   1, T_INVOKE_DEITY, 1},
+		       {   10, T_RAGE, 1},
+		       {   0, 0, 0} },
+	kha_tech[] = { {   1, T_EVISCERATE, 1},
+		       {   1, T_APPRAISAL, 1},
+		       {   1, T_INVOKE_DEITY, 1},
+		       {   0, 0, 0} },
+	arg_tech[] = { {   1, T_HEAL_HANDS, 1},
+		       {   1, T_APPRAISAL, 1},
+		       {   1, T_INVOKE_DEITY, 1},
+		       {   0, 0, 0} },
+#endif /* ELDER_SCROLLS */
 	def_tech[] = { {   1, T_APPRAISAL, 1}, /* everyone is supposed to get this --Amy */
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} };
@@ -915,14 +915,14 @@ int tech_no;
 				}
 /* If your deity feels annoyed, they will damage you and increase your prayer timeout. They won't get angry though. */
 			} 
-
+#ifdef ELDER_SCROLLS
 			else if (Race_if(PM_IMPERIAL)) {
 				pline("%s hates you and decides you need to be punished!",u_gname() );
 				u.ublesscnt += rnz(level_difficulty() + 1 );
 				losehp(rnz(level_difficulty() + 1 ), "being a pesky heretic", KILLED_BY);
 /* Imperials cannot use this technique successfully. */
 			} 
-
+#endif /* ELDER_SCROLLS */
 			else if ( (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7) ) {
 				pline("%s is inaccessible, and Moloch decides to smite you!",u_gname() );
 				u.ublesscnt += rnz(level_difficulty() + 1 );
@@ -2359,18 +2359,20 @@ race_tech()
 		case PM_CLOCKWORK_AUTOMATON:		return (clk_tech);
 
 		case PM_FENEK:		return (fen_tech);
-		case PM_NORD:		return (nor_tech);
 		case PM_ALBAE:		return (alb_tech);
 		case PM_GNOME:		return (gno_tech);
 		case PM_KOBOLT:		return (kob_tech);
 		case PM_OGRO:		return (ogr_tech);
 		case PM_UNGENOMOLD:		return (ung_tech);
-		case PM_ARGONIAN:		return (arg_tech);
 		case PM_INSECTOID:		return (ins_tech);
-		case PM_KHAJIIT:	return (kha_tech);
 		case PM_HOBBIT:		return (hob_tech);
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);
 		case PM_VAMPIRE:	return (vam_tech);
+#ifdef ELDER_SCROLLS
+		case PM_NORD:		return (nor_tech);
+		case PM_KHAJIIT:	return (kha_tech);
+		case PM_ARGONIAN:	return (arg_tech);
+#endif /* ELDER_SCROLLS */
 		default: 		/*return ((struct innate_tech *) 0)*/return (def_tech);
 	}
 }

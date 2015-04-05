@@ -298,11 +298,6 @@ const struct innate {
 		     {  15, &(HSwimming), "ready to swim","afraid of the water" },
 		     {   0, 0, 0, 0 } },
 
-	nor_abil[] = { {   1, &(HCold_resistance), "", "" },
-		     {	 15, &(HShock_resistance), "shock resistant", "less shock resistant" },
-		     {   0, 0, 0, 0 } },
-
-
 	gno_abil[] = { {   5, &(HStealth), "stealthy", "noisy" },
 		     {   9, &(HFast), "quick", "slow" },
 		     {   11, &(HSearching), "perceptive", "unaware" },
@@ -318,15 +313,6 @@ const struct innate {
 	gig_abil[] = { {  10, &(HFire_resistance), "cool", "warmer" },
 		     {   15, &(HCold_resistance), "warm", "cooler" },
 		     {  20, &(HShock_resistance), "insulated", "conductive" },
-		     {   0, 0, 0, 0 } },
-
-	bre_abil[] = { {  1, &(HFire_resistance), "", "" },
-		     {   1, &(HCold_resistance), "", "" },
-		     {  1, &(HShock_resistance), "", "" },
-		     {   0, 0, 0, 0 } },
-
-	red_abil[] = { {  1, &(HSick_resistance), "", "" },
-		     {   1, &(HPoison_resistance), "", "" },
 		     {   0, 0, 0, 0 } },
 
 	kob_abil[] = { {  1, &(HPoison_resistance), "", "" },
@@ -362,7 +348,19 @@ const struct innate {
 		     {   1, &(HRegeneration), "", "" },
 		     {   7, &(HStealth), "stealthy", "noisy" },
 		     {   0, 0, 0, 0 } },
-
+#ifdef ELDER_SCROLLS
+	bre_abil[] = { {  1, &(HFire_resistance), "", "" },
+		     {   1, &(HCold_resistance), "", "" },
+		     {  1, &(HShock_resistance), "", "" },
+		     {   0, 0, 0, 0 } },
+	red_abil[] = { {  1, &(HSick_resistance), "", "" },
+		     {   1, &(HPoison_resistance), "", "" },
+		     {	 1, &(HEnergy_regeneration), "", "" },
+		     {   0, 0, 0, 0 } },
+	nor_abil[] = { {   1, &(HCold_resistance), "", "" },
+		     {	 15, &(HShock_resistance), "shock resistant", "less shock resistant" },
+		     {   0, 0, 0, 0 } },
+#endif /* ELDER_SCROLLS */
 	orc_abil[] = { {	1, &(HPoison_resistance), "", "" },
 		     {	 0, 0, 0, 0 } };
 
@@ -921,8 +919,6 @@ int oldlevel, newlevel;
 	case PM_INCANTIFIER:            rabil = inc_abil;	break;
 	case PM_CLOCKWORK_AUTOMATON:            rabil = clk_abil;	break;
 	case PM_KOBOLT:            rabil = kob_abil;	break;
-	case PM_BRETON:            rabil = bre_abil;	break;
-	case PM_REDGUARD:            rabil = red_abil;	break;
 	case PM_TROLLOR:            rabil = tro_abil;	break;
 	case PM_SNAKEMAN:            rabil = sna_abil;	break;
 	case PM_ILLITHID:            rabil = ill_abil;	break;
@@ -937,8 +933,12 @@ int oldlevel, newlevel;
 	case PM_ORC:            rabil = orc_abil;	break;
 	case PM_HUMAN_WEREWOLF:	rabil = lyc_abil;	break;
 	case PM_FENEK:	rabil = fen_abil;	break;
-	case PM_NORD:	rabil = nor_abil;	break;
 	case PM_ALBAE:	rabil = alb_abil;	break;
+#ifdef ELDER_SCROLLS
+	case PM_BRETON:            rabil = bre_abil;	break;
+	case PM_REDGUARD:            rabil = red_abil;	break;
+	case PM_NORD:	rabil = nor_abil;	break;
+#endif /* ELDER_SCROLLS */
 	case PM_HUMAN:
 	case PM_VAMPIRE:
 	default:                rabil = 0;		break;

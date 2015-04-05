@@ -809,7 +809,7 @@ boolean incr;	/* true iff via incremental experience growth */
 	    adjabil(u.ulevel - 1, u.ulevel);	/* give new intrinsics */
 	    reset_rndmonst(NON_PM);		/* new monster selection */
 	}
-
+#ifdef ELDER_SCROLLS
 		if (Race_if(PM_ASGARDIAN) && u.ulevel > u.urmaxlvl) {
 
 		u.urmaxlvl = u.ulevel;
@@ -901,7 +901,7 @@ boolean incr;	/* true iff via incremental experience growth */
 		  }
 
 		}
-
+#endif /* ELDER_SCROLLS */
 		if (Role_if(PM_BINDER) && u.ulevel > u.urmaxlvlC) {
 
 		u.urmaxlvlC = u.ulevel;

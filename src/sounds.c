@@ -1332,7 +1332,7 @@ dochat()
         return 0;
     }
 #endif /* CONVICT */
-
+#ifdef ELDER_SCROLLS
     if (Race_if(PM_IMPERIAL) && mtmp->mnum != quest_info(MS_NEMESIS) && !(mtmp->data->geno & G_UNIQ) && !mtmp->mpeaceful &&
      !mtmp->mtame) {
 
@@ -1352,7 +1352,7 @@ dochat()
 
 		}
     }
-
+#endif /* ELDER_SCROLLS */
     return domonnoise(mtmp);
 }
 

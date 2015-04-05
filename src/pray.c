@@ -2019,7 +2019,7 @@ prayer_done()		/* M. Stephenson (1.0.3b) */
 	    angrygods(u.ualign.type);
 	return(0);
     }
-
+#ifdef ELDER_SCROLLS
 	/* Imperial heretics can't pray --Amy */
     if (Race_if(PM_IMPERIAL) ) {
 	pline("%s won't help a filthy imperial heretic like you.",
@@ -2028,7 +2028,7 @@ prayer_done()		/* M. Stephenson (1.0.3b) */
       angrygods(u.ualign.type);
 	return(0);
     }
-
+#endif /* ELDER_SCROLLS */
     if (p_type == 0) {
 	if(on_altar() && u.ualign.type != alignment)
 	    (void) water_prayer(FALSE);

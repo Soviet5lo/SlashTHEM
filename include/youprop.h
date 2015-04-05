@@ -321,7 +321,7 @@
 
 #define HEnergy_regeneration	u.uprops[ENERGY_REGENERATION].intrinsic
 #define EEnergy_regeneration	u.uprops[ENERGY_REGENERATION].extrinsic
-#define Energy_regeneration	(HEnergy_regeneration || EEnergy_regeneration || Race_if(PM_REDGUARD) )
+#define Energy_regeneration	(HEnergy_regeneration || EEnergy_regeneration)
 
 #define HProtection		u.uprops[PROTECTION].intrinsic
 #define EProtection		u.uprops[PROTECTION].extrinsic

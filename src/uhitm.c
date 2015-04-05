@@ -831,8 +831,9 @@ int thrown;
 		tmp = 0;
 		else tmp = rnd(2);
 	    }
-
+#ifdef ELDER_SCROLLS
 		if (Race_if(PM_KHAJIIT)) tmp += rnd(4);
+#endif /* ELDER_SCROLLS */
 		if (Race_if(PM_FENEK)) tmp += rnd(2);
 
 	    valid_weapon_attack = (tmp > 0);
