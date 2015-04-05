@@ -202,8 +202,7 @@ static struct trobj Drunk[] = {
 
 static struct trobj Officer[] = {
 	{ PISTOL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
+	{ BULLET, 0, WEAPON_CLASS, 40, 0 },
 	{ CLUB, 0, WEAPON_SYM, 1, UNDEF_BLESS },
 	{ LEATHER_ARMOR, 0, ARMOR_SYM, 1, UNDEF_BLESS },
 	{ WAN_MAGIC_MISSILE, UNDEF_SPE, WAND_SYM, 1, UNDEF_BLESS },
@@ -276,8 +275,7 @@ static struct trobj Ninja[] = {
 static struct trobj Gangster[] = {
 	{ KNIFE, 0, WEAPON_CLASS, 1, UNDEF_BLESS }, /* That ammo won't carry them far.  Give them a knife.  */
 	{ SUBMACHINE_GUN, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
+	{ BULLET, 0, WEAPON_CLASS, 30, 0 },
 	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
@@ -462,7 +460,7 @@ static struct trobj Pirate[] = {
 	{ SCIMITAR, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ KNIFE, 1, WEAPON_CLASS, 2, 0 },
 	{ PISTOL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
+	{ BULLET, 0, WEAPON_CLASS, 25, 0 },
 	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ HIGH_BOOTS, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ CRAM_RATION, 0, FOOD_CLASS, 2, UNDEF_BLESS },
@@ -494,8 +492,7 @@ static struct trobj Gladiator[] = {
 
 static struct trobj Goff[] = {
 	{ PISTOL, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
+	{ BULLET, 0, WEAPON_CLASS, 20, 0 },
 	{ HIPPIE_HEELS, 5, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ VICTORIAN_UNDERWEAR, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ BLACK_DRAGON_SCALE_MAIL, -9, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -621,7 +618,7 @@ static struct trobj Transvestite[] = {
 static struct trobj Topmodel[] = {
 	{ KNIFE, 1, WEAPON_CLASS, 1, 1 },
 	{ RIFLE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 50, 0 },
+	{ BULLET, 0, WEAPON_CLASS, 20, 0 },
 	{ LEATHER_PEEP_TOES, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ SADDLE, 0, TOOL_CLASS, 1, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
