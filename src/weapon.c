@@ -2016,6 +2016,10 @@ struct obj *weapon;
 	if (Race_if(PM_DWARF) && weapon && (weapon->otyp == DWARVISH_SHORT_SWORD || weapon->otyp == DWARVISH_SPEAR) ) bonus += 1;
 	if (Race_if(PM_GNOME) && weapon && (weapon->otyp == AKLYS || weapon->otyp == CROSSBOW || weapon->otyp == CROSSBOW_BOLT) ) bonus += 1;
 	if (Race_if(PM_HOBBIT) && weapon && (weapon->otyp == SLING || weapon_type(weapon) == -P_SLING) ) bonus += 1;
+	/* 5lo: Other races that start with unique equipment go here */
+	if (Race_if(PM_KOBOLT) && weapon && (weapon->otyp == DART)) bonus += 2;
+	if (Race_if(PM_TROLLOR) && weapon && (weapon->otyp == RANSEUR || weapon->otyp == PARTISAN || weapon->otyp == GLAIVE || weapon->otyp == SPETUM)) bonus += 2;
+	if (Race_if(PM_OGRO) && weapon && (weapon->otyp == CLUB )) bonus += 2;
 
     return bonus;
 }
