@@ -493,7 +493,7 @@ register struct monst *priest;
 	    if((offer = bribe(priest)) == 0) {
 		verbalize("Thou shalt regret thine action!");
 		if(coaligned) adjalign(-1);
-	    } else if(offer < /*(u.ulevel * 200)*/2000) {
+	    } else if(offer < (u.ulevel * 200)) {
 #ifndef GOLDOBJ
 		if(u.ugold > (offer * 2L)) verbalize("Cheapskate.");
 #else
@@ -504,7 +504,7 @@ register struct monst *priest;
 		    /*  give player some token  */
 		    exercise(A_WIS, TRUE);
 		}
-	    } else if(offer < /*(u.ulevel * 400)*/4000) {
+	    } else if(offer < (u.ulevel * 400)) {
 		verbalize("Thou art indeed a pious individual.");
 #ifndef GOLDOBJ
 		if(u.ugold < (offer * 2L)) {
@@ -517,7 +517,7 @@ register struct monst *priest;
 		    /* KMH, intrinsic patch */
 		    incr_itimeout(&HClairvoyant, rn1(500,500));
 		}
-	    } else if(offer < /*(u.ulevel * 600)*/6000 &&
+	    } else if(offer < (u.ulevel * 600) &&
 		      u.ublessed < 20 &&
 		      (u.ublessed < 9 || !rn2(u.ublessed))) {
 		verbalize("Thy devotion has been rewarded.");
