@@ -215,12 +215,12 @@
 #define NEWS "news"		/* the file containing the latest hack news */
 #define NEWS_AREA FILE_AREA_SHARE
 #define PANICLOG "paniclog"	/* log of panic and impossible events */
+
+#ifdef PUBLIC_SERVER
 #define LIVELOGFILE "livelog" /* live game progress log file */
 
 #define LIVELOG_BONES_KILLER	/* Report if a ghost of a former player is 
                                  * killed - Patric Mueller (15 Aug 2009) */ 
-
-#ifdef PUBLIC_SERVER
 #define LIVELOG_SHOUT
 #endif
 
