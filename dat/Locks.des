@@ -323,7 +323,7 @@ NON_DIGGABLE:(00,00,75,20)
 # One trap to keep the gnomes at bay.
 TRAP:"spiked pit",(37,07)
 # Objects
-OBJECT:'(',"skeleton key",(38,10),blessed,0,"Nocturnal Key"
+OBJECT:'(',"lock pick",(38,10),blessed,0,"The Lockpick of Arsene Lupin"
 OBJECT:'%',"tin",(26,12),"chameleon",0
 OBJECT:random,random,random
 OBJECT:random,random,random
