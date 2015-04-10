@@ -166,15 +166,15 @@ LEVEL:          "asmodeus" "A" @ (2, 22) 95
 RNDLEVEL:	"hellma" "H" @ (2, 22) 75 6
 BRANCH:         "Sheol" @ (3, 20) down
 
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
-RNDLEVEL:          "heck" "Q" @ (2, 22) 90 84
+# 5lo: Removed a few heck levels and reduced probability to stop
+# too many levels from being generated, causing a game freeze.
+RNDLEVEL:          "heck" "Q" @ (2, 22) 50 84
+RNDLEVEL:          "heck" "Q" @ (2, 22) 50 84
+RNDLEVEL:          "heck" "Q" @ (2, 22) 50 84
 LEVEL:		"school" "C" @ (2, 22) 50
-LEVEL:          "hitch" "H" @ (8, 5) 50
-LEVEL:		"compu" "P" @ (8, 5) 50
-LEVEL:		"key" "L" @ (8, 5) 50
+LEVEL:          "hitch" "H" @ (2, 22) 50
+LEVEL:		"compu" "P" @ (2, 22) 50
+LEVEL:		"key" "L" @ (2, 22) 50
 
 
 ### Gnomish Mines ###
