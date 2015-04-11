@@ -4710,6 +4710,12 @@ register struct	monst	*mtmp;
 		if (mtmp->data == &mons[PM_ASMODEUS]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
 		if (mtmp->data == &mons[PM_DEMOGORGON]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
 		if (mtmp->data == &mons[PM_CTHULHU]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
+		if (ptr == &mons[PM_UNIX_KERNEL]) {
+			struct obj *otmp = mksobj(RELAY,TRUE,FALSE);
+			otmp = oname(otmp,artiname(ART_BURNED_MOTH_RELAY));
+			mpickobj(mtmp,otmp);
+		}
+
 		break;
 	    case S_ANGEL:
 		if (monsndx(ptr) == PM_DOUGLAS_ADAMS) {
