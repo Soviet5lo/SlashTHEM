@@ -282,6 +282,10 @@ A("Oathkeeper", 		STILETTO, /* temp name? */
     (SPFX_RESTR), 0, 0,
     PHYS(7,9),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_LOCKSMITH, NON_PM, 1500L ),
 
+A("Blackshroud",		CLOAK_OF_PROTECTION,
+    (SPFX_RESTR),	(SPFX_LUCK|SPFX_WARN),	0,
+    NO_ATTK,	DRLI(0,0),	NO_CARY,	0,	A_NEUTRAL,	PM_UNDERTAKER,	NON_PM, 1500L ),
+
 A("Silvershard", SILVER_DAGGER,
     (SPFX_RESTR), 0, 0,
     PHYS(2,0),	NO_DFNS,	NO_CARY, 0, A_NONE, NON_PM, NON_PM, 1000L ),
@@ -395,6 +399,10 @@ A("Bloodmarker",		KNIFE,
 A("Slow Blade",                ORCISH_SHORT_SWORD, /* 5lo: Now opposite of Quickblade... */
 	SPFX_RESTR, 0, 0,
 	PHYS(2,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
+
+A("Black Death",                     HALBERD,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,
+	DRLI(5,5),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 2000L ),
 
 A("Spineseeker",	STILETTO,
 	SPFX_RESTR, 0, 0,
@@ -558,9 +566,10 @@ A("Fuma-itto no Ken",                BROADSWORD,    /* 5lo: New quest artifact f
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_DALIGN), 0, 0, /* This artifact has special privilage to not go by "the X of (the) Y" format */
 	PHYS(8,8),      NO_DFNS,     CARY(AD_DRLI),        CREATE_AMMO, A_CHAOTIC, PM_NINJA, NON_PM, 5000L ),
 
-A("Black Death",                     HALBERD,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,
-	DRLI(5,5),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_UNDERTAKER, NON_PM, 3000L ),
+A("The Pick of the Grave",		PICK_AXE,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK|SPFX_DRLI|SPFX_DEFN), (SPFX_REGEN|SPFX_HPHDAM|SPFX_TCTRL), 0,
+	DRLI(8,10),	COLD(0,0),   NO_CARY,
+	BLESS,		A_NEUTRAL, PM_UNDERTAKER, NON_PM, 3000L ),
 
 A("The Flute of Slime",          MAGIC_FLUTE, /* 5lo: temp name */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,

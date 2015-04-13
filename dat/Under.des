@@ -320,7 +320,7 @@ RANDOM_PLACES:(48,04),(52,04),(52,08),(52,12),(44,16),(52,16)
 # Stairs
 STAIR:(48,16),up
 # Objects
-OBJECT:')',"halberd",(10,09),blessed,0,"Black Death"
+OBJECT:'(',"pick-axe",(10,09),blessed,0,"The Pick of the Grave"
 
 TELEPORT_REGION:(47,15,49,17),(00,00,00,00)
 NON_DIGGABLE:(00,00,75,20)
