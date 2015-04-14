@@ -247,8 +247,8 @@ A("Deluder",               CLOAK_OF_DISPLACEMENT,
 	NO_ATTK,      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, PM_JEDI, NON_PM, 5000L ),
 
 A("Snakeskin",             ROBE,
-    (SPFX_RESTR|SPFX_HALRES), 0, 0,
-    NO_ATTK,    ACID(0,0),   NO_CARY,    0, A_NEUTRAL, NON_PM, NON_PM, 500L ),
+    (SPFX_RESTR|SPFX_HALRES|SPFX_PROTEC), 0, 0,
+    NO_ATTK,    ACID(0,0),   NO_CARY,    0, A_NEUTRAL, PM_PSION, NON_PM, 700L ),
 
 A("Poseidon's Treasure",	TRIDENT,
 	(SPFX_RESTR|SPFX_ATTK), 0, 0,
