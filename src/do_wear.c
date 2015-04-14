@@ -1525,6 +1525,10 @@ register struct obj *otmp;
 			nomovemsg = "You finish taking off your impractical underwear.";
 			afternmv = Shirt_off;
 		     }
+		else if (is_shirt(otmp)) {
+			nomovemsg = "You finish taking off your shirt.";
+			afternmv = Shirt_off;
+		     }
 		else {
 			nomovemsg = "You finish taking off your suit.";
 			afternmv = Armor_off;
@@ -1552,6 +1556,8 @@ register struct obj *otmp;
 		else if (is_helmet(otmp))
 			/* [Finn E. Theodorsen] For fedoras */
 			(void) Helmet_off();
+		else if (is_shirt(otmp))
+			(void) Shirt_off();
 		else setworn((struct obj *)0, otmp->owornmask & W_ARMOR);
 		off_msg(otmp);
 	}
