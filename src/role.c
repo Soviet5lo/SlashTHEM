@@ -1163,7 +1163,7 @@ const struct Role roles[] = {
 	{  10,  7,  8,  8,  7,  7 },
 	{   5, 30, 30,  5,  5, 25 },
 	/* Init   Lower  Higher */
-	{ 5, 0,  0, 0,  0, 0 },	/* Hit points */
+	{ 10, 0,  0, 8,  1, 0 },	/* Hit points */
 	{ 20, 4,  0, 4,  0, 8 },10,	/* Energy */
 	10, 8,-2, 2, 20, A_WIS, SPE_WIZARD_LOCK, -4
 },
@@ -2186,8 +2186,8 @@ const struct Race races[] = {
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR19(23),  17, 15, 16, 25, 15 },
 	/* Init   Lower  Higher */
-	{  0, 0,  0, 0,  0, 0 },	/* Hit points */
-	{  0, 0,  0, 0,  0, 0 }		/* Energy */
+	{  6, 0,  0, 3,  3, 0 },	/* Hit points */
+	{  1, 0,  1, 0,  1, 0 }		/* Energy */
 },
 
 {	"ungenomold", "ungenomoldic", "ungenomoldhood", "Ung",
