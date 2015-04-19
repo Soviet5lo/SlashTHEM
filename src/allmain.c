@@ -145,7 +145,7 @@ moveloop()
 			  * to handle anything that comes your way, so this won't be 
 			  * dropping newbies off the edge of the planet.  -- DSR 12/2/07
 			  */
-
+#ifdef MORE_SPAWNS
 			monclock = 70;
 			if (u.uevent.udemigod) {
 				monclock = 15;
@@ -338,13 +338,17 @@ moveloop()
 
 				}
 			}
-
+#endif /* MORE_SPAWNS */
 			if (uarmf && uarmf->otyp == ZIPPER_BOOTS && !EWounded_legs) EWounded_legs = 1;
-
+#ifdef MORE_SPAWNS
 		    if(!rn2(u.uevent.udemigod ? 125 :
 			    (depth(&u.uz) > depth(&stronghold_level)) ? 250 : 340))
-			(void) makemon((struct permonst *)0, 0, 0, NO_MM_FLAGS);
 	/* still keeping the old monstermaking routine up, but drastically reducing their spawn rate. --Amy */
+#else
+		    if(!rn2(u.uevent.udemigod ? 25 :
+			    (depth(&u.uz) > depth(&stronghold_level)) ? 50 : 70))
+#endif /* MORE_SPAWNS */
+			(void) makemon((struct permonst *)0, 0, 0, NO_MM_FLAGS);
 
 		    /* calculate how much time passed. */
 #ifdef STEED

@@ -419,6 +419,7 @@ typedef unsigned char	uchar;
 #define WALLIFIED_MAZE	/* Fancy mazes - Jean-Christophe Collet */
 /* #define REINCARNATION */     /* Special Rogue-like levels */
 #define BLACKMARKET     /* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
+/* #define MORE_SPAWNS */ /* 5lo: Extra spawning system by AmyBSOD */
 
 /* monsters & objects */
 #define KOPS		/* Keystone Kops by Scott R. Turner */
