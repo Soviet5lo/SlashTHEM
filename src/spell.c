@@ -1561,7 +1561,7 @@ int spell;
 
 	/* Clamp to percentile */
 	if (chance > 100) chance = 100;
-	if (chance < 10) chance = 10; /* used to be 0, but that was just stupid in my opinion --Amy */
+	if (chance < 0) chance = 0;
 
 	return chance;
 }
