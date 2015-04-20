@@ -1392,7 +1392,7 @@ int *spell_no;
 	 * in the window-ports (say via a tab character).
 	 */
 	if (!iflags.menu_tab_sep)
-		Sprintf(buf, "%-20s     Level  %-12s Fail  Memory", "    Name", "Category");
+		Sprintf(buf, "%-20s     Level  %-12s Fail", "    Name", "Category");
 	else
 		Sprintf(buf, "Name\tLevel\tCategory\tFail");
 	if (flags.menu_style == MENU_TRADITIONAL)
@@ -1400,13 +1400,11 @@ int *spell_no;
 	add_menu(tmpwin, NO_GLYPH, &any, 0, 0, ATR_BOLD, buf, MENU_UNSELECTED);
 	for (i = 0; i < MAXSPELL && spellid(i) != NO_SPELL; i++) {
 		Sprintf(buf, iflags.menu_tab_sep ?
-			"%s\t%-d%s\t%s\t%-d%%" : "%-20s  %2d%s   %-12s %3d%%"
-			"   %3d%%",
+			"%s\t%-d%s\t%s\t%-d%%" : "%-20s  %2d%s   %-12s %3d%%",
 			spellname(i), spellev(i),
-			(spellknow(i) > 1000) ? " " : (spellknow(i) ? "!" : "*"),
+			spellknow(i) ? " " : "*",
 			spelltypemnemonic(spell_skilltype(spellid(i))),
-			100 - percent_success(i),
-			(spellknow(i) * 100 + (KEEN-1)) / KEEN);
+			100 - percent_success(i));
 		if (flags.menu_style == MENU_TRADITIONAL)
 			Sprintf(eos(buf), iflags.menu_tab_sep ?
 				"\t%c" : "%4c ", spellet(i) ? spellet(i) : ' ');
