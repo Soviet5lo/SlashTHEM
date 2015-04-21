@@ -298,7 +298,7 @@
 - Revived the Newhon artifacts from SLASH 6 (if NEWHON_ARTIFACTS is defined in config.h)
     - Mouser's Scalpel: Neutral aligned Rapier, +5 to-hit and +1 damage.  50% chance of striking multiple times, each strike doing an extra d8 + 1 + enchantment. [from Slashem-up]
     - Graywand: Neutral aligned Two-Handed Sword, +3 to-hit and +6 cold damage.
-    - Heartseeker: Neutral aligned Showr Sword, +3 to-hit and +3 damage.  15% chance of doing an extra 4d6+4 damage.
+    - Heartseeker: Neutral aligned Short Sword, +3 to-hit and +3 damage.  15% chance of doing an extra 4d6+4 damage.
     - Cat's Claw: Neutral aligned Dagger, +5 to-hit and +7 damage to all rodents.
 
 - Implemented several new #invoke effects.
@@ -439,7 +439,7 @@
 - Fixed a makedef crash on windows
 - A general cleanup of files
 - Expanded list of Japanese and Pirate object terms.
-- Slings gain a damage bonus based on character stregnth.
+- Slings gain a damage bonus based on character strength.
 - Slings can Instakill giants at Expert skill level.
 - Removed a large amount of redundant hallucination monster names.
 - Removed a pointless graphic line of dialogue from seduction attacks.
