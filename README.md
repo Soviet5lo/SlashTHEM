@@ -30,7 +30,6 @@ Todo
 
 Bugs
 ----
-- Traps are sometimes generated outside of defined levels (possibly due to the new way level difficulty is calculated?)
 - Some roles do not get the quest dialogue when picking up the quest artifact (Lunatics, Locksmiths, a few others).
 - Probably a ton of others.
 

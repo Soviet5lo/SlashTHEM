@@ -1,5 +1,16 @@
 # Slash'THEM (Rough) ChangeLog
 
+Version 0.5.1 (2015-04-21)
+==========================
+-Wrapped AmyBSOD's Extra Spawning system into a define, disabled by default.  Uncomment MORE_SPAWNS in config.h to re-enable.
+    - If MORE_SPAWNS is defined, regular monster generation is reduced.  Otherwise, monster spawn gen is the same as vanilla (increased from extended).
+- Spell Memory no longer shows up in the spellcasting memu
+- Spell Chances max out at 100% again
+- Reverted Rock and Gem probability to Vanilla values. 
+    - TL;DR: Rocks less common, glass more common, gems slightly more common, touchstones slightly less common, whetstones and luckstones slightly more common.
+- Traps are no longer generated out of level (finally!)
+    - This also fixes traps being generated in corridors.
+
 Version 0.5.0 (2015-04-15)
 ==========================
 - Officers now start with a tame little dog
