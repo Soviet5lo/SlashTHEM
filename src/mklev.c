@@ -1072,7 +1072,7 @@ skip0:
 
 	/* for each room: put things inside */
 	for(croom = rooms; croom->hx > 0; croom++) {
-		/*if(croom->rtype != OROOM) continue;*/
+		if(croom->rtype != OROOM) continue;
 
 		/* put a sleeping monster inside */
 		/* Note: monster may be on the stairs. This cannot be
