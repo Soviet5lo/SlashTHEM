@@ -981,7 +981,7 @@ unsigned trflags;
 	boolean webmsgok = (!(trflags & NOWEBMSG));
 	boolean forcebungle = (trflags & FORCEBUNGLE);
 
-	nomul(0);
+	nomul(0, 0);
 
 	/* KMH -- You can't escape the Sokoban level traps */
 	if (In_sokoban(&u.uz) &&
@@ -1969,7 +1969,7 @@ int style;
 				break;
 			}
 		} else if (bhitpos.x == u.ux && bhitpos.y == u.uy) {
-			if (multi) nomul(0);
+			if (multi) nomul(0, 0);
 			if (thitu(9 + singleobj->spe,
 				  dmgval(singleobj, &youmonst),
 				  singleobj, (char *)0))
@@ -3228,7 +3228,7 @@ struct obj *box;        /* at the moment only for floor traps */
 		if ( !rn2(100) || (!Free_action && !rn2(10)))	{
 			You("inhale the intense smell of shit! The world spins and goes dark.");
 			nomovemsg = "You are conscious again.";	/* default: "you can move again" */
-			nomul(-rnd(10));
+			nomul(-rnd(10), "unconscious from smelling dog shit");
 			exercise(A_DEX, FALSE);
 		}
 
@@ -4855,7 +4855,7 @@ boolean disarm;
 			if (!Free_action) {                        
 			if (!Free_action) {                        
 			pline("Suddenly you are frozen in place!");
-			nomul(-d(5, 6));
+			nomul(-d(5, 6), "frozen by a container trap");
 			exercise(A_DEX, FALSE);
 			nomovemsg = You_can_move_again;
 			} else You("momentarily stiffen.");

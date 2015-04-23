@@ -1493,7 +1493,7 @@ dosacrifice()
 			  case 2: 
 			  case 3:
 			       You("are terrified, and unable to move.");
-			       nomul(-3);
+			       nomul(-3, "being terrified of a demon");
 			       nomovemsg = 0;
 			       break;                
 			  case 4:
@@ -1976,7 +1976,7 @@ dopray()
 	}
     }
 #endif
-    nomul(-3);
+    nomul(-3, "praying unsuccessfully"); /* note by Amy: if successfully, you're invulnerable... */
     nomovemsg = "You finish your prayer.";
     afternmv = prayer_done;
 
@@ -2156,7 +2156,7 @@ turn_undead()
 		    }
 	    }
 	}
-	nomul(-2);
+	nomul(-2, "trying to turn undead monsters");
 	nomovemsg = 0;
 	return(1);
 }

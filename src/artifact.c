@@ -1100,7 +1100,7 @@ char *hittee;			/* target's name: "you" or mon_nam(mdef) */
 	    if (Antimagic) {
 		resisted = TRUE;
 	    } else {
-		nomul(-3);
+		nomul(-3, "being scared stiff");
 		nomovemsg = "";
 		if (magr && magr == u.ustuck && sticks(youmonst.data)) {
 		    setustuck((struct monst *)0);
@@ -1477,7 +1477,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	    } else {
 	    	pline_The("gleaming blade cuts into your %s!", body_part(SPINE));
 		nomovemsg = "";
-		nomul(-rnd(5));
+		nomul(-rnd(5), "paralyzed by Spineseeker");
 	    }
 	}
 

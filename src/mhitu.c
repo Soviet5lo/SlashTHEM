@@ -176,7 +176,7 @@ register struct attack *mattk;
 				if (randomkick == 5) {
 				pline("You fall in love with %s's incredibly erotic footwear, and are unable to fight back.", mon_nam(mtmp) );
 					nomovemsg = "You finally decide to stop admiring the sexy leather boots.";
-					nomul(-rnd(5));
+					nomul(-rnd(5), "mesmerized by a pair of sexy leather boots");
 
 				}
 
@@ -239,7 +239,7 @@ register struct attack *mattk;
 					monsterlev = ((mtmp->m_lev) + 1);
 					monsterlev /= 2;
 					if (monsterlev <= 0) monsterlev = 1;
-					nomul(-monsterlev);
+					nomul(-monsterlev, "knocked out by an asian peep-toe");
 					exercise(A_DEX, FALSE);
 				    }
 				}
@@ -304,7 +304,7 @@ register struct attack *mattk;
 				monsterlev = ((mtmp->m_lev) + 1);
 				monsterlev /= 3;
 				if (monsterlev <= 0) monsterlev = 1;
-				nomul(-monsterlev);
+				nomul(-monsterlev, "flinching");
 				exercise(A_DEX, FALSE);
 			    }
 			}
@@ -700,7 +700,7 @@ mattacku(mtmp)
 		 * invisible, or you might be blind....
 		 */
 	
-	if(!ranged) nomul(0);
+	if(!ranged) nomul(0, 0);
 	if(mtmp->mhp <= 0 || (Underwater && !is_swimmer(mtmp->data)))
 	    return(0);
 
@@ -1137,7 +1137,7 @@ mattacku(mtmp)
 					    } else {
 						pline("You're knocked out and helplessly drop to the floor.");
 						nomovemsg = 0;	/* default: "you can move again" */
-						nomul(-rnd(5));
+						nomul(-rnd(5), "knocked out by a wooden Japanese sandal");
 						exercise(A_DEX, FALSE);
 						    }
 						}
@@ -1961,7 +1961,7 @@ dopois:
 			if (Blind) You("are frozen!");
 			else You("are frozen by %s!", mon_nam(mtmp));
 			nomovemsg = 0;	/* default: "you can move again" */
-			nomul(-rnd(10));
+			nomul(-rnd(10), "paralyzed by a monster attack");
 			exercise(A_DEX, FALSE);
 		    }
 		}
@@ -1975,7 +1975,7 @@ dopois:
 			if (Blind) You("are mercilessly tickled!");
 			else You("are mercilessly tickled by %s!", mon_nam(mtmp));
 			nomovemsg = 0;	/* default: "you can move again" */
-			nomul(-rnd(10));
+			nomul(-rnd(10), "tickled by a monster");
 			exercise(A_DEX, FALSE);
 			exercise(A_CON, FALSE);
 		    }
@@ -2878,7 +2878,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 			    } else {
 				You("can't move!");
 				nomovemsg = 0;	/* default: "you can move again" */
-				nomul(-rnd(10));
+				nomul(-rnd(10), "paralyzed by an engulfing monster");
 				exercise(A_DEX, FALSE);
 			    }
 			}
@@ -3133,7 +3133,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		    else {
 			pline("Wahahahaha! Arrgh! It tickles!");
 			nomovemsg = 0;	/* default: "you can move again" */
-			nomul(-rnd(10));
+			nomul(-rnd(10), "tickled by a bunch of feelers");
 			exercise(A_DEX, FALSE);
 			exercise(A_CON, FALSE);
 		    }
@@ -4010,7 +4010,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    } else if (Sleep_resistance && rn2(20)) {
 			pline("You yawn.");
 		    } else {
-			nomul(-rnd(10));
+			nomul(-rnd(10), "sleeping from a monster's gaze");
 			u.usleep = 1;
 			nomovemsg = "You wake up.";
 			if (Blind)  You("are put to sleep!");
@@ -4116,7 +4116,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	                else {
 	                        You("are frozen by %s!", mon_nam(mtmp));
 				nomovemsg = 0;
-	                        nomul(-rnd(4));
+	                        nomul(-rnd(4), "paralyzed by a monster's gaze");
 	                        exercise(A_DEX, FALSE);
 	                }
 	        }
