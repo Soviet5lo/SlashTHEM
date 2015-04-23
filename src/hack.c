@@ -609,9 +609,10 @@ moverock()
 		    pline("However, you can easily %s.",
 			(flags.pickup && !In_sokoban(&u.uz))
 			    ? "pick it up" : "push it aside");
+#if 0 /* 5lo: This message was a bit confusing to players */
 		if (yn("Do it?") != 'y')
 		return (-1);
-
+#endif
 		    if (In_sokoban(&u.uz))
 			{change_luck(-1);
 			pline("You cheater!");
