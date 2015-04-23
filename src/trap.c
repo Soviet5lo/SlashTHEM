@@ -4033,7 +4033,6 @@ dountrap()	/* disarm a trap */
 	}
 	if ((nohands(youmonst.data) && !webmaker(youmonst.data)) || !youmonst.data->mmove) {
 	    pline("And just how do you expect to do that?");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	    return 0;
 	} else if (u.ustuck && sticks(youmonst.data)) {
 	    pline("You'll have to let go of %s first.", mon_nam(u.ustuck));

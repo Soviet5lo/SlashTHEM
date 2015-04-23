@@ -2090,7 +2090,6 @@ dopois:
 			} else {
 			    pline("%s swings itself around you!",
 				  Monnam(mtmp));
-				display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 			    setustuck(mtmp);
 			}
 		    } else if(u.ustuck == mtmp) {
@@ -2136,7 +2135,6 @@ dopois:
 
 				}
 				else {
-					display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 					You("scream "); verbalize("HAHAHAHAHAHAHAAAAAAAA!"); /* Super Mario 64 */
 					u.uhpmax -= rnd(10);
 				    losehp(10, "lava dive", KILLED_BY_AN);

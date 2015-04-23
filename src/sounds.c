@@ -1227,22 +1227,18 @@ dochat()
 
     if (is_silent(youmonst.data)) {
 	pline("As %s, you cannot speak.", an(youmonst.data->mname));
-	display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return(0);
     }
     if (Strangled) {
 	You_cant("speak.  You're choking!");
-	display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return(0);
     }
     if (u.uswallow) {
 	pline("They won't hear you out there.");
-	display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return(0);
     }
     if (Underwater) {
 	Your("speech is unintelligible underwater.");
-	display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return(0);
     }
 

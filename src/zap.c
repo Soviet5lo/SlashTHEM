@@ -2503,7 +2503,6 @@ dozap()
 
 	/* zappable addition done by GAN 11/03/86 */
 	if(!zappable(obj)) {pline(nothing_happens);
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	}
 	else if(obj->cursed && !rn2(5)) {
 		/* WAC made this rn2(5) from rn2(100)*/
@@ -2929,14 +2928,12 @@ boolean ordinary;
 		    if(Sleep_resistance) {
 			if (!rn2(20)) {
 			pline("You feel a little drowsy.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 			fall_asleep(-rnd(5), TRUE);}
 			else {
 			shieldeff(u.ux, u.uy);
 			You("don't feel sleepy!");}
 		    } else {
 			pline_The("sleep ray hits you!");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 			fall_asleep(-rnd(50), TRUE);
 		    }
 		    break;
@@ -4212,7 +4209,6 @@ xchar sx, sy;
 		shieldeff(u.ux, u.uy);
 		You("don't feel sleepy.");
 	    } else {
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		fall_asleep(-d(nd,25), TRUE); /* sleep ray */
 	    }
 	    break;

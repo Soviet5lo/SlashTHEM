@@ -3067,7 +3067,6 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 #ifdef JEDI
 	if (uarmh && uarmh->otyp == PLASTEEL_HELM){
 		pline("The %s covers your whole face.", xname(uarmh));
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return 0;
 	}
 #endif

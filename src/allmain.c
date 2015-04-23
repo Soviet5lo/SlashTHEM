@@ -631,7 +631,6 @@ moveloop()
 			    xchar old_ux = u.ux, old_uy = u.uy;
 				You("suddenly get teleported!");
 			    tele();
-				display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 			    if (u.ux != old_ux || u.uy != old_uy) {
 				if (!next_to_u()) {
 				    check_leash(old_ux, old_uy);

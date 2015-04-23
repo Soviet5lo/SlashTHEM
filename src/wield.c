@@ -473,7 +473,6 @@ const char *verb;	/* "rub",&c */
 	You_cant("%s %s %s while wearing %s.",
 		 verb, shk_your(yourbuf, obj), what,
 		 more_than_1 ? "them" : "it");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return FALSE;
     }
     if (welded(uwep)) {
@@ -488,19 +487,16 @@ const char *verb;	/* "rub",&c */
 	} else {
 	    You_cant("do that.");
 	}
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return FALSE;
     }
     if (cantwield(youmonst.data)) {
 	You_cant("hold %s strongly enough.", more_than_1 ? "them" : "it");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return FALSE;
     }
     /* check shield */
     if (uarms && bimanual(obj)) {
 	You("cannot %s a two-handed %s while wearing a shield.",
 	    verb, (obj->oclass == WEAPON_CLASS) ? "weapon" : "tool");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	return FALSE;
     }
     if (uquiver == obj) setuqwep((struct obj *)0);

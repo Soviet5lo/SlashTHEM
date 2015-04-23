@@ -123,12 +123,10 @@ int type;
 	    if (!old) {
 		/* newly sick */
 		You_feel("deathly sick.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	    } else {
 		/* already sick */
 		if (talk) You_feel("%s worse.",
 			      rn2(2) ? "much" : "even");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	    }
 	    set_itimeout(&Sick, xtime);
 	    u.usick_type |= type;
@@ -369,7 +367,6 @@ dodrink()
 #ifdef JEDI
 	if (uarmh && uarmh->otyp == PLASTEEL_HELM){
 		pline("The %s covers your whole face.", xname(uarmh));
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return 0;
 	}
 #endif

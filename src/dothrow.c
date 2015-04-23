@@ -339,12 +339,10 @@ dothrow()
 
 	if (notake(youmonst.data)) {
 	    You("are physically incapable of throwing anything.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 
 		if (yn("But you can try to throw anyway. Okay?") == 'y') {
 			if (rn2(3)) { 		morehungry(10);
 			pline("The darn thing doesn't seem to fly very far.");
-			display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		    return 1;}
 		}
 		else {return(0);}
@@ -445,12 +443,10 @@ dofire()
 
 	if (notake(youmonst.data)) {
 	    You("are physically incapable of doing that.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 
 		if (yn("But you can try to fire anyway. Okay?") == 'y') {
 			if (rn2(3)) { 		morehungry(10);
 			pline("The darn thing doesn't seem to fly very far.");
-			display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		    return 1;}
 		}
 		else {return(0);}

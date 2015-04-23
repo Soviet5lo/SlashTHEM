@@ -1192,7 +1192,6 @@ struct trap *trap;
 		You("%s onto a vault teleporter!",
 		      Levitation ? (const char *)"float" :
 				  locomotion(youmonst.data, "step"));
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		deltrap(trap);
 		newsym(u.ux,u.uy);	/* get rid of trap symbol */
 		vault_tele();
@@ -1200,7 +1199,6 @@ struct trap *trap;
 		You("%s onto a teleport trap!",
 		      Levitation ? (const char *)"float" :
 				  locomotion(youmonst.data, "step"));
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		tele();
 		}
 }

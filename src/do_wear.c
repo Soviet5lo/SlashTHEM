@@ -1972,7 +1972,6 @@ doputon()
 #ifdef JEDI
 		if (uarmh && uarmh->otyp == PLASTEEL_HELM){
 			pline("The %s covers your whole face. You need to remove it first.", xname(uarmh));
-			display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 			return 1;
 		}
 #endif

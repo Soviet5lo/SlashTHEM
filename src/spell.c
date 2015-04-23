@@ -871,19 +871,15 @@ boolean atme;
 
 	if (u.uhunger <= 10 && spellid(spell) != SPE_DETECT_FOOD) {
 		You("are too hungry to cast that spell.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return(0);
 	} else if (ACURR(A_STR) < 4)  {
 		You("lack the strength to cast spells.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return(0);
 	} else if(check_capacity(
 		"Your concentration falters while carrying so much stuff.")) {
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	    return (1);
 	} else if (!freehand()) {
 		Your("arms are not free to cast!");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return (0);
 	}
 
@@ -929,7 +925,6 @@ boolean atme;
 				hungr = u.uhunger-3;
 	if (energy > u.uen)  {
 		You("don't have enough energy to cast that spell.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		/* WAC/ALI Experts can override with HP/hunger loss */
 		if ((role_skill >= P_SKILLED) && (yn("Continue?") == 'y')) {
 			energy -= u.uen;
@@ -947,7 +942,6 @@ boolean atme;
 	chance = percent_success(spell);
 	if ( (confused && spellid(spell) != SPE_CURE_CONFUSION && rn2(10) ) || (rnd(100) > chance)) {
 		pline("You fail to cast the spell correctly.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 
 #ifdef ALLEG_FX
                 if (iflags.usealleg) alleg_aura(u.ux, u.uy, P_ATTACK_SPELL-1);

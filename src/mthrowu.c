@@ -837,7 +837,6 @@ breamu(mtmp, mattk)			/* monster breathes at you (ranged) */
 		    if(canseemon(mtmp))
 			pline("%s breathes %s!", Monnam(mtmp),
 			      Hallucination ? hallubreathwep[rn2(SIZE(hallubreathwep))] : breathwep[typ-1]);
-			display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		    buzz((int) (-20 - (typ-1)), (int)mattk->damn,
 			 mtmp->mx, mtmp->my, sgn(tbx), sgn(tby));
 		    nomul(0, 0);
@@ -870,7 +869,6 @@ xchar ax, ay;
 		if(canseemon(mtmp))
 			pline("%s breathes %s!", Monnam(mtmp),
 				Hallucination ? hallubreathwep[rn2(SIZE(hallubreathwep))] : breathwep[typ-1]);
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		/* Do the door first - monster is ON TOP so call direct */
 		zap_over_floor(mtmp->mx, mtmp->my, (int) (-20 - (typ-1)), NULL);
 		buzz((int) (-20 - (typ-1)), (int)mattk->damn, 

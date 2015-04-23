@@ -236,13 +236,11 @@ use_stethoscope(obj)
 	if (!rn2(100)) {
 	    useup(obj);
 	    pline("Your stethoscope breaks!");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return;
 		}
 #endif
 	if (nohands(youmonst.data)) {	/* should also check for no ears and/or deaf */
 		You("have no hands!");	/* not `body_part(HAND)' */
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return 0;
 	} else if (!freehand()) {
 		You("have no free %s.", body_part(HAND));
@@ -1380,7 +1378,6 @@ dorub()
 		return 1;
 	    } else {
 		pline("Sorry, I don't know how to use that.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return 0;
 	    }
 	}
@@ -4107,7 +4104,6 @@ doapply()
 		    useup(obj);
 		    pline("Your god-o-meter explodes!");
 			u.ublesscnt += rn2(20);
-			display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 			return;
 			}
 
@@ -4142,7 +4138,6 @@ doapply()
 			break;
 		}
 		pline("Sorry, I don't know how to use that.");
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	xit:
 		nomul(0, 0);
 		return 0;

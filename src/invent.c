@@ -1296,7 +1296,6 @@ register const char *let,*word;
 	   !allowfloor && !allowthisplace) {
 		You("don't have anything %sto %s.",
 			foox ? "else " : "", word);
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 		return((struct obj *)0);
 	}
 	
@@ -1542,7 +1541,6 @@ struct obj *otmp;
 	    pline("Use the '%s' command to %s %s%s.", s1, s2, what, s3);
 	} else {
 	    pline(silly_thing_to, word);
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
 	}
 }
 
