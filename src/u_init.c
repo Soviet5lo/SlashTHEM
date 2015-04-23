@@ -5963,6 +5963,15 @@ register struct trobj *trop;
 				/* KMH, balance patch -- now an amulet */
 				|| (Role_if(PM_NECROMANCER) &&
 						otyp == AMULET_OF_DRAIN_RESISTANCE)
+				/* 5lo -- Drunks shouldn't get these */
+				|| ((Role_if(PM_DRUNK)) &&
+					(otyp == POT_BLOOD
+					|| otyp == POT_VAMPIRE_BLOOD
+					|| otyp == POT_PAN_GALACTIC_GARGLE_BLASTE
+					|| otyp == POT_CYANIDE
+					|| otyp == POT_RADIUM
+					|| otyp == POT_INVULNERABILITY))
+
 				/* 'useless' or over powerful items */
 				|| otyp == POT_HALLUCINATION
 				|| otyp == POT_ACID
