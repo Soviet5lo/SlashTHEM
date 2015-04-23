@@ -1472,10 +1472,12 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	if (otmp->oartifact == ART_SPINESEEKER && dieroll < 5 ) { /* 5lo: Another artifact effect */
 	    if(!youdefend) {
 	    	pline_The("gleaming blade cuts into %s's %s!", hittee, mbodypart(mdef,SPINE));
+		*dmgptr += rnd(5);
 		mdef->mcanmove = 0;
 		mdef->mfrozen = rnd(5);
 	    } else {
 	    	pline_The("gleaming blade cuts into your %s!", body_part(SPINE));
+		*dmgptr += rnd(5);
 		nomovemsg = "";
 		nomul(-rnd(5), "paralyzed by Spineseeker");
 	    }
