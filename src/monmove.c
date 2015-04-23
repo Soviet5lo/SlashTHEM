@@ -1431,8 +1431,8 @@ postmov:
 		    /* look for gold or jewels nearby */
 		    likegold = (likes_gold(ptr) && pctload < 95);
 		    likegems = (likes_gems(ptr) && pctload < 85);
-		    uses_items = (/*!mindless(ptr) && !is_animal(ptr)
-				  && */pctload < 75);
+		    uses_items = (!mindless(ptr) && !is_animal(ptr)
+				  && pctload < 75);
 		    likeobjs = (likes_objs(ptr) && pctload < 75);
 		    likemagic = (likes_magic(ptr) && pctload < 85);
 		    likerock = (throws_rocks(ptr) && pctload < 50 &&
