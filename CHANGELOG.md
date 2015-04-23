@@ -1,5 +1,19 @@
 # Slash'THEM (Rough) ChangeLog
 
+Version 0.5.2 (2015-04-23)
+==========================
+- Finally, definitely, completely kill the trap bug (for real this time.)
+- Spineseeker does an extra d5 damage when it stuns a monster (or player).
+- Disabled enchantable rocks, as the strength + racial bonus does more than eough.
+- Reverted Gauntlets of Power to function as they do in Slash'EM.
+- Stopped drunks from starting with potions of (vampire) blood, cyanide, radium, and Pan Galactic Gargle Blasters.
+- Applied the MSGTYPE patch
+    - Also removed a ton of --More-- Prompts that were added in Slash'EM Extended, as the MSGTYPE patch makes most of these redundant.
+- Applied the While Helpless patch.
+- Fix a leftover in monmove.c that resulted in some monsters searching for objects that they can't use.
+- Prevented roles from randomly starting with Potions of Invulnerability.
+- Removed a confusing prompt when squeezing into a space with a boulder.
+
 Version 0.5.1 (2015-04-21)
 ==========================
 -Wrapped AmyBSOD's Extra Spawning system into a define, disabled by default.  Uncomment MORE_SPAWNS in config.h to re-enable.

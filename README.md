@@ -16,6 +16,8 @@ It's difficulty at the current moment should be much, much easier than Slash'EM 
 
 This should compile fine on Windows (with MinGW) and Unix systems.  I haven't done any testing on other platforms.
 
+Windows (x64) builds are available on the [releases] (https://github.com/Soviet5lo/SlashTHEM/releases) page.
+
 Todo
 ----
 
