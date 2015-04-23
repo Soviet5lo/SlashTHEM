@@ -1063,10 +1063,10 @@ int x;
                 /* robe of weakness and gauntlets of power will cancel */
                 int base = u.acurr.a[x];
                 int bonus = tmp - base;
-                /*boolean nobonus = (uarmg && uarmg->otyp == GAUNTLETS_OF_POWER
-                        && uarm && uarm->otyp == ROBE_OF_WEAKNESS);*/
+                boolean nobonus = (uarmg && uarmg->otyp == GAUNTLETS_OF_POWER
+                        && uarm && uarm->otyp == ROBE_OF_WEAKNESS);
 
-                /*if (uarmg && uarmg->otyp == GAUNTLETS_OF_POWER && !nobonus) {
+                if (uarmg && uarmg->otyp == GAUNTLETS_OF_POWER && !nobonus) {
                         if ((uarmg->spe > 7)
                              || ((118 + bonus + uarmg->spe) > 125)
                              || ((tmp + uarmg->spe) > 125))
@@ -1075,7 +1075,7 @@ int x;
                         else return(118 + uarmg->spe + bonus);
                 } else if (uarm && uarm->otyp == ROBE_OF_WEAKNESS && !nobonus)
                         return(3 + bonus);
-		else*/ return((tmp >= 125) ? 125 : (tmp <= 3) ? 3 : tmp);
+		else return((tmp >= 125) ? 125 : (tmp <= 3) ? 3 : tmp);
 	} else if (x == A_CHA) {
 		if (tmp < 18 && (youmonst.data->mlet == S_NYMPH ||
 		    u.umonnum == PM_SUCCUBUS || u.umonnum == PM_INCUBUS))

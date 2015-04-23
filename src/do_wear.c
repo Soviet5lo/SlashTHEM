@@ -523,9 +523,9 @@ Gloves_on()
 			incr_itimeout(&HFumbling, rnd(20));
 		break;
 	case GAUNTLETS_OF_POWER:
-		/*makeknown(uarmg->otyp);*/
-		/*flags.botl = 1;*/ /* taken care of in attrib.c */
-		adj_abon(uarmg, uarmg->spe);
+		makeknown(uarmg->otyp);
+		flags.botl = 1; /* taken care of in attrib.c */
+		/*adj_abon(uarmg, uarmg->spe);*/
 		break;
 	case GAUNTLETS_OF_DEXTERITY:
 		adj_abon(uarmg, uarmg->spe);
@@ -563,9 +563,9 @@ Gloves_off()
 		HFumbling = EFumbling = 0;
 	    break;
 	case GAUNTLETS_OF_POWER:
-	    /*makeknown(uarmg->otyp);*/
-	    /*flags.botl = 1;*/ /* taken care of in attrib.c */
-	    if (!cancelled_don) adj_abon(uarmg, -uarmg->spe);
+	    makeknown(uarmg->otyp);
+	    flags.botl = 1; /* taken care of in attrib.c */
+	    /*if (!cancelled_don) adj_abon(uarmg, -uarmg->spe);*/
 	    break;
 	case GAUNTLETS_OF_DEXTERITY:
 	    if (!cancelled_don) adj_abon(uarmg, -uarmg->spe);
