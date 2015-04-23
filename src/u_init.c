@@ -5969,12 +5969,13 @@ register struct trobj *trop;
 					|| otyp == POT_VAMPIRE_BLOOD
 					|| otyp == POT_PAN_GALACTIC_GARGLE_BLASTE
 					|| otyp == POT_CYANIDE
-					|| otyp == POT_RADIUM
-					|| otyp == POT_INVULNERABILITY))
+					|| otyp == POT_RADIUM))
+
 
 				/* 'useless' or over powerful items */
 				|| otyp == POT_HALLUCINATION
 				|| otyp == POT_ACID
+				|| otyp == POT_INVULNERABILITY
 				|| otyp == SCR_AMNESIA
 				|| otyp == SCR_FIRE
 				|| otyp == SCR_BLANK_PAPER
