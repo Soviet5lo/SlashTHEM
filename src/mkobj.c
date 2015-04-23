@@ -550,6 +550,7 @@ boolean artif;
 		else if ((otmp->otyp != LUCKSTONE) && (otmp->otyp != HEALTHSTONE) &&
 				!rn2(6)) otmp->quan = 2L;
 		else otmp->quan = 1L;
+#if 0 /* 5lo: Prevents the game from attempting to give an enchantment to rocks */
 		if(!rn2(8)) {
 			otmp->spe = rne(2);
 			if (rn2(2)) otmp->blessed = rn2(2);
@@ -559,6 +560,7 @@ boolean artif;
 			 else	blessorcurse(otmp, 3);
 			otmp->spe = -rne(2);
 		} else	blessorcurse(otmp, 10);
+#endif
 		break;
 /* -----------============STEPHEN WHITE'S NEW CODE============----------- */
 	case TOOL_CLASS:

@@ -920,10 +920,12 @@ ring:
 		if(obj->owornmask & W_BALL)
 			Strcat(bp, " (chained to you)");
 			break;
+#if 0 /* 5lo: Disable rocks being enchantable, stregnth + racial bonus is more than enough */
 	case GEM_CLASS:
 		/*add_erosion_words(obj, prefix);*/
 		goto plus;
 		break;
+#endif
 	}
 	if((obj->owornmask & W_WEP) && !mrg_to_wielded) {
 		if (obj->quan != 1L) {
