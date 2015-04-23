@@ -1654,21 +1654,22 @@ schar ftyp, btyp;
 	    if(crm->typ == btyp) {
 		if(ftyp != CORR || rn2(100)) {
 			crm->typ = ftyp;
-			if(/*nxcor && */!rn2(75))
+			if(nxcor && !rn2(75))
 				(void) mksobj_at(BOULDER, xx, yy, TRUE, FALSE);
-			else if(/*nxcor &&*/ !rn2(40))
-				(void) mkobj_at(0, xx, yy, TRUE);
-			else if(/*nxcor &&*/ !rn2(100)){ 
+			/* 5lo: Allow random engravings, but not the others */
+			else if(nxcor && !rn2(100)){ 
 			    char buf[BUFSZ];
 				const char *mesg = random_engraving(buf);
 			    make_engr_at(xx, yy, mesg, 0L, MARK);
 			}
-			/* else (mktrap(0,1,(struct mkroom *) 0, (coord*) 0) ) ;*/
+#if 0 /* 5lo: This was the terrible code that kept adding traps to corridors, no more I say! */
+			else if(/*nxcor &&*/ !rn2(40))
+				(void) mkobj_at(0, xx, yy, TRUE);
+						/* else (mktrap(0,1,(struct mkroom *) 0, (coord*) 0) ) ;*/
 		    else if(/*nxcor &&*/ !rn2(300)) 
 				(void) maketrap(xx, yy, rndtrap());
 		    else if(/*nxcor &&*/ !rn2(200)) 
 				(void) makemon((struct permonst *)0, xx, yy, NO_MM_FLAGS);
-#if 0 /* Deferred for now */
 		    else if(/*nxcor &&*/ !rn2(20)) 
 				(void) mkfeature(xx, yy);
 #endif
