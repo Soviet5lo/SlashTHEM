@@ -4104,7 +4104,7 @@ doapply()
 		    useup(obj);
 		    pline("Your god-o-meter explodes!");
 			u.ublesscnt += rn2(20);
-			return;
+			return 0;
 			}
 
 		if (Blind) {

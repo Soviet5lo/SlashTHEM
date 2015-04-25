@@ -2384,7 +2384,7 @@ dopois:
 		break;
 	    }
 	    done(DIED);
-	    return; /* lifesaved */
+	    return 0; /* lifesaved */
 
 	}
 	      break;
@@ -3300,7 +3300,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		break;
 	    }
 	    done(DIED);
-	    return; /* lifesaved */
+	    return 0; /* lifesaved */
 
 	}
 		    break;
@@ -3595,7 +3595,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		break;
 	    }
 	    done(DIED);
-	    return; /* lifesaved */
+	    return 0; /* lifesaved */
 
 		}
 		}

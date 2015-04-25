@@ -1223,7 +1223,6 @@ char *
 get_description_of_attack_type(uchar id)
 {
 	switch(id){
-		case AT_ANY: return "fake attack; dmgtype_fromattack wildcard";
 		case AT_NONE: return "passive";
 		case AT_CLAW: return "claw (punch, hit, etc.)";
 		case AT_BITE: return "bite";
@@ -1253,7 +1252,6 @@ char *
 get_description_of_damage_type(uchar id)
 {
 	switch(id){
-		case AD_ANY: return "fake damage; attacktype_fordmg wildcard";
 		case AD_PHYS: return "ordinary physical";
 		case AD_MAGM: return "magic missiles";
 		case AD_FIRE: return "fire damage";

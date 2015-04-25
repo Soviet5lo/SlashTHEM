@@ -3657,7 +3657,7 @@ uchar aatyp;
 		break;
 	    }
 	    done(DIED);
-	    return; /* lifesaved */
+	    return 0; /* lifesaved */
 
 		}
 	      break;
