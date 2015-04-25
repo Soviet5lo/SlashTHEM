@@ -2619,7 +2619,7 @@ struct obj *obj;
 	    return 1;
 	}
 #endif
-	if (Levitation
+	if (Levitation || Flying
 #ifdef STEED
 			|| u.usteed
 #endif
