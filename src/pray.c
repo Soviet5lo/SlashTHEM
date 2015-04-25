@@ -612,7 +612,7 @@ aligntyp resp_god;
 		(void) makemon(mkclass(S_KOP,0), u.ux, u.uy, NO_MM_FLAGS);
 	} /* while */
 
-	if( (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7)) resp_god = A_NONE;
+	if( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna) resp_god = A_NONE;
 	u.ublessed = 0;
 
 	/* changed from tmp = u.ugangr + abs (u.uluck) -- rph */
@@ -1652,7 +1652,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 	if (u.ualign.type != altaralign) {
 	    /* Is this a conversion ? */
 	    /* An unaligned altar in Gehennom will always elicit rejection. */
-	    if (ugod_is_angry() || (altaralign == A_NONE && ( (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7) ) )) {
+	    if (ugod_is_angry() || (altaralign == A_NONE && ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) )) {
 		if(u.ualignbase[A_CURRENT] == u.ualignbase[A_ORIGINAL] &&
 		   altaralign != A_NONE) {
 		    You("have a strong feeling that %s is angry...", u_gname());
@@ -2011,7 +2011,7 @@ prayer_done()		/* M. Stephenson (1.0.3b) */
 	exercise(A_CON, FALSE);
 	return(1);
     }
-    if ( (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7) ) {
+    if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
 	pline("Since you are in Gehennom, %s won't help you.",
 	      align_gname(alignment));
 	/* haltingly aligned is least likely to anger */
@@ -2097,7 +2097,7 @@ turn_undead()
 		return(0);
 	}
 
-	if ( (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7)) {
+	if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna) {
 	    pline("Since you are in Gehennom, %s won't help you.", u_gname());
 	    aggravate();
 	    return(0);

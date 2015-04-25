@@ -3599,13 +3599,13 @@ u_init()
           ini_inv(AlwaysStartItem);
           ini_inv(AlwaysStartItemB);
 #endif /* EASY_MODE */
-	if (!strncmpi(plname, "lostsoul", 8)) { 
+	if (flags.lostsoul && !flags.uberlostsoul) { 
           ini_inv(LostSoulItem);  /* In Angband or TOME these would be scrolls of cure hunger instead of food rations. */
           ini_inv(LostSoulItemX);
           ini_inv(LostSoulItemY);
 	} 
 
-	if (!strncmpi(plname, "uberlostsoul", 12)) { /* lots of items, but you're gonna need them! --Amy */
+	if (flags.uberlostsoul) { /* lots of items, but you're gonna need them! --Amy */
           ini_inv(LostSoulItem);
           ini_inv(LostSoulItemX);
           ini_inv(LostSoulItemY);

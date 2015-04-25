@@ -904,7 +904,7 @@ int tech_no;
 
 			if (u.ualign.record < 0) {
 
-				if ( (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7) ) {
+				if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
 					pline("%s is inaccessible, and Moloch decides to smite you!",u_gname() );
 					u.ublesscnt += rnz(-u.ualign.record);
 					losehp(rnz(-u.ualign.record), "annoying Moloch", KILLED_BY);
@@ -923,7 +923,7 @@ int tech_no;
 /* Imperials cannot use this technique successfully. */
 			} 
 #endif /* ELDER_SCROLLS */
-			else if ( (Inhell && !Race_if(PM_HERETIC) ) || !strncmpi(plname, "Gehenna", 7) ) {
+			else if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
 				pline("%s is inaccessible, and Moloch decides to smite you!",u_gname() );
 				u.ublesscnt += rnz(level_difficulty() + 1 );
 				losehp(rnz(level_difficulty() + 1 ), "trying to contact their deity in Gehennom", KILLED_BY);

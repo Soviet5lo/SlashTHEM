@@ -1137,12 +1137,12 @@ boolean new_game;	/* false => restoring an old game */
 		}
 	}
 
-	if (!strncmpi(plname, "lostsoul", 8) && new_game) { 
+	if (flags.lostsoul && !flags.uberlostsoul && new_game) { 
 	goto_level(&medusa_level, TRUE, FALSE, FALSE); /* inspired by Tome, an Angband mod --Amy */
 	pline("These are the halls of Mandos... err, Medusa. Good luck making your way back up!");
 	}
 
-	if (!strncmpi(plname, "uberlostsoul", 12) && new_game) { 
+	if (flags.uberlostsoul && new_game) { 
 
 	goto_level((&sanctum_level - 1), TRUE, FALSE, FALSE);
 	pline("These are the halls of Mandos... err, Gehennom. Looks nice, huh?");

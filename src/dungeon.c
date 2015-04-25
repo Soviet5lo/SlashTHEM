@@ -1508,7 +1508,7 @@ level_difficulty()
 #ifdef ELDER_SCROLLS
 			    Race_if(PM_IMPERIAL) || 
 #endif /* ELDER_SCROLLS */
-			 !strncmpi(plname, "Gehenna", 7))
+			 flags.gehenna)
 
 			return((xchar) depth(&u.uz) + rn2(u.ulevel) + 2 ); /* may never be bigger than 127 */
 		else

@@ -5265,7 +5265,7 @@ register int	mmflags;
 #ifdef ELDER_SCROLLS
 			    Race_if(PM_IMPERIAL) || 
 #endif /* ELDER_SCROLLS */
-					!strncmpi(plname, "Gehenna", 7)) && is_bat(ptr))
+					flags.gehenna) && is_bat(ptr))
 			    mon_adjust_speed(mtmp, 2, (struct obj *)0);
 			break;
 		case S_VAMPIRE:

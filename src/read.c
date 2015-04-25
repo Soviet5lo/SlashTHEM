@@ -2539,7 +2539,7 @@ register struct obj	*sobj;
 	case SCR_TELEPORTATION:
 		if(confused || sobj->cursed) 
 			{
-		      if (strncmpi(plname, "lostsoul", 8) && strncmpi(plname, "uberlostsoul", 12)) level_tele();
+		      if (!flags.lostsoul && !flags.uberlostsoul) level_tele();
 			else pline("You try to teleport, but fail!");
 			}
 		else {
@@ -2558,7 +2558,7 @@ register struct obj	*sobj;
 		break;
 #if 0 /* 5lo: Removed */
 	case SCR_TELE_LEVEL:
-	      if (strncmpi(plname, "lostsoul", 8) && strncmpi(plname, "uberlostsoul", 12)) level_tele();
+	      if (!flags.lostsoul && !flags.uberlostsoul) level_tele();
 		else pline("Hmm... that level teleport scroll didn't do anything.");
 		known = TRUE;
 		break;
@@ -2566,7 +2566,7 @@ register struct obj	*sobj;
 		known = TRUE;
 		if (u.uevent.udemigod) { pline("You shudder for a moment."); (void) safe_teleds(FALSE); break;}
 
-		if (!strncmpi(plname, "lostsoul", 8) || !strncmpi(plname, "uberlostsoul", 12)) { 
+		if (flags.lostsoul || flags.uberlostsoul) { 
 			pline("You're unable to warp!"); break;}
 
 		make_stunned(HStun + 2, FALSE); /* to suppress teleport control that you might have */

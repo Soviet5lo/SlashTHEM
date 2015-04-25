@@ -106,8 +106,8 @@
 #define EBlinded			u.uprops[BLINDED].extrinsic
 #define Blindfolded		(ublindf && ublindf->otyp != LENSES)
 		/* ...means blind because of a cover */
-#define Blind	((Blinded || EBlinded || Blindfolded || !strncmpi(plname, "Blindfox", 8) || !haseyes(youmonst.data)) && \
-		 !(ublindf && ublindf->oartifact == ART_EYES_OF_THE_OVERWORLD && strncmpi(plname, "Blindfox", 8) ))
+#define Blind	((Blinded || EBlinded || Blindfolded || flags.blindfox || !haseyes(youmonst.data)) && \
+		 !(ublindf && ublindf->oartifact == ART_EYES_OF_THE_OVERWORLD && !flags.blindfox ))
 		/* ...the Eyes operate even when you really are blind
 		    or don't have any eyes */
 /* added possibility of playing the entire game blind --Amy*/
@@ -127,7 +127,7 @@
 #define EHalluc_resistance	u.uprops[HALLUC_RES].extrinsic
 #define Halluc_resistance	(EHalluc_resistance || \
 				 (Upolyd && dmgtype(youmonst.data, AD_HALU)))
-#define Hallucination		((HHallucination && !Halluc_resistance) || (EHallucination && !Halluc_resistance) || !strncmpi(plname, "Hippie", 6) )
+#define Hallucination		((HHallucination && !Halluc_resistance) || (EHallucination && !Halluc_resistance) || flags.hippie )
 /* added possibility of playing the entire game hallucinating --Amy*/
 
 /* Timeout, plus a worn mask */
@@ -225,7 +225,7 @@
 /*** Transportation ***/
 #define HJumping		u.uprops[JUMPING].intrinsic
 #define EJumping		u.uprops[JUMPING].extrinsic
-#define Jumping			(HJumping || EJumping || !strncmpi(plname, "IWBTG", 5) )
+#define Jumping			(HJumping || EJumping || flags.iwbtg)
 
 #define HTeleportation		u.uprops[TELEPORT].intrinsic
 #define ETeleportation		u.uprops[TELEPORT].extrinsic
