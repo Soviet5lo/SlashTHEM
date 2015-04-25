@@ -57,13 +57,15 @@ register struct obj *otmp;
 	case SCR_TAMING:
 	case SCR_TELEPORTATION:
 	case SCR_FLOOD:
+#if 0 /* 5lo: Removed */
 	case SCR_LAVA:
 	case SCR_BARRHING:
 	case SCR_GROWTH:
-	case SCR_ICE:
-	case SCR_CLOUDS:
 	case SCR_TELE_LEVEL:
 	case SCR_WARPING:
+#endif
+	case SCR_ICE:
+	case SCR_CLOUDS:
 	case SCR_MASS_MURDER:
 	case SCR_TRAP_CREATION:
 	case SCR_UNDO_GENOCIDE:
@@ -81,7 +83,9 @@ register struct obj *otmp;
 		return(30);
 /*		break; */
 	case SCR_GAIN_MANA:
+#if 0 /* 5lo: Removed */
 	case SCR_LOCKOUT:
+#endif
 		return(40);
 /*		break; */
 	case SCR_CONSECRATION:

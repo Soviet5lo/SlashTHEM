@@ -481,13 +481,15 @@ struct obj *otmp;
 #define MUSE_WAN_CREATE_HORDE 22
 #define MUSE_POT_VAMPIRE_BLOOD 23
 #define MUSE_WAN_FULL_HEALING 24
-#define MUSE_SCR_TELE_LEVEL 25
-#define MUSE_SCR_ROOT_PASSWORD_DETECTION 26
-#define MUSE_RIN_TIMELY_BACKUP 27
-#define MUSE_SCR_SUMMON_UNDEAD 28
-#define MUSE_WAN_SUMMON_UNDEAD 29
-#define MUSE_SCR_HEALING 30
+#define MUSE_SCR_ROOT_PASSWORD_DETECTION 25
+#define MUSE_RIN_TIMELY_BACKUP 26
+#define MUSE_SCR_SUMMON_UNDEAD 27
+#define MUSE_WAN_SUMMON_UNDEAD 28
+#define MUSE_SCR_HEALING 29
+#if 0 /* 5lo: Removed */
+#define MUSE_SCR_TELE_LEVEL 30
 #define MUSE_SCR_WARPING 31
+#endif
 /*
 #define MUSE_INNATE_TPT 9999
  * We cannot use this.  Since monsters get unlimited teleportation, if they
@@ -754,7 +756,7 @@ struct monst *mtmp;
 			m.defensive = obj;
 			m.has_defense = MUSE_SCR_ROOT_PASSWORD_DETECTION;
 		}
-
+#if 0 /* 5lo: Removed */
 		nomore(MUSE_SCR_TELE_LEVEL);
 		if(obj->otyp == SCR_TELE_LEVEL
 		   && (!(mtmp->isshk && inhishop(mtmp))
@@ -770,7 +772,7 @@ struct monst *mtmp;
 			m.defensive = obj;
 			m.has_defense = MUSE_SCR_WARPING;
 		}
-
+#endif
 		nomore(MUSE_RIN_TIMELY_BACKUP);
 		if(obj->otyp == RIN_TIMELY_BACKUP) {
 			m.defensive = obj;
@@ -989,6 +991,7 @@ mon_tele:
 		} else goto mon_tele;
 		return 2;
 	    }
+#if 0 /* 5lo: Removed */
 	case MUSE_SCR_TELE_LEVEL:
 	    {
 		if (mtmp->isshk || mtmp->isgd || mtmp->ispriest) return 2;
@@ -1032,6 +1035,7 @@ mon_tele:
 
 		return 2;
 	    }
+#endif
 	case MUSE_SCR_ROOT_PASSWORD_DETECTION:
 	    {
 		if (mtmp->isshk || mtmp->isgd || mtmp->ispriest) return 2;
@@ -1577,7 +1581,7 @@ struct monst *mtmp;
 			|| pm->mlet == S_KOP
 # endif
 		) return 0;
-	switch (rn2(21)) {
+	switch (rn2(20)) {
 
 		case 0: return SCR_TELEPORTATION;
 		case 1: return POT_HEALING;
@@ -1595,12 +1599,14 @@ struct monst *mtmp;
 		case 13: return WAN_CREATE_HORDE;
 		case 14: return POT_VAMPIRE_BLOOD;
 		case 15: return WAN_FULL_HEALING;
-		case 16: return SCR_TELE_LEVEL;
-		case 17: return SCR_ROOT_PASSWORD_DETECTION;
-		case 18: return RIN_TIMELY_BACKUP;
-		case 19: return WAN_SUMMON_UNDEAD;
-		case 20: return SCR_HEALING;
-		case 21: return SCR_WARPING;
+		case 16: return SCR_ROOT_PASSWORD_DETECTION;
+		case 17: return RIN_TIMELY_BACKUP;
+		case 18: return WAN_SUMMON_UNDEAD;
+		case 19: return SCR_HEALING;
+#if 0 /* 5lo: Removed */
+		case 20: return SCR_WARPING;
+		case 11: return SCR_TELE_LEVEL;
+#endif
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -1634,15 +1640,16 @@ struct monst *mtmp;
 #define MUSE_SCR_TRAP_CREATION 25
 #define MUSE_WAN_TRAP_CREATION 26
 #define MUSE_SCR_FLOOD 27
-#define MUSE_SCR_LAVA 28
-#define MUSE_SCR_GROWTH 29
-#define MUSE_SCR_ICE 30
-#define MUSE_SCR_CLOUDS 31
-#define MUSE_SCR_BARRHING 32
-#define MUSE_WAN_SOLAR_BEAM 33
+#define MUSE_SCR_ICE 28
+#define MUSE_SCR_CLOUDS 29
+#define MUSE_WAN_SOLAR_BEAM 30
+#if 0 /* 5lo: Removed these */
+#define MUSE_SCR_BARRHING 31
+#define MUSE_SCR_LAVA 32
+#define MUSE_SCR_GROWTH 33
 #define MUSE_SCR_LOCKOUT 34
-/*#define MUSE_WAN_BANISHMENT 35*/
-
+#define MUSE_WAN_BANISHMENT 35
+#endif
 /* Select an offensive item/action for a monster.  Returns TRUE iff one is
  * found.
  */
@@ -1806,6 +1813,7 @@ struct monst *mtmp;
 			m.offensive = obj;
 			m.has_offense = MUSE_SCR_FLOOD;
 		}
+#if 0 /* 5lo: Removed */
 		nomore(MUSE_SCR_LAVA);
 		if(obj->otyp == SCR_LAVA) {
 			m.offensive = obj;
@@ -1821,6 +1829,12 @@ struct monst *mtmp;
 			m.offensive = obj;
 			m.has_offense = MUSE_SCR_GROWTH;
 		}
+		nomore(MUSE_SCR_BARRHING);
+		if(obj->otyp == SCR_BARRHING) {
+			m.offensive = obj;
+			m.has_offense = MUSE_SCR_BARRHING;
+		}
+#endif
 		nomore(MUSE_SCR_ICE);
 		if(obj->otyp == SCR_ICE) {
 			m.offensive = obj;
@@ -1830,11 +1844,6 @@ struct monst *mtmp;
 		if(obj->otyp == SCR_CLOUDS) {
 			m.offensive = obj;
 			m.has_offense = MUSE_SCR_CLOUDS;
-		}
-		nomore(MUSE_SCR_BARRHING);
-		if(obj->otyp == SCR_BARRHING) {
-			m.offensive = obj;
-			m.has_offense = MUSE_SCR_BARRHING;
 		}
 		nomore(MUSE_WAN_TRAP_CREATION);
 		if(obj->otyp == WAN_TRAP_CREATION) {
@@ -2254,7 +2263,7 @@ struct monst *mtmp;
 		m_useup(mtmp, otmp);	/* otmp might be free'ed */
 
 		return 2;
-
+#if 0 /* 5lo: Removed */
 	case MUSE_SCR_LAVA:
 
 		mreadmsg(mtmp, otmp);
@@ -2342,6 +2351,34 @@ struct monst *mtmp;
 
 		return 2;
 
+	case MUSE_SCR_BARRHING:
+
+		mreadmsg(mtmp, otmp);
+		makeknown(otmp->otyp);
+
+			int madepoolF = 0;
+			int xF,yF,safe_posF=0;
+			do_clear_areaX(u.ux, u.uy, 5, do_barfloodd, (genericptr_t)&madepoolF);
+
+			/* check if there are safe tiles around the player */
+			for (xF = u.ux-1; xF <= u.ux+1; xF++) {
+				for (yF = u.uy - 1; yF <= u.uy + 1; yF++) {
+					if (xF != u.ux && yF != u.uy &&
+					    goodpos(xF, yF, &youmonst, 0)) {
+						safe_posF++;
+					}
+				}
+			}
+
+			if (madepoolF)
+				pline(Hallucination ?
+						"Aw shit, this feels like being in a jail!" :
+						"Iron bars shoot up from the ground!" );
+
+		m_useup(mtmp, otmp);	/* otmp might be free'ed */
+
+		return 2;
+#endif
 	case MUSE_SCR_ICE:
 
 		mreadmsg(mtmp, otmp);
@@ -2393,34 +2430,6 @@ struct monst *mtmp;
 				pline(Hallucination ?
 						"Wow! Floating clouds..." :
 						"Foggy clouds appear out of thin air!" );
-
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		return 2;
-
-	case MUSE_SCR_BARRHING:
-
-		mreadmsg(mtmp, otmp);
-		makeknown(otmp->otyp);
-
-			int madepoolF = 0;
-			int xF,yF,safe_posF=0;
-			do_clear_areaX(u.ux, u.uy, 5, do_barfloodd, (genericptr_t)&madepoolF);
-
-			/* check if there are safe tiles around the player */
-			for (xF = u.ux-1; xF <= u.ux+1; xF++) {
-				for (yF = u.uy - 1; yF <= u.uy + 1; yF++) {
-					if (xF != u.ux && yF != u.uy &&
-					    goodpos(xF, yF, &youmonst, 0)) {
-						safe_posF++;
-					}
-				}
-			}
-
-			if (madepoolF)
-				pline(Hallucination ?
-						"Aw shit, this feels like being in a jail!" :
-						"Iron bars shoot up from the ground!" );
 
 		m_useup(mtmp, otmp);	/* otmp might be free'ed */
 
@@ -2738,7 +2747,7 @@ struct monst *mtmp;
 			|| pm->mlet == S_KOP
 # endif
 		) return 0;
-	switch (rn2(33)) {
+	switch (rn2(29)) {
 
 		case 0: return WAN_DEATH;
 		case 1: return WAN_SLEEP;
@@ -2766,14 +2775,16 @@ struct monst *mtmp;
 		case 23: return SCR_TRAP_CREATION;
 		case 24: return WAN_TRAP_CREATION;
 		case 25: return SCR_FLOOD;
-		case 26: return SCR_LAVA;
-		case 27: return SCR_GROWTH;
-		case 28: return SCR_ICE;
-		case 29: return SCR_CLOUDS;
-		case 30: return SCR_BARRHING;
-		case 31: return WAN_SOLAR_BEAM;
+		case 26: return SCR_ICE;
+		case 27: return SCR_CLOUDS;
+		case 28: return WAN_SOLAR_BEAM;
+#if 0
+		case 29: return SCR_LAVA;
+		case 30: return SCR_GROWTH;
+		case 31: return SCR_BARRHING;
 		case 32: return SCR_LOCKOUT;
-		/*case 33: return WAN_BANISHMENT;*/
+		case 33: return WAN_BANISHMENT;
+#endif
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -3300,7 +3311,11 @@ struct obj *obj;
 		return TRUE;
 	    break;
 	case SCROLL_CLASS:
-	    if (typ == SCR_TELEPORTATION || typ == SCR_HEALING || typ == SCR_TELE_LEVEL || typ == SCR_WARPING || typ == SCR_ROOT_PASSWORD_DETECTION || typ == SCR_CREATE_MONSTER || typ == SCR_SUMMON_UNDEAD || typ == SCR_FLOOD || typ == SCR_LAVA || typ == SCR_LOCKOUT || typ == SCR_GROWTH || typ == SCR_ICE || typ == SCR_CLOUDS || typ == SCR_BARRHING || typ == SCR_EARTH || typ == SCR_TRAP_CREATION)
+	    if (typ == SCR_TELEPORTATION || typ == SCR_HEALING || typ == SCR_ROOT_PASSWORD_DETECTION || typ == SCR_CREATE_MONSTER || typ == SCR_SUMMON_UNDEAD || typ == SCR_FLOOD || typ == SCR_ICE || typ == SCR_CLOUDS ||typ == SCR_EARTH || typ == SCR_TRAP_CREATION
+#if 0 /* Removed */
+typ == SCR_TELE_LEVEL || typ == SCR_WARPING || typ == SCR_LAVA || typ == SCR_LOCKOUT || typ == SCR_GROWTH || typ == SCR_BARRHING
+#endif
+		)
 		return TRUE;
 	    break;
 	case AMULET_CLASS:

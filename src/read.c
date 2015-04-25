@@ -2211,6 +2211,9 @@ register struct obj	*sobj;
 		}
 	break;
 
+
+#if 0 /* 5lo: Removed */
+
 	case SCR_LOCKOUT:
 		known = TRUE;
 		if (confused) {
@@ -2255,7 +2258,6 @@ register struct obj	*sobj;
 		}
 
 	break;
-
 
 	case SCR_LAVA:
 		known = TRUE;
@@ -2339,6 +2341,49 @@ register struct obj	*sobj;
 
 	break;
 
+	case SCR_BARRHING:
+		known = TRUE;
+		if (confused) {
+			/* remove lava from vicinity of player */
+			int maderoom = 0;
+			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
+					undo_barflood, (genericptr_t)&maderoom);
+			if (maderoom) {
+				known = TRUE;
+				You("have a sense of freedom.");
+			}
+		} else {
+			int madepool = 0;
+			int stilldry = -1;
+			int x,y,safe_pos=0;
+				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_barflood,
+						(genericptr_t)&madepool);
+
+			/* check if there are safe tiles around the player */
+			for (x = u.ux-1; x <= u.ux+1; x++) {
+				for (y = u.uy - 1; y <= u.uy + 1; y++) {
+					if (x != u.ux && y != u.uy &&
+					    goodpos(x, y, &youmonst, 0)) {
+						safe_pos++;
+					}
+				}
+			}
+
+			/* we do not put these on the player's position. */
+			if (!madepool && stilldry)
+				break;
+			if (madepool)
+				pline(Hallucination ?
+						"Aw shit, this feels like being in a jail!" :
+						"Iron bars shoot up from the ground!" );
+			known = TRUE;
+			break;
+		}
+
+	break;
+
+#endif
+
 	case SCR_ICE:
 		known = TRUE;
 		if (confused) {
@@ -2415,47 +2460,6 @@ register struct obj	*sobj;
 				pline(Hallucination ?
 						"Wow! Floating clouds..." :
 						"Foggy clouds appear out of thin air!" );
-			known = TRUE;
-			break;
-		}
-
-	break;
-
-	case SCR_BARRHING:
-		known = TRUE;
-		if (confused) {
-			/* remove lava from vicinity of player */
-			int maderoom = 0;
-			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
-					undo_barflood, (genericptr_t)&maderoom);
-			if (maderoom) {
-				known = TRUE;
-				You("have a sense of freedom.");
-			}
-		} else {
-			int madepool = 0;
-			int stilldry = -1;
-			int x,y,safe_pos=0;
-				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_barflood,
-						(genericptr_t)&madepool);
-
-			/* check if there are safe tiles around the player */
-			for (x = u.ux-1; x <= u.ux+1; x++) {
-				for (y = u.uy - 1; y <= u.uy + 1; y++) {
-					if (x != u.ux && y != u.uy &&
-					    goodpos(x, y, &youmonst, 0)) {
-						safe_pos++;
-					}
-				}
-			}
-
-			/* we do not put these on the player's position. */
-			if (!madepool && stilldry)
-				break;
-			if (madepool)
-				pline(Hallucination ?
-						"Aw shit, this feels like being in a jail!" :
-						"Iron bars shoot up from the ground!" );
 			known = TRUE;
 			break;
 		}
@@ -2552,6 +2556,7 @@ register struct obj	*sobj;
 				known = TRUE;
 		}
 		break;
+#if 0 /* 5lo: Removed */
 	case SCR_TELE_LEVEL:
 	      if (strncmpi(plname, "lostsoul", 8) && strncmpi(plname, "uberlostsoul", 12)) level_tele();
 		else pline("Hmm... that level teleport scroll didn't do anything.");
@@ -2570,6 +2575,7 @@ register struct obj	*sobj;
 		else {(void) safe_teleds(FALSE); goto_level(&portal_level, TRUE, FALSE, FALSE); level_tele(); }
 
 		break;
+#endif
 	case SCR_GOLD_DETECTION:
 		if (confused || sobj->cursed) return(trap_detect(sobj));
 		else return(gold_detect(sobj));

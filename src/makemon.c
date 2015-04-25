@@ -2152,8 +2152,9 @@ register struct monst *mtmp;
 
 		} else if (mm == PM_DEATH_METAL_FREAK){
 			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
+#if 0 /* 5lo: Removed */
 			(void)mongets(mtmp, SCR_LOCKOUT);
-
+#endif
 			otmp = mksobj(rnd_class(ORCISH_DAGGER,HAWAIIAN_SHIRT-1),
 				      TRUE, FALSE);
 			otmp->quan = 1;
@@ -2176,13 +2177,13 @@ register struct monst *mtmp;
 
 			if (mtmp->female) (void)mongets(mtmp, VICTORIAN_UNDERWEAR);
 			else (void)mongets(mtmp, RUFFLED_SHIRT);
-
+#if 0	/* 5lo: Removed */
 			otmp = mksobj(rnd_class(SCR_LAVA,SCR_LOCKOUT),
 				      TRUE, FALSE);
 			otmp->quan = 1;
 			otmp->owt = weight(otmp);
 			(void) mpickobj(mtmp, otmp);
-
+#endif
 			if (!rn2(100) ) {
 
 			otmp = mksobj(rnd_class(HAWAIIAN_SHIRT,LEVITATION_BOOTS),
@@ -2196,7 +2197,7 @@ register struct monst *mtmp;
 
 			if (mtmp->female) (void)mongets(mtmp, VICTORIAN_UNDERWEAR);
 			else (void)mongets(mtmp, RUFFLED_SHIRT);
-
+#if 0 /* 5lo: Removed */
 			otmp = mksobj(rnd_class(SCR_LAVA,SCR_LOCKOUT), TRUE, FALSE);
 			otmp->quan = 1;
 			otmp->owt = weight(otmp);
@@ -2237,7 +2238,7 @@ register struct monst *mtmp;
 			otmp->quan = 1;
 			otmp->owt = weight(otmp);
 			(void) mpickobj(mtmp, otmp);
-
+#endif
 			if (!rn2(100) ) {
 
 			otmp = mksobj(rnd_class(HAWAIIAN_SHIRT,LEVITATION_BOOTS),
@@ -2249,7 +2250,9 @@ register struct monst *mtmp;
 
 		} else if (mm == PM_DEATH_METAL_DRUMMER){
 			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
+#if 0 /* 5lo: Removed */
 			(void)mongets(mtmp, SCR_LOCKOUT);
+#endif
 		     (void)mongets(mtmp, SUBMACHINE_GUN);
 			 m_initthrow(mtmp, BULLET, 50);
 			 m_initthrow(mtmp, BULLET, 50);
@@ -2271,11 +2274,13 @@ register struct monst *mtmp;
 
 		} else if (mm == PM_DEATH_METAL_ORCHESTRA_LEADER){
 			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
+#if 0 /* 5lo: Removed */
 			(void)mongets(mtmp, SCR_LOCKOUT);
 			(void)mongets(mtmp, SCR_LOCKOUT);
 			(void)mongets(mtmp, SCR_LOCKOUT);
 			(void)mongets(mtmp, SCR_LOCKOUT);
 			(void)mongets(mtmp, SCR_LOCKOUT);
+#endif
 		     (void)mongets(mtmp, HEAVY_MACHINE_GUN);
 			 m_initthrow(mtmp, BULLET, 50);
 			 m_initthrow(mtmp, BULLET, 50);
