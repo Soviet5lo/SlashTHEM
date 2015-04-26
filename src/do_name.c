@@ -2955,13 +2955,12 @@ rndmonnam()
 {
 	int name;
 
-	/*do {*/
-	    name = rn1(NUMMONS + SIZE(bogusmons) - LOW_PM, LOW_PM);
-	/*} while (name < NUMMONS &&
-	    (type_is_pname(&mons[name]) || (mons[name].geno & G_NOGEN)));*/
-/* All monster names should be possible, even unique and genocided ones. This adds more variety. --Amy */
+	do {
+	    name = rn1(SPECIAL_PM + SIZE(bogusmons) - LOW_PM, LOW_PM);
+	} while (name < SPECIAL_PM &&
+	    (type_is_pname(&mons[name]) || (mons[name].geno & G_NOGEN)));
 
-	if (name >= NUMMONS) return bogusmons[name - NUMMONS];
+	if (name >= SPECIAL_PM) return bogusmons[name - SPECIAL_PM];
 	return mons[name].mname;
 }
 
