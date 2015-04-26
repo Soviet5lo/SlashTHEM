@@ -554,16 +554,34 @@ rndghostname()
 
 static const char * const plrmonnames[] = {
 
-"Wolf", "Big Bear", "Ryu", "Tacitus", "Urbaldi", "Pete", "Lex", "Denshi Gasu", "Mr. Black", "Tiger's Claw", "Katzou", "Mohmar Deathstrike", "Ingo", "Septimus", "Martius", "Faster-Than-All-Others", "Senator Antius", "H.", "Pokoh", "Davide", "Aee", "Doctor Maex", "Marc", "Arno", "Hailbush", "Romann", "Siegfried", "Roy", "G-cheater", "Bastian", "Nicyan", "Queelix", "Miesael", "Honno", "Robin", "JNR", "Lars", "Tommy", "Giglio", "Kastortransport", "Larry", "Morton", "Iggy", "Lemmy", "Ludwig", "Oberdan", "Len-kind", "Ilie", "Till", "Tomas", "Nikolob", "Tillbull"
-
+	"Wolf", "Big Bear", "Ryu", "Tacitus", "Urbaldi", "Pete", "Lex", "Denshi Gasu",
+	"Mr. Black", "Tiger's Claw", "Katzou", "Mohmar Deathstrike", "Ingo", "Septimus",
+	"Martius", "Faster-Than-All-Others", "Senator Antius", "H.", "Pokoh", "Davide",
+	"Aee", "Doctor Maex", "Marc", "Arno", "Hailbush", "Romann", "Siegfried", "Roy",
+	"G-cheater", "Bastian", "Nicyan", "Queelix", "Miesael", "Honno", "Robin", "JNR",
+	"Lars", "Tommy", "Giglio", "Kastortransport", "Larry", "Morton", "Iggy", "Lemmy",
+	"Ludwig", "Oberdan", "Len-kind", "Ilie", "Till", "Tomas", "Nikolob", "Tillbull"
 };
 
 /* it's obvious that I seem to be better at making up female names ;) */
 
 static const char * const plrmonnamesfemale[] = {
 
-"JoJo", "Jyllia", "Sabrina", "Sabine", "Yvara", "Lenka", "Evita", "Liebea", "Isolde", "Elli", "Vilja", "Sunija", "Rhea", "Jasmin", "Erosina", "Irmina", "Melirija", "Larissa", "Sysette", "Miss Haskill", "Elenya", "Golden Mary", "Lara", "Sandrina", "Tonilia", "Claire", "Lumia", "Lahira", "Estrella", "Maricia", "Sontaire", "Marje", "Jill", "Trycja", "Kersey", "Sally", "Hannya", "Svantje", "Jynnifyr", "Elke", "Rinka", "Nicoletta", "Betti", "Ina", "Heikipa", "Jora", "Maitine", "Esruth", "Verene", "Lousie", "Irinella", "Amandina", "Lillie", "Leodoch", "Mirella", "Fisoa", "Suesska", "Ann", "Nurisha", "Desiree", "Birgit", "Elsbeth", "Lamy", "Lissie", "Arabella", "Anastasia", "Henrietta", "Katrin", "Jana", "Aniya", "Yasni", "Almina", "Xeni", "Mirri", "Eleanor", "Kirja", "Inge", "Helli", "Lucia", "Viktorija", "Simona", "Natalyana", "Krista", "Nellina", "Raidara", "Vera", "Noko", "Jasajeen", "Marika", "Merbek", "Marianna", "Sinja", "Rodotha", "Natinya", "Aline", "Michaela", "Mare", "Noenoe", "Tschulia", "Lea", "Sarah", "Charravalga", "Fridrika", "Great Jaguar Claw", "Lynette", "Celina", "Irya", "Mariya", "Wendy", "Katia", "Tanja", "Vanessa", "Anne", "Lena", "Jeanetta", "Rungud", "Melissa", "Everella", "Madeleine", "Anita", "Nina", "Natascha", "Manola", "Litta", "Kiwi", "Maja", "Natalje", "Little Marie" 
-
+	"JoJo", "Jyllia", "Sabrina", "Sabine", "Yvara", "Lenka", "Evita", "Liebea", "Isolde",
+	"Elli", "Vilja", "Sunija", "Rhea", "Jasmin", "Erosina", "Irmina", "Melirija", "Larissa",
+	"Sysette", "Miss Haskill", "Elenya", "Golden Mary", "Lara", "Sandrina", "Tonilia", "Claire",
+	"Lumia", "Lahira", "Estrella", "Maricia", "Sontaire", "Marje", "Jill", "Trycja", "Kersey",
+	"Sally", "Hannya", "Svantje", "Jynnifyr", "Elke", "Rinka", "Nicoletta", "Betti", "Ina",
+	"Heikipa", "Jora", "Maitine", "Esruth", "Verene", "Lousie", "Irinella", "Amandina", "Lillie",
+	"Leodoch", "Mirella", "Fisoa", "Suesska", "Ann", "Nurisha", "Desiree", "Birgit", "Elsbeth",
+	"Lamy", "Lissie", "Arabella", "Anastasia", "Henrietta", "Katrin", "Jana", "Aniya", "Yasni",
+	"Almina", "Xeni", "Mirri", "Eleanor", "Kirja", "Inge", "Helli", "Lucia", "Viktorija", "Simona",
+	"Natalyana", "Krista", "Nellina", "Raidara", "Vera", "Noko", "Jasajeen", "Marika", "Merbek",
+	"Marianna", "Sinja", "Rodotha", "Natinya", "Aline", "Michaela", "Mare", "Noenoe", "Tschulia",
+	"Lea", "Sarah", "Charravalga", "Fridrika", "Great Jaguar Claw", "Lynette", "Celina", "Irya",
+	"Mariya", "Wendy", "Katia", "Tanja", "Vanessa", "Anne", "Lena", "Jeanetta", "Rungud", "Melissa",
+	"Everella", "Madeleine", "Anita", "Nina", "Natascha", "Manola", "Litta", "Kiwi", "Maja", "Natalje",
+	"Little Marie" 
 };
 
 /* the following functions are used by makemon.c */
