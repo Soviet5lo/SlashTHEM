@@ -549,7 +549,7 @@ bot2str(char *newbot2)
 		nb = newbot2;
 
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	Strcat(nb = eos(newbot2), "HP");
+	Strcat(nb = eos(newbot2), "HP:");
 	curs(WIN_STATUS, 1, 1);
 	putstr(WIN_STATUS, 0, newbot2);
 	flags.botlx = 0;
@@ -557,23 +557,24 @@ bot2str(char *newbot2)
 	Sprintf(nb = eos(nb), "%d(%d)", hp, hpmax);
 	apply_color_option(percentage_color_of(hp, hpmax, hp_colors), newbot2);
 #else
-	Sprintf(nb = eos(nb), "HP%d(%d)", hp, hpmax);
+	Sprintf(nb = eos(nb), "HP:%d(%d)", hp, hpmax);
 #endif
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	Strcat(nb = eos(nb), " Pw");
+	Strcat(nb = eos(nb), " Pw:");
 	curs(WIN_STATUS, 1, 1);
 	putstr(WIN_STATUS, 0, newbot2);
 
 	Sprintf(nb = eos(nb), "%d(%d)", u.uen, u.uenmax);
 	apply_color_option(percentage_color_of(u.uen, u.uenmax, pw_colors), newbot2);
 #else
-	Sprintf(nb = eos(nb), " Pw%d(%d)", u.uen, u.uenmax);
+	Sprintf(nb = eos(nb), " Pw:%d(%d)", u.uen, u.uenmax);
 #endif
-	Sprintf(nb = eos(nb), " AC%d", u.uac);
+	Sprintf(nb = eos(nb), " AC:%d", u.uac);
 
-	Sprintf(nb = eos(nb), " MC%d", magic_negationX(&youmonst));
-
+	Sprintf(nb = eos(nb), " MC:%d", magic_negationX(&youmonst));
+#if 0 /* 5lo: No reason to show this, really */
 	Sprintf(nb = eos(nb), " Mov%d", youmonst.data->mmove);
+#endif
 
 	if (Upolyd)
 		Sprintf(nb = eos(nb), " HD:%d", ((u.ulycn == u.umonnum) ? 
@@ -646,68 +647,72 @@ bot2str(char *newbot2)
 #endif
 	if(Confusion)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	     	add_colored_text("Conf", newbot2);
+		add_colored_text(bot2_abbrev >= 2 ? "Cnf" : "Conf", newbot2);
 #else
-		Strcat(nb = eos(nb), " Conf");
+ 		Sprintf(nb = eos(nb), bot2_abbrev >= 2 ? " Cnf" : " Conf");
 #endif
 	if(Sick) {
 		if (u.usick_type & SICK_VOMITABLE)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-			add_colored_text("FoodPois", newbot2);
+			add_colored_text(bot2_abbrev >= 2 ? "FPs" 
+					: "FoodPois", newbot2);
 #else
-			Strcat(nb = eos(nb), " FoodPois");
+ 			   Sprintf(nb = eos(nb),
+ 			     bot2_abbrev >= 2 ? " FPs" : " FoodPois");
 #endif
 		if (u.usick_type & SICK_NONVOMITABLE)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
 			add_colored_text("Ill", newbot2);
 #else
-			Strcat(nb = eos(nb), " Ill");
+			Sprintf(nb = eos(nb), " Ill");
 #endif
 	}
 
 	if(Blind)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	     	add_colored_text("Blind", newbot2);
+		add_colored_text(bot2_abbrev >= 2 ? "Bnd" : "Blind", newbot2);
 #else
-		Strcat(nb = eos(nb), " Blind");
+ 		Sprintf(nb = eos(nb), bot2_abbrev >= 2 ? " Bnd" : " Blind");
 #endif
-	if(sengr_at("Elbereth", u.ux, u.uy))
+ 	if(sengr_at("Elbereth", u.ux, u.uy))
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	     	add_colored_text("Elbereth", newbot2);
+		add_colored_text(bot2_abbrev >= 2 ? "Elb" : "Elbereth", newbot2);
 #else
-		Strcat(nb = eos(nb), " Elbereth");
+ 		Sprintf(nb = eos(nb), bot2_abbrev >= 2 ? " Elb" : " Elbereth");
 #endif
 	/* Yes I know, this should have a "is the player blind?" check. But I'm lenient. --Amy */
 
 	if(Stunned)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	     	add_colored_text("Stun", newbot2);
+		add_colored_text(bot2_abbrev >= 2 ? "Stn" : "Stun", newbot2);
 #else
-		Strcat(nb = eos(nb), " Stun");
+ 		Sprintf(nb = eos(nb), bot2_abbrev >= 2 ? " Stn" : " Stun");
 #endif
 	if(Hallucination)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	     	add_colored_text("Hallu", newbot2);
+		add_colored_text(bot2_abbrev >= 2 ? "Hal" : "Hallu", newbot2);
 #else
-		Strcat(nb = eos(nb), " Hallu");
+ 		Sprintf(nb = eos(nb), bot2_abbrev >= 2 ? " Hal" : " Hallu");
 #endif
 	if(Slimed)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	     	add_colored_text("Slime", newbot2);
+		add_colored_text(bot2_abbrev >= 2 ? "Slm" : "Slime", newbot2);
 #else
-		Strcat(nb = eos(nb), " Slime");
+ 		Sprintf(nb = eos(nb), bot2_abbrev >= 2 ? " Slm" : " Slime");
 #endif
 	if(u.ustuck && !u.uswallow && !sticks(youmonst.data))
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	     	add_colored_text("Held", newbot2);
+		add_colored_text("Held", newbot2);
 #else
-		Strcat(nb = eos(nb), " Held");
+ 		Sprintf(nb = eos(nb), " Held");
 #endif
 	if(cap > UNENCUMBERED)
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-		add_colored_text(enc_stat[cap], newbot2);
+		add_colored_text(bot2_abbrev >= 2 ? enc_abbrev_stat[cap] : 
+				enc_stat[cap], newbot2);
 #else
-		Sprintf(nb = eos(nb), " %s", enc_stat[cap]);
+ 		Sprintf(nb = eos(nb), " %s",
+ 		  bot2_abbrev >= 2 ? enc_abbrev_stat[cap] : enc_stat[cap]);
 #endif
 }
 
@@ -770,18 +775,13 @@ const char *str;
 unsigned int len;
 {
     static char cbuf[MAXCO];
-#if 0 /* 5lo: To fix color bleed issue - causes status bar to disappear */
     for(bot2_abbrev = 1; bot2_abbrev <= 4; bot2_abbrev++) {
 	bot2str(cbuf);
 	if (strlen(cbuf) <= len)
 	    break;
     }
-#endif
-    bot2_abbrev = 5;
-#if 0 /* 5lo: Related to the above */
     if (bot2_abbrev > 4)
 	cbuf[len] = '\0';	/* If all else fails, truncate the line */
-#endif
     bot2_abbrev = 0;
     return cbuf;
 }
