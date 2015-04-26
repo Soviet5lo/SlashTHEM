@@ -479,15 +479,15 @@ const struct Role roles[] = {
 },
 
 {	{"Firefighter", 0}, {
-	{"Hazard Trainee",         0},
-	{"Brigade Runner",       0},
-	{"Watercannon User",       0},
+	{"Water Boy",         "Water Girl"},
+	{"Fire Cadet",       0},
+	{"Rookie",       0},
 	{"Extinguisher",     0},
-	{"Forest Fire Specialist",       0},
-	{"Anti-Flame Fighter",      0},
-	{"Fire Leader",   0},
-	{"Flash Fire Deleter", 0},
-	{"Eternal Firefighter",  0} },
+	{"Smokeeater",       0},
+	{"Fire Captain",      0},
+	{"Platoon Chief",   0},
+	{"Division Commander", 0},
+	{"Fire Chief",  0} },
 	"Prometheus", "Thor", "Arson", /* Fire */
 	"Fir", "Fire-Brigade Base", "Smokey Forest",
 	PM_FIREFIGHTER, NON_PM, PM_UNDEAD_FIREFIGHTER, NON_PM, PM_LITTLE_DOG,
