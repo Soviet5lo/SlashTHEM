@@ -1950,6 +1950,15 @@ tty_putstr(window, attr, str)
 	((cw->flags & WIN_CANCELLED) && (cw->type != NHW_MESSAGE)))
 		return;
     if(cw->type != NHW_MESSAGE)
+#if 0 /* Alternate way - Causes segfaults */
+    /* [BarclayII] looks like STATUSCOLORS patch is not compatible with status
+     * compressing...Temporarily disabled status string compression */
+    if(cw->type != NHW_MESSAGE
+#ifdef STATUS_COLORS
+	    && iflags.use_status_colors && window != WIN_STATUS
+#endif
+    )
+#endif
 		str = compress_str(str);
 
     ttyDisplay->lastwin = window;
