@@ -462,6 +462,10 @@ A("the Pen of the Void",	ATHAME,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,
 	0,	A_NONE, PM_BINDER, NON_PM, 2000L),
 
+A("The Gambler's Suit",		EXPENSIVE_SUIT,
+	(SPFX_RESTR|SPFX_PROTEC|SPFX_LUCK), 0, 0,
+	NO_ATTK,	NO_DFNS,	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 1000L ),
+
 #ifdef P_SPOON
 A("Houchou",                SPOON,
 	(SPFX_RESTR), 0, 0,

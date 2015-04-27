@@ -668,6 +668,7 @@ Shirt_on()
 		ABON(A_CHA) += 2;
 		break;
 	case EXPENSIVE_SUIT:
+		if(uarmu->oartifact == ART_GAMBLER_S_SUIT) ABON(A_CHA) += 3; /* Give an extra bonus */
 		ABON(A_CHA) += 2;
 		break;
 	default: impossible(unknown_type, c_shirt, uarmu->otyp);
@@ -695,6 +696,7 @@ Shirt_off()
 	     ABON(A_CHA) -= 2;
 	     break;
 	case EXPENSIVE_SUIT:
+	     if(uarmu->oartifact == ART_GAMBLER_S_SUIT) ABON(A_CHA) -= 3;
 	     ABON(A_CHA) -= 2;
 	     break;
 	default: impossible(unknown_type, c_shirt, uarmu->otyp);
