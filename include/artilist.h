@@ -263,6 +263,10 @@ A("Poseidon's Treasure",	TRIDENT,
 	(SPFX_RESTR|SPFX_ATTK), 0, 0,
 	ELEC(10, 10),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_DIVER, NON_PM, 2000L ),
 
+A("Gladius",		SHORT_SWORD,
+	(SPFX_RESTR), 0, 0,
+	PHYS(8,7),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_GLADIATOR, NON_PM, 1500L ),
+
 A("Debugger",       ATHAME,
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
     ELEC(5,5),  ELEC(0,0), NO_CARY,     0, A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 400L ),
@@ -768,10 +772,10 @@ A("The Treasury of Proteus",	CHEST,
 	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
 	0,	A_CHAOTIC,	 PM_PIRATE, NON_PM, 2500L ),
 
-A("Imperial Token", FEDORA, /* sorry Fyr, making the rings work correctly would be a major pain in the butt --Amy */
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DEFN), 0, 0,
-	NO_ATTK,       DRLI(0,0),        NO_CARY,
-	0,  A_NEUTRAL, PM_GLADIATOR, NON_PM, 2000L ),
+A("The Imperial Token", RIN_AGGRAVATE_MONSTER,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_REGEN|SPFX_DEFN), 0, 0,
+	NO_ATTK,       FIRE(0,0),        CARY(AD_DRLI),
+	LEADERSHIP,  A_NEUTRAL, PM_GLADIATOR, NON_PM, 2000L ), /* TODO: Better invoke? */
 
 A("The Pearl of Wisdom", FEDORA,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_HPHDAM), 0, 0,
