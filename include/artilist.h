@@ -212,6 +212,15 @@ A("Fire Brand",                 LONG_SWORD,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
 	FIRE(5,0),	FIRE(0,0),	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 3000L ),
 
+A("Shock Brand",                LONG_SWORD,
+	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
+	ELEC(5,0),	ELEC(0,0),	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 3000L ),
+
+A("Acid Brand",                 LONG_SWORD,
+	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
+	ACID(5,0),	ACID(0,0),	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 3000L ),
+
+
 /*
  *	Two problems:  1) doesn't let trolls regenerate heads,
  *	2) doesn't give unusual message for 2-headed monsters (but
@@ -289,6 +298,10 @@ A("Blackshroud",		CLOAK_OF_PROTECTION,
 A("Silvershard", SILVER_DAGGER,
     (SPFX_RESTR), 0, 0,
     PHYS(2,0),	NO_DFNS,	NO_CARY, 0, A_NONE, NON_PM, NON_PM, 1000L ),
+
+A("Mirror Brand",                 SILVER_LONG_SWORD, /* dNethack */
+	(SPFX_RESTR|SPFX_ATTK|SPFX_REFLECT|SPFX_DALIGN), 0, 0,
+	STUN(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 3500L ),
 
 /* 5lo: Some more artifacts... */
 A("Fungisword", LONG_SWORD,
