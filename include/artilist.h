@@ -479,6 +479,11 @@ A("The Gambler's Suit",		EXPENSIVE_SUIT,
 	(SPFX_RESTR|SPFX_PROTEC|SPFX_LUCK), 0, 0,
 	NO_ATTK,	NO_DFNS,	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 1000L ),
 
+A("The Wand of Might",		WAN_WISHING,
+	(SPFX_RESTR|SPFX_NOGEN), 0, 0,
+	NO_ATTK,	NO_DFNS,	NO_CARY,
+	0,	A_NONE, NON_PM, NON_PM, 3000L ),
+
 #ifdef P_SPOON
 A("Houchou",                SPOON,
 	(SPFX_RESTR), 0, 0,

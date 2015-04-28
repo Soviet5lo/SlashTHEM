@@ -145,7 +145,7 @@ OBJECT:object[3],random,(54,11)
 OBJECT:object[3],random,(55,11)
 # THE WAND OF WISHING in 1 of the 4 towers
 CONTAINER:'(',"chest",place[0]
-OBJECT:'/',"wishing",contained
+OBJECT:'/',"wishing",contained,uncursed,3,"The Wand of Might"
 # Prevent monsters from eating it.  (@'s never eat objects)
 ENGRAVING:place[0],burn,"Elbereth"
 # The treasure of the lord
@@ -383,7 +383,7 @@ OBJECT:object[1],random,(11,15)
 
 # treasure room
 CONTAINER:'(',"chest",place[0]
-  OBJECT:'/',"wishing",contained
+  OBJECT:'/',"wishing",contained,uncursed,3,"The Wand of Might"
 ENGRAVING:place[0],burn,"Elbereth"
 
 CONTAINER:'(',"chest",place[1]
@@ -621,7 +621,7 @@ MONSTER:'j',"ochre jelly",(43,01),asleep
 
 # treasure
 CONTAINER:'(',"chest",place[0]
-  OBJECT:'/',"wishing",contained
+  OBJECT:'/',"wishing",contained,uncursed,3,"The Wand of Might"
 ENGRAVING:place[0],burn,"Elbereth"
 
 OBJECT:'(',"chest",place[1]
@@ -832,7 +832,7 @@ OBJECT:object[3],random,(44,12)
 OBJECT:object[3],random,(45,12)
 # THE WAND OF WISHING in 1 of the 4 towers
 CONTAINER:'(',"chest",place[0]
-OBJECT:'/',"wishing",contained
+OBJECT:'/',"wishing",contained,uncursed,3,"The Wand of Might"
 # Prevent monsters from eating it.  (@'s never eat objects)
 OBJECT:'?',"scare monster",place[0]
 ENGRAVING:place[0],burn,"Elbereth"
@@ -1074,7 +1074,7 @@ OBJECT:object[3],random,(54,14)
 OBJECT:object[3],random,(55,14)
 # THE WAND OF WISHING in 1 of the 4 towers
 CONTAINER:'(',"chest",place[0]
-OBJECT:'/',"wishing",contained
+OBJECT:'/',"wishing",contained,uncursed,3,"The Wand of Might"
 # Prevent monsters from eating it.  (@'s never eat objects)
 OBJECT:'?',"scare monster",place[0]
 ENGRAVING:place[0],burn,"Elbereth"
@@ -1315,7 +1315,7 @@ OBJECT:object[3],random,(54,11)
 OBJECT:object[3],random,(55,11)
 # THE WAND OF WISHING in 1 of the 4 towers
 CONTAINER:'(',"chest",place[0]
-OBJECT:'/',"wishing",contained
+OBJECT:'/',"wishing",contained,uncursed,3,"The Wand of Might"
 # Prevent monsters from eating it.  (@'s never eat objects)
 OBJECT:'?',"scare monster",place[0]
 ENGRAVING:place[0],burn,"Elbereth"
