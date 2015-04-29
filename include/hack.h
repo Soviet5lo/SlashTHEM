@@ -103,8 +103,9 @@ NEARDATA extern coord bhitpos;	/* place where throw or zap hits or stops */
 #define FLASHED_LIGHT	3
 #define INVIS_BEAM	4
 
-#define MATCH_WARN_OF_MON(mon)	 (Warn_of_mon && flags.warntype && \
-		   		 (flags.warntype & (mon)->data->mflags2))
+#define MATCH_WARN_OF_MON(mon)	 ((Warn_of_mon && flags.warntype && \
+		   		 (flags.warntype & (mon)->data->mflags2)) || \
+                                 uwep && uwep->oartifact == ART_CAT_S_CLAW && (mon)->data->mlet == S_RODENT)
 
 #include "trap.h"
 #include "flag.h"
