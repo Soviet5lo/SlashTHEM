@@ -680,7 +680,7 @@ MAZEWALK:(42,08),east
 MAZEWALK:(36,14),south
 
 # Objects
-OBJECT:'[',"fedora",(36,08),uncursed,0,"The Pearl of Wisdom"
+OBJECT:'=',"gain wisdom",(36,08),uncursed,0,"The Pearl of Wisdom"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random

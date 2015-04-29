@@ -2139,6 +2139,11 @@ arti_invoke(obj)
 	    (void) pet_detect_and_tame(obj);
 	    break;
 	}
+    case MAP_LEVEL: {
+	    pline("An image suddenly forms in your mind!");
+	    (void)do_mapping();
+	    break;
+	}
 
 	  }
 	}
