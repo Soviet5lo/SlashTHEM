@@ -143,7 +143,7 @@ A("Skullcrusher",               CLUB,
 	PHYS(3,10),     NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CAVEMAN, NON_PM, 300L ),
 
 A("Liontamer",                BULLWHIP, /* 5lo: was quest artifact */
-	(SPFX_RESTR|SPFX_ATTK), 0, S_FELINE,
+	(SPFX_RESTR|SPFX_DCLAS), 0, S_FELINE,
 	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
 
 A("Trollsbane",                 MORNING_STAR,
