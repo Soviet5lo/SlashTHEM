@@ -5976,6 +5976,7 @@ register struct trobj *trop;
 				|| otyp == POT_HALLUCINATION
 				|| otyp == POT_ACID
 				|| otyp == POT_INVULNERABILITY
+				|| otyp == POT_HEROISM
 				|| otyp == SCR_AMNESIA
 				|| otyp == SCR_FIRE
 				|| otyp == SCR_BLANK_PAPER
