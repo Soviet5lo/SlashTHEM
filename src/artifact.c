@@ -823,7 +823,7 @@ struct monst *mtmp;
 			break;
 		case AD_ACID:
 			if (yours ? Acid_resistance : resists_acid(mtmp))
-				retval = FALSE;
+			    retval = FALSE;
 			break;
 		case AD_MAGM:
 		case AD_STUN:

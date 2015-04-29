@@ -169,8 +169,7 @@ A("Rod of Lordly Might", MACE, /*needs quote*/
 
 A("Itlachiayaque",             SHIELD_OF_REFLECTION,
 	(SPFX_RESTR), (SPFX_HSPDAM), 0,
-	NO_ATTK,        NO_DFNS,        CARY(AD_FIRE),
-	SMOKE_CLOUD,    A_LAWFUL, PM_ARCHEOLOGIST, NON_PM, 2000L ),
+	NO_ATTK,        NO_DFNS,        CARY(AD_FIRE),  SMOKE_CLOUD,    A_LAWFUL, PM_ARCHEOLOGIST, NON_PM, 2000L ),
 
 A("Queen's Guard",		RAPIER,
 	(SPFX_RESTR), 0, 0,
@@ -367,8 +366,8 @@ A("Serpent's Tongue",            DAGGER,
 	/* See artifact.c for special poison damage */
 
 A("The Marauder's Map", SCR_MAGIC_MAPPING,
-	(SPFX_RESTR), 0, 0, NO_ATTK,	NO_DFNS,	NO_CARY,
-	OBJECT_DET,	A_CHAOTIC, PM_PIRATE, NON_PM, 2000L ),
+	(SPFX_RESTR), 0, 0, 
+	NO_ATTK,	NO_DFNS,	NO_CARY,        OBJECT_DET, A_CHAOTIC, PM_PIRATE, NON_PM, 2000L ),
 
 A("Cleaver",                    BATTLE_AXE,
 	SPFX_RESTR, 0, 0,
