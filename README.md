@@ -5,7 +5,7 @@ SlashTHEM is a fork of Slash'EM Extended version 75.  It's primary goals are to 
 
 A current changelog of SlashTHEM can be found [here] (https://github.com/Soviet5lo/SlashTHEM/blob/master/CHANGELOG.md)
 
-SlashTHEM is also playable online at http://nethack.xd.cm.
+SlashTHEM is also playable online at https://nethack.xd.cm.
 
 Current Status
 --------------
