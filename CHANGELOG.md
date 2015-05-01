@@ -16,7 +16,7 @@ Version 0.5.2 (2015-04-23)
 
 Version 0.5.1 (2015-04-21)
 ==========================
--Wrapped AmyBSOD's Extra Spawning system into a define, disabled by default.  Uncomment MORE_SPAWNS in config.h to re-enable.
+- Wrapped AmyBSOD's Extra Spawning system into a define, disabled by default.  Uncomment MORE_SPAWNS in config.h to re-enable.
     - If MORE_SPAWNS is defined, regular monster generation is reduced.  Otherwise, monster spawn gen is the same as vanilla (increased from extended).
 - Spell Memory no longer shows up in the spellcasting memu
 - Spell Chances max out at 100% again
