@@ -270,6 +270,10 @@ A("Gladius",		SHORT_SWORD,
 	(SPFX_RESTR), 0, 0,
 	PHYS(8,7),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_GLADIATOR, NON_PM, 1500L ),
 
+A("Hrunting",		LONG_SWORD,
+	(SPFX_RESTR), 0, 0,
+	PHYS(4,5),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_WARRIOR, NON_PM, 1000L ),
+
 A("Debugger",       ATHAME,
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
     ELEC(5,5),  ELEC(0,0), NO_CARY,     0, A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 400L ),
@@ -402,7 +406,7 @@ A("Thiefbane",                  LONG_SWORD,
 
 A("Deathsword",                   TWO_HANDED_SWORD,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, M2_HUMAN,
-	PHYS(5,14),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_WARRIOR, NON_PM, 5000L ),
+	PHYS(5,14),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 5000L ),
 
 A("Bat from Hell",                BASEBALL_BAT,
 	(SPFX_RESTR), 0, 0,
@@ -675,10 +679,10 @@ A("The Cudgel of Cuthbert", QUARTERSTAFF, /* 5lo: from Nethack-- 3.1.3 */
 	BLESS,		A_LAWFUL, PM_CHEVALIER, NON_PM, 5000L ),
 
 #ifdef NWAR
-A("Magic Mirror of Jason", MIRROR,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_SPEAK), SPFX_HPHDAM, 0,
-	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
-	0,		A_LAWFUL, PM_WARRIOR, NON_PM, 1500L ),
+A("The Sword of Svyatogor", TWO_HANDED_SWORD,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DEFN), SPFX_HPHDAM, 0,
+	PHYS(7,8),	COLD(0,0),	CARY(AD_MAGM),
+	LEVITATION,	A_LAWFUL, PM_WARRIOR, NON_PM, 5000L ),
 #endif
 
 A("The Tommy Gun of Capone", SUBMACHINE_GUN,
