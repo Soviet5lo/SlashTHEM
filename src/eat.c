@@ -352,11 +352,13 @@ register struct obj *food;
 		return;
 	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
 	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
+#if 0 /* 5lo: Wayyyyyy too evil */
 	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
 		    Slimed = 100L;
 		    flags.botl = 1;
 		    killer_format = KILLED_BY_AN;
 		    delayed_killer = "slimy meal";
+#endif
 	}
 
 	}
@@ -1728,13 +1730,14 @@ gluttonous()
 		return;
 	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
 	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
+#if 0 /* 5lo: Wayyyyyy too evil */
 	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
 		    Slimed = 100L;
 		    flags.botl = 1;
 		    killer_format = KILLED_BY_AN;
 		    delayed_killer = "slimy meal";
+#endif
 	}
-
 	}
 
 
@@ -1801,13 +1804,14 @@ violated_vegetarian()
 		return;
 	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
 	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
+#if 0 /* 5lo: Wayyyyyy too evil */
 	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
 		    Slimed = 100L;
 		    flags.botl = 1;
 		    killer_format = KILLED_BY_AN;
 		    delayed_killer = "slimy meal";
+#endif
 	}
-
 	/* By the way, I'm certainly not a vegetarian myself. It's just a twist of the topmodel role. --Amy */
 
 	}
@@ -2108,11 +2112,13 @@ struct obj *obj;
 		return(1);
 	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
 	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
+#if 0 /* 5lo: Wayyyyyy too evil */
 	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
 		    Slimed = 100L;
 		    flags.botl = 1;
 		    killer_format = KILLED_BY_AN;
 		    delayed_killer = "slimy meal";
+#endif
 	}
 	return(0);
 }
