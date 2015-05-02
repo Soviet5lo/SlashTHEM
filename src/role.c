@@ -270,7 +270,7 @@ const struct Role roles[] = {
 	PM_CHEVALIER, NON_PM, PM_UNDEAD_CHEVALIER, NON_PM, NON_PM,
 	PM_EREC, PM_ACOLYTE, PM_ALDUIN,
 	PM_TROLL_ZOMBIE, PM_MANTICORE, S_DRAGON, S_DRAGON,
-	ART_MAGIC_MIRROR_OF_ARTHUBERT,
+	ART_CUDGEL_OF_CUTHBERT,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
@@ -307,7 +307,7 @@ const struct Role roles[] = {
 	/* Init   Lower  Higher */
 	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
 	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
-	-50, 5, 0, 2, 10, A_INT, SPE_TELEPORT_AWAY,   -4
+	-20, 5, 0, 2, 10, A_INT, SPE_TELEPORT_AWAY,   -4
 },
 #endif	/* CONVICT */
 
@@ -479,15 +479,15 @@ const struct Role roles[] = {
 },
 
 {	{"Firefighter", 0}, {
-	{"Hazard Trainee",         0},
-	{"Brigade Runner",       0},
-	{"Watercannon User",       0},
+	{"Water Boy",         "Water Girl"},
+	{"Fire Cadet",       0},
+	{"Rookie",       0},
 	{"Extinguisher",     0},
-	{"Forest Fire Specialist",       0},
-	{"Anti-Flame Fighter",      0},
-	{"Fire Leader",   0},
-	{"Flash Fire Deleter", 0},
-	{"Eternal Firefighter",  0} },
+	{"Smokeeater",       0},
+	{"Fire Captain",      0},
+	{"Platoon Chief",   0},
+	{"Division Commander", 0},
+	{"Fire Chief",  0} },
 	"Prometheus", "Thor", "Arson", /* Fire */
 	"Fir", "Fire-Brigade Base", "Smokey Forest",
 	PM_FIREFIGHTER, NON_PM, PM_UNDEAD_FIREFIGHTER, NON_PM, PM_LITTLE_DOG,
@@ -650,15 +650,15 @@ const struct Role roles[] = {
 },
 
 {	{"Graduate", 0}, {
-	{"Junior Assistant",    0},
-	{"Ass Assistant",    0},
-	{"Mean Assistant",    0},
-	{"College Graduate",    0},
-	{"University Traveler",    0},
-	{"Junior Professor",    0},
-	{"Experimental Scientist",    0},
-	{"Lab Leader",    0},
-	{"Test Row Developer",    0} }, 
+	{"Dork",    0},
+	{"Nerd",    0},
+	{"Hobbyist",    0},
+	{"Tester",    0},
+	{"Hacker",    0},
+	{"Programmer",    0},
+	{"Project Leader",    0},
+	{"Senior Developer",    0},
+	{"Kernel Maintainer",    0} }, 
 	"Jobs", "Wozniak", "Gates", /* geek */
 	"Gra", "university campus", "development hell",
 	PM_GRADUATE, NON_PM, PM_UNDEAD_GRADUATE, NON_PM, NON_PM,
@@ -930,7 +930,7 @@ const struct Role roles[] = {
 	PM_HARRY_THE_COWBOY, PM_HIGHEST_ELF, PM_DRACO_THE_SHARPSHOOTER,
 	PM_ENEMY_TROOPER, PM_OFFICER, S_HUMAN, S_HUMAN,
 
-	ART_BLACKHARP,
+	ART_HARP_OF_HARMONY,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
 	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
@@ -1553,7 +1553,7 @@ const struct Role roles[] = {
 #if 0
 	ART_DRAGONBANE, ART_DEMONBANE,
 #endif
-	ART_MAGIC_MIRROR_OF_JASON,
+	ART_SWORD_OF_SVYATOGOR,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
 	{  18,  7, 11, 10, 12, 14 },
@@ -1946,7 +1946,7 @@ const struct Race races[] = {
 	PM_ILLITHID, NON_PM, NON_PM, PM_UNDEAD_MIND_FLAYER,
 	MH_DWARF | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_DWARF, MH_DWARF, 0,
+	MH_DWARF, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
 	{     18,     25, 23, 18, 17, 16 },
@@ -2101,7 +2101,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{     16,     18, 18, 25, 15, 21 },
+	{     16,     18, 18, 25, 15, 25 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  3, 0,  3, 0,  3, 0 }		/* Energy */

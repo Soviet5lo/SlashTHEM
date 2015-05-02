@@ -80,5 +80,6 @@ struct artifact {
 #define SHARPEN		(LAST_PROP+24)
 #define BLESS		(LAST_PROP+25)
 #define LEADERSHIP 	(LAST_PROP+26)
+#define MAP_LEVEL	(LAST_PROP+27)
  
 #endif /* ARTIFACT_H */

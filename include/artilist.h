@@ -143,7 +143,7 @@ A("Skullcrusher",               CLUB,
 	PHYS(3,10),     NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_CAVEMAN, NON_PM, 300L ),
 
 A("Liontamer",                BULLWHIP, /* 5lo: was quest artifact */
-	(SPFX_RESTR|SPFX_ATTK), 0, S_FELINE,
+	(SPFX_RESTR|SPFX_DCLAS), 0, S_FELINE,
 	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
 
 A("Trollsbane",                 MORNING_STAR,
@@ -169,8 +169,11 @@ A("Rod of Lordly Might", MACE, /*needs quote*/
 
 A("Itlachiayaque",             SHIELD_OF_REFLECTION,
 	(SPFX_RESTR), (SPFX_HSPDAM), 0,
-	NO_ATTK,        NO_DFNS,        CARY(AD_FIRE),
-	SMOKE_CLOUD,    A_LAWFUL, PM_ARCHEOLOGIST, NON_PM, 2000L ),
+	NO_ATTK,        NO_DFNS,        CARY(AD_FIRE),  SMOKE_CLOUD,    A_LAWFUL, PM_ARCHEOLOGIST, NON_PM, 2000L ),
+
+A("Queen's Guard",		RAPIER,
+	(SPFX_RESTR), 0, 0,
+	PHYS(6,6),	NO_DFNS,	NO_CARY, 0, A_LAWFUL, PM_KORSAIR, NON_PM, 1500L ),
 
 #ifdef FIREARMS
 A("Peacekeeper",		PISTOL,
@@ -211,6 +214,15 @@ A("Frost Brand",                LONG_SWORD,
 A("Fire Brand",                 LONG_SWORD,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
 	FIRE(5,0),	FIRE(0,0),	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 3000L ),
+
+A("Shock Brand",                LONG_SWORD,
+	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
+	ELEC(5,0),	ELEC(0,0),	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 3000L ),
+
+A("Acid Brand",                 LONG_SWORD,
+	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
+	ACID(5,0),	ACID(0,0),	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 3000L ),
+
 
 /*
  *	Two problems:  1) doesn't let trolls regenerate heads,
@@ -254,6 +266,14 @@ A("Poseidon's Treasure",	TRIDENT,
 	(SPFX_RESTR|SPFX_ATTK), 0, 0,
 	ELEC(10, 10),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_DIVER, NON_PM, 2000L ),
 
+A("Gladius",		SHORT_SWORD,
+	(SPFX_RESTR), 0, 0,
+	PHYS(8,7),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_GLADIATOR, NON_PM, 1500L ),
+
+A("Hrunting",		LONG_SWORD,
+	(SPFX_RESTR), 0, 0,
+	PHYS(4,5),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_WARRIOR, NON_PM, 1000L ),
+
 A("Debugger",       ATHAME,
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
     ELEC(5,5),  ELEC(0,0), NO_CARY,     0, A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 400L ),
@@ -290,6 +310,17 @@ A("Silvershard", SILVER_DAGGER,
     (SPFX_RESTR), 0, 0,
     PHYS(2,0),	NO_DFNS,	NO_CARY, 0, A_NONE, NON_PM, NON_PM, 1000L ),
 
+A("Mirror Brand",                 SILVER_LONG_SWORD, /* dNethack */
+	(SPFX_RESTR|SPFX_ATTK|SPFX_REFLECT|SPFX_DALIGN), 0, 0,
+	STUN(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 3500L ),
+
+/* From Nethack--, This is pretty much a temp for Musicians
+ * Until I can think of something better for them.	
+ */
+A("Dirk", 		DAGGER, 
+	SPFX_RESTR, 	0, 	0,
+	PHYS(5,5),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_MUSICIAN, NON_PM, 1500L ),
+
 /* 5lo: Some more artifacts... */
 A("Fungisword", LONG_SWORD,
     (SPFX_RESTR|SPFX_DCLAS), SPFX_HALRES, S_FUNGUS,
@@ -317,7 +348,7 @@ A("Heartseeker",		SHORT_SWORD,
 	PHYS(3,3),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 1000L ),
 
 A("Cat's Claw",		DAGGER,
-	(SPFX_RESTR|SPFX_DCLAS), SPFX_WARN, S_RODENT,
+	(SPFX_RESTR|SPFX_DCLAS), 0, S_RODENT,
 	PHYS(5,7),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 1000L ),
 #endif /* NEWHON_ARTIFACTS */
 
@@ -346,8 +377,8 @@ A("Serpent's Tongue",            DAGGER,
 	/* See artifact.c for special poison damage */
 
 A("The Marauder's Map", SCR_MAGIC_MAPPING,
-	(SPFX_RESTR), 0, 0, NO_ATTK,	NO_DFNS,	NO_CARY,
-	OBJECT_DET,	A_CHAOTIC, PM_PIRATE, NON_PM, 2000L ),
+	(SPFX_RESTR), 0, 0, 
+	NO_ATTK,	NO_DFNS,	NO_CARY,        OBJECT_DET, A_CHAOTIC, PM_PIRATE, NON_PM, 2000L ),
 
 A("Cleaver",                    BATTLE_AXE,
 	SPFX_RESTR, 0, 0,
@@ -382,7 +413,7 @@ A("Thiefbane",                  LONG_SWORD,
 
 A("Deathsword",                   TWO_HANDED_SWORD,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, M2_HUMAN,
-	PHYS(5,14),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_WARRIOR, NON_PM, 5000L ),
+	PHYS(5,14),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 5000L ),
 
 A("Bat from Hell",                BASEBALL_BAT,
 	(SPFX_RESTR), 0, 0,
@@ -461,6 +492,15 @@ A("the Pen of the Void",	ATHAME,
 	(SPFX_RESTR|SPFX_ATTK), 0, 0,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,
 	0,	A_NONE, PM_BINDER, NON_PM, 2000L),
+
+A("The Gambler's Suit",		EXPENSIVE_SUIT,
+	(SPFX_RESTR|SPFX_PROTEC|SPFX_LUCK), 0, 0,
+	NO_ATTK,	NO_DFNS,	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 1000L ),
+
+A("The Wand of Might",		WAN_WISHING,
+	(SPFX_RESTR|SPFX_NOGEN), 0, 0,
+	NO_ATTK,	NO_DFNS,	NO_CARY,
+	0,	A_NONE, NON_PM, NON_PM, 3000L ),
 
 #ifdef P_SPOON
 A("Houchou",                SPOON,
@@ -629,26 +669,27 @@ A("The Harp of Lightning",          MAGIC_HARP,
 	SUMMON_AIR_ELEMENTAL,         A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 1000L ),
 /* Air is associated with Electricity in D&D */
 
-A("Blackharp",          MAGIC_HARP,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_TCTRL), 0,
-	NO_ATTK,        NO_DFNS,        CARY(AD_DRLI),
-	0,         A_CHAOTIC, PM_MUSICIAN, NON_PM, 1000L ),
+A("The Harp of Harmony",          MAGIC_HARP,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_SPEAK), (SPFX_WARN|SPFX_STLTH), 0,
+	NO_ATTK,	NO_DFNS,	CARY(AD_DRLI),
+	TAMING,		A_LAWFUL, PM_MUSICIAN, NON_PM, 5000L ),
 
 A("The Magic Mirror of Merlin", MIRROR,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_SPEAK), SPFX_ESP, 0,
 	NO_ATTK,	NO_DFNS,	CARY(AD_COLD),
 	0,		A_LAWFUL, PM_KNIGHT, NON_PM, 1500L ),
 
-A("The Magic Mirror of Arthubert", MIRROR,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_SPEAK), SPFX_HSPDAM, 0,
-	NO_ATTK,	NO_DFNS,	CARY(AD_STUN),
-	0,		A_LAWFUL, PM_CHEVALIER, NON_PM, 1500L ),
+A("The Cudgel of Cuthbert", QUARTERSTAFF, /* 5lo: from Nethack-- 3.1.3 */
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_HALRES|SPFX_REGEN|SPFX_DALIGN),
+	     (SPFX_WARN|SPFX_HSPDAM), 0,
+	PHYS(5,0),	NO_DFNS,	CARY(AD_DRLI),
+	BLESS,		A_LAWFUL, PM_CHEVALIER, NON_PM, 5000L ),
 
 #ifdef NWAR
-A("Magic Mirror of Jason", MIRROR,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_SPEAK), SPFX_HPHDAM, 0,
-	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
-	0,		A_LAWFUL, PM_WARRIOR, NON_PM, 1500L ),
+A("The Sword of Svyatogor", TWO_HANDED_SWORD,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DEFN), SPFX_HPHDAM, 0,
+	PHYS(7,8),	COLD(0,0),	CARY(AD_MAGM),
+	LEVITATION,	A_LAWFUL, PM_WARRIOR, NON_PM, 5000L ),
 #endif
 
 A("The Tommy Gun of Capone", SUBMACHINE_GUN,
@@ -746,15 +787,15 @@ A("The Treasury of Proteus",	CHEST,
 	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
 	0,	A_CHAOTIC,	 PM_PIRATE, NON_PM, 2500L ),
 
-A("Imperial Token", FEDORA, /* sorry Fyr, making the rings work correctly would be a major pain in the butt --Amy */
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DEFN), 0, 0,
-	NO_ATTK,       DRLI(0,0),        NO_CARY,
-	0,  A_NEUTRAL, PM_GLADIATOR, NON_PM, 2000L ),
+A("The Imperial Token", RIN_AGGRAVATE_MONSTER,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_REGEN|SPFX_DEFN), 0, 0,
+	NO_ATTK,       FIRE(0,0),        CARY(AD_DRLI),
+	LEADERSHIP,  A_NEUTRAL, PM_GLADIATOR, NON_PM, 2000L ), /* TODO: Better invoke? */
 
-A("The Pearl of Wisdom", FEDORA,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_HPHDAM), 0, 0,
-	NO_ATTK,       NO_DFNS,        NO_CARY,
-	0,  A_NEUTRAL, PM_KORSAIR, NON_PM, 2000L ),
+A("The Pearl of Wisdom", RIN_GAIN_WISDOM,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_HPHDAM|SPFX_DEFN), 0, 0,
+	NO_ATTK,       ELEC(0,0),        CARY(AD_MAGM),
+	MAP_LEVEL,  A_NEUTRAL, PM_KORSAIR, NON_PM, 2000L ),
 
 A("Maui's Fishhook",	GRAPPLING_HOOK,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_HSPDAM|SPFX_WARN|SPFX_SEEK|SPFX_DCLAS), 0, S_EEL,

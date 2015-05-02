@@ -3126,6 +3126,7 @@ typfnd:
 		otmp->oartifact == ART_SCALES_OF_THE_DRAGON_LORD || /* Also adding the special TNG artifacts */
 		otmp->oartifact == ART_KEY_OF_ACCESS ||
 		otmp->oartifact == ART_BURNED_MOTH_RELAY ||
+		otmp->oartifact == ART_WAND_OF_MIGHT || /* Castle only */
 	        otmp->oartifact == ART_THIEFBANE)) ||
 # ifdef NOARTIFACTWISH
 /* Wishing for a "weak" artifact is easier than for a stronger one */

@@ -1,5 +1,56 @@
 # Slash'THEM (Rough) ChangeLog
 
+Version 0.6.0 (2015-05-02)
+==========================
+
+- Removed Scrolls of Barrhing, Lockout, Growth, Lava, Warping, and Tele Level.
+- Special Character generation is now set in the configuration file (Backported from SLASH'EM Extended)
+- Locksmiths now gain much higher unlocking bonuses (values backported from SLASH'EM Extended)
+- Firefighters and Graduates have new level names.
+- Made convict starting alignment less sadistic (-50 -> -20)
+- Nymphs can reach 25 in Charisma.
+- Orcs, Ogros, Trollors, and Gigants can Twoweapon.
+- Dwarves are no longer peaceful to Illithid players.
+- No longer possible to get slimed by eating rotten food, violating vegetarian conduct, or being gluttonous.
+- Restored the Gnomish Mines monster generation to Vanilla status.  You should now see much, much, MUCH less gnome rogues/warriors/etc in the mines now.
+- Reduced the probability of scrolls of wishing being randomly generated.
+    - Increased the probability of Scrolls of Confuse Monster to compensate.
+- Flying characters can now pick up objects in pits, and can now use whips to pull things from pools and pits.
+    - Levitating characters can no longer pull characters out of pits.
+- Phasing characters no longer have their vision obscured from being inside of a pit.
+- Ugly backpacks are correctly automatically identified.
+- Removed Pleasant Valley from castle.des as it's been turned into Pleasantville for the Town Branch.
+- Disabled extra monsters spawning on dungeon features (re-enabled by enabling MORE_SPAWNS in config.h).
+- Gladiator artifacts
+    - Sacrifice gift: Gladius, a Neutral aligned Short Sword.  +8 to-hit and +7 damage.
+    - Quest Artifact: The Imperial Token, a Neutral Ring of Aggravate Monster.  Grants regeneration and fire resistance while worn, drain resistance while carried.  #Invoke for Leadership effect.
+- Korsair artifacts
+    - Sacrifice gift: Queen's Guard, a Lawful aligned Rapier.  +6 to-hit, +6 damage.
+    - Quest Artifact: The Pearl of Wisdom, a Neutral aligned Ring of Gain Wisdom.  Grants shock resistance and half physical damage while worn, magic resistance while carried.  #Invoke to reveal the map like a scroll of magic mapping.
+- Warrior artifacts
+    - Sacrifice gift: Hrunting, a Neutral aligned long sword.  +4 to-hit, +5 damage.  The name comes from Beowulf.
+    - Quest Artifact: The Sword of Svyatogor, a Lawful aligned Two-Handed Sword.  +7 to-hit, +9 damage.  Grants Half Physical Damage and Magic Resistance while carried, Cold resistance while wielded.  #Invoke for Levitation.  Name comes from the tale of Ilya Muromets.
+- Musician Artifacts
+    - Sacrifice Gift: Dirk, a Neutral aligned Dagger.  +5 to-hit and +5 damage.  This is more than likely a temporary until I can figure out something better to give them.
+    - Quest Artifact: The Harp of Harmony, a Lawful aligned Magic Harp.  Grants Warning, Stealth and Drain Resistance while carried.  Speaks when used.  #Invoke for Taming.
+- Chevalier changes
+    - Completely changed the starting inventory.  Now start with (all blessed) +1 Silver Short Sword, +1 Ring Mail, +0 Helmet, +0 Small Shield, +0 Leather Gloves, 2 Potions of Holy Water, 2 Cloves of Garlic, 2 Sprigs of Wolfsbane, a Spellbook of Healing, a Random scroll, a saddle, and a small chance of either an oil lamp/brass lantern or a magic marker.
+    - Quest Artifact: The Cudgel of Cuthbert, a Neutral aligned Quarterstaff.  +5 to-hit and double damage to all cross-aligned monsters.  Grants Hallucination resistance and regeneration while wielded, grants drain resistance, warning, and half spell damage while carried.  #Invoke for Blessing.
+- Implemented the Wand of Might from Nethack: The Next Generation.  Unaligned Wand of Wishing, only generated on the Castle level.  Cannot be wished for.
+- Implemented a few standalone artifacts.
+    - The Gambler's Suit: Unaligned Expensive Suit.  Grants Protection while worn, acts as a luckstone, grants an extra +3 bonus to Charisma while worn.
+    - Shock Brand: Unaligned Long Sword.  +5 to-hit, double damage to all non-shock resistance monsters.  Grants shock resistance while wielded.
+    - Acid Brand: Unaligned Long Sword.  +5 to-hit, double damage to all non-acid resistant monsters.  Grants acid resistance while wielded.
+    - Mirror Brand: Unaligned Silver Long Sword.  +5 to-hit, double damage to all cross aligned monsters with Magicbane's special effects.  Grants reflection while wielded.  Artifact comes from dNethack.
+- Gave Cat's Claw it's intended warning against rodents.
+- Modified hallucination monsters names.
+    - Removed a bunch of redundant names, currently vanilla + NAO + Unnethack.
+    - Unique and Genocided monsters no longer appear as hallucination names.
+- Fixed a few build errors on FreeBSD.
+- Fixed Liontamer not getting its damage/to-hit bonus against felines.
+- Fixed a link in README.md.
+- Disabled reading Orb of Fate/Coins as most of the time it didn't work and the few times it did work it caused a dungeon collapse.
+
 Version 0.5.2 (2015-04-23)
 ==========================
 - Finally, definitely, completely kill the trap bug (for real this time.)
@@ -16,7 +67,7 @@ Version 0.5.2 (2015-04-23)
 
 Version 0.5.1 (2015-04-21)
 ==========================
--Wrapped AmyBSOD's Extra Spawning system into a define, disabled by default.  Uncomment MORE_SPAWNS in config.h to re-enable.
+- Wrapped AmyBSOD's Extra Spawning system into a define, disabled by default.  Uncomment MORE_SPAWNS in config.h to re-enable.
     - If MORE_SPAWNS is defined, regular monster generation is reduced.  Otherwise, monster spawn gen is the same as vanilla (increased from extended).
 - Spell Memory no longer shows up in the spellcasting memu
 - Spell Chances max out at 100% again

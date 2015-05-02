@@ -21,8 +21,7 @@
 
 boolean	known;
 
-static NEARDATA const char readable[] = 
-		   { COIN_CLASS, ALL_CLASSES, SCROLL_CLASS, SPBOOK_CLASS, RING_CLASS, 0 };
+static NEARDATA const char readable[] = { COIN_CLASS, SCROLL_CLASS, SPBOOK_CLASS, RING_CLASS, 0 };
 static const char all_count[] = { ALLOW_COUNT, ALL_CLASSES, 0 };
 
 
@@ -579,6 +578,7 @@ doread()
             pline("\"Magic Marker(TM) Red Ink Marker Pen. Water Soluble.\"");
              u.uconduct.literate++;
              return 1;
+#if 0 /* We'll get back to this later... */
 	} else if (scroll->oclass == COIN_CLASS) {
 	   if (Blind)
                 You("feel the embossed words:");
@@ -599,6 +599,7 @@ doread()
 	    pline("\"Odin.\"");
             u.uconduct.literate++;
 	    return 1;
+#endif
 	} else if (OBJ_DESCR(objects[scroll->otyp]) &&
 		!strncmp(OBJ_DESCR(objects[scroll->otyp]), "runed", 5)) {
 	    if (scroll->otyp == RUNESWORD) {

@@ -1318,7 +1318,7 @@ mineralize()
 	    	    makemon(&mons[PM_DIVER_TROLL], x, y, NO_MM_FLAGS);
 
 		/* More random monsters on other terrain, too. --Amy */
-
+#ifdef MORE_SPAWNS
 		if ((levl[x][y].typ == ROOM && !rn2(2000 / level_difficulty() )) )
 			makemon((struct permonst *)0, x, y, NO_MM_FLAGS);
 
@@ -1397,9 +1397,8 @@ mineralize()
 
 		if ((levl[x][y].typ == ALTAR && !rn2(5)) )
 			makemon((struct permonst *)0, x, y, NO_MM_FLAGS);
-
+#endif /* MORE_SPAWNS */
 		}
-
 	/* determine if it is even allowed;
 	   almost all special levels are excluded */
 	if (In_hell(&u.uz) || In_V_tower(&u.uz) ||

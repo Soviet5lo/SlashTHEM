@@ -533,12 +533,14 @@ static struct trobj Necromancer[] = {
 };
 
 static struct trobj Chevalier[] = {
-	{ TRIDENT, 0, WEAPON_CLASS, 1, 1 },
-	{ ROBE, 0, ARMOR_CLASS, 1, 1 },
-	{ SMALL_SHIELD, 2, ARMOR_CLASS, 1, 1 },
+	{ SILVER_SHORT_SWORD, 1, WEAPON_CLASS, 1, 1 },
+	{ RING_MAIL, 1, ARMOR_CLASS, 1, 1 },
+	{ HELMET, 0, ARMOR_CLASS, 1, 1 },
+	{ SMALL_SHIELD, 0, ARMOR_CLASS, 1, 1 },
+	{ LEATHER_GLOVES, 0, ARMOR_CLASS, 1, 1 },
 	{ POT_WATER, 0, POTION_CLASS, 2, 1 },	/* holy water */
-	{ CLOVE_OF_GARLIC, 0, FOOD_CLASS, 1, 1 },
-	{ SPRIG_OF_WOLFSBANE, 0, FOOD_CLASS, 1, 1 },
+	{ CLOVE_OF_GARLIC, 0, FOOD_CLASS, 2, 1 },
+	{ SPRIG_OF_WOLFSBANE, 0, FOOD_CLASS, 2, 1 },
 	{ SPE_HEALING, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ UNDEF_TYP, UNDEF_SPE, SCROLL_CLASS, 1, 1 },
 	{ SADDLE, 0, TOOL_CLASS, 1, 1 },
@@ -1054,7 +1056,7 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_ELF,	BOW,			ELVEN_BOW	      },
     { PM_ELF,	ARROW,			ELVEN_ARROW	      },
     { PM_ELF,	HELMET,			ELVEN_LEATHER_HELM    },
- { PM_ELF,	SMALL_SHIELD,		ELVEN_SHIELD	      },
+    { PM_ELF,	SMALL_SHIELD,		ELVEN_SHIELD	      },
     { PM_ELF,	CLOAK_OF_DISPLACEMENT,	ELVEN_CLOAK	      },
     { PM_ELF,	CRAM_RATION,		LEMBAS_WAFER	      },
     { PM_ORC,	DAGGER,			ORCISH_DAGGER	      },
@@ -1069,14 +1071,14 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_DWARF, SPEAR,			DWARVISH_SPEAR	      },
     { PM_DWARF, SHORT_SWORD,		DWARVISH_SHORT_SWORD  },
     { PM_DWARF, HELMET,			DWARVISH_IRON_HELM    },
- { PM_DWARF, SMALL_SHIELD,		DWARVISH_ROUNDSHIELD  },
- { PM_DWARF, PICK_AXE,		DWARVISH_MATTOCK      },
+    { PM_DWARF, SMALL_SHIELD,		DWARVISH_ROUNDSHIELD  },
+    { PM_DWARF, PICK_AXE,		DWARVISH_MATTOCK      },
     { PM_GNOME, BOW,			CROSSBOW	      },
     { PM_GNOME, ARROW,			CROSSBOW_BOLT	      },
-    { PM_GNOME, HELMET, GNOMISH_HELM },
-    { PM_GNOME, LOW_BOOTS, GNOMISH_BOOTS },
-    { PM_GNOME, HIGH_BOOTS, GNOMISH_BOOTS },
-    { PM_GNOME, LEATHER_ARMOR, GNOMISH_SUIT },
+    { PM_GNOME, HELMET, 		GNOMISH_HELM },
+    { PM_GNOME, LOW_BOOTS, 		GNOMISH_BOOTS },
+    { PM_GNOME, HIGH_BOOTS, 		GNOMISH_BOOTS },
+    { PM_GNOME, LEATHER_ARMOR, 		GNOMISH_SUIT },
     { PM_HUMAN_WEREWOLF,FOOD_RATION,		TRIPE_RATION	      },
     { PM_HUMAN_WEREWOLF,SILVER_SPEAR,		SPEAR		      },
     { PM_HUMAN_WEREWOLF,SILVER_DAGGER,		DAGGER		      },
@@ -1090,7 +1092,7 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_VAMPIRE,	POT_FRUIT_JUICE,	POT_BLOOD	      },
     { PM_VAMPIRE,	FOOD_RATION,		POT_VAMPIRE_BLOOD     },
     { PM_GASTLY,	FOOD_RATION,		CORPSE     },
-    { NON_PM,	STRANGE_OBJECT,		STRANGE_OBJECT	      }
+    { NON_PM,		STRANGE_OBJECT,		STRANGE_OBJECT	      }
 };
 
 /* align-based substitutions for initial inventory */
@@ -5976,6 +5978,7 @@ register struct trobj *trop;
 				|| otyp == POT_HALLUCINATION
 				|| otyp == POT_ACID
 				|| otyp == POT_INVULNERABILITY
+				|| otyp == POT_HEROISM
 				|| otyp == SCR_AMNESIA
 				|| otyp == SCR_FIRE
 				|| otyp == SCR_BLANK_PAPER

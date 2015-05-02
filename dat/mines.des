@@ -25,23 +25,19 @@ OBJECT: random, random, random
 OBJECT: random, random, random
 OBJECT: random, random, random
 #
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', "gnome lord", random, hostile
-MONSTER: 'h', random, random, hostile
-MONSTER: 'h', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'M', random, random, hostile
-MONSTER: 'M', random, random, hostile
-MONSTER: 'h', random, random, hostile
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome lord", random
+MONSTER: 'h', "dwarf", random
+MONSTER: 'h', "dwarf", random
+MONSTER: 'G', random, random
+MONSTER: 'G', random, random
+MONSTER: 'h', random, random
 #
 TRAP: random, random
 TRAP: random, random
@@ -104,11 +100,11 @@ DOOR: false, closed, south, random
 
 SUBROOM: "ordinary", unlit, (10,10), (2,3), "town"
 DOOR: false, locked, east, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 
 SUBROOM: "ordinary", lit, (19,2),  (2,3), "town"
 DOOR: false, locked, west, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 
 SUBROOM: "temple", lit, (15,9), (4,4), "town"
 DOOR: false, closed, north, random
@@ -132,17 +128,17 @@ STAIR: random, up
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, down
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
 
 ROOM: "ordinary" , random, random, random, random
-MONSTER: 'h', random, random, hostile
+MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
 
 ROOM: "ordinary" , random, random, random, random
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 MONSTER: 'G', "gnome thief", random, hostile
 MONSTER: 'G', "gnome thief", random, hostile
 
@@ -195,7 +191,7 @@ DOOR: false, closed, south, random
 
 SUBROOM: "ordinary", random, (22,0), (2,2), "town"
 DOOR: false, locked, south, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 
 SUBROOM: "ordinary", unlit, (25,0), (2,2), "town"
 DOOR: false, closed, east, random
@@ -208,7 +204,7 @@ DOOR: false, closed, south, random
 
 SUBROOM: "ordinary", random, (8,5), (2,2), "town"
 DOOR: false, locked, north, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 
 SUBROOM: "shop" , lit, (2,10), (4,3), "town"
 CHANCE: 90
@@ -227,7 +223,7 @@ DOOR: false, closed, east, random
 
 SUBROOM: "ordinary", unlit, (7,10), (3,3), "town"
 DOOR: false, locked, north, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 
 SUBROOM: "temple", lit, (19,5), (4,4), "town"
 DOOR: false, closed, north, random
@@ -245,17 +241,17 @@ STAIR: random, up
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, down
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
 
 ROOM: "ordinary" , random, random, random, random
-MONSTER: 'h', random, random, hostile
+MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
 
 ROOM: "ordinary" , random, random, random, random
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 MONSTER: 'G', "gnome thief", random
 MONSTER: 'G', "gnome thief", random
 
@@ -352,17 +348,17 @@ STAIR: random, up
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, down
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
 
 ROOM: "ordinary" , random, random, random, random
-MONSTER: 'h', random, random, hostile
+MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
 
 ROOM: "ordinary" , random, random, random, random
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 MONSTER: 'G', "gnome thief", random
 MONSTER: 'G', "gnome thief", random
 
@@ -410,7 +406,7 @@ MONSTER: 'G', "gnomish wizard", random
 
 SUBROOM:"ordinary",random,(19,2),(2,2),"town"
 DOOR: false,closed,south,random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', random, random
 
 SUBROOM:"candle shop",lit,(22,2),(3,3),"town"
 DOOR:false,closed,south,random
@@ -451,17 +447,17 @@ STAIR: random, up
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, down
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
 
 ROOM: "ordinary" , random, random, random, random
-MONSTER: 'h', random, random, hostile
+MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
 
 ROOM: "ordinary" , random, random, random, random
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 MONSTER: 'G', "gnome thief", random
 MONSTER: 'G', "gnome thief", random
 
@@ -517,19 +513,19 @@ MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
 MONSTER: 'G', "gnome lord", random
 MONSTER: 'G', "gnome lord", random
 MONSTER: 'G', "gnome thief", random
 MONSTER: 'G', "gnome thief", random
-MONSTER: 'h', random, random, hostile
-MONSTER: 'h', random, random, hostile
-MONSTER: 'h', random, random, hostile
+MONSTER: 'h', "dwarf", random
+MONSTER: 'h', "dwarf", random
+MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
 OBJECT:random,random,random
@@ -643,22 +639,22 @@ DOOR:closed,(31,3)
 DOOR:closed,(35,3)
 DOOR:closed,(33,7)
 
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, (14,6)
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", (14,6)
 MONSTER: 'G', "gnome lord", (14,5)
-MONSTER: 'G', random, (27,8)
+MONSTER: 'G', "gnome", (27,8)
 MONSTER: 'G', "gnome lord", random
 MONSTER: 'G', "gnome lord", random
 MONSTER: 'G', "gnome thief", random
 MONSTER: 'G', "gnome thief", random
-MONSTER: 'h', random, random, hostile
-MONSTER: 'h', random, random, hostile
-MONSTER: 'h', random, random, hostile
+MONSTER: 'h', "dwarf", random
+MONSTER: 'h', "dwarf", random
+MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: '@', "watchman", random, peaceful
@@ -693,9 +689,9 @@ MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
 MONSTER:'G',"gnome lord",random
 MONSTER:'Y',"monkey",random
 MONSTER:'Y',"monkey",random
@@ -722,7 +718,7 @@ SUBROOM: "ordinary", random, (7,5), (2,2), "town"
 DOOR: false, closed, south, random
 
 SUBROOM: "ordinary", lit, (10,2), (3,4), "town"
-MONSTER:'G',random,random
+MONSTER:'G',"gnome",random
 MONSTER:'Y',"monkey",random
 MONSTER:'Y',"monkey",random
 MONSTER:'Y',"monkey",random
@@ -788,17 +784,17 @@ STAIR: random, up
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, down
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome", random
 
 ROOM: "ordinary" , random, random, random, random
-MONSTER: 'h', random, random, hostile
+MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
   
 ROOM: "ordinary" , random, random, random, random
 TRAP: random, random
-MONSTER: 'G', random, random, hostile
+MONSTER: 'G', "gnome", random
 MONSTER: 'G', "gnome thief", random
 MONSTER: 'G', "gnome thief", random
 
@@ -932,34 +928,34 @@ OBJECT:'/',"magic missile",place[0],cursed,0
 
 # the Orcish Army
 
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
-MONSTER: 'o', random, random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "goblin", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "hill orc", random, hostile
+MONSTER: 'o', "Mordor orc", random, hostile
+MONSTER: 'o', "Mordor orc", random, hostile
+MONSTER: 'o', "Mordor orc", random, hostile
+MONSTER: 'o', "Mordor orc", random, hostile
+MONSTER: 'o', "Uruk-hai", random, hostile
+MONSTER: 'o', "Uruk-hai", random, hostile
+MONSTER: 'o', "Uruk-hai", random, hostile
+MONSTER: 'o', "Uruk-hai", random, hostile
+MONSTER: 'o', "orc-captain", random, hostile
+MONSTER: 'o', "orc-captain", random, hostile
+MONSTER: 'o', "orc shaman", random, hostile
+MONSTER: 'o', "orc shaman", random, hostile
 MONSTER: 'o', random, random, hostile
 MONSTER: 'o', random, random, hostile
 
@@ -1021,22 +1017,22 @@ DOOR:closed,(31,3)
 DOOR:closed,(35,3)
 DOOR:closed,(33,7)
 
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', "gnome lord", random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', "gnome lord", random, hostile
-MONSTER: 'G', "gnome lord", random, hostile
-MONSTER: 'G', "gnomish wizard", random, hostile
-MONSTER: 'G', "gnomish wizard", random, hostile
-MONSTER: 'h', random, random, hostile
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome", random 
+MONSTER: 'G', "gnome lord", random
+MONSTER: 'G', "gnome", random
+MONSTER: 'G', "gnome lord", random
+MONSTER: 'G', "gnome lord", random
+MONSTER: 'G', "gnomish wizard", random
+MONSTER: 'G', "gnomish wizard", random
+MONSTER: 'h', "dwarf", random
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
@@ -1058,19 +1054,19 @@ MONSTER: '@', "watch captain", random, peaceful
 
 # The zoo needs some stuff...
 
-MONSTER: 'f', random, place[0], hostile
-MONSTER: 'f', random, place[1], hostile
-MONSTER: 'f', random, place[2], hostile
-MONSTER: 'q', random, place[3], hostile
+MONSTER: 'f', "lion", place[0], hostile
+MONSTER: 'f', "panther", place[1], hostile
+MONSTER: 'f', "jaguar", place[2], hostile
+MONSTER: 'q', "mastodon", place[3], hostile
 # and a couple token handlers
-MONSTER: 'o', random, place[4], hostile
-MONSTER: 'o', random, place[5], hostile
+MONSTER: 'o', "Mordor orc", place[4], hostile
+MONSTER: 'o', "Mordor orc", place[5], hostile
 OBJECT: ')', "bullwhip", place[4]
 OBJECT: ')', "bullwhip", place[5]
 # and some extra enemies for annoyance
-MONSTER: 'd', random, place[9], hostile
-MONSTER: 'G', random, place[6], hostile
-MONSTER: 'h', random, place[7], hostile
+MONSTER: 'd', "large dog", place[9], hostile
+MONSTER: 'G', "gnome lord", place[6], hostile
+MONSTER: 'h', "dwarf thief", place[7], hostile
 MONSTER: random, random, place[8], hostile
 # and a couple shiny prizes as temptation (for the handlers to use, possibly?)
 OBJECT: '/', random, place[6]
@@ -1174,25 +1170,21 @@ MONSTER:'G',"gnome lord",random
 MONSTER:'G',"gnome lord",random
 MONSTER:'G',"gnomish wizard",random
 MONSTER:'G',"gnomish wizard",random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'h',"hobbit",random
+MONSTER:'h',"hobbit",random
+MONSTER:'h',"dwarf",random
+MONSTER:'h',"dwarf",random
+MONSTER:'h',"dwarf",random
 MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'M', random, random, hostile
-MONSTER: 'M', random, random, hostile
 
 # Mine end level variant 2
 # "Gnome King's Wine Cellar"
@@ -1299,25 +1291,21 @@ MONSTER:'G',"gnome lord",random
 MONSTER:'G',"gnome lord",random
 MONSTER:'G',"gnomish wizard",random
 MONSTER:'G',"gnomish wizard",random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
-MONSTER:'G',random,random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'h',"hobbit",random
+MONSTER:'h',"hobbit",random
+MONSTER:'h',"dwarf",random
+MONSTER:'h',"dwarf",random
+MONSTER:'h',"dwarf",random
 MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER:'h',random,random
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'M', random, random, hostile
-MONSTER: 'M', random, random, hostile
 
 # "Catacombs" by Kelly Bailey
 # Relies on some very specific behavior of MAZEWALK.
@@ -1550,30 +1538,26 @@ MONSTER: 'G', random, (61,9), hostile
 MONSTER: 'G', random, (62,9), hostile
 MONSTER: 'G', random, (63,9), hostile
 # the mine workers
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'G', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'M', random, random, hostile
-MONSTER: 'M', random, random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
+MONSTER: 'G', "gnome", random, hostile
 MONSTER: 'G', "gnome warrior", random, hostile
 MONSTER: 'G', "gnome warrior", random, hostile
 MONSTER: 'G', "gnome warrior", random, hostile

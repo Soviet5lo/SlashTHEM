@@ -64,6 +64,7 @@ int x;
 			ART_NIGHTHORN && \
 			ART_EYE_OF_THE_BEHOLDER && \
 			ART_THIEFBANE && \
+			ART_WAND_OF_MIGHT && \
 			ART_KEY_OF_ACCESS && \
 			ART_BURNED_MOTH_RELAY && \
 			ART_SCALES_OF_THE_DRAGON_LORD);
@@ -822,7 +823,7 @@ struct monst *mtmp;
 			break;
 		case AD_ACID:
 			if (yours ? Acid_resistance : resists_acid(mtmp))
-				retval = FALSE;
+			    retval = FALSE;
 			break;
 		case AD_MAGM:
 		case AD_STUN:
@@ -2136,6 +2137,11 @@ arti_invoke(obj)
 	}
     case LEADERSHIP: {
 	    (void) pet_detect_and_tame(obj);
+	    break;
+	}
+    case MAP_LEVEL: {
+	    pline("An image suddenly forms in your mind!");
+	    (void)do_mapping();
 	    break;
 	}
 
