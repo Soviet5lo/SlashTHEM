@@ -218,7 +218,7 @@ STAIR:(03,08),up
 # Non diggable walls
 NON_DIGGABLE:(00,00,75,19)
 # Objects
-OBJECT:'(',"magic harp",(60,06),blessed,0,"Blackharp"
+OBJECT:'(',"magic harp",(60,06),blessed,0,"The Harp of Harmony"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
