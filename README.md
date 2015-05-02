@@ -1,7 +1,7 @@
 SlashTHEM
 =====================
 
-SlashTHEM is a fork of Slash'EM Extended version 75.  It's primary goals are to add more flavor to the game, create unique quests for most of the new roles, and apply some much needed balance changes.
+SlashTHEM is a fork of Slash'EM Extended version 75.  It's primary goals are to add more flavor to the game, flesh out and create unique quests for most of the new roles, and apply some much needed balance changes.
 
 A current changelog of SlashTHEM can be found [here] (https://github.com/Soviet5lo/SlashTHEM/blob/master/CHANGELOG.md)
 
@@ -17,6 +17,8 @@ It's difficulty at the current moment should be much, much easier than Slash'EM 
 This should compile fine on Windows (with MinGW) and Unix systems.  I haven't done any testing on other platforms.
 
 Windows (x64) builds are available on the [releases] (https://github.com/Soviet5lo/SlashTHEM/releases) page.
+
+Statuscolors support is available in a separate branch, but is very, very broken at the moment as it causes segfaults whenever too many status effects are on screen.  Patches/Pull requests to fix this and any other issue are welcome.
 
 Todo
 ----
