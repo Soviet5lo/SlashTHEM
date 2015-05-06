@@ -1855,8 +1855,10 @@ struct obj *obj;
 	    pline("This makes you feel %s!",
 		  (did_prop + did_attr) == (trouble_count + unfixable_trbl) ?
 		  "great" : "better");
+#if 0 /* 5lo: A bit too cruel, perhaps? */
 	else if (did_atno)
 	    pline("Damn! It didn't work!");
+#endif
 	else if (!did_prop)
 	    pline("Nothing seems to happen.");
 
