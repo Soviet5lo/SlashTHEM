@@ -1185,10 +1185,11 @@ water_prayer(bless_water)
 	      ((other || changed > 1L) ? "s" : ""), (changed > 1L ? "" : "s"),
 	      (bless_water ? hcolor(NH_LIGHT_BLUE) : hcolor(NH_BLACK)));
     }
+#if 0 /* 5lo: Removed */
 		if /*!*/ (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
 		pline_The("altar suddenly vanishes!"); /* hopefully this will teach those altar-campers! --Amy */
 		newsym(u.ux,u.uy);}
-
+#endif
     return((boolean)(changed > 0L));
 }
 
@@ -1767,11 +1768,11 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 	}
 
 	consume_offering(otmp);
-
+#if 0 /* 5lo: Removed */
 	if (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
 	pline_The("altar suddenly vanishes!"); /* hopefully this will teach those altar-campers! --Amy */
 	newsym(u.ux,u.uy);}
-
+#endif
 	/* OK, you get brownie points. */
 	if(u.ugangr) {
 	    u.ugangr -=

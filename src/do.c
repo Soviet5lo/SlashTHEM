@@ -270,11 +270,12 @@ void
 doaltarobj(obj)  /* obj is an object dropped on an altar */
 	register struct obj *obj;
 {
+#if 0 /* 5lo: Removed */
 	if (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
 	pline_The("altar suddenly vanishes!"); /* Yes, we're preventing altar abuse here, or trying to, at least. --Amy */
 	newsym(u.ux,u.uy);
 	return;}
-
+#endif
 	if (Blind)
 		return;
 
