@@ -292,6 +292,7 @@ boolean fleemsg;
 		mtmp->mfleetim = min(fleetime, 127);
 	    }
 	    if (!mtmp->mflee && fleemsg && canseemon(mtmp) && !mtmp->mfrozen) {
+#if 0 /* 5lo: Reverted (for now?) */
 		if (rn2(3)) {
 		  pline("%s turns to flee!", (Monnam(mtmp)));
 		  mtmp->mflee = 1;
@@ -299,9 +300,9 @@ boolean fleemsg;
 		else {
 		  pline("%s is startled for a moment.", (Monnam(mtmp)));}
 		};
-
-		/* pline("%s turns to flee!", (Monnam(mtmp))); */
-	    /*mtmp->mflee = 1;*/
+#endif
+		pline("%s turns to flee!", (Monnam(mtmp)));
+	    mtmp->mflee = 1;
 	}
 }
 
