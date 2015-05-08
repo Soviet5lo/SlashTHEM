@@ -1769,6 +1769,7 @@ long timeout;
 
     /* Weight towards non-motile fungi.
      */
+#if 0 /* 5lo: Let's just use the default Slash'EM behavior */
     if (rn2(20)) pmtype = pm_mkclass(S_FUNGUS, 0);
     else if (rn2(2)) pmtype = pm_mkclass(S_JELLY, 0); /*jellies, blobs and puddings should be possible --Amy*/
     else if (rn2(2)) pmtype = pm_mkclass(S_BLOB, 0);
@@ -1781,6 +1782,10 @@ long timeout;
 	    else if (rn2(2)) pmtype = pm_mkclass(S_BLOB, 0);
 	    else pmtype = pm_mkclass(S_PUDDING, 0);
 	}
+#endif
+    pmtype = pm_mkclass(S_FUNGUS, 0);
+    if ((pmtype != -1) && (mons[pmtype].mmove)) pmtype = pm_mkclass(S_FUNGUS, 0);
+
     /* [ALI] Molds don't grow in adverse conditions.  If it ever
      * becomes possible for molds to grow in containers we should
      * check for iceboxes here as well.
