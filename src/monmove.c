@@ -177,34 +177,23 @@ onscary(x, y, mtmp)
 int x, y;
 struct monst *mtmp;
 {
-	int resist_percentage;
-	int scresist_percentage;
-	boolean mresists;
-	boolean scmresists;
-
-
+	/* 5lo: Currently reverting Elbereth to function the same as it did in Slash'EM. This is a
+	 * bit harsh of a nerf as is considering all of the new monsters Slash'EM Extended introduced,
+	 * so this _should_ give people a fighting chance again.  After the monster cleanup this will
+	 * probably end up using the Sporkhack method of nerfing elbereth (success rate based on monster
+	 * level, higher level monsters being more resistant than lower level monsters, but not to the point
+	 * where Elbereth is completely useless.
+	 */
 	if (mtmp->isshk || mtmp->isgd || mtmp->iswiz || !mtmp->mcansee ||
-			mtmp->mpeaceful || (mtmp->data->mlet == S_HUMAN && (rn2(5) || mtmp->data->geno & G_UNIQ )) || (mtmp->data->mlet == S_DEMON && (rn2(3) || mtmp->data->geno & G_UNIQ )) ||
-			(mtmp->data->mlet == S_NEMESE && (rn2(10) || mtmp->data->geno & G_UNIQ )) || (mtmp->data->mlet == S_ARCHFIEND && (rn2(25) || mtmp->data->geno & G_UNIQ )) || mtmp->data->mlet == S_RUBMONST ||
-	    is_lminion(mtmp) || (mtmp->data->mlet == S_ANGEL && (rn2(20) || mtmp->data->geno & G_UNIQ )) || (mtmp->data->mlet == S_JELLY && (rn2(3) || mtmp->data->geno & G_UNIQ )) ||
-	    mtmp->data == &mons[PM_CTHULHU] || (mtmp->data->mlet == S_LIGHT && (rn2(2) || mtmp->data->geno & G_UNIQ )) || (mtmp->data->mlet == S_FUNGUS && (rn2(10) || mtmp->data->geno & G_UNIQ )) ||
-	    is_rider(mtmp->data) || (mtmp->data == &mons[PM_MINOTAUR] && (rn2(5) || mtmp->data->geno & G_UNIQ )) ||
-		 mtmp->mnum == quest_info(MS_NEMESIS) || mtmp->mnum == PM_VLAD_THE_IMPALER)
+			mtmp->mpeaceful || mtmp->data->mlet == S_HUMAN ||
+	    is_lminion(mtmp) || mtmp->data == &mons[PM_ANGEL] ||
+	    mtmp->data == &mons[PM_CTHULHU] ||
+	    is_rider(mtmp->data) || mtmp->data == &mons[PM_MINOTAUR])
 		return(FALSE);
 
-	/* the smallest monsters always respect Elbereth;
-	 * more powerful things less so */
-	/* also nerfed scare monster scrolls a bit */
-
-	resist_percentage = (int)(mtmp->m_lev * 1.5);
-	scresist_percentage = (int)(mtmp->m_lev * 0.5);
-
-	mresists = rn2(100) < resist_percentage;
-	scmresists = rn2(100) < resist_percentage;
-
-	return (boolean)((sobj_at(SCR_SCARE_MONSTER, x, y) && !scmresists)
+	return (boolean)(sobj_at(SCR_SCARE_MONSTER, x, y)
 #ifdef ELBERETH
-			 || (sengr_at("Elbereth", x, y) && !mresists)
+			 || sengr_at("Elbereth", x, y)
 #endif
 			 || (is_vampire(mtmp->data)
 			     && IS_ALTAR(levl[x][y].typ)));
