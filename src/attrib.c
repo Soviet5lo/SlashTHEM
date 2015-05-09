@@ -308,6 +308,7 @@ const struct innate {
 		     {   0, 0, 0, 0 } },
 
 	nym_abil[] = { {  1, &(HTeleportation), "", "" },
+		     {   15, &(HTeleport_control), "controlled", "helpless" },
 		     {   0, 0, 0, 0 } },
 
 	gig_abil[] = { {  10, &(HFire_resistance), "cool", "warmer" },
@@ -322,6 +323,7 @@ const struct innate {
 		     {   0, 0, 0, 0 } },
 
 	ill_abil[] = { {  1, &(HTelepat), "", "" },
+		     {   5, &(ETelepat), "aware", "unaware" },
 		     {   0, 0, 0, 0 } },
 
 	spi_abil[] = { {  1, &(HPoison_resistance), "", "" },
