@@ -5962,6 +5962,12 @@ register struct trobj *trop;
 				/* 5lo -- Doppelgangers shouldn't get ring of poly control. */
 				 || (Race_if(PM_DOPPELGANGER) && otyp == RIN_POLYMORPH_CONTROL)
 
+				/* Nor should nymphs get these rings. */
+				 || (Race_if(PM_NYMPH) &&
+					(otyp == RIN_TELEPORTATION
+					 || RIN_TELEPORT_CONTROL))
+
+
 				/* KMH, balance patch -- now an amulet */
 				|| (Role_if(PM_NECROMANCER) &&
 						otyp == AMULET_OF_DRAIN_RESISTANCE)
