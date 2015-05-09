@@ -913,7 +913,11 @@ E int NDECL(dopramulet);
 E int NDECL(doprtool);
 E int NDECL(doprinuse);
 E void FDECL(useupf, (struct obj *,long));
+#ifndef SHOWSYM
 E char *FDECL(let_to_name, (CHAR_P,BOOLEAN_P));
+#else
+E char *FDECL(let_to_name, (CHAR_P,BOOLEAN_P,BOOLEAN_P));
+#endif
 E void NDECL(free_invbuf);
 E void NDECL(reassign);
 E int NDECL(doorganize);

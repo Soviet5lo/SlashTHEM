@@ -226,6 +226,11 @@ static struct Bool_Opt
 #else
 	{"showweight", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
+#ifdef SHOWSYM
+	{"showsym", &iflags.showsym, TRUE, SET_IN_GAME},
+#else
+	{"showsym", (boolean *)0, FALSE, SET_IN_FILE},
+#endif
 	{"silent", &flags.silent, TRUE, SET_IN_GAME},
 	{"softkeyboard", &iflags.wc2_softkeyboard, FALSE, SET_IN_FILE},
 	{"sortpack", &flags.sortpack, TRUE, SET_IN_GAME},

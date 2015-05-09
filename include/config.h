@@ -519,6 +519,8 @@ typedef unsigned char	uchar;
  * bugs left here.
  */
 
+#define SHOWSYM	/* Show object symbols in menus */
+
 /*#define GOLDOBJ */	/* Gold is kept on obj chains - Helge Hafting */
 #define AUTOPICKUP_EXCEPTIONS /* exceptions to autopickup */
 /*#define UNDERGROUND_RIVERS */ /* 5lo: Wrapped these into a define, currently a bit buggy. */

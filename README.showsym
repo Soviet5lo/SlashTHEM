@@ -1,0 +1,53 @@
+
+Patch: showsym v1.2
+
+This patch adds the object class symbol to all obj class title names
+in menus where that obj class accelerator key works. For example:
+
+
+Drop what type of items?
+
+a - All types
+b - Amulets  ('"')
+c - Weapons  (')')
+d - Armor  ('[')
+e - Scrolls ('?')
+f - Tools  ('(')
+(end)
+
+
+Or:
+
+
+Pick up what?
+
+Armor  ('[')
+a - a crested helmet
+Potions  ('!')
+b - 2 potions of booze
+c - 2 potions of confusion
+Rings  ('=')
+d - a topaz ring
+(end)
+
+
+
+CHANGES:
+
+ v1.2
+  - updated to 3.4.3 codebase.
+
+ v1.1
+  - updated to 3.4.2 codebase.
+  - added an option "showsym" to toggle the symbol showing.
+  - compile time option SHOWSYM.
+
+ v1.0
+  - initial release.
+
+
+-
+Pasi Kallinen
+pkalli@cs.joensuu.fi
+
+
