@@ -475,7 +475,7 @@ register int type;
 	    if(levl[x][y].doormask & D_TRAPPED) {
 		struct monst *mtmp;
 
-		if (level_difficulty() >= /*9*/5 && !rn2(5) &&
+		if (level_difficulty() >= 9 && !rn2(5) &&
 		   !((mvitals[PM_SMALL_MIMIC].mvflags & G_GONE) &&
 		     (mvitals[PM_LARGE_MIMIC].mvflags & G_GONE) &&
 		     (mvitals[PM_MIMIC].mvflags & G_GONE) &&
