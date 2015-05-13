@@ -420,6 +420,8 @@ typedef unsigned char	uchar;
 /* #define REINCARNATION */     /* Special Rogue-like levels */
 #define BLACKMARKET     /* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
 /* #define MORE_SPAWNS */ /* 5lo: Extra spawning system by AmyBSOD */
+/* #define RND_SPEC_WALLS */ /* 5lo: Special levels have a chance of replacing walls with
+                              * pools/lava/ice/trees/iron bars */
 
 /* monsters & objects */
 #define KOPS		/* Keystone Kops by Scott R. Turner */
