@@ -1103,8 +1103,6 @@ skip0:
 #endif
 		if(!rn2(10)) mkfount(0,croom);
 
-		if(!rn2(500)) mkthrone(croom); /* rare cause they may give wishes --Amy */
-
 #ifdef SINKS
 		if(!rn2(60)) {
 		    mksink(croom);
@@ -1112,6 +1110,9 @@ skip0:
 		}
 #endif
 #if 0
+
+		if(!rn2(500)) mkthrone(croom); /* rare cause they may give wishes --Amy */
+
 		if(!rn2(50)) {
 		    mkstone(croom);
 		    if(!rn2(3)) mkstone(croom);
