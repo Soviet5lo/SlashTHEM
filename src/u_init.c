@@ -710,12 +710,12 @@ static struct trobj Yeoman[] = {
 /*
  *	Optional extra inventory items.
  */
-
+#if 0 /* 5lo: Obsolete */
 static struct trobj AlienItem[] = {
 	{ LOADSTONE, 0, GEM_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#endif
 static struct trobj NaviItem[] = {
 	{ WEDGE_SANDALS, 0, ARMOR_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -3551,9 +3551,10 @@ u_init()
 	    }
 	    break;
 	case PM_ALIEN: /* this is the harder than hard race, combine it with convict role for maximum torture */
-	    adjalign(-20); 
-	    change_luck(-2);
-          ini_inv(AlienItem); break; /* yeah its a lodestone, good luck getting rid of it! */
+	    adjalign(-10); 
+	    change_luck(-3);
+	    /*ini_inv(AlienItem);*/
+	    	break;
 	case PM_KOBOLT:
           ini_inv(KoboltItem);		
           ini_inv(KoboltItemB);		

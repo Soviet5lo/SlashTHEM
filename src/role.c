@@ -1733,7 +1733,7 @@ const struct Race races[] = {
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
-	{     16,     20, 16, 16, 16, 16 },
+	{     15,     18, 15, 15, 15, 15 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
