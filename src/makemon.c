@@ -4486,15 +4486,15 @@ register struct	monst	*mtmp;
 			struct obj *otmp = mksobj(HEAVY_HAMMER,TRUE,FALSE);
 			otmp = oname(otmp,artiname(ART_WARFORGER));
 			mpickobj(mtmp,otmp);
-            mongets(mtmp,SILVER_DRAGON_SCALE_MAIL);
-            mongets(mtmp,CLOAK_OF_DISPLACEMENT);
-            mongets(mtmp,SPEED_BOOTS);
-            mongets(mtmp,HELM_OF_BRILLIANCE);
-            mongets(mtmp,AMULET_OF_LIFE_SAVING);
-            mongets(mtmp,POT_FULL_HEALING);
-            mongets(mtmp,POT_FULL_HEALING);
-            mongets(mtmp,POT_FULL_HEALING);
-            mongets(mtmp,POT_FULL_HEALING); /* He is NOT going down without a fight */
+			mongets(mtmp,SILVER_DRAGON_SCALE_MAIL);
+			mongets(mtmp,CLOAK_OF_DISPLACEMENT);
+			mongets(mtmp,SPEED_BOOTS);
+			mongets(mtmp,HELM_OF_BRILLIANCE);
+			mongets(mtmp,AMULET_OF_LIFE_SAVING);
+			mongets(mtmp,POT_FULL_HEALING);
+			mongets(mtmp,POT_FULL_HEALING);
+			mongets(mtmp,POT_FULL_HEALING);
+			mongets(mtmp,POT_FULL_HEALING); /* He is NOT going down without a fight */
 
 		}  else if (ptr == &mons[PM_SHOPKEEPER]) {
 		    (void) mongets(mtmp,SKELETON_KEY);
