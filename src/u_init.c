@@ -740,12 +740,12 @@ static struct trobj KoboltItemC[] = {
 	{ ORCISH_SPEAR, 0, WEAPON_CLASS, 3, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#if 0 /* 5lo: Obsolete */
 static struct trobj GhastFood[] = {
 	{ CORPSE, 0, FOOD_CLASS, 5, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#endif
 static struct trobj UngMoldWand[] = {
 	{ WAN_DEATH, 10, WAND_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -3562,7 +3562,7 @@ u_init()
 		/*HSleeping = 5;*/
 		break;
 	case PM_GASTLY:
-          ini_inv(GhastFood);		
+          /*ini_inv(GhastFood);*/
 		break;
 	case PM_INSECTOID:
           ini_inv(InsectoidItem);		
