@@ -193,6 +193,7 @@ magic_map_background(x, y, show)
 	lev->glyph = cmap_to_glyph(cmap);
 #endif
     if (show || transp) show_glyph(x,y, cmap_to_glyph(cmap));
+    lev->styp = lev->typ;
 }
 
 /*

@@ -121,6 +121,7 @@ STATIC_PTR int NDECL(doextcmd);
 STATIC_PTR int NDECL(doborgtoggle);
 #endif
 STATIC_PTR int NDECL(domonability);
+STATIC_PTR int NDECL(dooverview_or_wiz_where);
 STATIC_PTR int NDECL(dotravel);
 STATIC_PTR int NDECL(playersteal);
 #if 0
@@ -677,6 +678,17 @@ playersteal()
 	return(0);
 } 
 
+STATIC_PTR int
+dooverview_or_wiz_where()
+{
+#ifdef WIZARD
+	if (wizard) return wiz_where();
+	else
+#endif
+	dooverview();
+	return 0;
+}
+
 #ifdef WIZARD
 
 /* ^W command - wish for something */
@@ -981,7 +993,8 @@ wiz_toggle_invulnerability()
 	            u.uinvulnerable = FALSE;
 	    }
 	}
-	else            pline("Unavailable command '^N'.");
+	/*	else            pline("Unavailable command '^N'.");*/
+	else donamelevel();
 	return 0;
 }
 /* END TSANTH'S CODE */
@@ -2296,8 +2309,10 @@ static const struct func_tab cmdlist[] = {
 	{C('n'), TRUE, wiz_toggle_invulnerability},
 /* END TSANTH'S CODE */
 	{C('h'), TRUE, wiz_detect_monsters},
-	{C('o'), TRUE, wiz_where},
+#else
+	{C('n'), TRUE, donamelevel}, /* if number_pad is set */
 #endif
+	{C('o'), TRUE, dooverview_or_wiz_where}, /*depending on wizard status*/
 	{C('p'), TRUE, doprev_message},
 	{C('q'), TRUE, done2},
 	{C('r'), TRUE, doredraw},
@@ -2431,6 +2446,7 @@ static const struct func_tab cmdlist[] = {
 struct ext_func_tab extcmdlist[] = {
 	{"2weapon", "toggle two-weapon combat", dotwoweapon, FALSE},
 	{"adjust", "adjust inventory letters", doorganize, TRUE},
+	{"annotate", "name current level", donamelevel, TRUE},
 	{"borrow", "steal from monsters", playersteal, FALSE},  /* jla */        
 	{"chat", "talk to someone", dotalk, TRUE},	/* converse? */
 	{"conduct", "list which challenges you have adhered to", doconduct, TRUE},
@@ -2450,6 +2466,7 @@ struct ext_func_tab extcmdlist[] = {
 	{"monster", "use a monster's special ability", domonability, TRUE},
 	{"name", "name an item or type of object", ddocall, TRUE},
 	{"offer", "offer a sacrifice to the gods", dosacrifice, FALSE},
+	{"overview", "show an overview of the dungeon", dooverview, TRUE},
 	{"pray", "pray to the gods for help", dopray, TRUE},
 	{"quit", "exit without saving current game", done2, TRUE},
 #ifdef STEED
