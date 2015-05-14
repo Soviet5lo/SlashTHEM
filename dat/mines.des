@@ -1054,7 +1054,7 @@ MONSTER: '@', "watch captain", random, peaceful
 
 # The zoo needs some stuff...
 
-MONSTER: 'f', "lion", place[0], hostile
+MONSTER: 'f', "cave lion", place[0], hostile
 MONSTER: 'f', "panther", place[1], hostile
 MONSTER: 'f', "jaguar", place[2], hostile
 MONSTER: 'q', "mastodon", place[3], hostile
