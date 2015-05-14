@@ -2110,6 +2110,16 @@ char		*tmp_levels;
 	    len = get_uchars(fp, buf, bufp, translate, FALSE,
 			     MAXECHARS, "EFFECTS");
 	    assign_graphics(translate, len, MAXECHARS, MAXDCHARS+MAXTCHARS);
+#ifdef USER_DUNGEONCOLOR
+	} else if (match_varname(buf, "DUNGEONCOLOR", 10)) {
+	    len = get_uchars(fp, buf, bufp, translate, FALSE,
+			     MAXDCHARS, "DUNGEONCOLOR");
+	    assign_colors(translate, len, MAXDCHARS, 0);
+	} else if (match_varname(buf, "TRAPCOLORS", 7)) {
+	    len = get_uchars(fp, buf, bufp, translate, FALSE,
+			     MAXTCHARS, "TRAPCOLORS");
+	    assign_colors(translate, len, MAXTCHARS, MAXDCHARS);
+#endif
 
 	} else if (match_varname(buf, "OBJECTS", 3)) {
 	    /* oc_syms[0] is the RANDOM object, unused */

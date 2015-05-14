@@ -25,7 +25,11 @@ int explcolors[] = {
 
 #ifdef TEXTCOLOR
 #define zap_color(n)  color = iflags.use_color ? (Hallucination ? rn2(15) : zapcolors[n]) : NO_COLOR
+#ifndef USER_DUNGEONCOLOR
 #define cmap_color(n) color = iflags.use_color ? (Hallucination ? rn2(15) : defsyms[n].color) : NO_COLOR
+#else
+#define cmap_color(n) color = iflags.use_color ? showsymcolors[n] : NO_COLOR
+#endif
 #define obj_color(n)  color = iflags.use_color ? (Hallucination ? rn2(15) : objects[n].oc_color) : NO_COLOR
 #define mon_color(n)  color = iflags.use_color ? (Hallucination ? rn2(15) : mons[n].mcolor) : NO_COLOR
 #define invis_color(n) color = NO_COLOR
@@ -126,8 +130,19 @@ unsigned *ospecial;
 	    /* provide a visible difference if normal and lit corridor
 	     * use the same symbol */
 	    if (iflags.use_color &&
+#ifndef USER_DUNGEONCOLOR
 		offset == S_litcorr && ch == showsyms[S_corr])
 		color = CLR_WHITE;
+#else
+		offset == S_litcorr && ch == showsyms[S_corr] &&
+		    showsymcolors[S_corr] == showsymcolors[S_litcorr]) {
+	if (showsymcolors[S_corr] != CLR_WHITE) {
+	    color = showsymcolors[S_litcorr] = CLR_WHITE;
+	} else {
+	    color = showsymcolors[S_litcorr] = CLR_GRAY;
+	}
+    }
+#endif /* USER_DUNGEONCOLOR */
 		/* special level colors by Amy, code partly stolen from dnethack */
 		else if(Is_lawful_quest(&u.uz)) {
 				if(offset >= S_vwall && offset <= S_hcdoor){

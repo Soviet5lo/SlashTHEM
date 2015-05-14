@@ -515,6 +515,9 @@ E void FDECL(switch_graphics, (int));
 #ifdef REINCARNATION
 E void FDECL(assign_rogue_graphics, (BOOLEAN_P));
 #endif
+#ifdef USER_DUNGEONCOLOR
+E void FDECL(assign_colors, (uchar *,int,int,int));
+#endif
 
 /* ### dungeon.c ### */
 

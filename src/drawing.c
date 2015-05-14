@@ -24,6 +24,10 @@ uchar showsyms[MAXPCHARS]  = DUMMY; /* the current feature display symbols */
 uchar monsyms[MAXMCLASSES] = DUMMY; /* the current monster display symbols */
 uchar warnsyms[WARNCOUNT]  = DUMMY;  /* the current warning display symbols */
 
+#ifdef USER_DUNGEONCOLOR
+uchar showsymcolors[MAXPCHARS] = DUMMY; /* current feature display colors */
+#endif
+
 /* Default object class symbols.  See objclass.h. */
 const char def_oc_syms[MAXOCLASSES] = {
 /* 0*/	'\0',		/* placeholder for the "random class" */
@@ -694,6 +698,21 @@ int glth, maxlen, offset;
 		       graph_chars[i] : defsyms[i+offset].sym);
 }
 
+#ifdef USER_DUNGEONCOLOR
+void
+assign_colors(graph_colors, glth, maxlen, offset)
+register uchar *graph_colors;
+int glth, maxlen, offset;
+{
+    register int i;
+
+    for (i = 0; i < maxlen; i++)
+	showsymcolors[i+offset] =
+	    (((i < glth) && (graph_colors[i] < CLR_MAX)) ?
+	     graph_colors[i] : defsyms[i+offset].color);
+}
+#endif
+
 void
 switch_graphics(gr_set_flag)
 int gr_set_flag;
@@ -702,6 +721,9 @@ int gr_set_flag;
 	default:
 	case ASCII_GRAPHICS:
 	    assign_graphics((uchar *)0, 0, MAXPCHARS, 0);
+#ifdef USER_DUNGEONCOLOR
+	    assign_colors((uchar *)0, 0, MAXPCHARS, 0);
+#endif
 #ifdef PC9800
 	    if (ascgraphics_mode_callback) (*ascgraphics_mode_callback)();
 #endif
