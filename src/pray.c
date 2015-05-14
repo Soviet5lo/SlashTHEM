@@ -1699,6 +1699,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 				You("feel %s is very angry at you!", a_gname());                    
 				summon_minion(altaralign, FALSE);
 				summon_minion(altaralign, FALSE);
+#ifdef MORE_SPAWNS
 				if (rn2(u.ulevel)) summon_minion(altaralign, FALSE); /* summon more --Amy */
 				if (rn2(u.ulevel)) summon_minion(altaralign, FALSE);
 				if (!rn2(2)) summon_minion(altaralign, FALSE);
@@ -1710,6 +1711,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 				if (!rn2(128)) summon_minion(altaralign, FALSE);
 				if (!rn2(256)) summon_minion(altaralign, FALSE);
 				if (!rn2(512)) summon_minion(altaralign, FALSE);
+#endif
 		    }
 		    u.ublesscnt = 0;  /* WAC You deserve this ... */
 		    exercise(A_WIS, TRUE);
@@ -1731,12 +1733,14 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    if (rnl(u.ulevel) > 6 && u.ualign.record > 0 &&
 		       rnd(u.ualign.record) > (3*ALIGNLIM)/4) {
 			summon_minion(altaralign, TRUE);
+#ifdef MORE_SPAWNS
 			if (rn2(u.ulevel)) summon_minion(altaralign, TRUE); /* summon more --Amy */
 			if (!rn2(3)) summon_minion(altaralign, TRUE);
 			if (!rn2(9)) summon_minion(altaralign, TRUE);
 			if (!rn2(27)) summon_minion(altaralign, TRUE);
 			if (!rn2(81)) summon_minion(altaralign, TRUE);
 			if (!rn2(243)) summon_minion(altaralign, TRUE);
+#endif
 			}
 
 		    /* anger priest; test handles bones files */
@@ -1754,12 +1758,14 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    if (rnl(u.ulevel) > 6 && u.ualign.record > 0 &&
 		       rnd(u.ualign.record) > (7*ALIGNLIM)/8) {
 			summon_minion(altaralign, TRUE);
+#ifdef MORE_SPAWNS
 			if (rn2(u.ulevel)) summon_minion(altaralign, TRUE); /* summon more --Amy */
 			if (!rn2(3)) summon_minion(altaralign, TRUE);
 			if (!rn2(9)) summon_minion(altaralign, TRUE);
 			if (!rn2(27)) summon_minion(altaralign, TRUE);
 			if (!rn2(81)) summon_minion(altaralign, TRUE);
 			if (!rn2(243)) summon_minion(altaralign, TRUE);
+#endif
 			}
 
 		}
