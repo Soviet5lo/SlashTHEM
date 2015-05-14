@@ -650,8 +650,9 @@ int how;
 	/* Troll characters have a chance of reviving. --Amy */
 	if (Race_if(PM_TROLLOR) && how <= GENOCIDED && u.ulevel > 2 && rn2(4) ) {
 		pline("But wait...");
-	    losexp("failed troll revival", TRUE);
-	    losexp("failed troll revival", TRUE);
+	    	losexp("failed troll revival", TRUE);
+		if (u.uexp > 0)
+		    u.uexp = newuexp(u.ulevel - 1);
 		pline("You come back to life!");
 		if(u.uhpmax <= 0) u.uhpmax = 1;	/* arbitrary */
 		savelife(how);
