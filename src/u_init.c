@@ -5966,7 +5966,7 @@ register struct trobj *trop;
 				/* Nor should nymphs get these rings. */
 				 || (Race_if(PM_NYMPH) &&
 					(otyp == RIN_TELEPORTATION
-					 || RIN_TELEPORT_CONTROL))
+					 || otyp == RIN_TELEPORT_CONTROL))
 
 
 				/* KMH, balance patch -- now an amulet */
