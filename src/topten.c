@@ -146,9 +146,9 @@ encodeconduct(void)
 {
        long e = 0L;
 
-       if(u.uconduct.unvegetarian)    e |= 0x1L;
+       if(u.uconduct.food)            e |= 0x1L;
        if(u.uconduct.unvegan)         e |= 0x2L;
-       if(u.uconduct.food)            e |= 0x4L;
+       if(u.uconduct.unvegetarian)    e |= 0x4L;
        if(u.uconduct.gnostic)         e |= 0x8L;
        if(u.uconduct.weaphit)         e |= 0x10L;
        if(u.uconduct.killer)          e |= 0x20L;
