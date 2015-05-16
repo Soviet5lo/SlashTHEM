@@ -429,6 +429,18 @@ struct toptenentry *tt;
   else if (flags.lostsoul)
       (void)fprintf(rfile, ",lostsoul");
 
+  (void)fprintf(rfile, SEP "mode=");
+  (void)fprintf(rfile, (wizard ? "wizard" :
+                        discover ? "explore" :
+                        (flags.gehenna ||
+                         flags.dudley ||
+                         flags.iwbtg ||
+                         flags.hippie ||
+                         flags.blindfox ||
+                         flags.uberlostsoul ||
+                         flags.lostsoul) ? "abnormal" :
+                        "normal"));
+
   (void)fprintf(rfile, "\n");
 
 }
