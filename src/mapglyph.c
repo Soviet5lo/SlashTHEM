@@ -172,6 +172,12 @@ unsigned *ospecial;
 				color = CLR_BLACK;
 			} else if(In_sheol(&u.uz)) {
 				color = CLR_BRIGHT_CYAN;
+			} else if(Is_knox(&u.uz)) {
+				color = CLR_YELLOW;
+#ifdef BLACKMARKET
+			} else if(Is_blackmarket(&u.uz)) {
+				color = CLR_BLACK;
+#endif /* BLACKMARKET */
 			} else if(In_mines(&u.uz) && !*in_rooms(x,y,0)) {
 				color = CLR_BROWN;
 			} else if(*in_rooms(x,y,BEEHIVE)) {
