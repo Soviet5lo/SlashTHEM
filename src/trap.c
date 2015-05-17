@@ -421,6 +421,7 @@ register int x, y, typ;
 		    (void) add_to_container(statue, otmp);
 		}
 		statue->owt = weight(statue);
+#if 0 /* 5lo: removed for balance reasons */
 		if (!rn2(5)) statue->oinvis = 1; /* player needs see invisible to detect this thing --Amy */
 		else if (!rn2(10)) (void) mkobj_at(COIN_CLASS, x, y, TRUE); /* hidden underneath a zorkmid */
 		else if (!rn2(10)) (void) mksobj_at(BOULDER, x, y, TRUE, FALSE); /* hidden underneath a boulder */
@@ -447,7 +448,7 @@ register int x, y, typ;
 					}
 		if (sessilemnum != -1) (void) makemon( &mons[sessilemnum], x, y, NO_MM_FLAGS); /* hidden beneath a fungus */
 		}
-
+#endif
 		mongone(mtmp);
 		break;
 	      }
