@@ -1850,9 +1850,11 @@ boolean prefilled;
 				if (!rn2(3)) {
 					(void)makemon(mkclass(S_EEL,0),croom->lx,croom->ly,NO_MM_FLAGS);
 				}
+#if 0
 				if (!rn2(3)) {
 					(void)makemon(mkclass(S_EEL,0),croom->hx,croom->hy,NO_MM_FLAGS);
 				}
+#endif
 			}
 		    break;
 		case COURT:
