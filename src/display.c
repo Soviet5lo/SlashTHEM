@@ -1412,7 +1412,7 @@ int glyph;
     register int offset;
 
     if (glyph >= NO_GLYPH)
-        return ;
+        return 0;
 
     /*
      *  Map the glyph back to a character.
