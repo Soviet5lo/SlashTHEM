@@ -4632,7 +4632,7 @@ register struct monst *mon;
 		}
 #endif
 	}
-
+#if 0 /* 5lo: ...no */
 	if (!rn2(50)) {
 
 	/* Yes, real-life pregnancy doesn't work like this. But I want to avoid having to make complicated functions,
@@ -4659,7 +4659,7 @@ register struct monst *mon;
 		pickup_object(uegg, 1, FALSE);
 
 	}
-
+#endif
 	if (!rn2(10)) mon->mcan = 1; /* monster is worn out; chance is much higher now --Amy */
 	if (!tele_restrict(mon)) (void) rloc(mon, FALSE);
 	return 1;
