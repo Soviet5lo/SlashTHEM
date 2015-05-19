@@ -289,13 +289,10 @@ const struct shclass shtypes[] = {
 	{"ammo shop", WEAPON_CLASS, 3, D_SHOP, {
 {15, -BULLET}, {15, -SILVER_BULLET}, {14, -SHOTGUN_SHELL}, {14, -ROCKET}, {14, -FRAG_GRENADE}, {14, -GAS_GRENADE}, {14, -STICK_OF_DYNAMITE} }, shkweapons},
 
-
-#else
-	{"crappy weapons outlet", WEAPON_CLASS, 3, D_SHOP, {
-	    {90, WEAPON_CLASS}, {10, ARMOR_CLASS}, {0, 0}}, shkweapons},
-#endif
-
 	{"rare instruments", TOOL_CLASS, 3, D_SHOP, 
+#else
+	{"rare instruments", TOOL_CLASS, 9, D_SHOP, 
+#endif
             {{10, -TIN_WHISTLE  }, { 3, -MAGIC_WHISTLE  }, 
              {10, -WOODEN_FLUTE }, { 3, -MAGIC_FLUTE    }, 
              {10, -TOOLED_HORN  }, { 3, -FROST_HORN     }, 
