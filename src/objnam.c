@@ -915,7 +915,7 @@ ring:
 		break;*/
 	case BALL_CLASS:
 	case CHAIN_CLASS:
-		goto plus;
+		/*goto plus;*/
 		add_erosion_words(obj, prefix);
 		if(obj->owornmask & W_BALL)
 			Strcat(bp, " (chained to you)");
