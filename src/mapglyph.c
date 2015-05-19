@@ -24,18 +24,18 @@ int explcolors[] = {
 #endif
 
 #ifdef TEXTCOLOR
-#define zap_color(n)  color = iflags.use_color ? (Hallucination ? rn2(15) : zapcolors[n]) : NO_COLOR
+#define zap_color(n)  color = iflags.use_color ? (flags.hippie  ? rn2(15) : zapcolors[n]) : NO_COLOR
 #ifndef USER_DUNGEONCOLOR
-#define cmap_color(n) color = iflags.use_color ? (Hallucination ? rn2(15) : defsyms[n].color) : NO_COLOR
+#define cmap_color(n) color = iflags.use_color ? (flags.hippie ? rn2(15) : defsyms[n].color) : NO_COLOR
 #else
 #define cmap_color(n) color = iflags.use_color ? showsymcolors[n] : NO_COLOR
 #endif
-#define obj_color(n)  color = iflags.use_color ? (Hallucination ? rn2(15) : objects[n].oc_color) : NO_COLOR
-#define mon_color(n)  color = iflags.use_color ? (Hallucination ? rn2(15) : mons[n].mcolor) : NO_COLOR
+#define obj_color(n)  color = iflags.use_color ? (flags.hippie ? rn2(15) : objects[n].oc_color) : NO_COLOR
+#define mon_color(n)  color = iflags.use_color ? (flags.hippie ? rn2(15) : mons[n].mcolor) : NO_COLOR
 #define invis_color(n) color = NO_COLOR
-#define pet_color(n)  color = iflags.use_color ? (Hallucination ? rn2(15) : mons[n].mcolor) : NO_COLOR
-#define warn_color(n) color = iflags.use_color ? (Hallucination ? rn2(15) : def_warnsyms[n].color) : NO_COLOR
-#define explode_color(n) color = iflags.use_color ? (Hallucination ? rn2(15) : explcolors[n]) : NO_COLOR
+#define pet_color(n)  color = iflags.use_color ? (flags.hippie ? rn2(15) : mons[n].mcolor) : NO_COLOR
+#define warn_color(n) color = iflags.use_color ? (flags.hippie ? rn2(15) : def_warnsyms[n].color) : NO_COLOR
+#define explode_color(n) color = iflags.use_color ? (flags.hippie ? rn2(15) : explcolors[n]) : NO_COLOR
 # if defined(REINCARNATION) && defined(ASCIIGRAPH)
 #  define ROGUE_COLOR
 # endif
@@ -287,7 +287,7 @@ unsigned *ospecial;
 
 #endif
 	    if (color == NO_COLOR) cmap_color(offset);
-		if (Hallucination) color = rn2(15);
+		if (flags.hippie) color = rn2(15);
     } else if ((offset = (glyph - GLYPH_OBJ_OFF)) >= 0) {	/* object */
 	if (On_stairs(x,y) && levl[x][y].seenv) special |= MG_STAIRS;
 	if (offset == BOULDER && iflags.bouldersym) ch = iflags.bouldersym;
