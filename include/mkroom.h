@@ -106,14 +106,10 @@ extern NEARDATA struct door doors[DOORMAX];
 #define PETSHOP         (SHOPBASE+ 9)		/* Stephen White */
 #define TINSHOP         (SHOPBASE+10)		/* Robin Johnson */
 #define BOOKSHOP        (SHOPBASE+11)
-#define USELESSSHOP     (SHOPBASE+12)
-#define GUNSHOP         (SHOPBASE+13)
-#define AMMOSHOP        (SHOPBASE+14)
-#define LITENSHOP       (SHOPBASE+15)
-#define BOULDSHOP       (SHOPBASE+16)
-#define ROCKSSHOP       (SHOPBASE+17)
-#define WIERDSHOP       (SHOPBASE+18)
-#define UNIQUESHOP      (SHOPBASE+19)      /* shops here & above not randomly gen'd. */
+#define GUNSHOP         (SHOPBASE+12)
+#define AMMOSHOP        (SHOPBASE+13)
+#define INSTRUMENTSHOP	(SHOPBASE+14)
+#define UNIQUESHOP      (SHOPBASE+15)      /* shops here & above not randomly gen'd. */
 #define CANDLESHOP      (UNIQUESHOP)
 #ifdef BLACKMARKET
 #define BLACKSHOP       (UNIQUESHOP+1)

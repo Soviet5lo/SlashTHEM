@@ -199,13 +199,9 @@ static struct {
 	{ "pet shop",    PETSHOP },	/* Stephen White */
 	{ "tin shop",    TINSHOP }, /* Robin Johnson */
 	{ "book shop",	 BOOKSHOP },
-	{ "fresh food shop",	 USELESSSHOP },
 	{ "gun shop",	 GUNSHOP },
 	{ "ammo shop",	 AMMOSHOP },
-	{ "boulder shop",	 BOULDSHOP },
-	{ "rock shop",	 ROCKSSHOP },
-	{ "lightning shop",	 LITENSHOP },
-	{ "wierd shop",	 WIERDSHOP },
+	{ "music shop",  INSTRUMENTSHOP },
 	{ "candle shop", CANDLESHOP },
 #ifdef BLACKMARKET
 	{ "black market", BLACKSHOP },
