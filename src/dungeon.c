@@ -2299,6 +2299,12 @@ int rtype;
 			return "tin shop";
 		case BOOKSHOP:
 			return "bookstore";
+		case GUNSHOP:
+			return "gun shop";
+		case AMMOSHOP:
+			return "ammo shop";
+		case INSTRUMENTSHOP:
+			return "music shop";
 		case CANDLESHOP:
 			return "lighting shop";
 #ifdef BLACKMARKET			  
