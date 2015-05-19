@@ -3127,7 +3127,7 @@ revid_end:
 		} else if (sobj->blessed) {
 			ual = u.ualign.type;
 			a = (ual==A_LAWFUL) ? 'l' : ((ual==A_NEUTRAL) ? 'n' : 'c');
-			c = yn_function("Which alignment do you want to consectrate the altar to?","lncm",a);
+			c = yn_function("Which alignment do you want to consecrate the altar to?","lncm",a);
 			al = A_NONE;
 			switch (c) {
 				case 'l':
@@ -3146,10 +3146,10 @@ revid_end:
 		levl[u.ux][u.uy].typ = ALTAR;
 		levl[u.ux][u.uy].altarmask = Align2amask(al);
 		x = (al == ual) ? 1 : ((al == A_NONE) ? -3 : -1);
-		y = -rn2(x * 100);
+//		y = -rn2(x * 100);
 		u.ualign.record += x;
-		u.ublesscnt += y;
-		if (u.ublesscnt < 0) u.ublesscnt = 0;
+//		u.ublesscnt += y;
+//		if (u.ublesscnt < 0) u.ublesscnt = 0;
 		pline("You feel %s%scomfortable.",(abs(x)>1) ? "very " : "", (x<0) ? "un" : "");
 	} break;
 

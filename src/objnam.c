@@ -1854,6 +1854,7 @@ const char *oldstr;
 		} else if (!BSTRCMPI(bp, p-5, "boots") ||
 			   !BSTRCMP(bp, p-9, "gauntlets") ||
                            !BSTRCMPI(bp, p-6, "tricks") ||
+                           !BSTRCMPI(bp, p-5, "cards") ||
                            !BSTRCMPI(bp, p-9, "paralysis") ||
                            !BSTRCMPI(bp, p-5, "glass") ||
                            !BSTRCMPI(bp, p-4, "ness") ||
