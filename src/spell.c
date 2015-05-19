@@ -621,6 +621,8 @@ void
 age_spells()
 {
 	int i;
+	if (Keen_memory && moves % 3 == 0)
+		return;
 	/*
 	 * The time relative to the hero (a pass through move
 	 * loop) causes all spell knowledge to be decremented.

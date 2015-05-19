@@ -3319,7 +3319,7 @@ typ == SCR_TELE_LEVEL || typ == SCR_WARPING || typ == SCR_LAVA || typ == SCR_LOC
 		return TRUE;
 	    break;
 	case AMULET_CLASS:
-	    if (typ == AMULET_OF_LIFE_SAVING || typ == AMULET_OF_DATA_STORAGE || typ == AMULET_OF_REFLECTION)
+	    if (typ == AMULET_OF_LIFE_SAVING || typ == AMULET_OF_REFLECTION)
 		return (boolean)(!nonliving(mon->data));
 	    if (typ == AMULET_OF_REFLECTION)
 		return TRUE;
@@ -3393,7 +3393,8 @@ const char *str;
 		    pline(str, s_suffix(mon_nam(mon)), "gauntlets");
 		    makeknown(GAUNTLETS_OF_REFLECTION);
 	    }
-	    return TRUE;	
+	    return TRUE;
+#if 0 /* 5lo: They shouldn't be using or wearing these at all */
 	} else if ((orefl = which_armor(mon, W_AMUL)) &&
 				orefl->otyp == AMULET_OF_DATA_STORAGE) {
 	    if (str) {
@@ -3401,6 +3402,7 @@ const char *str;
 		makeknown(AMULET_OF_DATA_STORAGE);
 	    }
 	    return TRUE;
+#endif
 	} else if ((orefl = which_armor(mon, W_ARMC)) &&
 				orefl->otyp == CLOAK_OF_REFLECTION) {
 	    if (str) {

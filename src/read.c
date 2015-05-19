@@ -1117,6 +1117,8 @@ static void
 forget_single_object(obj_id)
 	int obj_id;
 {
+	if (obj_id == AMULET_OF_DATA_STORAGE && rn2(6))
+	    return;   /* does not want to be forgotten */
 	objects[obj_id].oc_name_known = 0;
 	objects[obj_id].oc_pre_discovered = 0;	/* a discovery when relearned */
 	if (objects[obj_id].oc_uname) {
@@ -2723,6 +2725,13 @@ register struct obj	*sobj;
 		break;
 	case SCR_AMNESIA:
 		known = TRUE;
+		if (Keen_memory) {
+			if (Hallucination)
+				Your("brain itches for a moment.");
+			else
+				You("think about Maud for a few moments.");
+			break;
+		}
 		forget(	(!sobj->blessed ? ALL_SPELLS : 0) |
 			(!confused || sobj->cursed ? ALL_MAP : 0) );
 		if (Hallucination) /* Ommmmmm! */

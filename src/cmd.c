@@ -1593,6 +1593,7 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	if (u.udaminc)
 	    you_have(enlght_combatinc("damage", u.udaminc, final, buf));
 	if (Slow_digestion) you_have("slower digestion");
+	if (Keen_memory) enl_msg("Your memory ", "is", "was", " keen");
 	if (Half_physical_damage) you_have("physical resistance");
 	if (Half_spell_damage) you_have("spell resistance");
 	if (Regeneration) enl_msg("You regenerate", "", "d", "");

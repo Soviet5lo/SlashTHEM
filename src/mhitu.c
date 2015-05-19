@@ -1185,8 +1185,10 @@ mattacku(mtmp)
 					/* adjattrib gives dunce cap message when appropriate */
 					if (!rn2(10)) (void) adjattrib(A_INT, -rnd(2), FALSE);
 					else if (!rn2(2)) (void) adjattrib(A_INT, -1, FALSE);
+					if (!Keen_memory) {
 					forget_levels(5);	/* lose memory of 25% of levels */
 					forget_objects(5);	/* lose memory of 25% of objects */
+					}
 					exercise(A_WIS, FALSE);
 
 						}
@@ -1948,8 +1950,10 @@ dopois:
 		/* adjattrib gives dunce cap message when appropriate */
 		if (!rn2(10)) (void) adjattrib(A_INT, -rnd(2), FALSE);
 		else if (!rn2(2)) (void) adjattrib(A_INT, -1, FALSE);
-		forget_levels(5);	/* lose memory of 25% of levels */
-		forget_objects(5);	/* lose memory of 25% of objects */
+		if (!Keen_memory) {
+		    forget_levels(5);	/* lose memory of 25% of levels */
+		    forget_objects(5);	/* lose memory of 25% of objects */
+		}
 		exercise(A_WIS, FALSE);
 		break;
 	    case AD_PLYS:
@@ -3236,8 +3240,10 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 
 			if (!rn2(10)) (void) adjattrib(A_INT, -rnd(2), FALSE);
 			else if (!rn2(2)) (void) adjattrib(A_INT, -1, FALSE);
-			forget_levels(5);	/* lose memory of 25% of levels */
-			forget_objects(5);	/* lose memory of 25% of objects */
+			if (!Keen_memory) {
+		    	    forget_levels(5);	/* lose memory of 25% of levels */
+		    	    forget_objects(5);	/* lose memory of 25% of objects */
+			}
 			exercise(A_WIS, FALSE);
 		    } else tmp = 0;
 		    break;
