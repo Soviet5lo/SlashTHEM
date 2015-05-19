@@ -550,7 +550,7 @@ const struct Role roles[] = {
 	{"Mafia Don",  0} },
 	"Claude Speed", "Carl CJ Johnson", "Tommy Vercetti",	/* Grand Theft Auto */
 	"Gan", "Gang Headquarters", "the enemy gang's hideout",
-	PM_GANGSTER, NON_PM, PM_UNDEAD_GANGSTER, NON_PM, PM_PILE_OF_COPPER_COINS,
+	PM_GANGSTER, NON_PM, PM_UNDEAD_GANGSTER, NON_PM, PM_LITTLE_DOG,
 	PM_DAVE, PM_FELLOW_GANGSTER, PM_AMY_BLUESCREENOFDEATH,
 	PM_CUNTGUN_TROOPER, PM_RIFLEMAN, S_HUMAN, S_HUMAN,
 	ART_TOMMY_GUN_OF_CAPONE,
@@ -926,7 +926,7 @@ const struct Role roles[] = {
 	"Donblas", "Grome", "Arioch", /* Melnibonean */
 
 	"Mus", "Wild West Bar", "High Noon Plains",
-	PM_MUSICIAN, NON_PM, PM_UNDEAD_MUSICIAN, NON_PM, PM_GREEN_ELF,
+	PM_MUSICIAN, NON_PM, PM_UNDEAD_MUSICIAN, NON_PM, NON_PM,
 	PM_HARRY_THE_COWBOY, PM_HIGHEST_ELF, PM_DRACO_THE_SHARPSHOOTER,
 	PM_ENEMY_TROOPER, PM_OFFICER, S_HUMAN, S_HUMAN,
 
