@@ -3120,12 +3120,13 @@ revid_end:
 		}
 		known = TRUE;
 		pline("You build an altar.");
+		ual = u.ualign.type;
 		if (is_demon(youmonst.data)) {
 			al = A_CHAOTIC;
 		} else if (sobj->cursed) {
 			al = A_NONE;
 		} else if (sobj->blessed) {
-			ual = u.ualign.type;
+//			ual = u.ualign.type;
 			a = (ual==A_LAWFUL) ? 'l' : ((ual==A_NEUTRAL) ? 'n' : 'c');
 			c = yn_function("Which alignment do you want to consecrate the altar to?","lncm",a);
 			al = A_NONE;
