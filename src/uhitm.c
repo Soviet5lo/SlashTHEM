@@ -3745,6 +3745,15 @@ uchar aatyp;
 		You("are jolted with electricity!");
 		mdamageu(mon, tmp);
 		break;
+	      case AD_DISE: /* Gray fungus */
+	        if (Sick_resistance) {
+			You("are covered with botulism spores, but they seem to be inert.");
+		} else {
+			You("are covered with botulism spores!");
+			mdamageu(mon, tmp);
+			make_sick(20, "bad case of botulism", TRUE, SICK_NONVOMITABLE);
+		}
+		break;
 	      case AD_ENCH:	/* KMH -- remove enchantment (disenchanter) */
 		if (mhit) {
 		    struct obj *obj = target;
