@@ -1400,7 +1400,7 @@ boolean want_dump;
 #endif
 	}
     }
-    return (boolean) (total_killed);
+    return;
 }
 
 int
