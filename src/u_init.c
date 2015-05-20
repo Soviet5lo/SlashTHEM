@@ -3510,6 +3510,7 @@ u_init()
 	    /* compensate for generally inferior equipment */
 	    if (!no_extra_food && !Role_if(PM_WIZARD) &&
 		    !Role_if(PM_FLAME_MAGE) && !Role_if(PM_ICE_MAGE) &&
+		    !Role_if(PM_ELECTRIC_MAGE) && !Role_if(PM_ACID_MAGE) &&
 		    !Role_if(PM_NECROMANCER))
 #ifdef CONVICT
         if (!Role_if(PM_CONVICT))
