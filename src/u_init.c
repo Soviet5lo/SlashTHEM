@@ -3566,22 +3566,22 @@ u_init()
           /*ini_inv(GhastFood);*/
 		break;
 	case PM_INSECTOID:
-          ini_inv(InsectoidItem);		
+          if(!Role_if(PM_CONVICT)) ini_inv(InsectoidItem);		
 		break;
 	case PM_NAVI:
-          ini_inv(NaviItem);		
+          if(!Role_if(PM_CONVICT)) ini_inv(NaviItem);		
 		break;
 	case PM_UNGENOMOLD:
-          ini_inv(UngMoldWand);		
+          if(!Role_if(PM_CONVICT)) ini_inv(UngMoldWand);		
 		break;
 	case PM_MAIA:
-          ini_inv(MaiaWand);		
+          if(!Role_if(PM_CONVICT)) ini_inv(MaiaWand);		
 		break;
 	case PM_CLOCKWORK_AUTOMATON:
-          ini_inv(AutomatonItem);		
+          if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
 		break;
 	case PM_TROLLOR:
-		switch (rnd(4)) {   
+		if(!Role_if(PM_CONVICT)) switch (rnd(4)) {   
                 case 1: ini_inv(TrollItemA); break;
                 case 2: ini_inv(TrollItemB); break;
                 case 3: ini_inv(TrollItemC); break;
@@ -3589,10 +3589,10 @@ u_init()
 		    default: break;
 		}
 	case PM_OGRO:
-          ini_inv(OgroItem);		
+         if(!Role_if(PM_CONVICT)) ini_inv(OgroItem);		
 		break;
 	case PM_GIGANT:
-          ini_inv(GigantItem);		
+         if(!Role_if(PM_CONVICT)) ini_inv(GigantItem);		
 		break;
 
 	default:	/* impossible */
@@ -3641,7 +3641,7 @@ u_init()
 	/* Even if you actually get most of these items (by being lucky or savescumming), your level 1 character probably
 	 * won't stand a chance on dlvl 64 with no means of levelporting or branchporting, so this is still fair. --Amy */
 
-	knows_class(VENOM_CLASS);
+	/*knows_class(VENOM_CLASS);*/
 
 	if (discover)
 		ini_inv(Wishing);
