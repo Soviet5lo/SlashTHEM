@@ -42,6 +42,8 @@ STATIC_DCL void FDECL(artifact_score, (struct obj *,BOOLEAN_P,winid));
 STATIC_DCL void FDECL(savelife, (int));
 STATIC_DCL boolean FDECL(list_vanquished, (CHAR_P, BOOLEAN_P));
 #ifdef DUMP_LOG
+extern char msgs[][BUFSZ];
+extern int lastmsg;
 extern void NDECL(dump_spells);
 void FDECL(do_vanquished, (int, BOOLEAN_P, BOOLEAN_P));
 STATIC_DCL void FDECL(list_genocided, (int, BOOLEAN_P, BOOLEAN_P));
@@ -683,6 +685,7 @@ int how;
 	boolean bones_ok, have_windows = iflags.window_inited;
 	struct obj *corpse = (struct obj *)0;
 	long umoney;
+	int i;
 
 	if (how == TRICKED) {
 	    if (killer) {
@@ -944,6 +947,20 @@ die:
 	if (strcmp(flags.end_disclose, "none") && how != PANICKED)
 		disclose(how, taken);
 	/* finish_paybill should be called after disclosure but before bones */
+#if defined(DUMP_LOG) && defined(DUMPMSGS)
+		if (lastmsg >= 0) {
+		  dump ("", "Latest messages");
+		  for (i = lastmsg + 1; i < DUMPMSGS; i++) {
+		    if (msgs[i] && strcmp(msgs[i], "") )
+		      dump ("  ", msgs[i]);
+		  } 
+		  for (i = 0; i <= lastmsg; i++) {
+		    if (msgs[i] && strcmp(msgs[i], "") )
+		      dump ("  ", msgs[i]);
+		  } 
+		  dump ("","");
+		}
+#endif
 	if (bones_ok && taken) finish_paybill();
 	}
 
