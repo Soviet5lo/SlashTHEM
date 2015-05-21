@@ -1816,10 +1816,67 @@ int final;
 	else if (u.ualign.record >= -8)	dump(youhave, "sinned");
 	else dump("  You have ", "transgressed");
 #ifdef WIZARD
-	if (wizard) {
+	if (wizard || final >= 1) {
 		Sprintf(buf, " %d", u.ualign.record);
 		dump("  Your alignment was ", buf);
 	}
+	/*** Extra alignment and artifact stuff added for Slash'EM Extended/SlashTHEM ***/
+	if (wizard || final >= 1) {
+		Sprintf(buf, " %d", (int) ALIGNLIM);
+		dump("  Your max alignment was ", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, "%d sins", u.ualign.sins);
+		dump("  You carried ", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " %d", nartifact_exist());
+		dump("  Number of artifacts generated was ", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " %d", u.legscratching - 1);
+		dump("  Your leg damage was", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " turn %d", u.monstertimeout);
+		dump("  Monster spawn increase would have started at", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " turn %d", u.monstertimefinish);
+		dump("  Monster spawn increase would have reached its maximum at", buf);
+//		dump("  In this game, Eevee's evolution was", mons[u.eeveelution].mname );
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " turn %d", u.next_check);
+		dump("  Next attribute increase check would have come at", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " %d", AEXE(A_STR));
+		dump("  Strength training was", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " %d", AEXE(A_DEX));
+		dump("  Dexterity training was", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " %d", AEXE(A_WIS));
+		dump("  Wisdom training was", buf);
+	}
+
+	if (wizard || final >= 1) {
+		Sprintf(buf, " %d", AEXE(A_CON));
+		dump("  Constitution training was", buf);
+	}
+
 #endif
 
 	/*** Resistances to troubles ***/
@@ -1835,8 +1892,10 @@ int final;
 	if (Acid_resistance) dump(youwere, "acid resistant");
 	if (Stone_resistance) dump(youwere, "petrification resistant");
 	if (Invulnerable) dump(youwere, "invulnerable");
-	if (u.uedibility) dump(youcould, "recognize detrimental food");
-
+	if (u.urealedibility || is_animal(youmonst.data) || u.ulycn != NON_PM) {
+		Sprintf(buf, " (%d)", u.urealedibility);
+		dump("You could recognize detrimental food", buf);
+	}
 	/*** Troubles ***/
 	if (Halluc_resistance) 	dump("  ", "You resisted hallucinations");
 	if (Hallucination) dump(youwere, "hallucinating");
@@ -1851,10 +1910,13 @@ int final;
 	}
 	if (Stoned) dump(youwere, "turning to stone");
 	if (Slimed) dump(youwere, "turning into slime");
+	if (Vomiting) dump(youwere, "nauseated");
+	if (Punished) dump(youwere, "punished");
+	if (sengr_at("Elbereth", u.ux, u.uy)) dump(youwere, "standing on an active Elbereth engraving");
 	if (Strangled)
 		dump(youwere, (u.uburied) ? "buried" : "being strangled");
-	if (Glib) {
-		Sprintf(buf, "slippery %s", makeplural(body_part(FINGER)));
+	if (IsGlib) {
+		Sprintf(buf, "slippery %s ('%d')", makeplural(body_part(FINGER)), Glib);
 		dump(youhad, buf);
 	}
 	if (Fumbling) dump("  ", "You fumbled");
@@ -1886,16 +1948,26 @@ int final;
 		Sprintf(buf, "aware of the presence of %s",
 			(flags.warntype & M2_ORC) ? "orcs" :
 			(flags.warntype & M2_DEMON) ? "demons" :
+			(flags.warntype & M2_UNDEAD) ? "undead" :
 			something); 
 		dump(youwere, buf);
 	}
 	if (Undead_warning) dump(youwere, "warned of undead");
+	/* 5lo: These next two are just here for temp, as this role will be removed after a 1.0 release */
+	if (Role_if(PM_ACTIVISTOR)) dump(youwere, "aware of the presence of topmodels");
+	if (Role_if(PM_ACTIVISTOR) && uwep && is_quest_artifact(uwep)) dump(youwere, "aware of the presence of unique monsters");
+	/* Back to our program... */
+	if (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING ) dump(youwere, "aware of the presence of undead");
+	if (uamul && uamul->otyp == AMULET_OF_POISON_WARNING ) dump(youwere, "aware of the presence of poisonous monsters");
+	if (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING ) dump(youwere, "aware of the presence of same-race monsters");
+	if (uamul && uamul->otyp == AMULET_OF_COVETOUS_WARNING ) dump(youwere, "aware of the presence of covetous monsters");
 	if (Searching) dump(youhad, "automatic searching");
 	if (Clairvoyant) dump(youwere, "clairvoyant");
 	if (Infravision) dump(youhad, "infravision");
 	if (Detect_monsters)
 	  dump(youwere, "sensing the presence of monsters");
 	if (u.umconf) dump(youwere, "going to confuse monsters");
+	Sprintf(buf, "%d points of nutrition remaining", u.uhunger); dump(youhad, buf);
 
 	/*** Appearance and behavior ***/
 	if (Adornment) {
@@ -1940,7 +2012,7 @@ int final;
 	if (u.uswallow) {
 	    Sprintf(buf, "swallowed by %s", a_monnam(u.ustuck));
 #ifdef WIZARD
-	    if (wizard) Sprintf(eos(buf), " (%u)", u.uswldtim);
+	    if (wizard || final >= 1) Sprintf(eos(buf), " (%u)", u.uswldtim);
 #endif
 	    dump(youwere, buf);
 	} else if (u.ustuck) {
@@ -1958,7 +2030,12 @@ int final;
 	    dump(youhad,
 		enlght_combatinc("damage", u.udaminc, final, buf));
 	if (Slow_digestion) dump(youhad, "slower digestion");
+	if (Keen_memory) dump(youhad, "keen memory");
+	if (Half_physical_damage) dump(youhad, "physical resistance");
+	if (Half_spell_damage) dump(youhad, "spell resistance");
 	if (Regeneration) dump("  ", "You regenerated");
+	if (Energy_regeneration) dump(youhad, "mana regeneration");
+
 	if (u.uspellprot || Protection) {
 	    int prot = 0;
 
@@ -1985,7 +2062,7 @@ int final;
 	    else Sprintf(buf, "polymorphed into %s",
 			 an(youmonst.data->mname));
 #ifdef WIZARD
-	    if (wizard) Sprintf(eos(buf), " (%d)", u.mtimedone);
+	    if (wizard || final >= 1) Sprintf(eos(buf), " (%d)", u.mtimedone);
 #endif
 	    dump(youwere, buf);
 	}
@@ -1995,6 +2072,8 @@ int final;
 	if (Reflecting) dump(youhad, "reflection");
 	if (Free_action) dump(youhad, "free action");
 	if (Fixed_abil) dump(youhad, "fixed abilities");
+	if (uamul && uamul->otyp == AMULET_VERSUS_STONE) dump("  ","You would have been depetrified");
+	if (Second_chance) dump("  ", "You would have been given a second chance");
 	if (Lifesaved)
 		dump("  ", "Your life would have been saved");
 	if (u.twoweap) dump(youwere, "wielding two weapons at once");
@@ -2008,7 +2087,7 @@ int final;
 	    dump(youwere, buf);
 	}
 #ifdef WIZARD
-	 else if (wizard) dump("  ", "Your luck was zero");
+	 else if (wizard || final >= 1) dump("  ", "Your luck was zero");
 #endif
 	if (u.moreluck > 0) dump(youhad, "extra luck");
 	else if (u.moreluck < 0) dump(youhad, "reduced luck");
@@ -2024,7 +2103,7 @@ int final;
 	    Sprintf(buf, " %sangry with you",
 		u.ugangr > 6 ? "extremely " : u.ugangr > 3 ? "very " : "");
 #ifdef WIZARD
-	    if (wizard) Sprintf(eos(buf), " (%d)", u.ugangr);
+	    if (wizard || final >= 1) Sprintf(eos(buf), " (%d)", u.ugangr);
 #endif
 	    Sprintf(buf2, "%s was %s", u_gname(), buf);
 	    dump("  ", buf2);
@@ -2596,14 +2675,34 @@ int final;
 	    dump("", "  You followed a strict vegan diet");
 	else if (!u.uconduct.unvegetarian)
 	    dump("", "  You were a vegetarian");
-	else if (Role_if(PM_MONK) && u.uconduct.unvegetarian < 10) {
-	    sprintf(buf, "  You ate non-vegetarian food %ld time%s.", 
+	else /*if (Role_if(PM_MONK) && u.uconduct.unvegetarian < 10)*/ {
+	    sprintf(buf, "  You ate %ld time%s.", 
+		u.uconduct.food, plur(u.uconduct.food));
+	    dump("", buf);
+	    sprintf(buf, "  You ate food with animal by-products %ld time%s.", 
+		u.uconduct.unvegan, plur(u.uconduct.unvegan));
+	    dump("", buf);
+	    sprintf(buf, "  You ate meat %ld time%s.", 
 		u.uconduct.unvegetarian, plur(u.uconduct.unvegetarian));
 	    dump("", buf);
+
 	}
 
 	if (!u.uconduct.gnostic)
 	    dump("", "  You were an atheist");
+	else {
+	    Sprintf(buf, "  You communicated with the gods %ld time%s",
+		    u.uconduct.gnostic, plur(u.uconduct.gnostic));
+	    dump("", buf);
+	}
+
+	if (!u.uconduct.praydone)
+	    dump("", "  You never prayed to the gods");
+	else {
+	    Sprintf(buf, "  You prayed %ld time%s",
+		    u.uconduct.praydone, plur(u.uconduct.praydone));
+	    dump("", buf);
+	}
 
 	if (!u.uconduct.weaphit)
 	    dump("", "  You never hit with a wielded weapon");
@@ -2613,7 +2712,7 @@ int final;
 	    dump("", buf);
 	}
 #ifdef WIZARD
-	else if (wizard) {
+	else /*if (wizard)*/ {
 	    Sprintf(buf, "hit with a wielded weapon %ld time%s",
 		    u.uconduct.weaphit, plur(u.uconduct.weaphit));
 	    dump("  You ", buf);
@@ -2625,7 +2724,7 @@ int final;
 	if (!u.uconduct.literate)
 	    dump("", "  You were illiterate");
 #ifdef WIZARD
-	else if (wizard) {
+	else /*if (wizard)*/ {
 	    Sprintf(buf, "read items or engraved %ld time%s",
 		    u.uconduct.literate, plur(u.uconduct.literate));
 	    dump("  You ", buf);
@@ -2667,6 +2766,17 @@ int final;
 	    if (!u.uconduct.wisharti)
 		dump("", "  You did not wish for any artifacts");
 	}
+
+	if (!u.uconduct.celibacy)
+	    dump("","  You remained celibate");
+#ifdef WIZARD
+	else /*if (wizard)*/ {
+	    Sprintf(buf, "your vow of celibacy %ld time%s",
+		    u.uconduct.celibacy, plur(u.uconduct.celibacy));
+	    dump("  You broke ", buf);
+	}
+#endif
+
 
 	dump("", "");
 }
