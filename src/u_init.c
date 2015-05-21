@@ -1116,83 +1116,80 @@ static struct inv_asub inv_asubs[] = {
  *		categories.
  */
 
+/* 5lo: Reverted skills back to what they were in vanilla, patches, and variants
+ * that included skills.  For the rest, I either copy-pasted skillsets from other
+ * roles that I felt were similar/close enough, or edited the existing skillset to
+ * meet a more balanced level */
 static const struct def_skill Skill_A[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_PICK_AXE, P_EXPERT },		{ P_SHORT_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_PADDLE, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },
+    { P_DAGGER, P_BASIC },		{ P_KNIFE,  P_BASIC },
+    { P_PICK_AXE, P_EXPERT },		{ P_SHORT_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },		{ P_SABER, P_EXPERT },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
+    { P_QUARTERSTAFF, P_SKILLED },
 #ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
+    { P_FIREARM, P_SKILLED },
 #endif
-    { P_SLING, P_EXPERT },		{ P_DART, P_EXPERT },
+    { P_SLING, P_SKILLED },		{ P_DART, P_BASIC },
     { P_BOOMERANG, P_EXPERT },		{ P_WHIP, P_EXPERT },
-    { P_UNICORN_HORN, P_EXPERT },
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_UNICORN_HORN, P_SKILLED },
+    { P_ATTACK_SPELL, P_BASIC },	{ P_HEALING_SPELL, P_BASIC },
+    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_SKILLED },
     /*WAC- 'A' knows of all spells from studying,  but only really good
     at divination class*/
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_B[] = {
-    { P_DAGGER, P_EXPERT },		{ P_AXE, P_EXPERT },
-    { P_PICK_AXE, P_EXPERT },	{ P_SHORT_SWORD, P_EXPERT },
-    { P_BROAD_SWORD, P_EXPERT },	{ P_LONG_SWORD, P_EXPERT },
-    { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_SCIMITAR, P_EXPERT },
-    { P_SABER, P_EXPERT },		{ P_CLUB, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },		{ P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },		{ P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_SPEAR, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_BOW, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
+    { P_DAGGER, P_BASIC },		{ P_AXE, P_EXPERT },
+    { P_PICK_AXE, P_SKILLED },	{ P_SHORT_SWORD, P_EXPERT },
+    { P_BROAD_SWORD, P_SKILLED },	{ P_LONG_SWORD, P_SKILLED },
+    { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_SCIMITAR, P_SKILLED },
+    { P_SABER, P_BASIC },		{ P_CLUB, P_SKILLED },
+    { P_PADDLE, P_SKILLED },
+    { P_MACE, P_SKILLED },		{ P_MORNING_STAR, P_SKILLED },
+    { P_FLAIL, P_BASIC },		{ P_HAMMER, P_EXPERT },
+    { P_QUARTERSTAFF, P_BASIC },	{ P_SPEAR, P_SKILLED },
+    { P_TRIDENT, P_SKILLED },		{ P_BOW, P_BASIC },
+    { P_ATTACK_SPELL, P_SKILLED },	{ P_BODY_SPELL, P_SKILLED },
 /*WAC - 'B' is good at attack spells and body manipulation spells
         -both combat oriented */
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_MASTER },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Bard[] = {
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },		{ P_SCIMITAR, P_EXPERT },
-    { P_CLUB, P_EXPERT },		{ P_FLAIL, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_SLING, P_EXPERT },		{ P_DART, P_EXPERT },
-    { P_UNICORN_HORN, P_EXPERT },	{ P_CROSSBOW, P_EXPERT },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    /* 5lo: Comes straight from the Bard patch, music is omitted */
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_BASIC },
+    { P_SHORT_SWORD, P_BASIC },		{ P_SCIMITAR, P_BASIC },
+    { P_CLUB, P_SKILLED },		{ P_FLAIL, P_BASIC },
+    { P_QUARTERSTAFF, P_SKILLED },	{ P_POLEARMS, P_BASIC },
+    { P_JAVELIN, P_SKILLED },		{ P_SPEAR, P_BASIC },
+    { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },	 
+    { P_ENCHANTMENT_SPELL, P_SKILLED },	{ P_BODY_SPELL, P_BASIC },
+    { P_BARE_HANDED_COMBAT, P_EXPERT }, /* Music doesn't exist...yet. */
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_C[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },
+    { P_DAGGER, P_BASIC },		{ P_KNIFE,  P_SKILLED },
+    { P_AXE, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
     { P_CLUB, P_EXPERT },               { P_PADDLE, P_EXPERT },
     { P_MACE, P_EXPERT },
-    { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_TRIDENT, P_EXPERT },
-    { P_BOW, P_EXPERT },                { P_SLING, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },		{ P_UNICORN_HORN, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },      { P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_MORNING_STAR, P_BASIC },	{ P_FLAIL, P_SKILLED },
+    { P_HAMMER, P_SKILLED },		{ P_QUARTERSTAFF, P_EXPERT },
+    { P_POLEARMS, P_SKILLED },		{ P_SPEAR, P_EXPERT },
+    { P_JAVELIN, P_SKILLED },		{ P_TRIDENT, P_SKILLED },
+    { P_BOW, P_EXPERT },                { P_SLING, P_SKILLED },
+    { P_BOOMERANG, P_EXPERT },		{ P_UNICORN_HORN, P_BASIC },
+    { P_MATTER_SPELL, P_SKILLED },      { P_ENCHANTMENT_SPELL, P_BASIC },
 
 /*WAC - 'C' is at one with the elements - matter spells, as well as
         basic enchantments - removed attack spell basic skill as
@@ -1202,212 +1199,175 @@ static const struct def_skill Skill_C[] = {
 };
 
 static const struct def_skill Skill_Roc[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },
-    { P_CLUB, P_EXPERT },               { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },    { P_FIREARM, P_EXPERT },
-    { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_TRIDENT, P_EXPERT },
-    { P_BOW, P_EXPERT },                { P_SLING, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },		{ P_UNICORN_HORN, P_EXPERT },
-
-    { P_MATTER_SPELL, P_EXPERT },      { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_ATTACK_SPELL, P_EXPERT },      { P_DIVINATION_SPELL, P_EXPERT },
-
-    { P_BARE_HANDED_COMBAT, P_MASTER },
-    { P_RIDING, P_EXPERT },
+    /* 5lo: Let's use the Gnome skills from Slash 0.0.6 - they fit well enough */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
+/* WAC added Pickaxe, Axe */
+    { P_PICK_AXE, P_EXPERT },
+    { P_AXE, P_EXPERT },                { P_SHORT_SWORD, P_EXPERT },
+    /* { P_BROAD_SWORD, P_SKILLED },*/
+/*WAC removed twohanded sword,  broadsword!*/
+    { P_LONG_SWORD, P_SKILLED },      /*  { P_TWO_HANDED_SWORD, P_BASIC },*/
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_SKILLED },
+    { P_MACE, P_SKILLED },
+    { P_MORNING_STAR, P_BASIC },        { P_FLAIL, P_BASIC },
+/* WAC made hammer expert*/
+    { P_HAMMER, P_EXPERT },             { P_POLEARMS, P_BASIC },
+    { P_SPEAR, P_BASIC },               { P_BOW, P_SKILLED },
+/* WAC added Sling Expert */
+    { P_SLING, P_EXPERT },              { P_CROSSBOW, P_EXPERT },
+    { P_DART, P_EXPERT },               { P_SHURIKEN, P_SKILLED },
+    { P_DIVINATION_SPELL, P_BASIC }, { P_ENCHANTMENT_SPELL, P_EXPERT },
+/*WAC - G must be good at enchant,  since his class skill is fear.
+        also added a basic divination (from id gems) */
+#ifdef STEED
+    { P_RIDING, P_BASIC },
+#endif
+    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_F[] = {
 /*Style: small-med edged weapons, blunt weapons*/
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 /*{ P_PICK_AXE, P_EXPERT },*/
-    { P_SHORT_SWORD, P_EXPERT },        /*{ P_BROAD_SWORD, P_EXPERT },*/
-    { P_LONG_SWORD, P_EXPERT },        /*{ P_TWO_HANDED_SWORD, P_EXPERT },*/
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-/* Relies on spells for ranged attack*/
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_SKILLED },
+    { P_AXE, P_BASIC },                 /*{ P_PICK_AXE, P_BASIC },*/
+    { P_SHORT_SWORD, P_EXPERT },        /*{ P_BROAD_SWORD, P_BASIC },*/
+    { P_LONG_SWORD, P_SKILLED },        /*{ P_TWO_HANDED_SWORD, P_BASIC },*/
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_PADDLE, P_BASIC },
+    { P_MACE, P_BASIC },                /*{ P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },*/               { P_HAMMER, P_BASIC },
+    { P_QUARTERSTAFF, P_SKILLED },       /* { P_POLEARMS, P_BASIC },*/
+/* Relies on spells for ranged attack
+    { P_SPEAR, P_BASIC },               { P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },             { P_LANCE, P_BASIC },
+    { P_BOW, P_BASIC },                 { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },            { P_DART, P_EXPERT },
+    { P_SHURIKEN, P_BASIC },            { P_BOOMERANG, P_BASIC },
+*/
+    { P_WHIP, P_BASIC },                { P_UNICORN_HORN, P_SKILLED },
 
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_SKILLED },      { P_HEALING_SPELL, P_BASIC },
+    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_SKILLED },
     { P_MATTER_SPELL, P_EXPERT },
 /*  Added expert matter spell (elements), skilled in attack, basic in rest
         He is a mage,  so knows the types.*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Fir[] = {
-/*Style: small-med edged weapons, blunt weapons*/
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
+    /* 5lo: Still a bit of a work in progress */
     { P_AXE, P_EXPERT },                 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },        { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-/* Relies on spells for ranged attack*/
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
+    { P_SHORT_SWORD, P_EXPERT },         { P_BROAD_SWORD, P_EXPERT },
+    { P_SCIMITAR, P_BASIC },             { P_SABER, P_SKILLED },
+    { P_PADDLE, P_BASIC },
+    { P_MACE, P_SKILLED },               { P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },
+    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_BASIC },
+    { P_BOW, P_SKILLED },                 { P_SLING, P_SKILLED },
+    { P_CROSSBOW, P_SKILLED },            { P_DART, P_SKILLED },
+    { P_WHIP, P_BASIC },                { P_UNICORN_HORN, P_BASIC },
 
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-/*  Added expert matter spell (elements), skilled in attack, basic in rest
-        He is a mage,  so knows the types.*/
+    { P_PROTECTION_SPELL, P_SKILLED },   { P_HEALING_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_BASIC }, { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
 
 
 static const struct def_skill Skill_Zyb[] = {
+    /* 5lo: Still a very heavy work in progress... */
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE, P_EXPERT },
+    { P_LONG_SWORD, P_EXPERT },		{ P_CLUB, P_SKILLED },
+    { P_PADDLE, P_EXPERT },		{ P_MACE, P_BASIC },
+    { P_FLAIL, P_BASIC },		{ P_HAMMER, P_SKILLED },
+    { P_POLEARMS, P_SKILLED },		{ P_TRIDENT, P_BASIC },
+    { P_LANCE, P_BASIC },		{ P_SLING, P_BASIC },
+    { P_CROSSBOW, P_SKILLED },
+#ifdef FIREARMS
+    { P_FIREARM, P_EXPERT }, /* Mechanical beings have very deadly aim */
+#endif
+    { P_DART, P_EXPERT },
+    { P_LIGHTSABER, P_SKILLED }, /* Technological beings, after all */
 
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },        { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-	{ P_FIREARM, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
-	{ P_LIGHTSABER, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-
+    { P_PROTECTION_SPELL, P_SKILLED },    { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
 #ifdef STEED
     { P_RIDING, P_EXPERT },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_MARTIAL_ARTS, P_GRAND_MASTER },
+    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Lun[] = {
+    /* Directly taken from Slash'EM 0.0.6 sources - Lycanthrope role */
+    { P_DAGGER, P_BASIC },              { P_KNIFE,  P_SKILLED },
+    { P_AXE, P_SKILLED },               { P_PICK_AXE, P_BASIC },
+    { P_SHORT_SWORD, P_EXPERT },        { P_CLUB, P_EXPERT },
+    { P_PADDLE, P_BASIC },
+    { P_MACE, P_EXPERT },		{ P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_SKILLED },		{ P_HAMMER, P_SKILLED },
+    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_SKILLED },
+    { P_TRIDENT, P_SKILLED },		{ P_BOW, P_EXPERT },
+    { P_SLING, P_SKILLED },		{ P_BOOMERANG, P_EXPERT },
+    { P_UNICORN_HORN, P_BASIC },
 
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },        { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-	{ P_FIREARM, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
-	{ P_LIGHTSABER, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_MARTIAL_ARTS, P_GRAND_MASTER },
+    { P_HEALING_SPELL, P_BASIC },     { P_PROTECTION_SPELL, P_BASIC },    
+/*WAC - added skilled body spells (he polymorphs), expert heal
+        - regeneration and create familiar*/
+    { P_BARE_HANDED_COMBAT, P_GRAND_MASTER },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Bin[] = {
+    /* 5lo: Copy of the Wizard for now... */
+    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_SKILLED },
+    { P_AXE, P_SKILLED },		{ P_SHORT_SWORD, P_BASIC },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
+    { P_MACE, P_BASIC },
+    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_BASIC },		{ P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },		{ P_SLING, P_SKILLED },
+    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_BASIC },
 
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },        { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-	{ P_FIREARM, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
-	{ P_LIGHTSABER, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-
+    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_SKILLED },
+    { P_DIVINATION_SPELL, P_SKILLED },  { P_ENCHANTMENT_SPELL, P_SKILLED },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
+/*      added matter spell skilled,  as fireball and cone of cold are
+        matter spells, but now specialty of F/I Mages*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Ble[] = {
+    /* Mainly uses edged weapons. --Amy */
+    /* 5lo: Normalized the skills from Slash'EM Extended */
+    { P_DAGGER, P_SKILLED },            { P_KNIFE,  P_EXPERT },
+    { P_AXE, P_BASIC },                 
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_BASIC },
+    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_POLEARMS, P_BASIC },
+    { P_BOW, P_BASIC },                 { P_CROSSBOW, P_BASIC },
+    { P_UNICORN_HORN, P_BASIC },	/* Because of it's healing properties */
 
-	/* Mainly uses edged weapons. --Amy */
-
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },        { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-	{ P_FIREARM, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
-	{ P_LIGHTSABER, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_BASIC },
 
 #ifdef STEED
     { P_RIDING, P_EXPERT },
@@ -1417,693 +1377,675 @@ static const struct def_skill Skill_Ble[] = {
 };
 
 static const struct def_skill Skill_Spa[] = {
-
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },        { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-
-	{ P_FIREARM, P_EXPERT },
-
-    { P_WHIP, P_EXPERT },                { P_LIGHTSABER, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-
+    /* 5lo: Weapons from Castle of the Windows + Lightsaber */
+    { P_CLUB, P_SKILLED },		{ P_DAGGER, P_SKILLED },
+    { P_HAMMER, P_SKILLED },		{ P_AXE, P_SKILLED },
+    { P_QUARTERSTAFF, P_SKILLED },	{ P_SPEAR, P_SKILLED },
+    { P_SHORT_SWORD, P_SKILLED },	{ P_MACE, P_SKILLED },
+    { P_FLAIL, P_SKILLED },		{ P_LONG_SWORD, P_SKILLED },
+    { P_BROAD_SWORD, P_SKILLED },	{ P_MORNING_STAR, P_SKILLED },
+    /* Basic in everything - jack of all trades, master of none */
+    { P_ATTACK_SPELL, P_BASIC },      	{ P_HEALING_SPELL, P_BASIC },
+    { P_DIVINATION_SPELL, P_BASIC },   	{ P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Ele[] = {
+/* 5lo: Copy-paste of Flame Mage */
 /*Style: small-med edged weapons, blunt weapons*/
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 /*{ P_PICK_AXE, P_EXPERT },*/
-    { P_SHORT_SWORD, P_EXPERT },        /*{ P_BROAD_SWORD, P_EXPERT },*/
-    { P_LONG_SWORD, P_EXPERT },        /*{ P_TWO_HANDED_SWORD, P_EXPERT },*/
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-/* Relies on spells for ranged attack*/
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_SKILLED },
+    { P_AXE, P_BASIC },                 /*{ P_PICK_AXE, P_BASIC },*/
+    { P_SHORT_SWORD, P_EXPERT },        /*{ P_BROAD_SWORD, P_BASIC },*/
+    { P_LONG_SWORD, P_SKILLED },        /*{ P_TWO_HANDED_SWORD, P_BASIC },*/
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_PADDLE, P_BASIC },
+    { P_MACE, P_BASIC },                /*{ P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },*/               { P_HAMMER, P_BASIC },
+    { P_QUARTERSTAFF, P_SKILLED },       /* { P_POLEARMS, P_BASIC },*/
+/* Relies on spells for ranged attack
+    { P_SPEAR, P_BASIC },               { P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },             { P_LANCE, P_BASIC },
+    { P_BOW, P_BASIC },                 { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },            { P_DART, P_EXPERT },
+    { P_SHURIKEN, P_BASIC },            { P_BOOMERANG, P_BASIC },
+*/
+    { P_WHIP, P_BASIC },                { P_UNICORN_HORN, P_SKILLED },
 
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_SKILLED },      { P_HEALING_SPELL, P_BASIC },
+    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_SKILLED },
     { P_MATTER_SPELL, P_EXPERT },
 /*  Added expert matter spell (elements), skilled in attack, basic in rest
         He is a mage,  so knows the types.*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Aci[] = {
-/*Style: small-med edged weapons, blunt weapons*/
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },                 /*{ P_PICK_AXE, P_EXPERT },*/
-    { P_SHORT_SWORD, P_EXPERT },        /*{ P_BROAD_SWORD, P_EXPERT },*/
-    { P_LONG_SWORD, P_EXPERT },        /*{ P_TWO_HANDED_SWORD, P_EXPERT },*/
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },        { P_POLEARMS, P_EXPERT },
-/* Relies on spells for ranged attack*/
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
+    /* 5lo: Copy-paste of Ice Mage */
+/*Resorts mostly to stabbing weapons*/
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_SKILLED },
+/*  { P_AXE, P_BASIC },                 { P_PICK_AXE, P_BASIC },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_BASIC },*/
+    { P_LONG_SWORD, P_SKILLED },      /*{ P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_MACE, P_BASIC },                { P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },*/
+    { P_QUARTERSTAFF, P_SKILLED },      { P_POLEARMS, P_BASIC },
+    { P_SPEAR, P_BASIC },               { P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },             { P_LANCE, P_BASIC },
+/*  { P_BOW, P_BASIC },                 { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },            { P_DART, P_EXPERT },
+    { P_SHURIKEN, P_BASIC },            { P_BOOMERANG, P_BASIC },*/
+    { P_WHIP, P_BASIC },                { P_UNICORN_HORN, P_SKILLED },
 
-    { P_ATTACK_SPELL, P_EXPERT },      { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
+    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_BASIC },
     { P_MATTER_SPELL, P_EXPERT },
-/*  Added expert matter spell (elements), skilled in attack, basic in rest
-        He is a mage,  so knows the types.*/
+    /*WAC - same as Flame Mage*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 #ifdef CONVICT
 static const struct def_skill Skill_Con[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },
-    { P_CLUB, P_EXPERT },		    { P_MACE, P_EXPERT },
-    { P_DART, P_EXPERT },		    { P_FLAIL, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },		{ P_SLING, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    /* 5lo: Straight from Convict patch */
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_EXPERT },
+    { P_HAMMER, P_SKILLED },		{ P_PICK_AXE, P_EXPERT },
+    { P_CLUB, P_EXPERT },		{ P_MACE, P_BASIC },
+    { P_DART, P_SKILLED },		{ P_FLAIL, P_EXPERT },
+    { P_SHORT_SWORD, P_BASIC },		{ P_SLING, P_SKILLED },
+    { P_ATTACK_SPELL, P_BASIC },	{ P_BODY_SPELL, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED },
+    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 #endif  /* CONVICT */
 
 static const struct def_skill Skill_Dru[] = {
+    /* 5lo: A focus on short, one handed bladed weapons */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_WHIP, P_EXPERT },		    { P_CLUB, P_EXPERT },		    
-    { P_DART, P_EXPERT },		    { P_FLAIL, P_EXPERT },
-    { P_SLING, P_EXPERT },    { P_UNICORN_HORN, P_EXPERT },
+    { P_WHIP, P_EXPERT },		{ P_CLUB, P_SKILLED },    
+    { P_DART, P_SKILLED },		{ P_FLAIL, P_BASIC },
+    { P_SLING, P_SKILLED },    		{ P_UNICORN_HORN, P_BASIC },
 #ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
+    { P_FIREARM, P_BASIC },
 #endif
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_MATTER_SPELL, P_EXPERT },
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
+    { P_DIVINATION_SPELL, P_BASIC },	{ P_BODY_SPELL, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Tra[] = {
-    { P_HAMMER, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },
-    { P_CLUB, P_EXPERT },		    { P_MACE, P_EXPERT },
-    { P_FLAIL, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },		{ P_SLING, P_EXPERT },
+static const struct def_skill Skill_Tra[] = { /* Will be removed */
+    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
+    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_QUARTERSTAFF, P_EXPERT },	{ P_WHIP, P_BASIC },
+    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
+    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_EXPERT },
 #ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
+    { P_FIREARM, P_SKILLED },
 #endif
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_PROTECTION_SPELL, P_EXPERT },
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_RIDING, P_EXPERT },
+    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
+    { P_ENCHANTMENT_SPELL, P_EXPERT },
+#ifdef STEED
+    { P_RIDING, P_SKILLED },
+#endif
+    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Act[] = {
-    { P_PADDLE, P_EXPERT },		{ P_WHIP, P_EXPERT },
-    { P_CLUB, P_EXPERT },		    { P_SHURIKEN, P_EXPERT },
-    { P_FLAIL, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_PROTECTION_SPELL, P_EXPERT },
-    { P_HEALING_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_MARTIAL_ARTS, P_MASTER },
-    { P_RIDING, P_EXPERT },    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Top[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
-    { P_AXE, P_EXPERT },		    { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_FLAIL, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_TRIDENT, P_EXPERT },
-    { P_LANCE, P_EXPERT },		{ P_SLING, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },		{ P_WHIP, P_EXPERT },
-	{ P_LIGHTSABER, P_EXPERT },
+static const struct def_skill Skill_Act[] = { /* Will be removed */
+    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
+    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_QUARTERSTAFF, P_EXPERT },	{ P_PADDLE, P_EXPERT },
+    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
+    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_SKILLED },
 #ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
+    { P_FIREARM, P_SKILLED },
 #endif
-    { P_HEALING_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_PROTECTION_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },	{ P_MATTER_SPELL, P_EXPERT },
-    { P_MARTIAL_ARTS, P_MASTER },
-    { P_RIDING, P_EXPERT },
+    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
+    { P_ENCHANTMENT_SPELL, P_EXPERT },
+#ifdef STEED
+    { P_RIDING, P_SKILLED },
+#endif
+    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Top[] = { /* Will be removed */
+    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
+    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_QUARTERSTAFF, P_EXPERT },	{ P_WHIP, P_BASIC },
+    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
+    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_EXPERT },
+#ifdef FIREARMS
+    { P_FIREARM, P_SKILLED },
+#endif
+    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
+    { P_ENCHANTMENT_SPELL, P_EXPERT },
+#ifdef STEED
+    { P_RIDING, P_SKILLED },
+#endif
+    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Cou[] = {
-    { P_KNIFE,  P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },
-    { P_CLUB, P_EXPERT },		    { P_MACE, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },		    { P_FLAIL, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },		{ P_SLING, P_EXPERT },
+    /* 5lo: Heavy focus on firearms here, but can gain skill with blades */
+    { P_KNIFE,  P_EXPERT },		{ P_DAGGER, P_EXPERT },
+    { P_SHORT_SWORD, P_BASIC },		{ P_LONG_SWORD, P_BASIC },
+    { P_HAMMER, P_SKILLED },		{ P_PICK_AXE, P_EXPERT },
+    { P_CLUB, P_EXPERT },		{ P_MACE, P_BASIC },
+    { P_CROSSBOW, P_SKILLED },		{ P_FLAIL, P_BASIC },
+    { P_SHORT_SWORD, P_EXPERT },	{ P_SLING, P_SKILLED },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
+#ifdef STEED
+    { P_RIDING, P_EXPERT },
+#endif
+    /* Magic doesn't exist in the wasteland...*/
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Gan[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },		{ P_SHURIKEN,  P_EXPERT },
-    { P_DART, P_EXPERT },		    { P_WHIP, P_EXPERT },		    
-
+    /* 5lo: Effectively a slight modification of the Courier above */
+    { P_KNIFE,  P_EXPERT },		{ P_DAGGER, P_EXPERT },
+    { P_SHORT_SWORD, P_BASIC },		{ P_LONG_SWORD, P_BASIC },
+    { P_HAMMER, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
+    { P_CLUB, P_EXPERT },		{ P_MACE, P_BASIC },
+    { P_CROSSBOW, P_SKILLED },		{ P_FLAIL, P_BASIC },
+    { P_SHORT_SWORD, P_EXPERT },	{ P_SLING, P_BASIC },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
 #ifdef STEED
     { P_RIDING, P_EXPERT },
 #endif
+    { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Sci[] = {
-    { P_KNIFE,  P_EXPERT },
-    { P_CLUB, P_EXPERT },		{ P_HAMMER,  P_EXPERT },
-    { P_PADDLE, P_EXPERT },		    { P_FLAIL, P_EXPERT },		    
-    { P_POLEARMS, P_EXPERT },		    { P_SLING, P_EXPERT },		    
-    { P_WHIP, P_EXPERT },		    { P_LIGHTSABER, P_EXPERT },		    
-
+    /* 5lo: Doppelganger skills from Slash'EM 0.0.6 + Healer magic */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_SKILLED },
+    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
+    { P_MACE, P_SKILLED },              { P_MORNING_STAR, P_SKILLED },
+    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },
+    { P_POLEARMS, P_BASIC },            { P_SPEAR, P_BASIC },
 #ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
+    { P_FIREARM, P_BASIC },
 #endif
-    { P_MATTER_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-	{ P_DIVINATION_SPELL, P_EXPERT },
-    { P_MARTIAL_ARTS, P_MASTER },
+    { P_CROSSBOW, P_EXPERT },
+    { P_DART, P_EXPERT },               { P_SHURIKEN, P_SKILLED },
+
+    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
+    { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
 
 
 static const struct def_skill Skill_G[] = {
+    /* 5lo: They've mostly learned by movies and video games */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },	{ P_CLUB, P_EXPERT },
-    { P_PADDLE, P_EXPERT },	{ P_MACE, P_EXPERT },
-    { P_FLAIL, P_EXPERT },	{ P_HAMMER, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },	{ P_TRIDENT, P_EXPERT },
-    { P_LANCE, P_EXPERT },	{ P_SLING, P_EXPERT },
-    { P_FIREARM, P_EXPERT },	{ P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },	{ P_BOOMERANG, P_EXPERT },
-    { P_LIGHTSABER, P_EXPERT },
+    { P_LONG_SWORD, P_EXPERT },		{ P_CLUB, P_EXPERT },
+    { P_PADDLE, P_EXPERT },		{ P_MACE, P_BASIC },
+    { P_FLAIL, P_BASIC },		{ P_HAMMER, P_SKILLED },
+    { P_POLEARMS, P_SKILLED },		{ P_TRIDENT, P_BASIC },
+    { P_LANCE, P_BASIC },		{ P_SLING, P_BASIC },
+    { P_FIREARM, P_BASIC },		{ P_CROSSBOW, P_SKILLED },
+    { P_DART, P_EXPERT },		{ P_BOOMERANG, P_BASIC },
 
-    { P_ATTACK_SPELL, P_EXPERT },        
-    { P_DIVINATION_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_LIGHTSABER, P_BASIC }, /* They've seen Star Wars plenty of times */
+
+    { P_DIVINATION_SPELL, P_SKILLED },
+    { P_PROTECTION_SPELL, P_SKILLED },    { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
 
 #ifdef STEED
     { P_RIDING, P_EXPERT },
 #endif
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_MARTIAL_ARTS, P_BASIC },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Gra[] = {
+    /* 5lo: Effectively a much more limited Geek */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
-		{ P_AXE, P_EXPERT },
-    { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_CLUB, P_EXPERT },
-    { P_PADDLE, P_EXPERT },	{ P_MACE, P_EXPERT },
-	{ P_MORNING_STAR, P_EXPERT },	{ P_QUARTERSTAFF, P_EXPERT },
-    { P_FLAIL, P_EXPERT },	{ P_HAMMER, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },	{ P_JAVELIN, P_EXPERT },
-    { P_LANCE, P_EXPERT },	{ P_SLING, P_EXPERT },
-    { P_FIREARM, P_EXPERT },	{ P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },	{ P_SHURIKEN, P_EXPERT },
-    { P_LIGHTSABER, P_EXPERT },    { P_WHIP, P_EXPERT },
-    { P_BOW, P_EXPERT },
+    { P_LONG_SWORD, P_SKILLED },	{ P_CLUB, P_EXPERT },
+    { P_PADDLE, P_SKILLED },		{ P_MACE, P_BASIC },
+    { P_FLAIL, P_BASIC },		{ P_HAMMER, P_SKILLED },
+    { P_LANCE, P_BASIC },		{ P_SLING, P_BASIC },
+    { P_FIREARM, P_BASIC },		{ P_CROSSBOW, P_SKILLED },
+    { P_DART, P_EXPERT },		{ P_BOOMERANG, P_BASIC },
 
-    { P_ATTACK_SPELL, P_EXPERT },        
-    { P_DIVINATION_SPELL, P_EXPERT },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_LIGHTSABER, P_BASIC }, /* They've seen Star Wars plenty of times */
+
+    { P_DIVINATION_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
 
 #ifdef STEED
     { P_RIDING, P_EXPERT },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_MARTIAL_ARTS, P_MASTER },
+    { P_MARTIAL_ARTS, P_BASIC },
     { P_NONE, 0 }
 };
 
 
 static const struct def_skill Skill_H[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_SCIMITAR, P_EXPERT },
-    { P_SABER, P_EXPERT },		{ P_CLUB, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_TRIDENT, P_EXPERT },
-    { P_SLING, P_EXPERT },		{ P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },		{ P_UNICORN_HORN, P_EXPERT },
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE, P_EXPERT },
+    { P_SHORT_SWORD, P_SKILLED },	{ P_SCIMITAR, P_BASIC },
+    { P_SABER, P_BASIC },		{ P_CLUB, P_SKILLED },
+    { P_PADDLE, P_SKILLED },
+    { P_MACE, P_BASIC },		{ P_QUARTERSTAFF, P_EXPERT },
+    { P_POLEARMS, P_BASIC },		{ P_SPEAR, P_BASIC },
+    { P_JAVELIN, P_BASIC },		{ P_TRIDENT, P_BASIC },
+    { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },
+    { P_SHURIKEN, P_SKILLED },		{ P_UNICORN_HORN, P_EXPERT },
 
-    { P_ATTACK_SPELL, P_EXPERT },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },    { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
 
 
 static const struct def_skill Skill_I[] = {
 /*Resorts mostly to stabbing weapons*/
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-  { P_AXE, P_EXPERT },                 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },      { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },          { P_SABER, P_EXPERT },
-    { P_MACE, P_EXPERT },                { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },      { P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_LANCE, P_EXPERT },
-  { P_BOW, P_EXPERT },                 { P_SLING, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },            { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_SKILLED },
+/*  { P_AXE, P_BASIC },                 { P_PICK_AXE, P_BASIC },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_BASIC },*/
+    { P_LONG_SWORD, P_SKILLED },      /*{ P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_MACE, P_BASIC },                { P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },*/
+    { P_QUARTERSTAFF, P_SKILLED },      { P_POLEARMS, P_BASIC },
+    { P_SPEAR, P_BASIC },               { P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },             { P_LANCE, P_BASIC },
+/*  { P_BOW, P_BASIC },                 { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },            { P_DART, P_EXPERT },
+    { P_SHURIKEN, P_BASIC },            { P_BOOMERANG, P_BASIC },*/
+    { P_WHIP, P_BASIC },                { P_UNICORN_HORN, P_SKILLED },
 
-    { P_ATTACK_SPELL, P_EXPERT },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },    { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
+    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_BASIC },
     { P_MATTER_SPELL, P_EXPERT },
     /*WAC - same as Flame Mage*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 #ifdef JEDI
 static const struct def_skill Skill_J[] = {
+    /* 5lo: Straight from Jedi patch */
     { P_LIGHTSABER, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT }, { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT }, { P_SABER, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },{ P_BOOMERANG, P_EXPERT },
-
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_HEALING_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },    { P_MATTER_SPELL, P_EXPERT },
-
+    { P_SHORT_SWORD, P_BASIC }, { P_BROAD_SWORD, P_BASIC },
+    { P_LONG_SWORD, P_SKILLED }, { P_SABER, P_SKILLED },
+    { P_HEALING_SPELL, P_BASIC },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_BASIC }, { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 #endif
 
 static const struct def_skill Skill_K[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
-    { P_AXE, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },	{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },                { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },
-    { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },			{ P_CROSSBOW, P_EXPERT },
-    { P_HEALING_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },      { P_BODY_SPELL, P_EXPERT },
+    { P_DAGGER, P_BASIC },		{ P_KNIFE, P_BASIC },
+    { P_AXE, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
+    { P_SHORT_SWORD, P_SKILLED },	{ P_BROAD_SWORD, P_SKILLED },
+    { P_LONG_SWORD, P_EXPERT },	{ P_TWO_HANDED_SWORD, P_SKILLED },
+    { P_SCIMITAR, P_BASIC },		{ P_SABER, P_SKILLED },
+    { P_CLUB, P_BASIC },                { P_PADDLE, P_BASIC },
+    { P_MACE, P_SKILLED },
+    { P_MORNING_STAR, P_SKILLED },	{ P_FLAIL, P_BASIC },
+    { P_HAMMER, P_BASIC },		{ P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_SKILLED },		{ P_JAVELIN, P_SKILLED },
+    { P_TRIDENT, P_BASIC },		{ P_LANCE, P_EXPERT },
+    { P_BOW, P_BASIC },			{ P_CROSSBOW, P_SKILLED },
+    { P_HEALING_SPELL, P_SKILLED },
+    { P_PROTECTION_SPELL, P_SKILLED },      { P_BODY_SPELL, P_BASIC },
 /*WAC - removed the attack spells - no good having knights summoning
         undead!  Replaced with skilled body spells*/
 
 #ifdef STEED
     { P_RIDING, P_EXPERT },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_War[] = { /*master of all weapons*/
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
-    { P_AXE, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },		
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },	{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },                { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },
-    { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },		{ P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },			{ P_CROSSBOW, P_EXPERT },
-    { P_SLING, P_EXPERT },			{ P_DART, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_SHURIKEN, P_EXPERT },			{ P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },			{ P_UNICORN_HORN, P_EXPERT },
-    { P_LIGHTSABER, P_EXPERT },
-/* no magic skills at all*/
+    /* 5lo: uses Dwarf skills from Slash'EM 0.0.6 with modifications */
+    { P_PICK_AXE, P_SKILLED},     { P_AXE, P_SKILLED },
+    { P_SHORT_SWORD, P_EXPERT },  { P_SCIMITAR, P_SKILLED },
+    { P_FLAIL, P_SKILLED },       { P_HAMMER, P_SKILLED },
+    { P_DAGGER, P_BASIC },        { P_SPEAR, P_SKILLED },
+    { P_JAVELIN, P_BASIC },       { P_CLUB, P_BASIC },
+    { P_LONG_SWORD, P_EXPERT },    { P_SABER, P_BASIC },
+    { P_TWO_WEAPON_COMBAT, P_BASIC }, { P_BROAD_SWORD, P_EXPERT },
+    /* Warriors avoid magic */
+    { P_DIVINATION_SPELL, P_BASIC },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_NONE, 0 }
+    { P_TWO_WEAPON_COMBAT, P_SKILLED },
+    { P_BARE_HANDED_COMBAT, P_EXPERT },  { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Off[] = { /*master of all weapons*/
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
-    { P_AXE, P_EXPERT },		{ P_PICK_AXE, P_EXPERT },		
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },	{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },                { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },
-    { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },		{ P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },			{ P_CROSSBOW, P_EXPERT },
-    { P_SLING, P_EXPERT },			{ P_DART, P_EXPERT },
+static const struct def_skill Skill_Off[] = {
+    /* 5lo: Elf skills from Slash'EM 0.0.6 with modifications */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
+    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+    { P_QUARTERSTAFF, P_EXPERT },       { P_CLUB, P_EXPERT },
+    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
+    { P_BOW, P_EXPERT },                { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
-    { P_SHURIKEN, P_EXPERT },			{ P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },			{ P_UNICORN_HORN, P_EXPERT },
-    { P_LIGHTSABER, P_EXPERT },
-/* no magic skills at all*/
+    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
+    { P_ENCHANTMENT_SPELL, P_EXPERT },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Mon[] = {
-    { P_PADDLE, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_BOW, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_MARTIAL_ARTS, P_GRAND_MASTER },
-    { P_DART, P_EXPERT },    { P_CROSSBOW, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },    { P_UNICORN_HORN, P_EXPERT },
+    { P_PADDLE, P_SKILLED },
+    { P_QUARTERSTAFF, P_SKILLED },	{ P_SPEAR, P_BASIC },
+    { P_JAVELIN, P_BASIC },		{ P_BOW, P_BASIC },
+    { P_SHURIKEN, P_BASIC },            { P_MARTIAL_ARTS, P_GRAND_MASTER },
 
-
-    { P_ATTACK_SPELL, P_EXPERT },    { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_BASIC },    { P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_BASIC },	{ P_ENCHANTMENT_SPELL, P_SKILLED },
+    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },
 /*WAC - monks are good healers - expert healing - and expert protect*/
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Psi[] = {
-    { P_PADDLE, P_EXPERT },{ P_FIREARM, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_BOW, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },            { P_MARTIAL_ARTS, P_GRAND_MASTER },
+    /* 5lo: Copy-paste of the Monk */
+    { P_PADDLE, P_SKILLED },
+    { P_QUARTERSTAFF, P_SKILLED },	{ P_SPEAR, P_BASIC },
+    { P_JAVELIN, P_BASIC },		{ P_BOW, P_BASIC },
+    { P_SHURIKEN, P_BASIC },            { P_MARTIAL_ARTS, P_GRAND_MASTER },
 
-    { P_ATTACK_SPELL, P_EXPERT },    { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-/*WAC - monks are good healers - expert healing - and expert protect*/
+    { P_ATTACK_SPELL, P_BASIC },    { P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_BASIC },	{ P_ENCHANTMENT_SPELL, P_SKILLED },
+    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Nob[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
+    /* 5lo: Straight from dNethack */
+    { P_DAGGER, P_BASIC },		{ P_KNIFE, P_EXPERT },
     { P_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
+    { P_SHORT_SWORD, P_SKILLED },	{ P_BROAD_SWORD, P_SKILLED },
     { P_LONG_SWORD, P_EXPERT },
     { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },		{ P_MACE, P_EXPERT },
-    { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },			{ P_CROSSBOW, P_EXPERT },
-	{ P_FIREARM, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_CLUB, P_BASIC },		{ P_MACE, P_EXPERT },
+    { P_MORNING_STAR, P_BASIC },	{ P_FLAIL, P_BASIC },
+    { P_POLEARMS, P_BASIC },
+    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },		{ P_LANCE, P_SKILLED },
+    { P_BOW, P_SKILLED },		{ P_CROSSBOW, P_BASIC },
+    { P_ATTACK_SPELL, P_SKILLED },	{ P_HEALING_SPELL, P_SKILLED },
+    { P_BODY_SPELL, P_SKILLED },	{ P_ENCHANTMENT_SPELL, P_SKILLED },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_N[] = {
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },               { P_PICK_AXE, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_MACE, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },       { P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },               { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },             { P_SLING, P_EXPERT },
-    { P_DART, P_EXPERT },               { P_SHURIKEN, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },
-    { P_FLAIL, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_SKILLED },
+    { P_AXE, P_SKILLED },               { P_PICK_AXE, P_SKILLED },
+    { P_CLUB, P_SKILLED },              { P_MACE, P_BASIC },
+    { P_QUARTERSTAFF, P_EXPERT },       { P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_BASIC },               { P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },             { P_SLING, P_SKILLED },
+    { P_DART, P_EXPERT },               { P_SHURIKEN, P_BASIC },
 
     { P_ATTACK_SPELL, P_EXPERT },
     { P_MATTER_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
 /*WAC-  expert of dark arts - attack spells,  skilled in matter
         -for fireball and cone of cold*/
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
 
 static struct def_skill Skill_P[] = {
 	/* KMH -- Long sword for Sunsword */
-	{ P_LONG_SWORD, P_EXPERT },
+    { P_LONG_SWORD, P_SKILLED },
     { P_CLUB, P_EXPERT },               { P_PADDLE, P_EXPERT },
     { P_MACE, P_EXPERT },
     { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
     { P_HAMMER, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_TRIDENT, P_EXPERT },
-    { P_LANCE, P_EXPERT },		{ P_BOW, P_EXPERT },
-    { P_SLING, P_EXPERT },		{ P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },		{ P_UNICORN_HORN, P_EXPERT },
+    { P_POLEARMS, P_SKILLED },		{ P_SPEAR, P_SKILLED },
+    { P_JAVELIN, P_SKILLED },		{ P_TRIDENT, P_SKILLED },
+    { P_LANCE, P_BASIC },		{ P_BOW, P_BASIC },
+    { P_SLING, P_BASIC },		{ P_CROSSBOW, P_BASIC },
+    { P_DART, P_BASIC },		{ P_SHURIKEN, P_BASIC },
+    { P_BOOMERANG, P_BASIC },		{ P_UNICORN_HORN, P_SKILLED },
 
     /* [ALI] Depending on the spellbook which priests enter the dungeon with,
      * one of the maximum skill levels listed here will be raised by one.
      */
-    { P_ATTACK_SPELL, P_EXPERT },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },
 
-    { P_BARE_HANDED_COMBAT, P_EXPERT },  /* the monk is added in slash */ 
+    { P_BARE_HANDED_COMBAT, P_BASIC },  /* the monk is added in slash */ 
     { P_NONE, 0 }
 };
 
 static struct def_skill Skill_Che[] = {
-
-	{ P_LONG_SWORD, P_EXPERT },
-    { P_CLUB, P_EXPERT },               { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },
-    { P_MORNING_STAR, P_EXPERT },	{ P_FLAIL, P_EXPERT },
-    { P_HAMMER, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_TRIDENT, P_EXPERT },
-    { P_LANCE, P_EXPERT },		{ P_BOW, P_EXPERT },
-    { P_SLING, P_EXPERT },		{ P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },		{ P_UNICORN_HORN, P_EXPERT },
-
-    /* [ALI] Depending on the spellbook which priests enter the dungeon with,
-     * one of the maximum skill levels listed here will be raised by one.
-     */
-    { P_ATTACK_SPELL, P_EXPERT },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-
-    { P_BARE_HANDED_COMBAT, P_EXPERT },  /* the monk is added in slash */ 
+    /* 5lo: Mesh of Knight and Priest skills */
+    { P_DAGGER, P_BASIC },		{ P_KNIFE, P_BASIC },
+    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_SKILLED },
+    { P_LONG_SWORD, P_SKILLED },	{ P_TWO_HANDED_SWORD, P_SKILLED },
+    { P_SCIMITAR, P_BASIC },		{ P_SABER, P_SKILLED },
+    { P_CLUB, P_BASIC },		{ P_SLING, P_BASIC },
+    { P_MACE, P_EXPERT },		{ P_DART, P_BASIC},
+    { P_MORNING_STAR, P_SKILLED },
+    { P_HAMMER, P_BASIC },		{ P_POLEARMS, P_EXPERT },
+    { P_SPEAR, P_SKILLED },		{ P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },		{ P_LANCE, P_SKILLED },
+    { P_BOW, P_BASIC },			{ P_CROSSBOW, P_SKILLED },
+    { P_HEALING_SPELL, P_SKILLED },
+    { P_PROTECTION_SPELL, P_SKILLED },      { P_DIVINATION_SPELL, P_EXPERT },
+#ifdef STEED
     { P_RIDING, P_EXPERT },
+#endif
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 
 static const struct def_skill Skill_Pir[] = {
-    { P_DAGGER, P_EXPERT },	{ P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },	    { P_SHORT_SWORD, P_EXPERT },
-	{ P_BROAD_SWORD, P_EXPERT },{ P_LONG_SWORD, P_EXPERT },
-	{ P_SCIMITAR, P_EXPERT },	{ P_SABER, P_EXPERT },
-	{ P_CLUB, P_EXPERT },		{ P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-	{ P_JAVELIN, P_EXPERT },	{ P_TRIDENT, P_EXPERT },
-    { P_CROSSBOW, P_EXPERT },   { P_DART, P_EXPERT },
-    { P_WHIP, P_EXPERT },   	{ P_UNICORN_HORN, P_EXPERT },
-	{ P_FIREARM, P_EXPERT },
-	{ P_ATTACK_SPELL, P_EXPERT },{ P_DIVINATION_SPELL, P_EXPERT },
-	{ P_ENCHANTMENT_SPELL, P_EXPERT },{ P_BODY_SPELL, P_EXPERT },
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
+    /* 5lo: From the Pirate patch + Firearms */
+    { P_DAGGER, P_SKILLED },	{ P_KNIFE,  P_EXPERT },
+    { P_AXE, P_SKILLED },	    { P_SHORT_SWORD, P_BASIC },
+    { P_BROAD_SWORD, P_EXPERT },{ P_LONG_SWORD, P_BASIC },
+    { P_SCIMITAR, P_EXPERT },	{ P_SABER, P_EXPERT },
+    { P_CLUB, P_BASIC },		{ P_MORNING_STAR, P_SKILLED },
+    { P_FLAIL, P_EXPERT },		{ P_SPEAR, P_SKILLED },
+    { P_JAVELIN, P_SKILLED },	{ P_TRIDENT, P_EXPERT },
+    { P_CROSSBOW, P_EXPERT },   { P_DART, P_SKILLED },
+#ifdef FIREARMS
+    { P_FIREARM, P_SKILLED },
+#endif
+    { P_WHIP, P_SKILLED },   	{ P_UNICORN_HORN, P_BASIC },
+
+    { P_ATTACK_SPELL, P_BASIC },{ P_DIVINATION_SPELL, P_BASIC },
+    { P_ENCHANTMENT_SPELL, P_BASIC },{ P_BODY_SPELL, P_SKILLED },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Div[] = {
+    /* 5lo: from Fyr's userpage on nethackwiki */
     { P_TRIDENT, P_EXPERT },	{ P_KNIFE,  P_EXPERT },
-    { P_FLAIL, P_EXPERT },	    { P_SHORT_SWORD, P_EXPERT },
-	{ P_DAGGER, P_EXPERT },{ P_SPEAR, P_EXPERT },
-	{ P_JAVELIN, P_EXPERT },	{ P_FIREARM, P_EXPERT },
+    { P_FLAIL, P_EXPERT },	{ P_SHORT_SWORD, P_BASIC },
+    { P_DAGGER, P_BASIC },	{ P_SPEAR, P_SKILLED },
+    { P_JAVELIN, P_SKILLED },
 
-	{ P_DIVINATION_SPELL, P_EXPERT }, { P_BODY_SPELL, P_EXPERT },
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_RIDING, P_EXPERT },
+    { P_DIVINATION_SPELL, P_BASIC }, { P_BODY_SPELL, P_BASIC },
+    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Kor[] = {
-    { P_DAGGER, P_EXPERT },	{ P_LONG_SWORD,  P_EXPERT },
-    { P_PICK_AXE, P_EXPERT },	    { P_SHORT_SWORD, P_EXPERT },
-	{ P_DART, P_EXPERT },{ P_KNIFE, P_EXPERT },
-	{ P_AXE, P_EXPERT },	{ P_POLEARMS, P_EXPERT },
-	{ P_SPEAR, P_EXPERT },		{ P_TRIDENT, P_EXPERT },
+    /* 5lo: from Fyr's userpage on nethackwiki */
+    { P_DAGGER, P_EXPERT },	{ P_LONG_SWORD,  P_SKILLED },
+    { P_PICK_AXE, P_BASIC },	    { P_SHORT_SWORD, P_BASIC },
+    { P_DART, P_BASIC },{ P_KNIFE, P_SKILLED },
+    { P_AXE, P_SKILLED },	{ P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_SKILLED },		{ P_TRIDENT, P_SKILLED },
     { P_SCIMITAR, P_EXPERT },		{ P_WHIP, P_EXPERT },
-	{ P_SABER, P_EXPERT },	{ P_FIREARM, P_EXPERT },
-
-	{ P_ATTACK_SPELL, P_EXPERT },{ P_DIVINATION_SPELL, P_EXPERT },
-
+    { P_SABER, P_EXPERT },	
+#ifdef FIREARMS
+    { P_FIREARM, P_SKILLED },
+#endif
+    { P_ATTACK_SPELL, P_EXPERT },{ P_DIVINATION_SPELL, P_BASIC },
+    /* 5lo: Attack spells since we don't have voodoo implemented */
     { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Gla[] = {
-    { P_SABER, P_EXPERT },	{ P_PICK_AXE,  P_EXPERT },
-    { P_UNICORN_HORN, P_EXPERT },	    { P_CROSSBOW, P_EXPERT },
-	{ P_KNIFE, P_EXPERT },{ P_JAVELIN, P_EXPERT },
-	{ P_POLEARMS, P_EXPERT },	{ P_SCIMITAR, P_EXPERT },
-	{ P_FLAIL, P_EXPERT },		{ P_BROAD_SWORD, P_EXPERT },
-    { P_TWO_HANDED_SWORD, P_EXPERT },		{ P_MORNING_STAR, P_EXPERT },
-	{ P_HAMMER, P_EXPERT },	{ P_LANCE, P_EXPERT },
-    { P_WHIP, P_EXPERT },   { P_LONG_SWORD, P_EXPERT },
+    /* 5lo: from Fyr's userpage on nethackwiki */
+    { P_SABER, P_SKILLED },	{ P_PICK_AXE,  P_BASIC },
+    { P_UNICORN_HORN, P_EXPERT },	    { P_CROSSBOW, P_BASIC },
+    { P_KNIFE, P_SKILLED },	{ P_JAVELIN, P_SKILLED },
+    { P_POLEARMS, P_SKILLED },	{ P_SCIMITAR, P_SKILLED },
+    { P_FLAIL, P_SKILLED },		{ P_BROAD_SWORD, P_SKILLED },
+    { P_TWO_HANDED_SWORD, P_SKILLED },		{ P_MORNING_STAR, P_SKILLED },
+    { P_HAMMER, P_SKILLED },	{ P_LANCE, P_SKILLED },
+    { P_WHIP, P_SKILLED },   { P_LONG_SWORD, P_EXPERT },
     { P_SHORT_SWORD, P_EXPERT },   	{ P_DAGGER, P_EXPERT },
-	{ P_SPEAR, P_EXPERT },	{ P_TRIDENT, P_EXPERT },
+    { P_SPEAR, P_EXPERT },	{ P_TRIDENT, P_EXPERT },
 
-	{ P_ATTACK_SPELL, P_EXPERT },{ P_BODY_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_EXPERT },{ P_BODY_SPELL, P_EXPERT },
     { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_MASTER },
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Gof[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },    { P_FIREARM, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },  { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
+static const struct def_skill Skill_Gof[] = { /* Will be removed */
+    /* 5lo: Normalized skills from Slash'EM Extended + modifications */
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_EXPERT },
+    { P_QUARTERSTAFF, P_EXPERT },
+#ifdef FIREARMS
+    { P_FIREARM, P_EXPERT },
 #endif
-
+    { P_ATTACK_SPELL, P_SKILLED },	{ P_HEALING_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_EXPERT },
+    { P_MATTER_SPELL, P_BASIC }, { P_ENCHANTMENT_SPELL, P_BASIC },
+#ifdef STEED
+    { P_RIDING, P_SKILLED },
+#endif
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_R[] = {
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },	{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },              { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },            { P_SPEAR, P_EXPERT },
+    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_SKILLED },
+    { P_LONG_SWORD, P_SKILLED },	{ P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },		{ P_SABER, P_SKILLED },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_SKILLED },
+    { P_MACE, P_SKILLED },              { P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },
+    { P_POLEARMS, P_BASIC },            { P_SPEAR, P_BASIC },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
     { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },        { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_SKILLED },
+    { P_DIVINATION_SPELL, P_SKILLED },        { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
 /*WAC Left as is*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
     { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Loc[] = {
+    /* 5lo: Copy-paste of Rogue */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },	{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },              { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },            { P_SPEAR, P_EXPERT },
+    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_SKILLED },
+    { P_LONG_SWORD, P_SKILLED },	{ P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },		{ P_SABER, P_SKILLED },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_SKILLED },
+    { P_MACE, P_SKILLED },              { P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },
+    { P_POLEARMS, P_BASIC },            { P_SPEAR, P_BASIC },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
     { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },        { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_SKILLED },
+    { P_DIVINATION_SPELL, P_SKILLED },        { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
 /*WAC Left as is*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
     { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
@@ -2111,129 +2053,96 @@ static const struct def_skill Skill_Loc[] = {
 
 
 static const struct def_skill Skill_Nin[] = {
+    /* 5lo: Mesh of Rogue and Samurai */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
     { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },	{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },              { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },               { P_HAMMER, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },            { P_SPEAR, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },        { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-    { P_HEALING_SPELL, P_EXPERT },    { P_PROTECTION_SPELL, P_EXPERT },
-
-/*WAC Left as is*/
+    { P_LONG_SWORD, P_EXPERT },		{ P_TWO_HANDED_SWORD, P_BASIC },
+    /*{ P_SCIMITAR, P_BASIC },		{ P_SABER, P_SKILLED },*/
+    { P_CLUB, P_SKILLED },
+    { P_MACE, P_SKILLED },              { P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_EXPERT },              { P_HAMMER, P_BASIC },
+    { P_POLEARMS, P_SKILLED },            { P_SPEAR, P_BASIC },
+    { P_BOW, P_SKILLED },
+    { P_DART, P_SKILLED },		{ P_SHURIKEN, P_EXPERT },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_MARTIAL_ARTS, P_GRAND_MASTER },
+    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_MARTIAL_ARTS, P_MASTER },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Ran[] = {
-    { P_DAGGER, P_EXPERT },		 { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },	 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	 { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },	 { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT }, { P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },	 { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },	 { P_BOW, P_EXPERT },
+    { P_DAGGER, P_EXPERT },		 { P_KNIFE,  P_SKILLED },
+    { P_AXE, P_SKILLED },	 { P_PICK_AXE, P_BASIC },
+    { P_SHORT_SWORD, P_BASIC },	 { P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_SKILLED },	 { P_HAMMER, P_BASIC },
+    { P_QUARTERSTAFF, P_BASIC }, { P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_SKILLED },	 { P_JAVELIN, P_EXPERT },
+    { P_TRIDENT, P_BASIC },	 { P_BOW, P_EXPERT },
     { P_SLING, P_EXPERT },	 { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },	 { P_SHURIKEN, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },	 { P_WHIP, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_HEALING_SPELL, P_EXPERT },
+    { P_DART, P_EXPERT },	 { P_SHURIKEN, P_SKILLED },
+    { P_BOOMERANG, P_EXPERT },	 { P_WHIP, P_BASIC },
+    { P_HEALING_SPELL, P_BASIC },
     { P_DIVINATION_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },
+    { P_BODY_SPELL, P_BASIC },
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_NONE, 0 }
+    { P_BARE_HANDED_COMBAT, P_BASIC },
 };
 
-static const struct def_skill Skill_Elp[] = {
-    { P_DAGGER, P_EXPERT },		 { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },	 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	 { P_MORNING_STAR, P_EXPERT },
+static const struct def_skill Skill_Elp[] = { /* Will be removed */
+    /* 5lo: Elf skills from Slash'EM 0.0.6 */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
+    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
+    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
+        /* WAC removed shuriken, added quarterstaff - Drow quest arty */
+    { P_QUARTERSTAFF, P_EXPERT },
+    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
+    { P_BOW, P_EXPERT },                { P_SLING, P_BASIC },
+    { P_CROSSBOW, P_BASIC },            /* { P_SHURIKEN, P_BASIC }, */
 
-    { P_BROAD_SWORD, P_EXPERT },	 { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },	 { P_SABER, P_EXPERT },
-
-    { P_FLAIL, P_EXPERT },	 { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT }, { P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },	 { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },	 { P_BOW, P_EXPERT },
-    { P_SLING, P_EXPERT },	 { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },	 { P_SHURIKEN, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },	 { P_WHIP, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },
+    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
+    { P_ENCHANTMENT_SPELL, P_EXPERT },
+/*WAC      removed attack_spell skilled as attack spells include "evil spells
+        and elves can now be lawful.  Replaced with Matter spells*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Mus[] = {
-    { P_DAGGER, P_EXPERT },		 { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },	 { P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	 { P_MORNING_STAR, P_EXPERT },
-
-    { P_BROAD_SWORD, P_EXPERT },	 { P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },	 { P_SABER, P_EXPERT },
-
-    { P_FLAIL, P_EXPERT },	 { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT }, { P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },	 { P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },	 { P_BOW, P_EXPERT },
-    { P_SLING, P_EXPERT },	 { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },	 { P_SHURIKEN, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },	 { P_WHIP, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_UNICORN_HORN, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    /* 5lo: Copy-paste of the Bard */
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_BASIC },
+    { P_SHORT_SWORD, P_BASIC },		{ P_SCIMITAR, P_BASIC },
+    { P_CLUB, P_SKILLED },		{ P_FLAIL, P_BASIC },
+    { P_QUARTERSTAFF, P_SKILLED },	{ P_POLEARMS, P_BASIC },
+    { P_JAVELIN, P_SKILLED },		{ P_SPEAR, P_BASIC },
+    { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },	 
+    { P_ENCHANTMENT_SPELL, P_SKILLED },	{ P_BODY_SPELL, P_BASIC },
+    { P_BARE_HANDED_COMBAT, P_EXPERT }, /* Music doesn't exist...yet. */
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_S[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
+    { P_DAGGER, P_BASIC },		{ P_KNIFE,  P_SKILLED },
+    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_SKILLED },
     { P_LONG_SWORD, P_EXPERT },		{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_FLAIL, P_EXPERT },		{ P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },		{ P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },		{ P_LANCE, P_EXPERT },
+    { P_SCIMITAR, P_BASIC },		{ P_SABER, P_BASIC },
+    { P_PADDLE, P_BASIC },
+    { P_FLAIL, P_SKILLED },		{ P_QUARTERSTAFF, P_BASIC },
+    { P_POLEARMS, P_SKILLED },		{ P_SPEAR, P_BASIC },
+    { P_JAVELIN, P_BASIC },		{ P_LANCE, P_SKILLED },
     { P_BOW, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },      { P_BODY_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_SKILLED },      { P_BODY_SPELL, P_BASIC },
 
 /* WAC - removed the attack spells, replace with body.  clairvoyance, meditate*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
     { P_TWO_WEAPON_COMBAT, P_EXPERT },
     { P_MARTIAL_ARTS, P_MASTER },
@@ -2242,31 +2151,31 @@ static const struct def_skill Skill_S[] = {
 
 #ifdef TOURIST
 static const struct def_skill Skill_T[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },			{ P_PICK_AXE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },		{ P_TWO_HANDED_SWORD, P_EXPERT },
-    { P_SCIMITAR, P_EXPERT },		{ P_SABER, P_EXPERT },
-    { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },		{ P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },		{ P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_LANCE, P_EXPERT },
-    { P_BOW, P_EXPERT },			{ P_SLING, P_EXPERT },
+    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_SKILLED },
+    { P_AXE, P_BASIC },			{ P_PICK_AXE, P_BASIC },
+    { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_BASIC },
+    { P_LONG_SWORD, P_BASIC },		{ P_TWO_HANDED_SWORD, P_BASIC },
+    { P_SCIMITAR, P_SKILLED },		{ P_SABER, P_SKILLED },
+    { P_PADDLE, P_BASIC },
+    { P_MACE, P_BASIC },		{ P_MORNING_STAR, P_BASIC },
+    { P_FLAIL, P_BASIC },		{ P_HAMMER, P_BASIC },
+    { P_QUARTERSTAFF, P_BASIC },	{ P_POLEARMS, P_BASIC },
+    { P_SPEAR, P_BASIC },		{ P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },		{ P_LANCE, P_BASIC },
+    { P_BOW, P_BASIC },			{ P_SLING, P_BASIC },
 #ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
+    { P_FIREARM, P_BASIC },
 #endif
-    { P_CROSSBOW, P_EXPERT },		{ P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },		{ P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },		{ P_UNICORN_HORN, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },
+    { P_CROSSBOW, P_BASIC },		{ P_DART, P_EXPERT },
+    { P_SHURIKEN, P_BASIC },		{ P_BOOMERANG, P_BASIC },
+    { P_WHIP, P_BASIC },		{ P_UNICORN_HORN, P_SKILLED },
+    { P_DIVINATION_SPELL, P_BASIC },	{ P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_BODY_SPELL, P_SKILLED },
 /*WAC left alone*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 #endif /* TOURIST */
@@ -2284,119 +2193,94 @@ static const struct def_skill Skill_U[] = {
  * -removed Trident skill - from Skilled to Restricted
  * -removed Lance skill - from Basic to Restricted
  */
-    { P_DAGGER, P_EXPERT },             { P_LONG_SWORD, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },              { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },             { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },      { P_POLEARMS, P_EXPERT },
-    { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_SCIMITAR, P_EXPERT },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_EXPERT },
-    { P_BOW, P_EXPERT },			        { P_SLING, P_EXPERT },
+    { P_DAGGER, P_EXPERT },             { P_LONG_SWORD, P_SKILLED },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_SKILLED },
+    { P_MACE, P_SKILLED },              { P_MORNING_STAR, P_SKILLED },
+    { P_FLAIL, P_SKILLED },             { P_HAMMER, P_SKILLED },
+    { P_QUARTERSTAFF, P_SKILLED },      { P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_SKILLED },
+    { P_BOW, P_BASIC },			        { P_SLING, P_BASIC },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
-    { P_CROSSBOW, P_EXPERT },           { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },		{ P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },               { P_UNICORN_HORN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },      { P_LANCE, P_EXPERT },
+    { P_CROSSBOW, P_EXPERT },           { P_DART, P_BASIC },
+    { P_SHURIKEN, P_BASIC },		{ P_BOOMERANG, P_BASIC },
+    { P_WHIP, P_EXPERT },               { P_UNICORN_HORN, P_SKILLED },
 
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },    { P_ATTACK_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_SKILLED },    { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_BASIC },
 /*WAC - added PROTECTION spells,  body spells as skilled, basic
         matter spells - for the fire vs undead*/
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_MARTIAL_ARTS, P_GRAND_MASTER },    { P_NONE, 0 }
+    { P_BARE_HANDED_COMBAT, P_GRAND_MASTER },    { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Unt[] = {
-    { P_DAGGER, P_EXPERT },             { P_LONG_SWORD, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },              { P_MORNING_STAR, P_EXPERT },
-    { P_FLAIL, P_EXPERT },             { P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },      { P_POLEARMS, P_EXPERT },
-    { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_SCIMITAR, P_EXPERT },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_EXPERT },
-    { P_BOW, P_EXPERT },			        { P_SLING, P_EXPERT },
-    { P_PICK_AXE, P_EXPERT }, /* C'mon, they dig graves. */
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_CROSSBOW, P_EXPERT },           { P_DART, P_EXPERT },
-    { P_SHURIKEN, P_EXPERT },		{ P_BOOMERANG, P_EXPERT },
-    { P_WHIP, P_EXPERT },               { P_UNICORN_HORN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },      { P_LANCE, P_EXPERT },
-
-    { P_PROTECTION_SPELL, P_EXPERT },    { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },    { P_ATTACK_SPELL, P_EXPERT },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },    { P_DIVINATION_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
-    { P_MARTIAL_ARTS, P_GRAND_MASTER },    { P_NONE, 0 }
+    /* 5lo: Same weapon set as necromancers + Expert in Knives/pick axes */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
+    { P_AXE, P_SKILLED },               { P_PICK_AXE, P_EXPERT },
+    { P_CLUB, P_SKILLED },              { P_MACE, P_BASIC },
+    { P_QUARTERSTAFF, P_EXPERT },       { P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_BASIC },               { P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },             { P_SLING, P_SKILLED },
+    { P_DART, P_EXPERT },               { P_SHURIKEN, P_BASIC },
+    /* 5lo: Same spell set as Undead Slayers */
+    { P_PROTECTION_SPELL, P_SKILLED },    { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_BASIC },
+    { P_BARE_HANDED_COMBAT, P_BASIC },
+    { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_V[] = {
     { P_DAGGER, P_EXPERT },		{ P_AXE, P_EXPERT },
-    { P_PICK_AXE, P_EXPERT },		{ P_SHORT_SWORD, P_EXPERT },
-    { P_BROAD_SWORD, P_EXPERT },	{ P_LONG_SWORD, P_EXPERT },
-    { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_SCIMITAR, P_EXPERT },
-    { P_SABER, P_EXPERT },		{ P_HAMMER, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_LANCE, P_EXPERT },
-    { P_SLING, P_EXPERT },
-    { P_BOW, P_EXPERT },    { P_CROSSBOW, P_EXPERT },
-
-    { P_BODY_SPELL, P_EXPERT },          { P_MATTER_SPELL, P_EXPERT },
+    { P_PICK_AXE, P_SKILLED },		{ P_SHORT_SWORD, P_SKILLED },
+    { P_BROAD_SWORD, P_SKILLED },	{ P_LONG_SWORD, P_EXPERT },
+    { P_TWO_HANDED_SWORD, P_EXPERT },	{ P_SCIMITAR, P_BASIC },
+    { P_SABER, P_BASIC },		{ P_HAMMER, P_EXPERT },
+    { P_QUARTERSTAFF, P_BASIC },	{ P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_SKILLED },		{ P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },		{ P_LANCE, P_SKILLED },
+    { P_SLING, P_BASIC },
+    { P_BODY_SPELL, P_BASIC },          { P_MATTER_SPELL, P_EXPERT },
 /*  replace attack spell with matter spell - cone of cold, lightning
  *  Boosted to Expert
  */
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_SKILLED },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_W[] = {
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
-    { P_AXE, P_EXPERT },		{ P_SHORT_SWORD, P_EXPERT },
-    { P_CLUB, P_EXPERT },              { P_PADDLE, P_EXPERT },
-    { P_MACE, P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_EXPERT },
-    { P_SPEAR, P_EXPERT },		{ P_JAVELIN, P_EXPERT },
-    { P_TRIDENT, P_EXPERT },		{ P_SLING, P_EXPERT },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
+    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_SKILLED },
+    { P_AXE, P_SKILLED },		{ P_SHORT_SWORD, P_BASIC },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
+    { P_MACE, P_BASIC },
+    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_SKILLED },
+    { P_SPEAR, P_BASIC },		{ P_JAVELIN, P_BASIC },
+    { P_TRIDENT, P_BASIC },		{ P_SLING, P_SKILLED },
+    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_BASIC },
 
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },  { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_SKILLED },
+    { P_DIVINATION_SPELL, P_SKILLED },  { P_ENCHANTMENT_SPELL, P_SKILLED },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
+    { P_MATTER_SPELL, P_SKILLED },
 /*      added matter spell skilled,  as fireball and cone of cold are
         matter spells, but now specialty of F/I Mages*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
 
 static const struct def_skill Skill_Pok[] = {
-
+    /* 5lo: These can stay the same, honestly */
     { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
     { P_DIVINATION_SPELL, P_EXPERT },  { P_ENCHANTMENT_SPELL, P_EXPERT },
     { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
     { P_MATTER_SPELL, P_EXPERT },
-/*      added matter spell skilled,  as fireball and cone of cold are
-        matter spells, but now specialty of F/I Mages*/
 #ifdef STEED
     { P_RIDING, P_EXPERT },
 #endif
@@ -2405,74 +2289,71 @@ static const struct def_skill Skill_Pok[] = {
 };
 
 static const struct def_skill Skill_Zoo[] = {
-
-    { P_WHIP, P_EXPERT },
-    { P_SPEAR, P_EXPERT },    { P_JAVELIN, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },    { P_FIREARM, P_EXPERT },
-    { P_BOW, P_EXPERT },    { P_CROSSBOW, P_EXPERT },
-    { P_BOOMERANG, P_EXPERT },
-
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },  
-    { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-/*      added matter spell skilled,  as fireball and cone of cold are
-        matter spells, but now specialty of F/I Mages*/
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
+    /* 5lo: Heavily modified Hobbit skillset from Slash'EM 0.0.6 */
+    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_BASIC },
+    { P_CLUB, P_SKILLED },              { P_WHIP, P_EXPERT },
+    { P_SHORT_SWORD, P_SKILLED },       { P_BROAD_SWORD, P_BASIC },
+    { P_SCIMITAR, P_BASIC },            { P_HAMMER, P_BASIC },
+    { P_QUARTERSTAFF, P_BASIC },        { P_SPEAR, P_EXPERT },
+#ifdef FIREARMS
+    { P_FIREARM, P_SKILLED }, /* think of game hunters */
 #endif
-    { P_MARTIAL_ARTS, P_MASTER },
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },
+    { P_SLING, P_SKILLED },             { P_CROSSBOW, P_BASIC },
+    { P_DART, P_BASIC },                { P_UNICORN_HORN, P_SKILLED },
+    { P_BOOMERANG, P_SKILLED },
+#ifdef STEED
+    { P_RIDING, P_SKILLED },
+#endif
+    { P_TWO_WEAPON_COMBAT, P_BASIC },
+    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
+
 };
 
 static const struct def_skill Skill_Dea[] = {
-    { P_KNIFE,  P_EXPERT },
+    /* 5lo: Normalized their skillset from Slash'EM Extended */
+    { P_KNIFE,  P_BASIC },
     { P_QUARTERSTAFF, P_EXPERT },	
-    { P_TRIDENT,  P_EXPERT },
-    { P_DART,  P_EXPERT },     { P_SHURIKEN,  P_EXPERT },
-    { P_WHIP,  P_EXPERT },     { P_UNICORN_HORN,  P_EXPERT },
-
+    { P_TRIDENT,  P_BASIC },
+    { P_DART,  P_EXPERT },     { P_SHURIKEN,  P_BASIC },
+    { P_WHIP,  P_SKILLED },     { P_UNICORN_HORN,  P_SKILLED },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
-
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },  { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },  { P_BODY_SPELL, P_EXPERT },
+    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_BASIC },
+    { P_DIVINATION_SPELL, P_BASIC },  { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
     { P_MATTER_SPELL, P_EXPERT },
-/*      added matter spell skilled,  as fireball and cone of cold are
-        matter spells, but now specialty of F/I Mages*/
 #ifdef STEED
-    { P_RIDING, P_EXPERT },
+    { P_RIDING, P_BASIC },
 #endif
-    { P_MARTIAL_ARTS, P_MASTER },
+    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
 #ifdef YEOMAN
 static const struct def_skill Skill_Y[] = {
-    { P_DAGGER, P_EXPERT },            { P_KNIFE, P_EXPERT },
-    { P_AXE, P_EXPERT },               { P_SHORT_SWORD, P_EXPERT },
-    { P_BROAD_SWORD, P_EXPERT },         { P_LONG_SWORD, P_EXPERT },
-    { P_SABER, P_EXPERT },             { P_PADDLE, P_EXPERT },
-    { P_HAMMER, P_EXPERT },              { P_QUARTERSTAFF, P_EXPERT },
-    { P_POLEARMS, P_EXPERT },           { P_SPEAR, P_EXPERT },
-    { P_JAVELIN, P_EXPERT },           { P_TRIDENT, P_EXPERT },
-    { P_LANCE, P_EXPERT },             { P_BOW, P_EXPERT },
-    { P_SLING, P_EXPERT },
+    { P_DAGGER, P_SKILLED },            { P_KNIFE, P_BASIC },
+    { P_AXE, P_SKILLED },               { P_SHORT_SWORD, P_EXPERT },
+    { P_BROAD_SWORD, P_BASIC },         { P_LONG_SWORD, P_SKILLED },
+    { P_SABER, P_SKILLED },             { P_PADDLE, P_SKILLED },
+    { P_HAMMER, P_BASIC },              { P_QUARTERSTAFF, P_SKILLED },
+    { P_POLEARMS, P_EXPERT },           { P_SPEAR, P_BASIC },
+    { P_JAVELIN, P_SKILLED },           { P_TRIDENT, P_SKILLED },
+    { P_LANCE, P_SKILLED },             { P_BOW, P_EXPERT },
+    { P_SLING, P_BASIC },
 #ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
+    { P_FIREARM, P_SKILLED },
 #endif
-    { P_CROSSBOW, P_EXPERT },          { P_DART, P_EXPERT },
-    { P_WHIP, P_EXPERT },                { P_UNICORN_HORN, P_EXPERT },
+    { P_CROSSBOW, P_SKILLED },          { P_DART, P_BASIC },
+    { P_WHIP, P_BASIC },                { P_UNICORN_HORN, P_BASIC },
 
-    { P_ENCHANTMENT_SPELL, P_EXPERT }, { P_PROTECTION_SPELL, P_EXPERT },
-    { P_BODY_SPELL, P_EXPERT },
+    { P_ENCHANTMENT_SPELL, P_SKILLED }, { P_PROTECTION_SPELL, P_SKILLED },
+    { P_BODY_SPELL, P_BASIC },
 #ifdef STEED
     { P_RIDING, P_EXPERT },
 #endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_MARTIAL_ARTS, P_MASTER },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED }, { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 #endif
