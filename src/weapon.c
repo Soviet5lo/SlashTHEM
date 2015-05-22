@@ -2195,7 +2195,7 @@ const struct def_skill *class_skill;
 	    if (skill != P_NONE) {
 		P_SKILL(skill) = P_BASIC;
 		/* KMH -- If you came into the dungeon with it, you should at least be skilled */
-		if (P_MAX_SKILL(skill) < P_EXPERT) { /* edit by Amy: let's make it expert. */
+		if (P_MAX_SKILL(skill) < P_SKILLED) { 
 			pline("Warning: %s should be at least expert.  Fixing...", P_NAME(skill));
 			P_MAX_SKILL(skill) = P_EXPERT;
 		}
