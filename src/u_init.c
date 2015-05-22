@@ -1296,7 +1296,7 @@ static const struct def_skill Skill_Zyb[] = {
     { P_FIREARM, P_EXPERT }, /* Mechanical beings have very deadly aim */
 #endif
     { P_DART, P_EXPERT },
-    { P_LIGHTSABER, P_SKILLED }, /* Technological beings, after all */
+    { P_LIGHTSABER, P_EXPERT }, /* Technological beings, after all */
 
     { P_PROTECTION_SPELL, P_SKILLED },    { P_BODY_SPELL, P_SKILLED },
     { P_MATTER_SPELL, P_SKILLED },
@@ -1533,7 +1533,7 @@ static const struct def_skill Skill_Act[] = { /* Will be removed */
 
 static const struct def_skill Skill_Top[] = { /* Will be removed */
     /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
+    { P_DAGGER, P_SKILLED },             { P_KNIFE, P_EXPERT },
     { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
     { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
     { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
@@ -1542,7 +1542,7 @@ static const struct def_skill Skill_Top[] = { /* Will be removed */
     { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
     { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_EXPERT },
 #ifdef FIREARMS
-    { P_FIREARM, P_SKILLED },
+    { P_FIREARM, P_EXPERT },
 #endif
     { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
     { P_ENCHANTMENT_SPELL, P_EXPERT },
@@ -1765,7 +1765,8 @@ static const struct def_skill Skill_War[] = { /*master of all weapons*/
     { P_DAGGER, P_BASIC },        { P_SPEAR, P_SKILLED },
     { P_JAVELIN, P_BASIC },       { P_CLUB, P_BASIC },
     { P_LONG_SWORD, P_EXPERT },    { P_SABER, P_BASIC },
-    { P_TWO_WEAPON_COMBAT, P_BASIC }, { P_BROAD_SWORD, P_EXPERT },
+    { P_MACE, P_EXPERT }, { P_BROAD_SWORD, P_EXPERT },
+    { P_CROSSBOW, P_EXPERT },
     /* Warriors avoid magic */
     { P_DIVINATION_SPELL, P_BASIC },
 #ifdef STEED
@@ -1903,7 +1904,7 @@ static struct def_skill Skill_Che[] = {
     { P_SPEAR, P_SKILLED },		{ P_JAVELIN, P_BASIC },
     { P_TRIDENT, P_BASIC },		{ P_LANCE, P_SKILLED },
     { P_BOW, P_BASIC },			{ P_CROSSBOW, P_SKILLED },
-    { P_HEALING_SPELL, P_SKILLED },
+    { P_HEALING_SPELL, P_EXPERT },
     { P_PROTECTION_SPELL, P_SKILLED },      { P_DIVINATION_SPELL, P_EXPERT },
 #ifdef STEED
     { P_RIDING, P_EXPERT },
