@@ -1818,22 +1818,22 @@ int final;
 #ifdef WIZARD
 	if (wizard || final >= 1) {
 		Sprintf(buf, " %d", u.ualign.record);
-		dump("  Your alignment was ", buf);
+		dump("  Your alignment was", buf);
 	}
 	/*** Extra alignment and artifact stuff added for Slash'EM Extended/SlashTHEM ***/
 	if (wizard || final >= 1) {
 		Sprintf(buf, " %d", (int) ALIGNLIM);
-		dump("  Your max alignment was ", buf);
+		dump("  Your max alignment was", buf);
 	}
 
 	if (wizard || final >= 1) {
-		Sprintf(buf, "%d sins", u.ualign.sins);
-		dump("  You carried ", buf);
+		Sprintf(buf, " %d sins", u.ualign.sins);
+		dump("  You carried", buf);
 	}
 
 	if (wizard || final >= 1) {
 		Sprintf(buf, " %d", nartifact_exist());
-		dump("  Number of artifacts generated was ", buf);
+		dump("  Number of artifacts generated was", buf);
 	}
 
 	if (wizard || final >= 1) {
