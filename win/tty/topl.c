@@ -361,7 +361,16 @@ topl_putsym(c)
     cw->curx = ttyDisplay->curx;
     if(cw->curx == 0) cl_end();
 #ifndef WIN32CON
+# ifdef UNICODE
+	if(iflags.eight_bit_tty || iflags.IBMgraphics) {
+		//putwchar(uni_equiv(c));
+		putwidechar(uni_equiv(c));
+	}
+	else
+		(void) putchar(c);
+# else
     (void) putchar(c);
+# endif
 #endif
 }
 

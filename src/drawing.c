@@ -806,10 +806,15 @@ static const uchar r_oc_syms[MAXOCLASSES] = {
 static const uchar IBM_r_oc_syms[MAXOCLASSES] = {	/* a la EPYX Rogue */
 /* 0*/	'\0',
 	ILLOBJ_SYM,
-#  if defined(MSDOS) || defined(OS2) || ( defined(WIN32) && !defined(MSWIN_GRAPHICS) )
+#  if defined(UNICODE) || defined(MSDOS) || defined(OS2) || ( defined(WIN32) && !defined(MSWIN_GRAPHICS) ) 
 	0x18,			/* weapon: up arrow */
+#  if defined(UNICODE)
+	0x0a,
+	0x0b,
+#  else
 /*	0x0a, */ ARMOR_SYM,	/* armor:  Vert rect with o */
 /*	0x09, */ RING_SYM,	/* ring:   circle with arrow */
+#  endif
 /* 5*/	0x0c,			/* amulet: "female" symbol */
 	TOOL_SYM,
 	0x05,			/* food:   club (as in cards) */

@@ -30,6 +30,9 @@ static void FDECL(chdirx, (const char *,BOOLEAN_P));
 static boolean NDECL(whoami);
 static void FDECL(process_options, (int, char **));
 
+#ifdef UNICODE
+extern void NDECL(init_utf8_cons);
+#else
 #ifdef _M_UNIX
 extern void NDECL(check_sco_console);
 extern void NDECL(init_sco_cons);
@@ -37,6 +40,7 @@ extern void NDECL(init_sco_cons);
 #ifdef __linux__
 extern void NDECL(check_linux_console);
 extern void NDECL(init_linux_cons);
+#endif
 #endif
 
 #ifdef LINUX
@@ -136,11 +140,13 @@ char *argv[];
 	chdirx(dir,1);
 #endif
 
+#ifndef UNICODE
 #ifdef _M_UNIX
 	check_sco_console();
 #endif
 #ifdef LINUX
 	check_linux_console();
+#endif
 #endif
 #ifdef PROXY_GRAPHICS
 	/* Handle --proxy before options, if supported */
@@ -155,11 +161,15 @@ char *argv[];
 	initoptions();
 	init_nhwindows(&argc,argv);
 	exact_username = whoami();
+#ifdef UNICODE
+	init_utf8_cons();
+#else
 #ifdef _M_UNIX
 	init_sco_cons();
 #endif
 #ifdef LINUX
 	init_linux_cons();
+#endif
 #endif
 	/*
 	 * It seems you really want to play.

@@ -312,7 +312,48 @@ introff()		/* disable kbd interrupts if required*/
 #endif
 }
 
-#ifdef _M_UNIX		/* SCO UNIX (3.2.4), from Andreas Arens */
+#if defined(UNICODE)
+void NDECL(utf8_mapon);
+void NDECL(utf8_mapoff);
+void NDECL(init_utf8_cons);
+
+void
+utf8_mapon()
+{
+# ifdef TTY_GRAPHICS
+       if (!strcmp(windowprocs.name, "tty")) {
+               fwrite("\033%@", 1, 3, stdout);
+       }
+# endif
+}
+
+void
+utf8_mapoff()
+{
+# ifdef TTY_GRAPHICS
+       if (!strcmp(windowprocs.name, "tty")) {
+               fwrite("\033%G", 1, 3, stdout);
+       }
+# endif
+}
+
+void
+init_utf8_cons()
+{
+# ifdef TTY_GRAPHICS
+       if (!strcmp(windowprocs.name, "tty")) {
+               atexit(utf8_mapon);
+               utf8_mapoff();
+#  ifdef TEXTCOLOR
+               if (has_colors())
+                       iflags.use_color = TRUE;
+#  endif
+       }
+# endif
+}
+#endif
+
+#if defined(_M_UNIX) && !defined(UNICODE)              /* SCO UNIX (3.2.4), from Andreas Arens */ 
 # include <sys/console.h>
 
 # define BSIZE (E_TABSZ*2)
@@ -378,10 +419,10 @@ init_sco_cons()
 	}
 # endif
 }
-#endif	/* _M_UNIX */
+#endif	/* _M_UNIX && !UNICODE */
 
 
-#ifdef __linux__		/* via Jesse Thilo and Ben Gertzfield */
+#if defined(__linux__) && !defined(UNICODE)		/* via Jesse Thilo and Ben Gertzfield */
 # include <sys/vt.h>
 
 int linux_flag_console = 0;
@@ -435,7 +476,7 @@ init_linux_cons()
 	}
 # endif
 }
-#endif	/* __linux__ */
+#endif	/* __linux__ && !UNICODE */
 
 
 #ifndef __begui__	/* the Be GUI will define its own error proc */

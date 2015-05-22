@@ -3,6 +3,7 @@
 /* NetHack may be freely redistributed.  See license for details. */
 
 #include "hack.h"
+#include "tcap.h"
 #if defined(TTY_GRAPHICS)
 #include "wintty.h"	/* for prototype of has_color() only */
 #endif
