@@ -192,8 +192,6 @@ makedefs.o: makedefs.c $(CONFIG_H) ../include/permonst.h \
 	./makedefs -m
 ../include/vis_tab.h: makedefs
 	./makedefs -z
-#../include/verinfo.h: makedefs
-	#./makedefs -w
 # makedefs -z makes both vis_tab.h and vis_tab.c, but writes the .h first
 ../src/vis_tab.c: ../include/vis_tab.h
 
