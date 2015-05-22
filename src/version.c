@@ -29,7 +29,7 @@ char *
 getversionstring(buf)
 char *buf;
 {
-	Strcpy(buf, VERSION_ID);
+	Sprintf(buf, VERSION_ID, (__DATE__ " " __TIME__));
 #if defined(BETA) && defined(BETA_INFO)
 	Sprintf(eos(buf), " %s", BETA_INFO);
 #endif
