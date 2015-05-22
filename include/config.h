@@ -534,11 +534,7 @@ typedef unsigned char	uchar;
 /*#define UNDERGROUND_RIVERS */ /* 5lo: Wrapped these into a define, currently a bit buggy. */
 #define DUMP_LOG /* Dumplog support */
 
-#ifdef PUBLIC_SERVER
-#define DUMP_FN "/dgldir/userdata/%s/slashthem/dumplog/%ld"
-#else
-#define DUMP_FN "/tmp/%n.nh"    /* Fixed dumpfile name */
-#endif
+/* #define DUMP_FN "/tmp/%n.nh" */    /* Fixed dumpfile name */
 
 #define DUMPMSGS 20
 
