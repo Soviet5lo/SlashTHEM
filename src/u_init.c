@@ -737,7 +737,7 @@ static struct trobj KoboltItemB[] = {
 };
 
 static struct trobj KoboltItemC[] = {
-	{ ORCISH_SPEAR, 0, WEAPON_CLASS, 3, 0 },
+	{ ORCISH_SPEAR, 0, WEAPON_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 #if 0 /* 5lo: Obsolete */
@@ -3439,9 +3439,11 @@ u_init()
 	    /*ini_inv(AlienItem);*/
 	    	break;
 	case PM_KOBOLT:
-          ini_inv(KoboltItem);		
-          ini_inv(KoboltItemB);		
-          ini_inv(KoboltItemC);		
+	    if(!Role_if(PM_CONVICT)) {
+		ini_inv(KoboltItem);		
+		if(rn2(2)) ini_inv(KoboltItemB);		
+		else ini_inv(KoboltItemC);
+	    }
 		/*HSleeping = 5;*/
 		break;
 	case PM_GASTLY:
