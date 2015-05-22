@@ -2048,12 +2048,6 @@ struct obj *weapon;
 	}
 #endif
 
-	/* Ogres are supposed to have a use for that weak starting club of theirs after all --Amy */
-	if (Race_if(PM_OGRO) && weapon && weapon_type(weapon) == P_CLUB){
-
-		bonus += 2;
-	}
-
 	/* Navi are highly proficient with spears --Amy */
 	if (Race_if(PM_NAVI) && weapon && weapon_type(weapon) == P_SPEAR){
 
@@ -2064,15 +2058,15 @@ struct obj *weapon;
 	if (Role_if(PM_TRANSVESTITE) && weapon && weapon_type(weapon) == P_HAMMER){
 
 		bonus += 2;
-    if (u.ulevel >= 15) bonus += 1;
-    if (u.ulevel >= 30) bonus += 1;
+		if (u.ulevel >= 15) bonus += 1;
+		if (u.ulevel >= 30) bonus += 1;
 	}
 
 	/* add a little damage bonus for higher-level characters so the stronger monsters aren't too overpowered --Amy */
 
-    if (u.ulevel >= 10) bonus += 1;
-    if (u.ulevel >= 20) bonus += 1;
-    if (u.ulevel >= 30) bonus += 1;
+	if (u.ulevel >= 10) bonus += 1;
+	if (u.ulevel >= 20) bonus += 1;
+	if (u.ulevel >= 30) bonus += 1;
 
 	/* damage bonus for using racial equipment */
 
