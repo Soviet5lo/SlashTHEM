@@ -32,7 +32,7 @@ int putwidechar(c)
 wchar_t uni_equiv(int ch)
 {
     /* CP437 to Unicode mapping according to the Unicode Consortium */
-    static ushort cp437[] =
+    static unsigned short cp437[] =
     {
        0x0020, 0x263A, 0x263B, 0x2665, 0x2666, 0x2663, 0x2660, 0x2022,
        0x25D8, 0x25CB, 0x25D9, 0x2642, 0x2640, 0x266A, 0x266B, 0x263C,
@@ -67,7 +67,7 @@ wchar_t uni_equiv(int ch)
        0x2261, 0x00b1, 0x2265, 0x2264, 0x2320, 0x2321, 0x00f7, 0x2248,
        0x00b0, 0x2219, 0x00b7, 0x221a, 0x207f, 0x00b2, 0x25a0, 0x00a0
     };
-    ushort code;
+    unsigned short code;
 
     /* Convert selected code to UTF-8 */
     code = cp437[ch & 0xFF];
