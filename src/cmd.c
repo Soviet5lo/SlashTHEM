@@ -1894,7 +1894,7 @@ int final;
 	if (Invulnerable) dump(youwere, "invulnerable");
 	if (u.urealedibility || is_animal(youmonst.data) || u.ulycn != NON_PM) {
 		Sprintf(buf, " (%d)", u.urealedibility);
-		dump("You could recognize detrimental food", buf);
+		dump("  You could recognize detrimental food", buf);
 	}
 	/*** Troubles ***/
 	if (Halluc_resistance) 	dump("  ", "You resisted hallucinations");
