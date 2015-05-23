@@ -915,7 +915,7 @@ ring:
 		break;*/
 	case BALL_CLASS:
 	case CHAIN_CLASS:
-		goto plus;
+		/*goto plus;*/
 		add_erosion_words(obj, prefix);
 		if(obj->owornmask & W_BALL)
 			Strcat(bp, " (chained to you)");
@@ -1854,6 +1854,7 @@ const char *oldstr;
 		} else if (!BSTRCMPI(bp, p-5, "boots") ||
 			   !BSTRCMP(bp, p-9, "gauntlets") ||
                            !BSTRCMPI(bp, p-6, "tricks") ||
+                           !BSTRCMPI(bp, p-5, "cards") ||
                            !BSTRCMPI(bp, p-9, "paralysis") ||
                            !BSTRCMPI(bp, p-5, "glass") ||
                            !BSTRCMPI(bp, p-4, "ness") ||

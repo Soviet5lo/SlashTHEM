@@ -4486,15 +4486,15 @@ register struct	monst	*mtmp;
 			struct obj *otmp = mksobj(HEAVY_HAMMER,TRUE,FALSE);
 			otmp = oname(otmp,artiname(ART_WARFORGER));
 			mpickobj(mtmp,otmp);
-            mongets(mtmp,SILVER_DRAGON_SCALE_MAIL);
-            mongets(mtmp,CLOAK_OF_DISPLACEMENT);
-            mongets(mtmp,SPEED_BOOTS);
-            mongets(mtmp,HELM_OF_BRILLIANCE);
-            mongets(mtmp,AMULET_OF_LIFE_SAVING);
-            mongets(mtmp,POT_FULL_HEALING);
-            mongets(mtmp,POT_FULL_HEALING);
-            mongets(mtmp,POT_FULL_HEALING);
-            mongets(mtmp,POT_FULL_HEALING); /* He is NOT going down without a fight */
+			mongets(mtmp,SILVER_DRAGON_SCALE_MAIL);
+			mongets(mtmp,CLOAK_OF_DISPLACEMENT);
+			mongets(mtmp,SPEED_BOOTS);
+			mongets(mtmp,HELM_OF_BRILLIANCE);
+			mongets(mtmp,AMULET_OF_LIFE_SAVING);
+			mongets(mtmp,POT_FULL_HEALING);
+			mongets(mtmp,POT_FULL_HEALING);
+			mongets(mtmp,POT_FULL_HEALING);
+			mongets(mtmp,POT_FULL_HEALING); /* He is NOT going down without a fight */
 
 		}  else if (ptr == &mons[PM_SHOPKEEPER]) {
 		    (void) mongets(mtmp,SKELETON_KEY);
@@ -6105,21 +6105,22 @@ register struct permonst *ptr;
 	if (mal < A_NEUTRAL && u.uhave.amulet) return FALSE;
 
 	/* minions are hostile to players that have strayed at all */
-	/* and they can also be hostile to players with good alignment --Amy */
-	if (is_minion(ptr) && u.ualign.record < 0) return FALSE; /*return((boolean)(u.ualign.record >= 0));*/ 
+	if (is_minion(ptr)) return((boolean)(u.ualign.record >= 0));
 
 	/* Last case:  a chance of a co-aligned monster being
 	 * hostile.  This chance is greater if the player has strayed
 	 * (u.ualign.record negative) or the monster is not strongly aligned.
-	 * Edit by Amy - much higher chance of the monster being hostile.
 	 */
-	/*return((boolean)(!!rn2(16 + (u.ualign.record < -15 ? -15 : u.ualign.record)) &&
-		!!rn2(2 + abs(mal))));*/
+	return((boolean)(!!rn2(16 + (u.ualign.record < -15 ? -15 : u.ualign.record)) &&
+		!!rn2(2 + abs(mal))));
+#if 0 /* 5lo: Disabled and reverted to vanilla */
+	/* Edit by Amy - much higher chance of the monster being hostile. */
 	if (u.ualign.record < 0 && rn2(100)) return FALSE;
 	if (u.ualign.record == 0 && rn2(50)) return FALSE;
 	if (u.ualign.record >= 1 && rnd(u.ualign.record) < (5 + rnd(20)) && rn2(33) ) return FALSE;
 	if (!rn2(5 + abs(mal))) return FALSE;
 	else return TRUE;
+#endif
 }
 
 /* Set malign to have the proper effect on player alignment if monster is

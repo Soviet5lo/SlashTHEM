@@ -1185,10 +1185,11 @@ water_prayer(bless_water)
 	      ((other || changed > 1L) ? "s" : ""), (changed > 1L ? "" : "s"),
 	      (bless_water ? hcolor(NH_LIGHT_BLUE) : hcolor(NH_BLACK)));
     }
+#if 0 /* 5lo: Removed */
 		if /*!*/ (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
 		pline_The("altar suddenly vanishes!"); /* hopefully this will teach those altar-campers! --Amy */
 		newsym(u.ux,u.uy);}
-
+#endif
     return((boolean)(changed > 0L));
 }
 
@@ -1698,6 +1699,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 				You("feel %s is very angry at you!", a_gname());                    
 				summon_minion(altaralign, FALSE);
 				summon_minion(altaralign, FALSE);
+#ifdef MORE_SPAWNS
 				if (rn2(u.ulevel)) summon_minion(altaralign, FALSE); /* summon more --Amy */
 				if (rn2(u.ulevel)) summon_minion(altaralign, FALSE);
 				if (!rn2(2)) summon_minion(altaralign, FALSE);
@@ -1709,6 +1711,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 				if (!rn2(128)) summon_minion(altaralign, FALSE);
 				if (!rn2(256)) summon_minion(altaralign, FALSE);
 				if (!rn2(512)) summon_minion(altaralign, FALSE);
+#endif
 		    }
 		    u.ublesscnt = 0;  /* WAC You deserve this ... */
 		    exercise(A_WIS, TRUE);
@@ -1730,12 +1733,14 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    if (rnl(u.ulevel) > 6 && u.ualign.record > 0 &&
 		       rnd(u.ualign.record) > (3*ALIGNLIM)/4) {
 			summon_minion(altaralign, TRUE);
+#ifdef MORE_SPAWNS
 			if (rn2(u.ulevel)) summon_minion(altaralign, TRUE); /* summon more --Amy */
 			if (!rn2(3)) summon_minion(altaralign, TRUE);
 			if (!rn2(9)) summon_minion(altaralign, TRUE);
 			if (!rn2(27)) summon_minion(altaralign, TRUE);
 			if (!rn2(81)) summon_minion(altaralign, TRUE);
 			if (!rn2(243)) summon_minion(altaralign, TRUE);
+#endif
 			}
 
 		    /* anger priest; test handles bones files */
@@ -1753,12 +1758,14 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    if (rnl(u.ulevel) > 6 && u.ualign.record > 0 &&
 		       rnd(u.ualign.record) > (7*ALIGNLIM)/8) {
 			summon_minion(altaralign, TRUE);
+#ifdef MORE_SPAWNS
 			if (rn2(u.ulevel)) summon_minion(altaralign, TRUE); /* summon more --Amy */
 			if (!rn2(3)) summon_minion(altaralign, TRUE);
 			if (!rn2(9)) summon_minion(altaralign, TRUE);
 			if (!rn2(27)) summon_minion(altaralign, TRUE);
 			if (!rn2(81)) summon_minion(altaralign, TRUE);
 			if (!rn2(243)) summon_minion(altaralign, TRUE);
+#endif
 			}
 
 		}
@@ -1767,11 +1774,11 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 	}
 
 	consume_offering(otmp);
-
+#if 0 /* 5lo: Removed */
 	if (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
 	pline_The("altar suddenly vanishes!"); /* hopefully this will teach those altar-campers! --Amy */
 	newsym(u.ux,u.uy);}
-
+#endif
 	/* OK, you get brownie points. */
 	if(u.ugangr) {
 	    u.ugangr -=

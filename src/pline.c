@@ -15,6 +15,11 @@ static boolean no_repeat = FALSE;
 
 static char *FDECL(You_buf, (int));
 
+#if defined(DUMP_LOG) && defined(DUMPMSGS)
+char msgs[DUMPMSGS][BUFSZ];
+int lastmsg = -1;
+#endif
+
 void
 msgpline_add(typ, pattern)
      int typ;
@@ -98,6 +103,12 @@ pline VA_DECL(const char *, line)
 	    Vsprintf(pbuf,line,VA_ARGS);
 	    line = pbuf;
 	}
+#if defined(DUMP_LOG) && defined(DUMPMSGS)
+	if (DUMPMSGS > 0 && !program_state.gameover) {
+	  lastmsg = (lastmsg + 1) % DUMPMSGS;
+	  strncpy(msgs[lastmsg], line, BUFSZ);
+	}
+#endif
 
 /*Intercept direct speach, inpossible() and very short or long Strings here*/
 /* to cut down unnecesary calls to the now slower replace */

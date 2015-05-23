@@ -1850,9 +1850,11 @@ boolean prefilled;
 				if (!rn2(3)) {
 					(void)makemon(mkclass(S_EEL,0),croom->lx,croom->ly,NO_MM_FLAGS);
 				}
+#if 0
 				if (!rn2(3)) {
 					(void)makemon(mkclass(S_EEL,0),croom->hx,croom->hy,NO_MM_FLAGS);
 				}
+#endif
 			}
 		    break;
 		case COURT:
@@ -3077,9 +3079,11 @@ dlb *fd;
 
 	    walkfrom(x, y);
     }
-    /* wallification(1, 0, COLNO-1, ROWNO-1, FALSE); */
+#ifndef RND_SPEC_WALLS /* Use vanilla behavior if not defined */
+    wallification(1, 0, COLNO-1, ROWNO-1, FALSE);
+# else /* Otherwise use Slash'EM Extended behavior */
     wallification(1, 0, COLNO-1, ROWNO-1, TRUE);
-
+#endif
     /*
      * If there's a significant portion of maze unused by the special level,
      * we don't want it empty.

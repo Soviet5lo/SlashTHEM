@@ -176,6 +176,17 @@ static const char * const shkgeneral[] = {
     0
 };
 
+static const char * const shkmusic[] = {
+    "John", "Paul", "George", "Ringo"
+    "Elvis", "Mick", "Keith", "Ron", "Charlie"
+    "Joseph", "Franz", "Richard", "Ludwig", "Wolfgang Amadeus",
+    "Johann Sebastian",
+    "Karlheinz", "Gyorgy",
+    "Luciano", "Placido", "Jose", "Enrico",
+    "Falco", "_Britney", "_Christina", "_Toni", "_Brandy",
+    0
+};
+
 #ifdef BLACKMARKET
 static const char *shkblack[] = {
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
@@ -268,37 +279,29 @@ const struct shclass shtypes[] = {
 		{0, -CORPSE}, {0, 0}}, shkfoods},
 	{"rare books", SPBOOK_CLASS, 4, D_SHOP,
 	    {{90, SPBOOK_CLASS}, {10, SCROLL_CLASS}, {0, 0}}, shkbooks},
-	{"fresh food store", FOOD_CLASS, 1, D_SHOP,
-		{{90, -CORPSE}, {5, -TIN}, {5, FOOD_CLASS}, {0, 0}}, shkfoods},
 #ifdef FIREARMS	/* KMH -- no longer "antique" */
 
-	{"gun shop", WEAPON_CLASS, 2, D_SHOP, { /* 5lo: Banging shop removed and merged with gun shop */
+	{"gun shop", WEAPON_CLASS, 3, D_SHOP, { /* 5lo: Banging shop removed and merged with gun shop */
 {30, -PISTOL}, {10, -SUBMACHINE_GUN}, {10, -HEAVY_MACHINE_GUN}, {10, -RIFLE}, {10, -ASSAULT_RIFLE}, {5, -SNIPER_RIFLE},
 {10, -SHOTGUN}, {5, -AUTO_SHOTGUN}, {5, -ROCKET_LAUNCHER}, {5, -GRENADE_LAUNCHER},
           {0, 0}}, shkweapons},
 
-	{"ammo shop", WEAPON_CLASS, 2, D_SHOP, {
+	{"ammo shop", WEAPON_CLASS, 3, D_SHOP, {
 {15, -BULLET}, {15, -SILVER_BULLET}, {14, -SHOTGUN_SHELL}, {14, -ROCKET}, {14, -FRAG_GRENADE}, {14, -GAS_GRENADE}, {14, -STICK_OF_DYNAMITE} }, shkweapons},
 
-
+	{"rare instruments", TOOL_CLASS, 3, D_SHOP, 
 #else
-	{"crappy weapons outlet", WEAPON_CLASS, 3, D_SHOP, {
-	    {90, WEAPON_CLASS}, {10, ARMOR_CLASS}, {0, 0}}, shkweapons},
+	{"rare instruments", TOOL_CLASS, 9, D_SHOP, 
 #endif
-
-	{"rock-solid store", RANDOM_CLASS, 1, D_SHOP, {
-	    {14, -LUCKSTONE}, {14, -HEALTHSTONE}, {14, -TOUCHSTONE}, {14, -LOADSTONE}, {14, -WHETSTONE}, {15, -FLINT}, {15, -ROCK}, {0, 0}}, shktools},
-
-	{"one-stop mining shop", RANDOM_CLASS, 1, D_SHOP, {
-	    {100, ROCK_CLASS}, {0, 0}}, shktools},
-
-	{"lightning store", TOOL_CLASS, 1, D_SHOP,
-	    {{25, -WAX_CANDLE}, {35, -TALLOW_CANDLE}, {5, -TORCH}, {11, -BRASS_LANTERN},
-	    {16, -OIL_LAMP}, {3, -MAGIC_LAMP}, {5, -MAGIC_CANDLE}}, shktools},
-
-	{"weirdo shop", RANDOM_CLASS, 1, D_SHOP, {
-	    {33, CHAIN_CLASS}, {33, BALL_CLASS}, {34, VENOM_CLASS}, {0, 0}}, shktools},
-
+            {{10, -TIN_WHISTLE  }, { 3, -MAGIC_WHISTLE  }, 
+             {10, -WOODEN_FLUTE }, { 3, -MAGIC_FLUTE    }, 
+             {10, -TOOLED_HORN  }, { 3, -FROST_HORN     }, 
+             { 3, -FIRE_HORN    }, { 3, -HORN_OF_PLENTY }, 
+             {10, -WOODEN_HARP  }, { 3, -MAGIC_HARP     }, 
+             {10, -BELL         }, {10, -BUGLE          }, 
+             {10, -LEATHER_DRUM }, { 2, -DRUM_OF_EARTHQUAKE }, 
+             { 5, -T_SHIRT      }, { 5, -LOCK_PICK      }, 
+             {0, 0}} , shkmusic}, 
 	/* Shops below this point are "unique".  That is they must all have a
 	 * probability of zero.  They are only created via the special level
 	 * loader.
@@ -401,6 +404,10 @@ const char * const *nlp;
 	    for (trycnt = 0; trycnt < 50; trycnt++) {
 		if (nlp == shktools) {
 		    shname = shktools[rn2(names_avail)];
+		    shk->female = (*shname == '_');
+		    if (shk->female) shname++;
+		} else if (nlp == shkmusic) {
+		    shname = shkmusic[rn2(names_avail)];
 		    shk->female = (*shname == '_');
 		    if (shk->female) shname++;
 		} else if (name_wanted < names_avail) {

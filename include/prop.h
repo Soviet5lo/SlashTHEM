@@ -74,7 +74,8 @@
 #define WARN_OF_MON		65
 #define DETECT_MONSTERS		66
 #define SECOND_CHANCE		67
-#define LAST_PROP		(SECOND_CHANCE)
+#define KEEN_MEMORY		68
+#define LAST_PROP		(KEEN_MEMORY)
 
 /*** Where the properties come from ***/
 /* Definitions were moved here from obj.h and you.h */

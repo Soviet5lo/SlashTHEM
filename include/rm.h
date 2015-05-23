@@ -237,6 +237,9 @@ struct symdef {
 extern const struct symdef defsyms[MAXPCHARS];	/* defaults */
 extern uchar showsyms[MAXPCHARS];
 extern const struct symdef def_warnsyms[WARNCOUNT];
+#ifdef USER_DUNGEONCOLOR
+extern uchar showsymcolors[MAXPCHARS];
+#endif
 
 /*
  * Graphics sets for display symbols
@@ -353,6 +356,7 @@ struct rm {
 	int glyph;		/* what the hero thinks is there */
 #endif
 	schar typ;		/* what is really there */
+	Bitfield(styp, 6);	/* last seen/touched dungeon typ */
 	uchar seenv;		/* seen vector */
 	Bitfield(flags,5);	/* extra information for typ */
 	Bitfield(horizontal,1); /* wall/door/etc is horiz. (more typ info) */

@@ -57,7 +57,6 @@ static	const char	SCCS_Id[] = "@(#)makedefs.c\t3.4\t2002/02/03";
 #define DATE_FILE	"date.h"
 #define MONST_FILE	"pm.h"
 #define ONAME_FILE	"onames.h"
-#define VERINFO_FILE	"verinfo.h"
 #ifndef NH_OPTIONS_FILE
 #define OPTIONS_FILE	"options"
 #else
@@ -168,7 +167,7 @@ void FDECL(do_makedefs, (char *));
 void NDECL(do_objs);
 void NDECL(do_data);
 void NDECL(do_dungeon);
-void FDECL(do_date, (int));
+void NDECL(do_date);
 void NDECL(do_options);
 void NDECL(do_monstr);
 void NDECL(do_permonst);
@@ -184,7 +183,7 @@ extern void NDECL(objects_init);	/* objects.c */
 
 static void NDECL(make_version);
 static char *FDECL(version_string, (char *));
-static char *FDECL(version_id_string, (char *,const char *));
+static char *FDECL(version_id_string, (char *));
 static char *FDECL(xcrypt, (const char *));
 static int FDECL(check_control, (char *));
 static char *FDECL(without_control, (char *));
@@ -319,17 +318,14 @@ char	*options;
 		case 'M':	do_monstr();
 				break;
 		case 'v':
-		case 'V':	do_date(0);
+		case 'V':	do_date();
 				do_options();
-				break;
-		case 'w':
-		case 'W':	do_date(1);
 				break;
 		case 't':
 		case 'T':	do_options();
 				break;
 		case 'a':
-		case 'A':	do_date(0);
+		case 'A':	do_date();
 				break;
 		case 'p':
 		case 'P':	do_permonst();
@@ -583,9 +579,8 @@ char *outbuf;
 
 /* WAC use DEF_GAME_NAME */
 static char *
-version_id_string(outbuf, build_date)
+version_id_string(outbuf)
 char *outbuf;
-const char *build_date;
 {
     char subbuf[64], versbuf[64];
     subbuf[0] = '\0';
@@ -600,20 +595,18 @@ const char *build_date;
 #endif
 
     if (getenv("VCS_DESCRIPTION") && getenv("VCS_DESCRIPTION")[0])
-        Sprintf(outbuf, "%s %s%s Version %s (%s) - last build %s.",
+        Sprintf(outbuf, "%s %s%s Version %s (%s) - last build %%s.",
                 PORT_ID, DEF_GAME_NAME, subbuf, version_string(versbuf),
-                getenv("VCS_DESCRIPTION"), build_date);
+                getenv("VCS_DESCRIPTION"));
     else
-        Sprintf(outbuf, "%s %s%s Version %s - last build %s.",
-                PORT_ID, DEF_GAME_NAME, subbuf, version_string(versbuf),
-                build_date);
+        Sprintf(outbuf, "%s %s%s Version %s - last build %%s.",
+                PORT_ID, DEF_GAME_NAME, subbuf, version_string(versbuf));
 
     return outbuf;
 }
 
 void
-do_date(verinfo)
-int verinfo;
+do_date()
 {
 	long long clocktim = 0; /* 5lo: Fix makedefs crash on windows */
 	char *c,  *cbuf, buf[BUFSZ];
@@ -624,10 +617,7 @@ int verinfo;
 #ifdef FILE_PREFIX
 	Strcat(filename,file_prefix);
 #endif
-	if (verinfo)
-		Sprintf(eos(filename), INCLUDE_TEMPLATE, VERINFO_FILE);
-	else
-		Sprintf(eos(filename), INCLUDE_TEMPLATE, DATE_FILE);
+	Sprintf(eos(filename), INCLUDE_TEMPLATE, DATE_FILE);
 	if (!(ofp = fopen(filename, WRTMODE))) {
 		perror(filename);
 		exit(EXIT_FAILURE);
@@ -649,11 +639,6 @@ int verinfo;
 #else
 	ul_sfx = "L";
 #endif
-	if (!verinfo) {
-		Fprintf(ofp,"#define BUILD_DATE \"%s\"\n", cbuf);
-		Fprintf(ofp,"#define BUILD_TIME (%ldL)\n", clocktim);
-	}
-	Fprintf(ofp,"\n");
 	Fprintf(ofp,"#define VERSION_NUMBER 0x%08lx%s\n",
 		version.incarnation, ul_sfx);
 	Fprintf(ofp,"#define VERSION_FEATURES 0x%08lx%s\n",
@@ -668,9 +653,8 @@ int verinfo;
 		version.struct_sizes, ul_sfx);
 	Fprintf(ofp,"\n");
 	Fprintf(ofp,"#define VERSION_STRING \"%s\"\n", version_string(buf));
-	if (!verinfo)
-		Fprintf(ofp,"#define VERSION_ID \\\n \"%s\"\n",
-			version_id_string(buf, cbuf));
+	Fprintf(ofp,"#define VERSION_ID \\\n \"%s\"\n",
+		version_id_string(buf));
 #ifdef AMIGA
 	{
 	struct tm *tm = localtime((time_t *) &clocktim);
@@ -760,6 +744,7 @@ static const char *build_opts[] = {
 #ifdef REALTIME_ON_BOTL
                 "elapsed time on status line",
 #endif
+		"dungeon map overview patch",
 #ifdef ELBERETH
 		"Elbereth",
 #endif

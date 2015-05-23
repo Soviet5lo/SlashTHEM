@@ -366,5 +366,10 @@
 
 #define Lifesaved		u.uprops[LIFESAVED].extrinsic
 
+#define HKeen_memory		(u.uprops[KEEN_MEMORY].intrinsic || \
+				 (youmonst.data == &mons[PM_MASTODON]) || \
+				 (youmonst.data == &mons[PM_MUMAK]))
+#define EKeen_memory		u.uprops[KEEN_MEMORY].extrinsic
+#define Keen_memory		(HKeen_memory || EKeen_memory)
 
 #endif /* YOUPROP_H */

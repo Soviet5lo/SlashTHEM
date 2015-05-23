@@ -61,6 +61,10 @@
 /* #define GL_GRAPHICS */	/* OpenGL graphics */
 /* #define SDL_GRAPHICS */	/* Software SDL graphics */
 
+/* Define to display IBMGraphics via UTF-8 */
+/* #define UNICODE */ /* 5lo: Disabled because it breaks pokedex on unix
+                       * and breaks windows build entirely. */
+
 /*
  * Define the default window system.  This should be one that is compiled
  * into your system (see defines above).  Known window systems are:
@@ -420,6 +424,8 @@ typedef unsigned char	uchar;
 /* #define REINCARNATION */     /* Special Rogue-like levels */
 #define BLACKMARKET     /* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
 /* #define MORE_SPAWNS */ /* 5lo: Extra spawning system by AmyBSOD */
+/* #define RND_SPEC_WALLS */ /* 5lo: Special levels have a chance of replacing walls with
+                              * pools/lava/ice/trees/iron bars */
 
 /* monsters & objects */
 #define KOPS		/* Keystone Kops by Scott R. Turner */
@@ -520,9 +526,19 @@ typedef unsigned char	uchar;
  */
 
 #define STATUS_COLORS
+
+#define SHOWSYM	/* Show object symbols in menus */
+
+#define USER_DUNGEONCOLOR
+
 /*#define GOLDOBJ */	/* Gold is kept on obj chains - Helge Hafting */
 #define AUTOPICKUP_EXCEPTIONS /* exceptions to autopickup */
 /*#define UNDERGROUND_RIVERS */ /* 5lo: Wrapped these into a define, currently a bit buggy. */
+#define DUMP_LOG /* Dumplog support */
+
+/* #define DUMP_FN "/tmp/%n.nh" */    /* Fixed dumpfile name */
+
+#define DUMPMSGS 20
 
 /*#define SIMPLE_MAIL */ /* dgamelaunch simple mail */
 

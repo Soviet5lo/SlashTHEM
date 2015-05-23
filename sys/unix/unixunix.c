@@ -14,6 +14,10 @@
 #endif
 #include <signal.h>
 
+#ifdef UNICODE
+extern void NDECL(utf8_mapon);
+extern void NDECL(utf8_mapoff);
+#else 
 #ifdef _M_UNIX
 extern void NDECL(sco_mapon);
 extern void NDECL(sco_mapoff);
@@ -21,6 +25,7 @@ extern void NDECL(sco_mapoff);
 #ifdef __linux__
 extern void NDECL(linux_mapon);
 extern void NDECL(linux_mapoff);
+#endif
 #endif
 
 #ifdef LINUX
@@ -340,6 +345,9 @@ int wt;
 {
 	register int f;
 	suspend_nhwindows((char *)0);	/* also calls end_screen() */
+#ifdef UNICODE
+	utf8_mapon();
+#else
 #ifdef _M_UNIX
 	sco_mapon();
 #endif
@@ -348,6 +356,7 @@ int wt;
 #endif
 #ifdef __linux__
 	linux_mapon();
+#endif
 #endif
 	if((f = fork()) == 0){		/* child */
 		(void) setgid(getgid());
@@ -365,6 +374,9 @@ int wt;
 	(void) signal(SIGINT,SIG_IGN);
 	(void) signal(SIGQUIT,SIG_IGN);
 	(void) wait( (int *) 0);
+#ifdef UNICODE
+	utf8_mapoff();
+#else
 #ifdef _M_UNIX
 	sco_mapoff();
 #endif
@@ -373,6 +385,7 @@ int wt;
 #endif
 #ifdef LINUX
 	linux_mapoff();
+#endif
 #endif
 	(void) signal(SIGINT, (SIG_RET_TYPE) done1);
 #ifdef WIZARD

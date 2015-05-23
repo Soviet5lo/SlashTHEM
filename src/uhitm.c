@@ -2994,7 +2994,7 @@ use_weapon:
 				u.umonnum != PM_MARILITH)
 			    goto use_weapon;
 #ifdef SEDUCE
-#if 0	/* Shouldn't matter where the first AT_CLAW is anymore
+#if 0	/* Shouldn't matter where the first AT_CLAW is anymore */
 			/* succubi/incubi are humanoid, but their _second_
 			 * attack is AT_CLAW, not their first...
 			 */
@@ -3744,6 +3744,15 @@ uchar aatyp;
 		}
 		You("are jolted with electricity!");
 		mdamageu(mon, tmp);
+		break;
+	      case AD_DISE: /* Gray fungus */
+	        if (Sick_resistance) {
+			You("are covered with botulism spores, but they seem to be inert.");
+		} else {
+			You("are covered with botulism spores!");
+			mdamageu(mon, tmp);
+			make_sick(20, "bad case of botulism", TRUE, SICK_NONVOMITABLE);
+		}
 		break;
 	      case AD_ENCH:	/* KMH -- remove enchantment (disenchanter) */
 		if (mhit) {

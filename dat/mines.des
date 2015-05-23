@@ -864,17 +864,17 @@ DOOR:random,(31,11)
 # One spot each in most shops...
 
 # scatter some bodies
-OBJECT:'%',"corpse",(20,12),random,0,"aligned priest"
-OBJECT:'%',"corpse",place[0],random,0,"shopkeeper"
-OBJECT:'%',"corpse",place[1],random,0,"shopkeeper"
-OBJECT:'%',"corpse",place[2],random,0,"shopkeeper"
-OBJECT:'%',"corpse",place[3],random,0,"shopkeeper"
-OBJECT:'%',"corpse",place[4],random,0,"shopkeeper"
-OBJECT:'%',"corpse",place[5],random,0,"watchman"
-OBJECT:'%',"corpse",place[6],random,0,"watchman"
-OBJECT:'%',"corpse",place[7],random,0,"watchman"
-OBJECT:'%',"corpse",place[8],random,0,"watchman"
-OBJECT:'%',"corpse",place[9],random,0,"watch captain"
+OBJECT:'%',"corpse",(20,12),random,"aligned priest",0
+OBJECT:'%',"corpse",place[0],random,"shopkeeper",0
+OBJECT:'%',"corpse",place[1],random,"shopkeeper",0
+OBJECT:'%',"corpse",place[2],random,"shopkeeper",0
+OBJECT:'%',"corpse",place[3],random,"shopkeeper",0
+OBJECT:'%',"corpse",place[4],random,"shopkeeper",0
+OBJECT:'%',"corpse",place[5],random,"watchman",0
+OBJECT:'%',"corpse",place[6],random,"watchman",0
+OBJECT:'%',"corpse",place[7],random,"watchman",0
+OBJECT:'%',"corpse",place[8],random,"watchman",0
+OBJECT:'%',"corpse",place[9],random,"watch captain",0
 # 
 OBJECT:'`',"boulder",random
 OBJECT:'`',"boulder",random
@@ -1054,7 +1054,7 @@ MONSTER: '@', "watch captain", random, peaceful
 
 # The zoo needs some stuff...
 
-MONSTER: 'f', "lion", place[0], hostile
+MONSTER: 'f', "tiger", place[0], hostile
 MONSTER: 'f', "panther", place[1], hostile
 MONSTER: 'f', "jaguar", place[2], hostile
 MONSTER: 'q', "mastodon", place[3], hostile

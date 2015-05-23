@@ -1,4 +1,74 @@
-# Slash'THEM (Rough) ChangeLog
+# Slash'THEM ChangeLog
+
+Version 0.7.0 (2015-05-23)
+==========================
+
+#### Feature Additions
+- Implemented the ShowSym patch
+- Implemented the Dungeon Overview patch.
+- Implemented the Dungeoncolors patch.
+- Implemented the Dumplog patch.
+- Added two boolean options for Dungeon colorization.
+    - dungeon_colors controls the colorization of special levels, branches, and special rooms.  Can be set in game or in the config file, set to false by default.
+    - random_room_colors controls the colorization of all other rooms in room-and-corridor levels.  Can be set in game or in the config file, set to false by default.
+- Added Instrument Shop, a shop that specializes in selling instruments both magical and mundane, as well as a small chance of selling a t-shirt and a lock pick.
+- Implemented the Keen Memory property from the Ring of Memory patch.
+    - Keen Memory slows spell memory decay to 2/3rd of the normal rate and protects against amnesia effects.
+    - Keen memory can be gained by wearing an Amulet of Data Storage.
+    - Monsters no longer wear the Amulet of Data Storage, nor do monsters gain reflection by wearing it.
+
+#### Changes
+- Normalized skill spreads for all roles.  No longer will a role be able to reach all expert with every skill they have.  Suggestions are welcome for buffs/nerfs/changes/etc to some role skill sets (Reverted to Vanilla/Slash'EM Behavior).
+- Skills no longer take as long to level up (Reverted to Slash'EM levels).
+- Officers now start wielding their clubs, not pistols.
+- Gangsters now start with a tame little dog.
+- Musicians now start with either a tame little dog or a tame kitten.
+- Convicts no longer start with racial equipment.
+- Illithids gain extrinsic telepathy at Level 5.
+- Illithids count as Human for racial purposes.
+- Nymphs gain teleport control at Level 15.
+- Nymphs no longer can start with rings of teleport (control).
+- Kobolts now always start with 15 darts, but now have a chance of either starting with 3 orcish daggers or 2 orcish spears, not both.
+- Ghastly characters no longer start with 5 extra corpses in their starting inventory.
+- Alien:
+    - No longer start with a Loadstone.
+    - Starting alignment penalty has been reduced (-20 -> -10).
+    - Starting luck penalty has been increased (-2 -> -3).
+    - Racial attribute maximums has been decreased to 15 except Intelligence, which is now capped at 18.
+- Insectoid characters now have hands.
+- Trollors no longer lose 2 levels upon revival.  Instead they lose 1 level but are set to the beginning of that experience level.
+- Orc Acid/Electric Mages no longer start with extra food, to keep consistency with Orc Flame/Ice Mages and Wizards.
+- Unicorn Horns no longer permanently remove attributes.
+- The Scroll of Consecration no longer increases prayer timeout.
+    - This also solves an issue where reading a scroll of consecration would result in an rn2(n) error.
+- Iron bars and chains are no longer enchantable.
+- Altars no longer randomly disappear.
+- Corpses no longer mold into blobs, jellies, or puddings (reverted to Slash'EM Behavior).
+- Elbereth works the same as it did in Slash'EM (no longer has a random chance of failing).
+- Monsters no longer have a chance of being startled instead of fleeing normally. (reverted to Slash'EM Behavior)
+- Thrones are no longer randomly generated in rooms (Reverted to Slash'EM Behavior).
+- Walls in special levels are no longer randomly replaced with dungeon features (This can be re-enabled by defining RND_SPEC_WALLS in config.h).
+- Mimics no longer appear outside of shops so early (Reverted to Slash'EM Behavior).
+- Reduced the amount of angry deity spawns back to Slash'EM levels (Re-enable by defining MORE_SPAWNS in config.h).
+- Co-aligned minions and monsters are peaceful to the player more often (Reverted to Slash'EM behavior).
+- Sessile Monsters/Objects are no longer generated on top of statue traps, hiding them from view.
+- Stopped seducing monsters from getting pregnant/getting the player pregnant.  This was just very, very out of place.
+- Removed the Fresh Food, Rock Solid, Mining, Lightning, and Weirdo Shops.  Also removed the never used Crappy Weapons shop.
+- Hallucination no longer randomly colorizes the entire map, unless you're playing using the "hippie" mode flag.
+- Swapped the placement of food conducts in topten.c for livelog/xlogfile.
+- Added a separate "mode" field for xlogfile for use in the Junethack tournament.
+
+#### Bugfixes
+- Fixed corpses in the orc minetown variant being the wrong species.
+- Fixed a minor error in the zoo variant of minetown.
+- Fixed an error causing The Cudgel of Cuthbert to not show up in the Chevalier quest.
+- Fixed a warning about trailing space in mondata.h.
+- Fixed a clang warning about an unclosed comment in uhitm.c.
+- Fixed an empty return in display.c
+- Fixed the Scroll of Consecration giving a "You feel (un)comfortable" message when it should give the opposite message.
+- Fixed a very minor typo in the Scroll of Consecration's text ("consectrate" -> "consecrate").
+- Fixed an issue where being killed by a gray fungus illness attack would corrupt the "Killed by" text at the epitaph screen.
+- Fixed Ogros getting a +4 damage bonus when using clubs.
 
 Version 0.6.0 (2015-05-02)
 ==========================

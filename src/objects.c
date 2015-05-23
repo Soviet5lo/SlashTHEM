@@ -924,7 +924,7 @@ AMULET("amulet of regeneration",     "vivid",   REGENERATION,5, CLOTH,	CLR_BRIGH
 AMULET("amulet of conflict",     "sounding",   CONFLICT,5, METAL,	CLR_WHITE),
 AMULET("amulet of fumbling",     "clumsy",   FUMBLING,5, LEATHER,	CLR_ORANGE),
 AMULET("amulet of second chance", "tetraedical",SECOND_CHANCE, 5, GEMSTONE,	CLR_BRIGHT_BLUE),
-AMULET("amulet of data storage",  "icosaedrical", 0,		5, GEMSTONE,	CLR_BRIGHT_GREEN),
+AMULET("amulet of data storage",  "icosaedrical", KEEN_MEMORY,		5, GEMSTONE,	CLR_BRIGHT_GREEN),
 AMULET("amulet of waterwalking",     "rubber",   WWALKING,5, PLASTIC,	CLR_BRIGHT_BLUE),
 AMULET("amulet of hunger",     "gleaming",   HUNGER,5, WAX,	CLR_BRIGHT_MAGENTA),
 AMULET((char *)0,                     "rotated",     0, 0, METAL,	CLR_ORANGE),

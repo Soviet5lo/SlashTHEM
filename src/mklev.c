@@ -475,7 +475,7 @@ register int type;
 	    if(levl[x][y].doormask & D_TRAPPED) {
 		struct monst *mtmp;
 
-		if (level_difficulty() >= /*9*/5 && !rn2(5) &&
+		if (level_difficulty() >= 9 && !rn2(5) &&
 		   !((mvitals[PM_SMALL_MIMIC].mvflags & G_GONE) &&
 		     (mvitals[PM_LARGE_MIMIC].mvflags & G_GONE) &&
 		     (mvitals[PM_MIMIC].mvflags & G_GONE) &&
@@ -551,7 +551,8 @@ static NEARDATA const char *trap_engravings[TRAPNUM] = {
 			/* 14..16: trap door, teleport, level-teleport */
 			"Vlad was here", "ad aerarium", "ad aerarium",
 			(char *)0, (char *)0, (char *)0, (char *)0, (char *)0,
-			(char *)0, (char *)0,
+			(char *)0, (char *)0, (char *)0, (char *)0, (char *)0,
+			(char *)0,
 };
 
 STATIC_OVL void
@@ -1103,8 +1104,6 @@ skip0:
 #endif
 		if(!rn2(10)) mkfount(0,croom);
 
-		if(!rn2(500)) mkthrone(croom); /* rare cause they may give wishes --Amy */
-
 #ifdef SINKS
 		if(!rn2(60)) {
 		    mksink(croom);
@@ -1112,6 +1111,9 @@ skip0:
 		}
 #endif
 #if 0
+
+		if(!rn2(500)) mkthrone(croom); /* rare cause they may give wishes --Amy */
+
 		if(!rn2(50)) {
 		    mkstone(croom);
 		    if(!rn2(3)) mkstone(croom);
@@ -1481,6 +1483,7 @@ mklev()
 {
 	struct mkroom *croom;
 
+	init_mapseen(&u.uz);
 	if(getbones()) return;
 	in_mklev = TRUE;
 	makelevel();

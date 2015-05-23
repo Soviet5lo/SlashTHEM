@@ -84,6 +84,7 @@ static struct Bool_Opt
 #ifndef PUBLIC_SERVER
 	{"death_explore", &iflags.death_expl, TRUE, SET_IN_GAME},
 #endif
+	{"dungeon_colors", &iflags.dungeon_colors, FALSE, SET_IN_GAME},
 #if defined(TERMLIB) && !defined(MAC_GRAPHICS_ENV)
 	{"DECgraphics", &iflags.DECgraphics, FALSE, SET_IN_GAME},
 #else
@@ -193,6 +194,7 @@ static struct Bool_Opt
 	{"preload_tiles", &iflags.wc_preload_tiles, TRUE, DISP_IN_GAME},	/*WC*/
 	{"pushweapon", &flags.pushweapon, FALSE, SET_IN_GAME},
 	{"radar", (boolean *)0, FALSE, SET_IN_FILE},	/* OBSOLETE */
+	{"random_room_colors", &iflags.random_room_colors, FALSE, SET_IN_GAME},
 #if defined(MICRO) && !defined(AMIGA)
 	{"rawio", &iflags.rawio, FALSE, DISP_IN_GAME},
 #else
@@ -231,6 +233,11 @@ static struct Bool_Opt
 	{"showweight", &flags.showweight, FALSE, SET_IN_GAME},
 #else
 	{"showweight", (boolean *)0, FALSE, SET_IN_FILE},
+#endif
+#ifdef SHOWSYM
+	{"showsym", &iflags.showsym, TRUE, SET_IN_GAME},
+#else
+	{"showsym", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
 	{"silent", &flags.silent, TRUE, SET_IN_GAME},
 	{"softkeyboard", &iflags.wc2_softkeyboard, FALSE, SET_IN_FILE},
@@ -301,6 +308,14 @@ static struct Comp_Opt
 						SET_IN_GAME },
 	{ "dogname",  "the name of your (first) dog (e.g., dogname:Fang)",
 						PL_PSIZ, DISP_IN_GAME },
+#ifdef DUMP_LOG
+	{ "dumpfile", "where to dump data (e.g., dumpfile:/tmp/dump.nh)",
+#ifdef DUMP_FN
+						PL_PSIZ, DISP_IN_GAME },
+#else
+						PL_PSIZ, SET_IN_GAME },
+#endif
+#endif
 	{ "dungeon",  "the symbols to use in drawing the dungeon map",
 						MAXDCHARS+1, SET_IN_FILE },
 	{ "effects",  "the symbols to use in drawing special effects",
@@ -1542,6 +1557,19 @@ boolean tinitial, tfrom_file;
 			nmcpy(dogname, op, PL_PSIZ);
 		return;
 	}
+
+#ifdef DUMP_LOG
+	fullname = "dumpfile";
+	if (match_optname(opts, fullname, 3, TRUE)) {
+#ifndef DUMP_FN
+		if (negated) bad_negation(fullname, FALSE);
+		else if ((op = string_for_opt(opts, !tfrom_file)) != 0
+			&& strlen(op) > 1)
+			nmcpy(dump_fn, op, PL_PSIZ);
+#endif
+		return;
+       }
+#endif
 
 	fullname = "horsename";
 	if (match_optname(opts, fullname, 5, TRUE)) {
@@ -3685,6 +3713,10 @@ char *buf;
 	}
 	else if (!strcmp(optname, "dogname")) 
 		Sprintf(buf, "%s", dogname[0] ? dogname : none );
+#ifdef DUMP_LOG
+	else if (!strcmp(optname, "dumpfile"))
+		Sprintf(buf, "%s", dump_fn[0] ? dump_fn: none );
+#endif
 	else if (!strcmp(optname, "dungeon"))
 		Sprintf(buf, "%s", to_be_done);
 	else if (!strcmp(optname, "effects"))

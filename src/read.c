@@ -1117,6 +1117,8 @@ static void
 forget_single_object(obj_id)
 	int obj_id;
 {
+	if (obj_id == AMULET_OF_DATA_STORAGE && rn2(6))
+	    return;   /* does not want to be forgotten */
 	objects[obj_id].oc_name_known = 0;
 	objects[obj_id].oc_pre_discovered = 0;	/* a discovery when relearned */
 	if (objects[obj_id].oc_uname) {
@@ -1206,6 +1208,7 @@ forget_map(howmuch)
 		levl[zx][zy].seenv = 0;
 		levl[zx][zy].waslit = 0;
 		clear_memory_glyph(zx, zy, S_stone);
+		levl[zx][zy].styp = STONE;
 	    }
 }
 
@@ -1266,6 +1269,7 @@ forget_levels(percent)
 	count = ((count * percent) + 50) / 100;
 	for (i = 0; i < count; i++) {
 	    level_info[indices[i]].flags |= FORGOTTEN;
+	    forget_mapseen(indices[i]);
 	}
 }
 
@@ -2721,6 +2725,13 @@ register struct obj	*sobj;
 		break;
 	case SCR_AMNESIA:
 		known = TRUE;
+		if (Keen_memory) {
+			if (Hallucination)
+				Your("brain itches for a moment.");
+			else
+				You("think about Maud for a few moments.");
+			break;
+		}
 		forget(	(!sobj->blessed ? ALL_SPELLS : 0) |
 			(!confused || sobj->cursed ? ALL_MAP : 0) );
 		if (Hallucination) /* Ommmmmm! */
@@ -3109,14 +3120,15 @@ revid_end:
 		}
 		known = TRUE;
 		pline("You build an altar.");
+		ual = u.ualign.type;
 		if (is_demon(youmonst.data)) {
 			al = A_CHAOTIC;
 		} else if (sobj->cursed) {
 			al = A_NONE;
 		} else if (sobj->blessed) {
-			ual = u.ualign.type;
+//			ual = u.ualign.type;
 			a = (ual==A_LAWFUL) ? 'l' : ((ual==A_NEUTRAL) ? 'n' : 'c');
-			c = yn_function("Which alignment do you want to consectrate the altar to?","lncm",a);
+			c = yn_function("Which alignment do you want to consecrate the altar to?","lncm",a);
 			al = A_NONE;
 			switch (c) {
 				case 'l':
@@ -3135,10 +3147,10 @@ revid_end:
 		levl[u.ux][u.uy].typ = ALTAR;
 		levl[u.ux][u.uy].altarmask = Align2amask(al);
 		x = (al == ual) ? 1 : ((al == A_NONE) ? -3 : -1);
-		y = -rn2(x * 100);
+//		y = -rn2(x * 100);
 		u.ualign.record += x;
-		u.ublesscnt += y;
-		if (u.ublesscnt < 0) u.ublesscnt = 0;
+//		u.ublesscnt += y;
+//		if (u.ublesscnt < 0) u.ublesscnt = 0;
 		pline("You feel %s%scomfortable.",(abs(x)>1) ? "very " : "", (x<0) ? "un" : "");
 	} break;
 

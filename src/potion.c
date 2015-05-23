@@ -532,6 +532,10 @@ peffects(otmp)
 				  TRUE, 0L);
 		break;
 	case POT_AMNESIA:
+		if (Keen_memory) {
+			You_feel("no different than before.");
+			break;
+		}
 		pline(Hallucination? "This tastes like champagne!" :
 			"This liquid bubbles and fizzes as you drink it.");
 		forget((!otmp->blessed? ALL_SPELLS : 0) | ALL_MAP);
@@ -1866,6 +1870,10 @@ register struct obj *obj;
 		} else if(u.umonnum == PM_IRON_GOLEM) {
 		    You("rust!");
 		    losehp(d(1,6),"potion of amnesia", KILLED_BY_AN);
+		}
+		if(Keen_memory) {
+		You_feel("no different than before");
+		break;
 		}
 		You_feel("dizzy!");
 		forget(1 + rn2(5));

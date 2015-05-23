@@ -17,6 +17,10 @@
 #include "patchlevel.h"
 #endif
 
+# if defined(UNICODE)
+#include <wchar.h>
+#endif
+
 #ifdef TTY_GRAPHICS
 
 #ifdef MAC
@@ -167,7 +171,7 @@ STATIC_DCL void FDECL(invert_all, (winid,tty_menu_item *,tty_menu_item *, CHAR_P
 STATIC_DCL void FDECL(process_menu_window, (winid,struct WinDesc *));
 STATIC_DCL void FDECL(process_text_window, (winid,struct WinDesc *));
 STATIC_DCL tty_menu_item *FDECL(reverse, (tty_menu_item *));
-STATIC_DCL const char * FDECL(compress_str, (const char *));
+const char * FDECL(compress_str, (const char *));
 STATIC_DCL void FDECL(tty_putsym, (winid, int, int, CHAR_P));
 static char *FDECL(copy_of, (const char *));
 STATIC_DCL void FDECL(bail, (const char *));	/* __attribute__((noreturn)) */
@@ -1890,7 +1894,11 @@ tty_putsym(window, x, y, ch)
     case NHW_MAP:
     case NHW_BASE:
 	tty_curs(window, x, y);
+#ifdef UNICODE
+	putwidechar(uni_equiv((ch)));
+#else
 	(void) putchar(ch);
+#endif
 	ttyDisplay->curx++;
 	cw->curx++;
 	break;
@@ -1903,7 +1911,7 @@ tty_putsym(window, x, y, ch)
 }
 
 
-STATIC_OVL const char*
+const char*
 compress_str(str)
 const char *str;
 {
@@ -2718,7 +2726,14 @@ tty_print_glyph(window, x, y, glyph)
       xputg(glyph,ch,special);
     else
 #endif
-		g_putch(ch);		/* print the character */
+# if defined(UNICODE)
+	if( iflags.eight_bit_tty || iflags.IBMgraphics )
+		putwidechar(uni_equiv(ch));
+	else
+		g_putch(ch);
+# else
+ 	g_putch(ch);		/* print the character */
+# endif
 
     if (reverse_on) {
 	term_end_attr(ATR_INVERSE);
