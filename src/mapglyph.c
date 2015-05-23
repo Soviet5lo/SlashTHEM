@@ -175,6 +175,8 @@ unsigned *ospecial;
 				color = CLR_BRIGHT_CYAN;
 			} else if(Is_knox(&u.uz)) {
 				color = CLR_YELLOW;
+			} else if(In_sokoban(&u.uz)) {
+				color = CLR_BRIGHT_BLUE;
 #ifdef BLACKMARKET
 			} else if(Is_blackmarket(&u.uz)) {
 				color = CLR_BLACK;
