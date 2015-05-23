@@ -35,6 +35,8 @@ Todo
 Bugs
 ----
 - Some roles do not get the quest dialogue when picking up the quest artifact (Lunatics, Locksmiths, a few others).
+- Unicode support is terribly broken, causing the game to not function at all under windows and breaking Pokedex under Unix.
+- Vault teleporters to aquariums teleport the player to a random location in the level, not the aquarium.
 - Probably a ton of others.
 
 Credits
