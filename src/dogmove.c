@@ -752,6 +752,21 @@ register int after;	/* this is extra fast monster movement */
 #endif
 	if (appr == -2) return(0);
 
+	if (pet_can_sing(mtmp, FALSE))
+		return(3);
+	/* lose tameness if under effects of taming song */
+	if (has_edog && EDOG(mtmp)->friend && mtmp->mtame) {
+		mtmp->mtame -= (always_hostile(mtmp->data) ? 2 : 1);
+		if (mtmp->mtame <= 0) {
+			mtmp->mtame = 0;
+			EDOG(mtmp)->friend = 0;
+			mtmp->mpeaceful = EDOG(mtmp)->waspeaceful;
+		}
+		if (wizard)
+			pline("[%s friend for %d(%d)]", Monnam(mtmp), mtmp->mtame, EDOG(mtmp)->waspeaceful);
+	}
+
+
 	allowflags = ALLOW_M | ALLOW_TRAPS | ALLOW_SSM | ALLOW_SANCT;
 	if (passes_walls(mtmp->data)) allowflags |= (ALLOW_ROCK | ALLOW_WALL);
 	if (passes_bars(mtmp->data) && !In_sokoban(&u.uz))
@@ -860,7 +875,7 @@ register int after;	/* this is extra fast monster movement */
 		     * attacking higher level monsters 
 		     */
 		    if (((int)mtmp2->m_lev >= (int)mtmp->m_lev+2 && !is_spell && 
-			    !mindless(mtmp->data)) ||
+			    EDOG(mtmp)->encouraged || !mindless(mtmp->data)) ||
 			(mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10) &&
 			 mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee
 			 && (perceives(mtmp->data) || !mtmp2->minvis)) ||
@@ -872,7 +887,7 @@ register int after;	/* this is extra fast monster movement */
 			 * coaligned minions/priests/angels/unicorns.
 			 */
 			(align1 == align2 && align1 != A_NONE) ||
-			((mtmp->mhp*4 < mtmp->mhpmax
+			((mtmp->mhp*(4+EDOG(mtmp)->encouraged) < mtmp->mhpmax
 			  || mtmp2->data->msound == MS_GUARDIAN
 			  || mtmp2->data->msound == MS_LEADER) &&
 	/* the activistor quest shouldn't be trivialized by bringing a high-level pet or using charm monster. --Amy */
@@ -1046,6 +1061,11 @@ dognext:
 		place_monster(mtmp, cc.x, cc.y);
 		newsym(cc.x,cc.y);
 		set_apparxy(mtmp);
+	}
+	if (EDOG(mtmp)->encouraged && (rn2(4))) {
+	    EDOG(mtmp)->encouraged--;
+	    if (!(EDOG(mtmp)->encouraged) && canseemon(mtmp))
+		pline("%s looks calm again.", Monnam(mtmp));
 	}
 	return(1);
 }

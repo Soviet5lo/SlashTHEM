@@ -976,6 +976,13 @@ mdamagem(magr, mdef, mattk)
 	int canhitmon, objenchant;        
         boolean nohit = FALSE;
 
+	if (magr->mtame && EDOG(magr)) {
+		tmp += EDOG(magr)->encouraged;
+		if (wizard && EDOG(magr)->encouraged)
+			pline("[%s +%d]", Monnam(magr), EDOG(magr)->encouraged);
+	}
+
+
 	if (touch_petrifies(pd) && !rn2(4) && !resists_ston(magr)) {
 	    long protector = attk_protection((int)mattk->aatyp),
 		 wornitems = magr->misc_worn_check;

@@ -68,8 +68,9 @@
 #define P_PROTECTION_SPELL  	(P_LAST_WEAPON + 5)
 #define P_BODY_SPELL		(P_LAST_WEAPON + 6)
 #define P_MATTER_SPELL		(P_LAST_WEAPON + 7)
+#define P_MUSICALIZE            (P_LAST_WEAPON + 8)
 #define P_FIRST_SPELL		P_ATTACK_SPELL
-#define P_LAST_SPELL		P_MATTER_SPELL
+#define P_LAST_SPELL		P_MUSICALIZE
 
 /* Other types of combat */
 #define P_BARE_HANDED_COMBAT 	(P_LAST_SPELL + 1)

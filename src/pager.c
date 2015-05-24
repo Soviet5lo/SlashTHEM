@@ -7,6 +7,7 @@
 
 #include "hack.h"
 #include "dlb.h"
+#include "edog.h"
 
 #ifdef UNICODE
 #include <wchar.h>
@@ -170,7 +171,8 @@ lookat(x, y, buf, monbuf)
 		    (mtmp->mx != x || mtmp->my != y) ?
 			((mtmp->isshk && accurate)
 				? "tail of " : "tail of a ") : "",
-		    (mtmp->mtame && accurate) ? "tame " :
+		    (mtmp->mtame && accurate) ? 
+		    (EDOG(mtmp)->friend ? "friendly " : "tame ") :
 		    (mtmp->mpeaceful && accurate) ? "peaceful " : "",
 		    name);
 	    if (mon_wounds(mtmp)) {
