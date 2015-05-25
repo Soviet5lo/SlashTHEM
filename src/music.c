@@ -330,7 +330,7 @@ struct obj *instr;
 		   - Need a suitable instrument (the Lyre of Orpheus can play any song)
 		   - Must know the related spell (Bards already know any enchantment based song)
 		*/
-		know_spell = (Role_if(PM_BARD) && a <= SNG_LAST_ENCHANTMENT);
+		know_spell = (!P_RESTRICTED(P_MUSICALIZE));
 		if (!know_spell)
 			for (b = 0; b < MAXSPELL; b++)
 				if (spl_book[b].sp_id == songs[a].sp_id)
