@@ -11336,86 +11336,86 @@ You again sense %l pleading for help.
 essential in locating the Amulet of Yendor."
 %E
 #
-#	Elf
+#	Chef
 #
-%Cc Elp 00001
+%Cc Chf 00001
 You arrive in familiar surroundings.  In the distance, you %x the
 great stone Circle, the place of worship to %d.
 
 Something is wrong, though.  Surrounding the circle are orcs!
 And they've noticed you!
 %E
-%Cp Elp 00002
+%Cp Chf 00002
 Once again, you stand before %H.
 %E
-%Cp Elp 00003
+%Cp Chf 00003
 You have the oddest feeling that this may be the last time you
 are to enter %H.
 %E
-%Cp Elp 00005
+%Cp Chf 00005
 "%p!  I have not seen you in many cycles.  How do you fare?"
 %E
-%Cp Elp 00006
+%Cp Chf 00006
 "%nC continues to threaten the circle.  But we hold fast."
 %E
-%Cp Elp 00007
+%Cp Chf 00007
 "%lC is growing weak.  The magic required to defend the circle drains us."
 %E
-%Cp Elp 00008
+%Cp Chf 00008
 "Remember %i is hard to enter.  Seek the secret
 passageways."
 %E
-%Cp Elp 00009
+%Cp Chf 00009
 "We must regain %o.  Without it we will be overrun."
 %E
 
-%Cp Elp 00010
+%Cp Chf 00010
 "%pC!  I have not seen you in many moons.  How do you fare?"
 %E
-%Cp Elp 00011
+%Cp Chf 00011
 "Birdsong has returned to the grove, surely this means you have defeated %n."
 %E
-%Cp Elp 00012
+%Cp Chf 00012
 "%lC seems to have regained some of his strength."
 %E
-%Cp Elp 00013
+%Cp Chf 00013
 "So, tell us how you entered %i, in case some new evil arises there."
 %E
-%Cp Elp 00014
+%Cp Chf 00014
 "Is that truely %o that I see you carrying?"
 %E
 
-%Cc Elp 00015
+%Cc Chf 00015
 "%p!  You have returned!  Thank %d.
 
 "We have great need of you.  But first, I must see if you have the
 required abilities to take on this responsibility."
 %E
-%Cp Elp 00016
+%Cp Chf 00016
 "Once again, %p, you stand in our midst.  Are you ready now?"
 %E
-%Cp Elp 00017
+%Cp Chf 00017
 "Ah, you are here again, %p.  Allow me to determine your readiness..."
 %E
-%Cc Elp 00018
+%Cc Chf 00018
 "%p!  You have doomed us all.  You fairly radiate %L influences
 and weaken the power we have raised in this circle as a result!
 
 "Begone!  We renounce your %shood with us!  You are an outcast now!"
 %E
-%Cc Elp 00019
+%Cc Chf 00019
 "%p, you are yet too inexperienced to withstand the demands of that
 which we need you to do.  %RA might just be able to do this thing.
 
 "Return to us when you have learned more, my %S."
 %E
-%Cc Elp 00020
+%Cc Chf 00020
 "You have strayed, %p!  You know that %d requires that
 we maintain a pure devotion to things %a!
 
 "You must go from us.  Return when you have purified yourself."
 %E
-%Cc Elp 00021
+%Cc Chf 00021
 "You are indeed ready, %p.  I shall tell you what has transpired,
 and why we so desperately need your help:
 
@@ -11440,105 +11440,105 @@ until he delivers it to the Uruk-hai Overlord.
 "Recover %o for us, %p!  Only then will
 the circle of %d be safe."
 %E
-%Cp Elp 00025
+%Cp Chf 00025
 "It is rumored that the Uruk-hai have a pact with the Hill Ogres."
 %E
-%Cp Elp 00026
+%Cp Chf 00026
 "%nC is strong, but not very smart."
 %E
-%Cp Elp 00027
+%Cp Chf 00027
 "Use %o, when you find it.  It will help you survive
 to reach us."
 %E
-%Cp Elp 00028
+%Cp Chf 00028
 "Remember, let %d be your guide."
 %E
-%Cp Elp 00029
+%Cp Chf 00029
 "Call upon %d when you face %n.
 The very act of doing so will infuriate him, and give you advantage."
 %E
-%Cp Elp 00030
+%Cp Chf 00030
 "Though %n is as %C as we, he and his kind have always
 hated us."
 %E
-%Cp Elp 00031
+%Cp Chf 00031
 "We cannot hold the circle much longer, %p.  Hurry!"
 %E
-%Cp Elp 00032
+%Cp Chf 00032
 "To infiltrate %i, you must be very stealthy."
 %E
-%Cp Elp 00033
+%Cp Chf 00033
 "Remember that %n is a braggart.  Trust not what he says."
 %E
-%Cp Elp 00034
+%Cp Chf 00034
 "You can triumph, %p, if you trust in %d."
 %E
-%Cc Elp 00035
+%Cc Chf 00035
 You descend into the outer regions of %i.  You can hear
 scuffling sounds in the corridors, and vague mumblings in the distance.
 
 You remember that %ga once told you that there were many secret
 passageways in this complex.
 %E
-%Cp Elp 00036
+%Cp Chf 00036
 Once again, you descend into %i.
 %E
-%Cc Elp 00040
+%Cc Chf 00040
 You descend into a weird place, in which roughly cut cave-like walls
 join with smooth, finished ones, as if someone was in the midst of
 finishing off the construction of a subterranean complex.
 
 Off in the distance, you hear the sounds of a large, raucous gathering.
 %E
-%Cp Elp 00041
+%Cp Chf 00041
 Once again, you enter the distorted castle of %n.
 %E
-%Cc Elp 00050
+%Cc Chf 00050
 "So, %c.  %lC has sent you to recover %o.
 
 "Well, I shall keep that bauble.  It pleases me.  You, %c, shall die."
 %E
-%Cp Elp 00051
+%Cp Chf 00051
 "Back again, eh?  Well, a mere %r is no threat to me!  Die, %c!"
 %E
-%Cp Elp 00052
+%Cp Chf 00052
 "You haven't learned your lesson, %c.  You can't kill me!  You shall die now."
 %E
-%Cp Elp 00053
+%Cp Chf 00053
 "I shall have %o from you, %r.  Then I shall
 kill you."
 %E
-%Cp Elp 00060
+%Cp Chf 00060
 "Your %d is nothing, %c.  You are mine now!"
 %E
-%Cp Elp 00061
+%Cp Chf 00061
 "Run away little %c!  You can never hope to defeat %n!"
 %E
-%Cp Elp 00062
+%Cp Chf 00062
 "My Uruk-hai servants will rip you to shreds!"
 %E
-%Cp Elp 00063
+%Cp Chf 00063
 "I shall display your head as a trophy.  What do you think about that wall?"
 %E
-%Cp Elp 00064
+%Cp Chf 00064
 "I shall break your %ls circle, and destroy all the %gP!"
 %E
-%Cp Elp 00065
+%Cp Chf 00065
 "%d has abandoned you, %c.  You are doomed."
 %E
-%Cp Elp 00066
+%Cp Chf 00066
 "%rA?  %lC sends a mere %r against me?  Hah!"
 %E
-%Cp Elp 00067
+%Cp Chf 00067
 "%lC has failed, %c.  %oC will never leave here."
 %E
-%Cp Elp 00068
+%Cp Chf 00068
 "You really think you can defeat me, eh %c?  You are wrong!"
 %E
-%Cp Elp 00069
+%Cp Chf 00069
 "You weaken, %c.  I shall kill you now."
 %E
-%Cc Elp 00070
+%Cc Chf 00070
 As you pick up %o, it seems to glow, and a warmth
 fills you completely.  You realize that its power is what has protected
 your %sp against their enemies for so long.
@@ -11546,13 +11546,13 @@ your %sp against their enemies for so long.
 You must now return it to %l without delay -- their lives depend
 on your speed.
 %E
-%Cc Elp 00080
+%Cc Chf 00080
 %nC collapses to the ground, cursing you and %l, then says:
 
     You have defeated me, %r!  But I curse you one final time, with my
     dying breath!  You shall die before you leave my castle!
 %E
-%Cc Elp 00081
+%Cc Chf 00081
 "%p!  You have succeeded!  I feared it was not possible!
 
 "Your aura proclaims that you possess %o!
@@ -11564,14 +11564,14 @@ for %d before that happens, we will be eternally safe.
 "Take %o with you.  It will aid in your quest for
 the Amulet."
 %E
-%Cp Elp 00082
+%Cp Chf 00082
 "Welcome, %p.  Have you mastered the art of using %o yet?"
 %E
-%Cp Elp 00090
+%Cp Chf 00090
 "Welcome, %p.  How have you fared on your quest for the Amulet
 of Yendor?"
 %E
-%Cc Elp 00091
+%Cc Chf 00091
 "Utuelyes!  You have recovered the Amulet of Yendor!
 Now attend to me, %p, and I will tell you what must be done:
 
@@ -11583,7 +11583,7 @@ When you reach the temple, sacrifice the Amulet to %d.
 
 "Thus will you fulfill your destiny."
 %E
-%Cc Elp 00095
+%Cc Chf 00095
 "You have betrayed all those who hold allegiance to %d, as you once did.
 My allegiance to %d holds fast and I cannot condone or accept what you 
 have done.
@@ -11595,16 +11595,16 @@ resides.
 
 Go now!  You are banished from this place.
 %E
-%Cp Elp 00100
+%Cp Chf 00100
 You receive a faint telepathic message from %l:
 Your help is urgently needed at %H!
 Look for a ...ic transporter.
 You couldn't quite make out that last message.
 %E
-%Cp Elp 00101
+%Cp Chf 00101
 You again sense %l pleading for help.
 %E
-%Cp Elp 00102
+%Cp Chf 00102
 "The silver bell which was hoarded by %n will be
 essential in locating the Amulet of Yendor."
 %E

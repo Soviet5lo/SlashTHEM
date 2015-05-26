@@ -100,6 +100,26 @@ static struct trobj Cave_man[] = {
 	{ LEATHER_ARMOR, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
+
+static struct trobj Chef[] = { /* 5lo: New role */
+	{ KNIFE, 1, WEAPON_CLASS, 1, 1 },
+	{ LEATHER_ARMOR, 1, ARMOR_CLASS, 1, 1 },
+	{ DENTED_POT, 2, ARMOR_CLASS, 1, 1 },
+	{ FOOD_RATION, 0, FOOD_CLASS, 3, 0 },
+	/* Give him some herbs and spices... */
+	{ SPRIG_OF_WOLFSBANE, 0, FOOD_CLASS, 1, 0 },
+	{ CLOVE_OF_GARLIC, 0, FOOD_CLASS, 1, 0 },
+	{ POT_WATER, UNDEF_SPE, POTION_CLASS, 2, UNDEF_BLESS },
+	{ POT_BOOZE, UNDEF_SPE, POTION_CLASS, 2, UNDEF_BLESS },
+	{ SCR_FOOD_DETECTION, UNDEF_SPE, SCROLL_CLASS, 3, UNDEF_BLESS },
+	{ CAN_OF_GREASE, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
+	{ TOWEL, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
+	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
+	{ TIN_OPENER, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
+	{ SPOON, 2, TOOL_CLASS, 1, 1},
+	{ 0, 0, 0, 0, 0 }
+};
+
 static struct trobj Electric_Mage[] = {
 	{ QUARTERSTAFF, 1, WEAPON_CLASS, 1, 1 },        /* for dealing with ghosts */
 	{ STUDDED_LEATHER_ARMOR, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -1184,6 +1204,22 @@ static const struct def_skill Skill_C[] = {
     { P_BARE_HANDED_COMBAT, P_MASTER },
     { P_NONE, 0 }
 };
+
+static const struct def_skill Skill_Chef[] = {
+    /* 5lo: This'll be organized better later...*/
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_EXPERT },
+    { P_AXE, P_EXPERT },		{ P_DART, P_EXPERT },
+    { P_CLUB, P_SKILLED },              { P_PADDLE, P_SKILLED },
+    { P_LONG_SWORD, P_BASIC },		{ P_FLAIL, P_BASIC },
+    { P_SHORT_SWORD, P_SKILLED },
+    { P_HAMMER, P_EXPERT },		{ P_QUARTERSTAFF, P_SKILLED },
+    { P_SABER, P_BASIC},		{ P_SLING, P_SKILLED },
+    { P_SLING, P_BASIC},		{ P_UNICORN_HORN, P_BASIC },
+    { P_DIVINATION_SPELL, P_SKILLED },  { P_PROTECTION_SPELL, P_BASIC },
+    { P_BARE_HANDED_COMBAT, P_SKILLED }, {P_TWO_WEAPON_COMBAT, P_SKILLED },
+    { P_NONE, 0 }
+};
+
 
 static const struct def_skill Skill_Roc[] = {
     /* 5lo: Let's use the Gnome skills from Slash 0.0.6 - they fit well enough */
@@ -2731,6 +2767,10 @@ u_init()
 		Cave_man[C_AMMO].trquan = rn1(11, 10);	/* 10..20 */
 		ini_inv(Cave_man);
 		skill_init(Skill_C);
+		break;
+	case PM_CHEF:
+		ini_inv(Chef);
+		skill_init(Skill_Chef);
 		break;
 	case PM_GANGSTER:
 		ini_inv(Gangster);

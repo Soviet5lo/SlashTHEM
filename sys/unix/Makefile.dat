@@ -316,7 +316,7 @@ quest_levs: ../util/lev_comp \
 	Barb.des Bard.des Binder.des Bleeder.des \
 	Caveman.des Cheval.des Convict.des \
 	Courier.des Cyborg.des Deatheat.des Diver.des Drunk.des \
-	Electric.des Elf.des Elfreal.des Firef.des Flame.des \
+	Electric.des Elf.des Chef.des Firef.des Flame.des \
 	Gangster.des Gladia.des Geek.des Goff.des Gradu.des \
 	Healer.des Ice.des Jedi.des Knight.des Korsair.des \
 	Locks.des Lunatic.des Monk.des Music.des \
@@ -343,7 +343,7 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Drunk.des
 	../util/lev_comp Electric.des
 	../util/lev_comp Elf.des
-	../util/lev_comp Elfreal.des
+	../util/lev_comp Chef.des
 	../util/lev_comp Firef.des
 	../util/lev_comp Flame.des
 	../util/lev_comp Gangster.des

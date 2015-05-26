@@ -255,6 +255,36 @@ const struct Role roles[] = {
 	0, 12, 0, 1,  8, A_INT, SPE_DIG,             -4
 },
 
+{	{"Chef", 0}, { /* Level names based on Brigade de cuisine */
+	{"Plongeur",  0}, /* Dishwasher (washes dishes) */
+	{"Busser", 0}, /* Busboy (clears dishes and table, sets tables, etc)*/
+	{"Expediter", 0}, /* Takes orders, puts finishing touches on dishes */
+	{"Apprenti", 0}, /* Chef/cook in training */
+	{"Commis",0}, /* Junior Cook */
+	{"Cuisinier", 0}, /* Cook */
+	{"Chef de Partie", 0}, /* Station Chef */
+	{"Sous Chef", 0}, /* Sous-chef de cuisine - Second in Command */
+	{"Chef de Cuisine", 0} }, /* Kitchen Chef - Head of all */
+	"_Demeter", "_Hestia", "_Adephagia", /* Greek */
+	"Chf", "The Iron Kitchen of Gourmet", "Hell's Kitchen", /* TODO: Quest stuff */
+	PM_CHEF, NON_PM, PM_UNDEAD_CHEF, NON_PM, NON_PM,
+	PM_SUPREME_CHEF, PM_KITCHEN_PORTER, PM_THE_IMMORTAL_ROT, /* TODO: Quest leader/nemesis */
+	PM_GIANT_BEETLE, PM_BLOODWORM, S_ANT, S_WORM,
+#if 0
+	ART_TENDERIZER, ART_THE_GAMBLER_S_SUIT,
+#endif
+	ART_DELUXE_YENDORIAN_KNIFE,
+	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
+	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	/* Str Int Wis Dex Con Cha */  
+	{   7, 10,  6,  7,  7, 10 },
+	{  15, 10, 10, 15, 30, 20 },
+	/* Init   Lower  Higher */
+	{ 16, 0,  0, 8,  0, 0 },	/* Hit points */
+	{ 12, 0,  0, 1,  0, 1 },14,	/* Energy */
+	0, 5, 1, 2, 10, A_INT, SPE_DETECT_FOOD,   -4
+},
+
 {	{"Chevalier", 0}, {
 	{"Basher",    0},
 	{"Undefiler",     0},

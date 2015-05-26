@@ -249,6 +249,9 @@ register boolean special;
 		case PM_CHEVALIER:
 		    weapon = TRIDENT;
 		    break;
+		case PM_CHEF:
+		    weapon = KNIFE;
+		    break;
 		case PM_UNDERTAKER:
 		    weapon = SCALPEL;
 		    break;

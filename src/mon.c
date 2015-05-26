@@ -350,6 +350,7 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_CAVEMAN:
 	    case PM_UNDEAD_CAVEWOMAN:
 	    case PM_UNDEAD_CHEVALIER:
+	    case PM_UNDEAD_CHEF:
 	    case PM_UNDEAD_COURIER:
 	    case PM_UNDEAD_SPACEWARS_FIGHTER:
 	    case PM_UNDEAD_ZYBORG:

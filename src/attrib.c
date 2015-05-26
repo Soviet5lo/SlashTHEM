@@ -49,6 +49,10 @@ const struct innate {
 		     {	15, &(HWarning), "sensitive", "careless" },
 		     {	 0, 0, 0, 0 } },
 
+	chf_abil[] = { { 	7, &(HPoison_resistance), "healthy", "less healthy" },
+		     {	15, &(HFire_resistance), "cool", "warmer" },
+		     {	 0, 0, 0, 0 } },
+
 #ifdef CONVICT
 	con_abil[] = { {   1, &(HSick_resistance), "", "" },
 	         {	 7, &(HPoison_resistance), "healthy", "less healthy" },
@@ -855,6 +859,7 @@ int oldlevel, newlevel;
 	case PM_COURIER:      abil = cou_abil;	break;
 	case PM_BARD:           abil = brd_abil;	break;
 	case PM_CAVEMAN:        abil = cav_abil;	break;
+	case PM_CHEF:        abil = chf_abil;	break;
 #ifdef CONVICT
 	case PM_CONVICT:        abil = con_abil;	break;
 #endif	/* CONVICT */
