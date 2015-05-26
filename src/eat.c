@@ -3069,7 +3069,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 	if (!(otmp = floorfood("eat"))) return 0;
 	if (check_capacity((char *)0)) return 0;
 
-	if (is_animal(youmonst.data) || u.ulycn != NON_PM) {
+	if (is_animal(youmonst.data) || u.ulycn != NON_PM || Role_if(PM_CHEF)) {
 	/* don't use up u.uedibility */
 	if (edibility_prompts(otmp) == 1) return 0;
     	} else if (u.urealedibility) {

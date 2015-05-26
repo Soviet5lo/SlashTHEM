@@ -1367,7 +1367,7 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	}
 	/*if (u.urealedibility) you_can("recognize detrimental food");*/
 
-	if (u.urealedibility || is_animal(youmonst.data) || u.ulycn != NON_PM) {
+	if (u.urealedibility || is_animal(youmonst.data) || u.ulycn != NON_PM || Role_if(PM_CHEF)) {
 		Sprintf(buf, "recognize detrimental food");
 	   Sprintf(eos(buf), " (%d)", u.urealedibility);
 		you_can(buf);
@@ -1892,7 +1892,7 @@ int final;
 	if (Acid_resistance) dump(youwere, "acid resistant");
 	if (Stone_resistance) dump(youwere, "petrification resistant");
 	if (Invulnerable) dump(youwere, "invulnerable");
-	if (u.urealedibility || is_animal(youmonst.data) || u.ulycn != NON_PM) {
+	if (u.urealedibility || is_animal(youmonst.data) || u.ulycn != NON_PM || Role_if(PM_CHEF)) {
 		Sprintf(buf, " (%d)", u.urealedibility);
 		dump("  You could recognize detrimental food", buf);
 	}
