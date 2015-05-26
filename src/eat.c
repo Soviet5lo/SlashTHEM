@@ -185,19 +185,8 @@ static const struct { const char *txt; int nut; } tintxts[] = {
 	{"sauteed",      95},
 	{"broiled",      80},
 	{"smoked",       50},
-	/* [Tom] added a few new styles */        
-	{"stir fried",   80},
-	{"candied",      100},
-	{"boiled",       50},
-	{"dried",        55},
-	{"szechuan",     70},
-#define FRENCH_FRIED_TINX 20
-	{"french fried", 40},
-	{"sauteed",      95},
 	{"mashed",      90},
 	{"salted",      120},
-	{"broiled",      80},
-	{"smoked",       50},
 	{"roasted",      120},
 	{"cooked",      110},
 	{"beefed",      150},
@@ -1949,7 +1938,7 @@ opentin()		/* called during each move whilst opening a tin */
 		}
 	    else lesshungry(tintxts[r].nut);
 
-	    if(r == 0 || r == FRENCH_FRIED_TIN || r == FRENCH_FRIED_TINX) {
+	    if(r == 0 || r == FRENCH_FRIED_TIN) {
 	        /* Assume !Glib, because you can't open tins when Glib. */
 		incr_itimeout(&Glib, rnd(15));
 		pline("Eating deep fried food made your %s very slippery.",
