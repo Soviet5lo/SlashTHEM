@@ -693,10 +693,6 @@ struct monst *mtmp;
 	    case PM_ROCKER:
 		    multishot++;
 		    break;
-	    case PM_ELPH:
-		    multishot++;
-		    if (otmp->otyp == ELVEN_ARROW && mwep && mwep->otyp == ELVEN_BOW) multishot++;
-		    break;
 	    case PM_ROGUE:
 		    if (skill == P_DAGGER) multishot++;
 		    break;

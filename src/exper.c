@@ -273,7 +273,6 @@ newexplevel()
 			case PM_KNIGHT: u.uenbase += rnd(3); break;
 			/*case PM_HUMAN_WEREWOLF: u.uenbase += rnd(5) + 1; break;*/
 			case PM_MONK: u.uenbase += rnd(5) + 1; break;
-			case PM_ELPH: u.uenbase += rnd(5) + 1; break;
 			case PM_NECROMANCER: u.uenbase += rnd(6) + 2; break;
 			case PM_PRIEST: u.uenbase += rnd(6) + 2; break;
 			case PM_CHEVALIER: u.uenbase += rnd(6) + 2; break;

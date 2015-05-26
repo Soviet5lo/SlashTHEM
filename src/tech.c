@@ -264,8 +264,6 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	ran_tech[] = { {   1, T_FLURRY, 1},
 		       {   0, 0, 0} },
-	elp_tech[] = { {   1, T_FLURRY, 1},
-		       {   0, 0, 0} },
 	rog_tech[] = { {   1, T_CRIT_STRIKE, 1},
 		       {  15, T_CUTTHROAT, 1},
 		       {   0, 0, 0} },
@@ -2327,7 +2325,6 @@ role_tech()
 		case PM_PRIEST:		return (pri_tech);
 		case PM_CHEVALIER:		return (che_tech);
 		case PM_RANGER:		return (ran_tech);
-		case PM_ELPH:		return (elp_tech);
 		case PM_SPACEWARS_FIGHTER:		return (spa_tech);
 		case PM_ROGUE:		return (rog_tech);
 		case PM_SAMURAI:	return (sam_tech);

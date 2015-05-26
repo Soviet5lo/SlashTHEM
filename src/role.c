@@ -446,7 +446,7 @@ const struct Role roles[] = {
 	0, 1, 0, 
 	2, 10, A_INT, SPE_LIGHTNING,        -4 /* From old role.c */
 },
-
+#if 0 /* 5lo: Removed */
 {	{"Elph", 0}, {
 	{"Edhel",       "Elleth"},
 	{"Edhel",       "Elleth"},      /* elf-maid */
@@ -477,7 +477,7 @@ const struct Role roles[] = {
 	{  8, 0,  0, 2,  0, 2 },12,	/* Energy */
 	10, 9, 2, 1, 10, A_INT, SPE_INVISIBILITY,   -4
 },
-
+#endif
 {	{"Firefighter", 0}, {
 	{"Water Boy",         "Water Girl"},
 	{"Fire Cadet",       0},

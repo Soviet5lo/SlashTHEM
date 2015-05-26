@@ -1697,9 +1697,7 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_RANGER:
-		   case PM_ELPH:
 		   case PM_UNDEAD_RANGER:
-		   case PM_UNDEAD_ELPH:
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));

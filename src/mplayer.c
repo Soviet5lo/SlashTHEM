@@ -278,9 +278,6 @@ register boolean special;
 		case PM_RANGER:
 		    if (rn2(2)) weapon = ELVEN_DAGGER;
 		    break;
-		case PM_ELPH:
-		    weapon = ELVEN_DAGGER;
-		    break;
 		case PM_COURIER:
 		    weapon = KNIFE;
 		    break;

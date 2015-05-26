@@ -590,13 +590,6 @@ A("The Palantir of Westernesse",	CRYSTAL_BALL,
 
 /* STEPHEN WHITE'S NEW CODE */
 
-/* Let's reintroduce the elf role. --Amy */
-A("The Palantir of Westernesse",	CRYSTAL_BALL,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL),
-		(SPFX_ESP|SPFX_REGEN|SPFX_HSPDAM), 0,
-	NO_ATTK,	NO_DFNS,	NO_CARY,
-	TAMING,		A_CHAOTIC, PM_ELPH , NON_PM, 8000L ),
-
 A("The Sling of David",                SLING,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK|SPFX_HPHDAM), 0, 0,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,	PHASING, A_NEUTRAL, PM_ROCKER, NON_PM, 4000L ),

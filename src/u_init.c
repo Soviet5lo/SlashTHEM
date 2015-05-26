@@ -573,19 +573,6 @@ static struct trobj Ranger[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Elph[] = {
-#define ELP_BOW			1
-#define ELP_TWO_ARROWS	2
-#define ELP_ZERO_ARROWS	3
-	{ DAGGER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ ELVEN_BOW, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ ELVEN_ARROW, 2, WEAPON_CLASS, 50, UNDEF_BLESS },
-	{ ELVEN_ARROW, 0, WEAPON_CLASS, 30, UNDEF_BLESS },
-	{ CLOAK_OF_DISPLACEMENT, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ CRAM_RATION, 0, FOOD_CLASS, 4, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Rogue[] = {
 #define R_DAGGERS	1
 #define R_DARTS         2
@@ -3106,26 +3093,6 @@ u_init()
 		Ranger[RAN_ZERO_ARROWS].trquan = rn1(10, 30);
 		ini_inv(Ranger);
 		skill_init(Skill_Ran);
-		break;
-	case PM_ELPH:
-		Elph[ELP_TWO_ARROWS].trquan = rn1(10, 50);
-		Elph[ELP_ZERO_ARROWS].trquan = rn1(10, 30);
-		ini_inv(Elph);
-		skill_init(Skill_Elp);
-
-	    /* Elves can recognize all elvish objects */
-	    knows_object(ELVEN_SHORT_SWORD);
-	    knows_object(ELVEN_ARROW);
-	    knows_object(ELVEN_BOW);
-	    knows_object(ELVEN_SPEAR);
-	    knows_object(ELVEN_DAGGER);
-	    knows_object(ELVEN_BROADSWORD);
-	    knows_object(ELVEN_MITHRIL_COAT);
-	    knows_object(ELVEN_LEATHER_HELM);
-	    knows_object(ELVEN_SHIELD);
-	    knows_object(ELVEN_BOOTS);
-	    knows_object(ELVEN_CLOAK);
-
 		break;
 	case PM_TRANSVESTITE:
 		ini_inv(Transvestite);
@@ -5748,7 +5715,6 @@ int otyp;
      case PM_POKEMON:		skills = Skill_Pok; break;
      case PM_PRIEST:		skills = Skill_P; break;
      case PM_RANGER:		skills = Skill_Ran; break;
-     case PM_ELPH:		skills = Skill_Elp; break;
      case PM_ROGUE:		skills = Skill_R; break;
      case PM_SAMURAI:		skills = Skill_S; break;
 #ifdef TOURIST

@@ -1061,9 +1061,6 @@ struct mkroom	*croom;
 		m->id = PM_ELWING;
 #endif
 
-	    if (flags.female && Role_if(PM_ELPH) && m->id == PM_EARENDIL) /* elf role re-enabled by Amy */
-		m->id = PM_ELWING;
-
 	    /* in the Gnome Mines, make the gnomes & dwarves into            
 	       orcs, ogres, & zombies (because gnomes & dwarves are friendly...
 	       the mines would be hella easy otherwise) */
