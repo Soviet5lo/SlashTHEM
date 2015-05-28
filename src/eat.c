@@ -185,25 +185,25 @@ static const struct { const char *txt; int nut; } tintxts[] = {
 	{"sauteed",      95},
 	{"broiled",      80},
 	{"smoked",       50},
-	{"mashed",      90},
+	{"mashed",       90},
 	{"salted",      120},
-	{"roasted",      120},
+	{"roasted",     120},
 	{"cooked",      110},
 	{"beefed",      150},
-	{"tainted",      -500},
-	{"moldy",      0},
+	{"tainted",    -500},
+	{"moldy",         0},
 	{"terrible",      5},
 	/* added even more types, including some that actually give good nutrition --Amy */
-	{"peppered",      100},
-	{"spicy",      105},
-	{"cheesy", 20},
-	{"gourmand grade",      200},
-	{"army grade", 30},
-	{"tasty", 300},
-	{"toasted", 320},
-	{"ice-cold", 350},
-	{"icy", 340},
-	{"delicious", 400},
+	{"peppered",    100},
+	{"spicy",       105},
+	{"cheesy",       20},
+	{"gourmand grade", 200},
+	{"army grade",   30},
+	{"tasty",       300},
+	{"toasted",     320},
+	{"ice-cold",    350},
+	{"icy",         340},
+	{"delicious",   400},
 	{"", 0}
 };
 #define TTSZ	SIZE(tintxts)
@@ -1857,8 +1857,8 @@ opentin()		/* called during each move whilst opening a tin */
 		goto use_me;
 	    }
 	    r = tin.tin->cursed ? ROTTEN_TIN :	/* always rotten if cursed */
-		    (Role_if(PM_CHEF)) ? rn2(TTSZ-1) : /* Chefs will always make varied tins */
-		    (tin.tin->spe == -1) ? HOMEMADE_TIN :  /* player made it */
+		    /* 5lo: Chefs will always create varied tins */
+		    (tin.tin->spe == -1 && !Role_if(PM_CHEF)) ? HOMEMADE_TIN :  /* player made it */
 			rn2(TTSZ-1);		/* else take your pick */
 	    if (r == ROTTEN_TIN && (tin.tin->corpsenm == PM_LIZARD || tin.tin->corpsenm == PM_LIZARD_MAN || tin.tin->corpsenm == PM_CAVE_LIZARD || tin.tin->corpsenm == PM_CHAOS_LIZARD || tin.tin->corpsenm == PM_LIZARD_EEL || tin.tin->corpsenm == PM_EEL_LIZARD || tin.tin->corpsenm == PM_SQUIRREL || tin.tin->corpsenm == PM_IGUANA || tin.tin->corpsenm == PM_GECKO || tin.tin->corpsenm == PM_GIANT_GECKO || tin.tin->corpsenm == PM_BIG_IGUANA || tin.tin->corpsenm == PM_HUGE_LIZARD || tin.tin->corpsenm == PM_KARMIC_LIZARD || tin.tin->corpsenm == PM_FIRE_LIZARD || tin.tin->corpsenm == PM_LIGHTNING_LIZARD || tin.tin->corpsenm == PM_ICE_LIZARD || tin.tin->corpsenm == PM_GIANT_LIZARD || tin.tin->corpsenm == PM_ANTI_STONE_LIZARD || tin.tin->corpsenm == PM_HELPFUL_SQUIRREL || tin.tin->corpsenm == PM_RHAUMBUSUN || tin.tin->corpsenm == PM_BIG_RHAUMBUSUN || 
 			tin.tin->corpsenm == PM_LICHEN))
