@@ -249,6 +249,9 @@ register boolean special;
 		case PM_CHEVALIER:
 		    weapon = TRIDENT;
 		    break;
+		case PM_CHEF:
+		    weapon = KNIFE;
+		    break;
 		case PM_UNDERTAKER:
 		    weapon = SCALPEL;
 		    break;
@@ -277,9 +280,6 @@ register boolean special;
 		    break;
 		case PM_RANGER:
 		    if (rn2(2)) weapon = ELVEN_DAGGER;
-		    break;
-		case PM_ELPH:
-		    weapon = ELVEN_DAGGER;
 		    break;
 		case PM_COURIER:
 		    weapon = KNIFE;

@@ -350,6 +350,7 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_CAVEMAN:
 	    case PM_UNDEAD_CAVEWOMAN:
 	    case PM_UNDEAD_CHEVALIER:
+	    case PM_UNDEAD_CHEF:
 	    case PM_UNDEAD_COURIER:
 	    case PM_UNDEAD_SPACEWARS_FIGHTER:
 	    case PM_UNDEAD_ZYBORG:
@@ -382,7 +383,6 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_PRIEST:
 	    case PM_UNDEAD_PRIESTESS:
 	    case PM_UNDEAD_RANGER:
-	    case PM_UNDEAD_ELPH:
 	    case PM_UNDEAD_ROGUE:
 	    case PM_UNDEAD_SAMURAI:
 	    case PM_UNDEAD_TOURIST:

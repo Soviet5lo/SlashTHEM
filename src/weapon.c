@@ -2070,7 +2070,7 @@ struct obj *weapon;
 
 	/* damage bonus for using racial equipment */
 
-	if ((Race_if(PM_ELF) || Role_if(PM_ELPH)) && weapon && (weapon->otyp == ELVEN_DAGGER || weapon->otyp == ELVEN_BOW || weapon->otyp == ELVEN_ARROW || weapon->otyp == ELVEN_SPEAR || weapon->otyp == ELVEN_SHORT_SWORD || weapon->otyp == ELVEN_BROADSWORD) ) bonus += 1;
+	if (Race_if(PM_ELF)&& weapon && (weapon->otyp == ELVEN_DAGGER || weapon->otyp == ELVEN_BOW || weapon->otyp == ELVEN_ARROW || weapon->otyp == ELVEN_SPEAR || weapon->otyp == ELVEN_SHORT_SWORD || weapon->otyp == ELVEN_BROADSWORD) ) bonus += 1;
 	if (Race_if(PM_DROW) && weapon && (weapon->otyp == DARK_ELVEN_DAGGER || weapon->otyp == DARK_ELVEN_ARROW || weapon->otyp == DARK_ELVEN_BOW || weapon->otyp == DARK_ELVEN_SHORT_SWORD) ) bonus += 1;
 	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLT) || Role_if(PM_LUNATIC))&& weapon && (weapon->otyp == ORCISH_DAGGER || weapon->otyp == ORCISH_BOW || weapon->otyp == ORCISH_ARROW || weapon->otyp == ORCISH_SPEAR || weapon->otyp == ORCISH_SHORT_SWORD ) ) bonus += 1;
 	if (Race_if(PM_DWARF) && weapon && (weapon->otyp == DWARVISH_SHORT_SWORD || weapon->otyp == DWARVISH_SPEAR) ) bonus += 1;

@@ -49,6 +49,10 @@ const struct innate {
 		     {	15, &(HWarning), "sensitive", "careless" },
 		     {	 0, 0, 0, 0 } },
 
+	chf_abil[] = { { 	7, &(HPoison_resistance), "healthy", "less healthy" },
+		     {	15, &(HFire_resistance), "cool", "warmer" },
+		     {	 0, 0, 0, 0 } },
+
 #ifdef CONVICT
 	con_abil[] = { {   1, &(HSick_resistance), "", "" },
 	         {	 7, &(HPoison_resistance), "healthy", "less healthy" },
@@ -217,11 +221,6 @@ const struct innate {
 		     {	15, &(HSee_invisible), "your vision sharpen", "your vision blur" },
 		     {	 0, 0, 0, 0 } },
 
-	elp_abil[] = { {   1, &(HSearching), "", "" },
-		     {	4, &(HSleep_resistance), "awake", "tired" },
-		     {	 7, &(HStealth), "stealthy", "noisy" },
-		     {	15, &(HSee_invisible), "your vision sharpen", "your vision blur" },
-		     {	 0, 0, 0, 0 } },
 	rog_abil[] = { {	 1, &(HStealth), "", ""  },
 		     {  10, &(HSearching), "perceptive", "unaware" },
 		     {	 0, 0, 0, 0 } },
@@ -860,6 +859,7 @@ int oldlevel, newlevel;
 	case PM_COURIER:      abil = cou_abil;	break;
 	case PM_BARD:           abil = brd_abil;	break;
 	case PM_CAVEMAN:        abil = cav_abil;	break;
+	case PM_CHEF:        abil = chf_abil;	break;
 #ifdef CONVICT
 	case PM_CONVICT:        abil = con_abil;	break;
 #endif	/* CONVICT */
@@ -892,7 +892,6 @@ int oldlevel, newlevel;
 	case PM_LUNATIC:         abil = lun_abil;	break;
 	case PM_PRIEST:         abil = pri_abil;	break;
 	case PM_RANGER:         abil = ran_abil;	break;
-	case PM_ELPH:         abil = elp_abil;	break;
 	case PM_LOCKSMITH:         abil = loc_abil;	break;
 	case PM_ROGUE:          abil = rog_abil;	break;
 	case PM_SAMURAI:        abil = sam_abil;	break;

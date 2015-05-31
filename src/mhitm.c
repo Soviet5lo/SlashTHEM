@@ -668,10 +668,6 @@ struct monst *magr, *mdef;
 	case PM_RANGER:
 		multishot++;
 		break;
-	case PM_ELPH:
-		multishot++;
-		if (obj->otyp == ELVEN_ARROW && mwep && mwep->otyp == ELVEN_BOW) multishot++;
-		break;
 	case PM_ROGUE:
 		if (skill == P_DAGGER) multishot++;
 		break;

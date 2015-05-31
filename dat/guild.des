@@ -65,7 +65,6 @@ MONSTER: '@', "zyborg", random, hostile
 MONSTER: '@', "rocker", random, hostile
 MONSTER: '@', "acid mage", random, hostile
 MONSTER: '@', "spacewars fighter", random, hostile
-MONSTER: '@', "elph", random, hostile
   
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, up

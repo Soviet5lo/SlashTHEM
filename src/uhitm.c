@@ -1145,18 +1145,6 @@ int thrown;
 				tmp++;
 				}
 			    } /*else */
-				if (Role_if(PM_ELPH)) {
-				if (obj->otyp == ELVEN_ARROW &&
-					launcher->otyp == ELVEN_BOW) {
-				tmp++;
-				    /* WAC Extra damage if in special ability*/
-				    if (tech_inuse(T_FLURRY)) tmp += 2;
-				} else if (objects[obj->otyp].oc_skill == P_BOW
-					&& tech_inuse(T_FLURRY)) {
-				tmp++;
-				}
-			    } /*else */
-
 			      if (Role_if(PM_ROCKER)) {
 				if ((obj->otyp == SLING) && tech_inuse(T_FLURRY)) tmp += 2;
 				tmp++;
