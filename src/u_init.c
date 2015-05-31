@@ -2530,6 +2530,7 @@ void
 u_init()
 {
 	register int i, temp, racebounus, rolebounus, alignbounus, genderbounus, maxbounus;
+#if 0 /* 5lo: Disabled due to the massive amount of crashes it causes */
 	struct permonst* shamblerm = &mons[PM_NITROHACK_HORROR];
 	struct permonst* shamblerma = &mons[PM_SPEEDHACK_HORROR];
 	struct permonst* shamblerl = &mons[PM_DNETHACK_HORROR];
@@ -2567,7 +2568,7 @@ u_init()
 	struct permonst* pokshamblersp = &mons[PM_FORETOSU];	
 	struct permonst* pokshamblerxts = &mons[PM_CHARCOLT];
 	struct permonst* pokshamblerxtsp = &mons[PM_MILLENUM];
-
+#endif
 	struct attack* attkptr;
 	int no_extra_food = FALSE;
 
@@ -3641,7 +3642,7 @@ u_init()
 		/* only get here when didn't boost strength or constitution */
 		break;
 	}
-
+#if 0 /* 5lo: This does not work as intended and causes massive instability issues */
 	/* what a horrible night to have a curse */
 	/*shambler->mlevel += rnd(12)-3;*/				/* shuffle level */
 	shambler->mmove = rn2(10)+9;				/* slow to very fast */
@@ -5685,7 +5686,6 @@ u_init()
 	pokshamblerma->mflags2 &= ~M2_PNAME;				/* not a proper name */
 
 
-
 	if (!rn2(10)) {
 	attkptr = &deathraylord->mattk[4]; /* Yeenoghu gets finger of death */
 	attkptr->aatyp = AT_MAGC; /* well, at least one out of ten games he does */
@@ -5703,8 +5703,8 @@ u_init()
 		while (attkptr->adtyp == AD_ENDS || attkptr->adtyp == AD_SPC2 || attkptr->adtyp == AD_WERE) {
 			attkptr->adtyp = rn2(AD_ENDS);
 		}
-
 	}
+#endif
 	return;
 }
 

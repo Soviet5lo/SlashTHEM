@@ -391,7 +391,7 @@ unsigned int *stuckid, *steedid;	/* STEED */
 	cliparound(u.ux, u.uy);
 #endif
 	/* reload random monster*/
-
+#if 0
 	mread(fd, (genericptr_t) &mons[PM_NITROHACK_HORROR], sizeof(struct permonst));
 	mread(fd, (genericptr_t) &mons[PM_SPEEDHACK_HORROR], sizeof(struct permonst));
 	mread(fd, (genericptr_t) &mons[PM_DNETHACK_HORROR], sizeof(struct permonst));
@@ -429,7 +429,7 @@ unsigned int *stuckid, *steedid;	/* STEED */
 	mread(fd, (genericptr_t) &mons[PM_FORETOSU], sizeof(struct permonst));
 	mread(fd, (genericptr_t) &mons[PM_CHARCOLT], sizeof(struct permonst));
 	mread(fd, (genericptr_t) &mons[PM_MILLENUM], sizeof(struct permonst));
-
+#endif
 	if(u.uhp <= 0 && (!Upolyd || u.mh <= 0)) {
 	    u.ux = u.uy = 0;	/* affects pline() [hence You()] */
 	    You("were not healthy enough to survive restoration.");

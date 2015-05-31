@@ -357,7 +357,7 @@ register int fd, mode;
 	bwrite(fd, (genericptr_t) &u, sizeof(struct you));
 
 	/* save random monsters*/
-
+#if 0
 	bwrite(fd, (genericptr_t) &mons[PM_NITROHACK_HORROR], sizeof(struct permonst));
 	bwrite(fd, (genericptr_t) &mons[PM_SPEEDHACK_HORROR], sizeof(struct permonst));
 	bwrite(fd, (genericptr_t) &mons[PM_DNETHACK_HORROR], sizeof(struct permonst));
@@ -395,7 +395,7 @@ register int fd, mode;
 	bwrite(fd, (genericptr_t) &mons[PM_FORETOSU], sizeof(struct permonst));
 	bwrite(fd, (genericptr_t) &mons[PM_CHARCOLT], sizeof(struct permonst));
 	bwrite(fd, (genericptr_t) &mons[PM_MILLENUM], sizeof(struct permonst));
-
+#endif
 	/* must come before migrating_objs and migrating_mons are freed */
 	save_timers(fd, mode, RANGE_GLOBAL);
 	save_light_sources(fd, mode, RANGE_GLOBAL);
