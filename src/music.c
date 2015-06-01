@@ -41,6 +41,8 @@ STATIC_DCL void FDECL(tame_song,(int));
 STATIC_DCL void FDECL(sleep_song,(int));
 STATIC_DCL void FDECL(scary_song,(int));
 STATIC_DCL void FDECL(confusion_song,(int));
+STATIC_DCL void FDECL(cancel_song,(int));
+STATIC_DCL void FDECL(rally_song,(int));
 STATIC_DCL unsigned char FDECL(songs_menu,(struct obj *));
 STATIC_PTR int NDECL(play_song);
 STATIC_DCL void FDECL(slowness_song,(int));
@@ -82,7 +84,7 @@ struct songspell {
 #define SNG_PASSTUNE        97
 /* same order and indices as below */
 #define SNG_SLEEP		1
-#define SNG_CONFUSION		2
+#define SNG_CONFUSION	2
 #define SNG_SLOW		3
 #define SNG_FEAR		4
 #define SNG_TAME		5
@@ -91,8 +93,10 @@ struct songspell {
 #define SNG_LAST_ENCHANTMENT	SNG_COURAGE	/* last song based on an enchantment spell */
 #define SNG_HASTE		7
 #define SNG_HEAL		8
-#define SNG_LAST		SNG_HEAL
-#define SNG_IMPROVISE_CHAR	'i'
+#define SNG_CNCL		9
+#define SNG_RLLY	   10
+#define SNG_LAST		SNG_RLLY
+#define SNG_IMPROVISE_CHAR	'x'
 #define SNG_NOTES_CHAR		'n'
 #define SNG_PASSTUNE_CHAR	'p'
 
@@ -100,15 +104,17 @@ struct songspell {
    SNG_LAST_ENCHANTMENT */
 NEARDATA const struct songspell songs[] = {
 	/* sp_id		name	    level turns instr1		instr2 */
-	{ 0,			"None",		0, 1,	0,		0 },
-	{ SPE_SLEEP,		"Lullaby",	1, 4,	WOODEN_HARP,	WOODEN_FLUTE },
-	{ SPE_CONFUSE_MONSTER,	"Cacophony",	2, 5,	TOOLED_HORN,	LEATHER_DRUM },
-	{ SPE_SLOW_MONSTER,	"Drowsiness",	2, 5,	WOODEN_FLUTE, 	WOODEN_HARP },
-	{ SPE_CAUSE_FEAR,	"Despair",	3, 6,	LEATHER_DRUM, 	TOOLED_HORN },
-	{ SPE_CHARM_MONSTER,	"Friendship",	3, 6,	WOODEN_FLUTE, 	WOODEN_HARP },
-	{ SPE_CAUSE_FEAR,	"Inspire Courage",3,6,	LEATHER_DRUM, 	BUGLE },
-	{ SPE_HASTE_SELF,	"Charge", 2, 5, TOOLED_HORN,	LEATHER_DRUM },
-	{ SPE_EXTRA_HEALING,	"Meditative Healing", 1,4,WOODEN_HARP,WOODEN_FLUTE}
+	{ 0,				"None",		0, 1,	0,		0 },
+	{ SPE_SLEEP,		"Lullaby",	1, 4,			WOODEN_HARP,	WOODEN_FLUTE },
+	{ SPE_CONFUSE_MONSTER,	"Cacophony",	2, 5,	LEATHER_DRUM,	TOOLED_HORN },
+	{ SPE_SLOW_MONSTER,	"Drowsiness",	2, 5,		WOODEN_FLUTE,	WOODEN_HARP },
+	{ SPE_CAUSE_FEAR,	"Despair",	3, 6,			LEATHER_DRUM,	TOOLED_HORN },
+	{ SPE_CHARM_MONSTER,"Friendship",	3, 6,		WOODEN_FLUTE,	WOODEN_HARP },
+	{ SPE_CAUSE_FEAR,	"Inspire Courage",3,6,		LEATHER_DRUM,	BUGLE },
+	{ SPE_HASTE_SELF,	"Charge", 2, 5, 			LEATHER_DRUM,	BUGLE },
+	{ SPE_EXTRA_HEALING,"Meditative Healing", 1,4,	WOODEN_HARP,	WOODEN_FLUTE },
+	{ SPE_CANCELLATION,	"Disruption", 2,5,			BUGLE,			TOOLED_HORN },
+	{ SPE_TELEPORT_AWAY,"Rally",	1, 1,			TOOLED_HORN,	BUGLE }
 /*	random ideas that weren't implemented -- based in spells from other schools
 	{ SPE_CURE_BLINDNESS,	"Cause Blindness"
 	{ SPE_CURE_SICKNESS,	"Cause Sickness"
@@ -272,7 +278,9 @@ int know_spell;
 		chance = (chance*3)/2;
 
 	/* not easy to play 'peaceful' music when badly injured */
-	if (u.uhp < u.uhpmax * 0.3) chance /= 2;
+	if (u.uhp < u.uhpmax * 0.3 && 
+		(song_id == SNG_SLEEP || song_id == SNG_TAME || song_id == SNG_HASTE || song_id == SNG_HEAL)
+	) chance /= 2;
 
 	/* it's also difficult to play some instruments while wearing a shield. */
 	if (uarms && (instr->otyp == WOODEN_HARP || instr->otyp == LEATHER_DRUM)) 
@@ -281,7 +289,7 @@ int know_spell;
 	/* but it's easier with the eyes closed */
 	if (Blind) chance += u.ulevel;
 
-	if (instr->oartifact == ART_LYRE_OF_ORPHEUS && (song_id != SNG_SLEEP && song_id != SNG_TAME))
+	if (instr->oartifact == ART_LYRE_OF_ORPHEUS && (song_id != SNG_RLLY && song_id != SNG_HEAL && song_id != SNG_SLEEP && song_id != SNG_TAME))
 		chance /= 2;
 
 	if (chance > 100) chance = 100;
@@ -345,7 +353,7 @@ struct obj *instr;
 				   || instr->otyp == songs[a].instr1 || instr->otyp == songs[a].instr2)) {
 			any.a_int = a+1;
 			if (instr->oartifact == ART_LYRE_OF_ORPHEUS)
-				hardtoplay = (a == SNG_FEAR || a == SNG_COURAGE || a == SNG_CONFUSION || a == SNG_SLOW ? ' ' : '#');
+				hardtoplay = (a == SNG_FEAR || a == SNG_COURAGE || a == SNG_CONFUSION || a == SNG_SLOW || a == SNG_CNCL ? ' ' : '#');
 			else
 				hardtoplay = (songs[a].instr1 == instr->otyp ? ' ' : '#');
 					
@@ -407,7 +415,7 @@ struct obj * instr;
 
 	/* Defense level */
 	dlev = (int)mtmp->m_lev*2;
-	if (is_golem(mtmp->data)) dlev = 100;
+	if (nonliving(mtmp->data) && mindless(mtmp->data)) dlev = 100;
 	dlev0 = dlev;
 
 	/* "peaceful" songs */
@@ -452,9 +460,9 @@ struct obj * instr;
 			dlev *= 2;
 			if(song == SNG_HEAL) dlev *= -1;
 			else if (song_delay == songs[song].turns && showmsg)
-				msg = "%s is too hurt to care about your song.";
+				msg = "%s is too hurt to listen closely to your song.";
 		}
-	} else if (song == SNG_FEAR || song == SNG_CONFUSION) {
+	} else if (song == SNG_FEAR || song == SNG_CONFUSION || song == SNG_CNCL) {
 		int canseeu;
 
 		// the Lyre isn't so good to scare people or to sow confusion
@@ -468,7 +476,7 @@ struct obj * instr;
 		// but its harder to confuse it if it can see you
 		if (song == SNG_CONFUSION && canseeu) dlev += dlev0/5;
 
-	} else if (song == SNG_COURAGE) {
+	} else if (song == SNG_COURAGE || song == SNG_RLLY) {
 		/* when badly injured, it's easier to encourage others */
 		if (u.uhp < u.uhpmax * 0.6) alev *= 2;
 		if (u.uhp < u.uhpmax * 0.3) alev *= 3;
@@ -481,6 +489,8 @@ struct obj * instr;
     if (dlev < 1) dlev = is_mplayer(mtmp->data) ? u.ulevel : 1;
     if (song_penalty) alev /= 2;
 
+	alev += rnd(20);
+	
     if (wizard)
 	    pline("[%s:%i/%i]", mon_nam(mtmp), alev, dlev);
 
@@ -528,6 +538,12 @@ play_song()
 		case SNG_TAME:
 			tame_song(distance);
 			break;
+		case SNG_CNCL:
+			cancel_song(distance);
+			break;
+		case SNG_RLLY:
+			rally_song(distance);
+			break;
 		}
 
 	song_delay--;
@@ -554,7 +570,7 @@ play_song()
 #define mon_affected_by_peace_song(mtmp) \
 	(!mtmp->mtame || \
 	(mtmp->mtame && (P_SKILL(P_MUSICALIZE) < P_SKILLED) && \
-	 mtmp->data->mlet != S_NYMPH &&	 is_elf(mtmp->data)))
+	 mtmp->data->mlet != S_NYMPH &&	!is_elf(mtmp->data)))
 #define mon_affected_by_song(mtmp) \
 	(!mtmp->mtame || \
 	 (mtmp->mtame && (P_SKILL(P_MUSICALIZE) < P_SKILLED)))
@@ -733,7 +749,7 @@ int distance;
 
 	while(mtmp) {
 		if (!DEADMONSTER(mtmp) && mtmp->mtame && distu(mtmp->mx, mtmp->my) < distance &&
-		    resist_song(mtmp, SNG_TAME, song_instr) >= 0) {
+		    resist_song(mtmp, SNG_COURAGE, song_instr) >= 0) {
 			if (EDOG(mtmp)->encouraged < EDOG_ENCOURAGED_MAX)
 				EDOG(mtmp)->encouraged += (P_SKILL(P_MUSICALIZE)-P_UNSKILLED+1) * 6;
 			if (mtmp->mflee)
@@ -772,7 +788,7 @@ int distance;
 	while(mtmp) {
 		if (!DEADMONSTER(mtmp) && !mtmp->mtame && !mtmp->mconf &&
 		    distu(mtmp->mx, mtmp->my) < distance &&
-		    resist_song(mtmp, SNG_SLOW, song_instr) >= 0) {
+		    resist_song(mtmp, SNG_CONFUSION, song_instr) >= 0) {
 			if (canseemon(mtmp))
 				pline("%s seems confused.", Monnam(mtmp));
 			mtmp->mconf = 1;
@@ -781,6 +797,68 @@ int distance;
 	}
 }
 
+STATIC_OVL void
+cancel_song(distance)
+int distance;
+{
+	register struct monst *mtmp = fmon;
+
+	while(mtmp) {
+		if (!DEADMONSTER(mtmp) && !mtmp->mtame && 
+		    distu(mtmp->mx, mtmp->my) < distance &&
+		    resist_song(mtmp, SNG_CNCL, song_instr) >= 0) {
+			if (canseemon(mtmp))
+				pline("%s seems unable to focus.", Monnam(mtmp));
+			mtmp->mspec_used += min(max(1, P_SKILL(P_MUSICALIZE)-P_UNSKILLED), 255);
+			if(wizard) pline("mspec cooldown: %d", (int)mtmp->mspec_used);
+		}
+		mtmp = mtmp->nmon;
+	}
+}
+
+STATIC_OVL void
+rally_song(distance)
+int distance;
+{
+	register struct monst *mtmp = fmon, *nextmon;
+
+	while(mtmp) {
+		nextmon = mtmp->nmon;
+		if (!DEADMONSTER(mtmp) && mtmp->mtame && 
+		    distu(mtmp->mx, mtmp->my) < distance &&
+		    resist_song(mtmp, SNG_RLLY, song_instr) >= 0) {
+			if (mtmp->mtrapped) {
+			    /* no longer in previous trap (affects mintrap) */
+			    mtmp->mtrapped = 0;
+			    fill_pit(mtmp->mx, mtmp->my);
+			}
+			switch (P_SKILL(P_MUSICALIZE)) {
+			case P_EXPERT:
+				mtmp->mcan = 0;
+				mtmp->mspec_used = 0;
+			case P_SKILLED:
+				if(!mtmp->mcansee && mtmp->mblinded){
+					mtmp->mcansee = 1;
+					mtmp->mblinded = 0;
+				}
+			case P_BASIC:
+				if(!mtmp->mcanmove && mtmp->mfrozen){
+					mtmp->mcanmove = 1;
+					mtmp->mfrozen = 0;
+				}
+				mtmp->mstun = 0;
+				mtmp->mconf = 0;
+			case P_UNSKILLED:
+				mtmp->msleeping = 0;
+				mtmp->mflee = 0;
+				mtmp->mfleetim = 0;
+			}
+			mnexto(mtmp);
+			if (mintrap(mtmp) == 2) change_luck(-1);
+		}
+		mtmp = nextmon;
+	}
+}
 
 
 /*
@@ -825,6 +903,7 @@ int distance;
 	while(mtmp) {
 		if (!DEADMONSTER(mtmp) && distu(mtmp->mx, mtmp->my) < distance &&
 			mon_affected_by_peace_song(mtmp) &&
+			!resists_sleep(mtmp) &&
 		    resist_song(mtmp, SNG_SLEEP, song_instr) >= 0) {
 			/* pets, if affected, sleep less time */
 			mtmp->mfrozen = min( mtmp->mfrozen +
@@ -1352,9 +1431,9 @@ struct obj *instr;
     /* Another possibility would be playing only scary music
        while being thus affected. */
     if (Confusion > 0 || Stunned || Hallucination) {
-	You_cant("play music while %s!", Confusion > 0 ? "confused" : 
-		 (Stunned ? "stunned" : "stoned"));
-	return 0;
+		You_cant("play music while %s!", Confusion > 0 ? "confused" : 
+			 (Stunned ? "stunned" : "stoned"));
+		return 0;
     }
 
     if (uarms && (instr->otyp == WOODEN_HARP || instr->otyp == LEATHER_DRUM))
