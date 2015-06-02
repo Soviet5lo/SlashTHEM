@@ -58,7 +58,7 @@ register struct attack *mattk;
 	} /*else*/ switch (mattk->aatyp) {
 		case AT_CLAW:
 			pline("%s claws you!", Monnam(mtmp));
-
+#if 0 /* 5lo: Removed */
 			if (flags.female && !rn2(20) ) {
 				pline("%s rips into your breast with maniacal fervor!", Monnam(mtmp));
 
@@ -66,11 +66,12 @@ register struct attack *mattk;
 				if (monsterlev <= 0) monsterlev = 1;
 
 				losehp(d(2,monsterlev), "cowardly attack on her breasts", KILLED_BY_AN);
-
+#endif
 			}
 			break;
 		case AT_BITE:
 			pline("%s bites you!", Monnam(mtmp));
+#if 0 /* 5lo: Removed */
 			armproX = magic_negation(&youmonst);
 			/* 5lo: This happens way too often.  Decreased chances. */
 			if (!rn2(200) && ((rn2(3) >= armproX) || !rn2(50)) ) {
@@ -79,11 +80,12 @@ register struct attack *mattk;
 		      losexp("life drainage", FALSE);
 			}
 			}
+#endif
 			break;
 		case AT_KICK:
 			pline("%s kicks you%c", Monnam(mtmp),
 				    thick_skinned(youmonst.data) ? '.' : '!');
-
+#if 0 /* 5lo: removed */
 			if (!flags.female && !rn2(20) ) {
 				pline("%s's kick painfully slams into your nuts!", Monnam(mtmp));
 
@@ -279,9 +281,11 @@ register struct attack *mattk;
 				pline("%s does a round-house and painfully hits you with %s combat boots!", Monnam(mtmp), mhis(mtmp) );
 				losehp(d(4,monsterlev), "kung-fu attack", KILLED_BY_AN);
 			}
+#endif
 			break;
 		case AT_STNG:
 			pline("%s stings you!", Monnam(mtmp));
+#if 0 /* 5lo: Removed */
 			if (!rn2(250)) {
 			pline("You are bleeding out from your stinging injury!");
 			monsterlev = ((mtmp->m_lev) + 1);
@@ -291,10 +295,11 @@ register struct attack *mattk;
 			else u.uhpmax -= monsterlev;
 
 			}
+#endif
 			break;
 		case AT_BUTT:
 			pline("%s butts you!", Monnam(mtmp));
-
+#if 0 /* 5lo: Removed */
 			if (multi >= 0 && !rn2(33)) {
 			    if (Free_action) {
 				You("feel a slight shaking.");            
@@ -308,9 +313,11 @@ register struct attack *mattk;
 				exercise(A_DEX, FALSE);
 			    }
 			}
+#endif
 			break;
 		case AT_SCRA:
 			pline("%s scratches you!", Monnam(mtmp));
+#if 0 /* 5lo: Removed */
 			if (!rn2(100)) {
 			pline("One of your arteries bursts open! You suffer from blood loss!");
 			monsterlev = ((mtmp->m_lev) + 1);
@@ -321,24 +328,29 @@ register struct attack *mattk;
 			else u.uhpmax -= monsterlev/2;
 
 			}
+#endif
 			break;
 		case AT_LASH:
 			pline("%s lashes you!", Monnam(mtmp));
+#if 0 /* 5lo: Removed */
 			if (!rn2(30)) {
 			monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("Your head spins in confusion.");
 			make_confused(HConfusion + monsterlev, FALSE);
 			}
+#endif
 			break;
 		case AT_TRAM:
 			pline("%s tramples over you!", Monnam(mtmp));
+#if 0 /* 5lo: Removed */
 			if (!rn2(20)) {
 			monsterlev = ((mtmp->m_lev) + 1);
 				if (monsterlev <= 0) monsterlev = 1;
 				pline("You can't think straight as your every muscle is aching!");
 			make_stunned(HStun + monsterlev, FALSE);
 			}
+#endif
 			break;
 		case AT_TUCH:
 			pline("%s touches you!", Monnam(mtmp));
@@ -1072,6 +1084,7 @@ mattacku(mtmp)
 				    hittmp = hitval(otmp, &youmonst);
 				    tmp += hittmp;
 				    mswings(mtmp, otmp);
+#if 0 /* 5lo: Removed */
 					if (!rn2(3) && otmp->otyp == WEDGED_LITTLE_GIRL_SANDAL) {
 					pline("The massive wedge heel thunders painfully on your head!");
 					losehp(rnd(4),"a wedged little-girl sandal",KILLED_BY);
@@ -1210,7 +1223,7 @@ mattacku(mtmp)
 					}
 
 /* The gnome swings her spiked battle boot! Ouch! The spiked boot soles bore themselves into your skin! The spikes were poisoned! The poison was deadly... Do you want your possessions identified? */
-
+#endif
 				}
 				if(tmp > (j = dieroll = rnd(20+i)))
 				    sum[i] = hitmu(mtmp, mattk);
@@ -2247,7 +2260,7 @@ dopois:
 		    }
 		    break;
 		}
-
+#if 0 /* 5lo: Removed */
 		if (!rn2(25)) { /* Nymphs want to have some fun! :-) --Amy */
 
 			if(could_seduceX(mtmp, &youmonst, mattk) == 1 && !mtmp->mcan)
@@ -2255,7 +2268,7 @@ dopois:
 		/* What kind of male person wouldn't want to be seduced by such a wonderfully lovely, sweet lady? */
 
 		}
-
+#endif
 		buf[0] = '\0';
 		if (  (rnd(100) > ACURR(A_CHA)) && ((mtmp->female) && !flags.female && rn2(5) ) || ((!mtmp->female) && flags.female && rn2(3) ) || 
 			((mtmp->female) && flags.female && rn2(2) ) || ((!mtmp->female) && !flags.female && rn2(2) ) )
