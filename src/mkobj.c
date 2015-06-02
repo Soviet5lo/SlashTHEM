@@ -630,11 +630,10 @@ boolean artif;
 #endif
 		case TINNING_KIT:
 		case MAGIC_MARKER:
-			otmp->spe = rnd(100);
-			blessorcurse(otmp, 5);
+			otmp->spe = rn1(70,30);
 					break;
 		case CAN_OF_GREASE:
-			otmp->spe = rnd(35);
+			otmp->spe = rn1(25,10);
 					blessorcurse(otmp, 10);
 					break;
 		/* KMH, balance patch -- removed to prevent abuse
@@ -652,10 +651,10 @@ boolean artif;
 					break;
 		case HORN_OF_PLENTY:
 		case BAG_OF_TRICKS:
-			otmp->spe = rnd(30);
-			blessorcurse(otmp, 5);
+			otmp->spe = rn1(20,10);
+			blessorcurse(otmp,5);
 					break;
- 		case CHEMISTRY_SET:	otmp->spe = rnd(20);
+ 		case CHEMISTRY_SET:	otmp->spe = rn1(10,10);
  					blessorcurse(otmp,4);
  					break;
 		case FIGURINE:	{	int tryct2 = 0;
@@ -677,7 +676,7 @@ boolean artif;
 		/* KMH, balance patch -- removed
 		case PAN_PIPE_OF_SUMMONING:
 		case PAN_PIPE_OF_THE_SEWERS: */
-			otmp->spe = rnd(15);
+			otmp->spe = rn1(5,10);
 			blessorcurse(otmp, 10);
 					break;
 		default: /* all the other tools --Amy */
