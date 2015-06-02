@@ -312,7 +312,6 @@ char **argv;
 				":dat:lich.des",
 				":dat:mall-1.des",
 				":dat:mall-2.des",
-				":dat:mall-3.des",
 				":dat:medusa.des",
 				":dat:mtemple.des",
 				":dat:mines.des",
