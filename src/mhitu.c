@@ -66,8 +66,8 @@ register struct attack *mattk;
 				if (monsterlev <= 0) monsterlev = 1;
 
 				losehp(d(2,monsterlev), "cowardly attack on her breasts", KILLED_BY_AN);
-#endif
 			}
+#endif
 			break;
 		case AT_BITE:
 			pline("%s bites you!", Monnam(mtmp));
