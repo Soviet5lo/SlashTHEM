@@ -729,7 +729,7 @@ boolean artif;
 		break;
 	case SPBOOK_CLASS:
 		/* WAC charged books are easier to read */
-		if (otmp->otyp != SPE_BOOK_OF_THE_DEAD) otmp->spe = rnd(5); 
+		if (otmp->otyp != SPE_BOOK_OF_THE_DEAD) otmp->spe = rn1(3,2); 
 		blessorcurse(otmp, 17);
 		break;
 /* -----------============STEPHEN WHITE'S NEW CODE============----------- */           
@@ -767,27 +767,22 @@ boolean artif;
 /* -----------============STEPHEN WHITE'S NEW CODE============----------- */           
 	case WAND_CLASS:
 		if(otmp->otyp == WAN_WISHING) {                 
-			if (rn2(50)) otmp->spe = rnd(2);
-			else otmp->spe = rnd(3); /* if you get really lucky... --Amy */
+			otmp->spe = rnd(3);
 #ifdef INVISIBLE_OBJECTS
 			if (Is_stronghold(&u.uz)) otmp->oinvis = 1;
 #endif
 			otmp->recharged = 0;
 			if(!rn2(2)) otmp->recharged = 1;
 		} else if(otmp->otyp == WAN_ACQUIREMENT) {                 
-			if (rn2(20)) otmp->spe = rnd(5);
-			else otmp->spe = rnd(8); /* sometimes you may get lucky --Amy */
+			otmp->spe = rnd(8);
 			otmp->recharged = 0;
-			if(!rn2(3)) otmp->recharged = 1;
-
-		} else if (rn2(10)) otmp->spe = rnd( (objects[otmp->otyp].oc_dir == NODIR) ? 15 : 8);
-			else otmp->spe = rnd( (objects[otmp->otyp].oc_dir == NODIR) ? 30 : 16); /* low chance for extra charges --Amy */
-#if 0 /* 5lo: No more useless wand spawning */
-		if (rn2(2)) otmp->spe -= rnd(3); /* allow random useless wands to spawn --Amy */
-#endif
+			if(!rn2(4)) otmp->recharged = 1;
+		} else otmp->spe = rn1(5,
+			(objects[otmp->otyp].oc_dir == NODIR) ? 15 : 8);
 		blessorcurse(otmp, 17);
+		otmp->recharged = 0; /* used to control recharging */
+		break;
 		if (otmp->otyp != WAN_WISHING && otmp->otyp != WAN_ACQUIREMENT) otmp->recharged = 0; /* used to control recharging */
-		if (!rn2(10)) otmp->recharged = rnd(7); /* allow recharged wands to spawn --Amy */
 		break;
 	case RING_CLASS:
 		if(objects[otmp->otyp].oc_charged) {
