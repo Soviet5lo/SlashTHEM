@@ -348,7 +348,7 @@ struct rm {
 #ifdef DISPLAY_LAYERS
 	Bitfield(mem_bg,6);	/* Remembered background */
 	Bitfield(mem_trap,5);	/* Remembered trap */
-	Bitfield(mem_obj,10);	/* Remembered object/corpse */
+	Bitfield(mem_obj,18);	/* Remembered object/corpse */
 	Bitfield(mem_corpse,1);	/* Set if mem_obj refers to a corpse */
 	Bitfield(mem_invis,1);	/* Set if invisible monster remembered */
 	Bitfield(mem_spare,9);
