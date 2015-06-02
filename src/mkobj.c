@@ -451,7 +451,7 @@ boolean artif;
 		if (otmp->otyp == SHOTGUN_SHELL) otmp->quan += rnd(20);
 		if (otmp->otyp == ROCKET) otmp->quan += rnd(5);
 		if (otmp->otyp == CROSSBOW_BOLT) otmp->quan += rnd(10);
-		if (otmp->otyp == SHURIKEN) otmp->quan += rnd(100);
+		if (otmp->otyp == SHURIKEN) otmp->quan += rnd(20);
 		if(!rn2(8)) {
 			otmp->spe = rne(2);
 			if (rn2(2)) otmp->blessed = rn2(2);
