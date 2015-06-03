@@ -1540,8 +1540,8 @@ domove()
 		/* new displacer beast thingie -- by [Tom] */
 		/* sometimes, instead of attacking, you displace it. */
 		/* Good joke, huh? */
-		if ( (mtmp->data == &mons[PM_DISPLACER_BEAST] || mtmp->data->mlet == S_GRUE) && !rn2(2))
-		    displacer = TRUE; /* grues can also displace the player to make them more annoying --Amy */
+		if (mtmp->data == &mons[PM_DISPLACER_BEAST] && !rn2(2))
+		    displacer = TRUE;
 		else
 		/* try to attack; note that it might evade */
 		/* also, we don't attack tame when _safepet_ */
