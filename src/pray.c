@@ -977,7 +977,7 @@ pleased(g_align)
     /* note: can't get pat_on_head unless all troubles have just been
        fixed or there were no troubles to begin with; hallucination
        won't be in effect so special handling for it is superfluous */
-    if(pat_on_head && !rn2(3) )
+    if(pat_on_head)
 	switch(rn2((Luck + 6)>>1)) {
 	case 0:	break;
 	case 1:
@@ -1794,7 +1794,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    pline("%s seems %s.", u_gname(), Hallucination ?
 			  "cosmic (not a new fact)" : "mollified");
 
-		    if ((int)u.uluck < 0) change_luck(1); /* used to be set to 0, gotta make it harder to get your luck back --Amy */
+		    if ((int)u.uluck < 0) u.uluck = 0;
 		}
 	    } else { /* not satisfied yet */
 		if (Hallucination)
@@ -1822,10 +1822,10 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 			pline("Overall, there is a smell of fried onions.");
 		    else
 			You("have a feeling of reconciliation.");
-		    if ((int)u.uluck < 0) /*u.uluck = 0;*/change_luck(1);
+		    if ((int)u.uluck < 0) u.uluck = 0;
 		}
 	    }
-	} else if (!rn2(3)) {
+	} else {
 	    int nartifacts = nartifact_exist();
 
 	    /* you were already in pretty good standing */
@@ -1868,7 +1868,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    return(1);
 	    }
 
-	    if (!rn2(3)) { change_luck((value * LUCKMAX) / (MAXVALUE * 2));
+	    change_luck((value * LUCKMAX) / (MAXVALUE * 2));
 	    if ((int)u.uluck < 0) u.uluck = 0;
 	    if (u.uluck != saved_luck) {
 		if (Blind)
@@ -1877,7 +1877,6 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    "see crabgrass at your %s.  A funny thing in a dungeon." :
 		    "glimpse a four-leaf clover at your %s.",
 		    makeplural(body_part(FOOT)));
-			}
 	    }
 	}
     }
@@ -2022,7 +2021,7 @@ prayer_done()		/* M. Stephenson (1.0.3b) */
 	pline("Since you are in Gehennom, %s won't help you.",
 	      align_gname(alignment));
 	/* haltingly aligned is least likely to anger */
-	if (u.ualign.record <= 0 || rnl(u.ualign.record) || rn2(2) )
+	if (u.ualign.record <= 0 || rnl(u.ualign.record))
 	    angrygods(u.ualign.type);
 	return(0);
     }
