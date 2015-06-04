@@ -957,6 +957,43 @@ int thrown;
 
 	    if (is_poisonable(obj) && obj->opoisoned)
 		ispoisoned = TRUE;
+		/* 5lo: Cleaver will actually cleave through monsters.
+		 * Code is from Nethack Fourk, with some slight modification */
+                if (is_axe(obj) && !obj->axeinuse && !u.uswallow &&
+                    obj->oartifact == ART_CLEAVER && rn2(5)) {
+                    /* Axes also hit adjacent enemies */
+                    coord posn1, posn2;
+                    struct monst *ctarg; /* collateral target */
+                    pline("You swing %s in a wide arc.", xname(obj));
+                    obj->axeinuse = 1;
+                    if (u.ux == mon->mx) {
+                        posn1.x = mon->mx + 1;
+                        posn2.x = mon->mx - 1;
+                        posn1.y = mon->my;
+                        posn2.y = mon->my;
+                    } else if (u.uy == mon->my) {
+                        posn1.x = mon->mx;
+                        posn2.x = mon->mx;
+                        posn1.y = mon->my + 1;
+                        posn2.y = mon->my - 1;
+                    } else {
+                        posn1.x = u.ux;
+                        posn1.y = mon->my;
+                        posn2.x = mon->mx;
+                        posn2.y = u.uy;
+                    }
+                    if (isok(posn1.x, posn1.y) &&
+                        (ctarg = m_at(posn1.x, posn1.y)) &&
+                        !ctarg->mtame && !ctarg->mpeaceful) {
+                        hmon(ctarg, obj, thrown);
+                    }
+                    if (isok(posn2.x, posn2.y) &&
+                        (ctarg = m_at(posn2.x, posn2.y)) &&
+                        !ctarg->mtame && !ctarg->mpeaceful) {
+                        hmon(ctarg, obj, thrown);
+                    }
+                    obj->axeinuse = 0;
+                }
 
 	    noeffect = objenchant < canhitmon && !ispoisoned && rn2(3);
 

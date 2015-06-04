@@ -80,6 +80,7 @@ struct obj {
 #define norevive oeroded2
 	Bitfield(oerodeproof,1); /* erodeproof weapon/armor */
 	Bitfield(olocked,1);	/* object is locked */
+#define axeinuse olocked	/* axe collateral damage does not chain */
 #define oarmed olocked
 #define odrained olocked	/* drained corpse */
 	Bitfield(obroken,1);	/* lock has been broken */
