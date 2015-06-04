@@ -288,7 +288,7 @@ A("Straightshot",   BOW,
     
 A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     SPFX_RESTR, 0, 0,
-    PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NONE, PM_BARD, NON_PM, 1000L ),
+    PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NEUTRAL, PM_BARD, NON_PM, 1000L ),
 
 A("Full Metal Jacket",   LEATHER_JACKET, /* Temp name */
     (SPFX_RESTR|SPFX_DEFN|SPFX_PROTEC), (SPFX_HALRES), 0,
@@ -495,7 +495,7 @@ A("Hellfire", CROSSBOW,	/* WAC */
 A("the Pen of the Void",	ATHAME,
 	(SPFX_RESTR|SPFX_ATTK), 0, 0,
 	PHYS(5,0),	NO_DFNS,	NO_CARY,
-	0,	A_NONE, PM_BINDER, NON_PM, 2000L),
+	0,	A_NEUTRAL, PM_BINDER, NON_PM, 2000L),
 
 A("The Gambler's Suit",		EXPENSIVE_SUIT,
 	(SPFX_RESTR|SPFX_PROTEC|SPFX_LUCK), 0, 0,
