@@ -406,10 +406,43 @@ impossible VA_DECL(const char *, s)
 	VA_END();
 }
 
+const char * const hallu_alignments[] = {
+	"evil",
+	"really evil",
+	"mad",
+	"crazy",
+	"loud",
+	"hungry",
+	"greedy",
+
+	"cuddly",
+	"funky",
+	"chilly",
+	"relaxed",
+	"drunk",
+	"curious",
+	"magnificent",
+	"cool",
+
+	"currently not available",
+	"gone swimming",
+	"not listening",
+	"smashing things",
+	"thinking",
+
+	"yellow",
+	"purple",
+	"green",
+	"blue"
+};
+
 const char *
 align_str(alignment)
     aligntyp alignment;
 {
+    if (Hallucination) {
+	return hallu_alignments[rn2(SIZE(hallu_alignments))];
+    }
     switch ((int)alignment) {
 	case A_CHAOTIC: return "chaotic";
 	case A_NEUTRAL: return "neutral";
