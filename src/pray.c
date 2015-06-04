@@ -2210,7 +2210,7 @@ u_gname()  /* returns the name of the player's deity */
 }
 
 const char * const hallu_gods[] = {
-	"Bill Gates",
+	/*"Bill Gates",*/
 	"Britney Spears",
 	"Mother Teresa",
 	"George W. Bush",
@@ -2242,8 +2242,29 @@ const char * const hallu_gods[] = {
 	"Dion Nicolaas",
 	"marvin",
 	"Dudley",
-	"the RNG"
+	"the RNG",
 
+	/* from Kahran042 on Nethack Wiki */
+	"Seraphimon", "Ophanimon", "Cherubimon", /* Digimon Frontier */
+	"Falis", "Marfa", "Falaris", /* Record of Lodoss War */
+	"Ceipheid", "the Lord of Nightmares", "Shabranigdo", /* Slayers */
+	"Tsunami", "Washu", "Tokimi", /* Tenchi Muyo! */
+	"Osiris", "Obelisk", "Ra", /* Yu-Gi-Oh! */
+	"Ladon", "Namanda", "Myria", /* Breath of Fire */
+	"Goddess", "Doom", "Poltergeist", /* Final Fantasy VI */
+	"Biron", "Tieg", "the Mist", /* Legend of Legaia */
+	"Ishtar", "Filaha", "Asmodeus", /* Tactics Ogre */
+	"Nayru", "Farore", "Din", /* The Legend of Zelda */
+	"Zephyr", "Raftina", "Justine", /* Wild Arms */
+	"Princess Celestia", "the Fausticorn", "Princess Luna", /* My Little Pony */
+	"Ceiling Cat", "Longcat", "Basement Cat", /* Lolcats */
+	"SlimKirby", "Lucahjin", "The Dark Id", /* Let's Players */
+	/* Old defunct gods */
+	"Moradin", "Dumathoin", "Abbathor", /* Dwarf */
+	"Solonor Thelandira", "Aerdrie Faenya", "Erevan Ilesere", /* Elf */
+	"Lolth", /* Drow */
+	"Garl Glittergold", "Flandal Steelskin", "Urdlen", /* Gnome */
+	"Iluvatar", "Gilthoniel", "Morgoth" /* Hobbit */
 };
 
 const char *
