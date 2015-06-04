@@ -2391,9 +2391,17 @@ register struct monst *shkp;	/* if angry, impose a surcharge */
 	      obj->oclass==SPBOOK_CLASS  || obj->oclass==WAND_CLASS     ||
 	      obj->otyp==LUCKSTONE       || obj->otyp==LOADSTONE        || 
 	      obj->otyp==HEALTHSTONE || objects[obj->otyp].oc_magic) {
+#ifdef CONVICT
+	    tmp *= Role_if(PM_CONVICT) ? 25 : 50;
+#else
 	    tmp *= 50;
+#endif
 	  } else {
+#ifdef CONVICT
+	    tmp *= Role_if(PM_CONVICT) ? 12 : 25;
+#else
 	    tmp *= 25;
+#endif
 	  }
 	}
 #endif /* BLACKMARKET */
