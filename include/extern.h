@@ -1571,6 +1571,7 @@ E void FDECL(set_option_mod_status, (const char *, int));
 E boolean FDECL(add_menu_coloring, (char *));
 #endif
 #ifdef AUTOPICKUP_EXCEPTIONS
+E boolean FDECL(parse_monster_color, (char *));
 E int FDECL(add_autopickup_exception, (const char *));
 E void NDECL(free_autopickup_exceptions);
 #endif /* AUTOPICKUP_EXCEPTIONS */

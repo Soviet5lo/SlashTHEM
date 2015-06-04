@@ -2094,6 +2094,8 @@ char		*tmp_levels;
 #ifdef MENU_COLOR
 	   add_menu_coloring(bufp);
 #endif
+	} else if (match_varname(buf, "MONSTERCOLOR", 12)) {
+	    return parse_monster_color(bufp);
 	} else if (match_varname(buf, "GRAPHICS", 4)) {
 	    len = get_uchars(fp, buf, bufp, translate, FALSE,
 			     MAXPCHARS, "GRAPHICS");
