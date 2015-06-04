@@ -2190,8 +2190,8 @@ const struct def_skill *class_skill;
 		P_SKILL(skill) = P_BASIC;
 		/* KMH -- If you came into the dungeon with it, you should at least be skilled */
 		if (P_MAX_SKILL(skill) < P_SKILLED) { 
-			pline("Warning: %s should be at least expert.  Fixing...", P_NAME(skill));
-			P_MAX_SKILL(skill) = P_EXPERT;
+			pline("Warning: %s should be at least skilled.  Fixing...", P_NAME(skill));
+			P_MAX_SKILL(skill) = P_SKILLED;
 		}
 	    }
 	}
