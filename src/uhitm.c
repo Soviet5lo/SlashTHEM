@@ -1666,7 +1666,7 @@ int thrown;
 			pline("%s divides as you hit it!", Monnam(mon));
 			/* make_sick(Sick ? Sick/2L + 1L : (long)rn1(ACURR(A_CON), 40),
 			0, TRUE, SICK_NONVOMITABLE); */
-		      (void) difeasemu(mon); /* hopefully stopping those annoying pudding farmers! */
+		      (void) diseasemu(mon->data); /* hopefully stopping those annoying pudding farmers! */
 			u.ualign.sins++; /* adding even more punishment for lame farmers */
 			hittxt = TRUE;
 		}
@@ -3562,9 +3562,16 @@ uchar aatyp;
 	    }
 	    break;
         case AD_DISE:
+	        if (Sick_resistance) {
+			You("are covered with botulism spores, but they seem to be inert.");
+		} else {
+			You("are covered with botulism spores!");
+			make_sick(20, "bad case of botulism", TRUE, SICK_NONVOMITABLE);
+		}
+		break;
         case AD_PEST:
 		  pline("You got hit by botox spores!");
-		  (void) difeasemu(mon); /* plus the normal damage */
+		  (void) diseasemu(mon->data); /* plus the normal damage */
 	        break;
 	  default:
 	    break;
@@ -3770,15 +3777,6 @@ uchar aatyp;
 		You("are jolted with electricity!");
 		mdamageu(mon, tmp);
 		break;
-	      case AD_DISE: /* Gray fungus */
-	        if (Sick_resistance) {
-			You("are covered with botulism spores, but they seem to be inert.");
-		} else {
-			You("are covered with botulism spores!");
-			mdamageu(mon, tmp);
-			make_sick(20, "bad case of botulism", TRUE, SICK_NONVOMITABLE);
-		}
-		break;
 	      case AD_ENCH:	/* KMH -- remove enchantment (disenchanter) */
 		if (mhit) {
 		    struct obj *obj = target;
@@ -3914,7 +3912,7 @@ struct attack *mattk;		/* null means we find one internally */
 
 	if (obj && carried(obj)) update_inventory();
 }
-
+#if 0 /* 5lo: No longer needed */
 difeasemu(mon)
 struct permonst *mon;
 {
@@ -3927,7 +3925,7 @@ struct permonst *mon;
 		return TRUE;
 	}
 }
-
+#endif
 
 /* Note: caller must ascertain mtmp is mimicking... */
 void

@@ -1103,6 +1103,7 @@ E int FDECL(noattacks, (struct permonst *));
 E int FDECL(sleep_monst, (struct monst *,int,int));
 E void FDECL(slept_monst, (struct monst *));
 E long FDECL(attk_protection, (int));
+E boolean FDECL(diseasemu, (struct permonst *));
 
 /* ### mhitu.c ### */
 

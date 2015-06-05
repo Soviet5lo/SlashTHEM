@@ -20,7 +20,6 @@ STATIC_DCL void FDECL(mayberem, (struct obj *, const char *));
 # endif
 #endif /* OVLB */
 
-STATIC_DCL boolean FDECL(diseasemu, (struct permonst *));
 STATIC_DCL int FDECL(hitmu, (struct monst *,struct attack *));
 STATIC_DCL int FDECL(gulpmu, (struct monst *,struct attack *));
 STATIC_DCL int FDECL(explmu, (struct monst *,struct attack *,BOOLEAN_P));
@@ -1398,7 +1397,7 @@ witherarmor()
 #endif /* OVLB */
 #ifdef OVL1
 
-STATIC_OVL boolean
+boolean
 diseasemu(mdat)
 struct permonst *mdat;
 {
