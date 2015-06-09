@@ -2228,9 +2228,6 @@ const char * const hallu_gods[] = {
 
 	"the universe",
 	"Capitalism",
-	"Communism",
-	"Burger King",
-	"McDonald's",
 	"something",
 	"the U.N.O.",
 	"the Flying Spaghetti Monster",
@@ -2263,7 +2260,56 @@ const char * const hallu_gods[] = {
 	"Solonor Thelandira", "Aerdrie Faenya", "Erevan Ilesere", /* Elf */
 	"Lolth", /* Drow */
 	"Garl Glittergold", "Flandal Steelskin", "Urdlen", /* Gnome */
-	"Iluvatar", "Gilthoniel", "Morgoth" /* Hobbit */
+	"Iluvatar", "Gilthoniel", "Morgoth", /* Hobbit */
+	/* Gods from Slash'EM Extended */
+	"The Lord of the Pit", "Goldblight of the Flame", "Warpfire Hellspawn", /* Acid Mage */
+	"Anti-War Movement", "Global Freedom Council", "Human Rights Progression", /* Activistor - buzzwords used by activists */
+	"Suzanne Collins", "Effie Trinket", "President Snow", /* Amazon - hunger games */
+	"Leonardo", "Picasso", "Dali", /* Artist - famous artists */
+	"Ehud", "Ford", "Ivins", /* Assassin - unknown origin */
+	"Dunlain", "Savos Aren", "Hert the Vampire", /* Augurer - Skyrim */
+	"Rhea Oro", "Liebea Luna", "Elenya Pure", /* Bloodseeker - taken from a fanfic */
+	"Eddergud", "Vhaeraun", "the black web", /* Bosmer - Elven */
+	"Everella Shrine", "Butch DeLoria", "Draco Malfoy",	/* Bully - popular bullies */
+	"Buddha", "Jahwe", "Allah",	/* Chevalier - major real-world religions */
+	"McDonalds", "Kentucky's Fried Chicken", "Burger King", /* Cook - fast food places */
+	"Jacob Black", "Bella Swan", "Edward Cullen",	/* Cruel Abuser - Twilight */
+	"Sakuya", "Reimu", "Yukari Yakumo", /* Doll Mistress - Touhou */
+	"Orome", "Yavanna", "Tulkas", /* Dunmer - Elven */
+	"Thomas Alva Edison", "Benjamin Franklin", "Marilyn Monroe", /* Electric Mage - associated with electricity */
+	"James Bond", "Chuck Norris", "Jackie Chan", /* Feat Master - movie heroes */
+	"Colonel Campbell", "Deepthroat", "The Patriots", /* Foxhound Agent - probably some TV show or movie? */
+	"Nintendo", "Microsoft", "Sony", /* Gamer - gaming console producers */
+	"B'loody Mary", "Ebony Dark'ness", "Darth Valer", /* Goff - taken from a fanfic */
+#if 0 /* 5lo: We're changing these for the gratuate soon anyway */
+	"Jobs", "Wozniak", "Gates", /* Graduate - geek */
+#endif
+	"Bowditch", "Peabody", "Rothchild", /* Intel Scribe - Fallout 3 */
+	"Barnum", "Bailey", "Shaco", /* Jester - ??? */
+	"Hugh Hefner", "G-boy", "Arsene Lupin", /* Ladiesman - famous people, I guess? */
+	"Leo Tolstoi", "Stephen Hawking", "H. P. Lovecraft", /* Librarian - famous writers */
+	"Queen Serenity", "Angel Aphrodite", "Queen Beryl", /* Mahou Shoujo - perhaps an anime or manga? */
+	"Votishal", "Raiden", "Rat God", /* Ninja - Nehwon */
+	"Vaire", "Varda Elentari", "Nessa", /* Ordinator - Elven */
+	"Brahma", "Vishnu", "Shiva", /* Otaku - India? */
+	"Ariel", "Tyrael", "Gabriel",	/* Paladin - angels */
+	"Danzai", "Milanor", "Daini", /* Pickpocket - ??? */
+#if 0 /* 5lo: Might be disabled until a rewrite? */
+	"A'En", "Dr. Oujide", "Team Missile Bomb", /* Pokemon - Pokemon Vietnamese Crystal */
+#endif
+	"Democracy", "Communism", "Despotism", /* Politician - political structures */
+#if 0 /* 5lo: Same as Pokemon above */
+	"Bickney", "Corridor", "Lockney", /* Psion - Egyptian */
+#endif
+	"Cassandra", "Menelaos", "Helen of Troy", /* Sage - Greek history */
+	"Moori", "King Kai", "Vegeta", /* Saiyan - Dragonball series */
+	"Airyaman", "Gandarewa", "Daevas", /* Slave Master - Persian */
+	"the Homies", "the Robbers", "the Motherfuckers", /* Supermarket Cashier - taken from a fanfic */
+	"Manwe Sulimo", "Mandos", "Lorien", /* Thalmor - Elven */
+	"Speedy Gonzales", "Dan Naginati", "Kylie Lum", /* Topmodel - taken from a fanfic */
+	"Olivia", "Peyman", "Lady Gaga", /* Transvestite - weird fashion sense */
+	"Larry Koopa", "Roy Koopa", "Morton Koopa Jr.", /* Wandkeeper - Super Mario Bros */
+
 };
 
 const char *
