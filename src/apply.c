@@ -1701,13 +1701,13 @@ struct obj *obj;
 	int trouble_list[PROP_COUNT + ATTR_COUNT];
 	int chance;	/* KMH */
 
-
+#if 0 /* 5lo: Disable this for now */
 	if (!rn2(100)) {
 	    useup(obj);
 	    pline("The horn suddenly turns to dust.");
 		return;
 		}
-
+#endif
 	if (obj && obj->cursed) {
 	    long lcount = (long) rnd(100);
 
