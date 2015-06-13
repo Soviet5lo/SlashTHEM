@@ -27,12 +27,13 @@ STATIC_DCL int FDECL(enhance_skill, (boolean));
 #define PN_PROTECTION_SPELL	(-11)
 #define PN_BODY_SPELL		(-12)
 #define PN_MATTER_SPELL		(-13)
-#define PN_BARE_HANDED		(-14)
-#define PN_MARTIAL_ARTS		(-15)
-#define PN_RIDING		(-16)
-#define PN_TWO_WEAPONS		(-17)
+#define PN_MUSICALIZE		(-14)
+#define PN_BARE_HANDED		(-15)
+#define PN_MARTIAL_ARTS		(-16)
+#define PN_RIDING		(-17)
+#define PN_TWO_WEAPONS		(-18)
 #ifdef LIGHTSABERS
-#define PN_LIGHTSABER		(-18)
+#define PN_LIGHTSABER		(-19)
 #endif
 
 static void FDECL(give_may_advance_msg, (int));
@@ -72,7 +73,7 @@ STATIC_OVL NEARDATA const short skill_names_indices[P_NUM_SKILLS] = {
 	PN_ATTACK_SPELL,     PN_HEALING_SPELL,
 	PN_DIVINATION_SPELL, PN_ENCHANTMENT_SPELL,
 	PN_PROTECTION_SPELL,            PN_BODY_SPELL,
-	PN_MATTER_SPELL,
+	PN_MATTER_SPELL,		PN_MUSICALIZE,
 	PN_BARE_HANDED, 		PN_MARTIAL_ARTS, 
 	PN_TWO_WEAPONS,
 #ifdef STEED
@@ -96,6 +97,7 @@ STATIC_OVL NEARDATA const char * const odd_skill_names[] = {
     "protection spells",
     "body spells",
     "matter spells",
+    "musicalize spell",
     "bare-handed combat",
     "martial arts",
     "riding",
@@ -2195,6 +2197,9 @@ const struct def_skill *class_skill;
 		}
 	    }
 	}
+	/* Ugly kludge to get Bards/Musicians/Rockers to have Basic */
+	if (P_MAX_SKILL(P_MUSICALIZE) > P_SKILLED)
+	    P_SKILL(P_MUSICALIZE) = P_BASIC;
 
 #if 0  /* This should all be handled above now... */
 	/* set skills for magic */

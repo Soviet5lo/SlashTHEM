@@ -908,7 +908,7 @@ boolean incr;	/* true iff via incremental experience growth */
 		if (!rn2(3)) {ubookz = mkobj(SPBOOK_CLASS, FALSE); dropy(ubookz); pline("A book appeared at your feet!"); }
 
 		}
-
+#if 0 /* 5lo: Replaced by an actual music system */
 		if (Role_if(PM_BARD) && u.ulevel > u.urmaxlvlD) {
 
 		u.urmaxlvlD = u.ulevel;
@@ -928,7 +928,7 @@ boolean incr;	/* true iff via incremental experience growth */
 		if (u.urmaxlvlD == 20) {ubookz = mksobj(SPE_POLYMORPH, TRUE, FALSE); dropy(ubookz); pline("A book of change appeared at your feet!"); }
 
 		}
-
+#endif
 		if (Role_if(PM_ZYBORG) && u.ulevel > u.urmaxlvlB) {
 
 		u.urmaxlvlB = u.ulevel;

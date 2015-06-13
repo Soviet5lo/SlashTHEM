@@ -1182,6 +1182,7 @@ static const struct def_skill Skill_Bard[] = {
     { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },	 
     { P_ENCHANTMENT_SPELL, P_SKILLED },	{ P_BODY_SPELL, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT }, /* Music doesn't exist...yet. */
+    { P_MUSICALIZE, P_EXPERT },
     { P_NONE, 0 }
 };
 
@@ -1241,6 +1242,7 @@ static const struct def_skill Skill_Roc[] = {
     { P_SLING, P_EXPERT },              { P_CROSSBOW, P_EXPERT },
     { P_DART, P_EXPERT },               { P_SHURIKEN, P_SKILLED },
     { P_DIVINATION_SPELL, P_BASIC }, { P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_MUSICALIZE, P_EXPERT }, /* Rock music, of course */
 /*WAC - G must be good at enchant,  since his class skill is fear.
         also added a basic divination (from id gems) */
 #ifdef STEED
@@ -2149,6 +2151,7 @@ static const struct def_skill Skill_Mus[] = {
     { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },	 
     { P_ENCHANTMENT_SPELL, P_SKILLED },	{ P_BODY_SPELL, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT }, /* Music doesn't exist...yet. */
+    { P_MUSICALIZE, P_EXPERT },
     { P_NONE, 0 }
 };
 

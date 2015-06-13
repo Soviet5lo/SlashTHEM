@@ -2193,6 +2193,29 @@ nothing_special:
 	    else
 		    Your("body seems to unfade...");
 	    break;
+	    /*
+	case HARMONIZE:
+	    {
+		struct monst *mtmp;
+		struct obj *otmp;
+		int i,j;
+
+		for(i = -u.ulevel; i <= u.ulevel; i++)
+		    for(j = -u.ulevel; j <= u.ulevel; j++)
+			if (isok(u.ux+i,u.uy+j) 
+			    && i*i + j*j < u.ulevel * u.ulevel) {
+			    mtmp = m_at(u.ux+i,u.uy+j);
+			    if (mtmp->mtame && distu(mtmp->mx, mtmp->my) < u.ulevel) {
+				mtmp->mhp = mtmp->mhpmax;
+				mtmp->msleeping = mtmp->mflee = mtmp->mblinded = mtmp->mcanmove = mtmp->mfrozen = mtmp->mstun = mtmp->mconf = 0;
+				mtmp->mcansee = 1;
+				mtmp->mtame++;
+			    }
+			}
+	    }
+	    break;
+	    */
+
 	}
     }
 
