@@ -524,8 +524,7 @@ typedef unsigned char	uchar;
  * Enable any of these at your own risk -- there are almost certainly
  * bugs left here.
  */
-
-#define STATUS_COLORS
+/* #define STATUS_COLORS */
 
 #define SHOWSYM	/* Show object symbols in menus */
 

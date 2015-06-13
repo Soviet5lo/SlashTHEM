@@ -630,7 +630,7 @@ bot2str(char *newbot2)
                 Sprintf(nb = eos(nb), "!");
         }
 #endif
-#if 0	        
+#ifndef STATUS_COLORS /* 5lo: Because this breaks things under statuscolors */
         if (bot2_abbrev >= 2) {
 		if (hu_abbrev_stat[u.uhs][0]!='\0') {
 			Sprintf(nb = eos(nb), " ");
