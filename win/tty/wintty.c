@@ -1958,7 +1958,7 @@ tty_putstr(window, attr, str)
 	((cw->flags & WIN_CANCELLED) && (cw->type != NHW_MESSAGE)))
 		return;
     if(cw->type != NHW_MESSAGE)
-		str = compress_str(str);
+	str = compress_str(str);
 
     ttyDisplay->lastwin = window;
 
