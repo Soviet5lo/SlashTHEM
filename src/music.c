@@ -157,7 +157,7 @@ reset_song()
     song_delay = 0;
     song_penalty = 0;
 /*	song_lastturn = 0L;*/
-    return;
+    return 0;
 }
 
 /* music being played is at its last turn? */
