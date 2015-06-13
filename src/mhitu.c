@@ -977,8 +977,7 @@ mattacku(mtmp)
 			break;
 		case AT_HUGS:	/* automatic if prev two attacks succeed */
 			/* Note: if displaced, prev attacks never succeeded */
-		/* Note by Amy: come on, allow it to hit sometimes even if there are no previous attacks (shambling horror)! */
-		                if((!range2 && i>=2 && sum[i-1] && sum[i-2]) || mtmp == u.ustuck || !rn2(20) )
+		                if((!range2 && i>=2 && sum[i-1] && sum[i-2]) || mtmp == u.ustuck)
 				sum[i]= hitmu(mtmp, mattk);
 			break;
 		case AT_GAZE:	/* can affect you either ranged or not */
