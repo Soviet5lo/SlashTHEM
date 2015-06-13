@@ -1702,7 +1702,7 @@ struct obj *obj;
 	int chance;	/* KMH */
 
 #if 0 /* 5lo: Disable this for now */
-	if (!rn2(100)) {
+	if (!rn2(100) && !obj->oartifact) {
 	    useup(obj);
 	    pline("The horn suddenly turns to dust.");
 		return;
