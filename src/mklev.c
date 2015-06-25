@@ -896,7 +896,7 @@ makelevel()
 	    {
 		    makemaz(slev->proto);
 		    return;
-	    } else if (dungeons[u.uz.dnum].proto[0] && (rn2(2)) ) {
+	    } else if (dungeons[u.uz.dnum].proto[0]) {
 		    makemaz("");
 		    return;
 	    } else if (In_mines(&u.uz)) {
