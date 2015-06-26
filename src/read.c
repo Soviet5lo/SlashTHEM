@@ -812,7 +812,6 @@ struct obj *obj;
 int curse_bless;
 {
 	register int n;
-	/*int enspe;*/
 	boolean is_cursed, is_blessed;
 
 	is_cursed = curse_bless < 0;
@@ -839,8 +838,7 @@ int curse_bless;
 	     */
 	    n = (int)obj->recharged;
 	    if (n > 0 && (obj->otyp == WAN_WISHING || obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT ||
-		/* no unlimited recharging of wands of charging --Amy */
-		    ((n * n * n > rn2(7*7*7)) && rn2(2) ))) {	/* recharge_limit */
+		    (n * n * n > rn2(7*7*7)))) {	/* recharge_limit */
 		Your("%s vibrates violently, and explodes!",xname(obj));
 		wand_explode(obj, FALSE);
 		return;
@@ -853,21 +851,17 @@ int curse_bless;
 		stripspe(obj);
 	    } else {
 		int lim = (obj->otyp == WAN_WISHING) ? 2 : ( (obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT ) ) ? 3 : (objects[obj->otyp].oc_dir != NODIR) ? (8 + n) : (15 + n);
+			(objects[obj->otyp].oc_dir != NODIR) ? 8 : 15;
+		n = (lim == 3) ? 3 : rn1(5, lim + 1 - 5);
+		if (!is_blessed) n = rnd(n);
 
-		n = (lim == 2) ? 2 : (lim == 3) ? 3 : (is_blessed ? rn1(5, lim + 1 - 5) : rnd(lim) ) ;
-		/*if (!is_blessed) {enspe = rnd(n); n = enspe;}*/ /* no longer needed */
-
-		if (obj->spe < n) { obj->spe = rnd(n);
-		if (is_blessed && obj->spe < n && rn2(3) ) obj->spe = n;
-		}
-
-		/* let's make charging a bit more useful, considering wands spawn with less charges now --Amy */
-		/*else*/ obj->spe += obj->recharged; /* cannot be higher than 1 for wishing/charging anyway */
-		/*if (obj->otyp == WAN_WISHING && obj->spe > 3) {
+		if (obj->spe < n) obj->spe = n;
+		else obj->spe++;
+		if (obj->otyp == WAN_WISHING && obj->spe > 3) {
 		    Your("%s vibrates violently, and explodes!",xname(obj));
 		    wand_explode(obj, FALSE);
 		    return;
-		}*/
+		}
 		if (obj->spe >= lim) p_glow2(obj, NH_BLUE);
 		else p_glow1(obj);
 	    }
@@ -901,7 +895,7 @@ int curse_bless;
 	     *	14 :  63.29   99.32
 	     */
 	    n = (int)obj->recharged;
-	    if (n > 0 && rn2(2) && (n * n * n > rn2(7*7*7))) {	/* recharge_limit */
+	    if (n > 0 && (n * n * n > rn2(7*7*7))) {	/* recharge_limit */
 		Your("%s crumbles to dust!", xname(obj));
 		useup(obj);
 		    return;
@@ -930,8 +924,8 @@ int curse_bless;
 	    int s = is_blessed ? rnd(3) : is_cursed ? -rnd(2) : 1;
 	    boolean is_on = (obj == uleft || obj == uright);
 
-	    /* destruction depends on current state, not adjustment; explosion change lowered by Amy */
-	    if ((obj->spe > rn2(7) || obj->spe <= -5) && rn2(2)) {
+	    /* destruction depends on current state, not adjustment */
+	    if (obj->spe > rn2(7) || obj->spe <= -5) {
 		Your("%s %s momentarily, then %s!",
 		     xname(obj), otense(obj,"pulsate"), otense(obj,"explode"));
 		if (is_on) Ring_gone(obj);
@@ -979,27 +973,30 @@ int curse_bless;
 		    else
 			pline(nothing_happens);
 		} else if (is_blessed) {
-		    n = rnd(30);		/* 15..30 */
-		    if (rn2(2)) n += rnd(30);
-		    if (!rn2(5)) n += rnd(50);
-
+		    n = rn1(16,15);		/* 15..30 */
+		    if (obj->spe + n <= 50)
+			obj->spe = 50;
+		    else if (obj->spe + n <= 75)
+			obj->spe = 75;
+		    else {
 			int chrg = (int)obj->spe;
 			if ((chrg + n) > 127)
 				obj->spe = 127;
 			else
 				obj->spe += n;
-
+		    }
 		    p_glow2(obj, NH_BLUE);
 		} else {
-		    n = rnd(20);		/* 10..20 */
-		    if (rn2(2)) n += rnd(30);
-
+		    n = rn1(11,10);		/* 10..20 */
+		    if (obj->spe + n <= 50)
+			obj->spe = 50;
+		    else {
 			int chrg = (int)obj->spe;
 			if ((chrg + n) > 127)
 				obj->spe = 127;
 			else
 				obj->spe += n;
-
+		    }
 		    p_glow2(obj, NH_WHITE);
 		}
 		break;
@@ -1071,14 +1068,14 @@ int curse_bless;
 	    case CHEMISTRY_SET:
 		if (is_cursed) stripspe(obj);
 		else if (is_blessed) {
-
-			obj->spe += rnd(10);
-
-		    if (obj->spe > 117) obj->spe = 117;
+		    if (obj->spe <= 10)
+			obj->spe += rn1(10, 6);
+		    else obj->spe += rn1(5, 6);
+		    if (obj->spe > 50) obj->spe = 50;
 		    p_glow2(obj, NH_BLUE);
 		} else {
 		    obj->spe += rnd(5);
-		    if (obj->spe > 117) obj->spe = 117;
+		    if (obj->spe > 50) obj->spe = 50;
 		    p_glow1(obj);
 		}
 		break;
