@@ -537,7 +537,7 @@ pick_lock(pickp) /* pick a lock with a given object */
 			    ch = 3*ACURR(A_DEX) + 30*Role_if(PM_ROGUE) + 60*Role_if(PM_LOCKSMITH);
 			    break;
 			case SKELETON_KEY:
-			    if(!rn2(Role_if(PM_LOCKSMITH) ? 40 : 15) && (!pick->blessed || !rn2(3)) && !pick->oartifact) {
+			    if(!rn2(Role_if(PM_LOCKSMITH) ? 40 : 15) && !pick->blessed && !pick->oartifact) {
 				Your("key wasn't designed for this door and broke!");
 				useup(pick);
 				*pickp = (struct obj *)0;
