@@ -1666,8 +1666,10 @@ int thrown;
 			pline("%s divides as you hit it!", Monnam(mon));
 			/* make_sick(Sick ? Sick/2L + 1L : (long)rn1(ACURR(A_CON), 40),
 			0, TRUE, SICK_NONVOMITABLE); */
+#if 0 /* 5lo: Disease a player and lower alignment just because the thing split? */
 		      (void) diseasemu(mon->data); /* hopefully stopping those annoying pudding farmers! */
 			u.ualign.sins++; /* adding even more punishment for lame farmers */
+#endif
 			hittxt = TRUE;
 		}
 	}
