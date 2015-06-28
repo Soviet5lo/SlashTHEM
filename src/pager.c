@@ -24,6 +24,7 @@ STATIC_DCL boolean FDECL(help_menu, (int *));
 #ifdef PORT_HELP
 extern void NDECL(port_help);
 #endif
+#ifdef EXTENDED_INFO
 STATIC_DCL char * FDECL(get_description_of_monster_type, (struct permonst *, char *));
 STATIC_DCL char * FDECL(get_generation_description_of_monster_type, (struct permonst *, char *));
 STATIC_DCL char * FDECL(get_resistance_description_of_monster_type, (struct permonst *, char *));
@@ -31,7 +32,7 @@ STATIC_DCL char * FDECL(get_flag_description_of_monster_type, (struct permonst *
 STATIC_DCL char * FDECL(get_speed_description_of_monster_type, (struct permonst *, char *));
 STATIC_DCL int FDECL(generate_list_of_resistances, (char *, /*uchar*/unsigned long));
 STATIC_DCL void FDECL(append_newline_to_pline_string, (char * buf));
-
+#endif
 /* Returns "true" for characters that could represent a monster's stomach. */
 STATIC_OVL boolean
 is_swallow_sym(c)
@@ -800,14 +801,14 @@ do_look(quick)
 		    }
 		}
 #endif
-
+#ifdef EXTENDED_INFO
 		if(pm != (struct permonst *) 0) {
 			append_newline_to_pline_string(out_str);
 			temp_buf[0]='\0';
 			get_description_of_monster_type(pm, temp_buf);
 			(void)strncat(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
 		}
-
+#endif
 	    }
 	}
 
@@ -839,7 +840,7 @@ do_look(quick)
     flags.verbose = save_verbose;
     return 0;
 }
-
+#ifdef EXTENDED_INFO
 int
 plined_length(char * buf)
 {
@@ -1413,7 +1414,7 @@ get_description_of_monster_type(struct permonst * ptr, char * description)
 	}
 	return description;
 }
-
+#endif
 
 int
 dowhatis()

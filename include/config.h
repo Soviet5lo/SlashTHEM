@@ -527,7 +527,8 @@ typedef unsigned char	uchar;
 /* #define STATUS_COLORS */
 
 #define SHOWSYM	/* Show object symbols in menus */
-
+/* #define EXTENDED_INFO */ /* 5lo: Show full information of monsters
+                               when using farlook */
 #define USER_DUNGEONCOLOR
 
 /*#define GOLDOBJ */	/* Gold is kept on obj chains - Helge Hafting */
