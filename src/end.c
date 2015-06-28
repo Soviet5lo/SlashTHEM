@@ -768,10 +768,6 @@ int how;
 #ifdef LIVELOGFILE
 		livelog_avert_death();
 #endif
-
-#ifdef LIVELOGFILE
-		livelog_avert_death();
-#endif
 		return;
 
 	}
