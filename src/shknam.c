@@ -650,7 +650,7 @@ register struct mkroom *sroom;
 		      (sx == sroom->hx && doors[sh].x == sx+1) ||
 		      (sy == sroom->ly && doors[sh].y == sy-1) ||
 		      (sy == sroom->hy && doors[sh].y == sy+1)) continue;
-	    if (rn2(10)) mkshobj_at(shp, sx, sy);
+	    mkshobj_at(shp, sx, sy);
 	}
 
     /*
