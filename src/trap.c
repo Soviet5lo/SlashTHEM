@@ -3714,7 +3714,7 @@ register boolean force, here;
 					 (obj->blessed && !rnl(4))))
 				obj->oeroded++;
 			else if (is_rustprone(obj) && obj->oeroded == MAX_ERODE &&
-					!(obj->oerodeproof && !obj->oartifact))
+					!(obj->oerodeproof || obj->oartifact))
 			{
 			    
 				pline("One of your objects was destroyed by rust!");
