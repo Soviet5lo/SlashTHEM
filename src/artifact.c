@@ -634,10 +634,10 @@ long wp_mask;
 	if (spfx & SPFX_PROTEC) {
 	    if (on) {
 		u.ublessed += 2;
-		HProtection |= FROMOUTSIDE;
+		EProtection |= wp_mask;
 	    } else {
 	    	u.ublessed -= 2;
-		if (u.ublessed <= 0) HProtection &= ~FROMOUTSIDE;
+		if (u.ublessed <= 0) EProtection &= ~wp_mask;
 	    }
 	}
 	if (spfx & SPFX_XRAY) {

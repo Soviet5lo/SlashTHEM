@@ -2009,7 +2009,7 @@ find_ac()
 #endif
 	if(uleft && uleft->otyp == RIN_PROTECTION) uac -= uleft->spe;
 	if(uright && uright->otyp == RIN_PROTECTION) uac -= uright->spe;
-	if (HProtection & INTRINSIC) uac -= u.ublessed;
+	if (Protection) uac -= u.ublessed;
 	uac -= u.uspellprot;
 
 /* STEPHEN WHITE'S NEW CODE */
