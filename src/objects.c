@@ -693,7 +693,7 @@ HELM("fire helmet", "red shiny helmet",
 		0, 0, FIRE_RES,			2, 1, 25, 50, 9, 0, IRON, CLR_RED),
 #ifdef JEDI
 HELM("plasteel helm", (char *)0,
-		1, 0, 0,                        1, 1,  2,  20, 7, 9, PLASTIC, CLR_WHITE),
+		1, 0, 0,                        1, 1,  2,  20, 7, 0, PLASTIC, CLR_WHITE),
 #endif
 /* ...with shuffled appearances */
 HELM("helmet", "plumed helmet",
@@ -750,7 +750,7 @@ SHIELD("shield of reflection", "polished silver shield",
 /* Boots */
 #ifdef JEDI
 BOOTS("plasteel boots", "white boots", /* these things were crashing the game for binders and certain other chars! */
-		0, 0,  0,          1, 2, 2,  25,  8, 9, PLASTIC, CLR_WHITE),
+		0, 0,  0,          1, 2, 2,  25,  8, 0, PLASTIC, CLR_WHITE),
 #endif
 BOOTS("low boots", "walking shoes",
 		0, 0,  0,	  17, 2, 4,  8,  9, 0, LEATHER, HI_LEATHER),
