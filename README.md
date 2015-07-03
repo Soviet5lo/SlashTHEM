@@ -18,8 +18,6 @@ This should compile fine on Windows (with MinGW) and Unix systems.  I haven't do
 
 Windows (x64) builds are available on the [releases] (https://github.com/Soviet5lo/SlashTHEM/releases) page.
 
-Statuscolors support is available in a separate branch, but is very, very broken at the moment as it causes segfaults whenever too many status effects are on screen.  Patches/Pull requests to fix this and any other issue are welcome.
-
 Todo
 ----
 
@@ -37,12 +35,13 @@ Bugs
 - Some roles do not get the quest dialogue when picking up the quest artifact (Lunatics, Locksmiths, a few others).
 - Unicode support is terribly broken, causing the game to not function at all under windows and breaking Pokedex under Unix.
 - Vault teleporters to aquariums teleport the player to a random location in the level, not the aquarium.
+- Artifact protection isn't correctly calculated upon save and load, adding -2 to AC upon every load.
 - Probably a ton of others.
 
 Credits
 -------
 Credits go to Chris for dNethack (Used a few artifacts), Grunt for Grunthack, BarclayII for Slashem-up (some balance changes come from this), and of course AmyBSOD for Slash'EM Extended.
 
-Credits also go to Percival Tiglao for the minor sling upgrade patch, Mikael Lind for Rubber Gloves and Gauntlets of Reflection patches, Paxed for the "highlight object piles/hidden stairs" patch, and L for various patches implemented in this fork.
+Credits also go to Percival Tiglao for the minor sling upgrade patch, Mikael Lind for Rubber Gloves and Gauntlets of Reflection patches, Paxed for the "highlight object piles/hidden stairs" patch, André Bertelli Araújo for the music code for bards, Chris-plus-alphanumericgibberish (Chris) for additions and fixes to the music code, and L for various patches implemented in this fork.
 
 Credit also goes to Edoardo Spadolini for adding server specific code.

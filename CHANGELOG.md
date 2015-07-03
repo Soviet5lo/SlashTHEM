@@ -1,5 +1,82 @@
 # Slash'THEM ChangeLog
 
+Version 0.8.0 (2015-07-02)
+==========================
+
+## NOTICE: 0.8 will be the last release that contains certain roles, races, monsters, and objects.  This is mostly to remove some cruft and filler.
+
+#### Feature Additions.
+- Entirely replaced the Elph role with a brand new Chef role.
+    - A mostly melee oriented role with a focus on one-handed weapons.
+    - Skill set is:
+        - Basic: Long Sword, Flail, Saber, Sling, Unicorn Horn, Protection Spells
+        - Skilled: Dagger, Club, Paddle, Short Sword, Quarterstaff, Divination Spells, Bare Handed Combat, Two Weapon Combat.
+        - Expert: Knife, Dart, Axe, Hammer.
+    - Starting inventory consists of a blessed +1 Knife, blessed +1 Leather Armor, blessed +2 dented pot, 3 food rations, 2 sprigs of wolfsbane and 2 cloves of garlic  (acting as herbs and spices), 2 potions of water, 2 potions of booze, a can of grease, a towel, a blessed tinning kit, and a tin opener.
+    - Chefs gain Poison Resistance at level 7, and Fire Resistance at level 15.  Chefs have permanent food appraisal.
+    - Sacrifice gift is Tenderizer, a neutral aligned mallet.  +3 to-hit, and +7 damage.
+    - The Chef Quest sees you meeting the Surpreme Chef at the Iron Kitchen of Gourmet, who tells you to travel into Hell's Kitchen and battle The Immortal Rot for The Deluxe Yendorian Knife.  The Deluxe Yendorian Knife is a neutral aligned knife that has +6 to-hit and +20 damage, as well as granting Fire Resistance and ESP while wielded, and Acid Resistance while carried.  #Invoke to Sharpen it's blade (+1 if blessed, +0 if uncursed, -1 if cursed).  the des file used is the Doppelganger quest from SLASH 6 as a temporary.
+    - Chefs are now the only role that can create non-homemade tins.  All other roles use vanilla behavior.
+
+- Implemented Music from the Bard Patch. More information can be found [here] (https://andreba.wordpress.com/projects/nethack-bard-patch/)
+    - Bards, Rockers, and Musicians are the only 3 roles that can use Music currently.  All three gain Expert in Music.
+    - Songs are played by 'a'pplying a non-magical instrument.  Each song can be played by two specific instruments.
+    - A minor change was made.  Allowed any role unrestricted in music to play songs instead of relying on knowing the spell tied to the song.
+    - Also applied fixes and enhancements for music from dNethack.
+    - Current list of songs are:
+        - Lullaby: Makes monsters fall asleep.  Also affects pets at basic skill.
+        - Cacophony: Confuses monsters.
+        - Drowsiness: Slows a monster based on music skill.  Reduces speed by 6 at basic, 9 at skilled, and 11 at expert.
+        - Despair: Scares monsters.
+        - Friendship: Temporarly make monsters "friendly".  Are shown as pets will drop armor and weapons, but will not attack others.
+        - Inspire Courage: Makes pet more likely to attack higher level monsters and will ignore low hp.
+        - Charge: Hastes pets.
+        - Meditative Healing:  Heals pets.
+        - Disruption: Temporarly cancels monsters.
+        - Rally: Removes status effects from pets based on level.  Sleep and fear are removed at unskilled, stun and confusion removed at basic, blindness is removed at skilled, and cancellation is removed at expert.
+
+- Implemented the Monster Colors patch from NAO.
+- Implemented the Hallucination Gods patch.
+- Merged in the Statuscolors branch, but it's still disabled by default as the segfault still exists.  Can be enabled at compile time by uncommenting STATUS_COLORS in config.h
+
+#### Changes
+- The foo Horrors and other U's no longer have randomly generated attributes or attacks.  These were found to cause massive game instability and frequent crashes when they attacked.
+- Disabled viewing artifacts in the discovery screen for the moment, as quest artifacts will crash the game.
+- Disabled the extra special effects for certain types of attacks introduced in Slash'EM Extended.  This includes level drain from all bite attacks, kicking attacks doing extra damage to male players, and the new boots added in Slash'EM Extended having specialized effects when used by monsters.
+- Disabled the extended farlook information as using it repeatedly ends up corrupting mons[] over time, causing game instability.  Re-enable it by uncommenting EXTENDED_INFO in config.h.
+- Reduced the quantity of Shurikens generated (rnd(100) -> rnd(20)).
+- Tools, Wands and Spellbooks should no longer have abnormally low charges (Reverted to Slash'EM behavior).
+- Reverted object charging to function the way it did in Slash'EM.
+- Reverted the mall level back to the way it was in Slash'EM.  No longer will you get "mall-3" that contains no shops but a ton of nymphs.
+- Sokoban's staircase always appears on the level directly after the Oracle again (Reverted to Slash'EM behavior).
+- The Quest is 5 levels instead of 7 levels (Reverted to Slash'EM behavior).
+- Grues no longer have displacement as this made them way too annoying to fight.
+- Removed a few added random elements to sacrificing that were added by Slash'EM Extended (Reverted to vanilla behavior).
+- Convicts get reduced prices in the Black Market (idea from Unnethack).
+- Shimmerstaff and the Pen of the Void are now Neutral aligned, as roles are never offered an unaligned artifact for their first gift.
+- Cleaver now hits adjacent monsters occasionally (Code from Nethack Fourk).
+- Unicorn Horns no longer turn into dust (Reverted to Slash'EM behavior).
+- Bards no longer recieve spellbooks when gaining a level (see Music above).
+- Removed ranged grapple/hug attacks.
+- Keys should no longer have an abnormally high chance of breaking (Reverted to Slash'EM behavior).
+- Monsters will no longer randomly bypass locked doors.
+- Removed a "feature" where players would be diseased and lose max alignment for causing a pudding split.
+- Changed artifact protection to be extrinsic instead of intrinsic.
+- Reverted a Slash'EM Extended change that made all wands/tools/scrolls/potions cost the same.
+- Iron balls and chains are no longer randomly generated in the dungeon.
+
+#### Bugfixes
+- Fixed a segfault when chained iron balls were destroyed via rust.
+- Fixed a bug where corpses had the incorrect color.
+- Fixed an incorrect message in weapon.c.
+- Fixed corrupted message when killed by a monster with a passive disease attack (for real this time).
+- Fixed a crash with scrolls of food detection.
+- Fixed a "feature" where Vlad's level would occasionally be replaced with a room-and-corridor level.
+- Fixed livelog reporting an averted death twice during trollor revival.
+- Fixed a minor issue where shop floors would have a few empty tiles.
+- Fixed artifacts being destroyed via rusting.
+- Fixed plasteel helm and plasteel boots granting an abnormally high MC of 9.
+
 Version 0.7.0 (2015-05-23)
 ==========================
 
