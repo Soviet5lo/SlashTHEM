@@ -37,15 +37,13 @@ const struct icp mkobjprobs[] = {
 {100, ARMOR_CLASS},
 {200, FOOD_CLASS},
 {100, TOOL_CLASS},
-{ 60, GEM_CLASS},
+{ 80, GEM_CLASS},
 {150, POTION_CLASS},
 {150, SCROLL_CLASS},
 { 40, SPBOOK_CLASS},
 { 40, WAND_CLASS},
 { 40, RING_CLASS},
-{ 10, AMULET_CLASS},
-{ 10, BALL_CLASS},
-{ 10, CHAIN_CLASS}
+{ 10, AMULET_CLASS}
 
 /* KMH -- amulets now appear later in the game */
 /*{ 0, AMULET_CLASS}*/
