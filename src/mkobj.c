@@ -705,6 +705,7 @@ boolean artif;
 		break;
 	case CHAIN_CLASS:
 	case BALL_CLASS:
+#if 0 /* 5lo: Not needed anymore */
 		if(!rn2(8)) {
 			otmp->spe = rne(2);
 			if (rn2(2)) otmp->blessed = rn2(2);
@@ -714,6 +715,7 @@ boolean artif;
 			 else	blessorcurse(otmp, 3);
 			otmp->spe = -rne(2);
 		} else	blessorcurse(otmp, 10);
+#endif
 		break;
 	case POTION_CLASS:
 		if (otmp->otyp == POT_OIL)
