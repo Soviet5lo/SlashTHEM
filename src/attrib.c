@@ -187,11 +187,6 @@ const struct innate {
 		     {  11, &(HFast), "quick", "slow" },
 		     {	 0, 0, 0, 0 } },
 
-	gof_abil[] = {	{1, &(HDrain_resistance), "", ""  },
-		     {   1, &(HInfravision), "", "" },
-		     {  10, &(HReflecting), "reflexive", "nonreflexive" },
-		     {	 0, 0, 0, 0 } },
-
 	gla_abil[] = {	{3, &(HFast), "quick", "slow"  },
 			 {	6, &(HStealth), "stealthy", "noisy"  },	/* with cat-like tread ... */
 		     {  10, &(HAggravate_monster), "noisy", "quiet" },
@@ -880,7 +875,6 @@ int oldlevel, newlevel;
 	case PM_NINJA:		abil = nin_abil;	break;
 	case PM_KORSAIR:         abil = kor_abil;	break;
 	case PM_GLADIATOR:         abil = gla_abil;	break;
-	case PM_GOFF:         abil = gof_abil;	break;
 	case PM_DIVER:         abil = div_abil;	break;
 	case PM_DRUNK:         abil = dru_abil;	break;
 	case PM_LUNATIC:         abil = lun_abil;	break;

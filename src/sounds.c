@@ -963,10 +963,6 @@ register struct monst *mtmp;
 		case PM_POKEMON:
 		    verbl_msg = "Little strawberry me baby!";
 		    break;
-		case PM_ACTIVISTOR:
-		case PM_ACTIVIST:
-		    verbl_msg = "We're here to bring peace to the world.";
-		    break;
 		case PM_BLEEDER:
 		    verbl_msg = "*sigh* If only I could make this bleeding stop...";
 		    break;

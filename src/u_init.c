@@ -510,19 +510,6 @@ static struct trobj Gladiator[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Goff[] = {
-	{ PISTOL, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 20, 0 },
-	{ HIPPIE_HEELS, 5, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ VICTORIAN_UNDERWEAR, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ BLACK_DRAGON_SCALE_MAIL, -9, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ POT_ACID, 0, POTION_CLASS, 3, UNDEF_BLESS },
-	{ POT_VAMPIRE_BLOOD, 0, POTION_CLASS, 5, UNDEF_BLESS },
-	{ POT_BLOOD, 0, POTION_CLASS, 5, UNDEF_BLESS },
-	{ AMULET_OF_COVETOUS_WARNING, 0, AMULET_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Diver[] = {
 	{ KNIFE, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ SPEAR, 0, WEAPON_CLASS, 3, UNDEF_BLESS },
@@ -614,15 +601,6 @@ static struct trobj Samurai[] = {
 	{ YUMI, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ YA, 0, WEAPON_CLASS, 25, UNDEF_BLESS }, /* variable quan */
 	{ SPLINT_MAIL, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Activistor[] = {
-#define ACT_SHIRT	0
-	{ RUFFLED_SHIRT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ FLY_SWATTER, 1, WEAPON_CLASS, 1, 1 },
-	{ SPE_CHARM_MONSTER, UNDEF_SPE, SPBOOK_CLASS, 1, 1},
-	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -1496,28 +1474,6 @@ static const struct def_skill Skill_Dru[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Act[] = { /* Will be removed */
-    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_PADDLE, P_EXPERT },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
-    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
-    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_SKILLED },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Cou[] = {
     /* 5lo: Heavy focus on firearms here, but can gain skill with blades */
     { P_KNIFE,  P_EXPERT },		{ P_DAGGER, P_EXPERT },
@@ -1949,22 +1905,6 @@ static const struct def_skill Skill_Gla[] = {
     { P_TWO_WEAPON_COMBAT, P_EXPERT },
     { P_RIDING, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_MASTER },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Gof[] = { /* Will be removed */
-    /* 5lo: Normalized skills from Slash'EM Extended + modifications */
-    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_ATTACK_SPELL, P_SKILLED },	{ P_HEALING_SPELL, P_BASIC },
-    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_BASIC }, { P_ENCHANTMENT_SPELL, P_BASIC },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
     { P_NONE, 0 }
 };
 
@@ -2939,13 +2879,6 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Nob);
 		break;
-	case PM_ACTIVISTOR:
-		if(flags.female){
-			Activistor[ACT_SHIRT].trotyp = VICTORIAN_UNDERWEAR;
-		}
-		ini_inv(Activistor);
-		skill_init(Skill_Act);
-		break;
 	case PM_PIRATE:
 #ifndef GOLDOBJ
 		u.ugold = u.ugold0 = rnd(300);
@@ -2980,10 +2913,6 @@ u_init()
 		skill_init(Skill_Gla);
 		knows_class(ARMOR_CLASS);
 		knows_class(WEAPON_CLASS);
-		break;
-	case PM_GOFF:
-		ini_inv(Goff);
-		skill_init(Skill_Gof);
 		break;
 	case PM_DIVER:
 		ini_inv(Diver);
@@ -5677,7 +5606,6 @@ int otyp;
 	 case PM_PIRATE:		skills = Skill_Pir; break;
 	 case PM_KORSAIR:		skills = Skill_Kor; break;
 	 case PM_GLADIATOR:		skills = Skill_Gla; break;
-	 case PM_GOFF:		skills = Skill_Gof; break;
 	 case PM_DIVER:		skills = Skill_Div; break;
      case PM_POKEMON:		skills = Skill_Pok; break;
      case PM_PRIEST:		skills = Skill_P; break;
@@ -5926,12 +5854,6 @@ register struct trobj *trop;
             if (obj->otyp == AMULET_OF_LIFE_SAVING && (Role_if(PM_DEATH_EATER)) ) {
                 obj->cursed = TRUE;
             }
-            if (obj->otyp == AMULET_OF_COVETOUS_WARNING && (Role_if(PM_GOFF)) ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == BLACK_DRAGON_SCALE_MAIL && (Role_if(PM_GOFF)) ) {
-                obj->cursed = TRUE;
-            }
 			if (trop->trspe != UNDEF_SPE)
 			    obj->spe = trop->trspe;
 			if (trop->trbless != UNDEF_BLESS)
@@ -5974,11 +5896,6 @@ register struct trobj *trop;
 		if(obj->otyp == AMULET_OF_LIFE_SAVING && (Role_if(PM_DEATH_EATER)) ) {
 				setworn(obj, W_AMUL);
 			}
-
-            if (obj->otyp == AMULET_OF_COVETOUS_WARNING && (Role_if(PM_GOFF)) ) {
-				setworn(obj, W_AMUL);
-            }
-
 
 		if (obj->oclass == WEAPON_CLASS || is_weptool(obj) ||
 			otyp == TIN_OPENER || otyp == FLINT || otyp == ROCK) {

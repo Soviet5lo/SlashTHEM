@@ -1330,23 +1330,6 @@ register struct monst *mtmp;
 
 		   break;
 
-		   case PM_GOFF:
-		   case PM_UNDEAD_GOFF:
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_offensive_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_offensive_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_offensive_item_new(mtmp));
-		     (void)mongets(mtmp, QUARTERSTAFF);
-		     (void)mongets(mtmp, HIPPIE_HEELS);
-		     (void)mongets(mtmp, PISTOL);
-			 m_initthrow(mtmp, BULLET, 50);
-		     (void)mongets(mtmp, POT_ACID);
-		     (void)mongets(mtmp, POT_ACID);
-
-		   break;
-
 		   case PM_KORSAIR:
 		   case PM_UNDEAD_KORSAIR:
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
@@ -1388,40 +1371,6 @@ register struct monst *mtmp;
 		     (void)mongets(mtmp, SMALL_SHIELD);
 
 		   break;
-
-		   case PM_ACTIVISTOR:
-		   case PM_UNDEAD_ACTIVISTOR:
-
-			if (moves < 2) mtmp->female = 1;
-
-			if (mtmp->female) (void)mongets(mtmp, VICTORIAN_UNDERWEAR);
-			else (void)mongets(mtmp, RUFFLED_SHIRT);
-
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-		     if (!rn2(100)) (void) mongets(mtmp, rnd_misc_item_new(mtmp));
-
-		     (void)mongets(mtmp, FLY_SWATTER);
-
-		   break;
-
 
 		   case PM_ELECTRIC_MAGE:
 		   case PM_UNDEAD_ELECTRIC_MAGE:

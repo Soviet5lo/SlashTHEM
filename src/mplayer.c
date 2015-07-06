@@ -208,9 +208,6 @@ register boolean special;
 		case PM_GLADIATOR:
 		    weapon = SILVER_SABER;
 		    break;
-		case PM_GOFF:
-		    weapon = QUARTERSTAFF;
-		    break;
 		case PM_NOBLEMAN:
 		case PM_NOBLEWOMAN:
 		    weapon = RAPIER;
@@ -289,9 +286,6 @@ register boolean special;
 		    break;
 		case PM_LUNATIC:
 		    weapon = STEEL_WHIP;
-		    break;
-		case PM_ACTIVISTOR:
-		    weapon = FLY_SWATTER;
 		    break;
 		case PM_ROGUE:
 		    weapon = SHORT_SWORD;

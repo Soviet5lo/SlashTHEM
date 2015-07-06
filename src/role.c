@@ -57,33 +57,6 @@ const struct Role roles[] = {
 	2, 10, A_INT, SPE_ACID_STREAM,        -4 /* From old role.c */
 },
 
-{	{"Activistor", 0}, {
-	{"Little Rebel",    0},
-	{"Do-Gooder",  0},
-	{"Demonstrant",       0},
-	{"Worker on strike",   0},
-	{"Protestor", 0},
-	{"Rebellious Individual",         0},
-	{"Involved Activist",    0},
-	{"Renegade Fighter",        0},
-	{"Savior",      0} },
-	"Anti-War Movement", "Global Freedom Council", "Human Rights Progression", /* buzzwords used by activists */
-	"Act", "Activist Home", "Ghostly Halls",
-	PM_ACTIVISTOR, NON_PM, PM_UNDEAD_ACTIVISTOR, NON_PM, PM_ACTIVISTOR,
-	PM_ACTIVIST_SPEAKER, PM_ATTENDANT, PM_IMELDA_S_GHOST,
-	PM_ANIMATED_WEDGE_SANDAL, PM_ANIMATED_SEXY_LEATHER_PUMP, S_GOLEM, S_NEMESE,
-	ART_ACTIVIST_STICK,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  10, 25, 25, 10, 10, 20 },
-	/* Init   Lower  Higher */
-	{ 12, 0,  0, 3,  1, 0 },	/* Hit points */
-	{ 20, 0,  0, 4,  0, 4 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_TELEPORT_AWAY,   -4
-},
-
 {	{"Archeologist", 0}, {
 	{"Digger",      0},
 	{"Field Worker",0},
@@ -650,33 +623,6 @@ const struct Role roles[] = {
 	{ 12, 0,  0, 8,  4, 0 },	/* Hit points */
 	{  1, 0,  0, 1,  0, 1 },12,	/* Energy */
 	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
-},
-
-{	{"Goff", 0}, {
-	{"Fanfic Reader",    0},
-	{"Saint Preps Academy Alumnus",       "Saint Preps Academy Alumna"},
-	{"Badfic Writer",   0},
-	{"Emo Boy", "Emo Girl"},
-	{"Blatant Troll",         0},
-	{"Motherfucker",    0},
-	{"Author Avatar",        0},
-	{"Self-insert",  0},
-	{"Marty Stu",      "Mary Sue"} },
-	"B'loody Mary", "Ebony Dark'ness", "Darth Valer", /* taken from a fanfic */
-	"Gof", "Hogwarts Castle", "the forbidden forest", 
-	PM_GOFF, NON_PM, PM_UNDEAD_GOFF, NON_PM, NON_PM,
-	PM_SNAP_AND_LOOPIN, PM_PREP, PM_TARA_GILESBIE,
-	NON_PM, NON_PM, S_VAMPIRE, S_ZOMBIE,
-	ART_GOFFIC_BACKPACK,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  25,  5, 15, 25, 25,  5 },
-	/* Init   Lower  Higher */
-	{ 12, 0,  0, 4,  2, 0 },	/* Hit points */
-	{  8, 0,  0, 1,  0, 2 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_CURE_HALLUCINATION,   -4
 },
 
 {	{"Graduate", 0}, {

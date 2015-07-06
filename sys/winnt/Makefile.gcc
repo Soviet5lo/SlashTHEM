@@ -1450,7 +1450,7 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 		$(DAT)\sokoban.des  $(DAT)\heck.des    $(DAT)\mines.des    $(DAT)\mtemple.des \
 		$(DAT)\newmall.des  $(DAT)\nymph.des    $(DAT)\hellma.des    $(DAT)\oracle.des \
 		$(DAT)\rats.des     $(DAT)\sea.des      $(DAT)\spiders.des $(DAT)\village.des \
-		$(DAT)\stor-1.des   $(DAT)\stor-2.des   $(DAT)\act.des   $(DAT)\stor-3.des \
+		$(DAT)\stor-1.des   $(DAT)\stor-2.des   $(DAT)\stor-3.des \
 		$(DAT)\tomb.des     $(DAT)\tower.des    $(DAT)\warrior.des    $(DAT)\yendor.des \
 		$(DAT)\arch.des     $(DAT)\barb.des 	$(DAT)\binder.des 	$(DAT)\caveman.des \
 		$(DAT)\flame.des    $(DAT)\healer.des   $(DAT)\jedi.des   $(DAT)\ice.des \
@@ -1467,7 +1467,7 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
         $(DAT)\Psion.des $(DAT)\scient.des $(DAT)\Lunatic.des $(DAT)\Drunk.des \
         $(DAT)\Firef.des $(DAT)\Locks.des $(DAT)\Offic.des $(DAT)\Zooke.des \
         $(DAT)\Music.des $(DAT)\Ninja.des $(DAT)\Under.des $(DAT)\Gradu.des \
-        $(DAT)\Bard.des $(DAT)\Goff.des 
+        $(DAT)\Bard.des
         
 	lev_comp $(DDAT)/beholder.des
 	lev_comp $(DDAT)/bigroom.des
@@ -1508,7 +1508,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/acid.des
 	lev_comp $(DDAT)/rocker.des
 	lev_comp $(DDAT)/cheval.des
-	lev_comp $(DDAT)/act.des
 	lev_comp $(DDAT)/courier.des
 	lev_comp $(DDAT)/cyborg.des
 	lev_comp $(DDAT)/oracle.des
@@ -1563,7 +1562,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/Under.des
 	lev_comp $(DDAT)/Gradu.des
 	lev_comp $(DDAT)/Bard.des
-	lev_comp $(DDAT)/Goff.des
 	lev_comp $(DDAT)/gangster.des
 	lev_comp $(DDAT)/deatheat.des
 	lev_comp $(DDAT)/frnknstn.des

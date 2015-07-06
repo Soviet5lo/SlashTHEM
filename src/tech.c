@@ -271,10 +271,6 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	tou_tech[] = { /* Put Tech here */
 		       {   0, 0, 0} },
-	act_tech[] = { {   1, T_REINFORCE, 1},
-		       {  5, T_VANISH, 1},
-		       {  10, T_DAZZLE, 1},
-		       {   0, 0, 0} },
 	und_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_PRACTICE, 1},
 		       {   0, 0, 0} },
@@ -2288,7 +2284,6 @@ role_tech()
 {
 	switch (Role_switch) {
 		case PM_ARCHEOLOGIST:	return (arc_tech);
-		case PM_GOFF:	return (gof_tech);
 		case PM_DRUNK:	return (dru_tech);
 		case PM_BARBARIAN:	return (bar_tech);
 		case PM_BLEEDER:	return (ble_tech);
@@ -2297,7 +2292,6 @@ role_tech()
 		case PM_FLAME_MAGE:	return (fla_tech);
 		case PM_ACID_MAGE:	return (aci_tech);
 		case PM_LUNATIC:	return (lun_tech);
-		case PM_ACTIVISTOR:	return (act_tech);
 		case PM_ELECTRIC_MAGE:	return (ele_tech);
 		case PM_HEALER:		return (hea_tech);
 		case PM_ICE_MAGE:	return (ice_tech);

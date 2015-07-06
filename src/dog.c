@@ -55,8 +55,6 @@ pet_type()
 	    return (PM_LITTLE_DOG);
 	else if (Role_if(PM_PIRATE))
 		return (rn2(2) ? PM_AIRBORNE_PARROT : PM_MONKEY);
-	else if (Role_if(PM_GOFF))
-		return (rn2(2) ? PM_NINJA_BOY : PM_NINJA_GIRL);
 	else if (Role_if(PM_KORSAIR))
 		switch (rnd(5)) {   
 		case 1: return (PM_LITTLE_DOG);
@@ -285,19 +283,6 @@ makedog()
 	if (pettype == PM_TIGER) petname = "Simba";
 	if (pettype == PM_VIPER) petname = "Lukas";
 	if (pettype == PM_GIANT_SPIDER) petname = "Andreas";
-
-	if (pettype == PM_ANIMATED_WEDGE_SANDAL) petname = "Larissa"; /* just a common female first name */
-
-	if (pettype == PM_LITTLE_GIRL) petname = "Sarah"; /* just a common female first name */
-	if (pettype == PM_LITTLE_BOY) petname = "Jonas"; /* just a common male first name */
-	if (pettype == PM_ASIAN_GIRL) petname = "Whitney"; /* the Normal-type gym leader in Pokemon Crystal */
-	if (pettype == PM_ESTRELLA_GIRL) petname = "Estrella"; /* uncommon female first name */
-
-	if (pettype == PM_DARK_GIRL) petname = "Everella"; /* taken from a fanfic */
-	if (pettype == PM_REDGUARD_GIRL) petname = "Jasajeen"; /* taken from a fanfic */
-	if (pettype == PM_THIEVING_GIRL) petname = "Esruth"; /* taken from a fanfic */
-
-	if (pettype == PM_ACTIVISTOR) petname = "Helen"; /* yet another common first name */
 
 	if (pettype == PM_BABY_YELLOW_DRAGON || pettype == PM_BABY_GREEN_DRAGON || pettype == PM_BABY_BLUE_DRAGON || pettype == PM_BABY_RED_DRAGON || pettype == PM_BABY_ORANGE_DRAGON || pettype == PM_BABY_WHITE_DRAGON || pettype == PM_BABY_BLACK_DRAGON || pettype == PM_BABY_DEEP_DRAGON || pettype == PM_BABY_SHIMMERING_DRAGON || pettype == PM_BABY_GRAY_DRAGON || pettype == PM_BABY_SILVER_DRAGON) petname = "Odahviing";
 #endif /* CONVICT */

@@ -1504,8 +1504,6 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	if (Undead_warning) you_are("warned of undead");
 #endif
 
-	if (Role_if(PM_ACTIVISTOR) ) you_are("aware of the presence of topmodels");
-	if (Role_if(PM_ACTIVISTOR) && uwep && is_quest_artifact(uwep) ) you_are("aware of the presence of unique monsters");
 	if (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING ) you_are("aware of the presence of undead");
 	if (uamul && uamul->otyp == AMULET_OF_POISON_WARNING ) you_are("aware of the presence of poisonous monsters");
 	if (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING ) you_are("aware of the presence of same-race monsters");
@@ -1953,10 +1951,6 @@ int final;
 		dump(youwere, buf);
 	}
 	if (Undead_warning) dump(youwere, "warned of undead");
-	/* 5lo: These next two are just here for temp, as this role will be removed after a 1.0 release */
-	if (Role_if(PM_ACTIVISTOR)) dump(youwere, "aware of the presence of topmodels");
-	if (Role_if(PM_ACTIVISTOR) && uwep && is_quest_artifact(uwep)) dump(youwere, "aware of the presence of unique monsters");
-	/* Back to our program... */
 	if (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING ) dump(youwere, "aware of the presence of undead");
 	if (uamul && uamul->otyp == AMULET_OF_POISON_WARNING ) dump(youwere, "aware of the presence of poisonous monsters");
 	if (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING ) dump(youwere, "aware of the presence of same-race monsters");

@@ -147,7 +147,7 @@ register struct obj *obj;
 	/* [ALI] (fully) drained food is not presented as an option,
 	 * but partly eaten food is (even though you can't drain it).
 	 */
-	if (is_vampire(youmonst.data) || (Role_if(PM_GOFF) && !Upolyd) )
+	if (is_vampire(youmonst.data))
 		return (boolean)(obj->otyp == CORPSE &&
 		  has_blood(&mons[obj->corpsenm]) && (!obj->odrained ||
 		  obj->oeaten > drainlevel(obj)));
@@ -288,68 +288,9 @@ register struct obj *food;
 	if (u.uhs != SATIATED) {
 		if (!food || food->otyp != AMULET_OF_STRANGULATION)
 			return;
-	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_GOFF)) {
+	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER)) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
-	}
-
-	if (Role_if(PM_GOFF)) { /* They aren't used to eat much. --Amy */
-
-	if(!rn2(4)) {
-		if (Hallucination) You_feel("rather trippy.");
-		else You_feel("rather %s.", body_part(LIGHT_HEADED));
-		make_confused(HConfusion + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("uncontrollable."); /* this and some other effects added by Amy */
-		else You_feel("stunned.");
-		make_stunned(HStun + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("even weirder!");
-		else You_feel("weirded out!");
-		make_hallucinated(HHallucination + d(2,10),FALSE,0L);
-	} else if(!rn2(4)) {
-		if (!Blind) pline("Everything suddenly goes dark.");
-		make_blinded(Blinded+d(2,10),FALSE);
-		if (!Blind) Your(vision_clears);
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("like you have dementia tremor!"); /* not a real name --Amy */
-		else pline("Your hands start trembling violently!");
-		incr_itimeout(&Glib, d(2,4) );
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("totally down! Seems you tried some illegal shit!");
-		else pline("You feel like you're going to throw up.");
-	      make_vomiting(Vomiting+20, TRUE);
-		if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
-	} else if(!rn2(3)) {
-		const char *what, *where;
-		if (!Blind)
-		    what = "goes",  where = "dark";
-		else if (Levitation || Is_airlevel(&u.uz) ||
-			 Is_waterlevel(&u.uz))
-		    what = "you lose control of",  where = "yourself";
-		else
-		    what = "you slap against the", where =
-#ifdef STEED
-			   (u.usteed) ? "saddle" :
-#endif
-			   surface(u.ux,u.uy);
-		pline_The("world spins and %s %s.", what, where);
-		flags.soundok = 0;
-		nomul(-rnd(10), "unconscious from breaking anorexia conduct");
-		nomovemsg = "You are conscious again.";
-		afternmv = Hear_again;
-		return;
-	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
-	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
-#if 0 /* 5lo: Wayyyyyy too evil */
-	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
-		    Slimed = 100L;
-		    flags.botl = 1;
-		    killer_format = KILLED_BY_AN;
-		    delayed_killer = "slimy meal";
-#endif
-	}
-
 	}
 
 	exercise(A_CON, FALSE);
@@ -365,8 +306,6 @@ register struct obj *food;
 			return;
 		}
 		You("stuff yourself and then vomit voluminously.");
-		if (Role_if(PM_GOFF)) {adjalign(-20);	/* overeating doesn't befit a topmodel */
-		pline("Bleeargh! You feel very bad for trying to overeat."); }
 		morehungry(1000);	/* you just got *very* sick! */
 		nomovemsg = 0;
 		vomit();
@@ -527,7 +466,7 @@ eatfood()		/* called each move during eating process */
 		do_reset_eat();
 		return(0);
 	}
-	if ( (is_vampire(youmonst.data) || Role_if(PM_GOFF) ) != victual.piece->odrained) {
+	if ((is_vampire(youmonst.data)) != victual.piece->odrained) {
 	    /* Polymorphed while eating/draining */
 	    do_reset_eat();
 	    return(0);
@@ -1666,71 +1605,10 @@ void
 gluttonous()
 {
 	/* only happens if you were satiated, extra check by Amy to make that conduct mean more */
-	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_GOFF)) ) {
+	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER))) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
 	}
-
-	if (u.uhs == SATIATED && (Role_if(PM_GOFF)) ) { /* They aren't used to eat much. --Amy */
-
-	if(!rn2(4)) {
-		if (Hallucination) You_feel("rather trippy.");
-		else You_feel("rather %s.", body_part(LIGHT_HEADED));
-		make_confused(HConfusion + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("uncontrollable."); /* this and some other effects added by Amy */
-		else You_feel("stunned.");
-		make_stunned(HStun + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("even weirder!");
-		else You_feel("weirded out!");
-		make_hallucinated(HHallucination + d(2,10),FALSE,0L);
-	} else if(!rn2(4)) {
-		if (!Blind) pline("Everything suddenly goes dark.");
-		make_blinded(Blinded+d(2,10),FALSE);
-		if (!Blind) Your(vision_clears);
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("like you have dementia tremor!"); /* not a real name --Amy */
-		else pline("Your hands start trembling violently!");
-		incr_itimeout(&Glib, d(2,4) );
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("totally down! Seems you tried some illegal shit!");
-		else pline("You feel like you're going to throw up.");
-	      make_vomiting(Vomiting+20, TRUE);
-		if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
-	} else if(!rn2(3)) {
-		const char *what, *where;
-		if (!Blind)
-		    what = "goes",  where = "dark";
-		else if (Levitation || Is_airlevel(&u.uz) ||
-			 Is_waterlevel(&u.uz))
-		    what = "you lose control of",  where = "yourself";
-		else
-		    what = "you slap against the", where =
-#ifdef STEED
-			   (u.usteed) ? "saddle" :
-#endif
-			   surface(u.ux,u.uy);
-		pline_The("world spins and %s %s.", what, where);
-		flags.soundok = 0;
-		nomul(-rnd(10), "unconscious from breaking anorexia conduct");
-		nomovemsg = "You are conscious again.";
-		afternmv = Hear_again;
-		return;
-	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
-	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
-#if 0 /* 5lo: Wayyyyyy too evil */
-	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
-		    Slimed = 100L;
-		    flags.botl = 1;
-		    killer_format = KILLED_BY_AN;
-		    delayed_killer = "slimy meal";
-#endif
-	}
-	}
-
-
-
 }
 
 void
@@ -1741,70 +1619,10 @@ violated_vegetarian()
     return;
     }
     u.uconduct.unvegetarian++;
-    if (Role_if(PM_MONK) || Role_if(PM_GOFF) ) {
+    if (Role_if(PM_MONK)) {
 	You_feel("guilty.");
 	adjalign(-5);
     }
-	if (Role_if(PM_GOFF)) { /* Their metabolism isn't used to meat. --Amy */
-
-	if(!rn2(4)) {
-		if (Hallucination) You_feel("rather trippy.");
-		else You_feel("rather %s.", body_part(LIGHT_HEADED));
-		make_confused(HConfusion + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("uncontrollable."); /* this and some other effects added by Amy */
-		else You_feel("stunned.");
-		make_stunned(HStun + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("even weirder!");
-		else You_feel("weirded out!");
-		make_hallucinated(HHallucination + d(2,10),FALSE,0L);
-	} else if(!rn2(4)) {
-		if (!Blind) pline("Everything suddenly goes dark.");
-		make_blinded(Blinded+d(2,10),FALSE);
-		if (!Blind) Your(vision_clears);
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("like you have dementia tremor!"); /* not a real name --Amy */
-		else pline("Your hands start trembling violently!");
-		incr_itimeout(&Glib, d(2,4) );
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("totally down! Seems you tried some illegal shit!");
-		else pline("You feel like you're going to throw up.");
-	      make_vomiting(Vomiting+20, TRUE);
-		if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
-	} else if(!rn2(3)) {
-		const char *what, *where;
-		if (!Blind)
-		    what = "goes",  where = "dark";
-		else if (Levitation || Is_airlevel(&u.uz) ||
-			 Is_waterlevel(&u.uz))
-		    what = "you lose control of",  where = "yourself";
-		else
-		    what = "you slap against the", where =
-#ifdef STEED
-			   (u.usteed) ? "saddle" :
-#endif
-			   surface(u.ux,u.uy);
-		pline_The("world spins and %s %s.", what, where);
-		flags.soundok = 0;
-		nomul(-rnd(10), "unconscious from forgetting your anorexia conduct");
-		nomovemsg = "You are conscious again.";
-		afternmv = Hear_again;
-		return;
-	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
-	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
-#if 0 /* 5lo: Wayyyyyy too evil */
-	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
-		    Slimed = 100L;
-		    flags.botl = 1;
-		    killer_format = KILLED_BY_AN;
-		    delayed_killer = "slimy meal";
-#endif
-	}
-	/* By the way, I'm certainly not a vegetarian myself. It's just a twist of the topmodel role. --Amy */
-
-	}
-
     return;
 }
 
@@ -2152,7 +1970,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	 * Thus happens before the conduct checks intentionally - should it be after?
 	 * Blood is assumed to be meat and flesh.
 	 */
-	if (is_vampire(youmonst.data) || (Role_if(PM_GOFF) && !Upolyd) ) {
+	if (is_vampire(youmonst.data)) {
 	    /* oeaten is set up by touchfood */
 	    if (otmp->odrained ? otmp->oeaten <= drainlevel(otmp) :
 	      otmp->oeaten < mons[otmp->corpsenm].cnutrit) {
@@ -2974,7 +2792,7 @@ struct obj *otmp;
 		else return 2;
 	}
 	if (cadaver && !vegetarian(&mons[mnum]) &&
-	    !u.uconduct.unvegetarian && (Role_if(PM_MONK) || Role_if(PM_GOFF) ) ) {
+	    !u.uconduct.unvegetarian && (Role_if(PM_MONK))) {
 		Sprintf(buf, "%s unhealthy. %s",
 			foodsmell, eat_it_anyway);
 		if (yn_function(buf,ynchars,'n')=='n') return 1;
@@ -3198,7 +3016,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 	/* [ALI] Hero polymorphed in the meantime.
 	 */
 	if (otmp == victual.piece &&
-	  (is_vampire(youmonst.data) || Role_if(PM_GOFF) ) != otmp->odrained)
+	  (is_vampire(youmonst.data)) != otmp->odrained)
 	    victual.piece = (struct obj *)0;	/* Can't resume */
 
 	/* [ALI] Blood can coagulate during the interruption
