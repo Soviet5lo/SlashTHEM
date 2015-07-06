@@ -400,9 +400,12 @@ MONSTER: ''', "crystal ice golem", random
 MONSTER: ''', "crystal ice golem", random
 MONSTER: ''', "ice golem", random
 MONSTER: ''', "ice golem", random
-MONSTER: 'A', "black Angel", random
-MONSTER: 'A', "black Angel", random
-MONSTER: 'A', "black Angel", random
+#MONSTER: 'A', "black Angel", random
+#MONSTER: 'A', "black Angel", random
+#MONSTER: 'A', "black Angel", random
+MONSTER: 'A', "weeping angel", random
+MONSTER: 'A', "weeping angel", random
+MONSTER: 'A', "weeping angel", random
 MONSTER: random, random, random
 MONSTER: random, random, random
 MONSTER: random, random, random

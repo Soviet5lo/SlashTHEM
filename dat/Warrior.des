@@ -233,7 +233,6 @@ MONSTER:'n',"mountain nymph",random,hostile
 MONSTER:'n',"pixie",random,hostile
 MONSTER:'n',"brownie",random,hostile
 MONSTER:'n',"quickling",random,hostile
-MONSTER:'n',"ice nymph",random,hostile
 MONSTER:'n',random,random,hostile
 
 #
@@ -333,8 +332,6 @@ MONSTER:'n',"mountain nymph",random,hostile
 MONSTER:'n',"pixie",random,hostile
 MONSTER:'n',"brownie",random,hostile
 MONSTER:'n',"quickling",random,hostile
-MONSTER:'n',"ice nymph",random,hostile
-MONSTER:'n',"buzzing nymph",random,hostile
 MONSTER:'n',random,random,hostile
 
 #
@@ -367,7 +364,6 @@ MONSTER: 'a', "locust", random, hostile
 MONSTER: 'a', "locust", random, hostile
 MONSTER: 'a', "locust", random, hostile
 MONSTER: 'a', random, random, hostile
-MONSTER: 'n', "fiery nymph", random, hostile
 #
 TRAP: random, random
 TRAP: random, random
@@ -398,9 +394,9 @@ MONSTER: 'a', "locust", random, hostile
 MONSTER: 'a', "locust", random, hostile
 MONSTER: 'a', "locust", random, hostile
 MONSTER: 'a', random, random, hostile
-MONSTER: 'n', "ice nymph", random, hostile
-MONSTER: 'n', "fiery nymph", random, hostile
-MONSTER: 'n', "buzzing nymph", random, hostile
+MONSTER: 'n', random, random, hostile
+MONSTER: 'n', random, random, hostile
+MONSTER: 'n', random, random, hostile
 #
 TRAP: random, random
 TRAP: random, random

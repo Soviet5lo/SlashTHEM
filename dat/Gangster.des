@@ -48,14 +48,14 @@ MONSTER:'@',"fellow gangster",random,"Fridrika"
 MONSTER:'@',"fellow gangster",random,"Lynette"
 MONSTER:'@',"fellow gangster",random,"Giglio"
 # Corrupt guards
-MONSTER:'@',"cuntgun trooper",random,hostile
-MONSTER:'@',"cuntgun trooper",random,hostile
-MONSTER:'@',"cuntgun trooper",random,hostile
-MONSTER:'@',"cuntgun trooper",random,hostile
-MONSTER:'@',"cuntgun trooper",random,hostile
-MONSTER:'@',"cuntgun trooper",random,hostile
+MONSTER:'@',"soldier",random,hostile
+MONSTER:'@',"soldier",random,hostile
+MONSTER:'@',"soldier",random,hostile
+MONSTER:'@',"soldier",random,hostile
+MONSTER:'@',"soldier",random,hostile
+MONSTER:'@',"soldier",random,hostile
 # Good `ol mimics
-MONSTER:'@',"rifleman", (74,05),hostile
+MONSTER:'@',"officer", (74,05),hostile
 # Random traps
 TRAP:"web",random
 TRAP:"web",random
@@ -121,17 +121,17 @@ DOOR:closed,(45,17)
 DOOR:locked,(36,12)
 DOOR:closed,(61,02)
 # Police station kops
-MONSTER: '@',"cuntgun trooper",(62,01),hostile
-MONSTER: '@',"cuntgun trooper",(65,01),hostile
-MONSTER: '@',"cuntgun trooper",(66,01),hostile
-MONSTER: '@',"cuntgun trooper",(74,02),hostile
-MONSTER: '@',"cuntgun trooper",(63,03),hostile
-MONSTER: '@',"cuntgun trooper",(72,03),hostile
-MONSTER: '@',"cuntgun trooper",(71,04),hostile
-MONSTER: '@',"cuntgun trooper",(68,05),hostile
-MONSTER: '@',"cuntgun trooper",(64,06),hostile
+MONSTER: '@',"soldier",(62,01),hostile
+MONSTER: '@',"soldier",(65,01),hostile
+MONSTER: '@',"soldier",(66,01),hostile
+MONSTER: '@',"soldier",(74,02),hostile
+MONSTER: '@',"soldier",(63,03),hostile
+MONSTER: '@',"soldier",(72,03),hostile
+MONSTER: '@',"soldier",(71,04),hostile
+MONSTER: '@',"soldier",(68,05),hostile
+MONSTER: '@',"soldier",(64,06),hostile
 # Iron golem in supply room
-MONSTER: '@',"rifleman",(11,17),asleep,hostile
+MONSTER: '@',"officer",(11,17),asleep,hostile
 # Supply room junk
 
 
@@ -183,13 +183,13 @@ TRAP:"fire",random
 TRAP:"fire",random
 TRAP:"fire",random
 # Lava demons
-MONSTER: '@',"tank breaker",(30,05),hostile,awake
-MONSTER: '@',"tank breaker",(23,09),hostile,awake
-MONSTER: '@',"tank breaker",(39,09),hostile,awake
-MONSTER: '@',"tank breaker",(36,14),hostile,awake
-MONSTER: '@',"tank breaker",(26,14),hostile,awake
+MONSTER: '@',"soldier",(30,05),hostile,awake
+MONSTER: '@',"soldier",(23,09),hostile,awake
+MONSTER: '@',"soldier",(39,09),hostile,awake
+MONSTER: '@',"soldier",(36,14),hostile,awake
+MONSTER: '@',"soldier",(26,14),hostile,awake
 # Elite guard
-MONSTER: '@',"riot breaker",(04,13),hostile
+MONSTER: '@',"general",(04,13),hostile
 # Objects
 OBJECT:')',"submachine gun",(31,10),blessed,0,"The Tommy Gun of Capone"
 OBJECT:')',"bullet",(31,10)
@@ -241,21 +241,21 @@ STAIR:(03,17),down
 # Non diggable walls
 NON_DIGGABLE:(00,00,75,19)
 # "Regular" prisoners
-MONSTER:'@',"cuntgun trooper",(59,02),hostile
-MONSTER:'@',"cuntgun trooper",(55,08),hostile
-MONSTER:'@',"cuntgun trooper",(43,14),hostile
-MONSTER:'@',"cuntgun trooper",(38,05),hostile
-MONSTER:'@',"cuntgun trooper",(27,02),hostile
-MONSTER:'@',"cuntgun trooper",(23,08),hostile
-MONSTER:'@',"cuntgun trooper",(11,14),hostile
-MONSTER:'@',"cuntgun trooper",(06,05),hostile
+MONSTER:'@',"soldier",(59,02),hostile
+MONSTER:'@',"soldier",(55,08),hostile
+MONSTER:'@',"soldier",(43,14),hostile
+MONSTER:'@',"soldier",(38,05),hostile
+MONSTER:'@',"soldier",(27,02),hostile
+MONSTER:'@',"soldier",(23,08),hostile
+MONSTER:'@',"soldier",(11,14),hostile
+MONSTER:'@',"soldier",(06,05),hostile
 # Undead prisoners
 # Bugs and snakes
 # Corrupt guards
-MONSTER:'@',"rifleman",random,hostile
-MONSTER:'@',"rifleman",random,hostile
-MONSTER:'@',"rifleman",random,hostile
-MONSTER:'@',"rifleman",random,hostile
+MONSTER:'@',"officer",random,hostile
+MONSTER:'@',"officer",random,hostile
+MONSTER:'@',"officer",random,hostile
+MONSTER:'@',"officer",random,hostile
 # Random traps
 TRAP:"web",random
 TRAP:"web",random
@@ -273,25 +273,25 @@ NOMAP
 STAIR: random, up
 STAIR: random, down
 # Peaceful miners
-MONSTER:'@',"rifleman",random,hostile,"Big Bear"
-MONSTER:'@',"rifleman",random,hostile,"Tacitus"
+MONSTER:'@',"officer",random,hostile,"Big Bear"
+MONSTER:'@',"officer",random,hostile,"Tacitus"
 # Earth creatures
-MONSTER:'@',"rifleman",random,hostile,"Ryu"
-MONSTER:'@',"rifleman",random,hostile,"Wolf"
+MONSTER:'@',"officer",random,hostile,"Ryu"
+MONSTER:'@',"officer",random,hostile,"Wolf"
 # Other nasties
-MONSTER:'@',"cuntgun trooper",random,hostile,"Yvara"
-MONSTER:'@',"cuntgun trooper",random,hostile,"JoJo"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Sabine"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Jyllia"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Pete"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Lenka"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Lex"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Evita"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Liebea"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Mohmar Deathstrike"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Denshi Gasu"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Tiger's Claw"
-MONSTER:'@',"cuntgun trooper",random,hostile,"Ingo"
+MONSTER:'@',"soldier",random,hostile,"Yvara"
+MONSTER:'@',"soldier",random,hostile,"JoJo"
+MONSTER:'@',"soldier",random,hostile,"Sabine"
+MONSTER:'@',"soldier",random,hostile,"Jyllia"
+MONSTER:'@',"soldier",random,hostile,"Pete"
+MONSTER:'@',"soldier",random,hostile,"Lenka"
+MONSTER:'@',"soldier",random,hostile,"Lex"
+MONSTER:'@',"soldier",random,hostile,"Evita"
+MONSTER:'@',"soldier",random,hostile,"Liebea"
+MONSTER:'@',"soldier",random,hostile,"Mohmar Deathstrike"
+MONSTER:'@',"soldier",random,hostile,"Denshi Gasu"
+MONSTER:'@',"soldier",random,hostile,"Tiger's Claw"
+MONSTER:'@',"soldier",random,hostile,"Ingo"
 # Tools and corpses
 OBJECT: '%', "corpse", random
 OBJECT: '%', "corpse", random

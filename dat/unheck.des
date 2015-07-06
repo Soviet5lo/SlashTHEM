@@ -7806,7 +7806,7 @@ STAIR:levregion(1,0,79,20),(0,0,26,16),up
 
 REGION:(35,08,35,12),  lit,"ordinary",unfilled
 
-MONSTER:'u',"green nightmare", random
+MONSTER:'u',"warhorse", random
 OBJECT: '(',"skeleton key", random
 
 MONSTER:'V',random, random
@@ -8219,20 +8219,20 @@ RANDOM_PLACES:(03,03),(03,17),(19,03),(19,17),(37,02),(37,18),(55,03),(55,17),(7
 STAIR: place[0], up
 STAIR: place[1], down
 
-MONSTER:'e',"quinon", place[2]
-MONSTER:'e',"quinon", place[3]
+MONSTER:'e',"blinking eye", place[2]
+MONSTER:'e',"blinking eye", place[3]
 
-MONSTER:'e',"quaton", place[4]
-MONSTER:'e',"quaton", place[5]
+MONSTER:'e',"bloodshot eye", place[4]
+MONSTER:'e',"bloodshot eye", place[5]
 
-MONSTER:'e',"triton", place[6]
-MONSTER:'e',"triton", place[7]
+MONSTER:'e',"glowing eye", place[6]
+MONSTER:'e',"glowing eye", place[7]
 
-MONSTER:'e',"duton", place[8]
-MONSTER:'e',"duton", place[9]
+MONSTER:'e',"burning eye", place[8]
+MONSTER:'e',"burning eye", place[9]
 
-MONSTER:'e',"monoton", place[0]
-MONSTER:'e',"monoton", place[1]
+MONSTER:'e',"floating eye", place[0]
+MONSTER:'e',"floating eye", place[1]
 
 MAZE: "unhck-74",' '
 
@@ -8302,35 +8302,35 @@ ENDMAP
 
 MONSTER: 'e', random, (36,10)
 
-MONSTER: 'e', "quinon", random
-MONSTER: 'e', "quinon", random
+MONSTER: 'e', "blinking eye", random
+MONSTER: 'e', "blinking eye", random
 
-MONSTER: 'e', "quaton", random
-MONSTER: 'e', "quaton", random
+MONSTER: 'e', "bloodshot eye", random
+MONSTER: 'e', "bloodshot eye", random
 
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
 
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
 
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
 
 
 GEOMETRY: center, center
@@ -8385,10 +8385,10 @@ MONSTER: 'k', "kobold", (33,01)
 MONSTER: 'k', "large kobold", (35,01)
 MONSTER: 'k', "kobold lord", (37,01)
 MONSTER: 'k', "kobold shaman", (39,01)
-MONSTER: 'n', "dryad", (41,01)
-MONSTER: 'n', "naiad", (43,01)
+#MONSTER: 'n', "dryad", (41,01)
+#MONSTER: 'n', "naiad", (43,01)
 #OBJECT:'`',"boulder",(43,02)
-MONSTER: 'n', "swamp nymph", (45,01)
+#MONSTER: 'n', "swamp nymph", (45,01)
 MONSTER: 'o', "orc", (47,01)
 MONSTER: 'o', "hill orc", (49,01)
 MONSTER: 'o', "Mordor orc", (51,01)
@@ -8416,9 +8416,9 @@ MONSTER: 'L', random, (73,13)
 MONSTER: 'L', random, (73,15)
 OBJECT:'`',"statue",(73,17),"master lich",1
 
-OBJECT:'`',"statue",(71,19),"death knight",1
+#OBJECT:'`',"statue",(71,19),"death knight",1
 OBJECT:'`',"statue",(69,19),"arch-lich",1
-OBJECT:'`',"statue",(67,19),"alhoon",1
+OBJECT:'`',"statue",(67,19),"illithid",1
 MONSTER: 'M', "kobold mummy", (65,19)
 MONSTER: 'M', "gnome mummy", (63,19)
 MONSTER: 'M', "orc mummy", (61,19)
@@ -8439,7 +8439,7 @@ MONSTER: 'T', random, (35,19)
 MONSTER: 'T', random, (33,19)
 MONSTER: 'T', random, (31,19)
 MONSTER: 'T', random, (29,19)
-MONSTER: 'T', "wood troll", (27,19)
+#MONSTER: 'T', "wood troll", (27,19)
 MONSTER: 'V', random, (25,19)
 MONSTER: 'V', random, (23,19)
 MONSTER: 'Z', random, (21,19)
