@@ -5145,7 +5145,7 @@ register int	mmflags;
 				mtmp->mpeaceful = TRUE;
 			break;
 		case S_BAT:
-			if (((Inhell && !Race_if(PM_HERETIC)) ||
+			if (((Inhell) ||
 #ifdef ELDER_SCROLLS
 			    Race_if(PM_IMPERIAL) || 
 #endif /* ELDER_SCROLLS */
@@ -5945,8 +5945,6 @@ boolean
 peace_minded(ptr)
 register struct permonst *ptr;
 {
-	if (Race_if(PM_ALBAE)) return FALSE; /* albae are hated by all other races --Amy */
-
 	aligntyp mal = ptr->maligntyp, ual = u.ualign.type;
 
 	if (always_peaceful(ptr)) return TRUE;

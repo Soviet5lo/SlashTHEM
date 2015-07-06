@@ -2049,13 +2049,6 @@ struct obj *weapon;
 		}
 	}
 #endif
-
-	/* Navi are highly proficient with spears --Amy */
-	if (Race_if(PM_NAVI) && weapon && weapon_type(weapon) == P_SPEAR){
-
-		bonus += 3;
-	}
-
 	/* add a little damage bonus for higher-level characters so the stronger monsters aren't too overpowered --Amy */
 
 	if (u.ulevel >= 10) bonus += 1;

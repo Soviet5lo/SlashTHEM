@@ -1536,7 +1536,7 @@ level_difficulty()
 	else
 		if (u.uhave.amulet)
 			return(/*deepest_lev_reached(FALSE)*/100);
-		else if ((Inhell && !Race_if(PM_HERETIC) ) ||
+		else if ((Inhell) ||
 #ifdef ELDER_SCROLLS
 			    Race_if(PM_IMPERIAL) || 
 #endif /* ELDER_SCROLLS */

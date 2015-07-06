@@ -39,9 +39,6 @@ register boolean clumsy;
 	if (uarmf && uarmf->otyp == KICKING_BOOTS)
 	    dmg += 5;
 
-	if (uarmf && uarmf->otyp == WEDGE_SANDALS && Race_if(PM_NAVI) )
-	    dmg += 5;
-
 	if (uarmf && uarmf->otyp == WEDGE_SANDALS)
 	    dmg += 2;
 

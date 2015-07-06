@@ -685,11 +685,6 @@ static struct trobj AlienItem[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 #endif
-static struct trobj NaviItem[] = {
-	{ WEDGE_SANDALS, 0, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj InsectoidItem[] = {
 	{ LUMP_OF_ROYAL_JELLY, 0, FOOD_CLASS, 5, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -717,11 +712,6 @@ static struct trobj GhastFood[] = {
 #endif
 static struct trobj UngMoldWand[] = {
 	{ WAN_DEATH, 10, WAND_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj MaiaWand[] = {
-	{ WAN_TELEPORTATION, 12, WAND_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -2553,17 +2543,6 @@ u_init()
 	u.urmaxlvlC = 1; /* will go up if a binder role player levels up */
 	u.urmaxlvlD = 1; /* will go up if a bard role player levels up */
 
-	u.uhereticgodinit = 0; /* for heretic race */
-	u.uhereticgodlawful = randrole(); /* for heretic race */
-		    while (!roles[u.uhereticgodlawful].lgod)	/* unless they're missing */
-			u.uhereticgodlawful = randrole(); /* for heretic race */
-	u.uhereticgodneutral = randrole(); /* for heretic race */
-		    while (!roles[u.uhereticgodneutral].lgod)	/* unless they're missing */
-			u.uhereticgodneutral = randrole(); /* for heretic race */
-	u.uhereticgodchaotic = randrole(); /* for heretic race */
-		    while (!roles[u.uhereticgodchaotic].lgod)	/* unless they're missing */
-			u.uhereticgodchaotic = randrole(); /* for heretic race */
-
 /* In order to make the game even more interesting for lost souls, they cannot level teleport or branchport at all. */
 
 	u.ualignbase[A_CURRENT] = u.ualignbase[A_ORIGINAL] = u.ualign.type =
@@ -3323,14 +3302,8 @@ u_init()
 	case PM_INSECTOID:
           if(!Role_if(PM_CONVICT)) ini_inv(InsectoidItem);		
 		break;
-	case PM_NAVI:
-          if(!Role_if(PM_CONVICT)) ini_inv(NaviItem);		
-		break;
 	case PM_UNGENOMOLD:
           if(!Role_if(PM_CONVICT)) ini_inv(UngMoldWand);		
-		break;
-	case PM_MAIA:
-          if(!Role_if(PM_CONVICT)) ini_inv(MaiaWand);		
 		break;
 	case PM_CLOCKWORK_AUTOMATON:
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
@@ -5849,9 +5822,6 @@ register struct trobj *trop;
                 obj->cursed = TRUE;
             }
             if (obj->otyp == WAN_DEATH && (Role_if(PM_DEATH_EATER) || Race_if(PM_UNGENOMOLD) ) ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == WAN_TELEPORTATION && (Race_if(PM_MAIA) ) ) {
                 obj->cursed = TRUE;
             }
             if (obj->otyp == LUMP_OF_ROYAL_JELLY && (Race_if(PM_INSECTOID) ) ) {

@@ -277,14 +277,6 @@ const struct innate {
 		     {	 15, &(HFire_resistance), "heat resistant", "less heat resistant" },
 		     {	 0, 0, 0, 0 } },
 
-	alb_abil[] = { {   1, &(HAntimagic), "", "" },
-		     {   3, &(HUndead_warning), "sensitive", "careless" },
-		     {   10, &(HSee_invisible), "your vision sharpen", "your vision blur" },
-			{  12, &(HStealth), "stealthy", "noisy" },
-			{15, &(HMagical_breathing), "aquatic", "hydrophobic"  },
-		     {	 25, &(HEnergy_regeneration), "charged with mana", "a loss of mana" },
-		     {   0, 0, 0, 0 } },
-
 	fen_abil[] = { {   1, &(HSearching), "", "" },
 			{   5, &(HStealth), "stealthy", "noisy" },
 		     {   7, &(HFast), "quick", "slow" },
@@ -924,7 +916,6 @@ int oldlevel, newlevel;
 	case PM_ORC:            rabil = orc_abil;	break;
 	case PM_HUMAN_WEREWOLF:	rabil = lyc_abil;	break;
 	case PM_FENEK:	rabil = fen_abil;	break;
-	case PM_ALBAE:	rabil = alb_abil;	break;
 #ifdef ELDER_SCROLLS
 	case PM_BRETON:            rabil = bre_abil;	break;
 	case PM_REDGUARD:            rabil = red_abil;	break;

@@ -356,17 +356,6 @@ static const struct innate_tech
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   10, T_VANISH, 1},
 		       {   0, 0, 0} },
-
-	alb_tech[] = { {   1, T_DAZZLE, 1},
-		       {   1, T_PRACTICE, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   5, T_CHARGE_SABER, 1},
-		       {   10, T_CRIT_STRIKE, 1},
-		       {   15, T_TELEKINESIS, 1},
-		       {   20, T_BLINK, 1},
-		       {   25, T_JEDI_JUMP, 1},
-		       {   0, 0, 0} },
 	ins_tech[] = { {   1, T_SUMMON_TEAM_ANT, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
@@ -892,7 +881,7 @@ int tech_no;
 
 			if (u.ualign.record < 0) {
 
-				if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
+				if (Inhell || flags.gehenna ) {
 					pline("%s is inaccessible, and Moloch decides to smite you!",u_gname() );
 					u.ublesscnt += rnz(-u.ualign.record);
 					losehp(rnz(-u.ualign.record), "annoying Moloch", KILLED_BY);
@@ -911,7 +900,7 @@ int tech_no;
 /* Imperials cannot use this technique successfully. */
 			} 
 #endif /* ELDER_SCROLLS */
-			else if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
+			else if (Inhell || flags.gehenna ) {
 				pline("%s is inaccessible, and Moloch decides to smite you!",u_gname() );
 				u.ublesscnt += rnz(level_difficulty() + 1 );
 				losehp(rnz(level_difficulty() + 1 ), "trying to contact their deity in Gehennom", KILLED_BY);
@@ -2343,7 +2332,6 @@ race_tech()
 		case PM_CLOCKWORK_AUTOMATON:		return (clk_tech);
 
 		case PM_FENEK:		return (fen_tech);
-		case PM_ALBAE:		return (alb_tech);
 		case PM_GNOME:		return (gno_tech);
 		case PM_KOBOLT:		return (kob_tech);
 		case PM_OGRO:		return (ogr_tech);

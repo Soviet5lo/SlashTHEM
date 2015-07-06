@@ -366,10 +366,6 @@ struct you {
 	int urmaxlvlB;		/* for cyborg role */
 	int urmaxlvlC;		/* for binder role */
 	int urmaxlvlD;		/* for bard role */
-	int uhereticgodinit;
-	int uhereticgodlawful;
-	int uhereticgodneutral;
-	int uhereticgodchaotic;
 	int urealedibility;	/* no longer a boolean --Amy */
 
 	int eeveelution;		/* mainly for pokemon role but might be useful for others */

@@ -1765,7 +1765,7 @@ coord *tm;
 		case 6: kind = RUST_TRAP; break;
 	    }
 #endif
-	} else if (( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna) && !rn2(5)) {
+	} else if ((Inhell || flags.gehenna) && !rn2(5)) {
 	    /* bias the frequency of fire traps in Gehennom */
 	    kind = FIRE_TRAP;
 	} else {

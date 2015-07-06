@@ -228,12 +228,12 @@
 #define HTeleportation		u.uprops[TELEPORT].intrinsic
 #define ETeleportation		u.uprops[TELEPORT].extrinsic
 #define Teleportation		(HTeleportation || ETeleportation || \
-				 can_teleport(youmonst.data) || Race_if(PM_MAIA))
+				can_teleport(youmonst.data))
 
 #define HTeleport_control	u.uprops[TELEPORT_CONTROL].intrinsic
 #define ETeleport_control	u.uprops[TELEPORT_CONTROL].extrinsic
 #define Teleport_control	((HTeleport_control || ETeleport_control || \
-				 control_teleport(youmonst.data)) && !Race_if(PM_MAIA))
+				 control_teleport(youmonst.data)))
 
 #define HLevitation		u.uprops[LEVITATION].intrinsic
 #define ELevitation		u.uprops[LEVITATION].extrinsic

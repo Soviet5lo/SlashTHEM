@@ -1633,20 +1633,6 @@ struct Role urole =
 
 /* Table of all races */
 const struct Race races[] = {
-{	"albae", "albae", "albaehood", "Alb",
-	{0, 0},
-	PM_ALBAE, NON_PM, PM_ELF_MUMMY, PM_ELF_ZOMBIE,
-	MH_ELF | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_GNOME|MH_ORC|MH_ELF|MH_HUMAN|MH_DWARF|MH_HOBBIT|MH_WERE|MH_VAMPIRE,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{     18,     20, 20, 18, 16, 18 },
-	/* Init   Lower  Higher */
-	{  8, 0,  0, 6,  4, 0 },	/* Hit points */
-	{  8, 0,  6, 0,  4, 0 }		/* Energy */
-},
-
 {	"alien", "alien", "alienhood", "Ali",
 	{0, 0},
 	PM_ALIEN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1823,20 +1809,6 @@ const struct Race races[] = {
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
 },
 
-{	"heretic", "heretic", "hereticism", "Her",
-	{0, 0},
-	PM_HERETIC, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  3, 0,  0, 3,  5, 0 },	/* Hit points */
-	{  3, 0,  3, 0,  5, 0 }		/* Energy */
-},
-
 {	"hobbit", "hobbit", "hobbit-kind", "Hob",
 	{0, 0},
 	PM_HOBBIT, NON_PM, NON_PM, NON_PM,
@@ -1960,20 +1932,6 @@ const struct Race races[] = {
 	{  5, 0,  4, 0,  4, 0 }		/* Energy */
 },
 
-{	"maia", "maian", "maiahood", "Mai",
-	{0, 0},
-	PM_MAIA, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_GNOME|MH_ORC,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
-	{  4, 0,  4, 0,  4, 0 }		/* Energy */
-},
-
 {	"mould", "mouldic", "mouldhood", "Mou",
 	{0, 0},
 	PM_MOULD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1987,19 +1945,6 @@ const struct Race races[] = {
 	{  4, 0,  4, 0,  4, 0 }		/* Energy */
 },
 
-{	"navi", "navi", "navihood", "Nav",
-	{0, 0},
-	PM_NAVI, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_GNOME|MH_ORC,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  1, 0,  0, 2,  1, 0 },	/* Hit points */
-	{  1, 0,  4, 0,  4, 0 }		/* Energy */
-},
 #ifdef ELDER_SCROLLS
 {	"nord", "nordish", "nordhood", "Nor",
 	{0, 0},
@@ -3141,15 +3086,10 @@ role_init()
 		    while (!roles[flags.pantheon].lgod)	/* unless they're missing */
 			flags.pantheon = randrole();
 	}
-	if (!urole.lgod && !Race_if(PM_HERETIC) ) {
+	if (!urole.lgod) {
 	    urole.lgod = roles[flags.pantheon].lgod;
 	    urole.ngod = roles[flags.pantheon].ngod;
 	    urole.cgod = roles[flags.pantheon].cgod;
-	}
-	if (Race_if(PM_HERETIC) ) {
-	    urole.lgod = roles[u.uhereticgodlawful].lgod;
-	    urole.ngod = roles[u.uhereticgodneutral].ngod;
-	    urole.cgod = roles[u.uhereticgodchaotic].cgod;
 	}
 
 #if 0 /* Now in polyself.c, init_uasmon() */

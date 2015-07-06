@@ -676,7 +676,6 @@ register char *enterstring;
 	if ((uarmu && (uarmu->otyp == STRIPED_SHIRT)) && !uarm && !uarmc) {
 	    eshkp->pbanned = TRUE;
 	}
-	if (Race_if(PM_ALBAE) && !Upolyd) eshkp->pbanned = TRUE;
 #endif /* CONVICT */
 
 	rt = rooms[*enterstring - ROOMOFFSET].rtype;
@@ -1813,8 +1812,6 @@ shk_other_services()
 	/* Init your name */
 	if (Role_if(PM_CONVICT))
 		slang = "scumbag";
-	else if (Race_if(PM_ALBAE))
-		slang = "murderer";
 	else if (!is_human(youmonst.data))
 		slang = "ugly";
 	else
@@ -2762,7 +2759,7 @@ speak:
 	    }
 	    Strcpy(buf, "\"For you, ");
 	    if (ANGRY(shkp)) Strcat(buf, "scum ");
-	    else if (Role_if(PM_CONVICT) || Race_if(PM_ALBAE) ) Strcat(buf, "criminal ");
+	    else if (Role_if(PM_CONVICT)) Strcat(buf, "criminal ");
 	    else {
 		static const char *honored[5] = {
 		  "good", "honored", "most gracious", "esteemed",
