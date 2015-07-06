@@ -277,13 +277,6 @@ const struct innate {
 		     {	 15, &(HFire_resistance), "heat resistant", "less heat resistant" },
 		     {	 0, 0, 0, 0 } },
 
-	fen_abil[] = { {   1, &(HSearching), "", "" },
-			{   5, &(HStealth), "stealthy", "noisy" },
-		     {   7, &(HFast), "quick", "slow" },
-		     {	 10, &(HFire_resistance), "heat resistant", "less heat resistant" },
-		     {  15, &(HSwimming), "ready to swim","afraid of the water" },
-		     {   0, 0, 0, 0 } },
-
 	gno_abil[] = { {   5, &(HStealth), "stealthy", "noisy" },
 		     {   9, &(HFast), "quick", "slow" },
 		     {   11, &(HSearching), "perceptive", "unaware" },
@@ -305,17 +298,8 @@ const struct innate {
 	kob_abil[] = { {  1, &(HPoison_resistance), "", "" },
 		     {   0, 0, 0, 0 } },
 
-	sna_abil[] = { {  1, &(HPoison_resistance), "", "" },
-		     {   0, 0, 0, 0 } },
-
 	ill_abil[] = { {  1, &(HTelepat), "", "" },
 		     {   5, &(ETelepat), "aware", "unaware" },
-		     {   0, 0, 0, 0 } },
-
-	spi_abil[] = { {  1, &(HPoison_resistance), "", "" },
-		     {   0, 0, 0, 0 } },
-
-	ins_abil[] = { {  1, &(HPoison_resistance), "", "" },
 		     {   0, 0, 0, 0 } },
 
 	tro_abil[] = { {  1, &(HSick_resistance), "", "" },
@@ -903,10 +887,7 @@ int oldlevel, newlevel;
 	case PM_CLOCKWORK_AUTOMATON:            rabil = clk_abil;	break;
 	case PM_KOBOLT:            rabil = kob_abil;	break;
 	case PM_TROLLOR:            rabil = tro_abil;	break;
-	case PM_SNAKEMAN:            rabil = sna_abil;	break;
 	case PM_ILLITHID:            rabil = ill_abil;	break;
-	case PM_SPIDERMAN:            rabil = spi_abil;	break;
-	case PM_INSECTOID:            rabil = ins_abil;	break;
 	case PM_UNGENOMOLD:            rabil = ung_abil;	break;
 	case PM_GASTLY:            rabil = gas_abil;	break;
 	case PM_GIGANT:            rabil = gig_abil;	break;
@@ -915,7 +896,6 @@ int oldlevel, newlevel;
 	case PM_HOBBIT:		rabil = hob_abil;	break;
 	case PM_ORC:            rabil = orc_abil;	break;
 	case PM_HUMAN_WEREWOLF:	rabil = lyc_abil;	break;
-	case PM_FENEK:	rabil = fen_abil;	break;
 #ifdef ELDER_SCROLLS
 	case PM_BRETON:            rabil = bre_abil;	break;
 	case PM_REDGUARD:            rabil = red_abil;	break;

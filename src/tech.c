@@ -350,16 +350,6 @@ static const struct innate_tech
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
-
-	fen_tech[] = { {   1, T_EVISCERATE, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   10, T_VANISH, 1},
-		       {   0, 0, 0} },
-	ins_tech[] = { {   1, T_SUMMON_TEAM_ANT, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   0, 0, 0} },
 	kob_tech[] = { {   10, T_TINKER, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
@@ -2331,12 +2321,10 @@ race_tech()
 		case PM_DROW:		return (elf_tech);
 		case PM_CLOCKWORK_AUTOMATON:		return (clk_tech);
 
-		case PM_FENEK:		return (fen_tech);
 		case PM_GNOME:		return (gno_tech);
 		case PM_KOBOLT:		return (kob_tech);
 		case PM_OGRO:		return (ogr_tech);
 		case PM_UNGENOMOLD:		return (ung_tech);
-		case PM_INSECTOID:		return (ins_tech);
 		case PM_HOBBIT:		return (hob_tech);
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);
 		case PM_VAMPIRE:	return (vam_tech);

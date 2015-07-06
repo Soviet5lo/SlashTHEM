@@ -685,11 +685,6 @@ static struct trobj AlienItem[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 #endif
-static struct trobj InsectoidItem[] = {
-	{ LUMP_OF_ROYAL_JELLY, 0, FOOD_CLASS, 5, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj KoboltItem[] = {
 	{ DART, 0, WEAPON_CLASS, 15, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -3299,9 +3294,6 @@ u_init()
 	case PM_GASTLY:
           /*ini_inv(GhastFood);*/
 		break;
-	case PM_INSECTOID:
-          if(!Role_if(PM_CONVICT)) ini_inv(InsectoidItem);		
-		break;
 	case PM_UNGENOMOLD:
           if(!Role_if(PM_CONVICT)) ini_inv(UngMoldWand);		
 		break;
@@ -5822,9 +5814,6 @@ register struct trobj *trop;
                 obj->cursed = TRUE;
             }
             if (obj->otyp == WAN_DEATH && (Role_if(PM_DEATH_EATER) || Race_if(PM_UNGENOMOLD) ) ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == LUMP_OF_ROYAL_JELLY && (Race_if(PM_INSECTOID) ) ) {
                 obj->cursed = TRUE;
             }
             if (obj->otyp == AMULET_OF_LIFE_SAVING && (Role_if(PM_DEATH_EATER)) ) {

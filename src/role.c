@@ -1754,20 +1754,6 @@ const struct Race races[] = {
 	{  8, 0,  3, 0,  3, 0 }		/* Energy */
 },
 
-{	"fenek", "fenek", "fenekhood", "Fen",
-	{0, 0},
-	PM_FENEK, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  2, 0,  0, 4,  4, 0 },	/* Hit points */
-	{  2, 0,  1, 0,  1, 0 }		/* Energy */
-},
-
 {	"gastly", "ghast", "ghasthood", "Gha",
 	{0, 0},
 	PM_GASTLY, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1877,19 +1863,6 @@ const struct Race races[] = {
 	{  0, 0,  10, 0, 10, 0 },		/* Energy */
 },
 
-{	"insectoid", "insectoid", "insecthood", "Ins",
-	{0, 0},
-	PM_INSECTOID, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  2, 0,  0, 2,  2, 0 },	/* Hit points */
-	{  2, 0,  2, 0,  2, 0 }		/* Energy */
-},
 #ifdef ELDER_SCROLLS
 {	"khajiit", "khajiit", "cathood", "Kha",
 	{0, 0},
@@ -2015,34 +1988,6 @@ const struct Race races[] = {
 	{  0, 0,  0, 0,  0, 0 }		/* Energy */
 },
 #endif /* ELDER_SCROLLS */
-{	"snakeman", "snakey", "snakehood", "Sna",
-	{0, 0},
-	PM_SNAKEMAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  3, 0,  0, 2,  2, 0 },	/* Hit points */
-	{  2, 0,  1, 0,  1, 0 }		/* Energy */
-},
-
-{	"spiderman", "spider", "spiderhood", "Spi",
-	{0, 0},
-	PM_SPIDERMAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  4, 0,  0, 2,  3, 0 },	/* Hit points */
-	{  1, 0,  1, 0,  1, 0 }		/* Energy */
-},
-
 {	"trollor", "troll", "trollhood", "Tro",
 	{0, 0},
 	PM_TROLLOR, NON_PM, PM_TROLL_MUMMY, PM_TROLL_ZOMBIE,

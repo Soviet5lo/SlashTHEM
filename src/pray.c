@@ -1430,7 +1430,7 @@ dosacrifice()
 
 	/* fix for new races since they're MH_HUMAN but not actually supposed to count as same race --Amy */
 
-	if (your_race(ptr) && !Race_if(PM_ALIEN) && !Race_if(PM_GASTLY) && !Race_if(PM_GIGANT) && !Race_if(PM_INSECTOID) && !Race_if(PM_KOBOLT) && !Race_if(PM_MOULD) && !Race_if(PM_OGRO) && !Race_if(PM_TROLLOR) && !Race_if(PM_UNGENOMOLD) ) {
+	if (your_race(ptr) && !Race_if(PM_ALIEN) && !Race_if(PM_GASTLY) && !Race_if(PM_GIGANT) && !Race_if(PM_KOBOLT) && !Race_if(PM_MOULD) && !Race_if(PM_OGRO) && !Race_if(PM_TROLLOR) && !Race_if(PM_UNGENOMOLD) ) {
 	    if (is_demon(youmonst.data) || Race_if(PM_HUMAN_WEREWOLF)  || Role_if(PM_LUNATIC)) {
 		You("find the idea very satisfying.");
 		exercise(A_WIS, TRUE);

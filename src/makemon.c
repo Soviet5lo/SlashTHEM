@@ -5953,9 +5953,6 @@ register struct permonst *ptr;
 	if (ptr->mlet == S_OGRE && Race_if(PM_OGRO) && !Role_if(PM_CONVICT)) return TRUE;
 	if (ptr->mlet == S_GIANT && Race_if(PM_GIGANT) && !Role_if(PM_CONVICT)) return TRUE;
 	if (ptr->mlet == S_TROLL && Race_if(PM_TROLLOR) && !Role_if(PM_CONVICT)) return TRUE;
-	if (ptr->mlet == S_ANT && Race_if(PM_INSECTOID) && !Role_if(PM_CONVICT)) return TRUE; /* Go Team Ant! --Amy */
-	if (ptr->mlet == S_SNAKE && Race_if(PM_SNAKEMAN) && !Role_if(PM_CONVICT)) return TRUE;
-	if (ptr->mlet == S_SPIDER && Race_if(PM_SPIDERMAN) && !Role_if(PM_CONVICT)) return TRUE;
 #ifdef ELDER_SCROLLS
 	if (ptr->mlet == S_LIZARD && Race_if(PM_ARGONIAN) && !Role_if(PM_CONVICT)) return TRUE;
 #endif /* ELDER_SCROLLS */
