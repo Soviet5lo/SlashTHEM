@@ -617,22 +617,6 @@ static struct trobj Samurai[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Transvestite[] = {
-	{ WEDGED_LITTLE_GIRL_SANDAL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ WEDGE_SANDALS, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ SADDLE, 0, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Topmodel[] = {
-	{ KNIFE, 1, WEAPON_CLASS, 1, 1 },
-	{ RIFLE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 20, 0 },
-	{ LEATHER_PEEP_TOES, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ SADDLE, 0, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Activistor[] = {
 #define ACT_SHIRT	0
 	{ RUFFLED_SHIRT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -1512,28 +1496,6 @@ static const struct def_skill Skill_Dru[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Tra[] = { /* Will be removed */
-    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_WHIP, P_BASIC },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
-    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
-    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_SKILLED },
-#endif
-    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Act[] = { /* Will be removed */
     /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
     { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
@@ -1544,28 +1506,6 @@ static const struct def_skill Skill_Act[] = { /* Will be removed */
     { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
     { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
     { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_SKILLED },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Top[] = { /* Will be removed */
-    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
-    { P_DAGGER, P_SKILLED },             { P_KNIFE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_WHIP, P_BASIC },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
-    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
-    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_EXPERT },
 #ifdef FIREARMS
     { P_FIREARM, P_EXPERT },
 #endif
@@ -3138,19 +3078,6 @@ u_init()
 		ini_inv(Ranger);
 		skill_init(Skill_Ran);
 		break;
-	case PM_TRANSVESTITE:
-		ini_inv(Transvestite);
-		skill_init(Skill_Tra);
-		knows_class(WEAPON_CLASS);
-		knows_class(ARMOR_CLASS);
-		break;
-	case PM_TOPMODEL:
-		ini_inv(Topmodel);
-		skill_init(Skill_Top);
-		knows_class(WEAPON_CLASS);
-		knows_class(ARMOR_CLASS);
-	      u.uhunger = 200;  /* They don't eat much --Amy */
-		break;
 	case PM_ROGUE:
 		Rogue[R_DAGGERS].trquan = rn1(10, 6);
 		Rogue[R_DARTS].trquan = rn1(10, 25);
@@ -3571,7 +3498,6 @@ u_init()
 	case PM_SCIENTIST: rolebounus = rnd(15); break;
 	case PM_PIRATE: rolebounus = rnd(22); break;
 	case PM_JEDI: rolebounus = rnd(22); break;
-	case PM_TOPMODEL: rolebounus = rnd(15); break;
 	case PM_UNDEAD_SLAYER: rolebounus = rnd(25); break;
 	case PM_COURIER: rolebounus = rnd(5); break;
 	case PM_ZYBORG: rolebounus = rnd(30); break;
@@ -5739,8 +5665,6 @@ int otyp;
      case PM_ELECTRIC_MAGE:		skills = Skill_Ele; break;
      case PM_ACID_MAGE:		skills = Skill_Aci; break;
      case PM_FLAME_MAGE:		skills = Skill_F; break;
-     case PM_TRANSVESTITE:	skills = Skill_Tra; break;
-     case PM_TOPMODEL:	skills = Skill_Top; break;
      case PM_GEEK:		skills = Skill_G; break;
      case PM_SCIENTIST:		skills = Skill_Sci; break;
      case PM_GANGSTER:		skills = Skill_Gan; break;

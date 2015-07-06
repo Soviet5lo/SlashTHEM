@@ -271,15 +271,9 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	tou_tech[] = { /* Put Tech here */
 		       {   0, 0, 0} },
-	tra_tech[] = { {   1, T_ATTIRE_CHARM, 1},
-		       {   0, 0, 0} },
 	act_tech[] = { {   1, T_REINFORCE, 1},
 		       {  5, T_VANISH, 1},
 		       {  10, T_DAZZLE, 1},
-		       {   0, 0, 0} },
-	top_tech[] = { {   1, T_ATTIRE_CHARM, 1},
-		       {  10, T_CREATE_AMMO, 1},
-		       {  20, T_LIQUID_LEAP, 1},
 		       {   0, 0, 0} },
 	und_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_PRACTICE, 1},
@@ -2302,8 +2296,6 @@ role_tech()
 		case PM_BARD:	return (brd_tech);
 		case PM_FLAME_MAGE:	return (fla_tech);
 		case PM_ACID_MAGE:	return (aci_tech);
-		case PM_TRANSVESTITE:	return (tra_tech);
-		case PM_TOPMODEL:	return (top_tech);
 		case PM_LUNATIC:	return (lun_tech);
 		case PM_ACTIVISTOR:	return (act_tech);
 		case PM_ELECTRIC_MAGE:	return (ele_tech);

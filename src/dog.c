@@ -89,14 +89,6 @@ pet_type()
 		case 10: return (PM_BABY_SILVER_DRAGON);
 		case 11: return (PM_BABY_GRAY_DRAGON);
 		}
-	else if (Role_if(PM_TRANSVESTITE))
-		return ( !rn2(5) ? PM_ASIAN_GIRL : !rn2(10) ? PM_ESTRELLA_GIRL : rn2(2) ? PM_LITTLE_GIRL : PM_LITTLE_BOY);
-	else if (Role_if(PM_TOPMODEL))
-		switch (rnd(3)) {   
-		case 1: return (PM_DARK_GIRL);
-		case 2: return (PM_REDGUARD_GIRL);
-		case 3: return (PM_THIEVING_GIRL);
-		}
 	else
 	    return (rn2(2) ? PM_KITTEN : PM_LITTLE_DOG);
 }
@@ -1079,7 +1071,7 @@ register struct obj *obj;
 			and psion (learns attire charm at XL15, role suggested by Greg) */
 
 		if (mtmp->data != &mons[PM_PETTY_BATTLE_GIRL]  && mtmp->data != &mons[PM_PETTY_SWEET_WOMAN] && mtmp->data != &mons[PM_POKEMON] && mtmp->data != &mons[PM_PETTY_BEARDED_DEVIL] && mtmp->data != &mons[PM_SIZZLE] && mtmp->data != &mons[PM_PETTY_NALFESHNEE] && mtmp->data != &mons[PM_PETTY_LAVA_DEMON]
-&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR] && !Role_if(PM_TRANSVESTITE) && !Role_if(PM_TOPMODEL) && !Role_if(PM_ZYBORG)  && !Role_if(PM_BINDER) && !Role_if(PM_PSION) )
+&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR] && !Role_if(PM_ZYBORG)  && !Role_if(PM_BINDER) && !Role_if(PM_PSION) )
 			return (struct monst *)0;
 		}
 

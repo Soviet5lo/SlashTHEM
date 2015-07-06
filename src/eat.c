@@ -288,12 +288,12 @@ register struct obj *food;
 	if (u.uhs != SATIATED) {
 		if (!food || food->otyp != AMULET_OF_STRANGULATION)
 			return;
-	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) {
+	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_GOFF)) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
 	}
 
-	if (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) { /* They aren't used to eat much. --Amy */
+	if (Role_if(PM_GOFF)) { /* They aren't used to eat much. --Amy */
 
 	if(!rn2(4)) {
 		if (Hallucination) You_feel("rather trippy.");
@@ -365,7 +365,7 @@ register struct obj *food;
 			return;
 		}
 		You("stuff yourself and then vomit voluminously.");
-		if (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) {adjalign(-20);	/* overeating doesn't befit a topmodel */
+		if (Role_if(PM_GOFF)) {adjalign(-20);	/* overeating doesn't befit a topmodel */
 		pline("Bleeargh! You feel very bad for trying to overeat."); }
 		morehungry(1000);	/* you just got *very* sick! */
 		nomovemsg = 0;
@@ -1666,12 +1666,12 @@ void
 gluttonous()
 {
 	/* only happens if you were satiated, extra check by Amy to make that conduct mean more */
-	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) ) {
+	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_GOFF)) ) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
 	}
 
-	if (u.uhs == SATIATED && (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) ) { /* They aren't used to eat much. --Amy */
+	if (u.uhs == SATIATED && (Role_if(PM_GOFF)) ) { /* They aren't used to eat much. --Amy */
 
 	if(!rn2(4)) {
 		if (Hallucination) You_feel("rather trippy.");
@@ -1741,11 +1741,11 @@ violated_vegetarian()
     return;
     }
     u.uconduct.unvegetarian++;
-    if (Role_if(PM_MONK) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF) ) {
+    if (Role_if(PM_MONK) || Role_if(PM_GOFF) ) {
 	You_feel("guilty.");
 	adjalign(-5);
     }
-	if (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) { /* Their metabolism isn't used to meat. --Amy */
+	if (Role_if(PM_GOFF)) { /* Their metabolism isn't used to meat. --Amy */
 
 	if(!rn2(4)) {
 		if (Hallucination) You_feel("rather trippy.");
@@ -2974,7 +2974,7 @@ struct obj *otmp;
 		else return 2;
 	}
 	if (cadaver && !vegetarian(&mons[mnum]) &&
-	    !u.uconduct.unvegetarian && (Role_if(PM_MONK) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF) ) ) {
+	    !u.uconduct.unvegetarian && (Role_if(PM_MONK) || Role_if(PM_GOFF) ) ) {
 		Sprintf(buf, "%s unhealthy. %s",
 			foodsmell, eat_it_anyway);
 		if (yn_function(buf,ynchars,'n')=='n') return 1;
@@ -3382,8 +3382,6 @@ void
 gethungry()	/* as time goes by - called by moveloop() and domove() */
 {
 	if (u.uinvulnerable) return;	/* you don't feel hungrier */
-
-	if ( (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) && ( (rn2(2) && u.uhs == HUNGRY) || (rn2(4) && u.uhs == WEAK) || (rn2(8) && u.uhs == FAINTING) || (rn2(16) && u.uhs == FAINTED) ) ) return; /* They are used to eating very little. --Amy */
 
 	if ((!u.usleep || !rn2(10))	/* slow metabolic rate while asleep */
 		&& (carnivorous(youmonst.data) || herbivorous(youmonst.data) || metallivorous(youmonst.data) || lithivorous(youmonst.data))

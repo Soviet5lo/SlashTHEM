@@ -1156,22 +1156,6 @@ boolean new_game;	/* false => restoring an old game */
 
 	}
 
-	if (Role_if(PM_TRANSVESTITE) && new_game && flags.female) {
-		    makeknown(AMULET_OF_CHANGE);
-		    You("don't feel like being female!");
-			change_sex();
-		    flags.botl = 1;
-
-	}
-
-	if (Role_if(PM_TOPMODEL) && new_game && !flags.female) {
-		    makeknown(AMULET_OF_CHANGE);
-		    You("don't feel like being male!");
-			change_sex();
-		    flags.botl = 1;
-
-	}
-
 	if (Race_if(PM_UNGENOMOLD) && new_game) {
 		  makeknown(SCR_GENOCIDE);
 	    polyself(FALSE);

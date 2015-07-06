@@ -1393,33 +1393,6 @@ const struct Role roles[] = {
 	10, 8,-2, 0,  9, A_INT, SPE_DETECT_MONSTERS,     -4
 },
 
-{	{"Topmodel", 0}, {
-	{"Sweet Girl",    0},
-	{"Catwalk Tester",       0},
-	{"Curved Woman",   0},
-	{"Playboy Bunny", 0},
-	{"Erotic Lady",         0},
-	{"Lovely Chick",    0},
-	{"Sexy Poser",        0},
-	{"ANTM Semi-Finalist",  0},
-	{"ANTM Finalist",      0} },
-	"Speedy Gonzales", "Dan Naginati", "_Kylie Lum", /* taken from a fanfic */
-	"Top", "Red Carpet", "Violet Carpet", /* transvestite enemies like purple and violet */
-	PM_TOPMODEL, NON_PM, PM_UNDEAD_TOPMODEL, NON_PM, NON_PM,
-	PM_CAMP_PORTER, PM_MODEL, PM_ACTIVIST_LEADER,
-	PM_TRANSVESTITE, PM_ACTIVIST, S_HUMAN, S_HUMAN,
-	ART_GOLDEN_HIGH_HEELS,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  10, 25, 15, 15, 10, 25 },
-	/* Init   Lower  Higher */
-	{ 12, 0,  0, 4,  2, 0 },	/* Hit points */
-	{  8, 0,  0, 1,  0, 2 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_CHARM_MONSTER,   -4
-},
-
 #ifdef TOURIST
 {	{"Tourist", 0}, {
 	{"Rambler",     0},
@@ -1450,33 +1423,6 @@ const struct Role roles[] = {
 	0, 5, 1, 2, 10, A_INT, SPE_CHARM_MONSTER,   -4
 },
 #endif
-
-{	{"Transvestite", 0}, {
-	{"Clacker",    0},
-	{"Staggerer",       0},
-	{"Pseudo Model",   0},
-	{"Disguiser", 0},
-	{"Carnevalist",         0},
-	{"Heeler",    0},
-	{"Crossdresser",        0},
-	{"Drag Lord",  0},
-	{"Drag Queen",      0} },
-	"_Olivia", "Peyman", "_Lady Gaga", /* weird fashion sense */
-	"Tra", "Topmodel Boot Camp", "World 3 Airship",
-	PM_TRANSVESTITE, NON_PM, PM_UNDEAD_TRANSVESTITE, NON_PM, NON_PM,
-	PM_CROWNED_DRAG_QUEEN, PM_ATTENDANT, PM_WENDY,
-	PM_ADULT_LADY, PM_ADULT_GENTLEMAN, S_HUMAN, S_HUMAN,
-	ART_LOVELY_PINK_PUMPS,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  20, 10, 10, 20, 20, 20 },
-	/* Init   Lower  Higher */
-	{ 14, 0,  0, 6,  1, 0 },	/* Hit points */
-	{  4, 0,  0, 1,  0, 1 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_INVISIBILITY,   -4
-},
 
 {	{"Undead Slayer", 0}, {
 	{"Assistant",    0},

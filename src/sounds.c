@@ -963,12 +963,6 @@ register struct monst *mtmp;
 		case PM_POKEMON:
 		    verbl_msg = "Little strawberry me baby!";
 		    break;
-		case PM_TRANSVESTITE:
-		    verbl_msg = "Look at my heels! Do you think they're beautiful?";
-		    break;
-		case PM_TOPMODEL:
-		    verbl_msg = "I'm the chosen one who is going to win the ANTM show!";
-		    break;
 		case PM_ACTIVISTOR:
 		case PM_ACTIVIST:
 		    verbl_msg = "We're here to bring peace to the world.";

@@ -254,14 +254,6 @@ lookat(x, y, buf, monbuf)
 			Strcat(monbuf, "monster detection");
 			if (ways_seen-- > 1) Strcat(monbuf, ", ");
 		    }
-		    if (Role_if(PM_ACTIVISTOR) && mtmp->data == &mons[PM_TOPMODEL] ) {
-			Strcat(monbuf, "warned of topmodels");
-			if (ways_seen-- > 1) Strcat(monbuf, ", ");
-		    }
-		    if (Role_if(PM_ACTIVISTOR) && type_is_pname(mtmp->data) && uwep && is_quest_artifact(uwep) ) {
-			Strcat(monbuf, "warned of unique monsters");
-			if (ways_seen-- > 1) Strcat(monbuf, ", ");
-		    }
 		    if (uamul && uamul->otyp == AMULET_OF_POISON_WARNING && poisonous(mtmp->data)) {
 			Strcat(monbuf, "warned of poisonous monsters");
 			if (ways_seen-- > 1) Strcat(monbuf, ", ");

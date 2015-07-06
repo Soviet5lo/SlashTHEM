@@ -614,20 +614,14 @@ exerper()
 		    case SATIATED:	exercise(A_DEX, FALSE);
 					if (Role_if(PM_MONK))
 					    exercise(A_WIS, FALSE);
-					if (Role_if(PM_TOPMODEL)) { /* They strongly dislike being full --Amy */
-					    exercise(A_WIS, FALSE); exercise(A_STR, FALSE); exercise(A_CON, FALSE); exercise(A_DEX, FALSE); }
 					break;
 		    case NOT_HUNGRY:	exercise(A_CON, TRUE); break;
-		    case HUNGRY:	if (Role_if(PM_TOPMODEL)) exercise(A_WIS, TRUE); break;
-		    case WEAK:		if (!Role_if(PM_TOPMODEL)) exercise(A_STR, FALSE);
-					if (Role_if(PM_MONK))	/* fasting */
+		    case HUNGRY:	break;
+		    case WEAK:		if (Role_if(PM_MONK))	/* fasting */
 					    exercise(A_WIS, TRUE);
-					if (Role_if(PM_TOPMODEL)) {
-					    exercise(A_WIS, TRUE); exercise(A_STR, TRUE);
-}					break;
+					break;
 		    case FAINTING:
-		    case FAINTED:	 if (Role_if(PM_TOPMODEL)) { exercise(A_WIS, TRUE); exercise(A_STR, TRUE); exercise(A_DEX, TRUE);		}					
-					if (!Role_if(PM_TOPMODEL)) exercise(A_CON, FALSE); break;
+		    case FAINTED:	break;
 		}
 
 		/* Encumberance Checks */

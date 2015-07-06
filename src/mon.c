@@ -394,8 +394,6 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_OFFICER:
 	    case PM_UNDEAD_UNDERTAKER:
 	    case PM_UNDEAD_ZOOKEEPER:
-	    case PM_UNDEAD_TRANSVESTITE:
-	    case PM_UNDEAD_TOPMODEL:
 	    case PM_UNDEAD_ACTIVISTOR:
 	    case PM_NON_UNDEAD_SLAYER:
 	    case PM_UNDEAD_VALKYRIE:
@@ -2568,15 +2566,6 @@ cleanup:
 		You_feel("guilty...");
 	}
 
-	if (Role_if(PM_ACTIVISTOR) && mdat == &mons[PM_TOPMODEL]) { /* very bad idea! --Amy */
-		You_feel("guilty for killing an innocent girl.");
-		change_luck(-5);
-		u.ualign.sins += 10; 
-		adjalign(-50);
-		u.ugangr++; u.ugangr++; u.ugangr++;
-		prayer_done();
-
-	}
 	/* give experience points */
 	tmp = experience(mtmp, (int)mvitals[mndx].died + 1);
 	more_experienced(tmp, 0);

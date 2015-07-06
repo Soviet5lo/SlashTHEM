@@ -120,8 +120,6 @@ use_saddle(otmp)
 	if (!mtmp->mtame) chance -= 10*mtmp->m_lev;
 	if (Role_if(PM_KNIGHT) || Role_if(PM_CHEVALIER))
 	    chance += 20;
-	if (Role_if(PM_TRANSVESTITE) || Role_if(PM_TOPMODEL))
-	    chance += 50;
 	switch (P_SKILL(P_RIDING)) {
 	case P_ISRESTRICTED:
 	case P_UNSKILLED:
@@ -333,7 +331,7 @@ mount_steed(mtmp, force)
 	    return (FALSE);
 	}
 	if (!force && (Confusion || Fumbling || IsGlib || Wounded_legs ||
-		otmp->cursed || (u.ulevel+mtmp->mtame < rnd(MAXULEV/2+5) && ( (!Role_if(PM_KNIGHT) || !rn2(5)) && (!Role_if(PM_CHEVALIER) || !rn2(5)) && (!Role_if(PM_YEOMAN) || !rn2(5)) && ((!Role_if(PM_TRANSVESTITE) && !Role_if(PM_TOPMODEL)) || !rn2(5)) ) ) )) {
+		otmp->cursed || (u.ulevel+mtmp->mtame < rnd(MAXULEV/2+5) && ( (!Role_if(PM_KNIGHT) || !rn2(5)) && (!Role_if(PM_CHEVALIER) || !rn2(5)) && (!Role_if(PM_YEOMAN) || !rn2(5)) ) ) )) {
 	    if (Levitation) {
 		pline("%s slips away from you.", Monnam(mtmp));
 		return FALSE;

@@ -290,12 +290,6 @@ register boolean special;
 		case PM_LUNATIC:
 		    weapon = STEEL_WHIP;
 		    break;
-		case PM_TRANSVESTITE:
-		    weapon = SEXY_LEATHER_PUMP;
-		    break;
-		case PM_TOPMODEL:
-		    weapon = KNIFE;
-		    break;
 		case PM_ACTIVISTOR:
 		    weapon = FLY_SWATTER;
 		    break;

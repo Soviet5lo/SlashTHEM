@@ -58,7 +58,6 @@ MONSTER: '@', "pirate", random, hostile
 MONSTER: '@', "nobleman", random, hostile
 MONSTER: '@', "noblewoman", random, hostile
 MONSTER: '@', "electric mage", random, hostile
-MONSTER: '@', "transvestite", random, hostile
 MONSTER: '@', "courier", random, hostile
 MONSTER: '@', "chevalier", random, hostile
 MONSTER: '@', "zyborg", random, hostile

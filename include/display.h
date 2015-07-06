@@ -33,7 +33,7 @@
 	(distu((mon)->mx, (mon)->my) <= (BOLT_LIM * BOLT_LIM))))		      \
 )
 
-#define sensemon(mon) (tp_sensemon(mon) || Detect_monsters || MATCH_WARN_OF_MON(mon) || (Role_if(PM_ACTIVISTOR) && mon->data == &mons[PM_TOPMODEL]) || (Role_if(PM_ACTIVISTOR) && type_is_pname(mon->data) && uwep && is_quest_artifact(uwep) ) || (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING && is_undead(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_POISON_WARNING && poisonous(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING && your_race(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_COVETOUS_WARNING && is_covetous(mon->data) ) )
+#define sensemon(mon) (tp_sensemon(mon) || Detect_monsters || MATCH_WARN_OF_MON(mon) || (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING && is_undead(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_POISON_WARNING && poisonous(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING && your_race(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_COVETOUS_WARNING && is_covetous(mon->data) ) )
 
 /*
  * mon_warning() is used to warn of any dangerous monsters in your

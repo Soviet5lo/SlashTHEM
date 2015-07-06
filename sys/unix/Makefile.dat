@@ -323,7 +323,7 @@ quest_levs: ../util/lev_comp \
 	Pirate.des Priest.des Psion.des Ranger.des \
 	Rocker.des Rogue.des Samurai.des Scient.des \
 	Slayer.des Spacew.des \
-	Top.des Tourist.des Trans.des Under.des Valkyrie.des \
+	Tourist.des Under.des Valkyrie.des \
 	Warrior.des Wizard.des Yeoman.des Zooke.des
 	../util/lev_comp Acid.des
 	../util/lev_comp Act.des
@@ -373,11 +373,9 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Scient.des
 	../util/lev_comp Slayer.des
 	../util/lev_comp Spacew.des
-	../util/lev_comp Top.des
 	@if egrep -s tourists options > /dev/null ; then \
 	echo ../util/lev_comp Tourist.des ; ../util/lev_comp Tourist.des ; \
 	else rm -f Tou-goal.lev Tou-fil?.lev Tou-loca.lev Tou-strt.lev ; fi
-	../util/lev_comp Trans.des
 	../util/lev_comp Under.des
 	../util/lev_comp Valkyrie.des
 	../util/lev_comp Warrior.des

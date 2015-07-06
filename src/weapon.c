@@ -2056,14 +2056,6 @@ struct obj *weapon;
 		bonus += 3;
 	}
 
-	/* Transvestites can whack enemies using heels --Amy */
-	if (Role_if(PM_TRANSVESTITE) && weapon && weapon_type(weapon) == P_HAMMER){
-
-		bonus += 2;
-		if (u.ulevel >= 15) bonus += 1;
-		if (u.ulevel >= 30) bonus += 1;
-	}
-
 	/* add a little damage bonus for higher-level characters so the stronger monsters aren't too overpowered --Amy */
 
 	if (u.ulevel >= 10) bonus += 1;

@@ -808,7 +808,7 @@ newsym(x,y)
 	    worm_tail = is_worm_tail(mon);
 	    see_it = mon && (worm_tail
 		? (!mon->minvis || See_invisible)
-		: (mon_visible(mon)) || tp_sensemon(mon) || MATCH_WARN_OF_MON(mon) || (Role_if(PM_ACTIVISTOR) && mon->data == &mons[PM_TOPMODEL]) || (Role_if(PM_ACTIVISTOR) && type_is_pname(mon->data) && uwep && is_quest_artifact(uwep) ) || (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING && is_undead(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_POISON_WARNING && poisonous(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING && your_race(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_COVETOUS_WARNING && is_covetous(mon->data) ) );
+		: (mon_visible(mon)) || tp_sensemon(mon) || MATCH_WARN_OF_MON(mon) || (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING && is_undead(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_POISON_WARNING && poisonous(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING && your_race(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_COVETOUS_WARNING && is_covetous(mon->data) ) );
 	    if (mon && (see_it || (!worm_tail && Detect_monsters))) {
 		if (mon->mtrapped) {
 		    struct trap *trap = t_at(x, y);
@@ -841,7 +841,7 @@ newsym(x,y)
 	    if (senseself()) display_self();
 	}
 	else if ((mon = m_at(x,y))
-		&& ((see_it = (tp_sensemon(mon) || MATCH_WARN_OF_MON(mon) || (Role_if(PM_ACTIVISTOR) && mon->data == &mons[PM_TOPMODEL]) || (Role_if(PM_ACTIVISTOR) && type_is_pname(mon->data) && uwep && is_quest_artifact(uwep) ) 	|| (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING && is_undead(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_POISON_WARNING && poisonous(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING && your_race(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_COVETOUS_WARNING && is_covetous(mon->data) ) 	    		|| (see_with_infrared(mon) && mon_visible(mon))))
+		&& ((see_it = (tp_sensemon(mon) || MATCH_WARN_OF_MON(mon) || (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING && is_undead(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_POISON_WARNING && poisonous(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING && your_race(mon->data) ) || (uamul && uamul->otyp == AMULET_OF_COVETOUS_WARNING && is_covetous(mon->data) ) 	    		|| (see_with_infrared(mon) && mon_visible(mon))))
 		    || Detect_monsters)
 		&& !is_worm_tail(mon)) {
 	    /* Monsters are printed every time. */
