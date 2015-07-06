@@ -1055,7 +1055,7 @@ const struct Role roles[] = {
 	{  1, 0,  0, 1,  0, 1 },12,	/* Energy */
 	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
 },
-
+#if 0 /* 5lo: Needs an entire redesign, deferred for now */
 {	{"Pokemon", 0}, {
 	{"CROC",    0},
 	{"ALIGE",       0},
@@ -1082,7 +1082,7 @@ const struct Role roles[] = {
 	{  4, 0,  0, 1,  0, 1 },12,	/* Energy */
 	10, 9, 2, 1, 10, A_INT, SPE_INVISIBILITY,   -4
 },
-
+#endif
 {	{"Priest", "Priestess"}, {
 	{"Aspirant",    0},
 	{"Acolyte",     0},
@@ -1112,7 +1112,7 @@ const struct Role roles[] = {
 	{ 17, 3,  0, 2,  0, 2 },10,	/* Energy */
 	0, 3,-2, 2, 10, A_WIS, SPE_REMOVE_CURSE,    -4
 },
-
+#if 0 /* 5lo: Needs an entire rewrite, deferred for now */
 {	{"Psion", 0}, {
 	{"Cantripper",         0},
 	{"Spoonbender",            0},
@@ -1143,7 +1143,7 @@ const struct Role roles[] = {
 	{ 20, 4,  0, 4,  0, 8 },10,	/* Energy */
 	10, 8,-2, 2, 20, A_WIS, SPE_WIZARD_LOCK, -4
 },
-
+#endif
 {	{"Ranger", 0}, {
 #if 0	/* OBSOLETE */
 	{"Edhel",       "Elleth"},

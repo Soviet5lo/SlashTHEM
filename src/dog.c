@@ -1029,8 +1029,14 @@ register struct obj *obj;
 		return mtmp;
 	    } else {
 
-		if (mtmp->data != &mons[PM_PETTY_BATTLE_GIRL] && mtmp->data != &mons[PM_PETTY_SWEET_WOMAN] && mtmp->data != &mons[PM_POKEMON] && mtmp->data != &mons[PM_PETTY_BEARDED_DEVIL] && mtmp->data != &mons[PM_PETTY_NALFESHNEE] && mtmp->data != &mons[PM_PETTY_LAVA_DEMON]
-&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR])
+		if (mtmp->data != &mons[PM_PETTY_BATTLE_GIRL] && mtmp->data != &mons[PM_PETTY_SWEET_WOMAN] && mtmp->data != &mons[PM_PETTY_BEARDED_DEVIL] && mtmp->data != &mons[PM_PETTY_NALFESHNEE]
+		&& mtmp->data != &mons[PM_PETTY_LAVA_DEMON]
+		&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR]
+#if 0 /* Deferred */
+		&& mtmp->data != &mons[PM_POKEMON] 
+#endif
+		)
+
 
 		return (struct monst *)0;
 		}
@@ -1055,8 +1061,12 @@ register struct obj *obj;
 			and binder (can get attire charm from increasing a certain skill)
 			and psion (learns attire charm at XL15, role suggested by Greg) */
 
-		if (mtmp->data != &mons[PM_PETTY_BATTLE_GIRL]  && mtmp->data != &mons[PM_PETTY_SWEET_WOMAN] && mtmp->data != &mons[PM_POKEMON] && mtmp->data != &mons[PM_PETTY_BEARDED_DEVIL] && mtmp->data != &mons[PM_SIZZLE] && mtmp->data != &mons[PM_PETTY_NALFESHNEE] && mtmp->data != &mons[PM_PETTY_LAVA_DEMON]
-&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR] && !Role_if(PM_ZYBORG)  && !Role_if(PM_BINDER) && !Role_if(PM_PSION) )
+		if (mtmp->data != &mons[PM_PETTY_BATTLE_GIRL]  && mtmp->data != &mons[PM_PETTY_SWEET_WOMAN] && mtmp->data != &mons[PM_PETTY_BEARDED_DEVIL] && mtmp->data != &mons[PM_SIZZLE] && mtmp->data != &mons[PM_PETTY_NALFESHNEE] && mtmp->data != &mons[PM_PETTY_LAVA_DEMON]
+&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR] && !Role_if(PM_ZYBORG)  && !Role_if(PM_BINDER) 
+#if 0 /* 5lo: Deferred */
+ && mtmp->data != &mons[PM_POKEMON] && !Role_if(PM_PSION)
+#endif
+		)
 			return (struct monst *)0;
 		}
 

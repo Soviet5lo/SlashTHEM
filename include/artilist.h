@@ -257,10 +257,10 @@ A("Mirrorbright",               SHIELD_OF_REFLECTION,
 A("Deluder",               CLOAK_OF_DISPLACEMENT,
 	(SPFX_RESTR|SPFX_STLTH|SPFX_LUCK), 0, 0,
 	NO_ATTK,      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, PM_JEDI, NON_PM, 5000L ),
-
+/* 5lo: Generic artifact since Psions are deferred for now */
 A("Snakeskin",             ROBE,
     (SPFX_RESTR|SPFX_HALRES|SPFX_PROTEC), 0, 0,
-    NO_ATTK,    ACID(0,0),   NO_CARY,    0, A_NEUTRAL, PM_PSION, NON_PM, 700L ),
+    NO_ATTK,    ACID(0,0),   NO_CARY,    0, A_NEUTRAL, 0, NON_PM, 700L ),
 
 A("Poseidon's Treasure",	TRIDENT,
 	(SPFX_RESTR|SPFX_ATTK), 0, 0,
@@ -716,20 +716,21 @@ A("The Elder Staff",	QUARTERSTAFF,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK|SPFX_INTEL|SPFX_DRLI|SPFX_REGEN), 0,0,
 	DRLI(6,0),      NO_DFNS,        NO_CARY,
 	0,	A_CHAOTIC, PM_DEATH_EATER, NON_PM, 5000L ),
-
+#if 0 /* Deferred for now */
 A("Gauntlets of Illusion",    GAUNTLETS_OF_DEXTERITY,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), SPFX_HALRES, 0,
 	NO_ATTK,        NO_DFNS,        NO_CARY,    INVIS, A_NEUTRAL, PM_POKEMON, NON_PM, 5000L ),
-
-A("The Eyes of the Overworld",	LENSES,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_XRAY), 0, 0,
-	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
-	ENLIGHTENING,	A_NEUTRAL,	 PM_MONK, NON_PM, 2500L ),
 
 A("The Mantle of Knowledge",    HELM_OF_BRILLIANCE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_HPHDAM|SPFX_ESP), 0,
 	NO_ATTK,        NO_DFNS,        CARY(AD_MAGM),
 	ENERGY_BOOST, A_NEUTRAL, PM_PSION, NON_PM, 5000L ),
+#endif
+A("The Eyes of the Overworld",	LENSES,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_XRAY), 0, 0,
+	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
+	ENLIGHTENING,	A_NEUTRAL,	 PM_MONK, NON_PM, 2500L ),
+
 
 A("The Hand Mirror of Cthylla",	MIRROR, /* 5lo: replaces Pen of the Void */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_TCTRL|SPFX_SEARCH), 0,

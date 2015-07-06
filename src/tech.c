@@ -2300,10 +2300,12 @@ role_tech()
 #endif
 		case PM_KNIGHT:		return (kni_tech);
 		case PM_MONK: 		return (mon_tech);
-		case PM_PSION: 		return (psi_tech);
 		case PM_SCIENTIST: 		return (sci_tech);
 		case PM_DEATH_EATER: 		return (dea_tech);
+#if 0 /* 5lo: Deferred for now */
 		case PM_POKEMON: 		return (pok_tech);
+		case PM_PSION: 		return (psi_tech);
+#endif
 		case PM_GANGSTER: 		return (gan_tech);
 		case PM_ROCKER: 		return (roc_tech);
 		case PM_NECROMANCER:	return (nec_tech);

@@ -315,12 +315,12 @@ quest_levs: ../util/lev_comp \
 	Barb.des Bard.des Binder.des Bleeder.des \
 	Caveman.des Cheval.des Convict.des \
 	Courier.des Cyborg.des Deatheat.des Diver.des Drunk.des \
-	Electric.des Elf.des Chef.des Firef.des Flame.des \
+	Electric.des Chef.des Firef.des Flame.des \
 	Gangster.des Gladia.des Geek.des Gradu.des \
 	Healer.des Ice.des Jedi.des Knight.des Korsair.des \
 	Locks.des Lunatic.des Monk.des Music.des \
 	Necro.des Ninja.des Noble.des Offic.des \
-	Pirate.des Priest.des Psion.des Ranger.des \
+	Pirate.des Priest.des Ranger.des \
 	Rocker.des Rogue.des Samurai.des Scient.des \
 	Slayer.des Spacew.des \
 	Tourist.des Under.des Valkyrie.des \
@@ -340,7 +340,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Deatheat.des
 	../util/lev_comp Drunk.des
 	../util/lev_comp Electric.des
-	../util/lev_comp Elf.des
 	../util/lev_comp Chef.des
 	../util/lev_comp Firef.des
 	../util/lev_comp Flame.des
@@ -363,7 +362,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Offic.des
 	../util/lev_comp Pirate.des
 	../util/lev_comp Priest.des
-	../util/lev_comp Psion.des
 	../util/lev_comp Ranger.des
 	../util/lev_comp Rocker.des
 	../util/lev_comp Rogue.des

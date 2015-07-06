@@ -857,7 +857,10 @@ int oldlevel, newlevel;
 	case PM_ACID_MAGE:	abil = aci_abil;	break;
 	case PM_GEEK:	abil = gee_abil;	break;
 	case PM_GRADUATE:	abil = gra_abil;	break;
+#if 0 /* Deferred roles */
 	case PM_POKEMON:	abil = pok_abil;	break;
+	case PM_PSION:           abil = psi_abil;	break;
+#endif
 	case PM_HEALER:         abil = hea_abil;	break;
 	case PM_ELECTRIC_MAGE:	abil = ele_abil;	break;
 	case PM_ICE_MAGE:	abil = ice_abil;	break;
@@ -868,7 +871,6 @@ int oldlevel, newlevel;
 	case PM_WARRIOR:         abil = war_abil;	break;
 	case PM_MONK:           abil = mon_abil;	break;
 	case PM_MUSICIAN:           abil = mus_abil;	break;
-	case PM_PSION:           abil = psi_abil;	break;
 	case PM_SCIENTIST:           abil = sci_abil;	break;
 	case PM_NECROMANCER:	abil = nec_abil;	break;
 	case PM_PIRATE:         abil = pir_abil;	break;

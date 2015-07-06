@@ -960,9 +960,11 @@ register struct monst *mtmp;
 		case PM_GEEK:
 		    verbl_msg = "Enematzu memalezu!";
 		    break;
+#if 0 /* 5lo: Deferred */
 		case PM_POKEMON:
 		    verbl_msg = "Little strawberry me baby!";
 		    break;
+#endif
 		case PM_BLEEDER:
 		    verbl_msg = "*sigh* If only I could make this bleeding stop...";
 		    break;

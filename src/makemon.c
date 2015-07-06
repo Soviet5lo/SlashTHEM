@@ -1160,9 +1160,10 @@ register struct monst *mtmp;
 		     if (!rn2(10)) (void) mongets(mtmp, AMULET_OF_LIFE_SAVING);
 
 		   break;
-
+#if 0
 		   case PM_POKEMON:
 		   case PM_UNDEAD_POKEMON:
+#endif
 		   case PM_MUSICIAN:
 		   case PM_UNDEAD_MUSICIAN:
 		   case PM_GRADUATE:
@@ -1462,8 +1463,10 @@ register struct monst *mtmp;
 		     break;
 		   case PM_MONK:
 		   case PM_UNDEAD_MONK:
+#if 0 /* Deferred */
 		   case PM_PSION:
 		   case PM_UNDEAD_PSION:
+#endif
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_defensive_item(mtmp));
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));

@@ -313,13 +313,13 @@ static struct trobj Death_Eater[] = {
 	{ TIN, UNDEF_SPE, FOOD_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#if 0 /* Deferred */
 static struct trobj Pokemon[] = {
 	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 5, 0 },
 	{ WAN_ENLIGHTENMENT, UNDEF_SPE, WAND_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#endif
 
 static struct trobj Geek[] = {
 	{ ELECTRIC_SWORD, 1, WEAPON_CLASS, 1, 1},
@@ -1732,7 +1732,7 @@ static const struct def_skill Skill_Mon[] = {
 /*WAC - monks are good healers - expert healing - and expert protect*/
     { P_NONE, 0 }
 };
-
+#if 0 /* 5lo: Deferred */
 static const struct def_skill Skill_Psi[] = {
     /* 5lo: Copy-paste of the Monk */
     { P_PADDLE, P_SKILLED },
@@ -1746,7 +1746,7 @@ static const struct def_skill Skill_Psi[] = {
     { P_MATTER_SPELL, P_BASIC },
     { P_NONE, 0 }
 };
-
+#endif
 static const struct def_skill Skill_Nob[] = {
     /* 5lo: Straight from dNethack */
     { P_DAGGER, P_BASIC },		{ P_KNIFE, P_EXPERT },
@@ -2181,7 +2181,7 @@ static const struct def_skill Skill_W[] = {
     { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
-
+#if 0 /* Deferred */
 static const struct def_skill Skill_Pok[] = {
     /* 5lo: These can stay the same, honestly */
     { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
@@ -2194,7 +2194,7 @@ static const struct def_skill Skill_Pok[] = {
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
-
+#endif
 static const struct def_skill Skill_Zoo[] = {
     /* 5lo: Heavily modified Hobbit skillset from Slash'EM 0.0.6 */
     { P_DAGGER, P_EXPERT },             { P_KNIFE, P_BASIC },
@@ -2664,10 +2664,12 @@ u_init()
 		ini_inv(Death_Eater);
 		skill_init(Skill_Dea);
 		break;
+#if 0
 	case PM_POKEMON:
 		ini_inv(Pokemon);
 		skill_init(Skill_Pok);
 		break;
+#endif
 	case PM_FLAME_MAGE:
 		switch (rnd(2)) {                
 			case 1: Flame_Mage[F_BOOK].trotyp = SPE_DETECT_MONSTERS; break;
@@ -2858,6 +2860,7 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Mon);
 		break;
+#if 0
 	case PM_PSION:
 		switch (rn2(90) / 30) {
 		case 0: Psion[M_BOOK].trotyp = SPE_KNOCK; break;
@@ -2871,6 +2874,7 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Psi);
 		break;
+#endif
 	case PM_NOBLEMAN:
 		if(flags.female){
 			Noble[NOB_SHIRT].trotyp = VICTORIAN_UNDERWEAR;
@@ -5602,12 +5606,14 @@ int otyp;
      case PM_KNIGHT:		skills = Skill_K; break;
      case PM_WARRIOR:		skills = Skill_War; break;
      case PM_MONK:		skills = Skill_Mon; break;
+#if 0
      case PM_PSION:		skills = Skill_Psi; break;
-	 case PM_PIRATE:		skills = Skill_Pir; break;
-	 case PM_KORSAIR:		skills = Skill_Kor; break;
-	 case PM_GLADIATOR:		skills = Skill_Gla; break;
-	 case PM_DIVER:		skills = Skill_Div; break;
      case PM_POKEMON:		skills = Skill_Pok; break;
+#endif
+     case PM_PIRATE:		skills = Skill_Pir; break;
+     case PM_KORSAIR:		skills = Skill_Kor; break;
+     case PM_GLADIATOR:		skills = Skill_Gla; break;
+     case PM_DIVER:		skills = Skill_Div; break;
      case PM_PRIEST:		skills = Skill_P; break;
      case PM_RANGER:		skills = Skill_Ran; break;
      case PM_ROGUE:		skills = Skill_R; break;

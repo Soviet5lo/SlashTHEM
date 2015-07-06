@@ -212,7 +212,9 @@ register boolean special;
 		case PM_NOBLEWOMAN:
 		    weapon = RAPIER;
 		    break;
+#if 0
 		case PM_POKEMON:
+#endif
 		case PM_MUSICIAN:
 		    weapon = CLUB;
 		    break;
@@ -237,12 +239,14 @@ register boolean special;
 		    if (rn2(4)) weapon = MACE;
 		    if (rn2(2)) armor = rnd_class(PLATE_MAIL, CHAIN_MAIL);
 		case PM_MONK:
+#if 0 /* Deferred */
 		case PM_PSION:
 		    weapon = STRANGE_OBJECT;
 		    armor = STRANGE_OBJECT;
 		    cloak = ROBE;
 		    if (rn2(2)) shield = STRANGE_OBJECT;
 		    break;
+#endif
 		case PM_CHEVALIER:
 		    weapon = TRIDENT;
 		    break;
