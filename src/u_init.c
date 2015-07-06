@@ -2520,7 +2520,7 @@ u_init()
       u.monstertimefinish = rnz(10000)+rnz(20000)+u.monstertimeout; /*a new value, allowing the player to cheat. --Amy*/
 	u.legscratching = (Role_if(PM_BLEEDER) ? 3 : 1); /*must also be set here; this may increase over time*/
 	u.next_check = rnz(600); /* it used to be exactly 600 at the start of every game */
-
+#if 0 /* 5lo: No longer used as these monsters don't exist anymore */
 	u.eeveelution = PM_VAPOREON; /* failsafe */
 	if (u.monstertimefinish % 42 == 0) u.eeveelution = PM_VOLAREON;
 	else if (u.monstertimefinish % 23 == 0) u.eeveelution = PM_INSECTEON;
@@ -2532,7 +2532,7 @@ u_init()
 	else if (u.monstertimefinish % 7 == 0) u.eeveelution = PM_JOLTEON;
 	else if (u.monstertimefinish % 3 == 0) u.eeveelution = PM_FLAREON;
 	else u.eeveelution = PM_VAPOREON;
-
+#endif
 	u.urmaxlvlB = 1; /* will go up if a cyborg role player levels up */
 	u.urmaxlvlC = 1; /* will go up if a binder role player levels up */
 	u.urmaxlvlD = 1; /* will go up if a bard role player levels up */

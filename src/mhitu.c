@@ -1742,7 +1742,7 @@ hitmu(mtmp, mattk)
 			if (u.mh > 1 && u.mh > ((u.uac>0) ? dmg : dmg+u.uac) &&
 				   objects[otmp->otyp].oc_material == IRON &&
 					(u.umonnum==PM_BLACK_PUDDING
-					|| u.umonnum==PM_BROWN_PUDDING || u.umonnum==PM_BLACK_PIERCER)) {
+					|| u.umonnum==PM_BROWN_PUDDING)) {
 			    /* This redundancy necessary because you have to
 			     * take the damage _before_ being cloned.
 			     */
@@ -2198,21 +2198,6 @@ dopois:
 			if (u.ulycn == PM_HUMAN_WERETIGER) u.ulycn = PM_WERETIGER;
 			if (u.ulycn == PM_HUMAN_WERESNAKE) u.ulycn = PM_WERESNAKE;
 			if (u.ulycn == PM_HUMAN_WERESPIDER) u.ulycn = PM_WERESPIDER;
-			if (u.ulycn == PM_HUMAN_WERELICHEN) u.ulycn = PM_WERELICHEN;
-			if (u.ulycn == PM_HUMAN_WEREPIERCER) u.ulycn = PM_WEREPIERCER;
-			if (u.ulycn == PM_HUMAN_WERENYMPH) u.ulycn = PM_WERENYMPH;
-			if (u.ulycn == PM_HUMAN_WEREMIMIC) u.ulycn = PM_WEREMIMIC;
-			if (u.ulycn == PM_HUMAN_WERECOW) u.ulycn = PM_WERECOW;
-			if (u.ulycn == PM_HUMAN_WEREBEAR) u.ulycn = PM_WEREBEAR;
-			if (u.ulycn == PM_HUMAN_WEREVORTEX) u.ulycn = PM_WEREVORTEX;
-			if (u.ulycn == PM_HUMAN_WEREGIANT) u.ulycn = PM_WEREGIANT;
-			if (u.ulycn == PM_HUMAN_WEREGHOST) u.ulycn = PM_WEREGHOST;
-			if (u.ulycn == PM_HUMAN_WEREMINDFLAYER) u.ulycn = PM_WEREMINDFLAYER;
-			if (u.ulycn == PM_HUMAN_WERECOCKATRICE) u.ulycn = PM_WERECOCKATRICE;
-			if (u.ulycn == PM_HUMAN_WERESOLDIERANT) u.ulycn = PM_WERESOLDIERANT;
-			if (u.ulycn == PM_HUMAN_WEREPIRANHA) u.ulycn = PM_WEREPIRANHA;
-			if (u.ulycn == PM_HUMAN_WEREEEL) u.ulycn = PM_WEREEEL;
-			if (u.ulycn == PM_HUMAN_WEREKRAKEN) u.ulycn = PM_WEREKRAKEN;
 		    upermonst.mflags2 |= (M2_WERE);
 		}
 		break;

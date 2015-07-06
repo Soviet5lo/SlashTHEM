@@ -1445,12 +1445,11 @@ postmov:
 
 		/* Maybe a cube ate just about anything */
 		/* KMH -- Taz likes organics, too! */
-		if (ptr == &mons[PM_GELATINOUS_CUBE] || ptr == &mons[PM_GELATINOUS_DICE] || ptr == &mons[PM_TASMANIAN_ZOMBIE]
-		|| ptr == &mons[PM_GELATINOUS_THIEF] ||	ptr == &mons[PM_TASMANIAN_DEVIL]) {
+		if (ptr == &mons[PM_GELATINOUS_CUBE] || ptr == &mons[PM_TASMANIAN_DEVIL]) {
 		    if (meatobj(mtmp) == 2) return 2;	/* it died */
 		}
-		if (ptr == &mons[PM_GHOUL] || ptr == &mons[PM_GHAST] || ptr == &mons[PM_GASTLY]
-		|| ptr == &mons[PM_HAUNTER] || ptr == &mons[PM_GENGAR]) meatcorpse(mtmp);
+		if (ptr == &mons[PM_GHOUL] || ptr == &mons[PM_GHAST] || ptr == &mons[PM_GASTLY])
+			meatcorpse(mtmp);
 
 		if(!*in_rooms(mtmp->mx, mtmp->my, SHOPBASE) || !rn2(25)) {
 		    boolean picked = FALSE;

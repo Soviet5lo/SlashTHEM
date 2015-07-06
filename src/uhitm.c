@@ -1652,7 +1652,7 @@ int thrown;
 		abuse_dog(mon);
 		monflee(mon, 10 * rnd(tmp), FALSE, FALSE);
 	}
-	if((mdat == &mons[PM_BLACK_PUDDING] || mdat == &mons[PM_BLACK_PIERCER] || mdat == &mons[PM_BROWN_PUDDING])
+	if((mdat == &mons[PM_BLACK_PUDDING] || mdat == &mons[PM_BROWN_PUDDING])
 		   && obj /* && obj == uwep -- !thrown and obj == weapon */
 		   && !thrown
 		   && objects[obj->otyp].oc_material == IRON
@@ -1666,13 +1666,6 @@ int thrown;
 		      (void) diseasemu(mon->data); /* hopefully stopping those annoying pudding farmers! */
 			u.ualign.sins++; /* adding even more punishment for lame farmers */
 #endif
-			hittxt = TRUE;
-		}
-	}
-	if((mdat == &mons[PM_ARCH_LICHEN]) /* hit by any weapon and not destroyed, splits */
-		   && obj && obj == uwep && mon->mhp > 1 && !rn2(10) ) { /*sorry I had to reduce the chance a bit --Amy*/
-		if (clone_mon(mon, 0, 0)){
-			pline("RNG decides to clone %s in front of your eyes!", Monnam(mon));
 			hittxt = TRUE;
 		}
 	}
