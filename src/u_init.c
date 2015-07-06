@@ -2533,7 +2533,6 @@ u_init()
 	else if (u.monstertimefinish % 3 == 0) u.eeveelution = PM_FLAREON;
 	else u.eeveelution = PM_VAPOREON;
 
-	u.urmaxlvl = 1; /* will go up if an asgardian race player levels up */
 	u.urmaxlvlB = 1; /* will go up if a cyborg role player levels up */
 	u.urmaxlvlC = 1; /* will go up if a binder role player levels up */
 	u.urmaxlvlD = 1; /* will go up if a bard role player levels up */

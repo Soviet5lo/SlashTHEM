@@ -359,10 +359,6 @@ moveloop()
 #endif
 		    {
 			moveamt = youmonst.data->mmove;
-#ifdef ELDER_SCROLLS
-			if (Race_if(PM_ASGARDIAN) && !rn2(20) ) /* Asgardians are slower sometimes, this is intentional. --Amy */
-				moveamt -= NORMAL_SPEED / 2;
-#endif
 			if (moveamt < 0) moveamt == 0;
 
 			if (Very_fast) {	/* speed boots or potion */

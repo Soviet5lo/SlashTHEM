@@ -1320,27 +1320,6 @@ dochat()
         return 0;
     }
 #endif /* CONVICT */
-#ifdef ELDER_SCROLLS
-    if (Race_if(PM_IMPERIAL) && mtmp->mnum != quest_info(MS_NEMESIS) && !(mtmp->data->geno & G_UNIQ) && !mtmp->mpeaceful &&
-     !mtmp->mtame) {
-
-		if (yn("Use the Emperor's Voice?") == 'y') {
-
-	      verbalize("%s", !rn2(3) ? "By the power of His Holiness Titus Medes, I beseech thee - stop thine combat actions!" : !rn2(2) ? "Long live Martin Septim! Thou shall surrender lest I smite thee!" : "The Emperor will spare thy life if thou stoppest fighting!");
-		morehungry(100);
-
-		if (mtmp->m_lev < rnd(50) && rn2(u.ulevel) && rn2(3) ) { /* higher level monsters are less likely to be affected --Amy*/
-
-            mtmp->mpeaceful = 1;
-            set_malign(mtmp);
-		pline("%s is convinced by your sermon, and no longer views you as an enemy!",l_monnam(mtmp));
-		}
-
-        return 0;
-
-		}
-    }
-#endif /* ELDER_SCROLLS */
     return domonnoise(mtmp);
 }
 

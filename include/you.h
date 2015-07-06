@@ -362,7 +362,6 @@ struct you {
 	int tensionmonsterB; 	/* for mixed tension rooms */
 	int next_check; 	/* attrib.c check */
 
-	int urmaxlvl;		/* for asgardian race */
 	int urmaxlvlB;		/* for cyborg role */
 	int urmaxlvlC;		/* for binder role */
 	int urmaxlvlD;		/* for bard role */
