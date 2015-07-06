@@ -2203,7 +2203,8 @@ dopois:
 		break;
 	    case AD_SGLD:
 		hitmsg(mtmp, mattk);
-		if (youmonst.data->mlet == mdat->mlet) break;
+		/* 5lo: Allow an exception for Muggers */
+		if ((youmonst.data->mlet == mdat->mlet) && mdat != &mons[PM_MUGGER]) break;
 		if(!mtmp->mcan) stealgold(mtmp);
 		break;
 
