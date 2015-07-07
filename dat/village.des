@@ -72,8 +72,8 @@ DOOR:locked,(10,15)
 DOOR:locked,(10,18)
 DOOR:locked,(16,18)
 # Random animals to keep the player a bit busy.
-MONSTER:'B',"crow",random
-MONSTER:'B',"crow",random
+MONSTER:'B',"raven",random
+MONSTER:'B',"raven",random
 MONSTER:'B',"raven",random
 MONSTER:'B',"raven",random
 MONSTER:'d',"coyote",random
@@ -86,7 +86,7 @@ MONSTER:'Y',"monkey",random
 # An assortment of nymphs
 MONSTER:'n',"wood nymph",(37,04),asleep
 MONSTER:'n',"wood nymph",(42,07),asleep
-MONSTER:'n',"dryad",(41,09),asleep
+MONSTER:'n',"brownie",(41,09),asleep
 MONSTER:'n',"water nymph",(47,13),asleep
 MONSTER:'n',"water nymph",(51,16),asleep
 # A few people
@@ -124,13 +124,13 @@ MONSTER:'@',"werewolf",(11,15),asleep,hostile
 MONSTER:'@',"mugger",(03,14),asleep
 MONSTER:'@',"mugger",(03,15),asleep
 MONSTER:'@',"mugger",(03,16),asleep
-MONSTER:'@',"smirking sneak thief",(03,17),asleep
+MONSTER:'@',"bandit",(03,17),asleep
 MONSTER:'@',"mugger",(09,14),asleep
 MONSTER:'@',"mugger",(09,15),asleep
 MONSTER:'@',"mugger",(09,16),asleep
-MONSTER:'@',"smirking sneak thief",(09,17),asleep
+MONSTER:'@',"bandit",(09,17),asleep
 # The terrible trio | Names from Yatterman and Doraemon
-MONSTER:'@',"darkness thief",(06,18),asleep,hostile,"Goda"
+MONSTER:'@',"street thug leader",(06,18),asleep,hostile,"Goda"
 MONSTER:'@',"street thug",(04,18),asleep,hostile,"Tonzura"
 MONSTER:'@',"street thug",(08,18),asleep,hostile,"Boyakky"
 # And the last resort guards.

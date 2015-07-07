@@ -766,10 +766,10 @@ MONSTER: '@',"soldier",random,hostile
 MONSTER: '@',"soldier",random,hostile
 MONSTER: '@',"soldier",random,hostile
 
-MONSTER: 'B',"airborne parrot",random,hostile
-MONSTER: 'B',"airborne parrot",random,hostile
-MONSTER: 'B',"airborne parrot",random,hostile
-MONSTER: 'B',"airborne parrot",random,hostile
+MONSTER: 'c',"parrot",random,hostile
+MONSTER: 'c',"parrot",random,hostile
+MONSTER: 'c',"parrot",random,hostile
+MONSTER: 'c',"parrot",random,hostile
 
 MONSTER: 'Y',"monkey",random,hostile
 MONSTER: 'Y',"monkey",random,hostile

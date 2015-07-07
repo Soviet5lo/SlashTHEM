@@ -505,7 +505,7 @@ ENDMAP
 #0         1         2   	   3	     4		   5		 6	       7
 REGION:(00,00,15,20),lit,"ordinary"
 
-MONSTER: ';',"gyarados",(58,10), "red jinde fish",hostile
+MONSTER: ';',"whale",(58,10),hostile
 OBJECT:')',"crossbow",(58,10)
 OBJECT:')',"crossbow bolt",(58,10), blessed,+3
 

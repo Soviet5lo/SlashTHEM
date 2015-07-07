@@ -75,15 +75,15 @@ MONSTER:'@',"attendant",(21,03)
 NON_DIGGABLE:(00,00,30,16)
 
 # Monsters on siege duty.
-MONSTER: 'r',"huge rock mole",(01,01),hostile
-MONSTER: 'r',"huge rock mole",(01,01),hostile
-MONSTER: 'r',"huge rock mole",(01,01),hostile
-MONSTER: 'r',"huge rock mole",(01,01),hostile
-MONSTER: 'r',"huge rock mole",(01,09),hostile
-MONSTER: 'r',"huge rock mole",(03,08),hostile
-MONSTER: 'r',"huge rock mole",(10,00),hostile
-MONSTER: 'r',"huge rock mole",(02,12),hostile
-MONSTER: 'r',"huge rock mole",(03,14),hostile
+MONSTER: 'r',"rock mole",(01,01),hostile
+MONSTER: 'r',"rock mole",(01,01),hostile
+MONSTER: 'r',"rock mole",(01,01),hostile
+MONSTER: 'r',"rock mole",(01,01),hostile
+MONSTER: 'r',"rock mole",(01,09),hostile
+MONSTER: 'r',"rock mole",(03,08),hostile
+MONSTER: 'r',"rock mole",(10,00),hostile
+MONSTER: 'r',"rock mole",(02,12),hostile
+MONSTER: 'r',"rock mole",(03,14),hostile
 
 MONSTER: 'D',"stone dragon",(27,02),hostile
 MONSTER: 'D',"stone dragon",(28,09),hostile
@@ -138,11 +138,11 @@ TRAP: random, random
 TRAP: random, random
 TRAP: random, random
 #
-MONSTER: 'r',"huge rock mole",random,hostile
-MONSTER: 'r',"huge rock mole",random,hostile
-MONSTER: 'r',"huge rock mole",random,hostile
-MONSTER: 'r',"huge rock mole",random,hostile
-MONSTER: 'r',"huge rock mole",random,hostile
+MONSTER: 'r',"rock mole",random,hostile
+MONSTER: 'r',"rock mole",random,hostile
+MONSTER: 'r',"rock mole",random,hostile
+MONSTER: 'r',"rock mole",random,hostile
+MONSTER: 'r',"rock mole",random,hostile
 MONSTER: 'D',"stone dragon",random,hostile
 MONSTER: 'D',"stone dragon",random,hostile
 MONSTER: 'D',"stone dragon",random,hostile
@@ -242,19 +242,19 @@ MONSTER:'u',"speedhorse",random,hostile
 MONSTER:'u',"speedhorse",random,hostile
 MONSTER:'u',"speedhorse",random,hostile
 MONSTER:'u',"speedhorse",random,hostile
-MONSTER:'u',"arcane horse",random,hostile
-MONSTER:'u',"arcane horse",random,hostile
-MONSTER:'u',"arcane horse",random,hostile
-MONSTER:'u',"arcane horse",random,hostile
-MONSTER:'u',"arcane horse",random,hostile
-MONSTER:'u',"arcane horse",random,hostile
-MONSTER:'u',"arcane horse",random,hostile
-MONSTER:'u',"celestial horse",random,hostile
-MONSTER:'u',"celestial horse",random,hostile
-MONSTER:'u',"celestial horse",random,hostile
-MONSTER:'u',"celestial horse",random,hostile
-MONSTER:'u',"celestial horse",random,hostile
-MONSTER:'u',"celestial horse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
+MONSTER:'u',"warhorse",random,hostile
 MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal freak",random,hostile
@@ -309,11 +309,11 @@ MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal drummer",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
 MONSTER:'D',"stone dragon",random,hostile
 MONSTER:'D',"stone dragon",random,hostile
 
@@ -348,10 +348,10 @@ MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal freak",random,hostile
 MONSTER:'@',"death metal drummer",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
-MONSTER:'r',"huge rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
+MONSTER:'r',"rock mole",random,hostile
 MONSTER:'D',"stone dragon",random,hostile
 MONSTER:'D',"stone dragon",random,hostile

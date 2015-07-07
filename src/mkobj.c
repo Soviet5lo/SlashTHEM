@@ -864,7 +864,7 @@ start_corpse_timeout(body)
 #define ROT_AGE (250L)		/* age when corpses rot away */
 
 	/* lizards and lichen don't rot or revive */
-	if (body->corpsenm == PM_LIZARD || body->corpsenm == PM_CAVE_LIZARD || body->corpsenm == PM_CHAOS_LIZARD || body->corpsenm == PM_LIZARD_EEL || body->corpsenm == PM_EEL_LIZARD || body->corpsenm == PM_LIZARD_MAN || body->corpsenm == PM_ANTI_STONE_LIZARD || body->corpsenm == PM_LICHEN || body->corpsenm == PM_GECKO || body->corpsenm == PM_GIANT_GECKO || body->corpsenm == PM_SQUIRREL || body->corpsenm == PM_IGUANA || body->corpsenm == PM_BIG_IGUANA || body->corpsenm == PM_HUGE_LIZARD || body->corpsenm == PM_KARMIC_LIZARD || body->corpsenm == PM_FIRE_LIZARD || body->corpsenm == PM_LIGHTNING_LIZARD || body->corpsenm == PM_ICE_LIZARD || body->corpsenm == PM_GIANT_LIZARD || body->corpsenm == PM_HELPFUL_SQUIRREL || body->corpsenm == PM_RHAUMBUSUN || body->corpsenm == PM_BIG_RHAUMBUSUN) return;
+	if (body->corpsenm == PM_LIZARD || body->corpsenm == PM_LICHEN) return;
 
 	action = ROT_CORPSE;		/* default action: rot away */
 	rot_adjust = in_mklev ? 25 : 10;	/* give some variation */
@@ -1142,26 +1142,6 @@ int x, y;
 
 #define special_corpse(num)  (((num) == PM_LIZARD)		\
 				|| ((num) == PM_LICHEN)		\
-				|| ((num) == PM_LIZARD_EEL)		\
-				|| ((num) == PM_LIZARD_MAN)		\
-				|| ((num) == PM_EEL_LIZARD)		\
-				|| ((num) == PM_SQUIRREL)		\
-				|| ((num) == PM_HUGE_LIZARD)		\
-				|| ((num) == PM_KARMIC_LIZARD)		\
-				|| ((num) == PM_FIRE_LIZARD)		\
-				|| ((num) == PM_LIGHTNING_LIZARD)		\
-				|| ((num) == PM_ICE_LIZARD)		\
-				|| ((num) == PM_GIANT_LIZARD)		\
-				|| ((num) == PM_IGUANA)		\
-				|| ((num) == PM_CAVE_LIZARD)		\
-				|| ((num) == PM_CHAOS_LIZARD)		\
-				|| ((num) == PM_GECKO)		\
-				|| ((num) == PM_GIANT_GECKO)		\
-				|| ((num) == PM_BIG_IGUANA)		\
-				|| ((num) == PM_HELPFUL_SQUIRREL)		\
-				|| ((num) == PM_RHAUMBUSUN)		\
-				|| ((num) == PM_BIG_RHAUMBUSUN)		\
-				|| ((num) == PM_ANTI_STONE_LIZARD)		\
 				|| (is_rider(&mons[num]))	\
 				|| (mons[num].mlet == S_FUNGUS) \
 				|| (mons[num].mlet == S_TROLL))

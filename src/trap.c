@@ -2547,10 +2547,10 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
            break;
 
            case SHIT_TRAP:
-
+#if 0 /* Will be removed */
 		if(is_flyer(mptr) && (mptr != &mons[PM_ARABELLA]) && (mptr != &mons[PM_ANASTASIA]) && (mptr != &mons[PM_HENRIETTA]) && (mptr != &mons[PM_KATRIN]) && (mptr != &mons[PM_JANA]) & (mptr != &mons[PM_TUFTED_ASIAN_GIRL]) && (mptr != &mons[PM_SWEET_BLONDE]) && (mptr != &mons[PM_BURLY_WOMAN]) && (mptr != &mons[PM_VIOLET_BEAUTY]) && (mptr != &mons[PM_SOFT_WENCH]) ) break; /* since this is a ground-based trap */
 		/* The spacewars fighter nemeses somehow have affinity to this type of trap. */
-
+#endif
            if (in_sight)
              pline("%s steps into a heap of shit!", mon_nam(mtmp));
            else if (see_it)

@@ -167,14 +167,14 @@ MONSTER: random,random,(62,14),hostile
 MONSTER: random,random,(71,14),hostile
 MONSTER: random,random,(39,13),hostile
 MONSTER: random,random,(18,14),hostile
-MONSTER: '@',"coming thief",(19,08),hostile
-MONSTER: '@',"coming thief",(22,08),hostile
-MONSTER: '@',"coming thief",(16,08),hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
+MONSTER: '@',"street thug",(19,08),hostile
+MONSTER: '@',"street thug",(22,08),hostile
+MONSTER: '@',"street thug",(16,08),hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
 
 #
 #	The "locate" level for the quest.
@@ -271,11 +271,11 @@ MONSTER:random,random,random,hostile
 MONSTER:random,random,random,hostile
 MONSTER:random,random,random,hostile
 MONSTER:random,random,random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
 
 #
 #	The "goal" level for the quest.  Teleportation and digging are
@@ -381,11 +381,11 @@ MONSTER:random,random,random,hostile
 MONSTER:random,random,random,hostile
 MONSTER:random,random,random,hostile
 MONSTER:random,random,random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
-MONSTER: '@',"coming thief",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
+MONSTER: '@',"street thug",random,hostile
 MONSTER:';',"shark",(51,14),hostile
 MONSTER:';',"shark",(53,09),hostile
 MONSTER:';',"shark",(55,15),hostile

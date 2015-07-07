@@ -48,14 +48,14 @@ MONSTER:'@',"student",random
 MONSTER:'@',"student",random
 MONSTER:'@',"student",random
 # Corrupt guards
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
 # Good `ol mimics
-MONSTER:'@',"evasive tank breaker", (74,05),hostile
+MONSTER:'@',"street thug", (74,05),hostile
 # Random traps
 TRAP:"web",random
 TRAP:"web",random
@@ -121,17 +121,17 @@ DOOR:closed,(45,17)
 DOOR:locked,(36,12)
 DOOR:closed,(61,02)
 # Police station kops
-MONSTER: '@',"tank breaker",(62,01),hostile
-MONSTER: '@',"tank breaker",(65,01),hostile
-MONSTER: '@',"tank breaker",(66,01),hostile
-MONSTER: '@',"tank breaker",(74,02),hostile
-MONSTER: '@',"tank breaker",(63,03),hostile
-MONSTER: '@',"tank breaker",(72,03),hostile
-MONSTER: '@',"tank breaker",(71,04),hostile
-MONSTER: '@',"tank breaker",(68,05),hostile
-MONSTER: '@',"tank breaker",(64,06),hostile
+MONSTER: '@',"mugger",(62,01),hostile
+MONSTER: '@',"mugger",(65,01),hostile
+MONSTER: '@',"mugger",(66,01),hostile
+MONSTER: '@',"mugger",(74,02),hostile
+MONSTER: '@',"mugger",(63,03),hostile
+MONSTER: '@',"mugger",(72,03),hostile
+MONSTER: '@',"mugger",(71,04),hostile
+MONSTER: '@',"mugger",(68,05),hostile
+MONSTER: '@',"mugger",(64,06),hostile
 # Iron golem in supply room
-MONSTER: '@',"evasive tank breaker",(11,17),asleep,hostile
+MONSTER: '@',"street thug",(11,17),asleep,hostile
 # Supply room junk
 
 
@@ -183,13 +183,13 @@ TRAP:"fire",random
 TRAP:"fire",random
 TRAP:"fire",random
 # Lava demons
-MONSTER: '@',"tank breaker",(30,05),hostile,awake
-MONSTER: '@',"tank breaker",(23,09),hostile,awake
-MONSTER: '@',"tank breaker",(39,09),hostile,awake
-MONSTER: '@',"tank breaker",(36,14),hostile,awake
-MONSTER: '@',"tank breaker",(26,14),hostile,awake
+MONSTER: '@',"mugger",(30,05),hostile,awake
+MONSTER: '@',"mugger",(23,09),hostile,awake
+MONSTER: '@',"mugger",(39,09),hostile,awake
+MONSTER: '@',"mugger",(36,14),hostile,awake
+MONSTER: '@',"mugger",(26,14),hostile,awake
 # Elite guard
-MONSTER: '@',"evasive tank breaker",(04,13),hostile
+MONSTER: '@',"street thug",(04,13),hostile
 # Objects
 OBJECT:'(',"magic whistle",(31,10),blessed,0,"The Whistle of the Warden"
 OBJECT:')',"bullet",(31,10)
@@ -241,21 +241,21 @@ STAIR:(03,17),down
 # Non diggable walls
 NON_DIGGABLE:(00,00,75,19)
 # "Regular" prisoners
-MONSTER:'@',"tank breaker",(59,02),hostile
-MONSTER:'@',"tank breaker",(55,08),hostile
-MONSTER:'@',"tank breaker",(43,14),hostile
-MONSTER:'@',"tank breaker",(38,05),hostile
-MONSTER:'@',"tank breaker",(27,02),hostile
-MONSTER:'@',"tank breaker",(23,08),hostile
-MONSTER:'@',"tank breaker",(11,14),hostile
-MONSTER:'@',"tank breaker",(06,05),hostile
+MONSTER:'@',"mugger",(59,02),hostile
+MONSTER:'@',"mugger",(55,08),hostile
+MONSTER:'@',"mugger",(43,14),hostile
+MONSTER:'@',"mugger",(38,05),hostile
+MONSTER:'@',"mugger",(27,02),hostile
+MONSTER:'@',"mugger",(23,08),hostile
+MONSTER:'@',"mugger",(11,14),hostile
+MONSTER:'@',"mugger",(06,05),hostile
 # Undead prisoners
 # Bugs and snakes
 # Corrupt guards
-MONSTER:'@',"evasive tank breaker",random,hostile
-MONSTER:'@',"evasive tank breaker",random,hostile
-MONSTER:'@',"evasive tank breaker",random,hostile
-MONSTER:'@',"evasive tank breaker",random,hostile
+MONSTER:'@',"street thug",random,hostile
+MONSTER:'@',"street thug",random,hostile
+MONSTER:'@',"street thug",random,hostile
+MONSTER:'@',"street thug",random,hostile
 # Random traps
 TRAP:"web",random
 TRAP:"web",random
@@ -273,25 +273,25 @@ NOMAP
 STAIR: random, up
 STAIR: random, down
 # Peaceful miners
-MONSTER:'@',"evasive tank breaker",random,hostile
-MONSTER:'@',"evasive tank breaker",random,hostile
+MONSTER:'@',"street thug",random,hostile
+MONSTER:'@',"street thug",random,hostile
 # Earth creatures
-MONSTER:'@',"evasive tank breaker",random,hostile
-MONSTER:'@',"evasive tank breaker",random,hostile
+MONSTER:'@',"street thug",random,hostile
+MONSTER:'@',"street thug",random,hostile
 # Other nasties
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
-MONSTER:'@',"tank breaker",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
+MONSTER:'@',"mugger",random,hostile
 # Tools and corpses
 OBJECT: '%', "corpse", random
 OBJECT: '%', "corpse", random

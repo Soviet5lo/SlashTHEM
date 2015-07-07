@@ -5788,7 +5788,7 @@ MONSTER:'O',"ogre king",(66,03)
 # The Queen
 MONSTER:'O',"ogre king",(66,04)
 # An advisor
-MONSTER:'O',"ogre shaman",(65,04)
+MONSTER:'O',"ogre mage",(65,04)
 # The Guards
 MONSTER:'O',"ogre",(65,02)
 MONSTER:'O',"ogre",(67,02)
@@ -5800,7 +5800,7 @@ MONSTER:'k',"kobold lord",(65,03)
 OBJECT:'(',"chest",(70,02)
 OBJECT:'(',"chest",(70,05)
 # A few ogres
-MONSTER:'O',"ogre shaman",(39,05)
+MONSTER:'O',"ogre mage",(39,05)
 MONSTER:'O',"ogre",(45,12)
 MONSTER:'O',"ogre",(54,14)
 MONSTER:'O',"ogre",(54,09)
@@ -7805,7 +7805,7 @@ STAIR:levregion(1,0,79,20),(0,0,26,16),up
 
 REGION:(35,08,35,12),  lit,"ordinary",unfilled
 
-MONSTER:'u',"green nightmare", random
+MONSTER:'u',"warhorse", random
 OBJECT: '(',"skeleton key", random
 
 MONSTER:'V',"vampire lord", random
@@ -8140,7 +8140,7 @@ MONSTER:'D',random, (35, 06), asleep
 
 CONTAINER: '(', "chest"  , (60,03)
 OBJECT:')',"tsurugi", contained, blessed, 0
-MONSTER:''',"retriever", (51, 18), asleep, "Warmachine"
+MONSTER:''',"steel golem", (51, 18), asleep, "Warmachine"
 
 MAZE:"heck-72",' '
 FLAGS: hardfloor
@@ -8218,20 +8218,20 @@ RANDOM_PLACES:(03,03),(03,17),(19,03),(19,17),(37,02),(37,18),(55,03),(55,17),(7
 STAIR: place[0], up
 STAIR: place[1], down
 
-MONSTER:'e',"quinon", place[2]
-MONSTER:'e',"quinon", place[3]
+MONSTER:'e',"blinking eye", place[2]
+MONSTER:'e',"blinking eye", place[3]
 
-MONSTER:'e',"quaton", place[4]
-MONSTER:'e',"quaton", place[5]
+MONSTER:'e',"bloodshot eye", place[4]
+MONSTER:'e',"bloodshot eye", place[5]
 
-MONSTER:'e',"triton", place[6]
-MONSTER:'e',"triton", place[7]
+MONSTER:'e',"glowing eye", place[6]
+MONSTER:'e',"glowing eye", place[7]
 
-MONSTER:'e',"duton", place[8]
-MONSTER:'e',"duton", place[9]
+MONSTER:'e',"burning eye", place[8]
+MONSTER:'e',"burning eye", place[9]
 
-MONSTER:'e',"monoton", place[0]
-MONSTER:'e',"monoton", place[1]
+MONSTER:'e',"floating eye", place[0]
+MONSTER:'e',"floating eye", place[1]
 
 MAZE: "heck-74",' '
 
@@ -8301,35 +8301,35 @@ ENDMAP
 
 MONSTER: 'e', random, (36,10)
 
-MONSTER: 'e', "quinon", random
-MONSTER: 'e', "quinon", random
+MONSTER: 'e', "blinking eye", random
+MONSTER: 'e', "blinking eye", random
 
-MONSTER: 'e', "quaton", random
-MONSTER: 'e', "quaton", random
+MONSTER: 'e', "bloodshot eye", random
+MONSTER: 'e', "bloodshot eye", random
 
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
-MONSTER: 'e', "triton", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
+MONSTER: 'e', "glowing eye", random
 
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
-MONSTER: 'e', "duton", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
+MONSTER: 'e', "burning eye", random
 
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
-MONSTER: 'e', "monoton", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
+MONSTER: 'e', "floating eye", random
 
 
 GEOMETRY: center, center
@@ -8363,14 +8363,14 @@ MONSTER: '@', "werejackal", (03,01)
 MONSTER: '@', "wererat", (05,01)
 #OBJECT:'`',"boulder",(05,02)
 MONSTER: '@', "werewolf", (07,01)
-#OBJECT:'`',"statue",(09,01),"darkness given hunger",1
-MONSTER: 'P', "darkness given hunger", (09,01)
+#OBJECT:'`',"statue",(09,01),"tapicoa pudding",1
+MONSTER: 'P', "tapicoa pudding", (09,01)
 #OBJECT:'`',"boulder",(09,02)
 #OBJECT:'`',"statue",(11,01),"shoggoth",1
 MONSTER: 'P', "shoggoth", (11,01)
 #OBJECT:'`',"boulder",(11,02)
 MONSTER: 'd', "warg", (13,01)
-MONSTER: 'd', "anuban jackal", (15,01)
+#MONSTER: 'd', "anuban jackal", (15,01)
 MONSTER: 'e', random, (17,01)
 OBJECT:'`',"boulder",(17,02)
 MONSTER: 'g', "gremlin", (19,01)
@@ -8384,10 +8384,10 @@ MONSTER: 'k', "kobold", (33,01)
 MONSTER: 'k', "large kobold", (35,01)
 MONSTER: 'k', "kobold lord", (37,01)
 MONSTER: 'k', "kobold shaman", (39,01)
-MONSTER: 'n', "dryad", (41,01)
-MONSTER: 'n', "naiad", (43,01)
+MONSTER: 'n', "water nymph", (41,01)
+MONSTER: 'n', "water nymph", (43,01)
 #OBJECT:'`',"boulder",(43,02)
-MONSTER: 'n', "swamp nymph", (45,01)
+MONSTER: 'n', "satyr", (45,01)
 MONSTER: 'o', "orc", (47,01)
 MONSTER: 'o', "hill orc", (49,01)
 MONSTER: 'o', "Mordor orc", (51,01)
@@ -8397,7 +8397,7 @@ MONSTER: 'o', "orc-captain", (57,01)
 MONSTER: 'o', "goblin", (59,01)
 MONSTER: 'o', "hobgoblin", (61,01)
 OBJECT:'`',"statue",(63,01),"black unicorn",1
-MONSTER: 'x', "bebelith", (65,01)
+#MONSTER: 'x', "bebelith", (65,01)
 MONSTER: 'B', "byakhee", (67,01)
 MONSTER: 'C', "mountain centaur", (69,01)
 MONSTER: 'D', "blue dragon", (71,01)
@@ -8409,15 +8409,15 @@ MONSTER: 'D', "white dragon", (73,05)
 OBJECT:'`',"boulder",(72,05)
 MONSTER: 'D', "red dragon", (73,07)
 OBJECT:'`',"boulder",(72,07)
-MONSTER: 'H', "gnoll matriarch", (73,09)
-MONSTER: 'H', "minotaur priestess", (73,11)
+MONSTER: 'G', "gnoll chieftain", (73,09)
+MONSTER: 'H', "minotaur", (73,11)
 MONSTER: 'L', "lich", (73,13)
 MONSTER: 'L', "demilich", (73,15)
 OBJECT:'`',"statue",(73,17),"master lich",1
 
-OBJECT:'`',"statue",(71,19),"death knight",1
+# OBJECT:'`',"statue",(71,19),"death knight",1
 OBJECT:'`',"statue",(69,19),"arch-lich",1
-OBJECT:'`',"statue",(67,19),"alhoon",1
+OBJECT:'`',"statue",(67,19),"illithid",1
 MONSTER: 'M', "kobold mummy", (65,19)
 MONSTER: 'M', "gnome mummy", (63,19)
 MONSTER: 'M', "orc mummy", (61,19)
@@ -8431,14 +8431,14 @@ MONSTER: 'O', "ogre", (49,19)
 MONSTER: 'O', "ogre mage", (47,19)
 MONSTER: 'O', "ogre lord", (45,19)
 MONSTER: 'O', "ogre king", (43,19)
-MONSTER: 'O', "siege ogre", (41,19)
+#MONSTER: 'O', "siege ogre", (41,19)
 MONSTER: 'R', "disenchanter", (39,19)
 MONSTER: 'T', "troll", (37,19)
 MONSTER: 'T', "ice troll", (35,19)
 MONSTER: 'T', "rock troll", (33,19)
 MONSTER: 'T', "water troll", (31,19)
 MONSTER: 'T', "Olog-hai", (29,19)
-MONSTER: 'T', "wood troll", (27,19)
+#MONSTER: 'T', "wood troll", (27,19)
 MONSTER: 'V', "vampire", (25,19)
 MONSTER: 'V', "vampire lord", (23,19)
 MONSTER: 'Z', "gug", (21,19)
@@ -9386,14 +9386,14 @@ ENDMAP
 #01234567890
 REGION:(00,00,06,06),lit,"ordinary"
 WALLIFY
-MONSTER:''',"argentum golem",(01,03)
-MONSTER:''',"argentum golem",(02,02)
-MONSTER:''',"argentum golem",(03,01)
-MONSTER:''',"argentum golem",(04,02)
-MONSTER:''',"argentum golem",(05,03)
-MONSTER:''',"argentum golem",(04,04)
-MONSTER:''',"argentum golem",(03,05)
-MONSTER:''',"argentum golem",(02,04)
+MONSTER:''',"steel golem",(01,03)
+MONSTER:''',"steel golem",(02,02)
+MONSTER:''',"steel golem",(03,01)
+MONSTER:''',"steel golem",(04,02)
+MONSTER:''',"steel golem",(05,03)
+MONSTER:''',"steel golem",(04,04)
+MONSTER:''',"steel golem",(03,05)
+MONSTER:''',"steel golem",(02,04)
 
 MAZE:"heck-84",' '
 FLAGS:lethe
