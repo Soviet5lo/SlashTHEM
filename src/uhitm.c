@@ -1240,13 +1240,7 @@ int thrown;
 		switch(obj->otyp) {
 		    case BOULDER:		/* 1d20 */
 		    case HEAVY_IRON_BALL:	/* 1d25 */
-		    case REALLY_HEAVY_IRON_BALL:	/* 1d25 */
-		    case EXTREMELY_HEAVY_IRON_BALL:	/* 1d25 */
-		    case QUITE_HEAVY_IRON_BALL:	/* 1d25 */
 		    case IRON_CHAIN:		/* 1d4+1 */
-		    case ROTATING_CHAIN:		/* 1d4+1 */
-		    case SCOURGE:		/* 1d4+1 */
-		    case NUNCHIAKU:		/* 1d4+1 */
 			tmp = dmgval(obj, mon);
 			break;
 		    case MIRROR:

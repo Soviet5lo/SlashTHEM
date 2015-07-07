@@ -1055,33 +1055,28 @@ register struct monst *mtmp;
 		    (void) tamedog(mtmp, (struct obj *)0); /* supposed to start out tame */
 
 		} else if (mm == PM_ARABELLA){
-			(void)mongets(mtmp, HUGGING_BOOT);
 			(void)mongets(mtmp, SPEED_BOOTS);
 #if 0 /* 5lo: Removed */
 			(void)mongets(mtmp, WAN_BANISHMENT);
 #endif
 		} else if (mm == PM_ANASTASIA){
 
-			(void)mongets(mtmp, SOFT_GIRL_SNEAKER);
-			(void)mongets(mtmp, DANCING_SHOES);
+			(void)mongets(mtmp, ELVEN_BOOTS);
 
 		} else if (mm == PM_HENRIETTA){
-			(void)mongets(mtmp, BLOCK_HEELED_COMBAT_BOOT);
 			(void)mongets(mtmp, PLASTEEL_BOOTS);
 
 		} else if (mm == PM_KATRIN){
 
-			(void)mongets(mtmp, BLOCK_HEELED_COMBAT_BOOT);
-			(void)mongets(mtmp, FEMININE_PUMPS);
+			(void)mongets(mtmp, ELVEN_BOOTS);
 
 		} else if (mm == PM_JANA){
 
-			(void)mongets(mtmp, SOFT_GIRL_SNEAKER);
 			(void)mongets(mtmp, ELVEN_BOOTS);
 
 		} else if (mm == PM_THE_CHAMPION_OF_POMPEJI){
 
-			(void)mongets(mtmp, STYGIAN_PIKE);
+			(void)mongets(mtmp, TRIDENT);
 			(void)mongets(mtmp, STONE_DRAGON_SCALE_MAIL);
 
 		} else if (mm == PM_DEATH_METAL_FREAK){
@@ -1119,10 +1114,10 @@ register struct monst *mtmp;
 		} else if (mm == PM_GRANDPA_TANK_BREAKER){
 		     (void)mongets(mtmp, ROCKET_LAUNCHER);
 			 m_initthrow(mtmp, ROCKET, 10);
-		     (void)mongets(mtmp, REALLY_HEAVY_IRON_BALL);
+		     (void)mongets(mtmp, HEAVY_IRON_BALL);
 
 		} else if (mm == PM_STUDENT_LEADER){
-			(void)mongets(mtmp, HIPPIE_HEELS);
+			(void)mongets(mtmp, LOW_BOOTS);
 			(void)mongets(mtmp, SCR_CREATE_MONSTER);
 			(void)mongets(mtmp, SCR_CREATE_MONSTER);
 			(void)mongets(mtmp, SCR_CREATE_MONSTER);

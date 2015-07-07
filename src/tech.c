@@ -1858,12 +1858,12 @@ int tech_no;
 		    pline("The monster can't see its inside anyway!");
 			return 0;
 		}
-
+#if 0
 		if (!uarmf || (uarmf && uarmf->otyp != WEDGE_SANDALS && uarmf->otyp != FEMININE_PUMPS && uarmf->otyp != LEATHER_PEEP_TOES && uarmf->otyp != COMBAT_STILETTOS && uarmf->otyp != HIPPIE_HEELS) ) {
 		    pline("You must be wearing high heels for that.");
 			return 0;
 		}
-
+#endif
 		int k, l, caughtX;
 		struct monst *mtmp3;
 		register struct monst *mtmp4;

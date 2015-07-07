@@ -110,7 +110,7 @@ WEAPON("dark elven dagger", "black runed dagger",
 	0, 1, 0,  2, 4,  4,  4,  4, 1, P,   P_DAGGER, WOOD, CLR_BLACK),
 
 WEAPON("sharpened pencil", (char *)0,
-	1, 1, 0,  1, 2,  4,  2,  2, 1, P,   P_DAGGER, WOOD, CLR_YELLOW),
+	1, 1, 0,  3, 2,  4,  2,  2, 1, P,   P_DAGGER, WOOD, CLR_YELLOW),
 /* 5lo: From Nethack--, very low damage but can engrave without dulling */
 WEAPON("wooden stake", (char *)0,
 	1, 0, 0,  2, 8, 50,  4,  3, 1, P,   P_DAGGER, WOOD, HI_WOOD),
@@ -186,7 +186,7 @@ WEAPON("silver long sword", (char *)0,
 WEAPON("katana", "samurai sword",
 	0, 0, 0,  4, 16, 80, 10, 12, 1, S,   P_LONG_SWORD, IRON, HI_METAL),
 WEAPON("electric sword", (char *)0,
-	1, 0, 0,  1, 16,200, 12, 16, 2, S,   P_LONG_SWORD, IRON, HI_METAL),
+	1, 0, 0,  2, 16,200, 12, 16, 2, S,   P_LONG_SWORD, IRON, HI_METAL),
 
 /* Two-handed swords */
 WEAPON("two-handed sword", (char *)0,
@@ -198,9 +198,7 @@ WEAPON("tsurugi", "long samurai sword",
 
 /* Scimitars */
 WEAPON("scimitar", "curved sword",
-	0, 0, 0, 14, 16, 15,  8,  8, 0, S,   P_SCIMITAR, IRON, HI_METAL),
-WEAPON("bent sable", "bent sword",
-	0, 0, 0, 1, 16, 15,  12,  12, 0, S,   P_SCIMITAR, IRON, HI_METAL),
+	0, 0, 0, 15, 16, 15,  8,  8, 0, S,   P_SCIMITAR, IRON, HI_METAL),
 
 /* Sabers */
 WEAPON("rapier", (char *)0,
@@ -210,7 +208,7 @@ WEAPON("rapier", (char *)0,
 WEAPON("silver saber", (char *)0,
 	1, 0, 0, 24, 12, 75,  8,  8, 0, S,   P_SABER, SILVER, HI_SILVER),
 WEAPON("golden saber", (char *)0,
-	1, 0, 0,  1, 12, 75,  10,  10, 0, S,   P_SABER, GOLD, CLR_YELLOW),
+	1, 0, 0,  2, 12, 75,  10,  10, 0, S,   P_SABER, GOLD, CLR_YELLOW),
 
 /* Clubs */
 WEAPON("club", (char *)0,
@@ -220,7 +218,7 @@ WEAPON("aklys", "thonged club",
 WEAPON("baseball bat", (char *)0,
 	1, 0, 0,  4, 12, 50,  8,  6, 0, B,   P_CLUB, WOOD, HI_WOOD),
 WEAPON("metal club", "heavy club",
-	0, 0, 0, 1, 7,  4,  10,  8, 0, B,   P_CLUB, IRON, HI_METAL),
+	0, 0, 0, 2, 7,  4,  10,  8, 0, B,   P_CLUB, IRON, HI_METAL),
 
 	/* STEPHEN WHITE'S NEW CODE */
 	/* Base for artifact */
@@ -228,9 +226,7 @@ WEAPON("metal club", "heavy club",
 /* Paddles */
 /* Good to-hit and small damage, but low large damage */
 WEAPON("fly swatter", (char *)0,
-	1, 0, 0,  10, 4,  3, 15,  2, 2, B,   P_PADDLE, PLASTIC, CLR_GREEN),
-WEAPON("insect squasher", (char *)0,
-	1, 0, 0,  1, 4,  3, 30,  2, 4, B,   P_PADDLE, PLASTIC, CLR_GREEN),
+	1, 0, 0,  12, 4,  3, 15,  2, 2, B,   P_PADDLE, PLASTIC, CLR_GREEN),
 
 /* Maces */
 WEAPON("silver mace", (char *)0,
@@ -240,30 +236,14 @@ WEAPON("mace", (char *)0,
 	1, 0, 0, 35, 12,  5,  6,  7, 0, B,   P_MACE, IRON, HI_METAL),
 	/* +1 small */
 
-WEAPON("flanged mace", (char *)0,
-	1, 0, 0,  1, 12,  5,  8,  9, 0, B,   P_MACE, IRON, HI_METAL),
-
 /* Morning stars */
 WEAPON("morning star", (char *)0,
-	1, 0, 0, 20,48, 10,  4, 12, 0, B,   P_MORNING_STAR, IRON, HI_METAL),
+	1, 0, 0, 25,48, 10,  4, 12, 0, B,   P_MORNING_STAR, IRON, HI_METAL),
 						/* +d4 small, +1 large */
-
-WEAPON("jagged star", (char *)0,
-	1, 0, 0, 4,48, 10,  7,  15, 0, B,   P_MORNING_STAR, IRON, HI_METAL),
-
-WEAPON("devil star", (char *)0,
-	1, 0, 0, 1,48, 10,  12,  18, 0, B,   P_MORNING_STAR, IRON, HI_METAL),
-
 /* Flails */
 WEAPON("flail", (char *)0,
-	1, 0, 0, 30, 7,  4,  6,  4, 1, B,   P_FLAIL, IRON, HI_METAL),
+	1, 0, 0, 37, 7,  4,  6,  4, 1, B,   P_FLAIL, IRON, HI_METAL),
 	/* +1 small, +1d4 large */
-
-WEAPON("knout", (char *)0,
-	1, 0, 0,  6, 7,  4,  9,  6, 2, B,   P_FLAIL, IRON, HI_METAL),
-
-WEAPON("obsid", (char *)0,
-	1, 0, 0,  1, 7,  4,  12,  8, 3, B,   P_FLAIL, IRON, HI_METAL),
 
 /* Hammers */
 WEAPON("war hammer", (char *)0,
@@ -275,41 +255,15 @@ WEAPON("heavy hammer", (char *)0,
 	/* Base for artifact */
 
 WEAPON("mallet", (char *)0,
-	1, 0, 0,  1, 20,500, 14, 14, 0, B,   P_HAMMER, WOOD, HI_WOOD),
-
-/* Yes, these are melee weapons for whacking enemies to death. Hammer skill, for obvious reasons. --Amy */
-WEAPON("wedged little-girl sandal", (char *)0,
-	1, 0, 0, 1, 1,  5,  4,  4, 2, B,   P_HAMMER, MINERAL, CLR_WHITE),
-WEAPON("soft girl sneaker", (char *)0,
-	1, 0, 0, 1, 2,  100,  2,  2, 5, B,   P_HAMMER, LEATHER, CLR_RED),
-WEAPON("sturdy plateau boot for girls", (char *)0,
-	1, 0, 0, 1, 10,  200,  6,  6, 1, B,   P_HAMMER, METAL, CLR_BRIGHT_BLUE),
-WEAPON("hugging boot", (char *)0,
-	1, 0, 0, 1, 5,  100,  9,  8, 0, B,   P_HAMMER, MITHRIL, CLR_ORANGE),
-WEAPON("block-heeled combat boot", (char *)0,
-	1, 0, 0, 1, 5,  100,  11,  3, 0, B,   P_HAMMER, LEATHER, CLR_BLACK),
-/* Some of these are expensive because they're supposed to be brands like Nike, Adidas etc. */
-/* We won't use those brand names in-game though. */
-
-/* adult versions - these do more damage, but monsters will rarely start with them in their inventory */
-WEAPON("wooden geta", (char *)0,
-	1, 0, 0, 1, 1,  5,  10,  10, 0, B,   P_HAMMER, WOOD, CLR_BROWN),
-WEAPON("lacquered dancing shoe", (char *)0,
-	1, 0, 0, 1, 2,  75,  6,  11, 0, B,   P_HAMMER, MINERAL, CLR_BLACK),
-WEAPON("high-heeled sandal", (char *)0,
-	1, 0, 0, 1, 1,  10,  9,  7, 0, B,   P_HAMMER, MINERAL, CLR_WHITE),
-WEAPON("sexy leather pump", (char *)0,
-	1, 0, 0, 1, 2,  50,  8, 10, 4, B,   P_HAMMER, LEATHER, CLR_BRIGHT_MAGENTA),
-WEAPON("spiked battle boot", (char *)0,
-	1, 0, 0, 1, 5,  150,  9,  9, 2, B,   P_HAMMER, METAL, HI_METAL),
+	1, 0, 0,  3, 20,500, 14, 14, 0, B,   P_HAMMER, WOOD, HI_WOOD),
 
 /* Quarterstaves */
 WEAPON("quarterstaff", "staff",
 	0, 0, 1, 10, 16,  5,  9,  9, 0, B,   P_QUARTERSTAFF, WOOD, HI_WOOD),
 WEAPON("silver capped staff", (char *)0,
-	0, 0, 1, 2,  16, 100, 9,  9, 0, B,	 P_QUARTERSTAFF, SILVER, HI_SILVER),
+	0, 0, 1, 5,  16, 100, 9,  9, 0, B,	 P_QUARTERSTAFF, SILVER, HI_SILVER),
 WEAPON("battle staff", (char *)0,
-	0, 0, 1, 1, 16,  155,  15,  15, 0, B,   P_QUARTERSTAFF, METAL, HI_METAL),
+	0, 0, 1, 3, 16,  155,  15,  15, 0, B,   P_QUARTERSTAFF, METAL, HI_METAL),
 
 /* Polearms */
 /* (also weptool fishing pole) */
@@ -367,22 +321,15 @@ WEAPON("dwarvish spear", "stout spear",
 /* Javelins */
 WEAPON("javelin", "throwing spear",
 	0, 1, 0, 15, 8,  3,  6,  6, 1, P,   P_JAVELIN, IRON, HI_METAL),
-WEAPON("spirit thrower", (char *)0,
-	0, 1, 0, 5, 8,  3,  10,  10, 1, P,   P_JAVELIN, IRON, HI_METAL),
-WEAPON("torpedo", (char *)0,
-	0, 1, 0, 1, 8,  3,  16,  16, 1, P,   P_JAVELIN, IRON, HI_METAL),
 
 /* Tridents */
 WEAPON("trident", (char *)0,
 	1, 0, 0,  12, 10,  5,  6,  4, 1, P,   P_TRIDENT, IRON, HI_METAL),
 	/* +1 small, +2d4 large */
 
-WEAPON("stygian pike", (char *)0,
-	1, 0, 0,  1, 10,  5,  13,  11, 4, P,   P_TRIDENT, IRON, HI_METAL),
-
 /* Lances */
 WEAPON("lance", (char *)0,
-	1, 0, 0,  1,75, 10,  6,  8, 0, P,   P_LANCE, IRON, HI_METAL),
+	1, 0, 0,  5,75, 10,  6,  8, 0, P,   P_LANCE, IRON, HI_METAL),
 
 /* Bows (and arrows) */
 /* KMH, balance patch -- damage of launchers restored to d2 big and small */
@@ -461,7 +408,7 @@ WEAPON("bullwhip", (char *)0,
 	1, 0, 0,  9, 8,  4,  5,  3, 2, 0,   P_WHIP, LEATHER, CLR_BROWN),
 
 WEAPON("steel whip", (char *)0,
-	1, 0, 0,  1, 8,  4,  10,  6, 4, 0,   P_WHIP, METAL, HI_METAL),
+	1, 0, 0,  2, 8,  4,  10,  6, 4, 0,   P_WHIP, METAL, HI_METAL),
 
 #ifdef KOPS
 WEAPON("rubber hose", (char *)0,
@@ -760,22 +707,6 @@ BOOTS("gnomish boots", "little black boots",
 		0, 0,  0,	   1, 2, 4, 16,  10, 0, LEATHER, CLR_BLACK),
 BOOTS("high boots", "jackboots",
 		0, 0,  0,	  13, 2, 8, 12,  8, 0, LEATHER, HI_LEATHER),
-BOOTS("wedge sandals", "heeled sandals",
-		0, 0,  0,          1, 5, 2,  25,  10, 0, MINERAL, CLR_WHITE),
-BOOTS("dancing shoes", "soft footwear", /* not high-heeled - transvestites won't benefit from wearing this pair! --Amy */
-		0, 0,  0,          1, 1, 1,  80,   8, 0, LEATHER, CLR_BRIGHT_BLUE),
-BOOTS("sweet mocassins", "womens footwear", /* not high-heeled*/
-		0, 0,  0,          1, 1, 1,  50,   9, 0, LEATHER, CLR_ORANGE),
-BOOTS("soft sneakers", "light footwear", /* not high-heeled*/
-		0, 0,  0,          1, 2, 2,  150,   8, 0, LEATHER, CLR_WHITE),
-BOOTS("feminine pumps", "female footwear",
-		0, 0,  0,          1, 2, 4,  100,  10, 0, LEATHER, CLR_ORANGE),
-BOOTS("leather peep-toes", "asian footwear",
-		0, 0,  0,          1, 3, 4,  200,   9, 0, LEATHER, CLR_BLACK),
-BOOTS("hippie heels", "red overknees",
-		0, 0,  HALLUC,          1, 3, 5,  200,  5, 0, DRAGON_HIDE, CLR_ORANGE),
-BOOTS("combat stilettos", "heeled boots",
-		0, 0,  0,          1, 5, 10,  250,  9, 0, DRAGON_HIDE, CLR_BLACK),
 /* ...with shuffled appearances */
 BOOTS("speed boots", "combat boots",
 		0, 1,  FAST,	  12, 2, 8, 50,  9, 0, LEATHER, HI_LEATHER),
@@ -785,7 +716,7 @@ BOOTS("water walking boots", "jungle boots",
 BOOTS("jumping boots", "hiking boots",
 		0, 1,  JUMPING,   11, 2, 8, 50,  9, 0, LEATHER, HI_LEATHER),
 BOOTS("flying boots", "battle boots",
-		0, 1,  FLYING,   1, 2, 8, 50,  9, 0, SILVER, CLR_GRAY),
+		0, 1,  FLYING,   5, 2, 8, 50,  9, 0, SILVER, CLR_GRAY),
 BOOTS("elven boots", "mud boots",
 		0, 1,  STEALTH,   12, 2, 7,  50,  9, 0, LEATHER, HI_LEATHER),
 BOOTS("kicking boots", "steel boots",
@@ -793,7 +724,7 @@ BOOTS("kicking boots", "steel boots",
 BOOTS("fumble boots", "riding boots",
 		0, 1,  FUMBLING,  11, 2, 8, 50,  9, 0, LEATHER, HI_LEATHER),
 BOOTS("zipper boots", "persian boots",
-		0, 1,  WOUNDED_LEGS,  1, 2, 8, 50,  6, 3, DRAGON_HIDE, CLR_YELLOW),
+		0, 1,  WOUNDED_LEGS,  5, 2, 8, 50,  6, 3, DRAGON_HIDE, CLR_YELLOW),
 BOOTS("levitation boots", "snow boots",
 		0, 1,  LEVITATION,12, 2, 7, 50,  9, 0, LEATHER, HI_LEATHER),
 
@@ -1868,39 +1799,19 @@ OBJECT(OBJ("statue", (char *)0), BITS(1,0,0,1,0,0,0,0,0,0,0,P_NONE,MINERAL), 0,
 		ROCK_CLASS,   900, 0, 2500,  0, 20, 20, 0, 0, 200, CLR_WHITE),
 
 OBJECT(OBJ("heavy iron ball", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-		BALL_CLASS,  889, 0,  1200, 10, 25, 25, 0, 0,  200, HI_METAL),
+		BALL_CLASS,  1000, 0,  1200, 10, 25, 25, 0, 0,  200, HI_METAL),
 						/* +d4 when "very heavy" */
-OBJECT(OBJ("quite heavy iron ball", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-		BALL_CLASS,  100, 0,  1600, 10, 30, 30, 0, 0,  200, CLR_GREEN),
-OBJECT(OBJ("really heavy iron ball", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-		BALL_CLASS,  10, 0,  2000, 10, 35, 35, 0, 0,  200, CLR_RED),
-OBJECT(OBJ("extremely heavy iron ball", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-		BALL_CLASS,  1, 0,  2400, 10, 40, 40, 0, 0,  200, CLR_ORANGE),
 
 OBJECT(OBJ("iron chain", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-		CHAIN_CLASS, 889, 0,  120,  0,  4,  4, 0, 0,  200, HI_METAL),
+		CHAIN_CLASS, 1000, 0,  120,  0,  4,  4, 0, 0,  200, HI_METAL),
 						/* +1 both l & s */
-OBJECT(OBJ("rotating chain", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-		CHAIN_CLASS, 100, 0,  240,  0,  8,  8, 0, 0,  200, CLR_BRIGHT_BLUE),
-OBJECT(OBJ("scourge", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-		CHAIN_CLASS, 10, 0,  360,  0,  15,  15, 0, 0,  200, CLR_BRIGHT_MAGENTA),
-OBJECT(OBJ("nunchiaku", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON), 0,
-/* spelled wrong on purpose, as the samurai has another item with that name --Amy */
-		CHAIN_CLASS, 1, 0,  480,  0,  24,  24, 0, 0,  200, CLR_BRIGHT_GREEN),
-/* extra balls and chains for convict mainly (he can advance flail skill by swinging them) --Amy */
 
 OBJECT(OBJ("blinding venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
-		VENOM_CLASS,  499, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
-OBJECT(OBJ("tail spikes", "splash of venom"),
-		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
-		VENOM_CLASS,  1, 0,	 1,  0,  6,  6, 0, 0,	 0, CLR_BLACK),
-OBJECT(OBJ("faerie floss rhing", "splash of venom"),
-		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
-		VENOM_CLASS,  1, 0,	 1,  0,  0,  0, 0, 0,	 0, CLR_BRIGHT_MAGENTA),
+		VENOM_CLASS,  500, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
 OBJECT(OBJ("acid venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
-		VENOM_CLASS,  499, 0,	 1,  0,  6,  6, 0, 0,	 0, HI_ORGANIC),
+		VENOM_CLASS,  500, 0,	 1,  0,  6,  6, 0, 0,	 0, HI_ORGANIC),
 		/* +d6 small or large */
 
 /* fencepost, the deadly Array Terminator -- name [1st arg] *must* be NULL */

@@ -185,7 +185,7 @@ register boolean special;
 		    weapon = FLY_SWATTER;
 		    break;
 		case PM_GANGSTER:
-		    weapon = SCOURGE;
+		    weapon = KNIFE;
 		    break;
 		case PM_PIRATE:
 		    weapon = SCIMITAR;

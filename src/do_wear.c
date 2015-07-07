@@ -111,13 +111,6 @@ Boots_on()
 	case GNOMISH_BOOTS:
 	case IRON_SHOES:
 	case HIGH_BOOTS:
-	case WEDGE_SANDALS:
-	case FEMININE_PUMPS:
-	case DANCING_SHOES:
-	case SWEET_MOCASSINS:
-	case SOFT_SNEAKERS:
-	case LEATHER_PEEP_TOES:
-	case COMBAT_STILETTOS:
 	case JUMPING_BOOTS:
 	case FLYING_BOOTS:
 	case KICKING_BOOTS:
@@ -125,11 +118,6 @@ Boots_on()
 	case ZIPPER_BOOTS:
 		pline("While putting on this pair of boots, their zippers try to scratch your legs!");
 		losehp(rnd(20), "foolishly putting on a zipper boot", KILLED_BY);
-		break;
-	case HIPPIE_HEELS:
-		if (flags.female) pline("You're dressed like a '69 whore!");
-		else pline("You're dressed like a frickin' hardrocker!");
-	    if (!uarmf->cursed) {curse(uarmf); pline("The highly erotic boots weld themselves to your feet!");}
 		break;
 	case WATER_WALKING_BOOTS:
 		if (u.uinwater) spoteffects(TRUE);
@@ -220,23 +208,12 @@ Boots_off()
 	case LOW_BOOTS:
 	case GNOMISH_BOOTS:
 	case IRON_SHOES:
-	case WEDGE_SANDALS:
-	case FEMININE_PUMPS:
-	case DANCING_SHOES:
-	case SWEET_MOCASSINS:
-	case SOFT_SNEAKERS:
-	case LEATHER_PEEP_TOES:
-	case COMBAT_STILETTOS:
 	case HIGH_BOOTS:
 	case JUMPING_BOOTS:
 	case KICKING_BOOTS:
 #ifdef JEDI
 	case PLASTEEL_BOOTS:
 #endif
-		break;
-	case HIPPIE_HEELS:
-
-		pline("You decide you had enough of those hallucination-inducing boots.");
 		break;
 
 	default: impossible(unknown_type, c_boots, otyp);
