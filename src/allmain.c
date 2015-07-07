@@ -43,8 +43,10 @@ moveloop()
     int xtraclock;
     /*int timeout_start = rnz(10000)+rnz(15000);*/
     /*int clock_base = rnz(10000)+rnz(20000)+timeout_start;*/
+#ifdef MORE_SPAWNS
 	int timeout_start = u.monstertimeout;
 	int clock_base = u.monstertimefinish; /* values set in u_init */
+#endif
     int past_clock;
 	/*u.monstertimeout = timeout_start;*/
 	/*u.monstertimefinish = clock_base;*/

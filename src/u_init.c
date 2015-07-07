@@ -2516,8 +2516,10 @@ u_init()
 	init_uhunger();
 	u.ublesscnt = rnz(300);			/* no prayers just yet */
 
-      u.monstertimeout = rnz(10000)+rnz(15000); /*This NEEDS to be set here, because otherwise saving/restoring will set*/
-      u.monstertimefinish = rnz(10000)+rnz(20000)+u.monstertimeout; /*a new value, allowing the player to cheat. --Amy*/
+#ifdef MORE_SPAWNS
+        u.monstertimeout = rnz(10000)+rnz(15000); /*This NEEDS to be set here, because otherwise saving/restoring will set*/
+        u.monstertimefinish = rnz(10000)+rnz(20000)+u.monstertimeout; /*a new value, allowing the player to cheat. --Amy*/
+#endif
 	u.legscratching = (Role_if(PM_BLEEDER) ? 3 : 1); /*must also be set here; this may increase over time*/
 	u.next_check = rnz(600); /* it used to be exactly 600 at the start of every game */
 #if 0 /* 5lo: No longer used as these monsters don't exist anymore */
