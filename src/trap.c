@@ -10,7 +10,6 @@ STATIC_DCL void FDECL(rocks_fall, (int, int));
 
 STATIC_DCL void FDECL(dofiretrap, (struct obj *));
 STATIC_DCL void FDECL(doicetrap, (struct obj *));
-STATIC_DCL void FDECL(doshittrap, (struct obj *));
 STATIC_DCL void NDECL(domagictrap);
 STATIC_DCL boolean FDECL(emergency_disrobe,(boolean *));
 STATIC_DCL int FDECL(untrap_prob, (struct trap *ttmp));
@@ -1281,22 +1280,6 @@ glovecheck:		(void) rust_dmg(uarmg, "gauntlets", 1, TRUE, &youmonst);
 		doicetrap((struct obj *)0);
 		break;
 
-	    case SHIT_TRAP:
-
-		if (Levitation || Flying) { /* ground-based trap, obviously */
-		    if (!already_seen && rn2(3)) break;
-		    seetrap(trap);
-		    pline("%s %s on the ground below you.",
-			    already_seen ? "There is" : "You discover",
-			    "a stinking heap of shit");
-			break;
-		} 
-
-		seetrap(trap);
-		doshittrap((struct obj *)0);
-		if (!rn2(50)) deltrap(trap);
-		break;
-
 	    case PIT:
 	    case SPIKED_PIT:
 		/* KMH -- You can't escape the Sokoban level traps */
@@ -2546,22 +2529,6 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
 		if (!rn2(50)) deltrap(trap);
            break;
 
-           case SHIT_TRAP:
-#if 0 /* Will be removed */
-		if(is_flyer(mptr) && (mptr != &mons[PM_ARABELLA]) && (mptr != &mons[PM_ANASTASIA]) && (mptr != &mons[PM_HENRIETTA]) && (mptr != &mons[PM_KATRIN]) && (mptr != &mons[PM_JANA]) & (mptr != &mons[PM_TUFTED_ASIAN_GIRL]) && (mptr != &mons[PM_SWEET_BLONDE]) && (mptr != &mons[PM_BURLY_WOMAN]) && (mptr != &mons[PM_VIOLET_BEAUTY]) && (mptr != &mons[PM_SOFT_WENCH]) ) break; /* since this is a ground-based trap */
-		/* The spacewars fighter nemeses somehow have affinity to this type of trap. */
-#endif
-           if (in_sight)
-             pline("%s steps into a heap of shit!", mon_nam(mtmp));
-           else if (see_it)
-             You("see %s stepping into a heap of shit!", surface(mtmp->mx, mtmp->my));
-
-			mon_adjust_speed(mtmp, 1, (struct obj *)0);
-
-           if (see_it) seetrap(trap);
-		if (!rn2(20)) deltrap(trap);
-           break;
-
 		case PIT:
 		case SPIKED_PIT:
 			fallverb = "falls";
@@ -3196,45 +3163,6 @@ struct obj *box;        /* at the moment only for floor traps */
                 losehp(num, "freezing cloud", KILLED_BY_AN);
 
 		    if (!rn2(33)) /* new calculations --Amy */        destroy_item(POTION_CLASS, AD_COLD);
-}
-
-STATIC_OVL void
-doshittrap(box)
-struct obj *box;        /* at the moment only for floor traps */
-{
-        int num = 0;
-        num = d(4, 4) + rnd((level_difficulty() / 2) + 1);
-        if (box) {
-                impossible("doicetrap() called with non-null box.");
-                return;
-        }
-
-        pline("You stepped into a heap of shit!");
-        if (Acid_resistance) { /* let's just assume the stuff is acidic or corrosive --Amy */
-                shieldeff(u.ux, u.uy);
-                num = d(2, 2)+ rnd((level_difficulty() / 4) + 1);
-        }
-
-	    if (uarmf && !rn2(5)) (void)rust_dmg(uarmf, xname(uarmf), 0, TRUE, &youmonst);
-	    if (uarmf && !rn2(5)) (void)rust_dmg(uarmf, xname(uarmf), 1, TRUE, &youmonst);
-	    if (uarmf && !rn2(5)) (void)rust_dmg(uarmf, xname(uarmf), 2, TRUE, &youmonst);
-	    if (uarmf && !rn2(5)) (void)rust_dmg(uarmf, xname(uarmf), 3, TRUE, &youmonst);
-		/* Dog shit is extremely aggressive to footwear. Let's give it a chance to do withering damage. --Amy */
-	    if (uarmf && !rn2(25)) (void)wither_dmg(uarmf, xname(uarmf), 0, TRUE, &youmonst);
-	    if (uarmf && !rn2(25)) (void)wither_dmg(uarmf, xname(uarmf), 1, TRUE, &youmonst);
-	    if (uarmf && !rn2(25)) (void)wither_dmg(uarmf, xname(uarmf), 2, TRUE, &youmonst);
-	    if (uarmf && !rn2(25)) (void)wither_dmg(uarmf, xname(uarmf), 3, TRUE, &youmonst);
-		if (!rn2(20)) u_slow_down();
-
-		if ( !rn2(100) || (!Free_action && !rn2(10)))	{
-			You("inhale the intense smell of shit! The world spins and goes dark.");
-			nomovemsg = "You are conscious again.";	/* default: "you can move again" */
-			nomul(-rnd(10), "unconscious from smelling dog shit");
-			exercise(A_DEX, FALSE);
-		}
-
-        if (num) losehp(num, "heap of shit", KILLED_BY_AN);
-
 }
 
 STATIC_OVL void

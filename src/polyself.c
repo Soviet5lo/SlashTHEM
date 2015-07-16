@@ -1185,7 +1185,6 @@ dospinweb()
 		case SPEAR_TRAP:
 		case MAGIC_BEAM_TRAP:
 		case COLLAPSE_TRAP:
-		case SHIT_TRAP:
 		case LANDMINE:
 		case SLP_GAS_TRAP:
 		case RUST_TRAP:

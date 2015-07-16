@@ -528,7 +528,6 @@ static NEARDATA const char *trap_engravings[TRAPNUM] = {
 			"Vlad was here", "ad aerarium", "ad aerarium",
 			(char *)0, (char *)0, (char *)0, (char *)0, (char *)0,
 			(char *)0, (char *)0, (char *)0, (char *)0, (char *)0,
-			(char *)0,
 };
 
 STATIC_OVL void
@@ -1748,7 +1747,6 @@ coord *tm;
 			    if (lvl < 7) kind = NO_TRAP; break;
 		    case STATUE_TRAP:
 		    case POLY_TRAP:
-		    case SHIT_TRAP:
 			    if (lvl < 8) kind = NO_TRAP; break;
 		    case COLLAPSE_TRAP:
 		    case MAGIC_BEAM_TRAP:

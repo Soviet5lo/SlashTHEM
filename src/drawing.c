@@ -295,7 +295,6 @@ const struct symdef defsyms[MAXPCHARS] = {
 	{'^', "spear trap",	C(CLR_BROWN)},	/* trap */
 	{'^', "ceiling collapse trap", C(CLR_GRAY)},	/* trap */
 	{'^', "magic beam trap", C(CLR_YELLOW)},	/* trap */
-	{'^', "heap of shit", C(CLR_ORANGE)},	/* trap */
 	{'|', "wall",		C(CLR_GRAY)},	/* vbeam */
 	{'-', "wall",		C(CLR_GRAY)},	/* hbeam */
 	{'\\',"wall",		C(CLR_GRAY)},	/* lslant */
@@ -410,7 +409,6 @@ static uchar ibm_graphics[MAXPCHARS] = {
 	g_FILLER(S_spear_trap),
 	g_FILLER(S_falling_rocks_trap),
 	g_FILLER(S_magic_beam_trap),
-	g_FILLER(S_pile_of_shit),
 	0xb3,	/* S_vbeam:	meta-3, vertical rule */
 	0xc4,	/* S_hbeam:	meta-D, horizontal rule */
 	g_FILLER(S_lslant),
@@ -516,7 +514,6 @@ static uchar dec_graphics[MAXPCHARS] = {
 	g_FILLER(S_spear_trap),
 	g_FILLER(S_falling_rocks_trap),
 	g_FILLER(S_magic_beam_trap),
-	g_FILLER(S_pile_of_shit),
 	0xf8,	/* S_vbeam:	meta-x, vertical rule */
 	0xf1,	/* S_hbeam:	meta-q, horizontal rule */
 	g_FILLER(S_lslant),
@@ -620,7 +617,6 @@ static uchar mac_graphics[MAXPCHARS] = {
 	g_FILLER(S_spear_trap),
 	g_FILLER(S_falling_rocks_trap),
 	g_FILLER(S_magic_beam_trap),
-	g_FILLER(S_pile_of_shit),
 	g_FILLER(S_vbeam),
 	g_FILLER(S_hbeam),
 	g_FILLER(S_lslant),
@@ -939,7 +935,6 @@ boolean is_rlevel;
 	    showsyms[S_spear_trap] = 0x04;
 	    showsyms[S_falling_rocks_trap] = 0x04;
 	    showsyms[S_magic_beam_trap] = 0x04;
-	    showsyms[S_pile_of_shit] = 0x04;
 #endif
 	}
 #endif /* ASCIIGRAPH */

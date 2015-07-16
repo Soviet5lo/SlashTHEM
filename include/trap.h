@@ -76,7 +76,6 @@ extern struct trap *ftrap;
 #define SPEAR_TRAP	24
 #define COLLAPSE_TRAP	25
 #define MAGIC_BEAM_TRAP	26
-#define SHIT_TRAP	27
-#define TRAPNUM 28
+#define TRAPNUM 27
 
 #endif /* TRAP_H */
