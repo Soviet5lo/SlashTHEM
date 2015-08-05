@@ -1185,7 +1185,6 @@ dospinweb()
 		case SPEAR_TRAP:
 		case MAGIC_BEAM_TRAP:
 		case COLLAPSE_TRAP:
-		case SHIT_TRAP:
 		case LANDMINE:
 		case SLP_GAS_TRAP:
 		case RUST_TRAP:
@@ -1221,22 +1220,6 @@ dosummon()
 	int placeholder;
 	int somanymana;
 	somanymana = 10;
-
-	if (u.ulycn == PM_WERESOLDIERANT) somanymana = 15;
-	if (u.ulycn == PM_WEREWOLF) somanymana = 20;
-	if (u.ulycn == PM_WEREPIRANHA) somanymana = 20;
-	if (u.ulycn == PM_WEREEEL) somanymana = 25;
-	if (u.ulycn == PM_WEREKRAKEN) somanymana = 45;
-	if (u.ulycn == PM_WEREPANTHER) somanymana = 30;
-	if (u.ulycn == PM_WERETIGER) somanymana = 30;
-	if (u.ulycn == PM_WERESNAKE) somanymana = 20;
-	if (u.ulycn == PM_WERECOW) somanymana = 20;
-	if (u.ulycn == PM_WEREBEAR) somanymana = 75;
-	if (u.ulycn == PM_WEREVORTEX) somanymana = 50;
-	if (u.ulycn == PM_WEREGIANT) somanymana = 50;
-	if (u.ulycn == PM_WEREGHOST) somanymana = 30;
-	if (u.ulycn == PM_WERECOCKATRICE) somanymana = 60;
-	if (u.ulycn == PM_WEREMINDFLAYER) somanymana = 150;
 	
 	if (u.uen < somanymana) {
 	    You("lack the energy to send forth a call for help! You need at least %d!",somanymana);

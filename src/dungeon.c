@@ -1536,11 +1536,7 @@ level_difficulty()
 	else
 		if (u.uhave.amulet)
 			return(/*deepest_lev_reached(FALSE)*/100);
-		else if ((Inhell && !Race_if(PM_HERETIC) ) ||
-#ifdef ELDER_SCROLLS
-			    Race_if(PM_IMPERIAL) || 
-#endif /* ELDER_SCROLLS */
-			 flags.gehenna)
+		else if ((Inhell) || flags.gehenna)
 
 			return((xchar) depth(&u.uz) + rn2(u.ulevel) + 2 ); /* may never be bigger than 127 */
 		else

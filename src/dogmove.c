@@ -890,8 +890,7 @@ register int after;	/* this is extra fast monster movement */
 			((mtmp->mhp*(4+EDOG(mtmp)->encouraged) < mtmp->mhpmax
 			  || mtmp2->data->msound == MS_GUARDIAN
 			  || mtmp2->data->msound == MS_LEADER) &&
-	/* the activistor quest shouldn't be trivialized by bringing a high-level pet or using charm monster. --Amy */
-			 mtmp2->mpeaceful && !Conflict) || mtmp2->data == &mons[PM_TOPMODEL] ||
+			 mtmp2->mpeaceful && !Conflict) ||
 			   (touch_petrifies(mtmp2->data) &&
 				!resists_ston(mtmp)))
 			continue;

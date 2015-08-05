@@ -277,8 +277,7 @@ newexplevel()
 			case PM_PRIEST: u.uenbase += rnd(6) + 2; break;
 			case PM_CHEVALIER: u.uenbase += rnd(6) + 2; break;
 			case PM_ROGUE: u.uenbase += rnd(4) + 1; break;
-			/*case PM_MAIA: u.uenbase += rnd(4) + 1; break;
-			case PM_GASTLY: u.uenbase += rnd(3) + 1; break;*/
+			case PM_GASTLY: u.uenbase += rnd(3) + 1; break;
 			case PM_SAMURAI: u.uenbase += rnd(2); break;
 #ifdef TOURIST
 			case PM_TOURIST: u.uenbase += rnd(4) + 1; break;
@@ -808,99 +807,6 @@ boolean incr;	/* true iff via incremental experience growth */
 	    adjabil(u.ulevel - 1, u.ulevel);	/* give new intrinsics */
 	    reset_rndmonst(NON_PM);		/* new monster selection */
 	}
-#ifdef ELDER_SCROLLS
-		if (Race_if(PM_ASGARDIAN) && u.ulevel > u.urmaxlvl) {
-
-		u.urmaxlvl = u.ulevel;
-
-		if (!rn2(3)) { switch (rnd(50)) {
-
-			case 1: 
-			case 2: 
-			case 3: 
-			    HFire_resistance |= FROMOUTSIDE; pline("Got fire resistance!"); break;
-			case 4: 
-			case 5: 
-			case 6: 
-			    HCold_resistance |= FROMOUTSIDE; pline("Got cold resistance!"); break;
-			case 7: 
-			case 8: 
-			case 9: 
-			    HSleep_resistance |= FROMOUTSIDE; pline("Got sleep resistance!"); break;
-			case 10: 
-			case 11: 
-			    HDisint_resistance |= FROMOUTSIDE; pline("Got disintegration resistance!"); break;
-			case 12: 
-			case 13: 
-			case 14: 
-			    HShock_resistance |= FROMOUTSIDE; pline("Got shock resistance!"); break;
-			case 15: 
-			case 16: 
-			case 17: 
-			    HPoison_resistance |= FROMOUTSIDE; pline("Got poison resistance!"); break;
-			case 18: 
-			    HDrain_resistance |= FROMOUTSIDE; pline("Got drain resistance!"); break;
-			case 19: 
-			    HSick_resistance |= FROMOUTSIDE; pline("Got sickness resistance!"); break;
-			case 20: 
-			    HAcid_resistance |= FROMOUTSIDE; pline("Got acid resistance!"); break;
-			case 21: 
-			case 22: 
-			    HHunger |= FROMOUTSIDE; pline("You start to hunger rapidly!"); break;
-			case 23: 
-			case 24: 
-			    HSee_invisible |= FROMOUTSIDE; pline("Got see invisible!"); break;
-			case 25: 
-			    HTelepat |= FROMOUTSIDE; pline("Got telepathy!"); break;
-			case 26: 
-			case 27: 
-			    HWarning |= FROMOUTSIDE; pline("Got warning!"); break;
-			case 28: 
-			case 29: 
-			    HSearching |= FROMOUTSIDE; pline("Got searching!"); break;
-			case 30: 
-			case 31: 
-			    HStealth |= FROMOUTSIDE; pline("Got stealth!"); break;
-			case 32: 
-			case 33: 
-			    HAggravate_monster |= FROMOUTSIDE; pline("You aggravate monsters!"); break;
-			case 34: 
-			    HConflict |= FROMOUTSIDE; pline("You start causing conflict!"); break;
-			case 35: 
-			case 36: 
-			    HTeleportation |= FROMOUTSIDE; pline("Got teleportitis!"); break;
-			case 37: 
-			    HTeleport_control |= FROMOUTSIDE; pline("Got teleport control!"); break;
-			case 38: 
-			    HFlying |= FROMOUTSIDE; pline("Got flying!"); break;
-			case 39: 
-			    HSwimming |= FROMOUTSIDE; pline("Got swimming!"); break;
-			case 40: 
-			    HMagical_breathing |= FROMOUTSIDE; pline("Got unbreathing!"); break;
-			case 41: 
-			    HSlow_digestion |= FROMOUTSIDE; pline("Got slow digestion!"); break;
-			case 42: 
-			case 43: 
-			    HRegeneration |= FROMOUTSIDE; pline("Got regeneration!"); break;
-			case 44: 
-			    HPolymorph |= FROMOUTSIDE; pline("Got polymorphitis!"); break;
-			case 45: 
-			    HPolymorph_control |= FROMOUTSIDE; pline("Got polymorph control!"); break;
-			case 46: 
-			case 47: 
-			    HFast |= FROMOUTSIDE; pline("Got speed!"); break;
-			case 48: 
-			    HInvis |= FROMOUTSIDE; pline("Got invisibility!"); break;
-
-			default:
-				break;
-
-		    }
-
-		  }
-
-		}
-#endif /* ELDER_SCROLLS */
 		if (Role_if(PM_BINDER) && u.ulevel > u.urmaxlvlC) {
 
 		u.urmaxlvlC = u.ulevel;

@@ -39,24 +39,6 @@ register boolean clumsy;
 	if (uarmf && uarmf->otyp == KICKING_BOOTS)
 	    dmg += 5;
 
-	if (uarmf && uarmf->otyp == WEDGE_SANDALS && Race_if(PM_NAVI) )
-	    dmg += 5;
-
-	if (uarmf && uarmf->otyp == WEDGE_SANDALS)
-	    dmg += 2;
-
-	if (uarmf && uarmf->otyp == COMBAT_STILETTOS)
-	    dmg += 5;
-
-	if (uarmf && uarmf->otyp == LEATHER_PEEP_TOES)
-	    dmg += 4;
-
-	if (uarmf && uarmf->otyp == HIPPIE_HEELS)
-	    dmg += 7;
-
-	if (uarmf && uarmf->otyp == FEMININE_PUMPS && uarmf->spe >= 1)
-		dmg += uarmf->spe;
-
 	/* excessive wt affects dex, so it affects dmg */
 	if (clumsy) dmg /= 2;
 

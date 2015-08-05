@@ -187,11 +187,6 @@ const struct innate {
 		     {  11, &(HFast), "quick", "slow" },
 		     {	 0, 0, 0, 0 } },
 
-	gof_abil[] = {	{1, &(HDrain_resistance), "", ""  },
-		     {   1, &(HInfravision), "", "" },
-		     {  10, &(HReflecting), "reflexive", "nonreflexive" },
-		     {	 0, 0, 0, 0 } },
-
 	gla_abil[] = {	{3, &(HFast), "quick", "slow"  },
 			 {	6, &(HStealth), "stealthy", "noisy"  },	/* with cat-like tread ... */
 		     {  10, &(HAggravate_monster), "noisy", "quiet" },
@@ -282,21 +277,6 @@ const struct innate {
 		     {	 15, &(HFire_resistance), "heat resistant", "less heat resistant" },
 		     {	 0, 0, 0, 0 } },
 
-	alb_abil[] = { {   1, &(HAntimagic), "", "" },
-		     {   3, &(HUndead_warning), "sensitive", "careless" },
-		     {   10, &(HSee_invisible), "your vision sharpen", "your vision blur" },
-			{  12, &(HStealth), "stealthy", "noisy" },
-			{15, &(HMagical_breathing), "aquatic", "hydrophobic"  },
-		     {	 25, &(HEnergy_regeneration), "charged with mana", "a loss of mana" },
-		     {   0, 0, 0, 0 } },
-
-	fen_abil[] = { {   1, &(HSearching), "", "" },
-			{   5, &(HStealth), "stealthy", "noisy" },
-		     {   7, &(HFast), "quick", "slow" },
-		     {	 10, &(HFire_resistance), "heat resistant", "less heat resistant" },
-		     {  15, &(HSwimming), "ready to swim","afraid of the water" },
-		     {   0, 0, 0, 0 } },
-
 	gno_abil[] = { {   5, &(HStealth), "stealthy", "noisy" },
 		     {   9, &(HFast), "quick", "slow" },
 		     {   11, &(HSearching), "perceptive", "unaware" },
@@ -318,17 +298,8 @@ const struct innate {
 	kob_abil[] = { {  1, &(HPoison_resistance), "", "" },
 		     {   0, 0, 0, 0 } },
 
-	sna_abil[] = { {  1, &(HPoison_resistance), "", "" },
-		     {   0, 0, 0, 0 } },
-
 	ill_abil[] = { {  1, &(HTelepat), "", "" },
 		     {   5, &(ETelepat), "aware", "unaware" },
-		     {   0, 0, 0, 0 } },
-
-	spi_abil[] = { {  1, &(HPoison_resistance), "", "" },
-		     {   0, 0, 0, 0 } },
-
-	ins_abil[] = { {  1, &(HPoison_resistance), "", "" },
 		     {   0, 0, 0, 0 } },
 
 	tro_abil[] = { {  1, &(HSick_resistance), "", "" },
@@ -349,19 +320,6 @@ const struct innate {
 		     {   1, &(HRegeneration), "", "" },
 		     {   7, &(HStealth), "stealthy", "noisy" },
 		     {   0, 0, 0, 0 } },
-#ifdef ELDER_SCROLLS
-	bre_abil[] = { {  1, &(HFire_resistance), "", "" },
-		     {   1, &(HCold_resistance), "", "" },
-		     {  1, &(HShock_resistance), "", "" },
-		     {   0, 0, 0, 0 } },
-	red_abil[] = { {  1, &(HSick_resistance), "", "" },
-		     {   1, &(HPoison_resistance), "", "" },
-		     {	 1, &(HEnergy_regeneration), "", "" },
-		     {   0, 0, 0, 0 } },
-	nor_abil[] = { {   1, &(HCold_resistance), "", "" },
-		     {	 15, &(HShock_resistance), "shock resistant", "less shock resistant" },
-		     {   0, 0, 0, 0 } },
-#endif /* ELDER_SCROLLS */
 	orc_abil[] = { {	1, &(HPoison_resistance), "", "" },
 		     {	 0, 0, 0, 0 } };
 
@@ -614,20 +572,14 @@ exerper()
 		    case SATIATED:	exercise(A_DEX, FALSE);
 					if (Role_if(PM_MONK))
 					    exercise(A_WIS, FALSE);
-					if (Role_if(PM_TOPMODEL)) { /* They strongly dislike being full --Amy */
-					    exercise(A_WIS, FALSE); exercise(A_STR, FALSE); exercise(A_CON, FALSE); exercise(A_DEX, FALSE); }
 					break;
 		    case NOT_HUNGRY:	exercise(A_CON, TRUE); break;
-		    case HUNGRY:	if (Role_if(PM_TOPMODEL)) exercise(A_WIS, TRUE); break;
-		    case WEAK:		if (!Role_if(PM_TOPMODEL)) exercise(A_STR, FALSE);
-					if (Role_if(PM_MONK))	/* fasting */
+		    case HUNGRY:	break;
+		    case WEAK:		if (Role_if(PM_MONK))	/* fasting */
 					    exercise(A_WIS, TRUE);
-					if (Role_if(PM_TOPMODEL)) {
-					    exercise(A_WIS, TRUE); exercise(A_STR, TRUE);
-}					break;
+					break;
 		    case FAINTING:
-		    case FAINTED:	 if (Role_if(PM_TOPMODEL)) { exercise(A_WIS, TRUE); exercise(A_STR, TRUE); exercise(A_DEX, TRUE);		}					
-					if (!Role_if(PM_TOPMODEL)) exercise(A_CON, FALSE); break;
+		    case FAINTED:	break;
 		}
 
 		/* Encumberance Checks */
@@ -868,7 +820,10 @@ int oldlevel, newlevel;
 	case PM_ACID_MAGE:	abil = aci_abil;	break;
 	case PM_GEEK:	abil = gee_abil;	break;
 	case PM_GRADUATE:	abil = gra_abil;	break;
+#if 0 /* Deferred roles */
 	case PM_POKEMON:	abil = pok_abil;	break;
+	case PM_PSION:           abil = psi_abil;	break;
+#endif
 	case PM_HEALER:         abil = hea_abil;	break;
 	case PM_ELECTRIC_MAGE:	abil = ele_abil;	break;
 	case PM_ICE_MAGE:	abil = ice_abil;	break;
@@ -879,14 +834,12 @@ int oldlevel, newlevel;
 	case PM_WARRIOR:         abil = war_abil;	break;
 	case PM_MONK:           abil = mon_abil;	break;
 	case PM_MUSICIAN:           abil = mus_abil;	break;
-	case PM_PSION:           abil = psi_abil;	break;
 	case PM_SCIENTIST:           abil = sci_abil;	break;
 	case PM_NECROMANCER:	abil = nec_abil;	break;
 	case PM_PIRATE:         abil = pir_abil;	break;
 	case PM_NINJA:		abil = nin_abil;	break;
 	case PM_KORSAIR:         abil = kor_abil;	break;
 	case PM_GLADIATOR:         abil = gla_abil;	break;
-	case PM_GOFF:         abil = gof_abil;	break;
 	case PM_DIVER:         abil = div_abil;	break;
 	case PM_DRUNK:         abil = dru_abil;	break;
 	case PM_LUNATIC:         abil = lun_abil;	break;
@@ -921,10 +874,7 @@ int oldlevel, newlevel;
 	case PM_CLOCKWORK_AUTOMATON:            rabil = clk_abil;	break;
 	case PM_KOBOLT:            rabil = kob_abil;	break;
 	case PM_TROLLOR:            rabil = tro_abil;	break;
-	case PM_SNAKEMAN:            rabil = sna_abil;	break;
 	case PM_ILLITHID:            rabil = ill_abil;	break;
-	case PM_SPIDERMAN:            rabil = spi_abil;	break;
-	case PM_INSECTOID:            rabil = ins_abil;	break;
 	case PM_UNGENOMOLD:            rabil = ung_abil;	break;
 	case PM_GASTLY:            rabil = gas_abil;	break;
 	case PM_GIGANT:            rabil = gig_abil;	break;
@@ -933,13 +883,6 @@ int oldlevel, newlevel;
 	case PM_HOBBIT:		rabil = hob_abil;	break;
 	case PM_ORC:            rabil = orc_abil;	break;
 	case PM_HUMAN_WEREWOLF:	rabil = lyc_abil;	break;
-	case PM_FENEK:	rabil = fen_abil;	break;
-	case PM_ALBAE:	rabil = alb_abil;	break;
-#ifdef ELDER_SCROLLS
-	case PM_BRETON:            rabil = bre_abil;	break;
-	case PM_REDGUARD:            rabil = red_abil;	break;
-	case PM_NORD:	rabil = nor_abil;	break;
-#endif /* ELDER_SCROLLS */
 	case PM_HUMAN:
 	case PM_VAMPIRE:
 	default:                rabil = 0;		break;

@@ -77,21 +77,13 @@ int mndx;
 	case PM_ORC_ZOMBIE:
 	case PM_ORC_MUMMY:	mndx = PM_ORC;  break;
 	case PM_DROW_MUMMY:
-	case PM_DROW_ZOMBIE:
+	case PM_DROW_ZOMBIE:    mndx = PM_DROW; break;
 	case PM_ELF_ZOMBIE:
 	case PM_ELF_MUMMY:	mndx = PM_ELF;  break;
 	case PM_VAMPIRE:
 	case PM_VAMPIRE_LORD:
 	case PM_VAMPIRE_MAGE:
 	case PM_HUMAN_ZOMBIE:
-	case PM_WALKING_CORPSE:
-	case PM_ZOMBIE:
-	case PM_GNOLL_GHOUL:
-	case PM_DRAUGR_ZOMBIE:
-	case PM_STEEL_ZOMBIE:
-	case PM_DRAUGR_MUMMY:
-	case PM_GREATER_MUMMY:
-	case PM_MUMMY:
 	case PM_HUMAN_MUMMY:	mndx = PM_HUMAN;  break;
 	case PM_GIANT_ZOMBIE:
 	case PM_GIANT_MUMMY:	mndx = PM_GIANT;  break;
@@ -99,8 +91,6 @@ int mndx;
 	case PM_ETTIN_MUMMY:	mndx = PM_ETTIN;  break;
 	case PM_TROLL_ZOMBIE:
 	case PM_TROLL_MUMMY:    mndx = PM_TROLL;  break;
-	case PM_MIMIC_MUMMY:    mndx = PM_GIANT_MIMIC;  break;
-	case PM_TASMANIAN_ZOMBIE:    mndx = PM_TASMANIAN_DEVIL;  break;
 	default:  break;
 	}
 	return mndx;
@@ -160,7 +150,6 @@ int mndx;
 	case PM_CHAMELEON:	mcham = CHAM_CHAMELEON; break;
 	case PM_DOPPELGANGER:	mcham = CHAM_DOPPELGANGER; break;
 	case PM_SANDESTIN:	mcham = CHAM_SANDESTIN; break;
-	case PM_GIANT_CHAMELEON:	mcham = CHAM_GIANT_CHAMELEON; break;
 	default: mcham = CHAM_ORDINARY; break;
 	}
 	return mcham;
@@ -172,7 +161,6 @@ STATIC_VAR short cham_to_pm[] = {
 		PM_CHAMELEON,
 		PM_DOPPELGANGER,
 		PM_SANDESTIN,
-		PM_GIANT_CHAMELEON,
 };
 
 /* for deciding whether corpse or statue will carry along full monster data */
@@ -231,11 +219,6 @@ register struct monst *mtmp;
 	    case PM_WHITE_UNICORN:
 	    case PM_GRAY_UNICORN:
 	    case PM_BLACK_UNICORN:
-	    case PM_PURPLE_UNICORN:
-	    case PM_BIG_PURPLE_UNICORN:
-	    case PM_BIG_WHITE_UNICORN:
-	    case PM_BIG_GRAY_UNICORN:
-	    case PM_BIG_BLACK_UNICORN:
 		if (mtmp->mrevived && rn2(20)) {
 			if (canseemon(mtmp))
 			   pline("%s recently regrown horn crumbles to dust.",
@@ -268,8 +251,6 @@ register struct monst *mtmp;
 	    case PM_ORC_MUMMY:
 	    case PM_ELF_MUMMY:
 	    case PM_HUMAN_MUMMY:
-	    case PM_MUMMY:
-	    case PM_MIMIC_MUMMY:
 	    case PM_GIANT_MUMMY:
 	    case PM_ETTIN_MUMMY:
 	    case PM_TROLL_MUMMY:            
@@ -282,16 +263,8 @@ register struct monst *mtmp;
 	    case PM_ORC_ZOMBIE:
 	    case PM_ELF_ZOMBIE:
 	    case PM_HUMAN_ZOMBIE:
-	    case PM_TASMANIAN_ZOMBIE:
-	    case PM_WALKING_CORPSE:
-	    case PM_ZOMBIE:
 	    case PM_GIANT_ZOMBIE:
 	    case PM_ETTIN_ZOMBIE:
-		case PM_GNOLL_GHOUL:
-	    case PM_DRAUGR_ZOMBIE:
-	    case PM_STEEL_ZOMBIE:
-	    case PM_DRAUGR_MUMMY:
-	    case PM_GREATER_MUMMY:
 	    case PM_DROW_ZOMBIE:
 	    case PM_DROW_MUMMY:
 		num = undead_to_corpse(mndx);
@@ -300,48 +273,11 @@ register struct monst *mtmp;
 		break;
 	    case PM_WIGHT:
 	    case PM_BARROW_WIGHT:
-	    case PM_TUNNEL_WIGHT:
-	    case PM_CASTLE_WIGHT:
 	    case PM_GHOUL:
 	    case PM_GHAST:
 	    case PM_GASTLY:
-	    case PM_HAUNTER:
-	    case PM_GENGAR:
 	    case PM_CREEPING___:
 	    case PM_FRANKENSTEIN_S_MONSTER:
-	    case PM_UNDEAD_MIMIC:
-	    case PM_UNDEAD_KANGAROO:
-	    case PM_RIBBON_FISH:
-	    case PM_SKELETON_FISH:
-	    case PM_BONE_FISH:
-	    case PM_CORPSE_FISH:
-	    case PM_HORROR_FISH:
-	    case PM_UNDEAD_OLOG_HAI_AMBUSHER:
-	    case PM_UNDEAD_ANT:
-	    case PM_UNDEAD_COCKATRICE:
-	    case PM_SKELETAL_HOUND:
-	    case PM_CORPSE_HOUND:
-	    case PM_ZOMBOCAT:
-	    case PM_HAUNTED_TIGER:
-	    case PM_UNDEAD_MIND_FLAYER:
-	    case PM_UNDEAD_NYMPH:
-	    case PM_SKELETTOCROTTA:
-	    case PM_UNDEAD_RAT:
-	    case PM_UNDEAD_SCORPION:
-	    case PM_UNDEAD_HORSE:
-	    case PM_UNDEAD_UNICORN: /* too decayed to leave a working horn, so we just don't leave one at all :D --Amy */
-	    case PM_UNDEAD_CENTAUR:
-	    case PM_UNDEAD_KOP:
-	    case PM_UNDEAD_SERGEANT:
-	    case PM_UNDEAD_LIEUTENANT:
-	    case PM_UNDEAD_KOMMISSIONER:
-	    case PM_UNDEAD_KAPTAIN:
-	    case PM_UNDEAD_KCHIEF:
-	    case PM_UNDEAD_KATCHER:
-	    case PM_UNDEAD_SNAKE:
-	    case PM_UNDEAD_NAGA:
-	    case PM_UNDEAD_NAGA_HATCHLING:
-	    case PM_UNDEAD_YETI:
 	    case PM_UNDEAD_ARCHEOLOGIST:
 	    case PM_UNDEAD_BARBARIAN:
 	    case PM_UNDEAD_BINDER:
@@ -379,7 +315,6 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_KORSAIR:
 	    case PM_UNDEAD_DIVER:
 	    case PM_UNDEAD_GLADIATOR:
-	    case PM_UNDEAD_GOFF:
 	    case PM_UNDEAD_PRIEST:
 	    case PM_UNDEAD_PRIESTESS:
 	    case PM_UNDEAD_RANGER:
@@ -394,13 +329,10 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_OFFICER:
 	    case PM_UNDEAD_UNDERTAKER:
 	    case PM_UNDEAD_ZOOKEEPER:
-	    case PM_UNDEAD_TRANSVESTITE:
-	    case PM_UNDEAD_TOPMODEL:
-	    case PM_UNDEAD_ACTIVISTOR:
 	    case PM_NON_UNDEAD_SLAYER:
 	    case PM_UNDEAD_VALKYRIE:
 	    case PM_UNDEAD_YEOMAN:
-	    case PM_UNDEAD_PADAWAN:
+	    /*case PM_UNDEAD_PADAWAN:*/
 	    case PM_UNDEAD_JEDI:
 	    case PM_UNDEAD_WIZARD:
 		obj = mkcorpstat(CORPSE, (struct monst *)0, &mons[mndx], x, y, TRUE);
@@ -573,7 +505,6 @@ register struct monst *mtmp;
 		mtmp->mnamelth = 0;
 		break;
 	    case PM_GOLD_GOLEM:
-	    case PM_GOLD_SLIME:
 		/* Good luck gives more coins */
 		obj = mkgold((long)(200 - rnl(101)), x, y);
 		mtmp->mnamelth = 0;
@@ -827,7 +758,6 @@ mcalcdistress()
 	were_change(mtmp);
 
 	if(!mtmp->mcansee && (mtmp->data == &mons[PM_SHOGGOTH] ||
-			 mtmp->data == &mons[PM_DARK_SHOGGOTH] ||
 			 mtmp->data == &mons[PM_GIANT_SHOGGOTH])){
  	    if(canspotmon(mtmp)) pline("%s forms new eyes!", Monnam(mtmp));
 	    mtmp->mblinded = 1;
@@ -1289,18 +1219,6 @@ mpickstuff(mtmp, str)
 			/* let a handful of corpse types thru to can_carry() */
 			!touch_petrifies(&mons[otmp->corpsenm]) &&
 			otmp->corpsenm != PM_LIZARD &&
-			otmp->corpsenm != PM_CAVE_LIZARD &&
-			otmp->corpsenm != PM_CHAOS_LIZARD &&
-			otmp->corpsenm != PM_LIZARD_EEL &&
-			otmp->corpsenm != PM_LIZARD_MAN &&
-			otmp->corpsenm != PM_EEL_LIZARD &&
-			otmp->corpsenm != PM_ANTI_STONE_LIZARD &&
-			otmp->corpsenm != PM_HUGE_LIZARD &&
-			otmp->corpsenm != PM_KARMIC_LIZARD &&
-			otmp->corpsenm != PM_ICE_LIZARD &&
-			otmp->corpsenm != PM_FIRE_LIZARD &&
-			otmp->corpsenm != PM_LIGHTNING_LIZARD &&
-			otmp->corpsenm != PM_GIANT_LIZARD &&
 			!acidic(&mons[otmp->corpsenm])) continue;
 		if (!touch_artifact(otmp,mtmp)) continue;
 		if (!can_carry(mtmp,otmp)) continue;
@@ -1442,7 +1360,7 @@ mfndpos(mon, poss, info, flag)
 	nowtyp = levl[x][y].typ;
 
 	nodiag = (mdat == &mons[PM_GRID_BUG] || mdat == &mons[PM_GRID_XORN]);
-	wantpool = mdat->mlet == S_EEL || mdat == &mons[PM_HUMAN_WEREPIRANHA] || mdat == &mons[PM_HUMAN_WEREEEL] || mdat == &mons[PM_HUMAN_WEREKRAKEN] || mdat == &mons[PM_SWIMMER_TROLL] || mdat == &mons[PM_DIVER_TROLL] ;
+	wantpool = mdat->mlet == S_EEL;
 	poolok = is_flyer(mdat) || is_clinger(mdat) ||
 		 (is_swimmer(mdat) && !wantpool);
 	lavaok = is_flyer(mdat) || is_clinger(mdat) || likes_lava(mdat);
@@ -1673,13 +1591,13 @@ struct monst *magr,	/* monster that is currently deciding where to move */
 	/* woodchucks vs. The Oracle */
 	if(magr->data == &mons[PM_WOODCHUCK] && mdef->data == &mons[PM_ORACLE])
 		return ALLOW_M|ALLOW_TM;
-
+#if 0
 	/* aurors vs. death eaters */
 	if(magr->data == &mons[PM_AUROR] && mdef->data == &mons[PM_FELLOW_DEATH_EATER])
 		return ALLOW_M|ALLOW_TM;
 	if(mdef->data == &mons[PM_AUROR] && magr->data == &mons[PM_FELLOW_DEATH_EATER])
 		return ALLOW_M|ALLOW_TM;
-
+#endif
 #ifdef JEDI
 	/* Stormtroopers vs. Padawans */
 	if(magr->data == &mons[PM_STORMTROOPER] && mdef->data == &mons[PM_PADAWAN])
@@ -1983,36 +1901,6 @@ register struct monst *mtmp;
 	    set_mon_data(mtmp, &mons[PM_HUMAN_WERESNAKE], -1);
 	else if (mtmp->data == &mons[PM_WERESPIDER])
 	    set_mon_data(mtmp, &mons[PM_HUMAN_WERESPIDER], -1);
-	else if (mtmp->data == &mons[PM_WEREGIANT])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREGIANT], -1);
-	else if (mtmp->data == &mons[PM_WERELICHEN])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WERELICHEN], -1);
-	else if (mtmp->data == &mons[PM_WEREVORTEX])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREVORTEX], -1);
-	else if (mtmp->data == &mons[PM_WERECOW])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WERECOW], -1);
-	else if (mtmp->data == &mons[PM_WEREBEAR])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREBEAR], -1);
-	else if (mtmp->data == &mons[PM_WEREPIERCER])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREPIERCER], -1);
-	else if (mtmp->data == &mons[PM_WERENYMPH])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WERENYMPH], -1);
-	else if (mtmp->data == &mons[PM_WEREMIMIC])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREMIMIC], -1);
-	else if (mtmp->data == &mons[PM_WERECOCKATRICE])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WERECOCKATRICE], -1);
-	else if (mtmp->data == &mons[PM_WERESOLDIERANT])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WERESOLDIERANT], -1);
-	else if (mtmp->data == &mons[PM_WEREMINDFLAYER])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREMINDFLAYER], -1);
-	else if (mtmp->data == &mons[PM_WEREGHOST])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREGHOST], -1);
-	else if (mtmp->data == &mons[PM_WEREPIRANHA])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREPIRANHA], -1);
-	else if (mtmp->data == &mons[PM_WEREEEL])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREEEL], -1);
-	else if (mtmp->data == &mons[PM_WEREKRAKEN])
-	    set_mon_data(mtmp, &mons[PM_HUMAN_WEREKRAKEN], -1);
 
 	/* if MAXMONNO monsters of a given type have died, and it
 	 * can be done, extinguish that monster.
@@ -2170,7 +2058,7 @@ boolean was_swallowed;			/* digestion */
 	if (LEVEL_SPECIFIC_NOCORPSE(mdat))
 		return FALSE;
 
-	if (bigmonst(mdat) || mdat == &mons[PM_LIZARD] || mdat == &mons[PM_CAVE_LIZARD] || mdat == &mons[PM_CHAOS_LIZARD] || mdat == &mons[PM_LIZARD_EEL] || mdat == &mons[PM_EEL_LIZARD] || mdat == &mons[PM_LIZARD_MAN] || mdat == &mons[PM_ANTI_STONE_LIZARD]  || mdat == &mons[PM_GIANT_LIZARD] || mdat == &mons[PM_HUGE_LIZARD] || mdat == &mons[PM_KARMIC_LIZARD] || mdat == &mons[PM_FIRE_LIZARD] || mdat == &mons[PM_LIGHTNING_LIZARD] || mdat == &mons[PM_ICE_LIZARD]
+	if (bigmonst(mdat) || mdat == &mons[PM_LIZARD]
 		   || is_golem(mdat)
 		   || is_mplayer(mdat)
 		   || is_umplayer(mdat)
@@ -2480,16 +2368,9 @@ xkilled(mtmp, dest)
 		/* might be here after swallowed */
 
 		/* Throw a bone to vampiric and ghast players who cannot unstone themselves easily. --Amy */
-		if ((mdat == &mons[PM_LIZARD] || mdat == &mons[PM_CAVE_LIZARD] || mdat == &mons[PM_CHAOS_LIZARD] || mdat == &mons[PM_HUGE_LIZARD] || mdat == &mons[PM_FIRE_LIZARD] || mdat == &mons[PM_LIGHTNING_LIZARD] || mdat == &mons[PM_KARMIC_LIZARD] || mdat == &mons[PM_ICE_LIZARD] || mdat == &mons[PM_LIZARD_EEL] || mdat == &mons[PM_LIZARD_MAN] || mdat == &mons[PM_GIANT_LIZARD] || mdat == &mons[PM_EEL_LIZARD] || mdat == &mons[PM_ANTI_STONE_LIZARD]) && !rn2(5)) otmp = mksobj_at(POT_ACID, x, y, TRUE, FALSE);
+		if ((mdat == &mons[PM_LIZARD]) && !rn2(5)) otmp = mksobj_at(POT_ACID, x, y, TRUE, FALSE);
 		/* of course the acid potions are useful for other races too, if they run out of lizard corpses */
 
-		if ((mdat == &mons[PM_SQUIRREL] || mdat == &mons[PM_IGUANA] || mdat == &mons[PM_HELPFUL_SQUIRREL] || mdat == &mons[PM_BIG_IGUANA]) && !rn2(20)) otmp = mksobj_at(CARROT, x, y, TRUE, FALSE);
-		if ((mdat == &mons[PM_SQUIRREL] || mdat == &mons[PM_IGUANA] || mdat == &mons[PM_HELPFUL_SQUIRREL] || mdat == &mons[PM_BIG_IGUANA]) && !rn2(20)) otmp = mksobj_at(BANANA, x, y, TRUE, FALSE);
-		if ((mdat == &mons[PM_SQUIRREL] || mdat == &mons[PM_IGUANA] || mdat == &mons[PM_HELPFUL_SQUIRREL] || mdat == &mons[PM_BIG_IGUANA]) && !rn2(20)) otmp = mksobj_at(MELON, x, y, TRUE, FALSE);
-		if ((mdat == &mons[PM_SQUIRREL] || mdat == &mons[PM_IGUANA] || mdat == &mons[PM_HELPFUL_SQUIRREL] || mdat == &mons[PM_BIG_IGUANA]) && !rn2(20)) otmp = mksobj_at(PEAR, x, y, TRUE, FALSE);
-		if ((mdat == &mons[PM_SQUIRREL] || mdat == &mons[PM_IGUANA] || mdat == &mons[PM_HELPFUL_SQUIRREL] || mdat == &mons[PM_BIG_IGUANA]) && !rn2(50)) otmp = mksobj_at(ASIAN_PEAR, x, y, TRUE, FALSE);
-
-		if ((mdat == &mons[PM_GECKO] || mdat == &mons[PM_GIANT_GECKO]) && !rn2(40)) otmp = mksobj_at(EUCALYPTUS_LEAF, x, y, TRUE, FALSE);
 #ifdef EASY_MODE
 		if (!rn2(100)) otmp = mksobj_at(SCR_STANDARD_ID, x, y, TRUE, FALSE);
 		if (!rn2(40)) otmp = mksobj_at(SCR_HEALING, x, y, TRUE, FALSE);
@@ -2568,15 +2449,6 @@ cleanup:
 		You_feel("guilty...");
 	}
 
-	if (Role_if(PM_ACTIVISTOR) && mdat == &mons[PM_TOPMODEL]) { /* very bad idea! --Amy */
-		You_feel("guilty for killing an innocent girl.");
-		change_luck(-5);
-		u.ualign.sins += 10; 
-		adjalign(-50);
-		u.ugangr++; u.ugangr++; u.ugangr++;
-		prayer_done();
-
-	}
 	/* give experience points */
 	tmp = experience(mtmp, (int)mvitals[mndx].died + 1);
 	more_experienced(tmp, 0);
@@ -2991,7 +2863,7 @@ restartcham()
 	for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
 		if (DEADMONSTER(mtmp)) continue;
 		mtmp->cham = pm_to_cham(monsndx(mtmp->data));
-		if((mtmp->data->mlet == S_MIMIC || mtmp->data == &mons[PM_XEROC] || mtmp->data == &mons[PM_NETZAH_SEPHIRAH] || mtmp->data == &mons[PM_MIMIC_MUMMY] || mtmp->data == &mons[PM_CAMO_FISH] || mtmp->data == &mons[PM_HUMAN_WEREMIMIC] || mtmp->data == &mons[PM_FATA_MORGANA] || mtmp->data == &mons[PM_CURSED_SPIRIT] || mtmp->data == &mons[PM_DEVILISH_SPIRIT] || mtmp->data == &mons[PM_ALIENATED_UFO_PART] || mtmp->data == &mons[PM_VAMPIRE_SHADOWCLOAK] || mtmp->data == &mons[PM_MULTI_HUED_NAGA] || mtmp->data == &mons[PM_KEYSTONE_WARDER] || mtmp->data == &mons[PM_WARDER_SERGEANT] || mtmp->data == &mons[PM_WARDER_LIEUTENANT] || mtmp->data == &mons[PM_WARDER_KAPTAIN] || mtmp->data == &mons[PM_WARDER_KOMMISSIONER] || mtmp->data == &mons[PM_WARDER_KCHIEF] || mtmp->data == &mons[PM_MIMIC_VORTEX] || mtmp->data == &mons[PM_VOLTORB] || mtmp->data == &mons[PM_OSCILLATOR] || mtmp->data == &mons[PM_ELECTRODE] || mtmp->data == &mons[PM_HEHEHE_HE_GUY] || mtmp->data == &mons[PM_DISGUISED_SOLDIER_ANT] || mtmp->data == &mons[PM_MIMICRY_RUBBER] || mtmp->data == &mons[PM_AMORPHOUS_FISH]) && mtmp->msleeping &&
+		if (mtmp->data->mlet == S_MIMIC && mtmp->msleeping &&
 				cansee(mtmp->mx, mtmp->my)) {
 			set_mimic_sym(mtmp);
 			newsym(mtmp->mx,mtmp->my);
@@ -3031,7 +2903,7 @@ register struct monst *mtmp;
 	   (sensemon(mtmp) && distu(mtmp->mx, mtmp->my) <= 2))
 		return(FALSE);
 
-	if(mtmp->data->mlet == S_MIMIC || mtmp->data == &mons[PM_XEROC] || mtmp->data == &mons[PM_NETZAH_SEPHIRAH] || mtmp->data == &mons[PM_MIMIC_MUMMY] || mtmp->data == &mons[PM_CAMO_FISH] || mtmp->data == &mons[PM_HUMAN_WEREMIMIC] || mtmp->data == &mons[PM_FATA_MORGANA] || mtmp->data == &mons[PM_CURSED_SPIRIT] || mtmp->data == &mons[PM_DEVILISH_SPIRIT] || mtmp->data == &mons[PM_ALIENATED_UFO_PART] || mtmp->data == &mons[PM_VAMPIRE_SHADOWCLOAK] || mtmp->data == &mons[PM_MULTI_HUED_NAGA] || mtmp->data == &mons[PM_KEYSTONE_WARDER] || mtmp->data == &mons[PM_WARDER_SERGEANT] || mtmp->data == &mons[PM_WARDER_LIEUTENANT] || mtmp->data == &mons[PM_WARDER_KAPTAIN] || mtmp->data == &mons[PM_WARDER_KOMMISSIONER] || mtmp->data == &mons[PM_WARDER_KCHIEF] || mtmp->data == &mons[PM_MIMIC_VORTEX] || mtmp->data == &mons[PM_VOLTORB] || mtmp->data == &mons[PM_OSCILLATOR] || mtmp->data == &mons[PM_HEHEHE_HE_GUY] || mtmp->data == &mons[PM_ELECTRODE] || mtmp->data == &mons[PM_DISGUISED_SOLDIER_ANT] || mtmp->data == &mons[PM_MIMICRY_RUBBER] || mtmp->data == &mons[PM_AMORPHOUS_FISH]) {
+	if(mtmp->data->mlet == S_MIMIC) {
 		set_mimic_sym(mtmp);
 		return(TRUE);
 	} else
@@ -3095,9 +2967,6 @@ struct monst *mon;
 					    PM_ARCHEOLOGIST);
 		break;
 	    case CHAM_CHAMELEON:
-		if (!rn2(3)) mndx = pick_animal();
-		break;
-	    case CHAM_GIANT_CHAMELEON:
 		if (!rn2(3)) mndx = pick_animal();
 		break;
 	    case CHAM_ORDINARY:

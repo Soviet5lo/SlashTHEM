@@ -52,13 +52,12 @@ MONSTER: '@', "valkyrie", random, hostile
 MONSTER: '@', "warrior", random, hostile
 MONSTER: '@', "wizard", random, hostile
 MONSTER: '@', "gangster", random, hostile
-MONSTER: '@', "pokemon", random, hostile
+#MONSTER: '@', "pokemon", random, hostile
 MONSTER: '@', "death eater", random, hostile
 MONSTER: '@', "pirate", random, hostile
 MONSTER: '@', "nobleman", random, hostile
 MONSTER: '@', "noblewoman", random, hostile
 MONSTER: '@', "electric mage", random, hostile
-MONSTER: '@', "transvestite", random, hostile
 MONSTER: '@', "courier", random, hostile
 MONSTER: '@', "chevalier", random, hostile
 MONSTER: '@', "zyborg", random, hostile

@@ -43,8 +43,10 @@ moveloop()
     int xtraclock;
     /*int timeout_start = rnz(10000)+rnz(15000);*/
     /*int clock_base = rnz(10000)+rnz(20000)+timeout_start;*/
+#ifdef MORE_SPAWNS
 	int timeout_start = u.monstertimeout;
 	int clock_base = u.monstertimefinish; /* values set in u_init */
+#endif
     int past_clock;
 	/*u.monstertimeout = timeout_start;*/
 	/*u.monstertimefinish = clock_base;*/
@@ -359,10 +361,6 @@ moveloop()
 #endif
 		    {
 			moveamt = youmonst.data->mmove;
-#ifdef ELDER_SCROLLS
-			if (Race_if(PM_ASGARDIAN) && !rn2(20) ) /* Asgardians are slower sometimes, this is intentional. --Amy */
-				moveamt -= NORMAL_SPEED / 2;
-#endif
 			if (moveamt < 0) moveamt == 0;
 
 			if (Very_fast) {	/* speed boots or potion */
@@ -1044,99 +1042,6 @@ boolean new_game;	/* false => restoring an old game */
 	  (currentgend && urole.name.f) ? urole.name.f : urole.name.m, 
 	  DEF_GAME_NAME);
 
-	if (Role_if(PM_ACTIVISTOR) && new_game) {
-
-		int ammount;
-		ammount = 0;
-
-		while (ammount < 5) {
-
-		switch (rnd(50)) {
-
-		case 1: 
-		case 2: 
-		case 3: 
-		    HFire_resistance |= FROMOUTSIDE; break;
-		case 4: 
-		case 5: 
-		case 6: 
-		    HCold_resistance |= FROMOUTSIDE; break;
-		case 7: 
-		case 8: 
-		case 9: 
-		    HSleep_resistance |= FROMOUTSIDE; break;
-		case 10: 
-		case 11: 
-		    HDisint_resistance |= FROMOUTSIDE; break;
-		case 12: 
-		case 13: 
-		case 14: 
-		    HShock_resistance |= FROMOUTSIDE; break;
-		case 15: 
-		case 16: 
-		case 17: 
-		    HPoison_resistance |= FROMOUTSIDE; break;
-		case 18: 
-		    HDrain_resistance |= FROMOUTSIDE; break;
-		case 19: 
-		    HSick_resistance |= FROMOUTSIDE; break;
-		case 20: 
-		    HAcid_resistance |= FROMOUTSIDE; break;
-		case 21: 
-		case 22: 
-		    HHunger |= FROMOUTSIDE; break;
-		case 23: 
-		case 24: 
-		    HSee_invisible |= FROMOUTSIDE; break;
-		case 25: 
-		    HTelepat |= FROMOUTSIDE; break;
-		case 26: 
-		case 27: 
-		    HWarning |= FROMOUTSIDE; break;
-		case 28: 
-		case 29: 
-		    HSearching |= FROMOUTSIDE; break;
-		case 30: 
-		case 31: 
-		    HStealth |= FROMOUTSIDE; break;
-		case 32: 
-		case 33: 
-		    HAggravate_monster |= FROMOUTSIDE; break;
-		case 34: 
-		    HConflict |= FROMOUTSIDE; break;
-		case 35: 
-		case 36: 
-		    HTeleportation |= FROMOUTSIDE; break;
-		case 37: 
-		    HTeleport_control |= FROMOUTSIDE; break;
-		case 38: 
-		    HFlying |= FROMOUTSIDE; break;
-		case 39: 
-		    HSwimming |= FROMOUTSIDE; break;
-		case 40: 
-		    HMagical_breathing |= FROMOUTSIDE; break;
-		case 41: 
-		    HSlow_digestion |= FROMOUTSIDE; break;
-		case 42: 
-		case 43: 
-		    HRegeneration |= FROMOUTSIDE; break;
-		case 44: 
-		    HPolymorph |= FROMOUTSIDE; break;
-		case 45: 
-		    HPolymorph_control |= FROMOUTSIDE; break;
-		case 46: 
-		case 47: 
-		    HFast |= FROMOUTSIDE; break;
-		case 48: 
-		    HInvis |= FROMOUTSIDE; break;
-		default:
-			break;
-			}
-		ammount++;
-
-		}
-	}
-
 	if (flags.lostsoul && !flags.uberlostsoul && new_game) { 
 	goto_level(&medusa_level, TRUE, FALSE, FALSE); /* inspired by Tome, an Angband mod --Amy */
 	pline("These are the halls of Mandos... err, Medusa. Good luck making your way back up!");
@@ -1153,22 +1058,6 @@ boolean new_game;	/* false => restoring an old game */
 				goto_level(&newlevel, TRUE, FALSE, FALSE);
 				pline("Enjoy your stay, and try to get out if you can.");
 
-
-	}
-
-	if (Role_if(PM_TRANSVESTITE) && new_game && flags.female) {
-		    makeknown(AMULET_OF_CHANGE);
-		    You("don't feel like being female!");
-			change_sex();
-		    flags.botl = 1;
-
-	}
-
-	if (Role_if(PM_TOPMODEL) && new_game && !flags.female) {
-		    makeknown(AMULET_OF_CHANGE);
-		    You("don't feel like being male!");
-			change_sex();
-		    flags.botl = 1;
 
 	}
 

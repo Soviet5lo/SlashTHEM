@@ -844,30 +844,6 @@ have_lizard()
 	for(otmp = invent; otmp; otmp = otmp->nobj) {
 		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_LIZARD)
 			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_CAVE_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_CHAOS_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_LIZARD_EEL)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_LIZARD_MAN)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_EEL_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_ANTI_STONE_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_HUGE_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_KARMIC_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_FIRE_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_LIGHTNING_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_ICE_LIZARD)
-			return(TRUE);
-		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_GIANT_LIZARD)
-			return(TRUE);
 		}
 	return(FALSE);
 }

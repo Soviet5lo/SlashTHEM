@@ -354,22 +354,19 @@ struct you {
 	int ugangr;			/* if the gods are angry at you */
 	int ugifts;			/* number of artifacts bestowed */
 	int ublessed, ublesscnt;	/* blessing/duration from #pray */
+#ifdef MORE_SPAWNS
 	int monstertimeout; 	/* when monster spawns are increasing in frequency */
 	int monstertimefinish; 	/* point in time when monster spawns are at their maximum */
+#endif
 	int legscratching; 	/* for special AT_KICK attacks */
 	int tensionmonster; 	/* for tension rooms */
 	int tensionmonsteX; 	/* for the chance of getting really bad stuff in tension rooms */
 	int tensionmonsterB; 	/* for mixed tension rooms */
 	int next_check; 	/* attrib.c check */
 
-	int urmaxlvl;		/* for asgardian race */
 	int urmaxlvlB;		/* for cyborg role */
 	int urmaxlvlC;		/* for binder role */
 	int urmaxlvlD;		/* for bard role */
-	int uhereticgodinit;
-	int uhereticgodlawful;
-	int uhereticgodneutral;
-	int uhereticgodchaotic;
 	int urealedibility;	/* no longer a boolean --Amy */
 
 	int eeveelution;		/* mainly for pokemon role but might be useful for others */

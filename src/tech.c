@@ -271,16 +271,6 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	tou_tech[] = { /* Put Tech here */
 		       {   0, 0, 0} },
-	tra_tech[] = { {   1, T_ATTIRE_CHARM, 1},
-		       {   0, 0, 0} },
-	act_tech[] = { {   1, T_REINFORCE, 1},
-		       {  5, T_VANISH, 1},
-		       {  10, T_DAZZLE, 1},
-		       {   0, 0, 0} },
-	top_tech[] = { {   1, T_ATTIRE_CHARM, 1},
-		       {  10, T_CREATE_AMMO, 1},
-		       {  20, T_LIQUID_LEAP, 1},
-		       {   0, 0, 0} },
 	und_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_PRACTICE, 1},
 		       {   0, 0, 0} },
@@ -360,27 +350,6 @@ static const struct innate_tech
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
-
-	fen_tech[] = { {   1, T_EVISCERATE, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   10, T_VANISH, 1},
-		       {   0, 0, 0} },
-
-	alb_tech[] = { {   1, T_DAZZLE, 1},
-		       {   1, T_PRACTICE, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   5, T_CHARGE_SABER, 1},
-		       {   10, T_CRIT_STRIKE, 1},
-		       {   15, T_TELEKINESIS, 1},
-		       {   20, T_BLINK, 1},
-		       {   25, T_JEDI_JUMP, 1},
-		       {   0, 0, 0} },
-	ins_tech[] = { {   1, T_SUMMON_TEAM_ANT, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   0, 0, 0} },
 	kob_tech[] = { {   10, T_TINKER, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_INVOKE_DEITY, 1},
@@ -395,21 +364,6 @@ static const struct innate_tech
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   1, T_DRAW_BLOOD, 1},
 		       {   0, 0, 0} },
-#ifdef ELDER_SCROLLS
-	nor_tech[] = { {   1, T_BERSERK, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   10, T_RAGE, 1},
-		       {   0, 0, 0} },
-	kha_tech[] = { {   1, T_EVISCERATE, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   0, 0, 0} },
-	arg_tech[] = { {   1, T_HEAL_HANDS, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   0, 0, 0} },
-#endif /* ELDER_SCROLLS */
 	def_tech[] = { {   1, T_APPRAISAL, 1}, /* everyone is supposed to get this --Amy */
 		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} };
@@ -902,7 +856,7 @@ int tech_no;
 
 			if (u.ualign.record < 0) {
 
-				if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
+				if (Inhell || flags.gehenna ) {
 					pline("%s is inaccessible, and Moloch decides to smite you!",u_gname() );
 					u.ublesscnt += rnz(-u.ualign.record);
 					losehp(rnz(-u.ualign.record), "annoying Moloch", KILLED_BY);
@@ -913,15 +867,7 @@ int tech_no;
 				}
 /* If your deity feels annoyed, they will damage you and increase your prayer timeout. They won't get angry though. */
 			} 
-#ifdef ELDER_SCROLLS
-			else if (Race_if(PM_IMPERIAL)) {
-				pline("%s hates you and decides you need to be punished!",u_gname() );
-				u.ublesscnt += rnz(level_difficulty() + 1 );
-				losehp(rnz(level_difficulty() + 1 ), "being a pesky heretic", KILLED_BY);
-/* Imperials cannot use this technique successfully. */
-			} 
-#endif /* ELDER_SCROLLS */
-			else if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
+			else if (Inhell || flags.gehenna ) {
 				pline("%s is inaccessible, and Moloch decides to smite you!",u_gname() );
 				u.ublesscnt += rnz(level_difficulty() + 1 );
 				losehp(rnz(level_difficulty() + 1 ), "trying to contact their deity in Gehennom", KILLED_BY);
@@ -1912,12 +1858,12 @@ int tech_no;
 		    pline("The monster can't see its inside anyway!");
 			return 0;
 		}
-
+#if 0
 		if (!uarmf || (uarmf && uarmf->otyp != WEDGE_SANDALS && uarmf->otyp != FEMININE_PUMPS && uarmf->otyp != LEATHER_PEEP_TOES && uarmf->otyp != COMBAT_STILETTOS && uarmf->otyp != HIPPIE_HEELS) ) {
 		    pline("You must be wearing high heels for that.");
 			return 0;
 		}
-
+#endif
 		int k, l, caughtX;
 		struct monst *mtmp3;
 		register struct monst *mtmp4;
@@ -2294,7 +2240,6 @@ role_tech()
 {
 	switch (Role_switch) {
 		case PM_ARCHEOLOGIST:	return (arc_tech);
-		case PM_GOFF:	return (gof_tech);
 		case PM_DRUNK:	return (dru_tech);
 		case PM_BARBARIAN:	return (bar_tech);
 		case PM_BLEEDER:	return (ble_tech);
@@ -2302,10 +2247,7 @@ role_tech()
 		case PM_BARD:	return (brd_tech);
 		case PM_FLAME_MAGE:	return (fla_tech);
 		case PM_ACID_MAGE:	return (aci_tech);
-		case PM_TRANSVESTITE:	return (tra_tech);
-		case PM_TOPMODEL:	return (top_tech);
 		case PM_LUNATIC:	return (lun_tech);
-		case PM_ACTIVISTOR:	return (act_tech);
 		case PM_ELECTRIC_MAGE:	return (ele_tech);
 		case PM_HEALER:		return (hea_tech);
 		case PM_ICE_MAGE:	return (ice_tech);
@@ -2314,10 +2256,12 @@ role_tech()
 #endif
 		case PM_KNIGHT:		return (kni_tech);
 		case PM_MONK: 		return (mon_tech);
-		case PM_PSION: 		return (psi_tech);
 		case PM_SCIENTIST: 		return (sci_tech);
 		case PM_DEATH_EATER: 		return (dea_tech);
+#if 0 /* 5lo: Deferred for now */
 		case PM_POKEMON: 		return (pok_tech);
+		case PM_PSION: 		return (psi_tech);
+#endif
 		case PM_GANGSTER: 		return (gan_tech);
 		case PM_ROCKER: 		return (roc_tech);
 		case PM_NECROMANCER:	return (nec_tech);
@@ -2354,21 +2298,13 @@ race_tech()
 		case PM_DROW:		return (elf_tech);
 		case PM_CLOCKWORK_AUTOMATON:		return (clk_tech);
 
-		case PM_FENEK:		return (fen_tech);
-		case PM_ALBAE:		return (alb_tech);
 		case PM_GNOME:		return (gno_tech);
 		case PM_KOBOLT:		return (kob_tech);
 		case PM_OGRO:		return (ogr_tech);
 		case PM_UNGENOMOLD:		return (ung_tech);
-		case PM_INSECTOID:		return (ins_tech);
 		case PM_HOBBIT:		return (hob_tech);
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);
 		case PM_VAMPIRE:	return (vam_tech);
-#ifdef ELDER_SCROLLS
-		case PM_NORD:		return (nor_tech);
-		case PM_KHAJIIT:	return (kha_tech);
-		case PM_ARGONIAN:	return (arg_tech);
-#endif /* ELDER_SCROLLS */
 		default: 		/*return ((struct innate_tech *) 0)*/return (def_tech);
 	}
 }

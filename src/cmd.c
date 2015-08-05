@@ -1315,17 +1315,17 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	if (u.legscratching > 1) { Sprintf(buf, " %d", u.legscratching - 1);
 		enl_msg("Your leg damage ", "is", "was", buf);
 	}
-
+#ifdef MORE_SPAWNS
 	if (wizard || (!rn2(10)) || final >= 1 ) { Sprintf(buf, " turn %d", u.monstertimeout);
 		enl_msg("Monster spawn increase ", "start at", "would have started at", buf);
 	}
 
 	if (wizard || (!rn2(10)) || final >= 1 ) {Sprintf(buf, " turn %d", u.monstertimefinish);
 		enl_msg("Monster spawn increase ", "reaches its maximum at", "had reached its maximum at", buf);
-		enl_msg("In this game, Eevee's evolution ", "is ", "was ", mons[u.eeveelution].mname );
+//		enl_msg("In this game, Eevee's evolution ", "is ", "was ", mons[u.eeveelution].mname );
 		/* these two are tied together because the monstertimefinish variable defines the evolution --Amy */
 	}
-
+#endif
 	if (wizard || (!rn2(10)) || final >= 1 ) {Sprintf(buf, " turn %d", u.next_check);
 		enl_msg("Next attribute increase check ", "comes at", "would have come at", buf);
 	}
@@ -1504,8 +1504,6 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	if (Undead_warning) you_are("warned of undead");
 #endif
 
-	if (Role_if(PM_ACTIVISTOR) ) you_are("aware of the presence of topmodels");
-	if (Role_if(PM_ACTIVISTOR) && uwep && is_quest_artifact(uwep) ) you_are("aware of the presence of unique monsters");
 	if (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING ) you_are("aware of the presence of undead");
 	if (uamul && uamul->otyp == AMULET_OF_POISON_WARNING ) you_are("aware of the presence of poisonous monsters");
 	if (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING ) you_are("aware of the presence of same-race monsters");
@@ -1840,7 +1838,7 @@ int final;
 		Sprintf(buf, " %d", u.legscratching - 1);
 		dump("  Your leg damage was", buf);
 	}
-
+#ifdef MORE_SPAWNS
 	if (wizard || final >= 1) {
 		Sprintf(buf, " turn %d", u.monstertimeout);
 		dump("  Monster spawn increase would have started at", buf);
@@ -1851,7 +1849,7 @@ int final;
 		dump("  Monster spawn increase would have reached its maximum at", buf);
 //		dump("  In this game, Eevee's evolution was", mons[u.eeveelution].mname );
 	}
-
+#endif
 	if (wizard || final >= 1) {
 		Sprintf(buf, " turn %d", u.next_check);
 		dump("  Next attribute increase check would have come at", buf);
@@ -1953,10 +1951,6 @@ int final;
 		dump(youwere, buf);
 	}
 	if (Undead_warning) dump(youwere, "warned of undead");
-	/* 5lo: These next two are just here for temp, as this role will be removed after a 1.0 release */
-	if (Role_if(PM_ACTIVISTOR)) dump(youwere, "aware of the presence of topmodels");
-	if (Role_if(PM_ACTIVISTOR) && uwep && is_quest_artifact(uwep)) dump(youwere, "aware of the presence of unique monsters");
-	/* Back to our program... */
 	if (uamul && uamul->otyp == AMULET_OF_UNDEAD_WARNING ) dump(youwere, "aware of the presence of undead");
 	if (uamul && uamul->otyp == AMULET_OF_POISON_WARNING ) dump(youwere, "aware of the presence of poisonous monsters");
 	if (uamul && uamul->otyp == AMULET_OF_OWN_RACE_WARNING ) dump(youwere, "aware of the presence of same-race monsters");

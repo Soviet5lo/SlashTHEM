@@ -139,7 +139,6 @@ static struct {
 	{ "spear", SPEAR_TRAP },
 	{ "collapse",   COLLAPSE_TRAP },
 	{ "magic beam", MAGIC_BEAM_TRAP },
-	{ "shit trap", SHIT_TRAP },
 	{ 0, 0 }
 };
 

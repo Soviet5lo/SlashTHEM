@@ -1034,10 +1034,6 @@ MONSTER:'L',random,random
 MONSTER:'V',random,random
 MONSTER:'V',random,random
 MONSTER:'V',random,random
-# An arch-lichen in the Sanctum undead-priest restway. Evil!
-MONSTER[50%]:'F',"arch-lichen",(35,6),hostile
-
-MONSTER[50%]:':',"arch-newt",(19,09),hostile
 STAIR:(63,15),up
 
 #

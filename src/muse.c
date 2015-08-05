@@ -3424,16 +3424,6 @@ const char *str;
 	    if (str)
 		pline(str, s_suffix(mon_nam(mon)), "scales");
 	    return TRUE;
-	} else if (mon->data == &mons[PM_ARCH_LICHEN]) {
-		/* Intrinsic reflection for the greatest one */
-	    if (str)
-		pline(str, s_suffix(mon_nam(mon)), "RNG-endowed mirror on a stick");
-	    return TRUE;
-	} else if (mon->data == &mons[PM_SHAMBLING_MOUND] || mon->data == &mons[PM_SILVER_WOLF] || mon->data == &mons[PM_SEDUCER_SAINT]) {
-		/* in ADOM this thing would absorb bolts instead */
-	    if (str)
-		pline(str, s_suffix(mon_nam(mon)), "absorbing shell");
-	    return TRUE;
 	} else if (mon->data == &mons[PM_DIAMOND_GOLEM]
 	         || mon->data == &mons[PM_SAPPHIRE_GOLEM]
 	         || mon->data == &mons[PM_CRYSTAL_GOLEM]) {
@@ -3489,10 +3479,6 @@ const char *fmt, *str;
 	} else if (youmonst.data == &mons[PM_SILVER_DRAGON]) {
 	    if (fmt && str)
 	    	pline(fmt, str, "scales");
-	    return TRUE;
-	} else if (youmonst.data == &mons[PM_SHAMBLING_MOUND] || youmonst.data == &mons[PM_SILVER_WOLF]) {
-	    if (fmt && str)
-	    	pline(fmt, str, "surface");
 	    return TRUE;
 	} else if (youmonst.data == &mons[PM_DIAMOND_GOLEM]
 	         || youmonst.data == &mons[PM_SAPPHIRE_GOLEM]

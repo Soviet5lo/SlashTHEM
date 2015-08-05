@@ -192,11 +192,6 @@ struct monst *mon;
 	   else if (ptr->mlet == S_EEL || ptr->mlet == S_SNAKE) tmp += 2;
 	}
 
-	if (otmp->otyp == STYGIAN_PIKE && is_swimmer(ptr)) {
-	   if (is_pool(mon->mx, mon->my)) tmp += 10;
-	   else if (ptr->mlet == S_EEL || ptr->mlet == S_SNAKE) tmp += 5;
-	}
-
 	/* pick-axe used against xorns and earth elementals */
 	/* WAC made generic against "rock people" */
 	/* KMH, balance patch -- allow all picks */
@@ -265,16 +260,12 @@ struct monst *mon;
 		case IRON_CHAIN:
 		case CROSSBOW_BOLT:
 		case MORNING_STAR:
-		case JAGGED_STAR:
-		case DEVIL_STAR:
 		case PARTISAN:
 		case RUNESWORD:
 		case ELVEN_BROADSWORD:
 		case BROADSWORD:	tmp++; break;
 
 		case FLAIL:
-		case KNOUT:
-		case OBSID:
 		case RANSEUR:
 		case VOULGE:		tmp += rnd(4); break;
 
@@ -282,12 +273,8 @@ struct monst *mon;
 		case HALBERD:
 		case SPETUM:		tmp += rnd(6); break;
 
-		case TAIL_SPIKES:	tmp += rnd(6); tmp += rnd(6); tmp += rnd(6); tmp += rnd(6); tmp += rnd(6); tmp += rnd(6);
- 						break;
-
 		case BATTLE_AXE:
 		case BARDICHE:
-		case STYGIAN_PIKE:
 		case TRIDENT:		tmp += d(2,4); break;
 
 		case TSURUGI:
@@ -321,14 +308,10 @@ struct monst *mon;
 		case CROSSBOW_BOLT:
 		case MACE:
 		case SILVER_MACE:
-		case FLANGED_MACE:
 		case WAR_HAMMER:
 		case MALLET:
 		case FLAIL:
-		case KNOUT:
-		case OBSID:
 		case SPETUM:
-		case STYGIAN_PIKE:
 		case TRIDENT:		tmp++; break;
 
 		case BATTLE_AXE:
@@ -337,8 +320,6 @@ struct monst *mon;
 		case GUISARME:
 		case LUCERN_HAMMER:
 		case MORNING_STAR:
-		case JAGGED_STAR:
-		case DEVIL_STAR:
 		case RANSEUR:
 		case BROADSWORD:
 		case ELVEN_BROADSWORD:
@@ -362,8 +343,6 @@ struct monst *mon;
 #endif
 
 		case ACID_VENOM:	tmp += rnd(6); break;
-		case TAIL_SPIKES:	tmp += rnd(6); tmp += rnd(6); tmp += rnd(6); tmp += rnd(6); tmp += rnd(6); tmp += rnd(6); 
-					break;
 		case SCIMITAR:
 			if(otmp->oartifact == ART_REAVER) tmp += d(1,8); break;
 	    }
@@ -651,11 +630,10 @@ register struct monst *mtmp;
 /* WAC -- removed polearms */
 static const NEARDATA short hwep[] = {
 	  CORPSE,  /* cockatrice corpse */
-	EXTREMELY_HEAVY_IRON_BALL, REALLY_HEAVY_IRON_BALL, QUITE_HEAVY_IRON_BALL, HEAVY_IRON_BALL,
-	NUNCHIAKU, SCOURGE, ROTATING_CHAIN, IRON_CHAIN,
-	  TSURUGI, STYGIAN_PIKE, RUNESWORD, MALLET, HEAVY_HAMMER, 
-	  WOODEN_GETA, LACQUERED_DANCING_SHOE, HIGH_HEELED_SANDAL, SEXY_LEATHER_PUMP, SPIKED_BATTLE_BOOT, TORPEDO,
-	  DWARVISH_MATTOCK, BENT_SABLE, 
+	HEAVY_IRON_BALL,
+	IRON_CHAIN,
+	  TSURUGI, RUNESWORD, MALLET, HEAVY_HAMMER, 
+	  DWARVISH_MATTOCK,
 #ifdef LIGHTSABERS
 	  RED_DOUBLE_LIGHTSABER, RED_LIGHTSABER,
 #ifdef D_SABER
@@ -668,15 +646,14 @@ static const NEARDATA short hwep[] = {
 #endif
 	  GREEN_LIGHTSABER,
 #endif
-	  WEDGED_LITTLE_GIRL_SANDAL, SOFT_GIRL_SNEAKER, STURDY_PLATEAU_BOOT_FOR_GIRLS, HUGGING_BOOT, BLOCK_HEELED_COMBAT_BOOT,
-	  TWO_HANDED_SWORD, DEVIL_STAR, BATTLE_AXE, GOLDEN_SABER, BATTLE_STAFF,
-	  KATANA, UNICORN_HORN, CRYSKNIFE, ELECTRIC_SWORD, TRIDENT, LONG_SWORD, OBSID, SPIRIT_THROWER,
-	  ELVEN_BROADSWORD, BROADSWORD, SCIMITAR, SILVER_SABER, FLANGED_MACE, JAGGED_STAR, STEEL_WHIP,
+	  TWO_HANDED_SWORD, BATTLE_AXE, GOLDEN_SABER, BATTLE_STAFF,
+	  KATANA, UNICORN_HORN, CRYSKNIFE, ELECTRIC_SWORD, TRIDENT, LONG_SWORD,
+	  ELVEN_BROADSWORD, BROADSWORD, SCIMITAR, SILVER_SABER, STEEL_WHIP,
 	  SILVER_SHORT_SWORD, SILVER_LONG_SWORD, SILVER_MACE,
   	  MORNING_STAR, DARK_ELVEN_SHORT_SWORD, ELVEN_SHORT_SWORD, 
-  	  DWARVISH_SHORT_SWORD, SHORT_SWORD, METAL_CLUB, KNOUT, 
+  	  DWARVISH_SHORT_SWORD, SHORT_SWORD, METAL_CLUB,
 	  ORCISH_SHORT_SWORD, MACE, AXE, DWARVISH_SPEAR, SILVER_SPEAR,
-	  ELVEN_SPEAR, SPEAR, ORCISH_SPEAR, FLAIL, BULLWHIP, QUARTERSTAFF, INSECT_SQUASHER, BASEBALL_BAT,
+	  ELVEN_SPEAR, SPEAR, ORCISH_SPEAR, FLAIL, BULLWHIP, QUARTERSTAFF, BASEBALL_BAT,
 	  JAVELIN, AKLYS, CLUB, PICK_AXE, FLY_SWATTER, 
 
 #ifdef KOPS
@@ -2049,21 +2026,6 @@ struct obj *weapon;
 		}
 	}
 #endif
-
-	/* Navi are highly proficient with spears --Amy */
-	if (Race_if(PM_NAVI) && weapon && weapon_type(weapon) == P_SPEAR){
-
-		bonus += 3;
-	}
-
-	/* Transvestites can whack enemies using heels --Amy */
-	if (Role_if(PM_TRANSVESTITE) && weapon && weapon_type(weapon) == P_HAMMER){
-
-		bonus += 2;
-		if (u.ulevel >= 15) bonus += 1;
-		if (u.ulevel >= 30) bonus += 1;
-	}
-
 	/* add a little damage bonus for higher-level characters so the stronger monsters aren't too overpowered --Amy */
 
 	if (u.ulevel >= 10) bonus += 1;

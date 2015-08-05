@@ -61,8 +61,8 @@ char msgbuf[BUFSZ];
 /* also used to see if you're allowed to eat cats and dogs */
 #define CANNIBAL_ALLOWED() (Role_if(PM_CAVEMAN) || Role_if(PM_LUNATIC) || Race_if(PM_ORC) || \
 Race_if(PM_ALIEN) || Race_if(PM_TROLLOR) || Race_if(PM_KOBOLT) || Race_if(PM_GIGANT) || Race_if(PM_OGRO) || \
- Race_if(PM_INSECTOID) || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD) || Race_if(PM_HUMAN_WEREWOLF) || \
- Race_if(PM_SNAKEMAN) || Race_if(PM_SPIDERMAN) || Race_if(PM_VAMPIRE) || Race_if(PM_CLOCKWORK_AUTOMATON) || \
+Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD) || Race_if(PM_HUMAN_WEREWOLF) || \
+Race_if(PM_VAMPIRE) || Race_if(PM_CLOCKWORK_AUTOMATON) || \
  Race_if(PM_GASTLY) || Race_if(PM_ILLITHID)) /* 5lo: Let Illithids and Gastly characters have fun too */
 
 #ifndef OVLB
@@ -128,8 +128,8 @@ register struct obj *obj;
 		return TRUE;
 
 	/* KMH -- Taz likes organics, too! */
-	if ((u.umonnum == PM_GELATINOUS_CUBE || u.umonnum == PM_GELATINOUS_DICE || u.umonnum == PM_GELATINOUS_THIEF || u.umonnum == PM_TASMANIAN_ZOMBIE ||
-			u.umonnum == PM_TASMANIAN_DEVIL) && is_organic(obj) &&
+	if ((u.umonnum == PM_GELATINOUS_CUBE ||
+	     u.umonnum == PM_TASMANIAN_DEVIL) && is_organic(obj) &&
 		/* [g.cubes can eat containers and retain all contents
 		    as engulfed items, but poly'd player can't do that] */
 	    !Has_contents(obj))
@@ -140,14 +140,14 @@ register struct obj *obj;
 		return (boolean)(obj->otyp == EUCALYPTUS_LEAF);
 
 	/* Ghouls, ghasts only eat corpses */
-	if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST || u.umonnum == PM_GASTLY || u.umonnum == PM_HAUNTER
-	|| u.umonnum == PM_GENGAR || (Race_if(PM_GASTLY) && !Upolyd) )
+	if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST || u.umonnum == PM_GASTLY ||
+	(Race_if(PM_GASTLY) && !Upolyd) )
 	   	return (boolean)(obj->otyp == CORPSE);
 	/* Vampires drink the blood of meaty corpses */
 	/* [ALI] (fully) drained food is not presented as an option,
 	 * but partly eaten food is (even though you can't drain it).
 	 */
-	if (is_vampire(youmonst.data) || (Role_if(PM_GOFF) && !Upolyd) )
+	if (is_vampire(youmonst.data))
 		return (boolean)(obj->otyp == CORPSE &&
 		  has_blood(&mons[obj->corpsenm]) && (!obj->odrained ||
 		  obj->oeaten > drainlevel(obj)));
@@ -288,68 +288,9 @@ register struct obj *food;
 	if (u.uhs != SATIATED) {
 		if (!food || food->otyp != AMULET_OF_STRANGULATION)
 			return;
-	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) {
+	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER)) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
-	}
-
-	if (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) { /* They aren't used to eat much. --Amy */
-
-	if(!rn2(4)) {
-		if (Hallucination) You_feel("rather trippy.");
-		else You_feel("rather %s.", body_part(LIGHT_HEADED));
-		make_confused(HConfusion + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("uncontrollable."); /* this and some other effects added by Amy */
-		else You_feel("stunned.");
-		make_stunned(HStun + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("even weirder!");
-		else You_feel("weirded out!");
-		make_hallucinated(HHallucination + d(2,10),FALSE,0L);
-	} else if(!rn2(4)) {
-		if (!Blind) pline("Everything suddenly goes dark.");
-		make_blinded(Blinded+d(2,10),FALSE);
-		if (!Blind) Your(vision_clears);
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("like you have dementia tremor!"); /* not a real name --Amy */
-		else pline("Your hands start trembling violently!");
-		incr_itimeout(&Glib, d(2,4) );
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("totally down! Seems you tried some illegal shit!");
-		else pline("You feel like you're going to throw up.");
-	      make_vomiting(Vomiting+20, TRUE);
-		if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
-	} else if(!rn2(3)) {
-		const char *what, *where;
-		if (!Blind)
-		    what = "goes",  where = "dark";
-		else if (Levitation || Is_airlevel(&u.uz) ||
-			 Is_waterlevel(&u.uz))
-		    what = "you lose control of",  where = "yourself";
-		else
-		    what = "you slap against the", where =
-#ifdef STEED
-			   (u.usteed) ? "saddle" :
-#endif
-			   surface(u.ux,u.uy);
-		pline_The("world spins and %s %s.", what, where);
-		flags.soundok = 0;
-		nomul(-rnd(10), "unconscious from breaking anorexia conduct");
-		nomovemsg = "You are conscious again.";
-		afternmv = Hear_again;
-		return;
-	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
-	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
-#if 0 /* 5lo: Wayyyyyy too evil */
-	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
-		    Slimed = 100L;
-		    flags.botl = 1;
-		    killer_format = KILLED_BY_AN;
-		    delayed_killer = "slimy meal";
-#endif
-	}
-
 	}
 
 	exercise(A_CON, FALSE);
@@ -365,8 +306,6 @@ register struct obj *food;
 			return;
 		}
 		You("stuff yourself and then vomit voluminously.");
-		if (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) {adjalign(-20);	/* overeating doesn't befit a topmodel */
-		pline("Bleeargh! You feel very bad for trying to overeat."); }
 		morehungry(1000);	/* you just got *very* sick! */
 		nomovemsg = 0;
 		vomit();
@@ -527,7 +466,7 @@ eatfood()		/* called each move during eating process */
 		do_reset_eat();
 		return(0);
 	}
-	if ( (is_vampire(youmonst.data) || Role_if(PM_GOFF) ) != victual.piece->odrained) {
+	if ((is_vampire(youmonst.data)) != victual.piece->odrained) {
 	    /* Polymorphed while eating/draining */
 	    do_reset_eat();
 	    return(0);
@@ -649,42 +588,7 @@ register int pm;
 		}
 		break;
 	    case PM_LIZARD:
-	    case PM_LIZARD_MAN:
-	    case PM_CAVE_LIZARD:
-	    case PM_CHAOS_LIZARD:
-	    case PM_HUGE_LIZARD:
-	    case PM_KARMIC_LIZARD:
-	    case PM_FIRE_LIZARD:
-	    case PM_LIGHTNING_LIZARD:
-	    case PM_ICE_LIZARD:
-	    case PM_GIANT_LIZARD:
-	    case PM_LIZARD_EEL:
-	    case PM_EEL_LIZARD:
-	    case PM_ANTI_STONE_LIZARD:
 		if (Stoned) fix_petrification();
-		break;
-	    case PM_SQUIRREL:
-	    case PM_IGUANA:
-	    case PM_BIG_IGUANA:
-	    case PM_HELPFUL_SQUIRREL:
-		make_hallucinated(0L,TRUE,0L);
-		make_confused(0L,TRUE);
-		make_stunned(0L,TRUE);
-		make_blinded(0L,TRUE);
-		break;
-	    case PM_RHAUMBUSUN:
-	    case PM_BIG_RHAUMBUSUN:
-		if (Slimed) pline("The slime disappears.");
-		    Slimed = 0;
-		    flags.botl = 1;
-		    delayed_killer = 0;
-		break;
-	    case PM_GECKO:
-	    case PM_GIANT_GECKO:
-		if (Sick)
-		    make_sick(0L, (char *)0, TRUE, SICK_ALL);
-		if (Vomiting)
-		    make_vomiting(0L, TRUE);
 		break;
 	    case PM_DEATH:
 	    case PM_PESTILENCE:
@@ -729,18 +633,6 @@ struct monst *mon;
 {
     switch(monsndx(mon->data)) {
 	case PM_LIZARD:
-	case PM_LIZARD_MAN:
-	case PM_CAVE_LIZARD:
-	case PM_CHAOS_LIZARD:
-	case PM_LIZARD_EEL:
-	case PM_EEL_LIZARD:
-	case PM_ANTI_STONE_LIZARD:
-	case PM_HUGE_LIZARD:
-	case PM_KARMIC_LIZARD:
-	case PM_FIRE_LIZARD:
-	case PM_LIGHTNING_LIZARD:
-	case PM_ICE_LIZARD:
-	case PM_GIANT_LIZARD:
 	    if (Stoned) fix_petrification();
 	    break;
 	case PM_DEATH:
@@ -1108,39 +1000,9 @@ register int pm;
 	if (eatmbuf) (void)eatmdone();
 
 	switch(pm) {
-	    case PM_IGUANA:
-	    case PM_GECKO:
-			lesshungry(20);
-		break;
-	    case PM_RHAUMBUSUN:
-			lesshungry(40);
-	    case PM_SQUIRREL:
-	    case PM_HELPFUL_SQUIRREL:
-			lesshungry(50);
-		break;
-	    case PM_BIG_IGUANA:
-	    case PM_GIANT_GECKO:
-			lesshungry(120);
-	    case PM_BIG_RHAUMBUSUN:
-			lesshungry(160);
-		break;
-
-	    case PM_GORGON:
-		if (ABASE(A_CHA) < ATTRMAX(A_CHA)) {
-			if (!rn2(10)) {
-				pline("You feel more %s!", flags.female ? "pretty" : "attractive");
-				(void) adjattrib(A_CHA, 1, FALSE);
-				break;
-			}
-		}
-		break;
 	    case PM_NEWT:
-	    case PM_GRAY_NEWT:
-	    case PM_ARCH_NEWT:
 	    case PM_DEMINEWT:
 	    case PM_MASTER_NEWT:
-	    case PM_ASPHYNX:
-	    case PM_RUBBER_CHICKEN:
 		/* MRKR: "eye of newt" may give small magical energy boost */
 		if (rn2(3)/* || 3 * u.uen <= 2 * u.uenmax*/) {
 		    int old_uen = u.uen; /* Some slight changes to this code. --Amy */
@@ -1156,8 +1018,6 @@ register int pm;
 		}
 		break;
 	    case PM_WRAITH:
-	    case PM_TURBO_CHICKEN:
-	    case PM_CENTAURTRICE:
 		switch(rnd(10)) {                
 		case 1:
 		    You("feel that was a bad idea.");
@@ -1208,7 +1068,6 @@ register int pm;
 		flags.botl = 1;
 		break;
 	    case PM_CREEPING___:
-	    case PM_PETRO_CENTIPEDE:
 		pline("You feel appropriately 42!");
 		switch(rnd(10)) {                
 		case 1:
@@ -1292,104 +1151,12 @@ register int pm;
 		catch_lycanthropy = TRUE;
 		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WERESPIDER;
 		break;
-	    case PM_HUMAN_WEREPIRANHA:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREPIRANHA;
-		break;
-	    case PM_HUMAN_WEREEEL:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREEEL;
-		break;
-	    case PM_HUMAN_WEREKRAKEN:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREKRAKEN;
-		break;
-	    case PM_HUMAN_WEREGHOST:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREGHOST;
-		break;
-	    case PM_HUMAN_WEREGIANT:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREGIANT;
-		break;
-	    case PM_HUMAN_WERELICHEN:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WERELICHEN;
-		break;
-	    case PM_HUMAN_WEREVORTEX:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREVORTEX;
-		break;
-	    case PM_HUMAN_WERECOW:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WERECOW;
-		break;
-	    case PM_HUMAN_WEREBEAR:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREBEAR;
-		break;
-	    case PM_HUMAN_WEREPIERCER:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREPIERCER;
-		break;
-	    case PM_HUMAN_WERENYMPH:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WERENYMPH;
-		break;
-	    case PM_HUMAN_WERESOLDIERANT:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WERESOLDIERANT;
-		break;
-	    case PM_HUMAN_WERECOCKATRICE:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WERECOCKATRICE;
-
-		Your("velocity suddenly seems very uncertain!");
-		if (HFast & INTRINSIC) {
-			HFast &= ~INTRINSIC;
-			You("seem slower.");
-		} else {
-			HFast |= FROMOUTSIDE;
-			You("seem faster.");
-		}
-		break;
-	    case PM_HUMAN_WEREMIMIC:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREMIMIC;
-		tmp += 30;
-		if (youmonst.data->mlet != S_MIMIC && !Unchanging) {
-		    char buf[BUFSZ];
-		    You_cant("resist the temptation to mimic %s.",
-			Hallucination ? "an orange" : "a pile of gold");
-#ifdef STEED
-                    /* A pile of gold can't ride. */
-		    if (u.usteed) dismount_steed(DISMOUNT_FELL);
-#endif
-		    nomul(-tmp, "pretending to be a pile of gold");
-		    Sprintf(buf, Hallucination ?
-			"You suddenly dread being peeled and mimic %s again!" :
-			"You now prefer mimicking %s again.",
-			an(Upolyd ? youmonst.data->mname : urace.noun));
-		    eatmbuf = strcpy((char *) alloc(strlen(buf) + 1), buf);
-		    nomovemsg = eatmbuf;
-		    afternmv = eatmdone;
-		    /* ??? what if this was set before? */
-		    youmonst.m_ap_type = M_AP_OBJECT;
-		    youmonst.mappearance = Hallucination ? ORANGE : GOLD_PIECE;
-		    newsym(u.ux,u.uy);
-		    curs_on_u();
-		    /* make gold symbol show up now */
-		    display_nhwindow(WIN_MAP, TRUE);
-		}
-		break;
 	    case PM_NURSE:
-	    case PM_GORGON_FLY:
 		if (Upolyd) u.mh = u.mhmax;
 		else u.uhp = u.uhpmax;
 		flags.botl = 1;
 		break;
 	    case PM_STALKER:
-	    case PM_COCKTAUR:
 		if(!Invis) {
 			set_itimeout(&HInvis, (long)rn1(100, 50));
 			if (!Blind && !BInvis) self_invis_message();
@@ -1403,68 +1170,19 @@ register int pm;
 	    case PM_YELLOW_LIGHT:
 		/* fall into next case */
 	    case PM_GIANT_BAT:
-	    case PM_CHICKATRICE:
 		make_stunned(HStun + 30,FALSE);
 		/* fall into next case */
 	    case PM_BAT:
 		make_stunned(HStun + 30,FALSE);
 		break;
-	    case PM_BURNING_MIMIC:
-	    case PM_UNDEAD_MIMIC:
-	    case PM_ICE_MIMIC:
-	    case PM_STATIC_MIMIC:
-	    case PM_DARK_MIMIC:
-	    case PM_CONTROLLER_MIMIC:
-	    case PM_BOOBED_MIMIC:
-	    case PM_SUXXOR_MIMIC:
-	    case PM_MINUSCULE_MIMIC:
-	    case PM_WITHERING_MIMIC:
-	    case PM_ACID_MIMIC:
-	    case PM_DECAYING_MIMIC:
-	    case PM_RUSTY_MIMIC:
-	    case PM_PETTY_BOOBED_MIMIC:
-	    case PM_SUCKING_MIMIC:
-	    case PM_VAMP_MIMIC:
-	    case PM_KILLER_MIMIC:
-	    case PM_FOUL_MIMIC:
-	    case PM_PORTER_MIMIC:
-	    case PM_STEALER_MIMIC:
-	    case PM_MIMIC_MUMMY:
-	    case PM_MIMICRY_RUBBER:
-	    case PM_CAMO_FISH:
-	    case PM_FATA_MORGANA:
-	    case PM_CURSED_SPIRIT:
-	    case PM_DEVILISH_SPIRIT:
-	    case PM_OSCILLATOR:
-	    case PM_ALIENATED_UFO_PART:
-	    case PM_VAMPIRE_SHADOWCLOAK:
-	    case PM_MULTI_HUED_NAGA:
-	    case PM_MIMIC_VORTEX:
-	    case PM_VOLTORB:
-	    case PM_KEYSTONE_WARDER:
-	    case PM_WARDER_SERGEANT:
-	    case PM_WARDER_LIEUTENANT:
-	    case PM_WARDER_KAPTAIN:
-	    case PM_WARDER_KOMMISSIONER:
-	    case PM_WARDER_KCHIEF:
-	    case PM_HEHEHE_HE_GUY:
-	    case PM_ELECTRODE:
-	    case PM_DISGUISED_SOLDIER_ANT:
-	    case PM_NETZAH_SEPHIRAH:
-	    case PM_AMORPHOUS_FISH:
-	    case PM_GREATER_MIMIC:
-	    case PM_MASTER_MIMIC:
-	    case PM_MIMIC_HIVEMIND:
-		tmp += 10;
 	    case PM_GIANT_MIMIC:
 		tmp += 10;
 		/* fall into next case */
 	    case PM_LARGE_MIMIC:
-		tmp += 10;
+		tmp += 20;
 		/* fall into next case */
-	    case PM_MIMIC:
 	    case PM_SMALL_MIMIC:
-		tmp += 10;
+		tmp += 20;
 		if (youmonst.data->mlet != S_MIMIC && !Unchanging) {
 		    char buf[BUFSZ];
 		    You_cant("resist the temptation to mimic %s.",
@@ -1500,34 +1218,14 @@ register int pm;
 			You("seem faster.");
 		}
 		break;
-	    case PM_GIANT_LIZARD:
-			lesshungry(300); /* fall thru */
-	    case PM_CHAOS_LIZARD:
-	    case PM_LIZARD_MAN:
-			lesshungry(180); /* fall thru */
 	    case PM_LIZARD:
-	    case PM_KARMIC_LIZARD:
-	    case PM_CAVE_LIZARD:
-	    case PM_LIZARD_EEL:
-	    case PM_EEL_LIZARD:
-	    case PM_ANTI_STONE_LIZARD:
-			lesshungry(20); /* fall thru */
-	    case PM_UNDEAD_COCKATRICE:
-		if (HStun > 2)  make_stunned(2L,FALSE);
-		if (HConfusion > 2)  make_confused(2L,FALSE);
-		break;
-	    case PM_HUGE_LIZARD:
-	    case PM_FIRE_LIZARD:
-	    case PM_LIGHTNING_LIZARD:
-	    case PM_ICE_LIZARD:
-			lesshungry(120);
+		lesshungry(120);
 		if (HStun > 2)  make_stunned(2L,FALSE);
 		if (HConfusion > 2)  make_confused(2L,FALSE);
 		break;
 	    case PM_CHAMELEON:
 	    case PM_DOPPELGANGER:
 	 /* case PM_SANDESTIN: */
-	    case PM_GIANT_CHAMELEON:
 		if (!Unchanging) {
 		    You_feel("a change coming over you.");
 		    polyself(FALSE);
@@ -1539,27 +1237,8 @@ register int pm;
 		    polyself(FALSE);
 		}
 		break;
-
-	    case PM_OLOG_HAI_GORGON:
-		gainstr((struct obj *)0, 0);
-		pline("You feel stronger!");
-		break;
-
-		/* WAC all mind flayers as per mondata.h have to be here */
-	    case PM_HUMAN_WEREMINDFLAYER:
-		catch_lycanthropy = TRUE;
-		if (!Race_if(PM_HUMAN_WEREWOLF)  && !Role_if(PM_LUNATIC)) u.ulycn = PM_WEREMINDFLAYER;
-		/* fall through */
-
 	    case PM_MASTER_MIND_FLAYER:
-	    case PM_TELEMINDFLAYER:
-	    case PM_GIANT_MIND_FLAYER:
-	    case PM_GRANDMASTER_MIND_FLAYER:
 	    case PM_ILLITHID:
-		case PM_COCKATRICE:
-		case PM_PETTY_COCKATRICE:
-		case PM_BASILISK:
-		case PM_PETTY_MIND_FLAYER:
 	    case PM_MIND_FLAYER: {
 #if 0
 		int     temp;
@@ -1666,71 +1345,10 @@ void
 gluttonous()
 {
 	/* only happens if you were satiated, extra check by Amy to make that conduct mean more */
-	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) ) {
+	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER))) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
 	}
-
-	if (u.uhs == SATIATED && (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) ) { /* They aren't used to eat much. --Amy */
-
-	if(!rn2(4)) {
-		if (Hallucination) You_feel("rather trippy.");
-		else You_feel("rather %s.", body_part(LIGHT_HEADED));
-		make_confused(HConfusion + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("uncontrollable."); /* this and some other effects added by Amy */
-		else You_feel("stunned.");
-		make_stunned(HStun + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("even weirder!");
-		else You_feel("weirded out!");
-		make_hallucinated(HHallucination + d(2,10),FALSE,0L);
-	} else if(!rn2(4)) {
-		if (!Blind) pline("Everything suddenly goes dark.");
-		make_blinded(Blinded+d(2,10),FALSE);
-		if (!Blind) Your(vision_clears);
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("like you have dementia tremor!"); /* not a real name --Amy */
-		else pline("Your hands start trembling violently!");
-		incr_itimeout(&Glib, d(2,4) );
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("totally down! Seems you tried some illegal shit!");
-		else pline("You feel like you're going to throw up.");
-	      make_vomiting(Vomiting+20, TRUE);
-		if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
-	} else if(!rn2(3)) {
-		const char *what, *where;
-		if (!Blind)
-		    what = "goes",  where = "dark";
-		else if (Levitation || Is_airlevel(&u.uz) ||
-			 Is_waterlevel(&u.uz))
-		    what = "you lose control of",  where = "yourself";
-		else
-		    what = "you slap against the", where =
-#ifdef STEED
-			   (u.usteed) ? "saddle" :
-#endif
-			   surface(u.ux,u.uy);
-		pline_The("world spins and %s %s.", what, where);
-		flags.soundok = 0;
-		nomul(-rnd(10), "unconscious from breaking anorexia conduct");
-		nomovemsg = "You are conscious again.";
-		afternmv = Hear_again;
-		return;
-	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
-	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
-#if 0 /* 5lo: Wayyyyyy too evil */
-	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
-		    Slimed = 100L;
-		    flags.botl = 1;
-		    killer_format = KILLED_BY_AN;
-		    delayed_killer = "slimy meal";
-#endif
-	}
-	}
-
-
-
 }
 
 void
@@ -1741,70 +1359,10 @@ violated_vegetarian()
     return;
     }
     u.uconduct.unvegetarian++;
-    if (Role_if(PM_MONK) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF) ) {
+    if (Role_if(PM_MONK)) {
 	You_feel("guilty.");
 	adjalign(-5);
     }
-	if (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) { /* Their metabolism isn't used to meat. --Amy */
-
-	if(!rn2(4)) {
-		if (Hallucination) You_feel("rather trippy.");
-		else You_feel("rather %s.", body_part(LIGHT_HEADED));
-		make_confused(HConfusion + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("uncontrollable."); /* this and some other effects added by Amy */
-		else You_feel("stunned.");
-		make_stunned(HStun + d(2,4),FALSE);
-	} else if(!rn2(5)) {
-		if (Hallucination) You_feel("even weirder!");
-		else You_feel("weirded out!");
-		make_hallucinated(HHallucination + d(2,10),FALSE,0L);
-	} else if(!rn2(4)) {
-		if (!Blind) pline("Everything suddenly goes dark.");
-		make_blinded(Blinded+d(2,10),FALSE);
-		if (!Blind) Your(vision_clears);
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("like you have dementia tremor!"); /* not a real name --Amy */
-		else pline("Your hands start trembling violently!");
-		incr_itimeout(&Glib, d(2,4) );
-	} else if(!rn2(10)) {
-		if (Hallucination) You_feel("totally down! Seems you tried some illegal shit!");
-		else pline("You feel like you're going to throw up.");
-	      make_vomiting(Vomiting+20, TRUE);
-		if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
-	} else if(!rn2(3)) {
-		const char *what, *where;
-		if (!Blind)
-		    what = "goes",  where = "dark";
-		else if (Levitation || Is_airlevel(&u.uz) ||
-			 Is_waterlevel(&u.uz))
-		    what = "you lose control of",  where = "yourself";
-		else
-		    what = "you slap against the", where =
-#ifdef STEED
-			   (u.usteed) ? "saddle" :
-#endif
-			   surface(u.ux,u.uy);
-		pline_The("world spins and %s %s.", what, where);
-		flags.soundok = 0;
-		nomul(-rnd(10), "unconscious from forgetting your anorexia conduct");
-		nomovemsg = "You are conscious again.";
-		afternmv = Hear_again;
-		return;
-	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
-	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
-#if 0 /* 5lo: Wayyyyyy too evil */
-	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
-		    Slimed = 100L;
-		    flags.botl = 1;
-		    killer_format = KILLED_BY_AN;
-		    delayed_killer = "slimy meal";
-#endif
-	}
-	/* By the way, I'm certainly not a vegetarian myself. It's just a twist of the topmodel role. --Amy */
-
-	}
-
     return;
 }
 
@@ -1860,7 +1418,7 @@ opentin()		/* called during each move whilst opening a tin */
 		    /* 5lo: Chefs will always create varied tins */
 		    (tin.tin->spe == -1 && !Role_if(PM_CHEF)) ? HOMEMADE_TIN :  /* player made it */
 			rn2(TTSZ-1);		/* else take your pick */
-	    if (r == ROTTEN_TIN && (tin.tin->corpsenm == PM_LIZARD || tin.tin->corpsenm == PM_LIZARD_MAN || tin.tin->corpsenm == PM_CAVE_LIZARD || tin.tin->corpsenm == PM_CHAOS_LIZARD || tin.tin->corpsenm == PM_LIZARD_EEL || tin.tin->corpsenm == PM_EEL_LIZARD || tin.tin->corpsenm == PM_SQUIRREL || tin.tin->corpsenm == PM_IGUANA || tin.tin->corpsenm == PM_GECKO || tin.tin->corpsenm == PM_GIANT_GECKO || tin.tin->corpsenm == PM_BIG_IGUANA || tin.tin->corpsenm == PM_HUGE_LIZARD || tin.tin->corpsenm == PM_KARMIC_LIZARD || tin.tin->corpsenm == PM_FIRE_LIZARD || tin.tin->corpsenm == PM_LIGHTNING_LIZARD || tin.tin->corpsenm == PM_ICE_LIZARD || tin.tin->corpsenm == PM_GIANT_LIZARD || tin.tin->corpsenm == PM_ANTI_STONE_LIZARD || tin.tin->corpsenm == PM_HELPFUL_SQUIRREL || tin.tin->corpsenm == PM_RHAUMBUSUN || tin.tin->corpsenm == PM_BIG_RHAUMBUSUN || 
+	    if (r == ROTTEN_TIN && (tin.tin->corpsenm == PM_LIZARD ||
 			tin.tin->corpsenm == PM_LICHEN))
 		r = HOMEMADE_TIN;		/* lizards don't rot */
 	    else if (tin.tin->spe == -1 && !tin.tin->blessed && !rn2(7))
@@ -2138,7 +1696,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	if (!vegetarian(&mons[mnum])) violated_vegetarian();
 		gluttonous();
 
-	if (mnum != PM_LIZARD && mnum != PM_CAVE_LIZARD && mnum != PM_CHAOS_LIZARD && mnum != PM_LIZARD_EEL && mnum != PM_LIZARD_MAN && mnum != PM_EEL_LIZARD && mnum != PM_ANTI_STONE_LIZARD &&mnum != PM_LICHEN && mnum != PM_SQUIRREL && mnum != PM_IGUANA && mnum != PM_GECKO && mnum != PM_GIANT_GECKO && mnum != PM_BIG_IGUANA && mnum != PM_HUGE_LIZARD && mnum != PM_KARMIC_LIZARD && mnum != PM_FIRE_LIZARD && mnum != PM_ICE_LIZARD && mnum != PM_LIGHTNING_LIZARD && mnum != PM_GIANT_LIZARD && mnum != PM_HELPFUL_SQUIRREL && mnum != PM_RHAUMBUSUN && mnum != PM_BIG_RHAUMBUSUN) {
+	if (mnum != PM_LIZARD && mnum != PM_LICHEN) {
 		long age = peek_at_iced_corpse_age(otmp);
 
 		rotted = (monstermoves - age)/(10L + rn2(20));
@@ -2152,7 +1710,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	 * Thus happens before the conduct checks intentionally - should it be after?
 	 * Blood is assumed to be meat and flesh.
 	 */
-	if (is_vampire(youmonst.data) || (Role_if(PM_GOFF) && !Upolyd) ) {
+	if (is_vampire(youmonst.data)) {
 	    /* oeaten is set up by touchfood */
 	    if (otmp->odrained ? otmp->oeaten <= drainlevel(otmp) :
 	      otmp->oeaten < mons[otmp->corpsenm].cnutrit) {
@@ -2183,8 +1741,8 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	/* Very rotten corpse will make you sick unless you are a ghoul or a ghast */
 	if (mnum != PM_ACID_BLOB && !stoneable && rotted > 5L) {
 	    boolean cannibal = maybe_cannibal(mnum, FALSE);
-	    if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST || u.umonnum == PM_GASTLY || u.umonnum == PM_HAUNTER
-		|| u.umonnum == PM_GENGAR || (Race_if(PM_GASTLY) && !Upolyd) ) {
+	    if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST || u.umonnum == PM_GASTLY
+		||(Race_if(PM_GASTLY) && !Upolyd) ) {
 	    	pline("Yum - that %s was well aged%s!",
 		      mons[mnum].mlet == S_FUNGUS ? "fungoid vegetation" :
 		      !vegetarian(&mons[mnum]) ? "meat" : "protoplasm",
@@ -2218,8 +1776,8 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 		return(2);
 	    }
 	} else if (youmonst.data == &mons[PM_GHOUL] || 
-	youmonst.data == &mons[PM_GASTLY] || youmonst.data == &mons[PM_HAUNTER] || youmonst.data == &mons[PM_GENGAR] || 
-		   youmonst.data == &mons[PM_GHAST] || (Race_if(PM_GASTLY) && !Upolyd) ) {
+	youmonst.data == &mons[PM_GASTLY] ||  youmonst.data == &mons[PM_GHAST]
+	|| (Race_if(PM_GASTLY) && !Upolyd) ) {
 		pline ("This corpse is too fresh!");
 		return 3;
 	} else if (acidic(&mons[mnum]) && !Acid_resistance) {
@@ -2246,7 +1804,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	victual.reqtime = 3 + (mons[mnum].cwt >> 6);
 	if (otmp->odrained) victual.reqtime = rounddiv(victual.reqtime, 5);
 
-	if (!tp && mnum != PM_LIZARD && mnum != PM_CAVE_LIZARD && mnum != PM_CHAOS_LIZARD && mnum != PM_LIZARD_EEL && mnum != PM_LIZARD_MAN && mnum != PM_EEL_LIZARD && mnum != PM_ANTI_STONE_LIZARD && mnum != PM_LICHEN && mnum != PM_SQUIRREL && mnum != PM_GECKO && mnum != PM_GIANT_GECKO && mnum != PM_IGUANA && mnum != PM_BIG_IGUANA && mnum != PM_HUGE_LIZARD && mnum != PM_KARMIC_LIZARD && mnum != PM_FIRE_LIZARD && mnum != PM_ICE_LIZARD && mnum != PM_LIGHTNING_LIZARD && mnum != PM_GIANT_LIZARD && mnum != PM_HELPFUL_SQUIRREL && mnum != PM_RHAUMBUSUN && mnum != PM_BIG_RHAUMBUSUN  &&
+		if (!tp && mnum != PM_LIZARD && mnum != PM_LICHEN &&
 			(otmp->orotten || (!rn2(7) && !otmp->blessed)  )) {
 /* Come on, blessed food being equally susceptible to rotting is just stupid. --Amy */
 	    if (rottenfood(otmp)) {
@@ -2931,7 +2489,7 @@ struct obj *otmp;
                     stoneorslime = TRUE;
 
 
-		if (cadaver && mnum != PM_LIZARD && mnum != PM_CAVE_LIZARD && mnum != PM_CHAOS_LIZARD && mnum != PM_LIZARD_EEL && mnum != PM_LIZARD_MAN && mnum != PM_EEL_LIZARD && mnum != PM_ANTI_STONE_LIZARD && mnum != PM_LICHEN && mnum != PM_SQUIRREL && mnum != PM_GECKO && mnum != PM_GIANT_GECKO && mnum != PM_IGUANA && mnum != PM_BIG_IGUANA && mnum != PM_HUGE_LIZARD && mnum != PM_KARMIC_LIZARD && mnum != PM_FIRE_LIZARD && mnum != PM_LIGHTNING_LIZARD && mnum != PM_ICE_LIZARD && mnum != PM_GIANT_LIZARD && mnum != PM_HELPFUL_SQUIRREL && mnum != PM_RHAUMBUSUN && mnum != PM_BIG_RHAUMBUSUN) {
+		if (cadaver && mnum != PM_LIZARD && mnum != PM_LICHEN) {
 			long age = peek_at_iced_corpse_age(otmp);
 			/* worst case rather than random
 			   in this calculation to force prompt */
@@ -2974,7 +2532,7 @@ struct obj *otmp;
 		else return 2;
 	}
 	if (cadaver && !vegetarian(&mons[mnum]) &&
-	    !u.uconduct.unvegetarian && (Role_if(PM_MONK) || Role_if(PM_TOPMODEL) || Role_if(PM_GOFF) ) ) {
+	    !u.uconduct.unvegetarian && (Role_if(PM_MONK))) {
 		Sprintf(buf, "%s unhealthy. %s",
 			foodsmell, eat_it_anyway);
 		if (yn_function(buf,ynchars,'n')=='n') return 1;
@@ -3198,7 +2756,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 	/* [ALI] Hero polymorphed in the meantime.
 	 */
 	if (otmp == victual.piece &&
-	  (is_vampire(youmonst.data) || Role_if(PM_GOFF) ) != otmp->odrained)
+	  (is_vampire(youmonst.data)) != otmp->odrained)
 	    victual.piece = (struct obj *)0;	/* Can't resume */
 
 	/* [ALI] Blood can coagulate during the interruption
@@ -3382,8 +2940,6 @@ void
 gethungry()	/* as time goes by - called by moveloop() and domove() */
 {
 	if (u.uinvulnerable) return;	/* you don't feel hungrier */
-
-	if ( (Role_if(PM_TOPMODEL) || Role_if(PM_GOFF)) && ( (rn2(2) && u.uhs == HUNGRY) || (rn2(4) && u.uhs == WEAK) || (rn2(8) && u.uhs == FAINTING) || (rn2(16) && u.uhs == FAINTED) ) ) return; /* They are used to eating very little. --Amy */
 
 	if ((!u.usleep || !rn2(10))	/* slow metabolic rate while asleep */
 		&& (carnivorous(youmonst.data) || herbivorous(youmonst.data) || metallivorous(youmonst.data) || lithivorous(youmonst.data))

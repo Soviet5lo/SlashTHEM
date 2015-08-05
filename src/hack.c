@@ -1251,8 +1251,6 @@ ask_about_trap(int x, int y)
 		if (traphere->ttyp == MAGIC_PORTAL) {
 			return FALSE;
 		}
-		if (Role_if(PM_TOPMODEL) && Is_qlocate(&u.uz)) /* traps on this level do wind damage */
-			return TRUE;
 
 		if (Levitation || Flying) {
 			if (!In_sokoban(&u.uz) && traphere->ttyp == PIT) {
@@ -1282,8 +1280,6 @@ ask_about_water(int x, int y)
 	if (is_pool(u.ux, u.uy)) return FALSE;
 
 	if (is_pool(x, y) && !Levitation && !Flying && !Confusion && !Stunned && levl[x][y].seenv) return TRUE; 
-
-	if (is_pool(x, y) && !Confusion && !Stunned && levl[x][y].seenv && Role_if(PM_TOPMODEL) && Is_qlocate(&u.uz) ) return TRUE; 
 
 	return FALSE;
 }
@@ -1738,23 +1734,12 @@ domove()
 
 	if (ask_about_water(x, y)) {
 
-		if (Role_if(PM_TOPMODEL) && Is_qlocate(&u.uz) ) {
-		if (yn("There is a strong wind above the water. It seems dangerous. Really step there?") != 'y') {
-			nomul(0, 0);
-			flags.move = 0;
-			return;
-			}
-		}
-
-		else {
 		if (yn("This is a water tile that can cause you to drown. Really step on it?") != 'y') {
 			nomul(0, 0);
 			flags.move = 0;
 			return;
 			}
 		}
-
-	}
 
 	if (ask_about_lava(x, y)) {
 
@@ -2066,28 +2051,6 @@ spoteffects(pick)
 boolean pick;
 {
 	register struct monst *mtmp;
-
-	if  (is_pool(u.ux, u.uy) && Role_if(PM_TOPMODEL) && Is_qlocate(&u.uz) ) {
-
-	/* strong winds over the Grand Canyon. Please don't ask me how they can continue working underwater. :-) --Amy */
-
-		pline("There are scathing winds here! Your skin is scraped off!");
-		losehp(rnz(u.legscratching), "scathing winds", KILLED_BY);
-
-		You("tumble...");
-		make_stunned(HStun + rnz(u.legscratching), FALSE);
-
-		u.legscratching++;
-	}
-
-	if (t_at(u.ux, u.uy) && Role_if(PM_TOPMODEL) && Is_qlocate(&u.uz) ) {
-
-	/* every trap on the Grand Canyon level also has a lesser wind effect. --Amy */
-
-		pline("You are enclosed in a whirlwind!");
-		losehp(rnd(u.legscratching + 2), "whirlwinds", KILLED_BY);
-
-	}
 
 	if(u.uinwater) {
 		int was_underwater;

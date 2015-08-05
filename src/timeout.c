@@ -295,7 +295,6 @@ nh_timeout()
 
 	for(upp = u.uprops; upp < u.uprops+SIZE(u.uprops); upp++){
 		if(Upolyd && (youmonst.data == &mons[PM_SHOGGOTH] ||
-		youmonst.data == &mons[PM_DARK_SHOGGOTH] ||
 		youmonst.data == &mons[PM_GIANT_SHOGGOTH])
 		&& upp - u.uprops == BLINDED && upp->intrinsic & TIMEOUT){
 			upp->intrinsic &= ~TIMEOUT;

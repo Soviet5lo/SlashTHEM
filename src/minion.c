@@ -222,7 +222,6 @@ register struct monst *mtmp;
 int lawful_minion(int difficulty)
 /* this routine returns the # of an appropriate minion,
    given a difficulty rating from 1 to 30 */
-	/* These were way too overpowered. So I mixed in some weaker monsters. --Amy */
 {
    difficulty = difficulty + rn2(5) - 2;
    if (difficulty < 0) difficulty = 0;
@@ -231,16 +230,16 @@ int lawful_minion(int difficulty)
    if (difficulty >= 1) difficulty = rnd(difficulty);
    switch (difficulty) {
       case 0: return PM_TENGU;
-      case 1: return (rn2(2) ? PM_TENGU : PM_COUATL);
+      case 1: return PM_COUATL;
       case 2: return PM_WHITE_UNICORN;
-      case 3: return (rn2(4) ? PM_WHITE_UNICORN : PM_ANGEL);
-      case 4: return (rn2(5) ? PM_WOODLAND_ELF : PM_MOVANIC_DEVA);
-      case 5: return (rn2(6) ? PM_GREEN_ELF : PM_MONADIC_DEVA);
-      case 6: return (rn2(7) ? PM_GREY_ELF : PM_KI_RIN);
-      case 7: return (rn2(8) ? PM_HIGH_ELF : PM_ASTRAL_DEVA);
-      case 8: return (rn2(9) ? PM_ELF_LORD : PM_ARCHON);
-      case 9: return (rn2(10) ? PM_ELVENKING : PM_PLANETAR);
-      case 10: return (rn2(11) ? PM_BIG_WHITE_UNICORN : PM_SOLAR);
+      case 3: return PM_MOVANIC_DEVA;
+      case 4: return PM_MONADIC_DEVA;
+      case 5: return PM_KI_RIN;
+      case 6: return PM_ASTRAL_DEVA;
+      case 7: return PM_ARCHON;
+      case 8: return PM_PLANETAR;
+      case 9: return PM_SOLAR;
+      case 10: return PM_SOLAR;
 
       default: return PM_TENGU;
    }

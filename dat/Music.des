@@ -70,19 +70,19 @@ OBJECT:'?',"charging",contained
 OBJECT:'?',random,contained
 OBJECT:random,random,contained
 # the remaining Jedi
-MONSTER:'@',"Highest elf",(38,11),peaceful
-MONSTER:'@',"Highest elf",(38,09),peaceful
-MONSTER:'@',"Highest elf",(36,11),peaceful
-MONSTER:'@',"Highest elf",(36,09),peaceful
-MONSTER:'@',"Highest elf",(18,4),peaceful
-MONSTER:'@',"Highest elf",(19,4),peaceful
-MONSTER:'@',"Highest elf",(18,15),peaceful
-MONSTER:'@',"Highest elf",(19,15),peaceful
-MONSTER:'@',"Highest elf",(56,4),peaceful
-MONSTER:'@',"Highest elf",(57,4),peaceful
-MONSTER:'@',"Highest elf",(56,15),peaceful
-MONSTER:'@',"Highest elf",(57,15),peaceful
-MONSTER:'@',"Highest elf",(33,10),peaceful
+MONSTER:'@',"attendant",(38,11),peaceful
+MONSTER:'@',"attendant",(38,09),peaceful
+MONSTER:'@',"attendant",(36,11),peaceful
+MONSTER:'@',"attendant",(36,09),peaceful
+MONSTER:'@',"attendant",(18,4),peaceful
+MONSTER:'@',"attendant",(19,4),peaceful
+MONSTER:'@',"attendant",(18,15),peaceful
+MONSTER:'@',"attendant",(19,15),peaceful
+MONSTER:'@',"attendant",(56,4),peaceful
+MONSTER:'@',"attendant",(57,4),peaceful
+MONSTER:'@',"attendant",(56,15),peaceful
+MONSTER:'@',"attendant",(57,15),peaceful
+MONSTER:'@',"attendant",(33,10),peaceful
 # Non diggable walls
 NON_DIGGABLE:(00,00,75,20)
 # Monsters on siege duty.

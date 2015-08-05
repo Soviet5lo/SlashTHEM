@@ -258,12 +258,12 @@ DOOR:closed,(65,05)
 MONSTER:'7',"Lightningrod",(37,10),hostile
 
 # turrets that cannot be reached
-MONSTER:'H',"arch-titan",(40,06),hostile
-MONSTER:'H',"arch-titan",(40,15),hostile
-MONSTER:'H',"arch-titan",(69,10),hostile
-MONSTER:'H',"arch-titan",(30,07),hostile
-MONSTER:'H',"arch-titan",(28,14),hostile
-MONSTER:'H',"arch-titan",(15,10),hostile
+MONSTER:'H',"titan",(40,06),hostile
+MONSTER:'H',"titan",(40,15),hostile
+MONSTER:'H',"titan",(69,10),hostile
+MONSTER:'H',"titan",(30,07),hostile
+MONSTER:'H',"titan",(28,14),hostile
+MONSTER:'H',"titan",(15,10),hostile
 
 MONSTER:'e',"shocking sphere",(37,11),hostile
 MONSTER:'e',"shocking sphere",(37,09),hostile

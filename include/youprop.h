@@ -157,14 +157,13 @@
 #define HTelepat		u.uprops[TELEPAT].intrinsic
 #define ETelepat		u.uprops[TELEPAT].extrinsic
 
-#define Blind_telepat		( ((HTelepat || ETelepat || telepathic(youmonst.data)) && (!Role_if(PM_TOPMODEL) || !flags.female)) || ( Role_if(PM_TOPMODEL) && ((uarmf && uarmf->otyp == WEDGE_SANDALS) || (uarmf && uarmf->otyp == FEMININE_PUMPS) || (uarmf && uarmf->otyp == LEATHER_PEEP_TOES) || (uarmf && uarmf->otyp == HIPPIE_HEELS) || (uarmf && uarmf->otyp == COMBAT_STILETTOS) )))
+#define Blind_telepat		(HTelepat || ETelepat || telepathic(youmonst.data))
 
 #define Unblind_telepat		(ETelepat)
 
 #define HWarning		u.uprops[WARNING].intrinsic
 #define EWarning		u.uprops[WARNING].extrinsic
-#define Warning			(( (HWarning || EWarning) && (!Role_if(PM_TOPMODEL) || !flags.female)) || ( Role_if(PM_TOPMODEL) && ((uarmf && uarmf->otyp == WEDGE_SANDALS) || (uarmf && uarmf->otyp == FEMININE_PUMPS) || (uarmf && uarmf->otyp == LEATHER_PEEP_TOES) || (uarmf && uarmf->otyp == HIPPIE_HEELS) || (uarmf && uarmf->otyp == COMBAT_STILETTOS) )))
-
+#define Warning			(HWarning || EWarning)
 /* Warning for a specific type of monster */
 #define HWarn_of_mon		u.uprops[WARN_OF_MON].intrinsic
 #define EWarn_of_mon		u.uprops[WARN_OF_MON].extrinsic
@@ -211,8 +210,7 @@
 #define HStealth		u.uprops[STEALTH].intrinsic
 #define EStealth		u.uprops[STEALTH].extrinsic
 #define BStealth		u.uprops[STEALTH].blocked
-#define Stealth			(( (HStealth || EStealth) && !BStealth && !Race_if(PM_OGRO) && (!Role_if(PM_TOPMODEL) || !flags.female) ) || ( Role_if(PM_TOPMODEL) && ((uarmf && uarmf->otyp == WEDGE_SANDALS) || (uarmf && uarmf->otyp == FEMININE_PUMPS) || (uarmf && uarmf->otyp == LEATHER_PEEP_TOES) || (uarmf && uarmf->otyp == HIPPIE_HEELS) || (uarmf && uarmf->otyp == COMBAT_STILETTOS) )))
-
+#define Stealth			((HStealth || EStealth) && !BStealth && !Race_if(PM_OGRO))
 #define HAggravate_monster	u.uprops[AGGRAVATE_MONSTER].intrinsic
 #define EAggravate_monster	u.uprops[AGGRAVATE_MONSTER].extrinsic
 #define Aggravate_monster	(HAggravate_monster || EAggravate_monster || Race_if(PM_OGRO) )
@@ -230,12 +228,12 @@
 #define HTeleportation		u.uprops[TELEPORT].intrinsic
 #define ETeleportation		u.uprops[TELEPORT].extrinsic
 #define Teleportation		(HTeleportation || ETeleportation || \
-				 can_teleport(youmonst.data) || Race_if(PM_MAIA))
+				can_teleport(youmonst.data))
 
 #define HTeleport_control	u.uprops[TELEPORT_CONTROL].intrinsic
 #define ETeleport_control	u.uprops[TELEPORT_CONTROL].extrinsic
 #define Teleport_control	((HTeleport_control || ETeleport_control || \
-				 control_teleport(youmonst.data)) && !Race_if(PM_MAIA))
+				 control_teleport(youmonst.data)))
 
 #define HLevitation		u.uprops[LEVITATION].intrinsic
 #define ELevitation		u.uprops[LEVITATION].extrinsic
@@ -251,10 +249,10 @@
 #define HFlying			u.uprops[FLYING].intrinsic
 #define EFlying			u.uprops[FLYING].extrinsic
 #ifdef STEED
-# define Flying			(( (HFlying || EFlying || is_flyer(youmonst.data) || (u.usteed && is_flyer(u.usteed->data))) && (!Role_if(PM_TOPMODEL) || !flags.female)) || ( Role_if(PM_TOPMODEL) && ((uarmf && uarmf->otyp == WEDGE_SANDALS) || (uarmf && uarmf->otyp == FEMININE_PUMPS) || (uarmf && uarmf->otyp == LEATHER_PEEP_TOES) || (uarmf && uarmf->otyp == HIPPIE_HEELS) || (uarmf && uarmf->otyp == COMBAT_STILETTOS) )))
+# define Flying			(HFlying || EFlying || is_flyer(youmonst.data) || (u.usteed && is_flyer(u.usteed->data)))
 
 #else
-# define Flying			(( (HFlying || EFlying || is_flyer(youmonst.data)) && (!Role_if(PM_TOPMODEL))) || !flags.female) || ( Role_if(PM_TOPMODEL) && ((uarmf && uarmf->otyp == WEDGE_SANDALS) || (uarmf && uarmf->otyp == FEMININE_PUMPS) || (uarmf && uarmf->otyp == LEATHER_PEEP_TOES) || (uarmf && uarmf->otyp == HIPPIE_HEELS) || (uarmf && uarmf->otyp == COMBAT_STILETTOS) )))
+# define Flying			(HFlying || EFlying || is_flyer(youmonst.data))
 #endif
 	/* May touch surface; does not override any others */
 
@@ -281,7 +279,7 @@
 				 amphibious(youmonst.data))
 	/* Get wet, may go under surface */
 
-#define Breathless		( ((HMagical_breathing || EMagical_breathing || breathless(youmonst.data)) && (!Role_if(PM_TOPMODEL) || !flags.female)) || ( Role_if(PM_TOPMODEL) && ((uarmf && uarmf->otyp == WEDGE_SANDALS) || (uarmf && uarmf->otyp == FEMININE_PUMPS) || (uarmf && uarmf->otyp == LEATHER_PEEP_TOES) || (uarmf && uarmf->otyp == HIPPIE_HEELS) || (uarmf && uarmf->otyp == COMBAT_STILETTOS) )))
+#define Breathless		(HMagical_breathing || EMagical_breathing || breathless(youmonst.data))
 
 #define Underwater		(u.uinwater)
 /* Note that Underwater and u.uinwater are both used in code.
@@ -349,8 +347,8 @@
 
 #define HFast			u.uprops[FAST].intrinsic
 #define EFast			u.uprops[FAST].extrinsic
-#define Fast			( (HFast || EFast) && (!Role_if(PM_TRANSVESTITE) || flags.female) && (!Role_if(PM_TOPMODEL) || !flags.female) )
-#define Very_fast		(( ( (HFast & ~INTRINSIC) || EFast) && (!Role_if(PM_TRANSVESTITE) || flags.female) && (!Role_if(PM_TOPMODEL) || !flags.female) ) || ( (Role_if(PM_TRANSVESTITE) || Role_if(PM_TOPMODEL) ) && ((uarmf && uarmf->otyp == WEDGE_SANDALS) || (uarmf && uarmf->otyp == FEMININE_PUMPS) || (uarmf && uarmf->otyp == LEATHER_PEEP_TOES) || (uarmf && uarmf->otyp == HIPPIE_HEELS) || (uarmf && uarmf->otyp == COMBAT_STILETTOS) ) ))
+#define Fast			(HFast || EFast)
+#define Very_fast		((HFast & ~INTRINSIC) || EFast)
 
 #define HReflecting		u.uprops[REFLECTING].intrinsic
 #define EReflecting		u.uprops[REFLECTING].extrinsic

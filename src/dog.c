@@ -54,9 +54,7 @@ pet_type()
 	else if (preferred_pet == 'd')
 	    return (PM_LITTLE_DOG);
 	else if (Role_if(PM_PIRATE))
-		return (rn2(2) ? PM_AIRBORNE_PARROT : PM_MONKEY);
-	else if (Role_if(PM_GOFF))
-		return (rn2(2) ? PM_NINJA_BOY : PM_NINJA_GIRL);
+		return (rn2(2) ? PM_PARROT : PM_MONKEY);
 	else if (Role_if(PM_KORSAIR))
 		switch (rnd(5)) {   
 		case 1: return (PM_LITTLE_DOG);
@@ -72,7 +70,7 @@ pet_type()
 		case 3: return (PM_SEWER_RAT);
 		case 4: return (PM_PANTHER);
 		case 5: return (PM_TIGER);
-		case 6: return (PM_VIPER);
+		case 6: return (PM_PIT_VIPER);
 		case 7: return (PM_GIANT_SPIDER);
 		}
 	else if (Role_if(PM_CHEVALIER))
@@ -88,14 +86,6 @@ pet_type()
 		case 9: return (PM_BABY_SHIMMERING_DRAGON);
 		case 10: return (PM_BABY_SILVER_DRAGON);
 		case 11: return (PM_BABY_GRAY_DRAGON);
-		}
-	else if (Role_if(PM_TRANSVESTITE))
-		return ( !rn2(5) ? PM_ASIAN_GIRL : !rn2(10) ? PM_ESTRELLA_GIRL : rn2(2) ? PM_LITTLE_GIRL : PM_LITTLE_BOY);
-	else if (Role_if(PM_TOPMODEL))
-		switch (rnd(3)) {   
-		case 1: return (PM_DARK_GIRL);
-		case 2: return (PM_REDGUARD_GIRL);
-		case 3: return (PM_THIEVING_GIRL);
 		}
 	else
 	    return (rn2(2) ? PM_KITTEN : PM_LITTLE_DOG);
@@ -233,16 +223,14 @@ makedog()
 		petname = wolfname;
 	else if (pettype == PM_GHOUL)
 		petname = ghoulname;
-	else if (pettype == PM_PONY || pettype == PM_GREEN_NIGHTMARE)
+	else if (pettype == PM_PONY)
 		petname = horsename;
 #ifdef CONVICT
 	else if (pettype == PM_SEWER_RAT)
 		petname = ratname;
 #endif /* CONVICT */
-	else if (pettype == PM_AGGRESSIVE_LICHEN)
+	else if (pettype == PM_LICHEN)
 		petname = lichenname;
-	else if (pettype == PM_PILE_OF_COPPER_COINS)
-		petname = coinsname;
 	else if (pettype == PM_ROTHE)
 		petname = rothename;
 #if 0
@@ -277,13 +265,9 @@ makedog()
 	    if(Role_if(PM_CONVICT)) petname = "Nicodemus"; /* Rats of NIMH */
     }
 	if (pettype == PM_MONKEY) petname = "Ugga-Ugga";
-	if (pettype == PM_AIRBORNE_PARROT) petname = "Squawks";
+	if (pettype == PM_PARROT) petname = "Squawks";
 	if (pettype == PM_SPEEDHORSE) petname = "Harley Davidson";
 	if (pettype == PM_BABY_CROCODILE) petname = "Snappy"; /* in Germany it would be called Schnappi */
-	if (pettype == PM_EEVEE) petname = "HUSI";
-
-	if (pettype == PM_NINJA_BOY) petname = "Cornelia Fuck"; /* My Immortal fanfic */
-	if (pettype == PM_NINJA_GIRL) petname = "Doris Rumbridge";
 
 	if (pettype == PM_GREEN_ELF) petname = "Dray Harp";
 	if (pettype == PM_OFFICER) petname = "Officer O'Brian";
@@ -291,21 +275,8 @@ makedog()
 
 	if (pettype == PM_PANTHER) petname = "Tomcat Karlo";
 	if (pettype == PM_TIGER) petname = "Simba";
-	if (pettype == PM_VIPER) petname = "Lukas";
+	if (pettype == PM_PIT_VIPER) petname = "Lukas";
 	if (pettype == PM_GIANT_SPIDER) petname = "Andreas";
-
-	if (pettype == PM_ANIMATED_WEDGE_SANDAL) petname = "Larissa"; /* just a common female first name */
-
-	if (pettype == PM_LITTLE_GIRL) petname = "Sarah"; /* just a common female first name */
-	if (pettype == PM_LITTLE_BOY) petname = "Jonas"; /* just a common male first name */
-	if (pettype == PM_ASIAN_GIRL) petname = "Whitney"; /* the Normal-type gym leader in Pokemon Crystal */
-	if (pettype == PM_ESTRELLA_GIRL) petname = "Estrella"; /* uncommon female first name */
-
-	if (pettype == PM_DARK_GIRL) petname = "Everella"; /* taken from a fanfic */
-	if (pettype == PM_REDGUARD_GIRL) petname = "Jasajeen"; /* taken from a fanfic */
-	if (pettype == PM_THIEVING_GIRL) petname = "Esruth"; /* taken from a fanfic */
-
-	if (pettype == PM_ACTIVISTOR) petname = "Helen"; /* yet another common first name */
 
 	if (pettype == PM_BABY_YELLOW_DRAGON || pettype == PM_BABY_GREEN_DRAGON || pettype == PM_BABY_BLUE_DRAGON || pettype == PM_BABY_RED_DRAGON || pettype == PM_BABY_ORANGE_DRAGON || pettype == PM_BABY_WHITE_DRAGON || pettype == PM_BABY_BLACK_DRAGON || pettype == PM_BABY_DEEP_DRAGON || pettype == PM_BABY_SHIMMERING_DRAGON || pettype == PM_BABY_GRAY_DRAGON || pettype == PM_BABY_SILVER_DRAGON) petname = "Odahviing";
 #endif /* CONVICT */
@@ -316,7 +287,7 @@ makedog()
 
 #ifdef STEED
 	/* Horses already wear a saddle */
-	if ((pettype == PM_PONY || pettype == PM_GREEN_NIGHTMARE || pettype == PM_SPEEDHORSE) && !!(otmp = mksobj(SADDLE, TRUE, FALSE))) {
+	if ((pettype == PM_PONY || pettype == PM_SPEEDHORSE) && !!(otmp = mksobj(SADDLE, TRUE, FALSE))) {
 	    if (mpickobj(mtmp, otmp))
 		panic("merged saddle?");
 	    mtmp->misc_worn_check |= W_SADDLE;
@@ -859,8 +830,7 @@ register struct obj *obj;
 		 || is_rider(fptr)))
 		    return TABU;
 	    /* Ghouls only eat old corpses... yum! */
-	    if (mon->data == &mons[PM_GHOUL] || mon->data == &mons[PM_GHAST] || mon->data == &mons[PM_GASTLY]
-		|| mon->data == &mons[PM_HAUNTER] || mon->data == &mons[PM_GENGAR]) {
+	    if (mon->data == &mons[PM_GHOUL] || mon->data == &mons[PM_GHAST] || mon->data == &mons[PM_GASTLY]){
 		return (obj->otyp == CORPSE && obj->corpsenm != PM_ACID_BLOB &&
 		  peek_at_iced_corpse_age(obj) + 5*rn1(20,10) <= monstermoves) ?
 			DOGFOOD : TABU;
@@ -900,26 +870,6 @@ register struct obj *obj;
 		    else
 		    if ((peek_at_iced_corpse_age(obj) + 50L <= monstermoves
 					    && obj->corpsenm != PM_LIZARD
-					    && obj->corpsenm != PM_CAVE_LIZARD
-					    && obj->corpsenm != PM_CHAOS_LIZARD
-					    && obj->corpsenm != PM_LIZARD_EEL
-					    && obj->corpsenm != PM_EEL_LIZARD
-					    && obj->corpsenm != PM_SQUIRREL
-					    && obj->corpsenm != PM_IGUANA
-					    && obj->corpsenm != PM_BIG_IGUANA
-					    && obj->corpsenm != PM_HUGE_LIZARD
-					    && obj->corpsenm != PM_LIZARD_MAN
-					    && obj->corpsenm != PM_KARMIC_LIZARD
-					    && obj->corpsenm != PM_FIRE_LIZARD
-					    && obj->corpsenm != PM_LIGHTNING_LIZARD
-					    && obj->corpsenm != PM_ICE_LIZARD
-					    && obj->corpsenm != PM_GIANT_LIZARD
-					    && obj->corpsenm != PM_ANTI_STONE_LIZARD
-					    && obj->corpsenm != PM_HELPFUL_SQUIRREL
-					    && obj->corpsenm != PM_RHAUMBUSUN
-					    && obj->corpsenm != PM_BIG_RHAUMBUSUN
-					    && obj->corpsenm != PM_GECKO
-					    && obj->corpsenm != PM_GIANT_GECKO
 					    && obj->corpsenm != PM_LICHEN
 					    && mon->data->mlet != S_FUNGUS) ||
 			(acidic(&mons[obj->corpsenm]) && !resists_acid(mon)) ||
@@ -957,7 +907,6 @@ register struct obj *obj;
 	    if ((mon->data == &mons[PM_GELATINOUS_CUBE] ||
 		mon->data == &mons[PM_SHOGGOTH] ||
 		mon->data == &mons[PM_GIANT_SHOGGOTH] ||
-		mon->data == &mons[PM_TASMANIAN_ZOMBIE] ||
 	    	mon->data == &mons[PM_TASMANIAN_DEVIL]) && is_organic(obj))
 		return(ACCFOOD);
 	    if (metallivorous(mon->data) && is_metallic(obj) && (is_rustprone(obj) || mon->data != &mons[PM_RUST_MONSTER])) {
@@ -1051,10 +1000,9 @@ register struct obj *obj;
 		   food and also implies that the object has been deleted */
 		return mtmp;
 	    } else {
-
-		if (mtmp->data != &mons[PM_PETTY_BATTLE_GIRL] && mtmp->data != &mons[PM_PETTY_SWEET_WOMAN] && mtmp->data != &mons[PM_POKEMON] && mtmp->data != &mons[PM_PETTY_BEARDED_DEVIL] && mtmp->data != &mons[PM_PETTY_NALFESHNEE] && mtmp->data != &mons[PM_PETTY_LAVA_DEMON]
-&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR])
-
+#if 0 /* Deferred */
+		if (mtmp->data != &mons[PM_POKEMON])
+#endif
 		return (struct monst *)0;
 		}
 	}
@@ -1078,8 +1026,11 @@ register struct obj *obj;
 			and binder (can get attire charm from increasing a certain skill)
 			and psion (learns attire charm at XL15, role suggested by Greg) */
 
-		if (mtmp->data != &mons[PM_PETTY_BATTLE_GIRL]  && mtmp->data != &mons[PM_PETTY_SWEET_WOMAN] && mtmp->data != &mons[PM_POKEMON] && mtmp->data != &mons[PM_PETTY_BEARDED_DEVIL] && mtmp->data != &mons[PM_SIZZLE] && mtmp->data != &mons[PM_PETTY_NALFESHNEE] && mtmp->data != &mons[PM_PETTY_LAVA_DEMON]
-&& mtmp->data != &mons[PM_PETTY_ACEHACK_HORROR] && mtmp->data != &mons[PM_PETTY_GRUNTHACK_HORROR] && mtmp->data != &mons[PM_PETTY_ANGBAND_HORROR] && mtmp->data != &mons[PM_PETTY_ADOM_HORROR] && !Role_if(PM_TRANSVESTITE) && !Role_if(PM_TOPMODEL) && !Role_if(PM_ZYBORG)  && !Role_if(PM_BINDER) && !Role_if(PM_PSION) )
+		if (mtmp->data != &mons[PM_SIZZLE] && !Role_if(PM_ZYBORG)  && !Role_if(PM_BINDER) 
+#if 0 /* 5lo: Deferred */
+ && mtmp->data != &mons[PM_POKEMON] && !Role_if(PM_PSION)
+#endif
+		)
 			return (struct monst *)0;
 		}
 

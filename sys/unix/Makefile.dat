@@ -311,22 +311,21 @@ spec_levs: ../util/lev_comp \
 	touch spec_levs
 
 quest_levs: ../util/lev_comp \
-	Acid.des Act.des Arch.des \
+	Acid.des Arch.des \
 	Barb.des Bard.des Binder.des Bleeder.des \
 	Caveman.des Cheval.des Convict.des \
 	Courier.des Cyborg.des Deatheat.des Diver.des Drunk.des \
-	Electric.des Elf.des Chef.des Firef.des Flame.des \
-	Gangster.des Gladia.des Geek.des Goff.des Gradu.des \
+	Electric.des Chef.des Firef.des Flame.des \
+	Gangster.des Gladia.des Geek.des Gradu.des \
 	Healer.des Ice.des Jedi.des Knight.des Korsair.des \
 	Locks.des Lunatic.des Monk.des Music.des \
 	Necro.des Ninja.des Noble.des Offic.des \
-	Pirate.des Priest.des Psion.des Ranger.des \
+	Pirate.des Priest.des Ranger.des \
 	Rocker.des Rogue.des Samurai.des Scient.des \
 	Slayer.des Spacew.des \
-	Top.des Tourist.des Trans.des Under.des Valkyrie.des \
+	Tourist.des Under.des Valkyrie.des \
 	Warrior.des Wizard.des Yeoman.des Zooke.des
 	../util/lev_comp Acid.des
-	../util/lev_comp Act.des
 	../util/lev_comp Arch.des
 	../util/lev_comp Barb.des
 	../util/lev_comp Bard.des
@@ -341,14 +340,12 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Deatheat.des
 	../util/lev_comp Drunk.des
 	../util/lev_comp Electric.des
-	../util/lev_comp Elf.des
 	../util/lev_comp Chef.des
 	../util/lev_comp Firef.des
 	../util/lev_comp Flame.des
 	../util/lev_comp Gangster.des
 	../util/lev_comp Geek.des
 	../util/lev_comp Gladia.des
-	../util/lev_comp Goff.des
 	../util/lev_comp Gradu.des
 	../util/lev_comp Healer.des
 	../util/lev_comp Ice.des
@@ -365,7 +362,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Offic.des
 	../util/lev_comp Pirate.des
 	../util/lev_comp Priest.des
-	../util/lev_comp Psion.des
 	../util/lev_comp Ranger.des
 	../util/lev_comp Rocker.des
 	../util/lev_comp Rogue.des
@@ -373,11 +369,9 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Scient.des
 	../util/lev_comp Slayer.des
 	../util/lev_comp Spacew.des
-	../util/lev_comp Top.des
 	@if egrep -s tourists options > /dev/null ; then \
 	echo ../util/lev_comp Tourist.des ; ../util/lev_comp Tourist.des ; \
 	else rm -f Tou-goal.lev Tou-fil?.lev Tou-loca.lev Tou-strt.lev ; fi
-	../util/lev_comp Trans.des
 	../util/lev_comp Under.des
 	../util/lev_comp Valkyrie.des
 	../util/lev_comp Warrior.des

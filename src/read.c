@@ -2208,7 +2208,7 @@ register struct obj	*sobj;
 		    for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
 			if (!isok(u.ux + i, u.uy + j)) continue;
 			if ((mtmp = m_at(u.ux + i, u.uy + j)) != 0)
-			    if (!rn2(4) || (Role_if(PM_ACTIVISTOR) && mtmp->data == &mons[PM_TOPMODEL]) ) maybe_tame(mtmp, sobj);
+			    if (!rn2(4)) maybe_tame(mtmp, sobj);
 		    }
 		}
 	break;

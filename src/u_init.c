@@ -313,13 +313,13 @@ static struct trobj Death_Eater[] = {
 	{ TIN, UNDEF_SPE, FOOD_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#if 0 /* Deferred */
 static struct trobj Pokemon[] = {
 	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 5, 0 },
 	{ WAN_ENLIGHTENMENT, UNDEF_SPE, WAND_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#endif
 
 static struct trobj Geek[] = {
 	{ ELECTRIC_SWORD, 1, WEAPON_CLASS, 1, 1},
@@ -510,19 +510,6 @@ static struct trobj Gladiator[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Goff[] = {
-	{ PISTOL, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 20, 0 },
-	{ HIPPIE_HEELS, 5, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ VICTORIAN_UNDERWEAR, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ BLACK_DRAGON_SCALE_MAIL, -9, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ POT_ACID, 0, POTION_CLASS, 3, UNDEF_BLESS },
-	{ POT_VAMPIRE_BLOOD, 0, POTION_CLASS, 5, UNDEF_BLESS },
-	{ POT_BLOOD, 0, POTION_CLASS, 5, UNDEF_BLESS },
-	{ AMULET_OF_COVETOUS_WARNING, 0, AMULET_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Diver[] = {
 	{ KNIFE, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ SPEAR, 0, WEAPON_CLASS, 3, UNDEF_BLESS },
@@ -617,31 +604,6 @@ static struct trobj Samurai[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Transvestite[] = {
-	{ WEDGED_LITTLE_GIRL_SANDAL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ WEDGE_SANDALS, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ SADDLE, 0, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Topmodel[] = {
-	{ KNIFE, 1, WEAPON_CLASS, 1, 1 },
-	{ RIFLE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 20, 0 },
-	{ LEATHER_PEEP_TOES, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ SADDLE, 0, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Activistor[] = {
-#define ACT_SHIRT	0
-	{ RUFFLED_SHIRT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ FLY_SWATTER, 1, WEAPON_CLASS, 1, 1 },
-	{ SPE_CHARM_MONSTER, UNDEF_SPE, SPBOOK_CLASS, 1, 1},
-	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 #ifdef TOURIST
 static struct trobj Tourist[] = {
 #define T_DARTS		0
@@ -723,16 +685,6 @@ static struct trobj AlienItem[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 #endif
-static struct trobj NaviItem[] = {
-	{ WEDGE_SANDALS, 0, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj InsectoidItem[] = {
-	{ LUMP_OF_ROYAL_JELLY, 0, FOOD_CLASS, 5, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj KoboltItem[] = {
 	{ DART, 0, WEAPON_CLASS, 15, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -755,11 +707,6 @@ static struct trobj GhastFood[] = {
 #endif
 static struct trobj UngMoldWand[] = {
 	{ WAN_DEATH, 10, WAND_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj MaiaWand[] = {
-	{ WAN_TELEPORTATION, 12, WAND_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -1512,72 +1459,6 @@ static const struct def_skill Skill_Dru[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Tra[] = { /* Will be removed */
-    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_WHIP, P_BASIC },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
-    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
-    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_SKILLED },
-#endif
-    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Act[] = { /* Will be removed */
-    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_PADDLE, P_EXPERT },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
-    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
-    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_SKILLED },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Top[] = { /* Will be removed */
-    /* 5lo: Elf from Slash'EM 0.0.6 with slight modifications */
-    { P_DAGGER, P_SKILLED },             { P_KNIFE, P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_WHIP, P_BASIC },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
-    { P_BOW, P_SKILLED },               { P_SLING, P_BASIC },
-    { P_CROSSBOW, P_BASIC },		{ P_HAMMER, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Cou[] = {
     /* 5lo: Heavy focus on firearms here, but can gain skill with blades */
     { P_KNIFE,  P_EXPERT },		{ P_DAGGER, P_EXPERT },
@@ -1836,7 +1717,7 @@ static const struct def_skill Skill_Mon[] = {
 /*WAC - monks are good healers - expert healing - and expert protect*/
     { P_NONE, 0 }
 };
-
+#if 0 /* 5lo: Deferred */
 static const struct def_skill Skill_Psi[] = {
     /* 5lo: Copy-paste of the Monk */
     { P_PADDLE, P_SKILLED },
@@ -1850,7 +1731,7 @@ static const struct def_skill Skill_Psi[] = {
     { P_MATTER_SPELL, P_BASIC },
     { P_NONE, 0 }
 };
-
+#endif
 static const struct def_skill Skill_Nob[] = {
     /* 5lo: Straight from dNethack */
     { P_DAGGER, P_BASIC },		{ P_KNIFE, P_EXPERT },
@@ -2009,22 +1890,6 @@ static const struct def_skill Skill_Gla[] = {
     { P_TWO_WEAPON_COMBAT, P_EXPERT },
     { P_RIDING, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_MASTER },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Gof[] = { /* Will be removed */
-    /* 5lo: Normalized skills from Slash'EM Extended + modifications */
-    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_EXPERT },
-    { P_QUARTERSTAFF, P_EXPERT },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_ATTACK_SPELL, P_SKILLED },	{ P_HEALING_SPELL, P_BASIC },
-    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_BASIC }, { P_ENCHANTMENT_SPELL, P_BASIC },
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
     { P_NONE, 0 }
 };
 
@@ -2301,7 +2166,7 @@ static const struct def_skill Skill_W[] = {
     { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
-
+#if 0 /* Deferred */
 static const struct def_skill Skill_Pok[] = {
     /* 5lo: These can stay the same, honestly */
     { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
@@ -2314,7 +2179,7 @@ static const struct def_skill Skill_Pok[] = {
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
-
+#endif
 static const struct def_skill Skill_Zoo[] = {
     /* 5lo: Heavily modified Hobbit skillset from Slash'EM 0.0.6 */
     { P_DAGGER, P_EXPERT },             { P_KNIFE, P_BASIC },
@@ -2651,11 +2516,13 @@ u_init()
 	init_uhunger();
 	u.ublesscnt = rnz(300);			/* no prayers just yet */
 
-      u.monstertimeout = rnz(10000)+rnz(15000); /*This NEEDS to be set here, because otherwise saving/restoring will set*/
-      u.monstertimefinish = rnz(10000)+rnz(20000)+u.monstertimeout; /*a new value, allowing the player to cheat. --Amy*/
+#ifdef MORE_SPAWNS
+        u.monstertimeout = rnz(10000)+rnz(15000); /*This NEEDS to be set here, because otherwise saving/restoring will set*/
+        u.monstertimefinish = rnz(10000)+rnz(20000)+u.monstertimeout; /*a new value, allowing the player to cheat. --Amy*/
+#endif
 	u.legscratching = (Role_if(PM_BLEEDER) ? 3 : 1); /*must also be set here; this may increase over time*/
 	u.next_check = rnz(600); /* it used to be exactly 600 at the start of every game */
-
+#if 0 /* 5lo: No longer used as these monsters don't exist anymore */
 	u.eeveelution = PM_VAPOREON; /* failsafe */
 	if (u.monstertimefinish % 42 == 0) u.eeveelution = PM_VOLAREON;
 	else if (u.monstertimefinish % 23 == 0) u.eeveelution = PM_INSECTEON;
@@ -2667,22 +2534,10 @@ u_init()
 	else if (u.monstertimefinish % 7 == 0) u.eeveelution = PM_JOLTEON;
 	else if (u.monstertimefinish % 3 == 0) u.eeveelution = PM_FLAREON;
 	else u.eeveelution = PM_VAPOREON;
-
-	u.urmaxlvl = 1; /* will go up if an asgardian race player levels up */
+#endif
 	u.urmaxlvlB = 1; /* will go up if a cyborg role player levels up */
 	u.urmaxlvlC = 1; /* will go up if a binder role player levels up */
 	u.urmaxlvlD = 1; /* will go up if a bard role player levels up */
-
-	u.uhereticgodinit = 0; /* for heretic race */
-	u.uhereticgodlawful = randrole(); /* for heretic race */
-		    while (!roles[u.uhereticgodlawful].lgod)	/* unless they're missing */
-			u.uhereticgodlawful = randrole(); /* for heretic race */
-	u.uhereticgodneutral = randrole(); /* for heretic race */
-		    while (!roles[u.uhereticgodneutral].lgod)	/* unless they're missing */
-			u.uhereticgodneutral = randrole(); /* for heretic race */
-	u.uhereticgodchaotic = randrole(); /* for heretic race */
-		    while (!roles[u.uhereticgodchaotic].lgod)	/* unless they're missing */
-			u.uhereticgodchaotic = randrole(); /* for heretic race */
 
 /* In order to make the game even more interesting for lost souls, they cannot level teleport or branchport at all. */
 
@@ -2784,10 +2639,12 @@ u_init()
 		ini_inv(Death_Eater);
 		skill_init(Skill_Dea);
 		break;
+#if 0
 	case PM_POKEMON:
 		ini_inv(Pokemon);
 		skill_init(Skill_Pok);
 		break;
+#endif
 	case PM_FLAME_MAGE:
 		switch (rnd(2)) {                
 			case 1: Flame_Mage[F_BOOK].trotyp = SPE_DETECT_MONSTERS; break;
@@ -2978,6 +2835,7 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Mon);
 		break;
+#if 0
 	case PM_PSION:
 		switch (rn2(90) / 30) {
 		case 0: Psion[M_BOOK].trotyp = SPE_KNOCK; break;
@@ -2991,6 +2849,7 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Psi);
 		break;
+#endif
 	case PM_NOBLEMAN:
 		if(flags.female){
 			Noble[NOB_SHIRT].trotyp = VICTORIAN_UNDERWEAR;
@@ -2998,13 +2857,6 @@ u_init()
 		ini_inv(Noble);
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Nob);
-		break;
-	case PM_ACTIVISTOR:
-		if(flags.female){
-			Activistor[ACT_SHIRT].trotyp = VICTORIAN_UNDERWEAR;
-		}
-		ini_inv(Activistor);
-		skill_init(Skill_Act);
 		break;
 	case PM_PIRATE:
 #ifndef GOLDOBJ
@@ -3040,10 +2892,6 @@ u_init()
 		skill_init(Skill_Gla);
 		knows_class(ARMOR_CLASS);
 		knows_class(WEAPON_CLASS);
-		break;
-	case PM_GOFF:
-		ini_inv(Goff);
-		skill_init(Skill_Gof);
 		break;
 	case PM_DIVER:
 		ini_inv(Diver);
@@ -3137,19 +2985,6 @@ u_init()
 		Ranger[RAN_ZERO_ARROWS].trquan = rn1(10, 30);
 		ini_inv(Ranger);
 		skill_init(Skill_Ran);
-		break;
-	case PM_TRANSVESTITE:
-		ini_inv(Transvestite);
-		skill_init(Skill_Tra);
-		knows_class(WEAPON_CLASS);
-		knows_class(ARMOR_CLASS);
-		break;
-	case PM_TOPMODEL:
-		ini_inv(Topmodel);
-		skill_init(Skill_Top);
-		knows_class(WEAPON_CLASS);
-		knows_class(ARMOR_CLASS);
-	      u.uhunger = 200;  /* They don't eat much --Amy */
 		break;
 	case PM_ROGUE:
 		Rogue[R_DAGGERS].trquan = rn1(10, 6);
@@ -3460,17 +3295,8 @@ u_init()
 	case PM_GASTLY:
           /*ini_inv(GhastFood);*/
 		break;
-	case PM_INSECTOID:
-          if(!Role_if(PM_CONVICT)) ini_inv(InsectoidItem);		
-		break;
-	case PM_NAVI:
-          if(!Role_if(PM_CONVICT)) ini_inv(NaviItem);		
-		break;
 	case PM_UNGENOMOLD:
           if(!Role_if(PM_CONVICT)) ini_inv(UngMoldWand);		
-		break;
-	case PM_MAIA:
-          if(!Role_if(PM_CONVICT)) ini_inv(MaiaWand);		
 		break;
 	case PM_CLOCKWORK_AUTOMATON:
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
@@ -3571,7 +3397,6 @@ u_init()
 	case PM_SCIENTIST: rolebounus = rnd(15); break;
 	case PM_PIRATE: rolebounus = rnd(22); break;
 	case PM_JEDI: rolebounus = rnd(22); break;
-	case PM_TOPMODEL: rolebounus = rnd(15); break;
 	case PM_UNDEAD_SLAYER: rolebounus = rnd(25); break;
 	case PM_COURIER: rolebounus = rnd(5); break;
 	case PM_ZYBORG: rolebounus = rnd(30); break;
@@ -5739,8 +5564,6 @@ int otyp;
      case PM_ELECTRIC_MAGE:		skills = Skill_Ele; break;
      case PM_ACID_MAGE:		skills = Skill_Aci; break;
      case PM_FLAME_MAGE:		skills = Skill_F; break;
-     case PM_TRANSVESTITE:	skills = Skill_Tra; break;
-     case PM_TOPMODEL:	skills = Skill_Top; break;
      case PM_GEEK:		skills = Skill_G; break;
      case PM_SCIENTIST:		skills = Skill_Sci; break;
      case PM_GANGSTER:		skills = Skill_Gan; break;
@@ -5749,13 +5572,14 @@ int otyp;
      case PM_KNIGHT:		skills = Skill_K; break;
      case PM_WARRIOR:		skills = Skill_War; break;
      case PM_MONK:		skills = Skill_Mon; break;
+#if 0
      case PM_PSION:		skills = Skill_Psi; break;
-	 case PM_PIRATE:		skills = Skill_Pir; break;
-	 case PM_KORSAIR:		skills = Skill_Kor; break;
-	 case PM_GLADIATOR:		skills = Skill_Gla; break;
-	 case PM_GOFF:		skills = Skill_Gof; break;
-	 case PM_DIVER:		skills = Skill_Div; break;
      case PM_POKEMON:		skills = Skill_Pok; break;
+#endif
+     case PM_PIRATE:		skills = Skill_Pir; break;
+     case PM_KORSAIR:		skills = Skill_Kor; break;
+     case PM_GLADIATOR:		skills = Skill_Gla; break;
+     case PM_DIVER:		skills = Skill_Div; break;
      case PM_PRIEST:		skills = Skill_P; break;
      case PM_RANGER:		skills = Skill_Ran; break;
      case PM_ROGUE:		skills = Skill_R; break;
@@ -5993,19 +5817,7 @@ register struct trobj *trop;
             if (obj->otyp == WAN_DEATH && (Role_if(PM_DEATH_EATER) || Race_if(PM_UNGENOMOLD) ) ) {
                 obj->cursed = TRUE;
             }
-            if (obj->otyp == WAN_TELEPORTATION && (Race_if(PM_MAIA) ) ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == LUMP_OF_ROYAL_JELLY && (Race_if(PM_INSECTOID) ) ) {
-                obj->cursed = TRUE;
-            }
             if (obj->otyp == AMULET_OF_LIFE_SAVING && (Role_if(PM_DEATH_EATER)) ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == AMULET_OF_COVETOUS_WARNING && (Role_if(PM_GOFF)) ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == BLACK_DRAGON_SCALE_MAIL && (Role_if(PM_GOFF)) ) {
                 obj->cursed = TRUE;
             }
 			if (trop->trspe != UNDEF_SPE)
@@ -6050,11 +5862,6 @@ register struct trobj *trop;
 		if(obj->otyp == AMULET_OF_LIFE_SAVING && (Role_if(PM_DEATH_EATER)) ) {
 				setworn(obj, W_AMUL);
 			}
-
-            if (obj->otyp == AMULET_OF_COVETOUS_WARNING && (Role_if(PM_GOFF)) ) {
-				setworn(obj, W_AMUL);
-            }
-
 
 		if (obj->oclass == WEAPON_CLASS || is_weptool(obj) ||
 			otyp == TIN_OPENER || otyp == FLINT || otyp == ROCK) {

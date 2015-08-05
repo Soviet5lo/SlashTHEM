@@ -1709,7 +1709,7 @@ int thrown;
 	    }
 
 	} else if ((otyp == EGG || otyp == CREAM_PIE ||
-		    otyp == BLINDING_VENOM || otyp == FAERIE_FLOSS_RHING || otyp == ACID_VENOM || otyp == TAIL_SPIKES) &&
+		    otyp == BLINDING_VENOM || otyp == ACID_VENOM) &&
 		(guaranteed_hit || ACURR(A_DEX) > rnd(25) || tmp >= rnd(20) )) { /* F this stupidity. Sorry. --Amy */
 	    (void) hmon(mon, obj, thrown?thrown:3);
 	    return 1;	/* hmon used it up */
@@ -2010,9 +2010,7 @@ struct obj *obj;
 		case CREAM_PIE:
 		case MELON:
 		case ACID_VENOM:
-		case TAIL_SPIKES:
 		case BLINDING_VENOM:
-		case FAERIE_FLOSS_RHING:
 			return 1;
 		default:
 			return 0;
@@ -2056,9 +2054,7 @@ boolean in_view;
 			if (in_view) pline("What a mess!");
 			break;
 		case ACID_VENOM:
-		case TAIL_SPIKES:
 		case BLINDING_VENOM:
-		case FAERIE_FLOSS_RHING:
 			pline("Splash!");
 			break;
 	}

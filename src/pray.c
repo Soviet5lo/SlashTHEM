@@ -612,7 +612,7 @@ aligntyp resp_god;
 		(void) makemon(mkclass(S_KOP,0), u.ux, u.uy, NO_MM_FLAGS);
 	} /* while */
 
-	if( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna) resp_god = A_NONE;
+	if ((Inhell) || flags.gehenna) resp_god = A_NONE;
 	u.ublessed = 0;
 
 	/* changed from tmp = u.ugangr + abs (u.uluck) -- rph */
@@ -1430,7 +1430,7 @@ dosacrifice()
 
 	/* fix for new races since they're MH_HUMAN but not actually supposed to count as same race --Amy */
 
-	if (your_race(ptr) && !Race_if(PM_ALIEN) && !Race_if(PM_GASTLY) && !Race_if(PM_GIGANT) && !Race_if(PM_INSECTOID) && !Race_if(PM_KOBOLT) && !Race_if(PM_MOULD) && !Race_if(PM_OGRO) && !Race_if(PM_TROLLOR) && !Race_if(PM_UNGENOMOLD) ) {
+	if (your_race(ptr) && !Race_if(PM_ALIEN) && !Race_if(PM_GASTLY) && !Race_if(PM_GIGANT) && !Race_if(PM_KOBOLT) && !Race_if(PM_MOULD) && !Race_if(PM_OGRO) && !Race_if(PM_TROLLOR) && !Race_if(PM_UNGENOMOLD) ) {
 	    if (is_demon(youmonst.data) || Race_if(PM_HUMAN_WEREWOLF)  || Role_if(PM_LUNATIC)) {
 		You("find the idea very satisfying.");
 		exercise(A_WIS, TRUE);
@@ -1653,7 +1653,7 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 	if (u.ualign.type != altaralign) {
 	    /* Is this a conversion ? */
 	    /* An unaligned altar in Gehennom will always elicit rejection. */
-	    if (ugod_is_angry() || (altaralign == A_NONE && ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) )) {
+	    if (ugod_is_angry() || (altaralign == A_NONE && ((Inhell) || flags.gehenna))) {
 		if(u.ualignbase[A_CURRENT] == u.ualignbase[A_ORIGINAL] &&
 		   altaralign != A_NONE) {
 		    You("have a strong feeling that %s is angry...", u_gname());
@@ -1892,7 +1892,7 @@ boolean praying;	/* false means no messages should be given */
 {
     int alignment;
 
-    p_aligntyp = on_altar() ? a_align(u.ux,u.uy) : (Race_if(PM_HERETIC) ? (!rn2(3) ? A_CHAOTIC : !rn2(2) ? A_NEUTRAL : A_LAWFUL ) : u.ualign.type);
+    p_aligntyp = on_altar() ? a_align(u.ux,u.uy) : u.ualign.type;
     p_trouble = in_trouble();
 
     if (is_demon(youmonst.data) && (p_aligntyp != A_CHAOTIC)) {
@@ -1919,8 +1919,6 @@ boolean praying;	/* false means no messages should be given */
 	p_type = 1;		/* too naughty... */
     else /* alignment >= 0 */ {
 	if(on_altar() && u.ualign.type != p_aligntyp)
-	    p_type = 2;
-	else if (Race_if(PM_HERETIC) && u.ualign.type != p_aligntyp)
 	    p_type = 2;
 	else
 	    p_type = 3;
@@ -2017,7 +2015,7 @@ prayer_done()		/* M. Stephenson (1.0.3b) */
 	exercise(A_CON, FALSE);
 	return(1);
     }
-    if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna ) {
+    if (Inhell || flags.gehenna ) {
 	pline("Since you are in Gehennom, %s won't help you.",
 	      align_gname(alignment));
 	/* haltingly aligned is least likely to anger */
@@ -2025,16 +2023,6 @@ prayer_done()		/* M. Stephenson (1.0.3b) */
 	    angrygods(u.ualign.type);
 	return(0);
     }
-#ifdef ELDER_SCROLLS
-	/* Imperial heretics can't pray --Amy */
-    if (Race_if(PM_IMPERIAL) ) {
-	pline("%s won't help a filthy imperial heretic like you.",
-	      align_gname(alignment));
-	godvoice(u.ualign.type, "Join the Stormcloaks or die, worthless human being!");
-      angrygods(u.ualign.type);
-	return(0);
-    }
-#endif /* ELDER_SCROLLS */
     if (p_type == 0) {
 	if(on_altar() && u.ualign.type != alignment)
 	    (void) water_prayer(FALSE);
@@ -2103,7 +2091,7 @@ turn_undead()
 		return(0);
 	}
 
-	if ( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna) {
+	if ((Inhell) || flags.gehenna) {
 	    pline("Since you are in Gehennom, %s won't help you.", u_gname());
 	    aggravate();
 	    return(0);
@@ -2336,19 +2324,6 @@ aligntyp alignment;
 	    return gnam;
 	}
 #endif
-    if (Race_if(PM_HERETIC)) {
-
-    switch (alignment) {
-     case A_NONE:	gnam = Moloch; break;
-     case A_LAWFUL:	gnam = roles[u.uhereticgodlawful].lgod; break;
-     case A_NEUTRAL:	gnam = roles[u.uhereticgodneutral].ngod; break;
-     case A_CHAOTIC:	gnam = roles[u.uhereticgodchaotic].cgod; break;
-     default:		impossible("unknown alignment.");
-			gnam = "someone"; break;
-	    }
-
-	} else {
-
     switch (alignment) {
      case A_NONE:	gnam = Moloch; break;
      case A_LAWFUL:	gnam = urole.lgod; break;
@@ -2357,8 +2332,6 @@ aligntyp alignment;
      default:		impossible("unknown alignment.");
 			gnam = "someone"; break;
 	    }
-
-	}
 
     if (*gnam == '_') ++gnam;
     return gnam;
@@ -2395,25 +2368,12 @@ aligntyp alignment;
     const char *gnam, *result = "god";
 
 
-	if (Race_if(PM_HERETIC)) {
-
-    switch (alignment) {
-     case A_LAWFUL:	gnam = roles[u.uhereticgodlawful].lgod; break;
-     case A_NEUTRAL:	gnam = roles[u.uhereticgodneutral].ngod; break;
-     case A_CHAOTIC:	gnam = roles[u.uhereticgodchaotic].cgod; break;
-     default:		gnam = 0; break;
-	    }
-
-	} else {
-
     switch (alignment) {
      case A_LAWFUL:	gnam = urole.lgod; break;
      case A_NEUTRAL:	gnam = urole.ngod; break;
      case A_CHAOTIC:	gnam = urole.cgod; break;
      default:		gnam = 0; break;
 	    }
-
-	}
 
     /*switch (alignment) {
      case A_LAWFUL:	gnam = urole.lgod; break;

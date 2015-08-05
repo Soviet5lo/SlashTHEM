@@ -478,31 +478,7 @@ register int type;
 		if (level_difficulty() >= 9 && !rn2(5) &&
 		   !((mvitals[PM_SMALL_MIMIC].mvflags & G_GONE) &&
 		     (mvitals[PM_LARGE_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_MASTER_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_MIMIC_HIVEMIND].mvflags & G_GONE) &&
-		     (mvitals[PM_BURNING_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_UNDEAD_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_DECAYING_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_RUSTY_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_ICE_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_STATIC_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_CONTROLLER_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_BOOBED_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_MINUSCULE_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_WITHERING_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_PETTY_BOOBED_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_ACID_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_SUCKING_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_SUXXOR_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_VAMP_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_FOUL_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_KILLER_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_DARK_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_PORTER_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_STEALER_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_GIANT_MIMIC].mvflags & G_GONE) &&
-		     (mvitals[PM_GREATER_MIMIC].mvflags & G_GONE))) {
+		     (mvitals[PM_GIANT_MIMIC].mvflags & G_GONE))) {
 		    /* make a mimic instead */
 		    levl[x][y].doormask = D_NODOOR;
 		    mtmp = makemon(mkclass(S_MIMIC,0), x, y, NO_MM_FLAGS);
@@ -552,7 +528,6 @@ static NEARDATA const char *trap_engravings[TRAPNUM] = {
 			"Vlad was here", "ad aerarium", "ad aerarium",
 			(char *)0, (char *)0, (char *)0, (char *)0, (char *)0,
 			(char *)0, (char *)0, (char *)0, (char *)0, (char *)0,
-			(char *)0,
 };
 
 STATIC_OVL void
@@ -1299,26 +1274,6 @@ mineralize()
 			(levl[x][y].typ == MOAT && !rn2(20)))
 	    	    makemon(mkclass(S_EEL,0), x, y, NO_MM_FLAGS);
 
-		if ((levl[x][y].typ == POOL && !rn2(1000) && level_difficulty() > 4 ) ||
-			(levl[x][y].typ == MOAT && !rn2(1000) && level_difficulty() > 4 ))
-	    	    makemon(&mons[PM_HUMAN_WEREPIRANHA], x, y, NO_MM_FLAGS);
-
-		if ((levl[x][y].typ == POOL && !rn2(1000) && level_difficulty() > 9 ) ||
-			(levl[x][y].typ == MOAT && !rn2(1000) && level_difficulty() > 9 ))
-	    	    makemon(&mons[PM_HUMAN_WEREEEL], x, y, NO_MM_FLAGS);
-
-		if ((levl[x][y].typ == POOL && !rn2(1000) && level_difficulty() > 19 ) ||
-			(levl[x][y].typ == MOAT && !rn2(1000) && level_difficulty() > 19 ))
-	    	    makemon(&mons[PM_HUMAN_WEREKRAKEN], x, y, NO_MM_FLAGS);
-
-		if ((levl[x][y].typ == POOL && !rn2(5000) && level_difficulty() > 10 ) ||
-			(levl[x][y].typ == MOAT && !rn2(5000) && level_difficulty() > 10 ))
-	    	    makemon(&mons[PM_SWIMMER_TROLL], x, y, NO_MM_FLAGS);
-
-		if ((levl[x][y].typ == POOL && !rn2(5000) && level_difficulty() > 20 ) ||
-			(levl[x][y].typ == MOAT && !rn2(5000) && level_difficulty() > 20 ))
-	    	    makemon(&mons[PM_DIVER_TROLL], x, y, NO_MM_FLAGS);
-
 		/* More random monsters on other terrain, too. --Amy */
 #ifdef MORE_SPAWNS
 		if ((levl[x][y].typ == ROOM && !rn2(2000 / level_difficulty() )) )
@@ -1765,7 +1720,7 @@ coord *tm;
 		case 6: kind = RUST_TRAP; break;
 	    }
 #endif
-	} else if (( (Inhell && !Race_if(PM_HERETIC) ) || flags.gehenna) && !rn2(5)) {
+	} else if ((Inhell || flags.gehenna) && !rn2(5)) {
 	    /* bias the frequency of fire traps in Gehennom */
 	    kind = FIRE_TRAP;
 	} else {
@@ -1792,7 +1747,6 @@ coord *tm;
 			    if (lvl < 7) kind = NO_TRAP; break;
 		    case STATUE_TRAP:
 		    case POLY_TRAP:
-		    case SHIT_TRAP:
 			    if (lvl < 8) kind = NO_TRAP; break;
 		    case COLLAPSE_TRAP:
 		    case MAGIC_BEAM_TRAP:

@@ -42,7 +42,7 @@ const struct Role roles[] = {
 	"Aci", "Slime Pit", "Electric Power Station",
 	PM_ACID_MAGE, NON_PM, PM_UNDEAD_ACID_MAGE, NON_PM, PM_ACID_HOUND_PUP,
 	PM_ACIDSNORT, PM_ATTENDANT, PM_LIGHTNINGROD,
-	PM_DROW_MATRON, PM_TITAN, S_ANGEL, S_GIANT,
+	PM_DROW, PM_TITAN, S_ANGEL, S_GIANT,
 
 	ART_FLUTE_OF_SLIME,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
@@ -55,33 +55,6 @@ const struct Role roles[] = {
 	{ 15, 3,  0, 2,  0, 3 },12,	/* Energy */
 	0, 1, 0, 
 	2, 10, A_INT, SPE_ACID_STREAM,        -4 /* From old role.c */
-},
-
-{	{"Activistor", 0}, {
-	{"Little Rebel",    0},
-	{"Do-Gooder",  0},
-	{"Demonstrant",       0},
-	{"Worker on strike",   0},
-	{"Protestor", 0},
-	{"Rebellious Individual",         0},
-	{"Involved Activist",    0},
-	{"Renegade Fighter",        0},
-	{"Savior",      0} },
-	"Anti-War Movement", "Global Freedom Council", "Human Rights Progression", /* buzzwords used by activists */
-	"Act", "Activist Home", "Ghostly Halls",
-	PM_ACTIVISTOR, NON_PM, PM_UNDEAD_ACTIVISTOR, NON_PM, PM_ACTIVISTOR,
-	PM_ACTIVIST_SPEAKER, PM_ATTENDANT, PM_IMELDA_S_GHOST,
-	PM_ANIMATED_WEDGE_SANDAL, PM_ANIMATED_SEXY_LEATHER_PUMP, S_GOLEM, S_NEMESE,
-	ART_ACTIVIST_STICK,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  10, 25, 25, 10, 10, 20 },
-	/* Init   Lower  Higher */
-	{ 12, 0,  0, 3,  1, 0 },	/* Hit points */
-	{ 20, 0,  0, 4,  0, 4 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_TELEPORT_AWAY,   -4
 },
 
 {	{"Archeologist", 0}, {
@@ -212,7 +185,7 @@ const struct Role roles[] = {
 	"Ble", "hemorrhagic hospital", "red-sprinkled battle area",
 	PM_BLEEDER, NON_PM, PM_UNDEAD_BLEEDER, NON_PM, NON_PM,
 	PM_DISEASED_HEIR, PM_UNFORTUNATE_VICTIM, PM_BLOODY_BEAUTIES,
-	PM_BATTLE_GIRL, PM_ANIMATED_SEXY_LEATHER_PUMP, S_GOLEM, S_HUMAN,
+	PM_LOCUST, PM_GRAY_FUNGUS, S_FUNGUS, S_HUMAN,
 	ART_SCALPEL_OF_THE_BLOODLETTER,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -299,7 +272,7 @@ const struct Role roles[] = {
 	"Che", "Ancient Temple", "the World-Eater's domain",
 	PM_CHEVALIER, NON_PM, PM_UNDEAD_CHEVALIER, NON_PM, NON_PM,
 	PM_EREC, PM_ACOLYTE, PM_ALDUIN,
-	PM_TROLL_ZOMBIE, PM_MANTICORE, S_DRAGON, S_DRAGON,
+	PM_HUMAN_ZOMBIE, PM_WRAITH, S_ZOMBIE, S_WRAITH,
 	ART_CUDGEL_OF_CUTHBERT,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -355,7 +328,7 @@ const struct Role roles[] = {
 	"Cou", "in the middle of nowhere", "scum hideout",
 	PM_COURIER, NON_PM, PM_UNDEAD_COURIER, NON_PM, PM_LITTLE_DOG,
 	PM_YES_MAN, PM_ATTENDANT, PM_SOME_RANDOM_GUY,
-	PM_JACKAL, PM_CAZADOR, S_DOG, S_ANT,
+	PM_OGRE, PM_CAZADOR, S_OGRE, S_ANT, /* Ogre because we don't have super mutants */
 	ART_WITHERED_NINE_MILLIMETER,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -380,9 +353,9 @@ const struct Role roles[] = {
 	{"Dark Lord's Bodyguard", 0} },
 	"Merlin", "Salazar Slytherin", "Lord Voldemort", /* Harry Potter */
 	"Dea", "Malfoy Manor", "the Order of the Phoenix",
-	PM_DEATH_EATER, NON_PM, PM_UNDEAD_DEATH_EATER, NON_PM, PM_AGGRESSIVE_LICHEN,
+	PM_DEATH_EATER, NON_PM, PM_UNDEAD_DEATH_EATER, NON_PM, PM_LICHEN,
 	PM_BELLATRIX_LESTRANGE, PM_FELLOW_DEATH_EATER, PM_HARRY_POTTER,
-	PM_AUROR, PM_ELVEN_MASTER_ROGUE, S_ANGEL, S_HUMAN,
+	PM_AUROR, PM_ELF_LORD, S_ANGEL, S_HUMAN,
 	ART_ELDER_STAFF,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */  /* Direct copy from Wizard */
@@ -409,7 +382,7 @@ const struct Role roles[] = {
 	"Div", "Scuba Dock", "Melville's Sea of Doom",
 	PM_DIVER, NON_PM, PM_UNDEAD_DIVER, NON_PM, NON_PM,
 	PM_JACQUES_COUSTEAU, PM_ATTENDANT, PM_MOBY_DICK,
-	PM_BLUE_WHALE, PM_TENTACRUEL, S_EEL, S_EEL,
+	PM_ELECTRIC_EEL, PM_GIANT_CRAB, S_EEL, S_EEL,
 	ART_MAUI_S_FISHHOOK,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
 	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -582,7 +555,7 @@ const struct Role roles[] = {
 	"Gan", "Gang Headquarters", "the enemy gang's hideout",
 	PM_GANGSTER, NON_PM, PM_UNDEAD_GANGSTER, NON_PM, PM_LITTLE_DOG,
 	PM_DAVE, PM_FELLOW_GANGSTER, PM_AMY_BLUESCREENOFDEATH,
-	PM_CUNTGUN_TROOPER, PM_RIFLEMAN, S_HUMAN, S_HUMAN,
+	PM_SOLDIER, PM_LIEUTENANT, S_HUMAN, S_HUMAN,
 	ART_TOMMY_GUN_OF_CAPONE,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -609,7 +582,7 @@ const struct Role roles[] = {
 	"Gee", "the Development Team's location", "the Microsoft headquarter",
 	PM_GEEK, NON_PM, PM_UNDEAD_GEEK, NON_PM, NON_PM,
 	PM_THE_DEV_TEAM, PM_HACKER, PM_BILL_GATES,
-	PM_BUG, PM_PHANTOM, S_XAN, S_PUDDING,
+	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
 #if 0
 	ART_DELUDER, ART_MIRRORBRIGHT,
 #endif
@@ -652,33 +625,6 @@ const struct Role roles[] = {
 	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
 },
 
-{	{"Goff", 0}, {
-	{"Fanfic Reader",    0},
-	{"Saint Preps Academy Alumnus",       "Saint Preps Academy Alumna"},
-	{"Badfic Writer",   0},
-	{"Emo Boy", "Emo Girl"},
-	{"Blatant Troll",         0},
-	{"Motherfucker",    0},
-	{"Author Avatar",        0},
-	{"Self-insert",  0},
-	{"Marty Stu",      "Mary Sue"} },
-	"B'loody Mary", "Ebony Dark'ness", "Darth Valer", /* taken from a fanfic */
-	"Gof", "Hogwarts Castle", "the forbidden forest", 
-	PM_GOFF, NON_PM, PM_UNDEAD_GOFF, NON_PM, NON_PM,
-	PM_SNAP_AND_LOOPIN, PM_PREP, PM_TARA_GILESBIE,
-	NON_PM, NON_PM, S_VAMPIRE, S_ZOMBIE,
-	ART_GOFFIC_BACKPACK,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  25,  5, 15, 25, 25,  5 },
-	/* Init   Lower  Higher */
-	{ 12, 0,  0, 4,  2, 0 },	/* Hit points */
-	{  8, 0,  0, 1,  0, 2 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_CURE_HALLUCINATION,   -4
-},
-
 {	{"Graduate", 0}, {
 	{"Dork",    0},
 	{"Nerd",    0},
@@ -693,7 +639,7 @@ const struct Role roles[] = {
 	"Gra", "university campus", "development hell",
 	PM_GRADUATE, NON_PM, PM_UNDEAD_GRADUATE, NON_PM, NON_PM,
 	PM_UPPER_GRADUATE, PM_HACKER, PM_STUDENT_LEADER,
-	PM_STUDENT_ASSISTANT, PM_GREEN_PROSTITUTE, S_HUMAN, S_HUMAN,
+	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
 
 	ART_MASTER_BOOT_DISK,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
@@ -844,7 +790,7 @@ const struct Role roles[] = {
 	"Kor", "Queen Anne's Revenge", "Grotto of Souls",
 	PM_KORSAIR, NON_PM, PM_UNDEAD_KORSAIR, NON_PM, NON_PM,
 	PM_BLACKBEARD, PM_PIRATE_BROTHER, PM_SPEARATHAN,
-	PM_GIANT_EEL, PM_DRAUGR_ZOMBIE, S_EEL, S_ZOMBIE,
+	PM_GIANT_EEL, PM_SKELETAL_PIRATE, S_EEL, S_ZOMBIE,
 	ART_PEARL_OF_WISDOM,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
 	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -871,7 +817,7 @@ const struct Role roles[] = {
 	"Loc", "Emergency Base", "Locked Room",
 	PM_LOCKSMITH, NON_PM, PM_UNDEAD_LOCKSMITH, NON_PM, NON_PM,
 	PM_MASTER_OF_LOCKS, PM_THUG, PM_BURGLAR_ED,
-	PM_ELVEN_MASTER_ROGUE, PM_COMING_THIEF, S_HUMAN, S_HUMAN,
+	PM_MUGGER, PM_LEPRECHAUN, S_HUMAN, S_HUMAN,
 
 	ART_LOCKPICK_OF_ARSENE_LUPIN,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
@@ -957,8 +903,8 @@ const struct Role roles[] = {
 
 	"Mus", "Wild West Bar", "High Noon Plains",
 	PM_MUSICIAN, NON_PM, PM_UNDEAD_MUSICIAN, NON_PM, NON_PM,
-	PM_HARRY_THE_COWBOY, PM_HIGHEST_ELF, PM_DRACO_THE_SHARPSHOOTER,
-	PM_ENEMY_TROOPER, PM_OFFICER, S_HUMAN, S_HUMAN,
+	PM_HARRY_THE_COWBOY, PM_ATTENDANT, PM_DRACO_THE_SHARPSHOOTER,
+	PM_WOODLAND_ELF, PM_ROCKER, S_HUMAN, S_HUMAN,
 
 	ART_HARP_OF_HARMONY,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
@@ -1016,7 +962,7 @@ const struct Role roles[] = {
 	"Nin", "Green Plains", "Demon Orb Lair",
 	PM_NINJA, NON_PM, PM_UNDEAD_NINJA, NON_PM, PM_LITTLE_DOG,
 	PM_KEN_HAYABUSA, PM_ROSHI, PM_JAQUIO,
-	PM_CARNIVOROUS_APE, PM_NIGHTGAUNT, S_YETI, S_BAT,
+	PM_WOLF, PM_GIANT_BAT, S_DOG, S_BAT,
 
 	ART_FUMA_ITTO_NO_KEN,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -1070,7 +1016,7 @@ const struct Role roles[] = {
 	"Off", "Central Cop Station", "Tank Breaker Hideout",
 	PM_OFFICER, NON_PM, PM_UNDEAD_OFFICER, NON_PM, PM_LITTLE_DOG,
 	PM_COMMISSIONER_HUNTER, PM_STUDENT, PM_GRANDPA_TANK_BREAKER,
-	PM_TANK_BREAKER, PM_KOP_KCHIEF, S_HUMAN, S_KOP,
+	PM_MUGGER, PM_STREET_THUG, S_HUMAN, S_HUMAN,
 	ART_WHISTLE_OF_THE_WARDEN,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -1109,7 +1055,7 @@ const struct Role roles[] = {
 	{  1, 0,  0, 1,  0, 1 },12,	/* Energy */
 	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
 },
-
+#if 0 /* 5lo: Needs an entire redesign, deferred for now */
 {	{"Pokemon", 0}, {
 	{"CROC",    0},
 	{"ALIGE",       0},
@@ -1136,7 +1082,7 @@ const struct Role roles[] = {
 	{  4, 0,  0, 1,  0, 1 },12,	/* Energy */
 	10, 9, 2, 1, 10, A_INT, SPE_INVISIBILITY,   -4
 },
-
+#endif
 {	{"Priest", "Priestess"}, {
 	{"Aspirant",    0},
 	{"Acolyte",     0},
@@ -1166,7 +1112,7 @@ const struct Role roles[] = {
 	{ 17, 3,  0, 2,  0, 2 },10,	/* Energy */
 	0, 3,-2, 2, 10, A_WIS, SPE_REMOVE_CURSE,    -4
 },
-
+#if 0 /* 5lo: Needs an entire rewrite, deferred for now */
 {	{"Psion", 0}, {
 	{"Cantripper",         0},
 	{"Spoonbender",            0},
@@ -1197,7 +1143,7 @@ const struct Role roles[] = {
 	{ 20, 4,  0, 4,  0, 8 },10,	/* Energy */
 	10, 8,-2, 2, 20, A_WIS, SPE_WIZARD_LOCK, -4
 },
-
+#endif
 {	{"Ranger", 0}, {
 #if 0	/* OBSOLETE */
 	{"Edhel",       "Elleth"},
@@ -1353,7 +1299,7 @@ const struct Role roles[] = {
 	"Sci", "Black Mesa Research Facility", "Xen",
 	PM_SCIENTIST, NON_PM, PM_UNDEAD_SCIENTIST, NON_PM, NON_PM,
 	PM_GORDON_FREEMAN, PM_HACKER, PM_NIHILANTH,
-	PM_INFANTRYMAN, PM_GI_TROOPER, S_GOLEM, S_WALLMONST,
+	PM_SOLDIER, PM_LIEUTENANT, S_GOLEM, S_WALLMONST,
 
 	ART_OPERATIONAL_SCALPEL,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
@@ -1381,7 +1327,7 @@ const struct Role roles[] = {
 	"Spa", "Tiny Hamlet", "Inside Part",
 	PM_SPACEWARS_FIGHTER, NON_PM, PM_UNDEAD_SPACEWARS_FIGHTER, NON_PM, NON_PM,
 	PM_MARC, PM_ATTENDANT, PM_ARABELLA,
-	PM_WIZARD, PM_MANTICORE, S_HUMAN, S_DRAGON,
+	PM_WIZARD, PM_GRAY_DRAGON, S_HUMAN, S_DRAGON,
 	ART_HELM_OF_STORMS,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
@@ -1391,33 +1337,6 @@ const struct Role roles[] = {
 	{ 19, 0,  0, 8,  2, 0 },	/* Hit points */
 	{ 10, 4,  0, 1,  0, 2 },10,	/* Energy */
 	10, 8,-2, 0,  9, A_INT, SPE_DETECT_MONSTERS,     -4
-},
-
-{	{"Topmodel", 0}, {
-	{"Sweet Girl",    0},
-	{"Catwalk Tester",       0},
-	{"Curved Woman",   0},
-	{"Playboy Bunny", 0},
-	{"Erotic Lady",         0},
-	{"Lovely Chick",    0},
-	{"Sexy Poser",        0},
-	{"ANTM Semi-Finalist",  0},
-	{"ANTM Finalist",      0} },
-	"Speedy Gonzales", "Dan Naginati", "_Kylie Lum", /* taken from a fanfic */
-	"Top", "Red Carpet", "Violet Carpet", /* transvestite enemies like purple and violet */
-	PM_TOPMODEL, NON_PM, PM_UNDEAD_TOPMODEL, NON_PM, NON_PM,
-	PM_CAMP_PORTER, PM_MODEL, PM_ACTIVIST_LEADER,
-	PM_TRANSVESTITE, PM_ACTIVIST, S_HUMAN, S_HUMAN,
-	ART_GOLDEN_HIGH_HEELS,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  10, 25, 15, 15, 10, 25 },
-	/* Init   Lower  Higher */
-	{ 12, 0,  0, 4,  2, 0 },	/* Hit points */
-	{  8, 0,  0, 1,  0, 2 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_CHARM_MONSTER,   -4
 },
 
 #ifdef TOURIST
@@ -1450,33 +1369,6 @@ const struct Role roles[] = {
 	0, 5, 1, 2, 10, A_INT, SPE_CHARM_MONSTER,   -4
 },
 #endif
-
-{	{"Transvestite", 0}, {
-	{"Clacker",    0},
-	{"Staggerer",       0},
-	{"Pseudo Model",   0},
-	{"Disguiser", 0},
-	{"Carnevalist",         0},
-	{"Heeler",    0},
-	{"Crossdresser",        0},
-	{"Drag Lord",  0},
-	{"Drag Queen",      0} },
-	"_Olivia", "Peyman", "_Lady Gaga", /* weird fashion sense */
-	"Tra", "Topmodel Boot Camp", "World 3 Airship",
-	PM_TRANSVESTITE, NON_PM, PM_UNDEAD_TRANSVESTITE, NON_PM, NON_PM,
-	PM_CROWNED_DRAG_QUEEN, PM_ATTENDANT, PM_WENDY,
-	PM_ADULT_LADY, PM_ADULT_GENTLEMAN, S_HUMAN, S_HUMAN,
-	ART_LOVELY_PINK_PUMPS,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  20, 10, 10, 20, 20, 20 },
-	/* Init   Lower  Higher */
-	{ 14, 0,  0, 6,  1, 0 },	/* Hit points */
-	{  4, 0,  0, 1,  0, 1 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_INVISIBILITY,   -4
-},
 
 {	{"Undead Slayer", 0}, {
 	{"Assistant",    0},
@@ -1522,7 +1414,7 @@ const struct Role roles[] = {
 	"Unt", "New Graveyard", "Underground Demon Lair",
 	PM_UNDERTAKER, NON_PM, PM_UNDEAD_UNDERTAKER, NON_PM, PM_DEATH_DOG,
 	PM_AJELA, PM_EXTERMINATOR, PM_SEDUCER_SAINT,
-	PM_NALFESHNEE, PM_SHAYATEEN, S_DEMON, S_DEMON,
+	PM_NALFESHNEE, PM_PIT_FIEND, S_DEMON, S_DEMON,
 
 	ART_PICK_OF_THE_GRAVE,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
@@ -1577,9 +1469,9 @@ const struct Role roles[] = {
 	{"Patriarch",     "Matriarch"} },
 	"Talos", "_Meridia", "Clavicus Vile", /* The Elder Scrolls */
 	"War", "Acro Castle", "the Isle of the Damned",
-	PM_WARRIOR, NON_PM, PM_UNDEAD_WARRIOR, NON_PM, PM_GREEN_NIGHTMARE,
+	PM_WARRIOR, NON_PM, PM_UNDEAD_WARRIOR, NON_PM, PM_PONY,
 	PM_SIR_LANCELOT, PM_PAGE, PM_ARCHNEMESIS,
-	PM_LOCUST, PM_WOOD_NYMPH, S_ANT, S_NYMPH,
+	PM_RED_DRAGON, PM_BARBARIAN, S_DRAGON, S_HUMAN,
 #if 0
 	ART_DRAGONBANE, ART_DEMONBANE,
 #endif
@@ -1671,7 +1563,7 @@ const struct Role roles[] = {
 	"Zoo", "Yellowstone Park", "Jurassic Park",
 	PM_ZOOKEEPER, NON_PM, PM_UNDEAD_ZOOKEEPER, NON_PM, PM_PLATYPUS,
 	PM_MASTER_ZOOKEEPER, PM_STUDENT, PM_FEARFUL_TRICERATOPS,
-	PM_TYRANNOSAUR, PM_UNDEAD_KANGAROO, S_LIZARD, S_ZOUTHERN,
+	PM_CARNIVOROUS_APE, PM_JAGUAR, S_FELINE, S_ZOUTHERN,
 
 	ART_GOLDEN_WHISTLE_OF_NORA,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
@@ -1699,7 +1591,7 @@ const struct Role roles[] = {
 	"Zyb", "Tech Facility", "Chaos Factors",
 	PM_ZYBORG, NON_PM, PM_UNDEAD_ZYBORG, NON_PM, NON_PM,
 	PM_MISTER_MULBERRY, PM_ATTENDANT, PM_MASTER_BRAIN,
-	PM_UNDEAD_DRAGON, PM_GRIFFIN_ROGUE, S_WALLMONST, S_GRUE,
+	PM_CLOCKWORK_AUTOMATON, PM_SOLDIER, S_GOLEM, S_HUMAN,
 	ART_VERBAL_BLADE,
 	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
 	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
@@ -1741,20 +1633,6 @@ struct Role urole =
 
 /* Table of all races */
 const struct Race races[] = {
-{	"albae", "albae", "albaehood", "Alb",
-	{0, 0},
-	PM_ALBAE, NON_PM, PM_ELF_MUMMY, PM_ELF_ZOMBIE,
-	MH_ELF | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_GNOME|MH_ORC|MH_ELF|MH_HUMAN|MH_DWARF|MH_HOBBIT|MH_WERE|MH_VAMPIRE,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{     18,     20, 20, 18, 16, 18 },
-	/* Init   Lower  Higher */
-	{  8, 0,  0, 6,  4, 0 },	/* Hit points */
-	{  8, 0,  6, 0,  4, 0 }		/* Energy */
-},
-
 {	"alien", "alien", "alienhood", "Ali",
 	{0, 0},
 	PM_ALIEN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1768,49 +1646,7 @@ const struct Race races[] = {
 	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
 },
-#ifdef ELDER_SCROLLS
-{	"argonian", "argonian", "argohood", "Arg",
-	{0, 0},
-	PM_ARGONIAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  2, 0,  0, 2,  2, 0 },	/* Hit points */
-	{  2, 0,  3, 0,  3, 0 }		/* Energy */
-},
 
-{	"asgardian", "asgardish", "asgardhood", "Asg",
-	{0, 0},
-	PM_ASGARDIAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_GNOME|MH_ORC,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  4, 0,  0, 4,  4, 0 },	/* Hit points */
-	{  4, 0,  4, 0,  4, 0 }		/* Energy */
-},
-
-{	"breton", "bretonian", "bretonhood", "Bre",
-	{0, 0},
-	PM_BRETON, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
-	{  5, 0,  4, 0,  4, 0 }		/* Energy */
-},
-#endif /* ELDER_SCROLLS */
 {	"clockwork automaton", "automatic", "clockwork-kind", "Clk",
 	{0, 0},
 	PM_CLOCKWORK_AUTOMATON, NON_PM, NON_PM, NON_PM,
@@ -1876,20 +1712,6 @@ const struct Race races[] = {
 	{  8, 0,  3, 0,  3, 0 }		/* Energy */
 },
 
-{	"fenek", "fenek", "fenekhood", "Fen",
-	{0, 0},
-	PM_FENEK, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  2, 0,  0, 4,  4, 0 },	/* Hit points */
-	{  2, 0,  1, 0,  1, 0 }		/* Energy */
-},
-
 {	"gastly", "ghast", "ghasthood", "Gha",
 	{0, 0},
 	PM_GASTLY, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -1931,20 +1753,6 @@ const struct Race races[] = {
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
 },
 
-{	"heretic", "heretic", "hereticism", "Her",
-	{0, 0},
-	PM_HERETIC, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  3, 0,  0, 3,  5, 0 },	/* Hit points */
-	{  3, 0,  3, 0,  5, 0 }		/* Energy */
-},
-
 {	"hobbit", "hobbit", "hobbit-kind", "Hob",
 	{0, 0},
 	PM_HOBBIT, NON_PM, NON_PM, NON_PM,
@@ -1973,7 +1781,7 @@ const struct Race races[] = {
 
 {	"illithid", "illithid", "mindflayerhood", "Ill",
 	{0, 0},
-	PM_ILLITHID, NON_PM, NON_PM, PM_UNDEAD_MIND_FLAYER,
+	PM_ILLITHID, NON_PM, NON_PM, NON_PM,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, 0, 0,
@@ -1984,21 +1792,7 @@ const struct Race races[] = {
 	{  1, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  2, 0,  2, 0,  2, 0 }		/* Energy */
 },
-#ifdef ELDER_SCROLLS
-{	"imperial", "imperial", "imperialism", "Imp",
-	{0, 0},
-	PM_IMPERIAL, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  3, 0,  0, 3,  5, 0 },	/* Hit points */
-	{  3, 0,  3, 0,  5, 0 }		/* Energy */
-},
-#endif /* ELDER_SCROLLS */
+
 {	"incantifier", "incantifier", "wanterkind", "Inc",
 	{0, 0},
 	PM_INCANTIFIER, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -2013,34 +1807,6 @@ const struct Race races[] = {
 	{  0, 0,  10, 0, 10, 0 },		/* Energy */
 },
 
-{	"insectoid", "insectoid", "insecthood", "Ins",
-	{0, 0},
-	PM_INSECTOID, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  2, 0,  0, 2,  2, 0 },	/* Hit points */
-	{  2, 0,  2, 0,  2, 0 }		/* Energy */
-},
-#ifdef ELDER_SCROLLS
-{	"khajiit", "khajiit", "cathood", "Kha",
-	{0, 0},
-	PM_KHAJIIT, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  2, 0,  0, 3,  3, 0 },	/* Hit points */
-	{  2, 0,  2, 0,  2, 0 }		/* Energy */
-},
-#endif /* ELDER_SCROLLS */
 {	"kobolt", "koboltic", "kobolthood", "Kob",
 	{0, 0},
 	PM_KOBOLT, NON_PM, PM_KOBOLD_MUMMY, PM_KOBOLD_ZOMBIE,
@@ -2068,20 +1834,6 @@ const struct Race races[] = {
 	{  5, 0,  4, 0,  4, 0 }		/* Energy */
 },
 
-{	"maia", "maian", "maiahood", "Mai",
-	{0, 0},
-	PM_MAIA, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_GNOME|MH_ORC,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
-	{  4, 0,  4, 0,  4, 0 }		/* Energy */
-},
-
 {	"mould", "mouldic", "mouldhood", "Mou",
 	{0, 0},
 	PM_MOULD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
@@ -2095,37 +1847,9 @@ const struct Race races[] = {
 	{  4, 0,  4, 0,  4, 0 }		/* Energy */
 },
 
-{	"navi", "navi", "navihood", "Nav",
-	{0, 0},
-	PM_NAVI, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_GNOME|MH_ORC,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  1, 0,  0, 2,  1, 0 },	/* Hit points */
-	{  1, 0,  4, 0,  4, 0 }		/* Energy */
-},
-#ifdef ELDER_SCROLLS
-{	"nord", "nordish", "nordhood", "Nor",
-	{0, 0},
-	PM_NORD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, MH_ORC,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  4, 0,  0, 3,  2, 0 },	/* Hit points */
-	{  3, 0,  2, 0,  1, 0 }		/* Energy */
-},
-#endif /* ELDER_SCROLLS */
 {	"nymph", "nymphian", "nymphhood", "Nym", /* suggestion by BellisColdwine */
 	{0, 0},
-	PM_NYMPH, NON_PM, NON_PM, PM_UNDEAD_NYMPH,
+	PM_NYMPH, NON_PM, NON_PM, NON_PM,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, 0, MH_GNOME|MH_ORC,
@@ -2161,48 +1885,6 @@ const struct Race races[] = {
 	{STR18(50), 16, 16, 18, 18, 16 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 1,  0, 0 },	/* Hit points */
-	{  1, 0,  1, 0,  1, 0 }		/* Energy */
-},
-#ifdef ELDER_SCROLLS
-{	"redguard", "redguardian", "redguardhood", "Red",
-	{0, 0},
-	PM_REDGUARD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  10, 0,  0, 6,  4, 0 },	/* Hit points */
-	{  0, 0,  0, 0,  0, 0 }		/* Energy */
-},
-#endif /* ELDER_SCROLLS */
-{	"snakeman", "snakey", "snakehood", "Sna",
-	{0, 0},
-	PM_SNAKEMAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  3, 0,  0, 2,  2, 0 },	/* Hit points */
-	{  2, 0,  1, 0,  1, 0 }		/* Energy */
-},
-
-{	"spiderman", "spider", "spiderhood", "Spi",
-	{0, 0},
-	PM_SPIDERMAN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MH_HUMAN, 0, 0,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  4, 0,  0, 2,  3, 0 },	/* Hit points */
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
 },
 
@@ -3249,15 +2931,10 @@ role_init()
 		    while (!roles[flags.pantheon].lgod)	/* unless they're missing */
 			flags.pantheon = randrole();
 	}
-	if (!urole.lgod && !Race_if(PM_HERETIC) ) {
+	if (!urole.lgod) {
 	    urole.lgod = roles[flags.pantheon].lgod;
 	    urole.ngod = roles[flags.pantheon].ngod;
 	    urole.cgod = roles[flags.pantheon].cgod;
-	}
-	if (Race_if(PM_HERETIC) ) {
-	    urole.lgod = roles[u.uhereticgodlawful].lgod;
-	    urole.ngod = roles[u.uhereticgodneutral].ngod;
-	    urole.cgod = roles[u.uhereticgodchaotic].cgod;
 	}
 
 #if 0 /* Now in polyself.c, init_uasmon() */

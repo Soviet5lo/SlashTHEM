@@ -519,9 +519,6 @@ m_throw(mon, x, y, dx, dy, range, obj)
 				      (num_eyes == 1) ? "s" : "");
 			}
 		    }
-		    if (hitu && singleobj->otyp == FAERIE_FLOSS_RHING) {
-			    losexp("a sweet ring of faerie floss", TRUE);
-		    } /* This ignores level-drain resistance (not a bug). --Amy */
 
 		    if (hitu && singleobj->otyp == EGG) {
 			if (!Stone_resistance
@@ -778,12 +775,6 @@ register struct attack *mattk;
 		    case AD_BLND:
 		    case AD_DRST:
 			otmp = mksobj(BLINDING_VENOM, TRUE, FALSE);
-			break;
-		    case AD_DRLI:
-			otmp = mksobj(FAERIE_FLOSS_RHING, TRUE, FALSE);
-			break;
-		    case AD_TCKL:
-			otmp = mksobj(TAIL_SPIKES, TRUE, FALSE);
 			break;
 		    default:
 			pline("bad attack type in spitmu");
