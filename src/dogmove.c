@@ -875,7 +875,7 @@ register int after;	/* this is extra fast monster movement */
 		     * attacking higher level monsters 
 		     */
 		    if (((int)mtmp2->m_lev >= (int)mtmp->m_lev+2 && !is_spell && 
-			    EDOG(mtmp)->encouraged || !mindless(mtmp->data)) ||
+			    (EDOG(mtmp)->encouraged || !mindless(mtmp->data))) ||
 			(mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10) &&
 			 mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee
 			 && (perceives(mtmp->data) || !mtmp2->minvis)) ||
