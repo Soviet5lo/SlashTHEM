@@ -946,17 +946,19 @@ register struct obj *obj;
 		return((struct monst *)0);
 		}
 	/* worst case, at least it'll be peaceful. */
+	if(!obj || !is_instrument(obj)){
 	mtmp->mpeaceful = 1;
 	mtmp->mtraitor  = 0;	/* No longer a traitor */
 	set_malign(mtmp);
-	if(flags.moonphase == FULL_MOON && night() && rn2(6) && obj
+	}
+	if(flags.moonphase == FULL_MOON && night() && rn2(6) && obj && !is_instrument(obj)
 						&& mtmp->data->mlet == S_DOG)
 		{
 		return((struct monst *)0);
 
 		}
 #ifdef CONVICT
-    if (Role_if(PM_CONVICT) && (is_domestic(mtmp->data) && obj)) {
+    if (Role_if(PM_CONVICT) && (is_domestic(mtmp->data) && obj && !is_instrument(obj))) {
         /* Domestic animals are wary of the Convict */
         pline("%s still looks wary of you.", Monnam(mtmp));
         return((struct monst *)0);
@@ -976,7 +978,7 @@ register struct obj *obj;
 	}
 
 	/* feeding it treats makes it tamer */
-	if (mtmp->mtame && obj) {
+	if (mtmp->mtame && obj && !is_instrument(obj)) {
 	    int tasty;
 
 	    if (mtmp->mcanmove && !mtmp->mconf && !mtmp->meating &&
@@ -1017,7 +1019,7 @@ register struct obj *obj;
 	    (is_demon(mtmp->data) && !is_demon(youmonst.data) && rn2(10) ) ||
 	    /* Mik -- New flag to indicate which things cannot be tamed... */
 	    cannot_be_tamed(mtmp->data) ||
-	    (obj && dogfood(mtmp, obj) >= MANFOOD)) {
+	    (obj && !is_instrument(obj) && dogfood(mtmp, obj) >= MANFOOD)) {
 
 
 		/* workaround for new pet types --Amy */
@@ -1044,6 +1046,12 @@ register struct obj *obj;
 		}
 
 	/* make a new monster which has the pet extension */
+	if(obj && is_instrument(obj)){
+		/*Make it peaceful now*/
+		mtmp->mpeaceful = 1;
+		mtmp->mtraitor  = 0;	/* No longer a traitor */
+		set_malign(mtmp);
+	}
 	mtmp2 = newmonst(sizeof(struct edog) + mtmp->mnamelth);
 	*mtmp2 = *mtmp;
 	mtmp2->mxlth = sizeof(struct edog);
@@ -1052,7 +1060,7 @@ register struct obj *obj;
 	replmon(mtmp, mtmp2);
 	/* `mtmp' is now obsolete */
 
-	if (obj) {		/* thrown food */
+	if (obj && !is_instrument(obj)) {		/* thrown food */
 	    /* defer eating until the edog extension has been set up */
 	    place_object(obj, mtmp2->mx, mtmp2->my);	/* put on floor */
 	    /* devour the food (might grow into larger, genocided monster) */

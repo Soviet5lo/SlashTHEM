@@ -212,6 +212,8 @@ struct obj {
 #define uslinging()	(uwep && objects[uwep->otyp].oc_skill == P_SLING)
 #define is_weptool(o)	((o)->oclass == TOOL_CLASS && \
 			 objects[(o)->otyp].oc_skill != P_NONE)
+#define is_instrument(o)	((o)->otyp >= WOODEN_FLUTE && \
+			 (o)->otyp <= DRUM_OF_EARTHQUAKE)
 #define is_pick(otmp)	(((otmp)->oclass == WEAPON_CLASS || \
 			 (otmp)->oclass == TOOL_CLASS) && \
 			 objects[(otmp)->otyp].oc_skill == P_PICK_AXE)

@@ -263,6 +263,12 @@ mattackm(magr, mdef)
 	mdef->msleeping = 0;
     }
 
+	if (magr->mtame && !magr->isminion && EDOG(magr)) {
+		tmp += EDOG(magr)->encouraged;
+		if (wizard && EDOG(magr)->encouraged)
+			pline("[%s +%d]", Monnam(magr), EDOG(magr)->encouraged);
+	}
+	
     /* undetect monsters become un-hidden if they are attacked */
     if (mdef->mundetected) {
 	mdef->mundetected = 0;
@@ -972,7 +978,7 @@ mdamagem(magr, mdef, mattk)
 	int canhitmon, objenchant;        
         boolean nohit = FALSE;
 
-	if (magr->mtame && EDOG(magr)) {
+	if (magr->mtame && !magr->isminion && EDOG(magr)) {
 		tmp += EDOG(magr)->encouraged;
 		if (wizard && EDOG(magr)->encouraged)
 			pline("[%s +%d]", Monnam(magr), EDOG(magr)->encouraged);
