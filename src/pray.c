@@ -2197,23 +2197,26 @@ u_gname()  /* returns the name of the player's deity */
 }
 
 const char * const hallu_gods[] = {
+	/* Real life persons */
 	/*"Bill Gates",*/
-	"Britney Spears",
-	"Mother Teresa",
+	"_Britney Spears",
+	"_Mother Teresa",
 	"George W. Bush",
 	"Albert Einstein",
-	"Jackie Chan",
+	/*"Jackie Chan",*/
 
-	"Speedy Gonzales",
+	/* Fictional people */
+	/*"Speedy Gonzales",*/
 	"Homer Simpson",
 	"Dagobert Duck",
-	"Xena",
+	"_Xena",
 	"Super Mario",
 	"Donkey Kong",
 	"Jack Bauer",
 	"the blue Power Ranger",
 	"Mr. Spock",
 
+	/* Concepts */
 	"the universe",
 	"Capitalism",
 	"something",
@@ -2221,6 +2224,7 @@ const char * const hallu_gods[] = {
 	"the Flying Spaghetti Monster",
 	"the Invisible Pink Unicorn",
 
+	/* Nethack related */
 	"the gnome with the wand of death",
 	"the DevTeam",
 	"Dion Nicolaas",
@@ -2228,47 +2232,89 @@ const char * const hallu_gods[] = {
 	"Dudley",
 	"the RNG",
 
+	/* from dNethack - just a few*/
+	//Games
+	"Armok",
+	"_Hylia",
+	"_the three golden goddesses",
+	"_the Lady of Pain",
+	"the Outsider",
+	"Yevon",
+	"Bhunivelze",
+	"_Etro",
+	"the Transcendent One",
+	"_the Mana Tree",
+	"Golden Silver",
+	"_Luna",
+	"Arceus",
+	"the Composer",
+	"the Conductor",
+	"Chakravartin",
+	"Chattur'gha",
+	"Ulyaoth",
+	"_Xel'lo'tath",
+	"Mantorok",
+	"_Martel",
+	//Literature
+	"Mahasamatman",
+	"Nyarlathotep",
+	"Azathoth",
+	"Galactus",
+	//Other
+	"Ceiling Cat", /* Lolcats */
+	"Zoamelgustar", /* Slayers */
+	"Brohm", /* Ultima */
+	"Xenu", /* Scientology */
+	"the God of Cabbage", /* K-On! */
+	"Bill Cipher", /* Gravity Falls */
+	"Gades", "Amon", "_Erim", "Daos", /* Lufia series */
+        "_Beatrice", /* Umineko no Naku Koro ni */
+	"Spongebob Squarepants", /* should be obvious, right? :) */
+
 	/* from Kahran042 on Nethack Wiki */
-	"Seraphimon", "Ophanimon", "Cherubimon", /* Digimon Frontier */
-	"Falis", "Marfa", "Falaris", /* Record of Lodoss War */
-	"Ceipheid", "the Lord of Nightmares", "Shabranigdo", /* Slayers */
-	"Tsunami", "Washu", "Tokimi", /* Tenchi Muyo! */
+	"Seraphimon", "_Ophanimon", "Cherubimon", /* Digimon Frontier */
+	"Falis", "_Marfa", "Falaris", /* Record of Lodoss War */
+	"Dios", "_the Rose Bride", "End of the World", /* Revolutionary Girl Utena */
+	"Ceipheid", "_the Lord of Nightmares", "Shabranigdo", /* Slayers */
+	"_Tsunami", "_Washu", "_Tokimi", /* Tenchi Muyo! */
 	"Osiris", "Obelisk", "Ra", /* Yu-Gi-Oh! */
-	"Ladon", "Namanda", "Myria", /* Breath of Fire */
-	"Goddess", "Doom", "Poltergeist", /* Final Fantasy VI */
+	"Ladon", "Namanda", "_Myria", /* Breath of Fire */
+	"_Goddess", "Doom", "Poltergeist", /* Final Fantasy VI */
 	"Biron", "Tieg", "the Mist", /* Legend of Legaia */
-	"Ishtar", "Filaha", "Asmodeus", /* Tactics Ogre */
-	"Nayru", "Farore", "Din", /* The Legend of Zelda */
-	"Zephyr", "Raftina", "Justine", /* Wild Arms */
-	"Princess Celestia", "the Fausticorn", "Princess Luna", /* My Little Pony */
+	"_Ishtar", "Filaha", "Asmodeus", /* Tactics Ogre */
+	"_Nayru", "_Farore", "_Din", /* The Legend of Zelda */
+	"Zephyr", "_Raftina", "Justine", /* Wild Arms */
+	"Aslan", "the Emperor-beyond-the-Sea", "Tash", /* Narnia */
+	"Bahamut", "Io", "_Tiamat", /* D&D dragon gods */
+	"_Princess Celestia", "_Princess Luna", "Discord", /* My Little Pony */
 	"Ceiling Cat", "Longcat", "Basement Cat", /* Lolcats */
-	"SlimKirby", "Lucahjin", "The Dark Id", /* Let's Players */
+	"Superego", "Ego", "Id", /* psychology */
 	/* Old defunct gods */
 	"Moradin", "Dumathoin", "Abbathor", /* Dwarf */
-	"Solonor Thelandira", "Aerdrie Faenya", "Erevan Ilesere", /* Elf */
-	"Lolth", /* Drow */
+	"Solonor Thelandira", "_Aerdrie Faenya", "Erevan Ilesere", /* Elf */
+	"_Lolth", /* Drow */
 	"Garl Glittergold", "Flandal Steelskin", "Urdlen", /* Gnome */
 	"Iluvatar", "Gilthoniel", "Morgoth", /* Hobbit */
 	/* Gods from Slash'EM Extended */
 	"The Lord of the Pit", "Goldblight of the Flame", "Warpfire Hellspawn", /* Acid Mage */
 	"Anti-War Movement", "Global Freedom Council", "Human Rights Progression", /* Activistor - buzzwords used by activists */
-	"Suzanne Collins", "Effie Trinket", "President Snow", /* Amazon - hunger games */
+	"_Suzanne Collins", "_Effie Trinket", "President Snow", /* Amazon - hunger games */
 	"Leonardo", "Picasso", "Dali", /* Artist - famous artists */
 	"Ehud", "Ford", "Ivins", /* Assassin - unknown origin */
-	"Dunlain", "Savos Aren", "Hert the Vampire", /* Augurer - Skyrim */
-	"Rhea Oro", "Liebea Luna", "Elenya Pure", /* Bloodseeker - taken from a fanfic */
+	"Dunlain", "Savos Aren", "_Hert the Vampire", /* Augurer - Skyrim */
+	"_Rhea Oro", "_Liebea Luna", "_Elenya Pure", /* Bloodseeker - taken from a fanfic */
 	"Eddergud", "Vhaeraun", "the black web", /* Bosmer - Elven */
-	"Everella Shrine", "Butch DeLoria", "Draco Malfoy",	/* Bully - popular bullies */
+	"_Everella Shrine", "Butch DeLoria", "Draco Malfoy",	/* Bully - popular bullies */
 	"Buddha", "Jahwe", "Allah",	/* Chevalier - major real-world religions */
 	"McDonalds", "Kentucky's Fried Chicken", "Burger King", /* Cook - fast food places */
-	"Jacob Black", "Bella Swan", "Edward Cullen",	/* Cruel Abuser - Twilight */
-	"Sakuya", "Reimu", "Yukari Yakumo", /* Doll Mistress - Touhou */
-	"Orome", "Yavanna", "Tulkas", /* Dunmer - Elven */
-	"Thomas Alva Edison", "Benjamin Franklin", "Marilyn Monroe", /* Electric Mage - associated with electricity */
+	"Jacob Black", "_Bella Swan", "Edward Cullen",	/* Cruel Abuser - Twilight */
+	"_Sakuya", "_Reimu", "_Yukari Yakumo", /* Doll Mistress - Touhou */
+	"Orome", "_Yavanna", "Tulkas", /* Dunmer - Elven */
+	"Thomas Alva Edison", "Benjamin Franklin", "_Marilyn Monroe", /* Electric Mage - associated with electricity */
 	"James Bond", "Chuck Norris", "Jackie Chan", /* Feat Master - movie heroes */
 	"Colonel Campbell", "Deepthroat", "The Patriots", /* Foxhound Agent - probably some TV show or movie? */
 	"Nintendo", "Microsoft", "Sony", /* Gamer - gaming console producers */
-	"B'loody Mary", "Ebony Dark'ness", "Darth Valer", /* Goff - taken from a fanfic */
+	"_B'loody Mary", "_Ebony Dark'ness", "Darth Valer", /* Goff - taken from a fanfic */
 #if 0 /* 5lo: We're changing these for the gratuate soon anyway */
 	"Jobs", "Wozniak", "Gates", /* Graduate - geek */
 #endif
@@ -2276,10 +2322,10 @@ const char * const hallu_gods[] = {
 	"Barnum", "Bailey", "Shaco", /* Jester - ??? */
 	"Hugh Hefner", "G-boy", "Arsene Lupin", /* Ladiesman - famous people, I guess? */
 	"Leo Tolstoi", "Stephen Hawking", "H. P. Lovecraft", /* Librarian - famous writers */
-	"Queen Serenity", "Angel Aphrodite", "Queen Beryl", /* Mahou Shoujo - perhaps an anime or manga? */
+	"_Queen Serenity", "_Angel Aphrodite", "_Queen Beryl", /* Mahou Shoujo - perhaps an anime or manga? */
 	"Votishal", "Raiden", "Rat God", /* Ninja - Nehwon */
-	"Vaire", "Varda Elentari", "Nessa", /* Ordinator - Elven */
-	"Brahma", "Vishnu", "Shiva", /* Otaku - India? */
+	"_Vaire", "_Varda Elentari", "Nessa", /* Ordinator - Elven */
+	"Brahma", "Vishnu", "_Shiva", /* Otaku - India? */
 	"Ariel", "Tyrael", "Gabriel",	/* Paladin - angels */
 	"Danzai", "Milanor", "Daini", /* Pickpocket - ??? */
 #if 0 /* 5lo: Might be disabled until a rewrite? */
@@ -2289,13 +2335,13 @@ const char * const hallu_gods[] = {
 #if 0 /* 5lo: Same as Pokemon above */
 	"Bickney", "Corridor", "Lockney", /* Psion - Egyptian */
 #endif
-	"Cassandra", "Menelaos", "Helen of Troy", /* Sage - Greek history */
+	"_Cassandra", "Menelaos", "_Helen of Troy", /* Sage - Greek history */
 	"Moori", "King Kai", "Vegeta", /* Saiyan - Dragonball series */
 	"Airyaman", "Gandarewa", "Daevas", /* Slave Master - Persian */
 	"the Homies", "the Robbers", "the Motherfuckers", /* Supermarket Cashier - taken from a fanfic */
 	"Manwe Sulimo", "Mandos", "Lorien", /* Thalmor - Elven */
-	"Speedy Gonzales", "Dan Naginati", "Kylie Lum", /* Topmodel - taken from a fanfic */
-	"Olivia", "Peyman", "Lady Gaga", /* Transvestite - weird fashion sense */
+	"Speedy Gonzales", "Dan Naginati", "_Kylie Lum", /* Topmodel - taken from a fanfic */
+	"_Olivia", "Peyman", "_Lady Gaga", /* Transvestite - weird fashion sense */
 	"Larry Koopa", "Roy Koopa", "Morton Koopa Jr.", /* Wandkeeper - Super Mario Bros */
 
 };
@@ -2307,7 +2353,9 @@ aligntyp alignment;
     const char *gnam;
     int which;
     if (Hallucination) {
-	return hallu_gods[rn2(SIZE(hallu_gods))];
+	gnam = hallu_gods[rn2(SIZE(hallu_gods))];
+	if (*gnam == '_') gnam++;
+	return gnam;
     }
 #if 0 /* 5lo: Replaced by Hallu Gods patch */
 	if (Hallucination) { /* come on, hallucination should always affect god's names. --Amy */
