@@ -382,19 +382,19 @@ struct mkroom *sroom;
 		if ( (type != ARMORY && rn2(moreorless) ) || rn2(2)) mon = makemon(
 		    (type == COURT) ? (rn2(5) ? courtmon() : mkclass(S_ORC,0) ) :
 		    (type == BARRACKS) ? squadmon() :
-			(type == CLINIC) ? &mons[PM_NURSE] :
-			(type == TERRORHALL) ? mkclass(S_UMBER,0) :
-			(type == TENSHALL) ? (u.tensionmonsterB ? (rn2(2) ? tenshallmon() : tenshallmonB() ) : tenshallmon()) :
-			(type == ELEMHALL) ? mkclass(S_ELEMENTAL,0) :
-			(type == ANGELHALL) ? mkclass(S_ANGEL,0) :
-			(type == MIMICHALL) ? mkclass(S_MIMIC,0) :
-			(type == NYMPHHALL) ? mkclass(S_NYMPH,0) :
-			(type == TROLLHALL) ? mkclass(S_TROLL,0) :
-			(type == SPIDERHALL) ? mkclass(S_SPIDER,0) :
-			(type == HUMANHALL) ? mkclass(S_HUMAN,0) :
-			(type == GOLEMHALL) ? mkclass(S_GOLEM,0) :
-			(type == COINHALL) ? mkclass(S_BAD_COINS,0) :
-			(type == GRUEROOM) ? mkclass(S_GRUE,0) :
+		    (type == CLINIC) ? &mons[PM_NURSE] :
+		    (type == TERRORHALL) ? mkclass(S_UMBER,0) :
+		    (type == TENSHALL) ? (u.tensionmonsterB ? (rn2(2) ? tenshallmon() : tenshallmonB() ) : tenshallmon()) :
+		    (type == ELEMHALL) ? mkclass(S_ELEMENTAL,0) :
+		    (type == ANGELHALL) ? mkclass(S_ANGEL,0) :
+		    (type == MIMICHALL) ? mkclass(S_MIMIC,0) :
+		    (type == NYMPHHALL) ? mkclass(S_NYMPH,0) :
+		    (type == TROLLHALL) ? mkclass(S_TROLL,0) :
+		    (type == SPIDERHALL) ? mkclass(S_SPIDER,0) :
+		    (type == HUMANHALL) ? mkclass(S_HUMAN,0) :
+		    (type == GOLEMHALL) ? mkclass(S_GOLEM,0) :
+		    (type == COINHALL) ? mkclass(S_BAD_COINS,0) :
+		    (type == GRUEROOM) ? mkclass(S_GRUE,0) :
 		    (type == MORGUE) ? morguemon() :
 		    (type == FUNGUSFARM) ? (rn2(2) ? fungus() : mkclass(S_FUNGUS,0)) :
 		    (type == BEEHIVE) ?
@@ -403,11 +403,13 @@ struct mkroom *sroom;
 		    (type == DOUGROOM) ? douglas_adams_mon() : 
 		    (type == LEPREHALL) ? /*&mons[PM_LEPRECHAUN]*/mkclass(S_LEPRECHAUN,0) :
 		    (type == COCKNEST) ? 
-		    	/*(rn2(4) ? &mons[PM_COCKATRICE] :
-		    	 &mons[PM_CHICKATRICE])*/mkclass(S_COCKATRICE,0) :
-                   (type == ARMORY) ? (rn2(10) ? mkclass(S_RUSTMONST,0) :
+		    	(rn2(4) ? &mons[PM_COCKATRICE] :
+		    	 &mons[PM_CHICKATRICE]) :
+                    (type == ARMORY) ? (rn2(10) ? mkclass(S_RUSTMONST,0) :
 			mkclass(S_PUDDING,0) ) :
-		    (type == ANTHOLE) ? /*antholemon()*/mkclass(S_ANT,0) :
+                    (type == ANTHOLE) ? 
+		        (sx == tx && sy == ty ? &mons[PM_QUEEN_ANT] :
+			 antholemon()) :
 		    (type == DRAGONLAIR) ? mkclass(S_DRAGON,0) :
 		    (type == LEMUREPIT)? 
 		    	(!rn2(20)? &mons[PM_HORNED_DEVIL] : !rn2(20) ? mkclass(S_DEMON,0) : rn2(2) ? mkclass(S_IMP,0) :
@@ -744,8 +746,9 @@ antholemon()
 	switch ((level_difficulty() + ((long)u.ubirthday)) % 4) {
 	default:	mtyp = PM_GIANT_ANT; break;
 	case 0:		mtyp = PM_SOLDIER_ANT; break;
-	case 1:		mtyp = PM_FIRE_ANT; break;
-	case 2:		mtyp = PM_SNOW_ANT; break;
+	case 1:		mtyp = PM_BLACK_ANT; break;
+	case 2:		mtyp = PM_FIRE_ANT; break;
+	case 3:		mtyp = PM_SNOW_ANT; break;
 	}
 	return ((mvitals[mtyp].mvflags & G_GONE) ?
 			(struct permonst *)0 : &mons[mtyp]);
