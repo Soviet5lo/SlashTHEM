@@ -804,7 +804,7 @@ int tech_no;
 		    return(0);
 		} else if((ACURR(A_INT) + ACURR(A_WIS)) < rnd(60)) {
 			pline("Nothing in your pack looks familiar.");
-                    t_timeout = rnz(1000);
+                    t_timeout = rn1(500,500);
 		    break;
 		} else if(invent) {
 			You("examine your possessions.");
@@ -814,7 +814,7 @@ int tech_no;
 		    You("are already quite familiar with the contents of your pack.");
 		    break;
 		}
-                t_timeout = rnz(2000);
+                t_timeout = rn1(500,1500);
 		break;
             case T_EVISCERATE:
 		/* only when empty handed, in human form */
@@ -826,14 +826,14 @@ int tech_no;
 		Your("fingernails extend into claws!");
 		aggravate();
 		techt_inuse(tech_no) = d(2,4) + techlev(tech_no)/5 + 2;
-		t_timeout = rnz(2000);
+		t_timeout = rn1(1000,1000);
 		break;
             case T_BERSERK:
 		You("fly into a berserk rage!");
 		techt_inuse(tech_no) = d(2,8) +
                		(techlev(tech_no)/5) + 2;
 		incr_itimeout(&HFast, techt_inuse(tech_no));
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 		break;
             case T_REINFORCE:
 		/* WAC spell-users can study their known spells*/
@@ -842,7 +842,7 @@ int tech_no;
 		    break;
                	} else {
 		    You("concentrate...");
-		    if (studyspell()) t_timeout = rnz(1500); /*in spell.c*/
+		    if (studyspell()) t_timeout = rn1(1000,500); /*in spell.c*/
 		}
                break;
             case T_FLURRY:
@@ -850,7 +850,7 @@ int tech_no;
 			uarmg ? "gloved" : "bare",      /* Del Lamb */
 			makeplural(body_part(HAND)));
                 techt_inuse(tech_no) = rnd((int) (techlev(tech_no)/6 + 1)) + 2;
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 		break;
             case T_INVOKE_DEITY: /* ask for healing if your alignment record is positive --Amy */
 
@@ -887,7 +887,7 @@ int tech_no;
 			}
 
 			u.uconduct.gnostic++;	/* you just tried to access your god */
-                t_timeout = rnz(3000);
+                t_timeout = rn1(1500,1500);
 		break;
             case T_APPRAISAL:
 			if(!uwep) {
@@ -897,12 +897,12 @@ int tech_no;
                         You("examine %s.", doname(uwep));
                                 uwep->known = TRUE;
                                 You("discover it is %s",doname(uwep));
-                t_timeout = rnz(2000);
+                t_timeout = rn1(1000,1000);
 		} else {
                         You("examine %s.", doname(uwep));
                                 uwep->known = TRUE;
                                 You("discover it is %s",doname(uwep));
-                t_timeout = rnz(200);
+                t_timeout = rn1(100,100);
 		}
 		break;
             case T_PRACTICE:
@@ -924,7 +924,7 @@ int tech_no;
                 /*WAC Added practicing code - in weapon.c*/
                     practice_weapon();
 		}
-                t_timeout = rnz(1000);
+                t_timeout = rn1(500,500);
 		break;
             case T_SURGERY:
 		if (Hallucination || Stunned || Confusion) {
@@ -944,7 +944,7 @@ int tech_no;
 			    u.uhp -= 5;
 			else
 			    u.uhp = 1;
-                        t_timeout = rnz(1000);
+                        t_timeout = rn1(500,500);
 			flags.botl = TRUE;
 			break;
 		    } else pline("If only you had a scalpel...");
@@ -968,7 +968,7 @@ int tech_no;
 			You("strap your wounds as best you can.");
 			healup(techlev(tech_no) + rn1(5,5), 0, FALSE, FALSE);
 		    }
-                    t_timeout = rnz(1500);
+                    t_timeout = rn1(1000,500);
 		    flags.botl = TRUE;
 		} else You("don't need your healing powers!");
 		break;
@@ -976,15 +976,15 @@ int tech_no;
 		if (Slimed) {
 		    Your("body is on fire!");
 		    burn_away_slime();
-		    t_timeout = rnz(3000);
+		    t_timeout = 3000;
 		} else if (Sick) {
 		    You("lay your hands on the foul sickness...");
 		    make_sick(0L, (char*)0, TRUE, SICK_ALL);
-		    t_timeout = rnz(3000);
+		    t_timeout = 3000;
 		} else if (Upolyd ? u.mh < u.mhmax : u.uhp < u.uhpmax) {
 		    pline("A warm glow spreads through your body!");
 		    healup(techlev(tech_no) * 4, 0, FALSE, FALSE);
-		    t_timeout = rnz(3000);
+		    t_timeout = 3000;
 		} else
 		    pline(nothing_happens);
 		break;
@@ -992,7 +992,7 @@ int tech_no;
 		You("scream \"KIIILLL!\"");
 		aggravate();
                 techt_inuse(tech_no) = rnd((int) (techlev(tech_no)/6 + 1)) + 2;
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 		break;
 #ifdef STEED
 	    case T_CALM_STEED:
@@ -1015,7 +1015,7 @@ int tech_no;
 
 				}
 
-                        t_timeout = rnz(1500);
+                        t_timeout = rn1(1000,500);
                 } else
                         Your("technique is only effective when riding a monster.");
                 break;
@@ -1032,7 +1032,7 @@ int tech_no;
 		incr_itimeout(&HInvis, techt_inuse(tech_no));
 		incr_itimeout(&HFast, techt_inuse(tech_no));
 		newsym(u.ux,u.uy);      /* update position */
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 		break;
 	    case T_CRIT_STRIKE:
 		if (!getdir((char *)0)) return(0);
@@ -1065,7 +1065,7 @@ int tech_no;
 			    tmp /= 2;
 			}
 			tmp += techlev(tech_no);
-			t_timeout = rnz(1500);
+			t_timeout = rn1(1000, 500);
 			hurtmon(mtmp, tmp);
 		    }
 		}
@@ -1105,9 +1105,9 @@ int tech_no;
 			    tmp += techlev(tech_no);
 			    t_timeout = rn1(1000,500);
 			    hurtmon(mtmp, tmp);
- 			}
+			}
 		    }
- 		}
+		}
 		break;
 	    case T_BLESSING:
 		allowall[0] = ALL_CLASSES; allowall[1] = '\0';
@@ -1140,7 +1140,7 @@ int tech_no;
 			obj->bknown=1;
 			pline("The aura fades.");
 		}
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 		break;
 	    case T_E_FIST: 
 	    	blitz_e_fist();
@@ -1149,7 +1149,7 @@ int tech_no;
                 You("focus the powers of the elements into your %s", str);
                 techt_inuse(tech_no) = rnd((int) (techlev(tech_no)/3 + 1)) + d(1,4) + 2;
 #endif
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 	    	break;
 	    case T_PRIMAL_ROAR:	    	
 	    	You("let out a bloodcurdling roar!");
@@ -1178,7 +1178,7 @@ int tech_no;
 		    	    }
 		    	}
 		    }
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 	    	break;
 	    case T_LIQUID_LEAP: {
 	    	coord cc;
@@ -1281,7 +1281,7 @@ int tech_no;
 		    nomul(-1, "liquid leaping");
 		    nomovemsg = "";
 	    	}
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 	    	break;
 	    }
             case T_SIGIL_TEMPEST: 
@@ -1363,7 +1363,7 @@ int tech_no;
 		}
 		nomul(-2, "recovering from an attempt to raise zombies"); /* You need to recover */
 		nomovemsg = 0;
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 		break;
             case T_REVIVE: 
 		if (u.uswallow) {
@@ -1392,7 +1392,7 @@ int tech_no;
 		}
             	if (Upolyd) u.mh -= num;
             	else u.uhp -= num;
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
             	break;
 	    case T_WARD_FIRE:
 		/* Already have it intrinsically? */
@@ -1401,7 +1401,7 @@ int tech_no;
 		You("invoke the ward against flame!");
 		HFire_resistance += rn1(100,50);
 		HFire_resistance += techlev(tech_no);
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 
 	    	break;
 	    case T_WARD_COLD:
@@ -1411,7 +1411,7 @@ int tech_no;
 		You("invoke the ward against ice!");
 		HCold_resistance += rn1(100,50);
 		HCold_resistance += techlev(tech_no);
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 
 	    	break;
 	    case T_WARD_ELEC:
@@ -1421,7 +1421,7 @@ int tech_no;
 		You("invoke the ward against lightning!");
 		HShock_resistance += rn1(100,50);
 		HShock_resistance += techlev(tech_no);
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 
 	    	break;
 	    case T_TINKER:
@@ -1449,16 +1449,16 @@ int tech_no;
 	    	techt_inuse(tech_no) = num + 1;
 		u.uhpmax += num;
 		u.uhp += num;
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 		break;	    
 	    case T_BLINK:
 	    	You("feel the flow of time slow down.");
                 techt_inuse(tech_no) = rnd(techlev(tech_no) + 1) + 2;
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 	    	break;
             case T_CHI_STRIKE:
             	if (!blitz_chi_strike()) return(0);
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 		break;
             case T_DRAW_ENERGY:
             	if (u.uen == u.uenmax) {
@@ -1469,7 +1469,7 @@ int tech_no;
                 You("begin drawing energy from your surroundings!");
 		delay=-15;
 		set_occupation(draw_energy, "drawing energy", 0);                
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 		break;
             case T_CHI_HEALING:
             	if (u.uen < 1) {
@@ -1478,7 +1478,7 @@ int tech_no;
             	}
 		You("direct your internal energy to restoring your body!");
                 techt_inuse(tech_no) = techlev(tech_no)*2 + 4;
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 		break;	
 	    case T_DISARM:
 	    	if (P_SKILL(weapon_type(uwep)) == P_NONE) {
@@ -1644,7 +1644,7 @@ int tech_no;
 		} else {
                        pline("%s breaks the stare!", Monnam(mtmp));
 		}
-               	t_timeout = rnz(75);
+               	t_timeout = rn1(50,25);
 	    	break;
 	    case T_BLITZ:
 	    	if (uwep || (u.twoweap && uswapwep)) {
@@ -1656,7 +1656,7 @@ int tech_no;
 	    	}
 	    	if (!doblitz()) return (0);		
 		
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 	    	break;
             case T_PUMMEL:
 	    	if (uwep || (u.twoweap && uswapwep)) {
@@ -1672,7 +1672,7 @@ int tech_no;
 			return(0);
 		}
             	if (!blitz_pummel()) return(0);
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 		break;
             case T_G_SLAM:
 	    	if (uwep || (u.twoweap && uswapwep)) {
@@ -1688,7 +1688,7 @@ int tech_no;
 			return(0);
 		}
             	if (!blitz_g_slam()) return(0);
-                t_timeout = rnz(1500);
+                t_timeout = rn1(1000,500);
 		break;
             case T_DASH:
 		if (!getdir((char *)0)) return(0);
@@ -1697,11 +1697,11 @@ int tech_no;
 			return(0);
 		}
             	if (!blitz_dash()) return(0);
-                t_timeout = rnz(75);
+                t_timeout = rn1(50, 25);
 		break;
             case T_POWER_SURGE:
             	if (!blitz_power_surge()) return(0);
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 		break;            	
             case T_SPIRIT_BOMB:
 	    	if (uwep || (u.twoweap && uswapwep)) {
@@ -1713,7 +1713,7 @@ int tech_no;
 	    	}
 		if (!getdir((char *)0)) return(0);
             	if (!blitz_spirit_bomb()) return(0);
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000,500);
 		break;            	
 	    case T_DRAW_BLOOD:
 		/*if (!maybe_polyd(is_vampire(youmonst.data),
@@ -1754,7 +1754,7 @@ int tech_no;
 		(void) hold_another_object(otmp,
 			"You fill, but have to drop, %s!", doname(otmp),
 			(const char *)0);
-		t_timeout = rnz(1500);
+		t_timeout = rn1(1000, 500);
 		break;
 #ifdef JEDI
 	    case T_JEDI_JUMP:
@@ -1764,7 +1764,7 @@ int tech_no;
 		}
 		if (!jump((techlev(tech_no)/5)+1)) return 0;
 		u.uen -= 25;
-		t_timeout = rnz(50);
+		t_timeout = 50;
 		break;
 	    case T_POKE_BALL:
 
@@ -1794,7 +1794,7 @@ int tech_no;
 			      maybe_tameX(mtmp);
 				pline("Gotcha! %s was caught!", mon_nam(mtmp));
 				caught++;
-				t_timeout = rnz(1000);
+				t_timeout = rn1(500,500);
 				}
 
 			else if ( (mtmp->m_lev > (2 * techlev(tech_no)) || rn2(4) ) && mtmp->m_lev > techlev(tech_no) && caught == 0 && (!is_pokemon(mtmp->data) || rn2(2) ) )
@@ -1819,7 +1819,7 @@ int tech_no;
 				      maybe_tameX(mtmp);
 					pline("Gotcha! %s was caught!", mon_nam(mtmp));
 					caught++;
-					t_timeout = rnz(1000);
+					t_timeout = rn1(500,500);
 
 					}
 				}
@@ -1830,7 +1830,7 @@ int tech_no;
 		if (caught == 0) pline("The ball expodes in midair!");
 /* This is an intentional typo, derived from another roguelike. Do you know which one it is? --Amy*/
 
-		t_timeout = rnz(1000);
+		t_timeout = rn1(500,500);
 		break;
 	    case T_SUMMON_TEAM_ANT:
 
@@ -1850,7 +1850,7 @@ int tech_no;
 
 		/* A high level Insectoid character can create quite the army of insects sometimes. --Amy */
 
-		t_timeout = rnz(1000);
+		t_timeout = rn1(500,500);
 		break;
 	    case T_ATTIRE_CHARM:
 
@@ -1884,7 +1884,7 @@ int tech_no;
 			      maybe_tameX(mtmp3);
 				pline("%s is charmed, and wants to be your friend!", mon_nam(mtmp3));
 				if (techlev(tech_no) < rnd(100)) caughtX++;
-				t_timeout = rnz(2000);
+				t_timeout = rn1(1500,500);
 				}
 
 			else pline("%s is too stupid to fully appreciate you!", mon_nam(mtmp3));
@@ -1892,7 +1892,7 @@ int tech_no;
 			} /* monster is catchable loop */
 		    } /* for loop */
 
-		t_timeout = rnz(2000);
+		t_timeout = rn1(1500,500);
 		break;
 	    case T_WORLD_FALL:
 
@@ -1913,7 +1913,7 @@ int tech_no;
 	pline("Eliminated %d monster%s.", num, plur(num));
 			}
 
-		t_timeout = rnz(10000);
+		t_timeout = rn1(10000,10000);
 		break;
 	    case T_CREATE_AMMO:
 
@@ -1928,7 +1928,7 @@ int tech_no;
 		};
 		}
 
-	      t_timeout = rnz(500);
+	      t_timeout = rn1(250,250);
 	      break;
 
 	    case T_EGG_BOMB:
@@ -1955,7 +1955,7 @@ int tech_no;
 
 		}
 
-	      t_timeout = rnz(2000);
+	      t_timeout = rn1(1000,1000);
 	      break;
 
 	    case T_BOOZE:
@@ -1984,7 +1984,7 @@ int tech_no;
 
 		}
 
-	      t_timeout = rnz(2000);
+	      t_timeout = rn1(1000,1000);
 	      break;
 
 	    case T_TELEKINESIS:
@@ -2008,25 +2008,25 @@ int tech_no;
 		switch(ttrap->ttyp) {
 			case BEAR_TRAP:
 			case WEB:
-				t_timeout = rnz(250);
+				t_timeout = 250;
 				return disarm_holdingtrap(ttrap);
 			case LANDMINE:
-				t_timeout = rnz(250);
+				t_timeout = 250;
 				return disarm_landmine(ttrap);
 			case SQKY_BOARD:
-				t_timeout = rnz(250);
+				t_timeout = 250;
 				return disarm_squeaky_board(ttrap);
 			case DART_TRAP:
-				t_timeout = rnz(250);
+				t_timeout = 250;
 				return disarm_shooting_trap(ttrap, DART);
 			case ARROW_TRAP:
-				t_timeout = rnz(250);
+				t_timeout = 250;
 				return disarm_shooting_trap(ttrap, ARROW);
 			case RUST_TRAP:
-				t_timeout = rnz(250);
+				t_timeout = 250;
 				return disarm_rust_trap(ttrap);
 			case FIRE_TRAP:
-				t_timeout = rnz(250);
+				t_timeout = 250;
 				return disarm_fire_trap(ttrap);
 			default:
 				You("cannot disable %s trap.", (u.dx || u.dy) ? "that" : "this");
@@ -2040,7 +2040,7 @@ int tech_no;
 			blow_up_landmine(ttrap);
 			fill_pit(cc.x, cc.y);
 			newsym(cc.x, cc.y);
-		        t_timeout = rnz(250);
+			t_timeout = 250;
 			break;
 		      case ROLLING_BOULDER_TRAP:
 		      {
@@ -2051,7 +2051,7 @@ int tech_no;
 			  newsym(cc.x, cc.y);
 			  pline("But no boulder was released.");
 		        }
-		        t_timeout = rnz(250);
+		        t_timeout = 250;
 		      }
 		      default:
 		        You("can't spring this trap.");
@@ -2066,7 +2066,7 @@ int tech_no;
 		  You("pick up an object from the %s.", surface(cc.x,cc.y));
 		  (void) pickup_object(otmp, 1L, TRUE);
 		  newsym(cc.x, cc.y);
-		  t_timeout = rnz(250);
+		  t_timeout = 250;
 		} else {
 		  You("can't do anything there");
 			return(0);
@@ -2085,7 +2085,7 @@ int tech_no;
 	      You("start charging %s.", the(xname(uwep)));
 	      delay=-10;
 	      set_occupation(charge_saber, "charging", 0);
-	      t_timeout = rnz(500);
+	      t_timeout = 500;
 	      break;
 #endif
 	    default:
