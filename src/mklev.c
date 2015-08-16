@@ -1418,6 +1418,7 @@ mineralize()
 			    }
 		    }
 		}
+#if 0 /* 5lo: Makes no sense, this isn't Castlevania after all. */
 		if (rn2(1000) < objprob) {
 		    for (cnt = rnd(2 + dunlev(&u.uz) / 3); cnt > 0; cnt--)
 			if ((otmp = mkobj(RANDOM_CLASS, FALSE)) != 0) {
@@ -1430,6 +1431,7 @@ mineralize()
 			    }
 		    }
 		}
+#endif
 	    }
 }
 
