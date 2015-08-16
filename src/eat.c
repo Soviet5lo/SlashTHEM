@@ -506,7 +506,7 @@ boolean message;
 	if(victual.piece->otyp == CORPSE && victual.piece->odrained && Role_if(PM_BLEEDER) ) {
 
 		pline("That blood really hit the spot!");
-		healup(d(8,8) + rnz(u.ulevel), 0, TRUE, TRUE);
+		healup(d(8,8) + rnd(u.ulevel), 0, TRUE, TRUE);
 		exercise(A_CON, TRUE);
 
 	}
@@ -1610,7 +1610,7 @@ struct obj *obj;
 {
 	if(Race_if(PM_GASTLY)){
 	pline("Yum!  Rotten %s!", foodword(obj));
-	healup(d(2,2) + rnz(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
+	healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
 	return(0);
 	}
 	pline("Blecch!  Rotten %s!", foodword(obj));

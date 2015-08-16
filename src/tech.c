@@ -1963,7 +1963,7 @@ int tech_no;
 	    You("procure some refreshing drinks.");
 
 	    make_confused(HConfusion + d(3,8), FALSE);
-		healup(Role_if(PM_DRUNK) ? rnz(20 + u.ulevel) : 1, 0, FALSE, FALSE);
+		healup(Role_if(PM_DRUNK) ? rnd(20 + u.ulevel) : 1, 0, FALSE, FALSE);
 		u.uhunger += 20;
 		if (Race_if(PM_CLOCKWORK_AUTOMATON)) u.uhunger += 200;
 		if (Role_if(PM_DRUNK)) u.uhunger += 100;

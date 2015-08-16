@@ -619,7 +619,7 @@ peffects(otmp)
 		if (!otmp->blessed)
 		    make_confused(itimeout_incr(HConfusion, d(3,8)), FALSE);
 		/* the whiskey makes us feel better */
-		if (!otmp->odiluted) healup(Role_if(PM_DRUNK) ? rnz(20 + u.ulevel) : 1, 0, FALSE, FALSE);
+		if (!otmp->odiluted) healup(Role_if(PM_DRUNK) ? rnd(20 + u.ulevel) : 1, 0, FALSE, FALSE);
 		u.uhunger += 10 * (2 + bcsign(otmp));
 		if (Race_if(PM_CLOCKWORK_AUTOMATON)) u.uhunger += 200;
 		if (Role_if(PM_DRUNK)) u.uhunger += 100;
@@ -973,13 +973,13 @@ peffects(otmp)
 		break;
 	case POT_HEALING:
 		You_feel("better.");
-		healup(d(5,6) + rnz(u.ulevel) + 5 * bcsign(otmp),
+		healup(d(5,6) + rnd(u.ulevel) + 5 * bcsign(otmp),
 		       !otmp->cursed ? 1 : 0, 1+1*!!otmp->blessed, !otmp->cursed);
 		exercise(A_CON, TRUE);
 		break;
 	case POT_EXTRA_HEALING:
 		You_feel("much better.");
-		healup(d(6,8) + rnz(u.ulevel) + 5 * bcsign(otmp),
+		healup(d(6,8) + rnd(u.ulevel) + 5 * bcsign(otmp),
 		       otmp->blessed ? 5 : !otmp->cursed ? 2 : 0,
 		       !otmp->cursed, TRUE);
 		(void) make_hallucinated(0L,TRUE,0L);
@@ -988,7 +988,7 @@ peffects(otmp)
 		break;
 	case POT_FULL_HEALING:
 		You_feel("completely healed.");
-		healup(400 + rnz(u.ulevel), 4+4*bcsign(otmp), !otmp->cursed, TRUE);
+		healup(400 + rnd(u.ulevel), 4+4*bcsign(otmp), !otmp->cursed, TRUE);
 		/* Restore one lost level if blessed */
 		if (otmp->blessed && u.ulevel < u.ulevelmax) {
 		    /* when multiple levels have been lost, drinking
@@ -1036,7 +1036,7 @@ peffects(otmp)
 			    You_feel("lackluster.");
 			else
 			    pline("Magical energies course through your body.");
-			num = rnd(25) + rnz(u.ulevel) + 5 * otmp->blessed + 10;                        
+			num = rnd(25) + rnd(u.ulevel) + 5 * otmp->blessed + 10;                        
 			num2 = rnd(2) + 2 * otmp->blessed + 1;
 			u.uenmax += (otmp->cursed) ? -num2 : num2;
 			u.uen += (otmp->cursed) ? -num : num;
@@ -1427,7 +1427,7 @@ boolean your_fault;
 		angermon = FALSE;
 		if (canseemon(mon))
 			pline("%s looks better.", Monnam(mon));
-		healup_mon(mon, d(5,6) + rnz(u.ulevel) + 5 * bcsign(obj),
+		healup_mon(mon, d(5,6) + rnd(u.ulevel) + 5 * bcsign(obj),
 			!obj->cursed ? 1 : 0, 1+1*!!obj->blessed, !obj->cursed);
 		break;
 	case POT_EXTRA_HEALING:
@@ -1435,7 +1435,7 @@ boolean your_fault;
 		angermon = FALSE;
 		if (canseemon(mon))
 			pline("%s looks much better.", Monnam(mon));
-		healup_mon(mon, d(6,8) + rnz(u.ulevel) + 5 * bcsign(obj),
+		healup_mon(mon, d(6,8) + rnd(u.ulevel) + 5 * bcsign(obj),
 			obj->blessed ? 5 : !obj->cursed ? 2 : 0,
 			!obj->cursed, TRUE);
 		break;
@@ -1447,7 +1447,7 @@ boolean your_fault;
 		angermon = FALSE;
 		    if (canseemon(mon))
 			pline("%s looks sound and hale again.", Monnam(mon));
-		healup_mon(mon, 400 + rnz(u.ulevel), 5+5*!!(obj->blessed), !(obj->cursed), 1);
+		healup_mon(mon, 400 + rnd(u.ulevel), 5+5*!!(obj->blessed), !(obj->cursed), 1);
 		break;
 	case POT_SICKNESS:
 		if (mon->data == &mons[PM_PESTILENCE]) goto do_healing;

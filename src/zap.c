@@ -165,8 +165,8 @@ struct obj *otmp;
 		if (resists_magm(mtmp)) {	/* match effect on player */
 			shieldeff(mtmp->mx, mtmp->my);
 			break;	/* skip makeknown */
-		} else if (u.uswallow || rnd(20) < 10 + find_mac(mtmp) + rnz(u.ulevel) ) {
-			dmg = d(2,12) + rnz(u.ulevel);
+		} else if (u.uswallow || rnd(20) < 10 + find_mac(mtmp) + rnd(u.ulevel) ) {
+			dmg = d(2,12) + rnd(u.ulevel);
 			if(dbldam) dmg *= 2;
 			dmg += skilldmg;
 			hit(zap_type_text, mtmp, exclam(dmg));
@@ -329,10 +329,10 @@ struct obj *otmp;
 		   * effective than uncursed wands. This behaviour dates
 		   * right back to Slash v3 (and probably to v1).
 		   */
-		  otyp == WAN_HEALING ?  d(5,2) + rnz(u.ulevel) + 5 * !!bcsign(otmp) :
-		  otyp == WAN_EXTRA_HEALING ?  d(5,4) + rnz(u.ulevel) + 10 * !!bcsign(otmp) :
-		  otyp == WAN_FULL_HEALING ?  d(5,8) + rnz(u.ulevel) + 20 * !!bcsign(otmp) :
-		  otyp == SPE_HEALING ? rnd(10) +4 + rnz(u.ulevel) : d(3,8)+6 + rnz(u.ulevel);
+		  otyp == WAN_HEALING ?  d(5,2) + rnd(u.ulevel) + 5 * !!bcsign(otmp) :
+		  otyp == WAN_EXTRA_HEALING ?  d(5,4) + rnd(u.ulevel) + 10 * !!bcsign(otmp) :
+		  otyp == WAN_FULL_HEALING ?  d(5,8) + rnd(u.ulevel) + 20 * !!bcsign(otmp) :
+		  otyp == SPE_HEALING ? rnd(10) +4 + rnd(u.ulevel) : d(3,8)+6 + rnd(u.ulevel);
 		if (mtmp->mhp > mtmp->mhpmax) {
 		    if (otmp->oclass == WAND_CLASS)
 			mtmp->mhpmax++;
@@ -2896,20 +2896,20 @@ boolean ordinary;
 		break;
 		case WAN_HEALING:
 		   You("begin to feel better.");
-		   healup( d(5,6) + rnz(u.ulevel),0,0,0);
+		   healup( d(5,6) + rnd(u.ulevel),0,0,0);
 		   exercise(A_STR, TRUE);
 		   makeknown(WAN_HEALING);
 		break;
 		case WAN_EXTRA_HEALING:
 		   You("feel much better.");
-		   healup(d(6,8) + rnz(u.ulevel),0,0,0);
+		   healup(d(6,8) + rnd(u.ulevel),0,0,0);
 		   make_hallucinated(0L,TRUE,0L);
 		   exercise(A_STR, TRUE);
 		   exercise(A_CON, TRUE);
 		   makeknown(WAN_EXTRA_HEALING);
 		case WAN_FULL_HEALING:
 		   You("feel restored to health.");
-		   healup(d(10,20) + rnz(u.ulevel),0,0,0);
+		   healup(d(10,20) + rnd(u.ulevel),0,0,0);
 		   make_hallucinated(0L,TRUE,0L);
 		   exercise(A_STR, TRUE);
 		   exercise(A_CON, TRUE);
@@ -3006,14 +3006,14 @@ boolean ordinary;
 
 		case SPE_HEALING:
 		case SPE_EXTRA_HEALING:
-		    healup(obj->otyp == SPE_HEALING ? rnd(10) + 4 + rnz(u.ulevel) : d(3,8)+6 + rnz(u.ulevel),
+		    healup(obj->otyp == SPE_HEALING ? rnd(10) + 4 + rnd(u.ulevel) : d(3,8)+6 + rnd(u.ulevel),
 			   0, FALSE, FALSE);
 		    You_feel("%sbetter.",
 			obj->otyp == SPE_EXTRA_HEALING ? "much " : "");
 		    break;
 
 		case SPE_FULL_HEALING:
-		    healup(d(10,10) + rnz(u.ulevel),
+		    healup(d(10,10) + rnd(u.ulevel),
 			   0, FALSE, FALSE);
 		    You_feel("restored to health.");
 		    break;
@@ -3512,7 +3512,7 @@ struct obj *obj;
 	    else if (otyp >= WAN_MAGIC_MISSILE && otyp <= WAN_SOLAR_BEAM)
         {
 		buzz(otyp - WAN_MAGIC_MISSILE,
-		     (otyp == WAN_MAGIC_MISSILE) ? 2 + (rnz(u.ulevel) / 10) : (otyp == WAN_SOLAR_BEAM) ? 8 + (rnz(u.ulevel) / 4) : 6 + (rnz(u.ulevel) / 5),
+		     (otyp == WAN_MAGIC_MISSILE) ? 2 + (rnd(u.ulevel) / 10) : (otyp == WAN_SOLAR_BEAM) ? 8 + (rnd(u.ulevel) / 4) : 6 + (rnd(u.ulevel) / 5),
 		     u.ux, u.uy, u.dx, u.dy);
 			/*} else if (obj->otyp == WAN_ACID) {
 			    buzz(ZT_ACID,6,u.ux,u.uy,u.dx,u.dy); */ /* obsolete --Amy */

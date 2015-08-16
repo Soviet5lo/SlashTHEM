@@ -2643,9 +2643,9 @@ register struct obj	*sobj;
 	case SCR_HEALING: /* a basic healing item that can be used to - who would have guessed? - cure wounds! --Amy */
 		makeknown(SCR_HEALING);
 		You("feel healthier!");
-			if (!rn2(20)) healup(400 + rnz(u.ulevel), 0, FALSE, FALSE);
-			else if (!rn2(5)) healup(d(6,8) + rnz(u.ulevel), 0, FALSE, FALSE);
-			else healup(d(5,6) + rnz(u.ulevel), 0, FALSE, FALSE);
+			if (!rn2(20)) healup(400 + rnd(u.ulevel), 0, FALSE, FALSE);
+			else if (!rn2(5)) healup(d(6,8) + rnd(u.ulevel), 0, FALSE, FALSE);
+			else healup(d(5,6) + rnd(u.ulevel), 0, FALSE, FALSE);
 		break;
 	case SCR_CHARGING:
 	case SPE_CHARGING:
