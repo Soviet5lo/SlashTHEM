@@ -2666,7 +2666,7 @@ boolean ordinary;
 		case WAN_STRIKING:
 		    makeknown(WAN_STRIKING);
 		case SPE_FORCE_BOLT:
-		    if(Antimagic && rn2(20)) {
+		    if(Antimagic) {
 			shieldeff(u.ux, u.uy);
 			pline("Boing!");
 		    } else {
@@ -2685,7 +2685,7 @@ boolean ordinary;
 		    break;
 		case SPE_ACID_STREAM:
         	    /* KMH, balance patch -- new intrinsic */
-        	    if (Acid_resistance && rn2(20)) {
+        	    if (Acid_resistance) {
 			damage = 0;
         	    } else {
 			pline_The("acid burns!");
@@ -2698,7 +2698,7 @@ boolean ordinary;
         	    break;
 		case WAN_ACID:
 		    makeknown(WAN_ACID);
-		    if (Acid_resistance && rn2(20)) {
+		    if (Acid_resistance) {
 			shieldeff(u.ux,u.uy);
 			pline("Ugh!");
 		    } else {
@@ -2804,7 +2804,7 @@ boolean ordinary;
 		case WAN_MAGIC_MISSILE:
 		    makeknown(WAN_MAGIC_MISSILE);
 		case SPE_MAGIC_MISSILE:
-		    if(Antimagic && rn2(20)) {
+		    if(Antimagic) {
 			shieldeff(u.ux, u.uy);
 			pline_The("missiles bounce!");
 		    } else {
@@ -2826,7 +2826,7 @@ boolean ordinary;
 		case WAN_DRAINING:	/* KMH */
 			makeknown(obj->otyp);
 		case SPE_DRAIN_LIFE:
-			if (!Drain_resistance || !rn2(20) ) {
+			if (!Drain_resistance) {
 				losexp("life drainage", FALSE);
 			} else {
 				shieldeff(u.ux, u.uy);
@@ -4167,7 +4167,7 @@ xchar sx, sy;
 
 	switch (abs(type) % 10) {
 	case ZT_MAGIC_MISSILE:
-	    if (Antimagic && rn2(20)) {
+	    if (Antimagic) {
 		shieldeff(sx, sy);
 		pline_The("missiles bounce off!");
 	    } else {
@@ -4176,7 +4176,7 @@ xchar sx, sy;
 	    }
 	    break;
 	case ZT_FIRE:
-	    if (Fire_resistance && rn2(20)) {
+	    if (Fire_resistance) {
 		shieldeff(sx, sy);
 		You("don't feel hot!");
 		ugolemeffects(AD_FIRE, d(nd, 6));
@@ -4195,7 +4195,7 @@ xchar sx, sy;
 	    }
 	    break;
 	case ZT_COLD:
-	    if (Cold_resistance && rn2(20)) {
+	    if (Cold_resistance) {
 		shieldeff(sx, sy);
 		You("don't feel cold.");
 		ugolemeffects(AD_COLD, d(nd, 6));
@@ -4205,7 +4205,7 @@ xchar sx, sy;
 	    if (!rn2(75)) destroy_item(POTION_CLASS, AD_COLD);
 	    break;
 	case ZT_SLEEP:
-	    if (Sleep_resistance && rn2(20)) {
+	    if (Sleep_resistance) {
 		shieldeff(u.ux, u.uy);
 		You("don't feel sleepy.");
 	    } else {
@@ -4214,7 +4214,7 @@ xchar sx, sy;
 	    break;
 	case ZT_DEATH:
 	    if (abs(type) == ZT_BREATH(ZT_DEATH)) {
-		if (Disint_resistance && rn2(100)) {
+		if (Disint_resistance) {
 		    You("are not disintegrated.");
 		    break;
             } else if (Invulnerable) {
@@ -4243,7 +4243,7 @@ xchar sx, sy;
 		shieldeff(sx, sy);
 		You("seem unaffected.");
 		break;
-	    } else if (Antimagic) { /* Sorry people, but being magic resistant no longer makes you immune. --Amy */
+	    } else if (Antimagic) {
 	            dam = d(2,4);
 			u.uhpmax -= dam/2;
 	            pline("You resist the attack, but it hurts!");
@@ -4268,7 +4268,7 @@ xchar sx, sy;
                 pline("This hurts a lot!");
 		break;
 	case ZT_LIGHTNING:
-	    if (Shock_resistance && rn2(20)) {
+	    if (Shock_resistance) {
 		shieldeff(sx, sy);
 		You("aren't affected.");
 		ugolemeffects(AD_ELEC, d(nd, 6));
@@ -4284,7 +4284,7 @@ xchar sx, sy;
 	    break;
 	case ZT_ACID:
 		/* KMH, balance patch -- new intrinsic */
-	    if (Acid_resistance && rn2(20)) {
+	    if (Acid_resistance) {
 		dam = 0;
 	    } else {
 		pline_The("acid burns!");
@@ -4304,7 +4304,7 @@ xchar sx, sy;
 	    break;
 	}
 
-	if (Half_spell_damage && rn2(2) && dam &&
+	if (Half_spell_damage && dam &&
 	   type < 0 && (type > -20 || type < -29)) /* !Breath */
 	    dam = (dam + 1) / 2;
 
@@ -4674,7 +4674,7 @@ register int dx,dy;
 	    if (zap_hit((int) u.uac, 0)) {
 		range -= 2;
 		pline("%s hits you!", The(fltxt));
-		if (Reflecting && rn2(20) && abs(type) != ZT_SPELL(ZT_FIRE)) {
+		if (Reflecting && abs(type) != ZT_SPELL(ZT_FIRE)) {
 		    if (!Blind) {
 		    	(void) ureflects("But %s reflects from your %s!", "it");
 		    } else

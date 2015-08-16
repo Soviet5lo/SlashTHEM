@@ -1406,7 +1406,7 @@ physical:
 			tmp = 0;
 			break;
 		}
-		if (!resists_ston(mdef) && !rn2(4) ) {
+		if (!resists_ston(mdef)) {
 			if (vis) pline("%s turns to stone!", Monnam(mdef));
 			monstone(mdef);
  post_stone:		if (mdef->mhp > 0) return 0;

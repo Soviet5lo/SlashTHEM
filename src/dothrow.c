@@ -967,7 +967,7 @@ boolean hitsroof;
 	if (dmg > 1 && less_damage) dmg = 1;
 	if (dmg > 0) dmg += u.udaminc;
 	if (dmg < 0) dmg = 0;	/* beware negative rings of increase damage */
-	if (Half_physical_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	if (Half_physical_damage) dmg = (dmg + 1) / 2;
 
 	if (uarmh) {
 	    if (less_damage && dmg < (Upolyd ? u.mh : u.uhp)) {
@@ -1732,7 +1732,7 @@ int thrown;
 	} else if (guaranteed_hit) {
 	    /* this assumes that guaranteed_hit is due to swallowing */
 	    wakeup(mon);
-	    if (obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm]) && !rn2(4)) {
+	    if (obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm])) {
 		if (is_animal(u.ustuck->data)) {
 			minstapetrify(u.ustuck, TRUE);
 			/* Don't leave a cockatrice corpse available in a statue */

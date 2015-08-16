@@ -1381,7 +1381,7 @@ domove()
 		    return;
 		}
 #endif
-		if( (Stunned && !rn2(2)) || (Confusion && !rn2(8)) /* toned down so it's less crippling --Amy */
+		if(Stunned || (Confusion && !rn2(8)) /* toned down so it's less crippling --Amy */
 #ifdef STEED
 			|| (u.usteed && u.usteed->mconf)
 #endif	
@@ -2138,7 +2138,7 @@ stillinwater:;
 			    You("are hit by %s!",
 				x_monnam(mtmp, ARTICLE_A, "falling", 0, TRUE));
 			    dmg = d(4,6);
-			    if(Half_physical_damage && rn2(2) ) dmg = (dmg+1) / 2;
+			    if(Half_physical_damage) dmg = (dmg+1) / 2;
 			    mdamageu(mtmp, dmg);
 			}
 			break;

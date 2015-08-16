@@ -172,7 +172,7 @@ boolean force;		/* Force the loss of an experience level */
 		drainer = 0;
 #endif
 
-	if (!force && Drain_resistance && rn2(5) ) return;
+	if (!force && Drain_resistance) return;
 
 	if (u.ulevel > 1) {
 		pline("%s level %d.", Goodbye(), u.ulevel--);

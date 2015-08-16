@@ -1400,7 +1400,7 @@ boolean
 diseasemu(mdat)
 struct permonst *mdat;
 {
-	if (Sick_resistance || !rn2(10) ) { /* small chance to not get infected even if not resistant --Amy */
+	if (Sick_resistance) {
 		You_feel("a slight illness.");
 		return FALSE;
 	} else {
@@ -1414,7 +1414,7 @@ STATIC_OVL boolean
 digeasemu(mtmp)
 struct permonst *mtmp;
 {
-	if (Sick_resistance || !rn2(10) ) {
+	if (Sick_resistance) {
 		You_feel("a slight illness.");
 		return FALSE;
 	} else {
@@ -1803,7 +1803,7 @@ hitmu(mtmp, mattk)
 			    /* KMH -- this is okay with unchanging */
 			    rehumanize();
 			    break;
-		    } else if (Fire_resistance && rn2(20)) {
+		    } else if (Fire_resistance) {
 			pline_The("fire doesn't feel hot!");
 			dmg = 0;
                         } else if (u.umonnum == PM_STRAW_GOLEM ||
@@ -1841,7 +1841,7 @@ hitmu(mtmp, mattk)
 		hitmsg(mtmp, mattk);
 		if (uncancelled) {
 		    pline("You're covered in frost!");
-		    if (Cold_resistance && rn2(20)) {
+		    if (Cold_resistance) {
 			pline_The("frost doesn't seem cold!");
 			dmg = 0;
 		    }
@@ -1854,7 +1854,7 @@ hitmu(mtmp, mattk)
 		hitmsg(mtmp, mattk);
 		if (uncancelled) {
 		    You("get zapped!");
-		    if (Shock_resistance && rn2(20)) {
+		    if (Shock_resistance) {
 			pline_The("zap doesn't shock you!");
 			dmg = 0;
 		    }
@@ -1869,7 +1869,7 @@ hitmu(mtmp, mattk)
 	    case AD_SLEE:
 		hitmsg(mtmp, mattk);
 		if (uncancelled && multi >= 0 && !rn2(5)) {
-		    if (Sleep_resistance && rn2(20)) break;
+		    if (Sleep_resistance) break;
 		    fall_asleep(-rnd(10), TRUE);
 		    if (Blind) You("are put to sleep!");
 		    else You("are put to sleep by %s!", mon_nam(mtmp));
@@ -1921,7 +1921,7 @@ dopois:
 		    mtmp->mconf = 0;
 		}
 
-		if (Half_physical_damage && rn2(2) ) dmg = (dmg+1) / 2;
+		if (Half_physical_damage) dmg = (dmg+1) / 2;
 		mdamageu(mtmp, dmg);
 
 		if (!uarmh || uarmh->otyp != DUNCE_CAP) {
@@ -2009,7 +2009,7 @@ dopois:
 			    	EDOG(mtmp)->hungrytime += ((int)((youmonst.data)->cnutrit / 20) + 1);
 		}
 		
-		if (uncancelled && !rn2(3) && (!Drain_resistance || !rn2(20) )  ) {
+		if (uncancelled && !rn2(3) && !Drain_resistance) {
 		    losexp("life drainage", FALSE);
 		}
 		break;
@@ -2352,7 +2352,7 @@ dopois:
 		hitmsg(mtmp, mattk);
 
 		if (!rn2(10))  {
-		if (Disint_resistance && rn2(100)) {
+		if (Disint_resistance) {
 		    You("are not disintegrated.");
 		    break;
             } else if (Invulnerable) {
@@ -2380,7 +2380,7 @@ dopois:
 	      else if (nonliving(youmonst.data) || is_demon(youmonst.data)) {
 		You("seem unaffected.");
 		break;
-	    } else if (Antimagic && rn2(20)) {
+	    } else if (Antimagic) {
 		You("aren't affected.");
 		break;
 	    }
@@ -2497,7 +2497,7 @@ dopois:
 	    case AD_ACID:
 		hitmsg(mtmp, mattk);
 		if(!mtmp->mcan && !rn2(3)) {
-		    if (Acid_resistance && rn2(20)) {
+		    if (Acid_resistance) {
 			pline("You're covered in acid, but it seems harmless.");
 			dmg = 0;
 		    } else {
@@ -2588,7 +2588,7 @@ dopois:
 		break;
 	    case AD_MAGM:
 		hitmsg(mtmp, mattk);
-		    if(Antimagic && rn2(5)) {
+		    if(Antimagic) {
 			shieldeff(u.ux, u.uy);
 			dmg = 0;
 			pline("A hail of magic missiles narrowly misses you!");
@@ -2652,7 +2652,7 @@ dopois:
 	}
 
 	if(dmg) {
-	    if ( (Half_physical_damage && rn2(2)) 
+	    if ( (Half_physical_damage) 
 					/* Mitre of Holiness */
 		|| (Role_if(PM_PRIEST) && uarmh && is_quest_artifact(uarmh) &&
 		    (is_undead(mtmp->data) || is_demon(mtmp->data))))
@@ -2762,7 +2762,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		    unleash_all();
 		}
 
-		if (touch_petrifies(youmonst.data) && !resists_ston(mtmp) && !rn2(4)) {
+		if (touch_petrifies(youmonst.data) && !resists_ston(mtmp)) {
 			minstapetrify(mtmp, TRUE);
 			if (mtmp->mhp > 0) return 0;
 			else return 2;
@@ -2836,7 +2836,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 
 		case AD_SLEE:
 			if (!rn2(5) && multi >= 0) {
-			    if (Sleep_resistance && rn2(20)) break;
+			    if (Sleep_resistance) break;
 			    fall_asleep(-rnd(10), TRUE);
 			    You("suddenly fall asleep!");
 			}
@@ -2886,7 +2886,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 	      case AD_DRLI:
 			pline("It sucks you!");
 /* Imagine the facial expression of a player who thinks this is the mind flayer's amnesia attack. --Amy */
-			if (!rn2(3) && (!Drain_resistance || !rn2(20) )  ) {
+			if (!rn2(3) && (!Drain_resistance)  ) {
 			    losexp("life drainage", FALSE);
 			}
 			break;
@@ -3064,7 +3064,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		    } /* else FALLTHRU */
 		default: /* case 16: ... case 5: */
 		    You_feel("your life force draining away...");
-			if (Antimagic || (Half_spell_damage && rn2(2) )) {
+			if (Antimagic || (Half_spell_damage)) {
 				shieldeff(u.ux, u.uy);
 				tmp /= 2;
 			}
@@ -3154,7 +3154,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		    }
 		    break;
 		case AD_ACID:
-		    if (Acid_resistance && rn2(20)) {
+		    if (Acid_resistance) {
 			You("are covered with a seemingly harmless goo.");
 			tmp = 0;
 		    } else {
@@ -3184,7 +3184,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		case AD_ELEC:
 		    if(!mtmp->mcan && rn2(2)) {
 			pline_The("air around you crackles with electricity.");
-			if (Shock_resistance && rn2(20)) {
+			if (Shock_resistance) {
 				shieldeff(u.ux, u.uy);
 				You("seem unhurt.");
 				ugolemeffects(AD_ELEC,tmp);
@@ -3194,7 +3194,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		    break;
 		case AD_COLD:
 		    if(!mtmp->mcan && rn2(2)) {
-			if (Cold_resistance && rn2(20)) {
+			if (Cold_resistance) {
 				shieldeff(u.ux, u.uy);
 				You_feel("mildly chilly.");
 				ugolemeffects(AD_COLD,tmp);
@@ -3246,7 +3246,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		    break;
 		case AD_FIRE:
 		    if(!mtmp->mcan && rn2(2)) {
-			if (Fire_resistance && rn2(20)) {
+			if (Fire_resistance) {
 				shieldeff(u.ux, u.uy);
 				You_feel("mildly hot.");
 				ugolemeffects(AD_FIRE,tmp);
@@ -3260,7 +3260,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		    if (!diseasemu(mtmp->data)) tmp = 0;
 		    break;
 		case AD_MAGM:
-		    if(Antimagic && rn2(5)) {
+		    if(Antimagic) {
 			tmp = 0;
 		    } else {
 			You("are irradiated with energy!");
@@ -3269,7 +3269,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		case AD_DISN:
 		    You("feel like a drill is tearing you apart!");
 		if (!rn2(10))  {
-		if (Disint_resistance && rn2(100)) {
+		if (Disint_resistance) {
 		    You("are not disintegrated.");
 		    break;
             } else if (Invulnerable) {
@@ -3298,7 +3298,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 	      else if (nonliving(youmonst.data) || is_demon(youmonst.data)) {
 		You("seem unaffected.");
 		break;
-	    } else if (Antimagic && rn2(20)) {
+	    } else if (Antimagic) {
 		You("aren't affected.");
 		break;
 	    }
@@ -3318,7 +3318,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		randattackA = 0;
 	}*/
 
-	if (Half_physical_damage && rn2(2) ) tmp = (tmp+1) / 2;
+	if (Half_physical_damage) tmp = (tmp+1) / 2;
 
 	mdamageu(mtmp, tmp);
 	if (tmp) stop_occupation();
@@ -3387,7 +3387,7 @@ common:
 		        if (flags.verbose) You("get blasted!");
 		    }
 		    if (mattk->adtyp == AD_FIRE) burn_away_slime();
-		    if (Half_physical_damage && rn2(2) ) tmp = (tmp+1) / 2;
+		    if (Half_physical_damage) tmp = (tmp+1) / 2;
 		    mdamageu(mtmp, tmp);
 		}
 		break;
@@ -3512,7 +3512,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    return 2;
 		}
 		if (canseemon(mtmp) && couldsee(mtmp->mx, mtmp->my) &&
-		    !Stone_resistance && !rn2(15) ) {
+		    !Stone_resistance) {
 		    You("meet %s gaze.", s_suffix(mon_nam(mtmp)));
 		    stop_occupation();
 		    if(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
@@ -3551,7 +3551,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	      if(!mtmp->mcan && canseemon(mtmp) && mtmp->mcansee && rn2(5))
  		{
 		pline("%s's eye color suddenly changes!", Monnam(mtmp));
-		    if(Antimagic && !rn2(3)) {
+		    if(Antimagic) {
 			shieldeff(u.ux, u.uy);
 			pline("A hail of magic missiles narrowly misses you!");
 		    } else {
@@ -3565,7 +3565,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
  		{
 		if (!rn2(20))  {
 		pline("%s's gaze seems to drill right into you!", Monnam(mtmp));
-		if (Disint_resistance && rn2(100)) {
+		if (Disint_resistance) {
 		    You("are not disintegrated.");
 		    break;
             } else if (Invulnerable) {
@@ -3593,7 +3593,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	      else if (nonliving(youmonst.data) || is_demon(youmonst.data)) {
 		You("seem unaffected.");
 		break;
-	    } else if (Antimagic && rn2(20)) {
+	    } else if (Antimagic) {
 		You("aren't affected.");
 		break;
 	    }
@@ -3609,7 +3609,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 
 		if(!rn2(3)) {
 		pline("%s sends a terrifying gaze at you!", Monnam(mtmp));
-		    if (Acid_resistance && rn2(20)) {
+		    if (Acid_resistance) {
 			pline("You're covered in acid, but it seems harmless.");
 		    } else {
 			pline("You're covered in acid! It burns!");
@@ -3624,7 +3624,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	      case AD_DRLI:
 		if(!mtmp->mcan && canseemon(mtmp) && mtmp->mcansee && rn2(5))
  		{
-			if (!rn2(7) && (!Drain_resistance || !rn2(20) )  ) {
+			if (!rn2(7) && (!Drain_resistance)  ) {
 				pline("%s seems to drain your life with its gaze!", Monnam(mtmp));
 			    losexp("life drainage", FALSE);
 			}
@@ -3884,7 +3884,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 
 		    pline("%s attacks you with a fiery gaze!", Monnam(mtmp));
 		    stop_occupation();
-		    if (Fire_resistance && rn2(20)) {
+		    if (Fire_resistance) {
 			pline_The("fire doesn't feel hot!");
 			dmg = 0;
 		    }
@@ -3913,7 +3913,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 
 		    pline("%s attacks you with an icy gaze!", Monnam(mtmp));
 		    stop_occupation();
-		    if (Cold_resistance && rn2(20)) {
+		    if (Cold_resistance) {
 			pline_The("cold doesn't freeze you!");
 			dmg = 0;
 		    }
@@ -4008,7 +4008,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 			if (sleep_monst(mtmp, rnd(10), -1) && !Blind)
 			    pline("%s is put to sleep!", Monnam(mtmp));
 			break;
-		    } else if (Sleep_resistance && rn2(20)) {
+		    } else if (Sleep_resistance) {
 			pline("You yawn.");
 		    } else {
 			nomul(-rnd(10), "sleeping from a monster's gaze");
@@ -4187,7 +4187,7 @@ register int n;
 	if (Upolyd) {
 		u.mh -= n;
 		if (u.mh < 1) {                
-			if (Polymorph_control || !rn2(3)) {
+			if (Polymorph_control) {
 			    u.uhp -= mons[u.umonnum].mlevel;
 			    u.uhpmax -= mons[u.umonnum].mlevel;
 			    if (u.uhpmax < 1) u.uhpmax = 1;
@@ -4535,7 +4535,7 @@ register struct monst *mon;
 				flags.botl = 1;
 				break;
 			case 3:
-				if (!Drain_resistance || !rn2(20) ) {
+				if (!Drain_resistance) {
 				    You_feel("out of shape.");
 				    losexp("overexertion", FALSE);
 				} else {
@@ -4547,7 +4547,7 @@ register struct monst *mon;
 				You_feel("exhausted.");
 			        exercise(A_STR, FALSE);
 				tmp = rn1(10, 6);
-				if(Half_physical_damage && rn2(2) ) tmp = (tmp+1) / 2;
+				if(Half_physical_damage) tmp = (tmp+1) / 2;
 				losehp(tmp, "exhaustion", KILLED_BY);
 				break;
 			}
@@ -4748,7 +4748,7 @@ register struct attack *mattk;
 		/* wielded weapon gives same protection as gloves here */
 		if (MON_WEP(mtmp) != 0) wornitems |= W_ARMG;
 
-		if (!resists_ston(mtmp) && !rn2(4) && (protector == 0L ||
+		if (!resists_ston(mtmp) && (protector == 0L ||
 			(protector != ~0L &&
 			    (wornitems & protector) != protector))) {
 		    if (poly_when_stoned(mtmp->data)) {

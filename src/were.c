@@ -174,7 +174,7 @@ you_were()
 	char qbuf[QBUFSZ];
 
 	if (Unchanging || (u.umonnum == u.ulycn)) return;
-	if (Polymorph_control && rn2(5) ) {
+	if (Polymorph_control) {
 	    /* `+4' => skip "were" prefix to get name of beast */
 	    Sprintf(qbuf, "Do you want to change into %s? ",
 		    an(mons[u.ulycn].mname+4));

@@ -293,7 +293,7 @@ boolean forcecontrol;
 
 	if(!Polymorph_control && !forcecontrol && !draconian && !iswere &&
 			!isvamp && !Race_if(PM_DOPPELGANGER)) {
-		if ( (rn2(12) > ACURR(A_CON) || !rn2(50)) && !Race_if(PM_UNGENOMOLD) && !Race_if(PM_MOULD)) {
+		if ((rn2(12) > ACURR(A_CON)) && !Race_if(PM_UNGENOMOLD) && !Race_if(PM_MOULD)) {
 
 		You(shudder_for_moment);
 		losehp(rnd(30), "system shock", KILLED_BY_AN);
@@ -303,7 +303,7 @@ boolean forcecontrol;
 	}
 	old_light = Upolyd ? emits_light(youmonst.data) : 0;
 
-	if ((Polymorph_control || forcecontrol) && rn2(5)) {
+	if (Polymorph_control || forcecontrol) {
 		do {
 			getlin("Become what kind of monster? [type the name]",
 				buf);

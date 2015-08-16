@@ -96,7 +96,7 @@ const char *name;	/* if null, then format `obj' */
 			pline("It doesn't seem to hurt you.");
 		else {
 			if (is_acid) pline("It burns!");
-			if (Half_physical_damage && rn2(2) ) dam = (dam+1) / 2;
+			if (Half_physical_damage) dam = (dam+1) / 2;
 
 			if (dam && u.uac < /*-1*/0) { /* AC protects against this damage now, at least a bit --Amy */
 				int tempval;

@@ -355,7 +355,7 @@ castmu(mtmp, mattk, thinks_it_foundyou, foundyou)
 	} /*else*/ if (mattk->damd)
 	    dmg = d((int)((ml/2) + mattk->damn), (int)mattk->damd);
 	else dmg = d((int)((ml/2) + 1), 6);
-	if (Half_spell_damage && rn2(2) ) dmg = (dmg+1) / 2;
+	if (Half_spell_damage) dmg = (dmg+1) / 2;
 
 	ret = 1;
 
@@ -363,7 +363,7 @@ castmu(mtmp, mattk, thinks_it_foundyou, foundyou)
 
 	    case AD_FIRE:
 		pline("You're enveloped in flames.");
-		if(Fire_resistance && rn2(20) ) {
+		if(Fire_resistance) {
 			shieldeff(u.ux, u.uy);
 			pline("But you resist the effects.");
 			dmg = 0;
@@ -376,7 +376,7 @@ castmu(mtmp, mattk, thinks_it_foundyou, foundyou)
 		break;
 	    case AD_COLD:
 		pline("You're covered in frost.");
-		if(Cold_resistance && rn2(20) ) {
+		if(Cold_resistance) {
 			shieldeff(u.ux, u.uy);
 			pline("But you resist the effects.");
 			dmg = 0;
@@ -384,7 +384,7 @@ castmu(mtmp, mattk, thinks_it_foundyou, foundyou)
 		break;
 	    case AD_MAGM:
 		You("are hit by a shower of missiles!");
-		if(Antimagic && rn2(20) ) {
+		if(Antimagic) {
 			shieldeff(u.ux, u.uy);
 			pline_The("missiles bounce off!");
 			dmg = 0;
@@ -448,7 +448,7 @@ int spellnum;
 			dmg = d(8,6);
 			/* Magic resistance or half spell damage will cut this in half... */
 			/* and also prevent a reduction of maximum hit points */
-			if (Antimagic || (Half_spell_damage && rn2(2)) ) {
+			if (Antimagic || (Half_spell_damage) ) {
 				shieldeff(u.ux, u.uy);
 				dmg /= 2;
 				u.uhpmax -= dmg/2;
@@ -562,7 +562,7 @@ int spellnum;
 	dmg = 0;
 	break;
     case MGC_DESTRY_ARMR:
-	if (Antimagic && rn2(20)) {
+	if (Antimagic) {
 	    shieldeff(u.ux, u.uy);
 	    pline("A field of force surrounds you!");
 	} else if (!destroy_arm(some_armor(&youmonst))) {
@@ -622,7 +622,7 @@ int spellnum;
 		break;
 
     case MGC_WITHER:
-	if (Antimagic && rn2(5)) {
+	if (Antimagic) {
 	    shieldeff(u.ux, u.uy);
 	    pline("A field of force surrounds you!");
 	} else {
@@ -670,7 +670,7 @@ int spellnum;
 	dmg = 0;
 	break;
     case MGC_DAMAGE_ARMR:
-	if (Antimagic && rn2(5)) {
+	if (Antimagic) {
 	    shieldeff(u.ux, u.uy);
 	    pline("A field of force surrounds you!");
 	} else {
@@ -718,13 +718,13 @@ int spellnum;
 	dmg = 0;
 	break;
     case MGC_WEAKEN_YOU:		/* drain strength */
-	if (Antimagic && rn2(20)) {
+	if (Antimagic) {
 	    shieldeff(u.ux, u.uy);
 	    You_feel("momentarily weakened.");
 	} else {
 	    You("suddenly feel weaker!");
 	    dmg = mtmp->m_lev - 6;
-	    if (Half_spell_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	    if (Half_spell_damage) dmg = (dmg + 1) / 2;
 	    losestr(rnd(dmg));
 	    if (u.uhp < 1)
 		done_in_by(mtmp);
@@ -742,7 +742,7 @@ int spellnum;
 	    impossible("no reason for monster to cast disappear spell?");
 	break;
     case MGC_STUN_YOU:
-	if ((Antimagic || Free_action) && rn2(20)) {
+	if ((Antimagic || Free_action)) {
 	    shieldeff(u.ux, u.uy);
 	    if (!Stunned)
 		You_feel("momentarily disoriented.");
@@ -750,7 +750,7 @@ int spellnum;
 	} else {
 	    You(Stunned ? "struggle to keep your balance." : "reel...");
 	    dmg = d(ACURR(A_DEX) < 12 ? 6 : 4, 4);
-	    if (Half_spell_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	    if (Half_spell_damage) dmg = (dmg + 1) / 2;
 	    make_stunned(HStun + dmg, FALSE);
 	}
 	dmg = 0;
@@ -772,7 +772,7 @@ int spellnum;
     case MGC_PSI_BOLT:
 	/* prior to 3.4.0 Antimagic was setting the damage to 1--this
 	   made the spell virtually harmless to players with magic res. */
-	if (Antimagic && rn2(20)) {
+	if (Antimagic) {
 	    shieldeff(u.ux, u.uy);
 	    dmg = (dmg + 1) / 2;
 	}
@@ -837,7 +837,7 @@ int spellnum;
 	dmg = d(8, 6);
 	water_damage(invent, FALSE, FALSE); /* Come on, every other source of water rusts your stuff. --Amy */
 	if (level.flags.lethe) lethe_damage(invent, FALSE, FALSE);
-	if (Half_physical_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	if (Half_physical_damage) dmg = (dmg + 1) / 2;
 	break;
 
 	case 20:
@@ -845,7 +845,7 @@ int spellnum;
 	pline("You are caught in an antimatter storm!");
 	dmg = d(8, 6);
 	withering_damage(invent, FALSE, FALSE); /* This can potentially damage all of your inventory items. --Amy */
-	if (Half_physical_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	if (Half_physical_damage) dmg = (dmg + 1) / 2;
 
 	break;
 
@@ -902,12 +902,12 @@ int spellnum;
 
     case CLC_FIRE_PILLAR:
 	pline("A pillar of fire strikes all around you!");
-	if (Fire_resistance && rn2(20)) {
+	if (Fire_resistance) {
 	    shieldeff(u.ux, u.uy);
 	    dmg = 0;
 	} else
 	    dmg = d(8, 6);
-	if (Half_spell_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	if (Half_spell_damage) dmg = (dmg + 1) / 2;
 	burn_away_slime();
 	(void) burnarmor(&youmonst);
 		    if (!rn2(15)) /* new calculations --Amy */	destroy_item(SCROLL_CLASS, AD_FIRE);
@@ -934,7 +934,7 @@ int spellnum;
 		break;
 	} else
 	    dmg = d(8, 6);
-	if (Half_spell_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	if (Half_spell_damage) dmg = (dmg + 1) / 2;
 		    if (!rn2(15)) /* new calculations --Amy */	destroy_item(WAND_CLASS, AD_ELEC);
 		    if (!rn2(15)) /* new calculations --Amy */	destroy_item(RING_CLASS, AD_ELEC);
 	break;
@@ -1283,7 +1283,7 @@ int spellnum;
 	    impossible("no reason for monster to cast blindness spell?");
 	break;
     case CLC_PARALYZE:
-	if ((Antimagic || Free_action) && rn2(20)) {
+	if ((Antimagic || Free_action)) {
 	    shieldeff(u.ux, u.uy);
 	    if (multi >= 0)
 		You("stiffen briefly.");
@@ -1292,21 +1292,21 @@ int spellnum;
 	    if (multi >= 0)
 		You("are frozen in place!");
 	    dmg = 4 + (int)mtmp->m_lev;
-	    if (Half_spell_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	    if (Half_spell_damage) dmg = (dmg + 1) / 2;
 	    nomul(-dmg, "paralyzed by a monster spell");
 	}
 	nomovemsg = 0;
 	dmg = 0;
 	break;
     case CLC_CONFUSE_YOU:
-	if (Antimagic && rn2(20)) {
+	if (Antimagic) {
 	    shieldeff(u.ux, u.uy);
 	    You_feel("momentarily dizzy.");
 	} else {
 	    boolean oldprop = !!Confusion;
 
 	    dmg = (int)mtmp->m_lev;
-	    if (Half_spell_damage && rn2(2) ) dmg = (dmg + 1) / 2;
+	    if (Half_spell_damage) dmg = (dmg + 1) / 2;
 	    make_confused(HConfusion + dmg, TRUE);
 	    if (Hallucination)
 		You_feel("%s!", oldprop ? "trippier" : "trippy");
@@ -1326,7 +1326,7 @@ int spellnum;
 	}
 	break;
     case CLC_OPEN_WOUNDS:
-	if (Antimagic && rn2(20)) {
+	if (Antimagic) {
 	    shieldeff(u.ux, u.uy);
 	    dmg = (dmg + 1) / 2;
 	}

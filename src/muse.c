@@ -1659,7 +1659,7 @@ struct monst *mtmp;
 {
 	register struct obj *obj;
 	boolean ranged_stuff = lined_up(mtmp);
-	boolean reflection_skip = (Reflecting && rn2(2));
+	boolean reflection_skip = (Reflecting);
 	struct obj *helmet = which_armor(mtmp, W_ARMH);
 
 	m.offensive = (struct obj *)0;
@@ -1910,10 +1910,10 @@ register struct obj *otmp;
 			if (Antimagic) {
 			    shieldeff(u.ux, u.uy);
 			    pline("Boing!");
-			} else if (rnd(20) < 10 + u.uac || !rn2(3) ) { /* good ac will no longer be 100% protection --Amy */
+			} else if (rnd(20) < 10 + u.uac) {
 			    pline_The("wand hits you!");
 			    tmp = d(2,12);
-			    if(Half_spell_damage && rn2(2) ) tmp = (tmp+1) / 2;
+			    if(Half_spell_damage) tmp = (tmp+1) / 2;
 			    losehp(tmp, "wand", KILLED_BY_AN);
 			} else pline_The("wand misses you.");
 			stop_occupation();
@@ -2645,7 +2645,7 @@ struct monst *mtmp;
 			if (Fire_resistance)
 			    You("are not harmed.");
 			burn_away_slime();
-			if (Half_spell_damage && rn2(2) ) num = (num+1) / 2;
+			if (Half_spell_damage) num = (num+1) / 2;
 			else losehp(num, "scroll of fire", KILLED_BY_AN);
 			for(mtmp2 = fmon; mtmp2; mtmp2 = mtmp2->nmon) {
 			   if(DEADMONSTER(mtmp2)) continue;

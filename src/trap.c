@@ -1204,7 +1204,7 @@ unsigned trflags;
 
 		    pline("%s you!", A_gush_of_water_hits);
 		    You("are covered with rust!");
-		    if (Half_physical_damage && rn2(2) ) dam = (dam+1) / 2;
+		    if (Half_physical_damage) dam = (dam+1) / 2;
 		    losehp(dam, "rusting away", KILLED_BY);
 		    break;
 		} else if (u.umonnum == PM_FLAMING_SPHERE) {
@@ -1212,7 +1212,7 @@ unsigned trflags;
 
 		    pline("%s you!", A_gush_of_water_hits);
 		    You("are extinguished!");
-		    if (Half_physical_damage && rn2(2) ) dam = (dam+1) / 2;
+		    if (Half_physical_damage) dam = (dam+1) / 2;
 		    losehp(dam, "drenching", KILLED_BY);
 		    break;
 		} else if (u.umonnum == PM_GREMLIN && rn2(3)) {
@@ -2923,7 +2923,7 @@ boolean byplayer;
 {
 	struct obj *mwep = MON_WEP(mon);
 
-	if (mwep && mwep->otyp == CORPSE && touch_petrifies(&mons[mwep->corpsenm]) && !rn2(4)) {
+	if (mwep && mwep->otyp == CORPSE && touch_petrifies(&mons[mwep->corpsenm])) {
 		if (cansee(mon->mx, mon->my)) {
 			pline("%s%s touches the %s corpse.",
 			    arg ? arg : "", arg ? mon_nam(mon) : Monnam(mon),

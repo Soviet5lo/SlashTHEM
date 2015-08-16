@@ -644,7 +644,7 @@ register struct obj *obj;
 				       &mons[PM_GREEN_SLIME],
 				       FALSE, could_slime);
 			delobj(obj);	/* corpse is digested */
-		    } else if (could_petrify && !rn2(4)) {
+		    } else if (could_petrify) {
 			minstapetrify(u.ustuck, TRUE);
 			/* Don't leave a cockatrice corpse in a statue */
 			if (!u.uswallow) delobj(obj);

@@ -691,7 +691,7 @@ tele()
 	    You_feel("disoriented for a moment.");
 	    return;
 	}
-	if ((Teleport_control && !Stunned && rn2(20)) /* low chance for tele control to fail --Amy */
+	if ((Teleport_control && !Stunned)
 #ifdef WIZARD
 			    || (wizard && yn_function("Invoke wizard-mode teleport control?", ynchars, 'y') == 'y')
 #endif
@@ -878,7 +878,7 @@ level_tele()
 	    You_feel("very disoriented for a moment.");
 	    return;
 	}
-	if ((Teleport_control && !Stunned && rn2(10)) /* Teleport control might not always work. --Amy */
+	if ((Teleport_control && !Stunned)
 #ifdef WIZARD
 	   || (wizard && yn_function("Invoke wizard-mode teleport control?", ynchars, 'y') == 'y')
 #endif

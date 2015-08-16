@@ -947,7 +947,7 @@ meatmetal(mtmp)
 				ptr = mtmp->data;
 			} else if (grow) {
 			    ptr = grow_up(mtmp, (struct monst *)0);
-			} else if (mstone && !rn2(4) ) {
+			} else if (mstone) {
 			    if (poly_when_stoned(ptr)) {
 				mon_to_stone(mtmp);
 				ptr = mtmp->data;
@@ -2015,7 +2015,7 @@ boolean was_swallowed;			/* digestion */
 			      body_part(STOMACH));
 			Sprintf(killer_buf, "%s explosion",
 				s_suffix(mdat->mname));
-			if (Half_physical_damage && rn2(2) ) tmp = (tmp+1) / 2;
+			if (Half_physical_damage) tmp = (tmp+1) / 2;
 			losehp(tmp, killer_buf, KILLED_BY_AN);
 		    } else {
 			if (flags.soundok) You_hear("an explosion.");
@@ -2618,7 +2618,7 @@ int  typ, fatal;
 			string, plural ? "were" : "was");
 	}
 
-	if(Poison_resistance && rn2(20) ) {
+	if(Poison_resistance) {
 		if(!strcmp(string, "blast")) shieldeff(u.ux, u.uy);
 		pline_The("poison doesn't seem to affect you.");
 
@@ -2639,7 +2639,7 @@ int  typ, fatal;
 	    kprefix = KILLED_BY;
 	}
 	i = rn2(fatal + 20*thrown_weapon);
-	if(i == 0 && !Poison_resistance && typ != A_CHA && !rn2(100)) {
+	if(i == 0 && typ != A_CHA) {
 		if (Invulnerable)
 		   pline("You are unharmed!");
 		else {
@@ -2652,7 +2652,7 @@ int  typ, fatal;
 		    pline("You%s!", poiseff[typ]);
 	} else {
 		i = thrown_weapon ? rnd(6) : rn1(10,6);
-		if(Half_physical_damage && rn2(2) ) i = (i+1) / 2;
+		if(Half_physical_damage) i = (i+1) / 2;
 		losehp(i, pname, kprefix);
 	}
 	if(u.uhp < 1) {

@@ -1274,7 +1274,7 @@ int thrown;
 				obj->dknown ? the(mons[obj->corpsenm].mname) :
 				an(mons[obj->corpsenm].mname),
 				(obj->quan > 1) ? makeplural(withwhat) : withwhat);
-			    if (!munstone(mon, TRUE) && !rn2(4))
+			    if (!munstone(mon, TRUE))
 				minstapetrify(mon, TRUE);
 			    if (resists_ston(mon)) break;
 			    /* note: hp may be <= 0 even if munstoned==TRUE */
@@ -1318,7 +1318,7 @@ int thrown;
 			    obj->known = 1;	/* (not much point...) */
 #endif
 			    useup_eggs(obj);
-			    if (!munstone(mon, TRUE) && !rn2(4))
+			    if (!munstone(mon, TRUE))
 				minstapetrify(mon, TRUE);
 			    if (resists_ston(mon)) break;
 			    return (boolean) (mon->mhp > 0);
@@ -2017,7 +2017,7 @@ register struct attack *mattk;
 	}
 	switch(mattk->adtyp) {
 	    case AD_STUN:
-		if(!Blind && !rn2(3))
+		if(!Blind)
 		    pline("%s %s for a moment.", Monnam(mdef),
 			  makeplural(stagger(mdef->data, "stagger")));
 		mdef->mstun = 1;
@@ -2124,7 +2124,7 @@ register struct attack *mattk;
 		if (resists_acid(mdef)) tmp = 0;
 		break;
 	    case AD_STON:
-		if (!munstone(mdef, TRUE) && !rn2(4))
+		if (!munstone(mdef, TRUE))
 		    minstapetrify(mdef, TRUE);
 		tmp = 0;
 		break;
@@ -2372,7 +2372,7 @@ register struct attack *mattk;
 		if (mattk->aatyp == AT_GAZE && mon_reflects(mdef, (char *)0)) {
 		    tmp = 0;
 		    (void) mon_reflects(mdef, "But it reflects from %s %s!");
-		    if ((Sleep_resistance || Free_action) && rn2(10)) {
+		    if (Sleep_resistance || Free_action) {
 			pline("You yawn.");
 			break;
 		    } else {
@@ -3268,7 +3268,7 @@ uchar aatyp;
 		else	You("are splashed by %s acid!",
 			                s_suffix(mon_nam(mon)));
 
-		if (!Acid_resistance || !rn2(10))
+		if (!Acid_resistance)
 			mdamageu(mon, tmp);
 		if(!rn2(30)) erode_armor(&youmonst, TRUE);
 	    }
@@ -3459,7 +3459,7 @@ uchar aatyp;
 		    u_slow_down();
 		break;
         case AD_DRLI:
-			if (!rn2(3) && (!Drain_resistance || !rn2(20) )  ) {
+			if (!rn2(3) && (!Drain_resistance)) {
 			    losexp("life drainage", FALSE);
 			}
 			break;
@@ -3493,7 +3493,7 @@ uchar aatyp;
 		    } /* else FALLTHRU */
 		default: /* case 16: ... case 5: */
 		    You_feel("your life force draining away...");
-			if (Antimagic || (Half_spell_damage && rn2(2) )) {
+			if (Antimagic || (Half_spell_damage)) {
 				shieldeff(u.ux, u.uy);
 				tmp /= 2;
 			}
@@ -3538,7 +3538,7 @@ uchar aatyp;
 		break;
 	  case AD_MAGM:
 	    /* wrath of gods for attacking Oracle */
-	    if(Antimagic && rn2(5)) {
+	    if(Antimagic) {
 		shieldeff(u.ux, u.uy);
 		pline("A hail of magic missiles narrowly misses you!");
 	    } else {
@@ -3627,7 +3627,7 @@ uchar aatyp;
 			break;
 	      case AD_SLEE:
 
-		    if (Sleep_resistance && rn2(20)) {
+		    if (Sleep_resistance) {
  			    You("yawn.");
 			break;
 			}
@@ -3641,7 +3641,7 @@ uchar aatyp;
 		break;
 	    case AD_DISN:
 		if (!rn2(10))  {
-		if (Disint_resistance && rn2(100)) {
+		if (Disint_resistance) {
 		    You("are mildly shaked.");
 		    break;
             } else if (Invulnerable) {
@@ -3669,7 +3669,7 @@ uchar aatyp;
 	      else if (nonliving(youmonst.data) || is_demon(youmonst.data)) {
 		You("seem unaffected.");
 		break;
-	    } else if (Antimagic && rn2(20)) {
+	    } else if (Antimagic) {
 		You("aren't affected.");
 		break;
 	    }
@@ -3711,7 +3711,7 @@ uchar aatyp;
 		break;
 	      case AD_COLD:		/* brown mold or blue jelly */
 		if(monnear(mon, u.ux, u.uy)) {
-		    if(Cold_resistance && rn2(10)) {
+		    if(Cold_resistance) {
 			shieldeff(u.ux, u.uy);
 			You_feel("a mild chill.");
 			ugolemeffects(AD_COLD, tmp);
@@ -3742,7 +3742,7 @@ uchar aatyp;
 		break;
 	      case AD_FIRE:
 		if(monnear(mon, u.ux, u.uy)) {
-		    if(Fire_resistance && rn2(10)) {
+		    if(Fire_resistance) {
 			shieldeff(u.ux, u.uy);
 			You_feel("mildly warm.");
 			ugolemeffects(AD_FIRE, tmp);
@@ -3753,7 +3753,7 @@ uchar aatyp;
 		}
 		break;
 	      case AD_ELEC:
-		if(Shock_resistance && rn2(10)) {
+		if(Shock_resistance) {
 		    shieldeff(u.ux, u.uy);
 		    You_feel("a mild tingle.");
 		    ugolemeffects(AD_ELEC, tmp);
