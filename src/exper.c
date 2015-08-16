@@ -190,12 +190,8 @@ boolean force;		/* Force the loss of an experience level */
 	}
 	num = newhp();
 	u.uhpmax -= num;
-	u.uhpmax -= rnz(2);
-	u.uhpmax -= rnz(3); /* making the drain for gain exploit much harder to perform --Amy */
 	if (u.uhpmax < 1) u.uhpmax = 1;
 	u.uhp -= num;
-	u.uhp -= rnz(3);
-	u.uhp -= rnz(2);
 	if (u.uhp < 1) u.uhp = 1;
 	else if (u.uhp > u.uhpmax) u.uhp = u.uhpmax;
 
@@ -207,11 +203,8 @@ boolean force;		/* Force the loss of an experience level */
 			urole.enadv.hifix + urace.enadv.hifix);
 	num = enermod(num);		/* M. Stephenson */
 	u.uenmax -= num;
-	u.uenmax -= rnz(3);
-	u.uenmax -= (rn2(3) ? rnz(1) : rnz(2));
 	if (u.uenmax < 0) u.uenmax = 0;
 	u.uen -= num;
-	u.uen -= rnz(3);
 	if (u.uen < 0) u.uen = 0;
 	else if (u.uen > u.uenmax) u.uen = u.uenmax;
 
@@ -771,13 +764,17 @@ boolean incr;	/* true iff via incremental experience growth */
 	num = newhp();
 	u.uhpmax += num;
 	u.uhp += num;
-	u.uhpmax += rnz(2);
+#ifdef EASY_MODE
+	u.uhpmax += rnd(2);
 	if (u.uhp < u.uhpmax) u.uhp = u.uhpmax;
+#endif
 	if (Upolyd) {
-	    num = rnz(8); /* unfortunately will be lost upon unpolymorphing --Amy */
+	    num = rnd(8);
 	    u.mhmax += num;
 	    u.mh += num;
+#ifdef EASY_MODE
 		if (u.mh < u.mhmax) u.mh = u.mhmax;
+#endif
 	}
 	if (u.ulevel < urole.xlev)
 	    num = rn1((int)ACURR(A_WIS)/2 + urole.enadv.lornd + urace.enadv.lornd,
@@ -788,9 +785,10 @@ boolean incr;	/* true iff via incremental experience growth */
 	num = enermod(num);	/* M. Stephenson */
 	u.uenmax += num;
 	u.uen += num;
-	u.uenmax += (rn2(3) ? rnz(1) : rnz(2));
+#ifdef EASY_MODE
+	u.uenmax += (rn2(3) ? rnd(1) : rnd(2));
 	if (u.uen < u.uenmax) u.uen = u.uenmax;
-	
+#endif	
 	if(u.ulevel < MAXULEV) {
 	    if (incr) {
 		long tmp = newuexp(u.ulevel + 1);
