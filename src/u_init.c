@@ -1120,7 +1120,7 @@ static const struct def_skill Skill_B[] = {
 };
 
 static const struct def_skill Skill_Bard[] = {
-    /* 5lo: Comes straight from the Bard patch, music is omitted */
+    /* 5lo: Comes straight from the Bard patch. */
     { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_BASIC },
     { P_SHORT_SWORD, P_BASIC },		{ P_SCIMITAR, P_BASIC },
     { P_CLUB, P_SKILLED },		{ P_FLAIL, P_BASIC },
@@ -1128,7 +1128,7 @@ static const struct def_skill Skill_Bard[] = {
     { P_JAVELIN, P_SKILLED },		{ P_SPEAR, P_BASIC },
     { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },	 
     { P_ENCHANTMENT_SPELL, P_SKILLED },	{ P_BODY_SPELL, P_BASIC },
-    { P_BARE_HANDED_COMBAT, P_EXPERT }, /* Music doesn't exist...yet. */
+    { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_MUSICALIZE, P_EXPERT },
     { P_NONE, 0 }
 };
@@ -1454,6 +1454,7 @@ static const struct def_skill Skill_Dru[] = {
     { P_FIREARM, P_BASIC },
 #endif
     { P_DIVINATION_SPELL, P_BASIC },	{ P_BODY_SPELL, P_BASIC },
+    { P_MUSICALIZE, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_RIDING, P_BASIC },
     { P_NONE, 0 }
@@ -1713,7 +1714,7 @@ static const struct def_skill Skill_Mon[] = {
     { P_ATTACK_SPELL, P_BASIC },    { P_HEALING_SPELL, P_EXPERT },
     { P_DIVINATION_SPELL, P_BASIC },	{ P_ENCHANTMENT_SPELL, P_SKILLED },
     { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_BASIC },
-    { P_MATTER_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },	{ P_MUSICALIZE, P_BASIC },
 /*WAC - monks are good healers - expert healing - and expert protect*/
     { P_NONE, 0 }
 };
@@ -1747,6 +1748,7 @@ static const struct def_skill Skill_Nob[] = {
     { P_BOW, P_SKILLED },		{ P_CROSSBOW, P_BASIC },
     { P_ATTACK_SPELL, P_SKILLED },	{ P_HEALING_SPELL, P_SKILLED },
     { P_BODY_SPELL, P_SKILLED },	{ P_ENCHANTMENT_SPELL, P_SKILLED },
+    { P_MUSICALIZE, P_BASIC },
 #ifdef STEED
     { P_RIDING, P_SKILLED },
 #endif
@@ -1791,7 +1793,7 @@ static struct def_skill Skill_P[] = {
     { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
     { P_DIVINATION_SPELL, P_EXPERT },   { P_ENCHANTMENT_SPELL, P_BASIC },
     { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_BASIC },
-    { P_MATTER_SPELL, P_BASIC },
+    { P_MATTER_SPELL, P_BASIC },        { P_MUSICALIZE, P_BASIC },
 
     { P_BARE_HANDED_COMBAT, P_BASIC },  /* the monk is added in slash */ 
     { P_NONE, 0 }
@@ -2015,7 +2017,7 @@ static const struct def_skill Skill_Mus[] = {
     { P_JAVELIN, P_SKILLED },		{ P_SPEAR, P_BASIC },
     { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },	 
     { P_ENCHANTMENT_SPELL, P_SKILLED },	{ P_BODY_SPELL, P_BASIC },
-    { P_BARE_HANDED_COMBAT, P_EXPERT }, /* Music doesn't exist...yet. */
+    { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_MUSICALIZE, P_EXPERT },
     { P_NONE, 0 }
 };
@@ -2031,6 +2033,7 @@ static const struct def_skill Skill_S[] = {
     { P_JAVELIN, P_BASIC },		{ P_LANCE, P_SKILLED },
     { P_BOW, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
     { P_PROTECTION_SPELL, P_SKILLED },      { P_BODY_SPELL, P_BASIC },
+    { P_MUSICALIZE, P_BASIC },
 
 /* WAC - removed the attack spells, replace with body.  clairvoyance, meditate*/
 #ifdef STEED
@@ -2062,7 +2065,7 @@ static const struct def_skill Skill_T[] = {
     { P_SHURIKEN, P_BASIC },		{ P_BOOMERANG, P_BASIC },
     { P_WHIP, P_BASIC },		{ P_UNICORN_HORN, P_SKILLED },
     { P_DIVINATION_SPELL, P_BASIC },	{ P_ENCHANTMENT_SPELL, P_BASIC },
-    { P_BODY_SPELL, P_SKILLED },
+    { P_BODY_SPELL, P_SKILLED },        { P_MUSICALIZE, P_SKILLED },
 /*WAC left alone*/
 #ifdef STEED
     { P_RIDING, P_BASIC },
