@@ -222,7 +222,7 @@ nh_timeout()
 	/* special bleeder handling --Amy */
 	if (!rn2(200) && Role_if(PM_BLEEDER)) {
 		You("are losing blood!");
-		losehp(rnz(u.legscratching), "bleeding out", KILLED_BY);
+		losehp(rnd(u.legscratching), "bleeding out", KILLED_BY);
 	}
 
 	if (!rn2(1000) && Role_if(PM_BLEEDER)) {
@@ -231,7 +231,7 @@ nh_timeout()
 		u.uhpmax -= 1;
 		u.uen -= 1;
 		u.uenmax -= 1;
-		losehp(rnz(u.legscratching), "severe bleedout", KILLED_BY);
+		losehp(rnd(u.legscratching), "severe bleedout", KILLED_BY);
 	}
 
 	if (!rn2(3000) && Role_if(PM_BLEEDER)) {
@@ -545,7 +545,7 @@ struct obj *obj, *old;
 	if (obj->oldtyp == obj->otyp)
 	    obj->oldtyp = STRANGE_OBJECT;
 	else
-	    (void) start_timer(/*rn1(500,500)*/rnz(1000), TIMER_OBJECT,
+	    (void) start_timer(rn1(500,500), TIMER_OBJECT,
 			UNPOLY_OBJ, (genericptr_t) obj);
 	return;
 }
@@ -681,7 +681,7 @@ boolean your_fault;
 	    /* Stop any old timers.   */
 	    (void) stop_timer(UNPOLY_MON, (genericptr_t) mtmp);
 	    /* Lengthen unpolytime - was 500,500  for player */
-	    (void) start_timer(when ? when : /*rn1(1000, 1000)*/rnz(2000), TIMER_MONSTER,
+	    (void) start_timer(when ? when : rn1(1000, 1000), TIMER_MONSTER,
 		    UNPOLY_MON, (genericptr_t) mtmp);
 	}
 	return i;

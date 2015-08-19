@@ -2569,7 +2569,7 @@ dopois:
 		pline("%s reaches out, and your body shrivels.",
 			Monnam(mtmp));
 		exercise(A_CON, FALSE);
-		if (!is_fainted() && rn2(10) ) morehungry(rnz(40));
+		if (!is_fainted() && rn2(10) ) morehungry(rnd(40));
 		morehungry(dmg); /* This attack was way too weak. --Amy */
 		/* plus the normal damage */
 		break;
@@ -3080,7 +3080,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 	    case AD_FAMN:
 		pline("You are being eaten!");
 		exercise(A_CON, FALSE);
-		if (!is_fainted()) morehungry(rnz(40));
+		if (!is_fainted()) morehungry(rnd(40));
 		morehungry(tmp);
 		/* plus the normal damage */
 		break;
@@ -3767,7 +3767,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		pline("%s gazes at you with its hungry eyes!",
 			Monnam(mtmp));
 		exercise(A_CON, FALSE);
-		if (!is_fainted()) morehungry(rnz(40));
+		if (!is_fainted()) morehungry(rnd(40));
 		/* plus the normal damage */
 		}
 		break;

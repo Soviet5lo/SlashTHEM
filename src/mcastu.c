@@ -981,7 +981,7 @@ int spellnum;
 		You_feel("a dark aura."); /* dark aura */
 		int rangeX;
 
-		rangeX = (rnz(1 + mtmp->m_lev)) / 2;
+		rangeX = (rnd(1 + mtmp->m_lev)) / 2;
 		if (rn2(4)) rangeX = rangeX / 2;
 
 		if (rangeX < 1) rangeX = 1; if (rangeX > 15) rangeX = 15; 
@@ -996,7 +996,7 @@ int spellnum;
 	case 23:
 		You_feel("very trippy all of a sudden!"); /* acid trip */
 		int duratX;
-		duratX = (rnz(1 + mtmp->m_lev));
+		duratX = (rnd(1 + mtmp->m_lev));
 		make_hallucinated(HHallucination + duratX,FALSE,0L);
 		dmg = 0;
 		break;
@@ -1007,7 +1007,7 @@ int spellnum;
 			int rtrap;
 		    int i, j, bd;
 			bd = 1;
-			if (!rn2(5)) bd += rnz(1);
+			if (!rn2(5)) bd += rnd(1);
 
 		      for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
 				if (!isok(u.ux + i, u.uy + j)) continue;
@@ -1037,7 +1037,7 @@ int spellnum;
 	case 29:
 	      pline("Your mana is sapped!"); /* mana drain */
 		int manastealX;
-		manastealX = (rnz(1 + mtmp->m_lev));
+		manastealX = (rnd(1 + mtmp->m_lev));
 		drain_en(manastealX);
 		dmg = 0;
 		break;
@@ -1056,7 +1056,7 @@ int spellnum;
 	case 33:
 	      pline("Your hands start trembling!"); /* disarm */
 		int glibberX;
-		glibberX = (rnz(1 + mtmp->m_lev));
+		glibberX = (rnd(1 + mtmp->m_lev));
 		    incr_itimeout(&Glib, glibberX);
 		dmg = 0;
 		break;

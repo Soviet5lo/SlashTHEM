@@ -513,7 +513,7 @@ int	mntmp;
 		delayed_killer = 0;
 	}
 
-	u.mtimedone = /*rn1(500, 500)*/rnz(1000);
+	u.mtimedone = rn1(500, 500);
 	u.umonnum = mntmp;
 	set_uasmon();
 
@@ -566,8 +566,8 @@ int	mntmp;
 		else u.mhmax = d(mlvl, 8);
 		if (is_home_elemental(&mons[mntmp])) u.mhmax *= 3;
 	}
-	u.mhmax += rnz(u.ulevel);
-	u.mhmax += rnz(u.ulevel);
+	u.mhmax += rnd(u.ulevel);
+	u.mhmax += rnd(u.ulevel);
 	u.mh = u.mhmax;
 
 	if (u.ulevel < mlvl && !Race_if(PM_MOULD)) {
@@ -586,7 +586,7 @@ int	mntmp;
 
 	if ( (u.ulevel * 2) < mlvl && Race_if(PM_MOULD)) {
 
-	u.mtimedone = u.mtimedone + (rnz((u.ulevel * 2) + 1));
+	u.mtimedone = u.mtimedone + (rnd((u.ulevel * 2) + 1));
 
 	u.mtimedone = u.mtimedone * 2;
 	}

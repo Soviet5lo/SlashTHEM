@@ -652,7 +652,7 @@ int mm_flags;
 {
 	int cnt = 1;
 	if (!rn2(2)) cnt = (level_difficulty() + 1)/10;
-	if (!rn2(5)) cnt += rnz(5);
+	if (!rn2(5)) cnt += rnd(5);
 	if (cnt < 1) cnt = 1;
 	struct permonst *mdat;
 	struct obj *otmp;
@@ -679,7 +679,7 @@ int mm_flags;
 
 	int cnt = 1;
 	if (!rn2(2)) cnt = (level_difficulty() + 1)/10;
-	if (!rn2(5)) cnt += rnz(5);
+	if (!rn2(5)) cnt += rnd(5);
 	if (cnt < 1) cnt = 1;
 	int mdat;
 	struct obj *otmp;
@@ -709,7 +709,7 @@ int mm_flags;
 	struct obj *otmp;
 	coord cc;
 
-	if (!rn2(10)) cnt += rnz(2);
+	if (!rn2(10)) cnt += rnd(2);
 
 	while (cnt--) {
 	    mdat = morguemon();
@@ -1009,7 +1009,7 @@ schar type;
 struct permonst *
 courtmon()
 {
-	int     i = rnz(60) + rnz(3*level_difficulty());
+	int     i = rn2(60) + rn2(3*level_difficulty());
 	if (i > 200)            return(mkclass(S_DRAGON,0));
 	else if (i > 130)       return(mkclass(S_GIANT,0));
 	else if (i > 85)	return(mkclass(S_TROLL,0));

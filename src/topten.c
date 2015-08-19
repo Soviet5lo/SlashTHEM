@@ -1406,7 +1406,7 @@ int mm_flags;
 
 	int cnt = 1;
 	if (!rn2(2)) cnt = (level_difficulty() + 1)/10;
-	if (!rn2(5)) cnt += rnz(5);
+	if (!rn2(5)) cnt += rnd(5);
 	if (cnt < 1) cnt = 1;
 	int mdat;
 	struct obj *otmp;

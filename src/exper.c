@@ -246,7 +246,7 @@ newexplevel()
 		tmp = newhp();
 		u.uhpmax += tmp;
 		u.uhp += tmp;
-		u.uhpmax += rnz(2); /*making the game a bit easier --Amy */
+		u.uhpmax += rnd(2); /*making the game a bit easier --Amy */
 		if (u.uhp < u.uhpmax) u.uhp = u.uhpmax;
 		switch (Role_switch) {
 			case PM_ARCHEOLOGIST: u.uenbase += rnd(4) + 1; break;

@@ -1728,7 +1728,7 @@ arti_invoke(obj)
 	    obj->age += (long) d(3,10);
 	    return 1;
 	}
-	obj->age = monstermoves + rnz(1000);
+	obj->age = monstermoves + rnz(100);
 
 	switch(oart->inv_prop) {
 	case TAMING: {
@@ -2163,7 +2163,7 @@ arti_invoke(obj)
 	} else if(!on) {
 	    /* when turning off property, determine downtime */
 	    /* arbitrary for now until we can tune this -dlc */
-	    obj->age = monstermoves + rnz(1000);
+	    obj->age = monstermoves + rnz(100);
 	}
 
 	if ((eprop & ~W_ARTI) || iprop) {

@@ -3411,37 +3411,37 @@ u_init()
 
 	switch (Race_switch) {
 
-	case PM_ALIEN: racebounus = rnz(2); break;
-	case PM_DOPPELGANGER: racebounus = rnz(8); break;
-	case PM_DROW: racebounus = rnz(7); break;
-	case PM_BRETON: racebounus = rnz(5); break;
-	case PM_REDGUARD: racebounus = rnz(5); break;
-	case PM_IMPERIAL: racebounus = rnz(13); break;
-	case PM_ELF: racebounus = rnz(11); break;
-	case PM_GIGANT: racebounus = rnz(12); break;
-	case PM_HOBBIT: racebounus = rnz(8); break;
-	case PM_KOBOLT: racebounus = rnz(8); break;
-	case PM_HUMAN_WEREWOLF: racebounus = rnz(15); break;
-	case PM_MOULD: racebounus = rnz(12); break;
-	case PM_OGRO: racebounus = rnz(11); break;
-	case PM_TROLLOR: racebounus = rnz(12); break;
-	case PM_UNGENOMOLD: racebounus = rnz(15); break;
-	case PM_VAMPIRE: racebounus = rnz(12); break;
-	case PM_DWARF: racebounus = rnz(11); break;
-	case PM_ASGARDIAN: racebounus = rnz(15); break;
-	default:	racebounus = rnz(10); break;
+	case PM_ALIEN: racebounus = rnd(2); break;
+	case PM_DOPPELGANGER: racebounus = rnd(8); break;
+	case PM_DROW: racebounus = rnd(7); break;
+	case PM_BRETON: racebounus = rnd(5); break;
+	case PM_REDGUARD: racebounus = rnd(5); break;
+	case PM_IMPERIAL: racebounus = rnd(13); break;
+	case PM_ELF: racebounus = rnd(11); break;
+	case PM_GIGANT: racebounus = rnd(12); break;
+	case PM_HOBBIT: racebounus = rnd(8); break;
+	case PM_KOBOLT: racebounus = rnd(8); break;
+	case PM_HUMAN_WEREWOLF: racebounus = rnd(15); break;
+	case PM_MOULD: racebounus = rnd(12); break;
+	case PM_OGRO: racebounus = rnd(11); break;
+	case PM_TROLLOR: racebounus = rnd(12); break;
+	case PM_UNGENOMOLD: racebounus = rnd(15); break;
+	case PM_VAMPIRE: racebounus = rnd(12); break;
+	case PM_DWARF: racebounus = rnd(11); break;
+	case PM_ASGARDIAN: racebounus = rnd(15); break;
+	default:	racebounus = rnd(10); break;
 
 	}
 
     switch (u.ualign.type) {
-    case A_LAWFUL: alignbounus = rnz(5); break;
+    case A_LAWFUL: alignbounus = rnd(5); break;
     case A_NEUTRAL: alignbounus = rnd(12); break;
-    case A_CHAOTIC: alignbounus = rnz(3); break;
-	default: /*impossible*/ alignbounus = rnz(3); break;
+    case A_CHAOTIC: alignbounus = rnd(3); break;
+	default: /*impossible*/ alignbounus = rnd(3); break;
 
 	}
 
-	if (flags.female) genderbounus = rnz(3);
+	if (flags.female) genderbounus = rnd(3);
 	else genderbounus = rnd(5);
 
 	temp = 30 + rolebounus + racebounus + alignbounus + genderbounus; /* new algorithm --Amy */

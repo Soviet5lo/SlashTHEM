@@ -2793,9 +2793,9 @@ int     spc;
 	maxmlev = level_difficulty() /*>> 1*/; /* what the heck? does that divide the actual result by 2?! --Amy */
 	    if (!rn2(100)) maxmlev *= 2;
 	    if (!rn2(1000)) maxmlev *= 4;
-	    if (!rn2(5)) maxmlev += rnz(2);
-	    if (!rn2(20)) maxmlev += rnz(3);
-	    if (!rn2(100)) maxmlev += rnz(4);
+	    if (!rn2(5)) maxmlev += rnd(2);
+	    if (!rn2(20)) maxmlev += rnd(3);
+	    if (!rn2(100)) maxmlev += rnd(4);
 	    if (!rn2(10000)) maxmlev = 127;
 		if (maxmlev > 127) maxmlev = 127; /* very important! The game might otherwise crash or become unstable! */
 	if(class < 1 || class >= MAXMCLASSES) {

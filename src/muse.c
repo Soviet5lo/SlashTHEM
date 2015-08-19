@@ -1218,7 +1218,7 @@ mon_tele:
 		struct monst *mon;
 		boolean known = FALSE;
 
-		if (rn2(2)) cnt += rnz(2);
+		if (rn2(2)) cnt += rnd(2);
 		if (!rn2(73)) cnt += rnd(4);
 		if (mtmp->mconf || otmp->cursed) cnt += 12;
 		if (mtmp->mconf) pm = fish = &mons[PM_ACID_BLOB];

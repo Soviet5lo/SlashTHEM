@@ -2223,7 +2223,7 @@ register struct attack *mattk;
 				if (Role_if(PM_BLEEDER)) { /* Bleeders get better from drinking blood */
 
 					pline("This tastes good.");
-					healup(d(5,5) + rnz(u.ulevel), 0, FALSE, FALSE);
+					healup(d(5,5) + rnd(u.ulevel), 0, FALSE, FALSE);
 					exercise(A_CON, TRUE);
 				}
 			}
@@ -3509,7 +3509,7 @@ uchar aatyp;
 	  case AD_FAMN:
 		pline("Your body shrivels!");
 		exercise(A_CON, FALSE);
-		if (!is_fainted()) morehungry(rnz(40));
+		if (!is_fainted()) morehungry(rnd(40));
 		/* plus the normal damage */
 		break;
 	  case AD_SLIM:    

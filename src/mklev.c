@@ -1099,8 +1099,8 @@ skip0:
 		    if(!rn2(25)) mkstone(croom);
 		} 
 
-		if(!rn2(50)) mkstoneX(rnz(10),croom);
-		if(!rn2(250)) mkstoneX(rnz(25),croom);
+		if(!rn2(50)) mkstoneX(rnd(10),croom);
+		if(!rn2(250)) mkstoneX(rnd(25),croom);
 
 		if(!rn2(50)) {
 		    mkice(croom);
@@ -1112,8 +1112,8 @@ skip0:
 		    if(!rn2(25)) mkice(croom);
 		} 
 
-		if(!rn2(50)) mkiceX(rnz(10),croom);
-		if(!rn2(250)) mkiceX(rnz(25),croom);
+		if(!rn2(50)) mkiceX(rnd(10),croom);
+		if(!rn2(250)) mkiceX(rnd(25),croom);
 
 /*		if(!rn2(50)) {
 		    mkdoor(croom);
@@ -1137,8 +1137,8 @@ skip0:
 		    if(!rn2(20)) mktree(croom);
 		}
 
-		if(!rn2(100)) mktreeX(rnz(10),croom);
-		if(!rn2(500)) mktreeX(rnz(25),croom);
+		if(!rn2(100)) mktreeX(rnd(10),croom);
+		if(!rn2(500)) mktreeX(rnd(25),croom);
 
 		if(!rn2(200)) {
 		    mkpool(croom);
@@ -1151,8 +1151,8 @@ skip0:
 		    if(!rn2(128)) mkpool(croom);
 		}
 
-		if(!rn2(200)) mkpoolX(rnz(10),croom);
-		if(!rn2(1000)) mkpoolX(rnz(25),croom);
+		if(!rn2(200)) mkpoolX(rnd(10),croom);
+		if(!rn2(1000)) mkpoolX(rnd(25),croom);
 
 		if(!rn2(200)) {
 		    mkcloud(croom);
@@ -1165,8 +1165,8 @@ skip0:
 		    if(!rn2(128)) mkcloud(croom);
 		}
 
-		if(!rn2(200)) mkcloudX(rnz(10),croom);
-		if(!rn2(1000)) mkcloudX(rnz(25),croom);
+		if(!rn2(200)) mkcloudX(rnd(10),croom);
+		if(!rn2(1000)) mkcloudX(rnd(25),croom);
 
 		if(!rn2(500)) {
 		    mklavapool(croom);
@@ -1179,8 +1179,8 @@ skip0:
 		    if(!rn2(128)) mklavapool(croom);
 		}
 
-		if(!rn2(500)) mklavapoolX(rnz(10),croom);
-		if(!rn2(2500)) mklavapoolX(rnz(25),croom);
+		if(!rn2(500)) mklavapoolX(rnd(10),croom);
+		if(!rn2(2500)) mklavapoolX(rnd(25),croom);
 
 		if(!rn2(1000)) {
 		    mkironbars(croom);
@@ -1190,8 +1190,8 @@ skip0:
 		    if(!rn2(81)) mkironbars(croom);
 		}
 
-		if(!rn2(1000)) mkironbarsX(rnz(10),croom);
-		if(!rn2(5000)) mkironbarsX(rnz(25),croom);
+		if(!rn2(1000)) mkironbarsX(rnd(10),croom);
+		if(!rn2(5000)) mkironbarsX(rnd(25),croom);
 #endif
 		x = 80 - (depth(&u.uz) * 2);
 		if (x < 2) x = 2;

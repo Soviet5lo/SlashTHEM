@@ -41,8 +41,8 @@ moveloop()
     /* don't make it obvious when monsters will start speeding up */
     int monclock;
     int xtraclock;
-    /*int timeout_start = rnz(10000)+rnz(15000);*/
-    /*int clock_base = rnz(10000)+rnz(20000)+timeout_start;*/
+    /*int timeout_start = rnd(10000)+rnd(15000);*/
+    /*int clock_base = rnd(10000)+rnd(20000)+timeout_start;*/
 #ifdef MORE_SPAWNS
 	int timeout_start = u.monstertimeout;
 	int clock_base = u.monstertimefinish; /* values set in u_init */
