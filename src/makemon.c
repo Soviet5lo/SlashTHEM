@@ -2658,13 +2658,9 @@ rndmonst()
 	    } /* else `mndx' now ready for use below */
 	    zlevel = level_difficulty();
 	    /* determine the level of the weakest monster to make. */
-	    minmlev = /*zlevel / 6*/0;
+	    minmlev = zlevel / 6;
 	    /* determine the level of the strongest monster to make. */
 	    maxmlev = (zlevel + u.ulevel + 1)>>1;
-	    if (!rn2(100)) maxmlev *= 2;
-	    if (!rn2(1000)) maxmlev *= 4;
-	    if (!rn2(10000)) maxmlev = 127;
-		if (maxmlev > 127) maxmlev = 127; /* maxmlev is an int, but better safe than sorry. --Amy */
 #ifdef REINCARNATION
 	    upper = Is_rogue_level(&u.uz);
 #endif
@@ -2790,14 +2786,7 @@ int     spc;
 	register int	first, last, num = 0;
 	int maxmlev, mask = (G_NOGEN | G_UNIQ) & ~spc;
 
-	maxmlev = level_difficulty() /*>> 1*/; /* what the heck? does that divide the actual result by 2?! --Amy */
-	    if (!rn2(100)) maxmlev *= 2;
-	    if (!rn2(1000)) maxmlev *= 4;
-	    if (!rn2(5)) maxmlev += rnd(2);
-	    if (!rn2(20)) maxmlev += rnd(3);
-	    if (!rn2(100)) maxmlev += rnd(4);
-	    if (!rn2(10000)) maxmlev = 127;
-		if (maxmlev > 127) maxmlev = 127; /* very important! The game might otherwise crash or become unstable! */
+	maxmlev = level_difficulty() >> 1;
 	if(class < 1 || class >= MAXMCLASSES) {
 	    impossible("mkclass called with bad class!");
 	    return(-1);
