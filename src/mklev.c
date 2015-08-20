@@ -1268,10 +1268,11 @@ mineralize()
 			(levl[x][y].typ == MOAT && !rn2(30)))
 	    	    (void)mksobj_at(KELP_FROND, x, y, TRUE, FALSE);
 
-		/* Random sea monsters if there is water. --Amy */
+		/* Random sea monsters if there is water. --Amy
+		 * 5lo: Reduce monster spawns in water a bit. */
 
-		if ((levl[x][y].typ == POOL && !rn2(20)) ||
-			(levl[x][y].typ == MOAT && !rn2(20)))
+		if ((levl[x][y].typ == POOL && !rn2(50)) ||
+			(levl[x][y].typ == MOAT && !rn2(35)))
 	    	    makemon(mkclass(S_EEL,0), x, y, NO_MM_FLAGS);
 
 		/* More random monsters on other terrain, too. --Amy */
