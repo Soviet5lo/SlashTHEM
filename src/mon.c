@@ -2431,17 +2431,21 @@ xkilled(mtmp, dest)
 	if(redisp) newsym(x,y);
 cleanup:
 	/* punish bad behaviour */
-	if(is_human(mdat) && (always_peaceful(mdat) && mtmp->malign >= 0) &&
+	if(is_human(mdat) && (!always_hostile(mdat) && mtmp->malign <= 0) &&
 	   (mndx < PM_ARCHEOLOGIST || mndx > PM_WIZARD) &&
 	   u.ualign.type != A_CHAOTIC) {
-		HTelepat &= ~INTRINSIC;
-		change_luck( u.ualign.type == A_LAWFUL ? -2 : -1); /* lower penalty for neutrals --Amy */
-		You("murderer!");
-		if(u.ualign.type == A_LAWFUL) u.ualign.sins += 3; /*fall through*/
-		u.ualign.sins += 2; 
-		if (Blind && !Blind_telepat)
-		    see_monsters(); /* Can't sense monsters any more. */
+	        if (always_peaceful(mdat)) { /* being penalized for killing maia, imperials etc. was just stupid. --Amy */
+			HTelepat &= ~INTRINSIC;
+			change_luck( u.ualign.type == A_LAWFUL ? -2 : -1); /* lower penalty for neutrals --Amy */
+			You("murderer!");
+			if(u.ualign.type == A_LAWFUL) u.ualign.sins += 3; /*fall through*/
+			u.ualign.sins += 2; 
+			if (Blind && !Blind_telepat)
+			    see_monsters(); /* Can't sense monsters any more. */
+			}
+	   adjalign(u.ualign.type == A_LAWFUL ? -2 : -1);
 	}
+
 	if((mtmp->mpeaceful && !rn2(2)) || mtmp->mtame)	change_luck(-1);
 	if (is_unicorn(mdat) &&
 				sgn(u.ualign.type) == sgn(mdat->maligntyp)) {
