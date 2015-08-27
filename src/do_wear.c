@@ -1586,7 +1586,7 @@ boolean noisy;
 	if (noisy) { pline_The("%s will not fit on your body.", which);
 
 		if (yn("Try to put it on anyway?") == 'y') {
-			if (rn2(2)) { 	u.ublesscnt += rnz(5);
+			if (rn2(2)) { 	u.ublesscnt += rnd(5);
 			pline("Feeling uncomfortable, you decide to stop trying.");
 		    return 0;}
 			}

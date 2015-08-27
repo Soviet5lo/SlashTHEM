@@ -704,7 +704,7 @@ exerchk()
 		    }
 		}
 	    }
-	    u.next_check += rnz(2000);
+	    u.next_check += (600 + rnd(u.ulevel)*10);
 #ifdef DEBUG
 	    pline("exerchk: next check at %ld.", u.next_check);
 #endif

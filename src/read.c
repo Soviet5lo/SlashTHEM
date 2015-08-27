@@ -2601,7 +2601,7 @@ register struct obj	*sobj;
 			pline("This is an identify scroll.");
 		if (sobj->blessed || (!sobj->cursed && !rn2(3))) {
 			cval = rn2(4);
-			if (sobj->blessed && !rn2(3)) cval += rnz(2);
+			/*if (sobj->blessed && !rn2(3)) cval += rnz(2);*/
 			/* Note: if rn2(5)==0, identify all items */
 			if (cval == 1 && sobj->blessed && Luck > 0) ++cval;
 		} else	cval = 1;

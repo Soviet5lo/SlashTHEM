@@ -2208,7 +2208,7 @@ struct monst *mtmp;
 			int rtrap;
 		    int i, j, bd;
 			bd = 1;
-			if (!rn2(5)) bd += rnz(1);
+			if (!rn2(5)) bd += rnd(1);
 
 		      for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
 				if (!isok(u.ux + i, u.uy + j)) continue;
@@ -2445,7 +2445,7 @@ struct monst *mtmp;
 			int rtrap;
 		    int i, j, bd;
 			bd = 1;
-			if (!rn2(5)) bd += rnz(1);
+			if (!rn2(5)) bd += rnd(1);
 
 		      for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
 				if (!isok(u.ux + i, u.uy + j)) continue;
