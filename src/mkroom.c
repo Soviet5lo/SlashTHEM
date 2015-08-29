@@ -425,7 +425,7 @@ struct mkroom *sroom;
                else mon = ((struct monst *)0);
 /* some rooms can spawn new monster variants now --Amy */
 		if(mon) {
-			if (rn2(10)) mon->msleeping = 1; /*random chance of them not being asleep --Amy*/
+			mon->msleeping = 1;
 			if (/*type==COURT && */mon->mpeaceful) { /*enemies in these rooms will always be hostile now --Amy*/
 				mon->mpeaceful = 0;
 				set_malign(mon);

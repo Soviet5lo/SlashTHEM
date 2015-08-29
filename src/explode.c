@@ -562,13 +562,13 @@ boolean yours; /* is it your fault (for killing monsters) */
 			You("are caught in the %s!", str);
 		/* do property damage first, in case we end up leaving bones */
 		if (adtyp == AD_FIRE) burn_away_slime();
-
+#ifdef EASY_MODE
 		/* player may get lucky and take less damage --Amy */
 		if (!rn2(3) && damu >= 1) {damu = damu / 2; if (damu < 1) damu = 1;}
 		if (!rn2(10) && damu >= 1 && u.ulevel >= 10) {damu = damu / 3; if (damu < 1) damu = 1;}
 		if (!rn2(20) && damu >= 1 && u.ulevel >= 20) {damu = damu / 5; if (damu < 1) damu = 1;}
 		if (!rn2(50) && damu >= 1 && u.ulevel >= 30) {damu = damu / 10; if (damu < 1) damu= 1;}
-
+#endif
 		if (Role_if(PM_BLEEDER)) damu = damu * 2; /* bleeders are harder than hard mode */
 
 		if (Invulnerable) {

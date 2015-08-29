@@ -1478,7 +1478,7 @@ dosacrifice()
 		    dmon->minvis = FALSE;
 		    You("have summoned %s!", a_monnam(dmon));
 		    if (sgn(u.ualign.type) == sgn(dmon->data->maligntyp)) {
-			dmon->mpeaceful = (rn2(2) ? TRUE : FALSE); /* making things a bit more dangerous for chaotics --Amy */
+			dmon->mpeaceful = TRUE;
 			} else if (is_dprince(dmon->data)) {
 			switch (rn2(5)) {
 			  case 0:

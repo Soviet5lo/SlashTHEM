@@ -2926,12 +2926,8 @@ boolean ordinary;
 		    makeknown(WAN_SLEEP);
 		case SPE_SLEEP:
 		    if(Sleep_resistance) {
-			if (!rn2(20)) {
-			pline("You feel a little drowsy.");
-			fall_asleep(-rnd(5), TRUE);}
-			else {
 			shieldeff(u.ux, u.uy);
-			You("don't feel sleepy!");}
+			You("don't feel sleepy!");
 		    } else {
 			pline_The("sleep ray hits you!");
 			fall_asleep(-rnd(50), TRUE);
@@ -4307,14 +4303,14 @@ xchar sx, sy;
 	if (Half_spell_damage && dam &&
 	   type < 0 && (type > -20 || type < -29)) /* !Breath */
 	    dam = (dam + 1) / 2;
-
+#if 0
 	if (rn2(5) && dam && /* Enemies with wands are deadly enough already. Let's nerf them a bit. --Amy */
 	   type < 0 && (type > -20 || type < -29)) /* !Breath */
 	    dam = (dam + 1) / 2;
 	if (!rn2(5) && dam && 
 	   type < 0 && (type > -20 || type < -29)) /* !Breath */
 	    dam = (dam + 2) / 3;
-
+#endif
 	/* when killed by disintegration breath, don't leave corpse */
 	u.ugrave_arise = (type == -ZT_BREATH(ZT_DEATH)) ? -3 : -1;
 	losehp(dam, fltxt, KILLED_BY_AN);

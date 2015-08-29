@@ -65,7 +65,7 @@ const char *name;	/* if null, then format `obj' */
 			    (obj && obj->quan > 1L) ? name : an(name);
 	is_acid = (obj && obj->otyp == ACID_VENOM);
 
-	if((u.uac + tlev <= rnd(20)) && !rn2(3)) {
+	if(u.uac + tlev <= rnd(20)) {
 		if(Blind || !flags.verbose) pline("It misses.");
 		else You("are almost hit by %s.", onm);
 		return(0);

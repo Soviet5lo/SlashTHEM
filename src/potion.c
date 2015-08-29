@@ -126,7 +126,7 @@ int type;
 	    } else {
 		/* already sick */
 		if (talk) You_feel("%s worse.",
-			      rn2(2) ? "much" : "even");
+			      xtime <= Sick/2L ? "much" : "even");
 	    }
 	    set_itimeout(&Sick, xtime);
 	    u.usick_type |= type;
@@ -638,8 +638,8 @@ peffects(otmp)
 			exercise(A_WIS, FALSE);
 		} else {
 			if (otmp->blessed) {
-				if (!rn2(3)) (void) adjattrib(A_INT, 1, FALSE);
-				if (!rn2(3)) (void) adjattrib(A_WIS, 1, FALSE);
+				(void) adjattrib(A_INT, 1, FALSE);
+				(void) adjattrib(A_WIS, 1, FALSE);
 			}
 			You_feel("self-knowledgeable...");
 			display_nhwindow(WIN_MESSAGE, FALSE);
@@ -888,14 +888,13 @@ peffects(otmp)
 		    int itmp; /* 6 times to find one which can be increased. */
 		    i = -1;		/* increment to 0 */
 		    for (ii = A_MAX; ii > 0; ii--) {
-			i = (/*otmp->blessed ? i + 1 :*/ rn2(A_MAX));
+			i = (otmp->blessed ? i + 1 : rn2(A_MAX));
 			/* only give "your X is already as high as it can get"
 			   message on last attempt (except blessed potions) */
 			itmp = (otmp->blessed || ii == 1) ? 0 : -1;
 			if (adjattrib(i, 1, itmp) && !otmp->blessed)
 			    break;
-			if (rn2(5)) break; /* now, blessed ones no longer always increase every stat --Amy */
-		    } /* but a blessed one has a chance to increase more than one stat, or increase one stat twice */
+		    }
 		}
 		break;
 	case POT_SPEED:

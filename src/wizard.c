@@ -437,8 +437,6 @@ nasty(mcast)
     } else {
 	tmp = (u.ulevel > 6) ? u.ulevel /6 : 1; /* just in case -- rph */
 	/* if we don't have a casting monster, the nasties appear around you */
-	if (rnd(20) > 19) { tmp = (tmp * (rnd(5))); } /* now, summoning storms are generally less nasty */
-	if (rnd(40) > 39) { tmp = (tmp * (rnd(7))); } /* but occasionally they will summon a gigantic horde of stuff! --Amy */
 	bypos.x = u.ux;
 	bypos.y = u.uy;
 	for(i = rnd(tmp); i > 0; --i)

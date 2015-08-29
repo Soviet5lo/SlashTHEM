@@ -1389,7 +1389,7 @@ physical:
 			mon_to_stone(magr);
 			break;
 		    }
-		    if (!resists_ston(magr) && !rn2(4) ) {
+		    if (!resists_ston(magr)) {
 			if (vis) pline("%s turns to stone!", Monnam(magr));
 			monstone(magr);
 			if (magr->mhp > 0) return 0;

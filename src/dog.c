@@ -1015,8 +1015,8 @@ register struct obj *obj;
 	    mtmp->isshk || mtmp->isgd || mtmp->ispriest || mtmp->isminion ||
 	    /* KMH -- Added gypsy */
 	    mtmp->isgyp ||
-	    (is_covetous(mtmp->data) && rn2(50) ) || (is_human(mtmp->data) && rn2(4) ) ||
-	    (is_demon(mtmp->data) && !is_demon(youmonst.data) && rn2(10) ) ||
+	    is_covetous(mtmp->data) || is_human(mtmp->data) ||
+	    (is_demon(mtmp->data) && !is_demon(youmonst.data)) ||
 	    /* Mik -- New flag to indicate which things cannot be tamed... */
 	    cannot_be_tamed(mtmp->data) ||
 	    (obj && !is_instrument(obj) && dogfood(mtmp, obj) >= MANFOOD)) {

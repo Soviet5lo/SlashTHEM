@@ -522,8 +522,7 @@ moveloop()
 
 		    
 		    /* KMH -- OK to regenerate if you don't move */
-		    if ((u.uen < u.uenmax) && 
-				((Energy_regeneration && !rn2(5)) || /* greatly nerfed overpowered wizard artifact --Amy */
+		    if ((u.uen < u.uenmax) && (Energy_regeneration ||
 				((wtcap < MOD_ENCUMBER || !flags.mv) &&
 				(!(moves%((MAXULEV + 15 - u.ulevel) *                                    
 				(Role_if(PM_WIZARD) ? 3 : 4) / 6)))))) {
@@ -535,7 +534,7 @@ moveloop()
 			if (u.uen > u.uenmax)  u.uen = u.uenmax;
 			flags.botl = 1;
 		    }
-
+#ifdef EASY_MODE
 		/* leveling up will give a small boost to mana regeneration now --Amy */
 		    if ( u.uen < u.uenmax && ( 
 			(u.ulevel >= 5 && !rn2(200)) ||
@@ -547,6 +546,7 @@ moveloop()
 			)
 			)
 			u.uen += 1;
+#endif /* EASY_MODE */
 			if (u.uen > u.uenmax)  u.uen = u.uenmax;
 			flags.botl = 1;
 

@@ -3144,9 +3144,6 @@ typfnd:
 		otmp->oartifact != ART_OGRESMASHER &&
 		otmp->oartifact != ART_SWORD_OF_BALANCE)) ||
 # endif
-	     (otmp->oartifact && nartifact_exist() == 0 && !rn2(10) ) ||
-	     (otmp->oartifact && nartifact_exist() == 1 && !rn2(5) ) ||
-/* there should be a chance of an artifact wish failing even if none have been created yet --Amy */
 	     (otmp->oartifact && rn2(nartifact_exist()) > 1) ||
 		 (Role_if(PM_PIRATE) && otmp->oartifact == ART_REAVER))
 #ifdef WIZARD

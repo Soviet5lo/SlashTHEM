@@ -2385,7 +2385,7 @@ register struct attack *mattk;
 		    }
 		}
 
-		if (rn2(2) && !negated && !mdef->msleeping && /* drow nerf --Amy */
+		if (!negated && !mdef->msleeping &&
 			(mattk->aatyp != AT_WEAP || barehanded_hit) &&
 			sleep_monst(mdef, rnd(10), -1)) {
 		    if (!Blind)
@@ -2418,12 +2418,12 @@ register struct attack *mattk;
 		}
 		break;
 	    case AD_CONF:
-		if (!mdef->mconf && !rn2(3)) {
+		if (!mdef->mconf) {
 		    if (canseemon(mdef))
 			pline("%s looks confused.", Monnam(mdef));
 		    mdef->mconf = 1;
 		}
-		else if (!rn2(3))
+		else
 		{
 		    if (canseemon(mdef))
 			pline("%s is getting more and more confused.",
@@ -2432,7 +2432,7 @@ register struct attack *mattk;
 		}
 		break;
 	    case AD_POLY:
-		if (tmp < mdef->mhp && !rn2(20)) {
+		if (tmp < mdef->mhp) {
 		    if (resists_magm(mdef)) {
 			/* magic resistance protects from polymorph traps,
 			 * so make it guard against involuntary polymorph
@@ -2500,7 +2500,7 @@ register struct attack *mattk;
 		break;
 	    case AD_CALM:	/* KMH -- koala attack */
 		/* Certain monsters aren't even made peaceful. */
-		if (!rn2(10) && !mdef->iswiz && mdef->data != &mons[PM_MEDUSA] &&
+		if (!mdef->iswiz && mdef->data != &mons[PM_MEDUSA] &&
 				!(mdef->data->mflags3 & M3_COVETOUS) &&
 				!(mdef->data->geno & G_UNIQ)) {
 		    pline("You calm %s.", mon_nam(mdef));
@@ -2653,7 +2653,6 @@ register struct attack *mattk;
 		start_engulf(mdef);
 		switch(mattk->adtyp) {
 		    case AD_DGST:
-		if (!rn2(50)) { /*muuuuuch lower chance because this attack is totally unbalanced anyway --Amy*/
 			/* eating a Rider or its corpse is fatal */
 			if (is_rider(mdef->data)) {
 			 pline("Unfortunately, digesting any of it is fatal.");
@@ -2719,7 +2718,6 @@ register struct attack *mattk;
 			}
 			end_engulf();
 			return(2);
-		}
 			break;
 		    case AD_PHYS:
 			if (youmonst.data == &mons[PM_FOG_CLOUD]) {

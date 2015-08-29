@@ -332,12 +332,9 @@ int *inrange, *nearby, *scared;
 		seescaryx = u.ux;
 		seescaryy = u.uy;
 	}
-	*scared = (*nearby && (onscary(seescaryx, seescaryy, mtmp) && (rnd(20) > 1) ||
-			       (!mtmp->mpeaceful && (rnd(3) > 1) &&
+	*scared = (*nearby && (onscary(seescaryx, seescaryy, mtmp) ||
+			       (!mtmp->mpeaceful &&
 				    in_your_sanctuary(mtmp, 0, 0))));
-	/* I always felt permanent Elbereths were waaaaaaaay too strong.
-	It's much more interesting if Elbereth has a chance to fail, too.
-	After all, where's the challenge in burning an Elbereth, then whacking at soldier ants for two hours straight? */
 
 	if(*scared) {
 		if (rn2(7))
@@ -438,7 +435,7 @@ register struct monst *mtmp;
 
 	/* Monsters that want to acquire things */
 	/* may teleport, so do it before inrange is set */
-	if(is_covetous(mdat) && !rn2(10)) (void) tactics(mtmp);
+	if(is_covetous(mdat)) (void) tactics(mtmp);
 
 	/* check distance and scariness of attacks */
 	distfleeck(mtmp,&inrange,&nearby,&scared);
@@ -909,7 +906,7 @@ register int after;
 	}
 
 	/* and the acquisitive monsters get special treatment */
-	if(is_covetous(ptr) && !rn2(10)) {
+	if(is_covetous(ptr)) {
 	    xchar tx = STRAT_GOALX(mtmp->mstrategy),
 		  ty = STRAT_GOALY(mtmp->mstrategy);
 	    struct monst *intruder = m_at(tx, ty);

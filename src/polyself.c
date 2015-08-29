@@ -360,7 +360,7 @@ boolean forcecontrol;
 		    goto do_merge;
 	} else if (draconian || iswere || isvamp) {
 		/* special changes that don't require polyok() */
-		if (draconian && rn2(5) ) { /* chance to poly into something else --Amy */
+		if (draconian) {
 		    do_merge:
 			mntmp = armor_to_dragon(uarm->otyp);
 
@@ -726,7 +726,7 @@ break_armor()
 		Your("armor falls off!");
 		(void) Armor_gone();
 		dropx(otmp); /*WAC Drop instead of destroy*/
-	    } else if ((controlled_change && !otmp->cursed) || (youmonst.data->msize == MZ_MEDIUM && rn2(20) && !otmp->cursed) || (youmonst.data->msize == MZ_LARGE && rn2(5) && !otmp->cursed) || (youmonst.data->msize == MZ_HUGE && rn2(3) && !otmp->cursed) || (youmonst.data->msize > MZ_HUGE && rn2(2) && !otmp->cursed) ) {
+	    } else if (controlled_change && !otmp->cursed) {
 		if (donning(otmp)) cancel_don();
 		You("quickly remove your armor as you start to change.");
 		(void) Armor_gone();
@@ -744,7 +744,7 @@ break_armor()
 		Your("%s falls off!", cloak_simple_name(otmp));
 		(void) Cloak_off();
 		dropx(otmp);
-	    } else if ((controlled_change && !otmp->cursed) || (youmonst.data->msize == MZ_MEDIUM && rn2(20) && !otmp->cursed) || (youmonst.data->msize == MZ_LARGE && rn2(5) && !otmp->cursed) || (youmonst.data->msize == MZ_HUGE && rn2(3) && !otmp->cursed) || (youmonst.data->msize > MZ_HUGE && rn2(2) && !otmp->cursed) ) {
+	    } else if (controlled_change && !otmp->cursed) {
 		You("remove your %s before you transform.",
 			cloak_simple_name(otmp));
 		(void) Cloak_off();
@@ -757,7 +757,7 @@ break_armor()
 	}
 #ifdef TOURIST
 	if ((otmp = uarmu) != 0) {
-	    if ((controlled_change && !otmp->cursed && !uskin) || (youmonst.data->msize == MZ_MEDIUM && rn2(20) && !otmp->cursed && !uskin) || (youmonst.data->msize == MZ_LARGE && rn2(5) && !otmp->cursed && !uskin) || (youmonst.data->msize == MZ_HUGE && rn2(3) && !otmp->cursed && !uskin) || (youmonst.data->msize > MZ_HUGE && rn2(2) && !otmp->cursed && !uskin) ) {
+	    if (controlled_change && !otmp->cursed && !uskin) {
 		You("take off your shirt just before it starts to rip.");
 		setworn((struct obj *)0, otmp->owornmask & W_ARMU);
 		dropx(otmp);

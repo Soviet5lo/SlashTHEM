@@ -543,7 +543,7 @@ boolean artif;
 		if (otmp->otyp == LOADSTONE || otmp->otyp == HEALTHSTONE)
 			{ curse(otmp); break;}
 		else if (otmp->otyp == ROCK) otmp->quan = (long) rn1(6,6);
-		else if (otmp->otyp == FLINT && rn2(2) ) otmp->quan = (long) rn1(4,4);
+		else if (otmp->otyp == FLINT && rn2(2)) otmp->quan = (long) rn1(4,4);
 	/* Finding single flint stones is just useless. Let sling users have some fun! --Amy */
 		else if ((otmp->otyp != LUCKSTONE) && (otmp->otyp != HEALTHSTONE) &&
 				!rn2(6)) otmp->quan = 2L;

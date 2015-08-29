@@ -1444,7 +1444,7 @@ nexttry:	/* eels prefer the water, but if there is no water nearby,
 
 		info[cnt] = 0;
 		if ((checkobj || Displaced) && onscary(dispx, dispy, mon)) {
-		    if(!(flag & ALLOW_SSM) && !rn2(3)) continue;
+		    if(!(flag & ALLOW_SSM)) continue;
 		    info[cnt] |= ALLOW_SSM;
 		}
 		if((nx == u.ux && ny == u.uy) ||
@@ -1479,7 +1479,7 @@ nexttry:	/* eels prefer the water, but if there is no water nearby,
 			   *in_rooms(nx, ny, TEMPLE) &&
 			   !*in_rooms(x, y, TEMPLE) &&
 			   in_your_sanctuary((struct monst *)0, nx, ny)) {
-				if(!(flag & ALLOW_SANCT) && !rn2(5) ) continue;
+				if(!(flag & ALLOW_SANCT)) continue;
 				info[cnt] |= ALLOW_SANCT;
 			}
 		}
@@ -1841,8 +1841,8 @@ struct monst *mtmp;
 	    mtmp->mhp = mtmp->mhpmax;
 	    if (visible)
 		pline("But wait...");
-	    if ((newcham(mtmp, &mons[mtmp->oldmonnm], FALSE, visible)) && rn2(25))
-		mtmp->mhp = mtmp->mhpmax/2; /* 4% risk of the unpolymorph killing the monster. --Amy */
+	    if (newcham(mtmp, &mons[mtmp->oldmonnm], FALSE, visible))
+		mtmp->mhp = mtmp->mhpmax/2;
 	    else {
 		if (visible)
 		    pline("%s shudders!", Monnam(mtmp));

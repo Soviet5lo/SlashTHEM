@@ -640,7 +640,7 @@ register const char *s;
 	    pline("Couldn't load \"%s\" - making a maze.", protofile);
 	}
 
-	if (rn2(2)) level.flags.is_maze_lev = TRUE;
+	level.flags.is_maze_lev = TRUE;
 
 #ifndef WALLIFIED_MAZE
 	for(x = 2; x < x_maze_max; x++)

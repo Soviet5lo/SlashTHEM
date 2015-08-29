@@ -1445,13 +1445,13 @@ int spellnum;
 	/* healing when already healed */
 	if (mtmp->mhp == mtmp->mhpmax && spellnum == MGC_CURE_SELF)
 	    return TRUE;
-
+#if 0
 	/* summon monsters less often if the monster is low level --Amy */
 	if ( (spellnum == MGC_SUMMON_MONS || spellnum == MGC_SUMMON_GHOST || spellnum == MGC_CALL_UNDEAD) && mtmp->m_lev < rnd(50) && rn2(5)) return TRUE;
-
-	/* don't summon monsters if it doesn't think you're around */ /* or at least not as often --Amy */
-	if (!mcouldseeu && ( (spellnum == MGC_SUMMON_MONS && rn2(5)) ||
-		(spellnum == MGC_CALL_UNDEAD && rn2(5)) || 		(spellnum == MGC_SUMMON_GHOST && rn2(5)) ||
+#endif
+	/* don't summon monsters if it doesn't think you're around */
+	if (!mcouldseeu && (spellnum == MGC_SUMMON_MONS ||
+		spellnum == MGC_CALL_UNDEAD || spellnum == MGC_SUMMON_GHOST||
 		(!mtmp->iswiz && spellnum == MGC_CLONE_WIZ)))
 	    return TRUE;
 	/* only lichs can cast call undead */ /* well, not anymore --Amy */
@@ -1460,10 +1460,10 @@ int spellnum;
 	/* pools can only be created in certain locations and then only
 	 * rarely unless you're carrying the amulet.
 	 */
-	if ((levl[u.ux][u.uy].typ != ROOM && levl[u.ux][u.uy].typ != CORR /* lowered chance even with amulet --Amy */
-		|| (!u.uhave.amulet && rn2(10)) || rn2(3) ) && spellnum == MGC_CREATE_POOL)
+	if ((levl[u.ux][u.uy].typ != ROOM && levl[u.ux][u.uy].typ != CORR
+		|| !u.uhave.amulet && rn2(10)) && spellnum == MGC_CREATE_POOL)
 	    return TRUE;
-	if ((!mtmp->iswiz || (flags.no_of_wizards > 1 && rn2(20)) )
+	if ((!mtmp->iswiz || flags.no_of_wizards > 1)
 						&& spellnum == MGC_CLONE_WIZ)
 	    return TRUE;
     } else if (adtyp == AD_CLRC) {
@@ -1477,8 +1477,8 @@ int spellnum;
 	/* summon monsters less often if the monster is low level --Amy */
 	if ( spellnum == CLC_INSECTS && mtmp->m_lev < rnd(50) && rn2(5)) return TRUE;
 
-	/* don't summon insects if it doesn't think you're around */ /* or at least not as often --Amy */
-	if (!mcouldseeu && spellnum == CLC_INSECTS && rn2(5) )
+	/* don't summon insects if it doesn't think you're around */
+	if (!mcouldseeu && spellnum == CLC_INSECTS)
 	    return TRUE;
 	/* blindness spell on blinded player */
 	if (Blinded && spellnum == CLC_BLIND_YOU)

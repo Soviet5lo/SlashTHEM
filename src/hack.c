@@ -3013,13 +3013,13 @@ int k_format; /* WAC k_format is an int */
 		done(DIED);
 
 	}
-
+#ifdef EASY_MODE
 	/* let's allow the player to deflect some of the damage if he's lucky. --Amy */
 	if (!rn2(3) && n >= 1) {n = n / 2; if (n < 1) n = 1;}
 	if (!rn2(10) && n >= 1 && u.ulevel >= 10) {n = n / 3; if (n < 1) n = 1;}
 	if (!rn2(20) && n >= 1 && u.ulevel >= 20) {n = n / 5; if (n < 1) n = 1;}
 	if (!rn2(50) && n >= 1 && u.ulevel >= 30) {n = n / 10; if (n < 1) n = 1;}
-
+#endif /* EASY_MODE */
 	if (Role_if(PM_BLEEDER)) n = n * 2; /* bleeders are harder than hard mode */
 
 	/* [max] Invulnerable no dmg */

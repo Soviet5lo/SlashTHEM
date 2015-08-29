@@ -58,7 +58,7 @@ register struct monst *mtmp;
 	} else if(u.ugold) {
 	    u.ugold -= (tmp = somegold());
 	    Your("purse feels lighter.");
-	    if ( !metallivorous(mtmp->data) && rn2(20) )
+//	    if ( !metallivorous(mtmp->data) && rn2(20) )
 		mtmp->mgold += tmp;
 /* Gold bugs are metallivores, so they're supposed to EAT the gold they steal. --Amy */
 	if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
@@ -161,7 +161,8 @@ stealarm()
 			    subfrombill(otmp, shop_keeper(*u.ushops));
 			freeinv(otmp);
 			pline("%s steals %s!", Monnam(mtmp), doname(otmp));
-	if (rn2(1000) && !(metallivorous(mtmp->data) && is_metallic(otmp) && !rn2(10) ) && !(lithivorous(mtmp->data) && is_lithic(otmp) && !rn2(10) ) ) (void) mpickobj(mtmp,otmp);	/* may free otmp */
+//	if (rn2(1000) && !(metallivorous(mtmp->data) && is_metallic(otmp) && !rn2(10) ) && !(lithivorous(mtmp->data) && is_lithic(otmp) && !rn2(10) ) ) (void) mpickobj(mtmp,otmp);	/* may free otmp */
+			(void) mpickobj(mtmp,otmp);	/* may free otmp */
 			/* Implies seduction, "you gladly hand over ..."
 			   so we don't set mavenge bit here. */
 			monflee(mtmp, 0, FALSE, FALSE);
@@ -306,7 +307,7 @@ nothing_to_steal:
 	else if(otmp == uarmu && uarm) otmp = uarm;
 #endif
 
-	if ( (rnd(50) < ACURR(A_CHA)) && (otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL))) {
+	if ((rnd(50) < ACURR(A_CHA)) && (otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL))) {
 		pline("%s tries to take off your %s, but you resist!", !canspotmon(mtmp) ? "It" : Monnam(mtmp), equipname(otmp));
 		return(0);
 	}
@@ -446,7 +447,8 @@ gotobj:
 	pline("%s stole %s.", named ? "It" : Monnam(mtmp), doname(otmp));
 	could_petrify = (otmp->otyp == CORPSE &&
 			 touch_petrifies(&mons[otmp->corpsenm]));
-	if (rn2(1000) && !(metallivorous(mtmp->data) && is_metallic(otmp) && !rn2(10) ) && !(lithivorous(mtmp->data) && is_lithic(otmp) && !rn2(10) ) ) (void) mpickobj(mtmp,otmp);	/* may free otmp */
+//	if (rn2(1000) && !(metallivorous(mtmp->data) && is_metallic(otmp) && !rn2(10) ) && !(lithivorous(mtmp->data) && is_lithic(otmp) && !rn2(10) ) ) (void) mpickobj(mtmp,otmp);	/* may free otmp */
+	(void) mpickobj(mtmp,otmp);	/* may free otmp */
 	if (could_petrify && !(mtmp->misc_worn_check & W_ARMG)) {
 	    minstapetrify(mtmp, TRUE);
 	    return -1;

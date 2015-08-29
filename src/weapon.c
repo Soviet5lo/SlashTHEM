@@ -2050,12 +2050,14 @@ struct obj *weapon;
 		}
 	}
 #endif
+
+#ifdef EASY_MODE
 	/* add a little damage bonus for higher-level characters so the stronger monsters aren't too overpowered --Amy */
 
 	if (u.ulevel >= 10) bonus += 1;
 	if (u.ulevel >= 20) bonus += 1;
 	if (u.ulevel >= 30) bonus += 1;
-
+#endif
 	/* damage bonus for using racial equipment */
 
 	if (Race_if(PM_ELF)&& weapon && (weapon->otyp == ELVEN_DAGGER || weapon->otyp == ELVEN_BOW || weapon->otyp == ELVEN_ARROW || weapon->otyp == ELVEN_SPEAR || weapon->otyp == ELVEN_SHORT_SWORD || weapon->otyp == ELVEN_BROADSWORD) ) bonus += 1;

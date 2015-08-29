@@ -651,7 +651,7 @@ struct attack *alt_attk_buf;
 	    (attk->adtyp == AD_DISE ||
 		attk->adtyp == AD_PEST ||
 		attk->adtyp == AD_FAMN) &&
-	    attk->adtyp == mptr->mattk[indx - 1].adtyp && rn2(5) /* let's be a sadistic programmer --Amy */ ) {
+	    attk->adtyp == mptr->mattk[indx - 1].adtyp) {
 	*alt_attk_buf = *attk;
 	attk = alt_attk_buf;
 	attk->adtyp = AD_STUN;
@@ -993,7 +993,7 @@ mattacku(mtmp)
 		case AT_ENGL:
 			if (!range2) {
 			    if(foundyou) {
-				if((u.uswallow || tmp > (j = rnd(20+i))) && rn2(10)) { /* 10% chance to miss --Amy */
+				if(u.uswallow || tmp > (j = rnd(20+i))) {
 				    /* Force swallowing monster to be
 				     * displayed even when player is
 				     * moving away */
@@ -1574,7 +1574,7 @@ hitmu(mtmp, mattk)
  *	armor's special magic protection.  Otherwise just use !mtmp->mcan.
  */
 	armpro = magic_negation(&youmonst);
-	uncancelled = !mtmp->mcan && ((rn2(3) >= armpro) || !rn2(20)); /* mc3 no longer protects that much --Amy */
+	uncancelled = !mtmp->mcan && ((rn2(3) >= armpro) || !rn2(50));
 
 	permdmg = 0;
 /*	Now, adjust damages via resistances or specific attacks */
@@ -1877,7 +1877,7 @@ hitmu(mtmp, mattk)
 		break;
 	    case AD_BLND:
 		hitmsg(mtmp, mattk);
-		if (can_blnd(mtmp, &youmonst, mattk->aatyp, (struct obj*)0) && !rn2(3) ) {
+		if (can_blnd(mtmp, &youmonst, mattk->aatyp, (struct obj*)0)) {
 		    if (!Blind) pline("%s blinds you!", Monnam(mtmp));
 		    make_blinded(Blinded+(long)dmg,FALSE);
 		    if (!Blind) Your(vision_clears);
@@ -2254,10 +2254,7 @@ dopois:
 		}
 #endif
 		buf[0] = '\0';
-		if (  (rnd(100) > ACURR(A_CHA)) && ((mtmp->female) && !flags.female && rn2(5) ) || ((!mtmp->female) && flags.female && rn2(3) ) || 
-			((mtmp->female) && flags.female && rn2(2) ) || ((!mtmp->female) && !flags.female && rn2(2) ) )
-/* male characters are more susceptible to nymphs --Amy */
-			{ switch (steal(mtmp, buf)) {
+		switch (steal(mtmp, buf)) {
 		  case -1:
 			return 2;
 		  case 0:
@@ -2274,13 +2271,12 @@ dopois:
 			}
 			monflee(mtmp, 0, FALSE, FALSE);
 			return 3;
-			};
 		}
 		break;
 #ifdef SEDUCE
 	    case AD_SSEX:
 		if(could_seduceX(mtmp, &youmonst, mattk) == 1
-			&& !mtmp->mcan && rn2(2) ) /* 50% chance --Amy */
+			&& !mtmp->mcan)
 		    if (doseduce(mtmp))
 			return 3;
 		break;
@@ -2462,14 +2458,8 @@ dopois:
 	    case AD_CURS:
 	    case AD_LITE:
 		hitmsg(mtmp, mattk);
-		/* if(!night() && mdat == &mons[PM_GREMLIN]) break; */
-
-		/* Yeah I know, I just made gremlins and other AD_CURS using monsters a lot more dangerous.
-		They're supposed to appear late in the game, adding a bit of risk to high-level-characters.
-		I mean come on, early game is hell but late game is cake? Now you can lose your intrinsics at any time!
-		If you lose poison resistance, try eating some corpses to get it back.
-		If you lose sickness resistance, well, tough luck - it's not coming back. Ever. --Amy*/
-		if((!mtmp->mcan && !rn2(10)) || (night() && !rn2(3)) ) {
+		if(!night() && mdat == &mons[PM_GREMLIN]) break;
+		if(!mtmp->mcan && !rn2(10)) {
 		    if (flags.soundok) {
 			if (Blind) You_hear("laughter.");
 			else       pline("%s chuckles.", Monnam(mtmp));
@@ -2569,8 +2559,7 @@ dopois:
 		pline("%s reaches out, and your body shrivels.",
 			Monnam(mtmp));
 		exercise(A_CON, FALSE);
-		if (!is_fainted() && rn2(10) ) morehungry(rnd(40));
-		morehungry(dmg); /* This attack was way too weak. --Amy */
+		if (!is_fainted()) morehungry(rn1(40,40));
 		/* plus the normal damage */
 		break;
 	    case AD_CALM:	/* KMH -- koala attack */
@@ -3749,7 +3738,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	    case AD_CONF:
 		if(!mtmp->mcan && canseemon(mtmp) &&
 		   couldsee(mtmp->mx, mtmp->my) &&
-		   mtmp->mcansee && !mtmp->mspec_used && !rn2(5)) {
+		   mtmp->mcansee && !mtmp->mspec_used && rn2(5)) {
 		    int conf = d(3,4);
 
 		    mtmp->mspec_used = mtmp->mspec_used + (conf + rn2(6));
@@ -3851,7 +3840,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	    case AD_STUN:
 		if(!mtmp->mcan && canseemon(mtmp) &&
 		   couldsee(mtmp->mx, mtmp->my) &&
-		   mtmp->mcansee && !mtmp->mspec_used && !rn2(5)) {
+		   mtmp->mcansee && !mtmp->mspec_used && rn2(5)) {
 		    int stun = d(2,6);
 
 		    mtmp->mspec_used = mtmp->mspec_used + (stun + rn2(6));
@@ -3862,7 +3851,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		break;
 	    case AD_BLND:
 		if (!mtmp->mcan && canseemon(mtmp) && !resists_blnd(&youmonst)
-			&& distu(mtmp->mx,mtmp->my) <= BOLT_LIM*BOLT_LIM && !rn2(6) ) {
+			&& distu(mtmp->mx,mtmp->my) <= BOLT_LIM*BOLT_LIM) {
 		    int blnd = d((int)mattk->damn, (int)mattk->damd);
 
 		    You("are blinded by %s radiance!",
@@ -3879,7 +3868,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	    case AD_FIRE:
 		if (!mtmp->mcan && canseemon(mtmp) &&
 			couldsee(mtmp->mx, mtmp->my) &&
-			mtmp->mcansee && !mtmp->mspec_used && !rn2(5)) {
+			mtmp->mcansee && !mtmp->mspec_used && rn2(5)) {
 		    int dmg = d(2,6);
 
 		    pline("%s attacks you with a fiery gaze!", Monnam(mtmp));
@@ -3987,7 +3976,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 #endif
 	    case AD_SLEE:
 		if(!mtmp->mcan && canseemon(mtmp) &&
-				mtmp->mcansee && !mtmp->mspec_used && !rn2(5)) {
+				mtmp->mcansee && !mtmp->mspec_used && rn2(3)) {
 		    if (Displaced && rn2(3)) {
 			if (!Blind) pline("%s gazes at your displaced image!",Monnam(mtmp));
 			    break;
@@ -4077,7 +4066,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	        }
 	        break;
 	    case AD_DRST:
-	        if(!mtmp->mcan && canseemon(mtmp) && mtmp->mcansee && !mtmp->mspec_used && !rn2(5)) {
+	        if(!mtmp->mcan && canseemon(mtmp) && mtmp->mcansee && !mtmp->mspec_used && rn2(5)) {
 	                pline("%s stares into your eyes...", Monnam(mtmp));
 	                poisoned("The gaze", A_STR, mtmp->data->mname, 30);
 	        }
@@ -4157,13 +4146,13 @@ register int n;
 		done_in_by(mtmp);
 
 	}
-
+#ifdef EASY_MODE
 	/* sometimes you take less damage. The game is deadly enough already. --Amy */
 	if (!rn2(3) && n >= 1) {n = n / 2; if (n < 1) n = 1;}
 	if (!rn2(10) && n >= 1 && u.ulevel >= 10) {n = n / 3; if (n < 1) n = 1;}
 	if (!rn2(20) && n >= 1 && u.ulevel >= 20) {n = n / 5; if (n < 1) n = 1;}
 	if (!rn2(50) && n >= 1 && u.ulevel >= 30) {n = n / 10; if (n < 1) n = 1;}
-
+#endif /* EASY_MODE */
 	if (Role_if(PM_BLEEDER)) n = n * 2; /* bleeders are harder than hard mode */
 
 	if (Invulnerable) n=0;
@@ -4187,7 +4176,7 @@ register int n;
 	if (Upolyd) {
 		u.mh -= n;
 		if (u.mh < 1) {                
-			if (Polymorph_control) {
+			if (Polymorph_control || !rn2(3)) {
 			    u.uhp -= mons[u.umonnum].mlevel;
 			    u.uhpmax -= mons[u.umonnum].mlevel;
 			    if (u.uhpmax < 1) u.uhpmax = 1;

@@ -2019,7 +2019,7 @@ find_ac()
 	if(uarmu && uarmu->otyp == VICTORIAN_UNDERWEAR){
 		uac += 2; //flat penalty. Something in the code "corrects" ac values >10, this is a kludge.
 	}
-
+#ifdef EASY_MODE
 	/* A higher-level player will have a small AC boost to compensate for monsters being more dangerous. --Amy */
 	if (u.ulevel >= 5) uac -= 1;
 	if (u.ulevel >= 10) uac -= 1;
@@ -2029,7 +2029,7 @@ find_ac()
 	if (u.ulevel >= 30) uac -= 1;
 
 	/* After all, a couatl or archon can still hit a -40 AC player without any problems... */
-
+#endif /* EASY_MODE */
 	/* bonus for wearing racial armor */
 
 	if (Race_if(PM_DWARF) && uarm && uarm->otyp == DWARVISH_MITHRIL_COAT) uac -= 1;

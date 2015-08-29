@@ -249,9 +249,9 @@ nh_timeout()
 	    register int time_luck = stone_luck(FALSE);
 	    boolean nostone = !carrying(LUCKSTONE) && !stone_luck(TRUE);
 
-	    if(u.uluck > baseluck && (nostone || time_luck < 0 || !rn2(10) )) /* now luck will also time out if you do have a luckstone; it just times out more slowly --Amy */
+	    if(u.uluck > baseluck && (nostone || time_luck < 0))
 		u.uluck--;
-	    else if(u.uluck < baseluck && (nostone || time_luck > 0 || !rn2(10) ))
+	    else if(u.uluck < baseluck && (nostone || time_luck > 0))
 		u.uluck++;
 	}
 
@@ -670,7 +670,6 @@ boolean your_fault;
 	    /* Uhoh.  !i == newcham wasn't able to make the polymorph...*/
 	    if (transform_msg) pline("%s shudders.", Monnam(mtmp));
 	    if (i) mtmp->mhp -= rnd(30);
-	    if (!rn2(200)) mtmp->mhp = 0; /* chance that the monster doesn't survive the polymorph --Amy */
 	    if (!i || (mtmp->mhp <= 0)) {
 		if (your_fault) xkilled(mtmp, 3);
 		else mondead(mtmp);
@@ -705,7 +704,6 @@ boolean your_fault;
 	    /* Uhoh.  !i == newcham wasn't able to make the polymorph...*/
 	    if (transform_msg) pline("%s shudders.", Monnam(mtmp));
 	    if (i) mtmp->mhp -= rnd(30);
-	    if (!rn2(200)) mtmp->mhp = 0; /* chance that the monster doesn't survive the polymorph --Amy */
 	    if (!i || (mtmp->mhp <= 0)) {
 		if (your_fault) xkilled(mtmp, 3);
 		else mondead(mtmp);

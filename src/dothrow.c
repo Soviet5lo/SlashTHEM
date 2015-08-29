@@ -1777,10 +1777,10 @@ register struct obj *obj;
 		if(is_gem) {
 			if(is_buddy) {
 				Strcat(buf,addluck);
-				change_luck(rnd(4) );
+				change_luck(rnd(4));
 			} else {
 				Strcat(buf,maybeluck);
-				if (rn2(3)) change_luck(rnd(2) );
+				change_luck(rnd(2));
 			}
 		} else {
 			Strcat(buf,nogood);
@@ -1794,7 +1794,7 @@ register struct obj *obj;
 				change_luck(rnd(2) );
 			} else {
 				Strcat(buf,maybeluck);
-				if (!rn2(3)) change_luck(rnd(2) );
+				change_luck(rnd(2));
 			}
 		} else {
 			Strcat(buf,nogood);
@@ -1808,7 +1808,7 @@ register struct obj *obj;
 				change_luck(1);
 			} else {
 				Strcat(buf,maybeluck);
-				if (!rn2(5)) change_luck(1);
+				change_luck(1);
 			}
 		} else {
 			Strcat(buf,noluck);

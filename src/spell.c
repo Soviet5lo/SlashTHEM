@@ -942,7 +942,7 @@ boolean atme;
 	morehungry(hungr);
 
 	chance = percent_success(spell);
-	if ( (confused && spellid(spell) != SPE_CURE_CONFUSION && rn2(10) ) || (rnd(100) > chance)) {
+	if ((confused && spellid(spell) != SPE_CURE_CONFUSION) || (rnd(100) > chance)) {
 		pline("You fail to cast the spell correctly.");
 
 #ifdef ALLEG_FX
