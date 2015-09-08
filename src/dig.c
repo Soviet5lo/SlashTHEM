@@ -1297,16 +1297,6 @@ zap_dig()
 		    otmp = mksobj_at(ROCK, u.ux, u.uy, FALSE, FALSE);
 		    if (otmp) {
 
-			if(!rn2(8)) {
-				otmp->spe = rne(2);
-				if (rn2(2)) otmp->blessed = rn2(2);
-				 else	blessorcurse(otmp, 3);
-			} else if(!rn2(10)) {
-				if (rn2(10)) curse(otmp);
-				 else	blessorcurse(otmp, 3);
-				otmp->spe = -rne(2);
-			} else	blessorcurse(otmp, 10);
-
 			(void)xname(otmp);	/* set dknown, maybe bknown */
 			stackobj(otmp);
 		    }

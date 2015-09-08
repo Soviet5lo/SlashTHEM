@@ -2812,16 +2812,6 @@ register struct obj	*sobj;
 	    	    	    		FALSE, FALSE);
 	    	    	    if (!otmp2) continue;  /* Shouldn't happen */
 
-				if(!rn2(8)) {
-					otmp2->spe = rne(2);
-					if (rn2(2)) otmp2->blessed = rn2(2);
-					 else	blessorcurse(otmp2, 3);
-				} else if(!rn2(10)) {
-					if (rn2(10)) curse(otmp2);
-					 else	blessorcurse(otmp2, 3);
-					otmp2->spe = -rne(2);
-				} else	blessorcurse(otmp2, 10);
-
 	    	    	    otmp2->quan = confused ? rn1(5,2) : 1;
 	    	    	    otmp2->owt = weight(otmp2);
 
@@ -2877,16 +2867,6 @@ register struct obj	*sobj;
 		    otmp2 = mksobj(confused ? ROCK : BOULDER,
 				FALSE, FALSE);
 		    if (!otmp2) break;
-
-			if(!rn2(8)) {
-				otmp2->spe = rne(2);
-				if (rn2(2)) otmp2->blessed = rn2(2);
-				 else	blessorcurse(otmp2, 3);
-			} else if(!rn2(10)) {
-				if (rn2(10)) curse(otmp2);
-				 else	blessorcurse(otmp2, 3);
-				otmp2->spe = -rne(2);
-			} else	blessorcurse(otmp2, 10);
 
 		    otmp2->quan = confused ? rn1(5,2) : 1;
 		    otmp2->owt = weight(otmp2);

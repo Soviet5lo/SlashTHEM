@@ -3326,16 +3326,6 @@ struct obj *obj;	/* wand or spell */
 		       "falling rock", KILLED_BY_AN);
 		if ((otmp = mksobj_at(ROCK, x, y, FALSE, FALSE)) != 0) {
 
-			if(!rn2(8)) {
-				otmp->spe = rne(2);
-				if (rn2(2)) otmp->blessed = rn2(2);
-				 else	blessorcurse(otmp, 3);
-			} else if(!rn2(10)) {
-				if (rn2(10)) curse(otmp);
-				 else	blessorcurse(otmp, 3);
-				otmp->spe = -rne(2);
-			} else	blessorcurse(otmp, 10);
-
 		    (void)xname(otmp);	/* set dknown, maybe bknown */
 		    stackobj(otmp);
 		}
@@ -5056,16 +5046,6 @@ register struct obj *obj;		   /* no texts here! */
 	obj->onamelth = 0;		/* no names */
 	obj->oxlth = 0;			/* no extra data */
 	obj->oattached = OATTACHED_NOTHING;
-
-	if(!rn2(8)) {
-		obj->spe = rne(2);
-		if (rn2(2)) obj->blessed = rn2(2);
-		 else	blessorcurse(obj, 3);
-	} else if(!rn2(10)) {
-		if (rn2(10)) curse(obj);
-		 else	blessorcurse(obj, 3);
-		obj->spe = -rne(2);
-	} else	blessorcurse(obj, 10);
 
 	if (obj->where == OBJ_FLOOR) {
 		obj_extract_self(obj);		/* move rocks back on top */

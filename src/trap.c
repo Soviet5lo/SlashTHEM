@@ -1660,16 +1660,6 @@ int zx,zy;
 				otmp = mksobj(BOULDER,FALSE,FALSE);
 			}
 
-			if(!rn2(8)) {
-				otmp->spe = rne(2);
-				if (rn2(2)) otmp->blessed = rn2(2);
-				 else	blessorcurse(otmp, 3);
-			} else if(!rn2(10)) {
-				if (rn2(10)) curse(otmp);
-				 else	blessorcurse(otmp, 3);
-				otmp->spe = -rne(2);
-			} else	blessorcurse(otmp, 10);
-
 			/* in case of weirdness */
 			if (!flooreffects(otmp,rx,ry,"fall")) {
 				place_object(otmp,rx,ry);

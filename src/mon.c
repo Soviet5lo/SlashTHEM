@@ -429,16 +429,6 @@ register struct monst *mtmp;
 	    case PM_CLAY_GOLEM:
 		obj = mksobj_at(ROCK, x, y, FALSE, FALSE);
 
-		if(!rn2(8)) {
-			obj->spe = rne(2);
-			if (rn2(2)) obj->blessed = rn2(2);
-			 else	blessorcurse(obj, 3);
-		} else if(!rn2(10)) {
-			if (rn2(10)) curse(obj);
-			 else	blessorcurse(obj, 3);
-			obj->spe = -rne(2);
-		} else	blessorcurse(obj, 10);
-
 		obj->quan = (long)(rn2(20) + 50);
 		obj->owt = weight(obj);
 		mtmp->mnamelth = 0;
