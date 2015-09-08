@@ -204,7 +204,7 @@ struct obj *box;
 		/* handle a couple of special cases */
 		if (otmp->oclass == COIN_CLASS) {
 		    /* 2.5 x level's usual amount; weight adjusted below */
-		    otmp->quan = (long)(rnd(level_difficulty()+5) * rnd(10));
+		    otmp->quan = (long)(rnd(level_difficulty()+5) * rnd(100));
 		    otmp->owt = weight(otmp);
 		} else while (otmp->otyp == ROCK) {
 		    otmp->otyp = rnd_class(DILITHIUM_CRYSTAL, LOADSTONE);
@@ -1122,7 +1122,7 @@ int x, y;
     register struct obj *gold = g_at(x,y);
 
     if (amount <= 0L)
-	amount = (long)(1 + rnd(level_difficulty()+2) * rnd(5));
+	amount = (long)(1 + rnd(level_difficulty()+2) * rnd(30));
     if (gold) {
 	gold->quan += amount;
     } else {
