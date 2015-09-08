@@ -543,7 +543,7 @@ moveloop()
 #endif /* EASY_MODE */
 			if (u.uen > u.uenmax)  u.uen = u.uenmax;
 			flags.botl = 1;
-
+#ifdef EASY_MODE
 			/* Having a spell school at skilled will improve mana regeneration.
 			 * Having a spell school at expert will improve it by even more. --Amy */
 
@@ -616,7 +616,7 @@ moveloop()
 			u.uen += 1;
 			if (u.uen > u.uenmax)  u.uen = u.uenmax;
 			flags.botl = 1;
-
+#endif /* EASY_MODE */
 
 		    if(!u.uinvulnerable) {
 			if(Teleportation && !rn2(250)) {
