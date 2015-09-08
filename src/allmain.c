@@ -468,22 +468,16 @@ moveloop()
  * +2 blessed) for the basis of regeneration calculations.
  */
 
-
- 			int efflev = u.ulevel + (u.uhealbonus);
- 			int effcon = ACURR(A_CON) + (u.uhealbonus);
-			if (P_SKILL(P_RIDING) == P_SKILLED) efflev += 2;
-			if (P_SKILL(P_RIDING) == P_EXPERT) efflev += 5;
-			if (P_SKILL(P_RIDING) == P_SKILLED) effcon += 2;
-			if (P_SKILL(P_RIDING) == P_EXPERT) effcon += 5;
-	/* Yeah I know this makes no sense at all, but it improves the usefulness of the riding skill. --Amy */
+ 			int efflev = u.ulevel + u.uhealbonus;
+ 			int effcon = ACURR(A_CON) + u.uhealbonus;
 			int heal = 1;
 
 
-			if ( efflev > 9 && !(moves % 3)) {
+			if (efflev > 9 && !(moves % 3)) {
 			    if (effcon <= 12) {
 				heal = 1;
 			    } else {
-				heal = rnd(effcon / 5) + 1;
+				heal = rnd(effcon);
   				if (heal > efflev-9) heal = efflev-9;
 			    }
 			    flags.botl = 1;
