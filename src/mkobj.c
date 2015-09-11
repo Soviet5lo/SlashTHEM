@@ -489,8 +489,8 @@ boolean artif;
 		break;
 	    case EGG:
 		otmp->corpsenm = NON_PM;	/* generic egg */
-		if (rn2(3)) for (tryct = 500; tryct > 0; --tryct) { /* Uncommon egg types may be possible. --Amy */
-		    mndx = (rn2(100) ? can_be_hatched(rndmonnum()) : rndmonnum() );
+		if (!rn2(3)) for (tryct = 200; tryct > 0; --tryct) {
+		    mndx = can_be_hatched(rndmonnum());
 		    if (mndx != NON_PM && !dead_species(mndx, TRUE)) {
 			otmp->corpsenm = mndx;		/* typed egg */
 			attach_egg_hatch_timeout(otmp);
