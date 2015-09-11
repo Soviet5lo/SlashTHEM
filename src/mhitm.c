@@ -985,7 +985,7 @@ mdamagem(magr, mdef, mattk)
 	}
 
 
-	if (touch_petrifies(pd) && !rn2(4) && !resists_ston(magr)) {
+	if (touch_petrifies(pd) && !resists_ston(magr)) {
 	    long protector = attk_protection((int)mattk->aatyp),
 		 wornitems = magr->misc_worn_check;
 
@@ -1036,7 +1036,7 @@ mdamagem(magr, mdef, mattk)
 	if (hit_as_three(magr))  objenchant = 3;
 	if (hit_as_four(magr))   objenchant = 4;
 
-	if (objenchant < canhitmon && !rn2(3)) nohit = TRUE;
+	if (objenchant < canhitmon) nohit = TRUE;
 
 	/* cancellation factor is the same as when attacking the hero */
 	armpro = magic_negation(mdef);

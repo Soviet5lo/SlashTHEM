@@ -819,7 +819,7 @@ int thrown;
 	if(!thrown && no_obj) {      /* attack with bare hands */
 	    if (Role_if(PM_MONK) && !Upolyd && u.ulevel/4 > objenchant)
 		objenchant = u.ulevel/4;
-	    noeffect = objenchant < canhitmon && rn2(3);
+	    noeffect = objenchant < canhitmon;
 	    if (martial_bonus()) {
 		if (mdat == &mons[PM_SHADE]) {
 		    tmp = rn2(3);
@@ -991,7 +991,7 @@ int thrown;
                     obj->axeinuse = 0;
                 }
 
-	    noeffect = objenchant < canhitmon && !ispoisoned && rn2(3);
+	    noeffect = objenchant < canhitmon && !ispoisoned;
 
 	    Strcpy(saved_oname, cxname(obj));
 	    if(obj->oclass == WEAPON_CLASS || is_weptool(obj) ||
@@ -2003,10 +2003,10 @@ register struct attack *mattk;
 	if (hit_as_three(&youmonst))  enchantlvl = 3; 
 	if (hit_as_four(&youmonst))   enchantlvl = 4;         
 
-	if (need_one(mdef)   && enchantlvl < 1 && rn2(3)) noeffect = TRUE; 
-	if (need_two(mdef)   && enchantlvl < 2 && rn2(3)) noeffect = TRUE;      
-	if (need_three(mdef) && enchantlvl < 3 && rn2(3)) noeffect = TRUE;  
-	if (need_four(mdef)  && enchantlvl < 4 && rn2(3)) noeffect = TRUE;  
+	if (need_one(mdef)   && enchantlvl < 1) noeffect = TRUE; 
+	if (need_two(mdef)   && enchantlvl < 2) noeffect = TRUE;      
+	if (need_three(mdef) && enchantlvl < 3) noeffect = TRUE;  
+	if (need_four(mdef)  && enchantlvl < 4) noeffect = TRUE;  
 
 	if (is_demon(youmonst.data) && !rn2(23) && !uwep
 		&& u.umonnum != PM_SUCCUBUS && u.umonnum != PM_INCUBUS
@@ -2053,7 +2053,6 @@ register struct attack *mattk;
 		    tmp = 0;
 		    break;
 		}
-		if (rn2(3)) break;
 		if (!Blind)
 		    pline("%s is %s!", Monnam(mdef),
 			  on_fire(mdef->data, mattk));
@@ -2091,7 +2090,6 @@ register struct attack *mattk;
 		    tmp = 0;
 		    break;
 		}
-		if (rn2(3)) break;
 		if (!Blind) pline("%s is covered in frost!", Monnam(mdef));
 		if (resists_cold(mdef)) {
 		    shieldeff(mdef->mx, mdef->my);
@@ -2107,7 +2105,6 @@ register struct attack *mattk;
 		    tmp = 0;
 		    break;
 		}
-		if (rn2(3)) break;
 		if (!Blind) pline("%s is zapped!", Monnam(mdef));
 		tmp += destroy_mitem(mdef, WAND_CLASS, AD_ELEC);
 		if (resists_elec(mdef)) {
@@ -2166,7 +2163,7 @@ register struct attack *mattk;
 		break;
 	    case AD_TLPT:
 		if (tmp <= 0) tmp = 1;
-		if (!negated && tmp < mdef->mhp && !rn2(4)) {
+		if (!negated && tmp < mdef->mhp) {
 		    char nambuf[BUFSZ];
 		    boolean u_saw_mon = canseemon(mdef) ||
 					(u.uswallow && u.ustuck == mdef);
@@ -2178,7 +2175,7 @@ register struct attack *mattk;
 		}
 		break;
 	    case AD_BLND:
-		if (can_blnd(&youmonst, mdef, mattk->aatyp, (struct obj*)0) && !rn2(3) ) {
+		if (can_blnd(&youmonst, mdef, mattk->aatyp, (struct obj*)0)) {
 		    if(!Blind && mdef->mcansee)
 			pline("%s is blinded.", Monnam(mdef));
 		    mdef->mcansee = 0;
@@ -2245,11 +2242,11 @@ register struct attack *mattk;
 			pline("%s falls to pieces!", Monnam(mdef));
 			xkilled(mdef,0);
 		}
-		if (!rn2(3)) hurtmarmor(mdef, AD_RUST);
+		hurtmarmor(mdef, AD_RUST);
 		tmp = 0;
 		break;
 	    case AD_CORR:
-		if (!rn2(3)) hurtmarmor(mdef, AD_CORR);
+		hurtmarmor(mdef, AD_CORR);
 		tmp = 0;
 		break;
 	    case AD_DCAY:
@@ -2258,7 +2255,7 @@ register struct attack *mattk;
 			pline("%s falls to pieces!", Monnam(mdef));
 			xkilled(mdef,0);
 		}
-		if (!rn2(3)) hurtmarmor(mdef, AD_DCAY);
+		hurtmarmor(mdef, AD_DCAY);
 		tmp = 0;
 		break;
 	    case AD_DRST:
@@ -2339,7 +2336,7 @@ register struct attack *mattk;
 			}
 		    } else if(u.ustuck == mdef) {
 			/* Monsters don't wear amulets of magical breathing */
-			if (!rn2(20) && is_pool(u.ux,u.uy) && !is_swimmer(mdef->data) &&
+			if (is_pool(u.ux,u.uy) && !is_swimmer(mdef->data) &&
 			    !amphibious(mdef->data)) {
 			    You("drown %s...", mon_nam(mdef));
 			    tmp = mdef->mhp;
@@ -2516,7 +2513,7 @@ register struct attack *mattk;
 	if ( (Race_if(PM_HUMAN_WEREWOLF) || Role_if(PM_LUNATIC) ) && Upolyd) tmp += rnd(u.ulevel); /* come on, werewolves need some love too! --Amy */
 
 	mdef->mstrategy &= ~STRAT_WAITFORU; /* in case player is very fast */
-	if (rn2(3) && tmp && noeffect && !DEADMONSTER(mdef)) {
+	if (tmp && noeffect && !DEADMONSTER(mdef)) {
 	     You("don't seem to harm %s.", mon_nam(mdef));
 	     tmp = 0;
 	     return 1;
@@ -3561,10 +3558,8 @@ uchar aatyp;
 	}
 
 /*	These only affect you if they still live */
-/* well, since most of them are sessile, and it's actually quite cowardly to attack a helpless sessile monster... */
-/* it was changed so these effects will still apply if the monster got killed, but not if it was cancelled --Amy */
 
-	if(/*malive && */!mon->mcan && rn2(3)) {
+	if(malive && !mon->mcan && rn2(3)) {
 
 	    switch(atttypC) {
 
