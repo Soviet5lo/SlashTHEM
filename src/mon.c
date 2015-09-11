@@ -2368,9 +2368,9 @@ xkilled(mtmp, dest)
 		if (!rn2(20) /*&& !(mvitals[mndx].mvflags & G_NOCORPSE) && !(nohands(mdat))*/
 	/* lowered overall chance, but see below for a chance to get extra items --Amy */
 #ifdef KOPS
-					/*&& mdat->mlet != S_KOP*/
+					&& mdat->mlet != S_KOP
 #endif
-							) { /* allow death drops for every monster type --Amy */
+							) {
 			int typ;
 
 			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
