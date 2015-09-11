@@ -330,11 +330,11 @@ register struct monst *mtmp;
     /* Adding iron ball as a weapon skill gives a -4 penalty for
     unskilled vs no penalty for non-weapon objects.  Add 4 to
     compensate. */
-    /* if (uwep && (uwep->otyp == HEAVY_IRON_BALL)) {
-        tmp += 4;   Compensate for iron ball weapon skill -4
+    if (uwep && (uwep->otyp == HEAVY_IRON_BALL)) {
+        tmp += 4;   /* Compensate for iron ball weapon skill -4
                     penalty for unskilled vs no penalty for non-
-                    weapon objects.
-    } */
+                    weapon objects. */
+    }
 #endif /* CONVICT */
 #if 0
 	if(Role_if(PM_MONK) && !Upolyd) {

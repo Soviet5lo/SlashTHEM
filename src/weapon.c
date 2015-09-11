@@ -1851,7 +1851,7 @@ struct obj *obj;
 	    return (martial_bonus() ? P_MARTIAL_ARTS :
 				P_BARE_HANDED_COMBAT);
 #ifdef CONVICT
-    if ( ((obj->oclass == BALL_CLASS) || (obj->oclass == CHAIN_CLASS)) /*&& Role_if(PM_CONVICT)*/)
+    if (((obj->oclass == BALL_CLASS) || (obj->oclass == CHAIN_CLASS)) && Role_if(PM_CONVICT))
         return objects[obj->otyp].oc_skill;
 #endif /* CONVICT */
 	if (obj->oclass != WEAPON_CLASS && obj->oclass != TOOL_CLASS &&
