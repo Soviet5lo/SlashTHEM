@@ -1069,7 +1069,7 @@ int thrown;
 			;	/* no special bonuses */
 		    } else if (mon->mflee && (Role_if(PM_ROGUE) || Role_if(PM_NINJA)) && !Upolyd) {
 			You("strike %s from behind!", mon_nam(mon));
-			tmp += rnd(rnd(u.ulevel)); /* nerf by Amy */
+			tmp += rnd(u.ulevel);
 			hittxt = TRUE;
 		    } else if (dieroll == 2 && obj == uwep &&
 			  !u.twoweap &&
