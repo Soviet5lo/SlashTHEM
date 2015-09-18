@@ -461,8 +461,7 @@ set_moreluck()
 	int luckbon = stone_luck(TRUE);
 
 	if (!luckbon && !carrying(LUCKSTONE)) u.moreluck = 0;
-	else if (luckbon >= 0 && u.moreluckpts <= 3) u.moreluck = u.moreluckpts; /* not always give a flat +3 --Amy */
-	else if (luckbon >= 0 && u.moreluckpts > 3) u.moreluck = LUCKADD;
+	else if (luckbon >= 0) u.moreluck = LUCKADD;
 	else u.moreluck = -LUCKADD;
 }
 
