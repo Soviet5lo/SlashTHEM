@@ -1802,9 +1802,9 @@ struct obj *obj;
 	 */
 	val_limit = (obj && obj->blessed) ? trouble_count : 1;
 	if (obj && obj->spe > 0)
-		chance = (obj->spe < 13) ? obj->spe+6 : 18;
+		chance = (obj->spe < 6) ? obj->spe+3 : 9;
 	else
-		chance = 6;
+		chance = 3;
 #endif
 
 	/* fix [some of] the troubles */
