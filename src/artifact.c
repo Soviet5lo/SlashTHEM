@@ -1578,7 +1578,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 			otmp->dknown = TRUE;
 			return TRUE;
 		} else {
-			if (!has_head(youmonst.data) || Role_if(PM_COURIER)) {
+			if (!has_head(youmonst.data)) {
 				pline("Somehow, %s misses you wildly.",
 				      magr ? mon_nam(magr) : wepdesc);
 				*dmgptr = 0;

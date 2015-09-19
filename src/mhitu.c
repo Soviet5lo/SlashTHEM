@@ -1902,7 +1902,7 @@ dopois:
 		break;
 	    case AD_DRIN:
 		hitmsg(mtmp, mattk);
-		if (defends(AD_DRIN, uwep) || !has_head(youmonst.data) || Role_if(PM_COURIER)) {
+		if (defends(AD_DRIN, uwep) || !has_head(youmonst.data)) {
 		    You("don't seem harmed.");
 		    /* Not clear what to do for green slimes */
 		    break;
