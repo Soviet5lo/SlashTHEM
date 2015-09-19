@@ -3576,9 +3576,7 @@ use_chemistry_set(struct obj *chemset)
 	int cost;
 	char c;
 
-	/* We will allow the player to make a potion occasionally, even if they don't know the spell. --Amy */
-
-	if (!spell_known(SPE_CHEMISTRY) && (rn2(3)) ) {
+	if (!spell_known(SPE_CHEMISTRY) && (ACURR(A_INT) < 18)) {
 		pline("Huh? You don't understand anything about such stuff!");
 		if (chemset->spe > 0) chemset->spe -= 1;
 		return;
