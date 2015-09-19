@@ -442,14 +442,12 @@ boolean parameter; /* So I can't think up of a good name.  So sue me. --KAA */
 	for (otmp = invent; otmp; otmp = otmp->nobj)
 	    if (confers_luck(otmp)) {
 		if (otmp->cursed) bonchance -= otmp->quan;
-		else if (otmp->blessed) {bonchance += otmp->quan; bonchance += otmp->quan;}
+		else if (otmp->blessed) bonchance += otmp->quan;
 		else if (parameter) bonchance += otmp->quan;
 	    }
 
 	/* STEPHEN WHITE'S NEW CODE */
 	if (uarmh && uarmh->otyp == FEDORA && !uarmh->cursed) bonchance += 2;
-
-	u.moreluckpts = bonchance;
 	
 	return sgn((int)bonchance);
 }
