@@ -890,28 +890,6 @@ register xchar x,y,cnt;
 		if(!ep->engr_txt[0]) del_engr(ep);
 	    }
 	}
-
-      if (ep && ep->engr_type == BURN && sengr_at("Elbereth", x, y) && !rn2(10000) ) {
-
-	/* Burned Elbereth engravings will no longer be truly permanent. --Amy */
-
-		pline("Suddenly, the burned engraving disappears into the ether!");
-	    del_engr(ep);
-	    ep = (struct engr *)0;
-
-	}
-
-      if (sobj_at(SCR_SCARE_MONSTER, x, y) && !rn2(50) ) {
-
-	/* scare monster scrolls might randomly disappear --Amy */
-
-		pline("You sense some sort of heat for a moment!");
-		(void) burn_floor_paper(x, y, TRUE, FALSE); /* The actual chance of this removing the scroll is about 3%. */
-
-	}
-
-
-
 }
 
 #endif /* OVL1 */
