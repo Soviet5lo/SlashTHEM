@@ -856,8 +856,8 @@ register struct permonst *ptr;
 		case TELEPAT:
 			chance = 1;
 			break;
-		default: /* 5lo: Still low chance, but not as low */
-			chance = (Race_if(PM_ILLITHID) ? 100 : 25); /*much lower chance now --Amy */
+		default:
+			chance = (Race_if(PM_ILLITHID) ? 60 : 15); /* TODO: Do something better than this */
 			break;
 	}
 
