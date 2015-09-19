@@ -64,18 +64,6 @@ MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 SUBROOM: "shop" , lit, (2,2), (3,4), "town"
 CHANCE: 90
@@ -161,18 +149,6 @@ MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 SUBROOM: "ordinary", random, (2,0), (2,2), "town"
 DOOR: false, closed, west, random
@@ -271,18 +247,6 @@ MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 SUBROOM:"ordinary",random,(2,2),(2,2),"town"
 DOOR: false,closed,south,random
@@ -379,18 +343,6 @@ MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 SUBROOM:"book shop",lit,(4,2),(3,3),"town"
 DOOR: false,closed,south,random
@@ -528,18 +480,6 @@ MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf", random
 MONSTER: 'h', "dwarf thief", random
 MONSTER: 'h', "dwarf thief", random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 # The shops
 REGION:(25,17,28,19),lit,"candle shop"
@@ -662,18 +602,6 @@ MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
 MONSTER: '@', "watch captain", random, peaceful
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 
 # "Bazaar Town" by Kelly Bailey
@@ -695,18 +623,6 @@ MONSTER:'G',"gnome",random
 MONSTER:'G',"gnome lord",random
 MONSTER:'Y',"monkey",random
 MONSTER:'Y',"monkey",random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 SUBROOM: "ordinary", random, (2,2), (4,2), "town"
 DOOR: false, closed, south, random
@@ -896,18 +812,6 @@ OBJECT:'*',"rock",random
 OBJECT:'*',"rock",random
 OBJECT:'*',"rock",random
 OBJECT:'*',"rock",random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 # Guarantee 7 candles since we won't have Izchak available
 # OBJECT:('(',"wax candle"),$place[0],quantity:1d2
@@ -1033,18 +937,6 @@ MONSTER: 'G', "gnome lord", random
 MONSTER: 'G', "gnomish wizard", random
 MONSTER: 'G', "gnomish wizard", random
 MONSTER: 'h', "dwarf", random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
-OBJECT:random,random,random
 
 MONSTER: '@', "watchman", random, peaceful
 MONSTER: '@', "watchman", random, peaceful
