@@ -200,7 +200,7 @@ int rx, ry, *resp;
 	 * on actual instances of the monsters, and we're dealing with just an index
 	 * so we can avoid things like "a owlbear", etc. */
 	if (otmp = sobj_at(EGG,rx,ry)) {
-		if (Hallucination || !rn2(20) ) { /* Let's make it fail sometimes. --Amy */
+		if (Hallucination) {
 			pline("You listen to the egg and guess... %s?",rndmonnam());
 		} else {
 			if (stale_egg(otmp) || otmp->corpsenm == NON_PM) {
