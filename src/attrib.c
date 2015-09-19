@@ -154,7 +154,7 @@ const struct innate {
 #endif
 		     {  17, &(HTeleport_control), "controlled","uncontrolled" },
 		     {   0, 0, 0, 0 } },
-
+#if 0 /* 5lo: Deferred for now */
 	psi_abil[] = { {   1, &(HTelepat), "", "" },
 		     {   1, &(HClairvoyant), "","" },
 		     {   3, &(HSee_invisible), "your vision sharpen", "your vision blur" },
@@ -163,12 +163,12 @@ const struct innate {
 		     {  15, &(HFlying), "weightless", "grounded" },
 		     {  20, &(HPasses_walls), "ethereal","mundane" },
 		     {   0, 0, 0, 0 } },
-
+#endif
 	nec_abil[] = { {   1, &(HDrain_resistance), "", "" },
 		     {   1, &(HSick_resistance), "", "" },
 		     {   3, &(HUndead_warning), "sensitive", "careless" },
 		     {   0, 0, 0, 0 } },
-
+#if 0 /* 5lo: Deferred for now */
 	pok_abil[] = { {   1, &(HDisint_resistance), "", "" },
 		     {   4, &(HWarning), "sensitive", "careless" },
 		     {   7, &(HSearching), "perceptive", "unaware" },
@@ -181,7 +181,7 @@ const struct innate {
 		     {   28, &(HTeleport_control), "controlled", "uncontrolled" },
 		     {   30, &(HFlying), "airborne", "stalled" },
 		     {   0, 0, 0, 0 } },
-
+#endif
 	pir_abil[] = {	{1, &(HSwimming), "", ""  },
 			 {	7, &(HStealth), "stealthy", "noisy"  },	/* with cat-like tread ... */
 		     {  11, &(HFast), "quick", "slow" },
