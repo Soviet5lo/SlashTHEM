@@ -458,14 +458,14 @@ ARMOR("T-shirt", (char *)0,
 #endif /* TOURIST */
 # ifdef CONVICT
 ARMOR("striped shirt", (char *)0,
-	1, 0, 0, 0,	 1, 0,	 5,   2, 10, 0, ARM_SHIRT, CLOTH, CLR_GRAY),
+	1, 0, 0, 0,	 2, 0,	 5,   2, 10, 0, ARM_SHIRT, CLOTH, CLR_GRAY),
 # endif /* CONVICT */
 /*Ruffled shirts are little different from other shirts*/
 ARMOR("ruffled shirt", (char *)0,
-	1, 0, 0, 0,	 1, 0,	 5,   2, 10, 0, ARM_SHIRT, CLOTH, CLR_WHITE),
+	1, 0, 0, 0,	 2, 0,	 5,   2, 10, 0, ARM_SHIRT, CLOTH, CLR_WHITE),
 /* victorian underwear, on the other hand, inflicts a penalty to AC but grants MC 3 */
 ARMOR("victorian underwear", (char *)0,
-	1, 0, 0, 0,	 1, 5,	 5,   2, 10, 3, ARM_SHIRT, CLOTH, CLR_WHITE),
+	1, 0, 0, 0,	 2, 5,	 5,   2, 10, 3, ARM_SHIRT, CLOTH, CLR_WHITE),
 /* 5lo: Expensive suit from Nethack--, grants a charisma bonus and a MC 2 */
 ARMOR("expensive suit", (char *)0,
 	1, 0, 0, 0,	 2, 0,   5,  50, 10, 2, ARM_SHIRT, CLOTH, CLR_BLACK), 
@@ -519,13 +519,13 @@ ARMOR("leather jacket", (char *)0,
 /* Robes */
 /* STEPHEN WHITE'S NEW CODE */
 ARMOR("robe", "red robe",
-	0, 0, 0, 0,		1, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_RED),
+	0, 0, 0, 0,		2, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_RED),
 ARMOR("robe of protection", "blue robe",
-	0, 1, 0, PROTECTION,	1, 1,  16,  50,  5, 0, ARM_SUIT, CLOTH, CLR_BRIGHT_BLUE),
+	0, 1, 0, PROTECTION,	2, 1,  16,  50,  5, 0, ARM_SUIT, CLOTH, CLR_BRIGHT_BLUE),
 ARMOR("robe of power", "orange robe",
-	0, 1, 0, 0,		1, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_ORANGE),
+	0, 1, 0, 0,		2, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_ORANGE),
 ARMOR("robe of weakness", "green robe",
-	0, 1, 0, STUNNED,		1, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_GREEN),
+	0, 1, 0, STUNNED,		2, 1,  16,  50,  9, 0, ARM_SUIT, CLOTH, CLR_GREEN),
 
 /*
  * Dragon suits
@@ -536,40 +536,40 @@ ARMOR("robe of weakness", "green robe",
  *	(2) That the order of the dragon scale mail and dragon scales is the
  *	    the same defined in monst.c.
  */
-#define DRGN_ARMR(name,mgc,power,cost,ac,color) \
-	ARMOR(name,(char *)0,1,mgc,1,power,1,5,20,cost,ac,0,ARM_SUIT,DRAGON_HIDE,color)
+#define DRGN_ARMR(name,mgc,power,prob,cost,ac,color) \
+	ARMOR(name,(char *)0,1,mgc,1,power,prob,5,20,cost,ac,0,ARM_SUIT,DRAGON_HIDE,color)
 /* 3.4.1: dragon scale mail reclassified as "magic" since magic is
    needed to create them */
-DRGN_ARMR("gray dragon scale mail",   1, ANTIMAGIC,  1500, 1, CLR_GRAY),
-DRGN_ARMR("silver dragon scale mail", 1, REFLECTING, 1500, 1, SILVER),
-DRGN_ARMR("shimmering dragon scale mail", 1, DISPLACED, 1200, 1, CLR_CYAN),
-DRGN_ARMR("deep dragon scale mail",   1, DRAIN_RES,  1200, 1, CLR_MAGENTA),
-DRGN_ARMR("red dragon scale mail",    1, FIRE_RES,    900, 1, CLR_RED),
-DRGN_ARMR("white dragon scale mail",  1, COLD_RES,    900, 1, CLR_WHITE),
-DRGN_ARMR("orange dragon scale mail", 1, SLEEP_RES,   900, 1, CLR_ORANGE),
-DRGN_ARMR("black dragon scale mail",  1, DISINT_RES, 1200, 1, CLR_BLACK),
-DRGN_ARMR("blue dragon scale mail",   1, SHOCK_RES,   900, 1, CLR_BRIGHT_BLUE),
-DRGN_ARMR("green dragon scale mail",  1, POISON_RES,  900, 1, CLR_GREEN),
-DRGN_ARMR("golden dragon scale mail",  1, SICK_RES,  900, 1, CLR_YELLOW),
-DRGN_ARMR("stone dragon scale mail",  1, STONE_RES,  900, 1, CLR_GRAY),
-DRGN_ARMR("yellow dragon scale mail", 1, ACID_RES,    900, 1, CLR_YELLOW),
+DRGN_ARMR("gray dragon scale mail",   1, ANTIMAGIC,  0, 1500, 1, CLR_GRAY),
+DRGN_ARMR("silver dragon scale mail", 1, REFLECTING, 0, 1500, 1, SILVER),
+DRGN_ARMR("shimmering dragon scale mail", 1, DISPLACED, 0, 1200, 1, CLR_CYAN),
+DRGN_ARMR("deep dragon scale mail",   1, DRAIN_RES,  0, 1200, 1, CLR_MAGENTA),
+DRGN_ARMR("red dragon scale mail",    1, FIRE_RES,   0,  900, 1, CLR_RED),
+DRGN_ARMR("white dragon scale mail",  1, COLD_RES,   0,  900, 1, CLR_WHITE),
+DRGN_ARMR("orange dragon scale mail", 1, SLEEP_RES,  0,  900, 1, CLR_ORANGE),
+DRGN_ARMR("black dragon scale mail",  1, DISINT_RES, 0, 1200, 1, CLR_BLACK),
+DRGN_ARMR("blue dragon scale mail",   1, SHOCK_RES,  0,  900, 1, CLR_BRIGHT_BLUE),
+DRGN_ARMR("green dragon scale mail",  1, POISON_RES, 0,  900, 1, CLR_GREEN),
+DRGN_ARMR("golden dragon scale mail", 1, SICK_RES,   0,  900, 1, CLR_YELLOW),
+DRGN_ARMR("stone dragon scale mail",  1, STONE_RES,  0,  900, 1, CLR_GRAY),
+DRGN_ARMR("yellow dragon scale mail", 1, ACID_RES,   0,  900, 1, CLR_YELLOW),
 
 /* For now, only dragons leave these. */
 /* 3.4.1: dragon scales left classified as "non-magic"; they confer
    magical properties but are produced "naturally" */
-DRGN_ARMR("gray dragon scales",   0, ANTIMAGIC,  800, 5, CLR_GRAY),
-DRGN_ARMR("silver dragon scales", 0, REFLECTING, 800, 5, SILVER),
-DRGN_ARMR("shimmering dragon scales", 0, DISPLACED,  700, 5, CLR_CYAN),
-DRGN_ARMR("deep dragon scales",   0, DRAIN_RES,  500, 5, CLR_MAGENTA),
-DRGN_ARMR("red dragon scales",    0, FIRE_RES,   500, 5, CLR_RED),
-DRGN_ARMR("white dragon scales",  0, COLD_RES,   500, 5, CLR_WHITE),
-DRGN_ARMR("orange dragon scales", 0, SLEEP_RES,  500, 5, CLR_ORANGE),
-DRGN_ARMR("black dragon scales",  0, DISINT_RES, 700, 5, CLR_BLACK),
-DRGN_ARMR("blue dragon scales",   0, SHOCK_RES,  500, 5, CLR_BRIGHT_BLUE),
-DRGN_ARMR("green dragon scales",  0, POISON_RES, 500, 5, CLR_GREEN),
-DRGN_ARMR("golden dragon scales",   0, SICK_RES,  500, 5, CLR_YELLOW),
-DRGN_ARMR("stone dragon scales",  0, STONE_RES, 500, 5, CLR_GRAY),
-DRGN_ARMR("yellow dragon scales", 0, ACID_RES,   500, 5, CLR_YELLOW),
+DRGN_ARMR("gray dragon scales",   0, ANTIMAGIC,  1, 800, 5, CLR_GRAY),
+DRGN_ARMR("silver dragon scales", 0, REFLECTING, 1, 800, 5, SILVER),
+DRGN_ARMR("shimmering dragon scales", 0, DISPLACED, 1,  700, 5, CLR_CYAN),
+DRGN_ARMR("deep dragon scales",   0, DRAIN_RES,  1, 500, 5, CLR_MAGENTA),
+DRGN_ARMR("red dragon scales",    0, FIRE_RES,   1, 500, 5, CLR_RED),
+DRGN_ARMR("white dragon scales",  0, COLD_RES,   1, 500, 5, CLR_WHITE),
+DRGN_ARMR("orange dragon scales", 0, SLEEP_RES,  1, 500, 5, CLR_ORANGE),
+DRGN_ARMR("black dragon scales",  0, DISINT_RES, 1, 700, 5, CLR_BLACK),
+DRGN_ARMR("blue dragon scales",   0, SHOCK_RES,  1, 500, 5, CLR_BRIGHT_BLUE),
+DRGN_ARMR("green dragon scales",  0, POISON_RES, 1, 500, 5, CLR_GREEN),
+DRGN_ARMR("golden dragon scales",   0, SICK_RES, 1, 500, 5, CLR_YELLOW),
+DRGN_ARMR("stone dragon scales",  0, STONE_RES,  1, 500, 5, CLR_GRAY),
+DRGN_ARMR("yellow dragon scales", 0, ACID_RES,   1, 500, 5, CLR_YELLOW),
 #undef DRGN_ARMR
 
 /* Cloaks */
@@ -591,11 +591,11 @@ CLOAK("leather cloak", (char *)0,
 CLOAK("plasteel cloak", (char *)0,
 		1, 0,	0,	    1, 0, 7, 70,  8, 2, PLASTIC, CLR_WHITE),
 CLOAK("cloak of warmth", "metal cloak",
-		0, 1,	COLD_RES,  1, 0, 4, 50,  7, 3, METAL, CLR_GRAY),
+		0, 1,	COLD_RES,  2, 0, 4, 50,  7, 3, METAL, CLR_GRAY),
 CLOAK("cloak of grounding", "granite cloak",
-		0, 1,	SHOCK_RES,  1, 0, 4, 50,  8, 2, MINERAL, CLR_GRAY),
+		0, 1,	SHOCK_RES,  2, 0, 4, 50,  8, 2, MINERAL, CLR_GRAY),
 CLOAK("cloak of quenching", "asbestos cloak",
-		0, 1,	FIRE_RES,  1, 0, 4, 50,  9, 3, MITHRIL, CLR_ORANGE),
+		0, 1,	FIRE_RES,  2, 0, 4, 50,  9, 3, MITHRIL, CLR_ORANGE),
 
 #if 0
 CLOAK("robe", (char *)0,
@@ -615,7 +615,7 @@ CLOAK("cloak of magic resistance", "ornamental cope",
 CLOAK("cloak of reflection", "funeral cloak",
 		0, 1,	REFLECTING,  2, 0, 4, 50,  9, 3, CLOTH, CLR_BRIGHT_GREEN),
 CLOAK("manacloak", "dragonhide cloak",
-		0, 1,	ENERGY_REGENERATION,  1, 0, 4, 50,  7, 3, DRAGON_HIDE, CLR_BRIGHT_BLUE),
+		0, 1,	ENERGY_REGENERATION,  2, 0, 4, 50,  7, 3, DRAGON_HIDE, CLR_BRIGHT_BLUE),
 CLOAK("cloak of displacement", "piece of cloth",
 		0, 1,	DISPLACED, 7, 0, 4, 50,  9, 2, CLOTH, HI_CLOTH),
 /* Helmets */
@@ -637,7 +637,7 @@ HELM("dented pot", (char *)0,
 		1, 0, 0,			2, 0, 4,   8, 9, 0, IRON, CLR_BLACK),
 /* 5lo: Fire Helmet from SLASH 6, grants Fire Resistance */
 HELM("fire helmet", "red shiny helmet",
-		0, 0, FIRE_RES,			2, 1, 25, 50, 9, 0, IRON, CLR_RED),
+		0, 0, FIRE_RES,			3, 1, 25, 50, 9, 0, IRON, CLR_RED),
 #ifdef JEDI
 HELM("plasteel helm", (char *)0,
 		1, 0, 0,                        1, 1,  2,  20, 7, 0, PLASTIC, CLR_WHITE),
@@ -658,24 +658,24 @@ HELM("helm of telepathy", "visored helmet",
  */
 #ifdef JEDI
 GLOVES("plasteel gloves", "white gloves",
-		0, 0,  0,                        1, 1,  2, 25,  8, 0, PLASTIC, CLR_WHITE),
+		0, 0,  0,                1, 1,  2, 25,  8, 0, PLASTIC, CLR_WHITE),
 #endif
 GLOVES("leather gloves", "old gloves",
-		0, 0,  0,			14, 1, 4,  50,  9, 0, LEATHER, HI_LEATHER),
+		0, 0,  0,		14, 1,  4, 50,  9, 0, LEATHER, HI_LEATHER),
 GLOVES("rubber gloves", "gardening gloves",
-	0, 0,  0,	1, 1, 10, 50,	9, 0, PLASTIC, CLR_BROWN),
+		0, 0,  0,		2,  1, 10, 50,	9, 0, PLASTIC, CLR_BROWN),
 GLOVES("gauntlets of fumbling", "padded gloves",
-		0, 1,  FUMBLING,	8, 1, 4, 50,  9, 0, LEATHER, HI_LEATHER),
+		0, 1,  FUMBLING,	8,  1,  4, 50,  9, 0, LEATHER, HI_LEATHER),
 GLOVES("gauntlets of power", "riding gloves",
-		0, 1,  0,			7, 1, 4, 50,  9, 0, IRON, CLR_BROWN),
+		0, 1,  0,		7,  1,  4, 50,  9, 0, IRON, CLR_BROWN),
 GLOVES("gauntlets of typing", "brand-new gloves",
-		0, 1, 0, 			1, 1, 4,  50,  8, 0, LEATHER, HI_LEATHER),
+		0, 1, 0, 		1,  1,  4, 50,  8, 0, LEATHER, HI_LEATHER),
 GLOVES("gauntlets of swimming", "black gloves",
-		0, 1,  SWIMMING,	8, 1, 4, 50,  9, 0, LEATHER, HI_LEATHER),
+		0, 1,  SWIMMING,	8,  1,  4, 50,  9, 0, LEATHER, HI_LEATHER),
 GLOVES("gauntlets of reflection", "archery gloves",
-		0, 1, REFLECTING,	2, 1, 10, 50, 9, 0, SILVER, CLR_BROWN),
+		0, 1, REFLECTING,	2,  1, 10, 50,  9, 0, SILVER, CLR_BROWN),
 GLOVES("gauntlets of dexterity", "fencing gloves",
-		0, 1,  0,			8, 1, 4, 50,  9, 0, LEATHER, HI_LEATHER),
+		0, 1,  0,		8,  1,  4, 50,  9, 0, LEATHER, HI_LEATHER),
 
 /* Shields */
 SHIELD("small shield", (char *)0,
