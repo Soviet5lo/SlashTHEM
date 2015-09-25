@@ -126,10 +126,10 @@ init_artifacts1()
 
 	if (skill > P_NONE && P_SKILL(skill) < P_UNSKILLED)
 	    P_SKILL(skill) = P_UNSKILLED;
-	if (skill > P_NONE && P_MAX_SKILL(skill) < P_EXPERT) { /* expert instead of skilled --Amy */
-	    pline("Warning: %s should be at least expert.  Fixing...",
+	if (skill > P_NONE && P_MAX_SKILL(skill) < P_SKILLED) {
+	    pline("Warning: %s should be at least skilled.  Fixing...",
 		    artilist[urole.gift1arti].name);
-		P_MAX_SKILL(skill) = P_EXPERT;
+		P_MAX_SKILL(skill) = P_SKILLED;
 	}
     }
     if (urole.gift2arti &&
@@ -139,10 +139,10 @@ init_artifacts1()
 
 	if (skill > P_NONE && P_SKILL(skill) < P_UNSKILLED)
 	    P_SKILL(skill) = P_UNSKILLED;
-	if (skill > P_NONE && P_MAX_SKILL(skill) < P_EXPERT) {
-	    pline("Warning: %s should be at least expert.  Fixing...",
+	if (skill > P_NONE && P_MAX_SKILL(skill) < P_SKILLED) {
+	    pline("Warning: %s should be at least skilled.  Fixing...",
 		    artilist[urole.gift1arti].name);
-	    P_MAX_SKILL(skill) = P_EXPERT;
+	    P_MAX_SKILL(skill) = P_SKILLED;
 	}
     }
 #endif 
