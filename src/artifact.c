@@ -1914,7 +1914,7 @@ arti_invoke(obj)
 	    rescham();
 	    break;
 	case SUMMON_FIRE_ELEMENTAL:
-	    pm = rn2(4) ? &mons[PM_FIRE_ELEMENTAL] : &mons[PM_GREATER_FIRE_ELEMENTAL];
+	    pm = !rn2(4) ? &mons[PM_GREATER_FIRE_ELEMENTAL] : &mons[PM_FIRE_ELEMENTAL];
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");
@@ -1924,10 +1924,11 @@ arti_invoke(obj)
 	    mtmp->mtame = 30;
 	    break;
 	case SUMMON_WATER_ELEMENTAL:
-	    pm = rn2(4) ? &mons[PM_WATER_ELEMENTAL] : &mons[PM_GREATER_WATER_ELEMENTAL];
-	    if(Role_if(PM_ICE_MAGE)) {
-		pm = &mons[PM_ICE_ELEMENTAL];
-	    }
+	    if (obj->oartifact == ART_STORM_WHISTLE)
+		    pm = !rn2(4) ? &mons[PM_ICE_ELEMENTAL] : &mons[PM_ICE_VORTEX];
+	    else
+		    pm = !rn2(4) ? &mons[PM_GREATER_WATER_ELEMENTAL] : &mons[PM_WATER_ELEMENTAL];
+
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");
@@ -1937,7 +1938,7 @@ arti_invoke(obj)
 	    mtmp->mtame = 30;
 	    break;
 	case SUMMON_EARTH_ELEMENTAL: /* 5lo: New summons */
-            pm = rn2(4) ? &mons[PM_EARTH_ELEMENTAL] : &mons[PM_GREATER_EARTH_ELEMENTAL];
+            pm = !rn2(4) ? &mons[PM_GREATER_EARTH_ELEMENTAL] : &mons[PM_EARTH_ELEMENTAL];
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");
@@ -1947,7 +1948,7 @@ arti_invoke(obj)
 	    mtmp->mtame = 30;
 	    break;
 	case SUMMON_AIR_ELEMENTAL:
-            pm = rn2(4) ? &mons[PM_AIR_ELEMENTAL] : &mons[PM_GREATER_AIR_ELEMENTAL];
+            pm = !rn2(4) ? &mons[PM_GREATER_AIR_ELEMENTAL] : &mons[PM_AIR_ELEMENTAL];
 	    mtmp = makemon(pm, u.ux, u.uy, NO_MM_FLAGS);
    
 	    pline("You summon an elemental.");
