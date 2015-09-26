@@ -1004,13 +1004,13 @@ register int pm;
 	    case PM_DEMINEWT:
 	    case PM_MASTER_NEWT:
 		/* MRKR: "eye of newt" may give small magical energy boost */
-		if (rn2(3)/* || 3 * u.uen <= 2 * u.uenmax*/) {
-		    int old_uen = u.uen; /* Some slight changes to this code. --Amy */
+		if (rn2(3) || 3 * u.uen <= 2 * u.uenmax) {
+		    int old_uen = u.uen;
 		    u.uen += rnd(3);
-		    /*if (u.uen > u.uenmax) { */
+		    if (u.uen > u.uenmax) {
 			if (!rn2(3)) u.uenmax++;
-			/*u.uen = u.uenmax;
-		    } */
+			u.uen = u.uenmax;
+		    }
 		    if (old_uen != u.uen) {
 			    You_feel("a mild buzz.");
 			    flags.botl = 1;
