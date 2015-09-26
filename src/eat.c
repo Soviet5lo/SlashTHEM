@@ -1219,7 +1219,6 @@ register int pm;
 		}
 		break;
 	    case PM_LIZARD:
-		lesshungry(120);
 		if (HStun > 2)  make_stunned(2L,FALSE);
 		if (HConfusion > 2)  make_confused(2L,FALSE);
 		break;
