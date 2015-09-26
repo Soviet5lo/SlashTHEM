@@ -913,9 +913,8 @@ die:
 	 * On those rare occasions you get hosed immediately, go out
 	 * smiling... :-)  -3.
 	 */
-	if (moves <= 2 && how < PANICKED)	/* You die... --More-- */
+	if (moves <= 1 && how < PANICKED)	/* You die... --More-- */
 	    pline("Do not pass go.  Do not collect 200 %s.", currency(200L));
-	/* I'll allow you to see this message if you die on your second turn, too. --Amy */
 
 	if (have_windows) wait_synch();	/* flush screen output */
 	if (!goexplore) {
