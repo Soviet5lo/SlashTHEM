@@ -5402,15 +5402,15 @@ shk_charge(slang, shkp)
 			makeknown(obj->otyp);
 			bot();
 		}
-		else if (type == 'p')
-		{ 
+		else
+		{
 			/*
 			** Basic: recharge() will have given 1 charge.
 			** Premier: recharge() will have given 5-10, say.
-			** Add a few more still. Note by Amy: but only if the player uses premier charging.
+			** Add a few more still.
 			*/
-			if (obj->spe < 120) obj->spe += rnd(5);
-			/*else if (obj->spe < 20) obj->spe += 1;*/
+			if (obj->spe < 16) obj->spe += rn1(5,5);
+			else if (obj->spe < 20) obj->spe += 1;
 		}
 	}
 }
