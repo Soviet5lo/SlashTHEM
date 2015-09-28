@@ -9,10 +9,7 @@
 
 /* Monsters that might be ridden */
 static NEARDATA const char steeds[] = {
-	S_QUADRUPED, S_UNICORN, S_ANGEL, S_DEMON, S_CENTAUR, S_DRAGON, S_JABBERWOCK, S_COCKATRICE, S_HUMANOID, S_NYMPH,
-S_SPIDER, S_ZOUTHERN, S_BAT, S_GIANT, S_KOP, S_LICH, S_MUMMY, S_NAGA, S_VAMPIRE, S_WRAITH, S_YETI, S_ZOMBIE, S_GOLEM, 
-S_HUMAN, S_EEL, S_LIZARD, S_BAD_FOOD, S_BAD_COINS,  '\0' 
-/* added demons and some other stuff --Amy */
+	S_QUADRUPED, S_UNICORN, S_ANGEL, S_CENTAUR, S_DRAGON, S_JABBERWOCK, '\0'
 };
 
 STATIC_DCL boolean FDECL(landing_spot, (coord *, int, int));
@@ -31,13 +28,12 @@ boolean
 can_saddle(mtmp)
 	struct monst *mtmp;
 {
-	return 1; /*just remove all those annoying restrictions and allow everything to be saddled --Amy*/
-	/*struct permonst *ptr = mtmp->data;
+	struct permonst *ptr = mtmp->data;
 
 	return (index(steeds, ptr->mlet) && (ptr->msize >= MZ_MEDIUM) &&
 			(!humanoid(ptr) || ptr->mlet == S_CENTAUR) &&
 			!amorphous(ptr) && !noncorporeal(ptr) &&
-			!is_whirly(ptr) && !unsolid(ptr));*/
+			!is_whirly(ptr) && !unsolid(ptr));
 }
 
 
@@ -102,7 +98,7 @@ use_saddle(otmp)
 	if (ptr == &mons[PM_INCUBUS] || ptr == &mons[PM_SUCCUBUS]) {
 	    pline("Shame on you!");
 	    exercise(A_WIS, FALSE);
-	    /*return 1;*/ /* removed that stupid restriction --Amy */
+	    return 1;
 	}
 	if (mtmp->isminion || mtmp->isshk || mtmp->ispriest ||
 			mtmp->isgd || mtmp->iswiz) {
@@ -172,11 +168,10 @@ boolean
 can_ride(mtmp)
 	struct monst *mtmp;
 {
-	return (mtmp->mtame /*&& humanoid(youmonst.data) &&
+	return (mtmp->mtame && humanoid(youmonst.data) &&
 			!verysmall(youmonst.data) && !bigmonst(youmonst.data) &&
-			(!Underwater || is_swimmer(mtmp->data)) */);
+			(!Underwater || is_swimmer(mtmp->data)));
 }
-/* Removed a lot of annoying restrictions that don't serve any purpose anyway other than annoying the player. --Amy */
 
 
 int
@@ -217,7 +212,7 @@ mount_steed(mtmp, force)
 	/* Is the player in the right form? */
 	if (Hallucination && !force) {
 	    pline("Maybe you should find a designated driver.");
-	    /*return (FALSE); well, if the horse is saddled, a hallucinating player should be able to ride it --Amy*/
+	    return (FALSE);
 	}
 	/* While riding Wounded_legs refers to the steed's,
 	 * not the hero's legs.
