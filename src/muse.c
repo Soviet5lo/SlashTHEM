@@ -1659,7 +1659,7 @@ struct monst *mtmp;
 {
 	register struct obj *obj;
 	boolean ranged_stuff = lined_up(mtmp);
-	boolean reflection_skip = (Reflecting);
+	boolean reflection_skip = (Reflecting && rn2(2));
 	struct obj *helmet = which_armor(mtmp, W_ARMH);
 
 	m.offensive = (struct obj *)0;
