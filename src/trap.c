@@ -2098,10 +2098,10 @@ long ocount;
 	coord bcc;
 	int trycount = 0;
 	boolean success = FALSE;
-	int mindist = 0;
+	int mindist = 4;
 
 	if (ttmp->ttyp == ROLLING_BOULDER_TRAP) mindist = 2;
-	distance = rnd(8);    /* 4..8 away */
+	distance = rn1(5,4);    /* 4..8 away */
 	tmp = rn2(8);		/* randomly pick a direction to try first */
 	while (distance >= mindist) {
 		dx = xdir[tmp];
