@@ -368,7 +368,6 @@ register struct monst *mtmp;
 		Strcat(buf,", while blind");
 		if (multi) Strcat(buf," and helpless");
 	}
-	if(mtmp->data == &mons[PM_SOLDIER_ANT]) Strcat(buf, "    Go Team Ant!");
 
 	killer = buf;
 	if (mtmp->data->mlet == S_WRAITH)
