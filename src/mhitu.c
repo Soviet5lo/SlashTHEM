@@ -2631,11 +2631,11 @@ dopois:
 /*	Negative armor class reduces damage done instead of fully protecting
  *	against hits.
  */
-	if (dmg && u.uac < /*-1*/0) {  /* damage reduction will start at -1 rather than -11 AC now --Amy */
+	if (dmg && u.uac < -10) {
 		int tempval;
-		tempval = rnd(-(u.uac)/5+1);
+		tempval = rnd(-(10 + u.uac)/5+1);
 		if (tempval < 1)  tempval = 1;
-		if (tempval > 20) tempval = 20; /* max limit increased --Amy */
+		if (tempval > 10) tempval = 10;
 		dmg -= tempval;
 		if (dmg < 1) dmg = 1;
 	}
