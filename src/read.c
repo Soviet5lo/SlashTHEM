@@ -647,6 +647,7 @@ doread()
 	    }
 	} else if (scroll->otyp == PACK_OF_FLOPPIES) {
 		use_floppies(scroll);
+		return 1;
 	} else if (scroll->oclass != SCROLL_CLASS
 		&& scroll->oclass != SPBOOK_CLASS) {
 	    pline(silly_thing_to, "read");
