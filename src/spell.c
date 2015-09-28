@@ -1501,7 +1501,7 @@ int spell;
 	if (uarm && !(uarm->otyp == ROBE ||
 		      uarm->otyp == ROBE_OF_POWER ||
 		      uarm->otyp == ROBE_OF_PROTECTION)) 
-	    splcaster += 2;
+	    splcaster += 5;
 
 	/* Robes are body armour in SLASH'EM */
 	if (uarm && is_metallic(uarm))
@@ -1524,8 +1524,8 @@ int spell;
 		splcaster += special;
 
 	if (uarm && uarm->otyp == ROBE_OF_POWER) splcaster -= 3;
-	if (splcaster < 2) splcaster = 2;
-	if (splcaster > 15) splcaster = 15;
+	if (splcaster < 5) splcaster = 5;
+	if (splcaster > 20) splcaster = 20;
 
 	/* Calculate learned ability */
 
@@ -1541,7 +1541,7 @@ int spell;
 	 */
 	skill = P_SKILL(spell_skilltype(spellid(spell)));
 	skill = max(skill,P_UNSKILLED) - 1;	/* unskilled => 0 */
-	difficulty= (spellev(spell)-1) * 3 - ((skill * 6) + (u.ulevel/3) + 1);
+	difficulty= (spellev(spell)-1) * 4 - ((skill * 6) + (u.ulevel/3) + 1);
 
 	if (difficulty > 0) {
 		/* Player is too low level or unskilled. */
@@ -1568,13 +1568,13 @@ int spell;
 	 * to cast a spell.  The penalty is not quite so bad for the
 	 * player's class-specific spell.
 	 */
-	/* if (uarms && weight(uarms) > (int) objects[SMALL_SHIELD].oc_weight) {
+	if (uarms && weight(uarms) > (int) objects[SMALL_SHIELD].oc_weight) {
 		if (spellid(spell) == urole.spelspec) {
 			chance /= 2;
 		} else {
-			chance /= 3;
+			chance /= 4;
 		}
-	}*/
+	}
 
 	/* Finally, chance (based on player intell/wisdom and level) is
 	 * combined with ability (based on player intrinsics and
@@ -1582,7 +1582,7 @@ int spell;
 	 * a player is, intrinsics and encumbrance can prevent casting;
 	 * and no matter how able, learning is always required.
 	 */
-	chance = chance * (25-splcaster) / 10;
+	chance = chance * (20-splcaster) / 15 - splcaster;
 
 	/* Clamp to percentile */
 	if (chance > 100) chance = 100;
