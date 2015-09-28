@@ -3952,7 +3952,6 @@ register int fall;
 #ifdef KOPS
 /* modified by M. Campostrini (campo@sunthpi3.difi.unipi.it) */
 /* to allow for multiple choices of kops */
-/* modified even more by Amy to allow for even greater choice */
 STATIC_OVL void
 makekops(mm)
 coord *mm;
@@ -3988,15 +3987,14 @@ coord *mm;
 	kop_cnt[1] = (cnt / 3) + 1;   /* at least one sarge */
 	kop_cnt[2] = (cnt / 5) + 1;       /* maybe a lieutenant */
 	kop_cnt[3] = (cnt / 8) + 1;       /* and maybe a kaptain */
-	kop_cnt[4] = (cnt / 12) + 1;       /* and maybe a kaptain */
- 	kop_cnt[5] = (cnt / 16) + 1;       /* and maybe a kaptain */
+	kop_cnt[4] = (cnt / 12) + 1;       /* and maybe a kommissioner */
   
 	mc = (coord *)alloc(cnt * sizeof(coord));
 	for (ik=0; kop_pm[ik]; ik++) {
 	  if (!(mvitals[kop_pm[ik]].mvflags & G_GONE)) {
 	    cnt = epathto(mc, kop_cnt[ik], mm->x, mm->y, &mons[kop_pm[ik]]);
 	    while(--cnt >= 0)
-		(void) makemon(mkclass(S_KOP,0), mc[cnt].x, mc[cnt].y, NO_MM_FLAGS);
+		(void) makemon(&mons[kop_pm[ik]], mc[cnt].x, mc[cnt].y, NO_MM_FLAGS);
 	}
 	}
 	free((genericptr_t)mc);
