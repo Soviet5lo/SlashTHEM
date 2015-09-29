@@ -841,10 +841,9 @@ have_lizard()
 {
 	register struct obj *otmp;
 
-	for(otmp = invent; otmp; otmp = otmp->nobj) {
+	for(otmp = invent; otmp; otmp = otmp->nobj)
 		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_LIZARD)
 			return(TRUE);
-		}
 	return(FALSE);
 }
 

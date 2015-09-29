@@ -486,10 +486,6 @@ struct obj *otmp;
 #define MUSE_SCR_SUMMON_UNDEAD 27
 #define MUSE_WAN_SUMMON_UNDEAD 28
 #define MUSE_SCR_HEALING 29
-#if 0 /* 5lo: Removed */
-#define MUSE_SCR_TELE_LEVEL 30
-#define MUSE_SCR_WARPING 31
-#endif
 /*
 #define MUSE_INNATE_TPT 9999
  * We cannot use this.  Since monsters get unlimited teleportation, if they
@@ -756,23 +752,6 @@ struct monst *mtmp;
 			m.defensive = obj;
 			m.has_defense = MUSE_SCR_ROOT_PASSWORD_DETECTION;
 		}
-#if 0 /* 5lo: Removed */
-		nomore(MUSE_SCR_TELE_LEVEL);
-		if(obj->otyp == SCR_TELE_LEVEL
-		   && (!(mtmp->isshk && inhishop(mtmp))
-			    && !mtmp->isgd && !mtmp->ispriest)) {
-			m.defensive = obj;
-			m.has_defense = MUSE_SCR_TELE_LEVEL;
-		}
-
-		nomore(MUSE_SCR_WARPING);
-		if(obj->otyp == SCR_WARPING
-		   && (!(mtmp->isshk && inhishop(mtmp))
-			    && !mtmp->isgd && !mtmp->ispriest)) {
-			m.defensive = obj;
-			m.has_defense = MUSE_SCR_WARPING;
-		}
-#endif
 		nomore(MUSE_RIN_TIMELY_BACKUP);
 		if(obj->otyp == RIN_TIMELY_BACKUP) {
 			m.defensive = obj;
@@ -991,51 +970,6 @@ mon_tele:
 		} else goto mon_tele;
 		return 2;
 	    }
-#if 0 /* 5lo: Removed */
-	case MUSE_SCR_TELE_LEVEL:
-	    {
-		if (mtmp->isshk || mtmp->isgd || mtmp->ispriest) return 2;
-		m_flee(mtmp);
-		mreadmsg(mtmp, otmp);
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-		how = SCR_TELE_LEVEL;
-
-			int nlev;
-			d_level flev;
-
-			if (mon_has_amulet(mtmp) || In_endgame(&u.uz)) {
-			    if (vismon)
-				pline("%s seems very disoriented for a moment.",
-					Monnam(mtmp));
-			    return 2;
-			}
-			nlev = random_teleport_level();
-			if (nlev == depth(&u.uz)) {
-			    if (vismon)
-				pline("%s shudders for a moment.",
-								Monnam(mtmp));
-			    return 2;
-			}
-			get_level(&flev, nlev);
-			migrate_to_level(mtmp, ledger_no(&flev), MIGR_RANDOM,
-				(coord *)0);
-			if (oseen) makeknown(SCR_TELE_LEVEL);
-
-		return 2;
-	    }
-	case MUSE_SCR_WARPING:
-	    {
-		if (mtmp->isshk || mtmp->isgd || mtmp->ispriest) return 2;
-		m_flee(mtmp);
-		mreadmsg(mtmp, otmp);
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		if (u.uevent.udemigod) { (void) rloc(mtmp, FALSE); return 2; }
-		u_teleport_monB(mtmp, TRUE);
-
-		return 2;
-	    }
-#endif
 	case MUSE_SCR_ROOT_PASSWORD_DETECTION:
 	    {
 		if (mtmp->isshk || mtmp->isgd || mtmp->ispriest) return 2;
@@ -1603,10 +1537,6 @@ struct monst *mtmp;
 		case 17: return RIN_TIMELY_BACKUP;
 		case 18: return WAN_SUMMON_UNDEAD;
 		case 19: return SCR_HEALING;
-#if 0 /* 5lo: Removed */
-		case 20: return SCR_WARPING;
-		case 11: return SCR_TELE_LEVEL;
-#endif
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -1643,13 +1573,6 @@ struct monst *mtmp;
 #define MUSE_SCR_ICE 28
 #define MUSE_SCR_CLOUDS 29
 #define MUSE_WAN_SOLAR_BEAM 30
-#if 0 /* 5lo: Removed these */
-#define MUSE_SCR_BARRHING 31
-#define MUSE_SCR_LAVA 32
-#define MUSE_SCR_GROWTH 33
-#define MUSE_SCR_LOCKOUT 34
-#define MUSE_WAN_BANISHMENT 35
-#endif
 /* Select an offensive item/action for a monster.  Returns TRUE iff one is
  * found.
  */
@@ -1749,13 +1672,6 @@ struct monst *mtmp;
 			m.offensive = obj;
 			m.has_offense = MUSE_WAN_STRIKING;
 		}
-#if 0 /* 5lo: Removed */
-		nomore(MUSE_WAN_BANISHMENT);
-		if(obj->otyp == WAN_BANISHMENT && obj->spe > 0) {
-			m.offensive = obj;
-			m.has_offense = MUSE_WAN_BANISHMENT;
-		}
-#endif
 		nomore(MUSE_POT_PARALYSIS);
 		if(obj->otyp == POT_PARALYSIS && multi >= 0) {
 			m.offensive = obj;
@@ -1813,28 +1729,6 @@ struct monst *mtmp;
 			m.offensive = obj;
 			m.has_offense = MUSE_SCR_FLOOD;
 		}
-#if 0 /* 5lo: Removed */
-		nomore(MUSE_SCR_LAVA);
-		if(obj->otyp == SCR_LAVA) {
-			m.offensive = obj;
-			m.has_offense = MUSE_SCR_LAVA;
-		}
-		nomore(MUSE_SCR_LOCKOUT);
-		if(obj->otyp == SCR_LOCKOUT) {
-			m.offensive = obj;
-			m.has_offense = MUSE_SCR_LOCKOUT;
-		}
-		nomore(MUSE_SCR_GROWTH);
-		if(obj->otyp == SCR_GROWTH) {
-			m.offensive = obj;
-			m.has_offense = MUSE_SCR_GROWTH;
-		}
-		nomore(MUSE_SCR_BARRHING);
-		if(obj->otyp == SCR_BARRHING) {
-			m.offensive = obj;
-			m.has_offense = MUSE_SCR_BARRHING;
-		}
-#endif
 		nomore(MUSE_SCR_ICE);
 		if(obj->otyp == SCR_ICE) {
 			m.offensive = obj;
@@ -1949,36 +1843,6 @@ register struct obj *otmp;
 			    (void) rloc(mtmp, FALSE);
 		}
 		break;
-#if 0 /* 5lo: Removed */
-	case WAN_BANISHMENT:
-		if (u.uevent.udemigod) { pline("You shudder for a moment."); (void) safe_teleds(FALSE);  break; }
-
-		if (zap_oseen) makeknown(WAN_BANISHMENT);
-
-		if (flags.lostsoul || flags.uberlostsoul) { 
-		pline("Somehow, the banishment beam doesn't do anything."); break;}
-
-		if (u.usteed) {dismount_steed(DISMOUNT_GENERIC); } /* seems to crash if the player stays on the horse?! */
-		/* but it also crashes sometimes if the player is not mounted; recover seems to be able to rescue your game */
-		/* so this seems to be a necessary evil */
-
-		if (mtmp == &youmonst) {
-
-			make_stunned(HStun + 2, FALSE); /* to suppress teleport control that you might have */
-
-			/*if (rn2(2)) {(void) safe_teleds(FALSE); goto_level(&medusa_level, TRUE, FALSE, FALSE); level_tele(); }*/
-			/*else { (void) safe_teleds(FALSE); goto_level(&portal_level, TRUE, FALSE, FALSE); level_tele(); }*/
-			(void) safe_teleds(FALSE);
-
-			goto_level((&medusa_level), TRUE, FALSE, FALSE);
-			register int newlev = rnd(64);
-			d_level newlevel;
-			get_level(&newlevel, newlev);
-			goto_level(&newlevel, TRUE, FALSE, FALSE);
-		} /*else !u_teleport_monB(mtmp, TRUE);*/ /*doesn't seem to work as intended... --Amy*/
-
-		break;
-#endif
 	case WAN_CANCELLATION:
 	case SPE_CANCELLATION:
 		(void) cancel_monst(mtmp, otmp, FALSE, TRUE, FALSE);
@@ -2189,16 +2053,6 @@ struct monst *mtmp;
 		mbhit(mtmp,rn1(8,6),mbhitm,bhito,otmp);
 		m_using = FALSE;
 		return 2;
-#if 0
-	case MUSE_WAN_BANISHMENT:
-		zap_oseen = oseen;
-		mzapmsg(mtmp, otmp, FALSE);
-		otmp->spe--;
-		m_using = TRUE;
-		mbhitm(&youmonst,otmp);
-		m_using = FALSE;
-		return 2;
-#endif
 	case MUSE_SCR_TRAP_CREATION:
 
 		mreadmsg(mtmp, otmp);
@@ -2263,122 +2117,6 @@ struct monst *mtmp;
 		m_useup(mtmp, otmp);	/* otmp might be free'ed */
 
 		return 2;
-#if 0 /* 5lo: Removed */
-	case MUSE_SCR_LAVA:
-
-		mreadmsg(mtmp, otmp);
-		makeknown(otmp->otyp);
-
-			int madepoolB = 0;
-			int xB,yB,safe_posB=0;
-			do_clear_areaX(u.ux, u.uy, 5, do_lavafloodd, (genericptr_t)&madepoolB);
-
-			/* check if there are safe tiles around the player */
-			for (xB = u.ux-1; xB <= u.ux+1; xB++) {
-				for (yB = u.uy - 1; yB <= u.uy + 1; yB++) {
-					if (xB != u.ux && yB != u.uy &&
-					    goodpos(xB, yB, &youmonst, 0)) {
-						safe_posB++;
-					}
-				}
-			}
-
-			if (madepoolB)
-				pline(Hallucination ?
-						"Wow, that's, like, TOTALLY HOT, dude!" :
-						"A stream of lava surges through the area!" );
-
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		return 2;
-
-	case MUSE_SCR_LOCKOUT:
-
-		mreadmsg(mtmp, otmp);
-		makeknown(otmp->otyp);
-
-			int madepoolQ = 0;
-			int xQ,yQ,safe_posQ=0;
-			do_clear_areaX(u.ux, u.uy, 5, do_lockfloodd, (genericptr_t)&madepoolQ);
-
-			/* check if there are safe tiles around the player */
-			for (xQ = u.ux-1; xQ <= u.ux+1; xQ++) {
-				for (yQ = u.uy - 1; yQ <= u.uy + 1; yQ++) {
-					if (xQ != u.ux && yQ != u.uy &&
-					    goodpos(xQ, yQ, &youmonst, 0)) {
-						safe_posQ++;
-					}
-				}
-			}
-
-			if (madepoolQ)
-				pline(Hallucination ?
-						"It's getting a little bit tight in here!" :
-						"Walls and obstacles shoot up from the ground!" );
-			else pline(Hallucination ?
-						"You hear a grating that reminds you of Chinese water torture!" :
-						"You see dust particles flying around." );
-
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		return 2;
-
-	case MUSE_SCR_GROWTH:
-
-		mreadmsg(mtmp, otmp);
-		makeknown(otmp->otyp);
-
-			int madepoolC = 0;
-			int xC,yC,safe_posC=0;
-			do_clear_areaX(u.ux, u.uy, 5, do_treefloodd, (genericptr_t)&madepoolC);
-
-			/* check if there are safe tiles around the player */
-			for (xC = u.ux-1; xC <= u.ux+1; xC++) {
-				for (yC = u.uy - 1; yC <= u.uy + 1; yC++) {
-					if (xC != u.ux && yC != u.uy &&
-					    goodpos(xC, yC, &youmonst, 0)) {
-						safe_posC++;
-					}
-				}
-			}
-
-			if (madepoolC)
-				pline(Hallucination ?
-						"Uh... everything is so... green!?" :
-						"You see trees growing out of the ground!" );
-
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		return 2;
-
-	case MUSE_SCR_BARRHING:
-
-		mreadmsg(mtmp, otmp);
-		makeknown(otmp->otyp);
-
-			int madepoolF = 0;
-			int xF,yF,safe_posF=0;
-			do_clear_areaX(u.ux, u.uy, 5, do_barfloodd, (genericptr_t)&madepoolF);
-
-			/* check if there are safe tiles around the player */
-			for (xF = u.ux-1; xF <= u.ux+1; xF++) {
-				for (yF = u.uy - 1; yF <= u.uy + 1; yF++) {
-					if (xF != u.ux && yF != u.uy &&
-					    goodpos(xF, yF, &youmonst, 0)) {
-						safe_posF++;
-					}
-				}
-			}
-
-			if (madepoolF)
-				pline(Hallucination ?
-						"Aw shit, this feels like being in a jail!" :
-						"Iron bars shoot up from the ground!" );
-
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		return 2;
-#endif
 	case MUSE_SCR_ICE:
 
 		mreadmsg(mtmp, otmp);
@@ -2507,7 +2245,6 @@ struct monst *mtmp;
 	    	    	    otmp2 = mksobj(confused ? ROCK : BOULDER,
 	    	    	    		FALSE, FALSE);
 	    	    	    if (!otmp2) continue;  /* Shouldn't happen */
-
 	    	    	    otmp2->quan = confused ? rn1(5,2) : 1;
 	    	    	    otmp2->owt = weight(otmp2);
 
@@ -2566,7 +2303,6 @@ struct monst *mtmp;
 		    otmp2 = mksobj(confused ? ROCK : BOULDER,
 				FALSE, FALSE);
 		    if (!otmp2) goto xxx_noobj;  /* Shouldn't happen */
-
 		    otmp2->quan = confused ? rn1(5,2) : 1;
 		    otmp2->owt = weight(otmp2);
 		    if (!amorphous(youmonst.data) &&
@@ -2758,13 +2494,6 @@ struct monst *mtmp;
 		case 26: return SCR_ICE;
 		case 27: return SCR_CLOUDS;
 		case 28: return WAN_SOLAR_BEAM;
-#if 0
-		case 29: return SCR_LAVA;
-		case 30: return SCR_GROWTH;
-		case 31: return SCR_BARRHING;
-		case 32: return SCR_LOCKOUT;
-		case 33: return WAN_BANISHMENT;
-#endif
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -3257,7 +2986,6 @@ struct obj *obj;
 		return (boolean)(monstr[monsndx(mon->data)] < 6);
 	    if (objects[typ].oc_dir == RAY ||
 		    typ == WAN_STRIKING ||
-		    /*typ == WAN_BANISHMENT ||*/
 		    typ == WAN_TELEPORTATION ||
 		    typ == WAN_CREATE_MONSTER ||
 		    typ == WAN_SUMMON_UNDEAD ||
@@ -3291,11 +3019,10 @@ struct obj *obj;
 		return TRUE;
 	    break;
 	case SCROLL_CLASS:
-	    if (typ == SCR_TELEPORTATION || typ == SCR_HEALING || typ == SCR_ROOT_PASSWORD_DETECTION || typ == SCR_CREATE_MONSTER || typ == SCR_SUMMON_UNDEAD || typ == SCR_FLOOD || typ == SCR_ICE || typ == SCR_CLOUDS ||typ == SCR_EARTH || typ == SCR_TRAP_CREATION
-#if 0 /* Removed */
-typ == SCR_TELE_LEVEL || typ == SCR_WARPING || typ == SCR_LAVA || typ == SCR_LOCKOUT || typ == SCR_GROWTH || typ == SCR_BARRHING
-#endif
-		)
+	    if (typ == SCR_TELEPORTATION || typ == SCR_HEALING 
+		|| typ == SCR_ROOT_PASSWORD_DETECTION || typ == SCR_CREATE_MONSTER 
+		|| typ == SCR_SUMMON_UNDEAD || typ == SCR_FLOOD || typ == SCR_ICE 
+		|| typ == SCR_CLOUDS ||typ == SCR_EARTH || typ == SCR_TRAP_CREATION)
 		return TRUE;
 	    break;
 	case AMULET_CLASS:
@@ -3374,15 +3101,6 @@ const char *str;
 		    makeknown(GAUNTLETS_OF_REFLECTION);
 	    }
 	    return TRUE;
-#if 0 /* 5lo: They shouldn't be using or wearing these at all */
-	} else if ((orefl = which_armor(mon, W_AMUL)) &&
-				orefl->otyp == AMULET_OF_DATA_STORAGE) {
-	    if (str) {
-		pline(str, s_suffix(mon_nam(mon)), "amulet");
-		makeknown(AMULET_OF_DATA_STORAGE);
-	    }
-	    return TRUE;
-#endif
 	} else if ((orefl = which_armor(mon, W_ARMC)) &&
 				orefl->otyp == CLOAK_OF_REFLECTION) {
 	    if (str) {
@@ -3420,7 +3138,6 @@ ureflects (fmt, str)
 const char *fmt, *str;
 {
 	/* Check from outermost to innermost objects */
-
 	if (EReflecting & W_ARMS) {
 	    if (fmt && str) {
 	    	pline(fmt, str, "shield");

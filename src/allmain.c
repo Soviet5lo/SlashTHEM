@@ -950,9 +950,6 @@ newgame()
 	(void) makedog();
 
 	docrt();
-
-	/* 5lo: Iron balls made no sense, removed.  Now that they have actual stats they don't need this kind of a
-	 * nerf anyway */
 #ifdef CONVICT
        if (Role_if(PM_CONVICT)) {
               setworn(mkobj(CHAIN_CLASS, TRUE), W_CHAIN);

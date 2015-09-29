@@ -472,7 +472,6 @@ recalc_health()
 
 
 	u.uhealbonus = 0;
-
 	for(otmp = invent; otmp; otmp=otmp->nobj)
 	    if (otmp->otyp == HEALTHSTONE)
 	    	u.uhealbonus += otmp->quan *

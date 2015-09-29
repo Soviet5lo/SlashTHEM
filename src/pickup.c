@@ -1196,10 +1196,7 @@ boolean telekinesis;
     *cnt_p = carry_count(obj, container, *cnt_p, telekinesis, &old_wt, &new_wt);
     if (*cnt_p < 1L) {
 	result = -1;	/* nothing lifted */
-
-/* Trying to allow the player to pick up as much as they want. --Amy */
-/* 5lo: Reverted */
- #ifndef GOLDOBJ
+#ifndef GOLDOBJ
     } else if (obj->oclass != COIN_CLASS && inv_cnt() >= 52 &&
 		!merge_choice(invent, obj)) {
 #else

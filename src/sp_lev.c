@@ -44,9 +44,7 @@ STATIC_DCL void FDECL(create_corridor, (corridor *));
 
 STATIC_DCL boolean FDECL(create_subroom, (struct mkroom *, XCHAR_P, XCHAR_P,
 					XCHAR_P, XCHAR_P, XCHAR_P, XCHAR_P));
-#if 0 /* Deferred for now */
-STATIC_DCL void FDECL(mkfeature,(int,int));
-#endif
+
 #define LEFT	1
 #define H_LEFT	2
 #define CENTER	3
@@ -98,208 +96,7 @@ char *lev_message = 0;
 lev_region *lregions = 0;
 int num_lregions = 0;
 lev_init init_lev;
-#if 0 /* Deferred for now */
-/* Make a random dungeon feature --Amy */
-STATIC_OVL void
-mkfeature(x,y)
-register int x, y;
-{
 
-	int whatisit;
-	aligntyp al;
-	register int tryct = 0;
-	register struct obj *otmp;
-
-	if (occupied(x, y)) return;
-	if (rn2(20)) return;
-
-	whatisit = rnd(200);
-	switch (whatisit) {
-
-	case 1:
-	case 2:
-	case 3:
-	case 4:
-	case 5:
-	levl[x][y].typ = FOUNTAIN; break;
-	case 6:
-	case 7:
-	case 8:
-	case 9:
-	case 10:
-	case 11:
-	case 12:
-	case 13:
-	case 14:
-	case 15:
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 20:
-	case 21:
-	case 22:
-	case 23:
-	case 24:
-	case 25:
-	case 26:
-	case 27:
-	case 28:
-	case 29:
-	case 30:
-	levl[x][y].typ = CLOUD; break;
-
-	case 31:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-	case 36:
-	case 37:
-	case 38:
-	case 39:
-	case 40:
-	case 41:
-	case 42:
-	case 43:
-	case 44:
-	case 45:
-	case 46:
-	case 47:
-	case 48:
-	case 49:
-	case 50:
-	levl[x][y].typ = ICE; break;
-
-	case 51:
-	case 52:
-	case 53:
-	case 54:
-	case 55:
-	case 56:
-	case 57:
-	case 58:
-	case 59:
-	case 60:
-	case 61:
-	case 62:
-	case 63:
-	case 64:
-	case 65:
-	case 66:
-	case 67:
-	case 68:
-	case 69:
-	case 70:
-	levl[x][y].typ = POOL; break;
-
-	case 71:
-	case 72:
-	case 73:
-	case 74:
-	case 75:
-	case 76:
-	case 77:
-	case 78:
-	case 79:
-	case 80:
-	levl[x][y].typ = LAVAPOOL; break;
-
-	case 81:
-	case 82:
-	case 83:
-	case 84:
-	case 85:
-	case 86:
-	case 87:
-	case 88:
-	case 89:
-	case 90:
-	levl[x][y].typ = IRONBARS; break;
-
-	case 91:
-	case 92:
-	case 93:
-	case 94:
-	case 95:
-	case 96:
-	case 97:
-	case 98:
-	case 99:
-	case 100:
-	case 101:
-	case 102:
-	case 103:
-	case 104:
-	case 105:
-	case 106:
-	case 107:
-	case 108:
-	case 109:
-	case 110:
-	levl[x][y].typ = TREE; break;
-
-	case 111:
-	case 112:
-	case 113:
-	case 114:
-	case 115:
-	case 116:
-	case 117:
-	case 118:
-	case 119:
-	case 120:
-	case 121:
-	case 122:
-	case 123:
-	case 124:
-	case 125:
-	case 126:
-	case 127:
-	case 128:
-	case 129:
-	case 130:
-	make_grave(x, y, (char *) 0);
-	/* Possibly fill it with objects */
-	if (!rn2(3)) (void) mkgold(0L, x, y);
-	for (tryct = rn2(5); tryct; tryct--) {
-	    otmp = mkobj(RANDOM_CLASS, TRUE);
-	    if (!otmp) return;
-	    curse(otmp);
-	    otmp->ox = x;
-	    otmp->oy = y;
-	    add_to_buried(otmp);
-	}
-
-	case 131:
-	case 132:
-	case 133:
-	case 134:
-	case 135:
-	levl[x][y].typ = TOILET; break;
-
-	case 136:
-	case 137:
-	case 138:
-	case 139:
-	case 140:
-	levl[x][y].typ = SINK; break;
-
-	case 141:
-	levl[x][y].typ = THRONE; break;
-
-	case 142:
-	levl[x][y].typ = ALTAR;
-	al = rn2((int)A_LAWFUL+2) - 1;
-	if (!rn2(10)) levl[x][y].altarmask = Align2amask( al );
-	else levl[x][y].altarmask = Align2amask( A_NONE );
-	 break;
-	default:
-	levl[x][y].typ = STONE; break;
-	}
-
-}
-#endif
 /*
  * Make walls of the area (x1, y1, x2, y2) non diggable/non passwall-able
  */
@@ -1060,7 +857,6 @@ struct mkroom	*croom;
 	    if (flags.female && Role_if(PM_ELF) /*&& !u.uelf_drow*/ && m->id == PM_EARENDIL)
 		m->id = PM_ELWING;
 #endif
-
 	    /* in the Gnome Mines, make the gnomes & dwarves into            
 	       orcs, ogres, & zombies (because gnomes & dwarves are friendly...
 	       the mines would be hella easy otherwise) */
@@ -1653,23 +1449,12 @@ schar ftyp, btyp;
 			crm->typ = ftyp;
 			if(nxcor && !rn2(75))
 				(void) mksobj_at(BOULDER, xx, yy, TRUE, FALSE);
-			/* 5lo: Allow random engravings, but not the others */
+			/* 5lo: Allow random engravings in corridors */
 			else if(nxcor && !rn2(100)){ 
 			    char buf[BUFSZ];
 				const char *mesg = random_engraving(buf);
 			    make_engr_at(xx, yy, mesg, 0L, MARK);
 			}
-#if 0 /* 5lo: This was the terrible code that kept adding traps to corridors, no more I say! */
-			else if(/*nxcor &&*/ !rn2(40))
-				(void) mkobj_at(0, xx, yy, TRUE);
-						/* else (mktrap(0,1,(struct mkroom *) 0, (coord*) 0) ) ;*/
-		    else if(/*nxcor &&*/ !rn2(300)) 
-				(void) maketrap(xx, yy, rndtrap());
-		    else if(/*nxcor &&*/ !rn2(200)) 
-				(void) makemon((struct permonst *)0, xx, yy, NO_MM_FLAGS);
-		    else if(/*nxcor &&*/ !rn2(20)) 
-				(void) mkfeature(xx, yy);
-#endif
 		} else {
 			crm->typ = SCORR;
 		}
@@ -1847,11 +1632,6 @@ boolean prefilled;
 				if (!rn2(3)) {
 					(void)makemon(mkclass(S_EEL,0),croom->lx,croom->ly,NO_MM_FLAGS);
 				}
-#if 0
-				if (!rn2(3)) {
-					(void)makemon(mkclass(S_EEL,0),croom->hx,croom->hy,NO_MM_FLAGS);
-				}
-#endif
 			}
 		    break;
 		case COURT:

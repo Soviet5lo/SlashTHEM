@@ -57,299 +57,28 @@ register struct attack *mattk;
 	} /*else*/ switch (mattk->aatyp) {
 		case AT_CLAW:
 			pline("%s claws you!", Monnam(mtmp));
-#if 0 /* 5lo: Removed */
-			if (flags.female && !rn2(20) ) {
-				pline("%s rips into your breast with maniacal fervor!", Monnam(mtmp));
-
-			monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-
-				losehp(d(2,monsterlev), "cowardly attack on her breasts", KILLED_BY_AN);
-			}
-#endif
 			break;
 		case AT_BITE:
 			pline("%s bites you!", Monnam(mtmp));
-#if 0 /* 5lo: Removed */
-			armproX = magic_negation(&youmonst);
-			/* 5lo: This happens way too often.  Decreased chances. */
-			if (!rn2(200) && ((rn2(3) >= armproX) || !rn2(50)) ) {
-			if (!Drain_resistance) {
-			pline("%s sinks %s teeth deep into your skin and drinks your blood!", Monnam(mtmp), mhis(mtmp));
-		      losexp("life drainage", FALSE);
-			}
-			}
-#endif
 			break;
 		case AT_KICK:
 			pline("%s kicks you%c", Monnam(mtmp),
 				    thick_skinned(youmonst.data) ? '.' : '!');
-#if 0 /* 5lo: removed */
-			if (!flags.female && !rn2(20) ) {
-				pline("%s's kick painfully slams into your nuts!", Monnam(mtmp));
-
-			monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-
-				losehp(d(2,monsterlev), "kick in the nuts", KILLED_BY_AN);
-
-			}
-
-			struct obj *footwear = which_armor(mtmp, W_ARMF);
-			if (!rn2(10) && ((footwear && footwear->otyp == WEDGE_SANDALS) || mtmp->data == &mons[PM_ANIMATED_WEDGE_SANDAL]) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("%s slams %s sandals against your shins! It hurts!", Monnam(mtmp), mhis(mtmp) );
-				losehp(d(1,monsterlev), "sandal to the shin bone", KILLED_BY_AN);
-			}
-
-			if (!rn2(10) && (footwear && footwear->otyp == DANCING_SHOES) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("%s slams %s dancing shoes against your shins! You stagger...", Monnam(mtmp), mhis(mtmp) );
-				make_stunned(HStun + monsterlev, FALSE);
-				losehp(1, "soft dancing shoe", KILLED_BY_AN);
-			}
-
-			if (!rn2(10) && (footwear && footwear->otyp == SWEET_MOCASSINS) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("%s slides %s mocassins over your hands, opening your arteries and squirting blood everywhere!", Monnam(mtmp), mhis(mtmp) );
-				    incr_itimeout(&Glib, monsterlev);
-			}
-
-			if (!rn2(10) && (footwear && footwear->otyp == SOFT_SNEAKERS) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("%s hits your hand with %s sneakers!", Monnam(mtmp), mhis(mtmp) );
-				    incr_itimeout(&Glib, 2); /* just enough to make you drop your weapon */
-				losehp(d(1,monsterlev), "soft sneaker to the hand", KILLED_BY_AN);
-			}
-
-			if (!rn2(10) && (footwear && footwear->otyp == HIPPIE_HEELS) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				randomkick = rnd(11);
-				if (randomkick == 1) {
-				pline("%s steps on your hand with %s plateau heels!", Monnam(mtmp), mhis(mtmp) );
-				    incr_itimeout(&Glib, 20); /* painfully jamming your fingers */
-				losehp(d(1,monsterlev), "hippie plateau boot", KILLED_BY_AN);
-				}
-				if (randomkick == 2) {
-				pline("%s jams your toes with %s red whore boots!", Monnam(mtmp), mhis(mtmp) );
-
-				register long side = rn2(2) ? RIGHT_SIDE : LEFT_SIDE;
-				  const char *sidestr = (side == RIGHT_SIDE) ? "right" : "left";
-			    set_wounded_legs(side, rnd(60-ACURR(A_DEX)));
-			    exercise(A_STR, FALSE);
-			    exercise(A_DEX, FALSE);
-
-				losehp(d(1,monsterlev), "red whore boot", KILLED_BY_AN);
-				}
-
-				if (randomkick == 3) {
-					if (!flags.female) { 
-					pline("%s kicks right into your nuts with %s prostitute shoes!", Monnam(mtmp), mhis(mtmp) );
-
-					losehp(d(2,monsterlev), "prostitute shoe to the nuts", KILLED_BY_AN);
-					}
-
-					else {
-					pline("%s gently strokes you with %s prostitute shoes.", Monnam(mtmp), mhis(mtmp) );
-					if (Upolyd) u.mh += monsterlev; /* heal some hit points */
-					else u.uhp += monsterlev; /* heal some hit points */
-					pline("It feels very soothing.");
-					if (u.uhp > u.uhpmax) u.uhp = u.uhpmax;
-					if (u.mh > u.mhmax) u.mh = u.mhmax;
-					}
-
-				}
-
-				if (randomkick == 4) {
-				pline("%s painfully stomps your body with %s erotic lady boots!", Monnam(mtmp), mhis(mtmp) );
-				u.uhp -= 1;
-				u.uhpmax -= 1;
-				u.uen -= 1;
-				u.uenmax -= 1;
-				losehp(d(3,monsterlev), "being stomped by an erotic lady boot", KILLED_BY);
-				}
-
-				if (randomkick == 5) {
-				pline("You fall in love with %s's incredibly erotic footwear, and are unable to fight back.", mon_nam(mtmp) );
-					nomovemsg = "You finally decide to stop admiring the sexy leather boots.";
-					nomul(-rnd(5), "mesmerized by a pair of sexy leather boots");
-
-				}
-
-				if (randomkick == 6) {
-				pline("Think of the sweet red leather your sputa will flow down.");
-				morehungry(1000);
-	      make_vomiting(Vomiting+20, TRUE);
-		if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
-				}
-
-				if (randomkick == 7) {
-				pline("You decide to close your eyes for a while, thinking about the lovely %s and %s sexy red overknees.", m_monnam(mtmp), mhis(mtmp) );
-		    make_blinded(Blinded+monsterlev,FALSE);
-				}
-
-				if (randomkick == 8) {
-				pline("Wow... those wonderful high heels are soooooo mesmerizing and beautiful...");
-		make_hallucinated(HHallucination + monsterlev,FALSE,0L);
-				}
-
-				if (randomkick == 9) {
-				pline("You wonder where %s got %s plateau heels from. Who the hell wears those in a dungeon, anyway? Your head spins in bewilderment.", mon_nam(mtmp), mhis(mtmp) );
-		    make_confused(HConfusion+monsterlev,FALSE);
-				}
-
-				if (randomkick == 10) {
-				pline("Argh! The massive heel strained a vital muscle!");
-		    make_stunned(HStun+monsterlev,FALSE);
-				}
-
-				if (randomkick == 11) {
-				if (!rn2(25)) {
-					pline("Fuck! The high heel was contaminated with spores!" );
-					    make_sick(rn1(25,25), "contaminated high heel", TRUE, SICK_VOMITABLE);
-					losehp(d(1,monsterlev), "unclean high heel", KILLED_BY_AN);
-					}
-				else {
-				pline("The devious %s rubbed %s female boots with venom! How unfair!", m_monnam(mtmp), mhis(mtmp) );
-						poisoned("block heel", A_STR, "poisoned block heel", 8);
-					losehp(d(1,monsterlev), "impregnated block heel", KILLED_BY_AN);
-					}
-				}
-
-			}
-
-			if (!rn2(10) && ((footwear && footwear->otyp == LEATHER_PEEP_TOES) || mtmp->data == &mons[PM_ANIMATED_LEATHER_PEEP_TOE]) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("%s slams %s leather peep-toes against your shins!", Monnam(mtmp), mhis(mtmp) );
-				losehp(d(1,monsterlev), "asian peep-toe", KILLED_BY_AN);
-
-				if (multi >= 0 && !rn2(2)) {
-				    if (flags.female) {
-					pline("You congratulate %s for %s valiant attempt to hurt you.", mon_nam(mtmp), mhis(mtmp) );
-				    } else if (Free_action) {
-					pline("It hurts like hell, but you bear it like a man.");            
-				    } else {
-					pline("It hurts like hell! You pass out from the intense pain.");            
-					nomovemsg = "Still groaning with pain, you get back up, ready to fight again.";
-					monsterlev = ((mtmp->m_lev) + 1);
-					monsterlev /= 2;
-					if (monsterlev <= 0) monsterlev = 1;
-					nomul(-monsterlev, "knocked out by an asian peep-toe");
-					exercise(A_DEX, FALSE);
-				    }
-				}
-			}
-
-			if (!rn2(10) && ((footwear && footwear->otyp == FEMININE_PUMPS) || mtmp->data == &mons[PM_ANIMATED_SEXY_LEATHER_PUMP] || mtmp->data == &mons[PM_BLOODY_BEAUTIES]) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("%s scratches up and down your legs with %s heels!", Monnam(mtmp), mhis(mtmp) );
-				losehp(d(2,monsterlev), "leg-scratch from feminine pumps", KILLED_BY_AN);
-
-			if (u.legscratching <= 5)
-		    	    pline("It stings a little.");
-			else if (u.legscratching <= 10)
-		    	    pline("It hurts quite a bit as some of your skin is scraped off!");
-			else if (u.legscratching <= 20)
-			    pline("Blood drips from your leg as the heel scratches over your open wounds!");
-			else if (u.legscratching <= 40)
-			    pline("You can feel the heel scratching on your shin bone! It hurts and bleeds a lot!");
-			else
-			    pline("You watch in shock as your blood is squirting everywhere, all the while feeling the razor-sharp high heel mercilessly opening your legs!");
-
-			/* Need to add a timeout function that will lower the legscratching variable. --Amy
-			   It's in timeout.c and will just lower u.legscratching by one every 1000 ticks for now. */
-
-				losehp(u.legscratching, "bleedout from leg scratches", KILLED_BY_AN);
-				u.legscratching++;
-				register long side = rn2(2) ? RIGHT_SIDE : LEFT_SIDE;
-				  const char *sidestr = (side == RIGHT_SIDE) ? "right" : "left";
-			    set_wounded_legs(side, rnd(60-ACURR(A_DEX)));
-			    exercise(A_STR, FALSE);
-			    exercise(A_DEX, FALSE);
-			}
-			if (!rn2(10) && ((footwear && footwear->otyp == COMBAT_STILETTOS) || mtmp->data == &mons[PM_ANIMATED_COMBAT_STILETTO]) ) {
-				monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("%s does a round-house and painfully hits you with %s combat boots!", Monnam(mtmp), mhis(mtmp) );
-				losehp(d(4,monsterlev), "kung-fu attack", KILLED_BY_AN);
-			}
-#endif
 			break;
 		case AT_STNG:
 			pline("%s stings you!", Monnam(mtmp));
-#if 0 /* 5lo: Removed */
-			if (!rn2(250)) {
-			pline("You are bleeding out from your stinging injury!");
-			monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-
-			if (Upolyd) u.mhmax -= monsterlev;
-			else u.uhpmax -= monsterlev;
-
-			}
-#endif
 			break;
 		case AT_BUTT:
 			pline("%s butts you!", Monnam(mtmp));
-#if 0 /* 5lo: Removed */
-			if (multi >= 0 && !rn2(33)) {
-			    if (Free_action) {
-				You("feel a slight shaking.");            
-			    } else {
-				You("flinch!");
-				nomovemsg = 0;	/* default: "you can move again" */
-				monsterlev = ((mtmp->m_lev) + 1);
-				monsterlev /= 3;
-				if (monsterlev <= 0) monsterlev = 1;
-				nomul(-monsterlev, "flinching");
-				exercise(A_DEX, FALSE);
-			    }
-			}
-#endif
 			break;
 		case AT_SCRA:
 			pline("%s scratches you!", Monnam(mtmp));
-#if 0 /* 5lo: Removed */
-			if (!rn2(100)) {
-			pline("One of your arteries bursts open! You suffer from blood loss!");
-			monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-			losehp((monsterlev), "scratching attack", KILLED_BY_AN);
-
-			if (Upolyd) u.mhmax -= monsterlev/2;
-			else u.uhpmax -= monsterlev/2;
-
-			}
-#endif
 			break;
 		case AT_LASH:
 			pline("%s lashes you!", Monnam(mtmp));
-#if 0 /* 5lo: Removed */
-			if (!rn2(30)) {
-			monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("Your head spins in confusion.");
-			make_confused(HConfusion + monsterlev, FALSE);
-			}
-#endif
 			break;
 		case AT_TRAM:
 			pline("%s tramples over you!", Monnam(mtmp));
-#if 0 /* 5lo: Removed */
-			if (!rn2(20)) {
-			monsterlev = ((mtmp->m_lev) + 1);
-				if (monsterlev <= 0) monsterlev = 1;
-				pline("You can't think straight as your every muscle is aching!");
-			make_stunned(HStun + monsterlev, FALSE);
-			}
-#endif
 			break;
 		case AT_TUCH:
 			pline("%s touches you!", Monnam(mtmp));
@@ -1082,146 +811,6 @@ mattacku(mtmp)
 				    hittmp = hitval(otmp, &youmonst);
 				    tmp += hittmp;
 				    mswings(mtmp, otmp);
-#if 0 /* 5lo: Removed */
-					if (!rn2(3) && otmp->otyp == WEDGED_LITTLE_GIRL_SANDAL) {
-					pline("The massive wedge heel thunders painfully on your head!");
-					losehp(rnd(4),"a wedged little-girl sandal",KILLED_BY);
-					}
-					if (!rn2(3) && otmp->otyp == SOFT_GIRL_SNEAKER) {
-					pline("The soft leather sneaker actually feels quite soothing.");
-
-					if (Upolyd) u.mh++; /* heal one hit point */
-					else u.uhp++; /* heal one hit point */
-
-					if (u.uhp > u.uhpmax) u.uhp = u.uhpmax;
-					if (u.mh > u.mhmax) u.mh = u.mhmax;
-					}
-					if (!rn2(3) && otmp->otyp == STURDY_PLATEAU_BOOT_FOR_GIRLS) {
-					pline("The unyielding plateau boot bonks your head!");
-					losehp(rnd(10),"a sturdy plateau boot for girls",KILLED_BY);
-					}
-
-					if (!rn2(3) && otmp->otyp == BLOCK_HEELED_COMBAT_BOOT) {
-
-					if (flags.female) {
-						pline("The massive heel hits your head. Wow, this feels soothing and lovely!");
-
-						if (Upolyd) u.mh++; /* heal one hit point */
-						else u.uhp++; /* heal one hit point */
-
-						if (!rn2(5)) {
-							if (Upolyd) u.mh += 5; /* heal one hit point */
-							else u.uhp += 5; /* heal one hit point */
-						}
-
-						if (u.uhp > u.uhpmax) u.uhp = u.uhpmax;
-						if (u.mh > u.mhmax) u.mh = u.mhmax;
-
-						pline("You feel a strange sensation.");
-						make_confused(HConfusion + rnd(4), FALSE);
-					}
-					else {
-
-					pline("The massive heel painfully hits your head!");
-					losehp(rnd(12),"a block-heeled combat boot",KILLED_BY);
-						pline("You're seeing little asterisks everywhere.");
-						make_confused(HConfusion + rnd(10), FALSE);
-						}
-					}
-
-					if (!rn2(3) && otmp->otyp == HUGGING_BOOT) {
-					pline("Uff! Your head got hit hard!");
-					losehp(rnd(12),"a hugging boot",KILLED_BY);
-						if (Upolyd) u.mhmax--; /* lose one hit point */
-						else u.uhpmax--; /* lose one hit point */
-						if (u.uhp > u.uhpmax) u.uhp = u.uhpmax;
-						if (u.mh > u.mhmax) u.mh = u.mhmax;
-					}
-
-					if (!rn2(3) && otmp->otyp == WOODEN_GETA) {
-					pline("Argh! The unyielding piece of wood painfully lands on your head!");
-					losehp(rnd(15),"a wooden Japanese sandal",KILLED_BY);
-
-					if (multi >= 0 && !rn2(2)) {
-					    if (Free_action) {
-						pline("You struggle to stay on your feet.");
-					    } else {
-						pline("You're knocked out and helplessly drop to the floor.");
-						nomovemsg = 0;	/* default: "you can move again" */
-						nomul(-rnd(5), "knocked out by a wooden Japanese sandal");
-						exercise(A_DEX, FALSE);
-						    }
-						}
-					}
-
-					if (!rn2(3) && otmp->otyp == LACQUERED_DANCING_SHOE) {
-
-					if (Role_if(PM_COURIER)) pline("The lacquered dancing shoe harmlessly scratches you.");
-					else {pline("The lacquered dancing shoe scratches your head!");
-
-						if (!uarmh || uarmh->otyp != DUNCE_CAP) {
-
-					    /* No such thing as mindless players... */
-					    if (ABASE(A_INT) <= ATTRMIN(A_INT)) {
-						int lifesaved = 0;
-						struct obj *wore_amulet = uamul;
-			
-						while(1) {
-						    /* avoid looping on "die(y/n)?" */
-						    if (lifesaved && (discover || wizard)) {
-							if (wore_amulet && !uamul) {
-							    /* used up AMULET_OF_LIFE_SAVING; still
-							       subject to dying from brainlessness */
-							    wore_amulet = 0;
-							} else {
-							    /* explicitly chose not to die;
-							       arbitrarily boost intelligence */
-							    ABASE(A_INT) = ATTRMIN(A_INT) + 2;
-							    You_feel("like a scarecrow.");
-							    break;
-							}
-						    }
-
-						    if (lifesaved)
-							pline("Unfortunately your brain is still gone.");
-						    else
-							Your("last thought fades away.");
-						    killer = "brainlessness";
-						    killer_format = KILLED_BY;
-						    done(DIED);
-						    lifesaved++;
-						}
-					    }
-					}
-					/* adjattrib gives dunce cap message when appropriate */
-					if (!rn2(10)) (void) adjattrib(A_INT, -rnd(2), FALSE);
-					else if (!rn2(2)) (void) adjattrib(A_INT, -1, FALSE);
-					if (!Keen_memory) {
-					forget_levels(5);	/* lose memory of 25% of levels */
-					forget_objects(5);	/* lose memory of 25% of objects */
-					}
-					exercise(A_WIS, FALSE);
-
-						}
-					}
-
-					if (!rn2(3) && otmp->otyp == HIGH_HEELED_SANDAL) {
-					pline("Your head is hit painfully by the high heel!");
-					losehp(rnd(12),"a high-heeled sandal",KILLED_BY);
-					}
-					if (!rn2(3) && otmp->otyp == SEXY_LEATHER_PUMP) {
-					pline("Klock! The heel slams on your head, producing a beautiful sound.");
-					losehp(rnd(20),"a sexy leather pump",KILLED_BY);
-					}
-					if (!rn2(3) && otmp->otyp == SPIKED_BATTLE_BOOT) {
-					pline("Ouch! The spiked boot soles bore themselves into your skin!");
-					losehp(rnd(10),"a spiked battle boot",KILLED_BY);
-				    if (!rn2(6))
-					poisoned("spikes", A_STR, "poisoned boot spike", 8);
-					}
-
-/* The gnome swings her spiked battle boot! Ouch! The spiked boot soles bore themselves into your skin! The spikes were poisoned! The poison was deadly... Do you want your possessions identified? */
-#endif
 				}
 				if(tmp > (j = dieroll = rnd(20+i)))
 				    sum[i] = hitmu(mtmp, mattk);
@@ -1668,7 +1257,7 @@ hitmu(mtmp, mattk)
 			    pline("The silver sears your flesh!");
 			}
 			/* Stakes do extra dmg agains vamps */
-			if ((otmp->otyp == WOODEN_STAKE) &&
+			if (otmp->otyp == WOODEN_STAKE &&
 				is_vampire(youmonst.data)) {
 			    if (otmp->oartifact == ART_STAKE_OF_VAN_HELSING) {
 				if (!rn2(10)) {
@@ -1683,11 +1272,7 @@ hitmu(mtmp, mattk)
 					    Monnam(mtmp));
 				    dmg += rnd(6) + 2;
 				}
-			    }/*else if (otmp->oartifact == ART_VAMPIRE_KILLER) {
-				pline("%s whips you good!",
-					Monnam(mtmp));
-				dmg += rnd(6);
-			    }*/ else {
+			    } else {
 				pline("%s drives the stake into you.",
 					Monnam(mtmp));
 				dmg += rnd(6);
@@ -2244,15 +1829,6 @@ dopois:
 		    }
 		    break;
 		}
-#if 0 /* 5lo: Removed */
-		if (!rn2(25)) { /* Nymphs want to have some fun! :-) --Amy */
-
-			if(could_seduceX(mtmp, &youmonst, mattk) == 1 && !mtmp->mcan)
-			    if (doseduce(mtmp)) return 3;
-		/* What kind of male person wouldn't want to be seduced by such a wonderfully lovely, sweet lady? */
-
-		}
-#endif
 		buf[0] = '\0';
 		switch (steal(mtmp, buf)) {
 		  case -1:
@@ -2641,7 +2217,7 @@ dopois:
 	}
 
 	if(dmg) {
-	    if ( (Half_physical_damage) 
+	    if (Half_physical_damage
 					/* Mitre of Holiness */
 		|| (Role_if(PM_PRIEST) && uarmh && is_quest_artifact(uarmh) &&
 		    (is_undead(mtmp->data) || is_demon(mtmp->data))))
@@ -4476,11 +4052,6 @@ register struct monst *mon;
 	if (u.ualign.type == A_CHAOTIC)
 		adjalign(1);
 
-	/* yay graphical descriptions! --Amy */
-#if 0 /* 5lo: Just...no */
-	if (!flags.female) pline("%s starts to gently pull down your pants with her soft, fleecy hands...", Monnam(mon));
-	else pline("%s softly caresses your fleecy bra, and gently pulls it off to reveal your breasts...", Monnam(mon));
-#endif
 	if (rnd(ACURR(A_CHA)) < 3) { /* random chance of being betrayed by your love interest... */
 
 	monsterlev = ((mon->m_lev) + 1);
@@ -4624,34 +4195,6 @@ register struct monst *mon;
 		}
 #endif
 	}
-#if 0 /* 5lo: ...no */
-	if (!rn2(50)) {
-
-	/* Yes, real-life pregnancy doesn't work like this. But I want to avoid having to make complicated functions,
-	   so the player will just get an egg that immediately hatches and may be tame. --Amy */
-
-		struct obj *uegg;
-
-		if (flags.female) { pline("Uh-oh - you're pregnant!"); verbalize("Be a good mother, sweetheart!");
-		}
-		else { pline("Oh! %s is pregnant!",noit_Monnam(mon)); verbalize("Please take good care of my baby, %s!",plname);
-		}
-
-		uegg = mksobj(EGG, FALSE, FALSE);
-		uegg->spe = (flags.female ? 1 : 0);
-		uegg->quan = 1;
-		uegg->owt = weight(uegg);
-		if (!rn2(2)) uegg->corpsenm = mon->mnum;
-		else if (Upolyd) uegg->corpsenm = u.umonnum;
-		else if (urole.femalenum != NON_PM && !rn2(2)) uegg->corpsenm = urole.femalenum;
-		else uegg->corpsenm = urole.malenum;
-		uegg->known = uegg->dknown = 1;
-		attach_egg_hatch_timeout(uegg);
-		(void) start_timer(1, TIMER_OBJECT, HATCH_EGG, (genericptr_t)uegg);
-		pickup_object(uegg, 1, FALSE);
-
-	}
-#endif
 	if (!rn2(10)) mon->mcan = 1; /* monster is worn out; chance is much higher now --Amy */
 	if (!tele_restrict(mon)) (void) rloc(mon, FALSE);
 	return 1;

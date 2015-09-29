@@ -292,16 +292,6 @@ boolean fleemsg;
 		mtmp->mfleetim = min(fleetime, 127);
 	    }
 	    if (!mtmp->mflee && fleemsg && canseemon(mtmp) && !mtmp->mfrozen)
-#if 0 /* 5lo: Reverted (for now?) */
- {
-		if (rn2(3)) {
-		  pline("%s turns to flee!", (Monnam(mtmp)));
-		  mtmp->mflee = 1;
-		}
-		else {
-		  pline("%s is startled for a moment.", (Monnam(mtmp)));}
-		};
-#endif
 		pline("%s turns to flee!", (Monnam(mtmp)));
 	    mtmp->mflee = 1;
 	}
@@ -666,139 +656,10 @@ toofar:
 	if (!mtmp->msleeping && mtmp->mcanmove && nearby)
 	    quest_talk(mtmp);
 	/* extra emotional attack for vile monsters */
-	/* Come on, monsters can still cuss at you if you can't see them. Seriously, what the heck. --Amy */
 	    if(inrange && mtmp->data->msound == MS_CUSS && !mtmp->mpeaceful &&
 		couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis && !rn2(5))
 	    cuss(mtmp);
-#if 0 /* 5lo: No longer used */
-	    if(inrange && mtmp->data->msound == MS_PUPIL && !mtmp->mpeaceful &&
-		/*couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis &&*/ !rn2(5))
 
-		{
-		static const char *pupil_msgs[] = {
-			"Today no homework ... *please*",
-			"six times nine is ... um ... uh ... ... forty-two",
-			"you ... Strange word",	/* You're not expected to understand this ... */
-			"Bugger off!",
-			"*uck off!",
-			"What are the newest news about the Super Information Highway?",
-			"What do you want?",
-			"Do the world a favour---jump out of the 20th story of the Uni-Center!",
-		};
-
-		verbalize(pupil_msgs[rn2(SIZE(pupil_msgs))]);
-		}
-
-	    if(inrange && mtmp->data->msound == MS_WHORE && !mtmp->mpeaceful &&
-		/*couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis &&*/ !rn2(5))
-
-		{
-		static const char *whore_msgs[] = { /* These are obviously inspired by the GTA series --Amy */
-			"Come to Momma.",
-			"I'm gonna call my pimp.",
-			"You picked the wrong bitch.",
-			"You're just another sorry ass!",
-			"Hey, this is my first night!",
-			"You know, I used to be a marine before the OP.", /* Vice City */
-			"Cocksucker!",
-			"I'll kick your nuts flat!", /* yes the PC can be female, but who cares? */
-			"I'm no slut, I just need the money!",
-			"I'll be sitting on you in a second.",
-			"You think I can't mess you up?",
-			"Die in a pool of your own blood.",
-			"Get ready for an ass-kicking.",
-			"You want me to whoop you?",
-			"You want some? I'll give you some!",
-			"Enjoy this stiletto.",
-			"If I don't kill you, my parents will.",
-			"I know kickboxing.",
-			"I'm a black belt in karate.",
-			"My hands are lethal weapons.",
-			"I'll kick your teeth in.",
-			"Would you really hit a woman?",
-			"I've killed hundreds of pigs like you!",
-			"I'm gonna open up a can of whoopass on you now!",
-			"Girls can fight too!",
-			"Beating on girls, right?",
-			"I have no problem kicking you in the nuts.",
-			"I'll slap you silly.",
-			"My pimp will take care of you.",
-			"You're messing with an angry bitch!",
-			"Another asshole with a problem!",
-			"You think cause I'm a girl I can't fight?",
-			"You call that 'fighting'?",
-			"I'm gonna stomp your balls!",
-			"I'm a lady but I can fight.",
-			"I'm an innocent virgin!",
-			"You just made me break a nail!",
-			"I'm expecting an apology!",
-			"You insult my womanhood.",
-			"You disgust me.",
-		};
-
-		verbalize(whore_msgs[rn2(SIZE(whore_msgs))]);
-		}
-
-	    if(inrange && mtmp->data->msound == MS_PRINCIPAL && !mtmp->mpeaceful &&
-		/*couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis &&*/ !rn2(5))
-
-		{
-		static const char *principal_msgs[] = {
-		"What's up?",
-		"I really feel sick - there are so many things to do!",
-		"Help me, I faint!",
-		"We'll do that in groups of one person!",
-		};
-
-		verbalize(principal_msgs[rn2(SIZE(principal_msgs))]);
-		}
-
-	    if(inrange && mtmp->data->msound == MS_TEACHER && !mtmp->mpeaceful &&
-		/*couldsee(mtmp->mx, mtmp->my) && !mtmp->minvis &&*/ !rn2(5))
-
-		{
-	   	 static const char *teacher_msgs[] = {
-			"No chance! Every day you'll get homework!",
-			"Is it really true? Does really _everybody_ have the homework?",
-			"That usage of the word 'goes' does harm to my ears!",
-			"Your attitude is really unacceptable!",
-			"The \"Stigel-Brauerei\" was founded 1492. Well, in that year was that affair with that guy, Columbus, but that really isn't important.",
-			"Why are you going? I'm only 20 minutes late!",
-			"Where's your problem? I'll be happy to help you",
-			"You didn't understand? Then let's begin again ... (*sigh*)",
-			"No homework yet? - This can be changed!",
-			"Overbecks - das Ueberbier",
-			"How about dehydrating carbonhydrates today?",
-			"Back when I was a pupil, the following thing happened ...",
-			"Back when I was studying chemistry, the following thing happened ...",
-			"... dann ist die Scheisse am dampfen",
-			"NIKI forever!",
-			"Pascal forever!",
-			"Yes ... I know that everything is easier in C, but I simply love Pascal ...",
-			"You have Str:0 (at most), so bugger off!",
-			"Do it - who cares about the odd broken bone?",
-			"You are sick because you were running for 30 minutes? So run another hour!",
-			"Shall I help you? (takes the whip)",
-			"We'll do that diagonally. *grin* (wipes sweat off head)",
-			"*grin*",
-			"You know, (*grin*) we'll have to do something now! (*grin*)",
-			"How about a pupil experiment - cut off your ears?",
-			"Yet another pupil experiment: the consequences of KCN ingested.",
-			"Don't expect to get away without homework!",
-			"No homework in the holidays? You must have something to do, after all!",
-			"The low level of you all is really beyond acception!",
-			"There was endless work in the supervision and administration of the farm ...",
-			/* it's really a shame that I can't think of more messages for him */
-			"I expect you to do your homework _regularly_ and _carefully_!",
-			"The level of work is really very low nowadays!",
-			"In _our_ times pupils were real pupils and teachers were real teachers!",
-			"Back when pupils where real pupils and teachers were real teachers, everything was better!",
-		};
-
-		verbalize(teacher_msgs[rn2(SIZE(teacher_msgs))]);
-
-		}
-#endif
 	return(tmp == 2);
 }
 
@@ -1023,8 +884,8 @@ not_special:
 		likegold = (likes_gold(ptr) && pctload < 95);
 		likegems = (likes_gems(ptr) && pctload < 85);
 		uses_items = (!mindless(ptr) && !is_animal(ptr)
-			&& pctload < 75); /* I just decided that "mindless" isn't the same as "stupid". --Amy */
-		likeobjs = (likes_objs(ptr) && pctload < 75); /* 5lo: Reverted above. */
+			&& pctload < 75);
+		likeobjs = (likes_objs(ptr) && pctload < 75);
 		likemagic = (likes_magic(ptr) && pctload < 85);
 		likerock = (throws_rocks(ptr) && pctload < 50 && !In_sokoban(&u.uz));
 		conceals = hides_under(ptr);
@@ -1315,7 +1176,7 @@ postmov:
 		    struct rm *here = &levl[mtmp->mx][mtmp->my];
 		    boolean btrapped = (here->doormask & D_TRAPPED);
 
-		    if(here->doormask & (D_LOCKED|D_CLOSED) && (amorphous(ptr)  ) ) {
+		    if(here->doormask & (D_LOCKED|D_CLOSED) && amorphous(ptr)) {
 			if (flags.verbose && canseemon(mtmp))
 			    pline("%s %s under the door.", Monnam(mtmp),
 				  (ptr == &mons[PM_FOG_CLOUD] ||
@@ -1338,7 +1199,7 @@ postmov:
 			    /* newsym(mtmp->mx, mtmp->my); */
 			    unblock_point(mtmp->mx,mtmp->my); /* vision */
 			}
-		    } else if (here->doormask == D_CLOSED && (can_open ) ) {
+		    } else if (here->doormask == D_CLOSED && can_open) {
 			if(btrapped) {
 			    here->doormask = D_NODOOR;
 			    newsym(mtmp->mx, mtmp->my);

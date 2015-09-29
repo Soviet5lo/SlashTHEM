@@ -609,10 +609,6 @@ moverock()
 		    pline("However, you can easily %s.",
 			(flags.pickup && !In_sokoban(&u.uz))
 			    ? "pick it up" : "push it aside");
-#if 0 /* 5lo: This message was a bit confusing to players */
-		if (yn("Do it?") != 'y')
-		return (-1);
-#endif
 		    if (In_sokoban(&u.uz))
 			{change_luck(-1);
 			pline("You cheater!");
@@ -2409,117 +2405,90 @@ register boolean newlev;
 	    switch (rt) { /* 5lo: Removed wake_nearby, gets really annoying */
 		case ZOO:
 		    pline("Welcome to David's treasure zoo!");
-		    /*wake_nearby();*/
 		    break;
 		case SWAMP:
 		    pline("It %s rather %s down here.",
 			  Blind ? "feels" : "looks",
 			  Blind ? "humid" : "muddy");
-		    /*wake_nearby();*/
 		    break;
 		case COURT:
 		    You("enter an opulent throne room!");
-		    /*wake_nearby();*/
 		    break;
 		case REALZOO:
 		    You("enter a smelly zoo!");
-		    /*wake_nearby();*/
 		    break;
 		case GIANTCOURT:
 		    You("enter a giant throne room!");
-		    /*wake_nearby();*/
 		    break;
 		case DRAGONLAIR:
 		    You("enter a dragon lair...");
-		    /*wake_nearby();*/
 		    break;
 		case BADFOODSHOP:
 		    You("enter an abandoned store...");
-		    /*wake_nearby();*/
 		    break;
 		case LEPREHALL:
 		    You("enter a leprechaun hall!");
-		    /*wake_nearby();*/
 		    break;
 		case MORGUE:
 		    if(midnight()) {
 			const char *run = locomotion(youmonst.data, "Run");
 			pline("%s away!  %s away!", run, run);
 		    } else
-			{ You("have an uncanny feeling..."); }
-		    /*wake_nearby();*/
+			You("have an uncanny feeling...");
 		    break;
 		case BEEHIVE:
 		    You("enter a giant beehive!");
-		    /*wake_nearby();*/
 		    break;
 		case LEMUREPIT:
 		    You("enter a pit of screaming lemures!");
-		    /*wake_nearby();*/
 		    break;
 		case MIGOHIVE:
 		    You("enter a strange hive!");
-		    /*wake_nearby();*/
 		    break;
 		case FUNGUSFARM:
 		    You("enter a room full of fungi!");
-		    /*wake_nearby();*/
 		    break;
 		case COCKNEST:
 		    You("enter a disgusting nest!");
-		    /*wake_nearby();*/
 		    break;
 		case ANTHOLE:
 		    You("enter an anthole!");
-		    /*wake_nearby();*/
 		    break;
             case CLINIC:
                 You("enter a modern hospital.");
-		    /*wake_nearby();*/
                 break;
             case ANGELHALL:
                 You("enter a radiating hall of Angels!");
-		    /*wake_nearby();*/
                 break;
 	      case TERRORHALL:
                 You("enter a terrifying hall.");
-		    /*wake_nearby();*/
                 break;
 	      case TENSHALL:
                 You("enter a killer room! This is actually an ADOM tension room.");
-		    /*wake_nearby();*/
                 break;
 	      case ELEMHALL:
                 You("enter a room full of elementals!");
-		    /*wake_nearby();*/
                 break;
 	      case NYMPHHALL:
                 You("enter a beautiful garden!");
-		    /*wake_nearby();*/
                 break;
             case ARMORY:
                 You("enter a dilapidated armory.");
-		    /*wake_nearby();*/
                 break;
 	      case COINHALL:
                 You("enter a room filled with money!");
-		    /*wake_nearby();*/
                 break;
 	      case TROLLHALL:
                 You("enter a room full of stinking trolls...");
-		    /*wake_nearby();*/
                 break;
 	      case HUMANHALL:
                 You("encounter a living room!");
-		    /*wake_nearby();*/
                 break;
 	      case SPIDERHALL:
                 You("stumble into a nest of spiders...");
-		    /*wake_nearby();*/
                 break;
 	      case GOLEMHALL:
                 You("enter a room full of golems!");
-		    /*wake_nearby();*/
                 break;
 	      case TRAPROOM:
                 if (wizard) You("enter a trapped room!");
@@ -2546,18 +2515,15 @@ register boolean newlev;
 			monstinroom(&mons[PM_GENERAL], roomno))
 			You("enter a military barracks!");
 		    else
-			{ You("enter an abandoned barracks."); }
-		    /*wake_nearby();*/
+			You("enter an abandoned barracks.");
 		    break;
 		case DELPHI:
 		    if(monstinroom(&mons[PM_ORACLE], roomno))
 			verbalize("%s, %s, welcome to Delphi!",
 					Hello((struct monst *) 0), plname);
-		    /*wake_nearby();*/
 		    break;
 		case DOUGROOM:
 		    You("feel 42.");
-		    /*wake_nearby();*/
 		    break;
 		case TEMPLE:
 		    intemple(roomno + ROOMOFFSET);
@@ -2567,10 +2533,11 @@ register boolean newlev;
 	    }
 
 	    if (rt != 0) {
-		/*rooms[roomno].rtype = OROOM;*/
-		/*if (!search_special(rt)) {*/
+#if 0 /* 5lo: No longer used; see above comment from Amy. */
+		rooms[roomno].rtype = OROOM;
+		if (!search_special(rt)) {
 			/* No more room of that type */
-			/*switch(rt) {
+			switch(rt) {
 			    case COURT:
 			    case GIANTCOURT:
 				level.flags.has_court = 0;
@@ -2652,7 +2619,8 @@ register boolean newlev;
 				level.flags.has_fungusfarm = 0;
 				break;
 			}
-		}*/
+		}
+#endif
 		if(rt==COURT || rt==SWAMP || rt==MORGUE || rt==ZOO)
 		    for(mtmp = fmon; mtmp; mtmp = mtmp->nmon)
 			if (!DEADMONSTER(mtmp) && !Stealth && !rn2(3)) mtmp->msleeping = 0;

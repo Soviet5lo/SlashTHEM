@@ -2213,180 +2213,6 @@ register struct obj	*sobj;
 		    }
 		}
 	break;
-
-
-#if 0 /* 5lo: Removed */
-
-	case SCR_LOCKOUT:
-		known = TRUE;
-		if (confused) {
-			/* remove walls from vicinity of player */
-			int maderoom = 0;
-			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
-					undo_lockflood, (genericptr_t)&maderoom);
-			if (maderoom) {
-				known = TRUE;
-				You("feel free once again.");
-			}
-		} else {
-			int madepool = 0;
-			int stilldry = -1;
-			int x,y,safe_pos=0;
-				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_lockflood,
-						(genericptr_t)&madepool);
-
-			/* check if there are safe tiles around the player */
-			for (x = u.ux-1; x <= u.ux+1; x++) {
-				for (y = u.uy - 1; y <= u.uy + 1; y++) {
-					if (x != u.ux && y != u.uy &&
-					    goodpos(x, y, &youmonst, 0)) {
-						safe_pos++;
-					}
-				}
-			}
-
-			/* we do not put these on the player's position. */
-			/*if (!madepool && stilldry)
-				break;*/
-			if (madepool)
-				pline(Hallucination ?
-						"It's getting a little bit tight in here!" :
-						"Walls and obstacles shoot up from the ground!" );
-			else pline(Hallucination ?
-						"You hear a grating that reminds you of Chinese water torture!" :
-						"You see dust particles flying around." );
-
-			known = TRUE;
-			break;
-		}
-
-	break;
-
-	case SCR_LAVA:
-		known = TRUE;
-		if (confused) {
-			/* remove lava from vicinity of player */
-			int maderoom = 0;
-			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
-					undo_lavaflood, (genericptr_t)&maderoom);
-			if (maderoom) {
-				known = TRUE;
-				You("don't feel hot anymore.");
-			}
-		} else {
-			int madepool = 0;
-			int stilldry = -1;
-			int x,y,safe_pos=0;
-				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_lavaflood,
-						(genericptr_t)&madepool);
-
-			/* check if there are safe tiles around the player */
-			for (x = u.ux-1; x <= u.ux+1; x++) {
-				for (y = u.uy - 1; y <= u.uy + 1; y++) {
-					if (x != u.ux && y != u.uy &&
-					    goodpos(x, y, &youmonst, 0)) {
-						safe_pos++;
-					}
-				}
-			}
-
-			/* we do not put these on the player's position. */
-			if (!madepool && stilldry)
-				break;
-			if (madepool)
-				pline(Hallucination ?
-						"Wow, that's, like, TOTALLY HOT, dude!" :
-						"A stream of lava surges through the area!" );
-			known = TRUE;
-			break;
-		}
-
-	break;
-
-	case SCR_GROWTH:
-		known = TRUE;
-		if (confused) {
-			/* remove lava from vicinity of player */
-			int maderoom = 0;
-			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
-					undo_treeflood, (genericptr_t)&maderoom);
-			if (maderoom) {
-				known = TRUE;
-				You("feel a lack of greenery.");
-			}
-		} else {
-			int madepool = 0;
-			int stilldry = -1;
-			int x,y,safe_pos=0;
-				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_treeflood,
-						(genericptr_t)&madepool);
-
-			/* check if there are safe tiles around the player */
-			for (x = u.ux-1; x <= u.ux+1; x++) {
-				for (y = u.uy - 1; y <= u.uy + 1; y++) {
-					if (x != u.ux && y != u.uy &&
-					    goodpos(x, y, &youmonst, 0)) {
-						safe_pos++;
-					}
-				}
-			}
-
-			/* we do not put these on the player's position. */
-			if (!madepool && stilldry)
-				break;
-			if (madepool)
-				pline(Hallucination ?
-						"Uh... everything is so... green!?" :
-						"You see trees growing out of the ground!" );
-			known = TRUE;
-			break;
-		}
-
-	break;
-
-	case SCR_BARRHING:
-		known = TRUE;
-		if (confused) {
-			/* remove lava from vicinity of player */
-			int maderoom = 0;
-			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
-					undo_barflood, (genericptr_t)&maderoom);
-			if (maderoom) {
-				known = TRUE;
-				You("have a sense of freedom.");
-			}
-		} else {
-			int madepool = 0;
-			int stilldry = -1;
-			int x,y,safe_pos=0;
-				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_barflood,
-						(genericptr_t)&madepool);
-
-			/* check if there are safe tiles around the player */
-			for (x = u.ux-1; x <= u.ux+1; x++) {
-				for (y = u.uy - 1; y <= u.uy + 1; y++) {
-					if (x != u.ux && y != u.uy &&
-					    goodpos(x, y, &youmonst, 0)) {
-						safe_pos++;
-					}
-				}
-			}
-
-			/* we do not put these on the player's position. */
-			if (!madepool && stilldry)
-				break;
-			if (madepool)
-				pline(Hallucination ?
-						"Aw shit, this feels like being in a jail!" :
-						"Iron bars shoot up from the ground!" );
-			known = TRUE;
-			break;
-		}
-
-	break;
-
-#endif
-
 	case SCR_ICE:
 		known = TRUE;
 		if (confused) {
@@ -2559,26 +2385,6 @@ register struct obj	*sobj;
 				known = TRUE;
 		}
 		break;
-#if 0 /* 5lo: Removed */
-	case SCR_TELE_LEVEL:
-	      if (!flags.lostsoul && !flags.uberlostsoul) level_tele();
-		else pline("Hmm... that level teleport scroll didn't do anything.");
-		known = TRUE;
-		break;
-	case SCR_WARPING:
-		known = TRUE;
-		if (u.uevent.udemigod) { pline("You shudder for a moment."); (void) safe_teleds(FALSE); break;}
-
-		if (flags.lostsoul || flags.uberlostsoul) { 
-			pline("You're unable to warp!"); break;}
-
-		make_stunned(HStun + 2, FALSE); /* to suppress teleport control that you might have */
-
-		if (rn2(2)) {(void) safe_teleds(FALSE); goto_level(&medusa_level, TRUE, FALSE, FALSE); level_tele(); }
-		else {(void) safe_teleds(FALSE); goto_level(&portal_level, TRUE, FALSE, FALSE); level_tele(); }
-
-		break;
-#endif
 	case SCR_GOLD_DETECTION:
 		if (confused || sobj->cursed) return(trap_detect(sobj));
 		else return(gold_detect(sobj));
@@ -2602,7 +2408,6 @@ register struct obj	*sobj;
 			pline("This is an identify scroll.");
 		if (sobj->blessed || (!sobj->cursed && !rn2(3))) {
 			cval = rn2(4);
-			/*if (sobj->blessed && !rn2(3)) cval += rnz(2);*/
 			/* Note: if rn2(5)==0, identify all items */
 			if (cval == 1 && sobj->blessed && Luck > 0) ++cval;
 		} else	cval = 1;
@@ -2777,7 +2582,6 @@ register struct obj	*sobj;
 							SCROLL_CLASS, EXPL_FIERY);
 		return(1);
 	case SCR_EARTH:
-
 	    /* TODO: handle steeds */
 	    if (
 #ifdef REINCARNATION
@@ -2812,7 +2616,6 @@ register struct obj	*sobj;
 	    	    	    otmp2 = mksobj(confused ? ROCK : BOULDER,
 	    	    	    		FALSE, FALSE);
 	    	    	    if (!otmp2) continue;  /* Shouldn't happen */
-
 	    	    	    otmp2->quan = confused ? rn1(5,2) : 1;
 	    	    	    otmp2->owt = weight(otmp2);
 
@@ -2868,7 +2671,6 @@ register struct obj	*sobj;
 		    otmp2 = mksobj(confused ? ROCK : BOULDER,
 				FALSE, FALSE);
 		    if (!otmp2) break;
-
 		    otmp2->quan = confused ? rn1(5,2) : 1;
 		    otmp2->owt = weight(otmp2);
 		    if (!amorphous(youmonst.data) &&

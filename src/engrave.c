@@ -660,10 +660,10 @@ char *outbuf;
 
 	/* a random engraving may come from the "rumors" file,
 	   or from the list above */
-	if (!rn2(4) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor) /* increased random rumor chance --Amy */
+	if (!rn2(4) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor)
 	    Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
 
-	/*if (!rn2(5))*/ wipeout_text(outbuf, (int)(strlen(outbuf) / 8), 0);
+	wipeout_text(outbuf, (int)(strlen(outbuf) / 8), 0);
 	return outbuf;
 }
 
@@ -877,12 +877,7 @@ register xchar x,y,cnt;
 	if(ep && ep->engr_type != HEADSTONE){
 	    if(ep->engr_type != BURN || is_ice(x,y)) {
 		if(ep->engr_type != DUST && ep->engr_type != ENGR_BLOOD) {
-#if 0
-			cnt = /*rn2(1 + 40/(cnt+1)) ? 0 : 1)*/rnd(cnt) ; /* nerf to semi-permanent Elbereths --Amy */
-			if (rn2(5)) cnt /= 2;
-#endif
-			/* 5lo: Reverted */
-			cnt = rn2(1+ 50/(cnt+1)) ? 0 : 1;
+			cnt = rn2(1 + 50/(cnt+1)) ? 0 : 1;
 		}
 		wipeout_text(ep->engr_txt, (int)cnt, 0);
 		while(ep->engr_txt[0] == ' ')
@@ -1410,7 +1405,6 @@ doengrave()
 			    break;
 		    case WAN_CANCELLATION:
 		    case WAN_MAKE_INVISIBLE:
-		    /*case WAN_BANISHMENT:*/
 			if (oep && oep->engr_type != HEADSTONE) {
 			    if (!Blind)
 				pline_The("engraving on the %s vanishes!",

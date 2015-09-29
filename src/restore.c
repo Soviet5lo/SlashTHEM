@@ -390,46 +390,6 @@ unsigned int *stuckid, *steedid;	/* STEED */
 #ifdef CLIPPING
 	cliparound(u.ux, u.uy);
 #endif
-	/* reload random monster*/
-#if 0
-	mread(fd, (genericptr_t) &mons[PM_NITROHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_SPEEDHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_DNETHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_NETHACKBRASS_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_INTERHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_NHTNG_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_UNNETHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_UNNETHACKPLUS_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_ANGBAND_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_ADOM_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_PETTY_ANGBAND_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_PETTY_ADOM_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_SPORKHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_SLASHEM_HORROR], sizeof(struct permonst));	
-	mread(fd, (genericptr_t) &mons[PM_NETHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_ROGUE_HORROR], sizeof(struct permonst));	
-	mread(fd, (genericptr_t) &mons[PM_GRUNTHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_ACEHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_PETTY_GRUNTHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_PETTY_ACEHACK_HORROR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_YEENOGHU], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_MULTICOLOR_GRUE], sizeof(struct permonst));
-
-	mread(fd, (genericptr_t) &mons[PM_PUPURIN], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_SAPUSAUR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_TSUBOTSUBO], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_ODDOSHISHI], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_OKUTAN], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_RATICLAW], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_PSYBUR], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_HARISEN], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_SUIKUN], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_HOUOU], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_LOCUSTOD], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_FORETOSU], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_CHARCOLT], sizeof(struct permonst));
-	mread(fd, (genericptr_t) &mons[PM_MILLENUM], sizeof(struct permonst));
-#endif
 	if(u.uhp <= 0 && (!Upolyd || u.mh <= 0)) {
 	    u.ux = u.uy = 0;	/* affects pline() [hence You()] */
 	    You("were not healthy enough to survive restoration.");

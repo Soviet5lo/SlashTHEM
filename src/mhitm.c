@@ -1219,15 +1219,7 @@ physical:
                                                 }
                                                 tmp += rnd(6) + 2;
                                         }
-                                /*}else if (otmp->oartifact == ART_VAMPIRE_KILLER) {
-                                        if (vis) {
-                                                Strcpy(buf, Monnam(magr));
-                                                pline("%s whips %s good!",
-                                                        buf, mon_nam(mdef));
-                                        }
-                                        tmp += rnd(6);*/
-                                }
-					 else {
+                                } else {
                                         if (vis) {
                                                 Strcpy(buf, Monnam(magr));
                                                 pline("%s drives the stake into %s.",

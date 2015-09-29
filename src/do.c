@@ -270,12 +270,6 @@ void
 doaltarobj(obj)  /* obj is an object dropped on an altar */
 	register struct obj *obj;
 {
-#if 0 /* 5lo: Removed */
-	if (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
-	pline_The("altar suddenly vanishes!"); /* Yes, we're preventing altar abuse here, or trying to, at least. --Amy */
-	newsym(u.ux,u.uy);
-	return;}
-#endif
 	if (Blind)
 		return;
 
@@ -1491,8 +1485,6 @@ boolean at_stairs, falling, portal;
 
 	if (on_level(&u.uz, &astral_level))
 	    final_level();
-
-
 	else
 	    onquest();
 	assign_level(&u.uz0, &u.uz); /* reset u.uz0 */
@@ -1775,20 +1767,6 @@ long timeout;
 
     /* Weight towards non-motile fungi.
      */
-#if 0 /* 5lo: Let's just use the default Slash'EM behavior */
-    if (rn2(20)) pmtype = pm_mkclass(S_FUNGUS, 0);
-    else if (rn2(2)) pmtype = pm_mkclass(S_JELLY, 0); /*jellies, blobs and puddings should be possible --Amy*/
-    else if (rn2(2)) pmtype = pm_mkclass(S_BLOB, 0);
-    else pmtype = pm_mkclass(S_PUDDING, 0);
-
-    if ((pmtype != -1) && (mons[pmtype].mmove)) 
-	{
-	    if (rn2(20)) pmtype = pm_mkclass(S_FUNGUS, 0);
-	    else if (rn2(2)) pmtype = pm_mkclass(S_JELLY, 0); /*jellies, blobs and puddings should be possible --Amy*/
-	    else if (rn2(2)) pmtype = pm_mkclass(S_BLOB, 0);
-	    else pmtype = pm_mkclass(S_PUDDING, 0);
-	}
-#endif
     pmtype = pm_mkclass(S_FUNGUS, 0);
     if ((pmtype != -1) && (mons[pmtype].mmove)) pmtype = pm_mkclass(S_FUNGUS, 0);
 

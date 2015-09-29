@@ -362,46 +362,6 @@ register int fd, mode;
 	bwrite(fd, (genericptr_t) &flags, sizeof(struct flag));
 	bwrite(fd, (genericptr_t) &u, sizeof(struct you));
 
-	/* save random monsters*/
-#if 0
-	bwrite(fd, (genericptr_t) &mons[PM_NITROHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_SPEEDHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_DNETHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_NETHACKBRASS_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_INTERHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_NHTNG_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_UNNETHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_UNNETHACKPLUS_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_ANGBAND_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_ADOM_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_PETTY_ANGBAND_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_PETTY_ADOM_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_SPORKHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_SLASHEM_HORROR], sizeof(struct permonst));	
-	bwrite(fd, (genericptr_t) &mons[PM_NETHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_ROGUE_HORROR], sizeof(struct permonst));	
-	bwrite(fd, (genericptr_t) &mons[PM_GRUNTHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_ACEHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_PETTY_GRUNTHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_PETTY_ACEHACK_HORROR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_YEENOGHU], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_MULTICOLOR_GRUE], sizeof(struct permonst));
-
-	bwrite(fd, (genericptr_t) &mons[PM_PUPURIN], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_SAPUSAUR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_TSUBOTSUBO], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_ODDOSHISHI], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_OKUTAN], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_RATICLAW], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_PSYBUR], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_HARISEN], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_SUIKUN], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_HOUOU], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_LOCUSTOD], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_FORETOSU], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_CHARCOLT], sizeof(struct permonst));
-	bwrite(fd, (genericptr_t) &mons[PM_MILLENUM], sizeof(struct permonst));
-#endif
 	/* must come before migrating_objs and migrating_mons are freed */
 	save_timers(fd, mode, RANGE_GLOBAL);
 	save_light_sources(fd, mode, RANGE_GLOBAL);

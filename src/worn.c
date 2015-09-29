@@ -393,7 +393,6 @@ boolean creation;
 		return;
 	/* give mummies a chance to wear their wrappings
 	 * and let skeletons wear their initial armor */
-	/* well screw it, just let mindless creatures wear everything! --Amy */
 	if (mindless(mon->data) && (!creation ||
 	    (mon->data->mlet != S_MUMMY && mon->data != &mons[PM_SKELETON])))
 		return;

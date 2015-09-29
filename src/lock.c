@@ -559,14 +559,6 @@ pick_lock(pickp) /* pick a lock with a given object */
 			}
 			else ch = -1;		/* -1 == 0% chance */
 		    }
-#if 0 /* 5lo: This makes Master Key of Thievery entirely useless */
-			/* artifact keys shouldn't be overpowered --Amy */
-
-		    if (!key && pick->oartifact) {
-			    Your("key doesn't seem to fit.");
-			    return(0);
-		    }
-#endif
 	    }
 	}
 	flags.move = 0;

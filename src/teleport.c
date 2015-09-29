@@ -941,9 +941,7 @@ level_tele()
 
 		    /* if you're using wizard mode, you shouldn't really need
 		     * the game to interpret things like `mine town level' */
-
 		    if (wizard && (slev = find_level(buf))) {
-
 			schedule_goto(&slev->dlevel, FALSE, FALSE, 0,
 				      (char *)0, (char *)0);
 			return;

@@ -1714,10 +1714,6 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 #endif
 
 	    you_can(buf);
-
-
-
-
 #if 0	/* WAC -- replaced by techniques */
 /*	    Sprintf(buf, "%s%suse%s your special", !u.unextuse ? "" : "not ",
 		    final ? "have " : "", final ? "d" : "");*/
@@ -3365,8 +3361,6 @@ wiz_migrate_mons()
 	return 0;
 }
 #endif
-
-
 
 #endif /* WIZARD */
 

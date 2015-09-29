@@ -1085,114 +1085,6 @@ skip0:
 		    if(!rn2(3)) mktoilet(croom);
 		}
 #endif
-#if 0
-
-		if(!rn2(500)) mkthrone(croom); /* rare cause they may give wishes --Amy */
-
-		if(!rn2(50)) {
-		    mkstone(croom);
-		    if(!rn2(3)) mkstone(croom);
-		    if(!rn2(6)) mkstone(croom);
-		    if(!rn2(10)) mkstone(croom);
-		    if(!rn2(15)) mkstone(croom);
-		    if(!rn2(20)) mkstone(croom);
-		    if(!rn2(25)) mkstone(croom);
-		} 
-
-		if(!rn2(50)) mkstoneX(rnd(10),croom);
-		if(!rn2(250)) mkstoneX(rnd(25),croom);
-
-		if(!rn2(50)) {
-		    mkice(croom);
-		    if(!rn2(3)) mkice(croom);
-		    if(!rn2(6)) mkice(croom);
-		    if(!rn2(10)) mkice(croom);
-		    if(!rn2(15)) mkice(croom);
-		    if(!rn2(20)) mkice(croom);
-		    if(!rn2(25)) mkice(croom);
-		} 
-
-		if(!rn2(50)) mkiceX(rnd(10),croom);
-		if(!rn2(250)) mkiceX(rnd(25),croom);
-
-/*		if(!rn2(50)) {
-		    mkdoor(croom);
-		    if(!rn2(3)) mkdoor(croom);
-		    if(!rn2(6)) mkdoor(croom);
-		    if(!rn2(10)) mkdoor(croom);
-		    if(!rn2(15)) mkdoor(croom);
-		    if(!rn2(20)) mkdoor(croom);
-		    if(!rn2(25)) mkdoor(croom);
-		}*/
-
-		if(!rn2(100)) {
-		    mktree(croom);
-		    if(!rn2(2)) mktree(croom);
-		    if(!rn2(4)) mktree(croom);
-		    if(!rn2(5)) mktree(croom);
-		    if(!rn2(7)) mktree(croom);
-		    if(!rn2(10)) mktree(croom);
-		    if(!rn2(12)) mktree(croom);
-		    if(!rn2(15)) mktree(croom);
-		    if(!rn2(20)) mktree(croom);
-		}
-
-		if(!rn2(100)) mktreeX(rnd(10),croom);
-		if(!rn2(500)) mktreeX(rnd(25),croom);
-
-		if(!rn2(200)) {
-		    mkpool(croom);
-		    if(!rn2(2)) mkpool(croom);
-		    if(!rn2(4)) mkpool(croom);
-		    if(!rn2(8)) mkpool(croom);
-		    if(!rn2(16)) mkpool(croom);
-		    if(!rn2(32)) mkpool(croom);
-		    if(!rn2(64)) mkpool(croom);
-		    if(!rn2(128)) mkpool(croom);
-		}
-
-		if(!rn2(200)) mkpoolX(rnd(10),croom);
-		if(!rn2(1000)) mkpoolX(rnd(25),croom);
-
-		if(!rn2(200)) {
-		    mkcloud(croom);
-		    if(!rn2(2)) mkcloud(croom);
-		    if(!rn2(4)) mkcloud(croom);
-		    if(!rn2(8)) mkcloud(croom);
-		    if(!rn2(16)) mkcloud(croom);
-		    if(!rn2(32)) mkcloud(croom);
-		    if(!rn2(64)) mkcloud(croom);
-		    if(!rn2(128)) mkcloud(croom);
-		}
-
-		if(!rn2(200)) mkcloudX(rnd(10),croom);
-		if(!rn2(1000)) mkcloudX(rnd(25),croom);
-
-		if(!rn2(500)) {
-		    mklavapool(croom);
-		    if(!rn2(2)) mklavapool(croom);
-		    if(!rn2(4)) mklavapool(croom);
-		    if(!rn2(8)) mklavapool(croom);
-		    if(!rn2(16)) mklavapool(croom);
-		    if(!rn2(32)) mklavapool(croom);
-		    if(!rn2(64)) mklavapool(croom);
-		    if(!rn2(128)) mklavapool(croom);
-		}
-
-		if(!rn2(500)) mklavapoolX(rnd(10),croom);
-		if(!rn2(2500)) mklavapoolX(rnd(25),croom);
-
-		if(!rn2(1000)) {
-		    mkironbars(croom);
-		    if(!rn2(3)) mkironbars(croom);
-		    if(!rn2(9)) mkironbars(croom);
-		    if(!rn2(27)) mkironbars(croom);
-		    if(!rn2(81)) mkironbars(croom);
-		}
-
-		if(!rn2(1000)) mkironbarsX(rnd(10),croom);
-		if(!rn2(5000)) mkironbarsX(rnd(25),croom);
-#endif
 		x = 80 - (depth(&u.uz) * 2);
 		if (x < 2) x = 2;
 		if(!rn2(x)) mkgrave(croom);
@@ -1419,20 +1311,6 @@ mineralize()
 			    }
 		    }
 		}
-#if 0 /* 5lo: Makes no sense, this isn't Castlevania after all. */
-		if (rn2(1000) < objprob) {
-		    for (cnt = rnd(2 + dunlev(&u.uz) / 3); cnt > 0; cnt--)
-			if ((otmp = mkobj(RANDOM_CLASS, FALSE)) != 0) {
-			    if (otmp->otyp == ROCK) {
-				dealloc_obj(otmp);	/* discard it */
-			    } else {
-				otmp->ox = x,  otmp->oy = y;
-				if (!rn2(3)) add_to_buried(otmp);
-				else place_object(otmp, x, y);
-			    }
-		    }
-		}
-#endif
 	    }
 }
 

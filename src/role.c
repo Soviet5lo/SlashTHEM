@@ -449,38 +449,7 @@ const struct Role roles[] = {
 	0, 1, 0, 
 	2, 10, A_INT, SPE_LIGHTNING,        -4 /* From old role.c */
 },
-#if 0 /* 5lo: Removed */
-{	{"Elph", 0}, {
-	{"Edhel",       "Elleth"},
-	{"Edhel",       "Elleth"},      /* elf-maid */
-	{"Ohtar",       "Ohtie"},       /* warrior */
-	{"Kano",			/* commander (Q.) ['a] */
-			"Kanie"},	/* educated guess, until further research- SAC */
-	{"Arandur",			/* king's servant, minister (Q.) - guess */
-			"Aranduriel"},	/* educated guess */
-	{"Hir",         "Hiril"},       /* lord, lady (S.) ['ir] */
-	{"Aredhel",     "Arwen"},       /* noble elf, maiden (S.) */
-	{"Ernil",       "Elentariel"},  /* prince (S.), elf-maiden (Q.) */
-	{"Elentar",     "Elentari"} },	/* Star-king, -queen (Q.) */
-	"Solonor Thelandira", "Aerdrie Faenya", "Erevan Ilesere", /* Elven */
 
-	"Elp", "the great Circle of Elwing", "the Goblins' Cave",
-	PM_ELPH, NON_PM, PM_UNDEAD_ELPH, NON_PM, PM_LITTLE_DOG, /* Orion & canis major */
-	PM_EARENDIL, PM_HIGHEST_ELF, PM_GOBLIN_KING,
-	PM_URUK_HAI, PM_OGRE, S_ORC, S_OGRE,
-
-	ART_PALANTIR_OF_WESTERNESSE,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  13, 13, 13,  9, 13,  7 },
-	{  30, 10, 10, 20, 20, 10 },
-	/* Init   Lower  Higher */
-	{ 18, 0,  0, 6,  1, 0 },	/* Hit points */
-	{  8, 0,  0, 2,  0, 2 },12,	/* Energy */
-	10, 9, 2, 1, 10, A_INT, SPE_INVISIBILITY,   -4
-},
-#endif
 {	{"Firefighter", 0}, {
 	{"Water Boy",         "Water Girl"},
 	{"Fire Cadet",       0},

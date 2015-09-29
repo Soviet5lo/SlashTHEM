@@ -525,7 +525,6 @@ boolean with_you;
 void
 mon_catchup_elapsed_time(mtmp, nmv)
 struct monst *mtmp;
-
 long nmv;		/* number of moves */
 {
 	struct edog *edog = EDOG(mtmp);
@@ -592,11 +591,6 @@ long nmv;		/* number of moves */
 				if (mtmp->mtame > nmv/1000) /* increased by Amy */
 					mtmp->mtame -= nmv/1000;
 				else mtmp->mtame = 0;
-				/* Not how it's done in the patch, but... */
-#if 0
-				if (mtmp->friend)
-					mtmp->mtame *= 150;
-#endif
 	}
 	/* check to see if it would have died as a pet; if so, go wild instead
 	 * of dying the next time we call dog_move()

@@ -75,7 +75,6 @@ STATIC_OVL struct Jitem Japanese_items[] = {
 	{ WAR_HAMMER, "dai tsuchi" },
 	{ WOODEN_HARP, "koto" },
 	{ DOUGHNUT, "onigiri" }, /* 4kids dubbing */
-	/*{ WEDGE_SANDALS, "jika-tabi" },*/
 	{ WATER_WALKING_BOOTS, "mizugumo" },
 	{ GRAPPLING_HOOK, "kaginawa" },
 	{ BOW, "dai-kyu" }, /* Nethack-- */
@@ -730,9 +729,6 @@ register struct obj *obj;
 	if (Hallucination ? !rn2(100) : obj->greased) Strcat(prefix, "greased ");
 
 	switch(obj->oclass) {
-	/*case SCROLL_CLASS:
-		add_erosion_words(obj, prefix);
-		break;*/
 	case AMULET_CLASS:
 		add_erosion_words(obj, prefix);
 		if(obj->owornmask & W_AMUL)
@@ -821,7 +817,6 @@ plus:
 		    goto charges;
 		break;
 	case SPBOOK_CLASS: /* WAC spellbooks have charges now */
-		/*add_erosion_words(obj, prefix);*/
 #ifdef WIZARD
 		if (wizard) {
 		    if (Hallucination)
@@ -846,7 +841,6 @@ charges:
 			break;
 		if (obj->otyp == POT_OIL && obj->lamplit)
 		    Strcat(bp, " (lit)");
-		/*add_erosion_words(obj, prefix);*/
 		break;
 	case RING_CLASS:
 		add_erosion_words(obj, prefix);
@@ -865,7 +859,6 @@ ring:
 		}
 		break;
 	case FOOD_CLASS:
-		/*add_erosion_words(obj, prefix);*/
 		if (obj->otyp == CORPSE && obj->odrained) {
 #ifdef WIZARD
 		    if (wizard && obj->oeaten < drainlevel(obj))
@@ -909,23 +902,12 @@ ring:
 		}
 		if (obj->otyp == MEAT_RING) goto ring;
 		break;
-	/*case VENOM_CLASS:
-	case ROCK_CLASS:
-		add_erosion_words(obj, prefix);
-		break;*/
 	case BALL_CLASS:
 	case CHAIN_CLASS:
-		/*goto plus;*/
 		add_erosion_words(obj, prefix);
 		if(obj->owornmask & W_BALL)
 			Strcat(bp, " (chained to you)");
 			break;
-#if 0 /* 5lo: Disable rocks being enchantable, stregnth + racial bonus is more than enough */
-	case GEM_CLASS:
-		/*add_erosion_words(obj, prefix);*/
-		goto plus;
-		break;
-#endif
 	}
 	if((obj->owornmask & W_WEP) && !mrg_to_wielded) {
 		if (obj->quan != 1L) {
@@ -3055,7 +3037,7 @@ typfnd:
 	/* set otmp->recharged */
 	if (oclass == WAND_CLASS) {
 	    /* prevent wishing abuse */
-	    if ( (otmp->otyp == WAN_WISHING || otmp->otyp == WAN_ACQUIREMENT)
+	    if ((otmp->otyp == WAN_WISHING || otmp->otyp == WAN_ACQUIREMENT)
 #ifdef WIZARD
 		    && !wizard
 #endif

@@ -232,13 +232,7 @@ use_stethoscope(obj)
 	int rx, ry, res;
 	boolean interference = (u.uswallow && is_whirly(u.ustuck->data) &&
 				!rn2(Role_if(PM_HEALER) ? 10 : 3));
-#if 0 /* 5lo: What? */
-	if (!rn2(100)) {
-	    useup(obj);
-	    pline("Your stethoscope breaks!");
-		return;
-		}
-#endif
+
 	if (nohands(youmonst.data)) {	/* should also check for no ears and/or deaf */
 		You("have no hands!");	/* not `body_part(HAND)' */
 		return 0;
@@ -1701,13 +1695,6 @@ struct obj *obj;
 	int trouble_list[PROP_COUNT + ATTR_COUNT];
 	int chance;	/* KMH */
 
-#if 0 /* 5lo: Disable this for now */
-	if (!rn2(100) && !obj->oartifact) {
-	    useup(obj);
-	    pline("The horn suddenly turns to dust.");
-		return;
-		}
-#endif
 	if (obj && obj->cursed) {
 	    long lcount = (long) rnd(100);
 
@@ -1744,19 +1731,15 @@ struct obj *obj;
 
 	/* collect property troubles */
 	if (Sick) prop_trouble(SICK);
-
-
 	if (Blinded > (long)u.ucreamed) prop_trouble(BLINDED);
 	if (HHallucination) prop_trouble(HALLUC);
 	if (Vomiting) prop_trouble(VOMITING);
 	if (HConfusion) prop_trouble(CONFUSION);
-	if (HStun) prop_trouble(STUNNED); /* trying to prevent players from fixing everything */
+	if (HStun) prop_trouble(STUNNED);
 
 	unfixable_trbl = unfixable_trouble_count(TRUE);
 
 	/* collect attribute troubles */
-
-
 	for (idx = 0; idx < A_MAX; idx++) {
 	    val_limit = AMAX(idx);
 	    /* don't recover strength lost from hunger */
@@ -1768,7 +1751,7 @@ struct obj *obj;
 		attr_trouble(idx);
 	    /* keep track of unfixed trouble, for message adjustment below */
 	    unfixable_trbl += (AMAX(idx) - val_limit);
-	}  
+	}
 
 	if (trouble_count == 0) {
 	    pline(nothing_happens);
@@ -3309,29 +3292,6 @@ wand_explode(obj, hero_broke)
 		}
 	affects_objects = TRUE;
 	break;
-#if 0
-    case WAN_BANISHMENT:
-
-	    if ((obj->spe > 2) && rn2(obj->spe - 2) && !level.flags.noteleport &&
-		    !u.uswallow && !On_stairs(u.ux, u.uy) && (!IS_FURNITURE(levl[u.ux][u.uy].typ) &&
-		    !IS_ROCK(levl[u.ux][u.uy].typ) &&
-		    !closed_door(u.ux, u.uy) && !t_at(u.ux, u.uy))) {
-
-			struct trap *ttmp;
-
-			ttmp = maketrap(u.ux, u.uy, LEVEL_TELEP);
-			if (ttmp) {
-				ttmp->madeby_u = 1;
-				newsym(u.ux, u.uy); /* if our hero happens to be invisible */
-				if (*in_rooms(u.ux,u.uy,SHOPBASE)) {
-					/* shopkeeper will remove it */
-					add_damage(u.ux, u.uy, 0L);             
-				}
-			}
-		}
-	affects_objects = TRUE;
-	break;
-#endif
     case WAN_CREATE_HORDE: /* More damage than Create monster */
 	        dmg *= 2;
 	        break;

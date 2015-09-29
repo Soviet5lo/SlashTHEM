@@ -420,34 +420,6 @@ register int x, y, typ;
 		    (void) add_to_container(statue, otmp);
 		}
 		statue->owt = weight(statue);
-#if 0 /* 5lo: removed for balance reasons */
-		if (!rn2(5)) statue->oinvis = 1; /* player needs see invisible to detect this thing --Amy */
-		else if (!rn2(10)) (void) mkobj_at(COIN_CLASS, x, y, TRUE); /* hidden underneath a zorkmid */
-		else if (!rn2(10)) (void) mksobj_at(BOULDER, x, y, TRUE, FALSE); /* hidden underneath a boulder */
-		else if (!rn2(10)) (void) mkobj_at(0, x, y, TRUE); /* hidden underneath a random item */
-		else if (!rn2(12)) (void) makemon( mkclass(S_MIMIC,0), x, y, NO_MM_FLAGS); /* hidden beneath a mimic */
-		else if (!rn2(7)) {
-				for (sessileattempts = 0; sessileattempts < 20; sessileattempts++) {
-					sessilemnum = pm_mkclass(S_FUNGUS, 0);
-					if (sessilemnum != -1 && !mons[sessilemnum].mmove) sessileattempts = 20;
-					}
-		if (sessilemnum != -1) (void) makemon( &mons[sessilemnum], x, y, NO_MM_FLAGS); /* hidden beneath a fungus */
-		}
-		else if (!rn2(10)) {
-				for (sessileattempts = 0; sessileattempts < 10; sessileattempts++) {
-					sessilemnum = pm_mkclass(S_JELLY, 0);
-					if (sessilemnum != -1 && !mons[sessilemnum].mmove) sessileattempts = 20;
-					}
-		if (sessilemnum != -1) (void) makemon( &mons[sessilemnum], x, y, NO_MM_FLAGS); /* hidden beneath a fungus */
-		}
-		else if (!rn2(15)) {
-				for (sessileattempts = 0; sessileattempts < 100; sessileattempts++) {
-					sessilemnum = rndmonnum();
-					if (sessilemnum != -1 && !mons[sessilemnum].mmove) sessileattempts = 20;
-					}
-		if (sessilemnum != -1) (void) makemon( &mons[sessilemnum], x, y, NO_MM_FLAGS); /* hidden beneath a fungus */
-		}
-#endif
 		mongone(mtmp);
 		break;
 	      }

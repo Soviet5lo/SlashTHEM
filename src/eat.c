@@ -861,7 +861,7 @@ register struct permonst *ptr;
 			break;
 	}
 
-	if (ptr->mlevel <= rn2(chance)) /* 5lo: Reverted back to Vanilla */
+	if (ptr->mlevel <= rn2(chance))
 		return;		/* failed die roll */
 
 	switch (type) {
@@ -1659,13 +1659,6 @@ struct obj *obj;
 		return(1);
 	} else if(!rn2(50) && !Sick) { /* The chance of this outcome !MUST! be low. Everything else would be unfair. --Amy */
 	    make_sick(rn1(25,25), "rotten food", TRUE, SICK_VOMITABLE);
-#if 0 /* 5lo: Wayyyyyy too evil */
-	} else if(!rn2(200) && !Slimed && !flaming(youmonst.data) && !Unchanging && youmonst.data != &mons[PM_GREEN_SLIME]) { /* This chance should be even lower. --Amy */
-		    Slimed = 100L;
-		    flags.botl = 1;
-		    killer_format = KILLED_BY_AN;
-		    delayed_killer = "slimy meal";
-#endif
 	}
 	return(0);
 }
@@ -2755,7 +2748,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 	/* [ALI] Hero polymorphed in the meantime.
 	 */
 	if (otmp == victual.piece &&
-	  (is_vampire(youmonst.data)) != otmp->odrained)
+	  is_vampire(youmonst.data) != otmp->odrained)
 	    victual.piece = (struct obj *)0;	/* Can't resume */
 
 	/* [ALI] Blood can coagulate during the interruption

@@ -548,17 +548,6 @@ boolean artif;
 		else if ((otmp->otyp != LUCKSTONE) && (otmp->otyp != HEALTHSTONE) &&
 				!rn2(6)) otmp->quan = 2L;
 		else otmp->quan = 1L;
-#if 0 /* 5lo: Prevents the game from attempting to give an enchantment to rocks */
-		if(!rn2(8)) {
-			otmp->spe = rne(2);
-			if (rn2(2)) otmp->blessed = rn2(2);
-			 else	blessorcurse(otmp, 3);
-		} else if(!rn2(10)) {
-			if (rn2(10)) curse(otmp);
-			 else	blessorcurse(otmp, 3);
-			otmp->spe = -rne(2);
-		} else	blessorcurse(otmp, 10);
-#endif
 		break;
 /* -----------============STEPHEN WHITE'S NEW CODE============----------- */
 	case TOOL_CLASS:
@@ -705,17 +694,6 @@ boolean artif;
 		break;
 	case CHAIN_CLASS:
 	case BALL_CLASS:
-#if 0 /* 5lo: Not needed anymore */
-		if(!rn2(8)) {
-			otmp->spe = rne(2);
-			if (rn2(2)) otmp->blessed = rn2(2);
-			 else	blessorcurse(otmp, 3);
-		} else if(!rn2(10)) {
-			if (rn2(10)) curse(otmp);
-			 else	blessorcurse(otmp, 3);
-			otmp->spe = -rne(2);
-		} else	blessorcurse(otmp, 10);
-#endif
 		break;
 	case POTION_CLASS:
 		if (otmp->otyp == POT_OIL)

@@ -1056,22 +1056,17 @@ register struct monst *mtmp;
 
 		} else if (mm == PM_ARABELLA){
 			(void)mongets(mtmp, SPEED_BOOTS);
-#if 0 /* 5lo: Removed */
-			(void)mongets(mtmp, WAN_BANISHMENT);
-#endif
-		} else if (mm == PM_ANASTASIA){
 
+		} else if (mm == PM_ANASTASIA){
 			(void)mongets(mtmp, ELVEN_BOOTS);
 
 		} else if (mm == PM_HENRIETTA){
 			(void)mongets(mtmp, PLASTEEL_BOOTS);
 
 		} else if (mm == PM_KATRIN){
-
 			(void)mongets(mtmp, ELVEN_BOOTS);
 
 		} else if (mm == PM_JANA){
-
 			(void)mongets(mtmp, ELVEN_BOOTS);
 
 		} else if (mm == PM_THE_CHAMPION_OF_POMPEJI){
@@ -1081,27 +1076,15 @@ register struct monst *mtmp;
 
 		} else if (mm == PM_DEATH_METAL_FREAK){
 			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-#if 0 /* 5lo: Removed */
-			(void)mongets(mtmp, SCR_LOCKOUT);
-#endif
+
 		} else if (mm == PM_DEATH_METAL_DRUMMER){
 			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-#if 0 /* 5lo: Removed */
-			(void)mongets(mtmp, SCR_LOCKOUT);
-#endif
 		     (void)mongets(mtmp, SUBMACHINE_GUN);
 			 m_initthrow(mtmp, BULLET, 50);
 			 m_initthrow(mtmp, BULLET, 50);
 
 		} else if (mm == PM_DEATH_METAL_ORCHESTRA_LEADER){
 			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-#if 0 /* 5lo: Removed */
-			(void)mongets(mtmp, SCR_LOCKOUT);
-			(void)mongets(mtmp, SCR_LOCKOUT);
-			(void)mongets(mtmp, SCR_LOCKOUT);
-			(void)mongets(mtmp, SCR_LOCKOUT);
-			(void)mongets(mtmp, SCR_LOCKOUT);
-#endif
 		     (void)mongets(mtmp, HEAVY_MACHINE_GUN);
 			 m_initthrow(mtmp, BULLET, 50);
 			 m_initthrow(mtmp, BULLET, 50);
@@ -1843,35 +1826,6 @@ register struct	monst	*mtmp;
 			(void)mongets(mtmp, WAN_COLD);
 			(void)mongets(mtmp, WAN_FIRE);
 		}
-#if 0 /* 5lo: A bit much? */
-		if (mtmp->data == &mons[PM_BAEL]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_ZUGGTMOY]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_BAPHOMET]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_DAUGHTER_LILITH]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_MAMMON]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_XINIVRAE]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_MALCANTHET]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_MOTHER_LILITH]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_BELIAL]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_CRONE_LILITH]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_LYNKHAB]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_LEVIATHAN]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_MEPHISTOPHELES]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_BAALPHEGOR]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_GRAZ_ZT]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_PALE_NIGHT]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_VERIER]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_JUIBLEX]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_JUBILEX]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_YEENOGHU]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_ORCUS]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_GERYON]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_DISPATER]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_BAALZEBUB]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_ASMODEUS]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_DEMOGORGON]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-		if (mtmp->data == &mons[PM_CTHULHU]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-#endif
 		if (ptr == &mons[PM_UNIX_KERNEL]) {
 			struct obj *otmp = mksobj(RELAY,TRUE,FALSE);
 			otmp = oname(otmp,artiname(ART_BURNED_MOTH_RELAY));

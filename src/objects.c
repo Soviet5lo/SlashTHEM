@@ -1295,10 +1295,6 @@ SCROLL("enchant armor",         "ZELGO MER",            P_ENCHANTMENT_SPELL,  1,
 SCROLL("remove curse",          "PRATYAVAYAH",          P_PROTECTION_SPELL, 1,  60,  80, CLR_BRIGHT_MAGENTA),
 /* Body */
 SCROLL("teleportation",         "VENZAR BORGAVVE",      P_BODY_SPELL, 1,  55, 100, CLR_BROWN),
-#if 0 /* Removed */
-SCROLL("tele level",            "GON GET YA",           P_BODY_SPELL, 1,  5, 300, CLR_BRIGHT_CYAN),
-SCROLL("warping",               "MY SPUTA WILL FLOW DOWN",P_BODY_SPELL,1, 5, 300, CLR_BRIGHT_CYAN),
-#endif
 /* Matter */
 SCROLL("fire",                  "ANDOVA BEGARIN",       P_MATTER_SPELL, 1,  33, 100, CLR_WHITE),
 SCROLL("earth",                 "KIRJE",                P_MATTER_SPELL, 1,  20, 200, CLR_CYAN),
@@ -1326,12 +1322,6 @@ SCROLL("fountain building",     "SODALG",	        P_NONE, 1,   5, 300, CLR_YELLO
 SCROLL("sinking",		"ASHPD",	        P_NONE, 1,   5, 250, CLR_CYAN),
 SCROLL("WC",		        "ACHAT SHTAYIM SHALOSH", 
 		                                        P_NONE, 1,   5, 250, CLR_WHITE),
-#if 0 /* 5lo: Removed because these can create unwinnable games */
-SCROLL("lava",		        "LETS FAIL AND ROLL",   P_NONE, 1,   5, 300, CLR_GRAY),
-SCROLL("growth",		"WELCOME TO ANGBAND",	P_NONE, 1,   5, 300, CLR_BRIGHT_GREEN),
-SCROLL("barrhing",		"CONVICT PATCH",	P_NONE, 1,   5, 300, CLR_BRIGHT_MAGENTA),
-SCROLL("lockout",		"WE WILL HURT YOU",	P_NONE, 1,   5, 300, CLR_ORANGE),
-#endif
 SCROLL("ice",		        "KO BATE",	        P_NONE, 1,  10, 200, CLR_GREEN),
 SCROLL("clouds",		"FNORD",	        P_NONE, 1,  10, 200, CLR_BRIGHT_BLUE),
 SCROLL("root password detection","XYZZY",	        P_NONE, 1,   5, 200, CLR_GRAY),

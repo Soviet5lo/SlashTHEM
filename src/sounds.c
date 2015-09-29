@@ -1129,56 +1129,6 @@ register struct monst *mtmp;
 	    	pupil_sound(mtmp);
 		break;
 
-	case MS_WHORE:
-
-		{
-		static const char *whore_msgs[] = { /* These are obviously inspired by the GTA series --Amy */
-			"Come to Momma.",
-			"I'm gonna call my pimp.",
-			"You picked the wrong bitch.",
-			"You're just another sorry ass!",
-			"Hey, this is my first night!",
-			"You know, I used to be a marine before the OP.", /* Vice City */
-			"Cocksucker!",
-			"I'll kick your nuts flat!", /* yes the PC can be female, but who cares? */
-			"I'm no slut, I just need the money!",
-			"I'll be sitting on you in a second.",
-			"You think I can't mess you up?",
-			"Die in a pool of your own blood.",
-			"Get ready for an ass-kicking.",
-			"You want me to whoop you?",
-			"You want some? I'll give you some!",
-			"Enjoy this stiletto.",
-			"If I don't kill you, my parents will.",
-			"I know kickboxing.",
-			"I'm a black belt in karate.",
-			"My hands are lethal weapons.",
-			"I'll kick your teeth in.",
-			"Would you really hit a woman?",
-			"I've killed hundreds of pigs like you!",
-			"I'm gonna open up a can of whoopass on you now!",
-			"Girls can fight too!",
-			"Beating on girls, right?",
-			"I have no problem kicking you in the nuts.",
-			"I'll slap you silly.",
-			"My pimp will take care of you.",
-			"You're messing with an angry bitch!",
-			"Another asshole with a problem!",
-			"You think cause I'm a girl I can't fight?",
-			"You call that 'fighting'?",
-			"I'm gonna stomp your balls!",
-			"I'm a lady but I can fight.",
-			"I'm an innocent virgin!",
-			"You just made me break a nail!",
-			"I'm expecting an apology!",
-			"You insult my womanhood.",
-			"You disgust me.",
-		};
-
-		if (!mtmp->mpeaceful) verbalize(whore_msgs[rn2(SIZE(whore_msgs))]);
-		}
-		break;
-
 	case MS_TEACHER:
 		teacher_sound(mtmp);
 		break;

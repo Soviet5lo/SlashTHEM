@@ -1185,11 +1185,6 @@ water_prayer(bless_water)
 	      ((other || changed > 1L) ? "s" : ""), (changed > 1L ? "" : "s"),
 	      (bless_water ? hcolor(NH_LIGHT_BLUE) : hcolor(NH_BLACK)));
     }
-#if 0 /* 5lo: Removed */
-		if /*!*/ (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
-		pline_The("altar suddenly vanishes!"); /* hopefully this will teach those altar-campers! --Amy */
-		newsym(u.ux,u.uy);}
-#endif
     return((boolean)(changed > 0L));
 }
 
@@ -1774,11 +1769,6 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 	}
 
 	consume_offering(otmp);
-#if 0 /* 5lo: Removed */
-	if (!rn2(100) && (!Is_astralevel(&u.uz)) ) {levl[u.ux][u.uy].typ = ROOM;
-	pline_The("altar suddenly vanishes!"); /* hopefully this will teach those altar-campers! --Amy */
-	newsym(u.ux,u.uy);}
-#endif
 	/* OK, you get brownie points. */
 	if(u.ugangr) {
 	    u.ugangr -=
@@ -2357,21 +2347,7 @@ aligntyp alignment;
 	if (*gnam == '_') gnam++;
 	return gnam;
     }
-#if 0 /* 5lo: Replaced by Hallu Gods patch */
-	if (Hallucination) { /* come on, hallucination should always affect god's names. --Amy */
 
-	    which = randrole();
-	    switch (rn2(3)) {
-	     case 0:	gnam = roles[which].lgod; break;
-	     case 1:	gnam = roles[which].ngod; break;
-	     case 2:	gnam = roles[which].cgod; break;
-	     default:	gnam = 0; break;		/* lint suppression */
-	    }
-	    if (!gnam) gnam = Moloch;
-	    if (*gnam == '_') ++gnam;
-	    return gnam;
-	}
-#endif
     switch (alignment) {
      case A_NONE:	gnam = Moloch; break;
      case A_LAWFUL:	gnam = urole.lgod; break;
@@ -2415,20 +2391,12 @@ aligntyp alignment;
 {
     const char *gnam, *result = "god";
 
-
     switch (alignment) {
      case A_LAWFUL:	gnam = urole.lgod; break;
      case A_NEUTRAL:	gnam = urole.ngod; break;
      case A_CHAOTIC:	gnam = urole.cgod; break;
      default:		gnam = 0; break;
-	    }
-
-    /*switch (alignment) {
-     case A_LAWFUL:	gnam = urole.lgod; break;
-     case A_NEUTRAL:	gnam = urole.ngod; break;
-     case A_CHAOTIC:	gnam = urole.cgod; break;
-     default:		gnam = 0; break;
-    }*/
+    }
     if (gnam && *gnam == '_') result = "goddess";
     return result;
 }

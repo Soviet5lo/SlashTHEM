@@ -252,12 +252,6 @@ struct obj *otmp;
 	case SPE_TELEPORT_AWAY:
 		reveal_invis = !u_teleport_mon(mtmp, TRUE);
 		break;
-#if 0 /* 5lo: Removed */
-	case WAN_BANISHMENT:
-		if (u.uevent.udemigod) { reveal_invis = !u_teleport_mon(mtmp, TRUE); break; }
-		reveal_invis = !u_teleport_monB(mtmp, TRUE);
-		break;
-#endif
 	case WAN_MAKE_INVISIBLE:
 	    {
 		int oldinvis = mtmp->minvis;
@@ -1935,7 +1929,6 @@ struct obj *obj, *otmp;
 		(void) drain_item(obj);
 		break;
 	case WAN_TELEPORTATION:
-	/*case WAN_BANISHMENT:*/
 	case SPE_TELEPORT_AWAY:
 		rloco(obj);
 		break;
@@ -2946,26 +2939,6 @@ boolean ordinary;
 		    tele();
 			makeknown(obj->otyp);
 		    break;
-#if 0 /* 5lo: Removed because this never worked correctly in the first place */
-		case WAN_BANISHMENT:
-			makeknown(obj->otyp);
-			if (u.uevent.udemigod) { pline("You shudder for a moment."); (void) safe_teleds(FALSE); break;}
-			if (flags.lostsoul || flags.uberlostsoul) {
-			 pline("For some reason you resist the banishment!"); break;}
-
-			make_stunned(HStun + 2, FALSE); /* to suppress teleport control that you might have */
-
-		/*if (rn2(2)) {(void) safe_teleds(FALSE); goto_level(&medusa_level, TRUE, FALSE, FALSE); level_tele(); }*/
-		/*else {(void) safe_teleds(FALSE); goto_level(&portal_level, TRUE, FALSE, FALSE); level_tele(); }*/
-			(void) safe_teleds(FALSE);
-
-			goto_level((&medusa_level), TRUE, FALSE, FALSE);
-			register int newlev = rnd(64);
-			d_level newlevel;
-			get_level(&newlevel, newlev);
-			goto_level(&newlevel, TRUE, FALSE, FALSE);
-		    break;
-#endif
 		case WAN_DEATH:
 		case SPE_FINGER_OF_DEATH:
 		    if (nonliving(youmonst.data) || is_demon(youmonst.data)) {
@@ -3116,19 +3089,7 @@ struct obj *obj;	/* wand or spell */
 				makeknown(obj->otyp);
 		    steedhit = TRUE;
 		    break;
-#if 0
-		case WAN_BANISHMENT:
-			makeknown(obj->otyp);
-			if (u.uevent.udemigod) { pline("You shudder for a moment."); break;}
-			if (flags.lostsoul || flags.uberlostsoul) {
-			pline("For some reason you resist the banishment!"); break;}
 
-			make_stunned(HStun + 2, FALSE); /* to suppress teleport control that you might have */
-
-			if (rn2(2)) {(void) safe_teleds(FALSE); goto_level(&medusa_level, TRUE, FALSE, FALSE); level_tele(); }
-			else {(void) safe_teleds(FALSE); goto_level(&portal_level, TRUE, FALSE, FALSE); level_tele(); }
-			break;
-#endif
 		/* Default processing via bhitm() for these */
 		case SPE_CURE_SICKNESS:
 		case WAN_MAKE_INVISIBLE:
@@ -3325,7 +3286,6 @@ struct obj *obj;	/* wand or spell */
 		losehp(rnd((uarmh && is_metallic(uarmh)) ? 2 : 6),
 		       "falling rock", KILLED_BY_AN);
 		if ((otmp = mksobj_at(ROCK, x, y, FALSE, FALSE)) != 0) {
-
 		    (void)xname(otmp);	/* set dknown, maybe bknown */
 		    stackobj(otmp);
 		}
@@ -3389,7 +3349,6 @@ struct obj *obj;	/* wand or spell */
 		case WAN_CANCELLATION:
 		case SPE_CANCELLATION:
 		case WAN_MAKE_INVISIBLE:
-		/*case WAN_BANISHMENT:*/
 		    del_engr(e);
 		    break;
 		case WAN_TELEPORTATION:
@@ -4293,14 +4252,6 @@ xchar sx, sy;
 	if (Half_spell_damage && dam &&
 	   type < 0 && (type > -20 || type < -29)) /* !Breath */
 	    dam = (dam + 1) / 2;
-#if 0
-	if (rn2(5) && dam && /* Enemies with wands are deadly enough already. Let's nerf them a bit. --Amy */
-	   type < 0 && (type > -20 || type < -29)) /* !Breath */
-	    dam = (dam + 1) / 2;
-	if (!rn2(5) && dam && 
-	   type < 0 && (type > -20 || type < -29)) /* !Breath */
-	    dam = (dam + 2) / 3;
-#endif
 	/* when killed by disintegration breath, don't leave corpse */
 	u.ugrave_arise = (type == -ZT_BREATH(ZT_DEATH)) ? -3 : -1;
 	losehp(dam, fltxt, KILLED_BY_AN);
@@ -5046,7 +4997,6 @@ register struct obj *obj;		   /* no texts here! */
 	obj->onamelth = 0;		/* no names */
 	obj->oxlth = 0;			/* no extra data */
 	obj->oattached = OATTACHED_NOTHING;
-
 	if (obj->where == OBJ_FLOOR) {
 		obj_extract_self(obj);		/* move rocks back on top */
 		place_object(obj, obj->ox, obj->oy);

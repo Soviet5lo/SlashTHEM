@@ -1589,16 +1589,10 @@ int thrown;
                     tmp += rnd(6) + 2;
                     hittxt = TRUE;
                 }
-            } /*else if (obj->oartifact == ART_VAMPIRE_KILLER) {
-                You("whip %s good!", mon_nam(mon));
-                tmp += rnd(6);
-                hittxt = TRUE;
-
-		}*/ else {
+            } else {
                 You("drive your stake into %s.", mon_nam(mon));
                 tmp += rnd(6);
                 hittxt = TRUE;
-
             }
         }
 
@@ -1654,12 +1648,6 @@ int thrown;
 		   /* && !destroyed  -- guaranteed by mhp > 1 */ ) {
 		if (clone_mon(mon, 0, 0)) {
 			pline("%s divides as you hit it!", Monnam(mon));
-			/* make_sick(Sick ? Sick/2L + 1L : (long)rn1(ACURR(A_CON), 40),
-			0, TRUE, SICK_NONVOMITABLE); */
-#if 0 /* 5lo: Disease a player and lower alignment just because the thing split? */
-		      (void) diseasemu(mon->data); /* hopefully stopping those annoying pudding farmers! */
-			u.ualign.sins++; /* adding even more punishment for lame farmers */
-#endif
 			hittxt = TRUE;
 		}
 	}
@@ -1911,8 +1899,7 @@ struct attack *mattk;
 
 	/* look for worn body armor */
 	stealoid = (struct obj *)0;
-	/* extra check for nymph race because of the could_seduce function's weirdness --Amy */
-	if (could_seduce(&youmonst, mdef, mattk)/* || Race_if(PM_NYMPH)*/ ) {
+	if (could_seduce(&youmonst, mdef, mattk)) {
 	    /* find armor, and move it to end of inventory in the process */
 	    minvent_ptr = &mdef->minvent;
 	    while ((otmp = *minvent_ptr) != 0)
@@ -3890,20 +3877,6 @@ struct attack *mattk;		/* null means we find one internally */
 
 	if (obj && carried(obj)) update_inventory();
 }
-#if 0 /* 5lo: No longer needed */
-difeasemu(mon)
-struct permonst *mon;
-{
-	if (Sick_resistance) {
-		You_feel("a slight illness.");
-		return FALSE;
-	} else {
-		make_sick(Sick ? Sick/2L + 1L : (long)rn1(ACURR(A_CON), 40),
-			mon->mname, TRUE, SICK_NONVOMITABLE);
-		return TRUE;
-	}
-}
-#endif
 
 /* Note: caller must ascertain mtmp is mimicking... */
 void

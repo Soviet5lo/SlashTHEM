@@ -213,12 +213,6 @@ nh_timeout()
 
 	if (u.legscratching > 1 && !Role_if(PM_BLEEDER) && moves % 1000 == 0) u.legscratching--; /* always time out once per 1000 turns --Amy */
 
-#if 0 /* 5lo: No longer needed */
-	/* Nymph race randomly gets punished --Amy */
-	if (!rn2(2000) && Race_if(PM_NYMPH)) {
-			punishx();
-	}
-#endif
 	/* special bleeder handling --Amy */
 	if (!rn2(200) && Role_if(PM_BLEEDER)) {
 		You("are losing blood!");
@@ -2296,8 +2290,7 @@ mon_stop_timers(mon)
 	}
     }
 }
- 
- 
+
 
 /* Insert timer into the global queue */
 STATIC_OVL void

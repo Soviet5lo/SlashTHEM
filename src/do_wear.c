@@ -502,7 +502,6 @@ Gloves_on()
 	case GAUNTLETS_OF_POWER:
 		makeknown(uarmg->otyp);
 		flags.botl = 1; /* taken care of in attrib.c */
-		/*adj_abon(uarmg, uarmg->spe);*/
 		break;
 	case GAUNTLETS_OF_DEXTERITY:
 		adj_abon(uarmg, uarmg->spe);
@@ -542,7 +541,6 @@ Gloves_off()
 	case GAUNTLETS_OF_POWER:
 	    makeknown(uarmg->otyp);
 	    flags.botl = 1; /* taken care of in attrib.c */
-	    /*if (!cancelled_don) adj_abon(uarmg, -uarmg->spe);*/
 	    break;
 	case GAUNTLETS_OF_DEXTERITY:
 	    if (!cancelled_don) adj_abon(uarmg, -uarmg->spe);
@@ -797,7 +795,6 @@ Amulet_on()
 		Strangled = 6;
 		break;
 	case AMULET_OF_RESTFUL_SLEEP:
-		/*if Race_if(PM_KOBOLT) break;*/
 		if(uamul->blessed) {
 			char buf[BUFSZ];
 			int sleeptime;
@@ -953,7 +950,6 @@ register struct obj *obj;
 	case MEAT_RING:
 		break;
 	case RIN_SLEEPING:        
-		/*if Race_if(PM_KOBOLT) break;*/
 		HSleeping = rnd(1000);
 		break;
 #if 0
@@ -1623,19 +1619,6 @@ boolean noisy;
 		pline_The("%s won't fit over your horn%s.",
 			  c_helmet, plur(num_horns(youmonst.data)));
 	    err++;
-#if 0 /* 5lo: This makes no sense at all -- removed */
-	} else if (Role_if(PM_COURIER)) {
-	    if (noisy)
-		pline("You have no head!");
-	    err++;
-	/* Actually, you got shot in the head by Benny, so you aren't technically without a head. But for the sake of it,
-	   let's pretend the courier actually doesn't have one. By the way, Benny is the "some random guy" quest nemesis
-	   in the courier quest, since all Fallout New Vegas NPCs are undistinguishable clones of each other. --Amy */
-	} else if (Race_if(PM_ILLITHID)) {
-	    if (noisy)
-		pline("Your tentacles prevent that action!");
-	    err++;
-#endif
 #ifdef JEDI
 	} else if (Upolyd && (youmonst.data == &mons[PM_MIND_FLAYER] ||
 			      youmonst.data == &mons[PM_MASTER_MIND_FLAYER]) ||
