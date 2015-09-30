@@ -523,7 +523,7 @@ A("Wallet of Perseus",       BAG_OF_HOLDING,
 # endif /* WALLET_O_P */
 
 A("Warforger",  HEAVY_HAMMER,   /* giant blacksmithing hammer */
-	(SPFX_RESTR|SPFX_ATTK),  0, 0,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK),  0, 0,
 	PHYS(15,15),	FIRE(0,0),	NO_CARY, /* phys so fire resistance doesn't negate */
     0, A_NEUTRAL, NON_PM, NON_PM, 5000L ),
 
