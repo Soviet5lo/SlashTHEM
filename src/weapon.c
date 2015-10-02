@@ -937,36 +937,34 @@ abon()		/* attack bonus for strength & dexterity */
 
 	if (Upolyd) return(adj_lev(&mons[u.umonnum]) - 3);
 	/* [Tom] lowered these a little */        
-	if (str < 6) sbon = -1;
-	else if (str < 8) sbon = 0;
-	else if (str < 17) sbon = 1;
-	else if (str <= STR18(50)) sbon = 2;	/* up to 18/50 */
-	else if (str < STR18(100)) sbon = 2;
-	else if (str == STR18(100)) sbon = 3;  /* 18/00 */
-	else if (str == STR19(19)) sbon = 3;  /* 19 */
-	else if (str == STR19(20)) sbon = 4;  /* 20 */
-	else if (str == STR19(21)) sbon = 4;  /* 21 */
-	else if (str == STR19(22)) sbon = 5;  /* 22 */
-	else if (str == STR19(23)) sbon = 5;  /* 23 */
-	else if (str == STR19(24)) sbon = 6;  /* 24 */
-	else sbon = 7;
+	if (str < 6) sbon = -2;
+	else if (str < 8) sbon = -1;
+	else if (str < 17) sbon = 0;
+	else if (str <= STR18(50)) sbon = 1;	/* up to 18/50 */
+	else if (str < STR18(100)) sbon = 1;
+	else if (str == STR18(100)) sbon = 2;  /* 18/00 */
+	else if (str == STR19(19)) sbon = 2;  /* 19 */
+	else if (str == STR19(20)) sbon = 3;  /* 20 */
+	else if (str == STR19(21)) sbon = 3;  /* 21 */
+	else if (str == STR19(22)) sbon = 4;  /* 22 */
+	else if (str == STR19(23)) sbon = 4;  /* 23 */
+	else if (str == STR19(24)) sbon = 5;  /* 24 */
+	else sbon = 5;
   
-	if (dex < 5) sbon -= 1;
-	else if (dex < 7) sbon += 0;
-	else if (dex < 10) sbon += 1;
-	else if (dex < 12) sbon += 2;
-	else if (dex < 15) sbon += 3;
-	else if (dex == 15) sbon += 3;  /* 15 */
-	else if (dex == 16) sbon += 4;  /* 16 */
-	else if (dex == 17) sbon += 4;  /* 17 */
-	else if (dex == 18) sbon += 5;  /* 18 */
-	else if (dex == 19) sbon += 5;  /* 19 */
-	else if (dex == 20) sbon += 6;  /* 20 */
-	else if (dex == 21) sbon += 6;  /* 21 */
-	else if (dex == 22) sbon += 7;  /* 22 */
-	else if (dex == 23) sbon += 7;  /* 23 */
-	else if (dex == 24) sbon += 8;  /* 24 */
-	else sbon += 9;
+	if (dex < 5) sbon -= 2;
+	else if (dex < 7) sbon -= 1;
+	else if (dex < 15) sbon += 0;
+	else if (dex == 15) sbon += 1;  /* 15 */
+	else if (dex == 16) sbon += 1;  /* 16 */
+	else if (dex == 17) sbon += 1;  /* 17 */
+	else if (dex == 18) sbon += 2;  /* 18 */
+	else if (dex == 19) sbon += 2;  /* 19 */
+	else if (dex == 20) sbon += 2;  /* 20 */
+	else if (dex == 21) sbon += 3;  /* 21 */
+	else if (dex == 22) sbon += 3;  /* 22 */
+	else if (dex == 23) sbon += 3;  /* 23 */
+	else if (dex == 24) sbon += 4;  /* 24 */
+	else sbon += 5;
 
 /* Game tuning kludge: make it a bit easier for a low level character to hit */
 	sbon += (u.ulevel < 3) ? 1 : 0;
@@ -984,23 +982,19 @@ dbon()		/* damage bonus for strength */
 
 	if (Upolyd) return(0);
 	/* [Tom] I lowered this a little */
-	if (str < 5) return(-2);
-	else if (str < 8) return(-1);
-	else if (str < 10) return(0);
-	else if (str < 14) return(1);
-	else if (str < 18) return(2);
-	else if (str == 18) return(3);		/* up to 18 */
-	else if (str < STR18(30)) return(4);          /* up to 18/99 */
-	else if (str < STR18(66)) return(4);          /* up to 18/99 */
-	else if (str < STR18(100)) return(5);          /* up to 18/99 */
-	else if (str == STR18(100)) return(6);         /* 18/00 */
-	else if (str == STR19(19)) return(7);         /* 19 */
-	else if (str == STR19(20)) return(7);         /* 20 */
+	if (str < 6) return(-1);
+	else if (str < 16) return(0);
+	else if (str < 18) return(1);
+	else if (str == 18) return(2);		/* up to 18 */
+	else if (str < STR18(100)) return(3);          /* up to 18/99 */
+	else if (str == STR18(100)) return(4);         /* 18/00 */
+	else if (str == STR19(19)) return(5);         /* 19 */
+	else if (str == STR19(20)) return(6);         /* 20 */
 	else if (str == STR19(21)) return(7);         /* 21 */
 	else if (str == STR19(22)) return(8);         /* 22 */
-	else if (str == STR19(23)) return(8);         /* 23 */
-	else if (str == STR19(24)) return(8);        /* 24 */
-	else return(9);
+	else if (str == STR19(23)) return(9);         /* 23 */
+	else if (str == STR19(24)) return(10);        /* 24 */
+	else return(11);
 }
 
 /* copy the skill level name into the given buffer */
@@ -1946,9 +1940,9 @@ struct obj *weapon;
 		    case P_UNSKILLED:   bonus -= 2; break;
 		    case P_BASIC:       bonus -= 1; break;
 		    case P_SKILLED:     break;
-		    case P_EXPERT:      bonus += 2; break;
-		    case P_MASTER:	bonus += 4; break;
-		    case P_GRAND_MASTER:	bonus += 6; break;
+		    case P_EXPERT:      break;
+		    case P_MASTER:	bonus += 1; break;
+		    case P_GRAND_MASTER:	bonus += 2; break;
 		}
 		if (type == P_LANCE) bonus++;
 	}
@@ -2031,9 +2025,9 @@ struct obj *weapon;
 		switch (P_SKILL(P_RIDING)) {
 		    case P_ISRESTRICTED:
 		    case P_UNSKILLED:   break;
-		    case P_BASIC:       bonus += 1; break;
-		    case P_SKILLED:     bonus += 3; break;
-		    case P_EXPERT:      bonus += 5; break;
+		    case P_BASIC:       break;
+		    case P_SKILLED:     bonus += 1; break;
+		    case P_EXPERT:      bonus += 2; break;
 		}
 	}
 #endif

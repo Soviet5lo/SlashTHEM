@@ -973,15 +973,13 @@ newhp()
 
 	if (ACURR(A_CON) <= 3) conplus = -2;
 	else if (ACURR(A_CON) <= 6) conplus = -1;
-	else if (ACURR(A_CON) <= 9) conplus = 0;
-	else if (ACURR(A_CON) <= 12) conplus = 1;
-	else if (ACURR(A_CON) <= 14) conplus = 2;
-	else if (ACURR(A_CON) <= 16) conplus = 3;
-	else if (ACURR(A_CON) == 17) conplus = 4;
-	else if (ACURR(A_CON) <= 19) conplus = 5;
-	else if (ACURR(A_CON) <= 21) conplus = 6;
-	else if (ACURR(A_CON) <= 24) conplus = 7;
-	else conplus = 8;
+	else if (ACURR(A_CON) <= 14) conplus = 0;
+	else if (ACURR(A_CON) <= 16) conplus = 1;
+	else if (ACURR(A_CON) == 17) conplus = 2;
+	else if (ACURR(A_CON) == 18) conplus = 3;
+	else if (ACURR(A_CON) <= 20) conplus = 4;
+	else if (ACURR(A_CON) <= 22) conplus = 5;
+	else conplus = 6;
 	
 	hp += conplus;
 	return((hp <= 0) ? 1 : hp);
