@@ -1770,17 +1770,15 @@ register struct obj *obj;
 	mon->mpeaceful = 1;
 	mon->mavenge = 0;
 
-	/* Luck boosts used to be way too high. Thus I lowered them. --Amy */
-
 	/* object properly identified */
 	if(obj->dknown && objects[obj->otyp].oc_name_known) {
 		if(is_gem) {
 			if(is_buddy) {
 				Strcat(buf,addluck);
-				change_luck(rnd(4));
+				change_luck(5);
 			} else {
 				Strcat(buf,maybeluck);
-				change_luck(rnd(2));
+				change_luck(rn2(7)-3);
 			}
 		} else {
 			Strcat(buf,nogood);
@@ -1791,10 +1789,10 @@ register struct obj *obj;
 		if(is_gem) {
 			if(is_buddy) {
 				Strcat(buf,addluck);
-				change_luck(rnd(2) );
+				change_luck(2);
 			} else {
 				Strcat(buf,maybeluck);
-				change_luck(rnd(2));
+				change_luck(rn2(3)-1);
 			}
 		} else {
 			Strcat(buf,nogood);
@@ -1808,7 +1806,7 @@ register struct obj *obj;
 				change_luck(1);
 			} else {
 				Strcat(buf,maybeluck);
-				change_luck(1);
+				change_luck(rn2(3)-1);
 			}
 		} else {
 			Strcat(buf,noluck);
