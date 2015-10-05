@@ -454,12 +454,11 @@ nasty(mcast)
 		if (mcast &&
 		    !enexto(&bypos, mcast->mux, mcast->muy, &mons[makeindex]))
 		    continue;
-		/* if ((mtmp = makemon(&mons[makeindex],
+		if ((mtmp = makemon(&mons[makeindex],
 				    bypos.x, bypos.y, NO_MM_FLAGS)) != 0) {
 		    mtmp->msleeping = mtmp->mpeaceful = mtmp->mtame = 0;
 		    set_malign(mtmp);
-		} else GENOD? */
-/* changing summon nasties so it can summon everything --Amy */
+		} else /* GENOD? */
 		    mtmp = makemon((struct permonst *)0,
 					bypos.x, bypos.y, NO_MM_FLAGS);
 		if(mtmp && (mtmp->data->maligntyp == 0 ||
