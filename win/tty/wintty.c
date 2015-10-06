@@ -982,7 +982,7 @@ tty_create_nhwindow(type)
 	/* newwin->rows = newwin->maxrow = 2; */
 	newwin->rows = newwin->maxrow =
 	    ((ttyDisplay->rows - newwin->offy) > 2) ? 3 : 2;
-	newwin->cols = newwin->maxcol = min(ttyDisplay->cols, COLNO);
+	newwin->cols = newwin->maxcol = min(ttyDisplay->cols, MAXCO);
 	break;
     case NHW_MAP:
 	/* map window, ROWNO lines long, full width, below message window */

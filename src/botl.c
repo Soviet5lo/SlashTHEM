@@ -42,21 +42,6 @@ STATIC_DCL void FDECL(set_botl_warn, (int));
 #endif
 #endif /* OVL0 */
 
-/* MAXCO must hold longest uncompressed status line, and must be larger
- * than COLNO
- *
- * longest practical second status line at the moment is
- *	Astral Plane $:12345 HP:700(700) Pw:111(111) AC:-127 Xp:30/123456789
- *      Wt:5000/1000 T:123456 Satiated Lev Conf FoodPois Ill Blind Stun Hallu
- *      Slime Held Overloaded
- * -- or somewhat over 160 characters
- */
-#if COLNO <= 170
-#define MAXCO 240
-#else
-#define MAXCO (COLNO+70)
-#endif
-
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
 
 extern const struct percent_color_option *hp_colors;
@@ -138,6 +123,11 @@ char *newbot2;
 
 	if (*text == '\0') return;
 
+	/* don't add anything if it can't be displayed.
+	 * Otherwise the color of invisible text may bleed into
+	 * the statusline. */
+	if (strlen(newbot2) >= min(MAXCO, CO)-1) return;
+
 	if (!iflags.use_status_colors) {
 		Sprintf(nb = eos(newbot2), " %s", text);
                 return;
@@ -151,6 +141,9 @@ char *newbot2;
 	curs(WIN_STATUS, 1, 1);
        	color_option = text_color_of(text, text_colors);
 	start_color_option(color_option);
+	/* Trim the statusline to always have the end color
+	 * to have effect */
+	newbot2[min(MAXCO, CO)-1] = '\0';
 	putstr(WIN_STATUS, 0, newbot2);
 	end_color_option(color_option);
 }
