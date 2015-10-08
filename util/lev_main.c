@@ -300,7 +300,6 @@ char **argv;
 				":dat:caves.des",
 				":dat:dragons.des",
 				":dat:endgame.des",
-				":dat:exmall.des",
 				":dat:frnknstn.des",
 				":dat:gehennom.des",
 				":dat:giants.des",

@@ -255,8 +255,8 @@ options:	../util/makedefs
 
 spec_levs: ../util/lev_comp \
 	beholder.des bigroom.des blkmar.des castle.des compu.des \
-	dragons.des endgame.des exmall.des forge.des frnknstn.des gehennom.des \
-	giants.des grund.des guild.des heck.des hellma.des hitch.des \
+	dragons.des endgame.des forge.des frnknstn.des gehennom.des \
+	giants.des grund.des guild.des heck.des hitch.des \
 	key.des knox.des kobold-1.des kobold-2.des \
 	lich.des mall-1.des mall-2.des medusa.des mines.des \
 	mtemple.des newmall.des nightmar.des nymph.des oracle.des \
@@ -270,7 +270,6 @@ spec_levs: ../util/lev_comp \
 	../util/lev_comp compu.des
 	../util/lev_comp dragons.des
 	../util/lev_comp endgame.des
-	../util/lev_comp exmall.des
 	../util/lev_comp forge.des
 	../util/lev_comp frnknstn.des
 	../util/lev_comp gehennom.des
@@ -278,7 +277,6 @@ spec_levs: ../util/lev_comp \
 	../util/lev_comp grund.des
 	../util/lev_comp guild.des
 	../util/lev_comp heck.des
-	../util/lev_comp hellma.des
 	../util/lev_comp hitch.des
 	../util/lev_comp key.des
 	../util/lev_comp knox.des

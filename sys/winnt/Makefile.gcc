@@ -1443,12 +1443,12 @@ $(DAT)\oracles:	     utility.tag    $(DAT)\oracles.txt
 
 sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 		$(DAT)\blkmar.des   $(DAT)\castle.des   $(DAT)\bleeder.des   $(DAT)\grund.des \
-		$(DAT)\dragons.des  $(DAT)\endgame.des  $(DAT)\exmall.des  $(DAT)\gehennom.des \
+		$(DAT)\dragons.des  $(DAT)\endgame.des  $(DAT)\gehennom.des \
 		$(DAT)\giants.des   $(DAT)\guild.des    $(DAT)\knox.des \
 		$(DAT)\kobold-1.des $(DAT)\kobold-2.des $(DAT)\unheck.des $(DAT)\lich.des \
 		$(DAT)\mall-1.des   $(DAT)\mall-2.des   $(DAT)\geek.des   $(DAT)\medusa.des \
 		$(DAT)\sokoban.des  $(DAT)\heck.des    $(DAT)\mines.des    $(DAT)\mtemple.des \
-		$(DAT)\newmall.des  $(DAT)\nymph.des    $(DAT)\hellma.des    $(DAT)\oracle.des \
+		$(DAT)\newmall.des  $(DAT)\nymph.des    $(DAT)\oracle.des \
 		$(DAT)\rats.des     $(DAT)\sea.des      $(DAT)\spiders.des $(DAT)\village.des \
 		$(DAT)\stor-1.des   $(DAT)\stor-2.des   $(DAT)\stor-3.des \
 		$(DAT)\tomb.des     $(DAT)\tower.des    $(DAT)\warrior.des    $(DAT)\yendor.des \
@@ -1480,14 +1480,12 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/grund.des
 	lev_comp $(DDAT)/dragons.des
 	lev_comp $(DDAT)/endgame.des
-	lev_comp $(DDAT)/exmall.des
 	lev_comp $(DDAT)/forge.des
 	lev_comp $(DDAT)/gehennom.des
 	lev_comp $(DDAT)/giants.des
 	lev_comp $(DDAT)/guild.des
 	lev_comp $(DDAT)/heck.des
 	lev_comp $(DDAT)/unheck.des
-	lev_comp $(DDAT)/hellma.des
 	lev_comp $(DDAT)/hitch.des
 	lev_comp $(DDAT)/key.des
 	lev_comp $(DDAT)/knox.des
