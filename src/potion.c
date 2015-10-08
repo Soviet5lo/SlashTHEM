@@ -3495,7 +3495,7 @@ register struct obj *obj;
 	default: verbalize("You disturbed me, fool!");
 		break;
 	}
-	make_bottle(FALSE);
+	if (obj->otyp != MAGIC_LAMP) make_bottle(FALSE);
 }
 
 /* clone a gremlin or mold (2nd arg non-null implies heat as the trigger);
