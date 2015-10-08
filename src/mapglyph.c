@@ -287,6 +287,12 @@ unsigned *ospecial;
 				color = rn2(15);
 			}
 		}
+		if(iflags.use_color && 
+		    (offset == S_upstair || offset == S_dnstair) &&
+		    (x == sstairs.sx && y == sstairs.sy)) {
+			color = CLR_YELLOW;
+		}
+
 
 #endif
 	    if (color == NO_COLOR) cmap_color(offset);
