@@ -1512,6 +1512,8 @@ E int NDECL(dodiscovered);
 /* ### objects.c ### */
 
 E void NDECL(objects_init);
+E void NDECL(dump_ID_on);
+E void NDECL(dump_ID_off);
 
 /* ### objnam.c ### */
 

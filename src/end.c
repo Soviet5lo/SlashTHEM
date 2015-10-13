@@ -519,16 +519,11 @@ boolean taken;
 	    if (!done_stopprint) {
 		c = ask ? yn_function(qbuf, ynqchars, defquery) : defquery;
 		if (c != 'q') {
-			struct obj *obj;
-
 			if (Hallucination) {
 			    make_hallucinated(0L, FALSE, 0L);
 			    hallu = TRUE;
 			}
-			for (obj = invent; obj; obj = obj->nobj) {
-			    makeknown(obj->otyp);
-			    obj->known = obj->bknown = obj->dknown = obj->rknown = 1;
-			}
+			dump_ID_on();
 #ifdef DUMP_LOG
 			(void) dump_inventory((char *)0, TRUE);
 			do_containerconts(invent, TRUE, TRUE, TRUE);
@@ -1295,6 +1290,8 @@ boolean identified, all_containers, want_dump;
 	char buf[BUFSZ];
 
 	for (box = list; box; box = box->nobj) {
+	    int saveknown = objects[box->otyp].oc_name_known;
+	    objects[box->otyp].oc_name_known = 1;
 	    if (Is_container(box) || box->otyp == STATUE) {
 		if (box->otyp == BAG_OF_TRICKS) {
 		    continue;	/* wrong type of container */
@@ -1307,11 +1304,6 @@ boolean identified, all_containers, want_dump;
 		    if (dump_fp) dump("", buf);
 #endif
 		    for (obj = box->cobj; obj; obj = obj->nobj) {
-			if (identified) {
-			    makeknown(obj->otyp);
-			    obj->known = obj->bknown =
-			    obj->dknown = obj->rknown = 1;
-			}
 			putstr(tmpwin, 0, doname(obj));
 #ifdef DUMP_LOG
 			if (want_dump)  dump("  ", doname(obj));
@@ -1341,6 +1333,7 @@ boolean identified, all_containers, want_dump;
 #endif
 		}
 	    }
+	    objects[box->otyp].oc_name_known = saveknown;
 	    if (!all_containers)
 		break;
 	}
