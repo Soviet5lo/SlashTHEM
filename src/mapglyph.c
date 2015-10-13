@@ -287,7 +287,7 @@ unsigned *ospecial;
 				color = rn2(15);
 			}
 		}
-		if(iflags.use_color && 
+		if(iflags.use_color && iflags.dungeon_colors &&
 		    (offset == S_upstair || offset == S_dnstair) &&
 		    (x == sstairs.sx && y == sstairs.sy)) {
 			color = CLR_YELLOW;
