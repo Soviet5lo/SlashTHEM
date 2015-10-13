@@ -196,7 +196,7 @@ struct monst *victim;
 		update_inventory();
 	    }
 	} else if (!otmp->oartifact) {
-		    if (youdefend) {
+		    if (youdefend && carried(otmp)) {
 		    Your("%s got vaporized!", ostr);
 			remove_worn_item(otmp, FALSE);
 			if (otmp == uball) unpunish();
@@ -3604,10 +3604,11 @@ register boolean force, here;
 					 (obj->blessed && !rnl(4))))
 				obj->oeroded++;
 			else if (is_rustprone(obj) && obj->oeroded == MAX_ERODE &&
-					!(obj->oerodeproof || obj->oartifact))
+					!(obj->oerodeproof || obj->oartifact) && carried(obj))
 			{
 			    
-				pline("One of your objects was destroyed by rust!");
+				pline("Your %s %s destroyed by rust!", xname(obj),
+					obj->quan > 1 ? "were" : "was");
 				remove_worn_item(obj, FALSE);
 				if (obj == uball) unpunish();
 				useupall(obj);
@@ -3645,10 +3646,12 @@ register boolean force, here;
 
 			if (obj->oeroded < MAX_ERODE && !( (obj->blessed && !rnl(4))))
 				obj->oeroded++;
-			else if (obj->oeroded == MAX_ERODE)
+			else if (obj->oeroded == MAX_ERODE && carried(obj))
 			{
 			    
-				pline("One of your objects withered away!");
+				pline("Your %s withered away!", xname(obj));
+				remove_worn_item(obj, FALSE);
+				if (obj == uball) unpunish();
 				delobj(obj);
 				update_inventory();
 			    
