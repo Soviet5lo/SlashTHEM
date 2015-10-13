@@ -1068,6 +1068,11 @@ die:
 	done_money = umoney;
 #endif
 
+#ifdef DUMP_LOG
+	dumpoverview();
+	dump("", "");
+#endif
+
 	/* clean up unneeded windows */
 	if (have_windows) {
 	    wait_synch();
@@ -1337,6 +1342,17 @@ boolean identified, all_containers, want_dump;
 	    if (!all_containers)
 		break;
 	}
+}
+
+/** Dumps a definition list item. */
+void
+dump_definition_list(str)
+const char *str;
+{
+#ifdef DUMP_LOG
+	if (dump_fp)
+		fprintf(dump_fp, "  %s\n", str);
+#endif
 }
 
 /* should be called with either EXIT_SUCCESS or EXIT_FAILURE */

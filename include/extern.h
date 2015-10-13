@@ -590,6 +590,9 @@ E void FDECL(init_mapseen, (d_level *));
 E void NDECL(recalc_mapseen);
 E void FDECL(recbranch_mapseen, (d_level *, d_level *));
 E void FDECL(remdun_mapseen, (int));
+#ifdef DUMP_LOG
+E int NDECL(dumpoverview);
+#endif
 
 /* ### eat.c ### */
 
@@ -640,6 +643,7 @@ E void FDECL(container_contents, (struct obj *,BOOLEAN_P,BOOLEAN_P));
 #ifdef DUMP_LOG
 E void FDECL(dump, (char *, char *));
 E void FDECL(do_containerconts, (struct obj *,BOOLEAN_P,BOOLEAN_P,BOOLEAN_P));
+E void FDECL(dump_definition_list, (const char *));
 #endif
 E void FDECL(terminate, (int));
 E int NDECL(dolistvanq);
