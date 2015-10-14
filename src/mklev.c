@@ -182,7 +182,6 @@ do_room_or_subroom(croom, lowx, lowy, hix, hiy, lit, rtype, special, is_room)
 	if (!special && rtype == COINHALL) croom->colouur = CLR_YELLOW;
 	if (!special && rtype == DOUGROOM) croom->colouur = CLR_BRIGHT_CYAN;
 	if (!special && rtype == ARMORY) croom->colouur = CLR_CYAN;
-	if (!special && rtype == TENSHALL) croom->colouur = 20;
 	if (!special && rtype == POOLROOM) croom->colouur = CLR_BRIGHT_BLUE;
 
 	/* locations might bump level edges in wall-less rooms */
@@ -798,7 +797,6 @@ clear_level_structures()
 	level.flags.has_fungusfarm = 0;
 	level.flags.has_clinic = 0;
 	level.flags.has_terrorhall = 0;
-	level.flags.has_tenshall = 0;
 	level.flags.has_elemhall = 0;
 	level.flags.has_angelhall = 0;
 	level.flags.has_mimichall = 0;
@@ -987,7 +985,6 @@ makelevel()
 	    else if(depth(&u.uz) > 14 && !rn2(10)) mkroom(BARRACKS);
 	    else if (u_depth > 9 && !rn2(16)) mkroom(HUMANHALL);
 	    else if (u_depth > 9 && !rn2(25)) mkroom(TRAPROOM);
-	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 
 	    /* hives */
 	    if(depth(&u.uz) > 9 && !rn2(12)) mkroom(BEEHIVE);
@@ -996,8 +993,6 @@ makelevel()
 	    else if (u_depth > 13 && !rn2(13)) mkroom(COINHALL);
 	    else if (u_depth > 8 && !rn2(16)) mkroom(ARMORY);
 	    else if (u_depth > 10 && !rn2(25)) mkroom(POOLROOM);
-	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
-
 
 	    /* zoos */
 	    if(depth(&u.uz) > 6 && !rn2(12)) mkroom(ZOO);
@@ -1009,7 +1004,6 @@ makelevel()
 	    else if(depth(&u.uz) > 12 && !rn2(17)) mkroom(MIMICHALL);
 	    else if (u_depth > 8 && !rn2(15)) mkroom(SPIDERHALL);
 	    else if (u_depth > 11 && !rn2(25)) mkroom(STATUEROOM);
-	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 
 	    /* neat rooms */
 	    if(depth(&u.uz) > 8 && !rn2(13)) mkroom(TEMPLE);
@@ -1020,7 +1014,6 @@ makelevel()
 	    else if (depth(&u.uz) > 9 && !rn2(20)) mkroom(TERRORHALL);
 	    else if (depth(&u.uz) > 10 && !rn2(24)) mkroom(TROLLHALL);
 	    else if(depth(&u.uz) > 10 && !rn2(16)) mkroom(DOUGROOM);
-	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 
 	    /* dangerous ones */
 	    if (u_depth > 16 && !rn2(25)) mkroom(COCKNEST);
@@ -1032,7 +1025,6 @@ makelevel()
 	    else if (In_hell(&u.uz) && !rn2(22)) mkroom(LEMUREPIT);
 	    else if (u_depth > 15 && !rn2(24)) mkroom(GOLEMHALL);
 	    else if (u_depth > 15 && !rn2(25)) mkroom(GRUEROOM);
-	    else if (u_depth > 10 && !rn2(25)) mkroom(TENSHALL);
 #ifdef UNDERGROUND_RIVERS
 	    /* Underground rivers */
 	    if ( u_depth > 13 && !rn2(7)) mkrivers();

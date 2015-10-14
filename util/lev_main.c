@@ -181,7 +181,6 @@ static struct {
 	{ "coinhall",  COINHALL },
 	{ "dougroom",  DOUGROOM },
 	{ "armory",  ARMORY },
-	{ "tenshall",  TENSHALL },
 	{ "traproom",  TRAPROOM },
 	{ "poolroom",  POOLROOM },
 	{ "grueroom",  GRUEROOM },

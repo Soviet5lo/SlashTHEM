@@ -88,13 +88,12 @@ extern NEARDATA struct door doors[DOORMAX];
 #define COINHALL      31      /* bad coins */
 #define DOUGROOM	32	/* Adams, creeping 42's etc. */
 #define ARMORY	33	/* from Unnethack */
-#define TENSHALL	34	/* ADOM idea */
-#define TRAPROOM	35	/* from Sporkhack */
-#define POOLROOM	36	/* from Sporkhack */
-#define GRUEROOM	37	/* Zork reference */
-#define STATUEROOM	38	/* statues and statue traps */
+#define TRAPROOM	34	/* from Sporkhack */
+#define POOLROOM	35	/* from Sporkhack */
+#define GRUEROOM	36	/* Zork reference */
+#define STATUEROOM	37	/* statues and statue traps */
 
-#define SHOPBASE        39     	/* everything above this is a shop */
+#define SHOPBASE        38     	/* everything above this is a shop */
 #define ARMORSHOP       (SHOPBASE+ 1)   /* specific shop defines for level compiler */
 #define SCROLLSHOP      (SHOPBASE+ 2)
 #define POTIONSHOP      (SHOPBASE+ 3)

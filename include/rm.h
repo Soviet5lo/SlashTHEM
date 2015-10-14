@@ -490,8 +490,6 @@ struct levelflags {
 	Bitfield(has_golemhall, 1);
 	Bitfield(has_coinhall, 1);
 
-	Bitfield(has_tenshall, 1);
-
 	Bitfield(has_traproom, 1);
 	Bitfield(has_poolroom, 1);
 	Bitfield(has_grueroom, 1);

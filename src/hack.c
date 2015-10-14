@@ -2463,9 +2463,6 @@ register boolean newlev;
 	      case TERRORHALL:
                 You("enter a terrifying hall.");
                 break;
-	      case TENSHALL:
-                You("enter a killer room! This is actually an ADOM tension room.");
-                break;
 	      case ELEMHALL:
                 You("enter a room full of elementals!");
                 break;
@@ -2566,9 +2563,6 @@ register boolean newlev;
                         break;
                       case TERRORHALL:
                         level.flags.has_terrorhall = 0;
-                        break;
-                      case TENSHALL:
-                        level.flags.has_tenshall = 0;
                         break;
                       case ELEMHALL:
                         level.flags.has_elemhall = 0;

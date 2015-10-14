@@ -1654,7 +1654,6 @@ boolean prefilled;
 		case GOLEMHALL:
 		case COINHALL:
 		case ARMORY:
-		case TENSHALL:
 		case TRAPROOM:
 		case POOLROOM:
 		case GRUEROOM:
@@ -1734,9 +1733,6 @@ boolean prefilled;
 		break;
 	    case TERRORHALL:
 		level.flags.has_terrorhall = TRUE;
-		break;
-	    case TENSHALL:
-		level.flags.has_tenshall = TRUE;
 		break;
 	    case BARRACKS:
 		level.flags.has_barracks = TRUE;

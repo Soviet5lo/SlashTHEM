@@ -246,8 +246,6 @@ unsigned *ospecial;
 				color = CLR_BRIGHT_CYAN;
 			} else if(*in_rooms(x,y,ARMORY)) {
 				color = CLR_CYAN;
-			} else if(*in_rooms(x,y,TENSHALL)) {
-				color = rn2(15);
 			} else if(*in_rooms(x,y,POOLROOM)) {
 				color = CLR_BRIGHT_BLUE;
 			}

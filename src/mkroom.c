@@ -24,8 +24,6 @@ STATIC_DCL void NDECL(mktemple);
 STATIC_DCL coord * FDECL(shrine_pos, (int));
 STATIC_DCL struct permonst * NDECL(morguemon);
 STATIC_DCL struct permonst * NDECL(douglas_adams_mon);
-STATIC_DCL struct permonst * NDECL(tenshallmon);
-STATIC_DCL struct permonst * NDECL(tenshallmonB);
 STATIC_DCL struct permonst * NDECL(squadmon);
 STATIC_DCL struct permonst * NDECL(fungus);
 STATIC_DCL void NDECL(mktraproom);
@@ -78,7 +76,6 @@ int	roomtype;
 	case FUNGUSFARM: mkzoo(FUNGUSFARM); break;
 	case CLINIC: mkzoo(CLINIC); break;
 	case TERRORHALL: mkzoo(TERRORHALL); break;
-	case TENSHALL: mkzoo(TENSHALL); break;
 	case ELEMHALL: mkzoo(ELEMHALL); break;
 	case ANGELHALL: mkzoo(ANGELHALL); break;
 	case MIMICHALL: mkzoo(MIMICHALL); break;
@@ -347,12 +344,6 @@ struct mkroom *sroom;
 		case NYMPHHALL:
 		case GRUEROOM:
 		    break;
-		case TENSHALL:
-			u.tensionmonster = (rn2(181) + 1);
-			u.tensionmonsteX = (rn2(100) + 1);
-			u.tensionmonsterB = 0;
-			if (!rn2(4)) u.tensionmonsterB = (rn2(181) + 1);
-			break;
 	    case DRAGONLAIR:
 		goldlim = 1500 * level_difficulty();
 		break;
@@ -384,7 +375,6 @@ struct mkroom *sroom;
 		    (type == BARRACKS) ? squadmon() :
 		    (type == CLINIC) ? &mons[PM_NURSE] :
 		    (type == TERRORHALL) ? mkclass(S_UMBER,0) :
-		    (type == TENSHALL) ? (u.tensionmonsterB ? (rn2(2) ? tenshallmon() : tenshallmonB() ) : tenshallmon()) :
 		    (type == ELEMHALL) ? mkclass(S_ELEMENTAL,0) :
 		    (type == ANGELHALL) ? mkclass(S_ANGEL,0) :
 		    (type == MIMICHALL) ? mkclass(S_MIMIC,0) :
@@ -597,9 +587,6 @@ struct mkroom *sroom;
               break;
             case TERRORHALL:
               level.flags.has_terrorhall = 1;
-              break;
-            case TENSHALL:
-              level.flags.has_tenshall = 1;
               break;
             case ELEMHALL:
               level.flags.has_elemhall = 1;
@@ -1019,154 +1006,6 @@ courtmon()
 	else if (i > 30)	return(&mons[PM_HOBGOBLIN]);
 	else if (i > 15)	return(mkclass(S_GNOME,0));
 	else			return(mkclass(S_KOBOLD,0));
-}
-
-struct permonst *
-tenshallmon()
-{
-	if (u.tensionmonster < 6) return (mkclass(S_ANT,0));
-	else if (u.tensionmonster < 9) return (mkclass(S_BLOB,0));
-	else if (u.tensionmonster < 11) return (mkclass(S_COCKATRICE,0));
-	else if (u.tensionmonster < 15) return (mkclass(S_DOG,0));
-	else if (u.tensionmonster < 18) return (mkclass(S_EYE,0));
-	else if (u.tensionmonster < 22) return (mkclass(S_FELINE,0));
-	else if (u.tensionmonster < 24) return (mkclass(S_GREMLIN,0));
-	else if (u.tensionmonster < 29) return (mkclass(S_HUMANOID,0));
-	else if (u.tensionmonster < 33) return (mkclass(S_IMP,0));
-	else if (u.tensionmonster < 36) return (mkclass(S_JELLY,0));
-	else if (u.tensionmonster < 41) return (mkclass(S_KOBOLD,0));
-	else if (u.tensionmonster < 44) return (mkclass(S_LEPRECHAUN,0));
-	else if (u.tensionmonster < 47) return (mkclass(S_MIMIC,0));
-	else if (u.tensionmonster < 50) return (mkclass(S_NYMPH,0));
-	else if (u.tensionmonster < 54) return (mkclass(S_ORC,0));
-	else if (u.tensionmonster < 55) return (mkclass(S_PIERCER,0));
-	else if (u.tensionmonster < 58) return (mkclass(S_QUADRUPED,0));
-	else if (u.tensionmonster < 62) return (mkclass(S_RODENT,0));
-	else if (u.tensionmonster < 65) return (mkclass(S_SPIDER,0));
-	else if (u.tensionmonster < 66) return (mkclass(S_TRAPPER,0));
-	else if (u.tensionmonster < 69) return (mkclass(S_UNICORN,0));
-	else if (u.tensionmonster < 71) return (mkclass(S_VORTEX,0));
-	else if (u.tensionmonster < 73) return (mkclass(S_WORM,0));
-	else if (u.tensionmonster < 75) return (mkclass(S_XAN,0));
-	else if (u.tensionmonster < 76) return (mkclass(S_LIGHT,0));
-	else if (u.tensionmonster < 77) return (mkclass(S_ZOUTHERN,0));
-	else if (u.tensionmonster < 78) return (mkclass(S_ANGEL,0));
-	else if (u.tensionmonster < 81) return (mkclass(S_BAT,0));
-	else if (u.tensionmonster < 83) return (mkclass(S_CENTAUR,0));
-	else if (u.tensionmonster < 86) return (mkclass(S_DRAGON,0));
-	else if (u.tensionmonster < 89) return (mkclass(S_ELEMENTAL,0));
-	else if (u.tensionmonster < 94) return (mkclass(S_FUNGUS,0));
-	else if (u.tensionmonster < 99) return (mkclass(S_GNOME,0));
-	else if (u.tensionmonster < 102) return (mkclass(S_GIANT,0));
-	else if (u.tensionmonster < 103) return (mkclass(S_JABBERWOCK,0));
-	else if (u.tensionmonster < 104) return (mkclass(S_KOP,0));
-	else if (u.tensionmonster < 105) return (mkclass(S_LICH,0));
-	else if (u.tensionmonster < 108) return (mkclass(S_MUMMY,0));
-	else if (u.tensionmonster < 110) return (mkclass(S_NAGA,0));
-	else if (u.tensionmonster < 113) return (mkclass(S_OGRE,0));
-	else if (u.tensionmonster < 115) return (mkclass(S_PUDDING,0));
-	else if (u.tensionmonster < 116) return (mkclass(S_QUANTMECH,0));
-	else if (u.tensionmonster < 118) return (mkclass(S_RUSTMONST,0));
-	else if (u.tensionmonster < 121) return (mkclass(S_SNAKE,0));
-	else if (u.tensionmonster < 123) return (mkclass(S_TROLL,0));
-	else if (u.tensionmonster < 124) return (mkclass(S_UMBER,0));
-	else if (u.tensionmonster < 125) return (mkclass(S_VAMPIRE,0));
-	else if (u.tensionmonster < 127) return (mkclass(S_WRAITH,0));
-	else if (u.tensionmonster < 128) return (mkclass(S_XORN,0));
-	else if (u.tensionmonster < 130) return (mkclass(S_YETI,0));
-	else if (u.tensionmonster < 135) return (mkclass(S_ZOMBIE,0));
-	else if (u.tensionmonster < 145) return (mkclass(S_HUMAN,0));
-	else if (u.tensionmonster < 147) return (mkclass(S_GHOST,0));
-	else if (u.tensionmonster < 149) return (mkclass(S_GOLEM,0));
-	else if (u.tensionmonster < 152) return (mkclass(S_DEMON,0));
-	else if (u.tensionmonster < 155) return (mkclass(S_EEL,0));
-	else if (u.tensionmonster < 160) return (mkclass(S_LIZARD,0));
-	else if (u.tensionmonster < 162) return (mkclass(S_BAD_FOOD,0));
-	else if (u.tensionmonster < 165) return (mkclass(S_BAD_COINS,0));
-	else if (u.tensionmonster < 166) {if (u.tensionmonsteX < 95) return (mkclass(S_HUMAN,0));
-		else return (mkclass(S_NEMESE,0));
-	}
-	else if (u.tensionmonster < 171) return (mkclass(S_GRUE,0));
-	else if (u.tensionmonster < 176) return (mkclass(S_WALLMONST,0));
-	else if (u.tensionmonster < 180) return (mkclass(S_RUBMONST,0));
-	else if (u.tensionmonster < 181) {if (u.tensionmonsteX < 99) return (mkclass(S_HUMAN,0));
-		else return (mkclass(S_ARCHFIEND,0));
-	}
-	else return ((struct permonst*)0);
-}
-
-struct permonst *
-tenshallmonB()
-{
-	if (u.tensionmonsterB < 6) return (mkclass(S_ANT,0));
-	else if (u.tensionmonsterB < 9) return (mkclass(S_BLOB,0));
-	else if (u.tensionmonsterB < 11) return (mkclass(S_COCKATRICE,0));
-	else if (u.tensionmonsterB < 15) return (mkclass(S_DOG,0));
-	else if (u.tensionmonsterB < 18) return (mkclass(S_EYE,0));
-	else if (u.tensionmonsterB < 22) return (mkclass(S_FELINE,0));
-	else if (u.tensionmonsterB < 24) return (mkclass(S_GREMLIN,0));
-	else if (u.tensionmonsterB < 29) return (mkclass(S_HUMANOID,0));
-	else if (u.tensionmonsterB < 33) return (mkclass(S_IMP,0));
-	else if (u.tensionmonsterB < 36) return (mkclass(S_JELLY,0));
-	else if (u.tensionmonsterB < 41) return (mkclass(S_KOBOLD,0));
-	else if (u.tensionmonsterB < 44) return (mkclass(S_LEPRECHAUN,0));
-	else if (u.tensionmonsterB < 47) return (mkclass(S_MIMIC,0));
-	else if (u.tensionmonsterB < 50) return (mkclass(S_NYMPH,0));
-	else if (u.tensionmonsterB < 54) return (mkclass(S_ORC,0));
-	else if (u.tensionmonsterB < 55) return (mkclass(S_PIERCER,0));
-	else if (u.tensionmonsterB < 58) return (mkclass(S_QUADRUPED,0));
-	else if (u.tensionmonsterB < 62) return (mkclass(S_RODENT,0));
-	else if (u.tensionmonsterB < 65) return (mkclass(S_SPIDER,0));
-	else if (u.tensionmonsterB < 66) return (mkclass(S_TRAPPER,0));
-	else if (u.tensionmonsterB < 69) return (mkclass(S_UNICORN,0));
-	else if (u.tensionmonsterB < 71) return (mkclass(S_VORTEX,0));
-	else if (u.tensionmonsterB < 73) return (mkclass(S_WORM,0));
-	else if (u.tensionmonsterB < 75) return (mkclass(S_XAN,0));
-	else if (u.tensionmonsterB < 76) return (mkclass(S_LIGHT,0));
-	else if (u.tensionmonsterB < 77) return (mkclass(S_ZOUTHERN,0));
-	else if (u.tensionmonsterB < 78) return (mkclass(S_ANGEL,0));
-	else if (u.tensionmonsterB < 81) return (mkclass(S_BAT,0));
-	else if (u.tensionmonsterB < 83) return (mkclass(S_CENTAUR,0));
-	else if (u.tensionmonsterB < 86) return (mkclass(S_DRAGON,0));
-	else if (u.tensionmonsterB < 89) return (mkclass(S_ELEMENTAL,0));
-	else if (u.tensionmonsterB < 94) return (mkclass(S_FUNGUS,0));
-	else if (u.tensionmonsterB < 99) return (mkclass(S_GNOME,0));
-	else if (u.tensionmonsterB < 102) return (mkclass(S_GIANT,0));
-	else if (u.tensionmonsterB < 103) return (mkclass(S_JABBERWOCK,0));
-	else if (u.tensionmonsterB < 104) return (mkclass(S_KOP,0));
-	else if (u.tensionmonsterB < 105) return (mkclass(S_LICH,0));
-	else if (u.tensionmonsterB < 108) return (mkclass(S_MUMMY,0));
-	else if (u.tensionmonsterB < 110) return (mkclass(S_NAGA,0));
-	else if (u.tensionmonsterB < 113) return (mkclass(S_OGRE,0));
-	else if (u.tensionmonsterB < 115) return (mkclass(S_PUDDING,0));
-	else if (u.tensionmonsterB < 116) return (mkclass(S_QUANTMECH,0));
-	else if (u.tensionmonsterB < 118) return (mkclass(S_RUSTMONST,0));
-	else if (u.tensionmonsterB < 121) return (mkclass(S_SNAKE,0));
-	else if (u.tensionmonsterB < 123) return (mkclass(S_TROLL,0));
-	else if (u.tensionmonsterB < 124) return (mkclass(S_UMBER,0));
-	else if (u.tensionmonsterB < 125) return (mkclass(S_VAMPIRE,0));
-	else if (u.tensionmonsterB < 127) return (mkclass(S_WRAITH,0));
-	else if (u.tensionmonsterB < 128) return (mkclass(S_XORN,0));
-	else if (u.tensionmonsterB < 130) return (mkclass(S_YETI,0));
-	else if (u.tensionmonsterB < 135) return (mkclass(S_ZOMBIE,0));
-	else if (u.tensionmonsterB < 145) return (mkclass(S_HUMAN,0));
-	else if (u.tensionmonsterB < 147) return (mkclass(S_GHOST,0));
-	else if (u.tensionmonsterB < 149) return (mkclass(S_GOLEM,0));
-	else if (u.tensionmonsterB < 152) return (mkclass(S_DEMON,0));
-	else if (u.tensionmonsterB < 155) return (mkclass(S_EEL,0));
-	else if (u.tensionmonsterB < 160) return (mkclass(S_LIZARD,0));
-	else if (u.tensionmonsterB < 162) return (mkclass(S_BAD_FOOD,0));
-	else if (u.tensionmonsterB < 165) return (mkclass(S_BAD_COINS,0));
-	else if (u.tensionmonsterB < 166) {if (u.tensionmonsteX < 95) return (mkclass(S_HUMAN,0));
-		else return (mkclass(S_NEMESE,0));
-	}
-	else if (u.tensionmonsterB < 171) return (mkclass(S_GRUE,0));
-	else if (u.tensionmonsterB < 176) return (mkclass(S_WALLMONST,0));
-	else if (u.tensionmonsterB < 180) return (mkclass(S_RUBMONST,0));
-	else if (u.tensionmonsterB < 181) {if (u.tensionmonsteX < 99) return (mkclass(S_HUMAN,0));
-		else return (mkclass(S_ARCHFIEND,0));
-	}
-	else return ((struct permonst*)0);
 }
 
 struct permonst *

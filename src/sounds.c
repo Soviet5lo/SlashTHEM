@@ -362,16 +362,6 @@ dosounds()
 		You(terrorhall_msg[rn2(3)+hallu]);
 		return;
 	    }
-	    if (level.flags.has_tenshall && !rn2(200)) {
-		static const char *tenshall_msg[4] = {
-			"feel a certain tension.",
-			"feel a certain tension. This message was stolen from ADOM.",
-			"sense a certain tension.",
-			"suddenly see nightmarish images with Thomas Biskup in your mind!", /* ADOM creator */
-		};
-		You(tenshall_msg[rn2(3)+hallu]);
-		return;
-	    }
     if (level.flags.has_zoo && !rn2(200)) {
 	static const char * const zoo_msg[3] = {
 		"a sound reminiscent of an elephant stepping on a peanut.",

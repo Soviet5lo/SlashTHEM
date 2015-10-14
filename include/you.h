@@ -359,9 +359,6 @@ struct you {
 	int monstertimefinish; 	/* point in time when monster spawns are at their maximum */
 #endif
 	int legscratching; 	/* for special AT_KICK attacks */
-	int tensionmonster; 	/* for tension rooms */
-	int tensionmonsteX; 	/* for the chance of getting really bad stuff in tension rooms */
-	int tensionmonsterB; 	/* for mixed tension rooms */
 	int next_check; 	/* attrib.c check */
 
 	int urmaxlvlB;		/* for cyborg role */
