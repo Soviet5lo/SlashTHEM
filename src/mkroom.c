@@ -1142,25 +1142,23 @@ mkpoolroom()
 {
     struct mkroom *sroom;
     schar typ;
-	register int sx,sy = 0;
+    register int sx,sy = 0;
 
     if (!(sroom = pick_room(TRUE))) return;
 
-	if(sroom->rtype != OROOM || has_upstairs(sroom) || has_dnstairs(sroom)) return;
+    if(sroom->rtype != OROOM || has_upstairs(sroom) || has_dnstairs(sroom)) return;
 
     sroom->rtype = POOLROOM;
-    typ = !rn2(3) ? POOL : !rn2(4) ? ICE : !rn2(5) ? CLOUD : !rn2(8) ? AIR : !rn2(10) ? STONE : !rn2(10) ? TREE : !rn2(15) ? IRONBARS : !rn2(120) ? FOUNTAIN : !rn2(250) ? THRONE : !rn2(60) ? SINK : !rn2(40) ? TOILET : !rn2(20) ? GRAVE : !rn2(500) ? ALTAR : LAVAPOOL;
 
-		for(sx = sroom->lx; sx <= sroom->hx; sx++)
-		for(sy = sroom->ly; sy <= sroom->hy; sy++)
-		if(!OBJ_AT(sx, sy) &&
-		   !MON_AT(sx, sy) && !t_at(sx,sy) /*&& !nexttodoor(sx,sy)*/) {
-		    if(rn2(5)) 
-			levl[sx][sy].typ = typ;
-		}
+    typ = !rn2(5) ? POOL : LAVAPOOL;
+
+    for(sx = sroom->lx; sx <= sroom->hx; sx++)
+    for(sy = sroom->ly; sy <= sroom->hy; sy++)
+	if(!OBJ_AT(sx, sy) &&
+	   !MON_AT(sx, sy) && !t_at(sx,sy) && !nexttodoor(sx,sy))
+		levl[sx][sy].typ = typ;
 
 	level.flags.has_poolroom = 1;
-
 }
 
 void
