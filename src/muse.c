@@ -64,7 +64,7 @@ genericptr_t poolcnt;
 	register struct monst *mtmp;
 	register struct trap *ttmp;
 
-	if (/*nexttodoor(x, y) || */(rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM && levl[x][y].typ != CORR) || MON_AT(x, y) )
 		return;
 
@@ -98,7 +98,7 @@ genericptr_t poolcnt;
 	register struct monst *mtmp;
 	register struct trap *ttmp;
 
-	if (/*nexttodoor(x, y) || */(rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM && levl[x][y].typ != CORR) || MON_AT(x, y) )
 		return;
 
@@ -133,7 +133,7 @@ genericptr_t poolcnt;
 
 	if (rn2(3)) doorlockX(x, y);
 
-	if (/*nexttodoor(x, y) || */(rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != CORR))
 		return;
 
@@ -166,7 +166,7 @@ genericptr_t poolcnt;
 	register struct monst *mtmp;
 	register struct trap *ttmp;
 
-	if (/*nexttodoor(x, y) || */(rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM && levl[x][y].typ != CORR) || MON_AT(x, y) )
 		return;
 
@@ -199,7 +199,7 @@ genericptr_t poolcnt;
 	register struct monst *mtmp;
 	register struct trap *ttmp;
 
-	if (/*nexttodoor(x, y) || */(rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM && levl[x][y].typ != CORR) || MON_AT(x, y) )
 		return;
 
@@ -232,7 +232,7 @@ genericptr_t poolcnt;
 	register struct monst *mtmp;
 	register struct trap *ttmp;
 
-	if (/*nexttodoor(x, y) || */(rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM && levl[x][y].typ != CORR) || MON_AT(x, y) )
 		return;
 
@@ -265,7 +265,7 @@ genericptr_t poolcnt;
 	register struct monst *mtmp;
 	register struct trap *ttmp;
 
-	if (/*nexttodoor(x, y) || */(rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM && levl[x][y].typ != CORR) || MON_AT(x, y) )
 		return;
 
