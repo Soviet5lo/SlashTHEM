@@ -792,7 +792,7 @@ mkswamp()	/* Michiel Huisjes & Fred de Wilde */
 		for(sx = sroom->lx; sx <= sroom->hx; sx++)
 		for(sy = sroom->ly; sy <= sroom->hy; sy++)
 		if(!OBJ_AT(sx, sy) &&
-		   !MON_AT(sx, sy) && !t_at(sx,sy) /*&& !nexttodoor(sx,sy)*/) {
+		   !MON_AT(sx, sy) && !t_at(sx,sy) && !nexttodoor(sx,sy)) {
 		    if((sx+sy)%2) {
 			levl[sx][sy].typ = POOL;
 			if(!eelct || !rn2(4)) {
