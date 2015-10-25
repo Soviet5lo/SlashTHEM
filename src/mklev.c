@@ -172,13 +172,6 @@ do_room_or_subroom(croom, lowx, lowy, hix, hiy, lit, rtype, special, is_room)
 	if (!special && rtype == FUNGUSFARM) croom->colouur = CLR_BRIGHT_GREEN;
 	if (!special && rtype == CLINIC) croom->colouur = CLR_ORANGE;
 	if (!special && rtype == TERRORHALL) croom->colouur = CLR_BRIGHT_CYAN;
-	if (!special && rtype == ELEMHALL) croom->colouur = CLR_GRAY;
-	if (!special && rtype == ANGELHALL) croom->colouur = CLR_WHITE;
-	if (!special && rtype == NYMPHHALL) croom->colouur = CLR_GREEN;
-	if (!special && rtype == SPIDERHALL) croom->colouur = CLR_GRAY;
-	if (!special && rtype == TROLLHALL) croom->colouur = CLR_BROWN;
-	if (!special && rtype == HUMANHALL) croom->colouur = CLR_BRIGHT_BLUE;
-	if (!special && rtype == GOLEMHALL) croom->colouur = CLR_GRAY;
 	if (!special && rtype == COINHALL) croom->colouur = CLR_YELLOW;
 	if (!special && rtype == DOUGROOM) croom->colouur = CLR_BRIGHT_CYAN;
 	if (!special && rtype == ARMORY) croom->colouur = CLR_CYAN;
@@ -797,21 +790,11 @@ clear_level_structures()
 	level.flags.has_fungusfarm = 0;
 	level.flags.has_clinic = 0;
 	level.flags.has_terrorhall = 0;
-	level.flags.has_elemhall = 0;
-	level.flags.has_angelhall = 0;
-	level.flags.has_mimichall = 0;
-	level.flags.has_nymphhall = 0;
-	level.flags.has_golemhall = 0;
-	level.flags.has_humanhall = 0;
-	level.flags.has_spiderhall = 0;
-	level.flags.has_trollhall = 0;
 	level.flags.has_coinhall = 0;
 
-	level.flags.has_grueroom = 0;
+	/*level.flags.has_grueroom = 0;*/
 	level.flags.has_poolroom = 0;
 	level.flags.has_traproom = 0;
-
-	level.flags.has_statueroom = 0;
 
 	level.flags.has_temple = 0;
 	level.flags.has_swamp = 0;
@@ -983,13 +966,11 @@ makelevel()
 		else if (depth(&u.uz) > 5 && !rn2(8)) mkroom(LEPREHALL);
 	    else if(depth(&u.uz) > 14 && !rn2(16)) mkroom(GIANTCOURT);
 	    else if(depth(&u.uz) > 14 && !rn2(10)) mkroom(BARRACKS);
-	    else if (u_depth > 9 && !rn2(16)) mkroom(HUMANHALL);
 	    else if (u_depth > 9 && !rn2(25)) mkroom(TRAPROOM);
 
 	    /* hives */
 	    if(depth(&u.uz) > 9 && !rn2(12)) mkroom(BEEHIVE);
 	    else if (u_depth > 12 && !rn2(8)) mkroom(ANTHOLE);
-	    else if (u_depth > 8 && !rn2(12)) mkroom(NYMPHHALL);
 	    else if (u_depth > 13 && !rn2(13)) mkroom(COINHALL);
 	    else if (u_depth > 8 && !rn2(16)) mkroom(ARMORY);
 	    else if (u_depth > 10 && !rn2(25)) mkroom(POOLROOM);
@@ -999,11 +980,6 @@ makelevel()
 	    /* fungus farms are rare... */
 	    else if (u_depth > 7 && !rn2(25)) mkroom(FUNGUSFARM);
 	    else if(depth(&u.uz) > 9 && !rn2(18)) mkroom(REALZOO);
-	    else if(depth(&u.uz) > 11 && !rn2(20)) mkroom(ELEMHALL);
-	    else if(depth(&u.uz) > 12 && !rn2(25)) mkroom(ANGELHALL);
-	    else if(depth(&u.uz) > 12 && !rn2(17)) mkroom(MIMICHALL);
-	    else if (u_depth > 8 && !rn2(15)) mkroom(SPIDERHALL);
-	    else if (u_depth > 11 && !rn2(25)) mkroom(STATUEROOM);
 
 	    /* neat rooms */
 	    if(depth(&u.uz) > 8 && !rn2(13)) mkroom(TEMPLE);
@@ -1012,7 +988,6 @@ makelevel()
 	    else if(depth(&u.uz) > 18 && !rn2(7)) mkroom(SWAMP);
 	    else if (depth(&u.uz) > 10 && !rn2(40)) mkroom(CLINIC); /*supposed to be very rare --Amy*/
 	    else if (depth(&u.uz) > 9 && !rn2(20)) mkroom(TERRORHALL);
-	    else if (depth(&u.uz) > 10 && !rn2(24)) mkroom(TROLLHALL);
 	    else if(depth(&u.uz) > 10 && !rn2(16)) mkroom(DOUGROOM);
 
 	    /* dangerous ones */
@@ -1023,8 +998,7 @@ makelevel()
 	     *      never going to show up randomly (no random room+corridor
 	     *      levels in Gehennom). Perhaps this should be removed? */
 	    else if (In_hell(&u.uz) && !rn2(22)) mkroom(LEMUREPIT);
-	    else if (u_depth > 15 && !rn2(24)) mkroom(GOLEMHALL);
-	    else if (u_depth > 15 && !rn2(25)) mkroom(GRUEROOM);
+	    /*else if (u_depth > 15 && !rn2(25)) mkroom(GRUEROOM);*/
 #ifdef UNDERGROUND_RIVERS
 	    /* Underground rivers */
 	    if ( u_depth > 13 && !rn2(7)) mkrivers();

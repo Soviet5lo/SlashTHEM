@@ -480,21 +480,11 @@ struct levelflags {
 	Bitfield(has_fungusfarm, 1);
 	Bitfield(has_clinic, 1);
 	Bitfield(has_terrorhall, 1);
-	Bitfield(has_elemhall, 1);
-	Bitfield(has_angelhall, 1);
-	Bitfield(has_mimichall, 1);
-	Bitfield(has_nymphhall, 1);
-	Bitfield(has_spiderhall, 1);
-	Bitfield(has_trollhall, 1);
-	Bitfield(has_humanhall, 1);
-	Bitfield(has_golemhall, 1);
 	Bitfield(has_coinhall, 1);
 
 	Bitfield(has_traproom, 1);
 	Bitfield(has_poolroom, 1);
-	Bitfield(has_grueroom, 1);
-
-	Bitfield(has_statueroom, 1);
+	//Bitfield(has_grueroom, 1);
 
 	Bitfield(has_swamp, 1);
 	Bitfield(noteleport,1);

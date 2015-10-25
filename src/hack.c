@@ -2457,17 +2457,8 @@ register boolean newlev;
             case CLINIC:
                 You("enter a modern hospital.");
                 break;
-            case ANGELHALL:
-                You("enter a radiating hall of Angels!");
-                break;
 	      case TERRORHALL:
                 You("enter a terrifying hall.");
-                break;
-	      case ELEMHALL:
-                You("enter a room full of elementals!");
-                break;
-	      case NYMPHHALL:
-                You("enter a beautiful garden!");
                 break;
             case ARMORY:
                 You("enter a dilapidated armory.");
@@ -2475,27 +2466,13 @@ register boolean newlev;
 	      case COINHALL:
                 You("enter a room filled with money!");
                 break;
-	      case TROLLHALL:
-                You("enter a room full of stinking trolls...");
-                break;
-	      case HUMANHALL:
-                You("encounter a living room!");
-                break;
-	      case SPIDERHALL:
-                You("stumble into a nest of spiders...");
-                break;
-	      case GOLEMHALL:
-                You("enter a room full of golems!");
-                break;
 	      case TRAPROOM:
                 if (wizard) You("enter a trapped room!");
                 break;
 	      case POOLROOM:
                 if (wizard) You("enter a pool room!");
                 break;
-	      case STATUEROOM:
-                if (wizard) You("enter a statue room!");
-                break;
+#if 0
 	      case GRUEROOM:
                 pline("It is pitch black. You are likely to be eaten by a grue.");
 
@@ -2504,6 +2481,7 @@ register boolean newlev;
 		/* IMHO grue rooms may remove light every time you enter them. --Amy */
 		    /*wake_nearby();*/
                 break;
+#endif
 		case BARRACKS:
 		    if(monstinroom(&mons[PM_SOLDIER], roomno) ||
 			monstinroom(&mons[PM_SERGEANT], roomno) ||
@@ -2555,23 +2533,8 @@ register boolean newlev;
                       case CLINIC:
                         level.flags.has_clinic = 0;
                         break;
-                      case MIMICHALL:
-                        level.flags.has_mimichall = 0;
-                        break;
-                      case ANGELHALL:
-                        level.flags.has_angelhall = 0;
-                        break;
                       case TERRORHALL:
                         level.flags.has_terrorhall = 0;
-                        break;
-                      case ELEMHALL:
-                        level.flags.has_elemhall = 0;
-                        break;
-                      case NYMPHHALL:
-                        level.flags.has_nymphhall = 0;
-                        break;
-                      case GOLEMHALL:
-                        level.flags.has_golemhall = 0;
                         break;
                       case TRAPROOM:
                         level.flags.has_traproom = 0;
@@ -2582,20 +2545,8 @@ register boolean newlev;
                       case POOLROOM:
                         level.flags.has_poolroom = 0;
                         break;
-                      case STATUEROOM:
-                        level.flags.has_statueroom = 0;
-                        break;
-                      case HUMANHALL:
-                        level.flags.has_humanhall = 0;
-                        break;
                       case COINHALL:
                         level.flags.has_coinhall = 0;
-                        break;
-                      case TROLLHALL:
-                        level.flags.has_trollhall = 0;
-                        break;
-                      case SPIDERHALL:
-                        level.flags.has_spiderhall = 0;
                         break;
 			    case TEMPLE:
 				level.flags.has_temple = 0;

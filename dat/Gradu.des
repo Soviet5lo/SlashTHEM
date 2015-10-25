@@ -392,7 +392,7 @@ MONSTER:random,random,random
 TRAP:random,random
 TRAP:random,random
 
-ROOM: "mimichall", random, random, random, random
+ROOM: "ordinary", random, random, random, random
 OBJECT:random,random,random
 OBJECT:random,random,random
 MONSTER:random,random,random
@@ -416,7 +416,7 @@ MONSTER:random,random,random
 TRAP:random,random
 TRAP:random,random
 
-ROOM: "humanhall", random, random, random, random
+ROOM: "ordinary", random, random, random, random
 OBJECT:random,random,random
 OBJECT:random,random,random
 MONSTER:random,random,random

@@ -75,25 +75,16 @@ extern NEARDATA struct door doors[DOORMAX];
 #define LEMUREPIT       18      /* lemures */
 #define MIGOHIVE        19      /* Mi-Go */
 #define FUNGUSFARM      20      /* molds, puddings, and slime */
-#define CLINIC      21      /* nurses */
+#define CLINIC          21      /* nurses */
 #define TERRORHALL      22      /* hulks */
-#define ELEMHALL      23      /* elementals */
-#define ANGELHALL      24      /* angels */
-#define MIMICHALL      25      /* mimics */
-#define NYMPHHALL      26      /* nymphs */
-#define SPIDERHALL      27      /* spiders */
-#define TROLLHALL      28      /* trolls */
-#define HUMANHALL      29      /* humans */
-#define GOLEMHALL      30      /* golems */
-#define COINHALL      31      /* bad coins */
-#define DOUGROOM	32	/* Adams, creeping 42's etc. */
-#define ARMORY	33	/* from Unnethack */
-#define TRAPROOM	34	/* from Sporkhack */
-#define POOLROOM	35	/* from Sporkhack */
-#define GRUEROOM	36	/* Zork reference */
-#define STATUEROOM	37	/* statues and statue traps */
+#define COINHALL        23      /* bad coins */
+#define DOUGROOM	24	/* Adams, creeping 42's etc. */
+#define ARMORY	        25	/* from Unnethack */
+#define TRAPROOM	26	/* from Sporkhack */
+#define POOLROOM	27	/* from Sporkhack */
+//#define GRUEROOM	28	[> Zork reference <]
 
-#define SHOPBASE        38     	/* everything above this is a shop */
+#define SHOPBASE        28     	/* everything above this is a shop */
 #define ARMORSHOP       (SHOPBASE+ 1)   /* specific shop defines for level compiler */
 #define SCROLLSHOP      (SHOPBASE+ 2)
 #define POTIONSHOP      (SHOPBASE+ 3)

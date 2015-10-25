@@ -28,7 +28,7 @@ STATIC_DCL struct permonst * NDECL(squadmon);
 STATIC_DCL struct permonst * NDECL(fungus);
 STATIC_DCL void NDECL(mktraproom);
 STATIC_DCL void NDECL(mkpoolroom);
-STATIC_DCL void NDECL(mkstatueroom);
+//STATIC_DCL void NDECL(mkstatueroom);
 STATIC_DCL void FDECL(save_room, (int,struct mkroom *));
 STATIC_DCL void FDECL(rest_room, (int,struct mkroom *));
 #endif /* OVLB */
@@ -76,19 +76,10 @@ int	roomtype;
 	case FUNGUSFARM: mkzoo(FUNGUSFARM); break;
 	case CLINIC: mkzoo(CLINIC); break;
 	case TERRORHALL: mkzoo(TERRORHALL); break;
-	case ELEMHALL: mkzoo(ELEMHALL); break;
-	case ANGELHALL: mkzoo(ANGELHALL); break;
-	case MIMICHALL: mkzoo(MIMICHALL); break;
-	case NYMPHHALL: mkzoo(NYMPHHALL); break;
-	case TROLLHALL: mkzoo(TROLLHALL); break;
-	case HUMANHALL: mkzoo(HUMANHALL); break;
-	case GOLEMHALL: mkzoo(GOLEMHALL); break;
-	case SPIDERHALL: mkzoo(SPIDERHALL); break;
 	case COINHALL: mkzoo(COINHALL); break;
-	case GRUEROOM: mkzoo(GRUEROOM); break;
+	/*case GRUEROOM: mkzoo(GRUEROOM); break;*/
 	case TRAPROOM:  mktraproom(); break;
 	case POOLROOM:  mkpoolroom(); break;
-	case STATUEROOM:  mkstatueroom(); break;
 	case ARMORY: mkzoo(ARMORY); break;
 	default:	impossible("Tried to make a room of type %d.", roomtype);
     }
@@ -333,16 +324,8 @@ struct mkroom *sroom;
 		goldlim = 500 * level_difficulty();
 		break;
 		case CLINIC:
-		case MIMICHALL:
-		case ELEMHALL:
 		case TERRORHALL:
-		case ANGELHALL:
-		case SPIDERHALL:
-		case HUMANHALL:
-		case GOLEMHALL:
-		case TROLLHALL:
-		case NYMPHHALL:
-		case GRUEROOM:
+		/*case GRUEROOM:*/
 		    break;
 	    case DRAGONLAIR:
 		goldlim = 1500 * level_difficulty();
@@ -375,16 +358,8 @@ struct mkroom *sroom;
 		    (type == BARRACKS) ? squadmon() :
 		    (type == CLINIC) ? &mons[PM_NURSE] :
 		    (type == TERRORHALL) ? mkclass(S_UMBER,0) :
-		    (type == ELEMHALL) ? mkclass(S_ELEMENTAL,0) :
-		    (type == ANGELHALL) ? mkclass(S_ANGEL,0) :
-		    (type == MIMICHALL) ? mkclass(S_MIMIC,0) :
-		    (type == NYMPHHALL) ? mkclass(S_NYMPH,0) :
-		    (type == TROLLHALL) ? mkclass(S_TROLL,0) :
-		    (type == SPIDERHALL) ? mkclass(S_SPIDER,0) :
-		    (type == HUMANHALL) ? mkclass(S_HUMAN,0) :
-		    (type == GOLEMHALL) ? mkclass(S_GOLEM,0) :
 		    (type == COINHALL) ? mkclass(S_BAD_COINS,0) :
-		    (type == GRUEROOM) ? mkclass(S_GRUE,0) :
+		    /*(type == GRUEROOM) ? mkclass(S_GRUE,0) :*/
 		    (type == MORGUE) ? morguemon() :
 		    (type == FUNGUSFARM) ? (rn2(2) ? fungus() : mkclass(S_FUNGUS,0)) :
 		    (type == BEEHIVE) ?
@@ -491,14 +466,6 @@ struct mkroom *sroom;
 			if(!rn2(10))
 			    (void) mksobj_at(ICE_BOX,sx,sy,TRUE,FALSE);
 			break;
-		    case GOLEMHALL:
-			if(!rn2(20))
-			    (void) mkobj_at(CHAIN_CLASS, sx, sy, FALSE);
-			break;
-		    case SPIDERHALL:
-			if(!rn2(3))
-			    (void) mksobj_at(EGG,sx,sy,TRUE,FALSE);
-			break;
 		    case COCKNEST:
 			if(!rn2(3)) {
 			    struct obj *sobj = mk_tt_object(STATUE, sx, sy);
@@ -528,15 +495,6 @@ struct mkroom *sroom;
 		    case ANTHOLE:
 			if(!rn2(3))
 			    (void) mkobj_at(FOOD_CLASS, sx, sy, FALSE);
-			break;
-		    case ANGELHALL:
-			if(!rn2(10))
-			    (void) mkobj_at(GEM_CLASS, sx, sy, FALSE);
-			break;
-		    case MIMICHALL:
-		    case HUMANHALL:
-			if(!rn2(3))
-			    (void) mkobj_at(RANDOM_CLASS, sx, sy, FALSE);
 			break;
 		}
 	    }
@@ -588,44 +546,19 @@ struct mkroom *sroom;
             case TERRORHALL:
               level.flags.has_terrorhall = 1;
               break;
-            case ELEMHALL:
-              level.flags.has_elemhall = 1;
-              break;
-            case ANGELHALL:
-              level.flags.has_angelhall = 1;
-              break;
-            case MIMICHALL:
-              level.flags.has_mimichall = 1;
-              break;
-            case NYMPHHALL:
-              level.flags.has_nymphhall = 1;
-              break;
-            case SPIDERHALL:
-              level.flags.has_spiderhall = 1;
-              break;
-            case TROLLHALL:
-              level.flags.has_trollhall = 1;
-              break;
             case COINHALL:
               level.flags.has_coinhall = 1;
-              break;
-            case HUMANHALL:
-              level.flags.has_humanhall = 1;
-              break;
-            case GOLEMHALL:
-              level.flags.has_golemhall = 1;
               break;
             case TRAPROOM:
               level.flags.has_traproom = 1;
               break;
+#if 0 /* Deferred for now */
             case GRUEROOM:
               level.flags.has_grueroom = 1;
               break;
+#endif
             case POOLROOM:
               level.flags.has_poolroom = 1;
-              break;
-            case STATUEROOM:
-              level.flags.has_statueroom = 1;
               break;
 	}
 }
@@ -1149,7 +1082,7 @@ mkpoolroom()
 
 	level.flags.has_poolroom = 1;
 }
-
+#if 0
 void
 mkstatueroom()
 {
@@ -1188,7 +1121,7 @@ mkstatueroom()
 	level.flags.has_statueroom = 1;
 
 }
-
+#endif
 void
 save_rooms(fd)
 int fd;

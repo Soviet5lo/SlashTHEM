@@ -271,56 +271,6 @@ dosounds()
 		You(hospital_msg[rn2(3)+hallu]);
 		return;
 	    }
-	    if (level.flags.has_nymphhall && !rn2(200)) {
-		static const char *nymphhall_msg[4] = {
-			"hear leaves rustling.",
-			"hear a female voice singing a song.",
-			"catch a glimpse of sunlight.",
-			"seem mesmerized.",
-		};
-		You(nymphhall_msg[rn2(3)+hallu]);
-		return;
-	    }
-	    if (level.flags.has_spiderhall && !rn2(200)) {
-		static const char *spiderhall_msg[4] = {
-			"hear mandibles clicking.",
-			"notice webs everywhere.",
-			"notice little openings in the floor.",
-			"trip over a broken spider egg.",
-		};
-		You(spiderhall_msg[rn2(3)+hallu]);
-		return;
-	    }
-	    if (level.flags.has_trollhall && !rn2(200)) {
-		static const char *trollhall_msg[4] = {
-			"hear a grunting noise.",
-			"notice a horrible smell.",
-			"hear loud footsteps going up and down the halls.",
-			"trip over a stinking pile of shit!",
-		};
-		You(trollhall_msg[rn2(3)+hallu]);
-		return;
-	    }
-	    if (level.flags.has_humanhall && !rn2(200)) {
-		static const char *humanhall_msg[4] = {
-			"listen to a conversation.",
-			"hear people talking.",
-			"hear someone drawing a weapon.",
-			"sense that you are not alone...",
-		};
-		You(humanhall_msg[rn2(3)+hallu]);
-		return;
-	    }
-	    if (level.flags.has_golemhall && !rn2(200)) {
-		static const char *golemhall_msg[4] = {
-			"hear rattling noises.",
-			"think you saw an object move on its own.",
-			"feel that something weird may be just around the corner.",
-			"hear the deafening noise of a metal object breaking apart!",
-		};
-		You(golemhall_msg[rn2(3)+hallu]);
-		return;
-	    }
 	    if (level.flags.has_coinhall && !rn2(200)) {
 		static const char *coinhall_msg[4] = {
 			"notice the sound of clinging coins.",
@@ -329,27 +279,6 @@ dosounds()
 			"hear Scrooge McDuck taking a bath in his money!",
 		};
 		You(coinhall_msg[rn2(3)+hallu]);
-		return;
-	    }
-	    if (level.flags.has_angelhall && !rn2(200)) {
-		static const char *angelhall_msg[4] = {
-			"hear the sound of wispy wings.",
-			"can barely hear a whispering voice.",
-			"sense a glow of radiance.",
-			"think you just heard God speaking to you!",
-		};
-		You(angelhall_msg[rn2(3)+hallu]);
-		return;
-	    }
-	    if (level.flags.has_elemhall && !rn2(200)) {
-		static const char *elemhall_msg[5] = {
-			"suddenly feel a wave of heat.",
-			"notice some heaps of earth.",
-			"sense a strong gust of wind.",
-			"hear a wave of water.",
-			"get the impression that the laws of Nature itself are conspiring against you!",
-		};
-		You(elemhall_msg[rn2(4)+hallu]);
 		return;
 	    }
 	    if (level.flags.has_terrorhall && !rn2(200)) {
