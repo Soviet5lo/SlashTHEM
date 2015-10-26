@@ -198,6 +198,8 @@ unsigned *ospecial;
 				color = CLR_GREEN;
 			} else if(*in_rooms(x,y,SWAMP)) {
 				color = CLR_GREEN;
+			} else if(*in_rooms(x,y,GARDEN)) {
+				color = CLR_BRIGHT_GREEN;
 			} else if(*in_rooms(x,y,MORGUE)) {
 				color = CLR_BLACK;
 			} else if(*in_rooms(x,y,BARRACKS)) {

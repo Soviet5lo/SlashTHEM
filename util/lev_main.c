@@ -164,6 +164,7 @@ static struct {
 	{ "badfoodshop", BADFOODSHOP },
 	{ "anthole",	 ANTHOLE },
 	{ "cocknest",	 COCKNEST },
+	{ "garden",	 GARDEN },
 	{ "leprehall",	 LEPREHALL },
 	{ "lemurepit",   LEMUREPIT },
 	{ "migohive",    MIGOHIVE },

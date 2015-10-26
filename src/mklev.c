@@ -798,6 +798,7 @@ clear_level_structures()
 
 	level.flags.has_temple = 0;
 	level.flags.has_swamp = 0;
+	level.flags.has_garden = 0;
 	level.flags.noteleport = 0;
 	level.flags.hardfloor = 0;
 	level.flags.nommap = 0;
@@ -984,6 +985,7 @@ makelevel()
 	    /* neat rooms */
 	    if(depth(&u.uz) > 8 && !rn2(13)) mkroom(TEMPLE);
 	    else if(depth(&u.uz) > 11 && !rn2(14)) mkroom(MORGUE);
+	    else if(depth(&u.uz) > 7 && !rn2(12)) mkroom(GARDEN);
 	    else if(depth(&u.uz) > 13 && !rn2(15)) mkroom(BADFOODSHOP);
 	    else if(depth(&u.uz) > 18 && !rn2(7)) mkroom(SWAMP);
 	    else if (depth(&u.uz) > 10 && !rn2(40)) mkroom(CLINIC); /*supposed to be very rare --Amy*/

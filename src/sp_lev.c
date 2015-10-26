@@ -1634,6 +1634,7 @@ boolean prefilled;
 				}
 			}
 		    break;
+		case GARDEN:
 		case COURT:
 		case ZOO:
 		case BEEHIVE:
@@ -1661,6 +1662,9 @@ boolean prefilled;
 	    case ZOO:
 	    case DOUGROOM:
 		level.flags.has_zoo = TRUE;
+		break;
+	    case GARDEN:
+		level.flags.has_garden = TRUE;
 		break;
 	    case COURT:
 		level.flags.has_court = TRUE;

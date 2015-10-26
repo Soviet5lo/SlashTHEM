@@ -2406,6 +2406,10 @@ register boolean newlev;
 		case ZOO:
 		    pline("Welcome to David's treasure zoo!");
 		    break;
+		case GARDEN:
+		    if (Blind) pline_The("air here smells nice and fresh!");
+		    else You("enter a beautiful garden.");
+		    break;
 		case SWAMP:
 		    pline("It %s rather %s down here.",
 			  Blind ? "feels" : "looks",
@@ -2517,6 +2521,9 @@ register boolean newlev;
 			    case GIANTCOURT:
 				level.flags.has_court = 0;
 				break;
+			    case GARDEN:
+				level.flags.has_garden = 0;
+				break;
 			    case SWAMP:
 				level.flags.has_swamp = 0;
 				break;
@@ -2566,7 +2573,8 @@ register boolean newlev;
 			}
 		}
 #endif
-		if(rt==COURT || rt==SWAMP || rt==MORGUE || rt==ZOO)
+		if(rt==COURT || rt==SWAMP || rt==MORGUE ||
+		   rt==ZOO || rt==GARDEN)
 		    for(mtmp = fmon; mtmp; mtmp = mtmp->nmon)
 			if (!DEADMONSTER(mtmp) && !Stealth && !rn2(3)) mtmp->msleeping = 0;
 	    }
