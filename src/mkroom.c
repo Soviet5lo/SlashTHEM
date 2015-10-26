@@ -362,16 +362,18 @@ struct mkroom *sroom;
 		/* don't place monster on explicitly placed throne */
 		if(type == COURT && IS_THRONE(levl[sx][sy].typ))
 		    continue;
-               /* armories don't contain as many monsters */
-		if ( (type != ARMORY && rn2(moreorless) ) || rn2(2)) mon = makemon(
-		    (type == COURT) ? (rn2(5) ? courtmon() : mkclass(S_ORC,0) ) :
+               /* armories (and clinics) don't contain as many monsters */
+		if ((type != ARMORY && type != CLINIC) || rn2(2)) mon = makemon(
+		    (type == COURT) ? courtmon() :
 		    (type == BARRACKS) ? squadmon() :
-		    (type == CLINIC) ? &mons[PM_NURSE] :
+		    (type == CLINIC) ?
+			(sx == tx && sy == ty ? &mons[PM_HEALER] :
+			 &mons[PM_NURSE]) :
 		    (type == TERRORHALL) ? mkclass(S_UMBER,0) :
 		    (type == COINHALL) ? mkclass(S_BAD_COINS,0) :
 		    /*(type == GRUEROOM) ? mkclass(S_GRUE,0) :*/
 		    (type == MORGUE) ? morguemon() :
-		    (type == FUNGUSFARM) ? (rn2(2) ? fungus() : mkclass(S_FUNGUS,0)) :
+		    (type == FUNGUSFARM) ? fungus() :
 		    (type == BEEHIVE) ?
 			(sx == tx && sy == ty ? &mons[PM_QUEEN_BEE] :
 			 &mons[PM_KILLER_BEE]) :
@@ -381,19 +383,19 @@ struct mkroom *sroom;
 		    	(rn2(4) ? &mons[PM_COCKATRICE] :
 		    	 &mons[PM_CHICKATRICE]) :
                     (type == ARMORY) ? (rn2(10) ? mkclass(S_RUSTMONST,0) :
-			mkclass(S_PUDDING,0) ) :
+			&mons[PM_BROWN_PUDDING]) :
                     (type == ANTHOLE) ? 
 		        (sx == tx && sy == ty ? &mons[PM_QUEEN_ANT] :
 			 antholemon()) :
 		    (type == DRAGONLAIR) ? mkclass(S_DRAGON,0) :
 		    (type == LEMUREPIT)? 
-		    	(!rn2(20)? &mons[PM_HORNED_DEVIL] : !rn2(20) ? mkclass(S_DEMON,0) : rn2(2) ? mkclass(S_IMP,0) :
+		    	(!rn2(10)? &mons[PM_HORNED_DEVIL] : 
 			           &mons[PM_LEMURE]) :
 		    (type == MIGOHIVE)?
 		      (sx == tx && sy == ty? &mons[PM_MIGO_QUEEN] :
 	              (rn2(2)? &mons[PM_MIGO_DRONE] : &mons[PM_MIGO_WARRIOR])) :
 		    (type == BADFOODSHOP) ? mkclass(S_BAD_FOOD,0) :
-		    (type == REALZOO) ? (rn2(5) ? realzoomon() : mkclass(S_QUADRUPED,0) ) :
+		    (type == REALZOO) ? realzoomon() :
 		    (type == GIANTCOURT) ? mkclass(S_GIANT,0) :
 		    (struct permonst *) 0,
 		   sx, sy, NO_MM_FLAGS);
@@ -472,9 +474,31 @@ struct mkroom *sroom;
 			if (!rn2(5))
 			    make_grave(sx, sy, (char *)0);
 			break;
-		    case CLINIC:
+		    case CLINIC: /* 5lo: Rare rooms, lets give them a lot of healing objects. */
+			if(!rn2(5))
+			    (void) mksobj_at(POT_HEALING,sx,sy,TRUE,FALSE);
 			if(!rn2(10))
-			    (void) mksobj_at(ICE_BOX,sx,sy,TRUE,FALSE);
+			    (void) mksobj_at(POT_EXTRA_HEALING,sx,sy,TRUE,FALSE);
+			if(!rn2(20))
+			    (void) mksobj_at(POT_FULL_HEALING,sx,sy,TRUE,FALSE);
+			if(!rn2(30))
+			    (void) mksobj_at(POT_GAIN_HEALTH,sx,sy,TRUE,FALSE);
+			if(!rn2(30))
+			    (void) mksobj_at(POT_RECOVERY,sx,sy,TRUE,FALSE);
+			/* Now some wands... */
+			if(!rn2(10))
+			    (void) mksobj_at(WAN_HEALING,sx,sy,TRUE,FALSE);
+			if(!rn2(20))
+			    (void) mksobj_at(WAN_EXTRA_HEALING,sx,sy,TRUE,FALSE);
+			if(!rn2(40))
+			    (void) mksobj_at(WAN_FULL_HEALING,sx,sy,TRUE,FALSE);
+			/* And for misc healing objects */
+			if(!rn2(10))
+			    (void) mksobj_at(PILL,sx,sy,TRUE,FALSE);
+			if(!rn2(10))
+			    (void) mksobj_at(SCR_HEALING,sx,sy,TRUE,FALSE);
+			if(!rn2(40))
+			    (void) mksobj_at(MEDICAL_KIT,sx,sy,TRUE,FALSE);
 			break;
 		    case COCKNEST:
 			if(!rn2(3)) {
