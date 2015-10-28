@@ -1794,7 +1794,7 @@ struct obj *obj;
 	for (val = 0; val < val_limit; val++) {
 	    idx = trouble_list[val];
 
-		if (rn2(20) < chance)	/* KMH */
+		if (rn2(10) < chance)	/* KMH */
 	    switch (idx) {
 	    case prop2trbl(SICK):
 		make_sick(0L, (char *) 0, TRUE, SICK_ALL);
@@ -1822,12 +1822,13 @@ struct obj *obj;
 		break;
 	    default:
 		if (idx >= 0 && idx < A_MAX) {
-		    if (rn2(3))
-		    { ABASE(idx) += 1;
-		    did_attr++;}
-                else
-		    { did_atno++;
-                AMAX(idx) -= 1;}
+//		    if (rn2(3)) {
+		    ABASE(idx) += 1;
+		    did_attr++;
+//		    } else {
+//		    did_atno++;
+//                  AMAX(idx) -= 1;
+//                  }
 		} else
 		    panic("use_unicorn_horn: bad trouble? (%d)", idx);
 		break;
