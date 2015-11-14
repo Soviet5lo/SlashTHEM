@@ -255,7 +255,7 @@ DOOR:closed,(51,10)
 DOOR:locked,(53,08)
 DOOR:closed,(65,05)
 # Random monsters.
-MONSTER:'7',"Lightningrod",(37,10),hostile
+MONSTER:''',"Lightningrod",(37,10),hostile
 
 # turrets that cannot be reached
 MONSTER:'H',"titan",(40,06),hostile

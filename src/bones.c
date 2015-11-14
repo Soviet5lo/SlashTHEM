@@ -264,7 +264,7 @@ struct obj *corpse;
 	    if (DEADMONSTER(mtmp)) continue;
 	    mptr = mtmp->data;
 	    if (mtmp->iswiz || mptr == &mons[PM_MEDUSA] ||
-		    (mptr->msound == MS_NEMESIS &&  mptr->mlet != S_NEMESE) || mptr->msound == MS_LEADER ||
+		    mptr->msound == MS_NEMESIS || mptr->msound == MS_LEADER ||
 		    mptr == &mons[PM_VLAD_THE_IMPALER] ||
 		    mptr == &mons[PM_NIGHTMARE] ||
 		    mptr == &mons[PM_BEHOLDER] || mptr == &mons[PM_VECNA] ||

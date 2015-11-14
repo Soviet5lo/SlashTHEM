@@ -1152,9 +1152,6 @@ mineralize()
 		if ((levl[x][y].typ == CLOUD && !rn2(400 / level_difficulty() )) )
 			makemon((struct permonst *)0, x, y, NO_MM_FLAGS);
 
-		if ((levl[x][y].typ == CORR && !rn2(1000 )) )
-			makemon(mkclass(S_WALLMONST,0), x, y, NO_MM_FLAGS);
-
 		if ((levl[x][y].typ == TREE && !rn2(100)) )
 			makemon(mkclass(S_BAT,0), x, y, NO_MM_FLAGS);
 
@@ -1166,8 +1163,6 @@ mineralize()
 	    	    makemon(mkclass(S_NYMPH,0), x, y, NO_MM_FLAGS);
 		if ((levl[x][y].typ == FOUNTAIN && !rn2(60)) )
 	    	    makemon(mkclass(S_SPIDER,0), x, y, NO_MM_FLAGS);
-		if ((levl[x][y].typ == FOUNTAIN && !rn2(60)) )
-	    	    makemon(mkclass(S_RUBMONST,0), x, y, NO_MM_FLAGS);
 
 		if ((levl[x][y].typ == THRONE && !rn2(20)) )
 	    	    makemon(courtmon(), x, y, NO_MM_FLAGS);
@@ -1183,10 +1178,6 @@ mineralize()
 	    	    makemon(mkclass(S_ELEMENTAL,0), x, y, NO_MM_FLAGS);
 		if ((levl[x][y].typ == THRONE && !rn2(100)) )
 	    	    makemon(mkclass(S_HUMAN,0), x, y, NO_MM_FLAGS);
-		if ((levl[x][y].typ == THRONE && !rn2(1000)) )
-	    	    makemon(mkclass(S_NEMESE,0), x, y, NO_MM_FLAGS);
-		if ((levl[x][y].typ == THRONE && !rn2(10000)) )
-	    	    makemon(mkclass(S_ARCHFIEND,0), x, y, NO_MM_FLAGS);
 
 		if ((levl[x][y].typ == SINK && !rn2(60)) )
 	    	    makemon(mkclass(S_PUDDING,0), x, y, NO_MM_FLAGS);
@@ -1196,8 +1187,6 @@ mineralize()
 	    	    makemon(mkclass(S_JELLY,0), x, y, NO_MM_FLAGS);
 		if ((levl[x][y].typ == SINK && !rn2(60)) )
 	    	    makemon(mkclass(S_FUNGUS,0), x, y, NO_MM_FLAGS);
-		if ((levl[x][y].typ == SINK && !rn2(60)) )
-	    	    makemon(mkclass(S_GRUE,0), x, y, NO_MM_FLAGS);
 
 		if ((levl[x][y].typ == TOILET && !rn2(60)) )
 	    	    makemon(mkclass(S_LIZARD,0), x, y, NO_MM_FLAGS);

@@ -308,7 +308,7 @@ register struct monst *mtmp;
 		if (rn2(2)) (void)mongets(mtmp, (mm != PM_ETTIN) ?
 				    BOULDER : CLUB);
 		break;
-	    case S_RUBMONST:
+	    case S_GOLEM:
 		if (mm == PM_LIGHTNINGROD) {
 		    (void) mongets(mtmp, POT_SPEED);
 		    (void) mongets(mtmp, WAN_CREATE_HORDE);
@@ -2371,7 +2371,7 @@ register int	mmflags;
 		mitem = CANDELABRUM_OF_INVOCATION;
 	} else if (mndx == PM_CROESUS) {
 		mitem = TWO_HANDED_SWORD;
-	} else if (ptr->msound == MS_NEMESIS && ptr->mlet != S_NEMESE ) {
+	} else if (ptr->msound == MS_NEMESIS) {
 		mitem = BELL_OF_OPENING; /* prevent new random nemesis monsters from dropping the bell --Amy */
 	} else if (mndx == PM_PESTILENCE) {
 		mitem = POT_SICKNESS;
@@ -2452,7 +2452,7 @@ register int	mmflags;
 			monkilled(mtmp, "", AD_PHYS);
 	} 
 	if (mndx == PM_SHOCKING_SPHERE && Role_if(PM_ACID_MAGE) && Is_nemesis(&u.uz) ) {
-			(void) mon_spec_polyX(mtmp,  &mons[PM_LIGHTNING_PROOF_WALL], 0L, FALSE, FALSE, FALSE, FALSE);
+			(void) mon_spec_polyX(mtmp,  &mons[PM_LIGHTNING_PROOF_BARRIER], 0L, FALSE, FALSE, FALSE, FALSE);
 	} 
 
 

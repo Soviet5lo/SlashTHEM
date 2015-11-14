@@ -70,16 +70,10 @@
 #define S_LIZARD	58
 #define S_BAD_FOOD      59
 #define S_BAD_COINS     60
-#define S_NEMESE     61
-#define S_GRUE     62
-#define S_WALLMONST     63
-#define S_RUBMONST     64
-#define S_ARCHFIEND     65
-
-#define S_WORM_TAIL     66
-#define S_MIMIC_DEF     67
+#define S_WORM_TAIL     61
+#define S_MIMIC_DEF     62
                         
-#define MAXMCLASSES 68  /* number of monster classes */
+#define MAXMCLASSES 63  /* number of monster classes */
 #define MISCMCLASSES 2  /* currently only wormtail and mimicdef*/
 
 #if 0	/* moved to decl.h so that makedefs.c won't see them */
@@ -150,18 +144,6 @@ extern uchar monsyms[MAXMCLASSES];		/* current class symbols */
 #define DEF_LIZARD	':'
 #define DEF_BAD_FOOD    '%'
 #define DEF_BAD_COINS   '$'
-#define DEF_NEMESE   '§'
-#define DEF_GRUE   '­.'
-#define DEF_WALLMONST   '°'
-#define DEF_RUBMONST   '7'
-#define DEF_ARCHFIEND   '9'
-
-/* #define DEF_NEMESE   '§'
-#define DEF_GRUE   '­.'
-#define DEF_WALLMONST   '°'
-#define DEF_RUBMONST   '7'
-#define DEF_ARCHFIEND   '9'
- */
 
 #define DEF_INVISIBLE	'I'
 #define DEF_WORM_TAIL	'~'

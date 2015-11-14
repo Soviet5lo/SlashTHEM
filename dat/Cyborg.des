@@ -85,28 +85,28 @@ TRAP:random,random
 TRAP:random,random
 TRAP:random,random
 # Monsters on siege duty.
-MONSTER:'.',random,(14,00),hostile
-MONSTER:'.',random,(16,00),hostile
-MONSTER:'.',random,(18,00),hostile
-MONSTER:'.',random,(20,00),hostile
-MONSTER:'.',random,(22,00),hostile
-MONSTER:'.',random,(24,00),hostile
-MONSTER:'.',random,(26,00),hostile
-MONSTER:'.',random,(28,00),hostile
-MONSTER:'.',random,(30,00),hostile
-MONSTER:'.',random,(32,00),hostile
-MONSTER:'.',random,(34,00),hostile
-MONSTER:'.',random,(36,00),hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
+MONSTER:'U',random,(14,00),hostile
+MONSTER:'U',random,(16,00),hostile
+MONSTER:'U',random,(18,00),hostile
+MONSTER:'U',random,(20,00),hostile
+MONSTER:'U',random,(22,00),hostile
+MONSTER:'U',random,(24,00),hostile
+MONSTER:'U',random,(26,00),hostile
+MONSTER:'U',random,(28,00),hostile
+MONSTER:'U',random,(30,00),hostile
+MONSTER:'U',random,(32,00),hostile
+MONSTER:'U',random,(34,00),hostile
+MONSTER:'U',random,(36,00),hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
 
 #
 #	The "locate" level for the quest.
@@ -218,33 +218,33 @@ TRAP:"anti magic",random
 TRAP:"anti magic",random
 TRAP:"anti magic",random
 # Random monsters.
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
 
 #
 #	The "goal" level for the quest.
@@ -319,33 +319,33 @@ TRAP:random,random
 TRAP:random,random
 # Random monsters.
 MONSTER:'@',"Master Brain",(50,06),hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
 
 #
 #	The "fill" levels for the quest.
@@ -372,12 +372,12 @@ OBJECT: random, random, random
 OBJECT: random, random, random
 OBJECT: random, random, random
 #
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'°',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'@',random,random,hostile
 #
 TRAP: random, random
 TRAP: random, random
@@ -403,14 +403,14 @@ OBJECT: random, random, random
 OBJECT: random, random, random
 OBJECT: random, random, random
 #
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'.',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
-MONSTER:'°',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'U',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
+MONSTER:'@',random,random,hostile
 #
 TRAP: random, random
 TRAP: random, random

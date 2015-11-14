@@ -191,7 +191,7 @@ moveloop()
 			if (!rn2(xtraclock)) {
 
 				randsp = (rn2(14) + 2);
-				randmnst = (rn2(181) + 1);
+				randmnst = (rn2(166) + 1);
 				randmnsx = (rn2(100) + 1);
 
 				if (wizard || !rn2(10)) pline("You suddenly feel a surge of tension!");
@@ -317,24 +317,8 @@ moveloop()
 		 	    (void) makemon(mkclass(S_BAD_FOOD,0), 0, 0, NO_MM_FLAGS);
 			else if (randmnst < 165)
 		 	    (void) makemon(mkclass(S_BAD_COINS,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 166) {
-				if (randmnsx < 96)
+			else if (randmnst < 166)
 		 	    (void) makemon(mkclass(S_HUMAN,0), 0, 0, NO_MM_FLAGS);
-				else
-		 	    (void) makemon(mkclass(S_NEMESE,0), 0, 0, NO_MM_FLAGS);
-				}
-			else if (randmnst < 171)
-		 	    (void) makemon(mkclass(S_GRUE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 176)
-		 	    (void) makemon(mkclass(S_WALLMONST,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 180)
-		 	    (void) makemon(mkclass(S_RUBMONST,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 181) {
-				if (randmnsx < 99)
-		 	    (void) makemon(mkclass(S_HUMAN,0), 0, 0, NO_MM_FLAGS);
-				else
-		 	    (void) makemon(mkclass(S_ARCHFIEND,0), 0, 0, NO_MM_FLAGS);
-				}
 			else
 		 	    (void) makemon((struct permonst *)0, 0, 0, NO_MM_FLAGS);
 

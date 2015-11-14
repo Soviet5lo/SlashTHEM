@@ -1006,7 +1006,7 @@ not_special:
 	if (can_tunnel) flag |= ALLOW_DIG;
 	if (is_human(ptr) || ptr == &mons[PM_MINOTAUR]) flag |= ALLOW_SSM;
 	if (is_undead(ptr) && ptr->mlet != S_GHOST) flag |= NOGARLIC;
-	if (throws_rocks(ptr) || passes_walls(ptr) || amorphous(ptr) || is_whirly(ptr) || ptr->mlet == S_NEMESE || ptr->mlet == S_ARCHFIEND || ptr->msound == MS_NEMESIS || ptr->geno & G_UNIQ ||
+	if (throws_rocks(ptr) || passes_walls(ptr) || amorphous(ptr) || is_whirly(ptr) || ptr->msound == MS_NEMESIS || ptr->geno & G_UNIQ ||
 				verysmall(ptr) || slithy(ptr) || ptr == &mons[PM_BLACK_MARKETEER]) flag |= ALLOW_ROCK;
 /* Boulder forts will be a lot less effective at holding dangerous monsters at bay. --Amy */
 	if (can_open) flag |= OPENDOOR;

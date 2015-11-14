@@ -242,7 +242,6 @@
 				 (ptr)->mlet == S_FUNGUS ||           \
 				 (ptr)->mlet == S_VORTEX ||           \
 				 (ptr)->mlet == S_LIGHT ||            \
-				 (ptr)->mlet == S_GRUE ||            \
 				((ptr)->mlet == S_ELEMENTAL &&        \
 				 (ptr) != &mons[PM_STALKER]) ||       \
 				((ptr)->mlet == S_GOLEM &&            \
@@ -251,7 +250,6 @@
 				 (ptr) != &mons[PM_LEATHER_GOLEM]) || \
 				 noncorporeal(ptr))
 #define vegetarian(ptr)		(vegan(ptr) || \
-				 (ptr)->mlet == S_RUBMONST ||            \
 				((ptr)->mlet == S_PUDDING &&         \
 				 (ptr) != &mons[PM_BLACK_PUDDING]))
 /* For vampires */

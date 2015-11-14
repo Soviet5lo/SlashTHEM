@@ -1931,7 +1931,7 @@ register struct monst *mtmp;
 	}
 #endif
 	if(mtmp->iswiz) wizdead();
-	if(mtmp->data->msound == MS_NEMESIS && mtmp->data->mlet != S_NEMESE) nemdead();
+	if(mtmp->data->msound == MS_NEMESIS) nemdead();
 #ifdef RECORD_ACHIEVE
         if(mtmp->data == &mons[PM_MEDUSA])
             achieve.killed_medusa = 1;

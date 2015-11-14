@@ -159,11 +159,6 @@ const char def_monsyms[MAXMCLASSES] = {
 	DEF_LIZARD,
 	DEF_BAD_FOOD,
 	DEF_BAD_COINS,		/* 60 */
-	DEF_NEMESE,
-	DEF_GRUE,
-	DEF_WALLMONST,
-	DEF_RUBMONST,
-	DEF_ARCHFIEND,
 	DEF_WORM_TAIL,
 	DEF_MIMIC_DEF,
 };
@@ -201,7 +196,7 @@ const char * const monexplain[MAXMCLASSES] = {
 
     "human or elf",		"ghost",		"golem",
     "major demon",		"sea monster",		"lizard",
-    "piece of food",	"pile of coins", "nemese",		"grue",		"wall monster",		"rub monster",		"archfiend",		
+    "piece of food",		"pile of coins",
     "long worm tail",		"mimic"
 };
 
