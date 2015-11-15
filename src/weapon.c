@@ -1290,7 +1290,7 @@ int skill;
 		default: break;
 
 		}
-
+#if 0
 		if (P_SKILL(skill) == P_EXPERT) switch (skill) {
 
 		case P_DAGGER:
@@ -1507,7 +1507,7 @@ int skill;
 		default: break;
 
 		}
-
+#endif
 	}
 
 }

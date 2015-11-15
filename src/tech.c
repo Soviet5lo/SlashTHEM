@@ -86,13 +86,13 @@ STATIC_OVL NEARDATA const char *tech_names[] = {
 	"draw blood",
 	"world fall",
 	"create ammo",
-	"poke ball",
-	"attire charm",
-	"summon team ant",
+//	"poke ball",
+//	"attire charm",
+//	"summon team ant",
 	"appraisal",
-	"egg bomb",
+//	"egg bomb",
 	"booze",
-	"invoke deity",
+//	"invoke deity",
 #ifdef JEDI
 	"jedi jump",
 	"charge saber",
@@ -110,7 +110,6 @@ static const struct innate_tech
 		       {   1, T_DAZZLE, 1},
 		       {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_CREATE_AMMO, 1},
-		       {   1, T_ATTIRE_CHARM, 1},
 		       {   5, T_VANISH, 1},
 		       {   10, T_FLURRY, 1},
 		       {   15, T_REVIVE, 1},
@@ -138,8 +137,7 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	gan_tech[] = { {   1, T_CREATE_AMMO, 1},
 		       {   0, 0, 0} },
-	roc_tech[] = { {   1, T_EGG_BOMB, 1},
-		       {   1, T_FLURRY, 1},
+	roc_tech[] = { {   1, T_FLURRY, 1},
 		       {   0, 0, 0} },
 	dea_tech[] = { {   1, T_WORLD_FALL, 1},
 		       {   0, 0, 0} },
@@ -195,9 +193,7 @@ static const struct innate_tech
 	sci_tech[] = { {   1, T_RESEARCH, 1},
 		       {   1, T_TINKER, 1},
 		       {   10, T_SURGERY, 1},
-		       {   20, T_SUMMON_TEAM_ANT, 1},
 		       {   25, T_DRAW_ENERGY, 1},
-		       {   30, T_EGG_BOMB, 1},
 		       {   0, 0, 0} },
 
 	mon_tech[] = { {   1, T_PUMMEL, 1},
@@ -225,10 +221,10 @@ static const struct innate_tech
 		       {  11, T_WARD_FIRE, 1},
 		       {  13, T_WARD_COLD, 1},
 		       {  15, T_WARD_ELEC, 1},
-		       {  15, T_ATTIRE_CHARM, 1},
 		       {  17, T_SPIRIT_BOMB, 1},
 		       {  20, T_POWER_SURGE, 1},
 		       {   0, 0, 0} },
+#if 0
 	pok_tech[] = { {   1, T_POKE_BALL, 1},
 		       {   2, T_PUMMEL, 1},
 		       {   4, T_DASH, 1},
@@ -239,17 +235,16 @@ static const struct innate_tech
 		       {  13, T_WARD_ELEC, 1},
 	  	       {   15, T_CREATE_AMMO, 1},
 	  	       {   16, T_E_FIST, 1},
-	  	       {   17, T_EGG_BOMB, 1},
 	  	       {   18, T_WORLD_FALL, 1},
 		       {   20, T_DRAW_ENERGY, 1},
 		       {   22, T_RESEARCH, 1},
 		       {  25, T_G_SLAM, 1},
-		       {  26, T_SUMMON_TEAM_ANT, 1},
 		       {  27, T_BLESSING, 1},
 		       {  28, T_REVIVE, 1},
 		       {  29, T_SPIRIT_BOMB, 1},
 		       {  30, T_POWER_SURGE, 1},
 		       {   0, 0, 0} },
+#endif
 	nec_tech[] = { {   1, T_REINFORCE, 1},
 		       {   1, T_RAISE_ZOMBIES, 1},
 		       {  10, T_POWER_SURGE, 1},
@@ -280,7 +275,6 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	lun_tech[] = { {   1, T_EVISCERATE, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {  10, T_BERSERK, 1},
 		       {   0, 0, 0} },
 #ifdef YEOMAN
@@ -300,25 +294,20 @@ static const struct innate_tech
 	/* Races */
 	dop_tech[] = { {   1, T_LIQUID_LEAP, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
 	dwa_tech[] = { {   1, T_RAGE, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
 	elf_tech[] = { /* Put Tech here */
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
 	gno_tech[] = { {   1, T_VANISH, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   7, T_TINKER, 1},
 		       {   0, 0, 0} },
 	clk_tech[] = { {   1, T_FLURRY, 1},
 		       {   1, T_VANISH, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   1, T_BOOZE, 1},
 		       {   5, T_TINKER, 1},
 		       {   7, T_SIGIL_DISCHARGE, 1},
@@ -329,15 +318,12 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	ogr_tech[] = { {   1, T_FLURRY, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   10, T_BERSERK, 1},
 		       {   15, T_PRIMAL_ROAR, 1},
 		       {   20, T_CRIT_STRIKE, 1},
 		       {   0, 0, 0} },
 	ung_tech[] = { {   1, T_WORLD_FALL, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
-		       {   1, T_POKE_BALL, 1},
 		       {   1, T_RESEARCH, 1},
 		       {   1, T_PRACTICE, 1},
 		       {   1, T_CALM_STEED, 1},
@@ -348,24 +334,19 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	hob_tech[] = { {   1, T_BLINK, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
 	kob_tech[] = { {   10, T_TINKER, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} },
 	lyc_tech[] = { {   1, T_EVISCERATE, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {  10, T_BERSERK, 1},
 		       {   0, 0, 0} },
 	vam_tech[] = { {   1, T_DAZZLE, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   1, T_DRAW_BLOOD, 1},
 		       {   0, 0, 0} },
 	def_tech[] = { {   1, T_APPRAISAL, 1}, /* everyone is supposed to get this --Amy */
-		       {   1, T_INVOKE_DEITY, 1},
 		       {   0, 0, 0} };
 	/* Orc */
 
@@ -852,6 +833,7 @@ int tech_no;
                 techt_inuse(tech_no) = rnd((int) (techlev(tech_no)/6 + 1)) + 2;
                 t_timeout = rn1(1000,500);
 		break;
+#if 0
             case T_INVOKE_DEITY: /* ask for healing if your alignment record is positive --Amy */
 
 			if (u.ualign.record < 0) {
@@ -889,6 +871,7 @@ int tech_no;
 			u.uconduct.gnostic++;	/* you just tried to access your god */
                 t_timeout = rn1(1500,1500);
 		break;
+#endif
             case T_APPRAISAL:
 			if(!uwep) {
 		    You("are not wielding anything!");
@@ -1766,6 +1749,7 @@ int tech_no;
 		u.uen -= 25;
 		t_timeout = 50;
 		break;
+#if 0
 	    case T_POKE_BALL:
 
 		if (u.uswallow) {
@@ -1894,6 +1878,7 @@ int tech_no;
 
 		t_timeout = rn1(1500,500);
 		break;
+#endif
 	    case T_WORLD_FALL:
 
 		You("scream \"EYGOORTS-TOGAAL, JEZEHH!\"");
@@ -1930,7 +1915,7 @@ int tech_no;
 
 	      t_timeout = rn1(250,250);
 	      break;
-
+#if 0
 	    case T_EGG_BOMB:
 
 	    You("create some stoning grenades.");
@@ -1957,7 +1942,7 @@ int tech_no;
 
 	      t_timeout = rn1(1000,1000);
 	      break;
-
+#endif
 	    case T_BOOZE:
 
 	    You("procure some refreshing drinks.");

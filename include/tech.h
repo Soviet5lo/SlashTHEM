@@ -88,26 +88,20 @@ struct blitz_tab {
 #define T_POWER_SURGE 	39
 #define T_SPIRIT_BOMB 	40
 #define T_DRAW_BLOOD	41
-
+/* Added by Slash'EM Extended */
 #define T_WORLD_FALL	42
 #define T_CREATE_AMMO	43
-#define T_POKE_BALL	44
-#define T_ATTIRE_CHARM	45
-#define T_SUMMON_TEAM_ANT	46
-#define T_APPRAISAL	47
-#define T_EGG_BOMB	48
-#define T_BOOZE	49
-
-#define T_INVOKE_DEITY	50
+#define T_APPRAISAL	44
+#define T_BOOZE		45
 
 #ifdef JEDI
-#define T_JEDI_JUMP	51
-#define T_CHARGE_SABER	52
-#define T_TELEKINESIS	53
+#define T_JEDI_JUMP	46
+#define T_CHARGE_SABER	47
+#define T_TELEKINESIS	48
  
-#define MAXTECH 54
+#define MAXTECH 49
 #else /* JEDI */
-#define MAXTECH 51
+#define MAXTECH 46
 #endif /* JEDI */
 
 
