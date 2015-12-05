@@ -23,8 +23,6 @@ register struct obj *otmp;
 		return(2);
 /*		break; */
 # endif
-	case SCR_STANDARD_ID:
-		return(5);
 	case SCR_HEALING:
 	case SCR_LIGHT:
 	case SCR_GOLD_DETECTION:

@@ -3221,12 +3221,10 @@ wand_explode(obj, hero_broke)
     case WAN_ENTRAPPING:
     case WAN_MAGIC_MAPPING:
     case WAN_DARKNESS:
-    case WAN_TRAP_CREATION:
     case WAN_OBJECTION:
     case WAN_DETECT_MONSTERS:
     case WAN_IDENTIFY:
     case WAN_REMOVE_CURSE:
-    case WAN_PUNISHMENT:
     case WAN_OPENING:
     case WAN_WONDER:
     case WAN_BUGGING:

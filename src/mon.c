@@ -2361,7 +2361,7 @@ xkilled(mtmp, dest)
 		/* of course the acid potions are useful for other races too, if they run out of lizard corpses */
 
 #ifdef EASY_MODE
-		if (!rn2(100)) otmp = mksobj_at(SCR_STANDARD_ID, x, y, TRUE, FALSE);
+		if (!rn2(100)) otmp = mksobj_at(SCR_IDENTIFY, x, y, TRUE, FALSE);
 		if (!rn2(40)) otmp = mksobj_at(SCR_HEALING, x, y, TRUE, FALSE);
 #endif /* EASY_MODE */
 		if (!rn2(20) /*&& !(mvitals[mndx].mvflags & G_NOCORPSE) && !(nohands(mdat))*/

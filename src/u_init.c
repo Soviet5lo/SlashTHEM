@@ -732,7 +732,7 @@ static struct trobj AlwaysStartItem[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj AlwaysStartItemB[] = {
-	{ SCR_STANDARD_ID, 0, SCROLL_CLASS, 2, 0 },
+	{ SCR_IDENTIFY, 0, SCROLL_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 #endif /* EASY_MODE */

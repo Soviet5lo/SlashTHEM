@@ -192,7 +192,6 @@ struct obj *otmp;
 		}
 		break;
 	case WAN_SPEED_MONSTER:
-	case WAN_HASTE_MONSTER:
 		if (!resist(mtmp, otmp->oclass, 0, NOTELL)) {
 			mon_adjust_speed(mtmp, 1, otmp);
 			m_dowear(mtmp, FALSE); /* might want speed boots */
@@ -1205,7 +1204,7 @@ polyuse(objhdr, mat, minwt)
 #ifdef MAIL
 	if (otmp->otyp == SCR_MAIL) continue;
 #endif
-	if (otmp->otyp == SCR_HEALING || otmp->otyp == SCR_STANDARD_ID) continue;
+	if (otmp->otyp == SCR_HEALING) continue;
 
 	if (((int) objects[otmp->otyp].oc_material == mat) ==
 		(rn2(minwt + 1) != 0)) {
@@ -1331,7 +1330,7 @@ struct obj *obj;
 #ifdef MAIL
 	if (obj->otyp == SCR_MAIL) return;
 #endif
-	if (obj->otyp == SCR_HEALING || obj->otyp == SCR_STANDARD_ID) return;
+	if (obj->otyp == SCR_HEALING) return;
 
 	obj_zapped = TRUE;
 
@@ -1494,15 +1493,6 @@ poly_obj(obj, id)
 		unpoly = FALSE;	/* WAC -- no change! */
 #endif
 	}
-
-	if (obj->otyp == SCR_STANDARD_ID) {
-		otmp->otyp = SCR_STANDARD_ID;
-#ifdef UNPOLYPILE
-		unpoly = FALSE;	/* WAC -- no change! */
-#endif
-	}
-	
-
 
 	/* avoid abusing eggs laid by you */
 	if (obj->otyp == EGG && obj->spe) {
@@ -1962,7 +1952,6 @@ struct obj *obj, *otmp;
 	case WAN_SLOW_MONSTER:		/* no effect on objects */
 	case SPE_SLOW_MONSTER:
 	case WAN_SPEED_MONSTER:
-	case WAN_HASTE_MONSTER:
 	case WAN_NOTHING:
 	case SPE_HEALING:
 	case SPE_EXTRA_HEALING:
@@ -2155,32 +2144,6 @@ register struct obj *obj;
 	boolean known = FALSE;
 
 	switch(obj->otyp) {
-		case WAN_TRAP_CREATION:
-		known = TRUE;
-		    You_feel("endangered!!");
-		{
-			int rtrap;
-		    int i, j, bd = 1;
-
-		      for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
-				if (!isok(u.ux + i, u.uy + j)) continue;
-				if ((levl[u.ux + i][u.uy + j].typ != ROOM && levl[u.ux + i][u.uy + j].typ != CORR) || MON_AT(u.ux + i, u.uy + j)) continue;
-				if (t_at(u.ux + i, u.uy + j)) continue;
-
-			      rtrap = rnd(TRAPNUM-1);
-				if (rtrap == HOLE) rtrap = PIT;
-				if (rtrap == MAGIC_PORTAL) rtrap = PIT;
-				if (rtrap == TRAPDOOR && !Can_dig_down(&u.uz)) rtrap = PIT;
-				if (rtrap == LEVEL_TELEP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == TELEP_TRAP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == ROLLING_BOULDER_TRAP) rtrap = ROCKTRAP;
-				if (rtrap == NO_TRAP) rtrap = ARROW_TRAP;
-
-				(void) maketrap(u.ux + i, u.uy + j, rtrap);
-			}
-		}
-		break;
-
 		case WAN_LIGHT:
 		case SPE_LIGHT:
 			litroom(TRUE,obj);
@@ -2343,11 +2306,6 @@ register struct obj *obj;
 			for(obj = invent; obj ; obj = obj->nobj)
 				if (!rn2(5) && obj->cursed)	uncurse(obj);
 
-			break;
-		case WAN_PUNISHMENT:
-			known = TRUE;
-			You_feel("someone is punishing you for your misbehavior!");
-			punishx();
 			break;
 		case WAN_CHARGING:
 			known = TRUE;
@@ -2863,30 +2821,6 @@ boolean ordinary;
 		    /* Note that this is _not_ very fast */
 		    HFast |= FROMOUTSIDE;
 		    break;
-		case WAN_HASTE_MONSTER:
-
-		makeknown(WAN_HASTE_MONSTER);
-
-		if(Wounded_legs
-#ifdef STEED
-		   && !u.usteed	/* heal_legs() would heal steeds legs */
-#endif
-						) {
-			heal_legs();
-			break;
-		}
-
-		if (!Very_fast)
-			You("are suddenly moving %sfaster.",
-				Fast ? "" : "much ");
-		else {
-			Your("%s get new energy.",
-				makeplural(body_part(LEG)));
-		}
-		exercise(A_DEX, TRUE);
-		incr_itimeout(&HFast, rn1(10, 50));
-
-		break;
 		case WAN_HEALING:
 		   You("begin to feel better.");
 		   healup( d(5,6) + rnd(u.ulevel),0,0,0);
@@ -3102,7 +3036,6 @@ struct obj *obj;	/* wand or spell */
 		case WAN_SLOW_MONSTER:
 		case SPE_SLOW_MONSTER:
 		case WAN_SPEED_MONSTER:
-		case WAN_HASTE_MONSTER:
 		case SPE_HEALING:
 		case SPE_EXTRA_HEALING:
 		case SPE_FULL_HEALING:

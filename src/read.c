@@ -2435,17 +2435,6 @@ register struct obj	*sobj;
 		    identify_pack(0);
 		}
 		return(1);
-	case SCR_STANDARD_ID: /* always identifies exactly one item --Amy */
-		makeknown(SCR_STANDARD_ID);
-		pline("This is a standard identify scroll.");
-
-		if (carried(sobj)) useup(sobj);
-		else useupf(sobj, 1L);
-
-		if(invent) {
-		    identify_pack(1);
-		}
-		return(1);
 	case SCR_HEALING: /* a basic healing item that can be used to - who would have guessed? - cure wounds! --Amy */
 		makeknown(SCR_HEALING);
 		You("feel healthier!");

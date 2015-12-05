@@ -1568,11 +1568,10 @@ struct monst *mtmp;
 #define MUSE_POT_RADIUM 23
 #define MUSE_WAN_ACID 24
 #define MUSE_SCR_TRAP_CREATION 25
-#define MUSE_WAN_TRAP_CREATION 26
-#define MUSE_SCR_FLOOD 27
-#define MUSE_SCR_ICE 28
-#define MUSE_SCR_CLOUDS 29
-#define MUSE_WAN_SOLAR_BEAM 30
+#define MUSE_SCR_FLOOD 26
+#define MUSE_SCR_ICE 27
+#define MUSE_SCR_CLOUDS 28
+#define MUSE_WAN_SOLAR_BEAM 29
 /* Select an offensive item/action for a monster.  Returns TRUE iff one is
  * found.
  */
@@ -1738,11 +1737,6 @@ struct monst *mtmp;
 		if(obj->otyp == SCR_CLOUDS) {
 			m.offensive = obj;
 			m.has_offense = MUSE_SCR_CLOUDS;
-		}
-		nomore(MUSE_WAN_TRAP_CREATION);
-		if(obj->otyp == WAN_TRAP_CREATION) {
-			m.offensive = obj;
-			m.has_offense = MUSE_WAN_TRAP_CREATION;
 		}
 		/* we can safely put this scroll here since the locations that
 		 * are in a 1 square radius are a subset of the locations that
@@ -2173,38 +2167,6 @@ struct monst *mtmp;
 
 		return 2;
 
-	case MUSE_WAN_TRAP_CREATION:
-
-		mzapmsg(mtmp, otmp, FALSE);
-		otmp->spe--;
-		makeknown(otmp->otyp);
-	      You_feel("endangered!!");
-		{
-			int rtrap;
-		    int i, j, bd;
-			bd = 1;
-			if (!rn2(5)) bd += rnd(1);
-
-		      for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
-				if (!isok(u.ux + i, u.uy + j)) continue;
-				if ((levl[u.ux + i][u.uy + j].typ != ROOM && levl[u.ux + i][u.uy + j].typ != CORR) || MON_AT(u.ux + i, u.uy + j)) continue;
-				if (t_at(u.ux + i, u.uy + j)) continue;
-
-			      rtrap = rnd(TRAPNUM-1);
-				if (rtrap == HOLE) rtrap = PIT;
-				if (rtrap == MAGIC_PORTAL) rtrap = PIT;
-				if (rtrap == TRAPDOOR && !Can_dig_down(&u.uz)) rtrap = PIT;
-				if (rtrap == LEVEL_TELEP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == TELEP_TRAP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == ROLLING_BOULDER_TRAP) rtrap = ROCKTRAP;
-				if (rtrap == NO_TRAP) rtrap = ARROW_TRAP;
-
-				(void) maketrap(u.ux + i, u.uy + j, rtrap);
-			}
-		}
-
-		return 2;
-
 	case MUSE_SCR_EARTH:
 	    {
 		/* TODO: handle steeds */
@@ -2489,11 +2451,10 @@ struct monst *mtmp;
 		case 21: return POT_RADIUM;
 		case 22: return WAN_ACID;
 		case 23: return SCR_TRAP_CREATION;
-		case 24: return WAN_TRAP_CREATION;
-		case 25: return SCR_FLOOD;
-		case 26: return SCR_ICE;
-		case 27: return SCR_CLOUDS;
-		case 28: return WAN_SOLAR_BEAM;
+		case 24: return SCR_FLOOD;
+		case 25: return SCR_ICE;
+		case 26: return SCR_CLOUDS;
+		case 27: return WAN_SOLAR_BEAM;
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -2510,7 +2471,6 @@ struct monst *mtmp;
 #define MUSE_BULLWHIP 8
 #define MUSE_POT_POLYMORPH 9
 #define MUSE_WAN_CLONE_MONSTER 10
-#define MUSE_WAN_HASTE_MONSTER 11
 
 boolean
 find_misc(mtmp)
@@ -2605,12 +2565,6 @@ struct monst *mtmp;
 				&& mtmp->mspeed != MFAST && !mtmp->isgd) {
 			m.misc = obj;
 			m.has_misc = MUSE_WAN_SPEED_MONSTER;
-		}
-		nomore(MUSE_WAN_HASTE_MONSTER);
-		if(obj->otyp == WAN_HASTE_MONSTER && obj->spe > 0
-				&& mtmp->mspeed != MFAST && !mtmp->isgd) {
-			m.misc = obj;
-			m.has_misc = MUSE_WAN_HASTE_MONSTER;
 		}
 		nomore(MUSE_POT_SPEED);
 		if(obj->otyp == POT_SPEED && mtmp->mspeed != MFAST
@@ -2738,7 +2692,6 @@ skipmsg:
 		}
 		return 2;
 	case MUSE_WAN_SPEED_MONSTER:
-	case MUSE_WAN_HASTE_MONSTER:
 		mzapmsg(mtmp, otmp, TRUE);
 		otmp->spe--;
 		mon_adjust_speed(mtmp, 1, otmp);
@@ -2941,7 +2894,7 @@ struct monst *mtmp;
 			|| pm->mlet == S_KOP
 # endif
 		) return 0;
-	switch (rn2(10)) {
+	switch (rn2(9)) {
 
 		case 0: return POT_GAIN_LEVEL;
 		case 1: return WAN_MAKE_INVISIBLE;
@@ -2952,7 +2905,6 @@ struct monst *mtmp;
 		case 6: return BULLWHIP;
 		case 7: return POT_POLYMORPH;
 		case 8: return WAN_CLONE_MONSTER;
-		case 9: return WAN_HASTE_MONSTER;
 
 	}
 	/*NOTREACHED*/
@@ -2973,7 +2925,7 @@ struct obj *obj;
 
 	if (typ == WAN_MAKE_INVISIBLE || typ == POT_INVISIBILITY)
 	    return (boolean)(!mon->minvis && !mon->invis_blkd && !attacktype(mon->data, AT_GAZE));
-	if (typ == WAN_SPEED_MONSTER || typ == WAN_HASTE_MONSTER || typ == POT_SPEED)
+	if (typ == WAN_SPEED_MONSTER || typ == POT_SPEED)
 	    return (boolean)(mon->mspeed != MFAST);
 
 	switch (obj->oclass) {
@@ -2989,7 +2941,6 @@ struct obj *obj;
 		    typ == WAN_TELEPORTATION ||
 		    typ == WAN_CREATE_MONSTER ||
 		    typ == WAN_SUMMON_UNDEAD ||
-		    typ == WAN_TRAP_CREATION ||
 		    typ == WAN_CREATE_HORDE ||
 		    typ == WAN_DRAINING	||
 		    typ == WAN_HEALING ||

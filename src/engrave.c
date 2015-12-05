@@ -1258,12 +1258,10 @@ doengrave()
 		    case WAN_ENTRAPPING:
 		    case WAN_MAGIC_MAPPING:
 		    case WAN_DARKNESS:
-		    case WAN_TRAP_CREATION:
 		    case WAN_DETECT_MONSTERS:
 		    case WAN_OBJECTION:
 		    case WAN_IDENTIFY:
 		    case WAN_REMOVE_CURSE:
-		    case WAN_PUNISHMENT:
 		    case WAN_WISHING:
 		    case WAN_ACQUIREMENT:
 		    case WAN_BUGGING:
@@ -1309,7 +1307,6 @@ doengrave()
 			}
 			break;
 		    case WAN_SPEED_MONSTER:
-		    case WAN_HASTE_MONSTER:
 			if (!Blind) {
 			   Sprintf(post_engr_text,
 				   "The bugs on the %s speed up!",

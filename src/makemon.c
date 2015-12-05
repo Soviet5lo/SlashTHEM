@@ -233,7 +233,7 @@ register struct monst *mtmp;
 	/*struct obj *otmpX;*/
 
 	if (!rn2(100)) {
-			struct obj *otmpZ = mksobj(SCR_STANDARD_ID, TRUE, FALSE);
+			struct obj *otmpZ = mksobj(SCR_IDENTIFY, TRUE, FALSE);
 			otmpZ->quan = 1;
 			otmpZ->owt = weight(otmpZ);
 			(void) mpickobj(mtmp, otmpZ);

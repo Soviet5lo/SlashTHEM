@@ -3491,7 +3491,7 @@ register boolean force, here;
 
 		    switch (obj->oclass) {
 		    case SCROLL_CLASS:
-			if  (obj->otyp != SCR_HEALING && obj->otyp != SCR_STANDARD_ID
+			if  (obj->otyp != SCR_HEALING
 #ifdef MAIL
 		    && obj->otyp != SCR_MAIL
 #endif
