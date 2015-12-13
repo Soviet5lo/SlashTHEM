@@ -2293,8 +2293,8 @@ register struct obj *obj;
 			known = TRUE;
 			You_feel("insightful!");
 			if (invent) {
-			    /* rn2(5) agrees w/seffects() */
-			    identify_pack(rn2(5));
+			    /* Only identify one object per zap */
+			    identify_pack(1);
 			}
 			exercise(A_WIS, TRUE);
 			break;
