@@ -575,7 +575,7 @@ DRGN_ARMR("yellow dragon scales", 0, ACID_RES,   1, 500, 7, CLR_YELLOW),
 /* Cloaks */
 /*  'cope' is not a spelling mistake... leave it be */
 CLOAK("mummy wrapping", (char *)0,
-		1, 0,	0,	    1, 0,  3,  2, 10, 1, CLOTH, CLR_GRAY),
+		1, 0,	0,	    0, 0,  3,  2, 10, 1, CLOTH, CLR_GRAY),
 CLOAK("orcish cloak", "coarse mantelet",
 		0, 0,	0,	    6, 0, 10, 40, 10, 2, CLOTH, CLR_BLACK),
 CLOAK("dwarvish cloak", "hooded cloak",
@@ -587,7 +587,7 @@ CLOAK("elven cloak", "faded pall",
 CLOAK("lab coat", "white coat",
 		0, 1,   POISON_RES,10, 0, 10, 60,  9, 3, CLOTH, CLR_WHITE),
 CLOAK("leather cloak", (char *)0,
-		1, 0,	0,	    7, 0, 15, 40,  9, 1, LEATHER, CLR_BROWN),
+		1, 0,	0,	    8, 0, 15, 40,  9, 1, LEATHER, CLR_BROWN),
 CLOAK("plasteel cloak", (char *)0,
 		1, 0,	0,	    1, 0, 10, 70,  8, 2, PLASTIC, CLR_WHITE),
 CLOAK("cloak of warmth", "metal cloak",
@@ -976,14 +976,14 @@ WEPTOOL("spoon", (char *)0,
 #ifdef LIGHTSABERS
 # ifdef D_SABER
 WEPTOOL("pick-axe", (char *)0,
-	1, 0, 0, 0, 15, 80,   50,  6,  3, 0, WHACK,  P_PICK_AXE, IRON, HI_METAL),
+	1, 0, 0, 0, 16, 80,   50,  6,  3, 0, WHACK,  P_PICK_AXE, IRON, HI_METAL),
 # else
 WEPTOOL("pick-axe", (char *)0,
-	1, 0, 0, 0, 16, 80,   50,  6,  3, 0, WHACK,  P_PICK_AXE, IRON, HI_METAL),
+	1, 0, 0, 0, 17, 80,   50,  6,  3, 0, WHACK,  P_PICK_AXE, IRON, HI_METAL),
 # endif
 #else	/* LIGHTSABERS */
 WEPTOOL("pick-axe", (char *)0,
-	1, 0, 0, 0, 19, 80,   50,  6,  3, 0, WHACK,  P_PICK_AXE, IRON, HI_METAL),
+	1, 0, 0, 0, 20, 80,   50,  6,  3, 0, WHACK,  P_PICK_AXE, IRON, HI_METAL),
 #endif
 WEPTOOL("fishing pole", (char *)0,
 	1, 0, 0, 0,  5,  30,  50,  2,  6, 0, WHACK,  P_POLEARMS, METAL, HI_METAL),
@@ -991,7 +991,7 @@ WEPTOOL("grappling hook", "iron hook",
 	0, 0, 0, 0,  5,  30,  50,  2,  6, 0, WHACK,  P_FLAIL, IRON, HI_METAL),
 /* 3.4.1: unicorn horn left classified as "magic" */
 WEPTOOL("unicorn horn", (char *)0,
-	1, 1, 0, 1,  1,  20, 100, 12, 12, 0, PIERCE, P_UNICORN_HORN, BONE, CLR_WHITE),
+	1, 1, 0, 1,  0,  20, 100, 12, 12, 0, PIERCE, P_UNICORN_HORN, BONE, CLR_WHITE),
 /* WEPTOOL("torch", (char *)0,
 	   1, 0, 0,  1,  25, 8, 5, 2, WHACK, P_CLUB, WOOD, HI_WOOD), */
 
