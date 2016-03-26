@@ -888,6 +888,7 @@ die:
 	  dump("", "");
 	  dump_screen();
 	}
+	(void)doredraw(); /* prevent hiding half of the bottom lime */
 #endif /* DUMP_LOG */
 
 	} /* if (!goexplore) */
