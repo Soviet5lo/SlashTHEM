@@ -2364,8 +2364,7 @@ xkilled(mtmp, dest)
 		if (!rn2(100)) otmp = mksobj_at(SCR_IDENTIFY, x, y, TRUE, FALSE);
 		if (!rn2(40)) otmp = mksobj_at(SCR_HEALING, x, y, TRUE, FALSE);
 #endif /* EASY_MODE */
-		if (!rn2(20) /*&& !(mvitals[mndx].mvflags & G_NOCORPSE) && !(nohands(mdat))*/
-	/* lowered overall chance, but see below for a chance to get extra items --Amy */
+		if (!rn2(6) && !(mvitals[mndx].mvflags & G_NOCORPSE) && !(nohands(mdat))
 #ifdef KOPS
 					&& mdat->mlet != S_KOP
 #endif
@@ -2373,34 +2372,9 @@ xkilled(mtmp, dest)
 			int typ;
 
 			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			if (!rn2(40)) {
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE); /* small chance to get even more stuff --Amy */
-			}
-			if (!rn2(80)) {
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE); /* small chance to get even more stuff --Amy */
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			}
-			if (!rn2(160)) {
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE); /* small chance to get even more stuff --Amy */
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			}
-			if (!rn2(320)) {
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE); /* small chance to get even more stuff --Amy */
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			}
-			if (!rn2(640)) {
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE); /* small chance to get even more stuff --Amy */
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			otmp = mkobj_at(RANDOM_CLASS, x, y, TRUE);
-			}
 			/* Don't create large objects from small monsters */
 			typ = otmp->otyp;
-			if (mdat->msize < MZ_HUMAN && typ != FOOD_RATION 
+			if (mdat->msize < MZ_HUMAN && typ != FOOD_RATION
 			    && typ != LEASH
 			    && typ != FIGURINE
 			    && (otmp->owt > 3 ||
