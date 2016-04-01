@@ -49,6 +49,7 @@ STATIC_DCL boolean FDECL(list_vanquished, (CHAR_P, BOOLEAN_P));
 extern char msgs[][BUFSZ];
 extern int lastmsg;
 extern void NDECL(dump_spells);
+extern void NDECL(dump_techniques);
 void FDECL(do_vanquished, (int, BOOLEAN_P, BOOLEAN_P));
 STATIC_DCL void FDECL(list_genocided, (int, BOOLEAN_P, BOOLEAN_P));
 #else
@@ -550,6 +551,7 @@ boolean taken;
 	if (dump_fp) {
 	  dump_enlightenment((int) (how >= PANICKED ? 1 : 2));
 	  dump_spells();
+	  dump_techniques();
 	}
 #endif
 
