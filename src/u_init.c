@@ -2352,8 +2352,10 @@ u_init()
 	u.ublesscnt = 300;			/* no prayers just yet */
 
 #ifdef MORE_SPAWNS
-        u.monstertimeout = rnd(10000)+rnd(15000); /*This NEEDS to be set here, because otherwise saving/restoring will set*/
-        u.monstertimefinish = rnd(10000)+rnd(20000)+u.monstertimeout; /*a new value, allowing the player to cheat. --Amy*/
+	/* This NEEDS to be set here, because otherwise saving/restoring will set
+	 * a new value, allowing the player to cheat. --Amy */
+	u.monstertimeout = rnd(10000)+15000;
+	u.monstertimefinish = 70000L-u.monstertimeout;
 #endif
 	u.legscratching = (Role_if(PM_BLEEDER) ? 3 : 1); /*must also be set here; this may increase over time*/
 	u.next_check = 600; /* 5lo: Different method of doing attribute checks in attrib.c */

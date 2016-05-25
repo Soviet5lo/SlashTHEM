@@ -1325,7 +1325,7 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 //		enl_msg("In this game, Eevee's evolution ", "is ", "was ", mons[u.eeveelution].mname );
 		/* these two are tied together because the monstertimefinish variable defines the evolution --Amy */
 	}
-#endif
+#endif /* MORE_SPAWNS */
 	if (wizard || (!rn2(10)) || final >= 1 ) {Sprintf(buf, " turn %d", u.next_check);
 		enl_msg("Next attribute increase check ", "comes at", "would have come at", buf);
 	}
@@ -1845,7 +1845,7 @@ int final;
 		dump("  Monster spawn increase would have reached its maximum at", buf);
 //		dump("  In this game, Eevee's evolution was", mons[u.eeveelution].mname );
 	}
-#endif
+#endif /* MORE_SPAWNS */
 	if (wizard || final >= 1) {
 		Sprintf(buf, " turn %d", u.next_check);
 		dump("  Next attribute increase check would have come at", buf);

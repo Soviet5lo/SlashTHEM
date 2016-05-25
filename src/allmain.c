@@ -40,16 +40,20 @@ moveloop()
     boolean didmove = FALSE, monscanmove = FALSE;
     /* don't make it obvious when monsters will start speeding up */
     int monclock;
-    int xtraclock;
-    /*int timeout_start = rnd(10000)+rnd(15000);*/
-    /*int clock_base = rnd(10000)+rnd(20000)+timeout_start;*/
+
+    /* 5lo:
+     * <AmyBSOD\StD> Soviet5lo: monstertimeout in spork is bugged, because the value
+     * is re-initialized on save/restore. Not so in slex, where it's a you.h variable. 
+     * <AmyBSOD\StD> "Oops, now it's ultra fast respawn at T:30000 already? nevermind,
+     * save and restore" 
+     *
+     * So it's not done exactly how it is in Sporkhack.
+     */
 #ifdef MORE_SPAWNS
-	int timeout_start = u.monstertimeout;
-	int clock_base = u.monstertimefinish; /* values set in u_init */
+    int timeout_start = u.monstertimeout;
+    int clock_base = u.monstertimefinish;
 #endif
     int past_clock;
-	/*u.monstertimeout = timeout_start;*/
-	/*u.monstertimefinish = clock_base;*/
 
     flags.moonphase = phase_of_the_moon();
     if(flags.moonphase == FULL_MOON) {
@@ -125,7 +129,7 @@ moveloop()
 		    /* reallocate movement rations to monsters */
 		    for (mtmp = fmon; mtmp; mtmp = mtmp->nmon)
 			mtmp->movement += mcalcmove(mtmp);
-
+#ifdef MORE_SPAWNS
 			 /* Vanilla generates a critter every 70-ish turns.
 			  * The rate accelerates to every 50 or so below the Castle,
 			  * and 'round every 25 turns once you've done the Invocation.
@@ -147,7 +151,7 @@ moveloop()
 			  * to handle anything that comes your way, so this won't be 
 			  * dropping newbies off the edge of the planet.  -- DSR 12/2/07
 			  */
-#ifdef MORE_SPAWNS
+
 			monclock = 70;
 			if (u.uevent.udemigod) {
 				monclock = 15;
@@ -171,169 +175,13 @@ moveloop()
 					(void) makemon((struct permonst *)0, 0, 0, NO_MM_FLAGS);
 				}
 			}
-
-			xtraclock = 10000;
-			if (u.uevent.udemigod) {
-				xtraclock = 3000;
-			} else {
-				if (depth(&u.uz) > depth(&stronghold_level)) {
-					xtraclock = 7000;
-				}
-				past_clock = moves - timeout_start;
-				if (past_clock > 0) {
-					xtraclock -= past_clock*7000/clock_base;
-				}
-			}
-			/* make sure we don't fall off the bottom */
-			if (xtraclock < 3000) { xtraclock = 3000; }
-
-			/* new group spawn system by Amy */
-			if (!rn2(xtraclock)) {
-
-				randsp = (rn2(14) + 2);
-				randmnst = (rn2(166) + 1);
-				randmnsx = (rn2(100) + 1);
-
-				if (wizard || !rn2(10)) pline("You suddenly feel a surge of tension!");
-
-			for (i = 0; i < randsp; i++) {
-			/* This function will fill the map with a random amount of monsters of one class. --Amy */
-
-			if (randmnst < 6)
-		 	    (void) makemon(mkclass(S_ANT,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 9)
-		 	    (void) makemon(mkclass(S_BLOB,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 11)
-		 	    (void) makemon(mkclass(S_COCKATRICE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 15)
-		 	    (void) makemon(mkclass(S_DOG,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 18)
-		 	    (void) makemon(mkclass(S_EYE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 22)
-		 	    (void) makemon(mkclass(S_FELINE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 24)
-		 	    (void) makemon(mkclass(S_GREMLIN,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 29)
-		 	    (void) makemon(mkclass(S_HUMANOID,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 33)
-		 	    (void) makemon(mkclass(S_IMP,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 36)
-		 	    (void) makemon(mkclass(S_JELLY,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 41)
-		 	    (void) makemon(mkclass(S_KOBOLD,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 44)
-		 	    (void) makemon(mkclass(S_LEPRECHAUN,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 47)
-		 	    (void) makemon(mkclass(S_MIMIC,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 50)
-		 	    (void) makemon(mkclass(S_NYMPH,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 54)
-		 	    (void) makemon(mkclass(S_ORC,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 55)
-		 	    (void) makemon(mkclass(S_PIERCER,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 58)
-		 	    (void) makemon(mkclass(S_QUADRUPED,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 62)
-		 	    (void) makemon(mkclass(S_RODENT,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 65)
-		 	    (void) makemon(mkclass(S_SPIDER,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 66)
-		 	    (void) makemon(mkclass(S_TRAPPER,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 69)
-		 	    (void) makemon(mkclass(S_UNICORN,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 71)
-		 	    (void) makemon(mkclass(S_VORTEX,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 73)
-		 	    (void) makemon(mkclass(S_WORM,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 75)
-		 	    (void) makemon(mkclass(S_XAN,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 76)
-		 	    (void) makemon(mkclass(S_LIGHT,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 77)
-		 	    (void) makemon(mkclass(S_ZOUTHERN,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 78)
-		 	    (void) makemon(mkclass(S_ANGEL,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 81)
-		 	    (void) makemon(mkclass(S_BAT,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 83)
-		 	    (void) makemon(mkclass(S_CENTAUR,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 86)
-		 	    (void) makemon(mkclass(S_DRAGON,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 89)
-		 	    (void) makemon(mkclass(S_ELEMENTAL,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 94)
-		 	    (void) makemon(mkclass(S_FUNGUS,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 99)
-		 	    (void) makemon(mkclass(S_GNOME,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 102)
-		 	    (void) makemon(mkclass(S_GIANT,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 103)
-		 	    (void) makemon(mkclass(S_JABBERWOCK,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 104)
-		 	    (void) makemon(mkclass(S_KOP,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 105)
-		 	    (void) makemon(mkclass(S_LICH,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 108)
-		 	    (void) makemon(mkclass(S_MUMMY,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 110)
-		 	    (void) makemon(mkclass(S_NAGA,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 113)
-		 	    (void) makemon(mkclass(S_OGRE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 115)
-		 	    (void) makemon(mkclass(S_PUDDING,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 116)
-		 	    (void) makemon(mkclass(S_QUANTMECH,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 118)
-		 	    (void) makemon(mkclass(S_RUSTMONST,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 121)
-		 	    (void) makemon(mkclass(S_SNAKE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 123)
-		 	    (void) makemon(mkclass(S_TROLL,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 124)
-		 	    (void) makemon(mkclass(S_UMBER,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 125)
-		 	    (void) makemon(mkclass(S_VAMPIRE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 127)
-		 	    (void) makemon(mkclass(S_WRAITH,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 128)
-		 	    (void) makemon(mkclass(S_XORN,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 130)
-		 	    (void) makemon(mkclass(S_YETI,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 135)
-		 	    (void) makemon(mkclass(S_ZOMBIE,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 145)
-		 	    (void) makemon(mkclass(S_HUMAN,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 147)
-		 	    (void) makemon(mkclass(S_GHOST,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 149)
-		 	    (void) makemon(mkclass(S_GOLEM,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 152)
-		 	    (void) makemon(mkclass(S_DEMON,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 155)
-		 	    (void) makemon(mkclass(S_EEL,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 160)
-		 	    (void) makemon(mkclass(S_LIZARD,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 162)
-		 	    (void) makemon(mkclass(S_BAD_FOOD,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 165)
-		 	    (void) makemon(mkclass(S_BAD_COINS,0), 0, 0, NO_MM_FLAGS);
-			else if (randmnst < 166)
-		 	    (void) makemon(mkclass(S_HUMAN,0), 0, 0, NO_MM_FLAGS);
-			else
-		 	    (void) makemon((struct permonst *)0, 0, 0, NO_MM_FLAGS);
-
-				}
-			}
 #endif /* MORE_SPAWNS */
+
 			if (uarmf && uarmf->otyp == ZIPPER_BOOTS && !EWounded_legs) EWounded_legs = 1;
-#ifdef MORE_SPAWNS
-		    if(!rn2(u.uevent.udemigod ? 125 :
-			    (depth(&u.uz) > depth(&stronghold_level)) ? 250 : 340))
-	/* still keeping the old monstermaking routine up, but drastically reducing their spawn rate. --Amy */
-#else
+
 		    if(!rn2(u.uevent.udemigod ? 25 :
 			    (depth(&u.uz) > depth(&stronghold_level)) ? 50 : 70))
-#endif /* MORE_SPAWNS */
+
 			(void) makemon((struct permonst *)0, 0, 0, NO_MM_FLAGS);
 
 		    /* calculate how much time passed. */
