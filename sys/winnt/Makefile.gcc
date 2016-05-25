@@ -1454,12 +1454,12 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 		$(DAT)\tomb.des     $(DAT)\tower.des    $(DAT)\warrior.des    $(DAT)\yendor.des \
 		$(DAT)\arch.des     $(DAT)\barb.des 	$(DAT)\binder.des 	$(DAT)\caveman.des \
 		$(DAT)\flame.des    $(DAT)\healer.des   $(DAT)\jedi.des   $(DAT)\ice.des \
-		$(DAT)\chef.des  $(DAT)\knight.des   $(DAT)\monk.des     $(DAT)\necro.des \
-		$(DAT)\acid.des   $(DAT)\spacew.des   $(DAT)\rocker.des \
+		$(DAT)\chef.des     $(DAT)\knight.des   $(DAT)\monk.des     $(DAT)\necro.des \
+		$(DAT)\acid.des     $(DAT)\rocker.des \
 		$(DAT)\priest.des   $(DAT)\rogue.des    $(DAT)\town.des   $(DAT)\samurai.des \
 		$(DAT)\tourist.des  $(DAT)\slayer.des   $(DAT)\noble.des 	$(DAT)\valkyrie.des \
-		$(DAT)\electric.des  $(DAT)\courier.des   $(DAT)\cheval.des \
-		$(DAT)\cyborg.des   $(DAT)\gangster.des   $(DAT)\deatheat.des \
+		$(DAT)\electric.des $(DAT)\cheval.des \
+		$(DAT)\cyborg.des   $(DAT)\gangster.des \
 		$(DAT)\wizard.des   $(DAT)\sheol.des   $(DAT)\yeoman.des   $(DAT)\frnknstn.des \
 		$(DAT)\forge.des    $(DAT)\hitch.des   $(DAT)\compu.des    $(DAT)\key.des \
 		$(DAT)\korsair.des    $(DAT)\diver.des   $(DAT)\gladia.des \
@@ -1476,7 +1476,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/castle.des
 	lev_comp $(DDAT)/compu.des
 	lev_comp $(DDAT)/convict.des
-	lev_comp $(DDAT)/spacew.des
 	lev_comp $(DDAT)/grund.des
 	lev_comp $(DDAT)/dragons.des
 	lev_comp $(DDAT)/endgame.des
@@ -1506,7 +1505,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/acid.des
 	lev_comp $(DDAT)/rocker.des
 	lev_comp $(DDAT)/cheval.des
-	lev_comp $(DDAT)/courier.des
 	lev_comp $(DDAT)/cyborg.des
 	lev_comp $(DDAT)/oracle.des
 	lev_comp $(DDAT)/pirate.des
@@ -1559,7 +1557,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/Gradu.des
 	lev_comp $(DDAT)/Bard.des
 	lev_comp $(DDAT)/gangster.des
-	lev_comp $(DDAT)/deatheat.des
 	lev_comp $(DDAT)/frnknstn.des
 	lev_comp $(DDAT)/nightmar.des
 	lev_comp $(DDAT)/ranger.des

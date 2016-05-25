@@ -880,9 +880,6 @@ register struct monst *mtmp;
 		    verbl_msg = "Aloha.";
 		    break;
 #endif
-		case PM_DEATH_EATER:
-	    pline_msg = "talks about hunting muggles.";
-		    break;
 		case PM_GANGSTER:
 	    pline_msg = "talks about doing a drive-by.";
 		    break;
@@ -896,9 +893,6 @@ register struct monst *mtmp;
 #endif
 		case PM_BLEEDER:
 		    verbl_msg = "*sigh* If only I could make this bleeding stop...";
-		    break;
-		case PM_COURIER:
-	    pline_msg = "talks about some random guy named Benny.";
 		    break;
 		case PM_ROCKER:
 	    pline_msg = "talks about groovy music.";

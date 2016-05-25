@@ -1013,31 +1013,14 @@ register struct obj *obj;
 	    (is_demon(mtmp->data) && !is_demon(youmonst.data)) ||
 	    /* Mik -- New flag to indicate which things cannot be tamed... */
 	    cannot_be_tamed(mtmp->data) ||
-	    (obj && !is_instrument(obj) && dogfood(mtmp, obj) >= MANFOOD)) {
-
-
-		/* workaround for new pet types --Amy */
-		/* Transvestites/topmodels can always tame stuff that's not tameable; kludge for attire charm technique. 
-			same for zyborg (can randomly get attire charm from leveling up) 
-			and binder (can get attire charm from increasing a certain skill)
-			and psion (learns attire charm at XL15, role suggested by Greg) */
-
-		if (mtmp->data != &mons[PM_SIZZLE] && !Role_if(PM_ZYBORG)  && !Role_if(PM_BINDER) 
-#if 0 /* 5lo: Deferred */
- && mtmp->data != &mons[PM_POKEMON] && !Role_if(PM_PSION)
-#endif
-		)
-			return (struct monst *)0;
-		}
+	    (obj && !is_instrument(obj) && dogfood(mtmp, obj) >= MANFOOD)) return (struct monst *)0;
 
 	/* failsafe for things that REALLY cannot be tamed --Amy */
 	if (cannot_be_tamed(mtmp->data) || mtmp->mtame || mtmp->isshk || mtmp->isgd || mtmp->ispriest || mtmp->isminion || mtmp->isgyp)
 		return (struct monst *)0;
 
 	if (mtmp->m_id == quest_status.leader_m_id)
-		{
 	    return((struct monst *)0);
-		}
 
 	/* make a new monster which has the pet extension */
 	if(obj && is_instrument(obj)){

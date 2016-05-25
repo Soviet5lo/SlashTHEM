@@ -218,9 +218,6 @@ register boolean special;
 		case PM_MUSICIAN:
 		    weapon = CLUB;
 		    break;
-		case PM_DEATH_EATER:
-		    weapon = QUARTERSTAFF;
-		    break;
 		case PM_HEALER:
 		case PM_SCIENTIST:
 		    if (rn2(4)) weapon = QUARTERSTAFF;
@@ -268,9 +265,6 @@ register boolean special;
 		case PM_NINJA:
 		    weapon = KATANA;
 		    break;
-		case PM_SPACEWARS_FIGHTER:
-		    weapon = BLUE_LIGHTSABER;
-		    break;
 		case PM_PRIEST:
 		case PM_PRIESTESS:
 		    if (rn2(2)) weapon = MACE;
@@ -281,9 +275,6 @@ register boolean special;
 		    break;
 		case PM_RANGER:
 		    if (rn2(2)) weapon = ELVEN_DAGGER;
-		    break;
-		case PM_COURIER:
-		    weapon = KNIFE;
 		    break;
 		case PM_ZYBORG:
 		    weapon = RED_LIGHTSABER;

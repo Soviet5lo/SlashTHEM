@@ -36,11 +36,6 @@ const struct innate {
 		     {  15, &(HStealth), "stealthy", "noisy" },
 		     {	 0, 0, 0, 0 } },
 
-	cou_abil[] = { {	 1, &(HHunger), "", "" },
-		     {   1, &(HAggravate_monster), "", "" },
-		     /*{  1, &(HConflict), "", "" },*/
-		     {	 0, 0, 0, 0 } },
-
 	brd_abil[] = { {	5, &(HSleep_resistance), "awake", "tired" },
 		     {	 10, &(HStealth), "stealthy", "noisy" },
 		     {	 0, 0, 0, 0 } },
@@ -804,7 +799,6 @@ int oldlevel, newlevel;
 	switch (Role_switch) {
 	case PM_ARCHEOLOGIST:   abil = arc_abil;	break;
 	case PM_BARBARIAN:      abil = bar_abil;	break;
-	case PM_COURIER:      abil = cou_abil;	break;
 	case PM_BARD:           abil = brd_abil;	break;
 	case PM_CAVEMAN:        abil = cav_abil;	break;
 	case PM_CHEF:        abil = chf_abil;	break;

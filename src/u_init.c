@@ -164,20 +164,6 @@ static struct trobj Convict[] = {
 };
 #endif  /* CONVICT */
 
-static struct trobj Courier[] = {
-	{ PISTOL, 0, WEAPON_CLASS, 1, 0 },
-	{ BULLET, 0, WEAPON_CLASS, 20, 0 },
-	{ KNIFE, 0, WEAPON_CLASS, 1, 0 },
-	{ POT_JOLT_COLA, 0, POTION_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Spacewars_Fighter[] = {
-	{ DAGGER, 0, WEAPON_CLASS, 1, 0 },
-	{ SACK, 0, TOOL_CLASS, 1, 0 }, /* since there is no "small pack" in NetHack --Amy */
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Rocker[] = {
 	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
 	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
@@ -296,19 +282,6 @@ static struct trobj Gangster[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Death_Eater[] = {
-	{ QUARTERSTAFF, 1, WEAPON_CLASS, 1, 1 },
-	{ SHOTGUN, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ SHOTGUN_SHELL, 0, WEAPON_CLASS, 10, 0 },
-	{ CLOAK_OF_REFLECTION, 1, ARMOR_CLASS, 1, 0 },
-	{ SPE_FINGER_OF_DEATH, UNDEF_SPE, SPBOOK_CLASS, 1, 1},
-	{ SPE_CHARM_MONSTER, UNDEF_SPE, SPBOOK_CLASS, 1, 1},
-	{ SPE_ACID_STREAM, UNDEF_SPE, SPBOOK_CLASS, 1, 1},
-	{ WAN_DEATH, UNDEF_SPE, WAND_CLASS, 1, 0 },
-	{ AMULET_OF_LIFE_SAVING, UNDEF_SPE, AMULET_CLASS, 1, 0 },
-	{ TIN, UNDEF_SPE, FOOD_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
 #if 0 /* Deferred */
 static struct trobj Pokemon[] = {
 	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 5, 0 },
@@ -1303,23 +1276,6 @@ static const struct def_skill Skill_Ble[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Spa[] = {
-    /* 5lo: Weapons from Castle of the Windows + Lightsaber */
-    { P_CLUB, P_SKILLED },		{ P_DAGGER, P_SKILLED },
-    { P_HAMMER, P_SKILLED },		{ P_AXE, P_SKILLED },
-    { P_QUARTERSTAFF, P_SKILLED },	{ P_SPEAR, P_SKILLED },
-    { P_SHORT_SWORD, P_SKILLED },	{ P_MACE, P_SKILLED },
-    { P_FLAIL, P_SKILLED },		{ P_LONG_SWORD, P_SKILLED },
-    { P_BROAD_SWORD, P_SKILLED },	{ P_MORNING_STAR, P_SKILLED },
-    /* Basic in everything - jack of all trades, master of none */
-    { P_ATTACK_SPELL, P_BASIC },      	{ P_HEALING_SPELL, P_BASIC },
-    { P_DIVINATION_SPELL, P_BASIC },   	{ P_ENCHANTMENT_SPELL, P_BASIC },
-    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_BASIC },
-    { P_MATTER_SPELL, P_BASIC },
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Ele[] = {
 /* 5lo: Copy-paste of Flame Mage */
 /*Style: small-med edged weapons, blunt weapons*/
@@ -1412,25 +1368,6 @@ static const struct def_skill Skill_Dru[] = {
     { P_MUSICALIZE, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_RIDING, P_BASIC },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Cou[] = {
-    /* 5lo: Heavy focus on firearms here, but can gain skill with blades */
-    { P_KNIFE,  P_EXPERT },		{ P_DAGGER, P_EXPERT },
-    { P_SHORT_SWORD, P_BASIC },		{ P_LONG_SWORD, P_BASIC },
-    { P_HAMMER, P_SKILLED },		{ P_PICK_AXE, P_EXPERT },
-    { P_CLUB, P_EXPERT },		{ P_MACE, P_BASIC },
-    { P_CROSSBOW, P_SKILLED },		{ P_FLAIL, P_BASIC },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_SLING, P_SKILLED },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    /* Magic doesn't exist in the wasteland...*/
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
@@ -2160,27 +2097,6 @@ static const struct def_skill Skill_Zoo[] = {
 
 };
 
-static const struct def_skill Skill_Dea[] = {
-    /* 5lo: Normalized their skillset from Slash'EM Extended */
-    { P_KNIFE,  P_BASIC },
-    { P_QUARTERSTAFF, P_EXPERT },	
-    { P_TRIDENT,  P_BASIC },
-    { P_DART,  P_EXPERT },     { P_SHURIKEN,  P_BASIC },
-    { P_WHIP,  P_SKILLED },     { P_UNICORN_HORN,  P_SKILLED },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_BASIC },
-    { P_DIVINATION_SPELL, P_BASIC },  { P_ENCHANTMENT_SPELL, P_BASIC },
-    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
-    { P_MATTER_SPELL, P_EXPERT },
-#ifdef STEED
-    { P_RIDING, P_BASIC },
-#endif
-    { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
 #ifdef YEOMAN
 static const struct def_skill Skill_Y[] = {
     { P_DAGGER, P_SKILLED },            { P_KNIFE, P_BASIC },
@@ -2542,10 +2458,6 @@ u_init()
 		ini_inv(Gangster);
 		skill_init(Skill_Gan);
 		break;
-	case PM_DEATH_EATER:
-		ini_inv(Death_Eater);
-		skill_init(Skill_Dea);
-		break;
 #if 0
 	case PM_POKEMON:
 		ini_inv(Pokemon);
@@ -2563,21 +2475,6 @@ u_init()
 		else if(!rn2(5)) ini_inv(Blindfold);
 		else if(!rn2(5)) ini_inv(Magicmarker);
 		skill_init(Skill_F);
-		break;
-	case PM_COURIER:
-        ini_inv(Courier);
-        skill_init(Skill_Cou);
-		break;
-
-	case PM_SPACEWARS_FIGHTER:
-        ini_inv(Spacewars_Fighter);
-        skill_init(Skill_Spa);
-
-#ifndef GOLDOBJ
-		u.ugold = u.ugold0 = 1500;
-#else
-		u.umoney0 = 1500;
-#endif
 		break;
 
 	case PM_ROCKER:
@@ -3331,8 +3228,6 @@ int otyp;
 #ifdef CONVICT
      case PM_CONVICT:		skills = Skill_Con; break;
 #endif  /* CONVICT */
-     case PM_COURIER:		skills = Skill_Cou; break;
-     case PM_SPACEWARS_FIGHTER:		skills = Skill_Spa; break;
      case PM_ROCKER:		skills = Skill_Roc; break;
      case PM_ZYBORG:		skills = Skill_Zyb; break;
      case PM_LUNATIC:		skills = Skill_Lun; break;
@@ -3576,10 +3471,7 @@ register struct trobj *trop;
             if (obj->otyp == LOADSTONE ) {
                 obj->cursed = TRUE;
             }
-            if (obj->otyp == WAN_DEATH && (Role_if(PM_DEATH_EATER) || Race_if(PM_UNGENOMOLD) ) ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == AMULET_OF_LIFE_SAVING && (Role_if(PM_DEATH_EATER)) ) {
+            if (obj->otyp == WAN_DEATH && (Race_if(PM_UNGENOMOLD))) {
                 obj->cursed = TRUE;
             }
 			if (trop->trspe != UNDEF_SPE)
@@ -3620,10 +3512,6 @@ register struct trobj *trop;
 			else if (is_suit(obj) && !uarm)
 				setworn(obj, W_ARM);
 		}
-
-		if(obj->otyp == AMULET_OF_LIFE_SAVING && (Role_if(PM_DEATH_EATER)) ) {
-				setworn(obj, W_AMUL);
-			}
 
 		if (obj->oclass == WEAPON_CLASS || is_weptool(obj) ||
 			otyp == TIN_OPENER || otyp == FLINT || otyp == ROCK) {

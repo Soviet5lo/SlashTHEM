@@ -285,7 +285,6 @@ newexplevel()
 			case PM_TROLLOR: break;
 			case PM_GIGANT: break;*/
 			case PM_WARRIOR: break;
-			case PM_COURIER: break;
 			default: u.uenbase += rnd(2) + 1; break;
 		}
 		if (u.uen < u.uenmax) u.uen = u.uenmax;

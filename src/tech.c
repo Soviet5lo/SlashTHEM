@@ -127,19 +127,9 @@ static const struct innate_tech
 		       {   10, T_CHI_HEALING, 1},
 		       {   20, T_REVIVE, 1},
 		       {   0, 0, 0} },
-	spa_tech[] = { {   1, T_REINFORCE, 1},
-			 {   5, T_RESEARCH, 1},
-		       {  8, T_WARD_FIRE, 1},
-		       {  10, T_CHARGE_SABER, 1},
-		       {  11, T_WARD_COLD, 1},
-		       {  14, T_WARD_ELEC, 1},
-		       {  20, T_DRAW_ENERGY, 1},
-		       {   0, 0, 0} },
 	gan_tech[] = { {   1, T_CREATE_AMMO, 1},
 		       {   0, 0, 0} },
 	roc_tech[] = { {   1, T_FLURRY, 1},
-		       {   0, 0, 0} },
-	dea_tech[] = { {   1, T_WORLD_FALL, 1},
 		       {   0, 0, 0} },
 	cav_tech[] = { {   1, T_PRIMAL_ROAR, 1},
 		       {   0, 0, 0} },
@@ -2308,7 +2298,6 @@ role_tech()
 		case PM_KNIGHT:		return (kni_tech);
 		case PM_MONK: 		return (mon_tech);
 		case PM_SCIENTIST: 		return (sci_tech);
-		case PM_DEATH_EATER: 		return (dea_tech);
 #if 0 /* 5lo: Deferred for now */
 		case PM_POKEMON: 		return (pok_tech);
 		case PM_PSION: 		return (psi_tech);
@@ -2320,7 +2309,6 @@ role_tech()
 		case PM_PRIEST:		return (pri_tech);
 		case PM_CHEVALIER:		return (che_tech);
 		case PM_RANGER:		return (ran_tech);
-		case PM_SPACEWARS_FIGHTER:		return (spa_tech);
 		case PM_ROGUE:		return (rog_tech);
 		case PM_SAMURAI:	return (sam_tech);
 #ifdef TOURIST        

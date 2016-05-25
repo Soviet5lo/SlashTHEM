@@ -314,60 +314,6 @@ const struct Role roles[] = {
 },
 #endif	/* CONVICT */
 
-{	{"Courier", 0}, {
-	{"Vault Dweller",     0},
-	{"Hiker",   0},
-	{"Urban Legend",0},
-	{"Landstalker",0},
-	{"Searcher",    0},
-	{"Capital Crime Queen",   0},
-	{"Opportunist",     0},
-	{"Peacebringer",    0},
-	{"Messiah",  0} },
-	"President Kimball", "Mr. House", "Caesar",	/* Fallout New Vegas */
-	"Cou", "in the middle of nowhere", "scum hideout",
-	PM_COURIER, NON_PM, PM_UNDEAD_COURIER, NON_PM, PM_LITTLE_DOG,
-	PM_YES_MAN, PM_ATTENDANT, PM_SOME_RANDOM_GUY,
-	PM_OGRE, PM_CAZADOR, S_OGRE, S_ANT, /* Ogre because we don't have super mutants */
-	ART_WITHERED_NINE_MILLIMETER,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | 
-	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  10,  7,  7,  7, 13,  6 },
-	{  20, 20, 10, 20, 20, 10 },
-	/* Init   Lower  Higher */
-	{  10, 0,  0, 5,  0, 0 },	/* Hit points */
-	{  1, 0,  0, 1,  0, 1 },10,	/* Energy */
-	0, 5, 0, 2, 10, A_INT, SPE_ENDURE_HEAT,   -4
-},
-
-{	{"Death Eater", 0}, {
-	{"Filthy Worm",  0},
-	{"Creeping Maggot", 0},
-	{"Lowly Being", 0},
-	{"Black Mage", 0},
-	{"Curse Caster",0},
-	{"Imperious", 0},
-	{"Crucious", 0},
-	{"Deathbringer", 0},
-	{"Dark Lord's Bodyguard", 0} },
-	"Merlin", "Salazar Slytherin", "Lord Voldemort", /* Harry Potter */
-	"Dea", "Malfoy Manor", "the Order of the Phoenix",
-	PM_DEATH_EATER, NON_PM, PM_UNDEAD_DEATH_EATER, NON_PM, PM_LICHEN,
-	PM_BELLATRIX_LESTRANGE, PM_FELLOW_DEATH_EATER, PM_HARRY_POTTER,
-	PM_AUROR, PM_ELF_LORD, S_ANGEL, S_HUMAN,
-	ART_ELDER_STAFF,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */  /* Direct copy from Wizard */
-	{   7, 10,  7,  7,  7,  7 },
-	{  10, 30, 10, 20, 20, 10 },
-	/* Init   Lower  Higher */
-	{ 17, 0,  0, 8,  1, 0 },	/* Hit points */
-	{ 15, 3,  0, 2,  0, 3 },12,	/* Energy */
-	-5, 1, 0, 
-	2, 10, A_INT, SPE_FINGER_OF_DEATH,   -4
-},
-
 {	{"Diver", 0}, {
 	{"Beachcomber",  0},
 	{"Paddler",        	0},
@@ -1280,32 +1226,6 @@ const struct Role roles[] = {
 	{ 12, 0,  0, 3,  1, 0 },	/* Hit points */
 	{ 20, 5,  0, 1,  0, 2 },20,	/* Energy */
 	10, 3,-3, 2, 10, A_WIS, SPE_IDENTIFY,   -4
-},
-
-{	{"Spacewars Fighter", 0}, {
-	{"Roguelike Beginner",     0},
-	{"Dungeon Explorer",     0},
-	{"Sword Swinger",    0},
-	{"Burly Combatant",    0},
-	{"Heroic Mage",      0},
-	{"Battlemage",    0},
-	{"Spellsword",   0},
-	{"Nightblade",   0},
-	{"King's True Heir",     0} },
-	"_Lady Ariane", "Lord Stahngnir", "Sven Fanara", /* from a certain book --Amy */
-	"Spa", "Tiny Hamlet", "Inside Part",
-	PM_SPACEWARS_FIGHTER, NON_PM, PM_UNDEAD_SPACEWARS_FIGHTER, NON_PM, NON_PM,
-	PM_MARC, PM_ATTENDANT, PM_ARABELLA,
-	PM_WIZARD, PM_GRAY_DRAGON, S_HUMAN, S_DRAGON,
-	ART_HELM_OF_STORMS,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{   3,  3,  3,  3,  3,  3 },
-	{  17, 17, 16, 17, 17, 16 },
-	/* Init   Lower  Higher */
-	{ 19, 0,  0, 8,  2, 0 },	/* Hit points */
-	{ 10, 4,  0, 1,  0, 2 },10,	/* Energy */
-	10, 8,-2, 0,  9, A_INT, SPE_DETECT_MONSTERS,     -4
 },
 
 #ifdef TOURIST

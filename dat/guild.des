@@ -53,17 +53,14 @@ MONSTER: '@', "warrior", random, hostile
 MONSTER: '@', "wizard", random, hostile
 MONSTER: '@', "gangster", random, hostile
 #MONSTER: '@', "pokemon", random, hostile
-MONSTER: '@', "death eater", random, hostile
 MONSTER: '@', "pirate", random, hostile
 MONSTER: '@', "nobleman", random, hostile
 MONSTER: '@', "noblewoman", random, hostile
 MONSTER: '@', "electric mage", random, hostile
-MONSTER: '@', "courier", random, hostile
 MONSTER: '@', "chevalier", random, hostile
 MONSTER: '@', "zyborg", random, hostile
 MONSTER: '@', "rocker", random, hostile
 MONSTER: '@', "acid mage", random, hostile
-MONSTER: '@', "spacewars fighter", random, hostile
   
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, up

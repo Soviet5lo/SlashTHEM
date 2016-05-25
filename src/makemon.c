@@ -659,21 +659,6 @@ register struct monst *mtmp;
 		     (void)mongets(mtmp, ROCK);
 		   break;
 
-		   case PM_SPACEWARS_FIGHTER:
-		   case PM_UNDEAD_SPACEWARS_FIGHTER:
-		     (void)mongets(mtmp, GREEN_LIGHTSABER);
-		     (void)mongets(mtmp, DAGGER);
-		     (void)mongets(mtmp, PLASTEEL_ARMOR);
-		     if (!rn2(3)) (void)mongets(mtmp, WAN_SOLAR_BEAM);
-		   break;
-
-		   case PM_COURIER:
-		   case PM_UNDEAD_COURIER:
-		     (void)mongets(mtmp, PISTOL);
-			 m_initthrow(mtmp, BULLET, 25);
-		     (void)mongets(mtmp, KNIFE);
-		   break;
-
 		   case PM_ZYBORG:
 		   case PM_UNDEAD_ZYBORG:
 		     (void)mongets(mtmp, PLATE_MAIL);
@@ -695,15 +680,6 @@ register struct monst *mtmp;
 		     (void)mongets(mtmp, LEATHER_JACKET);
 		   break;
 
-		   case PM_DEATH_EATER:
-		   case PM_UNDEAD_DEATH_EATER:
-		     (void)mongets(mtmp, QUARTERSTAFF);
-		     (void)mongets(mtmp, SHOTGUN);
-			 m_initthrow(mtmp, SHOTGUN_SHELL, 10);
-		     (void)mongets(mtmp, CLOAK_OF_REFLECTION);
-		     if (!rn2(10)) (void) mongets(mtmp, WAN_DEATH);
-		     if (!rn2(10)) (void) mongets(mtmp, AMULET_OF_LIFE_SAVING);
-		   break;
 #if 0
 		   case PM_POKEMON:
 		   case PM_UNDEAD_POKEMON:
@@ -1041,33 +1017,6 @@ register struct monst *mtmp;
 			(void)mongets(mtmp, SCIMITAR);
 			(void)mongets(mtmp, LEATHER_ARMOR);
 			(void)mongets(mtmp, HIGH_BOOTS);
-
-		} else if (mm == PM_SIZZLE){
-		    otmp = mksobj(LONG_SWORD, FALSE, FALSE);
-
-			int spe2;
-			otmp = oname(otmp, artiname(ART_VORPAL_BLADE));
-		    bless(otmp);
-		    otmp->oerodeproof = TRUE;
-		    spe2 = rn2(4);
-		    otmp->spe = max(otmp->spe, spe2);
-		    (void) mpickobj(mtmp, otmp);
-		    (void) tamedog(mtmp, (struct obj *)0); /* supposed to start out tame */
-
-		} else if (mm == PM_ARABELLA){
-			(void)mongets(mtmp, SPEED_BOOTS);
-
-		} else if (mm == PM_ANASTASIA){
-			(void)mongets(mtmp, ELVEN_BOOTS);
-
-		} else if (mm == PM_HENRIETTA){
-			(void)mongets(mtmp, PLASTEEL_BOOTS);
-
-		} else if (mm == PM_KATRIN){
-			(void)mongets(mtmp, ELVEN_BOOTS);
-
-		} else if (mm == PM_JANA){
-			(void)mongets(mtmp, ELVEN_BOOTS);
 
 		} else if (mm == PM_THE_CHAMPION_OF_POMPEJI){
 

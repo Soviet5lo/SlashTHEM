@@ -312,7 +312,7 @@ quest_levs: ../util/lev_comp \
 	Acid.des Arch.des \
 	Barb.des Bard.des Binder.des Bleeder.des \
 	Caveman.des Cheval.des Convict.des \
-	Courier.des Cyborg.des Deatheat.des Diver.des Drunk.des \
+	Cyborg.des Diver.des Drunk.des \
 	Electric.des Chef.des Firef.des Flame.des \
 	Gangster.des Gladia.des Geek.des Gradu.des \
 	Healer.des Ice.des Jedi.des Knight.des Korsair.des \
@@ -320,7 +320,7 @@ quest_levs: ../util/lev_comp \
 	Necro.des Ninja.des Noble.des Offic.des \
 	Pirate.des Priest.des Ranger.des \
 	Rocker.des Rogue.des Samurai.des Scient.des \
-	Slayer.des Spacew.des \
+	Slayer.des \
 	Tourist.des Under.des Valkyrie.des \
 	Warrior.des Wizard.des Yeoman.des Zooke.des
 	../util/lev_comp Acid.des
@@ -332,10 +332,8 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Caveman.des
 	../util/lev_comp Cheval.des
 	../util/lev_comp Convict.des
-	../util/lev_comp Courier.des
 	../util/lev_comp Cyborg.des
 	../util/lev_comp Diver.des
-	../util/lev_comp Deatheat.des
 	../util/lev_comp Drunk.des
 	../util/lev_comp Electric.des
 	../util/lev_comp Chef.des
@@ -366,7 +364,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Samurai.des
 	../util/lev_comp Scient.des
 	../util/lev_comp Slayer.des
-	../util/lev_comp Spacew.des
 	@if egrep -s tourists options > /dev/null ; then \
 	echo ../util/lev_comp Tourist.des ; ../util/lev_comp Tourist.des ; \
 	else rm -f Tou-goal.lev Tou-fil?.lev Tou-loca.lev Tou-strt.lev ; fi

@@ -287,10 +287,7 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_CAVEWOMAN:
 	    case PM_UNDEAD_CHEVALIER:
 	    case PM_UNDEAD_CHEF:
-	    case PM_UNDEAD_COURIER:
-	    case PM_UNDEAD_SPACEWARS_FIGHTER:
 	    case PM_UNDEAD_ZYBORG:
-	    case PM_UNDEAD_DEATH_EATER:
 	    case PM_UNDEAD_GANGSTER:
 	    case PM_UNDEAD_POKEMON:
 	    case PM_UNDEAD_ELECTRIC_MAGE:
@@ -1580,13 +1577,6 @@ struct monst *magr,	/* monster that is currently deciding where to move */
 	/* woodchucks vs. The Oracle */
 	if(magr->data == &mons[PM_WOODCHUCK] && mdef->data == &mons[PM_ORACLE])
 		return ALLOW_M|ALLOW_TM;
-#if 0
-	/* aurors vs. death eaters */
-	if(magr->data == &mons[PM_AUROR] && mdef->data == &mons[PM_FELLOW_DEATH_EATER])
-		return ALLOW_M|ALLOW_TM;
-	if(mdef->data == &mons[PM_AUROR] && magr->data == &mons[PM_FELLOW_DEATH_EATER])
-		return ALLOW_M|ALLOW_TM;
-#endif
 #ifdef JEDI
 	/* Stormtroopers vs. Padawans */
 	if(magr->data == &mons[PM_STORMTROOPER] && mdef->data == &mons[PM_PADAWAN])

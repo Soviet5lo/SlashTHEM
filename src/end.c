@@ -511,10 +511,10 @@ boolean taken;
 
 	if (invent) {
 	    if(taken)
-		Sprintf(qbuf, Role_if(PM_SPACEWARS_FIGHTER) ? "Another one bites the dust... DYWYPI?" : "Do you want to see what you had when you %s? DYWYPI?",
+		Sprintf(qbuf,"Do you want to see what you had when you %s? DYWYPI?",
 			(how == QUIT) ? "quit" : "died");
 	    else
-		Strcpy(qbuf, Role_if(PM_SPACEWARS_FIGHTER) ? "Another one bites the dust... DYWYPI?" : "Do you want your possessions identified? DYWYPI?");
+		Strcpy(qbuf,"Do you want your possessions identified? DYWYPI?");
 
 	    ask = should_query_disclose_option('i', &defquery);
 	    if (!done_stopprint) {
@@ -536,7 +536,7 @@ boolean taken;
 		if (c == 'q')  done_stopprint++;
 	    }
 	}
-	if (!invent) pline(Role_if(PM_SPACEWARS_FIGHTER) ? "Another one bites the dust... DYWYPI? Oops... it seems your inventory was empty!" : "DYWYPI? Oops... it seems your inventory was empty!");
+	if (!invent) pline("DYWYPI? Oops... it seems your inventory was empty!");
 	if (hallu) make_hallucinated(20L, FALSE, 0L);
 
 	ask = should_query_disclose_option('a', &defquery);
