@@ -43,6 +43,7 @@ E void NDECL(unleash_all);
 E boolean NDECL(next_to_u);
 E struct obj *FDECL(get_mleash, (struct monst *));
 E void FDECL(check_leash, (XCHAR_P,XCHAR_P));
+E void FDECL(use_floppies, (struct obj *));
 E boolean FDECL(um_dist, (XCHAR_P,XCHAR_P,XCHAR_P));
 E boolean FDECL(snuff_candle, (struct obj *));
 E boolean FDECL(snuff_lit, (struct obj *));
@@ -1454,15 +1455,18 @@ E boolean FDECL(hits_bars, (struct obj **,int,int,int,int));
 E boolean FDECL(find_defensive, (struct monst *));
 E int FDECL(use_defensive, (struct monst *));
 E int FDECL(rnd_defensive_item, (struct monst *));
+E int FDECL(rnd_defensive_item_new, (struct monst *));
 E boolean FDECL(find_offensive, (struct monst *));
 #ifdef USE_TRAMPOLI
 E int FDECL(mbhitm, (struct monst *,struct obj *));
 #endif
 E int FDECL(use_offensive, (struct monst *));
 E int FDECL(rnd_offensive_item, (struct monst *));
+E int FDECL(rnd_offensive_item_new, (struct monst *));
 E boolean FDECL(find_misc, (struct monst *));
 E int FDECL(use_misc, (struct monst *));
 E int FDECL(rnd_misc_item, (struct monst *));
+E int FDECL(rnd_misc_item_new, (struct monst *));
 E boolean FDECL(searches_for_item, (struct monst *,struct obj *));
 E boolean FDECL(mon_reflects, (struct monst *,const char *));
 E boolean FDECL(ureflects, (const char *,const char *));
@@ -1699,6 +1703,7 @@ E void VDECL(raw_printf, (const char *,...)) PRINTF_F(1,2);
 E void VDECL(impossible, (const char *,...)) PRINTF_F(1,2);
 E const char *FDECL(align_str, (ALIGNTYP_P));
 E void FDECL(mstatusline, (struct monst *));
+E void FDECL(mstatuslinebl, (struct monst *));
 E void NDECL(ustatusline);
 E void NDECL(self_invis_message);
 
@@ -1839,9 +1844,11 @@ E int FDECL(seffects, (struct obj *));
 E void FDECL(set_lit, (int,int,genericptr_t));
 #endif
 E void FDECL(litroom, (BOOLEAN_P,struct obj *));
+E void FDECL(litroomlite, (boolean));
 E void FDECL(do_genocide, (int));
 E void FDECL(punish, (struct obj *));
 E void NDECL(unpunish);
+E void NDECL(punishx);
 E boolean FDECL(cant_create, (int *, BOOLEAN_P));
 #ifdef WIZARD
 E struct monst *NDECL(create_particular);
@@ -2184,6 +2191,7 @@ E int FDECL(mlevel_tele_trap, (struct monst *, struct trap *,BOOLEAN_P,int));
 E void FDECL(rloco, (struct obj *));
 E int NDECL(random_teleport_level);
 E int NDECL(random_banish_level);
+E void NDECL(teleX);
 E boolean FDECL(u_teleport_mon, (struct monst *,BOOLEAN_P));
 E boolean FDECL(u_teleport_monB, (struct monst *,BOOLEAN_P));
 
@@ -2689,6 +2697,9 @@ E int NDECL(doshout);
 #endif
 #endif
 
+/* ### termcap.c ### */
+E void FDECL(term_start_bgcolor, (int));
+E void NDECL(term_end_bgcolor);
 
 #endif /* !MAKEDEFS_C && !LEV_LEX_C */
 
