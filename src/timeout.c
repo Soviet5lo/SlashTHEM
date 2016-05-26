@@ -680,8 +680,9 @@ boolean your_fault;
 	return i;
 }
 
+/* 5lo: technically not permenant (999999) */
 int
-mon_spec_polyX(mtmp, type, when, polyspot, transform_msg, system_shock,
+mon_perm_poly(mtmp, type, when, polyspot, transform_msg, system_shock,
 	your_fault)
 struct monst *mtmp;
 struct permonst *type;
@@ -708,7 +709,7 @@ boolean your_fault;
 	    /* Stop any old timers.   */
 	    (void) stop_timer(UNPOLY_MON, (genericptr_t) mtmp);
 	    /* Lengthen unpolytime - was 500,500  for player */
-	    (void) start_timer(when ? when : /*rn1(1000, 1000)*/999999, TIMER_MONSTER,
+	    (void) start_timer(when ? when : 999999, TIMER_MONSTER,
 		    UNPOLY_MON, (genericptr_t) mtmp);
 	}
 	return i;

@@ -17,7 +17,7 @@ STATIC_DCL boolean FDECL(check_map_spot, (int,int,CHAR_P,unsigned));
 STATIC_DCL boolean FDECL(clear_stale_map, (CHAR_P,unsigned));
 STATIC_DCL void FDECL(sense_trap, (struct trap *,XCHAR_P,XCHAR_P,int));
 STATIC_DCL void FDECL(show_map_spot, (int,int));
-STATIC_DCL void FDECL(show_map_spotX, (int,int));
+STATIC_DCL void FDECL(show_partial_map, (int,int));
 STATIC_PTR void FDECL(findone,(int,int,genericptr_t));
 STATIC_PTR void FDECL(openone,(int,int,genericptr_t));
 
@@ -1135,8 +1135,11 @@ register int x, y;
     }
 }
 
+
+/* This copy of show_map_spot only shows bits and pieces of the map, used
+ * by the wand of magic mapping */
 STATIC_OVL void
-show_map_spotX(x, y)
+show_partial_map(x, y)
 register int x, y;
 {
     register struct rm *lev;
@@ -1189,8 +1192,10 @@ do_mapping()
     }
 }
 
+/* 5lo: Is this really needed?  It calls show_partial_map instead of 
+ * show_map_spot */
 void
-do_mappingX()
+do_partial_mapping()
 {
     register int zx, zy;
     int uw = u.uinwater;
@@ -1198,7 +1203,7 @@ do_mappingX()
     u.uinwater = 0;
     for (zx = 1; zx < COLNO; zx++)
 	for (zy = 0; zy < ROWNO; zy++)
-	    show_map_spotX(zx, zy);
+	    show_partial_map(zx, zy);
     exercise(A_WIS, TRUE);
     u.uinwater = uw;
     if (!level.flags.hero_memory || Underwater) {

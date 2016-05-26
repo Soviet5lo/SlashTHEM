@@ -2282,7 +2282,7 @@ register struct obj *obj;
 		case WAN_MAGIC_MAPPING:
 			known = TRUE;
 			pline("You grasp some bits from the current map!");
-			do_mappingX();
+			do_partial_mapping();
 			break;
 		case WAN_ENTRAPPING:
 			known = TRUE;

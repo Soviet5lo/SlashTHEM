@@ -16,7 +16,6 @@ STATIC_DCL boolean FDECL(findtravelpath, (BOOLEAN_P));
 STATIC_DCL boolean FDECL(monstinroom, (struct permonst *,int));
 
 STATIC_DCL void FDECL(move_update, (BOOLEAN_P));
-STATIC_PTR void FDECL(set_litX, (int,int,genericptr_t));
 
 #define IS_SHOP(x)	(rooms[x].rtype >= SHOPBASE)
 
@@ -2481,7 +2480,7 @@ register boolean newlev;
                 pline("It is pitch black. You are likely to be eaten by a grue.");
 
 	    do_clear_areaX(u.ux,u.uy,		/* extra darkness --Amy */
-		15, set_litX, (genericptr_t)((char *)0));
+		15, set_lit, (genericptr_t)((char *)0));
 		/* IMHO grue rooms may remove light every time you enter them. --Amy */
 		    /*wake_nearby();*/
                 break;
@@ -3133,16 +3132,3 @@ struct obj *otmp;
 #endif /* OVLB */
 
 /*hack.c*/
-
-STATIC_PTR void
-set_litX(x,y,val)
-int x, y;
-genericptr_t val;
-{
-	if (val)
-	    levl[x][y].lit = 1;
-	else {
-	    levl[x][y].lit = 0;
-	    snuff_light_source(x, y);
-	}
-}

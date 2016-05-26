@@ -2401,7 +2401,7 @@ register int	mmflags;
 			monkilled(mtmp, "", AD_PHYS);
 	} 
 	if (mndx == PM_SHOCKING_SPHERE && Role_if(PM_ACID_MAGE) && Is_nemesis(&u.uz) ) {
-			(void) mon_spec_polyX(mtmp,  &mons[PM_LIGHTNING_PROOF_BARRIER], 0L, FALSE, FALSE, FALSE, FALSE);
+			(void) mon_perm_poly(mtmp,  &mons[PM_LIGHTNING_PROOF_BARRIER], 0L, FALSE, FALSE, FALSE, FALSE);
 	} 
 
 
