@@ -147,7 +147,7 @@ do_room_or_subroom(croom, lowx, lowy, hix, hiy, lit, rtype, special, is_room)
 {
 	register int x, y;
 	struct rm *lev;
-
+/*
 	croom->colouur = 0;
 	if (!special && rtype == OROOM) croom->colouur = rn2(15);
 	if (!special && rtype >= SHOPBASE) croom->colouur = rn2(15);
@@ -176,7 +176,7 @@ do_room_or_subroom(croom, lowx, lowy, hix, hiy, lit, rtype, special, is_room)
 	if (!special && rtype == DOUGROOM) croom->colouur = CLR_BRIGHT_CYAN;
 	if (!special && rtype == ARMORY) croom->colouur = CLR_CYAN;
 	if (!special && rtype == POOLROOM) croom->colouur = CLR_BRIGHT_BLUE;
-
+*/
 	/* locations might bump level edges in wall-less rooms */
 	/* add/subtract 1 to allow for edge locations */
 	if(!lowx) lowx++;

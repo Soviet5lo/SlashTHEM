@@ -147,14 +147,11 @@ unsigned *ospecial;
 		/* special level colors by Amy, code partly stolen from dnethack */
 		/* 5lo: Let's rewrite this to be much, much shorter...*/
 		if(iflags.use_color && iflags.dungeon_colors &&
-		    (offset >= S_vwall && offset <= S_hcdoor)){
+		    ((offset >= S_vwall && offset <= S_hcdoor) || (offset >= S_corr && offset <= S_litcorr))){
 			if(Is_lawful_quest(&u.uz)) {
 				color = CLR_BLACK;
 			} else if(Is_nymph_level(&u.uz)) {
 				color = CLR_GREEN;
-				if(offset >= S_corr && offset <= S_litcorr){
-				    color = CLR_BRIGHT_GREEN;
-				}
 			} else if(Is_forge_level(&u.uz)) {
 				color = CLR_ORANGE;
 			} else if(Is_hitch_level(&u.uz)) {
@@ -240,7 +237,7 @@ unsigned *ospecial;
 		}
 		/* And turned this into it's own option, as some people don't like this by default */
 		if(iflags.use_color && iflags.random_room_colors&&
-		    (offset >= S_vwall && offset <= S_hcdoor)){
+		    ((offset >= S_vwall && offset <= S_hcdoor) || (offset >= S_corr && offset <= S_litcorr))){
 			if(*in_roomscolouur(x,y,1) && *in_rooms(x,y,OROOM)) {
 				color = 1;
 			} else if(*in_roomscolouur(x,y,2) && *in_rooms(x,y,OROOM)) {
