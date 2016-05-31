@@ -1492,7 +1492,23 @@ doengrave()
 		break;
 
 	    case WEAPON_CLASS:
-		if(is_blade(otmp)) {
+		if(otmp->otyp == SHARPENED_PENCIL) {
+			if ((int)otmp->spe > -1){
+//				if(!otmp->blessed && !rn2(5+(otmp->spe))) {
+				if(!otmp->blessed && (rnl(10) > 5)) {
+				    Your("Pencil lead breaks!");
+				    otmp->spe = -1;
+				    return(0);
+				}
+				else
+				    type = ENGRAVE;
+			}
+			else {
+				Your("pencil lead is broken!");
+				return(0);
+			}
+		}
+		else if(is_blade(otmp)) {
 		    if ((int)otmp->spe > -3)
 			type = ENGRAVE;
 		    else
