@@ -128,36 +128,7 @@ do_room_or_subroom(croom, lowx, lowy, hix, hiy, lit, rtype, special, is_room)
 {
 	register int x, y;
 	struct rm *lev;
-/*
-	croom->colouur = 0;
-	if (!special && rtype == OROOM) croom->colouur = rn2(15);
-	if (!special && rtype >= SHOPBASE) croom->colouur = rn2(15);
-	if (!special && rtype == BEEHIVE) croom->colouur = CLR_YELLOW;
-	if (!special && rtype == COURT) croom->colouur = CLR_MAGENTA;
-	if (!special && rtype == SWAMP) croom->colouur = CLR_GREEN;
-	if (!special && rtype == VAULT) croom->colouur = CLR_YELLOW;
-	if (!special && rtype == MORGUE) croom->colouur = CLR_BLACK;
-	if (!special && rtype == BARRACKS) croom->colouur = CLR_RED;
-	if (!special && rtype == ZOO) croom->colouur = CLR_BROWN;
-	if (!special && rtype == REALZOO) croom->colouur = CLR_BROWN;
-	if (!special && rtype == DELPHI) croom->colouur = CLR_BRIGHT_BLUE;
-	if (!special && rtype == TEMPLE) croom->colouur = CLR_CYAN;
-	if (!special && rtype == GIANTCOURT) croom->colouur = CLR_CYAN;
-	if (!special && rtype == LEPREHALL) croom->colouur = CLR_GREEN;
-	if (!special && rtype == DRAGONLAIR) croom->colouur = CLR_BRIGHT_MAGENTA;
-	if (!special && rtype == BADFOODSHOP) croom->colouur = CLR_RED;
-	if (!special && rtype == COCKNEST) croom->colouur = CLR_YELLOW;
-	if (!special && rtype == ANTHOLE) croom->colouur = CLR_BROWN;
-	if (!special && rtype == LEMUREPIT) croom->colouur = CLR_BLACK;
-	if (!special && rtype == MIGOHIVE) croom->colouur = CLR_BRIGHT_GREEN;
-	if (!special && rtype == FUNGUSFARM) croom->colouur = CLR_BRIGHT_GREEN;
-	if (!special && rtype == CLINIC) croom->colouur = CLR_ORANGE;
-	if (!special && rtype == TERRORHALL) croom->colouur = CLR_BRIGHT_CYAN;
-	if (!special && rtype == COINHALL) croom->colouur = CLR_YELLOW;
-	if (!special && rtype == DOUGROOM) croom->colouur = CLR_BRIGHT_CYAN;
-	if (!special && rtype == ARMORY) croom->colouur = CLR_CYAN;
-	if (!special && rtype == POOLROOM) croom->colouur = CLR_BRIGHT_BLUE;
-*/
+
 	/* locations might bump level edges in wall-less rooms */
 	/* add/subtract 1 to allow for edge locations */
 	if(!lowx) lowx++;
