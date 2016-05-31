@@ -3104,13 +3104,14 @@ u_init()
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
 		break;
 	case PM_TROLLOR:
-		if(!Role_if(PM_CONVICT)) switch (rnd(4)) {   
+		if(!Role_if(PM_CONVICT)) switch (rnd(4)) {
                 case 1: ini_inv(TrollItemA); break;
                 case 2: ini_inv(TrollItemB); break;
                 case 3: ini_inv(TrollItemC); break;
                 case 4: ini_inv(TrollItemD); break;
-		    default: break;
+		default: break;
 		}
+		break;
 	case PM_OGRO:
          if(!Role_if(PM_CONVICT)) ini_inv(OgroItem);		
 		break;
