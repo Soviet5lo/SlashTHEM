@@ -774,6 +774,7 @@ int thrown;
 #endif
 	boolean vapekilled = FALSE; /* WAC added boolean for vamps vaporize */
 	boolean burnmsg = FALSE;
+	boolean shockmsg = FALSE;  /* 5lo: electric version of burnmsg used for electric swords */
 	boolean no_obj = !obj;	/* since !obj can change if weapon breaks, etc. */
 	boolean noeffect;
 	int wtype;
@@ -1212,6 +1213,18 @@ int thrown;
 		      /* & equipment is delayed to below, after */
 		      /* the hit messages are printed. */
 		    }
+
+		    /* 5lo: Electric Swords may "spark" to life */
+
+		    if(obj->otyp == ELECTRIC_SWORD && !obj->oartifact && 
+		       !resists_elec(mon) && !rn2(10)) {
+
+		      shockmsg = TRUE;
+
+		      tmp += rnd(3);
+
+		    }
+
 		}
 	    } else if(obj->oclass == POTION_CLASS) {
 		if (!u.twoweap || obj == uwep) {
@@ -1691,7 +1704,21 @@ int thrown;
 	    burn_faster(obj, 1);
 	  }
 	}
-	
+
+	if (shockmsg) {
+	  /* A very small chance of destroying the monster's
+	   * wands and rings */
+
+	  if (!Blind) {
+	    Your("%s buzzes %s.", xname(obj), mon_nam(mon));
+
+	    if (!rn2(20)) 
+	      (void)destroy_mitem(mon, RING_CLASS, AD_ELEC);
+	    if (!rn2(20)) 
+	      (void)destroy_mitem(mon, WAND_CLASS, AD_ELEC);
+	  }
+	}
+
 	if (silvermsg) {
 		const char *fmt;
 		char *whom = mon_nam(mon);

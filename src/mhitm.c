@@ -1192,6 +1192,30 @@ physical:
 			  }
 			}
 
+			/* 5lo:  Also handle minor electric damage from
+			 *       electric swords 
+			 */
+
+			if((otmp->otyp == ELECTRIC_SWORD && !otmp->oartifact)
+			   && !resists_elec(mdef) && !rn2(10)) {
+
+
+			  if (!Blind) {
+			    static char outbuf[BUFSZ];
+			    char *s = Shk_Your(outbuf, otmp);
+
+			    pline("%s %s buzzes %s.", s, xname(otmp),
+				  mon_nam(mdef));
+			  }
+
+			  tmp += rnd(3);
+
+			    if (!rn2(25))
+			      (void)destroy_mitem(mdef, RING_CLASS, AD_ELEC);
+			    if (!rn2(25))
+			      (void)destroy_mitem(mdef, WAND_CLASS, AD_ELEC);
+			}
+
                         /* WAC Weres get seared */
                         if(otmp && objects[otmp->otyp].oc_material == SILVER &&
                           (hates_silver(pd))) {

@@ -1123,6 +1123,7 @@ hitmu(mtmp, mattk)
 	struct permonst *olduasmon = youmonst.data;
 	int res;
 	boolean burnmsg = FALSE;
+	boolean shockmsg = FALSE;
 
 	/*int randattack = 0;*/
 	uchar atttyp;
@@ -1217,6 +1218,15 @@ hitmu(mtmp, mattk)
 			if (otmp->otyp == TORCH && otmp->lamplit &&
 			    !Fire_resistance) {
 			  burnmsg = TRUE;
+			  dmg++;
+			}
+
+			/* 5lo: Electric swords have a 10% chance of
+			 * "sparking" to life */
+
+			if (otmp->otyp == ELECTRIC_SWORD && !otmp->oartifact &&
+			    !Shock_resistance && !rn2(10)) {
+			  shockmsg = TRUE;
 			  dmg++;
 			}
 
@@ -1322,6 +1332,17 @@ hitmu(mtmp, mattk)
 			  }
 			  burn_faster(otmp, 1);
 			}
+
+			/* 5lo: Occasional "buzz" from Electric Swords */
+			if (shockmsg) {
+			  pline("%s buzzes you!",
+				(Blind ? "It" : Yname2(otmp)));
+			    dmg += rnd(3);
+			    if (!rn2(25))
+			      (void)destroy_item(WAND_CLASS, AD_ELEC);
+			    if (!rn2(25))
+			      (void)destroy_item(RING_CLASS, AD_ELEC);
+			  }
 
 			if (!dmg) break;
 			if (u.mh > 1 && u.mh > ((u.uac>0) ? dmg : dmg+u.uac) &&
