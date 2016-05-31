@@ -892,25 +892,6 @@ objhere:	pline("%s's in the way.", Something);
 	return(FALSE);
 }
 
-STATIC_OVL
-boolean
-obstructedX(x,y)
-register int x, y;
-{
-	register struct monst *mtmp = m_at(x, y);
-
-	if(mtmp && mtmp->m_ap_type != M_AP_FURNITURE) {
-		if (mtmp->m_ap_type == M_AP_OBJECT) goto objhere;
-		if (!canspotmon(mtmp))
-		    map_invisible(mtmp->mx, mtmp->my);
-		return(TRUE);
-	}
-	if (OBJ_AT(x, y)) {
-objhere:	return(TRUE);
-	}
-	return(FALSE);
-}
-
 int
 doclose()		/* try to close a door */
 {
@@ -1044,51 +1025,6 @@ register struct obj *obj, *otmp;	/* obj *is* a box */
 	    if (xlock.box == obj)
 		reset_pick();
 	    break;
-	}
-	return res;
-}
-
-boolean
-doorlockX(x,y)
-int x, y;
-
-{
-	register struct rm *door = &levl[x][y];
-	boolean res = TRUE;
-	int loudness = 0;
-	const char *msg = (const char *)0;
-	const char *dustcloud = "A cloud of dust";
-	const char *quickly_dissipates = "quickly dissipates";
-	int key = artifact_door(x, y);		/* ALI - Artifact doors */
-
-	if (levl[x][y].typ != SDOOR && levl[x][y].typ != DOOR) return FALSE;
-
-	    if (obstructedX(x,y)) return FALSE;
-	    /* Don't allow doors to close over traps.  This is for pits */
-	    /* & trap doors, but is it ever OK for anything else? */
-	    if (t_at(x,y)) {
-		/* maketrap() clears doormask, so it should be NODOOR */
-		return FALSE;
-	    }
-
-	    block_point(x, y);
-	    if (key)
-		door->doormask = D_CLOSED | (door->doormask & D_TRAPPED);
-	    else
-	    door->doormask = D_LOCKED | (door->doormask & D_TRAPPED);
-	    newsym(x,y);
-
-	if (msg && cansee(x,y)) pline(msg);
-	if (loudness > 0) {
-	    /* door was destroyed */
-	    wake_nearto(x, y, loudness);
-	    if (*in_rooms(x, y, SHOPBASE)) add_damage(x, y, 0L);
-	}
-
-	if (res && picking_at(x, y)) {
-	    /* maybe unseen monster zaps door you're unlocking */
-	    stop_occupation();
-	    reset_pick();
 	}
 	return res;
 }
