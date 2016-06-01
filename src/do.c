@@ -863,13 +863,7 @@ dodown()
 	    }
 	    floating_above(stairs_down ? "stairs" : ladder_down ?
 			   "ladder" : surface(u.ux, u.uy));
-
-		if ( (stairs_down || ladder_down) && yn("You can force yourself down, but this will hurt you. Do it?") == 'y') {
-			pline("You drain your life-force to squeeze down the stairs.");
-		    losexp("levitating down a narrow set of stairs", TRUE);
-		    losexp("levitating down a narrow set of stairs", TRUE);
-		}
-		else {return(0);} /* didn't move */
+	    return (0);   /* didn't move */
 	}
 	if (!stairs_down && !ladder_down) {
 		if (!(trap = t_at(u.ux,u.uy)) ||
