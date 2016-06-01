@@ -4073,21 +4073,6 @@ register struct monst *mon;
 	if (u.ualign.type == A_CHAOTIC)
 		adjalign(1);
 
-	if (rnd(ACURR(A_CHA)) < 3) { /* random chance of being betrayed by your love interest... */
-
-	monsterlev = ((mon->m_lev) + 1);
-	if (monsterlev <= 0) monsterlev = 1;
-
-	if (!flags.female) { pline("But %s suddenly rams her sexy knees right into your nuts! OUCH!", Monnam(mon));
-				losehp(d(3,monsterlev), "treacherous lady", KILLED_BY_AN);
-			}
-	if (flags.female) { pline("But all of a sudden, %s clenches his burly hands to a fist and violently punches your breasts! AIIIEEEEEGGGGGHHHHH!", Monnam(mon));
-				losehp(d(3,monsterlev), "filthy traitor", KILLED_BY_AN);
-			}
-
-	return 1;
-	}
-
 	/* by this point you have discovered mon's identity, blind or not... */
 	pline("Time stands still while you and %s lie in each other's arms...",
 		noit_mon_nam(mon));
