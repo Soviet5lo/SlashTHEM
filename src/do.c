@@ -557,7 +557,7 @@ register struct obj *obj;
 	    if((obj->oclass == RING_CLASS || obj->otyp == MEAT_RING) &&
 			IS_SINK(levl[u.ux][u.uy].typ)) {
 		dosinkring(obj);
-		return(/*1*/0);
+		return(1);
 	    }
 #endif
 	    if (!can_reach_floor()) {
@@ -570,15 +570,13 @@ register struct obj *obj;
 		freeinv(obj);
 #endif
 		hitfloor(obj);
-		return(/*1*/0);
+		return(1);
 	    }
 	    if (!IS_ALTAR(levl[u.ux][u.uy].typ) && flags.verbose)
 		You("drop %s.", doname(obj));
 	}
 	dropx(obj);
-	return(/*1*/0);
-	/* Dropping things should no longer consume a turn now. --Amy */
-
+	return(1);
 }
 
 /* Called in several places - may produce output */

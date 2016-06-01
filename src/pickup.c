@@ -611,10 +611,7 @@ end_query:
 		/* see whether there's anything else here, after auto-pickup is done */
 		if (autopickup) check_here(n_picked > 0);
 	}
-
-	/* Picking up stuff no longer consumes turns. --Amy */
-
-	return /*(n_tried > */0/*)*/;
+	return (n_tried > 0);
 }
 
 #ifdef AUTOPICKUP_EXCEPTIONS
