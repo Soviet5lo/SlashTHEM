@@ -945,6 +945,8 @@ TOOL("magic lamp", "lamp",      0, 0, 1, 0,  10, 20,1000, COPPER, CLR_YELLOW),
 
 /* Instruments */
 /* KMH -- made less common */
+/* some code in invent.c requires wooden flute .. drum of earthquake to be
+   consecutive, with the wooden flute first and drum of earthquake last */
 TOOL("tin whistle", "whistle",  0, 0, 0, 0,  60,  3,  10, METAL, HI_METAL),
 TOOL("magic whistle", "whistle",0, 0, 1, 0,  25,  3,  10, METAL, HI_METAL),
 /* "If tin whistles are made out of tin, what do they make foghorns out of?" */

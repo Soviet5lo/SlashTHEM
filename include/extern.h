@@ -962,6 +962,7 @@ E void FDECL(carry_obj_effects, (struct monst *, struct obj *));
 E const char *FDECL(currency, (long));
 E void FDECL(silly_thing, (const char *,struct obj *));
 E int NDECL(doinvinuse);
+E struct obj *NDECL(getnextgetobj);
 /* KMH, balance patch -- new function */
 E int NDECL(jumble_pack);
 
@@ -1597,6 +1598,7 @@ E int NDECL(dowhatdoes);
 E char *FDECL(dowhatdoes_core,(CHAR_P, char *));
 E int NDECL(dohelp);
 E int NDECL(dohistory);
+E void FDECL(checkfile, (char *,struct permonst *,BOOLEAN_P,BOOLEAN_P));
 
 /* ### pcmain.c ### */
 
@@ -2563,6 +2565,7 @@ E void FDECL(setuswapwep, (struct obj *,BOOLEAN_P));
 E int NDECL(dowield);
 E int NDECL(doswapweapon);
 E int NDECL(dowieldquiver);
+E int NDECL(dounwield);
 E boolean FDECL(wield_tool, (struct obj *,const char *));
 E int NDECL(can_twoweapon);
 E void NDECL(drop_uswapwep);

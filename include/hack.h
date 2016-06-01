@@ -259,6 +259,7 @@ NEARDATA extern coord bhitpos;	/* place where throw or zap hits or stops */
 #define MENU_SELECTED	TRUE
 #define MENU_UNSELECTED FALSE
 
+#define MENU_DEFCNT 1
 /*
  * Option flags
  * Each higher number includes the characteristics of the numbers
