@@ -19,7 +19,7 @@ STATIC_DCL struct artifact artilist[];
 extern boolean notonhead;	/* for long worms */
 
 #define get_artifact(o) \
-		(((o)&&(o)->oartifact) ? &artilist[(int) ((unsigned char) (o)->oartifact)] : 0)
+		(((o)&&(o)->oartifact) ? &artilist[(o)->oartifact] : 0)
 
 STATIC_DCL int FDECL(spec_applies, (const struct artifact *,struct monst *));
 STATIC_DCL int FDECL(arti_invoke, (struct obj*));
@@ -360,7 +360,7 @@ register boolean mod;
 	    for (a = artilist+1; a->otyp; a++)
 		if (a->otyp == otmp->otyp && !strcmp(a->name, name)) {
 		    register int m = a - artilist;
-		    otmp->oartifact = (char)(mod ? m : 0);
+		    otmp->oartifact = (mod ? m : 0);
 		    if (mod) {
 			/* Light up Candle of Eternal Flame and
 			 * Holy Spear of Light on creation.
