@@ -230,6 +230,7 @@ static struct Bool_Opt
 #else
 	{"showdmg", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
+	{"showobj_inv", &iflags.showobj_inv, TRUE, SET_IN_GAME},
 #ifdef SHOW_WEIGHT
 	{"showweight", &flags.showweight, FALSE, SET_IN_GAME},
 #else

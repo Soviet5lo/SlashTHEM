@@ -355,6 +355,9 @@ typedef signed char	schar;
 typedef unsigned char	uchar;
 #endif
 
+/* added for displaying object in inventory port from Unnethack */
+typedef long glyph_t;
+
 #define RECORD_CONDUCT /* Record conduct challenges in logfile and xlogfile */
 
 #define REALTIME_ON_BOTL  /* Show elapsed time on bottom line.  Note:

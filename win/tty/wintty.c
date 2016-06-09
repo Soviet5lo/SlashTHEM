@@ -1391,6 +1391,25 @@ struct WinDesc *cw;
 		     * actually output the character.  We're faster doing
 		     * this.
 		     */
+		    /* add selector for display */
+		    if (curr->selector) {
+			    putchar(curr->selector);
+			    putchar(' '); putchar('-'); putchar(' ');
+			    ttyDisplay->curx += 4;
+		    }
+		    if (curr->glyph != NO_GLYPH && iflags.showobj_inv) {
+			    glyph_t character;
+			    unsigned special; /* unused */
+			    /* map glyph to character and color */
+			    mapglyph(curr->glyph, &character, &color, &special, 0, 0);
+
+			    if (color != NO_COLOR) term_start_color(color);
+			    putchar(character);
+			    if (color != NO_COLOR) term_end_color();
+			    putchar(' ');
+			    ttyDisplay->curx +=2;
+		    }
+
 #ifdef MENU_COLOR
 		   if (iflags.use_menu_color &&
 		       (menucolr = get_menu_coloring(curr->str, &color,&attr))) {
@@ -2238,7 +2257,7 @@ tty_start_menu(window)
 void
 tty_add_menu(window, glyph, identifier, ch, gch, attr, str, preselected)
     winid window;	/* window to use, must be of type NHW_MENU */
-    int glyph;		/* glyph to display with item (unused) */
+    int glyph;		/* glyph to display with item */
     const anything *identifier;	/* what to return if selected */
     char ch;		/* keyboard accelerator (0 = pick our own) */
     char gch;		/* group accelerator (0 = no group) */
@@ -2251,8 +2270,6 @@ tty_add_menu(window, glyph, identifier, ch, gch, attr, str, preselected)
 #endif
     register struct WinDesc *cw = 0;
     tty_menu_item *item;
-    const char *newstr;
-    char buf[4+BUFSZ];
 
     if (str == (const char*) 0)
 	return;
@@ -2262,19 +2279,6 @@ tty_add_menu(window, glyph, identifier, ch, gch, attr, str, preselected)
 	panic(winpanicstr,  window);
 
     cw->nitems++;
-    if (identifier->a_void) {
-	int len = strlen(str);
-	if (len >= BUFSZ) {
-	    /* We *think* everything's coming in off at most BUFSZ bufs... */
-	    impossible("Menu item too long (%d).", len);
-	    len = BUFSZ - 1;
-	}
-	Sprintf(buf, "%c - ", ch ? ch : '?');
-	(void) strncpy(buf+4, str, len);
-	buf[4+len] = '\0';
-	newstr = buf;
-    } else
-	newstr = str;
 
     item = (tty_menu_item *) alloc(sizeof(tty_menu_item));
     item->identifier = *identifier;
@@ -2283,7 +2287,8 @@ tty_add_menu(window, glyph, identifier, ch, gch, attr, str, preselected)
     item->selector = ch;
     item->gselector = gch;
     item->attr = attr;
-    item->str = copy_of(newstr);
+    item->str = copy_of(str);
+    item->glyph = glyph;
 
     item->next = cw->mlist;
     cw->mlist = item;
@@ -2358,12 +2363,23 @@ tty_end_menu(window, prompt)
 	    cw->plist[n/lmax] = curr;
 	}
 	if (curr->identifier.a_void && !curr->selector) {
-	    curr->str[0] = curr->selector = menu_ch;
+	    curr->selector = menu_ch;
 	    if (menu_ch++ == 'z') menu_ch = 'A';
 	}
 
 	/* cut off any lines that are too long */
 	len = strlen(curr->str) + 2;	/* extra space at beg & end */
+
+	if (curr->selector) {
+		/* extra space for keyboard accelator */
+		len += 4;
+		if (curr->glyph != NO_GLYPH &&
+		    iflags.showobj_inv) {
+			/* extra space for glyph */
+			len += 2;
+		}
+	}
+
 	if (len > (int)ttyDisplay->cols) {
 	    curr->str[ttyDisplay->cols-2] = 0;
 	    len = ttyDisplay->cols;
@@ -2666,7 +2682,7 @@ tty_print_glyph(window, x, y, glyph)
     xchar x, y;
     int glyph;
 {
-    int ch;
+    glyph_t ch;
     boolean reverse_on = FALSE;
     int	    color;
     unsigned special;

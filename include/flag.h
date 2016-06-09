@@ -319,6 +319,9 @@ struct instance_flags {
 	boolean dungeon_colors;
 	boolean random_room_colors;
 
+	boolean showobj_inv; /* Display items in inventory (Unnethack) */
+	/* makes showsym obsolete, but we'll keep it in as there's no conflict */
+
 #ifdef AUTOPICKUP_EXCEPTIONS
 	struct autopickup_exception *autopickup_exceptions[2];
 #define AP_LEAVE 0
