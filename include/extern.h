@@ -118,6 +118,9 @@ E schar NDECL(acurrstr);
 E void FDECL(adjalign, (int));
 /* KMH, balance patch -- new function */
 E void NDECL(recalc_health);
+/* 5lo: Added for Hitpointbar */
+E int NDECL(uhp);
+E int NDECL(uhpmax);
 
 /* ### ball.c ### */
 
