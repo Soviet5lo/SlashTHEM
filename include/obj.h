@@ -217,7 +217,6 @@ struct obj {
 #define is_pick(otmp)	(((otmp)->oclass == WEAPON_CLASS || \
 			 (otmp)->oclass == TOOL_CLASS) && \
 			 objects[(otmp)->otyp].oc_skill == P_PICK_AXE)
-#define is_antibar(otmp)	((otmp)->otyp == ELECTRIC_SWORD || (otmp)->otyp == GOLDEN_SABER  || (otmp)->otyp == METAL_CLUB || (otmp)->otyp == MALLET || (otmp)->otyp == STEEL_WHIP  )
 
 #define ammo_and_launcher(otmp,ltmp) \
 			(is_ammo(otmp) && (ltmp) && \

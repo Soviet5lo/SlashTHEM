@@ -1030,7 +1030,7 @@ struct obj *otmp;
 		      otyp != GAS_GRENADE &&
 		      otyp != STICK_OF_DYNAMITE &&
 #endif
-		      !is_axe(otmp) && !is_antibar(otmp) && !is_pole(otmp) && otyp != BULLWHIP) ||
+		      !is_axe(otmp) && !is_pole(otmp) && otyp != BULLWHIP) ||
 #ifdef GOLDOBJ
 			otmp->oclass == COIN_CLASS ||
 #endif

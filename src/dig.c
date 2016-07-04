@@ -25,7 +25,6 @@ STATIC_DCL void NDECL(dig_up_grave);
 #define DIGTYP_BOULDER    3
 #define DIGTYP_DOOR       4
 #define DIGTYP_TREE       5
-#define DIGTYP_IRONBAR    6
 
 
 STATIC_OVL boolean
@@ -137,30 +136,13 @@ struct obj *otmp;
 xchar x, y;
 {
 	boolean ispick = is_pick(otmp);
-	boolean isantibar = is_antibar(otmp);
-#ifdef LIGHTSABERS
-	boolean issaber = is_lightsaber(otmp);
-#endif
 
-	return ((ispick
-#ifdef LIGHTSABERS
-		|| issaber
-#endif
-		) && sobj_at(STATUE, x, y) ? DIGTYP_STATUE :
-		(isantibar && IS_IRONBAR(levl[x][y].typ)) ? DIGTYP_IRONBAR :
-		(ispick
-#ifdef LIGHTSABERS
-		|| issaber
-#endif
-		) && sobj_at(BOULDER, x, y) ? DIGTYP_BOULDER :
+	return (ispick && sobj_at(STATUE, x, y) ? DIGTYP_STATUE :
+		ispick && sobj_at(BOULDER, x, y) ? DIGTYP_BOULDER :
 		closed_door(x, y) ? DIGTYP_DOOR :
 		IS_TREE(levl[x][y].typ) ?
 			(ispick ? DIGTYP_UNDIGGABLE : DIGTYP_TREE) :
-		(ispick
-#ifdef LIGHTSABERS
-		 || issaber
-#endif
-		) && IS_ROCK(levl[x][y].typ) &&
+		ispick && IS_ROCK(levl[x][y].typ) &&
 			(!level.flags.arboreal || IS_WALL(levl[x][y].typ)) ?
 			DIGTYP_ROCK : DIGTYP_UNDIGGABLE);
 }
@@ -256,7 +238,7 @@ dig()
 #ifdef LIGHTSABERS
 		(!is_lightsaber(uwep) || !uwep->lamplit) &&
 #endif
-		!is_axe(uwep) && !is_antibar(uwep)) ||
+		!is_axe(uwep)) ||
 	    !on_level(&digging.level, &u.uz) ||
 	    ((digging.down ? (dpx != u.ux || dpy != u.uy)
 			   : (distu(dpx,dpy) > 2))))
@@ -378,7 +360,7 @@ dig()
 			    place_object(bobj, dpx, dpy);
 			}
 			digtxt = "The boulder falls apart.";
-		} else if (lev->typ == STONE || lev->typ == SCORR || IS_IRONBAR(lev->typ) ||
+		} else if (lev->typ == STONE || lev->typ == SCORR ||
 				IS_TREE(lev->typ)) {
 			if(Is_earthlevel(&u.uz)) {
 			    if(uwep->blessed && !rn2(3)) {
@@ -394,11 +376,6 @@ dig()
 			    digtxt = "You cut down the tree.";
 			    lev->typ = ROOM;
 			    if (!rn2(5)) (void) rnd_treefruit_at(dpx, dpy);
-			} else if (uwep && IS_IRONBAR(lev->typ) && is_antibar(uwep) ) {
-			    digtxt = "You smash the bars to the ground.";
-			    lev->typ = ROOM;
-				(void)wither_dmg(uwep, xname(uwep), rn2(4), TRUE, &youmonst); /* sorry --Amy */
-		if (!rn2(5)) mkobj_at(CHAIN_CLASS, dpx, dpy, FALSE); /* maybe make a chain from the bars --Amy */
 			} else {
 			    digtxt = "You succeed in cutting away some rock.";
 			    lev->typ = CORR;
@@ -470,8 +447,8 @@ cleanup:
 		digging.level.dlevel = -1;
 		return(0);
 	} else {		/* not enough effort has been spent yet */
-		static const char *const d_target[7] = {
-			"", "rock", "statue", "boulder", "door", "tree", "bars"
+		static const char *const d_target[6] = {
+			"", "rock", "statue", "boulder", "door", "tree"
 		};
 		int dig_target = dig_typ(uwep, dpx, dpy);
 
@@ -898,7 +875,6 @@ use_pick_axe(obj)
 struct obj *obj;
 {
 	boolean ispick;
-	boolean isantibar;
 	char dirsyms[12];
 	char qbuf[QBUFSZ];
 	register char *dsp = dirsyms;
@@ -914,8 +890,7 @@ struct obj *obj;
 	    else res = 1;
 	}
 	ispick = is_pick(obj);
-	isantibar = is_antibar(obj);
-	verb = ispick ? "dig" : isantibar ? "lash out" : "chop";
+	verb = ispick ? "dig" : "chop";
 
 	if (u.utrap && u.utraptype == TT_WEB) {
 	    pline("%s you can't %s while entangled in a web.",
@@ -1047,14 +1022,13 @@ struct obj *obj;
 			    You("swing your %s through thin air.",
 				aobjnam(obj, (char *)0));
 		} else {
-			static const char * const d_action[7][2] = {
+			static const char * const d_action[6][2] = {
 			    {"swinging","slicing the air"},
 			    {"digging","cutting through the wall"},
 			    {"chipping the statue","cutting the statue"},
 			    {"hitting the boulder","cutting through the boulder"},
 			    {"chopping at the door","burning through the door"},
-			    {"cutting the tree","razing the tree"},
-			    {"smashing the bars","breaking the bars"}
+			    {"cutting the tree","razing the tree"}
 			};
 			did_dig_msg = FALSE;
 			digging.quiet = FALSE;
