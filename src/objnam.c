@@ -1154,12 +1154,9 @@ ring:
 #ifdef SHOW_WEIGHT
 	  /* [max] weight inventory */
 	if ((obj->otyp != BOULDER) || !throws_rocks (youmonst.data))
-	  if ((obj->otyp <= ACID_VENOM) /* && (obj->otyp != CHEST) && (obj->otyp != LARGE_BOX) && */
-&& (obj->otyp != LUCKSTONE) && (obj->otyp != HEALTHSTONE) && (obj->otyp != LOADSTONE) && (obj->otyp != TOUCHSTONE)
-&& (obj->otyp != WHETSTONE) && (obj->otyp != FLINT)
-	      /*(obj->otyp != ICE_BOX) */ && (!Hallucination && flags.invweight))
+	  if ((obj->otyp < LUCKSTONE) && (obj->otyp != CHEST) && (obj->otyp != LARGE_BOX) &&
+	      (obj->otyp != ICE_BOX) && (!Hallucination && flags.invweight))
 		        Sprintf (eos(bp), " {%d}", obj->owt);
-/* show the freaking weight of all items! --Amy */
 #endif
 	/* merge bracketed attribs
 	   eg. [rustproof] [+1] -> [rustproof +1] */
