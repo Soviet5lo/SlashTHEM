@@ -1393,22 +1393,37 @@ struct WinDesc *cw;
 		     */
 		    /* add selector for display */
 		    if (curr->selector) {
-			    putchar(curr->selector);
-			    putchar(' '); putchar('-'); putchar(' ');
-			    ttyDisplay->curx += 4;
-		    }
+			    /* because WIN32CON this must be done in
+			     * a brain-dead way */
+			    putchar(curr->selector); ttyDisplay->curx++;
+			    putchar(' '); ttyDisplay->curx++;
+			    /* set item state */
+			    if (curr->identifier.a_void != 0 && curr->selected) {
+				    if (curr->count == -1L)
+					    (void) putchar('+'); /* all selected */
+				    else
+					    (void) putchar('#'); /* count selected */
+			    } else {
+				    putchar('-');
+			    }
+			    ttyDisplay->curx++;
+			    putchar(' '); ttyDisplay->curx++;
+ 		    }
+#ifndef WIN32CON
 		    if (curr->glyph != NO_GLYPH && iflags.showobj_inv) {
+			    int glyph_color = NO_COLOR;
 			    glyph_t character;
 			    unsigned special; /* unused */
 			    /* map glyph to character and color */
-			    mapglyph(curr->glyph, &character, &color, &special, 0, 0);
+			    mapglyph(curr->glyph, &character, &glyph_color, &special, 0, 0);
 
-			    if (color != NO_COLOR) term_start_color(color);
+			    if (glyph_color != NO_COLOR) term_start_color(glyph_color);
 			    putchar(character);
-			    if (color != NO_COLOR) term_end_color();
+			    if (glyph_color != NO_COLOR) term_end_color();
 			    putchar(' ');
 			    ttyDisplay->curx +=2;
 		    }
+#endif
 
 #ifdef MENU_COLOR
 		   if (iflags.use_menu_color &&
@@ -1426,13 +1441,6 @@ struct WinDesc *cw;
 			  *cp && (int) ttyDisplay->curx < (int) ttyDisplay->cols;
 			  cp++, n++, ttyDisplay->curx++)
 #endif
-			if (n == 2 && curr->identifier.a_void != 0 &&
-							curr->selected) {
-			    if (curr->count == -1L)
-				(void) putchar('+'); /* all selected */
-			    else
-				(void) putchar('#'); /* count selected */
-			} else
 			    (void) putchar(*cp);
 #ifdef MENU_COLOR
 		   if (iflags.use_menu_color && menucolr) {
@@ -2371,7 +2379,7 @@ tty_end_menu(window, prompt)
 	len = strlen(curr->str) + 2;	/* extra space at beg & end */
 
 	if (curr->selector) {
-		/* extra space for keyboard accelator */
+		/* extra space for keyboard accelerator */
 		len += 4;
 		if (curr->glyph != NO_GLYPH &&
 		    iflags.showobj_inv) {
