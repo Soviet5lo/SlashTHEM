@@ -1875,28 +1875,6 @@ static const struct def_skill Skill_Ran[] = {
     { P_RIDING, P_BASIC },
 #endif
     { P_BARE_HANDED_COMBAT, P_BASIC },
-};
-
-static const struct def_skill Skill_Elp[] = { /* Will be removed */
-    /* 5lo: Elf skills from Slash'EM 0.0.6 */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE, P_SKILLED },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_EXPERT },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-        /* WAC removed shuriken, added quarterstaff - Drow quest arty */
-    { P_QUARTERSTAFF, P_EXPERT },
-    { P_SPEAR, P_EXPERT },              { P_JAVELIN, P_BASIC },
-    { P_BOW, P_EXPERT },                { P_SLING, P_BASIC },
-    { P_CROSSBOW, P_BASIC },            /* { P_SHURIKEN, P_BASIC }, */
-
-    { P_MATTER_SPELL, P_BASIC },        { P_HEALING_SPELL, P_SKILLED },
-    { P_ENCHANTMENT_SPELL, P_EXPERT },
-/*WAC      removed attack_spell skilled as attack spells include "evil spells
-        and elves can now be lawful.  Replaced with Matter spells*/
-#ifdef STEED
-    { P_RIDING, P_SKILLED },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
@@ -2124,6 +2102,78 @@ static const struct def_skill Skill_Y[] = {
 };
 #endif
 
+/* Racial Skills here */
+
+static const struct def_skill Skill_Incantifier[] = {
+    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
+    { P_MATTER_SPELL, P_EXPERT },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Drow[] = {
+    { P_MUSICALIZE, P_SKILLED },	{ P_BOW, P_SKILLED },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Elf[] = {
+    { P_MUSICALIZE, P_SKILLED },	{ P_BOW, P_SKILLED },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Dwarf[] = {
+    { P_PICK_AXE, P_SKILLED },	{ P_AXE, P_SKILLED },
+    { P_NONE, 0 }
+};
+
+/*static const struct def_skill Skill_Giant[] = {
+
+};*/
+
+static const struct def_skill Skill_Gnome[] = {
+    { P_CROSSBOW, P_SKILLED },	{ P_CLUB, P_SKILLED },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Hobbit[] = {
+    { P_SLING, P_EXPERT },
+    { P_NONE, 0 }
+};
+
+/*static const struct def_skill Skill_Illithid[] = {
+
+};*/
+
+static const struct def_skill Skill_Kobold[] = {
+    { P_SPEAR, P_BASIC },	{ P_DAGGER, P_BASIC },
+    { P_DART, P_BASIC },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Lycanthrope[] = {
+    { P_BARE_HANDED_COMBAT, P_EXPERT },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Nymph[] = {
+    { P_MUSICALIZE, P_SKILLED},	{ P_HEALING_SPELL, P_SKILLED },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Ogre[] = {
+    { P_CLUB, P_EXPERT },
+    { P_NONE, 0 }
+};
+
+/*static const struct def_skill Skill_Orc[] = {
+
+};*/
+
+static const struct def_skill Skill_Troll[] = {
+    { P_POLEARMS, P_EXPERT },
+    { P_NONE, 0 }
+};
 
 STATIC_OVL void
 knows_object(obj)
@@ -2975,6 +3025,12 @@ u_init()
 	case PM_HUMAN:
 	    /* Nothing special */
 	    break;
+	case PM_INCANTIFIER:
+	    skill_add(Skill_Incantifier);
+//	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
+//	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
+//	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
+        break;
 
 	case PM_ELF:
 	    /*
@@ -3003,6 +3059,7 @@ u_init()
 	    knows_object(ELVEN_SHIELD);
 	    knows_object(ELVEN_BOOTS);
 	    knows_object(ELVEN_CLOAK);
+	    skill_add(Skill_Elf);
 	    break;
 	case PM_DROW:
 	    /* Drows can recognize all droven objects */
@@ -3011,6 +3068,7 @@ u_init()
 	    knows_object(DARK_ELVEN_BOW);
 	    knows_object(DARK_ELVEN_DAGGER);
 	    knows_object(DARK_ELVEN_MITHRIL_COAT);
+	    skill_add(Skill_Drow);
 	    break;
 
 	case PM_DWARF:
@@ -3022,18 +3080,21 @@ u_init()
 	    knows_object(DWARVISH_MITHRIL_COAT);
 	    knows_object(DWARVISH_CLOAK);
 	    knows_object(DWARVISH_ROUNDSHIELD);
+	    skill_add(Skill_Dwarf);
 	    break;
 
 	case PM_GNOME:
 	    knows_object(GNOMISH_HELM);
 	    knows_object(GNOMISH_BOOTS);
 	    knows_object(GNOMISH_SUIT);
+	    skill_add(Skill_Gnome);
 	    break;
 	case PM_HUMAN_WEREWOLF:
 	    if (!Role_if(PM_LUNATIC)) u.ulycn = PM_WEREWOLF;
 /*	    u.nv_range = 2;
 	    u.uen = u.uenmax += 6;
 	    ini_inv(Lycanthrope);*/
+	    skill_add(Skill_Lycanthrope);
 	    break;
 
 	case PM_ORC:
@@ -3092,7 +3153,7 @@ u_init()
 		if(rn2(2)) ini_inv(KoboltItemB);		
 		else ini_inv(KoboltItemC);
 	    }
-		/*HSleeping = 5;*/
+	    skill_add(Skill_Kobold);
 		break;
 	case PM_GASTLY:
           /*ini_inv(GhastFood);*/
@@ -3111,9 +3172,11 @@ u_init()
                 case 4: ini_inv(TrollItemD); break;
 		default: break;
 		}
+		skill_add(Skill_Troll);
 		break;
 	case PM_OGRO:
-         if(!Role_if(PM_CONVICT)) ini_inv(OgroItem);		
+         	if(!Role_if(PM_CONVICT)) ini_inv(OgroItem);
+		skill_add(Skill_Ogre);
 		break;
 	case PM_GIGANT:
          if(!Role_if(PM_CONVICT)) ini_inv(GigantItem);		

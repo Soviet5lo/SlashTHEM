@@ -2140,6 +2140,34 @@ struct obj *obj;
  * maximums.
  */
 void
+skill_add(class_skill)
+const struct def_skill *class_skill;
+{
+	int skmax, skill;
+	/* walk through array to set skill maximums */
+	for (; class_skill->skill != P_NONE; class_skill++) {
+	    skmax = class_skill->skmax;
+	    skill = class_skill->skill;
+
+	    P_MAX_SKILL(skill) = skmax;
+	    if (P_SKILL(skill) == P_ISRESTRICTED)	/* skill pre-set */
+			P_SKILL(skill) = P_UNSKILLED;
+	}
+	/*
+	 * Make sure we haven't missed setting the max on a skill
+	 * & set advance
+	 */
+	for (skill = 0; skill < P_NUM_SKILLS; skill++) {
+	    if (!P_RESTRICTED(skill)) {
+		if (P_MAX_SKILL(skill) < P_SKILL(skill)) {
+		    impossible("skill_init: curr > max: %s", P_NAME(skill));
+		    P_MAX_SKILL(skill) = P_SKILL(skill);
+		}
+		P_ADVANCE(skill) = practice_needed_to_advance(P_SKILL(skill)-1,skill);
+	    }
+	}
+}
+void
 skill_init(class_skill)
 const struct def_skill *class_skill;
 {
