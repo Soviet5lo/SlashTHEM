@@ -25,7 +25,7 @@ STATIC_DCL void NDECL(dig_up_grave);
 #define DIGTYP_BOULDER    3
 #define DIGTYP_DOOR       4
 #define DIGTYP_TREE       5
-
+#define DIGTYP_BARS	  6
 
 STATIC_OVL boolean
 rm_waslit()
@@ -135,8 +135,10 @@ dig_typ(otmp, x, y)
 struct obj *otmp;
 xchar x, y;
 {
-	boolean ispick = is_pick(otmp);
-
+	boolean ispick = is_pick(otmp),
+#ifdef LIGHTSABERS
+		is_saber = is_lightsaber(otmp);
+#endif
 	return (ispick && sobj_at(STATUE, x, y) ? DIGTYP_STATUE :
 		ispick && sobj_at(BOULDER, x, y) ? DIGTYP_BOULDER :
 		closed_door(x, y) ? DIGTYP_DOOR :
@@ -144,7 +146,11 @@ xchar x, y;
 			(ispick ? DIGTYP_UNDIGGABLE : DIGTYP_TREE) :
 		ispick && IS_ROCK(levl[x][y].typ) &&
 			(!level.flags.arboreal || IS_WALL(levl[x][y].typ)) ?
-			DIGTYP_ROCK : DIGTYP_UNDIGGABLE);
+			DIGTYP_ROCK :
+#ifdef LIGHTSABERS
+		is_saber && levl[x][y].typ == IRONBARS ? DIGTYP_BARS :
+#endif
+			DIGTYP_UNDIGGABLE);
 }
 
 boolean
@@ -361,7 +367,7 @@ dig()
 			}
 			digtxt = "The boulder falls apart.";
 		} else if (lev->typ == STONE || lev->typ == SCORR ||
-				IS_TREE(lev->typ)) {
+				IS_TREE(lev->typ) || lev->typ == IRONBARS) {
 			if(Is_earthlevel(&u.uz)) {
 			    if(uwep->blessed && !rn2(3)) {
 				mkcavearea(FALSE);
@@ -376,6 +382,16 @@ dig()
 			    digtxt = "You cut down the tree.";
 			    lev->typ = ROOM;
 			    if (!rn2(5)) (void) rnd_treefruit_at(dpx, dpy);
+			} else if (lev->typ == IRONBARS) {
+			    int numbars;
+			    struct obj *bars;
+			digtxt = "You cut through the bars.";
+			lev->typ = ROOM;
+			    for(numbars = d(2,4)-1; numbars > 0; numbars--){
+			    	bars = mksobj_at(!rn2(4) ? BATTLE_STAFF : METAL_CLUB, dpx, dpy, FALSE, FALSE);
+			    	bars->spe = 0;
+			    	bars->cursed = bars->blessed = FALSE;
+			    }
 			} else {
 			    digtxt = "You succeed in cutting away some rock.";
 			    lev->typ = CORR;
@@ -447,8 +463,8 @@ cleanup:
 		digging.level.dlevel = -1;
 		return(0);
 	} else {		/* not enough effort has been spent yet */
-		static const char *const d_target[6] = {
-			"", "rock", "statue", "boulder", "door", "tree"
+		static const char *const d_target[7] = {
+			"", "rock", "statue", "boulder", "door", "tree", "bars"
 		};
 		int dig_target = dig_typ(uwep, dpx, dpy);
 
@@ -1022,13 +1038,14 @@ struct obj *obj;
 			    You("swing your %s through thin air.",
 				aobjnam(obj, (char *)0));
 		} else {
-			static const char * const d_action[6][2] = {
+			static const char * const d_action[7][2] = {
 			    {"swinging","slicing the air"},
 			    {"digging","cutting through the wall"},
 			    {"chipping the statue","cutting the statue"},
 			    {"hitting the boulder","cutting through the boulder"},
 			    {"chopping at the door","burning through the door"},
-			    {"cutting the tree","razing the tree"}
+			    {"cutting the tree","razing the tree"},
+			    {"chopping at the bars","cutting through the bars"}
 			};
 			did_dig_msg = FALSE;
 			digging.quiet = FALSE;
