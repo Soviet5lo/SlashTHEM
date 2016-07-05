@@ -1301,8 +1301,8 @@ boolean identified, all_containers, want_dump;
 	    int saveknown = objects[box->otyp].oc_name_known;
 	    objects[box->otyp].oc_name_known = 1;
 	    if (Is_container(box) || box->otyp == STATUE) {
-		if (box->otyp == BAG_OF_TRICKS) {
-		    continue;	/* wrong type of container */
+		if (box->otyp == BAG_OF_TRICKS && box->spe) {
+		    continue;	/* bag of tricks with charges can't contain anything */
 		} else if (box->cobj) {
 		    winid tmpwin = create_nhwindow(NHW_MENU);
 		    Sprintf(buf, "Contents of %s:", the(xname(box)));

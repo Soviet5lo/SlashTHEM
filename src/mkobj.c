@@ -638,7 +638,7 @@ boolean artif;
 					break;
 		case HORN_OF_PLENTY:
 		case BAG_OF_TRICKS:
-			otmp->spe = rn1(20,10);
+			otmp->spe = rn1(25,10);
 			blessorcurse(otmp,5);
 					break;
  		case CHEMISTRY_SET:	otmp->spe = rn1(10,10);
