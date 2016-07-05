@@ -55,7 +55,7 @@ pet_type()
 	    return (PM_LITTLE_DOG);
 	else if (Role_if(PM_PIRATE))
 		return (rn2(2) ? PM_PARROT : PM_MONKEY);
-	else if (Role_if(PM_KORSAIR))
+	else if (Role_if(PM_CORSAIR))
 		switch (rnd(5)) {   
 		case 1: return (PM_LITTLE_DOG);
 		case 2: return (PM_KITTEN);
@@ -73,7 +73,7 @@ pet_type()
 		case 6: return (PM_PIT_VIPER);
 		case 7: return (PM_GIANT_SPIDER);
 		}
-	else if (Role_if(PM_CHEVALIER))
+	else if (Role_if(PM_WARRIOR))
 		switch (rnd(11)) {   
 		case 1: return (PM_BABY_YELLOW_DRAGON);
 		case 2: return (PM_BABY_GREEN_DRAGON);

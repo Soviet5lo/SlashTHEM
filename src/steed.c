@@ -114,7 +114,7 @@ use_saddle(otmp)
 	chance = ACURR(A_DEX) + ACURR(A_CHA)/2 + 2*mtmp->mtame;
 	chance += u.ulevel * (mtmp->mtame ? 20 : 5);
 	if (!mtmp->mtame) chance -= 10*mtmp->m_lev;
-	if (Role_if(PM_KNIGHT) || Role_if(PM_CHEVALIER))
+	if (Role_if(PM_KNIGHT) || Role_if(PM_PALADIN))
 	    chance += 20;
 	switch (P_SKILL(P_RIDING)) {
 	case P_ISRESTRICTED:
@@ -295,7 +295,7 @@ mount_steed(mtmp, force)
 	    return (FALSE);
 	}
 
-	if (!force && !Role_if(PM_KNIGHT) && !Role_if(PM_CHEVALIER) && !(--mtmp->mtame)) {
+	if (!force && !Role_if(PM_KNIGHT) && !Role_if(PM_PALADIN) && !(--mtmp->mtame)) {
 	    /* no longer tame */
 	    newsym(mtmp->mx, mtmp->my);
 	    pline("%s resists%s!", Monnam(mtmp),

@@ -243,7 +243,7 @@ static const struct innate_tech
 	pri_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_BLESSING, 1},
 		       {   0, 0, 0} },
-	che_tech[] = { {   1, T_TURN_UNDEAD, 1},
+	pal_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_BLESSING, 1},
 		       {   1, T_HEAL_HANDS, 1},
 		       {   0, 0, 0} },
@@ -2308,7 +2308,7 @@ role_tech()
 		case PM_NECROMANCER:	return (nec_tech);
 		case PM_NINJA:		return (nin_tech);
 		case PM_PRIEST:		return (pri_tech);
-		case PM_CHEVALIER:		return (che_tech);
+		case PM_PALADIN:	return (pal_tech);
 		case PM_RANGER:		return (ran_tech);
 		case PM_ROGUE:		return (rog_tech);
 		case PM_SAMURAI:	return (sam_tech);

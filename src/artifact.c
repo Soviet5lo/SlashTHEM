@@ -1310,7 +1310,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 				update_mon_intrinsics(mdef, otmp2, FALSE, FALSE);
 			}
 			/* give the object to the character */
-			otmp2 = (Role_if(PM_PIRATE) || Role_if(PM_KORSAIR) ) ? 
+			otmp2 = (Role_if(PM_PIRATE) || Role_if(PM_CORSAIR) ) ? 
 				hold_another_object(otmp2, "Ye snatched but dropped %s.",
 						   doname(otmp2), "Ye steal: ") :
 				hold_another_object(otmp2, "You snatched but dropped %s.",

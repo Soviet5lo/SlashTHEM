@@ -187,7 +187,7 @@ const struct innate {
 		     {  10, &(HAggravate_monster), "noisy", "quiet" },
 		     {  15, &(HWarning), "sensitive", "careless" },
 		     {	 0, 0, 0, 0 } },
-	kor_abil[] = {	{ 	1, &(HSwimming), "", "" },
+	cor_abil[] = {	{ 	1, &(HSwimming), "", "" },
 			 {2, &(HSearching), "perceptive", "unaware"  },
 			 {	7, &(HStealth), "stealthy", "noisy"  },	/* with cat-like tread ... */
 		     {	 0, 0, 0, 0 } },
@@ -828,7 +828,7 @@ int oldlevel, newlevel;
 	case PM_NECROMANCER:	abil = nec_abil;	break;
 	case PM_PIRATE:         abil = pir_abil;	break;
 	case PM_NINJA:		abil = nin_abil;	break;
-	case PM_KORSAIR:         abil = kor_abil;	break;
+	case PM_CORSAIR:         abil = cor_abil;	break;
 	case PM_GLADIATOR:         abil = gla_abil;	break;
 	case PM_DIVER:         abil = div_abil;	break;
 	case PM_DRUNK:         abil = dru_abil;	break;

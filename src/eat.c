@@ -288,7 +288,7 @@ register struct obj *food;
 	if (u.uhs != SATIATED) {
 		if (!food || food->otyp != AMULET_OF_STRANGULATION)
 			return;
-	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER)) {
+	} else if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_PALADIN)) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
 	}
@@ -1344,7 +1344,7 @@ void
 gluttonous()
 {
 	/* only happens if you were satiated, extra check by Amy to make that conduct mean more */
-	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_CHEVALIER))) {
+	if ((u.uhs == SATIATED) && ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_PALADIN))) {
 			adjalign(-3);		/* gluttony is unchivalrous */
 		You("feel like a glutton!");        
 	}

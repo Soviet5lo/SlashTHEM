@@ -7199,9 +7199,9 @@ You again sense %l pleading for help.
 essential in locating the Amulet of Yendor."
 %E
 #
-#       Chevalier
+#       Paladin
 #
-%Cc Che 00001
+%Cc Pal 00001
 You materialize in the shadows of %H.  Immediately, you notice
 that something is wrong.  The fields around the castle are trampled and
 withered, as if some great battle has been recently fought.
@@ -7209,63 +7209,63 @@ withered, as if some great battle has been recently fought.
 Looking closer, you %x long gouges in the walls of %H.
 You know of only one creature that makes those kinds of marks...
 %E
-%Cp Che 00002
+%Cp Pal 00002
 Once again you stand in the shadows of %H.
 %E
-%Cp Che 00003
+%Cp Pal 00003
 Again, you stand before %H.  You vaguely sense that this
 may be the last time you stand before %l.
 %E
-%Cp Che 00005
+%Cp Pal 00005
 "Hail, %p!  Verily, thou lookest well."
 %E
-%Cp Che 00006
+%Cp Pal 00006
 "There is word, %p, that %n hath been sighted in the fens
 near %i."
 %E
-%Cp Che 00007
+%Cp Pal 00007
 "Thou art our only hope now, %p."
 %E
-%Cp Che 00008
+%Cp Pal 00008
 "Verily, %l could have no better champion, %p."
 %E
-%Cp Che 00009
+%Cp Pal 00009
 "Many brave %cP died when %n attacked."
 %E
-%Cp Che 00010
+%Cp Pal 00010
 "Hail, %p!  Verily, thou lookest well."
 %E
-%Cp Che 00011
+%Cp Pal 00011
 "So, %p, didst thou find %n in the fens
 near %i?"
 %E
-%Cp Che 00012
+%Cp Pal 00012
 "Worthy %p, hast thou proven thy right purpose on the body of %n?"
 %E
-%Cp Che 00013
+%Cp Pal 00013
 "Verily, %l could have no better champion, %p."
 %E
-%Cp Che 00014
+%Cp Pal 00014
 "Hast thou indeed recovered %o?"
 %E
-%Cc Che 00015
+%Cc Pal 00015
 "Ah, %p.  We see thou hast received Our summons.
 We are in dire need of thy prowess.  But first, We must needs
 decide if thou art ready for this great undertaking."
 %E
-%Cp Che 00016
+%Cp Pal 00016
 "Welcome again, %p.  We hope thou art ready now."
 %E
-%Cp Che 00017
+%Cp Pal 00017
 "Once again, thou standest before Us, %p.  Art thou ready now?"
 %E
-%Cc Che 00018
+%Cc Pal 00018
 "Thou disgracest this noble court with thine impure presence.  We have been
 lenient with thee, but no more.  Thy name shall be spoken no more.  We
 hereby strip thee of thy title, thy lands, and thy standing as %ca.
 Begone from Our sight!"
 %E
-%Cc Che 00019
+%Cc Pal 00019
 "Verily, %p, thou hast done well.  That thou hast survived thus
 far is a credit to thy valor, but thou art yet unprepared for
 the demands required as Our Champion.  %rA, no matter how
@@ -7274,12 +7274,12 @@ pure, could never hope to defeat the foul %n.
 "Journey forth from this place, and hone thy skills.  Return to
 Our presence when thou hast attained the noble title of %R."
 %E
-%Cc Che 00020
+%Cc Pal 00020
 "Thou dishonourest Us, %p!  Thou hast strayed from the path of
 chivalry! Go from Our presence and do penance.  Only when thou art again
 pure mayst thou return hence."
 %E
-%Cc Che 00021
+%Cc Pal 00021
 "Ah, %p.  Thou art truly ready, as no %c before thee hath
 been.  Hear now Our words:
 
@@ -7301,108 +7301,108 @@ Arthubert will not regain his health.
 beast, and return to Us %o.  Only then can
 We restore Arthubert to health."
 %E
-%Cp Che 00025
+%Cp Pal 00025
 "Remember, %p, follow always the path of %d."
 %E
-%Cp Che 00026
+%Cp Pal 00026
 "Though %n is verily a mighty foe, We have confidence in thy victory."
 %E
-%Cp Che 00027
+%Cp Pal 00027
 "Beware, for %n hath surrounded himself with hordes of foul creatures."
 %E
-%Cp Che 00028
+%Cp Pal 00028
 "Great treasure, 'tis said, is hoarded in the lair of %n."
 %E
-%Cp Che 00029
+%Cp Pal 00029
 "If thou possessest %o, %p, %ns magic
 shall therewith be thwarted."
 %E
-%Cp Che 00030
+%Cp Pal 00030
 "The gates of %i are guarded by forces unseen, %p.
 Go carefully."
 %E
-%Cp Che 00031
+%Cp Pal 00031
 "Return %o to Us quickly, %p."
 %E
-%Cp Che 00032
+%Cp Pal 00032
 "Destroy %n, %p, else %H shall surely fall."
 %E
-%Cp Che 00033
+%Cp Pal 00033
 "Call upon %d when thou art in need."
 %E
-%Cp Che 00034
+%Cp Pal 00034
 "To find %i, thou must keep thy heart pure."
 %E
-%Cc Che 00035
+%Cc Pal 00035
 You stand at the foot of %i.  Atop, you can %x a shrine.
 Strange energies seem to be focused here, and the hair on the back
 of your neck stands on end.
 %E
-%Cp Che 00036
+%Cp Pal 00036
 Again, you stand at the foot of %i.
 %E
-%Cc Che 00040
+%Cc Pal 00040
 As you exit the swamps, you %x before you a huge, gaping hole in the
 side of a hill.  From within, you smell the foul stench of carrion.
 
 The pools on either side of the entrance are fouled with blood, and
 pieces of rusted metal and broken weapons show above the surface.
 %E
-%Cp Che 00041
+%Cp Pal 00041
 Again, you stand at the entrance to %ns lair.
 %E
-%Cc Che 00050
+%Cc Pal 00050
 "Hah!  Another puny %c seeks death.  I shall dine well tonight,
 then tomorrow, %H shall fall!"
 %E
-%Cp Che 00051
+%Cp Pal 00051
 "Again, thou challengest me, %r?  So be it.  Thou wilt die here."
 %E
-%Cp Che 00052
+%Cp Pal 00052
 "Thou art truly foolish, %r.  I shall dispatch thee anon."
 %E
-%Cp Che 00053
+%Cp Pal 00053
 "So, thou darest touch MY property!  I shall have that bauble back,
 puny %r.  Thou wilt die in agony!"
 %E
-%Cp Che 00060
+%Cp Pal 00060
 "A mere %r can never withstand me!"
 %E
-%Cp Che 00061
+%Cp Pal 00061
 "I shall kill thee now, and feast!"
 %E
-%Cp Che 00062
+%Cp Pal 00062
 "Puny %c.  What manner of death dost thou wish?"
 %E
-%Cp Che 00063
+%Cp Pal 00063
 "First thee, %p, then I shall feast upon %l."
 %E
-%Cp Che 00064
+%Cp Pal 00064
 "Hah!  Thou hast failed, %r.  Now thou shalt die."
 %E
-%Cp Che 00065
+%Cp Pal 00065
 "Die, %c.  Thou art as nothing against my might."
 %E
-%Cp Che 00066
+%Cp Pal 00066
 "I shall suck the marrow from thy bones, %c."
 %E
-%Cp Che 00067
+%Cp Pal 00067
 "Let's see...  Broiled?  No.  Fried?  Nay.  Baked?  Yea verily,
 that is the way I like my %c for dinner."
 %E
-%Cp Che 00068
+%Cp Pal 00068
 "Thy strength waneth, %p.  The time of thy death draweth near."
 %E
-%Cp Che 00069
+%Cp Pal 00069
 "Call upon thy precious %d, %p.  It shall not avail thee."
 %E
-%Cc Che 00070
+%Cc Pal 00070
 As you pick up %o, you feel its protective fields
 form around your body.  You also feel a faint stirring in your mind,
 as if you are in two places at once, and in the second, you are waking
 from a long sleep.
 %E
-%Cc Che 00080
+%Cc Pal 00080
 As %n sinks to the ground, blood gushing from his open mouth, he
 defiantly curses you and %l:
 
@@ -7412,7 +7412,7 @@ defiantly curses you and %l:
 His tail flailing madly, %n tries to crawl towards you, but slumps
 to the ground and dies in a pool of his own blood.
 %E
-%Cc Che 00081
+%Cc Pal 00081
 As you approach %l, he beams at you and says:
 
     Well done!  Thou art truly the Champion of %H.  We
@@ -7426,16 +7426,16 @@ As you approach %l, he beams at you and says:
     Amulet of Yendor.
 %E
 # assumes Magic Mirror of Merlin (glass object)
-%Cc Che 00082
+%Cc Pal 00082
 "Careful, %p!  %oC might break, and that would
 be a tragic loss.  Thou art its keeper now, and the time hath come
 to resume thy search for the Amulet.  %Z await thy
 return through the magic portal that brought thee here."
 %E
-%Cp Che 00090
+%Cp Pal 00090
 "Well met, %p.  How goeth thy search for the Amulet of Yendor?"
 %E
-%Cc Che 00091
+%Cc Pal 00091
 "Thou hast succeeded, We see, %p!  Now thou art commanded to take
 the Amulet to be sacrificed to %d in the plane of the astral.
 
@@ -7444,7 +7444,7 @@ the planes of the elements, to achieve this goal.
 
 "Go with %d, %p."
 %E
-%Cc Che 00095
+%Cc Pal 00095
 "You have betrayed all those who hold allegiance to %d, as you once did.
 My allegiance to %d holds fast and I cannot condone or accept what you 
 have done.
@@ -7457,16 +7457,16 @@ resides.
 Go now!  You are banished from this place.
 %E
 
-%Cp Che 00100
+%Cp Pal 00100
 You receive a faint telepathic message from %l:
 Your help is urgently needed at %H!
 Look for a ...ic transporter.
 You couldn't quite make out that last message.
 %E
-%Cp Che 00101
+%Cp Pal 00101
 You again sense %l pleading for help.
 %E
-%Cp Che 00102
+%Cp Pal 00102
 "The silver bell which was hoarded by %n will be
 essential in locating the Amulet of Yendor."
 %E
@@ -8540,9 +8540,9 @@ Ye again sense %l pleading for help.
 essential in locating the Amulet of Yendor."
 %E
 #
-#	Korsair
+#	Corsair
 #
-%Cc Kor 00001
+%Cc Cor 00001
 Ye breathe deeply of the sweet bouquet that is %H. 
 
 ...It'll linger.
@@ -8551,76 +8551,76 @@ Rather than the khaotic din ye recall, a eerie silence greets yer
 lugs. In the distance, ye hear soldiers on patrol. Seems yer pirate
 brethren be in need of yer assistance!
 %E
-%Cp Kor 00002
+%Cp Cor 00002
 Once again, ye breathe the bouquet that is %H.
 %E
-%Cp Kor 00003
+%Cp Cor 00003
 Ye are back on %H.
 Ye fear that soon the brethren of the koast will have to abandon 
 %H.
 %E
-%Cp Kor 00005
+%Cp Cor 00005
 "The soldiers o' Yendor attacked %H and destroyed %l's home!"
 %E
-%Cp Kor 00006
+%Cp Cor 00006
 "These Yendorans 'ave disturbed the dead that lay in Davy Jones's
 Locker!"
 %E
-%Cp Kor 00007
+%Cp Cor 00007
 "Ol' %l once sailed with the Dread Pirate Roberts, or so they say."
 %E
-%Cp Kor 00008
+%Cp Cor 00008
 "%n has risen and scattered the soldiers sent to %i.
 Now the dead attack %H as well!"
 %E
-%Cp Kor 00009
+%Cp Cor 00009
 "Kaptain Ketch led the attack and sank many o' our ships. Now Ketch be
 trapped on %i."
 %E
-%Cp Kor 00010
+%Cp Cor 00010
 "Have ye found much booty in the Dungeons o' Doom?"
 %E
-%Cp Kor 00011
+%Cp Cor 00011
 "Did ye send Ketch to feed the fishes?"
 %E
-%Cp Kor 00012
+%Cp Cor 00012
 "Arrrr!"
 %E
-%Cp Kor 00013
+%Cp Cor 00013
 "Ol' %l once sailed with the Dread Pirate Roberts, or so they say."
 %E
-%Cp Kor 00014
+%Cp Cor 00014
 "Be there komely lasses in the Dungeons o' Doom?"
 %E
-%Cc Kor 00015
+%Cc Cor 00015
 "So, %p. Ye have returned to yer brethren. We 'ave need of a kanny 
 %S of the koast to show these Yendorans to the plank.
 
 "Let me be see'n if ye BE that %S."
 %E
-%Cp Kor 00016
+%Cp Cor 00016
 "Ye try me patience, %p.
 I hope that this time ye be ready."
 %E
-%Cp Kor 00017
+%Cp Cor 00017
 "I hope for yer sake ye are prepared at last."
 %E
-%Cc Kor 00018
+%Cc Cor 00018
 "Me mercy is at an end, %p. Leave %H and never return."
 %E
-%Cc Kor 00019
+%Cc Cor 00019
 "Ye be still too weak.  Return a proven %R. Perhaps then
 ye will be ready.
 
 "Go now, and follow %d to glory and riches."
 %E
-%Cc Kor 00020
+%Cc Cor 00020
 "Ye must follow %d through %a waters to reach %i.
 
 "As ye be now ye would never make it. Do not return to %H 
 until ye be wise in the ways o' %d."
 %E
-%Cc Kor 00021
+%Cc Cor 00021
 "I always knew ye had greatness in ye, %S. As a %g, perhaps ye may
 succeed where I once failed.
 
@@ -8639,118 +8639,118 @@ I be unable to stop them. So it falls to ye, my %S. Drive these
 soldiers from %H, then sail to %i, destroy %n 
 once and fer all, and klaim %o, in yer own name!"
 %E
-%Cp Kor 00025
+%Cp Cor 00025
 "Do not be shaken by the fearsome form of %n."
 %E
-%Cp Kor 00026
+%Cp Cor 00026
 "To enter %i ye must find a hidden fissure in the rocks."
 %E
-%Cp Kor 00027
+%Cp Cor 00027
 "Oh, an' Kaptain Ketch owes me for a new house!"
 %E
-%Cp Kor 00028
+%Cp Cor 00028
 "Kaptain Ketch sailed to %i, but the ship was lost on the
 rocks an' Ketch doesn't know the way into the kaves."
 %E
-%Cp Kor 00029
+%Cp Cor 00029
 "If ye do not destroy %n, he will follow ye back here!"
 %E
-%Cp Kor 00030
+%Cp Cor 00030
 "Sharks swim in the waters around %i."
 %E
-%Cp Kor 00031
+%Cp Cor 00031
 "It be pitch black in %i!"
 %E
-%Cp Kor 00032
+%Cp Cor 00032
 "There be much treasure lost in the waves around %i."
 %E
-%Cp Kor 00033
+%Cp Cor 00033
 "Only the %a kan reach %i."
 %E
-%Cp Kor 00034
+%Cp Cor 00034
 "Trust %d in yer hour of need."
 %E
-%Cc Kor 00035
+%Cc Cor 00035
 Ye have reached the treacherous waters around %i at last
 The ghostly minions of %n are everywhere around ye.
 %E
-%Cp Kor 00036
+%Cp Cor 00036
 Ye know that this time ye must find and destroy %n.
 %E
-%Cc Kor 00040
+%Cc Cor 00040
 Ye sense the presence of %o at the heart of %i.
 %E
-%Cp Kor 00041
+%Cp Cor 00041
 Ye know that soon ye shall klaim %o for yer own.
 %E
-%Cc Kor 00050
+%Cc Cor 00050
 "So, %p, %l thinks that ye kan klaim %o,
 when even he kould not?!
 
 "He must be senile to send %ra to destroy me, when even in his prime
 he failed at the same task! No, it is yer soul that shall go to %d."
 %E
-%Cp Kor 00051
+%Cp Cor 00051
 "I have been toying with ye, %p. This time I will kill ye."
 %E
-%Cc Kor 00052
+%Cc Cor 00052
 "Flee now, %p. A %c kannot destroy %n.
 
 "If ye do not flee, I will inflict so much suffering on ye that
 %l will feel guilty for ever having sent his %S to me!"
 %E
-%Cc Kor 00053
+%Cc Cor 00053
 "Return %o to me, or I shall visit torments on ye even
 Judas knows naught of.
 %E
-%Cp Kor 00060
+%Cp Cor 00060
 "I defeated death, even %l kouldn't destroy me at his best.
 What hope have ye, %p."
 %E
-%Cp Kor 00061
+%Cp Cor 00061
 "I am the mightiest follower of the Devil the world 
 has ever known! Yer weak devotion to %d
 will not save ye."
 %E
-%Cp Kor 00062
+%Cp Cor 00062
 "Beg for mercy now, and I will only kill ye."
 %E
-%Cp Kor 00063
+%Cp Cor 00063
 "Abandon yer %a ways! Slink off and never face me again!"
 %E
-%Cp Kor 00064
+%Cp Cor 00064
 "Vengeance will be mine, %p. I will make %l pay,
 for what he did to me!"
 %E
-%Cp Kor 00065
+%Cp Cor 00065
 "The Brethren of the Koast are finished. Now I rule the seas!"
 %E
-%Cp Kor 00066
+%Cp Cor 00066
 "With %o I kontrol all the treasures of the sea!"
 %E
-%Cp Kor 00067
+%Cp Cor 00067
 "I will never die!"
 %E
-%Cp Kor 00068
+%Cp Cor 00068
 "Are ye truly the greatest pirate %H has left?
 It will share yer fate!"
 %E
-%Cp Kor 00069
+%Cp Cor 00069
 "Die in vain, %p! I will send %l to join ye!"
 %E
-%Cc Kor 00070
+%Cc Cor 00070
 As ye pick up %o, ye feel a great
 weight has been lifted from yer shoulders.  Yer only thoughts are
 to quickly return to %H and find %l.
 %E
-%Cc Kor 00080
+%Cc Cor 00080
 A great krack opens below %n, and a huge, flaming hand 
 reaches out to seize his wispy form. He kurses ye:
     NO! I won't die here, %p! It is ye who's soul will feed 
 	the Devil! I am king of all the oceans, I kannot be killed!
 	I will haunt ye until %d betrays ye!
 %E
-%Cc Kor 00081
+%Cc Cor 00081
 As %l senses %o, the lines on his face harden
 into what may be his version of a smile.
     Ye have klaimed %o.  Ye hold in
@@ -8763,21 +8763,21 @@ into what may be his version of a smile.
 	can klaim this prize. It was he who sent the soldiers here.
 	Return to %Z, and klaim yer destiny!
 %E
-%Cc Kor 00082
+%Cc Cor 00082
 "%oC is yers.  Yer destiny awaits through the portal that 
 brought ye here."
 %E
-%Cp Kor 00090
+%Cp Cor 00090
 "Tell me of yer adventures in yer quest for the Amulet of Yendor."
 %E
-%Cc Kor 00091
+%Cc Cor 00091
 "Ye have klaimed the Amulet of Yendor! Truly ye were destined to be
 the greatest %S of the Breathren of the Koast!
 
 "Now ye must travel to the astral sea, and offer the Amulet on the
 High Altar of %d!"
 %E
-%Cc Kor 00095
+%Cc Cor 00095
 "Ye have betrayed all those who hold allegiance to %d, as ye once did.
 My allegiance to %d holds fast and I kannot kondone or accept what ye 
 have done.
@@ -8790,16 +8790,16 @@ resides.
 Go now!  Ye are banished from this place.
 %E
 
-%Cp Kor 00100
+%Cp Cor 00100
 Ye receive a faint telepathic message from %l:
 Yer help is urgently needed at %H!
 Look for a ...ic transporter.
 Ye kouldn't quite make out that last message.
 %E
-%Cp Kor 00101
+%Cp Cor 00101
 Ye again sense %l pleading for help.
 %E
-%Cp Kor 00102
+%Cp Cor 00102
 "The silver bell which was hoarded by %n will be
 essential in locating the Amulet of Yendor."
 %E

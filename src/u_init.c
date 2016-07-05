@@ -460,7 +460,7 @@ static struct trobj Pirate[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Korsair[] = {
+static struct trobj Corsair[] = {
 	{ SCIMITAR, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ DAGGER, 1, WEAPON_CLASS, 7, 0 },
 	{ UNDEF_TYP, UNDEF_SPE, RING_CLASS, 1, UNDEF_BLESS },
@@ -508,7 +508,7 @@ static struct trobj Necromancer[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Chevalier[] = {
+static struct trobj Paladin[] = {
 	{ SILVER_SHORT_SWORD, 1, WEAPON_CLASS, 1, 1 },
 	{ RING_MAIL, 1, ARMOR_CLASS, 1, 1 },
 	{ HELMET, 0, ARMOR_CLASS, 1, 1 },
@@ -1691,7 +1691,7 @@ static struct def_skill Skill_P[] = {
     { P_NONE, 0 }
 };
 
-static struct def_skill Skill_Che[] = {
+static struct def_skill Skill_Pal[] = {
     /* 5lo: Mesh of Knight and Priest skills */
     { P_DAGGER, P_BASIC },		{ P_KNIFE, P_BASIC },
     { P_SHORT_SWORD, P_EXPERT },	{ P_BROAD_SWORD, P_SKILLED },
@@ -1748,7 +1748,7 @@ static const struct def_skill Skill_Div[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Kor[] = {
+static const struct def_skill Skill_Cor[] = {
     /* 5lo: from Fyr's userpage on nethackwiki */
     { P_DAGGER, P_EXPERT },	{ P_LONG_SWORD,  P_SKILLED },
     { P_PICK_AXE, P_BASIC },	    { P_SHORT_SWORD, P_BASIC },
@@ -2727,17 +2727,17 @@ u_init()
 		knows_object(GRAPPLING_HOOK);
 		skill_init(Skill_Pir);
 		break;
-	case PM_KORSAIR:
+	case PM_CORSAIR:
 #ifndef GOLDOBJ
 		u.ugold = u.ugold0 = rnd(300);
 #else
 		u.umoney0 = rnd(300);
 #endif
-		ini_inv(Korsair);
+		ini_inv(Corsair);
 		knows_object(OILSKIN_SACK);
 		knows_object(OILSKIN_CLOAK);
 		knows_object(GRAPPLING_HOOK);
-		skill_init(Skill_Kor);
+		skill_init(Skill_Cor);
 		break;
 	case PM_GLADIATOR:
 		ini_inv(Gladiator);
@@ -2824,13 +2824,13 @@ u_init()
 		 * role in their YAAP.
 		 */
 		break;
-	case PM_CHEVALIER:
-		ini_inv(Chevalier);
+	case PM_PALADIN:
+		ini_inv(Paladin);
 		if(!rn2(10)) ini_inv(Magicmarker);
 		else if(!rn2(10)) 
 		  (rn2(100) > 50 ? ini_inv(Lamp) : ini_inv(Torch));
 		knows_object(POT_WATER);
-		skill_init(Skill_Che);
+		skill_init(Skill_Pal);
 		break;
 	case PM_RANGER:
 		Ranger[RAN_TWO_ARROWS].trquan = rn1(10, 50);
@@ -3297,7 +3297,7 @@ int otyp;
      case PM_ROCKER:		skills = Skill_Roc; break;
      case PM_ZYBORG:		skills = Skill_Zyb; break;
      case PM_LUNATIC:		skills = Skill_Lun; break;
-     case PM_CHEVALIER:		skills = Skill_Che; break;
+     case PM_PALADIN:		skills = Skill_Pal; break;
      case PM_ELECTRIC_MAGE:		skills = Skill_Ele; break;
      case PM_ACID_MAGE:		skills = Skill_Aci; break;
      case PM_FLAME_MAGE:		skills = Skill_F; break;
@@ -3314,7 +3314,7 @@ int otyp;
      case PM_POKEMON:		skills = Skill_Pok; break;
 #endif
      case PM_PIRATE:		skills = Skill_Pir; break;
-     case PM_KORSAIR:		skills = Skill_Kor; break;
+     case PM_CORSAIR:		skills = Skill_Cor; break;
      case PM_GLADIATOR:		skills = Skill_Gla; break;
      case PM_DIVER:		skills = Skill_Div; break;
      case PM_PRIEST:		skills = Skill_P; break;

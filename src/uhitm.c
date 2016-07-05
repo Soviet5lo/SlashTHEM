@@ -265,7 +265,7 @@ struct monst *mtmp;
 
 	}
 
-	if (Role_if(PM_CHEVALIER) &&
+	if (Role_if(PM_PALADIN) &&
 	    (!mtmp->mcanmove || mtmp->msleeping ||
 	     (mtmp->mflee && !mtmp->mavenge)) &&
 	    u.ualign.record > -10) {

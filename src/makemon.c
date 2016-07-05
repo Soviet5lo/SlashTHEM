@@ -754,8 +754,8 @@ register struct monst *mtmp;
 
 		   break;
 
-		   case PM_KORSAIR:
-		   case PM_UNDEAD_KORSAIR:
+		   case PM_CORSAIR:
+		   case PM_UNDEAD_CORSAIR:
 		     (void)mongets(mtmp, DAGGER);
 		     (void)mongets(mtmp, SCIMITAR);
 
@@ -769,8 +769,8 @@ register struct monst *mtmp;
 		     (void)mongets(mtmp, OILSKIN_CLOAK);
 		   break;
 
-		   case PM_CHEVALIER:
-		   case PM_UNDEAD_CHEVALIER:
+		   case PM_PALADIN:
+		   case PM_UNDEAD_PALADIN:
 		     (void)mongets(mtmp, TRIDENT);
 		     (void)mongets(mtmp, ROBE);
 		     (void)mongets(mtmp, SMALL_SHIELD);

@@ -196,7 +196,7 @@ register boolean special;
 		case PM_OFFICER:
 		    weapon = CLUB;
 		    break;
-		case PM_KORSAIR:
+		case PM_CORSAIR:
 		    weapon = SCIMITAR;
 		    break;
 		case PM_DIVER:
@@ -244,8 +244,8 @@ register boolean special;
 		    if (rn2(2)) shield = STRANGE_OBJECT;
 		    break;
 #endif
-		case PM_CHEVALIER:
-		    weapon = TRIDENT;
+		case PM_PALADIN:
+		    weapon = SILVER_SHORT_SWORD;
 		    break;
 		case PM_CHEF:
 		    weapon = KNIFE;

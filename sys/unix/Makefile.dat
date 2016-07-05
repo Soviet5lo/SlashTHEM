@@ -311,11 +311,11 @@ spec_levs: ../util/lev_comp \
 quest_levs: ../util/lev_comp \
 	Acid.des Arch.des \
 	Barb.des Bard.des Binder.des Bleeder.des \
-	Caveman.des Cheval.des Convict.des \
+	Caveman.des Paladin.des Convict.des \
 	Cyborg.des Diver.des Drunk.des \
 	Electric.des Chef.des Firef.des Flame.des \
 	Gangster.des Gladia.des Geek.des Gradu.des \
-	Healer.des Ice.des Jedi.des Knight.des Korsair.des \
+	Healer.des Ice.des Jedi.des Knight.des Corsair.des \
 	Locks.des Lunatic.des Monk.des Music.des \
 	Necro.des Ninja.des Noble.des Offic.des \
 	Pirate.des Priest.des Ranger.des \
@@ -330,7 +330,7 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Binder.des
 	../util/lev_comp Bleeder.des
 	../util/lev_comp Caveman.des
-	../util/lev_comp Cheval.des
+	../util/lev_comp Paladin.des
 	../util/lev_comp Convict.des
 	../util/lev_comp Cyborg.des
 	../util/lev_comp Diver.des
@@ -347,7 +347,7 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Ice.des
 	../util/lev_comp Jedi.des
 	../util/lev_comp Knight.des
-	../util/lev_comp Korsair.des
+	../util/lev_comp Corsair.des
 	../util/lev_comp Locks.des
 	../util/lev_comp Lunatic.des
 	../util/lev_comp Monk.des

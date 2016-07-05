@@ -258,32 +258,6 @@ const struct Role roles[] = {
 	0, 5, 1, 2, 10, A_INT, SPE_DETECT_FOOD,   -4
 },
 
-{	{"Chevalier", 0}, {
-	{"Basher",    0},
-	{"Undefiler",     0},
-	{"Faithful",       0},
-	{"Religious One",      0},
-	{"Returned One",      0},
-	{"Sacred One",       0},
-	{"Celestial",        0},
-	{"Decomposer",   0},
-	{"Annihilator", 0} },
-	0, 0, 0,	/* randomly chosen from other roles */
-	"Che", "Ancient Temple", "the World-Eater's domain",
-	PM_CHEVALIER, NON_PM, PM_UNDEAD_CHEVALIER, NON_PM, NON_PM,
-	PM_EREC, PM_ACOLYTE, PM_ALDUIN,
-	PM_HUMAN_ZOMBIE, PM_WRAITH, S_ZOMBIE, S_WRAITH,
-	ART_CUDGEL_OF_CUTHBERT,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{   7,  7, 10,  7,  7,  7 },
-	{  20, 10, 30, 15, 20, 5 },
-	/* Init   Lower  Higher */
-	{ 20, 0,  0, 9,  1, 0 },	/* Hit points */
-	{ 17, 3,  0, 2,  0, 2 },10,	/* Energy */
-	0, 3,-2, 2, 10, A_WIS, SPE_REMOVE_CURSE,    -4
-},
 
 #ifdef CONVICT
 {	{"Convict", 0}, {
@@ -313,6 +287,33 @@ const struct Role roles[] = {
 	-20, 5, 0, 2, 10, A_INT, SPE_TELEPORT_AWAY,   -4
 },
 #endif	/* CONVICT */
+
+{	{"Corsair", 0}, {
+	{"Lubber",  0},
+	{"Swabby",        	0},
+	{"Deckhand",   0},
+	{"Bilge Rat",      		0},
+	{"Helmsman",     "Helmswoman"},
+	{"Navigator",      0},
+	{"Bosun",			0},
+	{"Mate",   	0},
+	{"Commodore",  	0} },
+	"Erzulie Freda", "Marassa Jumeaux", "Papa Legba",	/* Haitian Vodou */
+	"Cor", "Queen Anne's Revenge", "Grotto of Souls",
+	PM_CORSAIR, NON_PM, PM_UNDEAD_CORSAIR, NON_PM, NON_PM,
+	PM_BLACKBEARD, PM_PIRATE_BROTHER, PM_SPEARATHAN,
+	PM_GIANT_EEL, PM_SKELETAL_PIRATE, S_EEL, S_ZOMBIE,
+	ART_PEARL_OF_WISDOM,
+	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
+	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	/* Str Int Wis Dex Con Cha */
+	{   8,  7, 7,  8,  8,  7 },
+	{  20, 15, 10, 20, 25, 10 },
+	/* Init   Lower  Higher */
+	{ 10, 0,  0, 8,  1, 0 },	/* Hit points */
+	{  1, 0,  0, 1,  0, 1 },12,	/* Energy */
+	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
+},
 
 {	{"Diver", 0}, {
 	{"Beachcomber",  0},
@@ -691,32 +692,6 @@ const struct Role roles[] = {
 	10, 8,-2, 0,  9, A_WIS, SPE_TURN_UNDEAD,     -4
 },
 
-{	{"Korsair", 0}, {
-	{"Lubber",  0},
-	{"Swabby",        	0},
-	{"Deckhand",   0},
-	{"Bilge Rat",      		0},
-	{"Helmsman",     "Helmswoman"},
-	{"Navigator",      0},
-	{"Bosun",			0},
-	{"Mate",   	0},
-	{"Commodore",  	0} },
-	"Erzulie Freda", "Marassa Jumeaux", "Papa Legba",	/* Haitian Vodou */
-	"Kor", "Queen Anne's Revenge", "Grotto of Souls",
-	PM_KORSAIR, NON_PM, PM_UNDEAD_KORSAIR, NON_PM, NON_PM,
-	PM_BLACKBEARD, PM_PIRATE_BROTHER, PM_SPEARATHAN,
-	PM_GIANT_EEL, PM_SKELETAL_PIRATE, S_EEL, S_ZOMBIE,
-	ART_PEARL_OF_WISDOM,
-	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC |
-	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{   8,  7, 7,  8,  8,  7 },
-	{  20, 15, 10, 20, 25, 10 },
-	/* Init   Lower  Higher */
-	{ 10, 0,  0, 8,  1, 0 },	/* Hit points */
-	{  1, 0,  0, 1,  0, 1 },12,	/* Energy */
-	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
-},
 
 {	{"Locksmith", 0}, {
 	{"Listener",     0},
@@ -942,6 +917,33 @@ const struct Role roles[] = {
 	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
 	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
 	10, 5, 0, 2, 10, A_INT, SPE_RESIST_PETRIFICATION,   -4
+},
+
+{	{"Paladin", 0}, {
+	{"Undefiler",    0},
+	{"Faithful",     0},
+	{"Religious One",       0},
+	{"Returned One",      0},
+	{"Sacred One",      0},
+	{"Savior",       0},
+	{"Celestial",        0},
+	{"Decomposer",   0},
+	{"Annihilator", 0} },
+	0, 0, 0,	/* randomly chosen from other roles */
+	"Pal", "Ancient Temple", "the World-Eater's domain",
+	PM_PALADIN, NON_PM, PM_UNDEAD_PALADIN, NON_PM, NON_PM,
+	PM_EREC, PM_ACOLYTE, PM_ALDUIN,
+	PM_HUMAN_ZOMBIE, PM_WRAITH, S_ZOMBIE, S_WRAITH,
+	ART_CUDGEL_OF_CUTHBERT,
+	MH_HUMAN|MH_ELF|MH_DWARF|MH_GNOME|MH_HOBBIT|MH_VAMPIRE|MH_WERE|MH_ORC | ROLE_MALE|ROLE_FEMALE |
+	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	/* Str Int Wis Dex Con Cha */
+	{   7,  7, 10,  7,  7,  7 },
+	{  20, 10, 30, 15, 20, 5 },
+	/* Init   Lower  Higher */
+	{ 20, 0,  0, 9,  1, 0 },	/* Hit points */
+	{ 17, 3,  0, 2,  0, 2 },10,	/* Energy */
+	0, 3,-2, 2, 10, A_WIS, SPE_REMOVE_CURSE,    -4
 },
 
 {	{"Pirate", 0}, {
@@ -2856,7 +2858,7 @@ struct monst *mtmp;
 {
 	switch (Role_switch) {
 	case PM_KNIGHT:
-	case PM_CHEVALIER:
+	case PM_PALADIN:
 	    return ("Salutations"); /* Olde English */
 	case PM_MONK:
 	    return ("Namaste");	/* Sanskrit */
@@ -2865,7 +2867,7 @@ struct monst *mtmp;
 	    return (mtmp && mtmp->data == &mons[PM_SHOPKEEPER] ?
 	    		"Irasshaimase" : "Konnichi wa"); /* Japanese */
 	case PM_PIRATE:
-	case PM_KORSAIR:
+	case PM_CORSAIR:
 		return ("Ahoy");
 #ifdef TOURIST
 	case PM_TOURIST:
@@ -2887,7 +2889,7 @@ Goodbye()
 {
 	switch (Role_switch) {
 	case PM_KNIGHT:
-	case PM_CHEVALIER:
+	case PM_PALADIN:
 	    return ("Fare thee well");  /* Olde English */
 	case PM_MONK:
 	    return ("Punardarsanaya"); /* Sanskrit */

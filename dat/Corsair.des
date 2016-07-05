@@ -10,7 +10,7 @@
 #	Here you meet your (besieged) class leader, Dread Pirate (ret.)
 #	and receive your quest assignment.
 #
-MAZE: "Kor-strt",' '
+MAZE: "Cor-strt",' '
 FLAGS: noteleport,hardfloor
 
 GEOMETRY:center,center
@@ -235,7 +235,7 @@ NON_DIGGABLE:(00,00,75,20)
 #	move inland towards the center of the island.
 #
 
-MAZE: "Kor-loca",' '
+MAZE: "Cor-loca",' '
 FLAGS: noteleport,hardfloor
 # Dungeon Description
 GEOMETRY:center,center
@@ -528,7 +528,7 @@ NON_DIGGABLE:(56,15,75,20)
 #	you have been assigned to retrieve.
 #
 
-MAZE: "Kor-goal", ' '
+MAZE: "Cor-goal", ' '
 FLAGS: noteleport
 
 GEOMETRY:center,center
@@ -750,7 +750,7 @@ MONSTER:random,random,random,hostile
 #
 #
 
-MAZE: "Kor-fila",' '
+MAZE: "Cor-fila",' '
 FLAGS: noteleport,shortsighted
 INIT_MAP: '.' , '}' , false, false , lit , false
 NOMAP
@@ -791,7 +791,7 @@ ENDMAP
 STAIR: (01,01), up
 REGION:(00,00,03,02),  lit,"ordinary"
 
-MAZE: "Kor-filb",' '
+MAZE: "Cor-filb",' '
 FLAGS: noteleport
 INIT_MAP: '.' , ' ' , true , true , unlit, true
 NOMAP

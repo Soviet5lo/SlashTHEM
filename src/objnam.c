@@ -161,7 +161,7 @@ register int otyp;
 
 	if ( (Role_if(PM_SAMURAI) || Role_if(PM_NINJA) ) && Alternate_item_name(otyp,Japanese_items))
 		actualn = Alternate_item_name(otyp,Japanese_items);
-	if ( (Role_if(PM_PIRATE) || Role_if(PM_KORSAIR) ) && Alternate_item_name(otyp,Pirate_items))
+	if ( (Role_if(PM_PIRATE) || Role_if(PM_CORSAIR) ) && Alternate_item_name(otyp,Pirate_items))
 		actualn = Alternate_item_name(otyp,Pirate_items);
 	switch(ocl->oc_class) {
 	case COIN_CLASS:
@@ -311,7 +311,7 @@ register struct obj *obj;
 	buf = nextobuf() + PREFIX;	/* leave room for "17 -3 " */
 	if ( (Role_if(PM_SAMURAI) || Role_if(PM_NINJA) ) && Alternate_item_name(typ,Japanese_items))
 		actualn = Alternate_item_name(typ,Japanese_items);
-	if ( (Role_if(PM_PIRATE) || Role_if(PM_KORSAIR) ) && Alternate_item_name(typ,Pirate_items))
+	if ( (Role_if(PM_PIRATE) || Role_if(PM_CORSAIR) ) && Alternate_item_name(typ,Pirate_items))
 		actualn = Alternate_item_name(typ,Pirate_items);
 
 	buf[0] = '\0';
@@ -327,7 +327,7 @@ register struct obj *obj;
 #else
 	if (!Blind && (!obj->oinvis || See_invisible)) obj->dknown = TRUE;
 #endif
-	if (Role_if(PM_PRIEST) || Role_if(PM_NECROMANCER) || Role_if(PM_CHEVALIER)) obj->bknown = TRUE;
+	if (Role_if(PM_PRIEST) || Role_if(PM_NECROMANCER) || Role_if(PM_PALADIN)) obj->bknown = TRUE;
 
 	/* We could put a switch(obj->oclass) here but currently only this one case exists */
 	if (obj->oclass == WEAPON_CLASS && is_poisonable(obj) && obj->opoisoned)
@@ -703,7 +703,7 @@ register struct obj *obj;
 		if((Role_if(PM_SAMURAI) || Role_if(PM_NINJA)) && (tmp = Alternate_item_name(obj->otyp,Japanese_items)))
 			Strcpy(cp, tmp);
 
-		else if((Role_if(PM_PIRATE) || Role_if(PM_KORSAIR)) && (tmp = Alternate_item_name(obj->otyp,Pirate_items)))
+		else if((Role_if(PM_PIRATE) || Role_if(PM_CORSAIR)) && (tmp = Alternate_item_name(obj->otyp,Pirate_items)))
 			Strcpy(cp, tmp);
 
 		else if(obj->otyp == POT_WATER && (obj->blessed || obj->cursed))
@@ -864,7 +864,7 @@ register struct obj *obj;
 /* there is absolutely no reason to not display this outside of wizard mode! --Amy */
 #endif
 
-	if ((!Hallucination || Role_if(PM_PRIEST) || Role_if(PM_CHEVALIER) || Role_if(PM_NECROMANCER)) &&
+	if ((!Hallucination || Role_if(PM_PRIEST) || Role_if(PM_PALADIN) || Role_if(PM_NECROMANCER)) &&
 	    (obj->bknown || do_bknown) &&
 	    obj->oclass != COIN_CLASS &&
 	    (obj->otyp != POT_WATER || !objects[POT_WATER].oc_name_known
@@ -906,7 +906,7 @@ register struct obj *obj;
 #endif
 			&& obj->otyp != FAKE_AMULET_OF_YENDOR
 			&& obj->otyp != AMULET_OF_YENDOR
-			&& !Role_if(PM_PRIEST) && !Role_if(PM_CHEVALIER) && !Role_if(PM_NECROMANCER))
+			&& !Role_if(PM_PRIEST) && !Role_if(PM_PALADIN) && !Role_if(PM_NECROMANCER))
 		Strcat(prefix, "uncursed ");*/
 	}
 
@@ -1529,7 +1529,7 @@ register const char *verb;
 	 * special case: allow null sobj to get the singular 3rd person
 	 * present tense form so we don't duplicate this code elsewhere.
 	 */
-	if( ( Role_if(PM_PIRATE) || Role_if(PM_KORSAIR) ) && !strcmp(verb,"are")) {
+	if( ( Role_if(PM_PIRATE) || Role_if(PM_CORSAIR) ) && !strcmp(verb,"are")) {
 		Strcpy(buf,"be");
 		return buf;
 	}
