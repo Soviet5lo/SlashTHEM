@@ -28,7 +28,7 @@
 #define HFire_resistance	u.uprops[FIRE_RES].intrinsic
 #define EFire_resistance	u.uprops[FIRE_RES].extrinsic
 #define Fire_resistance		((HFire_resistance || EFire_resistance || \
-				 resists_fire(&youmonst)) && !Race_if(PM_TROLLOR))
+				 resists_fire(&youmonst)) && !Race_if(PM_TROLL))
 
 #define HCold_resistance	u.uprops[COLD_RES].intrinsic
 #define ECold_resistance	u.uprops[COLD_RES].extrinsic
@@ -37,7 +37,7 @@
 
 #define HSleep_resistance	u.uprops[SLEEP_RES].intrinsic
 #define ESleep_resistance	u.uprops[SLEEP_RES].extrinsic
-#define Sleep_resistance	( /*!Race_if(PM_KOBOLT) &&*/ (HSleep_resistance || ESleep_resistance || \
+#define Sleep_resistance	((HSleep_resistance || ESleep_resistance || \
 				 resists_sleep(&youmonst)) )
 
 #define HDisint_resistance	u.uprops[DISINT_RES].intrinsic
@@ -141,11 +141,11 @@
 
 #define HSleeping		u.uprops[SLEEPING].intrinsic
 #define ESleeping		u.uprops[SLEEPING].extrinsic
-#define Sleeping		(HSleeping || ESleeping /*|| Race_if(PM_KOBOLT)*/)
+#define Sleeping		(HSleeping || ESleeping)
 
 #define HHunger			u.uprops[HUNGER].intrinsic
 #define EHunger			u.uprops[HUNGER].extrinsic
-#define Hunger			(HHunger || EHunger || Race_if(PM_GIGANT))
+#define Hunger			(HHunger || EHunger || Race_if(PM_GIANT))
 
 
 /*** Vision and senses ***/
@@ -210,10 +210,10 @@
 #define HStealth		u.uprops[STEALTH].intrinsic
 #define EStealth		u.uprops[STEALTH].extrinsic
 #define BStealth		u.uprops[STEALTH].blocked
-#define Stealth			((HStealth || EStealth) && !BStealth && !Race_if(PM_OGRO))
+#define Stealth			((HStealth || EStealth) && !BStealth && !Race_if(PM_OGRE))
 #define HAggravate_monster	u.uprops[AGGRAVATE_MONSTER].intrinsic
 #define EAggravate_monster	u.uprops[AGGRAVATE_MONSTER].extrinsic
-#define Aggravate_monster	(HAggravate_monster || EAggravate_monster || Race_if(PM_OGRO) )
+#define Aggravate_monster	(HAggravate_monster || EAggravate_monster || Race_if(PM_OGRE) )
 
 #define HConflict		u.uprops[CONFLICT].intrinsic
 #define EConflict		u.uprops[CONFLICT].extrinsic
@@ -298,7 +298,7 @@
 /*** Physical attributes ***/
 #define HSlow_digestion		u.uprops[SLOW_DIGESTION].intrinsic
 #define ESlow_digestion		u.uprops[SLOW_DIGESTION].extrinsic
-#define Slow_digestion		(!Race_if(PM_GIGANT) && (HSlow_digestion || ESlow_digestion) )  /* KMH */
+#define Slow_digestion		(!Race_if(PM_GIANT) && (HSlow_digestion || ESlow_digestion) )  /* KMH */
 
 /* Half spell/physical damage only works 50% of the time, so it's more like three quarter spell/physical damage. --Amy */
 

@@ -2997,10 +2997,10 @@ register struct permonst *ptr;
 
 	if (always_peaceful(ptr)) return TRUE;
 
-	if (ptr->mlet == S_KOBOLD && Race_if(PM_KOBOLT) && !Role_if(PM_CONVICT)) return TRUE;
-	if (ptr->mlet == S_OGRE && Race_if(PM_OGRO) && !Role_if(PM_CONVICT)) return TRUE;
-	if (ptr->mlet == S_GIANT && Race_if(PM_GIGANT) && !Role_if(PM_CONVICT)) return TRUE;
-	if (ptr->mlet == S_TROLL && Race_if(PM_TROLLOR) && !Role_if(PM_CONVICT)) return TRUE;
+	if (ptr->mlet == S_KOBOLD && Race_if(PM_KOBOLD) && !Role_if(PM_CONVICT)) return TRUE;
+	if (ptr->mlet == S_OGRE && Race_if(PM_OGRE) && !Role_if(PM_CONVICT)) return TRUE;
+	if (ptr->mlet == S_GIANT && Race_if(PM_GIANT) && !Role_if(PM_CONVICT)) return TRUE;
+	if (ptr->mlet == S_TROLL && Race_if(PM_TROLL) && !Role_if(PM_CONVICT)) return TRUE;
 	if (ptr->mlet == S_NYMPH && Race_if(PM_NYMPH) && !Role_if(PM_CONVICT)) return TRUE;
 	if (is_mind_flayer(ptr) && Race_if(PM_ILLITHID) && !Role_if(PM_CONVICT)) return TRUE;
 

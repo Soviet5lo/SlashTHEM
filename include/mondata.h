@@ -127,8 +127,8 @@
 			P_MAX_SKILL(P_TWO_WEAPON_COMBAT) >= P_SKILLED || \
 			P_MAX_SKILL(P_TWO_WEAPON_COMBAT) >= P_BASIC && \
 			(Race_if(PM_DWARF) || Race_if(PM_HUMAN) \
-			 || Race_if(PM_ORC) || Race_if(PM_TROLLOR) \
-			 || Race_if(PM_GIGANT) || Race_if(PM_OGRO))))
+			 || Race_if(PM_ORC) || Race_if(PM_TROLL) \
+			 || Race_if(PM_GIANT) || Race_if(PM_OGRE))))
 #define cantweararm(ptr)	(breakarm(ptr) || sliparm(ptr))
 #define throws_rocks(ptr)	(((ptr)->mflags2 & M2_ROCKTHROW) != 0L)
 #define type_is_pname(ptr)	(((ptr)->mflags2 & M2_PNAME) != 0L)

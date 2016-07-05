@@ -60,10 +60,10 @@ char msgbuf[BUFSZ];
 
 /* also used to see if you're allowed to eat cats and dogs */
 #define CANNIBAL_ALLOWED() (Role_if(PM_CAVEMAN) || Role_if(PM_LUNATIC) || Race_if(PM_ORC) || \
-Race_if(PM_ALIEN) || Race_if(PM_TROLLOR) || Race_if(PM_KOBOLT) || Race_if(PM_GIGANT) || Race_if(PM_OGRO) || \
+Race_if(PM_ALIEN) || Race_if(PM_TROLL) || Race_if(PM_KOBOLD) || Race_if(PM_GIANT) || Race_if(PM_OGRE) || \
 Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD) || Race_if(PM_HUMAN_WEREWOLF) || \
 Race_if(PM_VAMPIRE) || Race_if(PM_CLOCKWORK_AUTOMATON) || \
- Race_if(PM_GASTLY) || Race_if(PM_ILLITHID)) /* 5lo: Let Illithids and Gastly characters have fun too */
+ Race_if(PM_GHOUL) || Race_if(PM_ILLITHID)) /* 5lo: Let Illithids and Gastly characters have fun too */
 
 #ifndef OVLB
 
@@ -140,8 +140,8 @@ register struct obj *obj;
 		return (boolean)(obj->otyp == EUCALYPTUS_LEAF);
 
 	/* Ghouls, ghasts only eat corpses */
-	if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST || u.umonnum == PM_GASTLY ||
-	(Race_if(PM_GASTLY) && !Upolyd) )
+	if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST ||
+	(Race_if(PM_GHOUL) && !Upolyd) )
 	   	return (boolean)(obj->otyp == CORPSE);
 	/* Vampires drink the blood of meaty corpses */
 	/* [ALI] (fully) drained food is not presented as an option,
@@ -1353,7 +1353,7 @@ gluttonous()
 void
 violated_vegetarian()
 {
-    if (Race_if(PM_VAMPIRE) || Race_if(PM_GASTLY)) {
+    if (Race_if(PM_VAMPIRE) || Race_if(PM_GHOUL)) {
     u.uconduct.unvegetarian++;
     return;
     }
@@ -1607,7 +1607,7 @@ STATIC_OVL int
 rottenfood(obj)
 struct obj *obj;
 {
-	if(Race_if(PM_GASTLY)){
+	if(Race_if(PM_GHOUL)){
 	pline("Yum!  Rotten %s!", foodword(obj));
 	healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
 	return(0);
@@ -1733,8 +1733,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	/* Very rotten corpse will make you sick unless you are a ghoul or a ghast */
 	if (mnum != PM_ACID_BLOB && !stoneable && rotted > 5L) {
 	    boolean cannibal = maybe_cannibal(mnum, FALSE);
-	    if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST || u.umonnum == PM_GASTLY
-		||(Race_if(PM_GASTLY) && !Upolyd) ) {
+	    if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST	||(Race_if(PM_GHOUL) && !Upolyd) ) {
 	    	pline("Yum - that %s was well aged%s!",
 		      mons[mnum].mlet == S_FUNGUS ? "fungoid vegetation" :
 		      !vegetarian(&mons[mnum]) ? "meat" : "protoplasm",
@@ -1767,9 +1766,8 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 		else useupf(otmp, 1L);
 		return(2);
 	    }
-	} else if (youmonst.data == &mons[PM_GHOUL] || 
-	youmonst.data == &mons[PM_GASTLY] ||  youmonst.data == &mons[PM_GHAST]
-	|| (Race_if(PM_GASTLY) && !Upolyd) ) {
+	} else if (youmonst.data == &mons[PM_GHOUL] || 	youmonst.data == &mons[PM_GHAST]
+	|| (Race_if(PM_GHOUL) && !Upolyd) ) {
 		pline ("This corpse is too fresh!");
 		return 3;
 	} else if (acidic(&mons[mnum]) && !Acid_resistance) {

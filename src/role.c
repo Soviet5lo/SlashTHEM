@@ -1603,9 +1603,9 @@ const struct Race races[] = {
 	{  8, 0,  3, 0,  3, 0 }		/* Energy */
 },
 
-{	"gastly", "ghast", "ghasthood", "Gha",
+{	"ghoul", "ghoulish", "ghoulhood", "Gul",
 	{0, 0},
-	PM_GASTLY, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
+	PM_GHOUL, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, 0, 0,
@@ -1617,9 +1617,9 @@ const struct Race races[] = {
 	{  1, 0,  2, 0,  2, 0 }		/* Energy */
 },
 
-{	"gigant", "gigantic", "giganthood", "Gig",
+{	"giant", "giant", "giantkind", "Gia",
 	{0, 0},
-	PM_GIGANT, NON_PM, PM_GIANT_MUMMY, PM_GIANT_ZOMBIE,
+	PM_GIANT, NON_PM, PM_GIANT_MUMMY, PM_GIANT_ZOMBIE,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, 0, 0,
@@ -1698,9 +1698,9 @@ const struct Race races[] = {
 	{  0, 0,  10, 0, 10, 0 },		/* Energy */
 },
 
-{	"kobolt", "koboltic", "kobolthood", "Kob",
+{	"kobold", "kobold", "koboldkind", "Kob",
 	{0, 0},
-	PM_KOBOLT, NON_PM, PM_KOBOLD_MUMMY, PM_KOBOLD_ZOMBIE,
+	PM_KOBOLD, NON_PM, PM_KOBOLD_MUMMY, PM_KOBOLD_ZOMBIE,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, 0, 0,
@@ -1752,9 +1752,9 @@ const struct Race races[] = {
 	{  3, 0,  3, 0,  3, 0 }		/* Energy */
 },
 
-{	"ogro", "ogrotic", "ogrohood", "Ogr",
+{	"ogre", "ogre", "ogrekind", "Ogr",
 	{0, 0},
-	PM_OGRO, NON_PM, PM_OGRE_MUMMY, PM_OGRE_ZOMBIE,
+	PM_OGRE, NON_PM, PM_OGRE_MUMMY, PM_OGRE_ZOMBIE,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, 0, 0,
@@ -1779,9 +1779,9 @@ const struct Race races[] = {
 	{  1, 0,  1, 0,  1, 0 }		/* Energy */
 },
 
-{	"trollor", "troll", "trollhood", "Tro",
+{	"troll", "troll", "trollkind", "Tro",
 	{0, 0},
-	PM_TROLLOR, NON_PM, PM_TROLL_MUMMY, PM_TROLL_ZOMBIE,
+	PM_TROLL, NON_PM, PM_TROLL_MUMMY, PM_TROLL_ZOMBIE,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MH_HUMAN, 0, 0,

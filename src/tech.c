@@ -2339,8 +2339,8 @@ race_tech()
 		case PM_CLOCKWORK_AUTOMATON:		return (clk_tech);
 
 		case PM_GNOME:		return (gno_tech);
-		case PM_KOBOLT:		return (kob_tech);
-		case PM_OGRO:		return (ogr_tech);
+		case PM_KOBOLD:		return (kob_tech);
+		case PM_OGRE:		return (ogr_tech);
 		case PM_UNGENOMOLD:		return (ung_tech);
 		case PM_HOBBIT:		return (hob_tech);
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);

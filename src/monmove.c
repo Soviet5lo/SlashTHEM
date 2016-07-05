@@ -1306,7 +1306,7 @@ postmov:
 		if (ptr == &mons[PM_GELATINOUS_CUBE] || ptr == &mons[PM_TASMANIAN_DEVIL]) {
 		    if (meatobj(mtmp) == 2) return 2;	/* it died */
 		}
-		if (ptr == &mons[PM_GHOUL] || ptr == &mons[PM_GHAST] || ptr == &mons[PM_GASTLY])
+		if (ptr == &mons[PM_GHOUL] || ptr == &mons[PM_GHAST])
 			meatcorpse(mtmp);
 
 		if(!*in_rooms(mtmp->mx, mtmp->my, SHOPBASE) || !rn2(25)) {

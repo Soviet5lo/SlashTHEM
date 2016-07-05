@@ -649,17 +649,17 @@ static struct trobj Yeoman[] = {
  *	Optional extra inventory items.
  */
 
-static struct trobj KoboltItem[] = {
+static struct trobj KoboldItem[] = {
 	{ DART, 0, WEAPON_CLASS, 15, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj KoboltItemB[] = {
+static struct trobj KoboldItemB[] = {
 	{ ORCISH_DAGGER, 0, WEAPON_CLASS, 3, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj KoboltItemC[] = {
+static struct trobj KoboldItemC[] = {
 	{ ORCISH_SPEAR, 0, WEAPON_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
@@ -781,11 +781,11 @@ static struct trobj UberLostSoulItemR[] = {
 	{ UNDEF_TYP, UNDEF_SPE, RANDOM_CLASS, 1, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-static struct trobj GigantItem[] = {
+static struct trobj GiantItem[] = {
 	{ BOULDER, 0, ROCK_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-static struct trobj OgroItem[] = {
+static struct trobj OgreItem[] = {
 	{ CLUB, 0, WEAPON_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
@@ -973,7 +973,7 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_DROW,		ARROW,			DARK_ELVEN_ARROW      },
     { PM_VAMPIRE,	POT_FRUIT_JUICE,	POT_BLOOD	      },
     { PM_VAMPIRE,	FOOD_RATION,		POT_VAMPIRE_BLOOD     },
-    { PM_GASTLY,	FOOD_RATION,		CORPSE     },
+    { PM_GHOUL,		FOOD_RATION,		CORPSE     },
     { NON_PM,		STRANGE_OBJECT,		STRANGE_OBJECT	      }
 };
 
@@ -3147,15 +3147,15 @@ u_init()
 	    change_luck(-3);
 	    /*ini_inv(AlienItem);*/
 	    	break;
-	case PM_KOBOLT:
+	case PM_KOBOLD:
 	    if(!Role_if(PM_CONVICT)) {
-		ini_inv(KoboltItem);		
-		if(rn2(2)) ini_inv(KoboltItemB);		
-		else ini_inv(KoboltItemC);
+		ini_inv(KoboldItem);		
+		if(rn2(2)) ini_inv(KoboldItemB);		
+		else ini_inv(KoboldItemC);
 	    }
 	    skill_add(Skill_Kobold);
 		break;
-	case PM_GASTLY:
+	case PM_GHOUL:
           /*ini_inv(GhastFood);*/
 		break;
 	case PM_UNGENOMOLD:
@@ -3164,7 +3164,7 @@ u_init()
 	case PM_CLOCKWORK_AUTOMATON:
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
 		break;
-	case PM_TROLLOR:
+	case PM_TROLL:
 		if(!Role_if(PM_CONVICT)) switch (rnd(4)) {
                 case 1: ini_inv(TrollItemA); break;
                 case 2: ini_inv(TrollItemB); break;
@@ -3174,12 +3174,12 @@ u_init()
 		}
 		skill_add(Skill_Troll);
 		break;
-	case PM_OGRO:
-         	if(!Role_if(PM_CONVICT)) ini_inv(OgroItem);
+	case PM_OGRE:
+         	if(!Role_if(PM_CONVICT)) ini_inv(OgreItem);
 		skill_add(Skill_Ogre);
 		break;
-	case PM_GIGANT:
-         if(!Role_if(PM_CONVICT)) ini_inv(GigantItem);		
+	case PM_GIANT:
+         if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
 		break;
 
 	default:	/* impossible */

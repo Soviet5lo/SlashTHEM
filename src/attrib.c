@@ -285,7 +285,7 @@ const struct innate {
 		     {   15, &(HTeleport_control), "controlled", "helpless" },
 		     {   0, 0, 0, 0 } },
 
-	gig_abil[] = { {  10, &(HFire_resistance), "cool", "warmer" },
+	gia_abil[] = { {  10, &(HFire_resistance), "cool", "warmer" },
 		     {   15, &(HCold_resistance), "warm", "cooler" },
 		     {  20, &(HShock_resistance), "insulated", "conductive" },
 		     {   0, 0, 0, 0 } },
@@ -305,7 +305,7 @@ const struct innate {
 		     {   1, &(HWarning), "", "" },
 		     {   0, 0, 0, 0 } },
 
-	gas_abil[] = { {  1, &(HSick_resistance), "", "" },
+	gul_abil[] = { {  1, &(HSick_resistance), "", "" },
 		     {   1, &(HCold_resistance), "", "" },
 		     {   1, &(HSleep_resistance), "", "" },
 		     {   1, &(HPoison_resistance), "", "" },
@@ -862,12 +862,12 @@ int oldlevel, newlevel;
 	case PM_ELF:            rabil = elf_abil;	break;
 	case PM_INCANTIFIER:            rabil = inc_abil;	break;
 	case PM_CLOCKWORK_AUTOMATON:            rabil = clk_abil;	break;
-	case PM_KOBOLT:            rabil = kob_abil;	break;
-	case PM_TROLLOR:            rabil = tro_abil;	break;
+	case PM_KOBOLD:            rabil = kob_abil;	break;
+	case PM_TROLL:            rabil = tro_abil;	break;
 	case PM_ILLITHID:            rabil = ill_abil;	break;
 	case PM_UNGENOMOLD:            rabil = ung_abil;	break;
-	case PM_GASTLY:            rabil = gas_abil;	break;
-	case PM_GIGANT:            rabil = gig_abil;	break;
+	case PM_GHOUL:            rabil = gul_abil;	break;
+	case PM_GIANT:            rabil = gia_abil;	break;
 	case PM_NYMPH:            rabil = nym_abil;	break;
 	case PM_GNOME:		rabil = gno_abil;	break;
 	case PM_HOBBIT:		rabil = hob_abil;	break;

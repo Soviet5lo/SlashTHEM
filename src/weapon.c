@@ -2056,14 +2056,14 @@ struct obj *weapon;
 
 	if (Race_if(PM_ELF)&& weapon && (weapon->otyp == ELVEN_DAGGER || weapon->otyp == ELVEN_BOW || weapon->otyp == ELVEN_ARROW || weapon->otyp == ELVEN_SPEAR || weapon->otyp == ELVEN_SHORT_SWORD || weapon->otyp == ELVEN_BROADSWORD) ) bonus += 1;
 	if (Race_if(PM_DROW) && weapon && (weapon->otyp == DARK_ELVEN_DAGGER || weapon->otyp == DARK_ELVEN_ARROW || weapon->otyp == DARK_ELVEN_BOW || weapon->otyp == DARK_ELVEN_SHORT_SWORD) ) bonus += 1;
-	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLT) || Role_if(PM_LUNATIC))&& weapon && (weapon->otyp == ORCISH_DAGGER || weapon->otyp == ORCISH_BOW || weapon->otyp == ORCISH_ARROW || weapon->otyp == ORCISH_SPEAR || weapon->otyp == ORCISH_SHORT_SWORD ) ) bonus += 1;
+	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLD) || Role_if(PM_LUNATIC))&& weapon && (weapon->otyp == ORCISH_DAGGER || weapon->otyp == ORCISH_BOW || weapon->otyp == ORCISH_ARROW || weapon->otyp == ORCISH_SPEAR || weapon->otyp == ORCISH_SHORT_SWORD ) ) bonus += 1;
 	if (Race_if(PM_DWARF) && weapon && (weapon->otyp == DWARVISH_SHORT_SWORD || weapon->otyp == DWARVISH_SPEAR) ) bonus += 1;
 	if (Race_if(PM_GNOME) && weapon && (weapon->otyp == AKLYS || weapon->otyp == CROSSBOW || weapon->otyp == CROSSBOW_BOLT) ) bonus += 1;
 	if (Race_if(PM_HOBBIT) && weapon && (weapon->otyp == SLING || weapon_type(weapon) == -P_SLING) ) bonus += 1;
 	/* 5lo: Other races that start with unique equipment go here */
-	if (Race_if(PM_KOBOLT) && weapon && (weapon->otyp == DART)) bonus += 2;
-	if (Race_if(PM_TROLLOR) && weapon && (weapon->otyp == RANSEUR || weapon->otyp == PARTISAN || weapon->otyp == GLAIVE || weapon->otyp == SPETUM)) bonus += 2;
-	if (Race_if(PM_OGRO) && weapon && (weapon->otyp == CLUB )) bonus += 2;
+	if (Race_if(PM_KOBOLD) && weapon && (weapon->otyp == DART)) bonus += 2;
+	if (Race_if(PM_TROLL) && weapon && (weapon->otyp == RANSEUR || weapon->otyp == PARTISAN || weapon->otyp == GLAIVE || weapon->otyp == SPETUM)) bonus += 2;
+	if (Race_if(PM_OGRE) && weapon && (weapon->otyp == CLUB )) bonus += 2;
 
     return bonus;
 }

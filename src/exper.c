@@ -270,7 +270,7 @@ newexplevel()
 			case PM_PRIEST: u.uenbase += rnd(6) + 2; break;
 			case PM_PALADIN: u.uenbase += rnd(6) + 2; break;
 			case PM_ROGUE: u.uenbase += rnd(4) + 1; break;
-			case PM_GASTLY: u.uenbase += rnd(3) + 1; break;
+			case PM_GHOUL: u.uenbase += rnd(3) + 1; break;
 			case PM_SAMURAI: u.uenbase += rnd(2); break;
 #ifdef TOURIST
 			case PM_TOURIST: u.uenbase += rnd(4) + 1; break;
@@ -280,10 +280,10 @@ newexplevel()
 			case PM_WIZARD: u.uenbase += rnd(6) + 2; break;
 			case PM_CONVICT: break;
 			/*case PM_ALIEN: break;
-			case PM_OGRO: break;
-			case PM_KOBOLT: break;
-			case PM_TROLLOR: break;
-			case PM_GIGANT: break;*/
+			case PM_OGRE: break;
+			case PM_KOBOLD: break;
+			case PM_TROLL: break;
+			case PM_GIANT: break;*/
 			case PM_WARRIOR: break;
 			default: u.uenbase += rnd(2) + 1; break;
 		}

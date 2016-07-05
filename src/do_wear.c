@@ -2019,15 +2019,15 @@ find_ac()
 	if (Race_if(PM_DROW) && uarm && uarm->otyp == DARK_ELVEN_MITHRIL_COAT) uac -= 1;
 	if (Race_if(PM_ELF) && uarm && uarm->otyp == ELVEN_MITHRIL_COAT) uac -= 1;
 	if (Race_if(PM_GNOME) && uarm && uarm->otyp == GNOMISH_SUIT) uac -= 2;
-	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLT) || Role_if(PM_LUNATIC)) && uarm && (uarm->otyp == ORCISH_CHAIN_MAIL || uarm->otyp == ORCISH_RING_MAIL) ) uac -= 1;
+	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLD) || Role_if(PM_LUNATIC)) && uarm && (uarm->otyp == ORCISH_CHAIN_MAIL || uarm->otyp == ORCISH_RING_MAIL) ) uac -= 1;
 
-	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLT) || Role_if(PM_LUNATIC)) && uarmc && uarmc->otyp == ORCISH_CLOAK ) uac -= 1;
+	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLD) || Role_if(PM_LUNATIC)) && uarmc && uarmc->otyp == ORCISH_CLOAK ) uac -= 1;
 	if (Race_if(PM_DWARF) && uarmc && uarmc->otyp == DWARVISH_CLOAK ) uac -= 1;
 	if (Race_if(PM_ELF) && uarmc && uarmc->otyp == ELVEN_CLOAK) uac -= 1;
 
 	if (Race_if(PM_ELF) && uarmh && uarmh->otyp == ELVEN_LEATHER_HELM) uac -= 1;
 	if (Race_if(PM_GNOME) && uarmh && uarmh->otyp == GNOMISH_HELM) uac -= 2;
-	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLT) || Role_if(PM_LUNATIC)) && uarmh && uarmh->otyp == ORCISH_HELM) uac -= 1;
+	if ((Race_if(PM_ORC) || Race_if(PM_KOBOLD) || Role_if(PM_LUNATIC)) && uarmh && uarmh->otyp == ORCISH_HELM) uac -= 1;
 	if (Race_if(PM_DWARF) && uarmh && uarmh->otyp == DWARVISH_IRON_HELM) uac -= 1;
 
 	if (Race_if(PM_ELF) && uarms && uarms->otyp == ELVEN_SHIELD) uac -= 1;
