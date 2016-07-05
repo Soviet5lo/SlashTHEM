@@ -1768,7 +1768,7 @@ register struct	monst	*mtmp;
 		/* [DS] Cthulhu isn't fully integrated yet, and he won't be
 		 *      until Moloch's Sanctum is rearranged */
 		} else if (ptr == &mons[PM_CTHULHU]) {
-			(void)mongets(mtmp, AMULET_OF_YENDOR);
+//			(void)mongets(mtmp, AMULET_OF_YENDOR);
 			(void)mongets(mtmp, WAN_DEATH);
 			(void)mongets(mtmp, POT_FULL_HEALING);
 		} else if (ptr == &mons[PM_ASMODEUS]) {
