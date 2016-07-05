@@ -468,13 +468,7 @@ dodiscovered()				/* free after Robert Viduya */
 		ct++;
 		if (oclass != prev_class) {
 		    add_menu(tmpwin, NO_GLYPH, &any, 0, 0, iflags.menu_headings,
-#ifndef SHOWSYM
 		      let_to_name(oclass, FALSE), MENU_UNSELECTED);
-#else
-		      let_to_name(oclass, FALSE, FALSE),
-#endif
-		      MENU_UNSELECTED);
-
 		    prev_class = oclass;
 		}
 		Sprintf(buf, "%s %s",(objects[dis].oc_pre_discovered ? "*" : " "),

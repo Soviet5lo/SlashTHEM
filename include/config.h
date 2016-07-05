@@ -528,7 +528,6 @@ typedef long glyph_t;
  */
 /* #define STATUS_COLORS */
 
-#define SHOWSYM	/* Show object symbols in menus */
 /* #define EXTENDED_INFO */ /* 5lo: Show full information of monsters
                                when using farlook */
 #define USER_DUNGEONCOLOR

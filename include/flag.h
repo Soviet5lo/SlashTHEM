@@ -313,14 +313,12 @@ struct instance_flags {
 	boolean  lootabc;	/* use "a/b/c" rather than "o/i/b" when looting */
 	boolean  showrace;	/* show hero glyph by race rather than by role */
 	boolean  travelcmd;	/* allow travel command */
-	boolean  showsym;	/* show object symbols in menus */
 	int	 runmode;	/* update screen display during run moves */
 
 	boolean dungeon_colors;
 	boolean random_room_colors;
 
 	boolean showobj_inv; /* Display items in inventory (Unnethack) */
-	/* makes showsym obsolete, but we'll keep it in as there's no conflict */
 
 #ifdef AUTOPICKUP_EXCEPTIONS
 	struct autopickup_exception *autopickup_exceptions[2];

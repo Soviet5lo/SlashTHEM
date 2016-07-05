@@ -768,12 +768,7 @@ boolean FDECL((*allow), (OBJ_P));/* allow function */
 		    if (qflags & INVORDER_SORT && !printed_type_name) {
 			any.a_obj = (struct obj *) 0;
 			add_menu(win, NO_GLYPH, &any, 0, 0, iflags.menu_headings,
-#ifndef SHOWSYM
-					let_to_name(*pack, FALSE),
-#else
-					let_to_name(*pack, FALSE, iflags.showsym),
-#endif
-				 MENU_UNSELECTED);
+					let_to_name(*pack, FALSE), MENU_UNSELECTED);
 			printed_type_name = TRUE;
 		    }
 
@@ -898,12 +893,7 @@ int how;			/* type of query */
 			any.a_int = curr->oclass;
 			add_menu(win, NO_GLYPH, &any, invlet++,
 				def_oc_syms[(int)objects[curr->otyp].oc_class],
-				ATR_NONE,
-#ifndef SHOWSYM
-				let_to_name(*pack, FALSE),
-#else
-				let_to_name(*pack, FALSE, iflags.showsym),
-#endif
+				ATR_NONE, let_to_name(*pack, FALSE),
 				MENU_UNSELECTED);
 			collected_type_name = TRUE;
 		   }
