@@ -3355,7 +3355,7 @@ struct obj *bag;
 		dropx(bag);
 		break;
 	case 3:
-		nomul(-1*(rnd(4)), "being devoured by a bag of holding");
+		nomul(-1*(rnd(4)), "being devoured by a bag of tricks");
 		if(Hallucination) {
 			You("start climbing into the bag.");
 			nomovemsg = "You give up your attempt to climb into the bag.";
@@ -3395,7 +3395,7 @@ struct obj *bag;
 		}
 		if((ACURR(A_WIS)<rnd(20) && !bag->blessed) || bag->cursed) {
 			You("are startled into immobility.");
-			nomul(-1*rnd(3), "startled by a bag of holding");
+			nomul(-1*rnd(3), "startled by a bag of tricks");
 			nomovemsg = "You regain your composure.";
 		}
 		break;
