@@ -128,7 +128,7 @@ register int x;
 {
 	register int tmp, utmp;
 
-	utmp = /*(u.ulevel < 15) ? 5 : u.ulevel/3*/100;
+	utmp = (u.ulevel < 15) ? 5 : u.ulevel/3;
 	tmp = 1;
 	while (tmp < utmp && !rn2(x))
 		tmp++;
@@ -155,8 +155,7 @@ int i;
 	register long tmp = 1000;
 #endif
 	tmp += rn2(1000);
-	if (rn2(5)) {tmp *= rne(4); } /*adjustments by Amy*/
-	else { tmp *= rne(3); }
+	tmp *= rne(4);
 	if (rn2(2)) { x *= tmp; x /= 1000; }
 	else { x *= 1000; x /= tmp; }
 	if (x < 1) x = 1;
