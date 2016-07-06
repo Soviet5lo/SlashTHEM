@@ -1541,8 +1541,8 @@ const struct Race races[] = {
 {	"clockwork automaton", "automatic", "clockwork-kind", "Clk",
 	{0, 0},
 	PM_CLOCKWORK_AUTOMATON, NON_PM, NON_PM, NON_PM,
-	MRACE_CLOCK | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_CLOCK, MRACE_DWARF, MRACE_GNOME,
+	MRACE_CLOCK | ROLE_MALE|ROLE_FEMALE | ROLE_NEUTRAL,
+	MRACE_CLOCK, MRACE_DWARF|MRACE_GNOME, MRACE_OGRE,
 	/*    Str     Int Wis Dex Con Cha */
 	{   3,         3,  3,  3,  3,  3 },
 	{STR18(100),  18, 18, 18, 18, 18 },
@@ -1554,7 +1554,7 @@ const struct Race races[] = {
 {	"doppelganger", "doppelganger", "doppelganger-kind", "Dop",
 	{0, 0},
 	PM_DOPPELGANGER, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE | ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MRACE_HUMAN, MRACE_WERE, MRACE_ELF|MRACE_GNOME|MRACE_DWARF,
 	/*    Str     Int Wis Dex Con Cha */
 	{      1,      3,  3,  1,  1,  1 },
@@ -1567,7 +1567,7 @@ const struct Race races[] = {
 {	"drow", "droven", "drovenkind", "Dro",
 	{0, 0},
 	PM_DROW, NON_PM, PM_DROW_MUMMY, PM_DROW_ZOMBIE,
-	MRACE_ELF | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_ELF | ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
 	MRACE_ELF, MRACE_ELF, MRACE_ORC,
 	/*  Str    Int Wis Dex Con Cha */
 	{    3,     3,  3,  3,  3,  3 },
@@ -1580,7 +1580,7 @@ const struct Race races[] = {
 {	"dwarf", "dwarven", "dwarvenkind", "Dwa",
 	{0, 0},
 	PM_DWARF, NON_PM, PM_DWARF_MUMMY, PM_DWARF_ZOMBIE,
-	MRACE_DWARF | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_DWARF | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL,
 	MRACE_DWARF, MRACE_DWARF|MRACE_GNOME, MRACE_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
@@ -1593,7 +1593,7 @@ const struct Race races[] = {
 {	"elf", "elven", "elvenkind", "Elf",
 	{0, 0},
 	PM_ELF, NON_PM, PM_ELF_MUMMY, PM_ELF_ZOMBIE,
-	MRACE_ELF | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_ELF | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL,
 	MRACE_ELF, MRACE_ELF, MRACE_ORC,
 	/*  Str    Int Wis Dex Con Cha */
 	{    3,     3,  3,  3,  3,  3 },
@@ -1606,8 +1606,7 @@ const struct Race races[] = {
 {	"ghoul", "ghoulish", "ghoulhood", "Gul",
 	{0, 0},
 	PM_GHOUL, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_GHOUL | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_GHOUL | ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
 	MRACE_GHOUL, MRACE_VAMPIRE|MRACE_GHOUL, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
@@ -1622,7 +1621,7 @@ const struct Race races[] = {
 	PM_GIANT, NON_PM, PM_GIANT_MUMMY, PM_GIANT_ZOMBIE,
 	MRACE_GIANT | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_GIANT, 0, 0,
+	MRACE_GIANT, 0, MRACE_GNOME|MRACE_DWARF,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR19(25),  17, 17, 15, 20, 16 },
@@ -1634,7 +1633,7 @@ const struct Race races[] = {
 {	"gnome", "gnomish", "gnomehood", "Gno",
 	{0, 0},
 	PM_GNOME, NON_PM, PM_GNOME_MUMMY, PM_GNOME_ZOMBIE,
-	MRACE_GNOME | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_GNOME | ROLE_MALE|ROLE_FEMALE | ROLE_NEUTRAL,
 	MRACE_GNOME, MRACE_DWARF|MRACE_GNOME, MRACE_HUMAN|MRACE_HOBBIT,
 	/*  Str    Int Wis Dex Con Cha */
 	{    3,     3,  3,  3,  3,  3 },
@@ -1647,7 +1646,7 @@ const struct Race races[] = {
 {	"hobbit", "hobbit", "hobbit-kind", "Hob",
 	{0, 0},
 	PM_HOBBIT, NON_PM, NON_PM, NON_PM,
-	MRACE_HOBBIT | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_HOBBIT | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL,
 	MRACE_HOBBIT, MRACE_HOBBIT, MRACE_GNOME|MRACE_ORC,
 	/*  Str    Int Wis Dex Con Cha */
 	{   3,      3,  3,  3,  3,  3 },
@@ -1673,8 +1672,7 @@ const struct Race races[] = {
 {	"illithid", "illithid", "mindflayerhood", "Ill",
 	{0, 0},
 	PM_ILLITHID, NON_PM, NON_PM, NON_PM,
-	MRACE_MFLAY | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_MFLAY | ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
 	MRACE_MFLAY, 0, 0,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
@@ -1689,7 +1687,7 @@ const struct Race races[] = {
 	PM_INCANTIFIER, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
 	MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_HUMAN, 0, MRACE_GNOME|MRACE_ORC,
+	MRACE_HUMAN, 0, MRACE_GNOME|MRACE_ORC|MRACE_ELF,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR18(100), 18, 18, 18, 18, 18 },
@@ -1701,9 +1699,10 @@ const struct Race races[] = {
 {	"kobold", "kobold", "koboldkind", "Kob",
 	{0, 0},
 	PM_KOBOLD, NON_PM, PM_KOBOLD_MUMMY, PM_KOBOLD_ZOMBIE,
-	MRACE_KOBOLD | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_KOBOLD, 0, 0,
+	MRACE_KOBOLD | ROLE_MALE|ROLE_FEMALE | ROLE_NEUTRAL|ROLE_CHAOTIC,
+	/* "Cutebolds" from DF are typically seen as neutral */
+	MRACE_KOBOLD, MRACE_KOBOLD,
+	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_DWARF,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
 	{     17,     17, 16, 20, 18, 16 },
@@ -1715,7 +1714,7 @@ const struct Race races[] = {
 {	"lycanthrope", "lycanthropic", "lycanthropehood", "Lyc",
 	{0, 0},
 	PM_HUMAN_WEREWOLF, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_WERE | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_WERE | ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
 	MRACE_WERE, 0, MRACE_ELF|MRACE_GNOME|MRACE_DWARF,
 	/*    Str     Int Wis Dex Con Cha */
 	{      4,      1,  1,  4,  4,  2 },
@@ -1728,7 +1727,7 @@ const struct Race races[] = {
 {	"mould", "mouldic", "mouldhood", "Mou",
 	{0, 0},
 	PM_MOULD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_MOULD| ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_MOULD| ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL,
 	MRACE_MOULD, 0, MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT|MRACE_DWARF|MRACE_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      4,      0,  0,  4,  3,  4 },
@@ -1738,11 +1737,11 @@ const struct Race races[] = {
 	{  4, 0,  4, 0,  4, 0 }		/* Energy */
 },
 
-{	"nymph", "nymphian", "nymphhood", "Nym", /* suggestion by BellisColdwine */
+{	"nymph", "nymphian", "nymphhood", "Nym",
+	/* suggestion by BellisColdwine */
 	{0, 0},
 	PM_NYMPH, NON_PM, NON_PM, NON_PM,
-	MRACE_NYMPH| ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_NYMPH| ROLE_MALE|ROLE_FEMALE | ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MRACE_NYMPH, 0, MRACE_GNOME|MRACE_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
@@ -1755,9 +1754,9 @@ const struct Race races[] = {
 {	"ogre", "ogre", "ogrekind", "Ogr",
 	{0, 0},
 	PM_OGRE, NON_PM, PM_OGRE_MUMMY, PM_OGRE_ZOMBIE,
-	MRACE_OGRE| ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_OGRE, 0, 0,
+	MRACE_OGRE| ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
+	MRACE_OGRE, 0, 
+	MRACE_HUMAN|MRACE_DWARF|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR19(23),  15, 15, 15, 20, 15 },
@@ -1769,7 +1768,7 @@ const struct Race races[] = {
 {	"orc", "orcish", "orcdom", "Orc",
 	{0, 0},
 	PM_ORC, NON_PM, PM_ORC_MUMMY, PM_ORC_ZOMBIE,
-	MRACE_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_ORC | ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
 	MRACE_ORC, 0, MRACE_HUMAN|MRACE_ELF|MRACE_DWARF|MRACE_HOBBIT,
 	/*  Str    Int Wis Dex Con Cha */
 	{   3,      3,  3,  3,  3,  3 },
@@ -1782,9 +1781,8 @@ const struct Race races[] = {
 {	"troll", "troll", "trollkind", "Tro",
 	{0, 0},
 	PM_TROLL, NON_PM, PM_TROLL_MUMMY, PM_TROLL_ZOMBIE,
-	MRACE_TROLL | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_TROLL, 0, 0,
+	MRACE_TROLL | ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
+	MRACE_TROLL, 0, MRACE_ELF|MRACE_HUMAN|MRACE_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR19(23),  17, 15, 16, 25, 15 },
@@ -1796,7 +1794,7 @@ const struct Race races[] = {
 {	"ungenomold", "ungenomoldic", "ungenomoldhood", "Ung",
 	{0, 0},
 	PM_UNGENOMOLD, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_MOULD| ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_MOULD| ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
 	MRACE_MOULD, 0, MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT|MRACE_DWARF|MRACE_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      4,      0,  0,  4,  3,  4 },
