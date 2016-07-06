@@ -101,6 +101,32 @@
 
 #define MR_TYPEMASK	0xFFC000FFL	/* bits to take from mresists */
 
+/* The MRACE_FOO replace both the old M2_FOO flags and also the corresponding
+   MH_FOO.  In monst.c, they are only needed for monsters that count as being
+   the "same race" for some player characters.  All others use MRACE_NONE.
+   Note that orcs get both, because they need the M2 flag for Sting/Orcrist. */
+#define MRACE_NONE      0x00000000L     /* not a playable race */
+/* These start at 8 for historical reasons because they used to be in M2 */
+#define MRACE_HUMAN     0x00000008L     /* is a human */
+#define MRACE_ELF       0x00000010L     /* is an elf */
+#define MRACE_DWARF     0x00000020L     /* is a dwarf */
+#define MRACE_GNOME     0x00000040L     /* is a gnome */
+#define MRACE_ORC       0x00000080L     /* is an orc */
+/* Slash'EM races */
+#define MRACE_HOBBIT    0x00000100L     /* is a hobbit */
+#define MRACE_DROW      0x00000200L     /* is a drow */
+#define MRACE_WERE      0x00000400L     /* is a lycanthrope */
+#define MRACE_VAMPIRE   0x00000800L     /* is a vampire */
+/* Slash'EM Extended races */
+#define MRACE_CLOCK     0x00001000L     /* is a clockwork */
+#define MRACE_GHOUL     0x00002000L     /* is a ghast */
+#define MRACE_GIANT     0x00004000L     /* is a giant */
+#define MRACE_MFLAY     0x00008000L     /* is an illithid */
+#define MRACE_KOBOLD    0x00010000L     /* is a kobold */
+#define MRACE_MOULD     0x00020000L     /* is a mould character (includes ungenomolds) */
+#define MRACE_NYMPH     0x00040000L     /* is a nymph */
+#define MRACE_OGRE      0x00080000L     /* is an ogre */
+#define MRACE_TROLL     0x00100000L     /* is a troll */
 
 #define M1_FLY		0x00000001L	/* can fly or float */
 #define M1_SWIM		0x00000002L	/* can traverse water */
@@ -143,6 +169,9 @@
 #define M2_NOPOLY	0x00000001L	/* players mayn't poly into one */
 #define M2_UNDEAD	0x00000002L	/* is walking dead */
 #define M2_MERC		0x00000004L	/* is a guard or soldier */
+/* 5lo: These have mostly been succeeded by racial flags
+ * but we're keeping them as several things still rely on
+ * these */
 #define M2_HUMAN	0x00000008L	/* is a human */
 #define M2_ELF		0x00000010L	/* is an elf */
 #define M2_DWARF	0x00000020L	/* is a dwarf */
@@ -217,6 +246,7 @@
 
 /* Monster races -- must stay within ROLE_RACEMASK */
 /* Eventually this may become its own field */
+#if 0 /* 5lo: Now it's own field */
 #define MH_HUMAN	M2_HUMAN
 #define MH_ELF		M2_ELF
 #define MH_DWARF	M2_DWARF
@@ -225,7 +255,7 @@
 #define MH_HOBBIT	M2_HOBBIT
 #define MH_WERE		M2_WERE
 #define MH_VAMPIRE	M2_VAMPIRE
-
+#endif
 
 /* for mons[].geno (constant during game) */
 #define G_VLGROUP	0x2000		/* appear in very large groups normally */

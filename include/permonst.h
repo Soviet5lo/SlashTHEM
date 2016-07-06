@@ -55,6 +55,7 @@ struct permonst {
 	uchar		msize;			/* physical size (3 bits) */
         unsigned long   mresists;               /* resistances */
 	uchar		mconveys;		/* conveyed by eating */
+	unsigned int    mflagsr;                /* racial flags (formally in mflags2) */
 	unsigned long	mflags1,		/* boolean bitflags */
 			mflags2;		/* more boolean bitflags */
 	unsigned short		mflags3;		/* yet more boolean bitflags */
