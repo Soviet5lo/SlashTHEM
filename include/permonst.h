@@ -55,10 +55,10 @@ struct permonst {
 	uchar		msize;			/* physical size (3 bits) */
         unsigned long   mresists;               /* resistances */
 	uchar		mconveys;		/* conveyed by eating */
-	unsigned int    mflagsr;                /* racial flags (formally in mflags2) */
+	unsigned long   mflagsr;                /* racial flags (formally in mflags2) */
 	unsigned long	mflags1,		/* boolean bitflags */
 			mflags2;		/* more boolean bitflags */
-	unsigned short		mflags3;		/* yet more boolean bitflags */
+	unsigned short	mflags3;		/* yet more boolean bitflags */
  /* who the heck set this to short, and why does the game crash if it's long? --Amy */
 # ifdef TEXTCOLOR
 	uchar		mcolor;			/* color to use */
