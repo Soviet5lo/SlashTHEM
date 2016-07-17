@@ -110,10 +110,10 @@ struct Role {
 	/*** Bitmasks ***/
 	long allow;		/* bit mask of allowed variations */
 #define ROLE_RACEMASK	0x001ffff8L	/* allowable races */
-#define ROLE_GENDMASK	0x00e0000L 	/* allowable genders */
-#define ROLE_MALE	0x0020000L
-#define ROLE_FEMALE	0x0040000L
-#define ROLE_NEUTER	0x0080000L
+#define ROLE_GENDMASK	0x00e00000L 	/* allowable genders */
+#define ROLE_MALE	0x00200000L
+#define ROLE_FEMALE	0x00400000L
+#define ROLE_NEUTER	0x00800000L
 #define ROLE_ALIGNMASK	AM_MASK		/* allowable alignments */
 #define ROLE_LAWFUL	AM_LAWFUL
 #define ROLE_NEUTRAL	AM_NEUTRAL
