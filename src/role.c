@@ -1820,7 +1820,7 @@ const struct Race races[] = {
 {	"vampire", "vampiric", "vampirehood", "Vam",
 	{0, 0},
 	PM_VAMPIRE, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_VAMPIRE | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_VAMPIRE | ROLE_MALE|ROLE_FEMALE | ROLE_CHAOTIC,
 	MRACE_VAMPIRE, 0, MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT|MRACE_DWARF|MRACE_ORC,
 	/*    Str     Int Wis Dex Con Cha */
 	{      4,      0,  0,  4,  3,  4 },
@@ -2162,7 +2162,7 @@ ok_role(rolenum, racenum, gendnum, alignnum)
 int rolenum, racenum, gendnum, alignnum;
 {
     int i;
-    short allow;
+    long allow;
 
     if (rolenum >= 0 && rolenum < SIZE(roles)-1) {
 	allow = roles[rolenum].allow;
@@ -2234,7 +2234,7 @@ ok_race(rolenum, racenum, gendnum, alignnum)
 int rolenum, racenum, gendnum, alignnum;
 {
     int i;
-    short allow;
+    long allow;
 
     if (racenum >= 0 && racenum < SIZE(races)-1) {
 	allow = races[racenum].allow;
@@ -2307,7 +2307,7 @@ ok_gend(rolenum, racenum, gendnum, alignnum)
 int rolenum, racenum, gendnum, alignnum;
 {
     int i;
-    short allow;
+    long allow;
 
     if (gendnum >= 0 && gendnum < ROLE_GENDERS) {
 	allow = genders[gendnum].allow;
@@ -2370,7 +2370,7 @@ ok_align(rolenum, racenum, gendnum, alignnum)
 int rolenum, racenum, gendnum, alignnum;
 {
     int i;
-    short allow;
+    long allow;
 
     if (alignnum >= 0 && alignnum < ROLE_ALIGNS) {
 	allow = aligns[alignnum].allow;
