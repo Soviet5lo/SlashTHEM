@@ -91,6 +91,8 @@
 #define monpolyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L) /* monsters may poly into this */
 #define polyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L) /* players may poly into this */
 #define is_undead(ptr)		(((ptr)->mflags2 & M2_UNDEAD) != 0L)
+#if 0 /* Unused now - note that the M2 flags still are used
+	 for backwards compat reasons (artifacts that rely on them */
 #define is_were(ptr)		(((ptr)->mflags2 & M2_WERE) != 0L)
 #define is_vampire(ptr)		(((ptr)->mflags2 & M2_VAMPIRE) != 0L)
 #define is_elf(ptr)		(((ptr)->mflags2 & M2_ELF) != 0L)
@@ -100,11 +102,31 @@
 #define is_human(ptr)		(((ptr)->mflags2 & M2_HUMAN) != 0L)
 #define is_hobbit(ptr)		(((ptr)->mflags2 & M2_HOBBIT) != 0L)
 #define your_race(ptr)		(((ptr)->mflags2 & urace.selfmask) != 0L)
+#endif /* new racial flags */
+#define is_were(ptr)		(((ptr)->mflagsr & MRACE_WERE) != 0L)
+#define is_vampire(ptr)		(((ptr)->mflagsr & MRACE_VAMPIRE) != 0L)
+#define is_elf(ptr)		(((ptr)->mflagsr & MRACE_ELF) != 0L)
+#define is_dwarf(ptr)		(((ptr)->mflagsr & MRACE_DWARF) != 0L)
+#define is_gnome(ptr)		(((ptr)->mflagsr & MRACE_GNOME) != 0L)
+#define is_orc(ptr)		(((ptr)->mflagsr & MRACE_ORC) != 0L)
+#define is_human(ptr)		(((ptr)->mflagsr & MRACE_HUMAN) != 0L)
+#define is_hobbit(ptr)		(((ptr)->mflagsr & MRACE_HOBBIT) != 0L)
+#define is_clock(ptr)		(((ptr)->mflagsr & MRACE_CLOCK) != 0L)
+#define is_ghoul(ptr)		(((ptr)->mflagsr & MRACE_GHOUL) != 0L)
+#define is_giant(ptr)		(((ptr)->mflagsr & MRACE_GIANT) != 0L)
+#define is_mflay(ptr)		(((ptr)->mflagsr & MRACE_MFLAY) != 0L)
+#define is_kobold(ptr)		(((ptr)->mflagsr & MRACE_KOBOLD) != 0L)
+#define is_nymph(ptr)		(((ptr)->mflagsr & MRACE_NYMPH) != 0L)
+#define is_ogre(ptr)		(((ptr)->mflagsr & MRACE_OGRE) != 0L)
+#define is_troll(ptr)		(((ptr)->mflagsr & MRACE_TROLL) != 0L)
+#define is_mould(ptr)		(((ptr)->mflagsr & MRACE_MOULD) != 0L)
+#define your_race(ptr)		(((ptr)->mflagsr & urace.selfmask) != 0L)
+/* Back to normal */
 #define is_bat(ptr)		((ptr) == &mons[PM_BAT] || \
 				 (ptr) == &mons[PM_GIANT_BAT] || \
 				 (ptr) == &mons[PM_VAMPIRE_BAT])
 #define is_bird(ptr)		((ptr)->mlet == S_BAT && !is_bat(ptr))
-#define is_giant(ptr)		(((ptr)->mflags2 & M2_GIANT) != 0L)
+//#define is_giant(ptr)		(((ptr)->mflags2 & M2_GIANT) != 0L)
 #define is_golem(ptr)		((ptr)->mlet == S_GOLEM)
 #define is_domestic(ptr)	(((ptr)->mflags2 & M2_DOMESTIC) != 0L)
 #define is_demon(ptr)		(((ptr)->mflags2 & M2_DEMON) != 0L)

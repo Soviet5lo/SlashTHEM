@@ -108,12 +108,12 @@ struct Role {
 	int   questarti;	/* index (ART_) of quest artifact (questpgr.c) */
 
 	/*** Bitmasks ***/
-	short allow;		/* bit mask of allowed variations */
-#define ROLE_RACEMASK	0x0ff8		/* allowable races */
-#define ROLE_GENDMASK	0xf000		/* allowable genders */
-#define ROLE_MALE	0x1000
-#define ROLE_FEMALE	0x2000
-#define ROLE_NEUTER	0x4000
+	long allow;		/* bit mask of allowed variations */
+#define ROLE_RACEMASK	0x001ffff8L	/* allowable races */
+#define ROLE_GENDMASK	0x00e00000L 	/* allowable genders */
+#define ROLE_MALE	0x00200000L
+#define ROLE_FEMALE	0x00400000L
+#define ROLE_NEUTER	0x00800000L
 #define ROLE_ALIGNMASK	AM_MASK		/* allowable alignments */
 #define ROLE_LAWFUL	AM_LAWFUL
 #define ROLE_NEUTRAL	AM_NEUTRAL
@@ -176,8 +176,8 @@ struct Race {
 	      zombienum;	/* PM_ as a zombie */
 
 	/*** Bitmasks ***/
-	short allow;		/* bit mask of allowed variations */
-	short selfmask,		/* your own race's bit mask */
+	long  allow;		/* bit mask of allowed variations */
+	long  selfmask,		/* your own race's bit mask */
 	      lovemask,		/* bit mask of always peaceful */
 	      hatemask;		/* bit mask of always hostile */
 
@@ -213,7 +213,7 @@ struct Gender {
 	const char *him;	/* him/her/it */
 	const char *his;	/* his/her/its */
 	const char *filecode;	/* file code */
-	short allow;		/* equivalent ROLE_ mask */
+	long allow;		/* equivalent ROLE_ mask */
 };
 #define ROLE_GENDERS	2	/* number of permitted player genders */
 				/* increment to 3 if you allow neuter roles */
@@ -232,7 +232,7 @@ struct Align {
 	const char *noun;	/* law/balance/chaos */
 	const char *adj;	/* lawful/neutral/chaotic */
 	const char *filecode;	/* file code */
-	short allow;		/* equivalent ROLE_ mask */
+	long allow;		/* equivalent ROLE_ mask */
 	aligntyp value;		/* equivalent A_ value */
 };
 #define ROLE_ALIGNS	3	/* number of permitted player alignments */
