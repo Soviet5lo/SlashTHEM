@@ -447,10 +447,10 @@ dodiscovered()				/* free after Robert Viduya */
 	      0, 0, ATR_NONE, buf, MENU_UNSELECTED);
 	    ++ct;
 	}
-#if 0 /* 5lo: Disabled until we can actually discover how this should be fixed */
+
     /* display any known artifacts as another pseudo-class */
     ct += disp_artifact_discoveries(tmpwin);
-#endif
+
     /* several classes are omitted from packorder; one is of interest here */
     Strcpy(classes, flags.inv_order);
     if (!index(classes, VENOM_CLASS)) {
