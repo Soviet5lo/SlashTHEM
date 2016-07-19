@@ -186,6 +186,14 @@ struct monst {
 /* these are in mspeed */
 #define MSLOW 1		/* slow monster */
 #define MFAST 2		/* speeded monster */
+/* these are used for clockworks */
+#define CLOCKWORK_PANIC   20
+#define CLOCKWORK_LOW    400
+#define CLOCKWORK_MED   1000
+#define CLOCKWORK_HIGH  1800
+#define CLOCKWORK_MAX   2000
+#define CLOCKWORK_WIND    50
+
 
 #define NAME(mtmp)	(((char *)(mtmp)->mextra) + (mtmp)->mxlth)
 

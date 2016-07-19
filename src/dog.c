@@ -551,7 +551,7 @@ long nmv;		/* number of moves */
 	    if (imv >= (int) mtmp->mblinded) mtmp->mblinded = 1;
 	    else mtmp->mblinded -= imv;
 	}
-	if (mtmp->mfrozen) {
+	if (mtmp->mfrozen && (mtmp->data != &mons[PM_CLOCKWORK_AUTOMATON] || !mtmp->mspec_used)) {
 	    if (imv >= (int) mtmp->mfrozen) mtmp->mfrozen = 1;
 	    else mtmp->mfrozen -= imv;
 	}

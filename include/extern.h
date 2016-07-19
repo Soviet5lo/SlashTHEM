@@ -606,6 +606,9 @@ E int NDECL(eatfood);
 E int NDECL(opentin);
 E int NDECL(unfaint);
 #endif
+/* 5lo: Clockwork exclusive */
+E int NDECL(rehumanize_wrapper);
+E int NDECL(windclock);
 E boolean FDECL(is_edible, (struct obj *));
 E void NDECL(init_uhunger);
 E int NDECL(Hear_again);
@@ -630,6 +633,8 @@ E boolean FDECL(bite_monster, (struct monst *mon));
 E void NDECL(fix_petrification);
 E void FDECL(consume_oeaten, (struct obj *,int));
 E boolean FDECL(maybe_finished_meal, (BOOLEAN_P));
+/* 5lo: Another Clockwork Function */
+E int FDECL(start_clockwinding, (struct obj *));
 
 /* ### end.c ### */
 
@@ -1363,6 +1368,7 @@ E boolean FDECL(closed_door, (int,int));
 E boolean FDECL(accessible, (int,int));
 E void FDECL(set_apparxy, (struct monst *));
 E boolean FDECL(can_ooze, (struct monst *));
+E int FDECL(wind_clockwork, (struct monst *, struct monst *));
 
 /* ### monst.c ### */
 

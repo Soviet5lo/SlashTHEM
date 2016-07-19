@@ -6,6 +6,7 @@
 
 #ifdef OVL0
 extern const char *hu_stat[];	/* defined in eat.c */
+extern const char *cahu_stat[]; /* also defined in eat.c */
 
 const char *hu_abbrev_stat[] = {	/* must be kept consistent with eat.c */
 	"Sat",
@@ -15,6 +16,16 @@ const char *hu_abbrev_stat[] = {	/* must be kept consistent with eat.c */
 	"Ftg",
 	"Ftd",
 	"Sta"
+};
+
+const char *cahu_abbrev_stat[] = {	/* must be kept consistent with eat.c */
+	"Ovr",
+	"",
+	"Wan",
+	"Unw",
+	"Slp",
+	"Spd",
+	"Stp"
 };
 
 const char * const enc_stat[] = {
@@ -666,14 +677,23 @@ bot2str(char *newbot2)
         if (bot2_abbrev >= 2) {
 		if (hu_abbrev_stat[u.uhs][0]!='\0') {
 			Sprintf(nb = eos(nb), " ");
-			Strcat(newbot2, hu_abbrev_stat[u.uhs]);
+			if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
+			    Strcat(newbot2, cahu_abbrev_stat[u.uhs]);
+			else
+			    Strcat(newbot2, hu_abbrev_stat[u.uhs]);
 		}
 	}
 	else if(strcmp(hu_stat[u.uhs], "        ")){
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-	  add_colored_text(hu_stat[u.uhs], newbot2);
+	    if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
+		add_colored_text(cahu_stat[u.uhs], newbot2);
+	    else
+		add_colored_text(hu_stat[u.uhs], newbot2);
 #else
 		Sprintf(nb = eos(nb), " ");
+	    if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
+                Strcat(newbot2, cahu_stat[u.uhs]);
+	    else
 		Strcat(newbot2, hu_stat[u.uhs]);
 #endif
 	}

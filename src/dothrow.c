@@ -1399,6 +1399,11 @@ boolean mon_notices;
 	    if (mon_notices && mon->data->mmove && !rn2(10)) {
 		mon->mcanmove = 1;
 		mon->mfrozen = 0;
+		if(mon->data == &mons[PM_CLOCKWORK_AUTOMATON] &&
+		   !mon->mspec_used){
+			mon->mfrozen = 1;
+			mon->mcanmove = 0;
+		}
 	    }
 	}
 	/* some objects are more likely to hit than others */

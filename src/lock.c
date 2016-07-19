@@ -368,6 +368,12 @@ pick_lock(pickp) /* pick a lock with a given object */
 		There("isn't any sort of lock up %s.",
 		      Levitation ? "here" : "there");
 		return 0;
+	    } else if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]
+		     || Race_if(PM_CLOCKWORK_AUTOMATON)) && picktyp == SKELETON_KEY){
+		Sprintf(qbuf, "Wind up your clockwork?");
+		c = ynq(qbuf);
+		if(c == 'q') return(0);
+		if(c == 'y' && start_clockwinding(pick)) return (1);
 	    } else if (is_lava(u.ux, u.uy)) {
 		pline("Doing that would probably melt your %s.",
 		      xname(pick));

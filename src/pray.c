@@ -313,6 +313,9 @@ register int trouble;
 		    losestr(-1);
 		    /* fall into... */
 	    case TROUBLE_HUNGRY:
+		    if ((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
+			You_feel("your mainspring wind up.");
+		    else
 		    Your("%s feels content.", body_part(STOMACH));
 		    init_uhunger ();
 		    flags.botl = 1;

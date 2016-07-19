@@ -388,6 +388,11 @@ aggravate()
 		if(!mtmp->mcanmove && !rn2(5)) {
 			mtmp->mfrozen = 0;
 			mtmp->mcanmove = 1;
+			if(mtmp->data == &mons[PM_CLOCKWORK_AUTOMATON] &&
+			!mtmp->mspec_used){
+			    mtmp->mfrozen = 1;
+			    mtmp->mcanmove = 0;
+			}
 		}
 	    }
 }

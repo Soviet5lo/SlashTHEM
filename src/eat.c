@@ -91,6 +91,16 @@ const char *hu_stat[] = {
 	"Starved "
 };
 
+const char * cahu_stat[] = {
+  "OvrWound",
+  "        ",
+  "Waning  ",
+  "Unwound ",
+  "Slipping",
+  "Slipped ",
+  "Stopped "
+};
+
 #endif /* OVLB */
 #ifdef OVL1
 
@@ -103,7 +113,8 @@ is_edible(obj)
 register struct obj *obj;
 {
 
-	/* Clockwork automatons can't eat anything at all, they need to use booze or oil --Amy */
+	/* Clockwork automatons can't eat anything at all, they need to use booze or oil --Amy
+	 * 5lo: Or they need to wind themselves with a key */
 	if (Race_if(PM_CLOCKWORK_AUTOMATON) && !Upolyd) return 0;
 
 	/* Incantifier only eats stone and metal --Amy */
@@ -1454,6 +1465,11 @@ opentin()		/* called during each move whilst opening a tin */
 		costly_tin((const char*)0);
 		goto use_me;
 	    }
+		if ((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON)){
+		    You("have no way to eat, so you discard the tin instead.");
+		    if (!Hallucination) tin.tin->dknown = tin.tin->known = TRUE;
+		    goto use_me;
+		}
 	    /* in case stop_occupation() was called on previous meal */
 	    victual.piece = (struct obj *)0;
 	    victual.fullwarn = victual.eating = victual.doreset = FALSE;
@@ -2606,6 +2622,10 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 		pline("If you can't breathe air, how can you consume solids?");
 		return 0;
 	}
+	if ((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON)){
+		pline("You can't eat anything in your current state.");
+		return 0;
+	}
 #ifdef JEDI
 	if (uarmh && uarmh->otyp == PLASTEEL_HELM){
 		pline("The %s covers your whole face.", xname(uarmh));
@@ -2921,6 +2941,81 @@ bite()
 	return 0;
 }
 
+int rehumanize_wrapper(){
+	rehumanize();
+	return 0;
+}
+
+int
+start_clockwinding(key)
+struct obj * key;
+{
+	char buf[BUFSZ], qbuf[QBUFSZ];
+	int turns,ret;
+
+	if (key->otyp != SKELETON_KEY)
+	    return 0;
+	You("use the key to wind up your clockwork.");
+	Sprintf(qbuf, "How many turns?");
+	getlin(qbuf, buf);
+	(void)mungspaces(buf);
+	if (buf[0] == '\033' || buf[0] == '\0') ret = 0;
+	else ret = sscanf(buf, "%d", &turns);
+
+	if (ret != 1 || turns <= 0){
+	    pline(Never_mind);
+	    return 0;
+	}
+	victual.piece = key;
+	victual.canchoke = TRUE;
+	victual.usedtime = 0;
+	victual.fullwarn = FALSE;
+	victual.reqtime = turns;
+	Sprintf(msgbuf, "winding");
+	set_occupation(windclock, msgbuf, 0);
+	return 1;
+}
+
+
+
+int
+windclock()
+{ 
+	if (victual.reqtime == victual.usedtime){
+	    occupation = 0;
+	    You("finish winding.");
+	    newuhs(FALSE);
+	    victual.piece = 0;
+	} else if (!carried(victual.piece)) {
+	    newuhs(FALSE);
+	    stop_occupation();
+	    victual.piece = 0;
+	    return 0;
+	} else if(victual.canchoke && u.uhunger >= 3000) {
+	    Your("mainspring is wound too tight!");
+	    Your("clockwork breaks apart!");
+	    killer_format = KILLED_BY;
+	    killer = "overclocking";
+	    done(DIED);
+	    victual.piece = 0;
+	    return 0;
+	} else if (u.uhunger >= 2500 && !victual.fullwarn) {
+	    pline("You're having a hard time cranking the key.");
+	    victual.fullwarn = TRUE;
+	    if (yn_function("Stop winding?",ynchars,'y')=='y') {
+		victual.piece = 0;
+		stop_occupation();
+		newuhs(FALSE);
+		return 0;
+	    }
+	} else {
+	    u.uhunger += 10;
+	    victual.usedtime ++;
+	}
+	flags.botl = 1;
+	return 1;
+}
+
 #endif /* OVLB */
 #ifdef OVL0
 
@@ -2928,7 +3023,10 @@ void
 gethungry()	/* as time goes by - called by moveloop() and domove() */
 {
 	if (u.uinvulnerable) return;	/* you don't feel hungrier */
-
+	if (Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON] && 
+	    (!u.usleep || !rn2(10)) )
+	    u.uhunger--;
+	else
 	if ((!u.usleep || !rn2(10))	/* slow metabolic rate while asleep */
 		&& (carnivorous(youmonst.data) || herbivorous(youmonst.data) || metallivorous(youmonst.data) || lithivorous(youmonst.data))
 #ifdef CONVICT
@@ -3077,6 +3175,8 @@ boolean incr;
 	static unsigned save_hs;
 	static boolean saved_hs = FALSE;
 	int h = u.uhunger;
+	boolean clockwork = ((Race_if(PM_CLOCKWORK_AUTOMATON)) || Upolyd &&
+			youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]);
 
 	newhs = (h > 1500) ? SATIATED : /* used to be 1000 --Amy */
 		(h > 150) ? NOT_HUNGRY :
@@ -3125,6 +3225,15 @@ boolean incr;
 			if(!is_fainted() && multi >= 0 /* %% */) {
 				/* stop what you're doing, then faint */
 				stop_occupation();
+			if (clockwork){
+				Your("clockwork comes to a complete stop.");
+				/* 5lo: TODO - Better message */
+			        if(u.uhunger < -(int)(800 + 50*ACURR(A_CON))) You("are close to stopping.");
+				flags.soundok=0;
+				nomul(-5,"immobilized by slipping gears.");
+				nomovemsg = "Your clockwork catches again.";
+				afternmv = unfaint;
+			} else {
 				You("faint from lack of food.");
 
 	/* warn player if starvation will happen soon, that is, less than 200 nutrition remaining --Amy */
@@ -3134,10 +3243,17 @@ boolean incr;
 				nomul(-3+(u.uhunger/200), "fainted from lack of food");
 				nomovemsg = "You regain consciousness.";
 				afternmv = unfaint;
+			      }
 				newhs = FAINTED;
 			}
 		} else
 		if(u.uhunger < -(int)(1000 + 50*ACURR(A_CON))) {
+			if (clockwork){
+			    Your("clockwork comes to a complete stop.");
+			    killer_format = KILLED_BY_AN;
+			    killer = "unwound spring";
+			    done(DIED);
+                        } else {
 			u.uhs = STARVED;
 			flags.botl = 1;
 			bot();
@@ -3148,8 +3264,8 @@ boolean incr;
 			/* if we return, we lifesaved, and that calls newuhs */
 			return;
 		}
+	    }
 	}
-
 	if(newhs != u.uhs) {
 		if(newhs >= WEAK && u.uhs < WEAK)
 			losestr(1);	/* this may kill you -- see below */
@@ -3157,6 +3273,18 @@ boolean incr;
 			losestr(-1);
 		switch(newhs){
 		case HUNGRY:
+			if (clockwork){
+			    if (Hallucination)
+				Your((!incr)? "cuckoo only feels hungry now.":
+				"cuckoo is feeling hungry.");
+			    else
+			    	You_feel((!incr) ? "your mainspring tightening." :
+				"the power of your mainspring waning.");
+			    if (incr && occupation && occupation != windclock)
+			        stop_occupation();
+			    break;
+			}
+
 			if (Hallucination) {
 			    You((!incr) ?
 				"now have a lesser case of the munchies." :
@@ -3170,6 +3298,17 @@ boolean incr;
 			    stop_occupation();
 			break;
 		case WEAK:
+			if (clockwork){
+			    You_feel("your mainspring %s and your gears %s.",
+			        (Hallucination)?"sprunging":"unwinding",
+			        (!incr)?"still slipping":
+			        (u.uhunger < 45 ) ? "slipping":
+			        "starting to slip");  
+			    if (incr && occupation && occupation != windclock)
+			        stop_occupation();
+			    break;
+			}
+
 			if (Hallucination)
 			    pline((!incr) ?
 				  "You still have the munchies." :

@@ -299,6 +299,15 @@ mattackm(magr, mdef)
     for (i = 0; i < NATTK; i++) {
 	res[i] = MM_MISS;
 	mattk = getmattk(pa, i, res, &alt_attk);
+	    if (magr->data == & mons[PM_CLOCKWORK_AUTOMATON]){
+	        if ((magr->mspec_used < CLOCKWORK_PANIC) ||
+		    (magr->mspec_used < CLOCKWORK_LOW && i) ||
+		    (magr->mspec_used < CLOCKWORK_MED && i>=2) ||
+		    (magr->mspec_used < CLOCKWORK_HIGH && i>=4) ) 
+	            continue;
+	        else
+	            magr->mspec_used -= 15;
+	   }
 	otmp = (struct obj *)0;
 	attk = 1;
 	switch (mattk->aatyp) {

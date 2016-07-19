@@ -1707,9 +1707,22 @@ register struct	monst	*mtmp;
 			(void) mpickobj(mtmp, otmp);
 		}
 		if (monsndx(ptr) == PM_CLOCKWORK_AUTOMATON) {
-	        	(void) mongets(mtmp, rn2(2)? BROADSWORD : SCIMITAR);
-	        	(void) mongets(mtmp, BRONZE_PLATE_MAIL);
-	      	}
+#if 0 /* 5lo: Deferred for now */
+			if (!rn2(13) || (ame && !strcmp(ame, "arren")) ){
+			    (void) mongets(mtmp, QUARTZ);
+			} else if (!rn2(12) || (ame && 
+			 !(strcmp(ame, "tsesibus") && strcmp(ame, "lepsydra")) )){
+			    (void) mongets(mtmp, POT_WATER);
+			} else if (!rn2(11) || (ame && !strcmp(ame, "lan"))){
+			    (void) mongets(mtmp, SCR_BLANK_PAPER);
+			}
+			if (!rn2(13))
+			    (void) mongets(mtmp, LAST_GEM+1); /* wpo white glass */
+#endif
+			(void) mongets(mtmp, rn2(2)? BROADSWORD : SCIMITAR);
+			(void) mongets(mtmp, BRONZE_PLATE_MAIL);
+			(void) mongets(mtmp, SKELETON_KEY);
+		}
 		if (monsndx(ptr) == PM_DOCTOR_FRANKENSTEIN) {
 			(void)mongets(mtmp, LAB_COAT);
 			(void)mongets(mtmp, WAN_POLYMORPH);

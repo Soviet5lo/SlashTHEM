@@ -319,6 +319,11 @@ register struct monst *mtmp;
 		if(!rn2(10)) {
 			mtmp->mcanmove = 1;
 			mtmp->mfrozen = 0;
+			if(mtmp->data == &mons[PM_CLOCKWORK_AUTOMATON] &&
+				!mtmp->mspec_used){
+				mtmp->mfrozen = 1;
+				mtmp->mcanmove = 0;
+			}
 		}
 	}
 

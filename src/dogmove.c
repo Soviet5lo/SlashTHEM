@@ -54,6 +54,9 @@ register struct monst *mon;
 			item2 = TRUE;
 			continue;
 		}
+		if (mon->data == &mons[PM_CLOCKWORK_AUTOMATON] &&
+		    obj->otyp == SKELETON_KEY )
+			continue;
 		if (!obj->owornmask && obj != wep) return obj;
 	}
 	return (struct obj *)0;

@@ -679,6 +679,15 @@ mattacku(mtmp)
 
 	    sum[i] = 0;
 	    mattk = getmattk(mdat, i, sum, &alt_attk);
+	        if (mdat == & mons[PM_CLOCKWORK_AUTOMATON]){
+		    if ((mtmp->mspec_used < CLOCKWORK_PANIC) ||
+		        (mtmp->mspec_used < CLOCKWORK_LOW && i) ||
+		        (mtmp->mspec_used < CLOCKWORK_MED && i>=2) ||
+		        (mtmp->mspec_used < CLOCKWORK_HIGH && i>=4) ) 
+		        continue;
+		    else
+		        mtmp->mspec_used -= 15;
+	       }
 	    if (u.uswallow && (mattk->aatyp != AT_ENGL))
 		continue;
 	    switch(mattk->aatyp) {

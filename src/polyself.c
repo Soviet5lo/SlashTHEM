@@ -901,6 +901,20 @@ rehumanize()
 		done(DIED);
 	}
 
+	if ((Unchanging &&
+	youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON] ||
+	Race_if(PM_CLOCKWORK_AUTOMATON)) && u.uhs >= 4 ){ /* FAINTING */
+		char kbuf[20];
+		u.uhs = 6; /* STARVED */
+		flags.botl = 1;
+		bot();
+		Your("clockwork completely unwinds.");
+		killer_format = NO_KILLER_PREFIX;
+		Sprintf(kbuf, "%s ticker stopped", uhis());
+		killer = kbuf;
+		done(STARVING);
+	}
+
 	if (emits_light(youmonst.data))
 	    del_light_source(LS_MONSTER, (genericptr_t)&youmonst);
 	polyman("return to %s form!", urace.adj);

@@ -722,6 +722,35 @@ register int after;
 	    mtmp->meating--;
 	    return 3;			/* still eating */
 	}
+	if (ptr == &mons[PM_CLOCKWORK_AUTOMATON]){
+	    int has_key = (int)(m_carrying(mtmp,SKELETON_KEY));
+	    int sees_you = m_canseeu(mtmp);
+	    if (!mtmp->mspec_used && !mtmp->mfrozen){
+		mtmp->mfrozen = 0;
+		mtmp->mcanmove = 0;
+		if(canseemon(mtmp))
+		    pline("%s jerks to a halt.", Monnam(mtmp));
+		    return 3;
+	    } else if (mtmp->mspec_used <= CLOCKWORK_PANIC) {
+		if (has_key)
+		    return (wind_clockwork(mtmp,mtmp))?2:3;
+		    monflee(mtmp, 20, FALSE, TRUE);
+	    } else if(mtmp->mspec_used <= CLOCKWORK_LOW) {
+		if ((!monnear(mtmp,u.ux,u.uy) || !sees_you) && has_key)
+		    return (wind_clockwork(mtmp,mtmp))?2:3;
+		else if(mtmp->permspeed != MSLOW)
+		    mon_adjust_speed(mtmp, -2, 0);
+	    } else if (mtmp->mspec_used <= CLOCKWORK_MED) {
+		if((distu(mtmp->mx, mtmp->my) >=5 || !sees_you) && has_key)
+		    return (wind_clockwork(mtmp,mtmp))?2:3;
+		else if(mtmp->permspeed == MFAST)
+		    mon_adjust_speed(mtmp,-1,0);
+	    } else if(mtmp->mspec_used <= (CLOCKWORK_HIGH-(CLOCKWORK_WIND*2))
+		&& !sees_you && has_key && mtmp->mstrategy == STRAT_HEAL){
+		return (wind_clockwork(mtmp,mtmp))?2:3;
+		}
+	    mtmp->mstrategy = STRAT_NONE; /* removes STRAT_HEAL if finished winding */
+	}
 
 	if (hides_under(ptr) && OBJ_AT(mtmp->mx, mtmp->my) && rn2(10))
 	    return 0;		/* do not leave hiding place */
@@ -1516,6 +1545,34 @@ bust_door_breath(mtmp)
         return(-1);
 }
 
+int /* 0: windee ok, 1: windee bit it */
+wind_clockwork(winder, windee)
+struct monst * winder;
+struct monst * windee;
+{
+	if (winder != windee) return 0; /* so far, not doable */
+	if (!winder->mcanmove || !m_carrying(winder, SKELETON_KEY)) return 0;
+	windee->mfrozen += 3;
+	windee->mcanmove = 0;
+	windee->mspec_used += CLOCKWORK_WIND;
+	if (windee->mstrategy != STRAT_HEAL){
+	    windee->mstrategy = STRAT_HEAL;
+	    if (canseemon(windee))
+		pline("%s starts winding up %sself.", Monnam(windee), mhim(windee));
+	}
+	if (windee->mspec_used > CLOCKWORK_HIGH)
+	if (rn2(CLOCKWORK_MAX - CLOCKWORK_HIGH) < windee->mspec_used - CLOCKWORK_HIGH){
+	    if(canseemon(windee))
+		pline("%s is wound up too tight!", Monnam(windee));
+	    mondied(windee);
+	    return 1;
+	}
+	if (windee->mspec_used > CLOCKWORK_MED && windee->permspeed !=MFAST)
+	    mon_adjust_speed(windee, 2, 0);
+	else if(windee->mspec_used >= CLOCKWORK_LOW && windee->permspeed == MSLOW)
+	    mon_adjust_speed(windee, 1, 0);
+	return 0;
+}
 
 #endif /* OVL0 */
 

@@ -1756,6 +1756,11 @@ register struct obj	*sobj;
 			if(confused || sobj->cursed) {
 			    mtmp->mflee = mtmp->mfrozen = mtmp->msleeping = 0;
 			    mtmp->mcanmove = 1;
+			    if(mtmp->data == &mons[PM_CLOCKWORK_AUTOMATON] &&
+			    !mtmp->mspec_used){
+				mtmp->mfrozen = 1;
+				mtmp->mcanmove = 0;
+			    }
 			} else
 			    if (! resist(mtmp, sobj->oclass, 0, NOTELL))
 				monflee(mtmp, 0, FALSE, FALSE);

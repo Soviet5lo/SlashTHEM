@@ -2794,6 +2794,19 @@ struct obj *obj;
 	if (typ == WAN_SPEED_MONSTER || typ == POT_SPEED)
 	    return (boolean)(mon->mspeed != MFAST);
 
+	/* some monsters only want certain items */
+	switch (mon->data->mlet){
+	    case S_QUANTMECH:
+		if(mon->data == &mons[PM_CLOCKWORK_AUTOMATON] &&
+		   !m_carrying(mon,SKELETON_KEY) &&
+		   obj->oclass == SKELETON_KEY)
+		    return TRUE;
+		return FALSE;
+		break;
+	    default:
+		break;
+	}
+
 	switch (obj->oclass) {
 	case WAND_CLASS:
 	    if (obj->spe <= 0)

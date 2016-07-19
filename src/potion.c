@@ -621,7 +621,6 @@ peffects(otmp)
 		/* the whiskey makes us feel better */
 		if (!otmp->odiluted) healup(Role_if(PM_DRUNK) ? rnd(20 + u.ulevel) : 1, 0, FALSE, FALSE);
 		u.uhunger += 10 * (2 + bcsign(otmp));
-		if (Race_if(PM_CLOCKWORK_AUTOMATON)) u.uhunger += 200;
 		if (Role_if(PM_DRUNK)) u.uhunger += 100;
 		newuhs(FALSE);
 		exercise(A_WIS, FALSE);
@@ -1072,6 +1071,8 @@ peffects(otmp)
 	case POT_OIL:				/* P. Winner */
 		{
 			boolean good_for_you = FALSE;
+			boolean clockwork = ((Race_if(PM_CLOCKWORK_AUTOMATON)) || Upolyd &&
+			                      youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]);
 
 			if (otmp->lamplit) {
 			    if (likes_fire(youmonst.data)) {
@@ -1082,13 +1083,22 @@ peffects(otmp)
 				losehp(d(Fire_resistance ? 1 : 3, 4),
 				       "burning potion of oil", KILLED_BY_AN);
 			    }
-			} else if(otmp->cursed)
+			} else if(otmp->cursed) {
 			    pline("This tastes like castor oil.");
-			else
+			    if (clockwork)
+				lesshungry(10);
+				good_for_you = TRUE;
+			} else {
 			    pline("That was smooth!");
+				if(clockwork) {
+					good_for_you = TRUE;
+					healup(d(4 + 2 * bcsign(otmp), 4),
+					    !otmp->cursed ? 1 : 0, !!otmp->blessed, !otmp->cursed);
+					/*if (u.uhunger < WEAK && u.uhunger > SATIATED)*/ lesshungry(50);
+				}
+			}
 			exercise(A_WIS, good_for_you);
 		}
-		if (Race_if(PM_CLOCKWORK_AUTOMATON)) u.uhunger += 500;
 		break;
 	case POT_ACID:
 		if (Acid_resistance)
