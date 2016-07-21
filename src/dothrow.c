@@ -76,7 +76,7 @@ int thrown;
 {
 	struct obj *otmp;
 	struct obj *launcher;
-	int multishot = (Race_if(PM_CLOCKWORK_AUTOMATON) && !Upolyd) ? 3 : 1;
+	int multishot = 1;
 	if ((long)multishot > obj->quan && (long)multishot > 1) multishot = (int)obj->quan;
 	schar skill;
 	long wep_mask;
