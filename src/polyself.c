@@ -45,7 +45,10 @@ init_uasmon()
 
 	upermonst.mflags3 &= ~(mons[PM_HUMAN].mflags3);
 	upermonst.mflags3 |= (mons[urace.malenum].mflags3);
-	
+
+	upermonst.mflagsr &= ~(mons[PM_HUMAN].mflagsr);
+	upermonst.mflagsr |= (mons[urace.malenum].mflagsr);
+
 	/* Fix up the attacks */
 	for(i = 0; i < NATTK; i++) {
 	    upermonst.mattk[i] = mons[urace.malenum].mattk[i];
