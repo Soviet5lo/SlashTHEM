@@ -114,7 +114,7 @@
 #define is_clock(ptr)		(((ptr)->mflagsr & MRACE_CLOCK) != 0L)
 #define is_ghoul(ptr)		(((ptr)->mflagsr & MRACE_GHOUL) != 0L)
 #define is_giant(ptr)		(((ptr)->mflagsr & MRACE_GIANT) != 0L)
-#define is_mflay(ptr)		(((ptr)->mflagsr & MRACE_MFLAY) != 0L)
+#define is_mind_flayer(ptr)	(((ptr)->mflagsr & MRACE_MFLAY) != 0L)
 #define is_kobold(ptr)		(((ptr)->mflagsr & MRACE_KOBOLD) != 0L)
 #define is_nymph(ptr)		(((ptr)->mflagsr & MRACE_NYMPH) != 0L)
 #define is_ogre(ptr)		(((ptr)->mflagsr & MRACE_OGRE) != 0L)
@@ -245,11 +245,11 @@
 				 ptr == &mons[PM_BASILISK] || \
 				 ptr == &mons[PM_CHICKATRICE] || \
 				 ptr == &mons[PM_ASPHYNX])
-
+/* 5lo: Now a racial flag.
 #define is_mind_flayer(ptr)	((ptr) == &mons[PM_MIND_FLAYER] || \
 				 (ptr) == &mons[PM_ILLITHID] || \
 				 (ptr) == &mons[PM_MASTER_MIND_FLAYER])
-
+*/
 #define made_of_rock(ptr)	((passes_walls(ptr) && thick_skinned(ptr)) || \
 				 (ptr) == &mons[PM_STONE_GOLEM] || \
 				 (ptr) == &mons[PM_STATUE_GARGOYLE])
