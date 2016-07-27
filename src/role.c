@@ -1626,7 +1626,7 @@ const struct Race races[] = {
 	{ STR19(19),  17, 17, 15, 18, 15 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  1, 0 },	/* Hit points */
-	{  1, 0,  2, 0,  2, 0 }		/* Energy */
+	{  2, 0,  2, 0,  2, 0 }		/* Energy */
 },
 
 {	"giant", "giant", "giantkind", "Gia",
@@ -1639,8 +1639,8 @@ const struct Race races[] = {
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR19(25),  17, 17, 15, 20, 16 },
 	/* Init   Lower  Higher */
-	{  5, 0,  0, 4,  4, 0 },	/* Hit points */
-	{  1, 0,  1, 0,  1, 0 }		/* Energy */
+	{  4, 4,  0, 4,  0, 3 },	/* Hit points */
+	{  1, 1,  0, 2,  0, 2 }		/* Energy */
 },
 
 {	"gnome", "gnomish", "gnomehood", "Gno",
@@ -1692,7 +1692,7 @@ const struct Race races[] = {
 	{     18,     25, 23, 18, 17, 16 },
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 2,  2, 0 },	/* Hit points */
-	{  2, 0,  2, 0,  2, 0 }		/* Energy */
+	{  9, 0,  6, 0,  6, 0 }		/* Energy */
 },
 
 {	"incantifier", "incantifier", "wanterkind", "Inc",
@@ -1706,7 +1706,7 @@ const struct Race races[] = {
 	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  0, 2 },	/* Hit points */
-	{  0, 0,  10, 0, 10, 0 },		/* Energy */
+	{  0, 0,  10, 0, 10, 0 },	/* Energy */
 },
 
 {	"kobold", "kobold", "koboldkind", "Kob",
@@ -1720,8 +1720,8 @@ const struct Race races[] = {
 	{      3,      3,  3,  3,  3,  3 },
 	{     17,     17, 16, 20, 18, 16 },
 	/* Init   Lower  Higher */
-	{  3, 0,  0, 2,  2, 0 },	/* Hit points */
-	{  3, 0,  2, 0,  1, 0 }		/* Energy */
+	{  1, 0,  0, 1,  0, 0 },	/* Hit points */
+	{  1, 0,  0, 2,  0, 2 }		/* Energy */
 },
 
 {	"lycanthrope", "lycanthropic", "lycanthropehood", "Lyc",
@@ -1760,8 +1760,8 @@ const struct Race races[] = {
 	{      3,      3,  3,  3,  3,  3 },
 	{     16,     18, 18, 25, 15, 25 },
 	/* Init   Lower  Higher */
-	{  2, 0,  0, 1,  1, 0 },	/* Hit points */
-	{  3, 0,  3, 0,  3, 0 }		/* Energy */
+	{  1, 0,  0, 1,  0, 0 },	/* Hit points */
+	{  4, 0,  3, 2,  3, 2 }		/* Energy */
 },
 
 {	"ogre", "ogre", "ogrekind", "Ogr",
@@ -1774,8 +1774,8 @@ const struct Race races[] = {
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR19(23),  15, 15, 15, 20, 15 },
 	/* Init   Lower  Higher */
-	{  4, 0,  0, 3,  3, 0 },	/* Hit points */
-	{  3, 0,  1, 0,  1, 0 }		/* Energy */
+	{  4, 2,  0, 3,  0, 2 },	/* Hit points */
+	{  0, 0,  0, 1,  0, 1 }		/* Energy */
 },
 
 {	"orc", "orcish", "orcdom", "Orc",
