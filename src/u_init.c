@@ -131,7 +131,7 @@ static struct trobj Electric_Mage[] = {
 };
 
 static struct trobj Acid_Mage[] = {
-#define A_BOOK		9
+#define ACID_BOOK	9
 	{ QUARTERSTAFF, 1, WEAPON_CLASS, 1, 1 },        /* for dealing with ghosts */
 	{ STUDDED_LEATHER_ARMOR, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ FOOD_RATION, 0, FOOD_CLASS, 2, 0 },
@@ -2626,8 +2626,8 @@ u_init()
 
 	case PM_ACID_MAGE:
 		switch (rnd(2)) {                
-			case 1: Acid_Mage[A_BOOK].trotyp = SPE_CONFUSE_MONSTER; break;
-			case 2: Acid_Mage[A_BOOK].trotyp = SPE_SLEEP; break;
+			case 1: Acid_Mage[ACID_BOOK].trotyp = SPE_CONFUSE_MONSTER; break;
+			case 2: Acid_Mage[ACID_BOOK].trotyp = SPE_SLEEP; break;
 			default: break;
 		}
 		ini_inv(Acid_Mage);
