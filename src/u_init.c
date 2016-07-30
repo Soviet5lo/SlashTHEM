@@ -127,6 +127,7 @@ static struct trobj Electric_Mage[] = {
 	{ UNDEF_TYP, UNDEF_SPE, RING_CLASS, 1, UNDEF_BLESS },
 	{ SPE_SHOCKING_SPHERE, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ SPE_LIGHTNING, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
+	{ UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
   	{ 0, 0, 0, 0, 0 }
 };
 
@@ -141,6 +142,7 @@ static struct trobj Acid_Mage[] = {
 	{ UNDEF_TYP, UNDEF_SPE, RING_CLASS, 1, UNDEF_BLESS },
 	{ SPE_ACID_SPHERE, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ SPE_ACID_STREAM, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
+	{ UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
   	{ 0, 0, 0, 0, 0 }
 };
 
