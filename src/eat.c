@@ -1273,8 +1273,8 @@ register int pm;
 		register struct permonst *ptr = &mons[pm];
 		int i, count;
 
-		if (dmgtype(ptr, AD_STUN) || dmgtype(ptr, AD_HALU) ||
-		    pm == PM_VIOLET_FUNGUS) {
+		if ((dmgtype(ptr, AD_STUN) || dmgtype(ptr, AD_HALU) ||
+		     pm == PM_VIOLET_FUNGUS) && (pm != PM_BANDERSNATCH)) {
 			pline ("Oh wow!  Great stuff!");
 			make_hallucinated(HHallucination + 200,FALSE,0L);
 		}

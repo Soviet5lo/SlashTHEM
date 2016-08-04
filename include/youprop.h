@@ -111,6 +111,7 @@
 		/* ...the Eyes operate even when you really are blind
 		    or don't have any eyes */
 /* added possibility of playing the entire game blind --Amy*/
+#define Hearing_muffled ((ublindf && ublindf->otyp == TOWEL))
 
 #define Sick			u.uprops[SICK].intrinsic
 #define Stoned			u.uprops[STONED].intrinsic

@@ -3096,6 +3096,7 @@ use_weapon:
 		case AT_NTCH: /* currently stopped at "compat", so no touching 
 				 may require moving if non-tempting monsters
 				 get the non-touching attack */
+use_natural:
 
 			if (i==0 && uwep && (youmonst.data->mlet==S_LICH)) goto use_weapon;
 			if ((uwep || u.twoweap && uswapwep) &&
@@ -3181,6 +3182,14 @@ use_weapon:
 			break;
 
 		case AT_ENGL:
+			if((youmonst.data == &mons[PM_BANDERSNATCH]) && 
+			  !yeasty_food(mon->data)) {
+			    mattk->aatyp = AT_BITE;
+			    mattk->adtyp = AD_PHYS;
+			    mattk->damn  = 1;
+			    mattk->damd  = 5;
+			    goto use_natural;
+			}
 			if((dhit = (tmp > (dieroll = rnd(20+i))))) {
 				wakeup(mon);
 				if (mon->data == &mons[PM_SHADE])

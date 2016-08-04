@@ -64,6 +64,22 @@ dosounds()
 #endif
     struct monst *mtmp;
 
+    if(!rn2(200) && !u.uswallow && !Underwater && !Hearing_muffled ){
+	for (mtmp = fmon; mtmp; mtmp = mtmp->nmon){
+	    if (mtmp->data == &mons[PM_JUBJUB_BIRD] && 
+	    !mtmp->mcan && !mtmp->mspec_used && 
+	    !couldsee(mtmp->mx, mtmp->my)){
+		if(flags.soundok)
+		    You_hear("a sound like a pencil that squeaks on a slate!");
+		else
+		    You("are befuddled by a terrifying shriek!");
+	    make_confused(HConfusion + rn1(8,8), FALSE);
+	    mtmp->mspec_used += 8;
+	    break;
+	    }
+	}
+    }
+
     if (!flags.soundok || u.uswallow || Underwater) return;
 
     hallu = Hallucination ? 1 : 0;

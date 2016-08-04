@@ -415,6 +415,10 @@ boolean forcecontrol;
 	if (!uarmg) selftouch("No longer petrify-resistant, you");
 
  made_change:
+	if(youmonst.data == &mons[PM_BANDERSNATCH]) {
+	    HUnchanging=-1L;
+	    pline("You have a feeling of permanency.");
+	}
 	new_light = Upolyd ? emits_light(youmonst.data) : 0;
 	if (old_light != new_light) {
 	    if (old_light)
@@ -659,6 +663,9 @@ int	mntmp;
 		pline(use_thec,monsterc,"remove an iron ball");
 	    if (attacktype_fordmg(youmonst.data, AT_ANY, AD_CHRM)) 
 		pline(use_thec,monsterc,"charm monsters");
+	    if (youmonst.data == &mons[PM_JUBJUB_BIRD])
+		pline(use_thec,monsterc,"screech at monsters");
+	    else
 	    if (attacktype(youmonst.data, AT_GAZE))
 		pline(use_thec,monsterc,"gaze at monsters");
 	    if (is_hider(youmonst.data))
@@ -963,6 +970,7 @@ rehumanize()
 int
 dogaze()
 {
+	/* TODO: Implement Jubjub Bird screeches properly */
 	coord cc;
 	struct monst *mtmp;
 
@@ -987,7 +995,35 @@ dogaze()
 		You("don't see a monster there!");
 		return (0);
 	}
-
+#if 0 /* Original code from Biodiversity patch, but Slash'EM uses a different dogaze() */
+	if (adtyp == AD_DRIN && couldsee(mtmp->mx, mtmp->my)){
+	    looked++;
+	    mtmp->msleeping = 0;
+	    if(mindless(mtmp->data))
+		pline("%s doesn't seems to care about your squawk.", Monnam(mtmp));
+	    else if (flags.safe_dog && !Confusion && !Hallucination &&
+	      mtmp->mtame)
+		You("avoid squaking too loudly at %s.", y_monnam(mtmp));
+	    else {
+		if(flags.confirm && mtmp->mpeaceful && !Confusion
+		  && !Hallucination) {
+		    Sprintf(qbuf, "Really screech at %s?", mon_nam(mtmp));
+		    if (yn(qbuf) != 'y') continue;
+		    setmangry(mtmp);
+		    if (!mtmp->mconf)
+			Your("screech confuses %s!", mon_nam(mtmp));
+		    else
+			pline("%s is getting more and more confused.",
+			  Monnam(mtmp));
+		    mtmp->mconf = 1;
+		    if (! resist(mtmp, SPBOOK_CLASS, 0, NOTELL))
+			monflee(mtmp, 0, FALSE, FALSE);
+		    else pline("But %s is not afraid.", mon_nam(mtmp));
+		}
+	    }
+	continue;
+	}
+#endif
 
 	if ((flags.safe_dog && !Confusion && !Hallucination
 		  && mtmp->mtame) || (flags.confirm && mtmp->mpeaceful 
@@ -1433,7 +1469,8 @@ dogaze()
 		}
 	    }
 	}
-	if (!looked) You("gaze at no place in particular.");
+	if (!looked) You("%s at no place in particular.", 
+	(adtyp == AD_DRIN) ? "squawk" : "gaze");
 	return 1;
 }
 #endif

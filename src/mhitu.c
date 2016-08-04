@@ -693,6 +693,7 @@ mattacku(mtmp)
 	    if (u.uswallow && (mattk->aatyp != AT_ENGL))
 		continue;
 	    switch(mattk->aatyp) {
+use_natural:
 		case AT_CLAW:	/* "hand to hand" attacks */
 		case AT_KICK:
 		case AT_BITE:
@@ -742,6 +743,14 @@ mattacku(mtmp)
 			if(!range2) sum[i] = explmu(mtmp, mattk, foundyou);
 			break;
 		case AT_ENGL:
+			if (mdat == &mons[PM_BANDERSNATCH] && !yeasty_food(youmonst.data)){
+			    mattk->aatyp = AT_BITE;
+			    mattk->adtyp = AD_PHYS;
+			    mattk->damn  = 1;
+			    mattk->damd  = 5;
+			    goto use_natural; 
+			    break;
+			}
 			if (!range2) {
 			    if(foundyou) {
 				if(u.uswallow || tmp > (j = rnd(20+i))) {
@@ -3737,25 +3746,25 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    if (dmg) mdamageu(mtmp, dmg);
 		}
 		break;
-       case AD_DRIN: /* not gaze/sight based. */
-     if(!mtmp->mcan && couldsee(mtmp->mx, mtmp->my) &&
-        (!ublindf || ublindf->otyp != TOWEL)  &&
-        !mtmp->mspec_used){
-       pline("%s screeches at you!", Monnam(mtmp));
-       if (u.usleep){
-         multi = -1;
-         nomovemsg = "You wake.";
-       }
-         if (ABASE(A_INT) > ATTRMIN(A_INT) && !rn2(10)) {
-           /* adjattrib gives dunce cap message when appropriate */
-           (void) adjattrib(A_INT, -1, FALSE);
-           losespells();
-           forget_map(0);
-           docrt();
-         }
-         mtmp->mspec_used += ABASE(A_INT) * rn1(1,3);
-     }
-     break;
+	    case AD_DRIN: /* not gaze/sight based. */
+		if(!mtmp->mcan && couldsee(mtmp->mx, mtmp->my) &&
+		  (!ublindf || ublindf->otyp != TOWEL)  &&
+		  !mtmp->mspec_used){
+		    pline("%s screeches at you!", Monnam(mtmp));
+		    if (u.usleep){
+			multi = -1;
+			nomovemsg = "You wake.";
+		    }
+		    if (ABASE(A_INT) > ATTRMIN(A_INT) && !rn2(10)) {
+		    /* adjattrib gives dunce cap message when appropriate */
+			(void) adjattrib(A_INT, -1, FALSE);
+			losespells();
+			forget_map(0);
+			docrt();
+		    }
+		    mtmp->mspec_used += ABASE(A_INT) * rn1(1,3);
+		}
+		break;
 #ifdef PM_BEHOLDER /* work in progress */
 #if 0
 	    case AD_SLEE:

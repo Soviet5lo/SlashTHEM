@@ -216,7 +216,7 @@ struct obj *otmp;
 	case WAN_POLYMORPH:
 	case SPE_POLYMORPH:
 	case POT_POLYMORPH:
-		if (resists_magm(mtmp)) {
+		if (resists_magm(mtmp) || (mtmp->data == &mons[PM_BANDERSNATCH])) {
 		    /* magic resistance protects from polymorph traps, so make
 		       it guard against involuntary polymorph attacks too... */
 		    shieldeff(mtmp->mx, mtmp->my);

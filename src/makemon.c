@@ -2242,6 +2242,8 @@ register int	mmflags;
 			mtmp->msleeping = 1;
 			break;
 		case S_JABBERWOCK:
+			if (ptr != &mons[PM_JABBERWOCK]) 
+			break;
 		case S_NYMPH:
 			if (rn2(5) && !u.uhave.amulet && ptr != &mons[PM_SATYR]) mtmp->msleeping = 1;
 			if (mndx == PM_PIXIE) {        

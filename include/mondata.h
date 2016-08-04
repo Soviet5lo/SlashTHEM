@@ -274,6 +274,11 @@
 #define vegetarian(ptr)		(vegan(ptr) || \
 				((ptr)->mlet == S_PUDDING &&         \
 				 (ptr) != &mons[PM_BLACK_PUDDING]))
+#define yeasty_food(ptr)  	((ptr)->mlet == S_BLOB || \
+                  		 (ptr)->mlet == S_JELLY ||           \
+                  		 (ptr)->mlet == S_FUNGUS ||          \
+                  		 (ptr)->mlet == S_PUDDING ||         \
+                  		 (ptr) == &mons[PM_JUIBLEX])
 /* For vampires */
 #define has_blood(ptr)		(!vegetarian(ptr) && \
 				   (ptr)->mlet != S_GOLEM && \

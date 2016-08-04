@@ -383,6 +383,7 @@ mattackm(magr, mdef)
 	    case AT_TRAM:
 	    case AT_SCRA:
 	    case AT_TENT:
+use_natural:
 		/* Nymph that teleported away on first attack? */
 		if (distmin(magr->mx,magr->my,mdef->mx,mdef->my) > 1)
 		    return MM_MISS;
@@ -461,6 +462,14 @@ mattackm(magr, mdef)
 		/* Engulfing attacks are directed at the hero if
 		 * possible. -dlc
 		 */
+		if((magr->data == &mons[PM_BANDERSNATCH]) && 
+		    !yeasty_food(mdef->data)) {
+		    mattk->aatyp = AT_BITE;
+		    mattk->adtyp = AD_PHYS;
+		    mattk->damn  = 1;
+		    mattk->damd  = 5;
+		    goto use_natural;
+		}
 		if (u.uswallow && magr == u.ustuck)
 		    strike = 0;
 		else {
@@ -840,6 +849,21 @@ gazemm(magr, mdef, mattk)
 	struct attack *mattk;
 {
 	char buf[BUFSZ];
+
+	if (mattk->adtyp == AD_DRIN){
+	    if(canseemon(magr)){
+		Sprintf(buf, "%s screeches at", Monnam(magr));
+		pline("%s %s...",buf, mon_nam(mdef));
+	    } else if (!u.uswallow && !Underwater && flags.soundok) {
+		You_hear("screeching.");
+	    } 
+	    mdef->msleeping = 0;
+	    if(!mindless(mdef->data)){
+		mattk->adtyp = AD_CONF;
+		return(mdamagem(magr, mdef, mattk));
+	    } 
+	    return 0;
+	}
 
 	if(vis) {
 		Sprintf(buf,"%s gazes at", Monnam(magr));
