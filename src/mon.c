@@ -755,6 +755,11 @@ mcalcdistress()
 	    mtmp->mcanmove = 1;
 	if (mtmp->mfleetim && !--mtmp->mfleetim)
 	    mtmp->mflee = 0;
+	if (mtmp->mpeacetim && (mtmp->mpeacetim != 0x7f) 
+	  && !--mtmp->mpeacetim){
+	    if(mtmp->mpeaceful) mtmp->malign = mtmp->data->maligntyp;
+	    mtmp->mpeaceful = 0;
+	}
 
 	/* FIXME: mtmp->mlstmv ought to be updated here */
     }
@@ -1299,7 +1304,7 @@ struct obj *otmp;
 	if (mtmp == u.usteed) return (FALSE);
 #endif
 	if (mtmp->isshk) return(TRUE); /* no limit */
-	if (mtmp->mpeaceful && !mtmp->mtame) return(FALSE);
+	if (mtmp->mpeaceful && !mtmp->mtame && !mtmp->mpeacetim) return(FALSE);
 	/* otherwise players might find themselves obligated to violate
 	 * their alignment if the monster takes something they need
 	 */
@@ -2667,6 +2672,7 @@ register struct monst *mtmp;
 	if(!mtmp->mpeaceful) return;
 	if(mtmp->mtame) return;
 	mtmp->mpeaceful = 0;
+	mtmp->mpeacetim = 0;
 	if(mtmp->ispriest) {
 		if(p_coaligned(mtmp)) adjalign(-50); /* very bad */
 		else adjalign(2);
@@ -3408,6 +3414,7 @@ register boolean silent;
 			}
 			mtmp->mpeaceful = 0;
 		}
+	    mtmp->mpeacetim =0;
 	}
 	if(ct) {
 	    if(!silent) { /* do we want pline msgs? */
@@ -3437,6 +3444,7 @@ pacify_guards()
 	    if (mtmp->data == &mons[PM_WATCHMAN] || mtmp->data == &mons[PM_WATCH_LIEUTENANT] ||
 		mtmp->data == &mons[PM_WATCH_CAPTAIN] || mtmp->data == &mons[PM_WATCH_LEADER])
 	    mtmp->mpeaceful = 1;
+	    mtmp->mpeacetim = 0;
 	}
 }
 

@@ -969,6 +969,8 @@ E int NDECL(doinvinuse);
 E struct obj *NDECL(getnextgetobj);
 /* KMH, balance patch -- new function */
 E int NDECL(jumble_pack);
+/* 5lo: from Biodiversity patch, for Satyrs */
+E struct obj * FDECL(mon_has_item,(struct monst *, int, int));
 
 /* ### ioctl.c ### */
 
@@ -1112,6 +1114,7 @@ E int FDECL(noattacks, (struct permonst *));
 E int FDECL(sleep_monst, (struct monst *,int,int));
 E void FDECL(slept_monst, (struct monst *));
 E long FDECL(attk_protection, (int));
+E int FDECL(mcharmm, (struct monst *, struct monst *, int));
 E boolean FDECL(diseasemu, (struct permonst *));
 
 /* ### mhitu.c ### */
@@ -1130,6 +1133,7 @@ E int FDECL(could_seduceX, (struct monst *,struct monst *,struct attack *));
 #ifdef SEDUCE
 E int FDECL(doseduce, (struct monst *));
 #endif
+E int FDECL(mcharmu, (struct monst *, int, int));
 
 /* ### minion.c ### */
 
@@ -1727,6 +1731,7 @@ E int NDECL(doremove);
 E int NDECL(dospinweb);
 E int NDECL(dosummon);
 E int NDECL(dogaze);
+E int NDECL(docharm);
 E int NDECL(dohide);
 E int NDECL(domindblast);
 E void FDECL(skinback, (BOOLEAN_P));

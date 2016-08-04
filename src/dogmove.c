@@ -183,6 +183,7 @@ boolean devour;
 	    edog->mhpmax_penalty = 0;
 	}
 	if (mtmp->mflee && mtmp->mfleetim > 1) mtmp->mfleetim /= 2;
+	if (mtmp->mpeacetim) mtmp->mpeacetim = 0;
 	if (mtmp->mtame < 20) mtmp->mtame++;
 	if (x != mtmp->mx || y != mtmp->my) {	/* moved & ate on same turn */
 	    newsym(x, y);

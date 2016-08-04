@@ -411,7 +411,8 @@ boolean creation;
 	if (!MON_WEP(mon) || !bimanual(MON_WEP(mon)))
 	    m_dowear_type(mon, W_ARMS, creation, FALSE);
 	m_dowear_type(mon, W_ARMG, creation, FALSE);
-	if (!slithy(mon->data) && mon->data->mlet != S_CENTAUR)
+	if (!slithy(mon->data) && mon->data->mlet != S_CENTAUR &&
+	   mon->data != &mons[PM_SATYR])
 	    m_dowear_type(mon, W_ARMF, creation, FALSE);
 	if (!cantweararm(mon->data))
 	    m_dowear_type(mon, W_ARM, creation, FALSE);
@@ -746,7 +747,7 @@ boolean polyspot;
 		m_lose_armor(mon, otmp);
 	    }
 	}
-	if (handless_or_tiny || slithy(mdat) || mdat->mlet == S_CENTAUR) {
+	if (handless_or_tiny || slithy(mdat) || mdat->mlet == S_CENTAUR || mdat == &mons[PM_SATYR]) {
 	    if ((otmp = which_armor(mon, W_ARMF)) != 0) {
 		if (vis) {
 		    if (is_whirly(mon->data))

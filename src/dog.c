@@ -559,6 +559,10 @@ long nmv;		/* number of moves */
 	    if (imv >= (int) mtmp->mfleetim) mtmp->mfleetim = 1;
 	    else mtmp->mfleetim -= imv;
 	}
+	if (mtmp->mpeacetim && (mtmp->mpeacetim!=0x7f)) {
+	    if (imv >= (int) mtmp->mpeacetim) mtmp->mpeacetim = 1;
+	    else mtmp->mpeacetim -= imv;
+	}
 
 	/* might recover from temporary trouble */
 	if (mtmp->mtrapped && rn2(imv + 1) > 40/2) mtmp->mtrapped = 0;
@@ -942,6 +946,7 @@ register struct obj *obj;
 	/* worst case, at least it'll be peaceful. */
 	if(!obj || !is_instrument(obj)){
 	mtmp->mpeaceful = 1;
+	mtmp->mpeacetim = 0;
 	mtmp->mtraitor  = 0;	/* No longer a traitor */
 	set_malign(mtmp);
 	}

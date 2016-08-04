@@ -92,6 +92,28 @@ register struct obj *otmp;
 #endif /* OVLB */
 #ifdef OVL1
 
+struct obj * 
+mon_has_item(mtmp, item, which)
+struct monst * mtmp;
+int item, which;
+{
+	struct obj * otmp;
+	int quant = 0;
+	for(otmp = mtmp->minvent; otmp; otmp = otmp->nobj)
+	    if (otmp->otyp == item) 
+		if (++quant == which)
+		    return otmp;
+	    if (which)
+		which = quant;
+	    else
+		which = rnd(quant);
+	    for(otmp = mtmp->minvent; otmp; otmp = otmp->nobj)
+		if (otmp->otyp == item) 
+		    if (++quant == which)
+		    return otmp;
+	return 0;
+}
+
 /* note: assumes ASCII; toggling a bit puts lowercase in front of uppercase */
 #define inv_rank(o) ((o)->invlet ^ 040)
 

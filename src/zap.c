@@ -5270,7 +5270,9 @@ int damage, tell;
 	int alev, dlev;
 
 	/* attack level */
-	switch (oclass) {
+	if (oclass<=0)
+	    alev = -oclass;
+	else switch (oclass) {
 	    case WAND_CLASS:	alev = 12;	 break;
 	    case TOOL_CLASS:	alev = 10;	 break;	/* instrument */
 	    case WEAPON_CLASS:	alev = 10;	 break;	/* artifact */

@@ -37,7 +37,8 @@ int atyp, dtyp;
     struct attack *a;
 
     for (a = &ptr->mattk[0]; a < &ptr->mattk[NATTK]; a++)
-	if (a->aatyp == atyp && (dtyp == AD_ANY || a->adtyp == dtyp))
+	if ((atyp == AT_ANY || a->aatyp == atyp)
+	  && (dtyp == AD_ANY || a->adtyp == dtyp))
 	    return a;
 
     return (struct attack *)0;

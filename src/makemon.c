@@ -1648,9 +1648,9 @@ register struct	monst	*mtmp;
 		break;
 	    case S_NYMPH:
 	        if(mtmp->data == &mons[PM_SATYR]){
-	            if(!rn2(2)) (void) mongets(mtmp, POT_BOOZE);
-	                (void) mongets(mtmp, WOODEN_FLUTE);
-		    }
+		    if(!rn2(2)) (void) mongets(mtmp, POT_BOOZE);
+		    (void) mongets(mtmp, WOODEN_FLUTE);
+		}
 		if (mtmp->data == &mons[PM_APHRODITE]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
 		if(!rn2(2)) (void) mongets(mtmp, MIRROR);
 		if(!rn2(2)) (void) mongets(mtmp, POT_OBJECT_DETECTION);
@@ -2236,15 +2236,14 @@ register int	mmflags;
 			break;
 		case S_JABBERWOCK:
 		case S_NYMPH:
-	      if (mndx == PM_SATYR)
-	        if (rn2(2))
-	          (void) mongets(mtmp, DAGGER);
-
-			if (rn2(5) && !u.uhave.amulet) mtmp->msleeping = 1;
+			if (rn2(5) && !u.uhave.amulet && ptr != &mons[PM_SATYR]) mtmp->msleeping = 1;
 			if (mndx == PM_PIXIE) {        
 /*  			    mtmp->perminvis = TRUE;*/
   			    mtmp->minvis = TRUE;
 			}
+			if (mndx == PM_SATYR)
+			    if (rn2(2))
+				(void) mongets(mtmp, DAGGER);
 			break;
 		case S_ORC:
 			if (Race_if(PM_ELF)) mtmp->mpeaceful = FALSE;

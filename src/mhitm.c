@@ -149,7 +149,9 @@ fightm(mtmp)		/* have monsters fight each other */
 	nmon = 0;
 #endif
 	/* perhaps the monster will resist Conflict */
-	if(resist(mtmp, RING_CLASS, 0, 0))
+	if(resist(mtmp, RING_CLASS, 0, 0)
+	/* if a monster is charmed by a baddie, it's immune to conflict */  
+		|| (!mtmp->mpeaceful && mtmp->mpeacetim))
 	    return(0);
 
 	if(u.ustuck == mtmp) {
@@ -415,6 +417,17 @@ mattackm(magr, mdef)
 		/* KMH -- don't accumulate to-hit bonuses */
 		if (otmp)
 		    tmp -= hitval(otmp, mdef);
+		break;
+	    case AT_NTCH: /* generic adjacent non-touching attack */
+		dieroll = rnd(20 + i);
+		strike = (tmp > dieroll);
+		/* KMH -- don't accumulate to-hit bonuses */
+		if (otmp)
+		    tmp -= hitval(otmp, mdef);
+		if (strike) 
+		    res[i] = hitmm(magr, mdef, mattk);
+		else		    
+			missmm(magr, mdef, tmp, dieroll, mattk);
 		break;
 
 	    case AT_HUGS:	/* automatic if prev two attacks succeed */
@@ -771,7 +784,8 @@ hitmm(magr, mdef, mattk)
 				mdef->mcansee ? "smiles at" : "talks to");
 			pline("%s %s %s.", buf, mon_nam(mdef),
 				compat == 2 ?
-					"engagingly" : "seductively");
+					"engagingly" :
+              !humanoid(mdef->data)? "real friendly-like" : "seductively");
 		} else {
 		    char magr_name[BUFSZ];
 
@@ -1685,6 +1699,16 @@ physical:
 	    case AD_SEDU:
 		if (magr->mcan) break;
 		/* find an object to steal, non-cursed if magr is tame */
+		else if(magr->data == &mons[PM_SATYR]){
+		    if (obj = mon_has_item(magr, WOODEN_FLUTE, 1)){
+			Strcpy(buf, Monnam(magr));
+			pline("%s plays the %s for %s.", buf, 
+			    distant_name(obj, xname), mon_nam(mdef));
+			mcharmm(magr, mdef, tmp);
+		    }
+		    tmp = 0;
+		    break;
+		}
 		for (obj = mdef->minvent; obj; obj = obj->nobj)
 		    if (!magr->mtame || !obj->cursed)
 			break;
@@ -1843,6 +1867,10 @@ physical:
 		    mdef->mtame = 0;
 		    tmp = 0;
 		}
+		break;
+	    case AD_CHRM:
+		magr->mspec_used += mcharmm(magr, mdef, tmp);
+		tmp = 0;
 		break;
 	    default:	/*tmp = 0;*/ 
 			break; /* necessary change to make pets more viable --Amy */
@@ -2206,6 +2234,55 @@ int aatyp;
 	break;
     }
     return w_mask;
+}
+
+/* the return value represents how much value to add to the mspec_used of
+   the agressor */
+int
+mcharmm(magr, mdef, tmp)
+struct monst * magr, * mdef;
+int tmp;
+{
+	if (magr->mcan || magr->mspec_used) { 
+	    return 0; 
+	} else {
+	    int mresistm = resist(mdef, -(char)magr->m_lev, 0, 0);
+	    char mdef_Name[BUFSZ]; 
+	    Strcpy(mdef_Name, Monnam(mdef));
+	    if (Conflict && (magr->mpeaceful || !(magr->mpeacetim))){
+		if (!mresistm){
+		    mdef->mtame = mdef->mpeaceful = 0;
+		    if (mdef->mpeacetim < 0x7e){ 
+			if (canseemon(mdef))
+			    pline("%s is charmed by %s.", mdef_Name, mon_nam(magr));
+		    }  
+		    if (mdef->mpeacetim != 0x7f){
+			int p = mdef->mpeacetim+rnd(magr->m_lev)*20;
+			mdef->mpeacetim = min(0x7e,p);
+		    }
+		    return 10 + rnd(10);
+		}
+	    } else if (mdef->mtame){
+		if (!mresistm){
+		    mdef->mtame = 0;
+		    if (canseemon(mdef))
+			pline("%s finds %s more charming than you.", 
+			  mdef_Name, mon_nam(magr));
+		    return 10+rnd(10);
+		}
+	    } else if (magr->mtame){
+		if (!mresistm){
+		    if (mdef->mpeacetim) {
+			mdef->mpeacetim = 0;
+			if (mdef->mpeaceful && canseemon(mdef))
+			    pline("%s is charmed by %s.", 
+			      mdef_Name, mon_nam(magr));
+			return 10+rnd(10);
+		    }  
+		}
+	    }  
+	}
+	return 0;
 }
 
 #endif /* OVLB */

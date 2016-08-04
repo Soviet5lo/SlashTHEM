@@ -273,7 +273,9 @@ wildmiss(mtmp, mattk)		/* monster attacked your displaced image */
 		 nolimbs(mtmp->data)) ? "lunges" : "swings";
 
 	    if (compat)
-		pline("%s tries to touch you and misses!", Monnam(mtmp));
+		pline("%s tries to %s and misses!", Monnam(mtmp),
+		    (mattk->aatyp == AT_NTCH) ? "hit the high note": /* satyr */
+		    "touch you"); 
 	    else
 		switch(rn2(3)) {
 		case 0: pline("%s %s wildly and misses!", Monnam(mtmp),
@@ -712,6 +714,17 @@ mattacku(mtmp)
 				    missmu(mtmp, tmp, j, mattk);
 			    } else wildmiss(mtmp, mattk);
 			}
+			break;
+		case AT_NTCH:
+			if(!range2){
+			    if (foundyou){
+				if(tmp > (j = rnd(20+1))){
+				    sum[i] = hitmu(mtmp, mattk);
+				} else 
+				    missmu(mtmp, tmp, j, mattk);
+			    } else
+				wildmiss(mtmp, mattk);
+		    	}
 			break;
 		case AT_HUGS:	/* automatic if prev two attacks succeed */
 			/* Note: if displaced, prev attacks never succeeded */
@@ -1837,7 +1850,15 @@ dopois:
 			pline("%s %s.", Monnam(mtmp), mtmp->minvent ?
 		    "brags about the goods some dungeon explorer provided" :
 		    "makes some remarks about how difficult theft is lately");
-			if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
+			if (mtmp->data == &mons[PM_SATYR] && !mtmp->mspec_used){
+			    struct obj * o;
+			    if(o = mon_has_item(mtmp, WOODEN_FLUTE, 1)){
+				pline("%s plays %s %s.", 
+				    Monnam(mtmp), mhis(mtmp), distant_name(o,xname));
+				mcharmu(mtmp, dmg, TRUE);
+				dmg = 0;
+			    }
+			} else if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
 			return 3;
 		} else if (mtmp->mcan) {
 		    if (!Blind) {
@@ -1850,14 +1871,24 @@ dopois:
 			  flags.female == mtmp->female;
 			pline("%s tries to %s you, but you seem %s.",
 			    Adjmonnam(mtmp, "plain"),
-			    do_charm ? "charm" : "seduce",
-			    do_charm ? "unaffected" : "uninterested");
+			    (!flags.female)^(!mtmp->female) ? "seduce" : "charm",
+			    (!flags.female)^(!mtmp->female) ? "uninterested" : "unaffected");
 		    }
-		    if(rn2(3)) {
+		    if(rn2(3) && mtmp->data != &mons[PM_SATYR]) {
 			if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
 			return 3;
 		    }
 		    break;
+		}
+		if (mtmp->data == &mons[PM_SATYR]){
+		    struct obj * o;
+		    if(o = mon_has_item(mtmp, WOODEN_FLUTE, 1)){
+			pline("%s plays %s %s.", Monnam(mtmp), 
+			    mhis(mtmp), distant_name(o,xname));
+			if (!mcharmu(mtmp,dmg, TRUE)) break;
+			dmg=0;
+		    } else 
+		      break;
 		}
 		buf[0] = '\0';
 		switch (steal(mtmp, buf)) {
@@ -1866,6 +1897,11 @@ dopois:
 		  case 0:
 			break;
 		  default:
+			if(mtmp->data == &mons[PM_SATYR]){
+			    pline("%s thanks you for the gift.", Monnam(mtmp));
+			    return 3;
+			    break;
+			}
 			if (!is_animal(mtmp->data) && !tele_restrict(mtmp))
 			    (void) rloc(mtmp, FALSE);
 			if (is_animal(mtmp->data) && *buf) {
@@ -2222,6 +2258,10 @@ dopois:
 			Your("%s less effective.", aobjnam(obj, "seem"));
 		    }
 		}
+		break;
+	    case AD_CHRM:
+		mcharmu(mtmp, dmg, FALSE);
+		dmg=0;
 		break;
 	    default:	dmg = 0;
 			break;
@@ -3735,6 +3775,33 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	}*/
 
 	return(0);
+}
+
+/* return 1 charmed, 0 uncharmed */
+int
+mcharmu(mtmp, amt, always)
+struct monst * mtmp;
+int amt;
+int always;
+{
+	if(!mtmp->mcan && !mtmp->mspec_used &&
+	  (always || ( (mtmp->mhp<=mtmp->mhpmax/2 || mtmp->mhp<=10) &&
+	  (!mtmp->mpeaceful || mtmp->mpeacetim)) )){
+	    mtmp->mspec_used = mtmp->mspec_used + (amt + rn2(6));
+	    if (rn2(30)+mtmp->m_lev > ACURR(A_CHA) + ACURR(A_INT)) {
+		mtmp->malign = -15;
+		mtmp->mpeaceful=1;
+		if(!rnd(3)) mtmp->mpeacetim=0x7f;
+		if (mtmp->mpeacetim != 0x7f){
+		    int p = mtmp->mpeacetim+30*(1+rnd(mtmp->m_lev));
+		    mtmp->mpeacetim = min(0x7e,p);
+		}
+		You("find %s charming.", mon_nam(mtmp));
+		return 1;
+	    } else
+		You("find %s uncharming.", mon_nam(mtmp));
+	}
+	return 0;
 }
 
 #endif /* OVLB */

@@ -650,8 +650,10 @@ int	mntmp;
 		pline(use_thec,monsterc,"use your breath weapon");
 	    if (attacktype(youmonst.data, AT_SPIT))
 		pline(use_thec,monsterc,"spit venom");
-	    if (youmonst.data->mlet == S_NYMPH)
+	    if (youmonst.data->mlet == S_NYMPH && youmonst.data != &mons[PM_SATYR])
 		pline(use_thec,monsterc,"remove an iron ball");
+	    if (attacktype_fordmg(youmonst.data, AT_ANY, AD_CHRM)) 
+		pline(use_thec,monsterc,"charm monsters");
 	    if (attacktype(youmonst.data, AT_GAZE))
 		pline(use_thec,monsterc,"gaze at monsters");
 	    if (is_hider(youmonst.data))
@@ -845,7 +847,7 @@ break_armor()
 	}
     }
     if (nohands(youmonst.data) || verysmall(youmonst.data) ||
-		slithy(youmonst.data) || youmonst.data->mlet == S_CENTAUR) {
+		slithy(youmonst.data) || youmonst.data->mlet == S_CENTAUR || youmonst.data == &mons[PM_SATYR]) {
 	if ((otmp = uarmf) != 0) {
 	    if (donning(otmp)) cancel_don();
 	    if (is_whirly(youmonst.data))
@@ -1252,6 +1254,40 @@ dosummon()
 	return(1);
 }
 
+int 
+docharm()
+{
+	uchar aatyp=0; 
+	struct obj * pseudo;
+	int charisma = ACURR(A_CHA);
+	int energy = (objects[SPE_CHARM_MONSTER].oc_level * ((charisma>10)?7:10) )/2
+	  - ((charisma>15)?(charisma-15):0);  
+  
+	if (Confusion){
+	  pline("What? You're too confused for that.");
+	  return 0;
+	}
+	if (u.uen<energy) { 
+	  You("lack the energy for that.");
+	  return 0; 
+	}
+	if (youmonst.data == &mons[PM_SATYR]){
+	    struct obj * inst;
+	    if (inst = carrying(WOODEN_FLUTE))
+		You("play your %s.", xname(inst));
+	    else {
+		You("hum an unenchanting melody.");
+		return 0;
+	    }
+	}
+	pseudo = mksobj(SPE_CHARM_MONSTER, FALSE, FALSE);
+	if (charisma<6+rn2(3)) curse(pseudo);
+	u.uen-=energy;
+	flags.botl=1;
+	(void) seffects(pseudo);
+	obfree(pseudo, (struct obj *)0);	/* now, get rid of it */
+	return 1;
+}
 
 #if 0
 /* WAC supplanted by dogaze (). */
@@ -1549,7 +1585,7 @@ int part;
 	if (mptr == &mons[PM_RAVEN])
 	    return bird_parts[part];
 	if (mptr->mlet == S_CENTAUR || mptr->mlet == S_UNICORN ||
-		(mptr == &mons[PM_ROTHE] && part != HAIR))
+		((mptr == &mons[PM_SATYR] || mptr == &mons[PM_ROTHE]) && part != HAIR))
 	    return horse_parts[part];
 	if (mptr->mlet == S_LIGHT) {
 		if (part == HANDED) return "rayed";

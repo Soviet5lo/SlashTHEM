@@ -2525,6 +2525,10 @@ register struct attack *mattk;
 		    tmp = 0;
 		}
 		break;
+	    /* this should be #monster-able, not attack */
+	    case AD_CHRM:
+		tmp=0;
+		break;
 	    default:	/*tmp = 0;*/ /*making uncommon polymorph forms with weird attacks like AD_DARK stronger. --Amy*/
 		break;
 	}
@@ -3041,6 +3045,10 @@ use_weapon:
 		case AT_TRAM:
 		case AT_SCRA:
 		case AT_TENT:
+		case AT_NTCH: /* currently stopped at "compat", so no touching 
+				 may require moving if non-tempting monsters
+				 get the non-touching attack */
+
 			if (i==0 && uwep && (youmonst.data->mlet==S_LICH)) goto use_weapon;
 			if ((uwep || u.twoweap && uswapwep) &&
 				(touch_petrifies(mon->data) ||
