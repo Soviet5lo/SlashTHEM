@@ -1874,6 +1874,25 @@ physical:
 		magr->mspec_used += mcharmm(magr, mdef, tmp);
 		tmp = 0;
 		break;
+	    case AD_SCLD:
+		if (cancelled) {
+		    tmp = 0;
+		    break;
+		}
+		if (vis)
+		    pline("%s is %s!", Monnam(mdef),
+			  on_fire(mdef->data, mattk));
+		if (resists_fire(mdef)) {
+		    if (vis)
+			pline_The("steam doesn't seem to burn %s much!",
+								mon_nam(mdef));
+		    shieldeff(mdef->mx, mdef->my);
+		    tmp = 0;
+		}
+		/* only potions damage resistant players in destroy_item */
+		tmp += destroy_mitem(mdef, POTION_CLASS, AD_FIRE);
+		if(!rn2(10)) hurtmarmor(mdef, AD_RUST);
+		break;
 	    default:	/*tmp = 0;*/ 
 			break; /* necessary change to make pets more viable --Amy */
 	}
@@ -2152,6 +2171,9 @@ int mdead;
 		}
 		tmp = 0;
 		break;
+	    case AD_SCLD:
+		if(!rn2(3)) hurtmarmor(mdef, AD_RUST);
+		/* fall through */
 	    case AD_FIRE:
 		if (resists_fire(magr)) {
 		    if (canseemon(magr)) {

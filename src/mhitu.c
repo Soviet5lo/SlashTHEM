@@ -2266,6 +2266,22 @@ dopois:
 		mcharmu(mtmp, dmg, FALSE);
 		dmg=0;
 		break;
+	    case AD_SCLD:
+		hitmsg(mtmp,mattk);
+		if (uncancelled) {
+		    pline("You're %s!", on_fire(youmonst.data, mattk));
+		    if (Fire_resistance) {
+			pline_The("steam doesn't feel hot.");
+			dmg = 0;
+		    } 
+		    if((int) mtmp->m_lev > rn2(20))
+		    destroy_item(POTION_CLASS, AD_FIRE);
+		    if(!rn2(10)) hurtarmor(AD_RUST);
+		} else {
+		    pline("It feels merely creepy.");
+		    dmg = 0;
+		}
+		break;
 	    case AD_SHOE:
 	    /* curse shoes, steal alt shoes, fumblize shoes, damage shoes */
 		if (uarmf && !mtmp->mcan){
@@ -2930,6 +2946,17 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 			burn_away_slime();
 		    } else tmp = 0;
 		    break;
+		case AD_SCLD:
+		    if(!mtmp->mcan && rn2(2)) {
+			if (Fire_resistance) {
+			    shieldeff(u.ux, u.uy);
+			    You_feel("mildly hot.");
+			    tmp=0;
+			} else 
+			    pline("You're %s!", on_fire(youmonst.data, mattk));
+			if(!rn2(3)) hurtarmor(AD_RUST);
+		    } else tmp = 0;
+		    break;
 		case AD_DISE:
 		case AD_PEST:
 		    if (!diseasemu(mtmp->data)) tmp = 0;
@@ -3047,6 +3074,7 @@ boolean ufound;
 		not_affected |= Cold_resistance;
 		goto common;
 	    case AD_FIRE:
+	    case AD_SCLD:
 		not_affected |= Fire_resistance;
 		goto common;
 	    case AD_ELEC:
@@ -4486,6 +4514,7 @@ register struct attack *mattk;
 		}
 		tmp = 0;
 		break;
+	    case AD_SCLD:
 	    case AD_FIRE: /* Red mold */
 		if (resists_fire(mtmp)) {
 		    shieldeff(mtmp->mx, mtmp->my);

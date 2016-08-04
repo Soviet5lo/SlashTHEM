@@ -96,6 +96,7 @@
 /* Biodiversity attacks here */
 #define AD_CHRM         60      /* monster charms you and other monsters */
 #define AD_SHOE         61      /* boggart damages, steals, or fixes shoes */
+#define AD_SCLD         62      /* scald, similar to AD_FIRE */
 
 #define AD_CLRC		240	/* random clerical spell */
 #define AD_SPEL		241	/* random magic spell */

@@ -2544,6 +2544,23 @@ register struct attack *mattk;
 		    tmp = 0;
 		}
 		break;
+	    case AD_SCLD:
+	    if (negated) {
+		tmp = 0;
+		break;
+	    }
+	    if (!Blind)
+		pline("%s is being steamed!", Monnam(mdef));
+		if (resists_fire(mdef)) {
+		    if (!Blind)
+			pline_The("steam doesn't scald %s!", mon_nam(mdef));
+		    shieldeff(mdef->mx, mdef->my);
+		    tmp = 0;
+		}
+		/* only potions damage resistant players in destroy_item */
+		tmp += destroy_mitem(mdef, POTION_CLASS, AD_FIRE);
+		if(!rn2(10)) hurtmarmor(mdef, AD_RUST);
+		break;
 	    /* this should be #monster-able, not attack */
 	    case AD_CHRM:
 		tmp=0;
@@ -2611,6 +2628,7 @@ register struct attack *mattk;
 		resistance = resists_cold(mdef);
 		goto common;
 	    case AD_FIRE:
+	    case AD_SCLD:
 		resistance = resists_fire(mdef);
 		goto common;
 	    case AD_ELEC:
@@ -2818,6 +2836,16 @@ register struct attack *mattk;
 				pline("%s is burning to a crisp!",Monnam(mdef));
 			    golemeffects(mdef,(int)mattk->adtyp,dam);
 			} else dam = 0;
+			break;
+		    case AD_SCLD:
+			if (rn2(2)) {
+			    if (resists_fire(mdef)) {
+				pline("%s seems mildly hot.", Monnam(mdef));
+				dam = 0;
+			    } else
+				pline("%s is severly scalded!", Monnam(mdef));
+				if(!rn2(3)) hurtmarmor(mdef, AD_RUST);
+			} else dam=0;
 			break;
 		}
 		end_engulf();
@@ -3779,6 +3807,9 @@ uchar aatyp;
 			 You("sniff some psychoactive substances!");
 		    make_hallucinated(HHallucination + (long)tmp, TRUE, 0L);
 		break;
+	      case AD_SCLD:
+		if(!rn2(10)) hurtmarmor(mon, AD_RUST);
+		/* fall through */
 	      case AD_FIRE:
 		if(monnear(mon, u.ux, u.uy)) {
 		    if(Fire_resistance) {
