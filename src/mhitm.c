@@ -1998,6 +1998,53 @@ physical:
 		magr->mspec_used += mcharmm(magr, mdef, tmp);
 		tmp = 0;
 		break;
+	    case AD_FLVR:
+		if (cancelled){ tmp = 0; break;}
+		switch (rn2(6)){
+		    case 0: /* up, copied from muse: MUSE_POT_GAIN_LEVEL */
+			if (Can_rise_up(mdef->mx, mdef->my, &u.uz)){
+			    register int tolev=depth(&u.uz)-1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if(on_level(&tolevel, &u.uz)) goto mhitm_flvr_strange;
+			    if (vis)
+			        pline("%s rises up, through the %s!",
+				  Monnam(mdef), ceiling(mdef->mx, mdef->my));
+			    migrate_to_level(mdef, ledger_no(&tolevel),
+			      MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else{goto mhitm_flvr_strange;}
+			break;
+		    case 1: /* down */
+			if (Can_fall_thru(&u.uz) /* && !In_sokoban(&u.uz)*/ ){
+			    register int tolev=depth(&u.uz)+1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if (mon_has_amulet(mdef) || In_endgame(&u.uz) 
+			       || on_level(&tolevel, &u.uz))
+				goto mhitm_flvr_strange;
+			    if (vis)
+				pline("%s sinks down, through the %s!", 
+				  Monnam(mdef), surface(mdef->mx, mdef->my));
+			    migrate_to_level(mdef,ledger_no(&tolevel),
+			      MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else goto mhitm_flvr_strange;
+		    case 2: /* top, teleport to dlev1, top level of branch? */
+		    case 3: /* bottom, teleport to Moloch's sanctum, bot lev of branch? */ 
+		    case 4: /* strange */
+mhitm_flvr_strange:
+			if (vis) pline("%s reacts strangely.", Monnam(mdef));
+			mdef->mconf = 1;
+			mdef->mstrategy &= ~STRAT_WAITFORU;
+			break;
+         	    case 5: /* charm, fall through */ 
+			magr->mspec_used += mcharmm(magr, mdef, tmp);
+			tmp = 0;
+		}
+	    break; 
 	    case AD_SCLD:
 		if (cancelled) {
 		    tmp = 0;

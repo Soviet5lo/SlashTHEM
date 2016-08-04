@@ -98,6 +98,7 @@
 #define AD_SHOE         61      /* boggart damages, steals, or fixes shoes */
 #define AD_SCLD         62      /* scald, similar to AD_FIRE */
 #define AD_EGLD         63      /* eats gold (gold bug) */
+#define AD_FLVR         64      /* quark flavour attacks */
 
 #define AD_CLRC		240	/* random clerical spell */
 #define AD_SPEL		241	/* random magic spell */

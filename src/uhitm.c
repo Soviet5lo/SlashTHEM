@@ -2563,6 +2563,52 @@ register struct attack *mattk;
 		if(!rn2(10)) hurtmarmor(mdef, AD_RUST);
 		break;
 	    /* this should be #monster-able, not attack */
+	    case AD_FLVR:
+		if (negated){ tmp = 0; break;}
+		switch (rn2(6)){
+		    case 0: /* up, copied from muse: MUSE_POT_GAIN_LEVEL */
+			if (Can_rise_up(mdef->mx, mdef->my, &u.uz)){
+			    register int tolev=depth(&u.uz)-1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if(on_level(&tolevel, &u.uz)) goto uhitm_flvr_strange;
+			    if (canseemon(mdef))
+				pline("%s rises up, through the %s!",
+				  Monnam(mdef), ceiling(mdef->mx, mdef->my));
+			    migrate_to_level(mdef, ledger_no(&tolevel),
+			    MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else{goto uhitm_flvr_strange;}
+			break;
+		    case 1: /* down */
+			if (Can_fall_thru(&u.uz) /* && !In_sokoban(&u.uz)*/ ){
+			    register int tolev=depth(&u.uz)+1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if (mon_has_amulet(mdef) || In_endgame(&u.uz) 
+			      || on_level(&tolevel, &u.uz))
+				goto uhitm_flvr_strange;
+			    if (canseemon(mdef))
+				pline("%s sinks down, through the %s!", 
+				  Monnam(mdef), surface(mdef->mx, mdef->my));
+			    migrate_to_level(mdef,ledger_no(&tolevel),
+			      MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else goto uhitm_flvr_strange;
+		    case 2: /* top, teleport to dlev1, top level of branch? */
+		    case 3: /* bottom, teleport to Moloch's sanctum, bot lev of branch? */ 
+		    case 4: /* strange */
+uhitm_flvr_strange:
+			if (canseemon(mdef)) pline("%s reacts strangely.", Monnam(mdef));
+			mdef->mconf = 1;
+			mdef->mstrategy &= ~STRAT_WAITFORU;
+			break;
+		    case 5: /* charm, fall through */ 
+			(void)docharm(); 
+		} 
+		break;
 	    case AD_CHRM:
 		tmp=0;
 		break;

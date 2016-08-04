@@ -2418,6 +2418,127 @@ dopois:
 		}
 		hitmsg(mtmp, mattk);
 		break;
+	    case AD_FLVR:
+		if (mtmp->mcan || (rn2(5) > armpro) || !rn2(50) || mtmp->mspec_used) {
+		    dmg = 0; 
+		    break;
+		}
+		hitmsg(mtmp, mattk);
+		switch (rn2(6)){
+		    case 0: /* up, copied from muse: MUSE_POT_GAIN_LEVEL */
+			if((ledger_no(&u.uz) == 1 && u.uhave.amulet) ||
+			Can_rise_up(u.ux, u.uy, &u.uz)) {
+			const char *riseup ="rise up, through the %s!";
+			mtmp->mspec_used = mtmp->mspec_used + (dmg + rn2(6));
+			if(ledger_no(&u.uz) == 1) {
+			    You(riseup, ceiling(u.ux,u.uy));
+			    schedule_goto(&earth_level, FALSE, FALSE, FALSE, 0, 0);
+			    return 4;
+			    break;
+			} else {
+			    register int newlev = depth(&u.uz)-1;
+			    d_level newlevel;
+			    get_level(&newlevel, newlev);
+			    if(on_level(&newlevel, &u.uz)) {
+				goto mhitu_flvr_strange; 
+				break;
+			    } else You(riseup, ceiling(u.ux,u.uy));
+			    schedule_goto(&newlevel, FALSE, FALSE, FALSE, 0, 0);
+			    return 4;
+			    break;
+			}
+		    } else
+		        goto mhitu_flvr_strange;
+		        break;
+		    case 1: /* down */
+			if (Can_fall_thru(&u.uz) && !In_sokoban(&u.uz) ){
+			    d_level dtmp;
+			    mtmp->mspec_used = mtmp->mspec_used + (dmg + rn2(6));
+			    pline("You sink down, through the %s!",surface(u.ux,u.uy));
+			    if(*u.ushops) shopdig(1);
+			    if (Is_stronghold(&u.uz)) {
+				find_hell(&dtmp);
+			    } else {
+				dtmp.dnum = u.uz.dnum;
+				dtmp.dlevel = dunlev(&u.uz)+1;
+			    }
+			    schedule_goto(&dtmp, FALSE, FALSE, FALSE, 0, 0);
+			    return 4;
+			    break;
+			} else
+			goto mhitu_flvr_strange;
+			break;
+		    case 2: /* top, teleport to dlev1, top level of branch? */
+		    case 3: /* bottom, teleport to sanctum, bot lev of branch? */
+			if(!In_sokoban(&u.uz) && !(In_quest(&u.uz)) && !In_endgame(&u.uz)){
+			    int i,j;
+			    struct monst * mamu;
+			    d_level newlev;
+			    if (u.uhave.amulet)
+				mamu = 0;
+			    else {
+				for(i=u.ux-1;i<u.ux+1;++i)
+				    for(j=u.uy;j<u.uy+1;++j)
+					if((mamu = m_at(i,j)) && (levl_follower(mamu)) &&
+					   (!mtmp->iswiz && mon_has_amulet(mtmp))){
+					    i=u.ux+2;
+					    break;
+					} else {
+					    mamu = 0;
+					}
+			    }
+			    j = 0; /* Truth of Truth/Beauty */
+			    if (u.uhave.amulet || mamu){
+				sprintf(buf, "are back at the bottom!");
+				newlev = sanctum_level;
+			    } else if ((u.uevent.invoked && !mamu) || rn2(2)){
+				if (Is_knox(&u.uz)) goto mhitu_flvr_strange;
+				sprintf(buf,"are back at the top!");
+				get_level(&newlev, 1);
+				j = 1;
+			    } else {
+				get_level(&newlev, deepest_lev_reached(FALSE));
+				sprintf(buf,"have reached the %s",
+				on_level(&newlev,&sanctum_level)?"bottom!":"...bottom?");
+			    }
+			    if(on_level(&newlev,&u.uz)) goto mhitu_flvr_strange;
+			    schedule_goto(&newlev, FALSE, FALSE, FALSE, 0, 0);
+			    You(buf);
+			    if (j){
+				if (Hallucination) 
+				    make_hallucinated(0,FALSE,0);
+				exercise(A_WIS, TRUE);
+				You("see the Truth!");
+			    } else {
+				if (adjattrib, A_CHA, 1)
+				    pline("You gain an air of Beauty.");
+			    }
+			    return 4;
+			} 
+			break;
+		    case 4: /* strange */
+mhitu_flvr_strange:
+			mtmp->mspec_used = mtmp->mspec_used + (dmg + rn2(6));
+			if(Confusion||Hallucination)
+			    pline("Things are getting even stranger.");
+			else
+			    pline("Things are getting strage.");
+			make_confused(HConfusion + dmg + rn2(3), FALSE);
+			if (!(u.umonnum == PM_BLACK_LIGHT ||
+			    u.umonnum == PM_VIOLET_FUNGUS ||
+			    dmgtype(youmonst.data, AD_STUN))){
+			    make_hallucinated(HHallucination + (long)dmg+rn2(3),FALSE,0L);
+			    }
+			break;
+		    case 5: /* charm */ 
+			if (!mtmp->mpeaceful || mtmp->mpeacetim)
+			    mcharmu(mtmp, dmg, TRUE);
+			else 
+			    goto mhitu_flvr_strange;
+		    	} 
+			dmg=0;
+			break;
+
 	    default:	dmg = 0;
 			break;
 	}
