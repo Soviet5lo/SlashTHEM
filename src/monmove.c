@@ -1356,6 +1356,22 @@ postmov:
 		} else
 		newsym(mtmp->mx,mtmp->my);
 	    }
+		/* eat golden items its carrying, if gold bug..*/
+		if(ptr==&mons[PM_GOLD_BUG] && mtmp->mcanmove){
+		    struct obj * geatme;
+		    if ((geatme = ochain_has_material(mtmp->minvent, GOLD, 0)) &&
+		      geatme->otyp != AMULET_OF_STRANGULATION &&
+		      geatme->otyp != RIN_SLOW_DIGESTION){
+			if (meatmetal_effects(mtmp, geatme) == 2) return 2;
+			mtmp->meating = geatme->owt/2 + 1;
+#ifndef GOLDOBJ
+		    } else if (mtmp->mgold){
+			mtmp->meating = 1;
+			mtmp->mgold -= 5;
+			if (mtmp->mgold < 0) mtmp->mgold = 0;
+#endif
+		    }
+		}
 	    if(OBJ_AT(mtmp->mx, mtmp->my) && mtmp->mcanmove) {
 		/* recompute the likes tests, in case we polymorphed
 		 * or if the "likegold" case got taken above */

@@ -1838,6 +1838,96 @@ dopois:
 		if ((youmonst.data->mlet == mdat->mlet) && mdat != &mons[PM_MUGGER]) break;
 		if(!mtmp->mcan) stealgold(mtmp);
 		break;
+	    case AD_EGLD: 
+		if (u.umonnum == PM_GOLD_GOLEM){
+		    pline("%s gnaws on you!", Monnam(mtmp));
+		    (mtmp->mcan)?dmg=1:rehumanize();
+		} else {
+		    struct obj * geatme;
+		    int how = 0;
+		    dmg = 0;
+		    buf[0] = 0;
+#ifndef GOLDOBJ
+		    geatme = g_at(u.ux, u.uy);
+		    if (geatme){
+			if(mtmp->mcan){
+			    mtmp->mgold += geatme->quan;
+			} else {
+			    int metab_time = mtmp->mhpmax - mtmp->mhp;
+			    if (geatme->quan < metab_time) metab_time = geatme->quan; 
+			    mtmp->mhp += metab_time;
+			    mtmp->mspec_used += metab_time/2 + 1;  /* instead of meating */
+			}
+			if(!Blind)
+			    pline("%s quickly %s some gold from %s your %s!",
+			      Monnam(mtmp), (mtmp->mcan)?"nabs":"gnoshes on", 
+			      (Levitation)?"beneath":"between", makeplural(body_part(FOOT)));
+			if (meatmetal_effects(mtmp, geatme) == 3) return 2;
+			newsym(u.ux, u.uy);
+			break;
+		    } 
+#endif /*  !GOLDOBJ */
+		    if (geatme =
+		      ochain_has_material(level.objects[u.ux][u.uy], GOLD, 0)){
+			obj_extract_self(geatme);
+			Sprintf(buf, "from %s your %s",
+			  (Levitation)?"beneath":"between", makeplural(body_part(FOOT)));
+		    } else if ( geatme = ochain_has_material(invent, GOLD, 0)){
+#ifdef GOLDOBJ
+			if (geatme->otyp == GOLD_PIECE){
+			    int tmp;
+			    const int gold_price = objects[GOLD_PIECE].oc_cost;
+			    if (u.umonnum == PM_LEPRECHAUN){
+				pline("%s tries to get your money, but fails...",
+				  Monnam(mtmp));
+				break;
+			    }
+			    tmp = (somegold(money_cnt(invent)) + gold_price - 1) / gold_price;
+			    tmp = min(tmp, geatme->quan);
+			    if (tmp < geatme->quan) geatme = splitobj(geatme, tmp);
+			    freeinv(geatme);
+			    flags.botl = 1;
+			} else
+#endif
+			    obj_extract_self(geatme);
+		    }
+		    if (geatme){
+			if (!(mtmp->mcan || geatme->otyp == AMULET_OF_STRANGULATION ||
+			    geatme->otyp == RIN_SLOW_DIGESTION)){
+				mtmp->mspec_used += geatme->owt/2 + 1;  /* instead of meating */
+				how = 1;
+			}
+			pline("%s %s %s%s!",
+			  Monnam(mtmp), (how)?"gobbles":"nabs", 
+			  yname(geatme), buf);
+			if (how) {
+			    if (meatmetal_effects(mtmp, geatme) == 3) return 2;
+			} else
+			    mpickobj(mtmp, geatme);
+			break;
+		    } 
+#ifndef GOLDOBJ 
+		    if (u.ugold) {
+			int tmp;
+			if (u.umonnum == PM_LEPRECHAUN){
+			    pline("%s tries to get your money, but fails...",
+			      Monnam(mtmp));
+			break;
+			}
+			u.ugold -= (tmp = somegold());
+			Your("purse feels lighter.");
+			if (mtmp->mcan){
+			    mtmp->mgold += tmp;
+			    break;
+			}
+			if (tmp > mtmp->mhpmax - mtmp->mhp)
+			    tmp = mtmp->mhpmax - mtmp->mhp;
+			mtmp->mspec_used = tmp;
+			mtmp->mhp+=tmp;
+		    }
+#endif /*GOLDOBJ */
+	    }
+	    break;
 
 	    case AD_SITM:	/* for now these are the same */
 	    case AD_SEDU:

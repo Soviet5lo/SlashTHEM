@@ -114,6 +114,33 @@ int item, which;
 	return 0;
 }
 
+struct obj *
+ochain_has_material(ochain, material, which)
+struct obj * ochain;
+unsigned int material, which;
+{
+	struct obj * otmp;
+	unsigned int quant = 0;
+	if (!ochain) return (struct obj *) 0;
+	for(otmp = ochain; otmp; otmp = otmp->nobj)
+	    if (objects[otmp->otyp].oc_material == material) 
+		if (++quant == which)
+		    return otmp;
+	if (!quant)
+	    return 0;
+	if (which)
+	    which = quant;
+	else
+	    which = rnd(quant);
+	quant = 0;
+	for(otmp = ochain; otmp; otmp = otmp->nobj)
+	    if (objects[otmp->otyp].oc_material == material) 
+		if (++quant == which){
+		    return otmp;
+		}
+	return 0;
+}
+
 /* note: assumes ASCII; toggling a bit puts lowercase in front of uppercase */
 #define inv_rank(o) ((o)->invlet ^ 040)
 

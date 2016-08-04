@@ -130,7 +130,8 @@ register struct obj *obj;
 	   allow fake amulets to be eaten either [which is already the case] */
 
 	if (metallivorous(youmonst.data) && is_metallic(obj) &&
-	    (youmonst.data != &mons[PM_RUST_MONSTER] || is_rustprone(obj)))
+	    (youmonst.data != &mons[PM_RUST_MONSTER] || is_rustprone(obj))
+	     && (youmonst.data != &mons[PM_GOLD_BUG] || is_golden(obj)))
 		return TRUE;
 
 	if (lithivorous(youmonst.data) && is_lithic(obj) )

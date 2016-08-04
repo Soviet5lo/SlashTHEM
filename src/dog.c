@@ -881,7 +881,7 @@ register struct obj *obj;
 		    return (is_undead(mon->data) ? TABU :
 			    ((herbi || starving) ? ACCFOOD : MANFOOD));
 		case TIN:
-		    return (metallivorous(mon->data) ? ACCFOOD : MANFOOD);
+		    return (metallivorous(mon->data) && !(mon->data == &mons[PM_GOLD_BUG]) ? ACCFOOD : MANFOOD);
 		case APPLE:
 		case CARROT:
 		    return (herbi ? DOGFOOD : starving ? ACCFOOD : MANFOOD);
@@ -907,6 +907,8 @@ register struct obj *obj;
 		mon->data == &mons[PM_GIANT_SHOGGOTH] ||
 	    	mon->data == &mons[PM_TASMANIAN_DEVIL]) && is_organic(obj))
 		return(ACCFOOD);
+	    if (mon->data == &mons[PM_GOLD_BUG] && is_golden(obj))
+		return (ACCFOOD);
 	    if (metallivorous(mon->data) && is_metallic(obj) && (is_rustprone(obj) || mon->data != &mons[PM_RUST_MONSTER])) {
 		/* Non-rustproofed ferrous based metals are preferred. */
 		return((is_rustprone(obj) && !obj->oerodeproof) ? DOGFOOD :

@@ -969,8 +969,11 @@ E int NDECL(doinvinuse);
 E struct obj *NDECL(getnextgetobj);
 /* KMH, balance patch -- new function */
 E int NDECL(jumble_pack);
-/* 5lo: from Biodiversity patch, for Satyrs */
+/* 5lo: from Biodiversity patch */
 E struct obj * FDECL(mon_has_item,(struct monst *, int, int));
+E struct obj * FDECL(ochain_has_material,
+    (struct obj *, unsigned int, unsigned int));
+
 
 /* ### ioctl.c ### */
 
@@ -1276,6 +1279,7 @@ E int FDECL(pm_to_cham, (int));
 E int FDECL(minliquid, (struct monst *));
 E int NDECL(movemon);
 E int FDECL(meatmetal, (struct monst *));
+E int FDECL(meatmetal_effects, (struct monst *, struct obj *));
 E void FDECL(meatcorpse, (struct monst *));
 E int FDECL(meatobj, (struct monst *));
 E void FDECL(mpickgold, (struct monst *));

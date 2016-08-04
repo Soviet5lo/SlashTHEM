@@ -904,8 +904,9 @@ meatmetal(mtmp)
 			      Monnam(mtmp), distant_name(otmp,doname));
 		    }
 		/* KMH -- Don't eat indigestible/choking objects */
-		} else if (otmp->otyp != AMULET_OF_STRANGULATION &&
-				otmp->otyp != RIN_SLOW_DIGESTION) {
+ 		  else if ((otmp->otyp != AMULET_OF_STRANGULATION &&
+ 				otmp->otyp != RIN_SLOW_DIGESTION) &&
+ 				(mtmp->data != &mons[PM_GOLD_BUG] || is_golden(otmp))) {   /*if a gold bug, then only eats goldenthings -Webb */
 		    if (cansee(mtmp->mx,mtmp->my) && flags.verbose)
 			pline("%s eats %s!", Monnam(mtmp),
 				distant_name(otmp,doname));
@@ -959,6 +960,7 @@ meatmetal(mtmp)
 		    return 1;
 		}
 	    }
+	}
 	}
 	return 0;
 }
@@ -1068,7 +1070,53 @@ meatcorpse(mtmp)
 		  }
       newsym(mtmp->mx, mtmp->my);
 }
- 
+
+int
+meatmetal_effects(mtmp, otmp)
+register struct monst * mtmp;
+register struct obj * otmp;
+{
+	int poly, grow, heal, mstone;
+	struct permonst *ptr;
+	if (mtmp->mhp < mtmp->mhpmax) {
+	    mtmp->mhp += objects[otmp->otyp].oc_weight;
+	    if (mtmp->mhp > mtmp->mhpmax) mtmp->mhp = mtmp->mhpmax;
+	}
+	if(otmp == uball) {
+	    unpunish();
+	    delobj(otmp);
+	} else if (otmp == uchain) {
+	    unpunish();	/* frees uchain */
+	} else {
+	    poly = polyfodder(otmp);
+	    grow = mlevelgain(otmp);
+	    heal = mhealup(otmp);
+	    mstone = mstoning(otmp);
+	    delobj(otmp);
+	    ptr = mtmp->data;
+	    if (poly) {
+		if (newcham(mtmp, (struct permonst *)0, FALSE, FALSE))
+		  ptr = mtmp->data;
+	    } else if (grow) {
+		ptr = grow_up(mtmp, (struct monst *)0);
+	    } else if (mstone) {
+		if (poly_when_stoned(ptr)) {
+		    mon_to_stone(mtmp);
+		    ptr = mtmp->data;
+		} else if (!resists_ston(mtmp)) {
+		    if (canseemon(mtmp))
+		      pline("%s turns to stone!", Monnam(mtmp));
+		    monstone(mtmp);
+		    ptr = (struct permonst *)0;
+		}
+	    } else if (heal) {
+		mtmp->mhp = mtmp->mhpmax;
+	    }
+	    if (!ptr) return 2;		 /* it died */
+  	}
+	return 1;
+}
+
 int
 meatobj(mtmp)		/* for gelatinous cubes */
 	register struct monst *mtmp;

@@ -1675,6 +1675,106 @@ physical:
 			pline("%s suddenly disappears!", buf);
 		}
 		break;
+	    case AD_EGLD:
+		if (pd ==  &mons[PM_GOLD_GOLEM]){
+		    Strcpy(buf, Monnam(magr));
+		    if (vis) pline("%s %s %s.", buf,
+		      (magr->mcan)?"gnaws on":"chews through",mon_nam(mdef));
+		    (magr->mcan)?mdef->mhp-=tmp:mondied(mdef);
+		    if (mdef->mhp > 0) return 0;
+		    else if (mdef->mtame && !vis)
+			pline("May %s rest in (gold)peices.", mon_nam(mdef));
+		    return (MM_DEF_DIED | (grow_up(magr,mdef) ? 
+		      0 : MM_AGR_DIED));
+		} else {
+		struct obj * geatme;
+		int how = 0;
+		tmp = 0;
+#ifndef GOLDOBJ
+		geatme = g_at(mdef->mx, mdef->my);
+		if (geatme){
+		    if(magr->mcan){
+			magr->mgold += geatme->quan;
+		    } else {
+			int metab_time = magr->mhpmax - magr->mhp;
+			if (geatme->quan < metab_time) metab_time = geatme->quan; 
+			magr->mspec_used += metab_time/2 + 1;  /* instead of meating */
+		    }
+		    if (meatmetal_effects(magr, geatme) == 3) return MM_AGR_DIED;
+		    newsym(mdef->mx, mdef->my);
+		    if(cansee(mdef->mx, mdef->my)){
+			if (canseemon(mdef))
+			    Sprintf(buf, "from under %s", mon_nam(mdef));
+			pline("%s quickly %s some gold%s!",
+			  Monnam(magr), (magr->mcan)?"nabs":"gnoshes on", buf);
+			break;
+		    } 
+		}
+#endif /*GOLDOBJ */
+		if (geatme =
+		   ochain_has_material(level.objects[mdef->mx][mdef->my], GOLD, 0)){
+		    obj_extract_self(geatme);
+		    if (canseemon(mdef))
+			Sprintf(buf, "from under %s", mon_nam(mdef));
+		} else if ( geatme = ochain_has_material(mdef->minvent, GOLD, 0)){
+#ifdef GOLDOBJ
+		    if (geatme->otyp == GOLD_PIECE){
+			int tmp;
+			const int gold_price = objects[GOLD_PIECE].oc_cost;
+			Strcpy(buf, s_suffix(mon_nam(mdef)));
+			if (mdef->data == &mons[PM_LEPRECHAUN] ){
+			    pline("%s tries to get %s money, but fails...",
+			      Monnam(magr), buf);
+			    break;
+			}
+			tmp = (somegold(money_cnt(mdef->minvent)) + gold_price - 1)
+			      / gold_price;
+			tmp = min(tmp, geatme->quan);
+			if (tmp < geatme->quan) geatme = splitobj(geatme, tmp);
+			obj_extract_self(geatme);
+		    } else 
+#endif
+		    obj_extract_self(geatme); 
+		}
+		if (geatme){
+		    if (!(magr->mcan || geatme->otyp == AMULET_OF_STRANGULATION ||
+		       geatme->otyp == RIN_SLOW_DIGESTION)){
+			magr->mspec_used += geatme->owt/2 + 1;  /* instead of meating */
+			how = 1;
+		    }
+		    pline("%s %s %s%s!",
+		      Monnam(magr), (how)?"gobbles":"nabs", yname(geatme), buf);
+		    if (how){
+			if (meatmetal_effects(magr, geatme) == 3) return MM_AGR_DIED;
+		    } else
+			mpickobj(magr, geatme);
+
+		    break;
+		} 
+#ifndef GOLDOBJ
+		if (mdef->mgold) {
+		    int tmp = mdef->mgold;
+		    if (mdef->data == &mons[PM_LEPRECHAUN] ){
+			Strcpy(buf, s_suffix(mon_nam(mdef)));
+			pline("%s tries to get %s money, but fails...",
+			  Monnam(magr), buf);
+			break;
+		    }
+		    mdef->mgold = 0;
+		    Your("purse feels lighter.");
+		    if (magr->mcan){
+			magr->mgold += tmp;
+			break;
+		    } else if (tmp > magr->mhpmax - magr->mhp){
+			tmp = magr->mhpmax - magr->mhp;
+			magr->mspec_used = tmp;
+			magr->mhp+=tmp;
+			break;
+		    }
+		}
+#endif /*GOLDOBJ */
+	    }
+	    break;
 	    case AD_DRLI:
 		if (nohit) break;                
 
