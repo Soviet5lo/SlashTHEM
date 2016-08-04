@@ -1684,7 +1684,10 @@ OBJECT(OBJ("iron chain", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON
 
 OBJECT(OBJ("blinding venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
-		VENOM_CLASS,  500, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
+		VENOM_CLASS,  499, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
+OBJECT(OBJ("water venom", "splash of water"),
+		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
+		VENOM_CLASS,    1, 0,    1,  0,  0,  0, 0, 0,    0, CLR_BLUE),
 OBJECT(OBJ("acid venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
 		VENOM_CLASS,  500, 0,	 1,  0,  6,  6, 0, 0,	 0, HI_ORGANIC),

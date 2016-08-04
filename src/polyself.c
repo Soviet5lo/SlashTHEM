@@ -648,8 +648,13 @@ int	mntmp;
 	    static const char monsterc[] = "monster";
 	    if (can_breathe(youmonst.data))
 		pline(use_thec,monsterc,"use your breath weapon");
-	    if (attacktype(youmonst.data, AT_SPIT))
-		pline(use_thec,monsterc,"spit venom");
+	    if (attacktype(youmonst.data, AT_SPIT)){
+		if (u.umonnum == PM_WATERSPOUT_GARGOYLE){
+		    pline(use_thec,monsterc,"spit water");
+		} else {
+		    pline(use_thec,monsterc,"spit venom");
+		}
+	    }
 	    if (youmonst.data->mlet == S_NYMPH && youmonst.data != &mons[PM_SATYR])
 		pline(use_thec,monsterc,"remove an iron ball");
 	    if (attacktype_fordmg(youmonst.data, AT_ANY, AD_CHRM)) 
@@ -1080,6 +1085,18 @@ dospit()
 	struct attack *mattk;
 
 	if (!getdir((char *)0)) return(0);
+	switch (u.umonnum){
+	    case (PM_COBRA):
+		otmp = mksobj( BLINDING_VENOM, TRUE, FALSE);
+		break;
+	    case (PM_WATERSPOUT_GARGOYLE):
+		otmp = mksobj( WATER_VENOM, TRUE, FALSE);
+		break;
+	    default:
+		otmp = mksobj( ACID_VENOM, TRUE, FALSE);
+		break;
+	} 
+#if 0 /* 5lo: replaced by biodiversity code */
 	mattk = attacktype_fordmg(youmonst.data, AT_SPIT, AD_ANY);
 	if (!mattk)
 	    impossible("bad spit attack?");
@@ -1099,6 +1116,9 @@ dospit()
 	    otmp->spe = 1; /* to indicate it's yours */
 	    throwit(otmp, 0L, FALSE, 0);
 	}
+#endif
+	otmp->spe = 1; /* to indicate it's yours */
+	throwit(otmp, 0L, FALSE, 0);
 	return(1);
 }
 

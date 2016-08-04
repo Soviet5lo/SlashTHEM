@@ -555,7 +555,7 @@ int ttyp;
 	/* these furniture checks were in dighole(), but wand
 	   breaking bypasses that routine and calls us directly */
 	if (IS_FOUNTAIN(lev->typ)) {
-	    dogushforth(FALSE);
+	    dogushforth(FALSE, u.ux, u.uy);
 	    SET_FOUNTAIN_WARNED(x,y);		/* force dryup */
 	    dryup(x, y, madeby_u);
 	    return;

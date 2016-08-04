@@ -943,6 +943,15 @@ boolean hitsroof;
 		    if (!Blind) Your(vision_clears);
 		}
 		break;
+	case WATER_VENOM:
+		if (u.umonnum == PM_GREMLIN) {
+		    (void)split_mon(&youmonst, (struct monst *)0);
+		} else if (u.umonnum == PM_IRON_GOLEM) {
+		    You("rust!");
+		    rehumanize();
+		}
+		(void)hurtarmor(AD_RUST);
+		break;
 	default:
 		break;
 	}
@@ -1714,7 +1723,7 @@ int thrown;
 	    }
 
 	} else if ((otyp == EGG || otyp == CREAM_PIE ||
-		    otyp == BLINDING_VENOM || otyp == ACID_VENOM) &&
+		    otyp == BLINDING_VENOM || otyp == ACID_VENOM || otyp == WATER_VENOM) &&
 		(guaranteed_hit || ACURR(A_DEX) > rnd(25) || tmp >= rnd(20) )) { /* F this stupidity. Sorry. --Amy */
 	    (void) hmon(mon, obj, thrown?thrown:3);
 	    return 1;	/* hmon used it up */
@@ -2014,6 +2023,7 @@ struct obj *obj;
 		case MELON:
 		case ACID_VENOM:
 		case BLINDING_VENOM:
+		case WATER_VENOM:
 			return 1;
 		default:
 			return 0;
@@ -2058,6 +2068,7 @@ boolean in_view;
 			break;
 		case ACID_VENOM:
 		case BLINDING_VENOM:
+		case WATER_VENOM:
 			pline("Splash!");
 			break;
 	}

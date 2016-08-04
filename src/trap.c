@@ -866,6 +866,13 @@ int *fail_reason;
 	    You("find %s posing as a statue.",
 		canspotmon(mon) ? a_monnam(mon) : something);
 	    stop_occupation();
+	    if (mon->data == &mons[PM_WATERSPOUT_GARGOYLE] && 
+	      levl[x][y].typ == FOUNTAIN){
+		pline("%s breaks free from the fountain.", 
+		canspotmon(mon) ? Monnam(mon) : something);
+		dogushforth(FALSE,x,y);
+		dryup(x,y, (cause == ANIMATE_SHATTER || cause == ANIMATE_SPELL));
+	    }
 	}
 	/* avoid hiding under nothing */
 	if (x == u.ux && y == u.uy &&

@@ -772,6 +772,7 @@ int thrown;
 	/* Giants instakiilled with sling + stone */
 	boolean giantkill = FALSE;
 	boolean silvermsg = FALSE, silverobj = FALSE;
+	boolean needrustmsg = FALSE;
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
 #ifdef STEED
@@ -1429,6 +1430,15 @@ int thrown;
 			hittxt = TRUE;
 			get_dmg_bonus = FALSE;
 			break;
+		    case WATER_VENOM: /* thrown (or spit) */
+			tmp = 0;
+#define does_rust(m) (m == &mons[PM_IRON_GOLEM])
+			if(does_rust(mdat)){
+			    tmp = d(1,6);
+			} 
+			needrustmsg = TRUE;
+#undef does_rust
+			break;
 		    default:
 			/* non-weapons can damage because of their weight */
 			/* (but not too much) */
@@ -1759,7 +1769,16 @@ int thrown;
 			xkilled(mon, 1);
 		}
 	}
-
+	if (needrustmsg){
+	    hurtmarmor(mon,AD_RUST);
+	    if(mdat == &mons[PM_GREMLIN]){
+		(void)split_mon(mon, (struct monst *)0);
+	    } else if ( mdat == &mons[PM_IRON_GOLEM] ) {
+		if (canseemon(mon))pline("%s rusts.", Monnam(mon));
+		setmangry(mon);
+		abuse_dog(mon);
+	    } 
+	}
 	if (needpoismsg)
 		pline_The("poison doesn't seem to affect %s.", mon_nam(mon));
 	if (poiskilled) {

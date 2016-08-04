@@ -300,6 +300,15 @@ boolean verbose;  /* give message(s) even when you can't see what happened */
 		    else if (verbose) pline("It is burned!");
 		}
 	    }
+	    else if (otmp->otyp == WATER_VENOM){
+		if (mtmp->data == &mons[PM_IRON_GOLEM]){
+		    if (canseemon(mtmp)) pline("%s rusts.", Monnam(mtmp));
+		    damage=d(1,6);
+		} else if(mtmp->data == &mons[PM_GREMLIN]){
+		    (void)split_mon(mtmp,(struct monst *)0);
+		}
+		hurtmarmor(mtmp,AD_RUST);
+	    }
 	    mtmp->mhp -= damage;
 	    if (mtmp->mhp < 1) {
 		if (vis || verbose)
@@ -472,6 +481,7 @@ m_throw(mon, x, y, dx, dy, range, obj)
 			    /* fall through */
 			case CREAM_PIE:
 			case BLINDING_VENOM:
+			case WATER_VENOM:
 			    hitu = thitu(8, 0, singleobj, (char *)0);
 			    break;
 			default:
@@ -519,7 +529,15 @@ m_throw(mon, x, y, dx, dy, range, obj)
 				      (num_eyes == 1) ? "s" : "");
 			}
 		    }
-
+		    if (hitu && singleobj->otyp == WATER_VENOM) {
+			if (u.umonnum == PM_GREMLIN){
+			    (void)split_mon(&youmonst, (struct monst *)0);
+			} else if (u.umonnum == PM_IRON_GOLEM){
+			    You("rust!");
+			    rehumanize();
+			}
+			(void)hurtarmor(AD_RUST);
+		    } 
 		    if (hitu && singleobj->otyp == EGG) {
 			if (!Stone_resistance
 			    && !(poly_when_stoned(youmonst.data) &&
@@ -776,6 +794,9 @@ register struct attack *mattk;
 		    case AD_DRST:
 			otmp = mksobj(BLINDING_VENOM, TRUE, FALSE);
 			break;
+		    case AD_RUST:
+			otmp = mksobj(WATER_VENOM, TRUE, FALSE);
+			break;
 		    default:
 			pline("bad attack type in spitmu");
 				/* fall through */
@@ -785,7 +806,7 @@ register struct attack *mattk;
 		}
 		if(!rn2(BOLT_LIM-distmin(mtmp->mx,mtmp->my,mtmp->mux,mtmp->muy))) {
 		    if (canseemon(mtmp))
-			pline("%s spits venom!", Monnam(mtmp));
+			pline("%s spits %s!", Monnam(mtmp),(mattk->adtyp==AD_RUST?"water":"venom"));
 		    m_throw(mtmp, mtmp->mx, mtmp->my, sgn(tbx), sgn(tby),
 			distmin(mtmp->mx,mtmp->my,mtmp->mux,mtmp->muy), otmp);
 		    nomul(0, 0);

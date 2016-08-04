@@ -854,7 +854,7 @@ NEARDATA struct permonst mons[] = {
     MON("waterspout gargoyle", S_GREMLIN,
 	LVL(8, 10, -4, 0, -10), (G_GENO|1),
 	A(ATTK(AT_CLAW, AD_PHYS, 2, 6), ATTK(AT_CLAW, AD_PHYS, 2, 6),
-	  ATTK(AT_BITE, AD_PHYS, 2, 4), ATTK(AT_GAZE, AD_RUST, 0, 0), /* Needs a spit rusting attack */
+	  ATTK(AT_BITE, AD_PHYS, 2, 4), ATTK(AT_SPIT, AD_RUST, 0, 0), /* Needs a spit rusting attack */
 	NO_ATTK, NO_ATTK),
 	SIZ(1100,250, 0, MS_GURGLE, MZ_HUMAN), MR_STONE, MR_STONE,
 	MRACE_NONE, M1_SWIM|M1_HUMANOID|M1_AMPHIBIOUS|M1_THICK_HIDE|M1_BREATHLESS,

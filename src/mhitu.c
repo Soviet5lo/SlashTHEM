@@ -27,7 +27,7 @@ STATIC_DCL void FDECL(missmu,(struct monst *,int,int,struct attack *));
 STATIC_DCL void FDECL(mswings,(struct monst *,struct obj *));
 STATIC_DCL void FDECL(wildmiss, (struct monst *,struct attack *));
 
-STATIC_DCL void FDECL(hurtarmor,(int));
+//STATIC_DCL void FDECL(hurtarmor,(int));
 STATIC_DCL void NDECL(witherarmor);
 STATIC_DCL void FDECL(hitmsg,(struct monst *,struct attack *));
 
@@ -885,7 +885,7 @@ mattacku(mtmp)
  * helper function for some compilers that have trouble with hitmu
  */
 
-STATIC_OVL void
+void
 hurtarmor(attk)
 int attk;
 {

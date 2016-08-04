@@ -778,7 +778,7 @@ E void NDECL(really_close);
 /* ### fountain.c ### */
 
 E void FDECL(floating_above, (const char *));
-E void FDECL(dogushforth, (int));
+E void FDECL(dogushforth, (int, int, int));
 # ifdef USE_TRAMPOLI
 E void FDECL(gush, (int,int,genericptr_t));
 # endif
@@ -1133,6 +1133,7 @@ E int FDECL(could_seduceX, (struct monst *,struct monst *,struct attack *));
 #ifdef SEDUCE
 E int FDECL(doseduce, (struct monst *));
 #endif
+E void FDECL(hurtarmor, (int));
 E int FDECL(mcharmu, (struct monst *, int, int));
 
 /* ### minion.c ### */
