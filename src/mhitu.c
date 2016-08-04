@@ -1156,13 +1156,16 @@ hitmu(mtmp, mattk)
 /*	If the monster is undetected & hits you, you should know where
  *	the attack came from.
  */
-	if(mtmp->mundetected && (hides_under(mdat) || mdat->mlet == S_EEL)) {
+	if(mtmp->mundetected && (hides_under(mdat) || mdat->mlet == S_EEL
+				|| mdat == &mons[PM_LABYRINTH_TRAPPER])) {
 	    mtmp->mundetected = 0;
 	    if (!(Blind ? Blind_telepat : Unblind_telepat)) {
 		struct obj *obj;
 		const char *what;
 
-		if ((obj = level.objects[mtmp->mx][mtmp->my]) != 0) {
+		if(mdat == &mons[PM_LABYRINTH_TRAPPER]) 
+		    pline("%s came out the wall!", Amonnam(mtmp));
+		else if ((obj = level.objects[mtmp->mx][mtmp->my]) != 0) {
 		    if (Blind && !obj->dknown)
 			what = something;
 		    else if (is_pool(mtmp->mx, mtmp->my) && !Underwater)

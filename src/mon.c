@@ -2863,7 +2863,8 @@ register struct monst *mtmp;
 	   (sensemon(mtmp) && distu(mtmp->mx, mtmp->my) <= 2))
 		return(FALSE);
 
-	if(mtmp->data->mlet == S_MIMIC) {
+	if (mtmp->data->mlet == S_MIMIC ||
+	    mtmp->data == &mons[PM_LABYRINTH_TRAPPER]){
 		set_mimic_sym(mtmp);
 		return(TRUE);
 	} else

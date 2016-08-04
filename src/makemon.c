@@ -2187,6 +2187,13 @@ register int	mmflags;
 		case S_MIMIC:
 			set_mimic_sym(mtmp);
 			break;
+		case S_TRAPPER:
+			if(ptr != &mons[PM_LABYRINTH_TRAPPER]){
+			    if (!(ptr == &mons[PM_LURKER_ABOVE] &&
+			      (Is_airlevel(&u.uz) /* || SKY_AT(mtmp->mx, mtmp->my)*/)))
+				mtmp->mundetected = 1; 
+				break;
+			}
 		case S_SPIDER:
 		case S_SNAKE:
 			if(in_mklev)
@@ -3138,6 +3145,161 @@ register struct monst *mtmp;
 		rt = OROOM,  roomno = 0;
 #endif
 	else	rt = 0;	/* roomno < 0 case for GCC_WARN */
+	if (mtmp->data == &mons[PM_LABYRINTH_TRAPPER]){
+	    if ( (IS_WALL(typ) && ( rn2(8) || !may_dig(mx, my) )) 
+		  || typ == SDOOR || typ == SCORR){ /* don't hide in STONE */
+		mtmp->mundetected = 1;
+		return;
+	} else if (IS_WALL(typ)){
+	    ap_type = M_AP_FURNITURE;
+	    appear = typ;
+	    levl[mx][my].typ = ROOM;
+	} else if (typ == CORR){
+	    ap_type = M_AP_FURNITURE;
+	    appear = S_stone;
+	} else if (typ == ROOM){
+#ifndef W_NORTH
+# define W_NORTH	1
+# define W_SOUTH	2
+# define W_EAST		4
+# define W_WEST		8
+#endif
+	uchar adj = 0;
+	schar adj_type;
+
+	if (isok(mx-1, my) && IS_WALL(levl[mx-1][my].typ)) adj |= W_WEST;
+	if (isok(mx+1, my) && IS_WALL(levl[mx+1][my].typ)) adj |= W_EAST;
+	if (isok(mx, my-1) && IS_WALL(levl[mx][my-1].typ)) adj |= W_NORTH;
+	if (isok(mx, my+1) && IS_WALL(levl[mx][my+1].typ)) adj |= W_SOUTH;
+	switch (adj){
+	    case (W_NORTH):
+	    case (W_SOUTH):
+	    case (W_NORTH|W_SOUTH):
+		appear = S_vwall;
+		break;
+	    case (W_EAST):
+	    case (W_WEST):
+	    case (W_EAST|W_WEST):
+		appear = S_hwall;
+		break;
+	    case (W_EAST|W_SOUTH):
+		appear = S_tlcorn;
+		break;
+	    case (W_WEST|W_SOUTH):
+		appear = S_trcorn;
+		break;
+	    case (W_EAST|W_NORTH):
+		appear = S_blcorn;
+		break;
+	    case (W_WEST|W_NORTH):
+		appear = S_brcorn;
+		break;
+	    case(W_WEST|W_EAST|W_NORTH|W_SOUTH):
+		appear = S_crwall;
+		break;
+	    case(W_WEST|W_EAST|W_NORTH):
+		appear = S_tuwall;
+		break;
+	    case(W_WEST|W_EAST|W_SOUTH):
+		appear = S_tdwall;
+		break;
+	    case(W_WEST|W_NORTH|W_SOUTH):
+		appear = S_tlwall;
+		break;
+	    case(W_EAST|W_NORTH|W_SOUTH):
+		appear = S_trwall;
+	    default:
+		if(!isok(mx-1,my) || !isok(mx+1,my))
+		    appear = S_vwall;
+		else
+		    appear = S_hwall;
+	    break;
+	}
+	ap_type = M_AP_FURNITURE;
+	/* this should run through a reset_seenv */
+	if (adj | W_NORTH){
+	    switch(adj_type = levl[mx][my-1].typ){
+		case (HWALL):
+		    adj_type = TDWALL;
+		    break;
+		case (BRCORNER):
+		    adj_type = TLWALL;
+		    break;
+		case (BLCORNER):
+		    adj_type = TRWALL;
+		    break;
+		case (TUWALL):
+		    adj_type = CROSSWALL;
+		    break;
+             }
+	     levl[mx][my-1].typ = adj_type;
+	     levl[mx][my-1].seenv &= ~SV5;
+	}
+	if (adj | W_SOUTH){
+	    switch(adj_type = levl[mx][my+1].typ){
+		case (HWALL):
+		    adj_type = TUWALL;
+		    break;
+		case (TRCORNER):
+		    adj_type = TLWALL;
+		    break;
+		case (TLCORNER):
+		    adj_type = TRWALL;
+		    break;
+		case (TDWALL):
+		    adj_type = CROSSWALL;
+		    break;
+	    }
+	    levl[mx][my+1].typ = adj_type;
+	    levl[mx][my+1].seenv &= ~SV1;
+	}
+	if (adj | W_EAST){
+	    switch(adj_type = levl[mx+1][my].typ){
+		case (VWALL):
+		    adj_type = TLWALL;
+		    break;
+		case (TLCORNER):
+		    adj_type = TDWALL;
+		    break;
+		case (BLCORNER):
+		    adj_type = TUWALL;
+		    break;
+		case (TRWALL):
+		    adj_type = CROSSWALL;
+		    break;
+	    }
+	    levl[mx+1][my].typ = adj_type;
+	    levl[mx+1][my].seenv &= ~SV3;
+	}
+	if (adj | W_WEST){
+	    switch(adj_type = levl[mx-1][my].typ){
+		case (VWALL):
+		    adj_type = TRWALL;
+		    break;
+		case (BRCORNER):
+		    adj_type = TUWALL;
+		    break;
+		case (TRCORNER):
+		    adj_type = TDWALL;
+		    break;
+		case (TLWALL):
+		    adj_type = CROSSWALL;
+		    break;
+	    }
+	    levl[mx-1][my].typ = adj_type;
+	    levl[mx-1][my].seenv &= ~SV7;
+	}
+	if(!rn2(8) && IS_WALL(appear)){
+	    levl[mx][my].typ = appear;
+	    mtmp->mundetected = 1;
+	    return;
+	}
+        }
+	block_point(mx,my);	/* vision */
+	mtmp->m_ap_type = ap_type;
+	mtmp->mappearance = appear;
+	return;
+	}
 
 	if (OBJ_AT(mx, my)) {
 		ap_type = M_AP_OBJECT;

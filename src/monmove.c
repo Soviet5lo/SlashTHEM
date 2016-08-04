@@ -378,6 +378,20 @@ register struct monst *mtmp;
 	/* update quest status flags */
 	quest_stat_check(mtmp);
 
+	if (mdat == &mons[PM_LABYRINTH_TRAPPER] &&
+	   (mtmp->m_ap_type || mtmp->mundetected)
+	   && distmin(mtmp->mx, mtmp->my, u.ux, u.uy)<=1){
+	    if (mtmp->mundetected){
+		mtmp->mundetected=0;
+		newsym(mtmp->mx, mtmp->my);
+	    } 
+	    if (mtmp->m_ap_type)
+		seemimic(mtmp);
+          
+	    if (cansee(mtmp->mx, mtmp->my))
+		pline("The wall beside you comes alive!");
+	}
+
 	if (!mtmp->mcanmove || (mtmp->mstrategy & STRAT_WAITMASK)) {
 	    if (Hallucination) newsym(mtmp->mx,mtmp->my);
 	    if (mtmp->mcanmove && (mtmp->mstrategy & STRAT_CLOSE) &&
