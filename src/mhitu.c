@@ -2263,6 +2263,43 @@ dopois:
 		mcharmu(mtmp, dmg, FALSE);
 		dmg=0;
 		break;
+	    case AD_SHOE:
+	    /* curse shoes, steal alt shoes, fumblize shoes, damage shoes */
+		if (uarmf && !mtmp->mcan){
+		    dmg = 0; 
+		    if (canseemon(mtmp))
+			pline("%s damages %s with %s little tools!",
+			  Monnam(mtmp), yname(uarmf), mhis(mtmp));
+		    else
+			You_feel("some malicious cobbling!");
+		    switch(rnd(3)){
+			case 0:
+			    if (uarmf->otyp != LOW_BOOTS  && uarmf->otyp != HIGH_BOOTS &&
+				uarmf->otyp != IRON_SHOES && uarmf->otyp != FUMBLE_BOOTS){
+				otmp = uarmf;
+				Boots_off();
+				otmp->otyp = (!rn2(4)) ? FUMBLE_BOOTS :
+				  (otmp->otyp == KICKING_BOOTS) ? IRON_SHOES : LOW_BOOTS;
+				setworn(otmp, W_ARMF);
+				Boots_on(); 
+				break;
+			} 
+			case 1:
+			    if (uarmf->blessed){
+				unbless(uarmf);
+				break;
+			    } else if(!(uarmf->cursed)){
+				curse(uarmf);
+				break;
+			}
+			case 2:
+			    --uarmf->spe;
+			    adj_abon(uarmf, -1); /* in case a boot is added that needs it */
+			    break;
+		    }
+		}
+		hitmsg(mtmp, mattk);
+		break;
 	    default:	dmg = 0;
 			break;
 	}
