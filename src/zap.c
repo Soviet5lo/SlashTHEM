@@ -4143,7 +4143,7 @@ xchar sx, sy;
 	    killer = fltxt;
 	    /* when killed by disintegration breath, don't leave corpse */
 	    u.ugrave_arise = (type == -ZT_BREATH(ZT_DEATH)) ? -3 : NON_PM;
-	    done(DIED);
+	    done((type== -ZT_BREATH(ZT_DEATH)) ? DISINTEGRATED : DIED);
 	    return; /* lifesaved */
 		}
 		else
@@ -4495,7 +4495,7 @@ register int dx,dy;
 
 			for (otmp = mon->minvent; otmp; otmp = otmp2) {
 			    otmp2 = otmp->nobj;
-			    if (!oresist_disintegration(otmp)) {
+			    if (!oresist_disintegration(otmp) || otmp == m_amulet) {
 				if (Has_contents(otmp)) delete_contents(otmp);
 				obj_extract_self(otmp);
 				obfree(otmp, (struct obj *)0);

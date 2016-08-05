@@ -773,6 +773,7 @@ int thrown;
 	boolean giantkill = FALSE;
 	boolean silvermsg = FALSE, silverobj = FALSE;
 	boolean needrustmsg = FALSE;
+	boolean disint_obj = FALSE;
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
 #ifdef STEED
@@ -870,6 +871,36 @@ int thrown;
 		    tmp += rnd(20);
 		    silvermsg = TRUE;
 		}
+
+		if (touch_disintegrates(mdat) && !mon->mcan && (mon->mhp>6)){
+		    int dis_dmg;
+		    valid_weapon_attack =0;
+		    Sprintf(unconventional,"barehandedly striking %s", 
+		      an(mdat->mname));
+		    if (!flags.verbose) You("hit it.");
+		    else You("%s %s%s", Role_if(PM_BARBARIAN) ? "smite" : "hit",
+		      mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
+		    dis_dmg = instadisintegrate(unconventional);
+		    tmp = min( dis_dmg, tmp);
+		    unconventional[0] = '\0';
+		    disint_obj = TRUE;
+		    hittxt = TRUE;
+		}
+	  } else {
+		if(touch_disintegrates(mdat) && !mon->mcan && (mon->mhp>6) &&
+		  !oresist_disintegration(uarmg)){
+		    int dis_dmg = uarmg->owt;
+		    weight_dmg(dis_dmg);
+		    if (!flags.verbose) You("hit it.");
+		    else You("%s %s%s", Role_if(PM_BARBARIAN) ? "smite" : "hit",
+		      mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
+		    hittxt = TRUE;
+		    destroy_arm(uarmg);
+		    tmp = min( dis_dmg, tmp);
+		    disint_obj = TRUE;
+		    valid_weapon_attack =0;
+		}
+
 	    }
 
 	    /* WAC - Hand-to-Hand Combat Techniques */
@@ -950,7 +981,13 @@ int thrown;
 		    tmp += dmgbonus;
 	    } /* Techinuse Elemental Fist */		
 
-	} else {
+	  if (touch_disintegrates(mdat) && !oresist_disintegration(obj) &&
+	    mon->mhp>6 && !mon->mcan){
+	    disint_obj = TRUE;
+	    valid_weapon_attack = FALSE;
+	    tmp = obj->owt;
+	    weight_dmg(tmp);
+	  } else {
 	    if (obj->oartifact == ART_MAGICBANE) objenchant = 4;
 	    else if (obj->oartifact) objenchant += 2;
 
@@ -1526,7 +1563,8 @@ int thrown;
 		Your("%s %s no longer poisoned.", xname(obj),
 		     otense(obj, "are"));
 	    }
-	    if (resists_poison(mon))
+	    if (disint_obj) ;
+	    else if (resists_poison(mon))
 		needpoismsg = TRUE;
 	    else if (rn2(100))
 		tmp += rnd(6);
@@ -1549,6 +1587,25 @@ int thrown;
 		if (get_dmg_bonus) tmp = 1;
 	    }
 	}
+
+	if(disint_obj && obj){ /* all the hit msgs, no object destruction */
+	    if(obj->oclass == POTION_CLASS || obj->oclass == VENOM_CLASS ||
+	       obj->otyp == EGG || obj->otyp == CREAM_PIE){
+		if (cansee(mon->mx, mon->my))
+		    pline_The("%s %s in a %s of green light!", 
+		      xname(obj), vtense(xname(obj),"vanish"), 
+		      (obj->oclass == VENOM_CLASS)?"twinkle":"flash");
+		else
+		    pline("Vip!");
+		hittxt=TRUE;
+	    } else if (u.usteed && !thrown && tmp > 0 &&
+	      weapon_type(obj) == P_LANCE && mon != u.ustuck && joust(mon,obj)) {
+		You("joust %s%s",
+		  mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
+		Your("%s vanishes on impact!", xname(obj));
+		hittxt = TRUE;
+	   }
+	} else
 
 #ifdef STEED
 	if (jousting) {
@@ -1733,6 +1790,26 @@ int thrown;
 	      (void)destroy_mitem(mon, WAND_CLASS, AD_ELEC);
 	  }
 	}
+
+	if (disint_obj && obj) {
+	    if(!hittxt){
+		if(cansee(mon->mx,mon->my)){
+		    pline_The("%s %s!", mshot_xname(obj),
+		      (obj->oartifact)?"dissolves":"disintegrates");
+		} else {
+		    pline("Vip!%s", 
+		       (!thrown) ? "  Your weapon vanishes from your grip!":"");
+		}
+	    }
+	    if (!thrown) {
+		u.twoweap = FALSE;	/* untwoweapon() is too verbose here */
+		if (obj == uwep) uwepgone();		/* set unweapon */
+		useupall(obj);
+		obj = 0;
+	    } else {
+		/*obfree(obj, (struct obj *) 0 ); handled: elsewhere */
+	    }
+	} 
 
 	if (silvermsg) {
 		const char *fmt;
@@ -2341,6 +2418,11 @@ register struct attack *mattk;
 		    killer_format = KILLED_BY_AN;
 		    delayed_killer = mdef->data->mname;
 		}
+          	/*		handled in tohit
+
+                  } else if (touch_disintegrates(mdef->data)) {
+                  tmp += instadisintegrate(mdef->data->mname); */
+
 		if (!vegan(mdef->data))
 		    u.uconduct.unvegan++;
 		if (!vegetarian(mdef->data))
@@ -2748,7 +2830,8 @@ register struct attack *mattk;
 	    for (otmp = mdef->minvent; otmp; otmp = otmp->nobj)
 		(void) snuff_lit(otmp);
 
-	    if(!touch_petrifies(mdef->data) || Stone_resistance) {
+	    if((!touch_petrifies(mdef->data) || Stone_resistance)
+		&& (!touch_disintegrates(mdef->data) || Disint_resistance)){
 #ifdef LINT	/* static char msgbuf[BUFSZ]; */
 		char msgbuf[BUFSZ];
 #else
@@ -2913,6 +2996,7 @@ register struct attack *mattk;
 		You("bite into %s.", mon_nam(mdef));
 		Sprintf(kbuf, "swallowing %s whole", an(mdef->data->mname));
 		instapetrify(kbuf);
+		instadisintegrate(kbuf);
 	    }
 	}
 	return(0);
@@ -3192,6 +3276,36 @@ use_natural:
 			    else if (mattk->aatyp == AT_TENT)
 				    Your("tentacles suck %s.", mon_nam(mon));
 			    else You("hit %s.", mon_nam(mon));
+			    if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>1){
+				int dis_dmg = 0;
+				if(mattk->aatyp == AT_KICK && uarmf){
+				    if(!oresist_disintegration(uarmf)){
+					dis_dmg += uarmf->owt;
+					destroy_arm(uarmf);
+				    }
+				} else if(uarmg && (mattk->aatyp == AT_WEAP ||
+				  mattk->aatyp == AT_CLAW || mattk->aatyp == AT_TUCH)){
+				    if(!oresist_disintegration(uarmg)){
+					dis_dmg += uarmg->owt;
+					destroy_arm(uarmg);
+				    } 
+				} else if(mattk->aatyp == AT_BUTT && uarmh) {
+				    if(!oresist_disintegration(uarmh)){
+					dis_dmg += (uarmh->owt);
+					destroy_arm(uarmh);
+				    }
+				} else {
+				    char kbuf[BUFSZ];
+				    Sprintf(kbuf, "touching %s", an(mon->data->mname));
+				    mon->mhp -= instadisintegrate(kbuf);
+				}
+				sum[i] = 1;
+				if(dis_dmg){
+				    weight_dmg(dis_dmg);
+				}
+				mon->mhp -= dis_dmg;
+				if (mon->mhp < 1) mon->mhp = 1;
+			} else
 			    sum[i] = hit_touch[damageum(mon, mattk)];
 			} else
 			    missum(mon, tmp, dieroll, mattk);

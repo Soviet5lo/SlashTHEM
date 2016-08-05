@@ -245,6 +245,9 @@
 				 ptr == &mons[PM_BASILISK] || \
 				 ptr == &mons[PM_CHICKATRICE] || \
 				 ptr == &mons[PM_ASPHYNX])
+
+# define touch_disintegrates(ptr) ((ptr) == &mons[PM_DISINTEGRATOR])
+
 /* 5lo: Now a racial flag.
 #define is_mind_flayer(ptr)	((ptr) == &mons[PM_MIND_FLAYER] || \
 				 (ptr) == &mons[PM_ILLITHID] || \

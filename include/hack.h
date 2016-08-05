@@ -76,13 +76,14 @@
 #define DISSOLVED	 7
 #define CRUSHING	 8
 #define STONING		 9
-#define TURNED_SLIME 10
-#define GENOCIDED	11
-#define PANICKED	12
-#define TRICKED		13
-#define QUIT		14
-#define ESCAPED		15
-#define ASCENDED	16
+#define TURNED_SLIME    10
+#define DISINTEGRATED   11
+#define GENOCIDED	12
+#define PANICKED	13
+#define TRICKED		14
+#define QUIT		15
+#define ESCAPED		16
+#define ASCENDED	17
 
 #include "align.h"
 #include "dungeon.h"

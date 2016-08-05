@@ -57,7 +57,7 @@ STATIC_VAR short cham_to_pm[];
 #else
 STATIC_DCL struct obj *FDECL(make_corpse,(struct monst *));
 STATIC_DCL void FDECL(m_detach, (struct monst *, struct permonst *));
-STATIC_DCL void FDECL(lifesaved_monster, (struct monst *));
+STATIC_DCL void FDECL(lifesaved_monster, (struct monst *, uchar));
 static void FDECL(unpoly_monster, (struct monst *));
 
 /* convert the monster index of an undead to its living counterpart */
@@ -1807,8 +1807,9 @@ struct monst *mon;
 }
 
 STATIC_OVL void
-lifesaved_monster(mtmp)
+lifesaved_monster(mtmp,adtyp)
 struct monst *mtmp;
+uchar adtyp;
 {
 	int visible;
 	struct obj *lifesave = mlifesaver(mtmp);
@@ -1828,7 +1829,8 @@ struct monst *mtmp;
 				s_suffix(Monnam(mtmp)));
 			makeknown(AMULET_OF_LIFE_SAVING);
 			if (attacktype(mtmp->data, AT_EXPL)
-			    || attacktype(mtmp->data, AT_BOOM))
+			    || attacktype(mtmp->data, AT_BOOM)
+			    || adtyp == AD_DISN)
 				pline("%s reconstitutes!", Monnam(mtmp));
 			else
 				pline("%s looks much better!", Monnam(mtmp));
@@ -1887,6 +1889,14 @@ void
 mondead(mtmp)
 register struct monst *mtmp;
 {
+	mondead_helper(mtmp, 0); /* mmm... default parameter values */
+}
+
+void
+mondead_helper(mtmp, adtyp)
+register struct monst * mtmp;
+uchar adtyp; 
+{
 	struct permonst *mptr;
 	int tmp;
 
@@ -1905,7 +1915,7 @@ register struct monst *mtmp;
 	unpoly_monster(mtmp);
 	if (mtmp->mhp > 0) return;
 
-	lifesaved_monster(mtmp);
+	lifesaved_monster(mtmp, adtyp);
 	if (mtmp->mhp > 0) return;
 
 #ifdef STEED
@@ -2024,7 +2034,7 @@ boolean was_swallowed;			/* digestion */
 	struct permonst *mdat = mon->data;
 	int i, tmp;
 
-	if (mdat == &mons[PM_VLAD_THE_IMPALER] || mdat->mlet == S_LICH) {
+	if (mdat == &mons[PM_VLAD_THE_IMPALER] || mdat->mlet == S_LICH || mdat == &mons[PM_DISINTEGRATOR]) {
 	    if (cansee(mon->mx, mon->my) && !was_swallowed)
 		pline("%s body crumbles into dust.", s_suffix(Monnam(mon)));
 	    /* KMH -- make_corpse() handles Vecna */
@@ -2148,7 +2158,7 @@ register struct monst *mdef;
 	 * put inventory in it, and we have to check for lifesaving before
 	 * making the statue....
 	 */
-	lifesaved_monster(mdef);
+	lifesaved_monster(mdef, AD_STON);
 	if (mdef->mhp > 0) return;
 
 	mdef->mtrapped = 0;	/* (see m_detach) */
@@ -2242,8 +2252,8 @@ int how;
 	    be_sad = (mdef->mtame != 0 && !mdef->isspell);
 
 	/* no corpses if digested or disintegrated */
-	if(how == AD_DGST || how == -AD_RBRE)
-	    mondead(mdef);
+	if(how == AD_DGST || how == -AD_RBRE || how == AD_DISN)
+	    mondead_helper(mdef, how);
 	else
 	    mondied(mdef);
 
