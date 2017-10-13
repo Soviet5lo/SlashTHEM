@@ -570,6 +570,10 @@ register struct obj *obj;
 		hobj->quan = obj->quan;
 		/* WAC clean up */
 		buf = xname2(hobj);
+		
+		if (Has_contents(hobj))
+			delete_contents(hobj);
+		
 		obj_extract_self(hobj);                
 		dealloc_obj(hobj);
 
