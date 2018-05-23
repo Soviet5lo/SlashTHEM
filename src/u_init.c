@@ -3202,7 +3202,12 @@ u_init()
 	case PM_GIANT:
          if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
 		break;
-
+	case PM_HOBBIT:
+		skill_add(Skill_Hobbit);
+		break;
+	case PM_NYMPH:
+		skill_add(Skill_Nymph);
+		break;
 	default:	/* impossible */
 		break;
 	}
