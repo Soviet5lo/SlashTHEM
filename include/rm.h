@@ -247,6 +247,7 @@ extern uchar showsymcolors[MAXPCHARS];
 #define IBM_GRAPHICS	1	/* PC graphic characters */
 #define DEC_GRAPHICS	2	/* VT100 line drawing characters */
 #define MAC_GRAPHICS	3	/* Macintosh drawing characters */
+#define CURS_GRAPHICS   4   /* Portable curses drawing characters */
 
 /*
  * The 5 possible states of doors

@@ -378,7 +378,7 @@ doborgtoggle()
 }
 #endif
 
-#if defined(TTY_GRAPHICS) || defined(GL_GRAPHICS) || defined(SDL_GRAPHICS)
+#if defined(TTY_GRAPHICS) || defined(CURSES_GRAPHICS) || defined(GL_GRAPHICS) || defined(SDL_GRAPHICS)
 #define MAX_EXT_CMD 40		/* Change if we ever have > 40 ext cmds */
 /*
  * This is currently used only by the tty port and is
