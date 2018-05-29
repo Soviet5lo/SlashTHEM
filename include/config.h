@@ -467,7 +467,7 @@ typedef long glyph_t;
 #if !defined(MAC)
 # define CLIPPING	/* allow smaller screens -- ERS */
 #endif
-#ifdef TTY_GRAPHICS
+#if defined(TTY_GRAPHICS) || defined(CURSES_GRAPHICS)
 # define MENU_COLOR
 #endif
 
