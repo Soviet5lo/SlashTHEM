@@ -677,10 +677,18 @@ bot2str(char *newbot2)
         if (bot2_abbrev >= 2) {
 		if (hu_abbrev_stat[u.uhs][0]!='\0') {
 			Sprintf(nb = eos(nb), " ");
+#if defined(STATUS_COLORS) && defined(TEXTCOLOR)
+			if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
+			    add_colored_text(cahu_abbrev_stat[u.uhs], newbot2);
+			else
+			    add_colored_text(hu_abbrev_stat[u.uhs], newbot2);
+
+#else
 			if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
 			    Strcat(newbot2, cahu_abbrev_stat[u.uhs]);
 			else
 			    Strcat(newbot2, hu_abbrev_stat[u.uhs]);
+#endif
 		}
 	}
 	else if(strcmp(hu_stat[u.uhs], "        ")){
@@ -841,6 +849,7 @@ const char *str;
 unsigned int len;
 {
     static char cbuf[MAXCO];
+    if (bot2_abbrev) return str; /* no recursion! */
     for(bot2_abbrev = 1; bot2_abbrev <= 4; bot2_abbrev++) {
 	bot2str(cbuf);
 	if (strlen(cbuf) <= len)
