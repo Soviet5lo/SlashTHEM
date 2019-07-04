@@ -189,7 +189,7 @@ Version 1.0 (XXXX-XX-XX)
     - Drunks, Monks, Noblemen, Priests and Samurai can reach Basic in Music.
     - Tourists can reach Skilled in Music.
 
-- #enhance menu now shows the max skill level for an available skill.
+- enhance menu now shows the max skill level for an available skill.
 - Added more Hallucination gods, and now denote female Hallucination gods.
 - Reduced the chances of monsters spawning in pools and moats
 - Branch stairs are colored yellow if using dungeon_colors (from Unnethack)
