@@ -714,9 +714,15 @@ menu_item **pick_list;		/* return list of items picked */
 int how;			/* type of query */
 boolean FDECL((*allow), (OBJ_P));/* allow function */
 {
+#ifdef SORTLOOT
+       int i, j;
+#endif
 	int n;
 	winid win;
 	struct obj *curr, *last;
+#ifdef SORTLOOT
+       struct obj **oarray;
+#endif
 	char *pack;
 	anything any;
 	boolean printed_type_name;
@@ -740,6 +746,32 @@ boolean FDECL((*allow), (OBJ_P));/* allow function */
 	    (*pick_list)->count = last->quan;
 	    return 1;
 	}
+#ifdef SORTLOOT
+       /* Make a temporary array to store the objects sorted */
+       oarray = (struct obj **)alloc(n*sizeof(struct obj*));
+
+       /* Add objects to the array */
+       i = 0;
+       for (curr = olist; curr; curr = FOLLOW(curr, qflags)) {
+         if ((*allow)(curr)) {
+           if (iflags.sortloot == 'f' ||
+               (iflags.sortloot == 'l' && !(qflags & USE_INVLET)))
+             {
+               /* Insert object at correct index */
+               for (j = i; j; j--)
+                 {
+                   if (strcmpi(cxname2(curr), cxname2(oarray[j-1]))>0) break;
+                   oarray[j] = oarray[j-1];
+                 }
+               oarray[j] = curr;
+               i++;
+             } else {
+               /* Just add it to the array */
+               oarray[i++] = curr;
+             }
+         }
+       }
+#endif /* SORTLOOT */
 
 	win = create_nhwindow(NHW_MENU);
 	start_menu(win);
@@ -754,7 +786,12 @@ boolean FDECL((*allow), (OBJ_P));/* allow function */
 	pack = flags.inv_order;
 	do {
 	    printed_type_name = FALSE;
-	    for (curr = olist; curr; curr = FOLLOW(curr, qflags)) {
+#ifdef SORTLOOT
+           for (i = 0; i < n; i++) {
+               curr = oarray[i];
+#else /* SORTLOOT */
+            for (curr = olist; curr; curr = FOLLOW(curr, qflags)) {
+#endif /* SORTLOOT */
 		if ((qflags & FEEL_COCKATRICE) && (curr->otyp == CORPSE || curr->otyp == EGG) &&
 		     will_feel_cockatrice(curr, FALSE)) {
 			destroy_nhwindow(win);	/* stop the menu and revert */
@@ -781,6 +818,10 @@ boolean FDECL((*allow), (OBJ_P));/* allow function */
 	    }
 	    pack++;
 	} while (qflags & INVORDER_SORT && *pack);
+
+#ifdef SORTLOOT
+       free(oarray);
+#endif
 
 	end_menu(win, qstr);
 	n = select_menu(win, how, pick_list);

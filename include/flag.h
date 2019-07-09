@@ -332,6 +332,9 @@ struct instance_flags {
 #ifdef REALTIME_ON_BOTL
   boolean  showrealtime; /* show actual elapsed time */
 #endif
+#ifdef SORTLOOT
+	uchar	sortloot;
+#endif
 };
 
 /*
