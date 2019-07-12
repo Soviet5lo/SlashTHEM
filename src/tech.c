@@ -1036,26 +1036,17 @@ int tech_no;
 		break;
 #ifdef STEED
 	    case T_CALM_STEED:
-
-		if (u.usteed) pline("You calm your steed.");
-		int calmedX;
-		calmedX = 0;
-
                 if (u.usteed) {
-
-
-                        pline("%s gets tamer.", Monnam(u.usteed));
+                        /*pline("%s gets tamer.", Monnam(u.usteed));*/
+			You("attempt to calm your steed.");
                         tamedog(u.usteed, (struct obj *) 0);
-
-				while (calmedX == 0) { /* remove the stupid bug that caused this tech to do nothing --Amy */
-
-				if (u.usteed->mtame < 20) u.usteed->mtame++;
-
-				if (techlev(tech_no) < rnd(50)) calmedX++; /* high level tech has high chance of extra tameness */
-
-				}
-
-                        t_timeout = rn1(1000,500);
+			if (u.usteed->mtame >= 10) {
+			    pline("%s looks tame enough.", Monnam(u.usteed));
+			}else{
+			    u.usteed->mtame += rnd((techlev(tech_no) + 2) / 3);
+			    pline("%s gets tamer.", Monnam(u.usteed));
+			    t_timeout = rn1(200, 200);
+			}
                 } else
                         Your("technique is only effective when riding a monster.");
                 break;
