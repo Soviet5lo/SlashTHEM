@@ -2854,12 +2854,13 @@ struct monst *mtmp, *victim;
 	if ((int)++mtmp->m_lev >= mons[newtype].mlevel && newtype != oldtype) {
 	    ptr = &mons[newtype];
 
-		/* stupid sensemon function! Screw it, evolving messages will always be displayed now. --Amy */
-
-		/*if (sensemon(mtmp)) {*/
-			pline("What? %s is evolving!", mon_nam(mtmp) );
+	if (sensemon(mtmp)) {
+	    	if (Hallucination) {
+			pline("What? %s is evolving!", mon_nam(mtmp));
 			pline("%s evolved into %s!", mon_nam(mtmp), an(ptr->mname) );
-		/*}*/
+		} else
+			pline("%s has grown into %s.", mon_nam(mtmp), an(ptr->mname));
+	}
 
 	    if (mvitals[newtype].mvflags & G_GENOD) {	/* allow G_EXTINCT */
 		if (sensemon(mtmp))
