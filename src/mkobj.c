@@ -610,8 +610,8 @@ boolean artif;
 		case BAG_OF_HOLDING:
 		case MEDICAL_KIT:
 			mkbox_cnts(otmp);
-		blessorcurse(otmp, 8);
-					break;
+			blessorcurse(otmp, 8);
+			break;
 #ifdef TOURIST
 		case EXPENSIVE_CAMERA:
 #endif
@@ -666,17 +666,6 @@ boolean artif;
 			otmp->spe = rn1(5,10);
 			blessorcurse(otmp, 10);
 					break;
-		default: /* all the other tools --Amy */
-		if(!rn2(8)) {
-			otmp->spe = rne(2);
-			if (rn2(2)) otmp->blessed = rn2(2);
-			 else	blessorcurse(otmp, 3);
-		} else if(!rn2(10)) {
-			if (rn2(10)) curse(otmp);
-			 else	blessorcurse(otmp, 3);
-			otmp->spe = -rne(2);
-		} else	blessorcurse(otmp, 10);
-		break;
 	    }
 	    break;
 	case AMULET_CLASS:
@@ -690,7 +679,6 @@ boolean artif;
 			curse(otmp);
 		} else	blessorcurse(otmp, 10);
 	case VENOM_CLASS:
-		blessorcurse(otmp, 10);
 		break;
 	case CHAIN_CLASS:
 	case BALL_CLASS:
