@@ -195,7 +195,6 @@ static struct Bool_Opt
 	{"preload_tiles", &iflags.wc_preload_tiles, TRUE, DISP_IN_GAME},	/*WC*/
 	{"pushweapon", &flags.pushweapon, FALSE, SET_IN_GAME},
 	{"radar", (boolean *)0, FALSE, SET_IN_FILE},	/* OBSOLETE */
-	{"random_room_colors", &iflags.random_room_colors, FALSE, SET_IN_GAME},
 #if defined(MICRO) && !defined(AMIGA)
 	{"rawio", &iflags.rawio, FALSE, DISP_IN_GAME},
 #else
