@@ -1430,19 +1430,6 @@ struct Role urole =
 
 /* Table of all races */
 const struct Race races[] = {
-{	"alien", "alien", "alienhood", "Ali",
-	{0, 0},
-	PM_ALIEN, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_HUMAN, 0, MRACE_GNOME|MRACE_ORC,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{     15,     18, 15, 15, 15, 15 },
-	/* Init   Lower  Higher */
-	{  1, 0,  0, 1,  1, 0 },	/* Hit points */
-	{  1, 0,  1, 0,  1, 0 }		/* Energy */
-},
 
 {	"clockwork automaton", "automatic", "clockwork-kind", "Clk",
 	{0, 0},

@@ -2990,11 +2990,6 @@ u_init()
 		ini_inv(Xtra_fopod);
 	    }
 	    break;
-	case PM_ALIEN: /* this is the harder than hard race, combine it with convict role for maximum torture */
-	    adjalign(-10); 
-	    change_luck(-3);
-	    /*ini_inv(AlienItem);*/
-	    	break;
 	case PM_KOBOLD:
 	    if(!Role_if(PM_CONVICT)) {
 		ini_inv(KoboldItem);		

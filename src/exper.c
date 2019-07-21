@@ -279,7 +279,6 @@ newexplevel()
 			case PM_VALKYRIE: u.uenbase += rnd(2); break;
 			case PM_WIZARD: u.uenbase += rnd(6) + 2; break;
 			case PM_CONVICT: break;
-			/*case PM_ALIEN: break;
 			case PM_OGRE: break;
 			case PM_KOBOLD: break;
 			case PM_TROLL: break;
