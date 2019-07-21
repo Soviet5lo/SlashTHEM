@@ -888,9 +888,6 @@ register struct monst *mtmp;
 		    verbl_msg = "Little strawberry me baby!";
 		    break;
 #endif
-		case PM_BLEEDER:
-		    verbl_msg = "*sigh* If only I could make this bleeding stop...";
-		    break;
 		case PM_ROCKER:
 	    pline_msg = "talks about groovy music.";
 		    break;

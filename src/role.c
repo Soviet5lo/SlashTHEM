@@ -176,33 +176,6 @@ const struct Role roles[] = {
 	-5, 10, 5, 10,  25, A_INT, SPE_SLEEP,             -14
 },
 
-{	{"Bleeder", 		 0}, {
-	{"Leg-scratched Boy",        "Leg-scratched Girl"},
-	{"Wounded Guy",      "Wounded Gal"},
-	{"Dripper",      0},
-	{"Pourer",       0},
-	{"Red Lake Creator", 0},
-	{"Tearshedder", 0},
-	{"Unlucky Individual",       0},
-	{"Diseased Sibling",     0},
-	{"Cursed King",    "Cursed Queen"} },
-	"Glycocalyx", "Fibrinogen", "_Hemophilia", /* hereditary disease */
-	"Ble", "hemorrhagic hospital", "red-sprinkled battle area",
-	PM_BLEEDER, NON_PM, PM_UNDEAD_BLEEDER, NON_PM, NON_PM,
-	PM_DISEASED_HEIR, PM_UNFORTUNATE_VICTIM, PM_BLOODY_BEAUTIES,
-	PM_LOCUST, PM_GRAY_FUNGUS, S_FUNGUS, S_HUMAN,
-	ART_SCALPEL_OF_THE_BLOODLETTER,
-	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT|MRACE_NYMPH | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_NEUTRAL,
-	/* Str Int Wis Dex Con Cha */
-	{  6,  6,  6,  6,  6,  6 },
-	{  12,  20,  24, 8, 10,  26 },
-	/* Init   Lower  Higher */
-	{ 20, 0,  0, 16,  12, 0 },	/* Hit points */
-	{  8, 0,  4, 0,  4, 0 },15,	/* Energy */
-	0, 10, 5, 10,  25, A_INT, SPE_FULL_HEALING,             -4
-},
-
 {	{"Caveman", "Cavewoman"}, {
 	{"Troglodyte",  0},
 	{"Aborigine",   0},

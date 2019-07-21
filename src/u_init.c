@@ -62,19 +62,6 @@ static struct trobj Binder[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Bleeder[] = {
-	{ KNIFE, 0, WEAPON_CLASS, 1, 0 },
-	{ POT_VAMPIRE_BLOOD, 0, POTION_CLASS, 2, 0 },
-	{ LAB_COAT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ MIRROR, 0, TOOL_CLASS, 1, 0 },
-	{ CAN_OF_GREASE, UNDEF_SPE, TOOL_CLASS, 1, 0 },
-	{ FOOD_RATION, 0, FOOD_CLASS, 2, 0 },
-	{ SPE_PROTECTION, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ SPE_RESIST_POISON, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ SPE_BOTOX_RESIST, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Bard[] = {
 #define BARD_INSTR 1
 #define BARD_BOOZE 5
@@ -1255,30 +1242,6 @@ static const struct def_skill Skill_Bin[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Ble[] = {
-    /* Mainly uses edged weapons. --Amy */
-    /* 5lo: Normalized the skills from Slash'EM Extended */
-    { P_DAGGER, P_SKILLED },            { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_BASIC },                 
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_BASIC },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_POLEARMS, P_BASIC },
-    { P_BOW, P_BASIC },                 { P_CROSSBOW, P_BASIC },
-    { P_UNICORN_HORN, P_BASIC },	/* Because of it's healing properties */
-
-    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
-    { P_MATTER_SPELL, P_BASIC },
-
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_MARTIAL_ARTS, P_EXPERT },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Ele[] = {
 /* 5lo: Copy-paste of Flame Mage */
 /*Style: small-med edged weapons, blunt weapons*/
@@ -1371,24 +1334,6 @@ static const struct def_skill Skill_Dru[] = {
     { P_MUSICALIZE, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_RIDING, P_BASIC },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Gan[] = {
-    /* 5lo: Effectively a slight modification of the Courier above */
-    { P_KNIFE,  P_EXPERT },		{ P_DAGGER, P_EXPERT },
-    { P_SHORT_SWORD, P_BASIC },		{ P_LONG_SWORD, P_BASIC },
-    { P_HAMMER, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
-    { P_CLUB, P_EXPERT },		{ P_MACE, P_BASIC },
-    { P_CROSSBOW, P_SKILLED },		{ P_FLAIL, P_BASIC },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_SLING, P_BASIC },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
@@ -2410,7 +2355,6 @@ u_init()
 	u.monstertimeout = rnd(10000)+15000;
 	u.monstertimefinish = 70000L-u.monstertimeout;
 #endif
-	u.legscratching = (Role_if(PM_BLEEDER) ? 3 : 1); /*must also be set here; this may increase over time*/
 	u.next_check = 600; /* 5lo: Different method of doing attribute checks in attrib.c */
 
 	u.urmaxlvlB = 1; /* will go up if a cyborg role player levels up */
@@ -2475,10 +2419,6 @@ u_init()
 		skill_init(Skill_Bin);
 	  u.ualign.sins += 16; /*One transgression is all it takes*/
 	    change_luck(-1); /*One resurection or two rehumanizations is all it takes*/
-		break;
-	case PM_BLEEDER:
-		ini_inv(Bleeder);
-		skill_init(Skill_Ble);
 		break;
 	case PM_BARD:
 		if (rn2(100) >= 50) Bard[BARD_INSTR].trotyp = WOODEN_FLUTE;
@@ -3300,7 +3240,6 @@ int otyp;
      case PM_BARBARIAN:		skills = Skill_B; break;
      case PM_BARD:		skills = Skill_Bard; break;
      case PM_BINDER:			skills = Skill_Bin; break;
-     case PM_BLEEDER:			skills = Skill_Ble; break;
      case PM_CAVEMAN:		skills = Skill_C; break;
 #ifdef CONVICT
      case PM_CONVICT:		skills = Skill_Con; break;

@@ -511,15 +511,6 @@ boolean message;
 		You("finish %s %s.", victual.piece->odrained ? "draining" :
 		  "eating", food_xname(victual.piece, TRUE));
 
-	/* Bleeders who can drain corpses will benefit from doing so */
-	if(victual.piece->otyp == CORPSE && victual.piece->odrained && Role_if(PM_BLEEDER) ) {
-
-		pline("That blood really hit the spot!");
-		healup(d(8,8) + rnd(u.ulevel), 0, TRUE, TRUE);
-		exercise(A_CON, TRUE);
-
-	}
-
 	if(victual.piece->otyp == CORPSE) {
 		if (!victual.piece->odrained || /*Race_if(PM_VAMPIRE) &&*/ !rn2(5))
 		cpostfx(victual.piece->corpsenm);

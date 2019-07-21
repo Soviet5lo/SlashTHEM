@@ -121,12 +121,6 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	bar_tech[] = { {   1, T_BERSERK, 1},
 		       {   0, 0, 0} },
-	ble_tech[] = { {   1, T_SURGERY, 1},
-		       {   1, T_HEAL_HANDS, 1},
-		       {   1, T_DRAW_BLOOD, 1},
-		       {   10, T_CHI_HEALING, 1},
-		       {   20, T_REVIVE, 1},
-		       {   0, 0, 0} },
 	roc_tech[] = { {   1, T_FLURRY, 1},
 		       {   0, 0, 0} },
 	cav_tech[] = { {   1, T_PRIMAL_ROAR, 1},
@@ -2259,7 +2253,6 @@ role_tech()
 		case PM_ARCHEOLOGIST:	return (arc_tech);
 		case PM_DRUNK:	return (dru_tech);
 		case PM_BARBARIAN:	return (bar_tech);
-		case PM_BLEEDER:	return (ble_tech);
 		case PM_CAVEMAN:	return (cav_tech);
 		case PM_BARD:	return (brd_tech);
 		case PM_FLAME_MAGE:	return (fla_tech);

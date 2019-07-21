@@ -1442,7 +1442,7 @@ $(DAT)\oracles:	     utility.tag    $(DAT)\oracles.txt
 	-makedefs -h
 
 sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
-		$(DAT)\blkmar.des   $(DAT)\castle.des   $(DAT)\bleeder.des   $(DAT)\grund.des \
+		$(DAT)\blkmar.des   $(DAT)\castle.des   $(DAT)\grund.des \
 		$(DAT)\dragons.des  $(DAT)\endgame.des  $(DAT)\gehennom.des \
 		$(DAT)\giants.des   $(DAT)\guild.des    $(DAT)\knox.des \
 		$(DAT)\kobold-1.des $(DAT)\kobold-2.des $(DAT)\unheck.des $(DAT)\lich.des \
@@ -1472,7 +1472,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/beholder.des
 	lev_comp $(DDAT)/bigroom.des
 	lev_comp $(DDAT)/blkmar.des
-	lev_comp $(DDAT)/bleeder.des
 	lev_comp $(DDAT)/castle.des
 	lev_comp $(DDAT)/compu.des
 	lev_comp $(DDAT)/convict.des

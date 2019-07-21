@@ -2236,12 +2236,6 @@ register struct attack *mattk;
 				   considered to be primarily a non-physical
 				   effect */
 				lesshungry(xtmp * 12);
-				if (Role_if(PM_BLEEDER)) { /* Bleeders get better from drinking blood */
-
-					pline("This tastes good.");
-					healup(d(5,5) + rnd(u.ulevel), 0, FALSE, FALSE);
-					exercise(A_CON, TRUE);
-				}
 			}
 			pline("%s suddenly seems weaker!", Monnam(mdef));
 			mdef->mhpmax -= xtmp;

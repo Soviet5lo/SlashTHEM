@@ -3759,8 +3759,6 @@ register int n;
 	if (!rn2(20) && n >= 1 && u.ulevel >= 20) {n = n / 5; if (n < 1) n = 1;}
 	if (!rn2(50) && n >= 1 && u.ulevel >= 30) {n = n / 10; if (n < 1) n = 1;}
 #endif /* EASY_MODE */
-	if (Role_if(PM_BLEEDER)) n = n * 2; /* bleeders are harder than hard mode */
-
 	if (Invulnerable) n=0;
 	if (n == 0) {
 		pline("You are unharmed.");

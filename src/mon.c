@@ -112,7 +112,6 @@ int mndx, mode;
 	case PM_CHIEFTAIN:   mndx = mode ? PM_BARBARIAN : PM_HUMAN; break;
 	case PM_NEANDERTHAL: mndx = mode ? PM_CAVEMAN   : PM_HUMAN; break;
 	case PM_ATTENDANT:   mndx = mode ? PM_HEALER    : PM_HUMAN; break;
-	case PM_UNFORTUNATE_VICTIM:   mndx = mode ? PM_BLEEDER    : PM_HUMAN; break;
 	case PM_PAGE:        mndx = mode ? PM_KNIGHT    : PM_HUMAN; break;
 	case PM_RHYMER:      mndx = mode ? PM_BARD   : PM_HUMAN; break;
 	case PM_ABBOT:       mndx = mode ? PM_MONK      : PM_HUMAN; break;
@@ -280,7 +279,6 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_ARCHEOLOGIST:
 	    case PM_UNDEAD_BARBARIAN:
 	    case PM_UNDEAD_BINDER:
-	    case PM_UNDEAD_BLEEDER:
 	    case PM_UNDEAD_BARD:
 	    case PM_UNDEAD_CAVEMAN:
 	    case PM_UNDEAD_CAVEWOMAN:

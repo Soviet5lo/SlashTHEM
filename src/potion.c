@@ -1123,14 +1123,6 @@ peffects(otmp)
 		unkn++;
 		u.uconduct.unvegan++;
 
-		if (Role_if(PM_BLEEDER) && !otmp->cursed) {
-
-		pline("Your tortured body experiences a strange sense of joy as your lips touch the warm red liquid.");
-		if (otmp->otyp == POT_VAMPIRE_BLOOD) u.uhpmax += 1;
-		u.uhp = u.uhpmax;
-
-		}
-
 		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)) {
 		    violated_vegetarian();
 		    if (otmp->cursed)

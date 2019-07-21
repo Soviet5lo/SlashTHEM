@@ -358,7 +358,6 @@ struct you {
 	int monstertimeout; 	/* when monster spawns are increasing in frequency */
 	int monstertimefinish; 	/* point in time when monster spawns are at their maximum */
 #endif
-	int legscratching; 	/* for special AT_KICK attacks */
 	int next_check; 	/* attrib.c check */
 
 	int urmaxlvlB;		/* for cyborg role */

@@ -211,28 +211,6 @@ nh_timeout()
 	    baseluck++;
 	if (flags.friday13) baseluck -= 1;
 
-	if (u.legscratching > 1 && !Role_if(PM_BLEEDER) && moves % 1000 == 0) u.legscratching--; /* always time out once per 1000 turns --Amy */
-
-	/* special bleeder handling --Amy */
-	if (!rn2(200) && Role_if(PM_BLEEDER)) {
-		You("are losing blood!");
-		losehp(rnd(u.legscratching), "bleeding out", KILLED_BY);
-	}
-
-	if (!rn2(1000) && Role_if(PM_BLEEDER)) {
-		You("are losing lots of blood!");
-		u.uhp -= 1;
-		u.uhpmax -= 1;
-		u.uen -= 1;
-		u.uenmax -= 1;
-		losehp(rnd(u.legscratching), "severe bleedout", KILLED_BY);
-	}
-
-	if (!rn2(3000) && Role_if(PM_BLEEDER)) {
-		pline("Your scratching wounds are bleeding %s worse than before!", rn2(2) ? "even" : "much");
-		u.legscratching++;
-	}
-
 	if (u.uluck != baseluck &&
 		moves % (u.uhave.amulet || u.ugangr ? 300 : 600) == 0) {
 	/* Cursed luckstones stop bad luck from timing out; blessed luckstones

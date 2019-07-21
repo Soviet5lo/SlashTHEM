@@ -555,13 +555,8 @@ register struct monst *mtmp;
 		     (void)mongets(mtmp, LEATHER_CLOAK);
 		   break;
 
-		   case PM_BLEEDER:
-		   case PM_UNDEAD_BLEEDER:
-		     (void)mongets(mtmp, KNIFE);
-		     (void)mongets(mtmp, LAB_COAT);
-		   break;
-
-		   case PM_BARD: case PM_UNDEAD_BARD:
+		   case PM_BARD:
+		   case PM_UNDEAD_BARD:
 		     (void)mongets(mtmp, LEATHER_CLOAK);
 #ifndef GOLDOBJ
 		     mtmp->mgold = (long) d(mtmp->m_lev, 15);
