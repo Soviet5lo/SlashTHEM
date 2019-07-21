@@ -335,15 +335,15 @@
 
 #define HPolymorph		u.uprops[POLYMORPH].intrinsic
 #define EPolymorph		u.uprops[POLYMORPH].extrinsic
-#define Polymorph		(HPolymorph || EPolymorph || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD))
+#define Polymorph		(HPolymorph || EPolymorph)
 
 #define HPolymorph_control	u.uprops[POLYMORPH_CONTROL].intrinsic
 #define EPolymorph_control	u.uprops[POLYMORPH_CONTROL].extrinsic
-#define Polymorph_control	((HPolymorph_control || EPolymorph_control) && !Race_if(PM_MOULD) && !Race_if(PM_UNGENOMOLD))
+#define Polymorph_control	(HPolymorph_control || EPolymorph_control)
 
 #define HUnchanging		u.uprops[UNCHANGING].intrinsic
 #define EUnchanging		u.uprops[UNCHANGING].extrinsic
-#define Unchanging		((HUnchanging || EUnchanging) && !Race_if(PM_MOULD) && !Race_if(PM_UNGENOMOLD))	/* KMH */
+#define Unchanging		(HUnchanging || EUnchanging)	/* KMH */
 
 #define HFast			u.uprops[FAST].intrinsic
 #define EFast			u.uprops[FAST].extrinsic

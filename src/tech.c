@@ -1747,20 +1747,16 @@ int tech_no;
 		t_timeout = rn1(1000,500);
 		break;            	
 	    case T_DRAW_BLOOD:
-		/*if (!maybe_polyd(is_vampire(youmonst.data),
-		  Race_if(PM_VAMPIRE)) && !Race_if(PM_UNGENOMOLD) ) {*/
+		if (!maybe_polyd(is_vampire(youmonst.data),
+		  Race_if(PM_VAMPIRE))) {
 		    /* ALI
 		     * Otherwise we get problems with what we create:
 		     * potions of vampire blood would no longer be
 		     * appropriate.
-		     * Note by Amy: Ungenomolds will be able to use this anyway. They may polymorph into a vampire,
-		     * which would make the potions useful for them. Even if they don't, they can still dilute them.
-		     * another note by Amy: who cares? If they can't use it in their current form, too bad. It's still
-		     * better than simply disabling the tech altogether.
 		     */
-		    /*You("must be in your natural form to draw blood.");
+		    You("must be in your natural form to draw blood.");
 		    return(0);
-		}*/
+		}
 		obj = use_medical_kit(PHIAL, TRUE, "draw blood with");
 		if (!obj)
 		    return 0;
@@ -2332,7 +2328,6 @@ race_tech()
 		case PM_GNOME:		return (gno_tech);
 		case PM_KOBOLD:		return (kob_tech);
 		case PM_OGRE:		return (ogr_tech);
-		case PM_UNGENOMOLD:		return (ung_tech);
 		case PM_HOBBIT:		return (hob_tech);
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);
 		case PM_VAMPIRE:	return (vam_tech);

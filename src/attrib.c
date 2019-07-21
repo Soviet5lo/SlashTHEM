@@ -865,7 +865,6 @@ int oldlevel, newlevel;
 	case PM_KOBOLD:            rabil = kob_abil;	break;
 	case PM_TROLL:            rabil = tro_abil;	break;
 	case PM_ILLITHID:            rabil = ill_abil;	break;
-	case PM_UNGENOMOLD:            rabil = ung_abil;	break;
 	case PM_GHOUL:            rabil = gul_abil;	break;
 	case PM_GIANT:            rabil = gia_abil;	break;
 	case PM_NYMPH:            rabil = nym_abil;	break;

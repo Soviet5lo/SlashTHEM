@@ -472,9 +472,6 @@ moveloop()
 			    change = 0;
 			if(Polymorph && !rn2(1000))
 			    change = 1;
-	/* let's allow the moulds to stop sucking so much. Make them polymorph more often. --Amy */
-			if(Polymorph && !rn2(200) && !Upolyd && Race_if(PM_MOULD) )
-			    change = 1;
 			else if (u.ulycn >= LOW_PM && !Upolyd &&
 				 !rn2(1200 - (200 * night())))
 			    change = 2;
@@ -884,14 +881,6 @@ boolean new_game;	/* false => restoring an old game */
 
 	}
 
-	if (Race_if(PM_UNGENOMOLD) && new_game) {
-		  makeknown(SCR_GENOCIDE);
-	    polyself(FALSE);
-		mvitals[PM_UNGENOMOLD].mvflags |= (G_GENOD|G_NOCORPSE);
-	    pline("Wiped out all ungenomolds.");
- 		You_feel("dead inside.");
-
-	}
 #ifdef LIVELOGFILE
 	/* Start live reporting */
 		  livelog_start();

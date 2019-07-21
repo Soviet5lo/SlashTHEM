@@ -119,7 +119,6 @@
 #define is_nymph(ptr)		(((ptr)->mflagsr & MRACE_NYMPH) != 0L)
 #define is_ogre(ptr)		(((ptr)->mflagsr & MRACE_OGRE) != 0L)
 #define is_troll(ptr)		(((ptr)->mflagsr & MRACE_TROLL) != 0L)
-#define is_mould(ptr)		(((ptr)->mflagsr & MRACE_MOULD) != 0L)
 #define your_race(ptr)		(((ptr)->mflagsr & urace.selfmask) != 0L)
 /* Back to normal */
 #define is_bat(ptr)		((ptr) == &mons[PM_BAT] || \

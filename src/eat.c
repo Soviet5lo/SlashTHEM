@@ -60,8 +60,8 @@ char msgbuf[BUFSZ];
 
 /* also used to see if you're allowed to eat cats and dogs */
 #define CANNIBAL_ALLOWED() (Role_if(PM_CAVEMAN) || Role_if(PM_LUNATIC) || Race_if(PM_ORC) || \
-Race_if(PM_TROLL) ||  Race_if(PM_OGRE) || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD) || \
-Race_if(PM_HUMAN_WEREWOLF) || Race_if(PM_VAMPIRE)|| Race_if(PM_GHOUL))
+Race_if(PM_TROLL) ||  Race_if(PM_OGRE) ||Race_if(PM_HUMAN_WEREWOLF) || Race_if(PM_VAMPIRE)|| \
+Race_if(PM_GHOUL))
 
 #ifndef OVLB
 

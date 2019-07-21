@@ -3350,12 +3350,6 @@ void undo_genocide(void)
 			pline("This creature has not been genocided.");
 			continue;
 		}
-		if (mn == PM_UNGENOMOLD) {
-
-			pline("For some reason, you cannot ungenocide this species!");
-			continue;
-		}
-
 		/*mons[mn].geno*/mvitals[mn].mvflags &= ~G_GENOD;
 		pline("The race of %s now exist again.",makeplural(buf));
 		break;

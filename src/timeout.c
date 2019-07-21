@@ -261,7 +261,7 @@ nh_timeout()
 	if(Vomiting) vomiting_dialogue();
 	if(Strangled) choke_dialogue();
 	if(u.mtimedone && !--u.mtimedone) {
-		if (Unchanging || Race_if(PM_UNGENOMOLD) )
+		if (Unchanging)
 			u.mtimedone = rnd(100*youmonst.data->mlevel + 1);
 		else
 			rehumanize();

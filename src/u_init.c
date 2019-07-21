@@ -3179,9 +3179,6 @@ u_init()
 	case PM_GHOUL:
           /*ini_inv(GhastFood);*/
 		break;
-	case PM_UNGENOMOLD:
-          if(!Role_if(PM_CONVICT)) ini_inv(UngMoldWand);		
-		break;
 	case PM_CLOCKWORK_AUTOMATON:
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
 		break;
@@ -3561,9 +3558,6 @@ register struct trobj *trop;
             }
 #endif /* CONVICT */
             if (obj->otyp == LOADSTONE ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == WAN_DEATH && (Race_if(PM_UNGENOMOLD))) {
                 obj->cursed = TRUE;
             }
 			if (trop->trspe != UNDEF_SPE)
