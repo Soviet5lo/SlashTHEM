@@ -127,8 +127,6 @@ static const struct innate_tech
 		       {   10, T_CHI_HEALING, 1},
 		       {   20, T_REVIVE, 1},
 		       {   0, 0, 0} },
-	gan_tech[] = { {   1, T_CREATE_AMMO, 1},
-		       {   0, 0, 0} },
 	roc_tech[] = { {   1, T_FLURRY, 1},
 		       {   0, 0, 0} },
 	cav_tech[] = { {   1, T_PRIMAL_ROAR, 1},
@@ -311,16 +309,6 @@ static const struct innate_tech
 		       {   10, T_BERSERK, 1},
 		       {   15, T_PRIMAL_ROAR, 1},
 		       {   20, T_CRIT_STRIKE, 1},
-		       {   0, 0, 0} },
-	ung_tech[] = { {   1, T_WORLD_FALL, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_RESEARCH, 1},
-		       {   1, T_PRACTICE, 1},
-		       {   1, T_CALM_STEED, 1},
-		       {   1, T_TURN_UNDEAD, 1},
-		       {   1, T_BLESSING, 1},
-		       {   1, T_DRAW_BLOOD, 1},
-		       {   1, T_SURGERY, 1},
 		       {   0, 0, 0} },
 	hob_tech[] = { {   1, T_BLINK, 1},
 		       {   1, T_APPRAISAL, 1},
@@ -2290,7 +2278,6 @@ role_tech()
 		case PM_POKEMON: 		return (pok_tech);
 		case PM_PSION: 		return (psi_tech);
 #endif
-		case PM_GANGSTER: 		return (gan_tech);
 		case PM_ROCKER: 		return (roc_tech);
 		case PM_NECROMANCER:	return (nec_tech);
 		case PM_NINJA:		return (nin_tech);

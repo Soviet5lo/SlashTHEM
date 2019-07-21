@@ -467,33 +467,6 @@ const struct Role roles[] = {
 	2, 10, A_INT, SPE_FIREBALL,        -4 /* From old role.c */
 },
 
-{	{"Gangster", 0}, {
-	{"Low Thug",     0},
-	{"Pickpocketer",   0},
-	{"Street Criminal",0},
-	{"Carjacker",0},
-	{"Wanted Criminal",    0},
-	{"Gang Member",   0},
-	{"Mafia Member",     0},
-	{"The Don's Right Hand",    0},
-	{"Mafia Don",  0} },
-	"Claude Speed", "Carl CJ Johnson", "Tommy Vercetti",	/* Grand Theft Auto */
-	"Gan", "Gang Headquarters", "the enemy gang's hideout",
-	PM_GANGSTER, NON_PM, PM_UNDEAD_GANGSTER, NON_PM, PM_LITTLE_DOG,
-	PM_DAVE, PM_FELLOW_GANGSTER, PM_AMY_BLUESCREENOFDEATH,
-	PM_SOLDIER, PM_LIEUTENANT, S_HUMAN, S_HUMAN,
-	ART_TOMMY_GUN_OF_CAPONE,
-	MRACE_HUMAN|MRACE_ELF|MRACE_WERE|MRACE_ORC|MRACE_KOBOLD|MRACE_OGRE | 
-	ROLE_MALE|ROLE_FEMALE|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  10,  7,  7,  7, 13,  6 },
-	{  20, 20, 10, 20, 20, 10 },
-	/* Init   Lower  Higher */
-	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
-	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
-	-5, 5, 0, 2, 10, A_INT, SPE_CONFUSE_MONSTER,   -4
-},
-
 {	{"Geek", 0}, {
 	{"Newbie",    0},
 	{"BASIC Programmer",        "BASIC Programmeress"},

@@ -287,8 +287,9 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_PALADIN:
 	    case PM_UNDEAD_CHEF:
 	    case PM_UNDEAD_ZYBORG:
-	    case PM_UNDEAD_GANGSTER:
+#if 0
 	    case PM_UNDEAD_POKEMON:
+#endif
 	    case PM_UNDEAD_ELECTRIC_MAGE:
 	    case PM_UNDEAD_ACID_MAGE:
 	    case PM_UNDEAD_FLAME_MAGE:
@@ -303,7 +304,9 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_KNIGHT:
 	    case PM_UNDEAD_WARRIOR:
 	    case PM_UNDEAD_MONK:
+#if 0
 	    case PM_UNDEAD_PSION:
+#endif
 	    case PM_UNDEAD_NECROMANCER:
 	    case PM_UNDEAD_NOBLEMAN:
 	    case PM_UNDEAD_NOBLEWOMAN:

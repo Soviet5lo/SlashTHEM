@@ -880,9 +880,6 @@ register struct monst *mtmp;
 		    verbl_msg = "Aloha.";
 		    break;
 #endif
-		case PM_GANGSTER:
-	    pline_msg = "talks about doing a drive-by.";
-		    break;
 		case PM_GEEK:
 		    verbl_msg = "Enematzu memalezu!";
 		    break;

@@ -278,14 +278,6 @@ static struct trobj Ninja[] = {
 	{ 0, 0, 0, 0, 0, }
 };
 
-static struct trobj Gangster[] = {
-	{ KNIFE, 0, WEAPON_CLASS, 1, UNDEF_BLESS }, /* That ammo won't carry them far.  Give them a knife.  */
-	{ SUBMACHINE_GUN, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 30, 0 },
-	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 #if 0 /* Deferred */
 static struct trobj Pokemon[] = {
 	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 5, 0 },
@@ -2517,10 +2509,6 @@ u_init()
 		ini_inv(Chef);
 		skill_init(Skill_Chef);
 		break;
-	case PM_GANGSTER:
-		ini_inv(Gangster);
-		skill_init(Skill_Gan);
-		break;
 #if 0
 	case PM_POKEMON:
 		ini_inv(Pokemon);
@@ -3326,7 +3314,6 @@ int otyp;
      case PM_FLAME_MAGE:		skills = Skill_F; break;
      case PM_GEEK:		skills = Skill_G; break;
      case PM_SCIENTIST:		skills = Skill_Sci; break;
-     case PM_GANGSTER:		skills = Skill_Gan; break;
      case PM_HEALER:		skills = Skill_H; break;
      case PM_JEDI:		skills = Skill_J; break;
      case PM_KNIGHT:		skills = Skill_K; break;

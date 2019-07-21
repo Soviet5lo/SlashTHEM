@@ -672,14 +672,6 @@ register struct monst *mtmp;
 		     (void)mongets(mtmp, STEEL_WHIP);
 		   break;
 
-		   case PM_GANGSTER:
-		   case PM_UNDEAD_GANGSTER:
-		     (void)mongets(mtmp, SUBMACHINE_GUN);
-			 m_initthrow(mtmp, BULLET, 50);
-			 m_initthrow(mtmp, BULLET, 50);
-		     (void)mongets(mtmp, LEATHER_JACKET);
-		   break;
-
 #if 0
 		   case PM_POKEMON:
 		   case PM_UNDEAD_POKEMON:
