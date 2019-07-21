@@ -412,7 +412,7 @@ WEAPON("steel whip", (char *)0,
 
 #ifdef KOPS
 WEAPON("rubber hose", (char *)0,
-	1, 0, 0,  3, 20,  3,  4,  3, 0, B,   P_WHIP, PLASTIC, CLR_BROWN),
+	1, 0, 0,  3, 20,  3,  4,  3, 0, 0,   P_WHIP, PLASTIC, CLR_BROWN),
 #endif
 
 /* With shuffled appearances... */
