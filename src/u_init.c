@@ -278,22 +278,6 @@ static struct trobj Graduate[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Scientist[] = {
-	{ SCALPEL, 1, WEAPON_CLASS, 1, 1},
-	{ RUBBER_GLOVES, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ LAB_COAT, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ POT_RADIUM, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_CYANIDE, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_PARALYSIS, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_ACID, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_SICKNESS, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ BOTTLE, 0, TOOL_CLASS, 3, 0 },
-	{ SANDWICH, 0, FOOD_CLASS, 2, UNDEF_BLESS },
-	{ SPE_CHEMISTRY, 5, SPBOOK_CLASS, 1, UNDEF_BLESS },
-	{ CHEMISTRY_SET, 40, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Healer[] = {
 	{ SCALPEL, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ RUBBER_GLOVES, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -1291,34 +1275,6 @@ static const struct def_skill Skill_Dru[] = {
     { P_RIDING, P_BASIC },
     { P_NONE, 0 }
 };
-
-static const struct def_skill Skill_Sci[] = {
-    /* 5lo: Doppelganger skills from Slash'EM 0.0.6 + Healer magic */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_SKILLED },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
-    { P_MACE, P_SKILLED },              { P_MORNING_STAR, P_SKILLED },
-    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },
-    { P_POLEARMS, P_BASIC },            { P_SPEAR, P_BASIC },
-#ifdef FIREARMS
-    { P_FIREARM, P_BASIC },
-#endif
-    { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },               { P_SHURIKEN, P_SKILLED },
-
-    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_BASIC },
-    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_BASIC },
-    { P_MATTER_SPELL, P_BASIC },
-#ifdef STEED
-    { P_RIDING, P_BASIC },
-#endif
-    { P_BARE_HANDED_COMBAT, P_BASIC },
-    { P_NONE, 0 }
-};
-
 
 static const struct def_skill Skill_G[] = {
     /* 5lo: They've mostly learned by movies and video games */
@@ -2535,13 +2491,6 @@ u_init()
 		skill_init(Skill_Gra);
 		break;
 
-	case PM_SCIENTIST:
-		ini_inv(Scientist);
-		skill_init(Skill_Sci);
-		knows_object(CHEMISTRY_SET);
-		knows_class(POTION_CLASS);
-		break;
-
 #ifdef JEDI
 	case PM_JEDI:
 		ini_inv(Jedi);
@@ -3201,7 +3150,6 @@ int otyp;
      case PM_ACID_MAGE:		skills = Skill_Aci; break;
      case PM_FLAME_MAGE:		skills = Skill_F; break;
      case PM_GEEK:		skills = Skill_G; break;
-     case PM_SCIENTIST:		skills = Skill_Sci; break;
      case PM_HEALER:		skills = Skill_H; break;
      case PM_JEDI:		skills = Skill_J; break;
      case PM_KNIGHT:		skills = Skill_K; break;

@@ -770,8 +770,6 @@ register struct monst *mtmp;
 
 		   case PM_HEALER:
 		   case PM_UNDEAD_HEALER:
-		   case PM_SCIENTIST:
-		   case PM_UNDEAD_SCIENTIST:
 		     (void)mongets(mtmp, SCALPEL);
 		     (void)mongets(mtmp, LEATHER_GLOVES);
 		     (void)mongets(mtmp, WAN_HEALING);

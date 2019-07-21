@@ -319,7 +319,7 @@ quest_levs: ../util/lev_comp \
 	Locks.des Lunatic.des Monk.des Music.des \
 	Necro.des Ninja.des Noble.des Offic.des \
 	Pirate.des Priest.des Ranger.des \
-	Rogue.des Samurai.des Scient.des \
+	Rogue.des Samurai.des \
 	Slayer.des \
 	Tourist.des Under.des Valkyrie.des \
 	Warrior.des Wizard.des Yeoman.des Zooke.des
@@ -359,7 +359,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Ranger.des
 	../util/lev_comp Rogue.des
 	../util/lev_comp Samurai.des
-	../util/lev_comp Scient.des
 	../util/lev_comp Slayer.des
 	@if egrep -s tourists options > /dev/null ; then \
 	echo ../util/lev_comp Tourist.des ; ../util/lev_comp Tourist.des ; \

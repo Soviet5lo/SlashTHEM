@@ -1136,34 +1136,6 @@ const struct Role roles[] = {
 	10, 10, 0, 0,  8, A_INT, SPE_CLAIRVOYANCE,    -4
 },
 
-{	{"Scientist", 0}, {
-	{"Tube Mixer",    0},
-	{"Practician",	0},
-	{"Advanced Practician",	0},
-	{"Experimentator",	0},
-	{"Test Runner", 0},
-	{"Graduate Scientist", 0},
-	{"Simpleton with a PhD",0},
-	{"Rocket Scientist",0},
-	{"Nobel-Prized Scientist",0} },
-	"Nikola Tesla", "Erwin Schroedinger", "Wernher von Braun", /* famous scientists */
-	"Sci", "Black Mesa Research Facility", "Xen",
-	PM_SCIENTIST, NON_PM, PM_UNDEAD_SCIENTIST, NON_PM, NON_PM,
-	PM_GORDON_FREEMAN, PM_HACKER, PM_NIHILANTH,
-	PM_SOLDIER, PM_LIEUTENANT, S_GOLEM, S_FUNGUS,
-
-	ART_OPERATIONAL_SCALPEL,
-	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT| ROLE_MALE|ROLE_FEMALE |
-	ROLE_NEUTRAL,
-	/* Str Int Wis Dex Con Cha */
-	{  10, 10, 10,  8,  9, 7 },
-	{  20, 20, 20, 10, 20, 10 },
-	/* Init   Lower  Higher */
-	{ 12, 0,  0, 3,  1, 0 },	/* Hit points */
-	{ 20, 5,  0, 1,  0, 2 },20,	/* Energy */
-	10, 3,-3, 2, 10, A_WIS, SPE_IDENTIFY,   -4
-},
-
 #ifdef TOURIST
 {	{"Tourist", 0}, {
 	{"Rambler",     0},

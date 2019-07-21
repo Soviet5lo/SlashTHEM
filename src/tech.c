@@ -170,12 +170,6 @@ static const struct innate_tech
 		       {   1, T_HEAL_HANDS, 1},
 		       {   0, 0, 0} },
 
-	sci_tech[] = { {   1, T_RESEARCH, 1},
-		       {   1, T_TINKER, 1},
-		       {   10, T_SURGERY, 1},
-		       {   25, T_DRAW_ENERGY, 1},
-		       {   0, 0, 0} },
-
 	mon_tech[] = { {   1, T_PUMMEL, 1},
 		       {   1, T_DASH, 1},
 		       {   1, T_BLITZ, 1},
@@ -2264,7 +2258,6 @@ role_tech()
 #endif
 		case PM_KNIGHT:		return (kni_tech);
 		case PM_MONK: 		return (mon_tech);
-		case PM_SCIENTIST: 		return (sci_tech);
 #if 0 /* 5lo: Deferred for now */
 		case PM_POKEMON: 		return (pok_tech);
 		case PM_PSION: 		return (psi_tech);

@@ -213,7 +213,6 @@ register boolean special;
 		    weapon = CLUB;
 		    break;
 		case PM_HEALER:
-		case PM_SCIENTIST:
 		    if (rn2(4)) weapon = QUARTERSTAFF;
 		    else if (rn2(2)) weapon = rn2(2) ? UNICORN_HORN : SCALPEL;
 		    if (rn2(4)) helm = rn2(2) ? HELM_OF_BRILLIANCE : HELM_OF_TELEPATHY;

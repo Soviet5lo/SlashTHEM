@@ -290,13 +290,7 @@ A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     SPFX_RESTR, 0, 0,
     PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NEUTRAL, PM_BARD, NON_PM, 1000L ),
 
-A("Tesla's Coat", LAB_COAT,
-    (SPFX_RESTR|SPFX_DEFN), SPFX_HPHDAM, 0,
-    NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, PM_SCIENTIST, NON_PM, 3000L ),
 
-A("David's Sling",                SLING,
-	(SPFX_RESTR|SPFX_ATTK|SPFX_HPHDAM), 0, 0,
-	PHYS(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
 
 A("Oathkeeper", 		STILETTO, /* temp name? */
     (SPFX_RESTR), 0, 0,
@@ -313,6 +307,14 @@ A("Silvershard", SILVER_DAGGER,
 A("Mirror Brand",                 SILVER_LONG_SWORD, /* dNethack */
 	(SPFX_RESTR|SPFX_ATTK|SPFX_REFLECT|SPFX_DALIGN), 0, 0,
 	STUN(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 3500L ),
+
+A("David's Sling",                SLING,
+	(SPFX_RESTR|SPFX_ATTK|SPFX_HPHDAM), 0, 0,
+	PHYS(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
+
+A("Tesla's Coat", LAB_COAT,
+    (SPFX_RESTR|SPFX_DEFN), 0, 0,
+    NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, NON_PM, NON_PM, 3000L ),
 
 /* From Nethack--, This is pretty much a temp for Musicians
  * Until I can think of something better for them.	
@@ -633,11 +635,6 @@ A("The Lyre of Orpheus",	WOODEN_HARP,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_SPEAK), 0, 0,
 	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
 	TAMING,		A_NEUTRAL, PM_BARD, NON_PM, 5000L ),
-
-A("Operational Scalpel",	SCALPEL,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK|SPFX_INTEL|SPFX_DRLI|SPFX_REGEN), 0,0,
-	DRLI(3,0),      NO_DFNS,        NO_CARY,
-	HEALING,	A_NEUTRAL, PM_SCIENTIST, NON_PM, 5000L ),
 
 A("The Deluxe Yendorian Knife", KNIFE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DEFN), SPFX_ESP, 0,
