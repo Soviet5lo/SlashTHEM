@@ -296,7 +296,6 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_GEEK:
 	    case PM_UNDEAD_GRADUATE:
 	    case PM_UNDEAD_SCIENTIST:
-	    case PM_UNDEAD_ROCKER:
 	    case PM_UNDEAD_HEALER:
 	    case PM_UNDEAD_ICE_MAGE:
 	    case PM_UNDEAD_KNIGHT:

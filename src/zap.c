@@ -690,18 +690,6 @@ register struct obj *obj;
 		int montype = obj->corpsenm;
 		xchar x, y;
 
-		if (montype == PM_UNFORTUNATE_VICTIM) { /* very bad! */
-
-			pline("You get a strong feeling that the gods don't like your actions...");
-			change_luck(-5);
-			u.ualign.sins += 10; 
-			adjalign(-50);
-			u.ugangr++; u.ugangr++; u.ugangr++;
-			prayer_done();
-
-
-		}
-
 		if (obj->where == OBJ_CONTAINED) {
 			/* deal with corpses in [possibly nested] containers */
 			struct monst *carrier;

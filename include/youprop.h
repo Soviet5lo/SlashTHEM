@@ -85,7 +85,7 @@
 
 #define HStone_resistance	u.uprops[STONE_RES].intrinsic
 #define EStone_resistance	u.uprops[STONE_RES].extrinsic
-#define Stone_resistance	(HStone_resistance || EStone_resistance || resists_ston(&youmonst) || Role_if(PM_ROCKER) )
+#define Stone_resistance	(HStone_resistance || EStone_resistance || resists_ston(&youmonst))
 
 
 /*** Troubles ***/

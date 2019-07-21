@@ -636,13 +636,6 @@ register struct monst *mtmp;
 #endif
 		   break;
 
-		   case PM_UNDEAD_ROCKER: /* needs to be filled */
-		   case PM_ROCKER: /* needs to be filled */
-			(void)mongets(mtmp, SLING);
-			 m_initthrow(mtmp, FLINT, 25);
-			(void)mongets(mtmp, PICK_AXE);
-		   break;
-
 		   case PM_CONVICT:
 		   case PM_UNDEAD_CONVICT:
 		     (void)mongets(mtmp, HEAVY_IRON_BALL);
@@ -1009,21 +1002,6 @@ register struct monst *mtmp;
 
 			(void)mongets(mtmp, TRIDENT);
 			(void)mongets(mtmp, STONE_DRAGON_SCALE_MAIL);
-
-		} else if (mm == PM_DEATH_METAL_FREAK){
-			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-
-		} else if (mm == PM_DEATH_METAL_DRUMMER){
-			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-		     (void)mongets(mtmp, SUBMACHINE_GUN);
-			 m_initthrow(mtmp, BULLET, 50);
-			 m_initthrow(mtmp, BULLET, 50);
-
-		} else if (mm == PM_DEATH_METAL_ORCHESTRA_LEADER){
-			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-		     (void)mongets(mtmp, HEAVY_MACHINE_GUN);
-			 m_initthrow(mtmp, BULLET, 50);
-			 m_initthrow(mtmp, BULLET, 50);
 
 		} else if (mm == PM_DRACO_THE_SHARPSHOOTER){
 		     (void)mongets(mtmp, SNIPER_RIFLE);
@@ -2397,9 +2375,6 @@ register int	mmflags;
 			mtmp->mstrategy |= STRAT_CLOSE;
 	}
 
-	if (mndx == PM_UNFORTUNATE_VICTIM && in_mklev ) { /* These are supposed to spawn already dead. --Amy */
-			monkilled(mtmp, "", AD_PHYS);
-	} 
 	if (mndx == PM_SHOCKING_SPHERE && Role_if(PM_ACID_MAGE) && Is_nemesis(&u.uz) ) {
 			(void) mon_perm_poly(mtmp,  &mons[PM_LIGHTNING_PROOF_BARRIER], 0L, FALSE, FALSE, FALSE, FALSE);
 	} 

@@ -687,7 +687,6 @@ struct monst *mtmp;
 
 	    switch (monsndx(mtmp->data)) {
 	    case PM_RANGER:
-	    case PM_ROCKER:
 		    multishot++;
 		    break;
 	    case PM_ROGUE:

@@ -2207,7 +2207,7 @@ const struct def_skill *class_skill;
 		}
 	    }
 	}
-	/* Ugly kludge to get Bards/Musicians/Rockers to have Basic */
+	/* Ugly kludge to get Bards/Musicians to have Basic */
 	if (P_MAX_SKILL(P_MUSICALIZE) > P_SKILLED)
 	    P_SKILL(P_MUSICALIZE) = P_BASIC;
 

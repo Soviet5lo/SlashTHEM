@@ -155,20 +155,6 @@ static struct trobj Convict[] = {
 };
 #endif  /* CONVICT */
 
-static struct trobj Rocker[] = {
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ FLINT, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ SLING, 2, WEAPON_CLASS, 1, 1 },
-	{ WOODEN_HARP, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ PICK_AXE, 1, TOOL_CLASS, 1, 1 },
-	{ SPE_FORCE_BOLT, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Zyborg[] = {
 	{ PLATE_MAIL, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ GREEN_LIGHTSABER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
@@ -1083,37 +1069,6 @@ static const struct def_skill Skill_Chef[] = {
     { P_SLING, P_BASIC},		{ P_UNICORN_HORN, P_BASIC },
     { P_DIVINATION_SPELL, P_SKILLED },  { P_PROTECTION_SPELL, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_SKILLED }, {P_TWO_WEAPON_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
-
-static const struct def_skill Skill_Roc[] = {
-    /* 5lo: Let's use the Gnome skills from Slash 0.0.6 - they fit well enough */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-/* WAC added Pickaxe, Axe */
-    { P_PICK_AXE, P_EXPERT },
-    { P_AXE, P_EXPERT },                { P_SHORT_SWORD, P_EXPERT },
-    /* { P_BROAD_SWORD, P_SKILLED },*/
-/*WAC removed twohanded sword,  broadsword!*/
-    { P_LONG_SWORD, P_SKILLED },      /*  { P_TWO_HANDED_SWORD, P_BASIC },*/
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_CLUB, P_SKILLED },              { P_PADDLE, P_SKILLED },
-    { P_MACE, P_SKILLED },
-    { P_MORNING_STAR, P_BASIC },        { P_FLAIL, P_BASIC },
-/* WAC made hammer expert*/
-    { P_HAMMER, P_EXPERT },             { P_POLEARMS, P_BASIC },
-    { P_SPEAR, P_BASIC },               { P_BOW, P_SKILLED },
-/* WAC added Sling Expert */
-    { P_SLING, P_EXPERT },              { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },               { P_SHURIKEN, P_SKILLED },
-    { P_DIVINATION_SPELL, P_BASIC }, { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_MUSICALIZE, P_EXPERT }, /* Rock music, of course */
-/*WAC - G must be good at enchant,  since his class skill is fear.
-        also added a basic divination (from id gems) */
-#ifdef STEED
-    { P_RIDING, P_BASIC },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
@@ -2468,11 +2423,6 @@ u_init()
 		skill_init(Skill_F);
 		break;
 
-	case PM_ROCKER:
-        ini_inv(Rocker);
-        skill_init(Skill_Roc);
-		break;
-
 	case PM_ZYBORG:
         ini_inv(Zyborg);
         skill_init(Skill_Zyb);
@@ -3244,7 +3194,6 @@ int otyp;
 #ifdef CONVICT
      case PM_CONVICT:		skills = Skill_Con; break;
 #endif  /* CONVICT */
-     case PM_ROCKER:		skills = Skill_Roc; break;
      case PM_ZYBORG:		skills = Skill_Zyb; break;
      case PM_LUNATIC:		skills = Skill_Lun; break;
      case PM_PALADIN:		skills = Skill_Pal; break;

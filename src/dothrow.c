@@ -195,12 +195,6 @@ int thrown;
 	    case PM_ROGUE:
 		if (skill == P_DAGGER) multishot++;
 		break;
-	    case PM_ROCKER:
-		if (skill == P_SLING) {multishot++;
-		if (P_SKILL(weapon_type(obj)) >= P_SKILLED) multishot++;
-		if (P_SKILL(weapon_type(obj)) >= P_EXPERT) multishot++;
-		}
-		break;
 	    case PM_SAMURAI:
 		if (obj->otyp == YA && launcher && launcher->otyp == YUMI) multishot++;
 		break;

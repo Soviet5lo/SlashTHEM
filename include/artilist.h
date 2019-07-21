@@ -290,13 +290,13 @@ A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     SPFX_RESTR, 0, 0,
     PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NEUTRAL, PM_BARD, NON_PM, 1000L ),
 
-A("Full Metal Jacket",   LEATHER_JACKET, /* Temp name */
-    (SPFX_RESTR|SPFX_DEFN|SPFX_PROTEC), (SPFX_HALRES), 0,
-    NO_ATTK,    FIRE(0,0),    NO_CARY,   0, A_NEUTRAL, PM_ROCKER, NON_PM, 1500L ), 
-    
 A("Tesla's Coat", LAB_COAT,
     (SPFX_RESTR|SPFX_DEFN), SPFX_HPHDAM, 0,
     NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, PM_SCIENTIST, NON_PM, 3000L ),
+
+A("David's Sling",                SLING,
+	(SPFX_RESTR|SPFX_ATTK|SPFX_HPHDAM), 0, 0,
+	PHYS(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
 
 A("Oathkeeper", 		STILETTO, /* temp name? */
     (SPFX_RESTR), 0, 0,
@@ -586,9 +586,6 @@ A("The Palantir of Westernesse",	CRYSTAL_BALL,
 
 /* STEPHEN WHITE'S NEW CODE */
 
-A("The Sling of David",                SLING,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK|SPFX_HPHDAM), 0, 0,
-	PHYS(5,0),	NO_DFNS,	NO_CARY,	PHASING, A_NEUTRAL, PM_ROCKER, NON_PM, 4000L ),
 
 A("The Golden Whistle of Nora",          MAGIC_WHISTLE, /* 5lo: temp name? */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_HPHDAM|SPFX_ESP), 0,

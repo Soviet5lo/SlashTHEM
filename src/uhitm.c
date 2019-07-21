@@ -1184,11 +1184,6 @@ int thrown;
 				tmp++;
 				}
 			    } /*else */
-			      if (Role_if(PM_ROCKER)) {
-				if ((obj->otyp == SLING) && tech_inuse(T_FLURRY)) tmp += 2;
-				tmp++;
-				
-			    } /*else */
 				if (Race_if(PM_DROW)) {
 				if (obj->otyp == DARK_ELVEN_ARROW &&
 					launcher->otyp == DARK_ELVEN_BOW) {
@@ -1494,7 +1489,7 @@ int thrown;
 
 	if (uslinging() && ammo_and_launcher(obj, uwep)
 	   		&& (P_SKILL(wtype) >= P_EXPERT ||
-			uwep->oartifact == ART_SLING_OF_DAVID)
+			uwep->oartifact == ART_DAVID_S_SLING)
 			&& mdat->mlet == S_GIANT)
 	{
 		giantkill = TRUE;

@@ -121,8 +121,6 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	bar_tech[] = { {   1, T_BERSERK, 1},
 		       {   0, 0, 0} },
-	roc_tech[] = { {   1, T_FLURRY, 1},
-		       {   0, 0, 0} },
 	cav_tech[] = { {   1, T_PRIMAL_ROAR, 1},
 		       {   0, 0, 0} },
 	brd_tech[] = { {   1, T_PRIMAL_ROAR, 1},
@@ -2271,7 +2269,6 @@ role_tech()
 		case PM_POKEMON: 		return (pok_tech);
 		case PM_PSION: 		return (psi_tech);
 #endif
-		case PM_ROCKER: 		return (roc_tech);
 		case PM_NECROMANCER:	return (nec_tech);
 		case PM_NINJA:		return (nin_tech);
 		case PM_PRIEST:		return (pri_tech);

@@ -888,10 +888,6 @@ register struct monst *mtmp;
 		    verbl_msg = "Little strawberry me baby!";
 		    break;
 #endif
-		case PM_ROCKER:
-	    pline_msg = "talks about groovy music.";
-		    break;
-
 		default:
 		    pline_msg = "discusses dungeon exploration.";
 		    break;

@@ -751,7 +751,7 @@ const struct Role roles[] = {
 	"Mus", "Wild West Bar", "High Noon Plains",
 	PM_MUSICIAN, NON_PM, PM_UNDEAD_MUSICIAN, NON_PM, NON_PM,
 	PM_HARRY_THE_COWBOY, PM_ATTENDANT, PM_DRACO_THE_SHARPSHOOTER,
-	PM_WOODLAND_ELF, PM_ROCKER, S_HUMAN, S_HUMAN,
+	PM_WOODLAND_ELF, PM_HIGH_ELF, S_HUMAN, S_HUMAN,
 
 	ART_HARP_OF_HARMONY,
 	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT|MRACE_NYMPH |
@@ -1063,33 +1063,6 @@ const struct Role roles[] = {
 	{ 18, 0,  0, 6,  1, 0 },	/* Hit points */
 	{  4, 0,  0, 1,  0, 1 },12,	/* Energy */
 	10, 9, 2, 1, 10, A_INT, SPE_INVISIBILITY,   -4
-},
-
-{	{"Rocker", 0}, {
-	{"Whistleblower",     0},
-	{"Tooter",   0},
-	{"Hooter",0},
-	{"Violinist",0},
-	{"Guitarist",    0},
-	{"Bassist",   0},
-	{"Percussionist",     0},
-	{"Harper",    0},
-	{"Synthesizer",  0} },
-	"Classic Rock", "Symphonic Metal", "Hardcore Punk",	/* music styles */
-	"Roc", "Bigband Studio", "Black Metal Den",
-	PM_ROCKER, NON_PM, PM_UNDEAD_ROCKER, NON_PM, PM_SPEEDHORSE,
-	PM_ROCKIN_ROLLER, PM_ATTENDANT, PM_DEATH_METAL_ORCHESTRA_LEADER,
-	PM_DEATH_METAL_FREAK, PM_DEATH_METAL_DRUMMER, S_HUMAN, S_UNICORN,
-	ART_SLING_OF_DAVID,
-	MRACE_HUMAN|MRACE_GNOME|MRACE_HOBBIT|MRACE_KOBOLD | 
-	ROLE_MALE|ROLE_FEMALE|ROLE_NEUTRAL,
-	/* Str Int Wis Dex Con Cha */
-	{  10,  7,  7,  7, 13,  6 },
-	{  20, 20, 10, 20, 20, 10 },
-	/* Init   Lower  Higher */
-	{  12, 0,  0, 8,  0, 0 },	/* Hit points */
-	{  3, 0,  0, 1,  0, 1 },10,	/* Energy */
-	0, 5, 0, 2, 10, A_INT, SPE_FORCE_BOLT,   -4
 },
 
 {	{"Rogue", 0}, {

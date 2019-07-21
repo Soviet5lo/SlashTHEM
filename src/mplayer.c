@@ -288,9 +288,6 @@ register boolean special;
 		    /* Defaults are just fine */
 		    break;
 #endif
-		case PM_ROCKER:
-			weapon = HEAVY_HAMMER;
-
 		case PM_UNDEAD_SLAYER:
 		    if (rn2(2)) weapon = SILVER_SPEAR;
 		    if (rn2(2)) armor = rnd_class(PLATE_MAIL, CHAIN_MAIL);
