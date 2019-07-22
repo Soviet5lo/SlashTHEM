@@ -2173,66 +2173,11 @@ register struct obj *obj;
 			break;
 		case WAN_ACQUIREMENT:
 			known = TRUE;
-			int acquireditem;
-			acquireditem = 0;
 			if(Luck + rn2(5) < 0) {
 				pline("Unfortunately, nothing happens.");
 				break;
 			}
-
-			while (acquireditem == 0) { /* ask the player what they want --Amy */
-
-			/* Yeah, I know this is less elegant than DCSS. But hey, it's a wand of acquirement! */
-
-				if (yn("Do you want to acquire a random item?")=='y') {
-					    acqo = mkobj_at(RANDOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a weapon?")=='y') {
-					    acqo = mkobj_at(WEAPON_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire an armor?")=='y') {
-					    acqo = mkobj_at(ARMOR_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a ring?")=='y') {
-					    acqo = mkobj_at(RING_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire an amulet?")=='y') {
-					    acqo = mkobj_at(AMULET_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a tool?")=='y') {
-					    acqo = mkobj_at(TOOL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire some food?")=='y') {
-					    acqo = mkobj_at(FOOD_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a potion?")=='y') {
-					    acqo = mkobj_at(POTION_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a scroll?")=='y') {
-					    acqo = mkobj_at(SCROLL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a spellbook?")=='y') {
-					    acqo = mkobj_at(SPBOOK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a wand?")=='y') {
-					    acqo = mkobj_at(WAND_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire some coins?")=='y') {
-					    acqo = mkobj_at(COIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a gem?")=='y') {
-					    acqo = mkobj_at(GEM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a boulder or statue?")=='y') {
-					    acqo = mkobj_at(ROCK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a heavy iron ball?")=='y') {
-					    acqo = mkobj_at(BALL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire an iron chain?")=='y') {
-					    acqo = mkobj_at(CHAIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a splash of venom?")=='y') {
-					    acqo = mkobj_at(VENOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-	
-			}
-	
-			/* special handling to prevent wands of wishing or similarly overpowered items --Amy */
-	
-			if (acqo->otyp == GOLD_PIECE) acqo->quan = rnd(1000);
-			if (acqo->otyp == MAGIC_LAMP) { acqo->otyp = OIL_LAMP; acqo->age = 1500L; }
-			if (acqo->otyp == MAGIC_MARKER) acqo->recharged = 1;
-		    while(acqo->otyp == WAN_WISHING || acqo->otyp == WAN_POLYMORPH || acqo->otyp == WAN_ACQUIREMENT)
-			acqo->otyp = rnd_class(WAN_LIGHT, WAN_SOLAR_BEAM);
-		    while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT || acqo->otyp == SCR_ENTHRONIZATION || acqo->otyp == SCR_FOUNTAIN_BUILDING || acqo->otyp == SCR_SINKING || acqo->otyp == SCR_WC)
-			acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
-	
-			pline("Something appeared on the ground just beneath you!");
-
+			do_acquirement();
 			break;
 		case WAN_ENLIGHTENMENT:
 			known = TRUE;
@@ -5357,6 +5302,104 @@ retry:
 	}
 }
 
+
+/* 5lo: A menu for acquirement instead of the awful, terrible way
+ * SlashEM-Extended handles this.
+ */
+void
+do_acquirement()
+{
+	struct obj *otmp, *acqo, nothing;
+	menu_item *pick_list = (menu_item *)0;
+	winid win;
+	anything any;
+	char	ch = 'q';
+
+	win = create_nhwindow(NHW_MENU);
+	start_menu(win);
+	any.a_void = 0; any.a_char = 'r';
+	add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE, "Random item", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = ')';
+	add_menu(win, NO_GLYPH, &any, ')', 0, ATR_NONE, "Weapon", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '[';
+	add_menu(win, NO_GLYPH, &any, '[', 0, ATR_NONE, "Armor", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '%';
+	add_menu(win, NO_GLYPH, &any, '%', 0, ATR_NONE, "Comestible", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '?';
+	add_menu(win, NO_GLYPH, &any, '?', 0, ATR_NONE, "Scroll", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '+';
+	add_menu(win, NO_GLYPH, &any, '+', 0, ATR_NONE, "Spellbook", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '!';
+	add_menu(win, NO_GLYPH, &any, '!', 0, ATR_NONE, "Potion", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '=';
+	add_menu(win, NO_GLYPH, &any, '"', 0, ATR_NONE, "Amulet", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '"';
+	add_menu(win, NO_GLYPH, &any, '=', 0, ATR_NONE, "Ring", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '/';
+	add_menu(win, NO_GLYPH, &any, '/', 0, ATR_NONE, "Wand", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '(';
+	add_menu(win, NO_GLYPH, &any, '(', 0, ATR_NONE, "Tool", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '*';
+	add_menu(win, NO_GLYPH, &any, '*', 0, ATR_NONE, "Gem", MENU_UNSELECTED);
+	end_menu(win, "Select a type of item to create:");
+	/* No chains, iron balls, venom, boulders or gold */
+	if (select_menu(win, PICK_ONE, &pick_list) > 0) {
+			ch = pick_list->item.a_char;
+			free((genericptr_t)pick_list);
+			}
+	destroy_nhwindow(win);
+
+	switch(ch) {
+		default:
+		case 'r':
+			acqo = mkobj_at(RANDOM_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case ')':
+			acqo = mkobj_at(WEAPON_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '[':
+			acqo = mkobj_at(ARMOR_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '%':
+			acqo = mkobj_at(FOOD_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '?':
+			acqo = mkobj_at(SCROLL_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '+':
+			acqo = mkobj_at(SPBOOK_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '!':
+			acqo = mkobj_at(POTION_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '"':
+			acqo = mkobj_at(AMULET_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '=':
+			acqo = mkobj_at(RING_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '/':
+			acqo = mkobj_at(WAND_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '(':
+			acqo = mkobj_at(TOOL_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '*':
+			acqo = mkobj_at(GEM_CLASS, u.ux, u.uy, FALSE);
+			break;
+	}
+	if (acqo->otyp == GOLD_PIECE) acqo->quan = rnd(1000);
+	if (acqo->otyp == MAGIC_LAMP) { acqo->otyp = OIL_LAMP; acqo->age = 1500L; }
+	if (acqo->otyp == MAGIC_MARKER) acqo->recharged = 1;
+	while(acqo->otyp == WAN_WISHING || acqo->otyp == WAN_POLYMORPH || acqo->otyp == WAN_ACQUIREMENT)
+	      acqo->otyp = rnd_class(WAN_LIGHT, WAN_SOLAR_BEAM);
+	while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT ||
+	       acqo->otyp == SCR_ENTHRONIZATION || acqo->otyp == SCR_FOUNTAIN_BUILDING ||
+	       acqo->otyp == SCR_SINKING || acqo->otyp == SCR_WC)
+		acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
+
+	pline("An item has appeared on the ground just beneath you.");
+}
 
 /* LSZ/WWA Wizard Patch June '96 Choose location where spell takes effect.*/
 /* WAC made into a void */
