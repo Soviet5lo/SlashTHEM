@@ -254,6 +254,11 @@ struct monst *mon;
 	        return 9999;
 # endif /* P_SPOON */
 
+	if (otyp == FLY_SWATTER &&
+	    (ptr->mlet == S_ANT || ptr->mlet == S_SPIDER || ptr->mlet == S_XAN) &&
+	    verysmall(ptr))
+		return 99;
+
 	if (bigmonst(ptr)) {
 	    if (objects[otyp].oc_wldam)
 		tmp = rnd(objects[otyp].oc_wldam);
