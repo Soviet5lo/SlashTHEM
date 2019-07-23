@@ -434,6 +434,9 @@ E NEARDATA struct c_color_names {
 
 E NEARDATA winid WIN_MESSAGE, WIN_STATUS;
 E NEARDATA winid WIN_MAP, WIN_INVEN;
+
+#define You_hear1(cstr) You_hear("%s", cstr)
+
 E char toplines[];
 #ifndef TCAP_H
 E struct tc_gbl_data {	/* also declared in tcap.h */
