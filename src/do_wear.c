@@ -1626,6 +1626,11 @@ boolean noisy;
 		pline_The("%s won't fit over your horn%s.",
 			  c_helmet, plur(num_horns(youmonst.data)));
 	    err++;
+	} else if (uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
+			!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+				"hooded cloak")) {
+	    if (noisy) You_cant("wear that over your hood.");
+	    err++;
 #ifdef JEDI
 	} else if (Upolyd && (youmonst.data == &mons[PM_MIND_FLAYER] ||
 			      youmonst.data == &mons[PM_MASTER_MIND_FLAYER]) ||
@@ -1655,11 +1660,6 @@ boolean noisy;
 		    You("cannot wear a shield while fighting with two %s.",
 			    makeplural(body_part(HAND)));
 	    }
-	    err++;
-	} else if (uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
-			!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
-				"hooded cloak")) {
-	    if (noisy) You_cant("wear that over your hood.");
 	    err++;
 	} else
 	    *mask = W_ARMS;
