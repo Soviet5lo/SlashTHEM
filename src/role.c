@@ -144,38 +144,6 @@ const struct Role roles[] = {
 	10, 3,-3, 2, 9, A_CHA, SPE_SLEEP, -4
 },
 
-{	{"Binder", 		 0}, {
-	{"Exile",        0},
-	{"Heratic",      0},
-	{"Cultist",      0},
-	{"Real Binder",       0},
-	{"Akousmatikoi", 0},
-	{"Mathematikoi", 0},
-	{"Doctor",       0},
-	{"Unbinder",     0},
-	{"Gnostikos",    0} },
-	"Yaldabaoth", "the void", "_Sophia", /* Gnostic */
-	"Bin", "the lost library", "the Tower of Woe",
-	PM_BINDER, NON_PM, PM_UNDEAD_BINDER, NON_PM, NON_PM,
-	PM_STRANGE_CORPSE, NON_PM, PM_ACERERAK,
-	PM_SKELETON, PM_LICH, S_HUMANOID, S_LICH,
-	ART_HAND_MIRROR_OF_CTHYLLA,
-	/* absolutely everyone */
-	MRACE_HUMAN|MRACE_ELF|MRACE_DWARF|MRACE_GNOME|MRACE_HOBBIT|
-	MRACE_VAMPIRE|MRACE_WERE|MRACE_ORC|MRACE_CLOCK|MRACE_GHOUL|
-	MRACE_GIANT|MRACE_MFLAY|MRACE_KOBOLD|MRACE_NYMPH|MRACE_OGRE|
-	MRACE_TROLL
-	| ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  6,  6,  6,  6,  6,  6 },
-	{  16,  17,  17, 17, 16,  17 },
-	/* Init   Lower  Higher */
-	{ 11, 0,  0, 10,  2, 0 },	/* Hit points */
-	{  5, 0,  1, 0,  1, 0 },15,	/* Energy */
-	-5, 10, 5, 10,  25, A_INT, SPE_SLEEP,             -14
-},
-
 {	{"Caveman", "Cavewoman"}, {
 	{"Troglodyte",  0},
 	{"Aborigine",   0},

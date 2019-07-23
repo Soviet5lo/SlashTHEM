@@ -696,7 +696,7 @@ SHIELD("shield of reflection", "polished silver shield",
 
 /* Boots */
 #ifdef JEDI
-BOOTS("plasteel boots", "white boots", /* these things were crashing the game for binders and certain other chars! */
+BOOTS("plasteel boots", "white boots",
 		0, 0,  0,          1, 2, 8,  25,  8, 0, PLASTIC, CLR_WHITE),
 #endif
 BOOTS("low boots", "walking shoes",

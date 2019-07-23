@@ -278,7 +278,6 @@ register struct monst *mtmp;
 	    case PM_FRANKENSTEIN_S_MONSTER:
 	    case PM_UNDEAD_ARCHEOLOGIST:
 	    case PM_UNDEAD_BARBARIAN:
-	    case PM_UNDEAD_BINDER:
 	    case PM_UNDEAD_BARD:
 	    case PM_UNDEAD_CAVEMAN:
 	    case PM_UNDEAD_CAVEWOMAN:

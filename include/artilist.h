@@ -486,11 +486,6 @@ A("Hellfire", CROSSBOW,	/* WAC */
 	PHYS(5,7),        FIRE(0,0),  NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 4000L ),
 	/* Auto-explode code in dothrow.c, uhitm.c */
 
-A("the Pen of the Void",	ATHAME,
-	(SPFX_RESTR|SPFX_ATTK), 0, 0,
-	PHYS(5,0),	NO_DFNS,	NO_CARY,
-	0,	A_NEUTRAL, PM_BINDER, NON_PM, 2000L),
-
 A("The Gambler's Suit",		EXPENSIVE_SUIT,
 	(SPFX_RESTR|SPFX_PROTEC|SPFX_LUCK), 0, 0,
 	NO_ATTK,	NO_DFNS,	NO_CARY,	0, A_NONE, NON_PM, NON_PM, 1000L ),
@@ -703,12 +698,6 @@ A("The Eyes of the Overworld",	LENSES,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_XRAY), 0, 0,
 	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
 	ENLIGHTENING,	A_NEUTRAL,	 PM_MONK, NON_PM, 2500L ),
-
-
-A("The Hand Mirror of Cthylla",	MIRROR, /* 5lo: replaces Pen of the Void */
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_TCTRL|SPFX_SEARCH), 0,
-	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
-	ENERGY_BOOST,	A_NONE, PM_BINDER, NON_PM, 5000L),
 
 A("The Mantle of Heaven",	LEATHER_CLOAK, /*Actually an ornamental cope in game*/
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_HSPDAM), 0, 0,

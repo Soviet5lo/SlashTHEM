@@ -50,18 +50,6 @@ static struct trobj Barbarian[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Binder[] = {
-	{ VOULGE, 0, WEAPON_CLASS, 1, 0 },
-	{ KNIFE, 0, WEAPON_CLASS, 1, 0 },
-	{ ROCK, 0, GEM_CLASS, 5, 0 }, 
-	{ FLINT, 0, GEM_CLASS, 1, 0 },
-	{ LEATHER_CLOAK, 0, ARMOR_CLASS, 1, 0 },
-	{ CRAM_RATION, 0, FOOD_CLASS, 1, 0 },
-	{ APPLE, 0, FOOD_CLASS, 2, 0 },
-	{ TRIPE_RATION, 0, FOOD_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Bard[] = {
 #define BARD_INSTR 1
 #define BARD_BOOZE 5
@@ -1157,30 +1145,6 @@ static const struct def_skill Skill_Lun[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Bin[] = {
-    /* 5lo: Copy of the Wizard for now... */
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_SKILLED },
-    { P_AXE, P_SKILLED },		{ P_SHORT_SWORD, P_BASIC },
-    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
-    { P_MACE, P_BASIC },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_SKILLED },
-    { P_SPEAR, P_BASIC },		{ P_JAVELIN, P_BASIC },
-    { P_TRIDENT, P_BASIC },		{ P_SLING, P_SKILLED },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_BASIC },
-
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_SKILLED },
-    { P_DIVINATION_SPELL, P_SKILLED },  { P_ENCHANTMENT_SPELL, P_SKILLED },
-    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
-    { P_MATTER_SPELL, P_SKILLED },
-/*      added matter spell skilled,  as fireball and cone of cold are
-        matter spells, but now specialty of F/I Mages*/
-#ifdef STEED
-    { P_RIDING, P_BASIC },
-#endif
-    { P_BARE_HANDED_COMBAT, P_BASIC },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Ele[] = {
 /* 5lo: Copy-paste of Flame Mage */
 /*Style: small-med edged weapons, blunt weapons*/
@@ -2234,7 +2198,7 @@ u_init()
 
 	u.umoved = FALSE;
 	u.umortality = 0;
-	u.ugrave_arise = Role_if(PM_PIRATE) ? PM_SKELETAL_PIRATE : Role_if(PM_BINDER) ? PM_SHADE : NON_PM;
+	u.ugrave_arise = Role_if(PM_PIRATE) ? PM_SKELETAL_PIRATE : NON_PM;
 	
 	u.ukinghill = 0;
 	u.protean = 0;
@@ -2269,8 +2233,6 @@ u_init()
 	u.next_check = 600; /* 5lo: Different method of doing attribute checks in attrib.c */
 
 	u.urmaxlvlB = 1; /* will go up if a cyborg role player levels up */
-	u.urmaxlvlC = 1; /* will go up if a binder role player levels up */
-	u.urmaxlvlD = 1; /* will go up if a bard role player levels up */
 
 /* In order to make the game even more interesting for lost souls, they cannot level teleport or branchport at all. */
 
@@ -2324,12 +2286,6 @@ u_init()
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_B);
-		break;
-	case PM_BINDER:
-		ini_inv(Binder);
-		skill_init(Skill_Bin);
-	  u.ualign.sins += 16; /*One transgression is all it takes*/
-	    change_luck(-1); /*One resurection or two rehumanizations is all it takes*/
 		break;
 	case PM_BARD:
 		if (rn2(100) >= 50) Bard[BARD_INSTR].trotyp = WOODEN_FLUTE;
@@ -3133,7 +3089,6 @@ int otyp;
      case PM_ARCHEOLOGIST:	skills = Skill_A; break;
      case PM_BARBARIAN:		skills = Skill_B; break;
      case PM_BARD:		skills = Skill_Bard; break;
-     case PM_BINDER:			skills = Skill_Bin; break;
      case PM_CAVEMAN:		skills = Skill_C; break;
 #ifdef CONVICT
      case PM_CONVICT:		skills = Skill_Con; break;

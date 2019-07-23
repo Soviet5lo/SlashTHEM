@@ -548,13 +548,6 @@ register struct monst *mtmp;
 #endif
 		   break;
 
-		   case PM_BINDER:
-		   case PM_UNDEAD_BINDER:
-		     (void)mongets(mtmp, VOULGE);
-		     (void)mongets(mtmp, KNIFE);
-		     (void)mongets(mtmp, LEATHER_CLOAK);
-		   break;
-
 		   case PM_BARD:
 		   case PM_UNDEAD_BARD:
 		     (void)mongets(mtmp, LEATHER_CLOAK);

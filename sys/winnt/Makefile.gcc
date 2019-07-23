@@ -1452,7 +1452,7 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 		$(DAT)\rats.des     $(DAT)\sea.des      $(DAT)\spiders.des $(DAT)\village.des \
 		$(DAT)\stor-1.des   $(DAT)\stor-2.des   $(DAT)\stor-3.des \
 		$(DAT)\tomb.des     $(DAT)\tower.des    $(DAT)\warrior.des    $(DAT)\yendor.des \
-		$(DAT)\arch.des     $(DAT)\barb.des 	$(DAT)\binder.des 	$(DAT)\caveman.des \
+		$(DAT)\arch.des     $(DAT)\barb.des 	$(DAT)\caveman.des \
 		$(DAT)\flame.des    $(DAT)\healer.des   $(DAT)\jedi.des   $(DAT)\ice.des \
 		$(DAT)\chef.des     $(DAT)\knight.des   $(DAT)\monk.des     $(DAT)\necro.des \
 		$(DAT)\acid.des     \
@@ -1522,7 +1522,6 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/yendor.des
 	lev_comp $(DDAT)/arch.des
 	lev_comp $(DDAT)/barb.des
-	lev_comp $(DDAT)/binder.des
 	lev_comp $(DDAT)/caveman.des
 	lev_comp $(DDAT)/flame.des
 	lev_comp $(DDAT)/geek.des
