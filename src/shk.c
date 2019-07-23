@@ -5612,7 +5612,7 @@ shk_food_examination(slang, shkp)
 		if (mons[mnum].mconveys & MR_FIRE)
 			descr[ndescr++] = "makes you resist fire";
 		if (mons[mnum].mconveys & MR_COLD)
-			descr[ndescr++] = "makes you resist sold";
+			descr[ndescr++] = "makes you resist cold";
 		if (mons[mnum].mconveys & MR_SLEEP)
 			descr[ndescr++] = "makes you resist sleep";
 		if (mons[mnum].mconveys & MR_DISINT)
