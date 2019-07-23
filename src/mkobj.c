@@ -829,7 +829,7 @@ start_corpse_timeout(body)
 #define ROT_AGE (250L)		/* age when corpses rot away */
 
 	/* lizards and lichen don't rot or revive */
-	if (body->corpsenm == PM_LIZARD || body->corpsenm == PM_LICHEN) return;
+	if (corpse_never_rots(&mons[body->corpsenm])) return;
 
 	action = ROT_CORPSE;		/* default action: rot away */
 	rot_adjust = in_mklev ? 25 : 10;	/* give some variation */
@@ -1105,8 +1105,7 @@ int x, y;
 /* return TRUE if the corpse has special timing */
 /* special timing is a timing that is not rotting or molding */
 
-#define special_corpse(num)  (((num) == PM_LIZARD)		\
-				|| ((num) == PM_LICHEN)		\
+#define special_corpse(num)  ((corpse_never_rots(&mons[num]))	\
 				|| (is_rider(&mons[num]))	\
 				|| (mons[num].mlet == S_FUNGUS) \
 				|| (mons[num].mlet == S_TROLL))

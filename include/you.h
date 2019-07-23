@@ -154,6 +154,10 @@ extern struct Role urole;
 #define Role_if(X)	(urole.malenum == (X))
 #define Role_switch	(urole.malenum)
 
+#define CANNIBAL_ALLOWED() (Role_if(PM_CAVEMAN) || Role_if(PM_LUNATIC) || Race_if(PM_ORC) || \
+Race_if(PM_TROLL) ||  Race_if(PM_OGRE) ||Race_if(PM_HUMAN_WEREWOLF) || Race_if(PM_VAMPIRE)|| \
+Race_if(PM_GHOUL))
+
 /* used during initialization for race, gender, and alignment
    as well as for character class */
 #define ROLE_NONE	(-1)
