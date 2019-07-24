@@ -578,7 +578,7 @@ doread()
             pline("\"Magic Marker(TM) Red Ink Marker Pen. Water Soluble.\"");
              u.uconduct.literate++;
              return 1;
-#if 0 /* We'll get back to this later... */
+
 	} else if (scroll->oclass == COIN_CLASS) {
 	   if (Blind)
                 You("feel the embossed words:");
@@ -586,10 +586,12 @@ doread()
                 You("read:");
 	    pline("\"1 Zorkmid. 857 GUE. In Frobs We Trust.\"");
             u.uconduct.literate++;
+#if 0 /* 5lo: This causes a segfault, but its not needed anyway */
 #ifndef GOLDOBJ 
 	    /* Give it back to them, then */
 	    u.ugold = scroll->quan;
 	    dealloc_obj(scroll);
+#endif
 #endif
 	    return 1;
 	} else if (scroll->oartifact == ART_ORB_OF_FATE) {
@@ -599,7 +601,6 @@ doread()
 	    pline("\"Odin.\"");
             u.uconduct.literate++;
 	    return 1;
-#endif
 	} else if (OBJ_DESCR(objects[scroll->otyp]) &&
 		!strncmp(OBJ_DESCR(objects[scroll->otyp]), "runed", 5)) {
 	    if (scroll->otyp == RUNESWORD) {
