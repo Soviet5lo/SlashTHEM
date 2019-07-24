@@ -3279,7 +3279,7 @@ struct obj *bag;
     if (!bag || bag->otyp != BAG_OF_TRICKS) {
 	impossible("bad bag o' tricks");
     } else if (bag->spe < 1) {
-		return use_container(bag, 1);
+		return use_container(&bag, 1);
     } else {
 	
 	boolean gotone = TRUE;
