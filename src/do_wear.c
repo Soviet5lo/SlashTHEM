@@ -1586,19 +1586,8 @@ boolean noisy;
 	    /* same exception for cloaks as used in m_dowear() */
 	    (which != c_cloak || youmonst.data->msize != MZ_SMALL) &&
 	    (racial_exception(&youmonst, otmp) < 1)) {
-	if (noisy) { pline_The("%s will not fit on your body.", which);
-
-		if (yn("Try to put it on anyway?") == 'y') {
-			if (rn2(2)) { 	u.ublesscnt += rnd(5);
-			pline("Feeling uncomfortable, you decide to stop trying.");
-		    return 0;}
-			}
-
-		else {return(0);}
-
-		}
-
-
+	if (noisy) pline_The("%s will not fit on your body.", which);
+	return 0;
     } else if (otmp->owornmask & W_ARMOR) {
 	if (noisy) already_wearing(c_that_);
 	return 0;
@@ -1756,15 +1745,8 @@ dowear()
 	/* cantweararm checks for suits of armor */
 	/* verysmall or nohands checks for shields, gloves, etc... */
 	if ((verysmall(youmonst.data) || nohands(youmonst.data))) {
-		pline("Don't even bother. Your current form can't realistically wear armor!");
-
-		if (yn("But you may try to wear something anyway. Do it?") == 'y') {
-			if (rn2(3)) { 		make_stunned(HStun + rnd(40),FALSE);
-			pline("Damn! You just stagger around aimlessly!");
-		    return 1;}
-		}
-		else {return(0);}
-
+		pline("Don't even bother.");
+		return(0);
 	}
 
 	otmp = getobj(clothes, "wear");

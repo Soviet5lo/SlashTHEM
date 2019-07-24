@@ -441,21 +441,11 @@ int what;		/* should be a long */
 		    return (0);
 		}
 		if (notake(youmonst.data)) {
-		    if (!autopickup) {
+		    if (!autopickup)
 			You("are physically incapable of picking anything up.");
-
-			if (yn("But maybe you can reach the items anyway. Try it?") == 'y') {
-				if (rn2(3)) { 	make_hallucinated(HHallucination + rnd(50),FALSE,0L);
-				pline("Oh wow! Is that your own shiny reflection you just saw?");
-			    return 1;}
-			}
-			else {return(0);}
-
-
-			}
 		    else
-			{ check_here(FALSE);
-		    return (0); }
+			check_here(FALSE);
+		    return (0);
 		}
 
 		/* if there's anything here, stop running */
@@ -1606,13 +1596,7 @@ doloot()	/* loot a container on the floor or loot saddle from mon. */
     }
     if (nohands(youmonst.data)) {
 	You("have no hands!");	/* not `body_part(HAND)' */
-
-		if (yn("Try to loot it with another part of your body instead?") == 'y') {
-			if (rn2(3)) { 			make_blinded(Blinded + rnd(50),TRUE);
-			pline("Off - you just blinded yourself!");
-		    return 1;}
-		}
-		else {return(0);}
+	return 0;
     }
     cc.x = u.ux; cc.y = u.uy;
 
@@ -2356,18 +2340,7 @@ int held;
 	emptymsg[0] = '\0';
 	if (nohands(youmonst.data)) {
 		You("have no hands!");	/* not `body_part(HAND)' */
-
-		if (yn("Try to open the container with another part of your body instead?") == 'y') {
-			if (rn2(3)) { 			
-				pline("You feel a wrenching sensation.");
-				flags.soundok = 0;
-				nomul(-rnd(10), "wrenched in a container");
-				nomovemsg = "You are conscious again.";
-				afternmv = Hear_again;
-		    return 1;}
-		}
-		else {return(0);}
-
+		return 0;
 	} else if (!freehand()) {
 		You("have no free %s.", body_part(HAND));
 		return 0;

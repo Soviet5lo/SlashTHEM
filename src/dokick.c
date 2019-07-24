@@ -688,20 +688,10 @@ dokick()
 
 	if (nolimbs(youmonst.data) || slithy(youmonst.data)) {
 		You("have no legs to kick with.");
-		if (yn("Try a full-body tackle instead?") == 'y') {
-			if (rn2(3)) {set_wounded_legs(LEFT_SIDE, rnd(60-ACURR(A_DEX)));
-			pline("Argh! That didn't work!");
-		    return 1;}
-		}
-		else {no_kick = TRUE;}
+		no_kick = TRUE;
 	} else if (verysmall(youmonst.data)) {
 		You("are too small to do any kicking.");
-		if (yn("Try it anyway?") == 'y') {
-			if (rn2(3)) {set_wounded_legs(LEFT_SIDE, rnd(60-ACURR(A_DEX)));
-			pline("You hurt your muscles!");
-		    return 1;}
-		}
-		else {no_kick = TRUE;}
+		no_kick = TRUE;
 #ifdef STEED
 	} else if (u.usteed) {
 		if (yn_function("Kick your steed?", ynchars, 'n') == 'y') {

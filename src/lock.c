@@ -795,13 +795,7 @@ doopen()		/* try to open a door */
 
 	if (nohands(youmonst.data)) {
 	    You_cant("open anything -- you have no hands!");
-
-		if (yn("Try to open it with another part of your body instead?") == 'y') {
-			if (rn2(3)) { 			make_blinded(Blinded + rnd(50),TRUE);
-			pline("Off - you just blinded yourself!");
-		    return 1;}
-		}
-		else {return(0);}
+	    return 0;
 	}
 
 	if (u.utrap && u.utraptype == TT_PIT) {
@@ -907,13 +901,7 @@ doclose()		/* try to close a door */
 
 	if (nohands(youmonst.data)) {
 	    You_cant("close anything -- you have no hands!");
-
-		if (yn("Try to close it with another part of your body instead?") == 'y') {
-			if (rn2(3)) { 			make_blinded(Blinded + rnd(50),TRUE);
-			pline("Something got in your face! You can't see!");
-		    return 1;}
-		}
-		else {return(0);}
+	    return 0;
 	}
 
 	if (u.utrap && u.utraptype == TT_PIT) {
