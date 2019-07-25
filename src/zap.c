@@ -5309,7 +5309,7 @@ retry:
 void
 do_acquirement()
 {
-	struct obj *otmp, *acqo, nothing;
+	struct obj *otmp, *acqo;
 	menu_item *pick_list = (menu_item *)0;
 	winid win;
 	anything any;
