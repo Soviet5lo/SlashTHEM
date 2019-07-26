@@ -447,6 +447,7 @@ E void FDECL(Ring_off, (struct obj *));
 E void FDECL(Ring_gone, (struct obj *));
 E void FDECL(Blindf_on, (struct obj *));
 E void FDECL(Blindf_off, (struct obj *));
+E int FDECL(Blemmye_blindness, (struct monst *));
 E int NDECL(dotakeoff);
 E int NDECL(doremring);
 E int FDECL(cursed, (struct obj *));

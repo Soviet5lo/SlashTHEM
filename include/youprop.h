@@ -106,7 +106,8 @@
 #define EBlinded			u.uprops[BLINDED].extrinsic
 #define Blindfolded		(ublindf && ublindf->otyp != LENSES)
 		/* ...means blind because of a cover */
-#define Blind	((Blinded || EBlinded || Blindfolded || flags.blindfox || !haseyes(youmonst.data)) && \
+#define Blind	((Blinded || EBlinded || Blindfolded || flags.blindfox || !haseyes(youmonst.data) \
+			|| Blemmye_blindness(&youmonst)) && \
 		 !(ublindf && ublindf->oartifact == ART_EYES_OF_THE_OVERWORLD && !flags.blindfox ))
 		/* ...the Eyes operate even when you really are blind
 		    or don't have any eyes */

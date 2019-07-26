@@ -1615,9 +1615,16 @@ int part;
 	    if (humanoid(mptr) && attacktype(mptr, AT_CLAW) &&
 		    (!index(not_claws, mptr->mlet) || mptr == &mons[PM_NOSFERATU]) &&
 		    mptr != &mons[PM_STONE_GOLEM] &&
+		    mptr != &mons[PM_BLEMMYE] &&
 		    mptr != &mons[PM_INCUBUS] && mptr != &mons[PM_SUCCUBUS])
 		return part == HAND ? "claw" : "clawed";
 	}
+	if (mptr == &mons[PM_BLEMMYE] ){
+	    if (part == HEAD) return "shoulders";
+	    else if (part == NECK) return "torso";
+	    else if (part == LIGHT_HEADED) return "addlebrained";
+	}
+
 	if ((mptr == &mons[PM_MUMAK] || mptr == &mons[PM_MASTODON]) &&
 		part == NOSE)
 	    return "trunk";
