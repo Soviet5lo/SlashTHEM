@@ -755,7 +755,7 @@ register int sh;
 	  if (typ==MAGIC_LAMP) {
 	    otmp->spe = 0;
 	  }
-	  if (typ==SCR_WISHING || typ==SCR_ACQUIREMENT || typ==SCR_ENTHRONIZATION || typ==SCR_FOUNTAIN_BUILDING || typ==SCR_SINKING || typ==SCR_WC) {
+	  if (typ==SCR_WISHING || typ==SCR_ACQUIREMENT) {
 	    typ = SCR_BLANK_PAPER;
 	  }
 

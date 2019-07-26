@@ -1598,7 +1598,7 @@ poly_obj(obj, id)
 	    break;
 
 	case SCROLL_CLASS:
-	    while (otmp->otyp == SCR_WISHING || otmp->otyp == SCR_ACQUIREMENT || otmp->otyp == SCR_ENTHRONIZATION || otmp->otyp == SCR_FOUNTAIN_BUILDING || otmp->otyp == SCR_SINKING || otmp->otyp == SCR_WC)
+	    while (otmp->otyp == SCR_WISHING || otmp->otyp == SCR_ACQUIREMENT)
 		otmp->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
 	    break;
 
@@ -5393,10 +5393,8 @@ do_acquirement()
 	if (acqo->otyp == MAGIC_MARKER) acqo->recharged = 1;
 	while(acqo->otyp == WAN_WISHING || acqo->otyp == WAN_POLYMORPH || acqo->otyp == WAN_ACQUIREMENT)
 	      acqo->otyp = rnd_class(WAN_LIGHT, WAN_SOLAR_BEAM);
-	while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT ||
-	       acqo->otyp == SCR_ENTHRONIZATION || acqo->otyp == SCR_FOUNTAIN_BUILDING ||
-	       acqo->otyp == SCR_SINKING || acqo->otyp == SCR_WC)
-		acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
+	while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT)
+	       acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
 
 	pline("An item has appeared on the ground just beneath you.");
 }

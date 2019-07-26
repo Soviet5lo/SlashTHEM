@@ -2606,7 +2606,7 @@ revid_end:
 		}
 		do_acquirement();
 		break;
-
+#if 0
 	case SCR_ENTHRONIZATION:
 
 		if (levl[u.ux][u.uy].typ != ROOM) {
@@ -2654,7 +2654,7 @@ revid_end:
 		levl[u.ux][u.uy].typ = TOILET;
 
 		break;
-
+#endif
 	case SCR_CONSECRATION:
 	{
 		aligntyp al,ual;

@@ -3041,7 +3041,7 @@ typfnd:
 	    typ = OIL_LAMP;
 
 	/* obviously don't allow wishing for scrolls of wishing --Amy */
-	if ((typ == SCR_WISHING || typ == SCR_ACQUIREMENT || typ == SCR_ENTHRONIZATION || typ == SCR_FOUNTAIN_BUILDING)
+	if ((typ == SCR_WISHING || typ == SCR_ACQUIREMENT)
 #ifdef WIZARD
 				&& !wizard
 #endif

@@ -3190,10 +3190,6 @@ register struct trobj *trop;
 				|| otyp == WAN_ACQUIREMENT
 				|| otyp == SCR_WISHING
 				|| otyp == SCR_ACQUIREMENT
-				|| otyp == SCR_ENTHRONIZATION
-				|| otyp == SCR_FOUNTAIN_BUILDING
-				|| otyp == SCR_SINKING
-				|| otyp == SCR_WC
 				|| otyp == nocreate
 				|| otyp == nocreate2
 				|| otyp == nocreate3

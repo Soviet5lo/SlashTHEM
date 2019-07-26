@@ -83,10 +83,6 @@ register struct obj *otmp;
 	case SCR_BLANK_PAPER:
 	case SCR_WISHING:
 	case SCR_ACQUIREMENT:
-	case SCR_ENTHRONIZATION:
-	case SCR_FOUNTAIN_BUILDING:
-	case SCR_SINKING:
-	case SCR_WC:
 	default:
 		/*impossible*/pline("You can't write such a weird scroll!");
 	}
@@ -176,7 +172,7 @@ found:
 	} else if (i == SPE_BOOK_OF_THE_DEAD) {
 		pline("No mere dungeon adventurer could write that.");
 		return 1;
-	} else if (i == SCR_WISHING || i == SCR_ACQUIREMENT || i == SCR_ENTHRONIZATION || i == SCR_FOUNTAIN_BUILDING || i == SCR_SINKING || i == SCR_WC) {
+	} else if (i == SCR_WISHING || i == SCR_ACQUIREMENT) {
 		pline("This scroll refuses to be written.");
 		return 1;
 	} else if (by_descr && paper->oclass == SPBOOK_CLASS &&
