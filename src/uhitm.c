@@ -982,7 +982,7 @@ int thrown;
 		    tmp += dmgbonus;
 	    } /* Techinuse Elemental Fist */		
 
-	  if (touch_disintegrates(mdat) && !oresist_disintegration(obj) &&
+	  } else if (touch_disintegrates(mdat) && !oresist_disintegration(obj) &&
 	    mon->mhp>6 && !mon->mcan){
 	    disint_obj = TRUE;
 	    valid_weapon_attack = FALSE;
@@ -1885,6 +1885,7 @@ int thrown;
 #endif
 	return((boolean)(destroyed ? FALSE : TRUE));
 }
+
 
 STATIC_OVL boolean
 shade_aware(obj)

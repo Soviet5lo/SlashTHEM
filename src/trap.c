@@ -2347,6 +2347,7 @@ register struct monst *mtmp;
 				    || mptr == &mons[PM_BUGBEAR])
 				   && flags.soundok)
 				    You_hear("the roaring of an angry bear!");
+			    	}
 			    }
 			}
 			break;
