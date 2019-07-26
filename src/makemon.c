@@ -2159,6 +2159,12 @@ register int	mmflags;
 			    mtmp->mundetected = TRUE;
 			break;
 		case S_LIGHT:
+			if (mndx == PM_WILL_O__WISP){
+			    mtmp->m_ap_type =
+			    ((mtmp->mappearance = pick_friendly()) == NON_PM )?
+			    M_AP_NOTHING:M_AP_MONSTER;
+			    break;
+			}
 		case S_ELEMENTAL:
 			if (mndx == PM_STALKER || mndx == PM_BLACK_LIGHT || mndx == PM_POLTERGEIST) {
 			    mtmp->perminvis = TRUE;
@@ -3432,6 +3438,38 @@ assign_sym:
 	}
 	mtmp->m_ap_type = ap_type;
 	mtmp->mappearance = appear;
+}
+
+static int friendlies[] = {
+    PM_ACID_BLOB,  PM_HOBBIT,     PM_BUGBEAR,     PM_GNOME,
+    PM_GNOME_LORD, PM_GNOME_KING, PM_DWARF,       PM_DWARF_LORD,
+    PM_DWARF_KING, PM_HOMUNCULUS, PM_TENGU,       PM_GOBLIN,
+    PM_HOBGOBLIN,  PM_HILL_ORC,   PM_ORC_SHAMAN,  PM_ORC_CAPTAIN,
+    PM_ANGEL,      PM_ARCHON,     PM_GOLDEN_NAGA, PM_GREEN_ELF,
+    PM_ELF_LORD,   PM_ELVENKING,  PM_MONKEY,      PM_SASQUATCH };
+
+static int very_friendlies[] = {
+    PM_LITTLE_DOG,    PM_DOG,          PM_LARGE_DOG,
+    PM_KITTEN,        PM_HOUSECAT,     PM_LARGE_CAT,
+    PM_PONY,          PM_HORSE,        PM_WARHORSE,     PM_ALIGNED_PRIEST,
+    PM_NURSE,         PM_GUIDE,        PM_SUCCUBUS,     PM_INCUBUS,
+    PM_BLACK_UNICORN, PM_GRAY_UNICORN, PM_WHITE_UNICORN };
+
+int
+pick_friendly()
+{
+  int pm, i=8;
+  do{ 
+  if (rn2(3))
+    pm = very_friendlies[rn2(SIZE(very_friendlies))];
+  else
+    pm = friendlies[rn2(SIZE(friendlies))];
+  if (!rn2(20))
+    pm = PM_GUIDE;
+  if (!peace_minded(&mons[pm]))
+    pm = NON_PM;
+  }while (pm == NON_PM || !(--i));
+  return pm;
 }
 
 /* Bag of Tricks now trickier ... nda 5/13/2003 */

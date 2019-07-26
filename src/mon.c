@@ -22,6 +22,7 @@ STATIC_DCL boolean FDECL(restrap,(struct monst *));
 STATIC_DCL long FDECL(mm_aggression, (struct monst *,struct monst *));
 #ifdef OVL2
 STATIC_DCL int NDECL(pick_animal);
+STATIC_DCL int FDECL(refakem, (struct monst *));
 STATIC_DCL int FDECL(select_newcham_form, (struct monst *));
 STATIC_DCL void FDECL(kill_eggs, (struct obj *));
 #endif
@@ -820,6 +821,9 @@ movemon()
 		    continue;
 	    if(mtmp->mundetected) continue;
 	}
+
+	if (mtmp->data == & mons[PM_WILL_O__WISP])
+	  refakem(mtmp);
 
 	/* continue if the monster died fighting */
 	if (Conflict && !mtmp->iswiz && mtmp->mcansee) {
@@ -2933,6 +2937,23 @@ register struct monst *mtmp;
 
 	return(FALSE);
 }
+
+int 
+refakem(mtmp)
+struct monst * mtmp;
+{
+  if ((cansee(mtmp->mx, mtmp->my) || mtmp->mcan) ||
+      ((mtmp->m_ap_type == M_AP_MONSTER) && rn2(8)))
+    return FALSE;
+  if ((mtmp->mappearance = pick_friendly()) != NON_PM ){
+    mtmp->m_ap_type = M_AP_MONSTER;
+    return TRUE;
+  } else {
+    mtmp->m_ap_type = M_AP_NOTHING;
+    return FALSE;
+  }
+}
+
 
 short *animal_list = 0;		/* list of PM values for animal monsters */
 int animal_list_count;
