@@ -99,6 +99,9 @@ struct flag {
 	boolean  time;		/* display elapsed 'time' */
 	boolean  tombstone;	/* print tombstone */
 	boolean  toptenwin;	/* ending list in window instead of stdout */
+#ifdef CURSES_GRAPHICS
+	boolean  tabcursesconfirm;  /* certain prompts in the curses interface require Tab to advance */
+#endif
 	boolean  verbose;	/* max battle info */
 	boolean  prayconfirm;	/* confirm before praying */
 	int	 end_top, end_around;	/* describe desired score list */
@@ -186,8 +189,8 @@ struct flag {
 struct instance_flags {
 	boolean  cbreak;	/* in cbreak mode, rogue format */
 #ifdef CURSES_GRAPHICS
-    boolean  classic_status;    /* What kind of horizontal statusbar to use */
-    boolean  cursesgraphics;    /* Use portable curses extended characters */
+	boolean  classic_status;    /* What kind of horizontal statusbar to use */
+	boolean  cursesgraphics;    /* Use portable curses extended characters */
 #endif
 	boolean  DECgraphics;	/* use DEC VT-xxx extended character set */
 	boolean  echo;		/* 1 to echo characters */

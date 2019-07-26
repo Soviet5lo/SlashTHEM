@@ -287,7 +287,7 @@ curses_display_nhwindow(winid wid, BOOLEAN_P block)
 
     if ((wid == MESSAGE_WIN) && block) {
         if (u.uhp != -1 && program_state.gameover != 1)
-            (void) curses_block(TRUE);
+            (void) curses_block(flags.tabcursesconfirm ? TRUE : FALSE);
         /* don't bug player with TAB prompt on "Saving..." or endgame */
         else
             (void) curses_more();

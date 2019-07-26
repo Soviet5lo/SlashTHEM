@@ -143,6 +143,7 @@ curses_block(boolean require_tab)
     curses_get_window_size(MESSAGE_WIN, &height, &width);
     curses_toggle_color_attr(win, MORECOLOR, NONE, ON);
     mvwprintw(win, my, mx, require_tab ? "<TAB!>" : ">>");
+    /* configurable with tabcursesconfirm option now, see also cursmain.c */
     curses_toggle_color_attr(win, MORECOLOR, NONE, OFF);
     if (require_tab)
         curses_alert_main_borders(TRUE);
