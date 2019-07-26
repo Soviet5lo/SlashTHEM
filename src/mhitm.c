@@ -1785,7 +1785,9 @@ physical:
 	    case AD_BLND:
 		if (nohit) break;                
 	       
-		if (can_blnd(magr, mdef, mattk->aatyp, (struct obj*)0)) {
+		if (can_blnd(magr, mdef, mattk->aatyp, (struct obj*)0) 
+          	    && (magr->data != &mons[PM_UMBRAL_HULK] || !magr->mspec_used)){
+
 		    register unsigned rnd_tmp;
 
 		    if (vis && mdef->mcansee)
@@ -2270,6 +2272,17 @@ mhitm_flvr_strange:
 		tmp += destroy_mitem(mdef, POTION_CLASS, AD_FIRE);
 		if(!rn2(10)) hurtmarmor(mdef, AD_RUST);
 		break;
+	    case AD_HNGY:
+		tmp = 0;
+		if (cancelled || !mdef->mtame) break;
+		EDOG(mdef)->hungrytime -= 50;
+
+		magr->mspec_used = magr->mspec_used + 50;
+		if (canseemon(mdef))
+		    pline("%s %s rumbles.",
+		    s_suffix(Monnam(mdef)), mbodypart(mdef,STOMACH));
+		break;
+
 	    default:	/*tmp = 0;*/ 
 			break; /* necessary change to make pets more viable --Amy */
 	}

@@ -661,6 +661,22 @@ toofar:
 		mtmp->mspec_used = max(spec_used/(mtmp->m_lev),10);
 	    }
 	}
+
+	if(mtmp->data == &mons[PM_UMBRAL_HULK] && 
+          !mtmp->mcan && !mtmp->mspec_used && levl[mtmp->mx][mtmp->my].lit){
+		litroom_mon(0, 0, mtmp->mx, mtmp->my);
+		mtmp->mspec_used = 5 + rn2(11);
+   	}
+	if (mtmp->data == &mons[PM_WILL_O__WISP] && 
+	   !mtmp->mcan && !mtmp->mspec_used && !rn2(10)){
+		struct rm * there = &levl[mtmp->mx][mtmp->my];
+		if (cansee(mtmp->mx, mtmp->my)){
+		    if(there->typ == ROOM){
+			maketrap(mtmp->mx, mtmp->my, rn2(3)?SPIKED_PIT:RUST_TRAP); /* was WATER_TRAP */
+		    }
+		mtmp->mspec_used += rn1(15,15);
+		} 
+	}
 		tmp = m_move(mtmp, 0);
 		distfleeck(mtmp,&inrange,&nearby,&scared);	/* recalc */
 		switch (tmp) {

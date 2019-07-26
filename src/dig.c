@@ -1227,7 +1227,10 @@ register struct monst *mtmp;
 	} else {
 	    here->typ = CORR;
 	    if (pile && pile < 5)
-	    (void) mksobj_at((pile == 1) ? BOULDER : ROCK,
+		(void) mksobj_at((pile == 1) ? 
+                       (mtmp->data==&mons[PM_HUNGER_HULK])? HUGE_CHUNK_OF_MEAT:
+                       BOULDER : 
+                       (mtmp->data==&mons[PM_HUNGER_HULK])? MEATBALL : ROCK,
 			     mtmp->mx, mtmp->my, TRUE, FALSE);
 	}
 	newsym(mtmp->mx, mtmp->my);

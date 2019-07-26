@@ -1868,6 +1868,7 @@ E void FDECL(set_lit, (int,int,genericptr_t));
 #endif
 E void FDECL(litroom, (BOOLEAN_P,struct obj *));
 E void FDECL(litroomlite, (boolean));
+E void FDECL(litroom_mon, (BOOLEAN_P, struct obj *, int, int));
 E void FDECL(do_genocide, (int));
 E void FDECL(punish, (struct obj *));
 E void NDECL(unpunish);

@@ -3943,6 +3943,16 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		}
 		break;
 	    case AD_BLND:
+		if (mtmp->data == &mons[PM_UMBRAL_HULK]){
+		    if (!mtmp->mspec_used && !Blind && couldsee(mtmp->mx, mtmp->my) &&
+		      can_blnd(mtmp, &youmonst, mattk->aatyp, (struct obj*)0)) {
+			pline("You meet %s gaze! The shadows merge into utter darkness!", 
+			  s_suffix(mon_nam(mtmp)) );
+			make_blinded(Blinded + d((int)mattk->damn, (int)mattk->damd), FALSE);
+			if (!Blind) Your(vision_clears);
+			}
+		    break;
+		}
 		if (!mtmp->mcan && canseemon(mtmp) && !resists_blnd(&youmonst)
 			&& distu(mtmp->mx,mtmp->my) <= BOLT_LIM*BOLT_LIM) {
 		    int blnd = d((int)mattk->damn, (int)mattk->damd);
@@ -4043,6 +4053,18 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 			docrt();
 		    }
 		    mtmp->mspec_used += ABASE(A_INT) * rn1(1,3);
+		}
+		break;
+	    case AD_HNGY:
+		if(!mtmp->mcan && canseemon(mtmp) &&
+		  couldsee(mtmp->mx, mtmp->my) && !is_fainted() &&
+		  mtmp->mcansee && !mtmp->mspec_used && rn2(5)) {
+		int hunger = 20 + d(3,4);
+
+		mtmp->mspec_used = mtmp->mspec_used + (hunger + rn2(6));
+		pline("%s gaze reminds you of delicious %s.",
+		s_suffix(Monnam(mtmp)), fruitname(FALSE));
+		morehungry(hunger);
 		}
 		break;
 #ifdef PM_BEHOLDER /* work in progress */
