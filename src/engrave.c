@@ -1126,16 +1126,7 @@ doengrave()
 	}
 	if (cantwield(youmonst.data)) {
 		You_cant("even hold anything!");
-
-		if (yn("Do you want to try engraving anyway?") == 'y') {
-			if (rn2(3)) { 		
-			pline("You failed to engrave anything.");
-		    return 1;}
-		}
-
-		/* Just make them lose that turn. If they're surrounded by 20 killer bees and 10 large cats,
-		   losing a turn while engraving might be enough to kill them anyway. No need for further penalties. --Amy */
-		else {return(0);}
+		return(0);
 	}
 	if (check_capacity((char *)0)) return (0);
 

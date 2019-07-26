@@ -1209,7 +1209,14 @@ unsigned trflags;
 		    case 0:
 			pline("%s you on the %s!", A_gush_of_water_hits,
 				    body_part(HEAD));
-			(void) rust_dmg(uarmh, "helmet", 1, TRUE, &youmonst);
+			if (uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
+					!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+						"hooded cloak"))
+				(void) rust_dmg(uarmc, cloak_simple_name(uarmc),
+						1, TRUE, &youmonst);
+			else
+				(void) rust_dmg(uarmh, "helmet",
+						1, TRUE, &youmonst);
 			break;
 		    case 1:
 			pline("%s your left %s!", A_gush_of_water_hits,

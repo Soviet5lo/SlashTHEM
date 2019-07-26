@@ -112,7 +112,6 @@ int mndx, mode;
 	case PM_CHIEFTAIN:   mndx = mode ? PM_BARBARIAN : PM_HUMAN; break;
 	case PM_NEANDERTHAL: mndx = mode ? PM_CAVEMAN   : PM_HUMAN; break;
 	case PM_ATTENDANT:   mndx = mode ? PM_HEALER    : PM_HUMAN; break;
-	case PM_UNFORTUNATE_VICTIM:   mndx = mode ? PM_BLEEDER    : PM_HUMAN; break;
 	case PM_PAGE:        mndx = mode ? PM_KNIGHT    : PM_HUMAN; break;
 	case PM_RHYMER:      mndx = mode ? PM_BARD   : PM_HUMAN; break;
 	case PM_ABBOT:       mndx = mode ? PM_MONK      : PM_HUMAN; break;
@@ -279,16 +278,15 @@ register struct monst *mtmp;
 	    case PM_FRANKENSTEIN_S_MONSTER:
 	    case PM_UNDEAD_ARCHEOLOGIST:
 	    case PM_UNDEAD_BARBARIAN:
-	    case PM_UNDEAD_BINDER:
-	    case PM_UNDEAD_BLEEDER:
 	    case PM_UNDEAD_BARD:
 	    case PM_UNDEAD_CAVEMAN:
 	    case PM_UNDEAD_CAVEWOMAN:
 	    case PM_UNDEAD_PALADIN:
 	    case PM_UNDEAD_CHEF:
 	    case PM_UNDEAD_ZYBORG:
-	    case PM_UNDEAD_GANGSTER:
+#if 0
 	    case PM_UNDEAD_POKEMON:
+#endif
 	    case PM_UNDEAD_ELECTRIC_MAGE:
 	    case PM_UNDEAD_ACID_MAGE:
 	    case PM_UNDEAD_FLAME_MAGE:
@@ -296,14 +294,14 @@ register struct monst *mtmp;
 	    case PM_UNDEAD_LUNATIC:
 	    case PM_UNDEAD_GEEK:
 	    case PM_UNDEAD_GRADUATE:
-	    case PM_UNDEAD_SCIENTIST:
-	    case PM_UNDEAD_ROCKER:
 	    case PM_UNDEAD_HEALER:
 	    case PM_UNDEAD_ICE_MAGE:
 	    case PM_UNDEAD_KNIGHT:
 	    case PM_UNDEAD_WARRIOR:
 	    case PM_UNDEAD_MONK:
+#if 0
 	    case PM_UNDEAD_PSION:
+#endif
 	    case PM_UNDEAD_NECROMANCER:
 	    case PM_UNDEAD_NOBLEMAN:
 	    case PM_UNDEAD_NOBLEWOMAN:

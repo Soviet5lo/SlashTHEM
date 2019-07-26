@@ -59,9 +59,6 @@ char msgbuf[BUFSZ];
 #define STARVED		6
 
 /* also used to see if you're allowed to eat cats and dogs */
-#define CANNIBAL_ALLOWED() (Role_if(PM_CAVEMAN) || Role_if(PM_LUNATIC) || Race_if(PM_ORC) || \
-Race_if(PM_TROLL) ||  Race_if(PM_OGRE) || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD) || \
-Race_if(PM_HUMAN_WEREWOLF) || Race_if(PM_VAMPIRE)|| Race_if(PM_GHOUL))
 
 #ifndef OVLB
 
@@ -511,15 +508,6 @@ boolean message;
 	} else if (message)
 		You("finish %s %s.", victual.piece->odrained ? "draining" :
 		  "eating", food_xname(victual.piece, TRUE));
-
-	/* Bleeders who can drain corpses will benefit from doing so */
-	if(victual.piece->otyp == CORPSE && victual.piece->odrained && Role_if(PM_BLEEDER) ) {
-
-		pline("That blood really hit the spot!");
-		healup(d(8,8) + rnd(u.ulevel), 0, TRUE, TRUE);
-		exercise(A_CON, TRUE);
-
-	}
 
 	if(victual.piece->otyp == CORPSE) {
 		if (!victual.piece->odrained || /*Race_if(PM_VAMPIRE) &&*/ !rn2(5))
@@ -1427,8 +1415,7 @@ opentin()		/* called during each move whilst opening a tin */
 		    /* 5lo: Chefs will always create varied tins */
 		    (tin.tin->spe == -1 && !Role_if(PM_CHEF)) ? HOMEMADE_TIN :  /* player made it */
 			rn2(TTSZ-1);		/* else take your pick */
-	    if (r == ROTTEN_TIN && (tin.tin->corpsenm == PM_LIZARD ||
-			tin.tin->corpsenm == PM_LICHEN))
+	    if (r == ROTTEN_TIN && corpse_never_rots(&mons[tin.tin->corpsenm]))
 		r = HOMEMADE_TIN;		/* lizards don't rot */
 	    else if (tin.tin->spe == -1 && !tin.tin->blessed && !rn2(7))
 		r = ROTTEN_TIN;			/* some homemade tins go bad */
@@ -1703,7 +1690,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	if (!vegetarian(&mons[mnum])) violated_vegetarian();
 		gluttonous();
 
-	if (mnum != PM_LIZARD && mnum != PM_LICHEN) {
+	if (!corpse_never_rots(&mons[mnum])) {
 		long age = peek_at_iced_corpse_age(otmp);
 
 		rotted = (monstermoves - age)/(10L + rn2(20));
@@ -1809,7 +1796,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	victual.reqtime = 3 + (mons[mnum].cwt >> 6);
 	if (otmp->odrained) victual.reqtime = rounddiv(victual.reqtime, 5);
 
-		if (!tp && mnum != PM_LIZARD && mnum != PM_LICHEN &&
+		if (!tp && !corpse_never_rots(&mons[mnum]) &&
 			(otmp->orotten || (!rn2(7) && !otmp->blessed)  )) {
 /* Come on, blessed food being equally susceptible to rotting is just stupid. --Amy */
 	    if (rottenfood(otmp)) {

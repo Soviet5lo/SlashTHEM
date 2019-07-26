@@ -166,7 +166,7 @@ in_trouble()
 		stuck_ring(uleft, RIN_LEVITATION) ||
 		stuck_ring(uright, RIN_LEVITATION))
 		return(TROUBLE_CURSED_LEVITATION);
-	if (!Race_if(PM_UNGENOMOLD) && ((nohands(youmonst.data) || !freehand()))) {
+	if (nohands(youmonst.data) || !freehand()) {
 	    /* for bag/box access [cf use_container()]...
 	       make sure it's a case that we know how to handle;
 	       otherwise "fix all troubles" would get stuck in a loop */
@@ -1995,7 +1995,7 @@ prayer_done()		/* M. Stephenson (1.0.3b) */
 		 "Vile creature, thou durst call upon me?" :
 		 "Walk no more, perversion of nature!");
 	You_feel("like you are falling apart.");
-	if (Upolyd && !Race_if(PM_UNGENOMOLD)) {
+	if (Upolyd) {
 	    /* KMH, balance patch -- Gods have mastery over unchanging */
 	rehumanize();
 	}

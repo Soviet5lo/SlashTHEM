@@ -235,41 +235,6 @@ unsigned *ospecial;
 				color = CLR_BRIGHT_BLUE;
 			}
 		}
-		/* And turned this into it's own option, as some people don't like this by default */
-		if(iflags.use_color && iflags.random_room_colors&&
-		    ((offset >= S_vwall && offset <= S_hcdoor) || (offset >= S_corr && offset <= S_litcorr))){
-			if(*in_roomscolouur(x,y,1) && *in_rooms(x,y,OROOM)) {
-				color = 1;
-			} else if(*in_roomscolouur(x,y,2) && *in_rooms(x,y,OROOM)) {
-				color = 2;
-			} else if(*in_roomscolouur(x,y,3) && *in_rooms(x,y,OROOM)) {
-				color = 3;
-			} else if(*in_roomscolouur(x,y,4) && *in_rooms(x,y,OROOM)) {
-				color = 4;
-			} else if(*in_roomscolouur(x,y,5) && *in_rooms(x,y,OROOM)) {
-				color = 5;
-			} else if(*in_roomscolouur(x,y,6) && *in_rooms(x,y,OROOM)) {
-				color = 6;
-			} else if(*in_roomscolouur(x,y,7) && *in_rooms(x,y,OROOM)) {
-				color = 7;
-			} else if(*in_roomscolouur(x,y,8) && *in_rooms(x,y,OROOM)) {
-				color = 8;
-			} else if(*in_roomscolouur(x,y,9) && *in_rooms(x,y,OROOM)) {
-				color = 9;
-			} else if(*in_roomscolouur(x,y,10) && *in_rooms(x,y,OROOM)) {
-				color = 10;
-			} else if(*in_roomscolouur(x,y,11) && *in_rooms(x,y,OROOM)) {
-				color = 11;
-			} else if(*in_roomscolouur(x,y,12) && *in_rooms(x,y,OROOM)) {
-				color = 12;
-			} else if(*in_roomscolouur(x,y,13) && *in_rooms(x,y,OROOM)) {
-				color = 13;
-			} else if(*in_roomscolouur(x,y,14) && *in_rooms(x,y,OROOM)) {
-				color = 14;
-			} else if(*in_roomscolouur(x,y,20) && *in_rooms(x,y,OROOM)) {
-				color = rn2(15);
-			}
-		}
 		if(iflags.use_color && iflags.dungeon_colors &&
 		    (offset == S_upstair || offset == S_dnstair) &&
 		    (x == sstairs.sx && y == sstairs.sy)) {

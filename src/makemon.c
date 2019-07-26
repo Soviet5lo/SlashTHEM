@@ -548,20 +548,8 @@ register struct monst *mtmp;
 #endif
 		   break;
 
-		   case PM_BINDER:
-		   case PM_UNDEAD_BINDER:
-		     (void)mongets(mtmp, VOULGE);
-		     (void)mongets(mtmp, KNIFE);
-		     (void)mongets(mtmp, LEATHER_CLOAK);
-		   break;
-
-		   case PM_BLEEDER:
-		   case PM_UNDEAD_BLEEDER:
-		     (void)mongets(mtmp, KNIFE);
-		     (void)mongets(mtmp, LAB_COAT);
-		   break;
-
-		   case PM_BARD: case PM_UNDEAD_BARD:
+		   case PM_BARD:
+		   case PM_UNDEAD_BARD:
 		     (void)mongets(mtmp, LEATHER_CLOAK);
 #ifndef GOLDOBJ
 		     mtmp->mgold = (long) d(mtmp->m_lev, 15);
@@ -641,13 +629,6 @@ register struct monst *mtmp;
 #endif
 		   break;
 
-		   case PM_UNDEAD_ROCKER: /* needs to be filled */
-		   case PM_ROCKER: /* needs to be filled */
-			(void)mongets(mtmp, SLING);
-			 m_initthrow(mtmp, FLINT, 25);
-			(void)mongets(mtmp, PICK_AXE);
-		   break;
-
 		   case PM_CONVICT:
 		   case PM_UNDEAD_CONVICT:
 		     (void)mongets(mtmp, HEAVY_IRON_BALL);
@@ -670,14 +651,6 @@ register struct monst *mtmp;
 		   case PM_UNDEAD_LUNATIC:
 		     (void)mongets(mtmp, LARGE_SHIELD);
 		     (void)mongets(mtmp, STEEL_WHIP);
-		   break;
-
-		   case PM_GANGSTER:
-		   case PM_UNDEAD_GANGSTER:
-		     (void)mongets(mtmp, SUBMACHINE_GUN);
-			 m_initthrow(mtmp, BULLET, 50);
-			 m_initthrow(mtmp, BULLET, 50);
-		     (void)mongets(mtmp, LEATHER_JACKET);
 		   break;
 
 #if 0
@@ -790,8 +763,6 @@ register struct monst *mtmp;
 
 		   case PM_HEALER:
 		   case PM_UNDEAD_HEALER:
-		   case PM_SCIENTIST:
-		   case PM_UNDEAD_SCIENTIST:
 		     (void)mongets(mtmp, SCALPEL);
 		     (void)mongets(mtmp, LEATHER_GLOVES);
 		     (void)mongets(mtmp, WAN_HEALING);
@@ -1022,21 +993,6 @@ register struct monst *mtmp;
 
 			(void)mongets(mtmp, TRIDENT);
 			(void)mongets(mtmp, STONE_DRAGON_SCALE_MAIL);
-
-		} else if (mm == PM_DEATH_METAL_FREAK){
-			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-
-		} else if (mm == PM_DEATH_METAL_DRUMMER){
-			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-		     (void)mongets(mtmp, SUBMACHINE_GUN);
-			 m_initthrow(mtmp, BULLET, 50);
-			 m_initthrow(mtmp, BULLET, 50);
-
-		} else if (mm == PM_DEATH_METAL_ORCHESTRA_LEADER){
-			if (rn2(2)) (void)mongets(mtmp, rn2(2) ? FIRE_HORN : FROST_HORN);
-		     (void)mongets(mtmp, HEAVY_MACHINE_GUN);
-			 m_initthrow(mtmp, BULLET, 50);
-			 m_initthrow(mtmp, BULLET, 50);
 
 		} else if (mm == PM_DRACO_THE_SHARPSHOOTER){
 		     (void)mongets(mtmp, SNIPER_RIFLE);
@@ -2418,9 +2374,6 @@ register int	mmflags;
 			mtmp->mstrategy |= STRAT_CLOSE;
 	}
 
-	if (mndx == PM_UNFORTUNATE_VICTIM && in_mklev ) { /* These are supposed to spawn already dead. --Amy */
-			monkilled(mtmp, "", AD_PHYS);
-	} 
 	if (mndx == PM_SHOCKING_SPHERE && Role_if(PM_ACID_MAGE) && Is_nemesis(&u.uz) ) {
 			(void) mon_perm_poly(mtmp,  &mons[PM_LIGHTNING_PROOF_BARRIER], 0L, FALSE, FALSE, FALSE, FALSE);
 	} 
@@ -2862,12 +2815,13 @@ struct monst *mtmp, *victim;
 	if ((int)++mtmp->m_lev >= mons[newtype].mlevel && newtype != oldtype) {
 	    ptr = &mons[newtype];
 
-		/* stupid sensemon function! Screw it, evolving messages will always be displayed now. --Amy */
-
-		/*if (sensemon(mtmp)) {*/
-			pline("What? %s is evolving!", mon_nam(mtmp) );
+	if (sensemon(mtmp)) {
+	    	if (Hallucination) {
+			pline("What? %s is evolving!", mon_nam(mtmp));
 			pline("%s evolved into %s!", mon_nam(mtmp), an(ptr->mname) );
-		/*}*/
+		} else
+			pline("%s has grown into %s.", mon_nam(mtmp), an(ptr->mname));
+	}
 
 	    if (mvitals[newtype].mvflags & G_GENOD) {	/* allow G_EXTINCT */
 		if (sensemon(mtmp))
@@ -3488,7 +3442,7 @@ struct obj *bag;
     if (!bag || bag->otyp != BAG_OF_TRICKS) {
 	impossible("bad bag o' tricks");
     } else if (bag->spe < 1) {
-		return use_container(bag, 1);
+		return use_container(&bag, 1);
     } else {
 	
 	boolean gotone = TRUE;

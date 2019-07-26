@@ -1312,10 +1312,6 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	if (wizard || (!rn2(10)) || final >= 1 ) { Sprintf(buf, " %d", nartifact_exist() );
 		enl_msg("Number of artifacts generated ", "is", "was", buf);
 	}
-
-	if (u.legscratching > 1) { Sprintf(buf, " %d", u.legscratching - 1);
-		enl_msg("Your leg damage ", "is", "was", buf);
-	}
 #ifdef MORE_SPAWNS
 	if (wizard || (!rn2(10)) || final >= 1 ) { Sprintf(buf, " turn %d", u.monstertimeout);
 		enl_msg("Monster spawn increase ", "start at", "would have started at", buf);
@@ -1831,10 +1827,6 @@ int final;
 		dump("  Number of artifacts generated was", buf);
 	}
 
-	if (wizard || final >= 1) {
-		Sprintf(buf, " %d", u.legscratching - 1);
-		dump("  Your leg damage was", buf);
-	}
 #ifdef MORE_SPAWNS
 	if (wizard || final >= 1) {
 		Sprintf(buf, " turn %d", u.monstertimeout);

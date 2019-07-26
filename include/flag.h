@@ -315,8 +315,7 @@ struct instance_flags {
 	boolean  travelcmd;	/* allow travel command */
 	int	 runmode;	/* update screen display during run moves */
 
-	boolean dungeon_colors;
-	boolean random_room_colors;
+	boolean dungeon_colors; /* Branch stairs, branches and special rooms are colored */
 
 	boolean showobj_inv; /* Display items in inventory (Unnethack) */
 
@@ -331,6 +330,9 @@ struct instance_flags {
 #endif
 #ifdef REALTIME_ON_BOTL
   boolean  showrealtime; /* show actual elapsed time */
+#endif
+#ifdef SORTLOOT
+	uchar	sortloot;
 #endif
 };
 

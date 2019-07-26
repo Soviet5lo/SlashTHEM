@@ -610,8 +610,8 @@ boolean artif;
 		case BAG_OF_HOLDING:
 		case MEDICAL_KIT:
 			mkbox_cnts(otmp);
-		blessorcurse(otmp, 8);
-					break;
+			blessorcurse(otmp, 8);
+			break;
 #ifdef TOURIST
 		case EXPENSIVE_CAMERA:
 #endif
@@ -666,17 +666,6 @@ boolean artif;
 			otmp->spe = rn1(5,10);
 			blessorcurse(otmp, 10);
 					break;
-		default: /* all the other tools --Amy */
-		if(!rn2(8)) {
-			otmp->spe = rne(2);
-			if (rn2(2)) otmp->blessed = rn2(2);
-			 else	blessorcurse(otmp, 3);
-		} else if(!rn2(10)) {
-			if (rn2(10)) curse(otmp);
-			 else	blessorcurse(otmp, 3);
-			otmp->spe = -rne(2);
-		} else	blessorcurse(otmp, 10);
-		break;
 	    }
 	    break;
 	case AMULET_CLASS:
@@ -690,7 +679,6 @@ boolean artif;
 			curse(otmp);
 		} else	blessorcurse(otmp, 10);
 	case VENOM_CLASS:
-		blessorcurse(otmp, 10);
 		break;
 	case CHAIN_CLASS:
 	case BALL_CLASS:
@@ -841,7 +829,7 @@ start_corpse_timeout(body)
 #define ROT_AGE (250L)		/* age when corpses rot away */
 
 	/* lizards and lichen don't rot or revive */
-	if (body->corpsenm == PM_LIZARD || body->corpsenm == PM_LICHEN) return;
+	if (corpse_never_rots(&mons[body->corpsenm])) return;
 
 	action = ROT_CORPSE;		/* default action: rot away */
 	rot_adjust = in_mklev ? 25 : 10;	/* give some variation */
@@ -1075,7 +1063,7 @@ register struct obj *obj;
 	} else if (obj->oclass == FOOD_CLASS && obj->oeaten) {
 		return eaten_stat((int)obj->quan * wt, obj);
 	} else if (obj->oclass == COIN_CLASS)
-		return (int)((obj->quan + 50L) / /*100*/10000L); /* gold weight fix --Amy */
+		return (int)((obj->quan + 50L) / 100L);
 	else if (obj->otyp == HEAVY_IRON_BALL && obj->owt != 0)
 		return((int)(obj->owt));	/* kludge for "very" heavy iron ball */
 	return(wt ? wt*(int)obj->quan : ((int)obj->quan + 1)>>1);
@@ -1117,8 +1105,7 @@ int x, y;
 /* return TRUE if the corpse has special timing */
 /* special timing is a timing that is not rotting or molding */
 
-#define special_corpse(num)  (((num) == PM_LIZARD)		\
-				|| ((num) == PM_LICHEN)		\
+#define special_corpse(num)  ((corpse_never_rots(&mons[num]))	\
 				|| (is_rider(&mons[num]))	\
 				|| (mons[num].mlet == S_FUNGUS) \
 				|| (mons[num].mlet == S_TROLL))

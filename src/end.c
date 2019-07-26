@@ -47,6 +47,7 @@ STATIC_DCL boolean FDECL(list_vanquished, (CHAR_P, BOOLEAN_P));
 #  include <sys/stat.h>
 # endif
 extern char msgs[][BUFSZ];
+extern int msgs_count[];
 extern int lastmsg;
 extern void NDECL(dump_spells);
 extern void NDECL(dump_techniques);
@@ -993,6 +994,7 @@ die:
 		disclose(how, taken);
 	/* finish_paybill should be called after disclosure but before bones */
 #if defined(DUMP_LOG) && defined(DUMPMSGS)
+	/*
 		if (lastmsg >= 0) {
 		  dump ("", "Latest messages");
 		  for (i = lastmsg + 1; i < DUMPMSGS; i++) {
@@ -1003,6 +1005,22 @@ die:
 		    if (msgs[i] && strcmp(msgs[i], "") )
 		      dump ("  ", msgs[i]);
 		  } 
+		  */
+		char tmpbuf[BUFSZ];
+		int i, j;
+		if (lastmsg >= 0) {
+		  dump ("", "Latest messages");
+		for (j = lastmsg + 1; j < DUMPMSGS + lastmsg + 1; j++) {
+		  i = j % DUMPMSGS;
+		  if (msgs[i] && strcmp(msgs[i], "") ) {
+		    if (msgs_count[i] == 1) {
+		      dump ("  ", msgs[i]);
+		    } else {
+		      Sprintf(tmpbuf, "%s (%dx)", msgs[i], msgs_count[i]);
+		      dump ("  ", tmpbuf);
+		    }
+		  }
+		}
 		  dump ("","");
 		}
 #endif
@@ -1297,6 +1315,11 @@ boolean identified, all_containers, want_dump;
 /* The original container_contents function */
 {
 	register struct obj *box, *obj;
+#ifdef SORTLOOT
+        struct obj **oarray;
+        int i,j,n;
+        char *invlet;
+#endif /* SORTLOOT */
 	char buf[BUFSZ];
 
 	for (box = list; box; box = box->nobj) {
@@ -1307,13 +1330,52 @@ boolean identified, all_containers, want_dump;
 		    continue;	/* bag of tricks with charges can't contain anything */
 		} else if (box->cobj) {
 		    winid tmpwin = create_nhwindow(NHW_MENU);
+#ifdef SORTLOOT
+                   /* count the number of items */
+                   for (n = 0, obj = box->cobj; obj; obj = obj->nobj) n++;
+                   /* Make a temporary array to store the objects sorted */
+                   oarray = (struct obj **) alloc(n*sizeof(struct obj*));
+
+                   /* Add objects to the array */
+                   i = 0;
+                   invlet = flags.inv_order;
+               nextclass:
+                   for (obj = box->cobj; obj; obj = obj->nobj) {
+                      if (!flags.sortpack || obj->oclass == *invlet) {
+                       if (iflags.sortloot == 'f'
+                           || iflags.sortloot == 'l') {
+                         /* Insert object at correct index */
+                         for (j = i; j; j--) {
+                           if (strcmpi(cxname2(obj), cxname2(oarray[j-1]))>0
+                           || (flags.sortpack &&
+                               oarray[j-1]->oclass != obj->oclass))
+                             break;
+                           oarray[j] = oarray[j-1];
+                         }
+                         oarray[j] = obj;
+                         i++;
+                       } else {
+                         /* Just add it to the array */
+                         oarray[i++] = obj;
+                       }
+                     }
+                   } /* for loop */
+                   if (flags.sortpack) {
+                     if (*++invlet) goto nextclass;
+                   }
+#endif /* SORTLOOT */
 		    Sprintf(buf, "Contents of %s:", the(xname(box)));
 		    putstr(tmpwin, 0, buf);
 		    putstr(tmpwin, 0, "");
 #ifdef DUMP_LOG
 		    if (dump_fp) dump("", buf);
 #endif
+#ifdef SORTLOOT
+                   for (i = 0; i < n; i++) {
+                       obj = oarray[i];
+#else
 		    for (obj = box->cobj; obj; obj = obj->nobj) {
+#endif
 			putstr(tmpwin, 0, doname(obj));
 #ifdef DUMP_LOG
 			if (want_dump)  dump("  ", doname(obj));

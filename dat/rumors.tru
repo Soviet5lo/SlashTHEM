@@ -1041,7 +1041,6 @@ They say that the Eye of the Aethiopica has been nerfed in Slash'EM Extended.
 Leveling up will give a small boost to your mana regeneration.
 Having a spell school at skilled will improve mana regeneration.
 Having a spell school at expert will improve mana regeneration even more.
-Mouldic characters have a higher chance to polymorph while in their natural form.
 Naming your character 'LostSoul' means you start at Medusa depth instead of dlvl1.
 Blessed stethoscopes are better than uncursed ones.
 Jumping is no longer completely free; it costs 10 mana now.
@@ -1109,11 +1108,6 @@ You cannot wish for a scroll of wishing!
 There is a chance of an artifact wish failing even if none have been created yet.
 They say that Slash'EM Extended allows the hero to pick up more than 52 items.
 If the program is in disorder, please inform Amy (Bluescreenofdeath at nethackwiki) about the bug that caused it.
-Moulds, including ungenomolds, are resistant to bad polymorphs but have uncurable polymorphitis.
-Ungenomolds automatically genocide their own race upon starting the game.
-Moulds and ungenomolds cannot suffer from system shock.
-Moulds used to suck way too much, so they're allowed to stay polymorphed for a longer time.
-Moulds and ungenomolds _must_ be able to polymorph at will. Otherwise they would just suck.
 Blessed potions of gain ability no longer increase all stats in Slash'EM Extended.
 Potions of gain ability: a blessed one has a chance to increase more than one stat, or increase one stat twice.
 There are no more stacks of healthstones for cavedwarfs, sorry.
@@ -1158,15 +1152,10 @@ They say that eating a gecko is like eating an eucalyptus leaf.
 They say that eating certain :-class monsters can work similar to a unicorn horn.
 They say that inducing vomiting may be useful if you're sick, even if your sickness can't be cured this way.
 They say that inducing vomiting will double your turns-to-live timer if you're deathly sick or ill.
-They say that rockers don't fear cockatrices.
 They say that acid mages may have difficulty reaching their quest nemesis.
-They say that binders may acquire random spellbooks upon increasing their experience.
-They say that binders who get skilled will receive some sort of boon.
-They say that expert binders can use some powerful techniques.
 They say that convicts are already on the verge of becoming hungry upon entering the dungeon.
 They say that convicts start with negative luck and alignment.
 They say that convicts have a hard time taming animals, and minetown is hostile to them.
-They say that gangsters can create bullets from thin air.
 They say that geeks may fight Bill Gates.
 They say that jedi must follow a code of conduct.
 They say that female noblewomen are less protected while wearing victorian underwear.
@@ -1175,16 +1164,12 @@ They say that pokemon can easily catch other pokemon, but it's even better to tr
 They say that warriors suck at spellcasting, but excel at fighting in melee.
 They say that paladins are like a cross between a Knight and a Priest.
 They say that zyborgs spontaneously decide what techniques they want to use.
-They say that aliens are always having a hard time, no matter what they attempt to do.
 They say that gastlies only eat corpses with a degree of rot on them, and can't eat any non-corpse food.
 They say that giants can pick up and throw boulders, but hunger rapidly.
 They say that kobolds often use throwing weapons and have poison resistance, but fall asleep every once in a while.
-They say that moulds like to polymorph often. Yeah. Very often indeed. They're the masters of polymorphing, so to speak.
 They say that ogres have learned how to use a club, but nobody seems to like them very much.
 They say that snakemen like to squeeze their enemies, but due to lack of feet they cannot kick.
 They say that trolls are immune to food poisoning, regenerate very quickly and can come back to life after death.
-They say that ungenomolds don't exist. Creatures polymorphed from an ungenomold do, though.
-They say that ungenomolds can't successfully revert to their original form if their polymorphed form dies.
 The electric sword is a stronger version of the katana.
 They say that wearing a cursed victorian underwear grants 25% chance of life saving.
 They say that wearing stone dragon scale mail makes you resistant to stoning.
@@ -1202,4 +1187,3 @@ Post about your Slash'EM Extended features on a forum! It'll help make the fork 
 You thought SLASH'EM already had everything and the kitchen sink? Well, Slash'EM Extended adds tons of extra stuff to that, and then some.
 Slash'EM Extended uses a design philosophy known as the "kitchen sink approach", and it's based on a NetHack fork that already used that approach too.
 You think SLASH'EM has the most of everything? You're wrong! Slash'EM Extended is trying to always have more than all other NetHack forks combined since more is not less, but more! :D
-They say that ungenomolds cannot lifesave if their polymorphed form is killed.

@@ -1349,7 +1349,10 @@ dotakeoff()
 	int armorpieces = 0;
 
 #define MOREARM(x) if (x) { armorpieces++; otmp = x; }
-	MOREARM(uarmh);
+	if (!uarmc || ( OBJ_DESCR(objects[uarmc->otyp]) && 
+				strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+					"hooded cloak") ) )
+		MOREARM(uarmh);
 	MOREARM(uarms);
 	MOREARM(uarmg);
 	MOREARM(uarmf);
@@ -1390,6 +1393,10 @@ dotakeoff()
 #ifdef TOURIST
 			  || ((otmp == uarmu) && (uarmc || uarm))
 #endif
+			  || ((otmp == uarmh) && uarmc && 
+				  OBJ_DESCR(objects[uarmc->otyp]) &&
+				  !strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+					  "hooded cloak"))
 		) {
 	    You_cant("take that off.");
 	    return 0;
@@ -1579,19 +1586,8 @@ boolean noisy;
 	    /* same exception for cloaks as used in m_dowear() */
 	    (which != c_cloak || youmonst.data->msize != MZ_SMALL) &&
 	    (racial_exception(&youmonst, otmp) < 1)) {
-	if (noisy) { pline_The("%s will not fit on your body.", which);
-
-		if (yn("Try to put it on anyway?") == 'y') {
-			if (rn2(2)) { 	u.ublesscnt += rnd(5);
-			pline("Feeling uncomfortable, you decide to stop trying.");
-		    return 0;}
-			}
-
-		else {return(0);}
-
-		}
-
-
+	if (noisy) pline_The("%s will not fit on your body.", which);
+	return 0;
     } else if (otmp->owornmask & W_ARMOR) {
 	if (noisy) already_wearing(c_that_);
 	return 0;
@@ -1618,6 +1614,11 @@ boolean noisy;
 	    if (noisy)
 		pline_The("%s won't fit over your horn%s.",
 			  c_helmet, plur(num_horns(youmonst.data)));
+	    err++;
+	} else if (uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
+			!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+				"hooded cloak")) {
+	    if (noisy) You_cant("wear that over your hood.");
 	    err++;
 #ifdef JEDI
 	} else if (Upolyd && (youmonst.data == &mons[PM_MIND_FLAYER] ||
@@ -1744,15 +1745,8 @@ dowear()
 	/* cantweararm checks for suits of armor */
 	/* verysmall or nohands checks for shields, gloves, etc... */
 	if ((verysmall(youmonst.data) || nohands(youmonst.data))) {
-		pline("Don't even bother. Your current form can't realistically wear armor!");
-
-		if (yn("But you may try to wear something anyway. Do it?") == 'y') {
-			if (rn2(3)) { 		make_stunned(HStun + rnd(40),FALSE);
-			pline("Damn! You just stagger around aimlessly!");
-		    return 1;}
-		}
-		else {return(0);}
-
+		pline("Don't even bother.");
+		return(0);
 	}
 
 	otmp = getobj(clothes, "wear");
@@ -2112,9 +2106,14 @@ struct obj *
 some_armor(victim)
 struct monst *victim;
 {
-	register struct obj *otmph, *otmp;
+	register struct obj *otmph, *otmp, *hood;
 
 	otmph = (victim == &youmonst) ? uarmc : which_armor(victim, W_ARMC);
+	if (otmph && OBJ_DESCR(objects[otmph->otyp])
+			&& !strcmp(OBJ_DESCR(objects[otmph->otyp]),
+				"hooded cloak") )
+		hood = otmph;
+	else hood = NULL;
 	if (!otmph)
 	    otmph = (victim == &youmonst) ? uarm : which_armor(victim, W_ARM);
 #ifdef TOURIST
@@ -2122,7 +2121,8 @@ struct monst *victim;
 	    otmph = (victim == &youmonst) ? uarmu : which_armor(victim, W_ARMU);
 #endif
 	
-	otmp = (victim == &youmonst) ? uarmh : which_armor(victim, W_ARMH);
+	if (hood) otmp = hood;
+	else otmp = (victim == &youmonst) ? uarmh : which_armor(victim, W_ARMH);
 	if(otmp && (!otmph || !rn2(4))) otmph = otmp;
 	otmp = (victim == &youmonst) ? uarmg : which_armor(victim, W_ARMG);
 	if(otmp && (!otmph || !rn2(4))) otmph = otmp;

@@ -290,13 +290,7 @@ A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     SPFX_RESTR, 0, 0,
     PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NEUTRAL, PM_BARD, NON_PM, 1000L ),
 
-A("Full Metal Jacket",   LEATHER_JACKET, /* Temp name */
-    (SPFX_RESTR|SPFX_DEFN|SPFX_PROTEC), (SPFX_HALRES), 0,
-    NO_ATTK,    FIRE(0,0),    NO_CARY,   0, A_NEUTRAL, PM_ROCKER, NON_PM, 1500L ), 
-    
-A("Tesla's Coat", LAB_COAT,
-    (SPFX_RESTR|SPFX_DEFN), SPFX_HPHDAM, 0,
-    NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, PM_SCIENTIST, NON_PM, 3000L ),
+
 
 A("Oathkeeper", 		STILETTO, /* temp name? */
     (SPFX_RESTR), 0, 0,
@@ -313,6 +307,14 @@ A("Silvershard", SILVER_DAGGER,
 A("Mirror Brand",                 SILVER_LONG_SWORD, /* dNethack */
 	(SPFX_RESTR|SPFX_ATTK|SPFX_REFLECT|SPFX_DALIGN), 0, 0,
 	STUN(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 3500L ),
+
+A("David's Sling",                SLING,
+	(SPFX_RESTR|SPFX_ATTK|SPFX_HPHDAM), 0, 0,
+	PHYS(5,0),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
+
+A("Tesla's Coat", LAB_COAT,
+    (SPFX_RESTR|SPFX_DEFN), 0, 0,
+    NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, NON_PM, NON_PM, 3000L ),
 
 /* From Nethack--, This is pretty much a temp for Musicians
  * Until I can think of something better for them.	
@@ -427,14 +429,6 @@ A("Elfrist",                    ORCISH_SPEAR,
 	SPFX_DFLAG2, 0, M2_ELF,
 	PHYS(5,15),     NO_DFNS,        NO_CARY,        0, A_CHAOTIC, PM_HUMAN_WEREWOLF, PM_ORC, 300L ),
 
-A("Bloodmarker",		KNIFE,
-	(SPFX_RESTR), 0, 0,
-	PHYS(3,7),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_BLEEDER, NON_PM, 1000L ),
-
-A("Shawshank",			KNIFE,
-	(SPFX_RESTR), 0, 0,
-	PHYS(9,9),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_GANGSTER, NON_PM, 1500L ),
-
 A("Slow Blade",                ORCISH_SHORT_SWORD, /* 5lo: Now opposite of Quickblade... */
 	SPFX_RESTR, 0, 0,
 	PHYS(2,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
@@ -491,11 +485,6 @@ A("Hellfire", CROSSBOW,	/* WAC */
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
 	PHYS(5,7),        FIRE(0,0),  NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 4000L ),
 	/* Auto-explode code in dothrow.c, uhitm.c */
-
-A("the Pen of the Void",	ATHAME,
-	(SPFX_RESTR|SPFX_ATTK), 0, 0,
-	PHYS(5,0),	NO_DFNS,	NO_CARY,
-	0,	A_NEUTRAL, PM_BINDER, NON_PM, 2000L),
 
 A("The Gambler's Suit",		EXPENSIVE_SUIT,
 	(SPFX_RESTR|SPFX_PROTEC|SPFX_LUCK), 0, 0,
@@ -594,9 +583,6 @@ A("The Palantir of Westernesse",	CRYSTAL_BALL,
 
 /* STEPHEN WHITE'S NEW CODE */
 
-A("The Sling of David",                SLING,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK|SPFX_HPHDAM), 0, 0,
-	PHYS(5,0),	NO_DFNS,	NO_CARY,	PHASING, A_NEUTRAL, PM_ROCKER, NON_PM, 4000L ),
 
 A("The Golden Whistle of Nora",          MAGIC_WHISTLE, /* 5lo: temp name? */
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_WARN|SPFX_HPHDAM|SPFX_ESP), 0,
@@ -645,11 +631,6 @@ A("The Lyre of Orpheus",	WOODEN_HARP,
 	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
 	TAMING,		A_NEUTRAL, PM_BARD, NON_PM, 5000L ),
 
-A("Operational Scalpel",	SCALPEL,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK|SPFX_INTEL|SPFX_DRLI|SPFX_REGEN), 0,0,
-	DRLI(3,0),      NO_DFNS,        NO_CARY,
-	HEALING,	A_NEUTRAL, PM_SCIENTIST, NON_PM, 5000L ),
-
 A("The Deluxe Yendorian Knife", KNIFE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DEFN), SPFX_ESP, 0,
 	PHYS(6,20),  	FIRE(0,0), 	CARY(AD_ACID),
@@ -694,11 +675,6 @@ A("The Sword of Svyatogor", TWO_HANDED_SWORD,
 	LEVITATION,	A_LAWFUL, PM_WARRIOR, NON_PM, 5000L ),
 #endif
 
-A("The Tommy Gun of Capone", SUBMACHINE_GUN,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_DEFN|SPFX_LUCK|SPFX_INTEL), (SPFX_WARN|SPFX_STLTH), 0,
-	PHYS(5,7),        DFNS(AD_FIRE),  CARY(AD_MAGM),
-	LEADERSHIP, A_CHAOTIC, PM_GANGSTER, NON_PM, 4000L ),
-
 A("The Whistle of the Warden", MAGIC_WHISTLE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_ESP|SPFX_TCTRL), 0,
 	NO_ATTK,        NO_DFNS,  DRLI(0,0),
@@ -722,17 +698,6 @@ A("The Eyes of the Overworld",	LENSES,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_XRAY), 0, 0,
 	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
 	ENLIGHTENING,	A_NEUTRAL,	 PM_MONK, NON_PM, 2500L ),
-
-
-A("The Hand Mirror of Cthylla",	MIRROR, /* 5lo: replaces Pen of the Void */
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_TCTRL|SPFX_SEARCH), 0,
-	NO_ATTK,	NO_DFNS,	CARY(AD_MAGM),
-	ENERGY_BOOST,	A_NONE, PM_BINDER, NON_PM, 5000L),
-
-A("The Scalpel of the Bloodletter",	SCALPEL,
-	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK|SPFX_DRLI|SPFX_HPHDAM), SPFX_REGEN, 0,
-	DRLI(9,10),	NO_DFNS,	NO_CARY,
-	HEALING,	A_NEUTRAL, PM_BLEEDER, NON_PM, 2500L),
 
 A("The Mantle of Heaven",	LEATHER_CLOAK, /*Actually an ornamental cope in game*/
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_HSPDAM), 0, 0,

@@ -412,7 +412,7 @@ WEAPON("steel whip", (char *)0,
 
 #ifdef KOPS
 WEAPON("rubber hose", (char *)0,
-	1, 0, 0,  3, 20,  3,  4,  3, 0, B,   P_WHIP, PLASTIC, CLR_BROWN),
+	1, 0, 0,  3, 20,  3,  4,  3, 0, 0,   P_WHIP, PLASTIC, CLR_BROWN),
 #endif
 
 /* With shuffled appearances... */
@@ -696,7 +696,7 @@ SHIELD("shield of reflection", "polished silver shield",
 
 /* Boots */
 #ifdef JEDI
-BOOTS("plasteel boots", "white boots", /* these things were crashing the game for binders and certain other chars! */
+BOOTS("plasteel boots", "white boots",
 		0, 0,  0,          1, 2, 8,  25,  8, 0, PLASTIC, CLR_WHITE),
 #endif
 BOOTS("low boots", "walking shoes",
@@ -1287,7 +1287,7 @@ SCROLL("identify",              "KERNOD WEL",           P_DIVINATION_SPELL, 1, 2
 SCROLL("inventory id",          "MAPIRO MAHAMA DIROMAT",P_DIVINATION_SPELL, 1,   5, 250, CLR_YELLOW),
 SCROLL("magic mapping",         "ELAM EBOW",            P_DIVINATION_SPELL, 1,  35, 100, CLR_CYAN),
 SCROLL("flood",                 "AQUE BRAGH",           P_DIVINATION_SPELL, 1,   5, 200, CLR_BRIGHT_BLUE),
-SCROLL("gain mana",             "GHOTI",                P_DIVINATION_SPELL, 1,   5, 150, CLR_BRIGHT_MAGENTA),
+SCROLL("gain mana",             "GHOTI",                P_DIVINATION_SPELL, 1,  10, 150, CLR_BRIGHT_MAGENTA),
 /* Enchantment */
 SCROLL("confuse monster",       "NR 9",                 P_ENCHANTMENT_SPELL,  1,  27, 100, CLR_MAGENTA),
 SCROLL("scare monster",         "XIXAXA XOXAXA XUXAXA", P_ENCHANTMENT_SPELL,  1,  35, 100, CLR_BRIGHT_BLUE),
@@ -1309,7 +1309,7 @@ SCROLL("genocide",              "ELBIB YLOH",           P_NONE, 1,  15, 300, CLR
 SCROLL("punishment",            "VE FORBRYDERNE",       P_NONE, 1,  15, 300, CLR_GRAY),
 SCROLL("stinking cloud",	"VELOX NEB",            P_NONE, 1,  15, 300, CLR_GRAY),
 SCROLL("trap detection",	"HOYO HOYO",            P_NONE, 1,   5, 300, CLR_YELLOW),
-SCROLL("acquirement",	        "HZLRC KSTSBD MPFNG",   P_NONE, 1,   5, 300, CLR_GRAY),
+SCROLL("acquirement",	        "HZLRC KSTSBD MPFNG",   P_NONE, 1,  10, 300, CLR_GRAY),
 SCROLL("proof armor",           "HAPAX LEGOMENON",      P_NONE, 1,   5, 100, CLR_ORANGE),
 SCROLL("proof weapon",          "GNIK SISI VLE",        P_NONE, 1,   5, 100, CLR_GRAY),
 SCROLL("mass murder",		"ENEMATZU MEMALEZU",	P_NONE, 1,   5, 200, CLR_BLACK),
@@ -1318,21 +1318,27 @@ SCROLL("reverse identify",	"OH CAPTAIN MY CAPTAIN",P_NONE, 1,   5,  30, CLR_RED)
 SCROLL("wishing",		"TRICK 13",		P_NONE, 1,   1, 400, CLR_WHITE),
 SCROLL("consecration",		"MAY THE FORCE BE WITH YOU",
 							P_NONE, 1,   5, 300, CLR_BRIGHT_CYAN),
+#if 0 /* 5lo: removed, not needed */
 SCROLL("enthronization",        "ZLORFIK",	        P_NONE, 1,   5, 300, CLR_BLACK),
 SCROLL("fountain building",     "SODALG",	        P_NONE, 1,   5, 300, CLR_YELLOW),
 SCROLL("sinking",		"ASHPD",	        P_NONE, 1,   5, 250, CLR_CYAN),
 SCROLL("WC",		        "ACHAT SHTAYIM SHALOSH", 
 		                                        P_NONE, 1,   5, 250, CLR_WHITE),
+#endif
 SCROLL("ice",		        "KO BATE",	        P_NONE, 1,  10, 200, CLR_GREEN),
 SCROLL("clouds",		"FNORD",	        P_NONE, 1,  10, 200, CLR_BRIGHT_BLUE),
 SCROLL("root password detection","XYZZY",	        P_NONE, 1,   5, 200, CLR_GRAY),
-SCROLL("trap creation",         "LOREM IPSUM",          P_NONE, 1,  10, 200, CLR_BLACK),
-SCROLL("sleep",                 "ETAOIN SHRDLU",        P_NONE, 1,  10, 200, CLR_BRIGHT_MAGENTA),
+SCROLL("trap creation",         "LOREM IPSUM",          P_NONE, 1,  15, 200, CLR_BLACK),
+SCROLL("sleep",                 "ETAOIN SHRDLU",        P_NONE, 1,  15, 200, CLR_BRIGHT_MAGENTA),
 SCROLL((char *)0,		"FOOBIE BLETCH",        P_NONE, 1,   0, 100, CLR_CYAN),
 SCROLL((char *)0,		"TEMOV",                P_NONE, 1,   0, 100, CLR_BLACK),
 SCROLL((char *)0,		"GARVEN DEH",           P_NONE, 1,   0, 100, CLR_GREEN),
 SCROLL((char *)0,		"READ ME",              P_NONE, 1,   0, 100, CLR_WHITE),
 SCROLL((char *)0,               "EIRIS SAZUN IDISI",    P_NONE, 1,   0, 100, CLR_ORANGE),
+SCROLL((char *)0,		"ZLORFIK",                P_NONE, 1,   0, 100, CLR_BLACK),
+SCROLL((char *)0,		"SODALG",           P_NONE, 1,   0, 100, CLR_GREEN),
+SCROLL((char *)0,		"ASHPD",              P_NONE, 1,   0, 100, CLR_WHITE),
+SCROLL((char *)0,               "ACHAT SHTAYIM SHALOSH",    P_NONE, 1,   0, 100, CLR_ORANGE),
 
 #if 0 /* 5lo: Unnethack appearances were used for scrolls above */
 SCROLL((char *)0,               "ETAOIN SHRDLU",   P_NONE,      1,   0, 100, CLR_BRIGHT_CYAN),

@@ -154,6 +154,10 @@ extern struct Role urole;
 #define Role_if(X)	(urole.malenum == (X))
 #define Role_switch	(urole.malenum)
 
+#define CANNIBAL_ALLOWED() (Role_if(PM_CAVEMAN) || Role_if(PM_LUNATIC) || Race_if(PM_ORC) || \
+Race_if(PM_TROLL) ||  Race_if(PM_OGRE) ||Race_if(PM_HUMAN_WEREWOLF) || Race_if(PM_VAMPIRE)|| \
+Race_if(PM_GHOUL))
+
 /* used during initialization for race, gender, and alignment
    as well as for character class */
 #define ROLE_NONE	(-1)
@@ -358,12 +362,9 @@ struct you {
 	int monstertimeout; 	/* when monster spawns are increasing in frequency */
 	int monstertimefinish; 	/* point in time when monster spawns are at their maximum */
 #endif
-	int legscratching; 	/* for special AT_KICK attacks */
 	int next_check; 	/* attrib.c check */
 
 	int urmaxlvlB;		/* for cyborg role */
-	int urmaxlvlC;		/* for binder role */
-	int urmaxlvlD;		/* for bard role */
 	int urealedibility;	/* no longer a boolean --Amy */
 
 	int eeveelution;		/* mainly for pokemon role but might be useful for others */

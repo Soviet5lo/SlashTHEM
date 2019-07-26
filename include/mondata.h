@@ -119,13 +119,15 @@
 #define is_nymph(ptr)		(((ptr)->mflagsr & MRACE_NYMPH) != 0L)
 #define is_ogre(ptr)		(((ptr)->mflagsr & MRACE_OGRE) != 0L)
 #define is_troll(ptr)		(((ptr)->mflagsr & MRACE_TROLL) != 0L)
-#define is_mould(ptr)		(((ptr)->mflagsr & MRACE_MOULD) != 0L)
 #define your_race(ptr)		(((ptr)->mflagsr & urace.selfmask) != 0L)
 /* Back to normal */
 #define is_bat(ptr)		((ptr) == &mons[PM_BAT] || \
 				 (ptr) == &mons[PM_GIANT_BAT] || \
 				 (ptr) == &mons[PM_VAMPIRE_BAT])
 #define is_bird(ptr)		((ptr)->mlet == S_BAT && !is_bat(ptr))
+#define has_beak(ptr)           (is_bird(ptr) || \
+                                 (ptr) == &mons[PM_TENGU] || \
+                                 (ptr) == &mons[PM_VROCK])
 //#define is_giant(ptr)		(((ptr)->mflags2 & M2_GIANT) != 0L)
 #define is_golem(ptr)		((ptr)->mlet == S_GOLEM)
 #define is_domestic(ptr)	(((ptr)->mflags2 & M2_DOMESTIC) != 0L)
@@ -288,6 +290,9 @@
 				  ((ptr)->mlet != S_BAD_FOOD || \
 				   (ptr) == &mons[PM_KILLER_TRIPE_RATION]) && \
 				   (!is_undead(ptr) || is_vampire(ptr)))
+
+#define corpse_never_rots(ptr)	((ptr) == &mons[PM_LIZARD] || \
+				 (ptr) == &mons[PM_LICHEN])
 
 #define befriend_with_obj(ptr, obj) ((obj)->oclass == FOOD_CLASS && ( \
 		is_domestic(ptr) || (is_rat(ptr) && Role_if(PM_CONVICT)) || \

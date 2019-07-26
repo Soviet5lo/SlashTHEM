@@ -184,11 +184,8 @@ newman()
 	u.ulevel = u.ulevel + rn1(5, -2);
 	if (u.ulevel > 127 || u.ulevel < 1) { /* level went below 0? */
 	    u.ulevel = oldlvl; /* restore old level in case they lifesave */
-	    if (!Race_if(PM_UNGENOMOLD) && !Race_if(PM_MOULD)) goto dead;
+	    goto dead;
 	}
-	/* Moulds, including ungenomolds, are resistant to bad polymorphs but have uncurable polymorphitis. --Amy
-	   They cannot suffer from system shock either. Since ungenomolds automatically genocide their own race
-	   upon starting the game, their first polymorph _needs_ to be into a species other than ungenomold. */
 
 	if (u.ulevel > MAXULEV) u.ulevel = MAXULEV;
 	/* If your level goes down, your peak level goes down by
@@ -249,7 +246,7 @@ newman()
 		if (u.uenmax <= u.ulevel) u.uenmax = u.ulevel;
 	}
 	if (u.uhp <= 0 || u.uhpmax <= 0) {
-		if (Polymorph_control || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD) ) {
+		if (Polymorph_control) {
 		    if (u.uhp <= 0) u.uhp = 1;
 		    if (u.uhpmax <= 0) u.uhpmax = 1;
 		} else {
@@ -296,7 +293,7 @@ boolean forcecontrol;
 
 	if(!Polymorph_control && !forcecontrol && !draconian && !iswere &&
 			!isvamp && !Race_if(PM_DOPPELGANGER)) {
-		if ((rn2(12) > ACURR(A_CON)) && !Race_if(PM_UNGENOMOLD) && !Race_if(PM_MOULD)) {
+		if (rn2(12) > ACURR(A_CON)) {
 
 		You(shudder_for_moment);
 		losehp(rnd(30), "system shock", KILLED_BY_AN);
@@ -384,7 +381,7 @@ boolean forcecontrol;
 		}
 		/* if polymon fails, "you feel" message has been given
 		   so don't follow up with another polymon or newman */
-		if (mntmp == PM_HUMAN && !Race_if(PM_UNGENOMOLD)) newman();	/* werecritter */
+		if (mntmp == PM_HUMAN) newman();	/* werecritter */
 		else (void) polymon(mntmp);
 		goto made_change;    /* maybe not, but this is right anyway */
 	}
@@ -401,14 +398,14 @@ boolean forcecontrol;
 	 * we deliberately chose something illegal to force newman().
 	 */
         /* WAC Doppelgangers go through a 1/20 check rather than 1/5 */
-        if ( !Race_if(PM_UNGENOMOLD) && (!polyok(&mons[mntmp]) ||
+        if (!polyok(&mons[mntmp]) ||
         		(Race_if(PM_DOPPELGANGER) ? (
         			((u.ulevel < mons[mntmp].mlevel)
 #ifdef EATEN_MEMORY
         			 || !mvitals[mntmp].eaten
 #endif
         			 ) && !rn2(20)) : 
-				   !rn2(5)) || your_race(&mons[mntmp])) )
+				   !rn2(5)) || your_race(&mons[mntmp]))
 		newman();
 	else if(!polymon(mntmp)) return;
 
@@ -577,7 +574,7 @@ int	mntmp;
 	u.mhmax += rnd(u.ulevel);
 	u.mh = u.mhmax;
 
-	if (u.ulevel < mlvl && !Race_if(PM_MOULD)) {
+	if (u.ulevel < mlvl) {
 	/* Low level characters can't become high level monsters for long */
 #ifdef DUMB
 		/* DRS/NS 2.2.6 messes up -- Peter Kendell */
@@ -587,15 +584,6 @@ int	mntmp;
 #else
 		u.mtimedone = u.mtimedone * u.ulevel / mlvl;
 #endif
-	}
-
-	/* Moulds suck way too much. Let's allow them to stay polymorphed for a longer time. --Amy */
-
-	if ( (u.ulevel * 2) < mlvl && Race_if(PM_MOULD)) {
-
-	u.mtimedone = u.mtimedone + (rnd((u.ulevel * 2) + 1));
-
-	u.mtimedone = u.mtimedone * 2;
 	}
 
 #ifdef EATEN_MEMORY
@@ -1630,8 +1618,9 @@ int part;
 	    return "trunk";
 	if (mptr == &mons[PM_SHARK] && part == HAIR)
 	    return "skin";	/* sharks don't have scales */
-	if (mptr == &mons[PM_JELLYFISH] && (part == ARM || part == FINGER ||
-	    part == HAND || part == FOOT || part == TOE))
+        if ((mptr == &mons[PM_JELLYFISH] || mptr == &mons[PM_KRAKEN]) &&
+           (part == ARM || part == FINGER || part == HAND ||
+            part == FOOT || part == TOE || part == FINGERTIP))
 	    return "tentacle";
 	if (mptr == &mons[PM_FLOATING_EYE] && part == EYE)
 	    return "cornea";
@@ -1639,8 +1628,10 @@ int part;
 		(part == ARM || part == FINGER || part == FINGERTIP ||
 		    part == HAND || part == HANDED))
 	    return humanoid_parts[part];
-	if (mptr == &mons[PM_RAVEN])
+        if (is_bird(mptr))
 	    return bird_parts[part];
+        if (has_beak(mptr) && part == NOSE)
+            return "beak";
 	if (mptr->mlet == S_CENTAUR || mptr->mlet == S_UNICORN ||
 		((mptr == &mons[PM_SATYR] || mptr == &mons[PM_ROTHE]) && part != HAIR))
 	    return horse_parts[part];
@@ -1910,9 +1901,8 @@ polyatwill()      /* Polymorph under conscious control (#youpoly) */
 		return 1;
 	    }
 	}
-	/* Moulds and ungenomolds _must_ be able to polymorph at will. Otherwise they would just suck. --Amy */
 
-	if (Race_if(PM_DOPPELGANGER) || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD)) {
+	if (Race_if(PM_DOPPELGANGER)) {
 	    if (yn("Polymorph at will?") == 'n')	    
 		return 0;
 	    else if (u.uen < EN_DOPP) {

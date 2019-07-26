@@ -2011,7 +2011,7 @@ struct monst *mon;
 
 	/* Able to detect wounds? */
 	if (!(canseemon(mon) || (u.ustuck == mon && u.uswallow && !Blind))
-		 || !Role_if(PM_HEALER) && !Role_if(PM_SCIENTIST) && !Role_if(PM_NECROMANCER) && !Role_if(PM_UNDERTAKER))
+		 || !Role_if(PM_HEALER) && !Role_if(PM_NECROMANCER) && !Role_if(PM_UNDERTAKER))
 		/* 5lo: Expanded for more roles */
 	    return (char *)0;
 	if (mon->mhp == mon->mhpmax || mon->mhp < 1)
@@ -2940,7 +2940,6 @@ int k_format; /* WAC k_format is an int */
 	if (!rn2(20) && n >= 1 && u.ulevel >= 20) {n = n / 5; if (n < 1) n = 1;}
 	if (!rn2(50) && n >= 1 && u.ulevel >= 30) {n = n / 10; if (n < 1) n = 1;}
 #endif /* EASY_MODE */
-	if (Role_if(PM_BLEEDER)) n = n * 2; /* bleeders are harder than hard mode */
 
 	/* [max] Invulnerable no dmg */
 	if (Invulnerable) {
@@ -3033,16 +3032,15 @@ inv_weight()
 	   of invent for easier manipulation by askchain & co, but it's also
 	   retained in u.ugold in order to keep the status line accurate; we
 	   mustn't add its weight in twice under that circumstance */
-	/* tried to make gold lighter --Amy */
 	wt = (otmp && otmp->oclass == COIN_CLASS) ? 0 :
-		(int)((u.ugold + 50L) / /*100L*/10000L);
+		(int)((u.ugold + 50L) / 100L);
 #endif
 	while (otmp) {
 #ifndef GOLDOBJ
 		if (otmp->otyp != BOULDER || !throws_rocks(youmonst.data))
 #else
 		if (otmp->oclass == COIN_CLASS)
-			wt += (int)(((long)otmp->quan + 50L) / /*100L*/10000L);
+			wt += (int)(((long)otmp->quan + 50L) / 100L);
 		else if (otmp->otyp != BOULDER || !throws_rocks(youmonst.data))
 #endif
 			wt += otmp->owt;

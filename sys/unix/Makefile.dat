@@ -310,16 +310,16 @@ spec_levs: ../util/lev_comp \
 
 quest_levs: ../util/lev_comp \
 	Acid.des Arch.des \
-	Barb.des Bard.des Binder.des Bleeder.des \
+	Barb.des Bard.des \
 	Caveman.des Paladin.des Convict.des \
 	Cyborg.des Diver.des Drunk.des \
 	Electric.des Chef.des Firef.des Flame.des \
-	Gangster.des Gladia.des Geek.des Gradu.des \
+	Gladia.des Geek.des Gradu.des \
 	Healer.des Ice.des Jedi.des Knight.des Corsair.des \
 	Locks.des Lunatic.des Monk.des Music.des \
 	Necro.des Ninja.des Noble.des Offic.des \
 	Pirate.des Priest.des Ranger.des \
-	Rocker.des Rogue.des Samurai.des Scient.des \
+	Rogue.des Samurai.des \
 	Slayer.des \
 	Tourist.des Under.des Valkyrie.des \
 	Warrior.des Wizard.des Yeoman.des Zooke.des
@@ -327,8 +327,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Arch.des
 	../util/lev_comp Barb.des
 	../util/lev_comp Bard.des
-	../util/lev_comp Binder.des
-	../util/lev_comp Bleeder.des
 	../util/lev_comp Caveman.des
 	../util/lev_comp Paladin.des
 	../util/lev_comp Convict.des
@@ -339,7 +337,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Chef.des
 	../util/lev_comp Firef.des
 	../util/lev_comp Flame.des
-	../util/lev_comp Gangster.des
 	../util/lev_comp Geek.des
 	../util/lev_comp Gladia.des
 	../util/lev_comp Gradu.des
@@ -359,10 +356,8 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Pirate.des
 	../util/lev_comp Priest.des
 	../util/lev_comp Ranger.des
-	../util/lev_comp Rocker.des
 	../util/lev_comp Rogue.des
 	../util/lev_comp Samurai.des
-	../util/lev_comp Scient.des
 	../util/lev_comp Slayer.des
 	@if egrep -s tourists options > /dev/null ; then \
 	echo ../util/lev_comp Tourist.des ; ../util/lev_comp Tourist.des ; \

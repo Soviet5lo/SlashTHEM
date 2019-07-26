@@ -1248,6 +1248,16 @@ struct obj *obj;
 	    return corpse_xname(obj, FALSE);
 	return xname(obj);
 }
+#ifdef SORTLOOT
+char *
+cxname2(obj)
+struct obj *obj;
+{
+       if (obj->otyp == CORPSE)
+           return corpse_xname(obj, TRUE);
+       return xname2(obj);
+}
+#endif /* SORTLOOT */
 
 /* treat an object as fully ID'd when it might be used as reason for death */
 char *
@@ -3031,7 +3041,7 @@ typfnd:
 	    typ = OIL_LAMP;
 
 	/* obviously don't allow wishing for scrolls of wishing --Amy */
-	if ((typ == SCR_WISHING || typ == SCR_ACQUIREMENT || typ == SCR_ENTHRONIZATION || typ == SCR_FOUNTAIN_BUILDING)
+	if ((typ == SCR_WISHING || typ == SCR_ACQUIREMENT)
 #ifdef WIZARD
 				&& !wizard
 #endif

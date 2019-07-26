@@ -123,10 +123,9 @@
 #define MRACE_GIANT     0x00004000L     /* is a giant */
 #define MRACE_MFLAY     0x00008000L     /* is an illithid */
 #define MRACE_KOBOLD    0x00010000L     /* is a kobold */
-#define MRACE_MOULD     0x00020000L     /* is a mould character (includes ungenomolds) */
-#define MRACE_NYMPH     0x00040000L     /* is a nymph */
-#define MRACE_OGRE      0x00080000L     /* is an ogre */
-#define MRACE_TROLL     0x00100000L     /* is a troll */
+#define MRACE_NYMPH     0x00020000L     /* is a nymph */
+#define MRACE_OGRE      0x00040000L     /* is an ogre */
+#define MRACE_TROLL     0x00080000L     /* is a troll */
 
 #define M1_FLY		0x00000001L	/* can fly or float */
 #define M1_SWIM		0x00000002L	/* can traverse water */

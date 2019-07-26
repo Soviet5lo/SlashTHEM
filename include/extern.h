@@ -1122,6 +1122,8 @@ E boolean FDECL(diseasemu, (struct permonst *));
 
 /* ### mhitu.c ### */
 
+E const char *FDECL(weaphitmsg, (struct obj *,BOOLEAN_P));
+E const char *FDECL(barehitmsg, (struct monst *));
 E const char *FDECL(mpoisons_subj, (struct monst *,struct attack *));
 E void NDECL(u_slow_down);
 E struct monst *NDECL(cloneu);
@@ -1552,6 +1554,9 @@ E char *FDECL(doname, (struct obj *));
 E boolean FDECL(not_fully_identified, (struct obj *));
 E char *FDECL(corpse_xname, (struct obj *,BOOLEAN_P));
 E char *FDECL(cxname, (struct obj *));
+#ifdef SORTLOOT
+E char *FDECL(cxname2, (struct obj *));
+#endif
 E char *FDECL(killer_xname, (struct obj *));
 E char *FDECL(killer_cxname, (struct obj *,BOOLEAN_P));
 E const char *FDECL(singular, (struct obj *,char *(*)(OBJ_P)));
@@ -1797,6 +1802,7 @@ E void FDECL(altar_wrath, (int,int));
 E int FDECL(move_special, (struct monst *,BOOLEAN_P,SCHAR_P,BOOLEAN_P,BOOLEAN_P,
 			   XCHAR_P,XCHAR_P,XCHAR_P,XCHAR_P));
 E char FDECL(temple_occupied, (char *));
+E boolean FDECL(inhistemple, (struct monst *));
 E int FDECL(pri_move, (struct monst *));
 E void FDECL(priestini, (d_level *,struct mkroom *,int,int,BOOLEAN_P));
 E char *FDECL(priestname, (struct monst *,char *));
@@ -2703,6 +2709,7 @@ E void FDECL(destroy_item, (int,int));
 E int FDECL(destroy_mitem, (struct monst *,int,int));
 E int FDECL(resist, (struct monst *,CHAR_P,int,int));
 E void NDECL(makewish);
+E void NDECL(do_acquirement);
 /* KMH -- xchar to XCHAR_P */
 E void FDECL(zap_strike_fx, (XCHAR_P, XCHAR_P, int));
 E void NDECL(throwspell);

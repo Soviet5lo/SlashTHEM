@@ -867,8 +867,7 @@ register struct obj *obj;
 			return (starving && carni ? ACCFOOD : TABU);
 		    else
 		    if ((peek_at_iced_corpse_age(obj) + 50L <= monstermoves
-					    && obj->corpsenm != PM_LIZARD
-					    && obj->corpsenm != PM_LICHEN
+					    && !corpse_never_rots(&mons[obj->corpsenm])
 					    && mon->data->mlet != S_FUNGUS) ||
 			(acidic(&mons[obj->corpsenm]) && !resists_acid(mon)) ||
 			(poisonous(&mons[obj->corpsenm]) &&

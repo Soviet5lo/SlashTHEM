@@ -279,7 +279,6 @@ newexplevel()
 			case PM_VALKYRIE: u.uenbase += rnd(2); break;
 			case PM_WIZARD: u.uenbase += rnd(6) + 2; break;
 			case PM_CONVICT: break;
-			/*case PM_ALIEN: break;
 			case PM_OGRE: break;
 			case PM_KOBOLD: break;
 			case PM_TROLL: break;
@@ -378,14 +377,6 @@ newexplevel()
 		    }
 
 		  }
-
-		}
-
-		if (Role_if(PM_BINDER) && u.ulevel > u.urmaxlvlC) {
-
-		u.urmaxlvlC = u.ulevel;
-
-		if (!rn2(3)) {ubook = mkobj(SPBOOK_CLASS, FALSE); dropy(ubook); pline("A book appeared at your feet!"); }
 
 		}
 
@@ -804,13 +795,6 @@ boolean incr;	/* true iff via incremental experience growth */
 	    adjabil(u.ulevel - 1, u.ulevel);	/* give new intrinsics */
 	    reset_rndmonst(NON_PM);		/* new monster selection */
 	}
-		if (Role_if(PM_BINDER) && u.ulevel > u.urmaxlvlC) {
-
-		u.urmaxlvlC = u.ulevel;
-
-		if (!rn2(3)) {ubookz = mkobj(SPBOOK_CLASS, FALSE); dropy(ubookz); pline("A book appeared at your feet!"); }
-
-		}
 
 		if (Role_if(PM_ZYBORG) && u.ulevel > u.urmaxlvlB) {
 

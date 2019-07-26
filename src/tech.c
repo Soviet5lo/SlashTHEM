@@ -121,16 +121,6 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	bar_tech[] = { {   1, T_BERSERK, 1},
 		       {   0, 0, 0} },
-	ble_tech[] = { {   1, T_SURGERY, 1},
-		       {   1, T_HEAL_HANDS, 1},
-		       {   1, T_DRAW_BLOOD, 1},
-		       {   10, T_CHI_HEALING, 1},
-		       {   20, T_REVIVE, 1},
-		       {   0, 0, 0} },
-	gan_tech[] = { {   1, T_CREATE_AMMO, 1},
-		       {   0, 0, 0} },
-	roc_tech[] = { {   1, T_FLURRY, 1},
-		       {   0, 0, 0} },
 	cav_tech[] = { {   1, T_PRIMAL_ROAR, 1},
 		       {   0, 0, 0} },
 	brd_tech[] = { {   1, T_PRIMAL_ROAR, 1},
@@ -178,12 +168,6 @@ static const struct innate_tech
 #endif
 	kni_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_HEAL_HANDS, 1},
-		       {   0, 0, 0} },
-
-	sci_tech[] = { {   1, T_RESEARCH, 1},
-		       {   1, T_TINKER, 1},
-		       {   10, T_SURGERY, 1},
-		       {   25, T_DRAW_ENERGY, 1},
 		       {   0, 0, 0} },
 
 	mon_tech[] = { {   1, T_PUMMEL, 1},
@@ -295,32 +279,14 @@ static const struct innate_tech
 		       {   1, T_APPRAISAL, 1},
 		       {   7, T_TINKER, 1},
 		       {   0, 0, 0} },
-	clk_tech[] = { {   1, T_FLURRY, 1},
-		       {   1, T_VANISH, 1},
+	clk_tech[] = { {   1, T_TINKER, 1},
 		       {   1, T_APPRAISAL, 1},
-		       {   1, T_BOOZE, 1},
-		       {   5, T_TINKER, 1},
-		       {   7, T_SIGIL_DISCHARGE, 1},
-		       {   10, T_BLINK, 1},
-		       {   12, T_DRAW_ENERGY, 1},
-		       {   15, T_SIGIL_TEMPEST, 1},
-		       {   23, T_SIGIL_CONTROL, 1},
 		       {   0, 0, 0} },
 	ogr_tech[] = { {   1, T_FLURRY, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   10, T_BERSERK, 1},
 		       {   15, T_PRIMAL_ROAR, 1},
 		       {   20, T_CRIT_STRIKE, 1},
-		       {   0, 0, 0} },
-	ung_tech[] = { {   1, T_WORLD_FALL, 1},
-		       {   1, T_APPRAISAL, 1},
-		       {   1, T_RESEARCH, 1},
-		       {   1, T_PRACTICE, 1},
-		       {   1, T_CALM_STEED, 1},
-		       {   1, T_TURN_UNDEAD, 1},
-		       {   1, T_BLESSING, 1},
-		       {   1, T_DRAW_BLOOD, 1},
-		       {   1, T_SURGERY, 1},
 		       {   0, 0, 0} },
 	hob_tech[] = { {   1, T_BLINK, 1},
 		       {   1, T_APPRAISAL, 1},
@@ -1036,26 +1002,17 @@ int tech_no;
 		break;
 #ifdef STEED
 	    case T_CALM_STEED:
-
-		if (u.usteed) pline("You calm your steed.");
-		int calmedX;
-		calmedX = 0;
-
                 if (u.usteed) {
-
-
-                        pline("%s gets tamer.", Monnam(u.usteed));
+                        /*pline("%s gets tamer.", Monnam(u.usteed));*/
+			You("attempt to calm your steed.");
                         tamedog(u.usteed, (struct obj *) 0);
-
-				while (calmedX == 0) { /* remove the stupid bug that caused this tech to do nothing --Amy */
-
-				if (u.usteed->mtame < 20) u.usteed->mtame++;
-
-				if (techlev(tech_no) < rnd(50)) calmedX++; /* high level tech has high chance of extra tameness */
-
-				}
-
-                        t_timeout = rn1(1000,500);
+			if (u.usteed->mtame >= 10) {
+			    pline("%s looks tame enough.", Monnam(u.usteed));
+			}else{
+			    u.usteed->mtame += rnd((techlev(tech_no) + 2) / 3);
+			    pline("%s gets tamer.", Monnam(u.usteed));
+			    t_timeout = rn1(200, 200);
+			}
                 } else
                         Your("technique is only effective when riding a monster.");
                 break;
@@ -1756,20 +1713,16 @@ int tech_no;
 		t_timeout = rn1(1000,500);
 		break;            	
 	    case T_DRAW_BLOOD:
-		/*if (!maybe_polyd(is_vampire(youmonst.data),
-		  Race_if(PM_VAMPIRE)) && !Race_if(PM_UNGENOMOLD) ) {*/
+		if (!maybe_polyd(is_vampire(youmonst.data),
+		  Race_if(PM_VAMPIRE))) {
 		    /* ALI
 		     * Otherwise we get problems with what we create:
 		     * potions of vampire blood would no longer be
 		     * appropriate.
-		     * Note by Amy: Ungenomolds will be able to use this anyway. They may polymorph into a vampire,
-		     * which would make the potions useful for them. Even if they don't, they can still dilute them.
-		     * another note by Amy: who cares? If they can't use it in their current form, too bad. It's still
-		     * better than simply disabling the tech altogether.
 		     */
-		    /*You("must be in your natural form to draw blood.");
+		    You("must be in your natural form to draw blood.");
 		    return(0);
-		}*/
+		}
 		obj = use_medical_kit(PHIAL, TRUE, "draw blood with");
 		if (!obj)
 		    return 0;
@@ -2284,7 +2237,6 @@ role_tech()
 		case PM_ARCHEOLOGIST:	return (arc_tech);
 		case PM_DRUNK:	return (dru_tech);
 		case PM_BARBARIAN:	return (bar_tech);
-		case PM_BLEEDER:	return (ble_tech);
 		case PM_CAVEMAN:	return (cav_tech);
 		case PM_BARD:	return (brd_tech);
 		case PM_FLAME_MAGE:	return (fla_tech);
@@ -2298,13 +2250,10 @@ role_tech()
 #endif
 		case PM_KNIGHT:		return (kni_tech);
 		case PM_MONK: 		return (mon_tech);
-		case PM_SCIENTIST: 		return (sci_tech);
 #if 0 /* 5lo: Deferred for now */
 		case PM_POKEMON: 		return (pok_tech);
 		case PM_PSION: 		return (psi_tech);
 #endif
-		case PM_GANGSTER: 		return (gan_tech);
-		case PM_ROCKER: 		return (roc_tech);
 		case PM_NECROMANCER:	return (nec_tech);
 		case PM_NINJA:		return (nin_tech);
 		case PM_PRIEST:		return (pri_tech);
@@ -2341,7 +2290,6 @@ race_tech()
 		case PM_GNOME:		return (gno_tech);
 		case PM_KOBOLD:		return (kob_tech);
 		case PM_OGRE:		return (ogr_tech);
-		case PM_UNGENOMOLD:		return (ung_tech);
 		case PM_HOBBIT:		return (hob_tech);
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);
 		case PM_VAMPIRE:	return (vam_tech);

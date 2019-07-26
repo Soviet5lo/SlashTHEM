@@ -37,6 +37,55 @@ static int dieroll;
 
 #ifdef OVL1
 
+const char *
+weaphitmsg(obj,uhitm)
+struct obj *obj;
+boolean uhitm;
+{
+       /* lucern hammers and bec-de-corbins both whack and pierce */
+       return ((objects[obj->otyp].oc_dir & WHACK &&
+               (!(objects[obj->otyp].oc_dir & PIERCE) || rn2(2))) ?
+                       ((objects[obj->otyp].oc_skill == P_CLUB ||
+                       objects[obj->otyp].oc_skill == P_MACE ||
+                       objects[obj->otyp].oc_skill == P_MORNING_STAR) ?
+                           "club" : "whack") :
+               (objects[obj->otyp].oc_dir & PIERCE &&
+               (!(objects[obj->otyp].oc_dir & SLASH) || rn2(2))) ?
+                       (is_blade(obj) ? "stab" : "jab") :
+               (objects[obj->otyp].oc_dir & SLASH) ?
+                       (uhitm && Role_if(PM_BARBARIAN) ? "smite" :
+                        rn2(2) ? "hack" : is_axe(obj) ? "hew" : "slash") :
+               (objects[obj->otyp].oc_skill == P_WHIP) ?
+                       "whip" :
+               "hit");
+}
+
+const char *
+barehitmsg(mtmp)
+struct monst *mtmp;
+{
+       if (!strcmp(mbodypart(mtmp, HAND),"claw") ||
+	   !strcmp(mbodypart(mtmp, HAND),"paw") ||
+               !strcmp(mbodypart(mtmp, HAND),"foreclaw") || is_bird(mtmp->data))
+                return "claw";
+       if (!strcmp(mbodypart(mtmp, HAND),"swirl") || /* elementals */
+           !strcmp(mbodypart(mtmp, HAND),"tentacle")) { /* krakens */
+               if (mtmp->data == &mons[PM_EARTH_ELEMENTAL])
+                   return "pummel";
+               return "lash";
+       } if (is_undead(mtmp->data))
+               return "scratch";
+       if (mtmp->data == &mons[PM_MONK] || mtmp->data == &mons[PM_SAMURAI]
+               || (martial_bonus() &&
+                  (mtmp == &youmonst ||
+                   /* Assumes monk or samurai quest monsters */
+                  mtmp->data->msound == MS_LEADER ||
+                  mtmp->data->msound == MS_GUARDIAN ||
+                  mtmp->data->msound == MS_NEMESIS)))
+               return "strike";
+       return "punch";
+}
+
 STATIC_OVL void
 hitmsg(mtmp, mattk)
 register struct monst *mtmp;
@@ -46,6 +95,7 @@ register struct attack *mattk;
 	int monsterlev;
 	int armproX = 0;
 	int randomkick;
+	char buf[BUFSZ];
 
 	/* Note: if opposite gender, "seductively" */
 	/* If same gender, "engagingly" for nymph, normal msg for others */
@@ -55,11 +105,9 @@ register struct attack *mattk;
 	              "smiles at", compat == 2 ? "engagingly" :
 	              "seductively");
 	} /*else*/ switch (mattk->aatyp) {
-		case AT_CLAW:
-			pline("%s claws you!", Monnam(mtmp));
-			break;
 		case AT_BITE:
-			pline("%s bites you!", Monnam(mtmp));
+			pline("%s %ss!", Monnam(mtmp), has_beak(mtmp->data) ?
+				"peck" : "bite");
 			break;
 		case AT_KICK:
 			pline("%s kicks you%c", Monnam(mtmp),
@@ -96,6 +144,28 @@ register struct attack *mattk;
 		case AT_BOOM:
 			pline("%s explodes!", Monnam(mtmp));
 			break;
+                case AT_WEAP:
+                        if (MON_WEP(mtmp)) {
+ 			   Sprintf(buf, weaphitmsg(MON_WEP(mtmp),FALSE));
+                            if (is_launcher(MON_WEP(mtmp)) ||
+                                is_missile(MON_WEP(mtmp)) ||
+                                is_ammo(MON_WEP(mtmp)) ||
+                                is_pole(MON_WEP(mtmp)))
+                                    Sprintf(buf,"hit");
+                            pline("%s %s%s!", Monnam(mtmp),
+                                makeplural(buf), !strcmp(buf,"whip") ||
+ 						!strcmp(buf,"hack") ||
+ 						!strcmp(buf,"hew") ||
+ 						!strcmp(buf,"jab") ? " you" : "");
+                            break;
+                        } /*fallthrough*/
+                case AT_CLAW:
+ 		       Sprintf(buf, barehitmsg(mtmp));
+                        pline("%s %s%s!", Monnam(mtmp), makeplural(buf),
+ 						!strcmp(buf,"scratch") ||
+ 						!strcmp(buf,"strike") ||
+ 						!strcmp(buf,"punch") ? "" : " you");
+                        break;
 		case AT_MULTIPLY:
 			/* No message. */
 		break;
@@ -2159,7 +2229,7 @@ dopois:
 #endif
 		   && !uarm && !uarmh && !uarms && !uarmg && !uarmc && !uarmf) {
 		    boolean goaway = FALSE;
-		    pline("%s hits!  (I hope you don't mind.)", Monnam(mtmp));
+                    pline("%s %s you!  (I hope you don't mind.)", Monnam(mtmp), makeplural(barehitmsg(mtmp)));
 		    if (Upolyd) {
 			u.mh += rnd(7);
 /* STEPHEN WHITE'S NEW CODE */                                            
@@ -4203,8 +4273,6 @@ register int n;
 	if (!rn2(20) && n >= 1 && u.ulevel >= 20) {n = n / 5; if (n < 1) n = 1;}
 	if (!rn2(50) && n >= 1 && u.ulevel >= 30) {n = n / 10; if (n < 1) n = 1;}
 #endif /* EASY_MODE */
-	if (Role_if(PM_BLEEDER)) n = n * 2; /* bleeders are harder than hard mode */
-
 	if (Invulnerable) n=0;
 	if (n == 0) {
 		pline("You are unharmed.");

@@ -288,15 +288,8 @@ boolean prompt_for_obj;
 	/* May we attempt this? */
 	multi = 0;
 	if (cantwield(youmonst.data)) {
-		pline("Don't be ridiculous! Your current form cannot realistically wield a weapon!");
-
-		if (yn("Try anyway?") == 'y') {
-			if (rn2(3)) { 		make_confused(HConfusion + rnd(40),FALSE);
-			pline("Uhh... that didn't seem to work.");
-		    return 1;}
-		}
-		else {return(0);}
-
+		pline("Don't be ridiculous!");
+		return(0);
 	}
 
 	/* Prompt for a new weapon */
@@ -353,15 +346,8 @@ doswapweapon()
 	/* May we attempt this? */
 	multi = 0;
 	if (cantwield(youmonst.data)) {
-
-		pline("Don't be ridiculous! Your current form cannot realistically wield a weapon!");
-
-		if (yn("Try anyway?") == 'y') {
-			if (rn2(3)) { 		make_confused(HConfusion + rnd(40),FALSE);
-			pline("Uhh... that didn't seem to work.");
-		    return 1;}
-		}
-		else {return(0);}
+		pline("Don't be ridiculous!");
+		return(0);
 	}
 	if (welded(uwep)) {
 		weldmsg(uwep);

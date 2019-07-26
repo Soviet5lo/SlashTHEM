@@ -578,7 +578,7 @@ doread()
             pline("\"Magic Marker(TM) Red Ink Marker Pen. Water Soluble.\"");
              u.uconduct.literate++;
              return 1;
-#if 0 /* We'll get back to this later... */
+
 	} else if (scroll->oclass == COIN_CLASS) {
 	   if (Blind)
                 You("feel the embossed words:");
@@ -586,10 +586,12 @@ doread()
                 You("read:");
 	    pline("\"1 Zorkmid. 857 GUE. In Frobs We Trust.\"");
             u.uconduct.literate++;
+#if 0 /* 5lo: This causes a segfault, but its not needed anyway */
 #ifndef GOLDOBJ 
 	    /* Give it back to them, then */
 	    u.ugold = scroll->quan;
 	    dealloc_obj(scroll);
+#endif
 #endif
 	    return 1;
 	} else if (scroll->oartifact == ART_ORB_OF_FATE) {
@@ -599,7 +601,6 @@ doread()
 	    pline("\"Odin.\"");
             u.uconduct.literate++;
 	    return 1;
-#endif
 	} else if (OBJ_DESCR(objects[scroll->otyp]) &&
 		!strncmp(OBJ_DESCR(objects[scroll->otyp]), "runed", 5)) {
 	    if (scroll->otyp == RUNESWORD) {
@@ -2598,69 +2599,14 @@ revid_end:
 	case SCR_ACQUIREMENT: 
 		known = TRUE;
 
-		int acquireditem;
-		acquireditem = 0;
 		pline("You have found a scroll of acquirement!");
 		if (sobj->cursed || (!sobj->blessed && Luck+rn2(5) < 0)) {
 			pline("Unfortuantely, nothing happens.");
 			break;
 		}
-
-		while (acquireditem == 0) { /* ask the player what they want --Amy */
-
-		/* Yeah, I know this is less elegant than DCSS. But hey, it's a scroll of acquirement! */
-
-			if (yn("Do you want to acquire a random item?")=='y') {
-				    acqo = mkobj_at(RANDOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a weapon?")=='y') {
-				    acqo = mkobj_at(WEAPON_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire an armor?")=='y') {
-				    acqo = mkobj_at(ARMOR_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a ring?")=='y') {
-				    acqo = mkobj_at(RING_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire an amulet?")=='y') {
-				    acqo = mkobj_at(AMULET_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a tool?")=='y') {
-				    acqo = mkobj_at(TOOL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire some food?")=='y') {
-				    acqo = mkobj_at(FOOD_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a potion?")=='y') {
-				    acqo = mkobj_at(POTION_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a scroll?")=='y') {
-				    acqo = mkobj_at(SCROLL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a spellbook?")=='y') {
-				    acqo = mkobj_at(SPBOOK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a wand?")=='y') {
-				    acqo = mkobj_at(WAND_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire some coins?")=='y') {
-				    acqo = mkobj_at(COIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a gem?")=='y') {
-				    acqo = mkobj_at(GEM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a boulder or statue?")=='y') {
-				    acqo = mkobj_at(ROCK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a heavy iron ball?")=='y') {
-				    acqo = mkobj_at(BALL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire an iron chain?")=='y') {
-				    acqo = mkobj_at(CHAIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a splash of venom?")=='y') {
-				    acqo = mkobj_at(VENOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-
-		}
-
-		/* special handling to prevent wands of wishing or similarly overpowered items --Amy */
-
-		if (acqo->otyp == GOLD_PIECE) acqo->quan = rnd(1000);
-		if (acqo->otyp == MAGIC_LAMP) { acqo->otyp = OIL_LAMP; acqo->age = 1500L; }
-		if (acqo->otyp == MAGIC_MARKER) acqo->recharged = 1;
-	    while(acqo->otyp == WAN_WISHING || acqo->otyp == WAN_POLYMORPH || acqo->otyp == WAN_ACQUIREMENT)
-		acqo->otyp = rnd_class(WAN_LIGHT, WAN_SOLAR_BEAM);
-	    while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT || acqo->otyp == SCR_ENTHRONIZATION || acqo->otyp == SCR_FOUNTAIN_BUILDING || acqo->otyp == SCR_SINKING || acqo->otyp == SCR_WC)
-		acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
-
-		pline("Something appeared on the ground just beneath you!");
-
+		do_acquirement();
 		break;
-
+#if 0
 	case SCR_ENTHRONIZATION:
 
 		if (levl[u.ux][u.uy].typ != ROOM) {
@@ -2708,7 +2654,7 @@ revid_end:
 		levl[u.ux][u.uy].typ = TOILET;
 
 		break;
-
+#endif
 	case SCR_CONSECRATION:
 	{
 		aligntyp al,ual;
@@ -3350,12 +3296,6 @@ void undo_genocide(void)
 			pline("This creature has not been genocided.");
 			continue;
 		}
-		if (mn == PM_UNGENOMOLD) {
-
-			pline("For some reason, you cannot ungenocide this species!");
-			continue;
-		}
-
 		/*mons[mn].geno*/mvitals[mn].mvflags &= ~G_GENOD;
 		pline("The race of %s now exist again.",makeplural(buf));
 		break;

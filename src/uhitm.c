@@ -776,6 +776,7 @@ int thrown;
 	boolean disint_obj = FALSE;
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
+	boolean not_melee_weapon = FALSE;
 #ifdef STEED
 	int jousting = 0;
 #endif
@@ -1071,6 +1072,7 @@ int thrown;
 		    (thrown == 2 && is_ammo(obj) && 
 		    	!ammo_and_launcher(obj, launcher))) {
 		    /* then do only 1-2 points of damage */
+                    not_melee_weapon = TRUE;
 		    if (mdat == &mons[PM_SHADE] && obj->otyp != SILVER_ARROW)
 			tmp = 0;
 		    else
@@ -1221,11 +1223,6 @@ int thrown;
 					&& tech_inuse(T_FLURRY)) {
 				tmp++;
 				}
-			    } /*else */
-			      if (Role_if(PM_ROCKER)) {
-				if ((obj->otyp == SLING) && tech_inuse(T_FLURRY)) tmp += 2;
-				tmp++;
-				
 			    } /*else */
 				if (Race_if(PM_DROW)) {
 				if (obj->otyp == DARK_ELVEN_ARROW &&
@@ -1541,7 +1538,7 @@ int thrown;
 
 	if (uslinging() && ammo_and_launcher(obj, uwep)
 	   		&& (P_SKILL(wtype) >= P_EXPERT ||
-			uwep->oartifact == ART_SLING_OF_DAVID)
+			uwep->oartifact == ART_DAVID_S_SLING)
 			&& mdat->mlet == S_GIANT)
 	{
 		giantkill = TRUE;
@@ -1741,7 +1738,8 @@ int thrown;
 	  (!destroyed || (thrown && m_shot.n > 1 && m_shot.o == obj->otyp))) {
 		if (thrown) hit(mshot_xname(obj), mon, exclam(tmp));
 		else if (!flags.verbose) You("hit it.");
-		else You("%s %s%s", Role_if(PM_BARBARIAN) ? "smite" : "hit",
+                else You("%s %s%s", !obj ? barehitmsg(&youmonst) :
+                          not_melee_weapon ? "hit" : weaphitmsg(obj,TRUE),
 			 mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
 	}
 
@@ -2333,12 +2331,6 @@ register struct attack *mattk;
 				   considered to be primarily a non-physical
 				   effect */
 				lesshungry(xtmp * 12);
-				if (Role_if(PM_BLEEDER)) { /* Bleeders get better from drinking blood */
-
-					pline("This tastes good.");
-					healup(d(5,5) + rnd(u.ulevel), 0, FALSE, FALSE);
-					exercise(A_CON, TRUE);
-				}
 			}
 			pline("%s suddenly seems weaker!", Monnam(mdef));
 			mdef->mhpmax -= xtmp;
@@ -3260,7 +3252,8 @@ use_natural:
 			    if (mattk->aatyp == AT_KICK)
 				    You("kick %s.", mon_nam(mon));
 			    else if (mattk->aatyp == AT_BITE)
-				    You("bite %s.", mon_nam(mon));
+                                    You("%s %s.", has_beak(youmonst.data) ?
+                                        "peck" : "bite", mon_nam(mon));
 			    else if (mattk->aatyp == AT_STNG)
 				    You("sting %s.", mon_nam(mon));
 			    else if (mattk->aatyp == AT_BUTT)
@@ -3275,6 +3268,9 @@ use_natural:
 				    You("touch %s.", mon_nam(mon));
 			    else if (mattk->aatyp == AT_TENT)
 				    Your("tentacles suck %s.", mon_nam(mon));
+                            else if (mattk->aatyp == AT_CLAW) {
+                                    You("%s %s.", barehitmsg(&youmonst),mon_nam(mon));
+                            }
 			    else You("hit %s.", mon_nam(mon));
 			    if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>1){
 				int dis_dmg = 0;

@@ -4,6 +4,7 @@
 
 #include "hack.h"
 #include "edog.h"
+#include "epri.h"
 #ifdef USER_SOUNDS
 # ifdef USER_SOUNDS_REGEX
 #include <regex.h>
@@ -368,6 +369,55 @@ dosounds()
 	    You_hear(ora_msg[rn2(3)+hallu*2]);
 	}
 	return;
+    }
+    if (level.flags.has_temple && !rn2(200)
+        && !(Is_astralevel(&u.uz) || Is_sanctum(&u.uz))) {
+        for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
+            if (DEADMONSTER(mtmp))
+                continue;
+            if (mtmp->ispriest && inhistemple(mtmp)
+                /* priest must be active */
+                && mtmp->mcanmove && !mtmp->msleeping
+                /* hero must be outside this temple */
+                && temple_occupied(u.urooms) != EPRI(mtmp)->shroom)
+                break;
+        }
+        if (mtmp) {
+            /* Generic temple messages; no attempt to match topic or tone
+               to the pantheon involved, let alone to the specific deity.
+               These are assumed to be coming from the attending priest;
+               asterisk means that the priest must be capable of speech;
+               pound sign (octathorpe,&c--don't go there) means that the
+               priest and the altar must not be directly visible (we don't
+               care if telepathy or extended detection reveals that the
+               priest is not currently standing on the altar; he's mobile). */
+            static const char *const temple_msg[] = {
+                "*someone praising %s.", "*someone beseeching %s.",
+                "#an animal carcass being offered in sacrifice.",
+                "*a strident plea for donations.",
+            };
+            const char *msg;
+            int trycount = 0, ax = EPRI(mtmp)->shrpos.x,
+                ay = EPRI(mtmp)->shrpos.y;
+            boolean speechless = (mtmp->data->msound <= MS_ANIMAL),
+                    in_sight = canseemon(mtmp) || cansee(ax, ay);
+
+            do {
+                msg = temple_msg[rn2(SIZE(temple_msg) - 1 + hallu)];
+                if (index(msg, '*') && speechless)
+                    continue;
+                if (index(msg, '#') && in_sight)
+                    continue;
+                break; /* msg is acceptable */
+            } while (++trycount < 50);
+            while (!letter(*msg))
+                ++msg; /* skip control flags */
+            if (index(msg, '%'))
+                You_hear(msg, halu_gname(EPRI(mtmp)->shralign));
+            else
+                You_hear1(msg);
+            return;
+        }
     }
 #ifdef BLACKMARKET
     if (!Is_blackmarket(&u.uz) && at_dgn_entrance("One-eyed Sam's Market") &&
@@ -896,9 +946,6 @@ register struct monst *mtmp;
 		    verbl_msg = "Aloha.";
 		    break;
 #endif
-		case PM_GANGSTER:
-	    pline_msg = "talks about doing a drive-by.";
-		    break;
 		case PM_GEEK:
 		    verbl_msg = "Enematzu memalezu!";
 		    break;
@@ -907,13 +954,6 @@ register struct monst *mtmp;
 		    verbl_msg = "Little strawberry me baby!";
 		    break;
 #endif
-		case PM_BLEEDER:
-		    verbl_msg = "*sigh* If only I could make this bleeding stop...";
-		    break;
-		case PM_ROCKER:
-	    pline_msg = "talks about groovy music.";
-		    break;
-
 		default:
 		    pline_msg = "discusses dungeon exploration.";
 		    break;

@@ -531,7 +531,7 @@ typedef long glyph_t;
 /* #define EXTENDED_INFO */ /* 5lo: Show full information of monsters
                                when using farlook */
 #define USER_DUNGEONCOLOR
-
+#define SORTLOOT	    /* 5lo: Sortloot patch */
 /*#define GOLDOBJ */	/* Gold is kept on obj chains - Helge Hafting */
 #define AUTOPICKUP_EXCEPTIONS /* exceptions to autopickup */
 /*#define UNDERGROUND_RIVERS */ /* 5lo: Wrapped these into a define, currently a bit buggy. */

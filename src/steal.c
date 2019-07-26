@@ -302,6 +302,9 @@ nothing_to_steal:
 	    otmp = uwep;
 	/* can't steal armor while wearing cloak - so steal the cloak. */
 	else if(otmp == uarm && uarmc) otmp = uarmc;
+	else if(otmp == uarmh && uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
+			!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+				"hooded cloak") ) otmp = uarmc;
 #ifdef TOURIST
 	else if(otmp == uarmu && uarmc) otmp = uarmc;
 	else if(otmp == uarmu && uarm) otmp = uarm;

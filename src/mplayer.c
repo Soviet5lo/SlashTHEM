@@ -161,14 +161,6 @@ register boolean special;
 		    if (rn2(2)) armor = rnd_class(PLATE_MAIL, CHAIN_MAIL);
 		    if (helm == HELM_OF_BRILLIANCE) helm = STRANGE_OBJECT;
 		    break;
-		case PM_BLEEDER:
-			weapon = KNIFE;
-		    break;
-		case PM_BINDER:
-			weapon = RANSEUR;
-			armor = ELVEN_MITHRIL_COAT;
-			cloak = LEATHER_CLOAK;
-		    break;
 		case PM_CAVEMAN:
 		case PM_CAVEWOMAN:
 		    if (rn2(4)) weapon = MACE;
@@ -183,9 +175,6 @@ register boolean special;
 		    break;
 		case PM_GRADUATE:
 		    weapon = FLY_SWATTER;
-		    break;
-		case PM_GANGSTER:
-		    weapon = KNIFE;
 		    break;
 		case PM_PIRATE:
 		    weapon = SCIMITAR;
@@ -219,7 +208,6 @@ register boolean special;
 		    weapon = CLUB;
 		    break;
 		case PM_HEALER:
-		case PM_SCIENTIST:
 		    if (rn2(4)) weapon = QUARTERSTAFF;
 		    else if (rn2(2)) weapon = rn2(2) ? UNICORN_HORN : SCALPEL;
 		    if (rn2(4)) helm = rn2(2) ? HELM_OF_BRILLIANCE : HELM_OF_TELEPATHY;
@@ -294,9 +282,6 @@ register boolean special;
 		    /* Defaults are just fine */
 		    break;
 #endif
-		case PM_ROCKER:
-			weapon = HEAVY_HAMMER;
-
 		case PM_UNDEAD_SLAYER:
 		    if (rn2(2)) weapon = SILVER_SPEAR;
 		    if (rn2(2)) armor = rnd_class(PLATE_MAIL, CHAIN_MAIL);

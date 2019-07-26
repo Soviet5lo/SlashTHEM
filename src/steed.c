@@ -50,14 +50,7 @@ use_saddle(otmp)
 	/* Can you use it? */
 	if (nohands(youmonst.data)) {
 		You("have no hands!");	/* not `body_part(HAND)' */
-
-		if (yn("Try to use the saddle with another part of your body instead?") == 'y') {
-			if (rn2(3)) { 			make_blinded(Blinded + rnd(50),TRUE);
-			pline("You got something in your face!");
-		    return 1;}
-		}
-		else {return(0);}
-
+		return 0;
 	} else if (!freehand()) {
 		You("have no free %s.", body_part(HAND));
 		return 0;

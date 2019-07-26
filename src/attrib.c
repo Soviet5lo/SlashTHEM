@@ -103,9 +103,6 @@ const struct innate {
 	dru_abil[] = { {	 1, &(HPoison_resistance), "", "" },
 		     {	 0, 0, 0, 0 } },
 
-	sci_abil[] = { {	 1, &(HAcid_resistance), "", "" },
-		     {	 0, 0, 0, 0 } },
-
 	mus_abil[] = { {	 7, &(HStealth), "stealthy", "noisy" },
 		     {	 0, 0, 0, 0 } },
 
@@ -824,7 +821,6 @@ int oldlevel, newlevel;
 	case PM_WARRIOR:         abil = war_abil;	break;
 	case PM_MONK:           abil = mon_abil;	break;
 	case PM_MUSICIAN:           abil = mus_abil;	break;
-	case PM_SCIENTIST:           abil = sci_abil;	break;
 	case PM_NECROMANCER:	abil = nec_abil;	break;
 	case PM_PIRATE:         abil = pir_abil;	break;
 	case PM_NINJA:		abil = nin_abil;	break;
@@ -865,7 +861,6 @@ int oldlevel, newlevel;
 	case PM_KOBOLD:            rabil = kob_abil;	break;
 	case PM_TROLL:            rabil = tro_abil;	break;
 	case PM_ILLITHID:            rabil = ill_abil;	break;
-	case PM_UNGENOMOLD:            rabil = ung_abil;	break;
 	case PM_GHOUL:            rabil = gul_abil;	break;
 	case PM_GIANT:            rabil = gia_abil;	break;
 	case PM_NYMPH:            rabil = nym_abil;	break;

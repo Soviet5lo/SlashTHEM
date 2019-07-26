@@ -569,8 +569,6 @@ boolean yours; /* is it your fault (for killing monsters) */
 		if (!rn2(20) && damu >= 1 && u.ulevel >= 20) {damu = damu / 5; if (damu < 1) damu = 1;}
 		if (!rn2(50) && damu >= 1 && u.ulevel >= 30) {damu = damu / 10; if (damu < 1) damu= 1;}
 #endif
-		if (Role_if(PM_BLEEDER)) damu = damu * 2; /* bleeders are harder than hard mode */
-
 		if (Invulnerable) {
 		    damu = 0;
 		    You("are unharmed!");
