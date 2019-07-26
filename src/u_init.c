@@ -1927,14 +1927,6 @@ static const struct def_skill Skill_Y[] = {
 
 /* Racial Skills here */
 
-static const struct def_skill Skill_Incantifier[] = {
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Drow[] = {
     { P_MUSICALIZE, P_SKILLED },	{ P_BOW, P_SKILLED },
     { P_NONE, 0 }
@@ -2829,12 +2821,6 @@ u_init()
 	case PM_HUMAN:
 	    /* Nothing special */
 	    break;
-	case PM_INCANTIFIER:
-	    skill_add(Skill_Incantifier);
-//	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
-//	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
-//	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
-        break;
 
 	case PM_ELF:
 	    /*

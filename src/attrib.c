@@ -856,7 +856,6 @@ int oldlevel, newlevel;
 #endif
 	case PM_DROW:
 	case PM_ELF:            rabil = elf_abil;	break;
-	case PM_INCANTIFIER:            rabil = inc_abil;	break;
 	case PM_CLOCKWORK_AUTOMATON:            rabil = clk_abil;	break;
 	case PM_KOBOLD:            rabil = kob_abil;	break;
 	case PM_TROLL:            rabil = tro_abil;	break;

@@ -114,8 +114,6 @@ register struct obj *obj;
 	 * 5lo: Or they need to wind themselves with a key */
 	if (Race_if(PM_CLOCKWORK_AUTOMATON) && !Upolyd) return 0;
 
-	/* Incantifier only eats stone and metal --Amy */
-	if (Race_if(PM_INCANTIFIER) && !Upolyd) return (boolean) (is_metallic(obj) || is_lithic(obj));
 
 	/* protect invocation tools but not Rider corpses (handled elsewhere)*/
      /* if (obj->oclass != FOOD_CLASS && obj_resists(obj, 0, 0)) */
