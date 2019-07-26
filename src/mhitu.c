@@ -4055,6 +4055,33 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    mtmp->mspec_used += ABASE(A_INT) * rn1(1,3);
 		}
 		break;
+	    case AD_PLYS:
+		if(!mtmp->mcan && mtmp->mcansee && !mtmp->mspec_used && rn2(4) && 
+		  multi>=0 && !((is_undead(youmonst.data)||is_demon(youmonst.data)) 
+		  && is_undead(mtmp->data))){
+			pline("%s aberrant stare frightens you to the %s!", 
+			  s_suffix(Monnam(mtmp)), has_bones(youmonst.data)?"marrow":"core");
+			if(Free_action){
+			    pline("But you quickly regain composure.");
+			} else {
+			    int prlys = d((int)mattk->damn, (int)mattk->damd);
+			    int numhelp, numseen;
+			    nomul(-prlys,"paralyzed by a monster's gaze"); 
+			    nomovemsg = 0;	/* default: "you can move again" */
+
+			    if(!mtmp->cham && mtmp->data == &mons[PM_NOSFERATU] && 
+			    !mtmp->mcan && !rn2(3)){ 
+				numhelp = were_summon(mtmp->data, FALSE, &numseen, 0);
+				pline("%s summons help!", Monnam(mtmp));
+				if (numhelp > 0) {
+				    if (numseen == 0)
+				    You_feel("hemmed in.");
+				} else pline("But none comes.");
+			    }
+			    mtmp->mspec_used += prlys*3/2 + rn2(prlys);
+			}
+		}
+	    break;
 	    case AD_HNGY:
 		if(!mtmp->mcan && canseemon(mtmp) &&
 		  couldsee(mtmp->mx, mtmp->my) && !is_fainted() &&
@@ -4214,6 +4241,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    You("%s.", chg ? "are getting very trippy" : "seem to get even more trippy");
 		}
 		break;
+#if 0 /* 5lo: using the one from Biodiversity */
 	    case AD_PLYS:
 	        if(!mtmp->mcan && multi >= 0 && canseemon(mtmp) && mtmp->mcansee && !mtmp->mspec_used && !rn2(5)) {
 	                pline("%s stares at you!", Monnam(mtmp));
@@ -4226,6 +4254,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 	                }
 	        }
 	        break;
+#endif
 	    case AD_TLPT:
 	        if(!mtmp->mcan && canseemon(mtmp) && mtmp->mcansee && !mtmp->mspec_used && !rn2(15)) {
 	                pline("%s stares blinkingly at you!", Monnam(mtmp));

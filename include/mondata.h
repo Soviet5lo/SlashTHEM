@@ -58,6 +58,20 @@
 #define notake(ptr)		(((ptr)->mflags1 & M1_NOTAKE) != 0L)
 #define has_head(ptr)		(((ptr)->mflags1 & M1_NOHEAD) == 0L)
 #define has_horns(ptr)		(num_horns(ptr) > 0)
+/* 5lo: The next 3 are introduced by Biodiversity */
+# define does_rust(ptr)    ((ptr) == &mons[PM_IRON_GOLEM] || \
+                            ((ptr) == &mons[PM_CLOCKWORK_AUTOMATON] && rn2(2)))
+# define is_insect(ptr)    ((ptr)->mlet == S_ANT || (ptr)->mlet == S_SPIDER ||\
+                            (ptr)->mlet == S_XAN)
+
+# define has_bones(ptr)   (has_head(ptr) && !(noncorporeal(ptr) || \
+                           is_insect(ptr) || (ptr)->mlet == S_PIERCER || \
+                           (ptr)->mlet == S_WORM || (ptr)->mlet == S_WORM_TAIL \
+                           || (ptr)->mlet == S_XORN || ((ptr)->mlet == S_GOLEM \
+                           && (ptr) != &mons[PM_FLESH_GOLEM])|| \
+                           (ptr) == &mons[PM_JELLYFISH] || \
+                           (ptr) == &mons[PM_KRAKEN]))
+
 #define is_whirly(ptr)		((ptr)->mlet == S_VORTEX || \
 				 (ptr) == &mons[PM_AIR_ELEMENTAL] || (ptr) == &mons[PM_GREATER_AIR_ELEMENTAL])
 #define is_fire(ptr)		((ptr) == &mons[PM_FIRE_VORTEX] || \
