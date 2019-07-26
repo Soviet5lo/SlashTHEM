@@ -485,6 +485,10 @@ boolean artif;
 			otmp->corpsenm = PM_HUMAN;
 		}
 		/* timer set below */
+		if (otmp->corpsenm == PM_OTYUGH){
+		    otmp->orotten = TRUE; 
+		    otmp->age -= 100;
+		}
 		blessorcurse(otmp, 8);
 		break;
 	    case EGG:

@@ -868,6 +868,7 @@ register struct obj *obj;
 		    else
 		    if ((peek_at_iced_corpse_age(obj) + 50L <= monstermoves
 					    && !corpse_never_rots(&mons[obj->corpsenm])
+					    && mon->data != &mons[PM_OTYUGH]
 					    && mon->data->mlet != S_FUNGUS) ||
 			(acidic(&mons[obj->corpsenm]) && !resists_acid(mon)) ||
 			(poisonous(&mons[obj->corpsenm]) &&

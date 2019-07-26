@@ -1580,6 +1580,8 @@ long timeout;	/* unused */
 		    obj->owornmask &= ~W_WEP;
                     MON_NOWEP(obj->ocarry);
 	    }
+	    if (obj->owt>1000 && !rn2((2000 - obj->owt)/30) )
+		mkclass('X',G_NOGEN); /* otyugh */
 	} else if (in_invent) {
 	    if (flags.verbose) {
 		char *cname = corpse_xname(obj, FALSE);
