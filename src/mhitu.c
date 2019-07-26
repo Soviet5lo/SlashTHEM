@@ -887,7 +887,7 @@ use_natural:
 			    clone_mon(mtmp, 0, 0);
 			break;
 		case AT_WEAP:
-			if(range2) {
+			if(range2 || mtmp->data == &mons[PM_POLTERGEIST]) {
 #ifdef REINCARNATION
 				if (!Is_rogue_level(&u.uz))
 #endif

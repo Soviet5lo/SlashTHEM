@@ -1037,7 +1037,9 @@ not_special:
 
 		    if(((likegold && otmp->oclass == COIN_CLASS) ||
 		       (likeobjs && index(practical, otmp->oclass) &&
-			(otmp->otyp != CORPSE || (ptr->mlet == S_NYMPH
+			(otmp->otyp != CORPSE || ((ptr->mlet == S_NYMPH
+					      || ptr == &mons[PM_POLTERGEIST])
+						  /* poltergeist throws anything */
 			   && !is_rider(&mons[otmp->corpsenm])))) ||
 		       (likemagic && index(magical, otmp->oclass)) ||
 		       (uses_items && searches_for_item(mtmp, otmp)) ||

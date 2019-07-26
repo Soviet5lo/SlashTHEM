@@ -557,7 +557,7 @@ register struct monst *mtmp;
 
 	    /* KMH, balance patch -- now using skills */
 	    prop = (objects[rwep[i]]).oc_skill;
-	    if (prop < 0) {
+	    if (prop < 0 && mtmp->data != &mons[PM_POLTERGEIST]) {
 		switch (-prop) {
 			/* WAC NOTE: remember to always start the 1st item in 
 			 *   a list of propellors with a
@@ -626,6 +626,9 @@ register struct monst *mtmp;
 		}
 	    }
 	  }
+
+	if (mtmp->data == &mons[PM_POLTERGEIST]) 
+	    return oselect(mtmp, STRANGE_OBJECT); 
 
 	/* failure */
 	return (struct obj *)0;

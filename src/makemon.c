@@ -1096,6 +1096,8 @@ register struct monst *mtmp;
 		    otmp->spe = max(otmp->spe, spe2);
 		    (void) mpickobj(mtmp, otmp);
 		} 
+		if(mm == PM_POLTERGEIST)
+		    m_initthrow(mtmp, KNIFE, 12);
 		break;
 
 	    case S_ANGEL:
@@ -2166,6 +2168,7 @@ register int	mmflags;
 			    break;
 			}
 		case S_ELEMENTAL:
+		case S_GHOST:
 			if (mndx == PM_STALKER || mndx == PM_BLACK_LIGHT || mndx == PM_POLTERGEIST) {
 			    mtmp->perminvis = TRUE;
 			    mtmp->minvis = TRUE;

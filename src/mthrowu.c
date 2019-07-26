@@ -635,7 +635,8 @@ struct monst *mtmp;
 	int chance;
 
 	/* Rearranged beginning so monsters can use polearms not in a line */
-	if (mtmp->weapon_check == NEED_WEAPON || !MON_WEP(mtmp)) {
+	if (mtmp->data != &mons[PM_POLTERGEIST] &&
+		(mtmp->weapon_check == NEED_WEAPON || !MON_WEP(mtmp))) {
 	    mtmp->weapon_check = NEED_RANGED_WEAPON;
 	    /* mon_wield_item resets weapon_check as appropriate */
 	    if(mon_wield_item(mtmp) != 0) return;
@@ -643,9 +644,12 @@ struct monst *mtmp;
 
 	/* Pick a weapon */
 	otmp = select_rwep(mtmp);
-	if (!otmp) return;
+	if (!otmp){
+	    if (mtmp->data == &mons[PM_POLTERGEIST]) monflee(mtmp, 3, TRUE, FALSE);
+	    return;
+	}
 
-	if ((MON_WEP(mtmp) == otmp) && is_pole(otmp)) {
+	if ((MON_WEP(mtmp) == otmp) && is_pole(otmp) && mtmp->data != &mons[PM_POLTERGEIST]) {
 	    int dam, hitv;
 
 	    if (dist2(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy) > POLE_LIM ||
@@ -680,7 +684,8 @@ struct monst *mtmp;
 	/* WAC Catch this since rn2(0) is illegal */
 	chance = (BOLT_LIM - distmin(x,y,mtmp->mux,mtmp->muy) > 0) ?
 		BOLT_LIM - distmin(x,y,mtmp->mux,mtmp->muy) : 1;
-	if (!lined_up(mtmp) || (URETREATING(x,y) && rn2(chance)))
+	if (!lined_up(mtmp) || (URETREATING(x,y) &&
+	    mtmp->data != &mons[PM_POLTERGEIST] && rn2(chance)))
 	    return;
 
 	skill = objects[otmp->otyp].oc_skill;
@@ -738,6 +743,8 @@ struct monst *mtmp;
 		    otmp->otyp == ORCISH_ARROW &&
 		    mwep && mwep->otyp == ORCISH_BOW))
 		multishot++;
+	    if( mtmp->data == &mons[PM_POLTERGEIST]) 
+		multishot += (curr_mon_load(mtmp) * 2) / max_mon_load(mtmp);
 
 	    if ((long)multishot > otmp->quan) multishot = (int)otmp->quan;
 	    if (multishot < 1) multishot = 1;
