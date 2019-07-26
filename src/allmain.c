@@ -305,7 +305,8 @@ moveloop()
 			int heal = 1;
 
 
-			if (efflev > 9 && !(moves % 3)) {
+			if (efflev > 9 && !(moves % 3) &&
+				!(Race_if(PM_INCANTIFIER))) {
 			    if (effcon <= 12) {
 				heal = 1;
 			    } else {
@@ -318,6 +319,7 @@ moveloop()
 				u.uhp = u.uhpmax;
 			} else if (Regeneration ||
 			     (efflev <= 9 &&
+			      !(Race_if(PM_INCANTIFIER)) &&
 			      !(moves % ((MAXULEV+12) / (u.ulevel+2) + 1)))) {
 			    flags.botl = 1;
 			    u.uhp++;
@@ -349,7 +351,8 @@ moveloop()
 		    
 		    /* KMH -- OK to regenerate if you don't move */
 		    if ((u.uen < u.uenmax) && (Energy_regeneration ||
-				((wtcap < MOD_ENCUMBER || !flags.mv) &&
+				(((wtcap < MOD_ENCUMBER || !flags.mv)
+				  && !Race_if(PM_INCANTIFIER)) &&
 				(!(moves%((MAXULEV + 15 - u.ulevel) *                                    
 				(Role_if(PM_WIZARD) ? 3 : 4) / 6)))))) {
 			u.uen += rn1((int)(ACURR(A_WIS) + ACURR(A_INT)) / 15 + 1,1);

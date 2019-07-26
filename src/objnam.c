@@ -925,7 +925,7 @@ plus:
 		add_erosion_words(obj, prefix);
 		if (Hallucination)
 			break;
-		if(obj->known || do_known)
+		if(obj->known || do_known || Race_if(PM_INCANTIFIER))
 			Sprintf(eos(prefix), "%s%s%s ",
 			  do_known? "[" : "", sitoa(obj->spe), do_known? "]" : "");
 //		}
@@ -1042,7 +1042,7 @@ ring:
 		}
 		if (Hallucination)
 			break;
-		if((obj->known || do_known) && objects[obj->otyp].oc_charged)
+		if((obj->known || do_known || Race_if(PM_INCANTIFIER)) && objects[obj->otyp].oc_charged)
 			Sprintf(eos(prefix), "%s%s%s ",
 			  do_known? "[" : "", sitoa(obj->spe), do_known? "]" : "");
 		break;

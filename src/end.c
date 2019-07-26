@@ -600,8 +600,9 @@ int how;
 		u.uhp = u.uhpmax;
 	}
 	u.uhplast = u.uhp;
-	if (u.uhunger < 500) {
-	    u.uhunger = 500;
+	if (YouHunger < 500) {
+		if(Race_if(PM_INCANTIFIER)) u.uen = u.uenmax/4;
+		else u.uhunger = 500;
 	    newuhs(FALSE);
 	}
 	/* cure impending doom of sickness hero won't have time to fix */
