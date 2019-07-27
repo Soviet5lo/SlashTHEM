@@ -20,7 +20,6 @@ static NEARDATA struct obj *book;	/* last/current book being xscribed */
 #define MAX_CAN_STUDY 	60000	/* Can study while timeout is less than */
 
 #define MAX_STUDY_TIME 	  300	/* Max time for one study session */
-#define MAX_SPELL_STUDY    30	/* Uses before spellbook crumbles */
 
 #define spellknow(spell)	spl_book[spell].sp_know 
 

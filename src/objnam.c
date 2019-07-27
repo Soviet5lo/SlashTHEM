@@ -1011,7 +1011,7 @@ plus:
 		    break;
 		} else
 #endif
-#define MAX_SPELL_STUDY 3 /* spell.c */
+//#define MAX_SPELL_STUDY 3 /* spell.c */
 		if(dump_ID_flag && obj->spestudied > MAX_SPELL_STUDY / 2)
 			Strcat(prefix, "[faint] ");
 
