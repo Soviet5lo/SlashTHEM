@@ -196,7 +196,7 @@ init_uhunger()
 {
 	if(Race_if(PM_INCANTIFIER)){
 	    u.uenmax += 1200;
-	    u.uen = u.uenmax*.45;
+	    u.uen = u.uenmax/2;
 	} else u.uhunger = 1200;
 	u.uhs = NOT_HUNGRY;
 }
