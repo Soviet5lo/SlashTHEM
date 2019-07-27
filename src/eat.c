@@ -117,10 +117,8 @@ register struct obj *obj;
 		if(obj->oclass == TOOL_CLASS && objects[obj->otyp].oc_skill > 0) return TRUE;
 	}
 	if(obj->oclass == SCROLL_CLASS && obj->otyp != SCR_BLANK_PAPER && 
-#if 0
 #ifdef MAIL
-		obj->otyp != MAIL && 
-#endif
+		obj->otyp != SCR_MAIL && 
 #endif
 		!obj->oartifact) return TRUE;
 	if(obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BLANK_PAPER && !obj->oartifact) return TRUE;
