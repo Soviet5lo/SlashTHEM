@@ -1125,7 +1125,8 @@ peffects(otmp)
 		unkn++;
 		u.uconduct.unvegan++;
 
-		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)) {
+		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)
+				|| Race_if(PM_INCANTIFIER)) {
 		    violated_vegetarian();
 		    if (otmp->cursed)
 			pline("Yecch!  This %s.", Hallucination ?
