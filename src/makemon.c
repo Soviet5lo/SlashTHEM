@@ -1697,8 +1697,6 @@ register struct	monst	*mtmp;
        	    case S_ZRUTY:
 	          if (ptr == &mons[PM_BANNIK] && !rn2(5))
 		    mongets(mtmp, TOWEL);
-	          else if (ptr == &mons[PM_LESHY])
-		    mongets(mtmp, APPLE);
 	          break;
 	    case S_ELEMENTAL:        
   /*            if(ptr == &mons[PM_WATER_WEIRD]){
@@ -1787,6 +1785,8 @@ register struct	monst	*mtmp;
 			otmp->owt = weight(otmp);
 			mpickobj(mtmp,otmp);
 		}
+	        if (ptr == &mons[PM_LESHY])
+		    mongets(mtmp, rnl(7)?ACORN:APPLE);
  		break;
 	    case S_DRAGON:
 		if (ptr == &mons[PM_DRAGON_LORD]) {

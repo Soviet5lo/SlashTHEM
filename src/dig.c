@@ -234,6 +234,8 @@ dig()
 	    is_lightsaber(uwep) ? "cut through" :
 #endif
 	    "chop through";
+	char buf[40]; /* blah blah ironwood tree. */
+
 	int bonus;
 
 	lev = &levl[dpx][dpy];
@@ -379,7 +381,8 @@ dig()
 			    }
 			}
 			if (IS_TREE(lev->typ)) {
-			    digtxt = "You cut down the tree.";
+				Sprintf(buf,"You cut down the %s.", rmname(lev)); 
+				    digtxt = buf;
 			    lev->typ = ROOM;
 			    if (!rn2(5)) (void) rnd_treefruit_at(dpx, dpy);
 			} else if (lev->typ == IRONBARS) {
@@ -483,7 +486,7 @@ cleanup:
 		    else
 #endif
 		    You("hit the %s with all your might.",
-			d_target[dig_target]);
+			(IS_TREE(lev->typ))?rmname(lev):d_target[dig_target]);
 		    did_dig_msg = TRUE;
 		}
 	}
@@ -1146,7 +1149,7 @@ watch_dig(mtmp, x, y, zap)
 		    if (IS_DOOR(lev->typ))
 			str = "door";
 		    else if (IS_TREE(lev->typ))
-			str = "tree";
+			str = rmname(lev);
 		    else if (IS_ROCK(lev->typ))
 			str = "wall";
 		    else
@@ -1378,7 +1381,7 @@ zap_dig()
 			room->typ = ROOM;
 			unblock_point(zx,zy); /* vision */
 		    } else if (!Blind)
-			pline_The("tree shudders but is unharmed.");
+			pline_The("%s shudders but is unharmed.", rmname(room));
 		    break;
 		} else if (room->typ == STONE || room->typ == SCORR) {
 		    if (!(room->wall_info & W_NONDIGGABLE)) {

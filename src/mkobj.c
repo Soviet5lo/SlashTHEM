@@ -1073,13 +1073,16 @@ register struct obj *obj;
 	return(wt ? wt*(int)obj->quan : ((int)obj->quan + 1)>>1);
 }
 
-static int treefruits[] = {APPLE,ORANGE,PEAR,BANANA,EUCALYPTUS_LEAF};
+static int treefruits[] = {APPLE,ORANGE,PEAR,BANANA,EUCALYPTUS_LEAF, ACORN};
 
 struct obj *
 rnd_treefruit_at(x,y)
 int x, y;
 {
-	return mksobj_at(treefruits[rn2(SIZE(treefruits))], x, y, TRUE, FALSE);
+	int typ = (levl[x][y].flags & TREE_TYPE_MASK)>>2;
+	    return mksobj_at(
+	    treefruits[ (typ) ? ((typ)-1) : rn2(SIZE(treefruits)) ], 
+	    x, y, TRUE, FALSE);
 }
 #endif /* OVL0 */
 #ifdef OVLB

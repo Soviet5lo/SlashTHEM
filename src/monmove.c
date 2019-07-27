@@ -1457,6 +1457,22 @@ postmov:
 			(is_pool(mtmp->mx, mtmp->my) && !Is_waterlevel(&u.uz));
 		newsym(mtmp->mx, mtmp->my);
 	    }
+	    if (ptr == &mons[PM_LESHY]) {
+		struct rm * there = &levl[mtmp->mx][mtmp->my];
+		if (there->typ == TREE){
+		    if (!(there->flags & TREE_LOOTED)){
+			struct obj * otmp = rnd_treefruit_at(mtmp->mx, mtmp->my);
+			otmp->quan = rnd(3);
+			otmp->owt  = weight(otmp);
+			there->flags |= TREE_LOOTED;
+			obj_extract_self(otmp);
+			(void) mpickobj(mtmp, otmp);
+			return 2;
+		    }/* 
+			if (mmoved == 1)
+			mtmp->mundetected = TRUE;*/
+		}
+	    }
 	    if (mtmp->isshk) {
 		after_shk_move(mtmp);
 	    }

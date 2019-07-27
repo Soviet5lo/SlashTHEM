@@ -189,7 +189,12 @@ struct obj {
 			 (otmp)->oclass == GEM_CLASS) && \
 			 objects[(otmp)->otyp].oc_skill >= -P_CROSSBOW && \
 			 objects[(otmp)->otyp].oc_skill <= -P_BOW)
+# define throwable_nut(otmp)    ((otmp->oclass == FOOD_CLASS) && \
+				objects[(otmp)->otyp].oc_skill == -P_SLING && \
+				!(otmp)->oeaten)
+
 #define is_missile(otmp)	(((otmp)->oclass == WEAPON_CLASS || \
+			 throwable_nut(otmp) || \
 			 (otmp)->oclass == TOOL_CLASS) && \
 			 objects[(otmp)->otyp].oc_skill >= -P_BOOMERANG && \
 			 objects[(otmp)->otyp].oc_skill <= -P_DART)

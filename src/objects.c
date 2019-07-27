@@ -1159,6 +1159,12 @@ FOOD("mushroom",             5, 1,  5, 0, VEGGY, 130, CLR_BLACK),
 FOOD("melon",               19, 1,  5, 0, VEGGY, 175, CLR_BRIGHT_GREEN),
 FOOD("slime mold",          75, 1,  5, 0, VEGGY, 250, HI_ORGANIC),
 FOOD("peanut bag",	     5, 3, 10, 0, VEGGY, 800, HI_ORGANIC),
+# define NUT(name,desc,prob,kn,delay,wt,gval,nutr,sdam,ldam,color) \
+OBJECT( OBJ(name,desc), \
+    BITS(kn, 1, 0, 0,0,0,0,0,0,0,0,-P_SLING,VEGGY), 0, \
+    FOOD_CLASS, /*prob*/ 0, delay, wt, gval, sdam, ldam, 0, 0, nutr, color)
+NUT("acorn", (char *) 0,                  0, 1, 1, 10, 0,  5, 2, 0, HI_WOOD),
+#undef NUT
 
 /* People food */
 FOOD("lump of royal jelly",  1, 1,  2, 0, VEGGY, 200, CLR_YELLOW),

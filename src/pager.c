@@ -328,6 +328,9 @@ lookat(x, y, buf, monbuf)
     case S_cloud:
 	Strcpy(buf, Is_airlevel(&u.uz) ? "cloudy area" : "fog/vapor cloud");
 	break;
+    case S_tree:
+	Strcpy(buf,rmname(&levl[x][y]));
+	break;
     case S_water:
     case S_pool:
 	Strcpy(buf, level.flags.lethe? "sparkling water" : "water");
@@ -713,7 +716,7 @@ do_look(quick)
 		    if (is_cmap_trap(i)) hit_trap = TRUE;
 		}
 
-		if (i == S_altar || is_cmap_trap(i))
+		if (i == S_altar || is_cmap_trap(i) || i == S_tree)
 		    need_to_look = TRUE;
 	    }
 	}

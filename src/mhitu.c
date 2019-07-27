@@ -3841,6 +3841,11 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    else
 			You("are getting more and more confused.");
 		    make_confused(HConfusion + conf, FALSE);
+			if(mtmp->data == &mons[PM_LESHY] && !rn2(5)){
+			    You_feel("a little lost");
+			    forget_map(0);
+			    docrt();
+			}
 		    stop_occupation();
 		}
 		break;

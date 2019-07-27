@@ -2337,6 +2337,9 @@ struct monst *mtmp;
 #define MUSE_BULLWHIP 8
 #define MUSE_POT_POLYMORPH 9
 #define MUSE_WAN_CLONE_MONSTER 10
+#define MUSE_SEED 11
+
+static int treefruits[] = {APPLE,ORANGE,PEAR,BANANA,EUCALYPTUS_LEAF, ACORN};
 
 boolean
 find_misc(mtmp)
@@ -2454,6 +2457,19 @@ struct monst *mtmp;
 				&& monstr[monsndx(mdat)] < 6) {
 			m.misc = obj;
 			m.has_misc = MUSE_POT_POLYMORPH;
+		}
+		nomore(MUSE_SEED);
+		if(mtmp->data == &mons[PM_LESHY] && !mtmp->mcan && !mtmp->mspec_used &&
+		    ((mtmp->mx + mtmp->my) & 1) && /* only on odd squares */
+		    obj->oclass == FOOD_CLASS && !obj->oeaten ){
+			int i;
+			for(i=0; i< 7 ; ++i){
+			    if (obj->otyp == treefruits[i]){ 
+				m.misc = obj;
+				m.has_misc = MUSE_SEED;
+				break;
+			    }
+			}
 		}
 	}
 	return((boolean)(!!m.has_misc));
@@ -2679,6 +2695,25 @@ skipmsg:
 		    return 1;
 		}
 		return 0;
+	case MUSE_SEED:
+	    if(!rn2(5) || 1){
+		int i, tx = mtmp->mx, ty = mtmp->my;
+		struct rm * there = &levl[tx][ty];
+		if (!IS_ROOM(there->typ)) return 0;
+		for(i=0; i < 7 ; ++i)
+		    if (otmp->otyp == treefruits[i]) break;
+		there->typ = TREE;
+		there->flags = TREE_SWARM | ((i+1)<<2); 
+		block_point(tx, ty);
+		newsym(tx, ty);
+		if (vis)
+		    pline("Suddenly %s springs out of the ground!",
+		    an(rmname(there)));
+		m_useup(mtmp, otmp);
+		mtmp->mspec_used += rn1(20, 60/*(SKY_AT(tx, ty))?20:60*/);
+		return 2;
+	    }
+	return 0; 
 	case 0: return 0; /* i.e. an exploded wand */
 	default: impossible("%s wanted to perform action %d?", Monnam(mtmp),
 			m.has_misc);
