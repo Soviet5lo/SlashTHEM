@@ -1652,7 +1652,7 @@ register struct obj *obj;
 	}
 	consume_obj_charge(obj, TRUE);
 	if((Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) || 
-		Race_if(PM_CLOCKWORK_AUTOMATON)) 
+		Race_if(PM_GHOUL)) 
 				&& mons[corpse->corpsenm].cnutrit 
 				&& !(mvitals[corpse->corpsenm].mvflags & G_NOCORPSE)
 				&& has_blood(&mons[corpse->corpsenm])
