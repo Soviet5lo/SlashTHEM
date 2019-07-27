@@ -194,8 +194,10 @@ register struct obj *obj;
 void
 init_uhunger()
 {
-	if(Race_if(PM_INCANTIFIER)) u.uen = min(u.uenmax, 1200);
-	else u.uhunger = 1200;
+	if(Race_if(PM_INCANTIFIER)){
+	    u.uenmax += 1200;
+	    u.uen = u.uenmax*.45;
+	} else u.uhunger = 1200;
 	u.uhs = NOT_HUNGRY;
 }
 

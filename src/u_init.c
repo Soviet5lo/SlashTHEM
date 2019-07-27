@@ -2243,7 +2243,7 @@ u_init()
 	adjabil(0,1);
 	u.ulevel = u.ulevelmax = 1;
 
-	if(Race_if(PM_INCANTIFIER)) u.uenmax += 1200;
+//	if(Race_if(PM_INCANTIFIER)) u.uenmax += 1200;
 	init_uhunger();
 	u.ublesscnt = 300;			/* no prayers just yet */
 
