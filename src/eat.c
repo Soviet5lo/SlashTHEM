@@ -3136,7 +3136,7 @@ gethungry()	/* as time goes by - called by moveloop() and domove() */
         && (!Role_if(PM_CONVICT) || (moves % 2) || (u.uhs < HUNGRY))
 #endif /* CONVICT */
 		&& (!Race_if(PM_VAMPIRE) || (moves % 2) || (u.uhs < HUNGRY))
-		&& !((Slow_digestion && (!Race_if(PM_INCANTIFIER) || moves%2))))
+		&& !((Slow_digestion && (!Race_if(PM_INCANTIFIER) || moves%2) || 		      Race_if(PM_INCANTIFIER) && moves%10)))
 			(Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);		/* ordinary food consumption */
 
 	if (moves % 2) {	/* odd turns */
