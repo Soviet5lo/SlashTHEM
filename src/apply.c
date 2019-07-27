@@ -1664,6 +1664,7 @@ register struct obj *obj;
 			can->cursed = obj->cursed;
 			can->blessed = obj->blessed;
 			can->known = 1;
+			can->selfmade = TRUE;
 			if (carried(corpse)) {
 				if (corpse->unpaid)
 					verbalize(you_buy_it);
