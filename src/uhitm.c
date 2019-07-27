@@ -1466,12 +1466,10 @@ int thrown;
 			break;
 		    case WATER_VENOM: /* thrown (or spit) */
 			tmp = 0;
-#define does_rust(m) (m == &mons[PM_IRON_GOLEM])
 			if(does_rust(mdat)){
 			    tmp = d(1,6);
 			} 
 			needrustmsg = TRUE;
-#undef does_rust
 			break;
 		    default:
 			/* non-weapons can damage because of their weight */
