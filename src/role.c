@@ -1326,7 +1326,7 @@ const struct Role roles[] = {
 	{"Curator",     0} },
 	"Balder", "Edda", "Hagen", /* Norse mythology */
 	"Zoo", "Yellowstone Park", "Jurassic Park",
-	PM_ZOOKEEPER, NON_PM, PM_UNDEAD_ZOOKEEPER, NON_PM, PM_PLATYPUS,
+	PM_ZOOKEEPER, NON_PM, PM_UNDEAD_ZOOKEEPER, NON_PM, PM_DINGO_PUPPY,
 	PM_MASTER_ZOOKEEPER, PM_STUDENT, PM_FEARFUL_TRICERATOPS,
 	PM_CARNIVOROUS_APE, PM_JAGUAR, S_FELINE, S_ZOUTHERN,
 

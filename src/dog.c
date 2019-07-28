@@ -271,7 +271,6 @@ makedog()
 
 	if (pettype == PM_GREEN_ELF) petname = "Dray Harp";
 	if (pettype == PM_OFFICER) petname = "Officer O'Brian";
-	if (pettype == PM_PLATYPUS) petname = "Donald Duck";
 
 	if (pettype == PM_PANTHER) petname = "Tomcat Karlo";
 	if (pettype == PM_TIGER) petname = "Simba";
