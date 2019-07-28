@@ -2862,6 +2862,8 @@ u_init()
 	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
 	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
 	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
+	    knows_object(POT_BLOOD);
+	    knows_object(POT_VAMPIRE_BLOOD);
     	    break;
 
 	case PM_ELF:
@@ -2973,6 +2975,8 @@ u_init()
 		Xtra_fopod[0].trotyp = trotyp[rn2(SIZE(trotyp))];
 		ini_inv(Xtra_fopod);
 	    }
+	    knows_object(POT_BLOOD);
+	    knows_object(POT_VAMPIRE_BLOOD);
 	    break;
 	case PM_KOBOLD:
 	    if(!Role_if(PM_CONVICT)) {
@@ -2984,6 +2988,8 @@ u_init()
 		break;
 	case PM_GHOUL:
           /*ini_inv(GhastFood);*/
+		knows_object(POT_BLOOD);
+		knows_object(POT_VAMPIRE_BLOOD);
 		break;
 	case PM_CLOCKWORK_AUTOMATON:
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
