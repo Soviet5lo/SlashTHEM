@@ -185,7 +185,8 @@ struct monst *mtmp;
 	 * where Elbereth is completely useless.
 	 */
 	if (mtmp->isshk || mtmp->isgd || mtmp->iswiz || !mtmp->mcansee ||
-			mtmp->mpeaceful || !mtmp->mpeacetim || mtmp->data->mlet == S_HUMAN ||
+	    (mtmp->mpeaceful && !mtmp->mpeacetim) ||
+  	     mtmp->data->mlet == S_HUMAN ||
 	    is_lminion(mtmp) || mtmp->data == &mons[PM_ANGEL] ||
 	    mtmp->data == &mons[PM_CTHULHU] ||
 	    is_rider(mtmp->data) || mtmp->data == &mons[PM_MINOTAUR])
