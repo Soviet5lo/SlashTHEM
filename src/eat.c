@@ -2715,6 +2715,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 		}
 		stackobj(otmp);
 		return 1;
+	}
 
 	if(Race_if(PM_INCANTIFIER) && !objects[otmp->otyp].oc_unique){ //redundant check against unique
 		if (otmp->quan > 1L) {
@@ -2787,7 +2788,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 		return 1;
 	}
 
-	}
+//	}
 	if (otmp->otyp == EYEBALL || otmp->otyp == SEVERED_HAND) {
 	    Strcpy(qbuf,"Are you sure you want to eat that?");
 	    if ((c = yn_function(qbuf, ynqchars, 'n')) != 'y') return 0;
