@@ -2766,9 +2766,9 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 			break;
 			case SCROLL_CLASS:
 				if(otmp->oartifact) break; //redundant check
-	    	    		otmp->otyp = SCR_BLANK_PAPER;
+	    	    		You("lick the ink off the %s.", xname(otmp));
+				otmp->otyp = SCR_BLANK_PAPER;
 				lesshungry(50);
-				You("lick the ink off the %s.", xname(otmp));
 			break;
 			case SPBOOK_CLASS:
 				if(otmp->oartifact) break; //redundant check
