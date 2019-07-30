@@ -2734,11 +2734,11 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 				otmp = addinv(otmp);
 				otmp->oxlth--;
 			}
-		}
+		    }
 		}
 		switch(otmp->oclass){
 			case WEAPON_CLASS:
-	    	    (void) drain_item(otmp);
+	    	    	(void) drain_item(otmp);
 				lesshungry(50);
 				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 			break;
@@ -2755,31 +2755,33 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 				else useupf(otmp, 1L);
 			break;
 			case ARMOR_CLASS:
-	    	    (void) drain_item(otmp);
+		    	    	(void) drain_item(otmp);
 				lesshungry(50);
 				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 			break;
 			case TOOL_CLASS:
-	    	    (void) drain_item(otmp);
+		    	        (void) drain_item(otmp);
 				lesshungry(50);
 				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 			break;
 			case SCROLL_CLASS:
 				if(otmp->oartifact) break; //redundant check
-	    	    otmp->otyp = SCR_BLANK_PAPER;
+	    	    		otmp->otyp = SCR_BLANK_PAPER;
 				lesshungry(50);
 				You("lick the ink off the %s.", xname(otmp));
 			break;
 			case SPBOOK_CLASS:
 				if(otmp->oartifact) break; //redundant check
-				otmp->spestudied++;
+				(void) drain_item(otmp);
+//				otmp->spestudied++;
 				lesshungry(50);
 				You("drain the magic from the %s.", xname(otmp));
-	    	    if(otmp->spestudied > MAX_SPELL_STUDY) otmp->otyp = SPE_BLANK_PAPER;
+				if(!otmp->spe) otmp->otyp = SPE_BLANK_PAPER;
+//	    	    		if(otmp->spestudied > MAX_SPELL_STUDY) otmp->otyp = SPE_BLANK_PAPER;
 			break;
 			case WAND_CLASS:
-	    	    (void) drain_item(otmp);
-//	    	    otmp->otyp = SPE_BLANK_PAPER;
+				(void) drain_item(otmp);
+//	    	    		otmp->otyp = SPE_BLANK_PAPER;
 				lesshungry(10);
 				if(!otmp->spe) otmp->otyp = WAN_NOTHING;
 				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
