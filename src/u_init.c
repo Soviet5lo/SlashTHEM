@@ -15,6 +15,7 @@ struct trobj {
 STATIC_DCL void FDECL(ini_inv, (struct trobj *));
 STATIC_DCL void FDECL(knows_object,(int));
 STATIC_DCL void FDECL(knows_class,(CHAR_P));
+STATIC_DCL void FDECL(augment_skill_cap,(int, int, int, int));
 STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 
 #define UNDEF_TYP	0
@@ -1925,6 +1926,7 @@ static const struct def_skill Skill_Y[] = {
 };
 #endif
 
+#if 0 /* 5lo: No longer used */
 /* Racial Skills here */
 
 static const struct def_skill Skill_Incantifier[] = {
@@ -1997,7 +1999,7 @@ static const struct def_skill Skill_Troll[] = {
     { P_POLEARMS, P_EXPERT },
     { P_NONE, 0 }
 };
-
+#endif
 STATIC_OVL void
 knows_object(obj)
 register int obj;
@@ -2017,6 +2019,19 @@ register char sym;
 	for (ct = 1; ct < NUM_OBJECTS; ct++)
 		if (objects[ct].oc_class == sym && !objects[ct].oc_magic)
 			knows_object(ct);
+}
+
+/* Raise the player character's skill cap for a particular skill. */
+void
+augment_skill_cap(int skill, int augment, int minimum, int maximum)
+{
+	int count = 0;
+	if (P_SKILL(skill) == P_ISRESTRICTED)
+		P_SKILL(skill) = P_BASIC;
+	while (count++ < augment && P_MAX_SKILL(skill) < maximum)
+		P_MAX_SKILL(skill) = P_MAX_SKILL(skill) + 1;
+	if (P_MAX_SKILL(skill) < minimum)
+		P_MAX_SKILL(skill) = minimum;
 }
 
 /* [ALI] Raise one spell skill by one level. Priorities:
@@ -2830,10 +2845,17 @@ u_init()
 	    /* Nothing special */
 	    break;
 	case PM_INCANTIFIER:
-	    skill_add(Skill_Incantifier);
+//	    skill_add(Skill_Incantifier);
 //	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
 //	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
 //	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
+	    augment_skill_cap(P_ATTACK_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_HEALING_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_DIVINATION_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_ENCHANTMENT_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_PROTECTION_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_BODY_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_MATTER_SPELL, 1, P_EXPERT, P_EXPERT);
         break;
 
 	case PM_ELF:
@@ -2863,7 +2885,9 @@ u_init()
 	    knows_object(ELVEN_SHIELD);
 	    knows_object(ELVEN_BOOTS);
 	    knows_object(ELVEN_CLOAK);
-	    skill_add(Skill_Elf);
+//	    skill_add(Skill_Elf);
+	    augment_skill_cap(P_MUSICALIZE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_BOW, 1, P_SKILLED, P_EXPERT);
 	    break;
 	case PM_DROW:
 	    /* Drows can recognize all droven objects */
@@ -2872,7 +2896,9 @@ u_init()
 	    knows_object(DARK_ELVEN_BOW);
 	    knows_object(DARK_ELVEN_DAGGER);
 	    knows_object(DARK_ELVEN_MITHRIL_COAT);
-	    skill_add(Skill_Drow);
+//	    skill_add(Skill_Drow);
+	    augment_skill_cap(P_MUSICALIZE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_BOW, 1, P_SKILLED, P_EXPERT);
 	    break;
 
 	case PM_DWARF:
@@ -2884,21 +2910,26 @@ u_init()
 	    knows_object(DWARVISH_MITHRIL_COAT);
 	    knows_object(DWARVISH_CLOAK);
 	    knows_object(DWARVISH_ROUNDSHIELD);
-	    skill_add(Skill_Dwarf);
+//	    skill_add(Skill_Dwarf);
+	    augment_skill_cap(P_PICK_AXE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_AXE, 1, P_SKILLED, P_EXPERT);
 	    break;
 
 	case PM_GNOME:
 	    knows_object(GNOMISH_HELM);
 	    knows_object(GNOMISH_BOOTS);
 	    knows_object(GNOMISH_SUIT);
-	    skill_add(Skill_Gnome);
+//	    skill_add(Skill_Gnome);
+	    augment_skill_cap(P_CROSSBOW, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_CLUB, 1, P_BASIC, P_SKILLED);
 	    break;
 	case PM_HUMAN_WEREWOLF:
 	    if (!Role_if(PM_LUNATIC)) u.ulycn = PM_WEREWOLF;
 /*	    u.nv_range = 2;
 	    u.uen = u.uenmax += 6;
 	    ini_inv(Lycanthrope);*/
-	    skill_add(Skill_Lycanthrope);
+//	    skill_add(Skill_Lycanthrope);
+	    augment_skill_cap(P_BARE_HANDED_COMBAT, 2, P_EXPERT, P_MASTER);
 	    break;
 
 	case PM_ORC:
@@ -2952,8 +2983,11 @@ u_init()
 		if(rn2(2)) ini_inv(KoboldItemB);		
 		else ini_inv(KoboldItemC);
 	    }
-	    skill_add(Skill_Kobold);
-		break;
+//	    skill_add(Skill_Kobold);
+	    augment_skill_cap(P_DART, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_SPEAR, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+	    break;
 	case PM_GHOUL:
           /*ini_inv(GhastFood);*/
 		break;
@@ -2968,20 +3002,24 @@ u_init()
                 case 4: ini_inv(TrollItemD); break;
 		default: break;
 		}
-		skill_add(Skill_Troll);
+//		skill_add(Skill_Troll);
+		augment_skill_cap(P_POLEARMS, 1, P_SKILLED, P_EXPERT);
 		break;
 	case PM_OGRE:
          	if(!Role_if(PM_CONVICT)) ini_inv(OgreItem);
-		skill_add(Skill_Ogre);
+		augment_skill_cap(P_CLUB, 1, P_SKILLED, P_EXPERT);
+//		skill_add(Skill_Ogre);
 		break;
 	case PM_GIANT:
          if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
 		break;
 	case PM_HOBBIT:
-		skill_add(Skill_Hobbit);
+		augment_skill_cap(P_SLING, 1, P_SKILLED, P_EXPERT);
+//		skill_add(Skill_Hobbit);
 		break;
 	case PM_NYMPH:
-		skill_add(Skill_Nymph);
+		augment_skill_cap(P_MUSICALIZE, 1, P_SKILLED, P_EXPERT);
+//		skill_add(Skill_Nymph);
 		break;
 	default:	/* impossible */
 		break;
