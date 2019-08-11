@@ -343,6 +343,28 @@ botl_player()
 	Sprintf(eos(nb), mbot);
 	} else
 	Sprintf(eos(nb), rank());
+#if defined(STATUS_COLORS) && defined(TEXTCOLOR)
+        if (flags.hitpointbar) {
+            int bar_length = strlen(player)-1;
+            char tmp[MAXCO];
+            char *p = tmp;
+            /* filledbar >= 0 and < MAXCO */
+            int hp = (uhp() < 0) ? 0 : uhp();
+            int filledbar = (uhpmax() > 0) ? (hp * bar_length / uhpmax()) : 0;
+            if (filledbar >= MAXCO) { filledbar = MAXCO-1; }
+            Strcpy(tmp, player);
+            p++;
+
+            /* draw hp bar */
+            if (iflags.use_inverse) term_start_attr(ATR_INVERSE);
+            p[filledbar] = '\0';
+            apply_color_option(percentage_color_of(uhp(), uhpmax(), hp_colors), tmp, 1);
+            term_end_color();
+            if (iflags.use_inverse) term_end_attr(ATR_INVERSE);
+
+            Strcat(player, "]");
+    }
+#endif
     return player;
 }
 
@@ -376,28 +398,6 @@ bot1()
 	register int i,j;
 
 	Strcpy(newbot1, botl_player());
-#if defined(STATUS_COLORS) && defined(TEXTCOLOR)
-        if (flags.hitpointbar) {
-            int bar_length = strlen(newbot1)-1;
-            char tmp[MAXCO];
-            char *p = tmp;
-            /* filledbar >= 0 and < MAXCO */
-            int hp = (uhp() < 0) ? 0 : uhp();
-            int filledbar = (uhpmax() > 0) ? (hp * bar_length / uhpmax()) : 0;
-            if (filledbar >= MAXCO) { filledbar = MAXCO-1; }
-            Strcpy(tmp, newbot1);
-            p++;
-
-            /* draw hp bar */
-            if (iflags.use_inverse) term_start_attr(ATR_INVERSE);
-            p[filledbar] = '\0';
-            apply_color_option(percentage_color_of(uhp(), uhpmax(), hp_colors), tmp, 1);
-            term_end_color();
-            if (iflags.use_inverse) term_end_attr(ATR_INVERSE);
-
-            Strcat(newbot1, "]");
-    }
-#endif
 
 	Sprintf(nb = eos(newbot1),"  ");
 	i = mrank_sz + 15;
