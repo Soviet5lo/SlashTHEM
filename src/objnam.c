@@ -460,6 +460,12 @@ register struct obj *obj;
 	    case POTION_CLASS:
 		if (obj->dknown && obj->odiluted)
 			Strcpy(buf, "diluted ");
+		/*
+		if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
+			Strcat(buf, "potion");
+			Sprintf(eos(buf), " of %s blood", mons[obj->corpsenm].mname);
+		}
+		*/
 		if(nn || un || !obj->dknown) {
 			Strcat(buf, "potion");
 			if(!obj->dknown) break;
@@ -468,6 +474,10 @@ register struct obj *obj;
 			    if (typ == POT_WATER &&
 				obj->bknown && (obj->blessed || obj->cursed)) {
 				Strcat(buf, obj->blessed ? "holy " : "unholy ");
+			    }
+			    if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
+				Sprintf(eos(buf), "%s ",
+					mons[obj->corpsenm].mname);
 			    }
 			    Strcat(buf, actualn);
 			} else {
@@ -827,6 +837,9 @@ register struct obj *obj;
 			Sprintf(eos(bp), " [of %s]", mons[obj->corpsenm].mname);
 		else
 			Sprintf(eos(bp), " [of %s meat]", mons[obj->corpsenm].mname);
+	}
+	else if(obj->otyp == POT_BLOOD && do_known) {
+		Sprintf(eos(bp), " [of %s blood]", mons[obj->corpsenm].mname);
 	}
 	else if(obj->otyp == POT_WATER &&
 			(obj->blessed || obj->cursed) && do_bknown) {
@@ -3139,11 +3152,13 @@ typfnd:
 		switch (typ) {
 		case TIN:
 			otmp->spe = 0; /* No spinach */
+		case POT_BLOOD:
 			if (dead_species(mntmp, FALSE)) {
 			    otmp->corpsenm = NON_PM;	/* it's empty */
 			} else if (!(mons[mntmp].geno & G_UNIQ) &&
 				   !(mvitals[mntmp].mvflags & G_NOCORPSE) &&
-				   mons[mntmp].cnutrit != 0) {
+				   mons[mntmp].cnutrit != 0 &&
+				   !(typ==POT_BLOOD && !has_blood(&mons[mntmp]))) {
 			    otmp->corpsenm = mntmp;
 			}
 			break;

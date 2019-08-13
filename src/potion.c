@@ -1123,22 +1123,38 @@ peffects(otmp)
 	case POT_BLOOD:
 	case POT_VAMPIRE_BLOOD:
 		unkn++;
-		u.uconduct.unvegan++;
-
 		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)
-				|| Race_if(PM_INCANTIFIER)) {
-		    violated_vegetarian();
-		    if (otmp->cursed)
-			pline("Yecch!  This %s.", Hallucination ?
-			"liquid could do with a good stir" : "blood has congealed");
-		    else pline(Hallucination ?
-		      "The %s liquid stirs memories of home." :
-		      "The %s blood tastes delicious.",
-			  otmp->odiluted ? "watery" : "thick");
-		    if (!otmp->cursed)
-			lesshungry((otmp->odiluted ? 1 : 2) *
-			  (otmp->otyp == POT_VAMPIRE_BLOOD ? 400 :
-			  otmp->blessed ? 15 : 10));
+				&& !(otmp->otyp == POT_VAMPIRE_BLOOD)) {
+			pline("It smells like %s%s.",
+					!type_is_pname(&mons[otmp->corpsenm]) ||
+					!(mons[otmp->corpsenm].geno & G_UNIQ) ||
+					Hallucination ?
+					"the " :
+					"", 
+					Hallucination ?
+					makeplural(rndmonnam()) :
+					mons[otmp->corpsenm].geno & G_UNIQ ?
+					mons[otmp->corpsenm].mname :
+					makeplural(mons[otmp->corpsenm].mname)
+			);
+			if(!Hallucination) otmp->known = TRUE;
+			if (yn("Drink it?") == 'n') {
+				break;
+			} else {
+			    violated_vegetarian();
+			    u.uconduct.unvegan++;
+			    if (otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
+				pline("Yecch!  This %s.", Hallucination ?
+				"liquid could do with a good stir" : "blood has congealed");
+			    else pline(Hallucination ?
+			      "The %s liquid stirs memories of home." :
+			      "The %s blood tastes delicious.",
+				  otmp->odiluted ? "watery" : "thick");
+			    if (!otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
+				lesshungry((otmp->odiluted ? 1 : 2) *
+				  (otmp->otyp == POT_VAMPIRE_BLOOD ? 400 :
+				  (otmp->blessed ? mons[(otmp)->corpsenm].cnutrit*1.5/5 : mons[(otmp)->corpsenm].cnutrit/5 )));
+			}
 		    if (otmp->otyp == POT_VAMPIRE_BLOOD && otmp->blessed) {
 			int num = newhp();
 			if (Upolyd) {
@@ -1167,9 +1183,12 @@ peffects(otmp)
 		} else {
 		    violated_vegetarian();
 		    pline("Ugh.  That was vile.");
-		    make_vomiting(Vomiting+d(10,8), TRUE);
+		    if(!Race_if(PM_CLOCKWORK_AUTOMATON) && !Race_if(PM_INCANTIFIER))
+			make_vomiting(Vomiting+d(10,8), TRUE);
 			if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
 		}
+			cprefx(otmp->corpsenm);
+			cpostfx(otmp->corpsenm);
 		break;
 
 	case POT_CYANIDE:

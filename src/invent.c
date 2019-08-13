@@ -3322,7 +3322,7 @@ mergable(otmp, obj)	/* returns TRUE if obj  & otmp can be merged */
 	  obj->odrained != otmp->odrained || obj->orotten != otmp->orotten))
 	    return(FALSE);
 
-	if (obj->otyp == CORPSE || obj->otyp == EGG || obj->otyp == TIN) {
+	if (obj->otyp == CORPSE || obj->otyp == EGG || obj->otyp == TIN || obj->otyp == POT_BLOOD) {
 		if (obj->corpsenm != otmp->corpsenm)
 				return FALSE;
 	}

@@ -26,10 +26,8 @@ STATIC_DCL void NDECL(recalc_wt);
 STATIC_DCL struct obj *FDECL(touchfood, (struct obj *));
 STATIC_DCL void NDECL(do_reset_eat);
 STATIC_DCL void FDECL(done_eating, (BOOLEAN_P));
-STATIC_DCL void FDECL(cprefx, (int));
 STATIC_DCL int FDECL(intrinsic_possible, (int,struct permonst *));
 STATIC_DCL void FDECL(givit, (int,struct permonst *));
-STATIC_DCL void FDECL(cpostfx, (int));
 STATIC_DCL void FDECL(start_tin, (struct obj *));
 STATIC_DCL int FDECL(eatcorpse, (struct obj *));
 STATIC_DCL void FDECL(start_eating, (struct obj *));
@@ -590,7 +588,7 @@ boolean allowmsg;
 	return FALSE;
 }
 
-STATIC_OVL void
+void
 cprefx(pm)
 register int pm;
 {
@@ -1026,7 +1024,7 @@ register struct permonst *ptr;
 	}
 }
 
-STATIC_OVL void
+void
 cpostfx(pm)		/* called after completely consuming a corpse */
 register int pm;
 {

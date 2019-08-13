@@ -684,6 +684,19 @@ boolean artif;
 	case BALL_CLASS:
 		break;
 	case POTION_CLASS:
+		if (otmp->otyp == POT_BLOOD){
+			otmp->corpsenm = PM_HUMAN;	/* default value */
+			for (tryct = 200; tryct > 0; --tryct) {
+				mndx = undead_to_corpse(rndmonnum());
+				if (mons[mndx].cnutrit &&
+					!(mvitals[mndx].mvflags & G_NOCORPSE)
+					&& has_blood(&mons[mndx]) ) {
+				otmp->corpsenm = mndx;
+				break;
+				}
+			}
+			blessorcurse(otmp, 10);
+		}
 		if (otmp->otyp == POT_OIL)
 		    otmp->age = MAX_OIL_IN_FLASK;	/* amount of oil */
 		/* fall through */
