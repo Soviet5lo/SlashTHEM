@@ -2862,8 +2862,6 @@ u_init()
 	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
 	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
 	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
-	    knows_object(POT_BLOOD);
-	    knows_object(POT_VAMPIRE_BLOOD);
     	    break;
 
 	case PM_ELF:
@@ -2987,7 +2985,6 @@ u_init()
 	    skill_add(Skill_Kobold);
 		break;
 	case PM_GHOUL:
-          /*ini_inv(GhastFood);*/
 		knows_object(POT_BLOOD);
 		knows_object(POT_VAMPIRE_BLOOD);
 		break;
