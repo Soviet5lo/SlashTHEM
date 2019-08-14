@@ -1678,7 +1678,10 @@ register struct obj *obj;
 			can = hold_another_object(can, "You make, but cannot pick up, %s.",
 						  doname(can), (const char *)0);
 		} else impossible("Bottling failed.");
-	} else{
+	} else {
+		if(!(Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) ||
+					Race_if(PM_CLOCKWORK_AUTOMATON))
+			|| yn("This corpse does not have blood.  Tin it?") == 'y') {
 	if ((can = mksobj(TIN, FALSE, FALSE)) != 0) {
 	    static const char you_buy_it[] = "You tin it, you bought it!";
 
@@ -1708,6 +1711,7 @@ register struct obj *obj;
 	    can = hold_another_object(can, "You make, but cannot pick up, %s.",
 				      doname(can), (const char *)0);
 	} else impossible("Tinning failed.");
+	}
 	}
 }
 
