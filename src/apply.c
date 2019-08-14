@@ -1606,7 +1606,7 @@ STATIC_OVL void
 use_tinning_kit(obj)
 register struct obj *obj;
 {
-	register struct obj *corpse, *can;
+	register struct obj *corpse, *can, *bld;
 /*
 	char *badmove;
  */
@@ -1657,15 +1657,14 @@ register struct obj *obj;
 				&& !(mvitals[corpse->corpsenm].mvflags & G_NOCORPSE)
 				&& has_blood(&mons[corpse->corpsenm])
 		){
-		if ((can = mksobj(POT_BLOOD, FALSE, FALSE)) != 0) {
+		if ((bld = mksobj(POT_BLOOD, FALSE, FALSE)) != 0) {
 			static const char you_buy_it[] = "You bottle it, you bought it!";
 
-			can->corpsenm = corpse->corpsenm;
-			can->cursed = obj->cursed;
-			can->blessed = obj->blessed;
-			can->known = 1;
-			can->spe = -1;
-			can->selfmade = TRUE;
+			bld->corpsenm = corpse->corpsenm;
+			bld->cursed = obj->cursed;
+			bld->blessed = obj->blessed;
+			bld->known = 1;
+			bld->selfmade = TRUE;
 			if (carried(corpse)) {
 				if (corpse->unpaid)
 					verbalize(you_buy_it);
@@ -1675,8 +1674,8 @@ register struct obj *obj;
 				verbalize(you_buy_it);
 			useupf(corpse, 1L);
 			}
-			can = hold_another_object(can, "You make, but cannot pick up, %s.",
-						  doname(can), (const char *)0);
+			bld = hold_another_object(can, "You make, but cannot pick up, %s.",
+						  doname(bld), (const char *)0);
 		} else impossible("Bottling failed.");
 	} else {
 		if(!(Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) ||
