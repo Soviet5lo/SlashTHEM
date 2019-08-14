@@ -3201,6 +3201,8 @@ register struct trobj *trop;
 				break;
 			    }
 			obj = mksobj(otyp, TRUE, FALSE);
+			if(obj->otyp == POT_BLOOD)
+				obj->corpsenm = PM_HUMAN;
 		} else {	/* UNDEF_TYP */
 			static NEARDATA short nocreate = STRANGE_OBJECT;
 			static NEARDATA short nocreate2 = STRANGE_OBJECT;
