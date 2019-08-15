@@ -1123,23 +1123,24 @@ peffects(otmp)
 	case POT_BLOOD:
 	case POT_VAMPIRE_BLOOD:
 		unkn++;
-		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)
-				&& !(otmp->otyp == POT_VAMPIRE_BLOOD)) {
-			pline("It smells like %s%s.",
-					!type_is_pname(&mons[otmp->corpsenm]) ||
-					!(mons[otmp->corpsenm].geno & G_UNIQ) ||
-					Hallucination ?
-					"the " :
-					"", 
-					Hallucination ?
-					makeplural(rndmonnam()) :
-					mons[otmp->corpsenm].geno & G_UNIQ ?
-					mons[otmp->corpsenm].mname :
-					makeplural(mons[otmp->corpsenm].mname)
-			);
-			if(!Hallucination) otmp->known = TRUE;
-			if (yn("Drink it?") == 'n') {
-				break;
+		if ((maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL))) {
+			if (otmp->otyp =! POT_VAMPIRE_BLOOD) {
+				pline("It smells like %s%s.",
+						!type_is_pname(&mons[otmp->corpsenm]) ||
+						!(mons[otmp->corpsenm].geno & G_UNIQ) ||
+						Hallucination ?
+						"the " :
+						"", 
+						Hallucination ?
+						makeplural(rndmonnam()) :
+						mons[otmp->corpsenm].geno & G_UNIQ ?
+						mons[otmp->corpsenm].mname :
+						makeplural(mons[otmp->corpsenm].mname)
+				);
+				if(!Hallucination) otmp->known = TRUE;
+				if (yn("Drink it?") == 'n') {
+					break;
+				}
 			} else {
 			    violated_vegetarian();
 			    u.uconduct.unvegan++;
