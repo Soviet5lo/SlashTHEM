@@ -334,6 +334,9 @@ struct instance_flags {
 #ifdef SORTLOOT
 	uchar	sortloot;
 #endif
+#ifdef AUTO_OPEN
+	boolean  autoopen;	/* open doors by walking into them */
+#endif
 };
 
 /*

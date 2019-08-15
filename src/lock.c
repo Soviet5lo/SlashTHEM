@@ -789,6 +789,14 @@ doforce()		/* try to force a chest with your weapon */
 int
 doopen()		/* try to open a door */
 {
+#ifdef AUTO_OPEN
+	return doopen_indir(0, 0);
+}
+ int
+doopen_indir(x, y)		/* try to open a door in direction u.dx/u.dy */
+	int x, y;		/* if true, prompt for direction */
+{
+#endif /* AUTO_OPEN */
 	coord cc;
 	register struct rm *door;
 	struct monst *mtmp;
@@ -802,6 +810,14 @@ doopen()		/* try to open a door */
 	    You_cant("reach over the edge of the pit.");
 	    return 0;
 	}
+
+#ifdef AUTO_OPEN
+	if (x > 0 && y > 0) {
+	    cc.x = x;
+	    cc.y = y;
+	}
+	else
+#endif
 
 	if(!get_adjacent_loc((char *)0, (char *)0, u.ux, u.uy, &cc)) return(0);
 

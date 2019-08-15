@@ -543,6 +543,8 @@ typedef long glyph_t;
 
 /*#define SIMPLE_MAIL */ /* dgamelaunch simple mail */
 
+#define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
+
 /* End of Section 5 */
 
 #include "global.h"	/* Define everything else according to choices above */
