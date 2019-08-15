@@ -1451,21 +1451,6 @@ const struct Race races[] = {
 	{  0, 0,  0, 0,  0, 0 }		/* Energy */
 },
 
-{	"incantifier", "incantifier", "wanterkind", "Inc",
-	{0, 0},
-	PM_INCANTIFIER, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
-	MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_NEUTRAL|ROLE_CHAOTIC,
-	MRACE_HUMAN, 0, MRACE_GNOME|MRACE_ORC|MRACE_ELF,
-	/*    Str     Int Wis Dex Con Cha */
-	{      3,      3,  3,  3,  3,  3 },
-	{ STR18(100), 18, 18, 18, 18, 18 },
-	/* Init   Lower  Higher */
-	{  2, 0,  0, 2,  0, 2 },	/* Hit points */
-	{  0, 0,  10, 0, 10, 0 }		/* Energy */
-},
-
-
 {	"elf", "elven", "elvenkind", "Elf",
 	{0, 0},
 	PM_ELF, NON_PM, PM_ELF_MUMMY, PM_ELF_ZOMBIE,
@@ -1556,6 +1541,20 @@ const struct Race races[] = {
 	/* Init   Lower  Higher */
 	{  1, 0,  0, 2,  2, 0 },	/* Hit points */
 	{  9, 0,  6, 0,  6, 0 }		/* Energy */
+},
+
+{	"incantifier", "incantifier", "wanterkind", "Inc",
+	{0, 0},
+	PM_INCANTIFIER, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
+	MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE |
+	  ROLE_NEUTRAL|ROLE_CHAOTIC,
+	MRACE_HUMAN, 0, MRACE_GNOME|MRACE_ORC|MRACE_ELF,
+	/*    Str     Int Wis Dex Con Cha */
+	{      3,      3,  3,  3,  3,  3 },
+	{ STR18(100), 18, 18, 18, 18, 18 },
+	/* Init   Lower  Higher */
+	{  2, 0,  0, 2,  0, 2 },	/* Hit points */
+	{  0, 0,  10, 0, 10, 0 }		/* Energy */
 },
 
 {	"kobold", "kobold", "koboldkind", "Kob",
