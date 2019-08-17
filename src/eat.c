@@ -1653,7 +1653,8 @@ struct obj *obj;
 	healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
 	return(0);
 	}
-	pline("Blecch!  Rotten %s!", foodword(obj));
+	pline("Blecch!  Rotten %s!",
+		is_vampire(youmonst.data) ? "blood" : foodword(obj));
 	if(!rn2(4)) {
 		if (Hallucination) You_feel("rather trippy.");
 		else You_feel("rather %s.", body_part(LIGHT_HEADED));
