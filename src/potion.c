@@ -1141,7 +1141,8 @@ peffects(otmp)
 				if (yn("Drink it?") == 'n') {
 					break;
 				}
-			} else {
+			}
+		//	else {
 			    violated_vegetarian();
 			    u.uconduct.unvegan++;
 			    if (otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
@@ -1155,7 +1156,7 @@ peffects(otmp)
 				lesshungry((otmp->odiluted ? 1 : 2) *
 				  (otmp->otyp == POT_VAMPIRE_BLOOD ? 400 :
 				  (otmp->blessed ? mons[(otmp)->corpsenm].cnutrit*1.5/5 : mons[(otmp)->corpsenm].cnutrit/5 )));
-			}
+//			}
 		    if (otmp->otyp == POT_VAMPIRE_BLOOD && otmp->blessed) {
 			int num = newhp();
 			if (Upolyd) {
