@@ -1164,7 +1164,7 @@ peffects(otmp)
 			cpostfx(otmp->corpsenm);
 		break;
 	case POT_VAMPIRE_BLOOD:
-		unkn++;
+//		unkn++;
 		    /* [CWC] fix conducts for potions of (vampire) blood -
 		       doesn't use violated_vegetarian() to prevent
 		       duplicated "you feel guilty" messages */
@@ -1188,7 +1188,7 @@ peffects(otmp)
 			}
 		    }
 		break;
-		}
+		} else {
 		    u.uconduct.unvegetarian++;
 		    if (u.ualign.type == A_LAWFUL || Role_if(PM_MONK)) {
 			You_feel("%sguilty about drinking such a vile liquid.",
@@ -1212,6 +1212,8 @@ peffects(otmp)
 			if (successful_polymorph)
 				u.mtimedone = 0;	/* "Permament" change */
 		    }
+		}
+		otmp->known = TRUE;
 		break;
 	case POT_CYANIDE:
 		make_sick(Sick ? Sick/2L + 1L : 20, "cyanide potion", TRUE, SICK_VOMITABLE);
