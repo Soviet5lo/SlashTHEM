@@ -31,15 +31,9 @@ moveloop()
     char ch;
     int abort_lev;
 #endif
-	struct obj *pobj; /* 5lo: *pobj exists on other platforms, not just Windows */
+    struct obj *pobj; /* 5lo: *pobj exists on other platforms, not just Windows */
     int moveamt = 0, wtcap = 0, change = 0;
-	int randsp;
-	int randmnst;
-	int randmnsx;
-	int i;
     boolean didmove = FALSE, monscanmove = FALSE;
-    /* don't make it obvious when monsters will start speeding up */
-    int monclock;
 
     /* 5lo:
      * <AmyBSOD\StD> Soviet5lo: monstertimeout in spork is bugged, because the value
@@ -52,8 +46,10 @@ moveloop()
 #ifdef MORE_SPAWNS
     int timeout_start = u.monstertimeout;
     int clock_base = u.monstertimefinish;
-#endif
+    /* don't make it obvious when monsters will start speeding up */
+    int monclock;
     int past_clock;
+#endif
 
     flags.moonphase = phase_of_the_moon();
     if(flags.moonphase == FULL_MOON) {
@@ -372,10 +368,7 @@ moveloop()
 			)
 			)
 			u.uen += 1;
-#endif /* EASY_MODE */
-			if (u.uen > u.uenmax)  u.uen = u.uenmax;
-			flags.botl = 1;
-#ifdef EASY_MODE
+
 			/* Having a spell school at skilled will improve mana regeneration.
 			 * Having a spell school at expert will improve it by even more. --Amy */
 
