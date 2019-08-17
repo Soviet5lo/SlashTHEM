@@ -2987,7 +2987,6 @@ u_init()
 		break;
 	case PM_GHOUL:
 		knows_object(POT_BLOOD);
-		knows_object(POT_VAMPIRE_BLOOD);
 		break;
 	case PM_CLOCKWORK_AUTOMATON:
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
