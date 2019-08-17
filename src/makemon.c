@@ -1708,7 +1708,11 @@ register struct	monst	*mtmp;
 		break;	
 	    case S_VAMPIRE:
 		/* [Lethe] Star and fire vampires don't get this stuff */
+		/* 5lo: Vogons don't either */
 		if (ptr == &mons[PM_STAR_VAMPIRE] || 
+				ptr == &mons[PM_VOGON] ||
+				ptr == &mons[PM_VOGON_LORD] ||
+				ptr == &mons[PM_PROSTETNIK_VOGON_JELTZ] ||
 				ptr == &mons[PM_FIRE_VAMPIRE])
 		    break;
 	    	/* Get opera cloak */
