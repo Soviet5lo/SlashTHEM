@@ -1674,7 +1674,7 @@ register struct obj *obj;
 				verbalize(you_buy_it);
 			useupf(corpse, 1L);
 			}
-			bld = hold_another_object(can, "You make, but cannot pick up, %s.",
+			bld = hold_another_object(bld, "You make, but cannot pick up, %s.",
 						  doname(bld), (const char *)0);
 		} else impossible("Bottling failed.");
 	} else {
