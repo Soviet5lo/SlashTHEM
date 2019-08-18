@@ -1128,13 +1128,13 @@ peffects(otmp)
 					!type_is_pname(&mons[otmp->corpsenm]) ||
 					!(mons[otmp->corpsenm].geno & G_UNIQ) ||
 					Hallucination ?
-					"the " :
-					"", 
+						"the " :
+						"", 
 					Hallucination ?
-					makeplural(rndmonnam()) :
-					mons[otmp->corpsenm].geno & G_UNIQ ?
-					mons[otmp->corpsenm].mname :
-					makeplural(mons[otmp->corpsenm].mname)
+						makeplural(rndmonnam()) :
+						mons[otmp->corpsenm].geno & G_UNIQ ?
+						mons[otmp->corpsenm].mname :
+						makeplural(mons[otmp->corpsenm].mname)
 			);
 			if(!Hallucination) otmp->known = TRUE;
 			if (yn("Drink it?") == 'n') {
@@ -1142,7 +1142,7 @@ peffects(otmp)
 			} else {
 				violated_vegetarian();
 				u.uconduct.unvegan++;
-				if (otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
+				if (otmp->cursed)
 				pline("Yecch!  This %s.", Hallucination ?
 				    "liquid could do with a good stir" : "blood has congealed");
 				else pline(Hallucination ?
