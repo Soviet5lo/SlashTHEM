@@ -1122,7 +1122,8 @@ peffects(otmp)
 		break;
 	case POT_BLOOD:
 		unkn++;
-		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)) {
+		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) ||
+				(carnivorous(youmonst.data) && !herbivorous(youmonst.data))) {
 			pline("It smells like %s%s.",
 					!type_is_pname(&mons[otmp->corpsenm]) ||
 					!(mons[otmp->corpsenm].geno & G_UNIQ) ||
