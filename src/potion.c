@@ -1123,36 +1123,35 @@ peffects(otmp)
 	case POT_BLOOD:
 		unkn++;
 		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)) {
-				pline("It smells like %s%s.",
-						!type_is_pname(&mons[otmp->corpsenm]) ||
-						!(mons[otmp->corpsenm].geno & G_UNIQ) ||
-						Hallucination ?
-						"the " :
-						"", 
-						Hallucination ?
-						makeplural(rndmonnam()) :
-						mons[otmp->corpsenm].geno & G_UNIQ ?
-						mons[otmp->corpsenm].mname :
-						makeplural(mons[otmp->corpsenm].mname)
-				);
-				if(!Hallucination) otmp->known = TRUE;
-				if (yn("Drink it?") == 'n') {
-					break;
-				}
-		//	else {
-			    violated_vegetarian();
-			    u.uconduct.unvegan++;
-			    if (otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
+			pline("It smells like %s%s.",
+					!type_is_pname(&mons[otmp->corpsenm]) ||
+					!(mons[otmp->corpsenm].geno & G_UNIQ) ||
+					Hallucination ?
+					"the " :
+					"", 
+					Hallucination ?
+					makeplural(rndmonnam()) :
+					mons[otmp->corpsenm].geno & G_UNIQ ?
+					mons[otmp->corpsenm].mname :
+					makeplural(mons[otmp->corpsenm].mname)
+			);
+			if(!Hallucination) otmp->known = TRUE;
+			if (yn("Drink it?") == 'n') {
+				break;
+			} else {
+				violated_vegetarian();
+				u.uconduct.unvegan++;
+				if (otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
 				pline("Yecch!  This %s.", Hallucination ?
-				"liquid could do with a good stir" : "blood has congealed");
-			    else pline(Hallucination ?
-			      "The %s liquid stirs memories of home." :
-			      "The %s blood tastes delicious.",
-				  otmp->odiluted ? "watery" : "thick");
-			    if (!otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
-				lesshungry((otmp->odiluted ? 1 : 2) *
-				  (otmp->blessed ? mons[(otmp)->corpsenm].cnutrit*1.5/5 : mons[(otmp)->corpsenm].cnutrit/5 ));
-//			}
+				    "liquid could do with a good stir" : "blood has congealed");
+				else pline(Hallucination ?
+				    "The %s liquid stirs memories of home." :
+				    "The %s blood tastes delicious.",
+				    otmp->odiluted ? "watery" : "thick");
+				if (!otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
+				    lesshungry((otmp->odiluted ? 1 : 2) *
+				    (otmp->blessed ? mons[(otmp)->corpsenm].cnutrit*1.5/5 : mons[(otmp)->corpsenm].cnutrit/5 ));
+				}
 		} else {
 		    violated_vegetarian();
 		    pline("Ugh.  That was vile.");
