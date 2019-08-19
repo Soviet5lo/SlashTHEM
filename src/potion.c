@@ -465,7 +465,7 @@ peffects(otmp)
 {
 	register int i, ii, lim;
 
-	if (otmp->selfmade && !(5-rnl(6))) {
+	if (otmp->selfmade && otmp->otyp != POT_BLOOD && !(5-rnl(6))) {
 		pline("That potion was bad!");
 		switch(rnl(5)) {
 			case 0:
