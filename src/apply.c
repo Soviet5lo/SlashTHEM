@@ -3596,6 +3596,10 @@ use_chemistry_set(struct obj *chemset)
 	if (!new_obj || new_obj->oclass != POTION_CLASS) {
 		goto blast_him;
 	}
+	if (new_obj->otyp == POT_VAMPIRE_BLOOD || new_obj->otyp == POT_BLOOD) {
+		You("can't create such a potion via chemistry.");
+		return;
+	}
 	if (!(objects[new_obj->otyp].oc_name_known) && 
 	    !(objects[new_obj->otyp].oc_uname)) {
 		You("don't know how to make such a potion!");
