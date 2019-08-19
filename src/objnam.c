@@ -460,13 +460,11 @@ register struct obj *obj;
 	    case POTION_CLASS:
 		if (obj->dknown && obj->odiluted)
 			Strcpy(buf, "diluted ");
-		/*
 		if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
 			Strcat(buf, "potion");
 			Sprintf(eos(buf), " of %s blood", mons[obj->corpsenm].mname);
 		}
-		*/
-		if(nn || un || !obj->dknown) {
+		else if(nn || un || !obj->dknown) {
 			Strcat(buf, "potion");
 			if(!obj->dknown) break;
 			if(nn) {
@@ -475,10 +473,12 @@ register struct obj *obj;
 				obj->bknown && (obj->blessed || obj->cursed)) {
 				Strcat(buf, obj->blessed ? "holy " : "unholy ");
 			    }
+#if 0
 			    if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
 				Sprintf(eos(buf), "%s ",
 					mons[obj->corpsenm].mname);
 			    }
+#endif
 			    Strcat(buf, actualn);
 			} else {
 				Strcat(buf, " called ");
