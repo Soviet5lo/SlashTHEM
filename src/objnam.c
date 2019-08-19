@@ -706,7 +706,10 @@ register struct obj *obj;
 	else if(obj->otyp == EGG && obj->corpsenm >= LOW_PM &&
 			!(obj->known || mvitals[obj->corpsenm].mvflags & MV_KNOWS_EGG))
 		Sprintf(bp, "[%s] egg%s", mons[obj->corpsenm].mname, obj->quan>1? "s" : "");
-	
+
+	else if(obj->otyp == POT_BLOOD && do_known) {
+		Sprintf(eos(bp), " [of %s blood]", mons[obj->corpsenm].mname);
+	}
 	else if(do_ID || do_dknown) {
 		char *cp = nextobuf();
 
@@ -837,9 +840,6 @@ register struct obj *obj;
 			Sprintf(eos(bp), " [of %s]", mons[obj->corpsenm].mname);
 		else
 			Sprintf(eos(bp), " [of %s meat]", mons[obj->corpsenm].mname);
-	}
-	else if(obj->otyp == POT_BLOOD && do_known) {
-		Sprintf(eos(bp), " [of %s blood]", mons[obj->corpsenm].mname);
 	}
 	else if(obj->otyp == POT_WATER &&
 			(obj->blessed || obj->cursed) && do_bknown) {
