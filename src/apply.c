@@ -1679,7 +1679,7 @@ register struct obj *obj;
 		} else impossible("Bottling failed.");
 	} else {
 		if(!(Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) ||
-					Race_if(PM_CLOCKWORK_AUTOMATON))
+					Race_if(PM_GHOUL))
 			|| yn("This corpse does not have blood.  Tin it?") == 'y') {
 	if ((can = mksobj(TIN, FALSE, FALSE)) != 0) {
 	    static const char you_buy_it[] = "You tin it, you bought it!";
