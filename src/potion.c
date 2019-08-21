@@ -1434,8 +1434,9 @@ boolean your_fault;
 			mon->mhp--;
 	}
 
-	/* oil doesn't instantly evaporate */
-	if (obj->otyp != POT_OIL && cansee(mon->mx,mon->my))
+	/* oil and blood don't instantly evaporate */
+	if (obj->otyp != POT_OIL  && obj->otyp != POT_BLOOD &&
+			obj->otyp != POT_VAMPIRE_BLOOD && cansee(mon->mx,mon->my))
 		pline("%s.", Tobjnam(obj, "evaporate"));
 
     if (isyou) {
