@@ -1442,6 +1442,9 @@ poly_obj(obj, id)
 	if (!otmp)
 #endif
 	if (id == STRANGE_OBJECT) { /* preserve symbol */
+	    if(obj->otyp == POT_BLOOD){
+		    otmp = mksobj(POT_BLOOD, FALSE, FALSE);
+	    }
 	    int try_limit = 3;
 	    /* Try up to 3 times to make the magic-or-not status of
 	       the new item be the same as it was for the old one. */

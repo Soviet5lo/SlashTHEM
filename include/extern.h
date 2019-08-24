@@ -609,6 +609,8 @@ E int NDECL(unfaint);
 /* 5lo: Clockwork exclusive */
 E int NDECL(rehumanize_wrapper);
 E int NDECL(windclock);
+E void FDECL(cprefx, (int));
+E void FDECL(cpostfx, (int));
 E boolean FDECL(is_edible, (struct obj *));
 E void NDECL(init_uhunger);
 E int NDECL(Hear_again);

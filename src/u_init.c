@@ -942,7 +942,8 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_INCANTIFIER,	BANANA,		SCR_FOOD_DETECTION	},
     { PM_INCANTIFIER,	ORANGE,		SCR_FOOD_DETECTION	},
     { PM_INCANTIFIER,	POT_BOOZE,	SCR_FOOD_DETECTION	},
-    { PM_GHOUL,		FOOD_RATION,		CORPSE     	      },
+    { PM_GHOUL,		FOOD_RATION,		POT_BLOOD     	      },
+    { PM_GHOUL,		POT_FRUIT_JUICE,	POT_BLOOD	      },
     { PM_CLOCKWORK_AUTOMATON,	FOOD_RATION,	POT_OIL    	      },
     { PM_CLOCKWORK_AUTOMATON,	CRAM_RATION, 	POT_OIL 	      },
     { PM_CLOCKWORK_AUTOMATON,	POT_FRUIT_JUICE,POT_OIL		      },
@@ -2868,8 +2869,6 @@ u_init()
 	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
 	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
 	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
-	    knows_object(POT_BLOOD);
-	    knows_object(POT_VAMPIRE_BLOOD);
     	    break;
 
 	case PM_ELF:
@@ -2993,7 +2992,6 @@ u_init()
 	    skill_add(Skill_Kobold);
 		break;
 	case PM_GHOUL:
-          /*ini_inv(GhastFood);*/
 		knows_object(POT_BLOOD);
 		knows_object(POT_VAMPIRE_BLOOD);
 		break;
@@ -3209,6 +3207,8 @@ register struct trobj *trop;
 				break;
 			    }
 			obj = mksobj(otyp, TRUE, FALSE);
+			if(obj->otyp == POT_BLOOD)
+				obj->corpsenm = PM_HUMAN;
 		} else {	/* UNDEF_TYP */
 			static NEARDATA short nocreate = STRANGE_OBJECT;
 			static NEARDATA short nocreate2 = STRANGE_OBJECT;

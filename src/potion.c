@@ -465,7 +465,7 @@ peffects(otmp)
 {
 	register int i, ii, lim;
 
-	if (otmp->selfmade && !(5-rnl(6))) {
+	if (otmp->selfmade && otmp->otyp != POT_BLOOD && !(5-rnl(6))) {
 		pline("That potion was bad!");
 		switch(rnl(5)) {
 			case 0:
@@ -1121,25 +1121,63 @@ peffects(otmp)
 		if (!Unchanging) polyself(FALSE);
 		break;
 	case POT_BLOOD:
-	case POT_VAMPIRE_BLOOD:
 		unkn++;
-		u.uconduct.unvegan++;
-
-		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)
-				|| Race_if(PM_INCANTIFIER)) {
+		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) ||
+				(carnivorous(youmonst.data) && !herbivorous(youmonst.data))) {
+			pline("It smells like %s%s.",
+					!type_is_pname(&mons[otmp->corpsenm]) ||
+					!(mons[otmp->corpsenm].geno & G_UNIQ) ||
+					Hallucination ?
+						"the " :
+						"", 
+					Hallucination ?
+						makeplural(rndmonnam()) :
+						mons[otmp->corpsenm].geno & G_UNIQ ?
+						mons[otmp->corpsenm].mname :
+						makeplural(mons[otmp->corpsenm].mname)
+			);
+			if(!Hallucination) otmp->known = TRUE;
+			if (yn("Drink it?") == 'n') {
+				break;
+			} else {
+				violated_vegetarian();
+				u.uconduct.unvegan++;
+				if (otmp->cursed)
+				pline("Yecch!  This %s.", Hallucination ?
+				    "liquid could do with a good stir" : "blood has congealed");
+				else pline(Hallucination ?
+				    "The %s liquid stirs memories of home." :
+				    "The %s blood tastes delicious.",
+				    otmp->odiluted ? "watery" : "thick");
+				if (!otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
+				    lesshungry((otmp->odiluted ? 1 : 2) *
+				    (otmp->blessed ? mons[(otmp)->corpsenm].cnutrit*1.5/5 : mons[(otmp)->corpsenm].cnutrit/5 ));
+				}
+		} else {
 		    violated_vegetarian();
+		    pline("Ugh.  That was vile.");
+		    if(!Race_if(PM_CLOCKWORK_AUTOMATON) && !Race_if(PM_INCANTIFIER))
+			make_vomiting(Vomiting+d(10,8), TRUE);
+			if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
+		}
+			cprefx(otmp->corpsenm);
+			cpostfx(otmp->corpsenm);
+		break;
+	case POT_VAMPIRE_BLOOD:
+//		unkn++;
+		    /* [CWC] fix conducts for potions of (vampire) blood -
+		       doesn't use violated_vegetarian() to prevent
+		       duplicated "you feel guilty" messages */
+		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE))) {
 		    if (otmp->cursed)
 			pline("Yecch!  This %s.", Hallucination ?
 			"liquid could do with a good stir" : "blood has congealed");
 		    else pline(Hallucination ?
 		      "The %s liquid stirs memories of home." :
-		      "The %s blood tastes delicious.",
+		      "The %s kindred blood tastes delicious.",
 			  otmp->odiluted ? "watery" : "thick");
-		    if (!otmp->cursed)
-			lesshungry((otmp->odiluted ? 1 : 2) *
-			  (otmp->otyp == POT_VAMPIRE_BLOOD ? 400 :
-			  otmp->blessed ? 15 : 10));
-		    if (otmp->otyp == POT_VAMPIRE_BLOOD && otmp->blessed) {
+			lesshungry((otmp->odiluted ? 1 : 2) * 400);
+		    if (otmp->blessed) {
 			int num = newhp();
 			if (Upolyd) {
 			    u.mhmax += num;
@@ -1149,10 +1187,8 @@ peffects(otmp)
 			    u.uhp += num;
 			}
 		    }
-		} else if (otmp->otyp == POT_VAMPIRE_BLOOD) {
-		    /* [CWC] fix conducts for potions of (vampire) blood -
-		       doesn't use violated_vegetarian() to prevent
-		       duplicated "you feel guilty" messages */
+		break;
+		} else {
 		    u.uconduct.unvegetarian++;
 		    if (u.ualign.type == A_LAWFUL || Role_if(PM_MONK)) {
 			You_feel("%sguilty about drinking such a vile liquid.",
@@ -1162,16 +1198,23 @@ peffects(otmp)
 		    } else if (u.ualign.type == A_NEUTRAL)
 			adjalign(-3);
 		    exercise(A_CON, FALSE);
-		    if (!Unchanging && polymon(PM_VAMPIRE))
-			u.mtimedone = 0;	/* "Permament" change */
-		} else {
-		    violated_vegetarian();
-		    pline("Ugh.  That was vile.");
-		    make_vomiting(Vomiting+d(10,8), TRUE);
-			if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
+		    if (Race_if(PM_VAMPIRE)) {
+			if (!Unchanging) rehumanize();
+			break;
+		    } else if (!Unchanging) {
+			int successful_polymorph = FALSE;
+			if (otmp->blessed)
+				successful_polymorph = polymon(PM_VAMPIRE_LORD);
+			else if (otmp->cursed)
+				successful_polymorph = polymon(PM_VAMPIRE_BAT);
+			else
+				successful_polymorph = polymon(PM_VAMPIRE);
+			if (successful_polymorph)
+				u.mtimedone = 0;	/* "Permament" change */
+		    }
 		}
+		otmp->known = TRUE;
 		break;
-
 	case POT_CYANIDE:
 		make_sick(Sick ? Sick/2L + 1L : 20, "cyanide potion", TRUE, SICK_VOMITABLE);
 		losestr(rnd(10));
@@ -1391,8 +1434,9 @@ boolean your_fault;
 			mon->mhp--;
 	}
 
-	/* oil doesn't instantly evaporate */
-	if (obj->otyp != POT_OIL && cansee(mon->mx,mon->my))
+	/* oil and blood don't instantly evaporate */
+	if (obj->otyp != POT_OIL  && obj->otyp != POT_BLOOD &&
+			obj->otyp != POT_VAMPIRE_BLOOD && cansee(mon->mx,mon->my))
 		pline("%s.", Tobjnam(obj, "evaporate"));
 
     if (isyou) {
