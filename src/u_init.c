@@ -2869,6 +2869,8 @@ u_init()
 	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
 	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
 	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
+	    knows_object(SCR_BLANK_PAPER);
+	    knows_object(SPE_BLANK_PAPER);
     	    break;
 
 	case PM_ELF:
