@@ -2738,30 +2738,30 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 		switch(otmp->oclass){
 			case WEAPON_CLASS:
 	    	    	(void) drain_item(otmp);
+				You("drain the %s%s.", xname(otmp),otmp->spe>1?"":" dry");
 				lesshungry(50);
-				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 			break;
 			case RING_CLASS:
 				if(otmp->oartifact) break; //redundant check
 				pline("The %s turns to dust as you drain it dry.", xname(otmp));
 				eataccessory(otmp);
-				lesshungry(50);
 				if (otmp == uwep && otmp->quan == 1L) uwepgone();
 				if (otmp == uquiver && otmp->quan == 1L) uqwepgone();
 				if (otmp == uswapwep && otmp->quan == 1L) uswapwepgone();
 
 				if (carried(otmp)) useup(otmp);
 				else useupf(otmp, 1L);
+				lesshungry(50);
 			break;
 			case ARMOR_CLASS:
+				You("drain the %s%s.", xname(otmp),otmp->spe>1?"":" dry");
 		    	    	(void) drain_item(otmp);
 				lesshungry(50);
-				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 			break;
 			case TOOL_CLASS:
+				You("drain the %s%s.", xname(otmp),otmp->spe>1?"":" dry");
 		    	        (void) drain_item(otmp);
 				lesshungry(50);
-				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 			break;
 			case SCROLL_CLASS:
 				if(otmp->oartifact) break; //redundant check
@@ -2771,19 +2771,17 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 			break;
 			case SPBOOK_CLASS:
 				if(otmp->oartifact) break; //redundant check
-				(void) drain_item(otmp);
-//				otmp->spestudied++;
-				lesshungry(50);
 				You("drain the magic from the %s.", xname(otmp));
+				(void) drain_item(otmp);
 				if(!otmp->spe) otmp->otyp = SPE_BLANK_PAPER;
-//	    	    		if(otmp->spestudied > MAX_SPELL_STUDY) otmp->otyp = SPE_BLANK_PAPER;
+				lesshungry(50);
 			break;
 			case WAND_CLASS:
+				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 				(void) drain_item(otmp);
 //	    	    		otmp->otyp = SPE_BLANK_PAPER;
 				lesshungry(10);
 				if(!otmp->spe) otmp->otyp = WAN_NOTHING;
-				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
 			break;
 		}
 		return 1;
