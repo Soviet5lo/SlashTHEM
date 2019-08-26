@@ -1182,6 +1182,7 @@ peffects(otmp)
 		break;
 	case POT_JOLT_COLA:
 		You("are jolted back to your senses.");
+		incr_itimeout(&HSleep_resistance, rn1(10, 100 + 60 * bcsign(otmp)));
 		if (otmp->cursed) {
 			You("feel bad.");
 			u.uhp -= rn2(10);
