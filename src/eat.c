@@ -120,6 +120,7 @@ register struct obj *obj;
 #endif
 		!obj->oartifact) return TRUE;
 	if(obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BLANK_PAPER && !obj->oartifact) return TRUE;
+	if(obj->oclass == AMULET_CLASS && obj->spe >=0 && !obj->oartifact) return TRUE;
 	if(obj->oclass == RING_CLASS && obj->spe >= 0 && !obj->oartifact) return TRUE;
 	if(obj->oclass == WAND_CLASS && obj->spe > 0 && obj->otyp != WAN_NOTHING) return TRUE;
 	
@@ -2758,6 +2759,19 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 				if (otmp == uquiver && otmp->quan == 1L) uqwepgone();
 				if (otmp == uswapwep && otmp->quan == 1L) uswapwepgone();
 
+				if (carried(otmp)) useup(otmp);
+				else useupf(otmp, 1L);
+				lesshungry(50);
+				flags.botl = 1;
+			break;
+			case AMULET_CLASS:
+				if(otmp->oartifact || objects[otmp->otyp].oc_unique) break; //redundant check
+				u.uconduct.food++;
+				pline("The %s crumbles to dust as you drain it dry.", xname(otmp));
+				eataccessory(otmp);
+				if (otmp == uwep && otmp->quan == 1L) uwepgone();
+				if (otmp == uquiver && otmp->quan == 1L) uqwepgone();
+				if (otmp == uswapwep && otmp->quan == 1L) uswapwepgone();
 				if (carried(otmp)) useup(otmp);
 				else useupf(otmp, 1L);
 				lesshungry(50);
