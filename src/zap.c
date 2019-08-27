@@ -22,7 +22,6 @@ extern boolean notonhead;	/* for long worms */
 /* kludge to use mondied instead of killed */
 extern boolean m_using;
 
-STATIC_DCL void FDECL(costly_cancel, (struct obj *));
 STATIC_DCL void FDECL(polyuse, (struct obj*, int, int));
 STATIC_DCL void FDECL(create_polymon, (struct obj *, int));
 STATIC_DCL boolean FDECL(zap_updown, (struct obj *));
@@ -890,7 +889,7 @@ struct monst *mon;
 static const char charged_objs[] = { WAND_CLASS, WEAPON_CLASS, ARMOR_CLASS,
 				     SPBOOK_CLASS, 0 };
 
-STATIC_OVL void
+void
 costly_cancel(obj)
 register struct obj *obj;
 {

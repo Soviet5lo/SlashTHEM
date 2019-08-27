@@ -2717,6 +2717,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 	}
 
 	if(Race_if(PM_INCANTIFIER) && !objects[otmp->otyp].oc_unique){ //redundant check against unique
+		int curspe;
 		if (otmp->quan > 1L) {
 			if(!carried(otmp))
 				(void) splitobj(otmp, otmp->quan - 1L);
@@ -2737,13 +2738,20 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 		}
 		switch(otmp->oclass){
 			case WEAPON_CLASS:
-	    	    	(void) drain_item(otmp);
-				You("drain the %s%s.", xname(otmp),otmp->spe>1?"":" dry");
-				lesshungry(50);
-				flags.botl = 1;
+				u.uconduct.food++;
+				curspe = otmp->spe;
+	    	    		(void) drain_item(otmp);
+				if(curspe > otmp->spe){
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(50);
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
 			break;
 			case RING_CLASS:
 				if(otmp->oartifact) break; //redundant check
+				u.uconduct.food++;
 				pline("The %s turns to dust as you drain it dry.", xname(otmp));
 				eataccessory(otmp);
 				if (otmp == uwep && otmp->quan == 1L) uwepgone();
@@ -2756,39 +2764,61 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 				flags.botl = 1;
 			break;
 			case ARMOR_CLASS:
-				You("drain the %s%s.", xname(otmp),otmp->spe>1?"":" dry");
+				u.uconduct.food++;
+				curspe = otmp->spe;
 		    	    	(void) drain_item(otmp);
-				lesshungry(50);
-				flags.botl = 1;
+				if (curspe > otmp->spe){
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(50);
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
 			break;
 			case TOOL_CLASS:
-				You("drain the %s%s.", xname(otmp),otmp->spe>1?"":" dry");
+				u.uconduct.food++;
+				curspe = otmp->spe;
 		    	        (void) drain_item(otmp);
-				lesshungry(50);
-				flags.botl = 1;
+				if (curspe > otmp->spe) {
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(50);
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
 			break;
 			case SCROLL_CLASS:
 				if(otmp->oartifact) break; //redundant check
+				u.uconduct.food++;
 	    	    		You("lick the ink off the %s.", xname(otmp));
+				costly_cancel(otmp);
 				otmp->otyp = SCR_BLANK_PAPER;
+				otmp->spe = 0;
 				lesshungry(50);
 				flags.botl = 1;
 			break;
 			case SPBOOK_CLASS:
 				if(otmp->oartifact) break; //redundant check
+				u.uconduct.food++;
 				You("drain the magic from the %s.", xname(otmp));
 				(void) drain_item(otmp);
+				costly_cancel(otmp);
 				if(!otmp->spe) otmp->otyp = SPE_BLANK_PAPER;
 				lesshungry(50);
 				flags.botl = 1;
 			break;
 			case WAND_CLASS:
-				You("drain the %s%s.", xname(otmp),otmp->spe?"":" dry");
+				u.uconduct.food++;
+				curspe = otmp->spe;
 				(void) drain_item(otmp);
-//	    	    		otmp->otyp = SPE_BLANK_PAPER;
-				lesshungry(10);
-				if(!otmp->spe) otmp->otyp = WAN_NOTHING;
-				flags.botl = 1;
+				if (curspe > otmp->spe) {
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(10);
+					if(!otmp->spe) otmp->otyp = WAN_NOTHING;
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
 			break;
 		}
 		return 1;

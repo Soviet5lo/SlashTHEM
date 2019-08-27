@@ -2699,6 +2699,7 @@ E void FDECL(destroy_item, (int,int));
 E int FDECL(destroy_mitem, (struct monst *,int,int));
 E int FDECL(resist, (struct monst *,CHAR_P,int,int));
 E void NDECL(makewish);
+E void FDECL (costly_cancel, (struct obj *));
 E void NDECL(do_acquirement);
 /* KMH -- xchar to XCHAR_P */
 E void FDECL(zap_strike_fx, (XCHAR_P, XCHAR_P, int));
