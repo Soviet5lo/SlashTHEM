@@ -290,8 +290,6 @@ A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     SPFX_RESTR, 0, 0,
     PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NEUTRAL, PM_BARD, NON_PM, 1000L ),
 
-
-
 A("Oathkeeper", 		STILETTO, /* temp name? */
     (SPFX_RESTR), 0, 0,
     PHYS(7,9),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_LOCKSMITH, NON_PM, 1500L ),
@@ -367,6 +365,11 @@ A("Whisperfeet",               SPEED_BOOTS,
 	(SPFX_RESTR|SPFX_STLTH|SPFX_LUCK), 0, 0,
 	NO_ATTK,      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, NON_PM, NON_PM, 5000L ),
 #endif
+
+A("Bugzapper",			FLY_SWATTER,
+	(SPFX_RESTR|SPFX_ATTK), 0, 0,
+	ELEC(3,10),	NO_DFNS,	NO_CARY,
+	0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
 
 /*** Chaotic artifacts ***/
 A("Grimtooth",                  ORCISH_DAGGER,
