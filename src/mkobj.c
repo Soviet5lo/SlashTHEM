@@ -443,11 +443,11 @@ boolean artif;
 /* -----------============STEPHEN WHITE'S NEW CODE============----------- */                   
 	case WEAPON_CLASS:
 		/* KMH, balance patch -- new macros */
-		otmp->quan = is_multigen(otmp) ? (long) rn1(12,12) : 1L;
-		if (otmp->otyp == BULLET) otmp->quan += rnd(50);
-		if (otmp->otyp == SILVER_BULLET) otmp->quan += rnd(50);
-		if (otmp->otyp == SHOTGUN_SHELL) otmp->quan += rnd(20);
-		if (otmp->otyp == ROCKET) otmp->quan += rnd(5);
+		otmp->quan = is_multigen(otmp) ? (long) rn1(8,8) : 1L;
+		if (otmp->otyp == BULLET) otmp->quan == rnd(20);
+		if (otmp->otyp == SILVER_BULLET) otmp->quan == rnd(20);
+		if (otmp->otyp == SHOTGUN_SHELL) otmp->quan == rnd(10);
+		if (otmp->otyp == ROCKET) otmp->quan == rnd(2);
 		if (otmp->otyp == CROSSBOW_BOLT) otmp->quan += rnd(10);
 		if (otmp->otyp == SHURIKEN) otmp->quan += rnd(20);
 		if(!rn2(8)) {
