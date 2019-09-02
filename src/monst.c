@@ -4914,7 +4914,7 @@ struct permonst _mons2[] = {
 	M3_INFRAVISIBLE, CLR_WHITE),
 #ifdef JEDI
     MON("stormtrooper", S_HUMAN,
-	LVL(8, 10, 5, 25, -5), (1|G_LGROUP),
+	LVL(8, 10, 5, 25, -5), G_NOGEN,
 	A(ATTK(AT_WEAP, AD_PHYS, 2, 4), ATTK(AT_KICK, AD_PHYS, 2, 4),
 	  NO_ATTK, NO_ATTK, NO_ATTK, NO_ATTK),
 	SIZ(WT_HUMAN, 400, 0, MS_SOLDIER, MZ_HUMAN), 0, 0,
