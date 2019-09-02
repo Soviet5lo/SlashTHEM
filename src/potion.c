@@ -1233,6 +1233,10 @@ peffects(otmp)
 			You("feel bad.");
 			u.uhp -= rn2(10);
 			if (u.uhp < 1) u.uhp = 1;	/* can't kill you */
+			if(!rn2(6)) {
+				You("belch loudly!");
+				wake_nearby();
+			}
 		} else {
 			if (Hallucination) make_hallucinated(0L,FALSE,0L);
 			if (otmp->blessed && !rn2(10)) {
