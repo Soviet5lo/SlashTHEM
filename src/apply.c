@@ -1468,7 +1468,7 @@ int magic; /* 0=Physical, otherwise skill level */
 	} else if (!magic && near_capacity() > UNENCUMBERED) {
 		You("are carrying too much to jump!");
 		return 0;
-	} else if (!magic && (u.uhunger <= 100 || ACURR(A_STR) < 6)) {
+	} else if (!magic && (YouHunger <= 100 || ACURR(A_STR) < 6)) {
 		You("lack the strength to jump!");
 		return 0;
 	} else if (Wounded_legs) {
@@ -1606,7 +1606,7 @@ STATIC_OVL void
 use_tinning_kit(obj)
 register struct obj *obj;
 {
-	register struct obj *corpse, *can;
+	register struct obj *corpse, *can, *bld;
 /*
 	char *badmove;
  */
@@ -1651,7 +1651,36 @@ register struct obj *obj;
 		return;
 	}
 	consume_obj_charge(obj, TRUE);
+	if((Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) || 
+		Race_if(PM_GHOUL)) 
+				&& mons[corpse->corpsenm].cnutrit 
+				&& !(mvitals[corpse->corpsenm].mvflags & G_NOCORPSE)
+				&& has_blood(&mons[corpse->corpsenm])
+		){
+		if ((bld = mksobj(POT_BLOOD, FALSE, FALSE)) != 0) {
+			static const char you_buy_it[] = "You bottle it, you bought it!";
 
+			bld->corpsenm = corpse->corpsenm;
+			bld->cursed = obj->cursed;
+			bld->blessed = obj->blessed;
+			bld->known = 1;
+			bld->selfmade = TRUE;
+			if (carried(corpse)) {
+				if (corpse->unpaid)
+					verbalize(you_buy_it);
+				useup(corpse);
+			} else {
+			if (costly_spot(corpse->ox, corpse->oy) && !corpse->no_charge)
+				verbalize(you_buy_it);
+			useupf(corpse, 1L);
+			}
+			bld = hold_another_object(bld, "You make, but cannot pick up, %s.",
+						  doname(bld), (const char *)0);
+		} else impossible("Bottling failed.");
+	} else {
+		if(!(Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) ||
+					Race_if(PM_GHOUL))
+			|| yn("This corpse does not have blood.  Tin it?") == 'y') {
 	if ((can = mksobj(TIN, FALSE, FALSE)) != 0) {
 	    static const char you_buy_it[] = "You tin it, you bought it!";
 
@@ -1681,6 +1710,8 @@ register struct obj *obj;
 	    can = hold_another_object(can, "You make, but cannot pick up, %s.",
 				      doname(can), (const char *)0);
 	} else impossible("Tinning failed.");
+	}
+	}
 }
 
 
@@ -3564,6 +3595,10 @@ use_chemistry_set(struct obj *chemset)
 
 	if (!new_obj || new_obj->oclass != POTION_CLASS) {
 		goto blast_him;
+	}
+	if (new_obj->otyp == POT_VAMPIRE_BLOOD || new_obj->otyp == POT_BLOOD) {
+		You("can't create such a potion via chemistry.");
+		return;
 	}
 	if (!(objects[new_obj->otyp].oc_name_known) && 
 	    !(objects[new_obj->otyp].oc_uname)) {

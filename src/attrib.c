@@ -548,10 +548,10 @@ exerper()
 	if(!(moves % 10)) {
 		/* Hunger Checks */
 
-		int hs = (u.uhunger > 1500) ? SATIATED :
-			 (u.uhunger > 150) ? NOT_HUNGRY :
-			 (u.uhunger > 50) ? HUNGRY :
-			 (u.uhunger > 0) ? WEAK : FAINTING;
+		int hs = (YouHunger > (Race_if(PM_INCANTIFIER) ? max(u.uenmax/2,200) : 1000)) ? SATIATED :
+			 (YouHunger > 150) ? NOT_HUNGRY :
+			 (YouHunger > 50) ? HUNGRY :
+			 (YouHunger > 0) ? WEAK : FAINTING;
 
 #ifdef DEBUG
 		pline("exerper: Hunger checks");
@@ -856,7 +856,6 @@ int oldlevel, newlevel;
 #endif
 	case PM_DROW:
 	case PM_ELF:            rabil = elf_abil;	break;
-	case PM_INCANTIFIER:            rabil = inc_abil;	break;
 	case PM_CLOCKWORK_AUTOMATON:            rabil = clk_abil;	break;
 	case PM_KOBOLD:            rabil = kob_abil;	break;
 	case PM_TROLL:            rabil = tro_abil;	break;
@@ -868,6 +867,7 @@ int oldlevel, newlevel;
 	case PM_HOBBIT:		rabil = hob_abil;	break;
 	case PM_ORC:            rabil = orc_abil;	break;
 	case PM_HUMAN_WEREWOLF:	rabil = lyc_abil;	break;
+	case PM_INCANTIFIER:     rabil = inc_abil;	break;
 	case PM_HUMAN:
 	case PM_VAMPIRE:
 	default:                rabil = 0;		break;

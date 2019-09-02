@@ -146,7 +146,7 @@ in_trouble()
 	if(Strangled) return(TROUBLE_STRANGLED);
 	if(u.utrap && u.utraptype == TT_LAVA) return(TROUBLE_LAVA);
 	if(Sick) return(TROUBLE_SICK);
-	if(u.uhs >= WEAK) return(TROUBLE_STARVING);
+	if(u.uhs >= WEAK && !Race_if(PM_INCANTIFIER)) return(TROUBLE_STARVING);
 	if (Upolyd ? (u.mh <= 5 || u.mh*7 <= u.mhmax) :
 		(u.uhp <= 5 || u.uhp*7 <= u.uhpmax)) return(TROUBLE_HIT);
 	if(u.ulycn >= LOW_PM && !Race_if(PM_HUMAN_WEREWOLF) && !Role_if(PM_LUNATIC) )
@@ -200,7 +200,7 @@ in_trouble()
 		    && !u.usteed
 #endif
 				) return (TROUBLE_WOUNDED_LEGS);
-	if(u.uhs >= HUNGRY) return(TROUBLE_HUNGRY);
+	if(u.uhs >= HUNGRY && !Race_if(PM_INCANTIFIER)) return(TROUBLE_HUNGRY);
 	if(HStun) return (TROUBLE_STUNNED);
 	if(HConfusion) return (TROUBLE_CONFUSED);
 	if(Hallucination) return(TROUBLE_HALLUCINATION);
@@ -1061,7 +1061,7 @@ pleased(g_align)
 	    u.uhp = u.uhpmax;
 	    if (Upolyd) u.mh = u.mhmax;
 	    ABASE(A_STR) = AMAX(A_STR);
-	    if (u.uhunger < 1200) init_uhunger();
+	    if (YouHunger < 1200) init_uhunger();
 	    if (u.uluck < 0) change_luck(1); /* used to be set to 0, but now you'll have to work for it --Amy */
 	    make_blinded(0L,TRUE);
 	    flags.botl = 1;

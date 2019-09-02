@@ -609,6 +609,8 @@ E int NDECL(unfaint);
 /* 5lo: Clockwork exclusive */
 E int NDECL(rehumanize_wrapper);
 E int NDECL(windclock);
+E void FDECL(cprefx, (int));
+E void FDECL(cpostfx, (int));
 E boolean FDECL(is_edible, (struct obj *));
 E void NDECL(init_uhunger);
 E int NDECL(Hear_again);
@@ -2174,6 +2176,7 @@ E void FDECL(learntech, (SHORT_P,long,int));
 E int FDECL(disarm_holdingtrap, (struct trap *));
 E int FDECL(disarm_rust_trap, (struct trap *));
 E int FDECL(disarm_fire_trap, (struct trap *));
+E int FDECL(disarm_magic_trap, (struct trap *));
 E int FDECL(disarm_landmine, (struct trap *));
 E int FDECL(disarm_squeaky_board, (struct trap *));
 E int FDECL(disarm_shooting_trap, (struct trap *, int));
@@ -2696,6 +2699,7 @@ E void FDECL(destroy_item, (int,int));
 E int FDECL(destroy_mitem, (struct monst *,int,int));
 E int FDECL(resist, (struct monst *,CHAR_P,int,int));
 E void NDECL(makewish);
+E void FDECL (costly_cancel, (struct obj *));
 E void NDECL(do_acquirement);
 /* KMH -- xchar to XCHAR_P */
 E void FDECL(zap_strike_fx, (XCHAR_P, XCHAR_P, int));

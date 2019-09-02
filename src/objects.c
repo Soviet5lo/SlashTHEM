@@ -1265,7 +1265,7 @@ POTION((char *)0, "topaz",              0, 0,           0,   0, CLR_YELLOW),
 POTION((char *)0, "violet",             0, 0,           0,   0, CLR_BRIGHT_MAGENTA),
 #endif
 POTION("water", "clear",                0, 0,          55, 300, CLR_CYAN),
-POTION("blood", "blood-red",            0, 0,           5, 300, CLR_RED),
+POTION("blood", "blood-red",            0, 0,           5,  50, CLR_RED),
 POTION("vampire blood", "blood-red",    1, 0,           5, 300, CLR_RED),
 POTION("amnesia", "sparkling",          1, 0,          16, 300, CLR_CYAN),
 #undef POTION

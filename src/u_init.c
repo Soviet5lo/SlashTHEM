@@ -591,6 +591,22 @@ static struct trobj Yeoman[] = {
  *	Optional extra inventory items.
  */
 
+static struct trobj HealingBook[] = {
+	{ SPE_HEALING, 0, SPBOOK_CLASS, 1, 1 },
+	{ 0, 0, 0, 0, 0 }
+};
+
+static struct trobj ForceBook[] = {
+	{ SPE_FORCE_BOLT, 0, SPBOOK_CLASS, 1, 1 },
+	{ 0, 0, 0, 0, 0 }
+};
+
+static struct trobj ExtraBook[] = {
+	{ UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
+	{ 0, 0, 0, 0, 0 }
+};
+
+
 static struct trobj KoboldItem[] = {
 	{ DART, 0, WEAPON_CLASS, 15, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -915,7 +931,20 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_DROW,		ARROW,			DARK_ELVEN_ARROW      },
     { PM_VAMPIRE,	POT_FRUIT_JUICE,	POT_BLOOD	      },
     { PM_VAMPIRE,	FOOD_RATION,		POT_VAMPIRE_BLOOD     },
-    { PM_GHOUL,		FOOD_RATION,		CORPSE     	      },
+    { PM_INCANTIFIER,CLOAK_OF_MAGIC_RESISTANCE,	ROBE  },
+    { PM_INCANTIFIER,CLOAK_OF_DISPLACEMENT,	ROBE  },
+    { PM_INCANTIFIER,	LEATHER_ARMOR,		ROBE  },
+    { PM_INCANTIFIER,	LEATHER_JACKET,		ROBE  },
+    { PM_INCANTIFIER,	RING_MAIL,		ROBE  },
+    { PM_INCANTIFIER,	SPLINT_MAIL,		ROBE  },
+    { PM_INCANTIFIER,	FOOD_RATION,	SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	CRAM_RATION, 	SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	POT_FRUIT_JUICE,SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	BANANA,		SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	ORANGE,		SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	POT_BOOZE,	SCR_FOOD_DETECTION	},
+    { PM_GHOUL,		FOOD_RATION,		POT_BLOOD     	      },
+    { PM_GHOUL,		POT_FRUIT_JUICE,	POT_BLOOD	      },
     { PM_CLOCKWORK_AUTOMATON,	FOOD_RATION,	POT_OIL    	      },
     { PM_CLOCKWORK_AUTOMATON,	CRAM_RATION, 	POT_OIL 	      },
     { PM_CLOCKWORK_AUTOMATON,	POT_FRUIT_JUICE,POT_OIL		      },
@@ -1354,6 +1383,14 @@ static const struct def_skill Skill_J[] = {
     { P_NONE, 0 }
 };
 #endif
+
+static const struct def_skill Skill_Incantifier[] = {
+    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
+    { P_MATTER_SPELL, P_EXPERT },
+    { P_NONE, 0 }
+};
 
 static const struct def_skill Skill_K[] = {
     { P_DAGGER, P_BASIC },		{ P_KNIFE, P_BASIC },
@@ -1929,14 +1966,6 @@ static const struct def_skill Skill_Y[] = {
 #if 0 /* 5lo: No longer used */
 /* Racial Skills here */
 
-static const struct def_skill Skill_Incantifier[] = {
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Drow[] = {
     { P_MUSICALIZE, P_SKILLED },	{ P_BOW, P_SKILLED },
     { P_NONE, 0 }
@@ -2238,6 +2267,7 @@ u_init()
 	adjabil(0,1);
 	u.ulevel = u.ulevelmax = 1;
 
+//	if(Race_if(PM_INCANTIFIER)) u.uenmax += 1200;
 	init_uhunger();
 	u.ublesscnt = 300;			/* no prayers just yet */
 
@@ -2380,7 +2410,11 @@ u_init()
         knows_object(GRAPPLING_HOOK);
         skill_init(Skill_Con);
 	u.ualign.sins += 16; /* You have sinned */
-        u.uhunger = 200;  /* On the verge of hungry */
+        /* On the verge of hungry */
+		if(Race_if(PM_INCANTIFIER)){
+			u.uen = 200;
+		}
+		else u.uhunger = 200;
     	u.ualignbase[A_CURRENT] = u.ualignbase[A_ORIGINAL] =
         u.ualign.type = A_CHAOTIC; /* Override racial alignment */
         urace.hatemask |= urace.lovemask;   /* Hated by the race's allies */
@@ -2846,11 +2880,12 @@ u_init()
 	case PM_HUMAN:
 	    /* Nothing special */
 	    break;
+
 	case PM_INCANTIFIER:
 //	    skill_add(Skill_Incantifier);
-//	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
-//	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
-//	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
+	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
+	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
+	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
 	    augment_skill_cap(P_ATTACK_SPELL, 1, P_EXPERT, P_EXPERT);
 	    augment_skill_cap(P_HEALING_SPELL, 1, P_EXPERT, P_EXPERT);
 	    augment_skill_cap(P_DIVINATION_SPELL, 1, P_EXPERT, P_EXPERT);
@@ -2858,7 +2893,9 @@ u_init()
 	    augment_skill_cap(P_PROTECTION_SPELL, 1, P_EXPERT, P_EXPERT);
 	    augment_skill_cap(P_BODY_SPELL, 1, P_EXPERT, P_EXPERT);
 	    augment_skill_cap(P_MATTER_SPELL, 1, P_EXPERT, P_EXPERT);
-        break;
+	    knows_object(SCR_BLANK_PAPER);
+	    knows_object(SPE_BLANK_PAPER);
+    	    break;
 
 	case PM_ELF:
 	    /*
@@ -2978,6 +3015,8 @@ u_init()
 		Xtra_fopod[0].trotyp = trotyp[rn2(SIZE(trotyp))];
 		ini_inv(Xtra_fopod);
 	    }
+	    knows_object(POT_BLOOD);
+	    knows_object(POT_VAMPIRE_BLOOD);
 	    break;
 	case PM_KOBOLD:
 	    if(!Role_if(PM_CONVICT)) {
@@ -2991,7 +3030,8 @@ u_init()
 	    augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
 	    break;
 	case PM_GHOUL:
-          /*ini_inv(GhastFood);*/
+		knows_object(POT_BLOOD);
+		knows_object(POT_VAMPIRE_BLOOD);
 		break;
 	case PM_CLOCKWORK_AUTOMATON:
           if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
@@ -3209,11 +3249,16 @@ register struct trobj *trop;
 				break;
 			    }
 			obj = mksobj(otyp, TRUE, FALSE);
+			if(obj->otyp == POT_BLOOD)
+				obj->corpsenm = PM_HUMAN;
 		} else {	/* UNDEF_TYP */
 			static NEARDATA short nocreate = STRANGE_OBJECT;
 			static NEARDATA short nocreate2 = STRANGE_OBJECT;
 			static NEARDATA short nocreate3 = STRANGE_OBJECT;
 			static NEARDATA short nocreate4 = STRANGE_OBJECT;
+			static NEARDATA short nocreate5 = STRANGE_OBJECT;
+			static NEARDATA short nocreate6 = STRANGE_OBJECT;
+			static NEARDATA short nocreate7 = STRANGE_OBJECT;
 		/*
 		 * For random objects, do not create certain overly powerful
 		 * items: wand of wishing, ring of levitation, or the
@@ -3234,9 +3279,10 @@ register struct trobj *trop;
 				|| otyp == nocreate2
 				|| otyp == nocreate3
 				|| otyp == nocreate4
-#ifdef ELBERETH
+				|| otyp == nocreate5
+				|| otyp == nocreate6
+				|| otyp == nocreate7
 				|| otyp == RIN_LEVITATION
-#endif
 				|| ((Role_if(PM_FLAME_MAGE) || Role_if(PM_ICE_MAGE))
 						&&
 				    (otyp == RIN_FIRE_RESISTANCE || 
@@ -3290,7 +3336,9 @@ register struct trobj *trop;
 				    Role_if(PM_MONK))
 				/* wizard patch -- they already have one */
 				|| (otyp == SPE_FORCE_BOLT &&
-				    Role_if(PM_WIZARD))
+				    (Role_if(PM_WIZARD) || Race_if(PM_INCANTIFIER)))
+				|| (otyp == SPE_HEALING &&
+				    Race_if(PM_INCANTIFIER))
 				/* powerful spells are either useless to
 				   low level players or unbalancing; also
 				   spells in restricted skill categories */
@@ -3339,7 +3387,10 @@ register struct trobj *trop;
 			/* Don't have 2 of the same ring or spellbook */
 			if (obj->oclass == RING_CLASS ||
 			    obj->oclass == SPBOOK_CLASS)
-				nocreate4 = otyp;
+				if(nocreate4 == STRANGE_OBJECT) nocreate4 = otyp;
+				else if(nocreate5 == STRANGE_OBJECT) nocreate5 = otyp;
+				else if(nocreate6 == STRANGE_OBJECT) nocreate6 = otyp;
+				else if(nocreate7 == STRANGE_OBJECT) nocreate7 = otyp;
 		}
 
 #ifdef GOLDOBJ

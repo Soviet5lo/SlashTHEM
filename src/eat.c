@@ -26,10 +26,8 @@ STATIC_DCL void NDECL(recalc_wt);
 STATIC_DCL struct obj *FDECL(touchfood, (struct obj *));
 STATIC_DCL void NDECL(do_reset_eat);
 STATIC_DCL void FDECL(done_eating, (BOOLEAN_P));
-STATIC_DCL void FDECL(cprefx, (int));
 STATIC_DCL int FDECL(intrinsic_possible, (int,struct permonst *));
 STATIC_DCL void FDECL(givit, (int,struct permonst *));
-STATIC_DCL void FDECL(cpostfx, (int));
 STATIC_DCL void FDECL(start_tin, (struct obj *));
 STATIC_DCL int FDECL(eatcorpse, (struct obj *));
 STATIC_DCL void FDECL(start_eating, (struct obj *));
@@ -101,6 +99,33 @@ const char * cahu_stat[] = {
 #endif /* OVLB */
 #ifdef OVL1
 
+boolean
+incantifier_edible(obj)
+register struct obj *obj;
+{
+	/* protect invocation tools but not Rider corpses (handled elsewhere)*/
+     /* if (obj->oclass != FOOD_CLASS && obj_resists(obj, 0, 0)) */
+	 /* Repeating this check in the name of futureproofing */
+	if (objects[obj->otyp].oc_unique)
+		return FALSE;
+	
+	if(obj->spe>0){
+		if(obj->oclass == WEAPON_CLASS && objects[obj->otyp].oc_skill > 0) return TRUE;//ie, not amunition
+		if(obj->oclass == ARMOR_CLASS) return TRUE;
+		if(obj->oclass == TOOL_CLASS && objects[obj->otyp].oc_skill > 0) return TRUE;
+	}
+	if(obj->oclass == SCROLL_CLASS && obj->otyp != SCR_BLANK_PAPER && 
+#ifdef MAIL
+		obj->otyp != SCR_MAIL && 
+#endif
+		!obj->oartifact) return TRUE;
+	if(obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BLANK_PAPER && !obj->oartifact) return TRUE;
+	if(obj->oclass == AMULET_CLASS && obj->spe >=0 && !obj->oartifact) return TRUE;
+	if(obj->oclass == RING_CLASS && obj->spe >= 0 && !obj->oartifact) return TRUE;
+	if(obj->oclass == WAND_CLASS && obj->spe > 0 && obj->otyp != WAN_NOTHING) return TRUE;
+	
+	return FALSE;
+}
 /*
  * Decide whether a particular object can be eaten by the possibly
  * polymorphed character.  Not used for monster checks.
@@ -114,8 +139,6 @@ register struct obj *obj;
 	 * 5lo: Or they need to wind themselves with a key */
 	if (Race_if(PM_CLOCKWORK_AUTOMATON) && !Upolyd) return 0;
 
-	/* Incantifier only eats stone and metal --Amy */
-	if (Race_if(PM_INCANTIFIER) && !Upolyd) return (boolean) (is_metallic(obj) || is_lithic(obj));
 
 	/* protect invocation tools but not Rider corpses (handled elsewhere)*/
      /* if (obj->oclass != FOOD_CLASS && obj_resists(obj, 0, 0)) */
@@ -126,6 +149,8 @@ register struct obj *obj;
 	/* above also prevents the Amulet from being eaten, so we must never
 	   allow fake amulets to be eaten either [which is already the case] */
 
+	if(Race_if(PM_INCANTIFIER)) return incantifier_edible(obj);
+	
 	if (metallivorous(youmonst.data) && is_metallic(obj) &&
 	    (youmonst.data != &mons[PM_RUST_MONSTER] || is_rustprone(obj)))
 		return TRUE;
@@ -168,7 +193,10 @@ register struct obj *obj;
 void
 init_uhunger()
 {
-	u.uhunger = 1200;
+	if(Race_if(PM_INCANTIFIER)){
+	    u.uenmax += 1200;
+	    u.uen = u.uenmax/2;
+	} else u.uhunger = 1200;
 	u.uhs = NOT_HUNGRY;
 }
 
@@ -301,7 +329,7 @@ register struct obj *food;
 
 	exercise(A_CON, FALSE);
 
-	if (Breathless || (!Strangled && !rn2(2))) { /* much higher chance to survive --Amy */
+	if ((Breathless && !Race_if(PM_INCANTIFIER)) || (!Strangled && !rn2(2))) { /* much higher chance to survive --Amy */
 		/* choking by eating AoS doesn't involve stuffing yourself */
 		/* ALI - nor does other non-food nutrition (eg., life-blood) */
 		if (!food || food->otyp == AMULET_OF_STRANGULATION) {
@@ -316,6 +344,17 @@ register struct obj *food;
 		nomovemsg = 0;
 		vomit();
 	} else {
+	 if(Race_if(PM_INCANTIFIER)){
+		killer_format = KILLED_BY;
+		You("absorb too much energy and explode.");
+		killer = Hallucination ? "amateur-hour horseshit" : "absorbing too much energy and exploding"; //8-bit theater
+		You("die...");
+		done(DIED); /* We don't have DISINTEGRATED here */
+		explode(u.ux, u.uy, 0, u.uhpmax/2, MON_EXPLODE, EXPL_MAGICAL);
+		u.uhp = u.uhpmax/2;
+		pline("You reform!");
+		morehungry(u.uenmax/2);	/* lifesaved */
+	 } else{
 		killer_format = KILLED_BY_AN;
 		/*
 		 * Note all "killer"s below read "Choked on %s" on the
@@ -340,6 +379,7 @@ register struct obj *food;
 		}
 		You("die...");
 		done(CHOKING);
+	}
 	}
 }
 
@@ -549,7 +589,7 @@ boolean allowmsg;
 	return FALSE;
 }
 
-STATIC_OVL void
+void
 cprefx(pm)
 register int pm;
 {
@@ -985,7 +1025,7 @@ register struct permonst *ptr;
 	}
 }
 
-STATIC_OVL void
+void
 cpostfx(pm)		/* called after completely consuming a corpse */
 register int pm;
 {
@@ -1486,6 +1526,7 @@ opentin()		/* called during each move whilst opening a tin */
 #endif
 	    tin.tin->dknown = tin.tin->known = TRUE;
 	    cprefx(tin.tin->corpsenm); cpostfx(tin.tin->corpsenm);
+//	    cprefx(tin.tin->corpsenm,FALSE); cpostfx(tin.tin->corpsenm, TRUE);
 
 	    /* charge for one at pre-eating cost */
 	    costly_tin((const char*)0);
@@ -1613,7 +1654,8 @@ struct obj *obj;
 	healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
 	return(0);
 	}
-	pline("Blecch!  Rotten %s!", foodword(obj));
+	pline("Blecch!  Rotten %s!",
+		is_vampire(youmonst.data) ? "blood" : foodword(obj));
 	if(!rn2(4)) {
 		if (Hallucination) You_feel("rather trippy.");
 		else You_feel("rather %s.", body_part(LIGHT_HEADED));
@@ -1880,10 +1922,10 @@ struct obj *otmp;
 	switch(otmp->otyp) {
 
 	    case FOOD_RATION:
-		if(u.uhunger <= 200)
+		if(YouHunger <= 200)
 		    pline(Hallucination ? "Oh wow, like, superior, man!" :
 			  "That food really hit the spot!");
-		else if(u.uhunger <= 700) pline("That satiated your %s!",
+		else if(YouHunger <= 700) pline("That satiated your %s!",
 						body_part(STOMACH));
 		break;
 	    case TRIPE_RATION:
@@ -2674,6 +2716,129 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 		stackobj(otmp);
 		return 1;
 	}
+
+	if(Race_if(PM_INCANTIFIER) && !objects[otmp->otyp].oc_unique){ //redundant check against unique
+		int curspe;
+		if (otmp->quan > 1L) {
+			if(!carried(otmp))
+				(void) splitobj(otmp, otmp->quan - 1L);
+			else
+				otmp = splitobj(otmp, 1L);
+		if (carried(otmp)) {
+			freeinv(otmp);
+			if (inv_cnt() >= 52) {
+				sellobj_state(SELL_DONTSELL);
+				dropy(otmp);
+				sellobj_state(SELL_NORMAL);
+			} else {
+				otmp->oxlth++;	/* hack to prevent merge */
+				otmp = addinv(otmp);
+				otmp->oxlth--;
+			}
+		    }
+		}
+		switch(otmp->oclass){
+			case WEAPON_CLASS:
+				u.uconduct.food++;
+				curspe = otmp->spe;
+	    	    		(void) drain_item(otmp);
+				if(curspe > otmp->spe){
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(50);
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
+			break;
+			case RING_CLASS:
+				if(otmp->oartifact) break; //redundant check
+				u.uconduct.food++;
+				pline("The %s turns to dust as you drain it dry.", xname(otmp));
+				eataccessory(otmp);
+				if (otmp == uwep && otmp->quan == 1L) uwepgone();
+				if (otmp == uquiver && otmp->quan == 1L) uqwepgone();
+				if (otmp == uswapwep && otmp->quan == 1L) uswapwepgone();
+
+				if (carried(otmp)) useup(otmp);
+				else useupf(otmp, 1L);
+				lesshungry(50);
+				flags.botl = 1;
+			break;
+			case AMULET_CLASS:
+				if(otmp->oartifact || objects[otmp->otyp].oc_unique) break; //redundant check
+				u.uconduct.food++;
+				pline("The %s crumbles to dust as you drain it dry.", xname(otmp));
+				eataccessory(otmp);
+				if (otmp == uwep && otmp->quan == 1L) uwepgone();
+				if (otmp == uquiver && otmp->quan == 1L) uqwepgone();
+				if (otmp == uswapwep && otmp->quan == 1L) uswapwepgone();
+				if (carried(otmp)) useup(otmp);
+				else useupf(otmp, 1L);
+				lesshungry(50);
+				flags.botl = 1;
+			break;
+			case ARMOR_CLASS:
+				u.uconduct.food++;
+				curspe = otmp->spe;
+		    	    	(void) drain_item(otmp);
+				if (curspe > otmp->spe){
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(50);
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
+			break;
+			case TOOL_CLASS:
+				u.uconduct.food++;
+				curspe = otmp->spe;
+		    	        (void) drain_item(otmp);
+				if (curspe > otmp->spe) {
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(50);
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
+			break;
+			case SCROLL_CLASS:
+				if(otmp->oartifact) break; //redundant check
+				u.uconduct.food++;
+	    	    		You("lick the ink off the %s.", xname(otmp));
+				costly_cancel(otmp);
+				otmp->otyp = SCR_BLANK_PAPER;
+				otmp->spe = 0;
+				lesshungry(50);
+				flags.botl = 1;
+			break;
+			case SPBOOK_CLASS:
+				if(otmp->oartifact) break; //redundant check
+				u.uconduct.food++;
+				You("drain the magic from the %s.", xname(otmp));
+				(void) drain_item(otmp);
+				costly_cancel(otmp);
+				if(!otmp->spe) otmp->otyp = SPE_BLANK_PAPER;
+				lesshungry(50);
+				flags.botl = 1;
+			break;
+			case WAND_CLASS:
+				u.uconduct.food++;
+				curspe = otmp->spe;
+				(void) drain_item(otmp);
+				if (curspe > otmp->spe) {
+					You("drain the %s%s.", xname(otmp),otmp->spe!=0?"":" dry");
+					lesshungry(10);
+					if(!otmp->spe) otmp->otyp = WAN_NOTHING;
+					flags.botl = 1;
+				} else {
+					pline("The %s resists your attempt to drain its magic.", xname(otmp));
+				}
+			break;
+		}
+		return 1;
+	}
+
+//	}
 	if (otmp->otyp == EYEBALL || otmp->otyp == SEVERED_HAND) {
 	    Strcpy(qbuf,"Are you sure you want to eat that?");
 	    if ((c = yn_function(qbuf, ynqchars, 'n')) != 'y') return 0;
@@ -2907,7 +3072,10 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 STATIC_OVL int
 bite()
 {
-	if(victual.canchoke && u.uhunger >= 3000) { /* allowing players to eat more --Amy */
+	if(victual.canchoke && 
+		((Race_if(PM_INCANTIFIER) && u.uen >= u.uenmax) ||
+		 (!Race_if(PM_INCANTIFIER)&& u.uhunger >= 3000) )
+	) {
 		choke(victual.piece);
 		return 1;
 	}
@@ -3020,36 +3188,39 @@ gethungry()	/* as time goes by - called by moveloop() and domove() */
         /* Convicts can last twice as long at hungry and below */
         && (!Role_if(PM_CONVICT) || (moves % 2) || (u.uhs < HUNGRY))
 #endif /* CONVICT */
+		/* 5lo: So can vampires, since they're undead and can sometimes be
+		 * forced to go long periods of time without feeding */
 		&& (!Race_if(PM_VAMPIRE) || (moves % 2) || (u.uhs < HUNGRY))
-		&& !Slow_digestion)
-	    u.uhunger--;		/* ordinary food consumption */
+		&& !((Slow_digestion && (!Race_if(PM_INCANTIFIER) || moves%2) ||
+			Race_if(PM_INCANTIFIER) && moves%10)))
+			(Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);		/* ordinary food consumption */
 
 	if (moves % 2) {	/* odd turns */
 	    /* Regeneration uses up food, unless due to an artifact */
 	    if (HRegeneration || ((ERegeneration & (~W_ART)) &&
 				(ERegeneration != W_WEP || !uwep->oartifact)))
-			u.uhunger--;
-	    if (near_capacity() > SLT_ENCUMBER) u.uhunger--;
+			(Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
+	    if (near_capacity() > SLT_ENCUMBER) (Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
 	} else {		/* even turns */
-	    if (Hunger) u.uhunger--;
+	    if (Hunger) (Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
 		if (Race_if(PM_CLOCKWORK_AUTOMATON)) u.uhunger--; /* to prevent =oSD from being overpowered --Amy */
 	    /* Conflict uses up food too */
 		/* and a lot of it because conflict is so overpowered --Amy */
-	    if (HConflict || (EConflict & (~W_ARTI))) { u.uhunger--; u.uhunger--; u.uhunger--; u.uhunger--; u.uhunger--; }
+	    if (HConflict || (EConflict & (~W_ARTI))) (Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
 	    /* +0 charged rings don't do anything, so don't affect hunger */
 	    /* Slow digestion still uses ring hunger */
 	    switch ((int)(moves % 20)) {	/* note: use even cases only */
 	     case  4: if (uleft &&
 			  (uleft->spe || !objects[uleft->otyp].oc_charged))
-			    u.uhunger--;
+			    (Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
 		    break;
-	     case  8: if (uamul) u.uhunger--;
+	     case  8: if (uamul) (Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
 		    break;
 	     case 12: if (uright &&
 			  (uright->spe || !objects[uright->otyp].oc_charged))
-			    u.uhunger--;
+			    (Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
 		    break;
-	     case 16: if (u.uhave.amulet) u.uhunger--;
+	     case 16: if (u.uhave.amulet) (Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);
 		    break;
 	     default: break;
 	    }
@@ -3064,7 +3235,8 @@ void
 morehungry(num)	/* called after vomiting and after performing feats of magic */
 register int num;
 {
-	u.uhunger -= num;
+	if(Race_if(PM_INCANTIFIER)) u.uen -= num;
+	else u.uhunger -= num;
 	newuhs(TRUE);
 }
 
@@ -3078,8 +3250,11 @@ register int num;
 #ifdef DEBUG
 	debugpline("lesshungry(%d)", num);
 #endif
-	u.uhunger += num;
-	if(u.uhunger >= 3000) {
+	if(Race_if(PM_INCANTIFIER)) u.uen += num;
+	else u.uhunger += num;
+	if(((Race_if(PM_INCANTIFIER) && u.uen >= u.uenmax) ||
+		 (!Race_if(PM_INCANTIFIER)&& u.uhunger >= 3000) )
+		) {
 	    if (!iseating || victual.canchoke) {
 		if (iseating) {
 		    choke(victual.piece);
@@ -3092,7 +3267,8 @@ register int num;
 	    /* Have lesshungry() report when you're nearly full so all eating
 	     * warns when you're about to choke.
 	     */
-	    if (u.uhunger >= 2500) {
+	    if ((Race_if(PM_INCANTIFIER) && u.uen >= u.uenmax * 3/4) ||
+			(!Race_if(PM_INCANTIFIER) && u.uhunger >= 2500)) {
 		if (!victual.eating || (victual.eating && !victual.fullwarn)) {
 		    pline("You're having a hard time getting all of it down.");
 		    nomovemsg = "You're finally finished.";
@@ -3147,7 +3323,7 @@ sync_hunger()
 {
 	if(is_fainted()) {
 		flags.soundok = 0;
-		nomul(-10+(u.uhunger/10), "fainted from lack of food");
+		nomul(-10+( YouHunger/10), "fainted from lack of food");
 		nomovemsg = "You regain consciousness.";
 		afternmv = unfaint;
 	}
@@ -3161,11 +3337,11 @@ boolean incr;
 	unsigned newhs;
 	static unsigned save_hs;
 	static boolean saved_hs = FALSE;
-	int h = u.uhunger;
+	int h = YouHunger;
 	boolean clockwork = ((Race_if(PM_CLOCKWORK_AUTOMATON)) || Upolyd &&
 			youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]);
 
-	newhs = (h > 1500) ? SATIATED : /* used to be 1000 --Amy */
+	newhs = (h > (Race_if(PM_INCANTIFIER) ? max(u.uenmax/2,200) : 1500) ) ? SATIATED :
 		(h > 150) ? NOT_HUNGRY :
 		(h > 50) ? HUNGRY :
 		(h > 0) ? WEAK : FAINTING;
@@ -3208,7 +3384,7 @@ boolean incr;
 
 	if(newhs == FAINTING) {
 		if(is_fainted()) newhs = FAINTED;
-		if(u.uhs <= WEAK || rn2(50-u.uhunger/50) >= 49) {
+		if(u.uhs <= WEAK || rn2(50-YouHunger/50) >= 49) {
 			if(!is_fainted() && multi >= 0 /* %% */) {
 				/* stop what you're doing, then faint */
 				stop_occupation();
@@ -3227,14 +3403,14 @@ boolean incr;
 			if(u.uhunger < -(int)(800 + 50*ACURR(A_CON))) You("are close to starvation.");
 
 				flags.soundok = 0;
-				nomul(-3+(u.uhunger/200), "fainted from lack of food");
+				nomul(-3+(YouHunger/200), "fainted from lack of food");
 				nomovemsg = "You regain consciousness.";
 				afternmv = unfaint;
 			      }
 				newhs = FAINTED;
 			}
 		} else
-		if(u.uhunger < -(int)(1000 + 50*ACURR(A_CON))) {
+		if(YouHunger < -(int)(1000 + 50*ACURR(A_CON))) {
 			if (clockwork){
 			    Your("clockwork comes to a complete stop.");
 			    killer_format = KILLED_BY_AN;
@@ -3278,7 +3454,7 @@ boolean incr;
 				"are getting the munchies.");
 			} else
 			    You((!incr) ? "only feel hungry now." :
-				  (u.uhunger < 145) ? "feel hungry." :
+				  (YouHunger < 145) ? "feel hungry." :
 				   "are beginning to feel hungry.");
 			if (incr && occupation &&
 			    (occupation != eatfood && occupation != opentin))
@@ -3308,7 +3484,7 @@ boolean incr;
 				  urole.name.m : "Elf");
 			else
 			    You((!incr) ? "feel weak now." :
-				  (u.uhunger < 45) ? "feel weak." :
+				  (YouHunger < 45) ? "feel weak." :
 				   "are beginning to feel weak.");
 			if (incr && occupation &&
 			    (occupation != eatfood && occupation != opentin))

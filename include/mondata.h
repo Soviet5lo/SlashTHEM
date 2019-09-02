@@ -281,7 +281,7 @@
 				   (ptr)->mlet != S_GOLEM && \
 				  ((ptr)->mlet != S_BAD_FOOD || \
 				   (ptr) == &mons[PM_KILLER_TRIPE_RATION]) && \
-				   (!is_undead(ptr) || is_vampire(ptr)))
+				   (!nonliving(ptr) || is_vampire(ptr)))
 
 #define corpse_never_rots(ptr)	((ptr) == &mons[PM_LIZARD] || \
 				 (ptr) == &mons[PM_LICHEN])

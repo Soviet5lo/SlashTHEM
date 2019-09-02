@@ -184,6 +184,7 @@ static const struct innate_tech
 		       {  17, T_SPIRIT_BOMB, 1},
 		       {  20, T_POWER_SURGE, 1},
 		       {   0, 0, 0} },
+#if 0
 	psi_tech[] = { {   1, T_PUMMEL, 1},
 		       {   1, T_DASH, 1},
 		       {   2, T_CHI_STRIKE, 1},
@@ -198,7 +199,6 @@ static const struct innate_tech
 		       {  17, T_SPIRIT_BOMB, 1},
 		       {  20, T_POWER_SURGE, 1},
 		       {   0, 0, 0} },
-#if 0
 	pok_tech[] = { {   1, T_POKE_BALL, 1},
 		       {   2, T_PUMMEL, 1},
 		       {   4, T_DASH, 1},
@@ -301,6 +301,8 @@ static const struct innate_tech
 	vam_tech[] = { {   1, T_DAZZLE, 1},
 		       {   1, T_APPRAISAL, 1},
 		       {   1, T_DRAW_BLOOD, 1},
+		       {   0, 0, 0} },
+	inc_tech[] = { {   1, T_DRAW_ENERGY, 1},
 		       {   0, 0, 0} },
 	def_tech[] = { {   1, T_APPRAISAL, 1}, /* everyone is supposed to get this --Amy */
 		       {   0, 0, 0} };
@@ -2293,6 +2295,7 @@ race_tech()
 		case PM_HOBBIT:		return (hob_tech);
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);
 		case PM_VAMPIRE:	return (vam_tech);
+		case PM_INCANTIFIER:	return (inc_tech);
 		default: 		/*return ((struct innate_tech *) 0)*/return (def_tech);
 	}
 }
