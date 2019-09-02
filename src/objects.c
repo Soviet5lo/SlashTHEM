@@ -406,9 +406,15 @@ WEAPON("boomerang", (char *)0,
 
 WEAPON("bullwhip", (char *)0,
 	1, 0, 0,  9, 20,  4,  2,  1, 0, 0,   P_WHIP, LEATHER, CLR_BROWN),
-
-WEAPON("steel whip", (char *)0,
-	1, 0, 0,  2, 25,  4,  6,  6, 0, 0,   P_WHIP, METAL, HI_METAL),
+/* 5lo: New whips from the nh342 whips patch */
+WEAPON("long bullwhip", (char *)0,
+	1, 0, 0,  1, 20,  4,  2,  2, 0, 0,   P_WHIP, LEATHER, CLR_BROWN),
+WEAPON("chainwhip", (char *)0,
+	1, 0, 0,  0,120, 10,  4,  2,-1, 0,   P_WHIP, IRON, HI_METAL),
+WEAPON("thorned chainwhip", (char *)0,
+	1, 0, 0,  1, 60, 20,  7,  5,-1, S,   P_WHIP, MITHRIL, HI_METAL),
+WEAPON("long thorned chainwhip", (char *)0,
+	1, 0, 0,  0, 60, 20,  7,  7, 0, S,   P_WHIP, MITHRIL, HI_METAL),
 
 #ifdef KOPS
 WEAPON("rubber hose", (char *)0,

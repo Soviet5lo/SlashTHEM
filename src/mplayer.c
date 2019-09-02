@@ -277,7 +277,7 @@ register boolean special;
 		    weapon = RED_LIGHTSABER;
 		    break;
 		case PM_LUNATIC:
-		    weapon = STEEL_WHIP;
+		    weapon = CHAINWHIP;
 		    break;
 		case PM_ROGUE:
 		    weapon = SHORT_SWORD;

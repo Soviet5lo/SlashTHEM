@@ -650,7 +650,7 @@ register struct monst *mtmp;
 		   case PM_LUNATIC:
 		   case PM_UNDEAD_LUNATIC:
 		     (void)mongets(mtmp, LARGE_SHIELD);
-		     (void)mongets(mtmp, STEEL_WHIP);
+		     (void)mongets(mtmp, CHAINWHIP);
 		   break;
 
 #if 0
