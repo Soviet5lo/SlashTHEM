@@ -266,7 +266,6 @@ makedog()
     }
 	if (pettype == PM_MONKEY) petname = "Ugga-Ugga";
 	if (pettype == PM_PARROT) petname = "Squawks";
-	if (pettype == PM_SPEEDHORSE) petname = "Harley Davidson";
 	if (pettype == PM_BABY_CROCODILE) petname = "Snappy"; /* in Germany it would be called Schnappi */
 
 	if (pettype == PM_GREEN_ELF) petname = "Dray Harp";
@@ -286,7 +285,7 @@ makedog()
 
 #ifdef STEED
 	/* Horses already wear a saddle */
-	if ((pettype == PM_PONY || pettype == PM_SPEEDHORSE) && !!(otmp = mksobj(SADDLE, TRUE, FALSE))) {
+	if (pettype == PM_PONY && !!(otmp = mksobj(SADDLE, TRUE, FALSE))) {
 	    if (mpickobj(mtmp, otmp))
 		panic("merged saddle?");
 	    mtmp->misc_worn_check |= W_SADDLE;
