@@ -189,7 +189,7 @@ A("Icebiter",			AXE,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
 	COLD(6,6),	COLD(0,0),	NO_CARY,	0, A_LAWFUL, PM_FIREFIGHTER, NON_PM, 1500L ),
 
-A("Vampire Killer",        BULLWHIP,
+A("Vampire Killer",        LONG_BULLWHIP,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, (M2_UNDEAD|M2_DEMON|M2_WERE),
 	PHYS(10,20),    DRLI(0,0),        NO_CARY,
 	BLESS,              A_LAWFUL, NON_PM, NON_PM, 2500L ),
