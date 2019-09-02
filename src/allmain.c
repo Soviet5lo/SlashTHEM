@@ -359,6 +359,10 @@ moveloop()
 			if (u.uen > u.uenmax)  u.uen = u.uenmax;
 			flags.botl = 1;
 		    }
+		    	/* 5lo: Ugly workaround to bottom status bar not updating
+			 * properly when incantifier power is lost */
+			if (u.uen > u.uenmax)  u.uen = u.uenmax;
+			flags.botl = 1;
 #ifdef EASY_MODE
 		/* leveling up will give a small boost to mana regeneration now --Amy */
 		    if ( u.uen < u.uenmax && ( 
