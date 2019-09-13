@@ -5333,9 +5333,9 @@ do_acquirement()
 	add_menu(win, NO_GLYPH, &any, '+', 0, ATR_NONE, "Spellbook", MENU_UNSELECTED);
 	any.a_void = 0; any.a_char = '!';
 	add_menu(win, NO_GLYPH, &any, '!', 0, ATR_NONE, "Potion", MENU_UNSELECTED);
-	any.a_void = 0; any.a_char = '=';
-	add_menu(win, NO_GLYPH, &any, '"', 0, ATR_NONE, "Amulet", MENU_UNSELECTED);
 	any.a_void = 0; any.a_char = '"';
+	add_menu(win, NO_GLYPH, &any, '"', 0, ATR_NONE, "Amulet", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '=';
 	add_menu(win, NO_GLYPH, &any, '=', 0, ATR_NONE, "Ring", MENU_UNSELECTED);
 	any.a_void = 0; any.a_char = '/';
 	add_menu(win, NO_GLYPH, &any, '/', 0, ATR_NONE, "Wand", MENU_UNSELECTED);
