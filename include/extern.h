@@ -1760,6 +1760,8 @@ E void FDECL(healup, (int,int,BOOLEAN_P,BOOLEAN_P));
 E void FDECL(strange_feeling, (struct obj *,const char *));
 E void FDECL(potionhit, (struct monst *,struct obj *,BOOLEAN_P));
 E void FDECL(potionbreathe, (struct obj *));
+E void NDECL(alchemy_init);
+E short FDECL(mixtype, (struct obj *, struct obj *, BOOLEAN_P));
 E boolean FDECL(get_wet, (struct obj *, BOOLEAN_P));
 E int NDECL(dodip);
 E void FDECL(djinni_from_bottle, (struct obj *));

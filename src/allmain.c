@@ -753,6 +753,8 @@ newgame()
 	u_init();
 	init_artifacts1();	/* must be after u_init() */
 
+	alchemy_init();
+
 #ifndef NO_SIGNAL
 	(void) signal(SIGINT, (SIG_RET_TYPE) done1);
 #endif

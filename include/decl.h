@@ -184,6 +184,9 @@ E NEARDATA struct fruit *ffruit;
 
 E NEARDATA char tune[6];
 
+/* quite ugly, but i can't think of a better way yet */
+E NEARDATA short alchemy_table[36][36]; /* POT_WATER - POT_BOOZE */
+
 #define MAXLINFO (MAXDUNGEON * MAXLEVEL)
 E struct linfo level_info[MAXLINFO];
 

@@ -21,7 +21,6 @@ static NEARDATA const char beverages[] = { POTION_CLASS, 0 };
 STATIC_DCL long FDECL(itimeout, (long));
 STATIC_DCL long FDECL(itimeout_incr, (long,int));
 STATIC_DCL void NDECL(ghost_from_bottle);
-STATIC_DCL short FDECL(mixtype, (struct obj *,struct obj *));
 
 STATIC_DCL void FDECL(healup_mon, (struct monst *, int,int,BOOLEAN_P,BOOLEAN_P));
 	/* For healing monsters - analogous to healup for players */
@@ -1964,9 +1963,34 @@ register struct obj *obj;
 	}
 }
 
-STATIC_OVL short
-mixtype(o1, o2)
+void
+alchemy_init()
+{
+	int p1, p2, i, j;
+	for(p1 = POT_BOOZE, i = 0; p1 < POT_WATER; ++p1, ++i)
+		for(p2 = POT_BOOZE, j = 0; p2 < POT_WATER; ++p2, ++j)
+		    if (p1 > p2)
+			alchemy_table[i][j] = alchemy_table[j][i];
+		    else if (p1 == p2)
+			alchemy_table[i][j] = p1;
+		    else {
+			/* smoky and milky potions are not allowed to prevent 
+			 * potential abuse */
+			int objtyp;
+			do {
+			    objtyp = rn1(
+				POT_WATER-POT_BOOZE, POT_BOOZE);
+			}while(!strcmp("smoky", OBJ_DESCR(objects[objtyp]))
+				|| !strcmp("milky", OBJ_DESCR(objects[objtyp]))
+				|| objtyp == p1 || objtyp == p2);
+			alchemy_table[i][j] = objtyp;
+		    }
+}
+
+short
+mixtype(o1, o2, force_success)
 register struct obj *o1, *o2;
+boolean force_success;
 /* returns the potion type when o1 is dipped in o2 */
 {
 	/* cut down on the number of cases below */
@@ -2066,9 +2090,16 @@ register struct obj *o1, *o2;
 			}
 			break;
 	}
+	if (o1->oclass == POTION_CLASS && o2->oclass == POTION_CLASS
+			&& ((uarmc && uarmc->otyp == LAB_COAT) ||
+				/* let's assume healers understand alchemy 
+				 * quite well */
+				Role_if(PM_HEALER) ||
+				force_success || !rn2(2)))
+		return alchemy_table[o1->otyp - POT_BOOZE][o2->otyp - POT_BOOZE];
 	/* MRKR: Extra alchemical effects. */
 
-	if (o2->otyp == POT_ACID && o1->oclass == GEM_CLASS) {
+	if ((force_success || o2->otyp == POT_ACID) && o1->oclass == GEM_CLASS) {
 	  const char *potion_descr;
 
 	  /* Note: you can't create smoky, milky or clear potions */
@@ -3162,7 +3193,7 @@ dodip()
 		obj->blessed = obj->cursed = obj->bknown = 0;
 		if (Blind || Hallucination) obj->dknown = 0;
 
-		if ((mixture = mixtype(obj, potion)) != 0) {
+		if ((mixture = mixtype(obj, potion, FALSE)) != 0) {
 			obj->otyp = mixture;
 		} else {
 		    switch (obj->odiluted ? 1 : rnd(8)) {
@@ -3381,7 +3412,7 @@ dodip()
 
 	potion->in_use = FALSE;         /* didn't go poof */
 	if ((obj->otyp == UNICORN_HORN || obj->oclass == GEM_CLASS) &&
-	    (mixture = mixtype(obj, potion)) != 0) {
+	    (mixture = mixtype(obj, potion, FALSE)) != 0) {
 		char oldbuf[BUFSZ], newbuf[BUFSZ];
 		short old_otyp = potion->otyp;
 		boolean old_dknown = FALSE;

@@ -397,6 +397,7 @@ register int fd, mode;
 	bwrite(fd, (genericptr_t) pl_character, sizeof pl_character);
 	bwrite(fd, (genericptr_t) pl_fruit, sizeof pl_fruit);
 	bwrite(fd, (genericptr_t) &current_fruit, sizeof current_fruit);
+	bwrite(fd, (genericptr_t) &alchemy_table, sizeof(alchemy_table));
 	savefruitchn(fd, mode);
 	savenames(fd, mode);
 	save_waterlevel(fd, mode);

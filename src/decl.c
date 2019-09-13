@@ -133,6 +133,9 @@ NEARDATA struct obj *current_wand = 0;	/* wand currently zapped/applied */
 
 NEARDATA boolean in_steed_dismounting = FALSE;
 
+/* quite ugly, but i can't think of a better way yet */
+NEARDATA short alchemy_table[36][36];	/* POT_WATER - POT_BOOZE */
+
 NEARDATA coord bhitpos = DUMMY;
 NEARDATA struct door doors[DOORMAX] = {DUMMY};
 

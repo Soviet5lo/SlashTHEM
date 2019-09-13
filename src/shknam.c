@@ -812,7 +812,8 @@ struct monst *shk;
 	(shk_class_match(TOOL_CLASS, shk) == SHK_MATCH) ||
 	(shk_class_match(SPBOOK_CLASS, shk) == SHK_MATCH) ||
 	(shk_class_match(RING_CLASS, shk) == SHK_MATCH) ||
-	(shk_class_match(FOOD_CLASS, shk) == SHK_MATCH)) {
+	(shk_class_match(FOOD_CLASS, shk) == SHK_MATCH) ||
+	(shk_class_match(POTION_CLASS, shk) == SHK_MATCH)) {
 		if (!rn2(3/*5*/)) ESHK(shk)->services |= SHK_SPECIAL_A;
 		if (!rn2(3/*5*/)) ESHK(shk)->services |= SHK_SPECIAL_B;
 	}
