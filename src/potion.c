@@ -3192,8 +3192,11 @@ dodip()
 
 		obj->blessed = obj->cursed = obj->bknown = 0;
 		if (Blind || Hallucination) obj->dknown = 0;
-
-		if ((mixture = mixtype(obj, potion, FALSE)) != 0) {
+		/* [BarclayII]
+		 * potion of amnesia always produces potion of amnesia */
+		if (obj->otyp == POT_AMNESIA || potion->otyp == POT_AMNESIA)
+			obj->otyp = POT_AMNESIA;
+		else if ((mixture = mixtype(obj, potion, FALSE)) != 0) {
 			obj->otyp = mixture;
 		} else {
 		    switch (obj->odiluted ? 1 : rnd(8)) {
@@ -3221,11 +3224,15 @@ dodip()
 		    }
 		}
 
-		obj->odiluted = (obj->otyp != POT_WATER);
+		obj->odiluted = (obj->otyp != POT_WATER && 
+				obj->otyp != POT_AMNESIA);
 
 		if (obj->otyp == POT_WATER && !Hallucination) {
 			pline_The("mixture bubbles%s.",
 				Blind ? "" : ", then clears");
+		} else if (obj->otyp == POT_AMNESIA && !Hallucination) {
+			pline_The("mixture bubbles%s.",
+				Blind ? "" : " and sparkles");
 		} else if (!Blind) {
 			pline_The("mixture looks %s.",
 				hcolor(OBJ_DESCR(objects[obj->otyp])));
