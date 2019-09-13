@@ -5546,6 +5546,11 @@ shk_brew(slang, shkp)
 
 			if (!(o1 = getobj(gem_types, "synthesize"))) return;
 
+			if (!objects[o1->otyp].oc_name_known) {
+				verbalize("I'm not dissolving something you don't know about!");
+				return;
+			}
+
 			if (objects[o1->otyp].oc_material == MINERAL) {
 				verbalize("You certainly won't get anything from rocks.");
 				return;
