@@ -2095,6 +2095,9 @@ boolean force_success;
 				/* let's assume healers understand alchemy 
 				 * quite well */
 				Role_if(PM_HEALER) ||
+				/* 5lo: definitely understand alchemy if
+				 * you know chemistry */
+				spell_known(SPE_CHEMISTRY) ||
 				force_success || !rn2(2)))
 		return alchemy_table[o1->otyp - POT_BOOZE][o2->otyp - POT_BOOZE];
 	/* MRKR: Extra alchemical effects. */
