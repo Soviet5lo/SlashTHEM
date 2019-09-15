@@ -268,7 +268,9 @@ struct obj {
 				|| (otmp)->otyp == DWARVISH_MITHRIL_COAT\
 				|| (otmp)->otyp == DWARVISH_CLOAK\
 				|| (otmp)->otyp == DWARVISH_ROUNDSHIELD)
-#define is_gnomish_armor(otmp)	(FALSE)
+#define is_gnomish_armor(otmp)	((otmp)->otyp == GNOMISH_HELM\
+				|| (otmp)->otyp == GNOMISH_BOOTS\
+				|| (otmp)->otyp == GNOMISH_SUIT)
 
 				
 /* Eggs and other food */
