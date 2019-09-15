@@ -632,12 +632,19 @@ long wp_mask;
 	    else EHalf_physical_damage &= ~wp_mask;
 	}
 	if (spfx & SPFX_PROTEC) {
+	/* 5lo: The original code from NH:TnG doesn't work properly as the protection
+	 * is duplicated upon saving and restoring, allowing for a player to easily 
+	 * decrease their AC until it reaches the limit of -127.  Instead, let's just
+	 * skip the protection intrinsic and directly modify the AC.
+	 */
 	    if (on) {
-		u.ublessed += 2;
-		EProtection |= wp_mask;
+//		u.ublessed += 2;
+//		EProtection |= wp_mask;
+		mons[u.umonnum].ac -= 2;
 	    } else {
-	    	u.ublessed -= 2;
-		if (u.ublessed <= 0) EProtection &= ~wp_mask;
+//	    	u.ublessed -= 2;
+//		if (u.ublessed <= 0) EProtection &= ~wp_mask;
+		mons[u.umonnum].ac += 2;
 	    }
 	}
 	if (spfx & SPFX_XRAY) {

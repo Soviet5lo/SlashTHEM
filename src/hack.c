@@ -17,6 +17,8 @@ STATIC_DCL boolean FDECL(monstinroom, (struct permonst *,int));
 
 STATIC_DCL void FDECL(move_update, (BOOLEAN_P));
 
+static boolean door_opened;	/* set to true if door was opened during test_move */
+
 #define IS_SHOP(x)	(rooms[x].rtype >= SHOPBASE)
 
 #ifdef OVL2
@@ -700,7 +702,8 @@ still_chewing(x,y)
 
     /* Okay, you've chewed through something */
     u.uconduct.food++;
-    u.uhunger += rnd(20);
+	if(Race_if(PM_INCANTIFIER)) u.uen += rnd(20);
+	else u.uhunger += rnd(20);
 
     if (boulder) {
 	delobj(boulder);		/* boulder goes bye-bye */
@@ -972,6 +975,12 @@ int mode;
 		if (mode == DO_MOVE) {
 		    if (amorphous(youmonst.data))
 			You("try to ooze under the door, but can't squeeze your possessions through.");
+#ifdef AUTO_OPEN
+		    else if (iflags.autoopen
+				&& !Confusion && !Stunned && !Fumbling) {
+			    door_opened = flags.move = doopen_indir(x, y);
+		    }
+#endif
 		    else if (x == ux || y == uy) {
 			if (Blind || Stunned || ACURR(A_DEX) < 10 || Fumbling) {
 #ifdef STEED
@@ -1710,9 +1719,13 @@ domove()
 	}
 
 	if (!test_move(u.ux, u.uy, x-u.ux, y-u.uy, DO_MOVE)) {
-	    flags.move = 0;
-	    nomul(0, 0);
-	    return;
+		if (!door_opened) {
+			flags.move = 0;
+			nomul(0,0);
+		} else {
+			door_opened = 0;
+		}
+		return;
 	}
 
 	/* warn player before walking into known traps */

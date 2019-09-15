@@ -1524,7 +1524,7 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 
 	if (u.umconf) you_are("going to confuse monsters");
 
-	Sprintf(buf, "%d points of nutrition remaining", u.uhunger); you_have(buf);
+	Sprintf(buf, "%d points of nutrition remaining", YouHunger); you_have(buf);
 
 	/*** Appearance and behavior ***/
 	if (Adornment) {
@@ -1950,7 +1950,7 @@ int final;
 	if (Detect_monsters)
 	  dump(youwere, "sensing the presence of monsters");
 	if (u.umconf) dump(youwere, "going to confuse monsters");
-	Sprintf(buf, "%d points of nutrition remaining", u.uhunger); dump(youhad, buf);
+	Sprintf(buf, "%d points of nutrition remaining", YouHunger); dump(youhad, buf);
 
 	/*** Appearance and behavior ***/
 	if (Adornment) {

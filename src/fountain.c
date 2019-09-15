@@ -231,7 +231,9 @@ drinkfountain()
 	if (fate < 10) {
 		pline_The("cool draught refreshes you.");
 		if (!((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON)))
-		u.uhunger += rnd(10); /* don't choke on water */
+			/* 5lo: TODO: Bug? */
+		if(Race_if(PM_INCANTIFIER)) u.uen += rnd(10); /* don't choke on water */
+		else u.uhunger += rnd(10); /* don't choke on water */
 		newuhs(FALSE);
 		if(mgkftn) return;
 	} else {

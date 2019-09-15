@@ -31,15 +31,9 @@ moveloop()
     char ch;
     int abort_lev;
 #endif
-	struct obj *pobj; /* 5lo: *pobj exists on other platforms, not just Windows */
+    struct obj *pobj; /* 5lo: *pobj exists on other platforms, not just Windows */
     int moveamt = 0, wtcap = 0, change = 0;
-	int randsp;
-	int randmnst;
-	int randmnsx;
-	int i;
     boolean didmove = FALSE, monscanmove = FALSE;
-    /* don't make it obvious when monsters will start speeding up */
-    int monclock;
 
     /* 5lo:
      * <AmyBSOD\StD> Soviet5lo: monstertimeout in spork is bugged, because the value
@@ -52,8 +46,10 @@ moveloop()
 #ifdef MORE_SPAWNS
     int timeout_start = u.monstertimeout;
     int clock_base = u.monstertimefinish;
-#endif
+    /* don't make it obvious when monsters will start speeding up */
+    int monclock;
     int past_clock;
+#endif
 
     flags.moonphase = phase_of_the_moon();
     if(flags.moonphase == FULL_MOON) {
@@ -305,7 +301,8 @@ moveloop()
 			int heal = 1;
 
 
-			if (efflev > 9 && !(moves % 3)) {
+			if (efflev > 9 && !(moves % 3) &&
+				!(Race_if(PM_INCANTIFIER))) {
 			    if (effcon <= 12) {
 				heal = 1;
 			    } else {
@@ -318,6 +315,7 @@ moveloop()
 				u.uhp = u.uhpmax;
 			} else if (Regeneration ||
 			     (efflev <= 9 &&
+			      !(Race_if(PM_INCANTIFIER)) &&
 			      !(moves % ((MAXULEV+12) / (u.ulevel+2) + 1)))) {
 			    flags.botl = 1;
 			    u.uhp++;
@@ -349,7 +347,8 @@ moveloop()
 		    
 		    /* KMH -- OK to regenerate if you don't move */
 		    if ((u.uen < u.uenmax) && (Energy_regeneration ||
-				((wtcap < MOD_ENCUMBER || !flags.mv) &&
+				(((wtcap < MOD_ENCUMBER || !flags.mv)
+				  && !Race_if(PM_INCANTIFIER)) &&
 				(!(moves%((MAXULEV + 15 - u.ulevel) *                                    
 				(Role_if(PM_WIZARD) ? 3 : 4) / 6)))))) {
 			u.uen += rn1((int)(ACURR(A_WIS) + ACURR(A_INT)) / 15 + 1,1);
@@ -360,6 +359,10 @@ moveloop()
 			if (u.uen > u.uenmax)  u.uen = u.uenmax;
 			flags.botl = 1;
 		    }
+		    	/* 5lo: Ugly workaround to bottom status bar not updating
+			 * properly when incantifier power is lost */
+			if (u.uen > u.uenmax)  u.uen = u.uenmax;
+			flags.botl = 1;
 #ifdef EASY_MODE
 		/* leveling up will give a small boost to mana regeneration now --Amy */
 		    if ( u.uen < u.uenmax && ( 
@@ -372,10 +375,7 @@ moveloop()
 			)
 			)
 			u.uen += 1;
-#endif /* EASY_MODE */
-			if (u.uen > u.uenmax)  u.uen = u.uenmax;
-			flags.botl = 1;
-#ifdef EASY_MODE
+
 			/* Having a spell school at skilled will improve mana regeneration.
 			 * Having a spell school at expert will improve it by even more. --Amy */
 
@@ -752,6 +752,8 @@ newgame()
 				 * any artifacts */
 	u_init();
 	init_artifacts1();	/* must be after u_init() */
+
+	alchemy_init();
 
 #ifndef NO_SIGNAL
 	(void) signal(SIGINT, (SIG_RET_TYPE) done1);

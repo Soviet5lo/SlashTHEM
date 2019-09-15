@@ -1480,7 +1480,7 @@ glovecheck:		(void) rust_dmg(uarmg, "gauntlets", 1, TRUE, &youmonst);
 
 	    case ANTI_MAGIC:
 		seetrap(trap);
-		if(Antimagic) {
+		if(Antimagic && !(Race_if(PM_INCANTIFIER))) {
 		    shieldeff(u.ux, u.uy);
 		    You_feel("momentarily lethargic.");
 		} else drain_en(rnd(u.ulevel) + 1 + rnd(level_difficulty() + 1));
@@ -4285,6 +4285,22 @@ struct trap *ttmp;
 	return 1;
 }
 
+int
+disarm_magic_trap(ttmp)	/* Paul Sonier */
+struct trap *ttmp;
+{
+	xchar trapx = ttmp->tx, trapy = ttmp->ty;
+	if(!Race_if(PM_INCANTIFIER)){
+		You("cannot disable %s trap.", (u.dx || u.dy) ? "that" : "this");
+	} /* else */
+	You("drain the trap's magical energy!");
+	lesshungry(50);
+	deltrap(ttmp);
+	newsym(trapx, trapy);
+	return 1;
+}
+
+
 /* getobj will filter down to cans of grease and known potions of oil */
 
 static NEARDATA const char oil[] = { ALL_CLASSES, TOOL_CLASS, POTION_CLASS, 0 };
@@ -4610,6 +4626,12 @@ boolean force;
 				    return 0;
 				}
 				return help_monster_out(mtmp, ttmp);
+			case TELEP_TRAP:
+			case LEVEL_TELEP:
+			case MAGIC_TRAP:
+			case POLY_TRAP:
+			case MAGIC_BEAM_TRAP:
+				return disarm_magic_trap(ttmp);
 			default:
 				You("cannot disable %s trap.", (u.dx || u.dy) ? "that" : "this");
 				return 0;

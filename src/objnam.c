@@ -460,7 +460,11 @@ register struct obj *obj;
 	    case POTION_CLASS:
 		if (obj->dknown && obj->odiluted)
 			Strcpy(buf, "diluted ");
-		if(nn || un || !obj->dknown) {
+		if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
+			Strcat(buf, "potion");
+			Sprintf(eos(buf), " of %s blood", mons[obj->corpsenm].mname);
+		}
+		else if(nn || un || !obj->dknown) {
 			Strcat(buf, "potion");
 			if(!obj->dknown) break;
 			if(nn) {
@@ -469,6 +473,12 @@ register struct obj *obj;
 				obj->bknown && (obj->blessed || obj->cursed)) {
 				Strcat(buf, obj->blessed ? "holy " : "unholy ");
 			    }
+#if 0
+			    if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
+				Sprintf(eos(buf), "%s ",
+					mons[obj->corpsenm].mname);
+			    }
+#endif
 			    Strcat(buf, actualn);
 			} else {
 				Strcat(buf, " called ");
@@ -581,6 +591,8 @@ register struct obj *obj;
 		hobj->quan = obj->quan;
 		/* WAC clean up */
 		buf = xname2(hobj);
+		if (Has_contents(hobj))
+			delete_contents(hobj);
 		obj_extract_self(hobj);                
 		dealloc_obj(hobj);
 
@@ -696,7 +708,10 @@ register struct obj *obj;
 	else if(obj->otyp == EGG && obj->corpsenm >= LOW_PM &&
 			!(obj->known || mvitals[obj->corpsenm].mvflags & MV_KNOWS_EGG))
 		Sprintf(bp, "[%s] egg%s", mons[obj->corpsenm].mname, obj->quan>1? "s" : "");
-	
+
+	else if(obj->otyp == POT_BLOOD && do_known) {
+		Sprintf(eos(bp), " [of %s blood]", mons[obj->corpsenm].mname);
+	}
 	else if(do_ID || do_dknown) {
 		char *cp = nextobuf();
 
@@ -925,7 +940,7 @@ plus:
 		add_erosion_words(obj, prefix);
 		if (Hallucination)
 			break;
-		if(obj->known || do_known)
+		if(obj->known || do_known || Race_if(PM_INCANTIFIER))
 			Sprintf(eos(prefix), "%s%s%s ",
 			  do_known? "[" : "", sitoa(obj->spe), do_known? "]" : "");
 //		}
@@ -1011,7 +1026,7 @@ plus:
 		    break;
 		} else
 #endif
-#define MAX_SPELL_STUDY 3 /* spell.c */
+//#define MAX_SPELL_STUDY 3 /* spell.c */
 		if(dump_ID_flag && obj->spestudied > MAX_SPELL_STUDY / 2)
 			Strcat(prefix, "[faint] ");
 
@@ -1042,7 +1057,7 @@ ring:
 		}
 		if (Hallucination)
 			break;
-		if((obj->known || do_known) && objects[obj->otyp].oc_charged)
+		if((obj->known || do_known || Race_if(PM_INCANTIFIER)) && objects[obj->otyp].oc_charged)
 			Sprintf(eos(prefix), "%s%s%s ",
 			  do_known? "[" : "", sitoa(obj->spe), do_known? "]" : "");
 		break;
@@ -3139,11 +3154,13 @@ typfnd:
 		switch (typ) {
 		case TIN:
 			otmp->spe = 0; /* No spinach */
+		case POT_BLOOD:
 			if (dead_species(mntmp, FALSE)) {
 			    otmp->corpsenm = NON_PM;	/* it's empty */
 			} else if (!(mons[mntmp].geno & G_UNIQ) &&
 				   !(mvitals[mntmp].mvflags & G_NOCORPSE) &&
-				   mons[mntmp].cnutrit != 0) {
+				   mons[mntmp].cnutrit != 0 &&
+				   !(typ==POT_BLOOD && !has_blood(&mons[mntmp]))) {
 			    otmp->corpsenm = mntmp;
 			}
 			break;

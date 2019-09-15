@@ -22,6 +22,8 @@
 #define MAX_CARR_CAP	4000	/* so that boulders can be heavier */
 #define DUMMY { 0 }
 
+#define MAX_SPELL_STUDY    30	/* Uses before spellbook crumbles */
+
 /* symbolic names for capacity levels */
 #define UNENCUMBERED	0
 #define SLT_ENCUMBER	1	/* Burdened */

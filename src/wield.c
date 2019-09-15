@@ -316,7 +316,7 @@ boolean prompt_for_obj;
 		return (doswapweapon());
 	else if (wep == uquiver)
 		setuqwep((struct obj *) 0);
-	else if (wep->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL
+	else if (wep->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL | W_CHAIN
 #ifdef STEED
 			| W_SADDLE
 #endif
@@ -325,6 +325,14 @@ boolean prompt_for_obj;
 		return (0);
 	}
 
+	/* it's a chain? 
+	 * 5lo: And you're not restricted */
+	if (wep && wep->otyp == IRON_CHAIN && P_MAX_SKILL(P_WHIP) > P_ISRESTRICTED) {
+	        pline("You figure out your iron chain can be used as a chainwhip!");
+		wep->oclass = WEAPON_CLASS;
+		wep->otyp = CHAINWHIP;
+	        result = ready_weapon(wep, TRUE);
+	} else {
 	/* Set your new primary weapon */
 	oldwep = uwep;
 	result = ready_weapon(wep, TRUE);
@@ -332,7 +340,7 @@ boolean prompt_for_obj;
 		setuswapwep(oldwep, TRUE);
 	untwoweapon();
 	(void)doredraw();
-
+	}
 	return (result);
 }
 

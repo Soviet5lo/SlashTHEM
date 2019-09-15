@@ -21,7 +21,6 @@ static NEARDATA const char beverages[] = { POTION_CLASS, 0 };
 STATIC_DCL long FDECL(itimeout, (long));
 STATIC_DCL long FDECL(itimeout_incr, (long,int));
 STATIC_DCL void NDECL(ghost_from_bottle);
-STATIC_DCL short FDECL(mixtype, (struct obj *,struct obj *));
 
 STATIC_DCL void FDECL(healup_mon, (struct monst *, int,int,BOOLEAN_P,BOOLEAN_P));
 	/* For healing monsters - analogous to healup for players */
@@ -465,7 +464,7 @@ peffects(otmp)
 {
 	register int i, ii, lim;
 
-	if (otmp->selfmade && !(5-rnl(6))) {
+	if (otmp->selfmade && otmp->otyp != POT_BLOOD && !(5-rnl(6))) {
 		pline("That potion was bad!");
 		switch(rnl(5)) {
 			case 0:
@@ -556,7 +555,9 @@ peffects(otmp)
 		    make_sick(0L, (char *) 0, TRUE, SICK_ALL);
 
 		    /* You feel refreshed */
-		    u.uhunger += 50 + rnd(50);
+		    if(Race_if(PM_INCANTIFIER)) u.uen += 50 + rnd(50);
+		    else u.uhunger += 50 + rnd(50);
+		    
 		    newuhs(FALSE);
 		} else
 		    exercise(A_WIS, FALSE);
@@ -564,7 +565,7 @@ peffects(otmp)
 	case POT_WATER:
 		if(!otmp->blessed && !otmp->cursed) {
 		    pline("This tastes like water.");
-		    u.uhunger += rnd(10);
+		    if(!Race_if(PM_INCANTIFIER)) u.uhunger += rnd(10);
 		    newuhs(FALSE);
 		    break;
 		}
@@ -620,7 +621,7 @@ peffects(otmp)
 		    make_confused(itimeout_incr(HConfusion, d(3,8)), FALSE);
 		/* the whiskey makes us feel better */
 		if (!otmp->odiluted) healup(Role_if(PM_DRUNK) ? rnd(20 + u.ulevel) : 1, 0, FALSE, FALSE);
-		u.uhunger += 10 * (2 + bcsign(otmp));
+		if(!Race_if(PM_INCANTIFIER)) u.uhunger += 10 * (2 + bcsign(otmp));
 		if (Role_if(PM_DRUNK)) u.uhunger += 100;
 		newuhs(FALSE);
 		exercise(A_WIS, FALSE);
@@ -685,7 +686,7 @@ peffects(otmp)
 			  otmp->odiluted ? "reconstituted " : "",
 			  fruitname(TRUE));
 		if (otmp->otyp == POT_FRUIT_JUICE) {
-		    u.uhunger += (otmp->odiluted ? 5 : 10) * (2 + bcsign(otmp));
+		    if(!Race_if(PM_INCANTIFIER)) u.uhunger += (otmp->odiluted ? 5 : 10) * (2 + bcsign(otmp));
 		    newuhs(FALSE);
 		    break;
 		}
@@ -1119,24 +1120,63 @@ peffects(otmp)
 		if (!Unchanging) polyself(FALSE);
 		break;
 	case POT_BLOOD:
-	case POT_VAMPIRE_BLOOD:
 		unkn++;
-		u.uconduct.unvegan++;
-
-		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) || Race_if(PM_GHOUL)) {
+		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE)) ||
+				(carnivorous(youmonst.data) && !herbivorous(youmonst.data))) {
+			pline("It smells like %s%s.",
+					!type_is_pname(&mons[otmp->corpsenm]) ||
+					!(mons[otmp->corpsenm].geno & G_UNIQ) ||
+					Hallucination ?
+						"the " :
+						"", 
+					Hallucination ?
+						makeplural(rndmonnam()) :
+						mons[otmp->corpsenm].geno & G_UNIQ ?
+						mons[otmp->corpsenm].mname :
+						makeplural(mons[otmp->corpsenm].mname)
+			);
+			if(!Hallucination) otmp->known = TRUE;
+			if (yn("Drink it?") == 'n') {
+				break;
+			} else {
+				violated_vegetarian();
+				u.uconduct.unvegan++;
+				if (otmp->cursed)
+				pline("Yecch!  This %s.", Hallucination ?
+				    "liquid could do with a good stir" : "blood has congealed");
+				else pline(Hallucination ?
+				    "The %s liquid stirs memories of home." :
+				    "The %s blood tastes delicious.",
+				    otmp->odiluted ? "watery" : "thick");
+				if (!otmp->cursed && !Race_if(PM_INCANTIFIER) && !Race_if(PM_CLOCKWORK_AUTOMATON))
+				    lesshungry((otmp->odiluted ? 1 : 2) *
+				    (otmp->blessed ? mons[(otmp)->corpsenm].cnutrit*1.5/5 : mons[(otmp)->corpsenm].cnutrit/5 ));
+				}
+		} else {
 		    violated_vegetarian();
+		    pline("Ugh.  That was vile.");
+		    if(!Race_if(PM_CLOCKWORK_AUTOMATON) && !Race_if(PM_INCANTIFIER))
+			make_vomiting(Vomiting+d(10,8), TRUE);
+			if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
+		}
+			cprefx(otmp->corpsenm);
+			cpostfx(otmp->corpsenm);
+		break;
+	case POT_VAMPIRE_BLOOD:
+//		unkn++;
+		    /* [CWC] fix conducts for potions of (vampire) blood -
+		       doesn't use violated_vegetarian() to prevent
+		       duplicated "you feel guilty" messages */
+		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE))) {
 		    if (otmp->cursed)
 			pline("Yecch!  This %s.", Hallucination ?
 			"liquid could do with a good stir" : "blood has congealed");
 		    else pline(Hallucination ?
 		      "The %s liquid stirs memories of home." :
-		      "The %s blood tastes delicious.",
+		      "The %s kindred blood tastes delicious.",
 			  otmp->odiluted ? "watery" : "thick");
-		    if (!otmp->cursed)
-			lesshungry((otmp->odiluted ? 1 : 2) *
-			  (otmp->otyp == POT_VAMPIRE_BLOOD ? 400 :
-			  otmp->blessed ? 15 : 10));
-		    if (otmp->otyp == POT_VAMPIRE_BLOOD && otmp->blessed) {
+			lesshungry((otmp->odiluted ? 1 : 2) * 400);
+		    if (otmp->blessed) {
 			int num = newhp();
 			if (Upolyd) {
 			    u.mhmax += num;
@@ -1146,10 +1186,8 @@ peffects(otmp)
 			    u.uhp += num;
 			}
 		    }
-		} else if (otmp->otyp == POT_VAMPIRE_BLOOD) {
-		    /* [CWC] fix conducts for potions of (vampire) blood -
-		       doesn't use violated_vegetarian() to prevent
-		       duplicated "you feel guilty" messages */
+		break;
+		} else {
 		    u.uconduct.unvegetarian++;
 		    if (u.ualign.type == A_LAWFUL || Role_if(PM_MONK)) {
 			You_feel("%sguilty about drinking such a vile liquid.",
@@ -1159,16 +1197,23 @@ peffects(otmp)
 		    } else if (u.ualign.type == A_NEUTRAL)
 			adjalign(-3);
 		    exercise(A_CON, FALSE);
-		    if (!Unchanging && polymon(PM_VAMPIRE))
-			u.mtimedone = 0;	/* "Permament" change */
-		} else {
-		    violated_vegetarian();
-		    pline("Ugh.  That was vile.");
-		    make_vomiting(Vomiting+d(10,8), TRUE);
-			if (Sick && Sick < 100) 	set_itimeout(&Sick, (Sick * 2) + 10); /* higher chance to survive long enough --Amy */
+		    if (Race_if(PM_VAMPIRE)) {
+			if (!Unchanging) rehumanize();
+			break;
+		    } else if (!Unchanging) {
+			int successful_polymorph = FALSE;
+			if (otmp->blessed)
+				successful_polymorph = polymon(PM_VAMPIRE_LORD);
+			else if (otmp->cursed)
+				successful_polymorph = polymon(PM_VAMPIRE_BAT);
+			else
+				successful_polymorph = polymon(PM_VAMPIRE);
+			if (successful_polymorph)
+				u.mtimedone = 0;	/* "Permament" change */
+		    }
 		}
+		otmp->known = TRUE;
 		break;
-
 	case POT_CYANIDE:
 		make_sick(Sick ? Sick/2L + 1L : 20, "cyanide potion", TRUE, SICK_VOMITABLE);
 		losestr(rnd(10));
@@ -1182,10 +1227,15 @@ peffects(otmp)
 		break;
 	case POT_JOLT_COLA:
 		You("are jolted back to your senses.");
+		incr_itimeout(&HSleep_resistance, rn1(10, 100 + 60 * bcsign(otmp)));
 		if (otmp->cursed) {
 			You("feel bad.");
 			u.uhp -= rn2(10);
 			if (u.uhp < 1) u.uhp = 1;	/* can't kill you */
+			if(!rn2(6)) {
+				You("belch loudly!");
+				wake_nearby();
+			}
 		} else {
 			if (Hallucination) make_hallucinated(0L,FALSE,0L);
 			if (otmp->blessed && !rn2(10)) {
@@ -1390,8 +1440,9 @@ boolean your_fault;
 			mon->mhp--;
 	}
 
-	/* oil doesn't instantly evaporate */
-	if (obj->otyp != POT_OIL && cansee(mon->mx,mon->my) && !disint)
+	/* oil and blood don't instantly evaporate */
+	if ((obj->otyp != POT_OIL  && obj->otyp != POT_BLOOD &&
+			obj->otyp != POT_VAMPIRE_BLOOD && cansee(mon->mx,mon->my)))
 		pline("%s.", Tobjnam(obj, "evaporate"));
 
     if (isyou) {
@@ -1919,9 +1970,34 @@ register struct obj *obj;
 	}
 }
 
-STATIC_OVL short
-mixtype(o1, o2)
+void
+alchemy_init()
+{
+	int p1, p2, i, j;
+	for(p1 = POT_BOOZE, i = 0; p1 < POT_WATER; ++p1, ++i)
+		for(p2 = POT_BOOZE, j = 0; p2 < POT_WATER; ++p2, ++j)
+		    if (p1 > p2)
+			alchemy_table[i][j] = alchemy_table[j][i];
+		    else if (p1 == p2)
+			alchemy_table[i][j] = p1;
+		    else {
+			/* smoky and milky potions are not allowed to prevent 
+			 * potential abuse */
+			int objtyp;
+			do {
+			    objtyp = rn1(
+				POT_WATER-POT_BOOZE, POT_BOOZE);
+			}while(!strcmp("smoky", OBJ_DESCR(objects[objtyp]))
+				|| !strcmp("milky", OBJ_DESCR(objects[objtyp]))
+				|| objtyp == p1 || objtyp == p2);
+			alchemy_table[i][j] = objtyp;
+		    }
+}
+
+short
+mixtype(o1, o2, force_success)
 register struct obj *o1, *o2;
+boolean force_success;
 /* returns the potion type when o1 is dipped in o2 */
 {
 	/* cut down on the number of cases below */
@@ -2021,9 +2097,19 @@ register struct obj *o1, *o2;
 			}
 			break;
 	}
+	if (o1->oclass == POTION_CLASS && o2->oclass == POTION_CLASS
+			&& ((uarmc && uarmc->otyp == LAB_COAT) ||
+				/* let's assume healers understand alchemy 
+				 * quite well */
+				Role_if(PM_HEALER) ||
+				/* 5lo: definitely understand alchemy if
+				 * you know chemistry */
+				spell_known(SPE_CHEMISTRY) ||
+				force_success || !rn2(2)))
+		return alchemy_table[o1->otyp - POT_BOOZE][o2->otyp - POT_BOOZE];
 	/* MRKR: Extra alchemical effects. */
 
-	if (o2->otyp == POT_ACID && o1->oclass == GEM_CLASS) {
+	if ((force_success || o2->otyp == POT_ACID) && o1->oclass == GEM_CLASS) {
 	  const char *potion_descr;
 
 	  /* Note: you can't create smoky, milky or clear potions */
@@ -3116,8 +3202,11 @@ dodip()
 
 		obj->blessed = obj->cursed = obj->bknown = 0;
 		if (Blind || Hallucination) obj->dknown = 0;
-
-		if ((mixture = mixtype(obj, potion)) != 0) {
+		/* [BarclayII]
+		 * potion of amnesia always produces potion of amnesia */
+		if (obj->otyp == POT_AMNESIA || potion->otyp == POT_AMNESIA)
+			obj->otyp = POT_AMNESIA;
+		else if ((mixture = mixtype(obj, potion, FALSE)) != 0) {
 			obj->otyp = mixture;
 		} else {
 		    switch (obj->odiluted ? 1 : rnd(8)) {
@@ -3145,11 +3234,15 @@ dodip()
 		    }
 		}
 
-		obj->odiluted = (obj->otyp != POT_WATER);
+		obj->odiluted = (obj->otyp != POT_WATER && 
+				obj->otyp != POT_AMNESIA);
 
 		if (obj->otyp == POT_WATER && !Hallucination) {
 			pline_The("mixture bubbles%s.",
 				Blind ? "" : ", then clears");
+		} else if (obj->otyp == POT_AMNESIA && !Hallucination) {
+			pline_The("mixture bubbles%s.",
+				Blind ? "" : " and sparkles");
 		} else if (!Blind) {
 			pline_The("mixture looks %s.",
 				hcolor(OBJ_DESCR(objects[obj->otyp])));
@@ -3336,7 +3429,7 @@ dodip()
 
 	potion->in_use = FALSE;         /* didn't go poof */
 	if ((obj->otyp == UNICORN_HORN || obj->oclass == GEM_CLASS) &&
-	    (mixture = mixtype(obj, potion)) != 0) {
+	    (mixture = mixtype(obj, potion, FALSE)) != 0) {
 		char oldbuf[BUFSZ], newbuf[BUFSZ];
 		short old_otyp = potion->otyp;
 		boolean old_dknown = FALSE;

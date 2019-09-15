@@ -2015,6 +2015,7 @@ struct obj *obj;
 		case EXPENSIVE_CAMERA:
 #endif
 		case POT_WATER:		/* really, all potions */
+		case BOTTLE:
 		case EGG:
 		case CREAM_PIE:
 		case MELON:
@@ -2044,6 +2045,7 @@ boolean in_view;
 		case LENSES:
 		case MIRROR:
 		case CRYSTAL_BALL:
+		case BOTTLE:
 #ifdef TOURIST
 		case EXPENSIVE_CAMERA:
 #endif

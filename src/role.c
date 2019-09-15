@@ -1326,7 +1326,7 @@ const struct Role roles[] = {
 	{"Curator",     0} },
 	"Balder", "Edda", "Hagen", /* Norse mythology */
 	"Zoo", "Yellowstone Park", "Jurassic Park",
-	PM_ZOOKEEPER, NON_PM, PM_UNDEAD_ZOOKEEPER, NON_PM, PM_PLATYPUS,
+	PM_ZOOKEEPER, NON_PM, PM_UNDEAD_ZOOKEEPER, NON_PM, PM_DINGO_PUPPY,
 	PM_MASTER_ZOOKEEPER, PM_STUDENT, PM_FEARFUL_TRICERATOPS,
 	PM_CARNIVOROUS_APE, PM_JAGUAR, S_FELINE, S_ZOUTHERN,
 
@@ -1547,14 +1547,14 @@ const struct Race races[] = {
 	{0, 0},
 	PM_INCANTIFIER, NON_PM, PM_HUMAN_MUMMY, PM_HUMAN_ZOMBIE,
 	MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE |
-	  ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
+	  ROLE_NEUTRAL|ROLE_CHAOTIC,
 	MRACE_HUMAN, 0, MRACE_GNOME|MRACE_ORC|MRACE_ELF,
 	/*    Str     Int Wis Dex Con Cha */
 	{      3,      3,  3,  3,  3,  3 },
 	{ STR18(100), 18, 18, 18, 18, 18 },
 	/* Init   Lower  Higher */
 	{  2, 0,  0, 2,  0, 2 },	/* Hit points */
-	{  0, 0,  10, 0, 10, 0 },	/* Energy */
+	{  0, 0,  10, 0, 10, 0 }		/* Energy */
 },
 
 {	"kobold", "kobold", "koboldkind", "Kob",

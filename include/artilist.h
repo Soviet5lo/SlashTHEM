@@ -189,7 +189,7 @@ A("Icebiter",			AXE,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
 	COLD(6,6),	COLD(0,0),	NO_CARY,	0, A_LAWFUL, PM_FIREFIGHTER, NON_PM, 1500L ),
 
-A("Vampire Killer",        BULLWHIP,
+A("Vampire Killer",        LONG_BULLWHIP,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, (M2_UNDEAD|M2_DEMON|M2_WERE),
 	PHYS(10,20),    DRLI(0,0),        NO_CARY,
 	BLESS,              A_LAWFUL, NON_PM, NON_PM, 2500L ),
@@ -290,8 +290,6 @@ A("Shimmerstaff",   SILVER_CAPPED_STAFF,
     SPFX_RESTR, 0, 0,
     PHYS(8,5),     NO_DFNS,    NO_CARY,    0, A_NEUTRAL, PM_BARD, NON_PM, 1000L ),
 
-
-
 A("Oathkeeper", 		STILETTO, /* temp name? */
     (SPFX_RESTR), 0, 0,
     PHYS(7,9),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, PM_LOCKSMITH, NON_PM, 1500L ),
@@ -367,6 +365,11 @@ A("Whisperfeet",               SPEED_BOOTS,
 	(SPFX_RESTR|SPFX_STLTH|SPFX_LUCK), 0, 0,
 	NO_ATTK,      NO_DFNS,        NO_CARY,        0, A_NEUTRAL, NON_PM, NON_PM, 5000L ),
 #endif
+
+A("Bugzapper",			FLY_SWATTER,
+	(SPFX_RESTR|SPFX_ATTK), 0, 0,
+	ELEC(3,10),	NO_DFNS,	NO_CARY,
+	0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
 
 /*** Chaotic artifacts ***/
 A("Grimtooth",                  ORCISH_DAGGER,

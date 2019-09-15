@@ -22,7 +22,6 @@ extern boolean notonhead;	/* for long worms */
 /* kludge to use mondied instead of killed */
 extern boolean m_using;
 
-STATIC_DCL void FDECL(costly_cancel, (struct obj *));
 STATIC_DCL void FDECL(polyuse, (struct obj*, int, int));
 STATIC_DCL void FDECL(create_polymon, (struct obj *, int));
 STATIC_DCL boolean FDECL(zap_updown, (struct obj *));
@@ -890,7 +889,7 @@ struct monst *mon;
 static const char charged_objs[] = { WAND_CLASS, WEAPON_CLASS, ARMOR_CLASS,
 				     SPBOOK_CLASS, 0 };
 
-STATIC_OVL void
+void
 costly_cancel(obj)
 register struct obj *obj;
 {
@@ -1442,6 +1441,9 @@ poly_obj(obj, id)
 	if (!otmp)
 #endif
 	if (id == STRANGE_OBJECT) { /* preserve symbol */
+	    if(obj->otyp == POT_BLOOD){
+		    otmp = mksobj(POT_BLOOD, FALSE, FALSE);
+	    }
 	    int try_limit = 3;
 	    /* Try up to 3 times to make the magic-or-not status of
 	       the new item be the same as it was for the old one. */
@@ -5333,9 +5335,9 @@ do_acquirement()
 	add_menu(win, NO_GLYPH, &any, '+', 0, ATR_NONE, "Spellbook", MENU_UNSELECTED);
 	any.a_void = 0; any.a_char = '!';
 	add_menu(win, NO_GLYPH, &any, '!', 0, ATR_NONE, "Potion", MENU_UNSELECTED);
-	any.a_void = 0; any.a_char = '=';
-	add_menu(win, NO_GLYPH, &any, '"', 0, ATR_NONE, "Amulet", MENU_UNSELECTED);
 	any.a_void = 0; any.a_char = '"';
+	add_menu(win, NO_GLYPH, &any, '"', 0, ATR_NONE, "Amulet", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '=';
 	add_menu(win, NO_GLYPH, &any, '=', 0, ATR_NONE, "Ring", MENU_UNSELECTED);
 	any.a_void = 0; any.a_char = '/';
 	add_menu(win, NO_GLYPH, &any, '/', 0, ATR_NONE, "Wand", MENU_UNSELECTED);

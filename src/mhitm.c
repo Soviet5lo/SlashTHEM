@@ -1251,6 +1251,14 @@ mdamagem(magr, mdef, mattk)
 	if (hit_as_three(magr))  objenchant = 3;
 	if (hit_as_four(magr))   objenchant = 4;
 
+	/* Experienced spell-being exploders receive hit-as bonus */
+	if (mattk->aatyp == AT_EXPL && magr->uexp) {
+		if (P_SKILL(P_MATTER_SPELL) == P_SKILLED)
+			objenchant = (objenchant > 2) ? objenchant : 2;
+		if (P_SKILL(P_MATTER_SPELL) == P_EXPERT)
+			objenchant = 4;
+	}
+
 	if (objenchant < canhitmon) nohit = TRUE;
 
 	/* cancellation factor is the same as when attacking the hero */
