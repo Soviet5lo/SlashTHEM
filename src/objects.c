@@ -1277,98 +1277,98 @@ POTION("amnesia", "sparkling",          1, 0,          16, 300, CLR_CYAN),
 #undef POTION
 
 /* scrolls ... */
-#define SCROLL(name,text,sub,mgc,prob,cost,color) OBJECT( \
+#define SCROLL(name,text,sub,mgc,prob,cost) OBJECT( \
 		OBJ(name,text), BITS(0,1,0,0,mgc,0,0,0,0,0,0,sub,PAPER), 0, \
-		SCROLL_CLASS, prob, 0, 5, cost, 0, 0, 0, 0, 6, color )
+		SCROLL_CLASS, prob, 0, 5, cost, 0, 0, 0, 0, 6, HI_PAPER )
 /* Attack */
-SCROLL("create monster",        "LEP GEX VEN ZEA",      P_ATTACK_SPELL, 1,  30, 200, CLR_RED),
-SCROLL("summon undead",         "VAS CORP BET MANI",    P_ATTACK_SPELL, 1,   5, 250, CLR_WHITE),
+SCROLL("create monster",        "LEP GEX VEN ZEA",      P_ATTACK_SPELL, 1,  30, 200),
+SCROLL("summon undead",         "VAS CORP BET MANI",    P_ATTACK_SPELL, 1,   5, 250),
 /* Enchantment */
-SCROLL("taming",                "PRIRUTSENIE",          P_ENCHANTMENT_SPELL, 1,  35, 200, CLR_WHITE),
+SCROLL("taming",                "PRIRUTSENIE",          P_ENCHANTMENT_SPELL, 1,  35, 200),
 /* Divination */
-SCROLL("light",                 "VERR YED HORRE",       P_DIVINATION_SPELL, 1,  20,  50, CLR_BLACK),
-SCROLL("food detection",        "YUM YUM",              P_DIVINATION_SPELL, 1,  15, 100, CLR_YELLOW),
-SCROLL("gold detection",        "THARR",                P_DIVINATION_SPELL, 1,  23, 100, CLR_BROWN),
-SCROLL("identify",              "KERNOD WEL",           P_DIVINATION_SPELL, 1, 200,  20, CLR_GREEN),
-SCROLL("inventory id",          "MAPIRO MAHAMA DIROMAT",P_DIVINATION_SPELL, 1,   5, 250, CLR_YELLOW),
-SCROLL("magic mapping",         "ELAM EBOW",            P_DIVINATION_SPELL, 1,  35, 100, CLR_CYAN),
-SCROLL("flood",                 "AQUE BRAGH",           P_DIVINATION_SPELL, 1,   5, 200, CLR_BRIGHT_BLUE),
-SCROLL("gain mana",             "GHOTI",                P_DIVINATION_SPELL, 1,  10, 150, CLR_BRIGHT_MAGENTA),
+SCROLL("light",                 "VERR YED HORRE",       P_DIVINATION_SPELL, 1,  20,  50),
+SCROLL("food detection",        "YUM YUM",              P_DIVINATION_SPELL, 1,  15, 100),
+SCROLL("gold detection",        "THARR",                P_DIVINATION_SPELL, 1,  23, 100),
+SCROLL("identify",              "KERNOD WEL",           P_DIVINATION_SPELL, 1, 200,  20),
+SCROLL("inventory id",          "MAPIRO MAHAMA DIROMAT",P_DIVINATION_SPELL, 1,   5, 250),
+SCROLL("magic mapping",         "ELAM EBOW",            P_DIVINATION_SPELL, 1,  35, 100),
+SCROLL("flood",                 "AQUE BRAGH",           P_DIVINATION_SPELL, 1,   5, 200),
+SCROLL("gain mana",             "GHOTI",                P_DIVINATION_SPELL, 1,  10, 150),
 /* Enchantment */
-SCROLL("confuse monster",       "NR 9",                 P_ENCHANTMENT_SPELL,  1,  27, 100, CLR_MAGENTA),
-SCROLL("scare monster",         "XIXAXA XOXAXA XUXAXA", P_ENCHANTMENT_SPELL,  1,  35, 100, CLR_BRIGHT_BLUE),
-SCROLL("enchant weapon",        "DAIYEN FOOELS",        P_ENCHANTMENT_SPELL,  1,  75,  60, CLR_RED),
-SCROLL("enchant armor",         "ZELGO MER",            P_ENCHANTMENT_SPELL,  1,  63,  80, CLR_GREEN),
+SCROLL("confuse monster",       "NR 9",                 P_ENCHANTMENT_SPELL,  1,  27, 100),
+SCROLL("scare monster",         "XIXAXA XOXAXA XUXAXA", P_ENCHANTMENT_SPELL,  1,  35, 100),
+SCROLL("enchant weapon",        "DAIYEN FOOELS",        P_ENCHANTMENT_SPELL,  1,  75,  60),
+SCROLL("enchant armor",         "ZELGO MER",            P_ENCHANTMENT_SPELL,  1,  63,  80),
 /* Protection */
-SCROLL("remove curse",          "PRATYAVAYAH",          P_PROTECTION_SPELL, 1,  60,  80, CLR_BRIGHT_MAGENTA),
+SCROLL("remove curse",          "PRATYAVAYAH",          P_PROTECTION_SPELL, 1,  60,  80),
 /* Body */
-SCROLL("teleportation",         "VENZAR BORGAVVE",      P_BODY_SPELL, 1,  55, 100, CLR_BROWN),
+SCROLL("teleportation",         "VENZAR BORGAVVE",      P_BODY_SPELL, 1,  55, 100),
 /* Matter */
-SCROLL("fire",                  "ANDOVA BEGARIN",       P_MATTER_SPELL, 1,  33, 100, CLR_WHITE),
-SCROLL("earth",                 "KIRJE",                P_MATTER_SPELL, 1,  20, 200, CLR_CYAN),
+SCROLL("fire",                  "ANDOVA BEGARIN",       P_MATTER_SPELL, 1,  33, 100),
+SCROLL("earth",                 "KIRJE",                P_MATTER_SPELL, 1,  20, 200),
 
-SCROLL("destroy armor",         "JUYED AWK YACC",       P_NONE, 1,  20, 100, CLR_YELLOW),
-SCROLL("amnesia",               "DUAM XNAHT",           P_NONE, 1,  15, 200, CLR_BRIGHT_BLUE),
-SCROLL("healing",               "PHOL ENDE WODAN",      P_NONE, 1,  15, 300, CLR_BRIGHT_CYAN),
-SCROLL("charging",              "HACKEM MUCHE",         P_NONE, 1,  25, 300, CLR_GREEN),
-SCROLL("genocide",              "ELBIB YLOH",           P_NONE, 1,  15, 300, CLR_MAGENTA),
-SCROLL("punishment",            "VE FORBRYDERNE",       P_NONE, 1,  15, 300, CLR_GRAY),
-SCROLL("stinking cloud",	"VELOX NEB",            P_NONE, 1,  15, 300, CLR_GRAY),
-SCROLL("trap detection",	"HOYO HOYO",            P_NONE, 1,   5, 300, CLR_YELLOW),
-SCROLL("acquirement",	        "HZLRC KSTSBD MPFNG",   P_NONE, 1,  10, 300, CLR_GRAY),
-SCROLL("proof armor",           "HAPAX LEGOMENON",      P_NONE, 1,   5, 100, CLR_ORANGE),
-SCROLL("proof weapon",          "GNIK SISI VLE",        P_NONE, 1,   5, 100, CLR_GRAY),
-SCROLL("mass murder",		"ENEMATZU MEMALEZU",	P_NONE, 1,   5, 200, CLR_BLACK),
-SCROLL("undo genocide",		"42",			P_NONE, 1,   5, 500, CLR_ORANGE),
-SCROLL("reverse identify",	"OH CAPTAIN MY CAPTAIN",P_NONE, 1,   5,  30, CLR_RED),
-SCROLL("wishing",		"TRICK 13",		P_NONE, 1,   1, 400, CLR_WHITE),
+SCROLL("destroy armor",         "JUYED AWK YACC",       P_NONE, 1,  20, 100),
+SCROLL("amnesia",               "DUAM XNAHT",           P_NONE, 1,  15, 200),
+SCROLL("healing",               "PHOL ENDE WODAN",      P_NONE, 1,  15, 300),
+SCROLL("charging",              "HACKEM MUCHE",         P_NONE, 1,  25, 300),
+SCROLL("genocide",              "ELBIB YLOH",           P_NONE, 1,  15, 300),
+SCROLL("punishment",            "VE FORBRYDERNE",       P_NONE, 1,  15, 300),
+SCROLL("stinking cloud",	"VELOX NEB",            P_NONE, 1,  15, 300),
+SCROLL("trap detection",	"HOYO HOYO",            P_NONE, 1,   5, 300),
+SCROLL("acquirement",	        "HZLRC KSTSBD MPFNG",   P_NONE, 1,  10, 300),
+SCROLL("proof armor",           "HAPAX LEGOMENON",      P_NONE, 1,   5, 100),
+SCROLL("proof weapon",          "GNIK SISI VLE",        P_NONE, 1,   5, 100),
+SCROLL("mass murder",		"ENEMATZU MEMALEZU",	P_NONE, 1,   5, 200),
+SCROLL("undo genocide",		"42",			P_NONE, 1,   5, 500),
+SCROLL("reverse identify",	"OH CAPTAIN MY CAPTAIN",P_NONE, 1,   5,  30),
+SCROLL("wishing",		"TRICK 13",		P_NONE, 1,   1, 400),
 SCROLL("consecration",		"MAY THE FORCE BE WITH YOU",
-							P_NONE, 1,   5, 300, CLR_BRIGHT_CYAN),
+							P_NONE, 1,   5, 300),
 #if 0 /* 5lo: removed, not needed */
-SCROLL("enthronization",        "ZLORFIK",	        P_NONE, 1,   5, 300, CLR_BLACK),
-SCROLL("fountain building",     "SODALG",	        P_NONE, 1,   5, 300, CLR_YELLOW),
-SCROLL("sinking",		"ASHPD",	        P_NONE, 1,   5, 250, CLR_CYAN),
+SCROLL("enthronization",        "ZLORFIK",	        P_NONE, 1,   5, 300),
+SCROLL("fountain building",     "SODALG",	        P_NONE, 1,   5, 300),
+SCROLL("sinking",		"ASHPD",	        P_NONE, 1,   5, 250),
 SCROLL("WC",		        "ACHAT SHTAYIM SHALOSH", 
-		                                        P_NONE, 1,   5, 250, CLR_WHITE),
+		                                        P_NONE, 1,   5, 250),
 #endif
-SCROLL("ice",		        "KO BATE",	        P_NONE, 1,  10, 200, CLR_GREEN),
-SCROLL("clouds",		"FNORD",	        P_NONE, 1,  10, 200, CLR_BRIGHT_BLUE),
-SCROLL("root password detection","XYZZY",	        P_NONE, 1,   5, 200, CLR_GRAY),
-SCROLL("trap creation",         "LOREM IPSUM",          P_NONE, 1,  15, 200, CLR_BLACK),
-SCROLL("sleep",                 "ETAOIN SHRDLU",        P_NONE, 1,  15, 200, CLR_BRIGHT_MAGENTA),
-SCROLL((char *)0,		"FOOBIE BLETCH",        P_NONE, 1,   0, 100, CLR_CYAN),
-SCROLL((char *)0,		"TEMOV",                P_NONE, 1,   0, 100, CLR_BLACK),
-SCROLL((char *)0,		"GARVEN DEH",           P_NONE, 1,   0, 100, CLR_GREEN),
-SCROLL((char *)0,		"READ ME",              P_NONE, 1,   0, 100, CLR_WHITE),
-SCROLL((char *)0,               "EIRIS SAZUN IDISI",    P_NONE, 1,   0, 100, CLR_ORANGE),
-SCROLL((char *)0,		"ZLORFIK",                P_NONE, 1,   0, 100, CLR_BLACK),
-SCROLL((char *)0,		"SODALG",           P_NONE, 1,   0, 100, CLR_GREEN),
-SCROLL((char *)0,		"ASHPD",              P_NONE, 1,   0, 100, CLR_WHITE),
-SCROLL((char *)0,               "ACHAT SHTAYIM SHALOSH",    P_NONE, 1,   0, 100, CLR_ORANGE),
+SCROLL("ice",		        "KO BATE",	        P_NONE, 1,  10, 200),
+SCROLL("clouds",		"FNORD",	        P_NONE, 1,  10, 200),
+SCROLL("root password detection","XYZZY",	        P_NONE, 1,   5, 200),
+SCROLL("trap creation",         "LOREM IPSUM",          P_NONE, 1,  15, 200),
+SCROLL("sleep",                 "ETAOIN SHRDLU",        P_NONE, 1,  15, 200),
+SCROLL((char *)0,		"FOOBIE BLETCH",        P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"TEMOV",                P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"GARVEN DEH",           P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"READ ME",              P_NONE, 1,   0, 100),
+SCROLL((char *)0,               "EIRIS SAZUN IDISI",    P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"ZLORFIK",                P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"SODALG",           P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"ASHPD",              P_NONE, 1,   0, 100),
+SCROLL((char *)0,               "ACHAT SHTAYIM SHALOSH",    P_NONE, 1,   0, 100),
 
 #if 0 /* 5lo: Unnethack appearances were used for scrolls above */
-SCROLL((char *)0,               "ETAOIN SHRDLU",   P_NONE,      1,   0, 100, CLR_BRIGHT_CYAN),
-SCROLL((char *)0,               "LOREM IPSUM",     P_NONE,      1,   0, 100, CLR_BRIGHT_BLUE),
-SCROLL((char *)0,               "FNORD",           P_NONE,      1,   0, 100, CLR_BROWN), /* Illuminati */
-SCROLL((char *)0,               "KO BATE",         P_NONE,      1,   0, 100, CLR_RED), /* Kurd Lasswitz */
-SCROLL((char *)0,               "ACHAT SHTAYIM SHALOSH",P_NONE, 1,   0, 100, CLR_BRIGHT_BLUE), /* Uri Geller */
-SCROLL((char *)0,               "ABRA KA DABRA",     P_NONE,    1,   0, 100, CLR_BLACK), /* traditional incantation */
-SCROLL((char *)0,               "ASHPD",          P_NONE,       1,   0, 100, CLR_BLACK), /* Portal */
-SCROLL((char *)0,               "SODALG",          P_NONE,      1,   0, 100, CLR_RED), /* Portal */
-SCROLL((char *)0,               "ZLORFIK",         P_NONE,      1,   0, 100, CLR_ORANGE), /* Zak McKracken */
-SCROLL((char *)0,               "GNIK SISI VLE",     P_NONE,    1,   0, 100, CLR_GREEN), /* Zak McKracken */
-SCROLL((char *)0,               "HAPAX LEGOMENON",  P_NONE,     1,   0, 100, CLR_BRIGHT_BLUE),
-SCROLL((char *)0,               "HZLRC KSTSBD MPFNG", P_NONE,   1,   0, 100, CLR_YELLOW),
-SCROLL((char *)0,               "EIRIS SAZUN IDISI",  P_NONE,   1,   0, 100, CLR_BRIGHT_GREEN), /* Merseburg Incantations */
-SCROLL((char *)0,               "PHOL ENDE WODAN",   P_NONE,    1,   0, 100, CLR_GRAY), /* Merseburg Incantations */
-SCROLL((char *)0,               "GHOTI",             P_NONE,    1,   0, 100, CLR_BRIGHT_BLUE), /* pronounced as 'fish', George Bernard Shaw */
-SCROLL((char *)0,               "MAPIRO MAHAMA DIROMAT",P_NONE, 1,   0, 100, CLR_BRIGHT_MAGENTA), /* Wizardry */
+SCROLL((char *)0,               "ETAOIN SHRDLU",   P_NONE,      1,   0, 100),
+SCROLL((char *)0,               "LOREM IPSUM",     P_NONE,      1,   0, 100),
+SCROLL((char *)0,               "FNORD",           P_NONE,      1,   0, 100), /* Illuminati */
+SCROLL((char *)0,               "KO BATE",         P_NONE,      1,   0, 100), /* Kurd Lasswitz */
+SCROLL((char *)0,               "ACHAT SHTAYIM SHALOSH",P_NONE, 1,   0, 100), /* Uri Geller */
+SCROLL((char *)0,               "ABRA KA DABRA",     P_NONE,    1,   0, 100), /* traditional incantation */
+SCROLL((char *)0,               "ASHPD",          P_NONE,       1,   0, 100), /* Portal */
+SCROLL((char *)0,               "SODALG",          P_NONE,      1,   0, 100), /* Portal */
+SCROLL((char *)0,               "ZLORFIK",         P_NONE,      1,   0, 100), /* Zak McKracken */
+SCROLL((char *)0,               "GNIK SISI VLE",     P_NONE,    1,   0, 100), /* Zak McKracken */
+SCROLL((char *)0,               "HAPAX LEGOMENON",  P_NONE,     1,   0, 100),
+SCROLL((char *)0,               "HZLRC KSTSBD MPFNG", P_NONE,   1,   0, 100),
+SCROLL((char *)0,               "EIRIS SAZUN IDISI",  P_NONE,   1,   0, 100), /* Merseburg Incantations */
+SCROLL((char *)0,               "PHOL ENDE WODAN",   P_NONE,    1,   0, 100), /* Merseburg Incantations */
+SCROLL((char *)0,               "GHOTI",             P_NONE,    1,   0, 100), /* pronounced as 'fish', George Bernard Shaw */
+SCROLL((char *)0,               "MAPIRO MAHAMA DIROMAT",P_NONE, 1,   0, 100), /* Wizardry */
 #endif
 /* these must come last because they have special descriptions */
 #ifdef MAIL
-SCROLL("mail",                  "stamped",              P_NONE, 0,   0,   0, CLR_BRIGHT_BLUE),
+SCROLL("mail",                  "stamped",              P_NONE, 0,   0,   0),
 #endif
-SCROLL("blank paper",           "unlabeled",            P_NONE, 0,  28,  60, CLR_GRAY),
+SCROLL("blank paper",           "unlabeled",            P_NONE, 0,  28,  60),
 #undef SCROLL
 
 /* spell books ... */
