@@ -450,14 +450,12 @@ boolean artif;
 		if (otmp->otyp == ROCKET) otmp->quan == rnd(2);
 		if (otmp->otyp == CROSSBOW_BOLT) otmp->quan += rnd(10);
 		if (otmp->otyp == SHURIKEN) otmp->quan += rnd(20);
-		if(!rn2(8)) {
-			otmp->spe = rne(2);
-			if (rn2(2)) otmp->blessed = rn2(2);
-			 else	blessorcurse(otmp, 3);
+		if(!rn2(11)) {
+			otmp->spe = rne(3);
+			otmp->blessed = rn2(2);
 		} else if(!rn2(10)) {
-			if (rn2(10)) curse(otmp);
-			 else	blessorcurse(otmp, 3);
-			otmp->spe = -rne(2);
+			curse(otmp);
+			otmp->spe = -rne(3);
 		} else	blessorcurse(otmp, 10);
 		if (is_poisonable(otmp) && !rn2(100))
 			otmp->opoisoned = 1;
@@ -679,7 +677,6 @@ boolean artif;
 			curse(otmp);
 		} else	blessorcurse(otmp, 10);
 	case VENOM_CLASS:
-		break;
 	case CHAIN_CLASS:
 	case BALL_CLASS:
 		break;
@@ -720,13 +717,11 @@ boolean artif;
 		   otmp->otyp == GAUNTLETS_OF_FUMBLING ||
 		   otmp->otyp == ROBE_OF_WEAKNESS ||
 		   !rn2(11))) {
-			if (rn2(10)) curse(otmp);
-			 else	blessorcurse(otmp, 3);
-			otmp->spe = -rne(2);
-		} else if(!rn2(8)) {
-			if (rn2(2)) otmp->blessed = rn2(2);
-			 else	blessorcurse(otmp, 3);
-			otmp->spe = rne(2);
+			curse(otmp);
+			otmp->spe = -rne(3);
+		} else if(!rn2(10)) {
+			otmp->blessed = rn2(2);
+			otmp->spe = rne(3);
 		} else	blessorcurse(otmp, 10);
 		if (artif && !rn2(40))                
 		    otmp = mk_artifact(otmp, (aligntyp)A_NONE);
@@ -767,15 +762,15 @@ boolean artif;
 		    blessorcurse(otmp, 3);
 		    if(rn2(10)) {
 			if(rn2(10) && bcsign(otmp))
-			    otmp->spe = bcsign(otmp) * rne(2);
-			else otmp->spe = rn2(2) ? rne(2) : -rne(2);
+			    otmp->spe = bcsign(otmp) * rne(3);
+			else otmp->spe = rn2(2) ? rne(3) : -rne(3);
 		    }
 		    /* make useless +0 rings much less common */
 		    if (otmp->spe == 0) {
 /*                     otmp->spe = rn2(4) - rn2(3); */
 		       /* wow! +8! */
-		       if (rn2(3)) otmp->spe = rne(2)+1;
-		       else otmp->spe = -(rne(2)+1);
+		       if (rn2(2)) otmp->spe = rne(8)+1;
+		       else otmp->spe = -(rne(8)+1);
 		    }
 		    /* negative rings are usually cursed */
 		    if (otmp->spe < 0 && rn2(5)) curse(otmp);
@@ -992,7 +987,7 @@ register int chance;
 	if(otmp->blessed || otmp->cursed) return;
 
 	if(!rn2(chance)) {
-	    if(!rn2(3)) {
+	    if(!rn2(2)) {
 		curse(otmp);
 	    } else {
 		bless(otmp);
