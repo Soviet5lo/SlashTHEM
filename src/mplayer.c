@@ -235,12 +235,12 @@ register boolean special;
 		case PM_MONK:
 #if 0 /* Deferred */
 		case PM_PSION:
+#endif
 		    weapon = STRANGE_OBJECT;
 		    armor = STRANGE_OBJECT;
 		    cloak = ROBE;
 		    if (rn2(2)) shield = STRANGE_OBJECT;
 		    break;
-#endif
 		case PM_PALADIN:
 		    weapon = SILVER_SHORT_SWORD;
 		    break;
