@@ -190,7 +190,6 @@ static struct {
 	{ "tin shop",    TINSHOP }, /* Robin Johnson */
 	{ "book shop",	 BOOKSHOP },
 	{ "gun shop",	 GUNSHOP },
-	{ "ammo shop",	 AMMOSHOP },
 	{ "music shop",  INSTRUMENTSHOP },
 	{ "candle shop", CANDLESHOP },
 #ifdef BLACKMARKET

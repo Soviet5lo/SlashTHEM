@@ -281,17 +281,16 @@ const struct shclass shtypes[] = {
 	    {{90, SPBOOK_CLASS}, {10, SCROLL_CLASS}, {0, 0}}, shkbooks},
 #ifdef FIREARMS	/* KMH -- no longer "antique" */
 
-	{"gun shop", WEAPON_CLASS, 3, D_SHOP, {
-	    {30, -PISTOL}, {10, -SUBMACHINE_GUN}, {10, -HEAVY_MACHINE_GUN}, {10, -RIFLE}, 
-            {10, -ASSAULT_RIFLE}, {5, -SNIPER_RIFLE}, {10, -SHOTGUN}, {5, -AUTO_SHOTGUN},
-            {5, -ROCKET_LAUNCHER}, {5, -GRENADE_LAUNCHER},
+	{"gun store", WEAPON_CLASS, 4, D_SHOP, {
+	    {20, -PISTOL}, {8, -SUBMACHINE_GUN}, {5, -HEAVY_MACHINE_GUN}, {4, RIFLE},
+	    {3, -ASSAULT_RIFLE}, {3, -SNIPER_RIFLE}, {8, -SHOTGUN}, {5, -AUTO_SHOTGUN},
+	    {1, -ROCKET_LAUNCHER}, {1, -GRENADE_LAUNCHER},
+	    /* ammo */
+	    {15, -BULLET}, {6, -SILVER_BULLET}, {8, -SHOTGUN_SHELL}, {1, -ROCKET},
+	    {5, -FRAG_GRENADE}, {5, -GAS_GRENADE}, {2, -STICK_OF_DYNAMITE},
           {0, 0}}, shkweapons},
 
-	{"ammo shop", WEAPON_CLASS, 3, D_SHOP, {
-	    {15, -BULLET}, {15, -SILVER_BULLET}, {14, -SHOTGUN_SHELL}, {14, -ROCKET},
-	    {14, -FRAG_GRENADE}, {14, -GAS_GRENADE}, {14, -STICK_OF_DYNAMITE}, {0, 0}}, shkweapons},
-
-	{"rare instruments", TOOL_CLASS, 3, D_SHOP, 
+	{"rare instruments", TOOL_CLASS, 5, D_SHOP, 
 #else
 	{"rare instruments", TOOL_CLASS, 9, D_SHOP, 
 #endif

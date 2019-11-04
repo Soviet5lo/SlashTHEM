@@ -2336,9 +2336,7 @@ int rtype;
 		case BOOKSHOP:
 			return "bookstore";
 		case GUNSHOP:
-			return "gun shop";
-		case AMMOSHOP:
-			return "ammo shop";
+			return "gun store";
 		case INSTRUMENTSHOP:
 			return "music shop";
 		case CANDLESHOP:
