@@ -187,6 +187,24 @@ static const char * const shkmusic[] = {
     0
 };
 
+static const char * const shkguns[] = {
+    /* GTA 3 */
+    "Claude", "_Catalina", "8-Ball", "Salvatore",
+    /* Vice City */
+    "Tommy", "Ken", "Lance", "Sonny", "Ricardo",
+    /* San Andreas */
+    "Carl", "Sean", "Melvin", "Lance",
+    /* 4 */
+    "Niko", "Dimitri", "Mikhail", "Vlad",
+    /* Chinatown Wars */
+    "Huang", "Wu",
+    /* GTAV */
+    "Michael", "Franklin", "Trevor", "Steve",
+    "Weston",
+    0
+};
+
+
 #ifdef BLACKMARKET
 static const char *shkblack[] = {
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
@@ -288,7 +306,7 @@ const struct shclass shtypes[] = {
 	    /* ammo */
 	    {15, -BULLET}, {6, -SILVER_BULLET}, {8, -SHOTGUN_SHELL}, {1, -ROCKET},
 	    {5, -FRAG_GRENADE}, {5, -GAS_GRENADE}, {2, -STICK_OF_DYNAMITE},
-          {0, 0}}, shkweapons},
+          {0, 0}}, shkguns},
 
 	{"rare instruments", TOOL_CLASS, 5, D_SHOP, 
 #else
