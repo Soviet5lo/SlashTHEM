@@ -300,7 +300,7 @@ const struct shclass shtypes[] = {
 #ifdef FIREARMS	/* KMH -- no longer "antique" */
 
 	{"gun store", WEAPON_CLASS, 4, D_SHOP, {
-	    {20, -PISTOL}, {8, -SUBMACHINE_GUN}, {5, -HEAVY_MACHINE_GUN}, {4, RIFLE},
+	    {20, -PISTOL}, {8, -SUBMACHINE_GUN}, {5, -HEAVY_MACHINE_GUN}, {4, -RIFLE},
 	    {3, -ASSAULT_RIFLE}, {3, -SNIPER_RIFLE}, {8, -SHOTGUN}, {5, -AUTO_SHOTGUN},
 	    {1, -ROCKET_LAUNCHER}, {1, -GRENADE_LAUNCHER},
 	    /* ammo */
