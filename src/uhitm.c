@@ -1040,13 +1040,10 @@ int thrown;
 		    else
 			tmp = rnd(2);
 
-		/* Bashing with bows, darts, ranseurs or inactive lightsabers might not be completely useless... --Amy */
+		    /* 5lo: Jedi know how to use an unlit lightsaber as a weapon */
+		    if (is_lightsaber(obj) && !obj->lamplit && Role_if(PM_JEDI))
+		    	tmp = d(1,4) + obj->spe + (P_SKILL(P_LIGHTSABER) - P_UNSKILLED);
 
-		    if (is_launcher(obj) || is_missile(obj) || is_pole(obj) || (is_lightsaber(obj) && !obj->lamplit) ) 			{
-			if ((wtype = uwep_skill_type()) != P_NONE &&  P_SKILL(wtype) >= P_SKILLED) tmp += rnd(2);
-			if ((wtype = uwep_skill_type()) != P_NONE &&  P_SKILL(wtype) >= P_EXPERT) tmp += rnd(4);
-			valid_weapon_attack = (tmp > 0);
-		}
 		    if (!thrown && (obj == uwep || obj == uswapwep) && 
 				obj->otyp == BOOMERANG && !rnl(4) == 4-1) {
 			boolean more_than_1 = (obj->quan > 1L);
