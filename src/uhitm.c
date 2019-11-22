@@ -2218,10 +2218,11 @@ register struct attack *mattk;
 		if (!negated && !rn2(3) && !resists_drli(mdef)) {
 			int xtmp = d(2,6);
 			if (mdef->mhp < xtmp) xtmp = mdef->mhp;
+			/* Player vampires are smart enough not to feed while
+			 * biting if they might have trouble getting it down */
 			if (maybe_polyd(is_vampire(youmonst.data), 
 			    Race_if(PM_VAMPIRE)) && mattk->aatyp == AT_BITE &&
-			    has_blood(pd) && (yn_function("Drink blood?", ynchars, 'y') == 'y') ) {
-				/* fixing stupid overeating issues --Amy */
+			    has_blood(pd) && u.uhunger <= 2300 ) {
 				/* For the life of a creature is in the blood
 				   (Lev 17:11) */
 				if (flags.verbose)
