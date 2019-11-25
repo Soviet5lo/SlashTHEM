@@ -1568,6 +1568,7 @@ proceed:
 		 
 #ifdef OTHER_SERVICES
 /*		    else */
+		    if (!eshkp->pbanned)
 			shk_other_services();
 #endif                
 		
