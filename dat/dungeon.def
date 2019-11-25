@@ -240,7 +240,7 @@ RNDLEVEL:       "grund" "Z" @ (1, 0) 3
 DUNGEON:        "Fort Ludios" "K" (1, 0)
 DESCRIPTION:    mazelike
 ALIGNMENT:      unaligned
-LEVEL:          "knox" "K" @ (-1, 0)
+RNDLEVEL:       "knox" "K" @ (-1, 0) 3
 
 ### The Wyrm Caves ###
 DUNGEON:        "The Wyrm Caves" "D" (1, 0)
