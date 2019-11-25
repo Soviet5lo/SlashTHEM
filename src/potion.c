@@ -1219,7 +1219,7 @@ peffects(otmp)
 		losestr(rnd(10));
 		pline("CN(-) + HCl <==> HCN + Cl(-) ");
 			losehp(d(otmp->cursed ? 4 : 2, otmp->blessed ? 8 : 16),
-					"drinking cyanide", KILLED_BY_AN);
+					"drinking cyanide", KILLED_BY);
 		break;
 	case POT_RADIUM:
 		pline("This was radioactive radium!");
