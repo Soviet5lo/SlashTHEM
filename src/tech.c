@@ -279,7 +279,7 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	clk_tech[] = { {   1, T_TINKER, 1},
 		       {   0, 0, 0} },
-	ogr_tech[] = { {   1, T_PRIMAR_ROAR, 1},
+	ogr_tech[] = { {   1, T_PRIMAL_ROAR, 1},
 		       {   10, T_BERSERK, 1},
 		       {   0, 0, 0} },
 	hob_tech[] = { {   1, T_BLINK, 1},
