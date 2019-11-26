@@ -248,7 +248,6 @@ static const struct innate_tech
 	val_tech[] = { {   1, T_PRACTICE, 1},
 		       {   0, 0, 0} },
 	lun_tech[] = { {   1, T_EVISCERATE, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {  10, T_BERSERK, 1},
 		       {   0, 0, 0} },
 #ifdef YEOMAN
@@ -267,44 +266,32 @@ static const struct innate_tech
 		       {   0, 0, 0} },		       
 	/* Races */
 	dop_tech[] = { {   1, T_LIQUID_LEAP, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   0, 0, 0} },
 	dwa_tech[] = { {   1, T_RAGE, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   0, 0, 0} },
 	elf_tech[] = { /* Put Tech here */
-		       {   1, T_APPRAISAL, 1},
 		       {   0, 0, 0} },
 	gno_tech[] = { {   1, T_VANISH, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   7, T_TINKER, 1},
 		       {   0, 0, 0} },
 	clk_tech[] = { {   1, T_TINKER, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   0, 0, 0} },
 	ogr_tech[] = { {   1, T_FLURRY, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   10, T_BERSERK, 1},
 		       {   15, T_PRIMAL_ROAR, 1},
 		       {   20, T_CRIT_STRIKE, 1},
 		       {   0, 0, 0} },
 	hob_tech[] = { {   1, T_BLINK, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   0, 0, 0} },
 	kob_tech[] = { {   10, T_TINKER, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   0, 0, 0} },
 	lyc_tech[] = { {   1, T_EVISCERATE, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {  10, T_BERSERK, 1},
 		       {   0, 0, 0} },
 	vam_tech[] = { {   1, T_DAZZLE, 1},
-		       {   1, T_APPRAISAL, 1},
 		       {   1, T_DRAW_BLOOD, 1},
 		       {   0, 0, 0} },
 	inc_tech[] = { {   1, T_DRAW_ENERGY, 1},
-		       {   0, 0, 0} },
-	def_tech[] = { {   1, T_APPRAISAL, 1}, /* everyone is supposed to get this --Amy */
 		       {   0, 0, 0} };
 	/* Orc */
 
@@ -2296,7 +2283,7 @@ race_tech()
 		case PM_HUMAN_WEREWOLF:	return (lyc_tech);
 		case PM_VAMPIRE:	return (vam_tech);
 		case PM_INCANTIFIER:	return (inc_tech);
-		default: 		/*return ((struct innate_tech *) 0)*/return (def_tech);
+		default: 		return ((struct innate_tech *) 0);
 	}
 }
 
