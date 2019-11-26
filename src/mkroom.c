@@ -426,12 +426,6 @@ struct mkroom *sroom;
 		    case MORGUE:
 			if(!rn2(5))
 			    (void) mk_tt_object(CORPSE, sx, sy);
-			if(!rn2(5) && (level_difficulty() > 10+rnd(200) )) { /* real player ghosts --Amy */
-				coord mmm;
-				mmm.x = sx;   
-				mmm.y = sy;
-			    (void) tt_mname(&mmm, FALSE, 0);
-				}
 			if(!rn2(10))	/* lots of treasure buried with dead */
 			    (void) mksobj_at((rn2(3)) ? LARGE_BOX : CHEST,
 					     sx, sy, TRUE, FALSE);

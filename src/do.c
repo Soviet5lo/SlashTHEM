@@ -1189,21 +1189,6 @@ boolean at_stairs, falling, portal;
 		}
 		mklev();
 		new = TRUE;	/* made the level */
-
-		/* some levels are populated with a few undead player monsters --Amy */
-		if (on_level(&u.uz, &earth_level))
-			create_umplayers(rn1(2, 1), TRUE);
-		if (on_level(&u.uz, &water_level))
-			create_umplayers(rn1(2, 1), TRUE);
-		if (on_level(&u.uz, &air_level))
-			create_umplayers(rn1(2, 1), TRUE);
-		if (on_level(&u.uz, &fire_level))
-			create_umplayers(rn1(2, 1), TRUE);
-		if (on_level(&u.uz, &sanctum_level))
-			create_umplayers(rn1(2, 1), TRUE);
-		if (on_level(&u.uz, &valley_level))
-			create_umplayers(rn1(6, 5), TRUE); /* valley of the dead has more undead --Amy */
-
 	} else {
 		/* returning to previously visited level; reload it */
 		fd = open_levelfile(new_ledger, whynot);
@@ -1504,9 +1489,7 @@ final_level()
 
 	/* create some player-monsters */
 	create_mplayers(rn1(4, 3), TRUE);
-	create_umplayers(rn1(2, 1), TRUE);
 	if (!rn2(5)) create_mplayers(rn1(4, 3), TRUE);
-	if (!rn2(5)) create_umplayers(rn1(2, 1), TRUE);
 
 	/* create a guardian angel next to player, if worthy */
 	if (Conflict) {

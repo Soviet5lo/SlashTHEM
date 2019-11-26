@@ -1179,10 +1179,6 @@ get_flag_description_of_monster_type(struct permonst * ptr, char * description)
 	if (is_mplayer(ptr)) {
 		strcat(description, " Is a playable role and thus likely to be well-armed.");
 	}
-	if (is_umplayer(ptr)) {
-		strcat(description, " Is an undead player character. Be very careful.");
-	}
-
 	
 	if (polyok(ptr)) {
 		strcat(description, " Is a valid polymorph form.");

@@ -323,22 +323,7 @@ struct obj *corpse;
 		 * on your location
 		 */
 		in_mklev = TRUE;
-
-		/* Come on, the ghost is just too weak. Let's try to make DCSS-styled player "ghosts". --Amy */
-
-		if (!rn2(5)) mtmp = makemon(&mons[PM_GHOST], u.ux, u.uy, MM_NONAME);
-
-		else if (u.ulevel >= 10 && !rn2(5)) { /* dangerous undead version --Amy */
-
-		if (flags.female && urole.undeadfemalenum != NON_PM) mtmp = makemon(&mons[urole.undeadfemalenum], u.ux, u.uy, MM_NONAME);
-		else mtmp = makemon(&mons[urole.undeadmalenum], u.ux, u.uy, MM_NONAME);
-
-		}
-
-		else if (flags.female && urole.femalenum != NON_PM) mtmp = makemon(&mons[urole.femalenum], u.ux, u.uy, MM_NONAME);
-		else mtmp = makemon(&mons[urole.malenum], u.ux, u.uy, MM_NONAME);
-
-
+		mtmp = makemon(&mons[PM_GHOST], u.ux, u.uy, MM_NONAME);
 		in_mklev = FALSE;
 		if (!mtmp) return;
 		mtmp = christen_monst(mtmp, plname);

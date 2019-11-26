@@ -516,10 +516,9 @@ register struct monst *mtmp;
 		    }
 		    } /* normal elves */                
 		} else /* enemy characters! */
-		 if ((mm >= PM_ARCHEOLOGIST && mm <= PM_WIZARD /*&& rn2(4)*/) || (mm >= PM_UNDEAD_ARCHEOLOGIST && mm <= PM_UNDEAD_WIZARD) ) { 
+		 if (mm >= PM_ARCHEOLOGIST && mm <= PM_WIZARD /*&& rn2(4)*/) {
 		  switch (mm) {
 		   case PM_ARCHEOLOGIST:
-		   case PM_UNDEAD_ARCHEOLOGIST:
 		     (void)mongets(mtmp, BULLWHIP);
 		     (void)mongets(mtmp, LEATHER_JACKET);
 		     (void)mongets(mtmp, FEDORA);
@@ -532,12 +531,10 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_ZOOKEEPER:
-		   case PM_UNDEAD_ZOOKEEPER:
 		     (void)mongets(mtmp, BULLWHIP);
 		   break;
 
 		   case PM_BARBARIAN:
-		   case PM_UNDEAD_BARBARIAN:
 		     (void)mongets(mtmp, BATTLE_AXE);
 		     if (!rn2(2)) (void)mongets(mtmp, TWO_HANDED_SWORD);
 		     (void)mongets(mtmp, RING_MAIL);
@@ -549,7 +546,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_BARD:
-		   case PM_UNDEAD_BARD:
 		     (void)mongets(mtmp, LEATHER_CLOAK);
 #ifndef GOLDOBJ
 		     mtmp->mgold = (long) d(mtmp->m_lev, 15);
@@ -559,7 +555,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_CAVEMAN: case PM_CAVEWOMAN:
-		   case PM_UNDEAD_CAVEMAN: case PM_UNDEAD_CAVEWOMAN:
 		     (void)mongets(mtmp, CLUB);
 		     if (rn2(3)) {
 			(void)mongets(mtmp, BOW);
@@ -581,7 +576,6 @@ register struct monst *mtmp;
 #endif
 		   break;
 		   case PM_GEEK:
-		   case PM_UNDEAD_GEEK:
 		     (void)mongets(mtmp, SILVER_DAGGER);
 		   break;
 		   case PM_ELF:
@@ -600,7 +594,6 @@ register struct monst *mtmp;
 #endif
 		   break;
 		   case PM_FLAME_MAGE:
-		   case PM_UNDEAD_FLAME_MAGE:
 		     (void)mongets(mtmp, QUARTERSTAFF);
 		     (void)mongets(mtmp, STUDDED_LEATHER_ARMOR);
 		     (void)mongets(mtmp, WAN_FIRE);
@@ -612,13 +605,11 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_FIREFIGHTER:
-		   case PM_UNDEAD_FIREFIGHTER:
 		     (void)mongets(mtmp, AXE);
 		     (void)mongets(mtmp, WAN_FIRE);
 		   break;
 
 		   case PM_ACID_MAGE:
-		   case PM_UNDEAD_ACID_MAGE:
 		     (void)mongets(mtmp, QUARTERSTAFF);
 		     (void)mongets(mtmp, STUDDED_LEATHER_ARMOR);
 		     (void)mongets(mtmp, WAN_ACID);
@@ -630,7 +621,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_CONVICT:
-		   case PM_UNDEAD_CONVICT:
 		     (void)mongets(mtmp, HEAVY_IRON_BALL);
 		     (void)mongets(mtmp, STRIPED_SHIRT);
 		     (void)mongets(mtmp, ROCK);
@@ -641,32 +631,26 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_ZYBORG:
-		   case PM_UNDEAD_ZYBORG:
 		     (void)mongets(mtmp, PLATE_MAIL);
 		     (void)mongets(mtmp, GREEN_LIGHTSABER);
 		     (void)mongets(mtmp, WAN_SOLAR_BEAM);
 		   break;
 
 		   case PM_LUNATIC:
-		   case PM_UNDEAD_LUNATIC:
 		     (void)mongets(mtmp, LARGE_SHIELD);
 		     (void)mongets(mtmp, CHAINWHIP);
 		   break;
 
 #if 0
 		   case PM_POKEMON:
-		   case PM_UNDEAD_POKEMON:
 #endif
 		   case PM_MUSICIAN:
-		   case PM_UNDEAD_MUSICIAN:
 		   case PM_GRADUATE:
-		   case PM_UNDEAD_GRADUATE:
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
 		   break;
 
 		   case PM_WARRIOR:
-		   case PM_UNDEAD_WARRIOR:
 		     (void)mongets(mtmp, MACE);
 		     (void)mongets(mtmp, CROSSBOW);
 			 m_initthrow(mtmp, CROSSBOW_BOLT, 50);
@@ -679,7 +663,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_NOBLEMAN:
-		   case PM_UNDEAD_NOBLEMAN:
 		     (void)mongets(mtmp, RAPIER);
 		     (void)mongets(mtmp, RUFFLED_SHIRT);
 		     (void)mongets(mtmp, LEATHER_GLOVES);
@@ -687,7 +670,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_NOBLEWOMAN:
-		   case PM_UNDEAD_NOBLEWOMAN:
 		     (void)mongets(mtmp, RAPIER);
 		     (void)mongets(mtmp, VICTORIAN_UNDERWEAR);
 		     (void)mongets(mtmp, LEATHER_GLOVES);
@@ -695,12 +677,10 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_DRUNK:
-		   case PM_UNDEAD_DRUNK:
 		     (void)mongets(mtmp, RUBBER_HOSE);
 		   break;
 
 		   case PM_PIRATE:
-		   case PM_UNDEAD_PIRATE:
 		     (void)mongets(mtmp, SCIMITAR);
 		     (void)mongets(mtmp, PISTOL);
 		     (void)mongets(mtmp, KNIFE);
@@ -711,7 +691,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_OFFICER:
-		   case PM_UNDEAD_OFFICER:
 		     (void)mongets(mtmp, CLUB);
 		     (void)mongets(mtmp, PISTOL);
 			 m_initthrow(mtmp, BULLET, 50);
@@ -721,21 +700,18 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_GLADIATOR:
-		   case PM_UNDEAD_GLADIATOR:
 		     (void)mongets(mtmp, SILVER_SPEAR);
 		     (void)mongets(mtmp, SHIELD_OF_REFLECTION);
 
 		   break;
 
 		   case PM_CORSAIR:
-		   case PM_UNDEAD_CORSAIR:
 		     (void)mongets(mtmp, DAGGER);
 		     (void)mongets(mtmp, SCIMITAR);
 
 		   break;
 
 		   case PM_DIVER:
-		   case PM_UNDEAD_DIVER:
 		     (void)mongets(mtmp, KNIFE);
 		     (void)mongets(mtmp, TRIDENT);
 		     (void)mongets(mtmp, SPEAR);
@@ -743,14 +719,12 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_PALADIN:
-		   case PM_UNDEAD_PALADIN:
 		     (void)mongets(mtmp, TRIDENT);
 		     (void)mongets(mtmp, ROBE);
 		     (void)mongets(mtmp, SMALL_SHIELD);
 		   break;
 
 		   case PM_ELECTRIC_MAGE:
-		   case PM_UNDEAD_ELECTRIC_MAGE:
 		     (void)mongets(mtmp, QUARTERSTAFF);
 		     (void)mongets(mtmp, STUDDED_LEATHER_ARMOR);
 		     (void)mongets(mtmp, WAN_LIGHTNING);
@@ -762,7 +736,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_HEALER:
-		   case PM_UNDEAD_HEALER:
 		     (void)mongets(mtmp, SCALPEL);
 		     (void)mongets(mtmp, LEATHER_GLOVES);
 		     (void)mongets(mtmp, WAN_HEALING);
@@ -774,7 +747,6 @@ register struct monst *mtmp;
 #endif
 		   break;
 		   case PM_ICE_MAGE:
-		   case PM_UNDEAD_ICE_MAGE:
 		     (void)mongets(mtmp, QUARTERSTAFF);
 		     (void)mongets(mtmp, STUDDED_LEATHER_ARMOR);
 		     (void)mongets(mtmp, WAN_COLD);
@@ -787,9 +759,7 @@ register struct monst *mtmp;
 #ifdef YEOMAN
 		   case PM_YEOMAN:
 #endif
-		   case PM_UNDEAD_YEOMAN:
 		   case PM_KNIGHT:
-		   case PM_UNDEAD_KNIGHT:
 		     (void)mongets(mtmp, LONG_SWORD);
 		     (void)mongets(mtmp, PLATE_MAIL);
 		     (void)mongets(mtmp, LARGE_SHIELD);
@@ -802,10 +772,8 @@ register struct monst *mtmp;
 #endif
 		     break;
 		   case PM_MONK:
-		   case PM_UNDEAD_MONK:
 #if 0 /* Deferred */
 		   case PM_PSION:
-		   case PM_UNDEAD_PSION:
 #endif
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_offensive_item(mtmp));
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_defensive_item(mtmp));
@@ -817,7 +785,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_NECROMANCER:
-		   case PM_UNDEAD_NECROMANCER:
 		     (void)mongets(mtmp, ATHAME);
 		     (void)mongets(mtmp, SCR_SUMMON_UNDEAD);
 		     if (!rn2(10)) (void)mongets(mtmp, WAN_SUMMON_UNDEAD);
@@ -832,8 +799,6 @@ register struct monst *mtmp;
 		   break;
 		   case PM_PRIEST:
 		   case PM_PRIESTESS:
-		   case PM_UNDEAD_PRIEST:
-		   case PM_UNDEAD_PRIESTESS:
 		     (void)mongets(mtmp, MACE);
 		     (void)mongets(mtmp, rn1(ROBE_OF_WEAKNESS - ROBE + 1, ROBE));
 		     (void)mongets(mtmp, SMALL_SHIELD);
@@ -854,7 +819,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_ROGUE:
-		   case PM_UNDEAD_ROGUE:
 		     (void)mongets(mtmp, SHORT_SWORD);
 		     (void)mongets(mtmp, LEATHER_ARMOR);
 #ifndef GOLDOBJ
@@ -865,25 +829,21 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_LOCKSMITH:
-		   case PM_UNDEAD_LOCKSMITH:
 		   break;
 
 		   case PM_RANGER:
-		   case PM_UNDEAD_RANGER:
 		     (void)mongets(mtmp, ELVEN_DAGGER);
 		     (void)mongets(mtmp, ELVEN_BOW);
 			    m_initthrow(mtmp, ELVEN_ARROW, 25);
 		   break;
 
 		   case PM_NINJA:
-		   case PM_UNDEAD_NINJA:
 		     (void)mongets(mtmp, SHORT_SWORD);
 		     (void)mongets(mtmp, POT_INVISIBILITY);
 			m_initthrow(mtmp, SHURIKEN, 25);
 		   break;
 
 		   case PM_SAMURAI:
-		   case PM_UNDEAD_SAMURAI:
 		     (void)mongets(mtmp, KATANA);
 		     if (rn2(2)) (void)mongets(mtmp, SHORT_SWORD);
 		     if (rn2(3)) {
@@ -899,7 +859,6 @@ register struct monst *mtmp;
 		   break;
 #ifdef TOURIST
 		   case PM_TOURIST:
-		   case PM_UNDEAD_TOURIST:
 		     m_initthrow(mtmp, DART, 20);
 		     (void)mongets(mtmp, HAWAIIAN_SHIRT);
 		     if (rn2(2)) (void)mongets(mtmp, EXPENSIVE_CAMERA);
@@ -911,7 +870,6 @@ register struct monst *mtmp;
 		   break;
 #endif
 		   case PM_UNDEAD_SLAYER:
-		   case PM_NON_UNDEAD_SLAYER:
 		     (void)mongets(mtmp, SILVER_SPEAR);
 		     (void)mongets(mtmp, CHAIN_MAIL);
 #ifndef GOLDOBJ
@@ -922,13 +880,11 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_UNDERTAKER:
-		   case PM_UNDEAD_UNDERTAKER:
 		     (void)mongets(mtmp, SCALPEL);
 		     (void)mongets(mtmp, VICTORIAN_UNDERWEAR);
 		   break;
 
 		   case PM_VALKYRIE:
-		   case PM_UNDEAD_VALKYRIE:
 		     (void)mongets(mtmp, LONG_SWORD);
 		     if (!rn2(3)) m_initthrow(mtmp, DAGGER, 4);
 		     (void)mongets(mtmp, SMALL_SHIELD);
@@ -940,7 +896,6 @@ register struct monst *mtmp;
 		   break;
 
 		   case PM_WIZARD:
-		   case PM_UNDEAD_WIZARD:
 		     (void)mongets(mtmp, ATHAME);
 		     (void) mongets(mtmp, rnd_offensive_item(mtmp));
 		     (void) mongets(mtmp, rnd_offensive_item(mtmp));
@@ -2253,12 +2208,6 @@ register int	mmflags;
 		flags.ghost_count++;
 		if (!(mmflags & MM_NONAME))
 			mtmp = christen_monst(mtmp, rndghostname());
-
-	/* undead player monsters don't have titles, so I'm assigning names to them instead --Amy */
-	} else if (mndx >= PM_UNDEAD_ARCHEOLOGIST && mndx <= PM_UNDEAD_WIZARD && !(mmflags & MM_NONAME) ) {
-
-		mtmp = christen_monst(mtmp, mtmp->female ? rndplrmonnamefemale() : rndplrmonname() );
-
 	} else if (mndx == PM_NIGHTMARE) {
 		struct obj *otmp;
 

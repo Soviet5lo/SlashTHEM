@@ -40,7 +40,7 @@ const struct Role roles[] = {
 	{"Acid-Master",  0} },
 	"Tartarica", "Acetica", "Hydrocloria", /* Special - Based on chemical acids */
 	"Aci", "Slime Pit", "Electric Power Station",
-	PM_ACID_MAGE, NON_PM, PM_UNDEAD_ACID_MAGE, NON_PM, PM_ACID_HOUND_PUP,
+	PM_ACID_MAGE, NON_PM, PM_ACID_HOUND_PUP,
 	PM_ACIDSNORT, PM_ATTENDANT, PM_LIGHTNINGROD,
 	PM_DROW, PM_TITAN, S_ANGEL, S_GIANT,
 
@@ -69,7 +69,7 @@ const struct Role roles[] = {
 	{"Curator",     0} },
 	"Quetzalcoatl", "Camaxtli", "Huhetotl", /* Central American */
 	"Arc", "the College of Archeology", "the Tomb of the Toltec Kings",
-	PM_ARCHEOLOGIST, NON_PM, PM_UNDEAD_ARCHEOLOGIST, NON_PM, NON_PM,
+	PM_ARCHEOLOGIST, NON_PM, NON_PM,
 	PM_LORD_CARNARVON, PM_STUDENT, PM_MINION_OF_HUHETOTL,
 	NON_PM, PM_HUMAN_MUMMY, S_SNAKE, S_MUMMY,
 #if 0
@@ -99,7 +99,7 @@ const struct Role roles[] = {
 	{"Conqueror",   "Conqueress"} },
 	"Mitra", "Crom", "Set", /* Hyborian */
 	"Bar", "the Camp of the Duali Tribe", "the Duali Oasis",
-	PM_BARBARIAN, NON_PM, PM_UNDEAD_BARBARIAN, NON_PM, NON_PM,
+	PM_BARBARIAN, NON_PM, NON_PM,
 	PM_PELIAS, PM_CHIEFTAIN, PM_THOTH_AMON,
 	PM_OGRE, PM_TROLL, S_OGRE, S_TROLL,
 #if 0
@@ -129,7 +129,7 @@ const struct Role roles[] = {
 	{"Master Bard", 0} },
 	"_Minerva", "Apollo", "Linus", /* classical gods of music */
 	"Brd", "the Conservatorium", "the Island of Anthemoessa",
-	PM_BARD, NON_PM, PM_UNDEAD_BARD, NON_PM, NON_PM,
+	PM_BARD, NON_PM, NON_PM,
 	PM_PINDAR, PM_RHYMER, PM_AGLAOPE,
 	PM_SNAKE, PM_WHITE_UNICORN, S_SNAKE, S_UNICORN,
 	ART_LYRE_OF_ORPHEUS,
@@ -156,7 +156,7 @@ const struct Role roles[] = {
 	{"Pioneer",     0} },
 	"Anu", "_Ishtar", "Anshar", /* Babylonian */
 	"Cav", "the Caves of the Ancestors", "the Dragon's Lair",
-	PM_CAVEMAN, PM_CAVEWOMAN, PM_UNDEAD_CAVEMAN, PM_UNDEAD_CAVEWOMAN, PM_LITTLE_DOG,
+	PM_CAVEMAN, PM_CAVEWOMAN, PM_LITTLE_DOG,
 	PM_SHAMAN_KARNOV, PM_NEANDERTHAL, PM_CHROMATIC_DRAGON,
 	PM_BUGBEAR, PM_HILL_GIANT, S_HUMANOID, S_GIANT,
 #if 0
@@ -186,7 +186,7 @@ const struct Role roles[] = {
 	{"Chef de Cuisine", 0} }, /* Kitchen Chef - Head of all */
 	"_Demeter", "_Hestia", "_Adephagia", /* Greek */
 	"Chf", "The Iron Kitchen of Gourmet", "Hell's Kitchen", /* TODO: Quest stuff */
-	PM_CHEF, NON_PM, PM_UNDEAD_CHEF, NON_PM, NON_PM,
+	PM_CHEF, NON_PM, NON_PM,
 	PM_SUPREME_CHEF, PM_KITCHEN_PORTER, PM_THE_IMMORTAL_ROT, /* TODO: Quest leader/nemesis */
 	PM_GIANT_BEETLE, PM_BLOODWORM, S_ANT, S_WORM,
 #if 0
@@ -218,7 +218,7 @@ const struct Role roles[] = {
 	{"Fugitive",  0} },
 	"Ilmater", "Grumbar", "_Tymora",	/* Faerunian */
 	"Con", "Castle Waterdeep Dungeon", "the Warden's Level",
-	PM_CONVICT, NON_PM, PM_UNDEAD_CONVICT, NON_PM, PM_SEWER_RAT,
+	PM_CONVICT, NON_PM, PM_SEWER_RAT,
 	PM_ROBERT_THE_LIFER, PM_INMATE, PM_WARDEN_ARIANNA,
 	PM_GIANT_BEETLE, PM_SOLDIER_ANT, S_RODENT, S_SPIDER,
 	ART_IRON_BALL_OF_LIBERATION,
@@ -250,7 +250,7 @@ const struct Role roles[] = {
 	{"Commodore",  	0} },
 	"Erzulie Freda", "Marassa Jumeaux", "Papa Legba",	/* Haitian Vodou */
 	"Cor", "Queen Anne's Revenge", "Grotto of Souls",
-	PM_CORSAIR, NON_PM, PM_UNDEAD_CORSAIR, NON_PM, NON_PM,
+	PM_CORSAIR, NON_PM, NON_PM,
 	PM_BLACKBEARD, PM_PIRATE_BROTHER, PM_SPEARATHAN,
 	PM_GIANT_EEL, PM_SKELETAL_PIRATE, S_EEL, S_ZOMBIE,
 	ART_PEARL_OF_WISDOM,
@@ -277,7 +277,7 @@ const struct Role roles[] = {
 	{"Torpedo",  	0} },
 	"Tane", "Tangaroa", "Whiro",	/* Polynesian */
 	"Div", "Scuba Dock", "Melville's Sea of Doom",
-	PM_DIVER, NON_PM, PM_UNDEAD_DIVER, NON_PM, NON_PM,
+	PM_DIVER, NON_PM, NON_PM,
 	PM_JACQUES_COUSTEAU, PM_ATTENDANT, PM_MOBY_DICK,
 	PM_ELECTRIC_EEL, PM_GIANT_CRAB, S_EEL, S_EEL,
 	ART_MAUI_S_FISHHOOK,
@@ -304,7 +304,7 @@ const struct Role roles[] = {
 	{"Socialite",  0} },
 	"Fufluns", "Dionysus", "Pan",	/* Classical gods of Wine */
 	"Dru", "Brass Lantern Bar", "Moriarty's Saloon",
-	PM_DRUNK, NON_PM, PM_UNDEAD_DRUNK, NON_PM, NON_PM,
+	PM_DRUNK, NON_PM, NON_PM,
 	PM_ANDY_STAHL, PM_ATTENDANT, PM_COLIN_MORIARTY,
 	PM_GNOME_WARRIOR, PM_DWARF_KING, S_HUMAN, S_GNOME,
 	ART_GOURD_OF_INFINITY,
@@ -332,7 +332,7 @@ const struct Role roles[] = {
 	{"Shock-Master",  0} },
 	"Static", "Magnet", "Lightning", /* Special */
 	"Ele", "Bolttown", "Celebrity Graveyard",
-	PM_ELECTRIC_MAGE, NON_PM, PM_UNDEAD_ELECTRIC_MAGE, NON_PM, PM_SHOCK_HOUND_PUP,
+	PM_ELECTRIC_MAGE, NON_PM, PM_SHOCK_HOUND_PUP,
 	PM_GUITAR_HERO, PM_SHOCKER, PM_ELVIS_PRESLEY,
 	PM_SHOGGOTH, PM_BURBLING_BLOB, S_PUDDING, S_BLOB,
 	ART_HARP_OF_LIGHTNING,
@@ -360,7 +360,7 @@ const struct Role roles[] = {
 	{"Fire Chief",  0} },
 	"Prometheus", "Thor", "Arson", /* Fire */
 	"Fir", "Fire-Brigade Base", "Smokey Forest",
-	PM_FIREFIGHTER, NON_PM, PM_UNDEAD_FIREFIGHTER, NON_PM, PM_LITTLE_DOG,
+	PM_FIREFIGHTER, NON_PM, PM_LITTLE_DOG,
 	PM_SMOKEY, PM_ATTENDANT, PM_EDDIE_THE_PYRO,
 	PM_FIRE_ELEMENTAL, PM_SALAMANDER, S_ELEMENTAL, S_LIZARD,
 
@@ -389,7 +389,7 @@ const struct Role roles[] = {
 	{"Flame-Master",  0} },
 	"Earth", "Fire", "Ash", /* Special */
 	"Fla", "the great Circle of Flame", "the Water Mage's Cave",
-	PM_FLAME_MAGE, NON_PM, PM_UNDEAD_FLAME_MAGE, NON_PM, PM_HELL_HOUND_PUP,
+	PM_FLAME_MAGE, NON_PM, PM_HELL_HOUND_PUP,
 	PM_HIGH_FLAME_MAGE, PM_IGNITER, PM_WATER_MAGE,
 	PM_WATER_ELEMENTAL, PM_RUST_MONSTER, S_ELEMENTAL, S_RUSTMONST,
 #if 0
@@ -420,7 +420,7 @@ const struct Role roles[] = {
 	{"he who learns",     "she who learns"} },
 	"UNIX", "the PDP-7", "VMS", /* Computerian */
 	"Gee", "the Development Team's location", "the Microsoft headquarter",
-	PM_GEEK, NON_PM, PM_UNDEAD_GEEK, NON_PM, NON_PM,
+	PM_GEEK, NON_PM, NON_PM,
 	PM_THE_DEV_TEAM, PM_HACKER, PM_BILL_GATES,
 	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
 #if 0
@@ -450,7 +450,7 @@ const struct Role roles[] = {
 	{"Centurion",  	0} }, /* sorry Fyr, but Champion was just way too generic of a title. --Amy */
 	"Sulla", "Cicero", "Catilina",	/* Ancient Rome */
 	"Gla", "Arena Bloodworks", "Colosseum",
-	PM_GLADIATOR, NON_PM, PM_UNDEAD_GLADIATOR, NON_PM, NON_PM,
+	PM_GLADIATOR, NON_PM, NON_PM,
 	PM_TUTOR, PM_ATTENDANT, PM_THE_CHAMPION_OF_POMPEJI,
 	PM_WEREPANTHER, PM_MINOTAUR, S_HUMAN, S_QUADRUPED,
 	ART_IMPERIAL_TOKEN,
@@ -477,7 +477,7 @@ const struct Role roles[] = {
 	{"Kernel Maintainer",    0} }, 
 	"Jobs", "Wozniak", "Gates", /* geek */
 	"Gra", "university campus", "development hell",
-	PM_GRADUATE, NON_PM, PM_UNDEAD_GRADUATE, NON_PM, NON_PM,
+	PM_GRADUATE, NON_PM, NON_PM,
 	PM_UPPER_GRADUATE, PM_HACKER, PM_STUDENT_LEADER,
 	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
 
@@ -505,7 +505,7 @@ const struct Role roles[] = {
 	{"Chirurgeon",     0} },
 	"_Athena", "Hermes", "Poseidon", /* Greek */
 	"Hea", "the Temple of Epidaurus", "the Temple of Coeus",
-	PM_HEALER, NON_PM, PM_UNDEAD_HEALER, NON_PM, NON_PM,
+	PM_HEALER, NON_PM, NON_PM,
 	PM_HIPPOCRATES, PM_ATTENDANT, PM_CYCLOPS,
 	PM_GIANT_RAT, PM_SNAKE, S_RODENT, S_YETI,
 #if 0
@@ -535,7 +535,7 @@ const struct Role roles[] = {
 	{"Ice-Master",    0} },
 	"Air", "Frost", "Smoke", /* Special */
 	"Ice", "the great Ring of Ice", "the Earth Mage's Cave",
-	PM_ICE_MAGE, NON_PM, PM_UNDEAD_ICE_MAGE, NON_PM, PM_WINTER_WOLF_CUB,
+	PM_ICE_MAGE, NON_PM, PM_WINTER_WOLF_CUB,
 	PM_HIGH_ICE_MAGE, PM_FROSTER, PM_EARTH_MAGE,
 	PM_RUST_MONSTER, PM_XORN, S_RUSTMONST, S_XORN,
 #if 0
@@ -568,7 +568,7 @@ const struct Role roles[] = {
 	{"Jedi Master",    0} },
 	"the Light Side", "the Force", "the Dark Side",
 	"Jed", "the Jedi Temple", "the Outer Rim",
-	PM_JEDI, NON_PM, PM_UNDEAD_JEDI, NON_PM, PM_LITTLE_DOG,
+	PM_JEDI, NON_PM, PM_LITTLE_DOG,
 	PM_THE_JEDI_MASTER, PM_PADAWAN, PM_LORD_SIDIOUS,
 	PM_STORMTROOPER, PM_STORMTROOPER, S_HUMAN, S_HUMAN,
 #if 0
@@ -600,7 +600,7 @@ const struct Role roles[] = {
 	{"Paladin",     0} },
 	"Lugh", "_Brigit", "Manannan Mac Lir", /* Celtic */
 	"Kni", "Camelot Castle", "the Isle of Glass",
-	PM_KNIGHT, NON_PM, PM_UNDEAD_KNIGHT, NON_PM, PM_PONY,
+	PM_KNIGHT, NON_PM, PM_PONY,
 	PM_KING_ARTHUR, PM_PAGE, PM_IXOTH,
 	PM_QUASIT, PM_OCHRE_JELLY, S_IMP, S_JELLY,
 #if 0
@@ -630,7 +630,7 @@ const struct Role roles[] = {
 	{"Supreme Locksmith",       0} },
 	"Nuada", "Dagda", "Morrigan", /* Celtic */
 	"Loc", "Emergency Base", "Locked Room",
-	PM_LOCKSMITH, NON_PM, PM_UNDEAD_LOCKSMITH, NON_PM, NON_PM,
+	PM_LOCKSMITH, NON_PM, NON_PM,
 	PM_MASTER_OF_LOCKS, PM_THUG, PM_BURGLAR_ED,
 	PM_MUGGER, PM_LEPRECHAUN, S_HUMAN, S_HUMAN,
 
@@ -658,7 +658,7 @@ const struct Role roles[] = {
 	{"Master Shapeshifter",  0} },
 	"Eluvian", "Moon", "Lycanthus",	/* from an old SLASH version without extended magic */
 	"Lun", "the Calerin Forest", "the Nightmare Forest",
-	PM_LUNATIC, NON_PM, PM_UNDEAD_LUNATIC, NON_PM, NON_PM,
+	PM_LUNATIC, NON_PM, NON_PM,
 	PM_HIGH_LYCANTHROPE, PM_FIEND, PM_SIR_LORIMAR,
 	PM_WOODLAND_ELF, PM_FOREST_CENTAUR, S_HUMAN, S_CENTAUR,
 	ART_STAFF_OF_WITHERING,
@@ -686,7 +686,7 @@ const struct Role roles[] = {
 	"Shan Lai Ching", "Chih Sung-tzu", "Huan Ti", /* Chinese */
 	"Mon", "the Monastery of Chan-Sune",
 	  "the Monastery of the Earth-Lord",
-	PM_MONK, NON_PM, PM_UNDEAD_MONK, NON_PM, NON_PM,
+	PM_MONK, NON_PM, NON_PM,
 	PM_GRAND_MASTER, PM_ABBOT, PM_MASTER_KAEN,
 	PM_EARTH_ELEMENTAL, PM_XORN, S_ELEMENTAL, S_XORN,
 #if 0
@@ -717,7 +717,7 @@ const struct Role roles[] = {
 	"Donblas", "Grome", "Arioch", /* Melnibonean */
 
 	"Mus", "Wild West Bar", "High Noon Plains",
-	PM_MUSICIAN, NON_PM, PM_UNDEAD_MUSICIAN, NON_PM, NON_PM,
+	PM_MUSICIAN, NON_PM, NON_PM,
 	PM_HARRY_THE_COWBOY, PM_ATTENDANT, PM_DRACO_THE_SHARPSHOOTER,
 	PM_WOODLAND_ELF, PM_HIGH_ELF, S_HUMAN, S_HUMAN,
 
@@ -745,7 +745,7 @@ const struct Role roles[] = {
 	{"Lich Lord", 0} },
 	"Nharlotep", "Zugguthobal", "Gothuulbe", /* Assorted slimy things */
 	"Nec", "the Tower of the Dark Lord", "the Lair of Maugneshaagar",
-	PM_NECROMANCER, NON_PM, PM_UNDEAD_NECROMANCER, NON_PM, PM_GHOUL,
+	PM_NECROMANCER, NON_PM, PM_GHOUL,
 	PM_DARK_LORD, PM_EMBALMER, PM_MAUGNESHAAGAR,
 	PM_NUPPERIBO, PM_MONGBAT, S_BAT, S_IMP,
 #if 0
@@ -776,7 +776,7 @@ const struct Role roles[] = {
 	{"Ikkyu",       0} },
 	"Jiraiya", "_Tsunade", "Orochimaru", /* from Jiraiya Goketsu Monogatari */
 	"Nin", "Green Plains", "Demon Orb Lair",
-	PM_NINJA, NON_PM, PM_UNDEAD_NINJA, NON_PM, PM_LITTLE_DOG,
+	PM_NINJA, NON_PM, PM_LITTLE_DOG,
 	PM_KEN_HAYABUSA, PM_ROSHI, PM_JAQUIO,
 	PM_WOLF, PM_GIANT_BAT, S_DOG, S_BAT,
 
@@ -805,7 +805,7 @@ const struct Role roles[] = {
 	"God the Father", "_Mother Earth", "the Satan", /* Romanian, sorta */
 	"Nob", "your ancestral home",
 	  "the rebel village",
-	PM_NOBLEMAN, PM_NOBLEWOMAN, PM_UNDEAD_NOBLEMAN, PM_UNDEAD_NOBLEWOMAN, PM_PONY,
+	PM_NOBLEMAN, PM_NOBLEWOMAN, PM_PONY,
 	PM_OLD_GYPSY_WOMAN, PM_SERVANT, PM_REBEL_RINGLEADER,
 	PM_SOLDIER, PM_PEASANT, S_HUMANOID, S_HUMAN,
 	ART_MANTLE_OF_HEAVEN,
@@ -832,7 +832,7 @@ const struct Role roles[] = {
 	{"Commissioner",  0} },
 	"Magnum", "Smith", "Wesson", /* guns */
 	"Off", "Central Cop Station", "Tank Breaker Hideout",
-	PM_OFFICER, NON_PM, PM_UNDEAD_OFFICER, NON_PM, PM_LITTLE_DOG,
+	PM_OFFICER, NON_PM, PM_LITTLE_DOG,
 	PM_COMMISSIONER_HUNTER, PM_STUDENT, PM_GRANDPA_TANK_BREAKER,
 	PM_MUGGER, PM_STREET_THUG, S_HUMAN, S_HUMAN,
 	ART_WHISTLE_OF_THE_WARDEN,
@@ -859,7 +859,7 @@ const struct Role roles[] = {
 	{"Annihilator", 0} },
 	0, 0, 0,	/* randomly chosen from other roles */
 	"Pal", "Ancient Temple", "the World-Eater's domain",
-	PM_PALADIN, NON_PM, PM_UNDEAD_PALADIN, NON_PM, NON_PM,
+	PM_PALADIN, NON_PM, NON_PM,
 	PM_EREC, PM_ACOLYTE, PM_ALDUIN,
 	PM_HUMAN_ZOMBIE, PM_WRAITH, S_ZOMBIE, S_WRAITH,
 	ART_CUDGEL_OF_CUTHBERT,
@@ -886,7 +886,7 @@ const struct Role roles[] = {
 	{"Dread Pirate",  	0} },
 	"Nereus", "Neptune", "Proteus",	/* Classical sea gods */
 	"Pir", "Tortuga", "Shipwreck Island",
-	PM_PIRATE, NON_PM, PM_UNDEAD_PIRATE, NON_PM, NON_PM,
+	PM_PIRATE, NON_PM, NON_PM,
 	PM_MAYOR_CUMMERBUND, PM_PIRATE_BROTHER, PM_BLACKBEARD_S_GHOST,
 	PM_SKELETAL_PIRATE, PM_SOLDIER, S_RODENT, S_ELEMENTAL, /* Ghost pirates, soldiers, rats in the food stores, and the occasional storm*/
 	ART_TREASURY_OF_PROTEUS,
@@ -913,7 +913,7 @@ const struct Role roles[] = {
 	{"MIY",      0} },
 	"A'En", "Dr. Oujide", "Team Missile Bomb", /* Pokemon Vietnamese Crystal */
 	"Pok", "ELF GRANDFATHER RESEARCH LAB", "JOIN-CAVE",
-	PM_POKEMON, NON_PM, PM_UNDEAD_POKEMON, NON_PM, PM_EEVEE,
+	PM_POKEMON, NON_PM, PM_EEVEE,
 	PM_DR__WUSIJI, PM_POKEMON_TRAINER, PM_HO_OH,
 	PM_KOFFING, PM_RHYHORN, S_EYE, S_QUADRUPED,
 	ART_GAUNTLETS_OF_ILLUSION,
@@ -940,7 +940,7 @@ const struct Role roles[] = {
 	{"High Priest", "High Priestess"} },
 	0, 0, 0,	/* chosen randomly from among the other roles */
 	"Pri", "the Great Temple", "the Temple of Nalzok",
-	PM_PRIEST, PM_PRIESTESS, PM_UNDEAD_PRIEST, PM_UNDEAD_PRIESTESS, NON_PM,
+	PM_PRIEST, PM_PRIESTESS, NON_PM,
 	PM_ARCH_PRIEST, PM_ACOLYTE, PM_NALZOK,
 	PM_HUMAN_ZOMBIE, PM_WRAITH, S_ZOMBIE, S_WRAITH,
 #if 0
@@ -971,7 +971,7 @@ const struct Role roles[] = {
 	"Bickney", "Corridor", "Lockney", /* Egyptian */
 	"Psi", "the Monastery of Psionics",
 	  "the Monastery of the Swamp",
-	PM_PSION, NON_PM, PM_UNDEAD_PSION, NON_PM, NON_PM,
+	PM_PSION, NON_PM, NON_PM,
 	PM_PSI_MASTER, PM_ABBOT, PM_MASTER_SABRINA,
 	PM_DOPPELGANGER, PM_MULTICOLOR_GRUE, S_GRUE, S_HUMAN,
 #if 0
@@ -1015,7 +1015,7 @@ const struct Role roles[] = {
 	{"Marksman",      "Markswoman"} },
 	"Mercury", "_Venus", "Mars", /* Roman/planets */
 	"Ran", "Orion's camp", "the cave of the wumpus",
-	PM_RANGER, NON_PM, PM_UNDEAD_RANGER, NON_PM, PM_LITTLE_DOG /* Orion & canis major */,
+	PM_RANGER, NON_PM, PM_LITTLE_DOG /* Orion & canis major */,
 	PM_ORION, PM_HUNTER, PM_SCORPIUS,
 	PM_FOREST_CENTAUR, PM_SCORPION, S_CENTAUR, S_SPIDER,
 #if 0
@@ -1045,7 +1045,7 @@ const struct Role roles[] = {
 	{"Thief",       0} },
 	"Issek", "Mog", "Kos", /* Nehwon */
 	"Rog", "the Thieves' Guild Hall", "the Assassins' Guild Hall",
-	PM_ROGUE, NON_PM, PM_UNDEAD_ROGUE, NON_PM, NON_PM,
+	PM_ROGUE, NON_PM, NON_PM,
 	PM_MASTER_OF_THIEVES, PM_THUG, PM_MASTER_ASSASSIN,
 	PM_LEPRECHAUN, PM_GUARDIAN_NAGA, S_NYMPH, S_NAGA,
 #if 0
@@ -1087,7 +1087,7 @@ const struct Role roles[] = {
 	{"Kokushu",	0} },	/* heads a province */
 	"_Amaterasu Omikami", "Raijin", "Susanowo", /* Japanese */
 	"Sam", "the Castle of the Taro Clan", "the Shogun's Castle",
-	PM_SAMURAI, NON_PM, PM_UNDEAD_SAMURAI, NON_PM, PM_LITTLE_DOG,
+	PM_SAMURAI, NON_PM, PM_LITTLE_DOG,
 	PM_LORD_SATO, PM_ROSHI, PM_ASHIKAGA_TAKAUJI,
 	PM_WOLF, PM_STALKER, S_DOG, S_ELEMENTAL,
 #if 0
@@ -1117,7 +1117,7 @@ const struct Role roles[] = {
 	{"Adventurer",  0} },
 	"Blind Io", "_The Lady", "Offler", /* Discworld */
 	"Tou", "Ankh-Morpork", "the Thieves' Guild Hall",
-	PM_TOURIST, NON_PM, PM_UNDEAD_TOURIST, NON_PM, NON_PM,
+	PM_TOURIST, NON_PM, NON_PM,
 	PM_TWOFLOWER, PM_GUIDE, PM_MASTER_OF_THIEVES,
 	PM_GIANT_SPIDER, PM_FOREST_CENTAUR, S_SPIDER, S_CENTAUR,
 #if 0
@@ -1147,7 +1147,7 @@ const struct Role roles[] = {
 	{"Undead Slayer", 0} },
 	"Seeker", "_Osiris", "Seth", /* Egyptian */
 	"Und", "the Temple of Light", "the Crypt of Dracula",
-	PM_UNDEAD_SLAYER, NON_PM, PM_NON_UNDEAD_SLAYER, NON_PM, NON_PM,
+	PM_UNDEAD_SLAYER, NON_PM, NON_PM,
 	PM_VAN_HELSING, PM_EXTERMINATOR, PM_COUNT_DRACULA,
 	PM_HUMAN_MUMMY, PM_VAMPIRE, S_MUMMY, S_VAMPIRE,
 #if 0
@@ -1177,7 +1177,7 @@ const struct Role roles[] = {
 	{"Corpse Burner", 0} },
 	"_Hel", "Pluto", "Orcus", /* Death */
 	"Unt", "New Graveyard", "Underground Demon Lair",
-	PM_UNDERTAKER, NON_PM, PM_UNDEAD_UNDERTAKER, NON_PM, PM_DEATH_DOG,
+	PM_UNDERTAKER, NON_PM, PM_DEATH_DOG,
 	PM_AJELA, PM_EXTERMINATOR, PM_SEDUCER_SAINT,
 	PM_NALFESHNEE, PM_PIT_FIEND, S_DEMON, S_DEMON,
 
@@ -1205,7 +1205,7 @@ const struct Role roles[] = {
 	{"Lord",        "Lady"} },
 	"Tyr", "Odin", "Loki", /* Norse */
 	"Val", "the Shrine of Destiny", "the cave of Surtur",
-	PM_VALKYRIE, NON_PM, PM_UNDEAD_VALKYRIE, NON_PM, NON_PM /*PM_WINTER_WOLF_CUB*/,
+	PM_VALKYRIE, NON_PM, NON_PM /*PM_WINTER_WOLF_CUB*/,
 	PM_NORN, PM_SUPER_WARRIOR, PM_LORD_SURTUR,
 	PM_FIRE_ANT, PM_FIRE_GIANT, S_ANT, S_GIANT,
 #if 0
@@ -1234,7 +1234,7 @@ const struct Role roles[] = {
 	{"Patriarch",     "Matriarch"} },
 	"Talos", "_Meridia", "Clavicus Vile", /* The Elder Scrolls */
 	"War", "Acro Castle", "the Isle of the Damned",
-	PM_WARRIOR, NON_PM, PM_UNDEAD_WARRIOR, NON_PM, PM_PONY,
+	PM_WARRIOR, NON_PM, PM_PONY,
 	PM_SIR_LANCELOT, PM_PAGE, PM_ARCHNEMESIS,
 	PM_RED_DRAGON, PM_BARBARIAN, S_DRAGON, S_HUMAN,
 #if 0
@@ -1263,7 +1263,7 @@ const struct Role roles[] = {
 	{"Mage",        0} },
 	"Ptah", "Thoth", "Anhur", /* Egyptian */
 	"Wiz", "the Lonely Tower", "the Tower of Darkness",
-	PM_WIZARD, NON_PM, PM_UNDEAD_WIZARD, NON_PM, PM_KITTEN,
+	PM_WIZARD, NON_PM, PM_KITTEN,
 	PM_NEFERET_THE_GREEN, PM_APPRENTICE, PM_DARK_ONE,
 	PM_VAMPIRE_BAT, PM_XORN, S_BAT, S_WRAITH,
 #if 0
@@ -1296,7 +1296,7 @@ const struct Role roles[] = {
 	{"Regent",         0} },
 	"His Majesty", "His Holiness", "The Commons", /* The three estates */
 	"Yeo", "London", "the inner ward",
-	PM_YEOMAN, NON_PM, PM_UNDEAD_YEOMAN, NON_PM, PM_PONY,
+	PM_YEOMAN, NON_PM, PM_PONY,
 	PM_CHIEF_YEOMAN_WARDER, PM_YEOMAN_WARDER, PM_COLONEL_BLOOD,
 	PM_RAVEN, PM_WEREWOLF, S_RODENT, S_DOG,
 #if 0
@@ -1326,7 +1326,7 @@ const struct Role roles[] = {
 	{"Curator",     0} },
 	"Balder", "Edda", "Hagen", /* Norse mythology */
 	"Zoo", "Yellowstone Park", "Jurassic Park",
-	PM_ZOOKEEPER, NON_PM, PM_UNDEAD_ZOOKEEPER, NON_PM, PM_DINGO_PUPPY,
+	PM_ZOOKEEPER, NON_PM, PM_DINGO_PUPPY,
 	PM_MASTER_ZOOKEEPER, PM_STUDENT, PM_FEARFUL_TRICERATOPS,
 	PM_CARNIVOROUS_APE, PM_JAGUAR, S_FELINE, S_ZOUTHERN,
 
@@ -1354,7 +1354,7 @@ const struct Role roles[] = {
 	{"Synthetic Man",  "Synthetic Woman"} },
 	"Andromorph", "Technix", "Mechatron",	/* made-up names by Amy */
 	"Zyb", "Tech Facility", "Chaos Factors",
-	PM_ZYBORG, NON_PM, PM_UNDEAD_ZYBORG, NON_PM, NON_PM,
+	PM_ZYBORG, NON_PM, NON_PM,
 	PM_MISTER_MULBERRY, PM_ATTENDANT, PM_MASTER_BRAIN,
 	PM_CLOCKWORK_AUTOMATON, PM_SOLDIER, S_GOLEM, S_HUMAN,
 	ART_VERBAL_BLADE,
@@ -1381,7 +1381,7 @@ struct Role urole =
 {	{"Undefined", 0}, { {0, 0}, {0, 0}, {0, 0},
 	{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0} },
 	"L", "N", "C", "Xxx", "home", "locate",
-	NON_PM, NON_PM, NON_PM, NON_PM, NON_PM, NON_PM, NON_PM, NON_PM,
+	NON_PM, NON_PM, NON_PM, NON_PM, NON_PM, NON_PM,
 	NON_PM, NON_PM, 0, 0, 
 #if 0
 	0, 0,

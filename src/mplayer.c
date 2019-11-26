@@ -435,36 +435,6 @@ boolean special;
 		num--;
 	}
 }
-
-void
-create_umplayers(num, special)
-register int num;
-boolean special;
-{
-	int pm, x, y;
-	struct monst fakemon;
-
-	while(num) {
-		int tryct = 0;
-
-		/* roll for character class */
-		pm = PM_UNDEAD_ARCHEOLOGIST + rn2(PM_UNDEAD_WIZARD - PM_UNDEAD_ARCHEOLOGIST + 1);
-		fakemon.data = &mons[pm];
-
-		/* roll for an available location */
-		do {
-		    x = rn1(COLNO-4, 2);
-		    y = rnd(ROWNO-2);
-		} while(!goodpos(x, y, &fakemon, 0) && tryct++ <= 50);
-
-		/* if pos not found in 50 tries, don't bother to continue */
-		if(tryct > 50) return;
-
-		(void) makemon(&mons[pm], (xchar)x, (xchar)y, NO_MM_FLAGS);
-		num--;
-	}
-}
-
 void
 mplayer_talk(mtmp)
 register struct monst *mtmp;

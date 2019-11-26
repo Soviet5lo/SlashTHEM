@@ -276,59 +276,6 @@ register struct monst *mtmp;
 	    case PM_GHAST:
 	    case PM_CREEPING___:
 	    case PM_FRANKENSTEIN_S_MONSTER:
-	    case PM_UNDEAD_ARCHEOLOGIST:
-	    case PM_UNDEAD_BARBARIAN:
-	    case PM_UNDEAD_BARD:
-	    case PM_UNDEAD_CAVEMAN:
-	    case PM_UNDEAD_CAVEWOMAN:
-	    case PM_UNDEAD_PALADIN:
-	    case PM_UNDEAD_CHEF:
-	    case PM_UNDEAD_ZYBORG:
-#if 0
-	    case PM_UNDEAD_POKEMON:
-#endif
-	    case PM_UNDEAD_ELECTRIC_MAGE:
-	    case PM_UNDEAD_ACID_MAGE:
-	    case PM_UNDEAD_FLAME_MAGE:
-	    case PM_UNDEAD_CONVICT:
-	    case PM_UNDEAD_LUNATIC:
-	    case PM_UNDEAD_GEEK:
-	    case PM_UNDEAD_GRADUATE:
-	    case PM_UNDEAD_HEALER:
-	    case PM_UNDEAD_ICE_MAGE:
-	    case PM_UNDEAD_KNIGHT:
-	    case PM_UNDEAD_WARRIOR:
-	    case PM_UNDEAD_MONK:
-#if 0
-	    case PM_UNDEAD_PSION:
-#endif
-	    case PM_UNDEAD_NECROMANCER:
-	    case PM_UNDEAD_NOBLEMAN:
-	    case PM_UNDEAD_NOBLEWOMAN:
-	    case PM_UNDEAD_PIRATE:
-	    case PM_UNDEAD_CORSAIR:
-	    case PM_UNDEAD_DIVER:
-	    case PM_UNDEAD_GLADIATOR:
-	    case PM_UNDEAD_PRIEST:
-	    case PM_UNDEAD_PRIESTESS:
-	    case PM_UNDEAD_RANGER:
-	    case PM_UNDEAD_ROGUE:
-	    case PM_UNDEAD_SAMURAI:
-	    case PM_UNDEAD_TOURIST:
-	    case PM_UNDEAD_DRUNK:
-	    case PM_UNDEAD_FIREFIGHTER:
-	    case PM_UNDEAD_LOCKSMITH:
-	    case PM_UNDEAD_MUSICIAN:
-	    case PM_UNDEAD_NINJA:
-	    case PM_UNDEAD_OFFICER:
-	    case PM_UNDEAD_UNDERTAKER:
-	    case PM_UNDEAD_ZOOKEEPER:
-	    case PM_NON_UNDEAD_SLAYER:
-	    case PM_UNDEAD_VALKYRIE:
-	    case PM_UNDEAD_YEOMAN:
-	    /*case PM_UNDEAD_PADAWAN:*/
-	    case PM_UNDEAD_JEDI:
-	    case PM_UNDEAD_WIZARD:
 		obj = mkcorpstat(CORPSE, (struct monst *)0, &mons[mndx], x, y, TRUE);
 		obj->age -= 100;                /* this is an *OLD* corpse */
 		break;
@@ -2037,7 +1984,6 @@ boolean was_swallowed;			/* digestion */
 	if (bigmonst(mdat) || mdat == &mons[PM_LIZARD]
 		   || is_golem(mdat)
 		   || is_mplayer(mdat)
-		   || is_umplayer(mdat)
 		   || is_rider(mdat))
 		return TRUE;
 	return (boolean) (!rn2((int)
@@ -2992,7 +2938,7 @@ boolean msg;
 		   select_newcham_form might deliberately pick a player
 		   character type, so we can't arbitrarily rule out all
 		   human forms any more */
-		if (is_mplayer(mdat) || is_umplayer(mdat) || (!is_human(mdat) && monpolyok(mdat)))
+		if (is_mplayer(mdat) || (!is_human(mdat) && monpolyok(mdat)))
 		    break;
 	    }
 	    if (tryct > 100) return 0;	/* Should never happen */

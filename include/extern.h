@@ -1387,7 +1387,6 @@ E void NDECL(monstr_init);
 E struct monst *FDECL(mk_mplayer, (struct permonst *,XCHAR_P,
 				   XCHAR_P,BOOLEAN_P));
 E void FDECL(create_mplayers, (int,BOOLEAN_P));
-E void FDECL(create_umplayers, (int,BOOLEAN_P));
 E void FDECL(mplayer_talk, (struct monst *));
 
 #if defined(MICRO) || defined(WIN32)
@@ -2269,7 +2268,6 @@ E void FDECL(prscore, (int,char **));
 E struct obj *FDECL(tt_oname, (struct obj *));
 /*E void FDECL(tt_mname, (struct monst *));*/
 /*E void FDECL(mkundeadboo, (coord *,BOOLEAN_P,int));*/
-E void FDECL(tt_mname, (coord *,BOOLEAN_P,int));
 #ifdef GTK_GRAPHICS
 E winid NDECL(create_toptenwin);
 E void NDECL(destroy_toptenwin);

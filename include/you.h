@@ -91,8 +91,6 @@ struct Role {
 	/*** Indices of important monsters and objects ***/
 	short malenum,		/* index (PM_) as a male (botl.c) */
 	      femalenum,	/* ...or as a female (NON_PM == same) */
-		undeadmalenum,	/* index (PM_) as an undead */
-		undeadfemalenum,	/* mainly for bones files --Amy */
 	      petnum,		/* PM_ of preferred pet (NON_PM == random) */
 	      ldrnum,		/* PM_ of quest leader (questpgr.c) */
 	      guardnum,		/* PM_ of quest guardians (questpgr.c) */
