@@ -311,7 +311,7 @@ quest_levs: ../util/lev_comp \
 	Acid.des Arch.des \
 	Barb.des Bard.des \
 	Caveman.des Paladin.des Convict.des \
-	Cyborg.des Diver.des Drunk.des \
+	Diver.des Drunk.des \
 	Electric.des Chef.des Firef.des Flame.des \
 	Gladia.des Geek.des Gradu.des \
 	Healer.des Ice.des Jedi.des Knight.des Corsair.des \
@@ -329,7 +329,6 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Caveman.des
 	../util/lev_comp Paladin.des
 	../util/lev_comp Convict.des
-	../util/lev_comp Cyborg.des
 	../util/lev_comp Diver.des
 	../util/lev_comp Drunk.des
 	../util/lev_comp Electric.des

@@ -630,12 +630,6 @@ register struct monst *mtmp;
 		     (void)mongets(mtmp, ROCK);
 		   break;
 
-		   case PM_ZYBORG:
-		     (void)mongets(mtmp, PLATE_MAIL);
-		     (void)mongets(mtmp, GREEN_LIGHTSABER);
-		     (void)mongets(mtmp, WAN_SOLAR_BEAM);
-		   break;
-
 		   case PM_LUNATIC:
 		     (void)mongets(mtmp, LARGE_SHIELD);
 		     (void)mongets(mtmp, CHAINWHIP);

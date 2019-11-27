@@ -363,7 +363,6 @@ struct you {
 #endif
 	int next_check; 	/* attrib.c check */
 
-	int urmaxlvlB;		/* for cyborg role */
 	int urealedibility;	/* no longer a boolean --Amy */
 
 	int eeveelution;		/* mainly for pokemon role but might be useful for others */

@@ -144,14 +144,6 @@ static struct trobj Convict[] = {
 };
 #endif  /* CONVICT */
 
-static struct trobj Zyborg[] = {
-	{ PLATE_MAIL, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ GREEN_LIGHTSABER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ DIODE, UNDEF_SPE, TOOL_CLASS, 20, UNDEF_BLESS },
-	{ WAN_SOLAR_BEAM, UNDEF_SPE, WAND_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Lunatic[] = { /* 5lo: Changing to starting objects from Slash 6 Lycanthrope role */
 	{ ORCISH_SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ POT_SICKNESS, 0, POTION_CLASS, 2, 0 },
@@ -1126,31 +1118,6 @@ static const struct def_skill Skill_Fir[] = {
     { P_RIDING, P_SKILLED },
 #endif
     { P_TWO_WEAPON_COMBAT, P_BASIC }, { P_BARE_HANDED_COMBAT, P_BASIC },
-    { P_NONE, 0 }
-};
-
-
-static const struct def_skill Skill_Zyb[] = {
-    /* 5lo: Still a very heavy work in progress... */
-    { P_DAGGER, P_SKILLED },		{ P_KNIFE, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },		{ P_CLUB, P_SKILLED },
-    { P_PADDLE, P_EXPERT },		{ P_MACE, P_BASIC },
-    { P_FLAIL, P_BASIC },		{ P_HAMMER, P_SKILLED },
-    { P_POLEARMS, P_SKILLED },		{ P_TRIDENT, P_BASIC },
-    { P_LANCE, P_BASIC },		{ P_SLING, P_BASIC },
-    { P_CROSSBOW, P_SKILLED },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT }, /* Mechanical beings have very deadly aim */
-#endif
-    { P_DART, P_EXPERT },
-    { P_LIGHTSABER, P_SKILLED }, /* Technological beings, after all */
-
-    { P_PROTECTION_SPELL, P_SKILLED },    { P_BODY_SPELL, P_SKILLED },
-    { P_MATTER_SPELL, P_SKILLED },
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
 
@@ -2279,8 +2246,6 @@ u_init()
 #endif
 	u.next_check = 600; /* 5lo: Different method of doing attribute checks in attrib.c */
 
-	u.urmaxlvlB = 1; /* will go up if a cyborg role player levels up */
-
 /* In order to make the game even more interesting for lost souls, they cannot level teleport or branchport at all. */
 
 	u.ualignbase[A_CURRENT] = u.ualignbase[A_ORIGINAL] = u.ualign.type =
@@ -2380,11 +2345,6 @@ u_init()
 		else if(!rn2(5)) ini_inv(Blindfold);
 		else if(!rn2(5)) ini_inv(Magicmarker);
 		skill_init(Skill_F);
-		break;
-
-	case PM_ZYBORG:
-        ini_inv(Zyborg);
-        skill_init(Skill_Zyb);
 		break;
 
 	case PM_LUNATIC:
@@ -3160,7 +3120,6 @@ int otyp;
 #ifdef CONVICT
      case PM_CONVICT:		skills = Skill_Con; break;
 #endif  /* CONVICT */
-     case PM_ZYBORG:		skills = Skill_Zyb; break;
      case PM_LUNATIC:		skills = Skill_Lun; break;
      case PM_PALADIN:		skills = Skill_Pal; break;
      case PM_ELECTRIC_MAGE:		skills = Skill_Ele; break;

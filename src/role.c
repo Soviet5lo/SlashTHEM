@@ -1342,33 +1342,6 @@ const struct Role roles[] = {
 	10, 5, 0, 2, 10, A_INT, SPE_CHARM_MONSTER,   -4
 },
 
-{	{"Zyborg", 0}, {
-	{"Tin Can",     0},
-	{"Artificial Stupidity",     0},
-	{"Metal Man",   "Metal Woman"},
-	{"Automaton",0},
-	{"Mechwarrior",0},
-	{"Android",    0},
-	{"Advanced Robot",   0},
-	{"Artificial Intelligence",    0},
-	{"Synthetic Man",  "Synthetic Woman"} },
-	"Andromorph", "Technix", "Mechatron",	/* made-up names by Amy */
-	"Zyb", "Tech Facility", "Chaos Factors",
-	PM_ZYBORG, NON_PM, NON_PM,
-	PM_MISTER_MULBERRY, PM_ATTENDANT, PM_MASTER_BRAIN,
-	PM_CLOCKWORK_AUTOMATON, PM_SOLDIER, S_GOLEM, S_HUMAN,
-	ART_VERBAL_BLADE,
-	MRACE_HUMAN|MRACE_ELF|MRACE_DWARF|MRACE_GNOME|MRACE_HOBBIT|MRACE_NYMPH|MRACE_KOBOLD|MRACE_CLOCK | 
-	ROLE_MALE|ROLE_FEMALE|ROLE_LAWFUL|ROLE_NEUTRAL|ROLE_CHAOTIC,
-	/* Str Int Wis Dex Con Cha */
-	{  10,  7,  7,  7, 13,  6 },
-	{  18, 18, 18, 18, 18, 10 },
-	/* Init   Lower  Higher */
-	{  20, 0,  0, 5,  2, 0 },	/* Hit points */
-	{  4, 2,  0, 4,  0, 4 },10,	/* Energy */
-	0, 5, 0, 2, 10, A_INT, SPE_SOLAR_BEAM,   -4
-},
-
 /* Array terminator */
 {{0, 0}}
 };

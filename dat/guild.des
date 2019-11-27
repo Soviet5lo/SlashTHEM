@@ -57,7 +57,6 @@ MONSTER: '@', "nobleman", random, hostile
 MONSTER: '@', "noblewoman", random, hostile
 MONSTER: '@', "electric mage", random, hostile
 MONSTER: '@', "paladin", random, hostile
-MONSTER: '@', "zyborg", random, hostile
 MONSTER: '@', "acid mage", random, hostile
   
 ROOM: "ordinary" , random, random, random, random

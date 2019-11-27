@@ -273,9 +273,6 @@ register boolean special;
 		case PM_RANGER:
 		    if (rn2(2)) weapon = ELVEN_DAGGER;
 		    break;
-		case PM_ZYBORG:
-		    weapon = RED_LIGHTSABER;
-		    break;
 		case PM_LUNATIC:
 		    weapon = CHAINWHIP;
 		    break;
