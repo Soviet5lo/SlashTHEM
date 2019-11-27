@@ -3002,19 +3002,6 @@ u_init()
 	    u.ualign.sins += 5;
 	    change_luck(-1);
 	    }
-		{
-		static int trotyp[] = {POT_BLOOD, POT_VAMPIRE_BLOOD};
-		Xtra_food[0].trotyp = trotyp[rn2(SIZE(trotyp))];
-		ini_inv(Xtra_food);
-	    }
-		ini_inv(XtraRing);
-
-		if(!rn2(5))
-		{
-		static int trotyp[] = {POT_BLOOD, POT_VAMPIRE_BLOOD};
-		Xtra_fopod[0].trotyp = trotyp[rn2(SIZE(trotyp))];
-		ini_inv(Xtra_fopod);
-	    }
 	    knows_object(POT_BLOOD);
 	    knows_object(POT_VAMPIRE_BLOOD);
 	    break;
