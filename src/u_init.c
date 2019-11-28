@@ -251,7 +251,7 @@ static struct trobj Hacker[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Graduate[] = {
+static struct trobj Geek[] = {
 	{ SHARPENED_PENCIL, 3, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ CANDY_BAR, 0, FOOD_CLASS, 5, 0 },
 	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
@@ -1237,7 +1237,7 @@ static const struct def_skill Skill_Dru[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_G[] = {
+static const struct def_skill Skill_Hack[] = {
     /* 5lo: They've mostly learned by movies and video games */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
     { P_LONG_SWORD, P_EXPERT },		{ P_CLUB, P_EXPERT },
@@ -1261,7 +1261,7 @@ static const struct def_skill Skill_G[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Gra[] = {
+static const struct def_skill Skill_Gee[] = {
     /* 5lo: Effectively a much more limited Geek */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
     { P_LONG_SWORD, P_SKILLED },	{ P_CLUB, P_EXPERT },
@@ -2443,7 +2443,7 @@ u_init()
 	case PM_HACKER:
 		Hacker[H_IC].trquan = rn2(7) + 1;
 		ini_inv(Hacker);
-		skill_init(Skill_G);
+		skill_init(Skill_Hack);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
 		knows_object(PACK_OF_FLOPPIES);
@@ -2453,9 +2453,9 @@ u_init()
 		knows_object(IC);
 		break;
 
-	case PM_GRADUATE:
-		ini_inv(Graduate);
-		skill_init(Skill_Gra);
+	case PM_GEEK:
+		ini_inv(Geek);
+		skill_init(Skill_Gee);
 		break;
 
 #ifdef JEDI
@@ -3157,7 +3157,7 @@ int otyp;
      case PM_ZOOKEEPER:		skills = Skill_Zoo; break;
      case PM_NINJA:		skills = Skill_Nin; break;
      case PM_UNDERTAKER:		skills = Skill_Unt; break;
-     case PM_GRADUATE:		skills = Skill_Gra; break;
+     case PM_GEEK:		skills = Skill_Gee; break;
 
      default:			skills = 0; break;	/* lint suppression */
     }

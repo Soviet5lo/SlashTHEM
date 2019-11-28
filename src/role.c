@@ -408,6 +408,34 @@ const struct Role roles[] = {
 	2, 10, A_INT, SPE_FIREBALL,        -4 /* From old role.c */
 },
 
+{	{"Geek", 0}, {
+	{"Dork",    0},
+	{"Nerd",    0},
+	{"Hobbyist",    0},
+	{"Tester",    0},
+	{"Hacker",    0},
+	{"Programmer",    0},
+	{"Project Leader",    0},
+	{"Senior Developer",    0},
+	{"Kernel Maintainer",    0} }, 
+	"Jobs", "Wozniak", "Gates", /* geek */
+	"Gee", "university campus", "development hell",
+	PM_GEEK, NON_PM, NON_PM,
+	PM_UPPER_GRADUATE, PM_HACKER, PM_STUDENT_LEADER,
+	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
+
+	ART_MASTER_BOOT_DISK,
+	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT | ROLE_MALE|ROLE_FEMALE |
+	ROLE_NEUTRAL,
+	/* Str Int Wis Dex Con Cha */
+	{   7, 14,  6,  7,  7,  5 },
+	{  10, 20, 10, 10, 30, 10 },
+	/* Init   Lower  Higher */
+	{ 18, 0,  0, 8,  1, 0 },	/* Hit points */
+	{ 20, 4,  0, 1,  0, 2 },20,	/* Energy */
+	10, 3,-3, 2, 10, A_WIS, SPE_CURE_HALLUCINATION,   -4
+},
+
 {	{"Gladiator", 0}, {
 	{"Velite",  0},
 	{"Thraex",        	0},
@@ -433,34 +461,6 @@ const struct Role roles[] = {
 	{ 12, 0,  0, 8,  4, 0 },	/* Hit points */
 	{  1, 0,  0, 1,  0, 1 },12,	/* Energy */
 	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
-},
-
-{	{"Graduate", 0}, {
-	{"Dork",    0},
-	{"Nerd",    0},
-	{"Hobbyist",    0},
-	{"Tester",    0},
-	{"Hacker",    0},
-	{"Programmer",    0},
-	{"Project Leader",    0},
-	{"Senior Developer",    0},
-	{"Kernel Maintainer",    0} }, 
-	"Jobs", "Wozniak", "Gates", /* geek */
-	"Gra", "university campus", "development hell",
-	PM_GRADUATE, NON_PM, NON_PM,
-	PM_UPPER_GRADUATE, PM_HACKER, PM_STUDENT_LEADER,
-	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
-
-	ART_MASTER_BOOT_DISK,
-	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT | ROLE_MALE|ROLE_FEMALE |
-	ROLE_NEUTRAL,
-	/* Str Int Wis Dex Con Cha */
-	{   7, 14,  6,  7,  7,  5 },
-	{  10, 20, 10, 10, 30, 10 },
-	/* Init   Lower  Higher */
-	{ 18, 0,  0, 8,  1, 0 },	/* Hit points */
-	{ 20, 4,  0, 1,  0, 2 },20,	/* Energy */
-	10, 3,-3, 2, 10, A_WIS, SPE_CURE_HALLUCINATION,   -4
 },
 
 {	{"Hacker", 0}, {

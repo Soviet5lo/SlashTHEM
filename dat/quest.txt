@@ -8838,9 +8838,9 @@ You again sense %l pleading for help.
 "The silver bell which was hoarded by %n will be
 essential in locating the Amulet of Yendor."
 %E
-#	Graduate
+#	Geek
 #
-%Cc Gra 00001
+%Cc Gee 00001
 You now enter what is pretty known to you - it is the location of
 the Holy Development Team, which in a year-long effort developed
 the computer game "NetHack". 
@@ -8855,44 +8855,44 @@ the ones you used to program in NetHack, but, now in reality.
 
 What the heck is going on here?!
 %E
-%Cp Gra 00002
+%Cp Gee 00002
 Once again you approach %H.
 %E
-%Cp Gra 00003
+%Cp Gee 00003
 As you again approach %H you fear it might be the last time you see this place.
 %E
-%Cp Gra 00005
+%Cp Gee 00005
 "Written any patches lately?"
 %E
-%Cp Gra 00006
+%Cp Gee 00006
 "Do _you_ know what erf(3M) does?"
 %E
-%Cc Gra 00007
+%Cc Gee 00007
 "How do you like this implementation of the Ravenous Bugblatter of Traal"
 You reply, "Be careful not to get sued for copyright infringement!"
 %E
-%Cp Gra 00008
+%Cp Gee 00008
 :-)
 %E
-%Cp Gra 00009
+%Cp Gee 00009
 "May the force be with you!"
 %E
-%Cp Gra 00010
+%Cp Gee 00010
 "Looking good, %p!"
 %E
-%Cp Gra 00011
+%Cp Gee 00011
 "Eureka! Oh, sorry, just practising..."
 %E
-%Cp Gra 00012
+%Cp Gee 00012
 "As I expected. Oh, wait a minute... that's not what I expected!"
 %E
-%Cp Gra 00013
+%Cp Gee 00013
 "It appears our defenses against %n have completely failed..."
 %E
-%Cp Gra 00014
+%Cp Gee 00014
 "Well, there goes the neighborhood. Next we'll be seeing Space Balls."
 %E
-%Cc Gra 00015
+%Cc Gee 00015
 "It is a pleasure to see you again, %p.
 
 Horrible things have happened since our last meeting and I really need
@@ -8900,17 +8900,17 @@ a brave %R to clean up things for once and all.
 
 Let me see whether you are really able to cope with the task ... "
 %E
-%Cp Gra 00016
+%Cp Gee 00016
 "Please stand still while I finger(1) your state ..."
 %E
-%Cp Gra 00017
+%Cp Gee 00017
 $ finger %p
 %E
-%Cc Gra 00018
+%Cc Gee 00018
 "This was too much. You'll never attain the state of Hackishness.
 Now begone!"
 %E
-%Cc Gra 00019
+%Cc Gee 00019
 "I see you fighting %n and finally being done in by him, who we call
 The Dark Lord Of Software.
 No, I can't let you go like this, I really can't see a chance of a 
@@ -8918,7 +8918,7 @@ No, I can't let you go like this, I really can't see a chance of a
 I can only ask you to train some more until you have achieved the
 %R's state of ability."
 %E
-%Cc Gra 00020
+%Cc Gee 00020
 "Foo!
 You have strayed from the path of %d!
 Trying to destroy %n in this state of mind would mean the sure death
@@ -8926,7 +8926,7 @@ of your hackish soul!
 Purify yourself, until you're again piously aligned with Our God,
 and then come again and I will admit you."
 %E
-%Cc Gra 00021
+%Cc Gee 00021
 "I now see that you are truly worthy to fight %n, my %s.
 
 Half a year ago, a young programmer, known to everybody as %n, came
@@ -8939,75 +8939,75 @@ Several days later, upon waking up, I found %o to be missing.
 You are my last hope. If you fail to regain %o, NetHack development
 is doomed to stop forever!"
 %E
-%Cp Gra 00025
+%Cp Gee 00025
 "May %d protect you!"
 %E
-%Cp Gra 00026
+%Cp Gee 00026
 "Remember, He is completely evil, yet not invulnerable!"
 %E
-%Cp Gra 00027
+%Cp Gee 00027
 :-)
 %E
-%Cp Gra 00028
+%Cp Gee 00028
 "I know you can do it!"
 %E
-%Cp Gra 00029
+%Cp Gee 00029
 "Our fate is up to you now."
 %E
-%Cp Gra 00030
+%Cp Gee 00030
 "A level being seemingly harmless may prove to be fatal by monsters
 suddenly transforming one into another"
 %E
-%Cp Gra 00031
+%Cp Gee 00031
 "It is rumoured that %n filled His lair with deadly traps."
 %E
-%Cp Gra 00032
+%Cp Gee 00032
 "Do you know what 'memalezu' means?"
 %E
-%Cp Gra 00033
+%Cp Gee 00033
 "They say that you can escape the dungeon by teleporting to level 0."
 %E
-%Cp Gra 00034
+%Cp Gee 00034
 "Nobody here has an idea what to use a silver bell for."
 %E
-%Cp Gra 00035
+%Cp Gee 00035
 You have a sure feeling that you will soon find the entrace to the %i.
 You *know* you can do it!
 %E
-%Cp Gra 00036
+%Cp Gee 00036
 Once again you enter this place and once again you are sure you will succeed.
 %E
-%Cp Gra 00040
+%Cp Gee 00040
 You now almost smell %o.
 %E
-%Cp Gra 00041
+%Cp Gee 00041
 Once again you sense %o.
 %E
-%Cp Gra 00050
+%Cp Gee 00050
 You will never retrieve %o!
 %E
-%Cp Gra 00051
+%Cp Gee 00051
 You're doomed! You will end your life as a litte programmer slave earning
 $1000 ... per year! ... before taxes!
 %E
-%Cp Gra 00052
+%Cp Gee 00052
 You will never succeed! You could give up now as well!
 %E
-%Cp Gra 00053
+%Cp Gee 00053
 I will now get %o back from you and then I will make you the MS-DOS
 Project Manager. This will be enough torture for you!
 %E
-%Cp Gra 00060
+%Cp Gee 00060
 FORMAT C: /V /S
 %E
-%Cp Gra 00061
+%Cp Gee 00061
 You will die now, as sure as if you quaffed a potion of cyanide!
 %E
-%Cp Gra 00062
+%Cp Gee 00062
 I think I'll be generous. I will let you have a little fun with my
 pet succubus before you die ...
 %E
-%Cc Gra 00063
+%Cc Gee 00063
 "Perhaps you should consider the following qoute from Terry Pratchett:
 
 	"But I don't know how to use a sword!"
@@ -9018,37 +9018,37 @@ pet succubus before you die ...
 
 	"Remember which end is which."
 %E
-%Cp Gra 00064
+%Cp Gee 00064
 "What? You said 'Microsloth'? Then die, bastard!"
 %E
-%Cp Gra 00065
+%Cp Gee 00065
 "I will soon format your body, mind and soul!"
 %E
-%Cp Gra 00066
+%Cp Gee 00066
 "I've got an idea: we can greatly speed this up (and save much pain
 for you). You just have to take your sword and push it into your
 stomach. Or, if you prefer, take a COBOL programming course."
 %E
-%Cp Gra 00067
+%Cp Gee 00067
 "Don't worry, your pains will soon be over!"
 %E
-%Cp Gra 00068
+%Cp Gee 00068
 "I'm wondering all the time why somebody like you does something like this.
 Does pain excite you or what? Well, I have a *great* sortiment of whips handy!"
 %E
-%Cp Gra 00069
+%Cp Gee 00069
 "Nobody will ever need more than 640 KB of RAM."
 %E
-%Cc Gra 00070
+%Cc Gee 00070
 You feel the power of %o flow through your body. Although you know
 you have to return it to %l, you now feel like you could continue
 developing NetHack on your own now.
 %E
-%Cp Gra 00080
+%Cp Gee 00080
 You see %n lying dead in a puddle of blood. Not a second do you 
 regret what you've done.
 %E
-%Cc Gra 00081
+%Cc Gee 00081
 "You've finally got %o back! I am very grateful for what you've done.
 
 Yet, I am an old man and I will not long more be able to supervise
@@ -9058,16 +9058,16 @@ careful to maintain game balance.
 
 My ultimate secret is: Nothing is true. Everything is allowed."
 %E
-%Cc Gra 00082
+%Cc Gee 00082
 "Yes, %o are really yours now. Use them wisely.
 
 And remember: Nothing is true. Everything is allowed.
 Be careful to maintain game balance."
 %E
-%Cp Gra 00090
+%Cp Gee 00090
 Latest news regarding the Amulet Of Yendor?
 %E
-%Cc Gra 00091
+%Cc Gee 00091
 "Now I see you with the Amulet Of Yendor shining brightly in your
 pack. Honestly, I didn't believe you'd (or anyone else, for that
 matter) would manage to tear it from the hands of Moloch.
@@ -9084,7 +9084,7 @@ are located.
 
 Return the amulet to %d at His altar, and you will be richly rewarded."
 %E
-%Cc Gra 00095
+%Cc Gee 00095
 "You have betrayed all those who hold allegiance to %d, as you once did.
 My allegiance to %d holds fast and I cannot condone or accept what you 
 have done.
@@ -9097,16 +9097,16 @@ resides.
 Go now!  You are banished from this place.
 %E
 
-%Cp Gra 00100
+%Cp Gee 00100
 You receive a faint telepathic message from %l:
 Your help is urgently needed at %H!
 Look for a ...ic transporter.
 You couldn't quite make out that last message.
 %E
-%Cp Gra 00101
+%Cp Gee 00101
 You again sense %l pleading for help.
 %E
-%Cp Gra 00102
+%Cp Gee 00102
 "The silver bell which was hoarded by %n will be
 essential in locating the Amulet of Yendor."
 %E

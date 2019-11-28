@@ -639,7 +639,7 @@ register struct monst *mtmp;
 		   case PM_POKEMON:
 #endif
 		   case PM_MUSICIAN:
-		   case PM_GRADUATE:
+		   case PM_GEEK:
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
 		     if (!rn2(20)) (void) mongets(mtmp, rnd_misc_item(mtmp));
 		   break;

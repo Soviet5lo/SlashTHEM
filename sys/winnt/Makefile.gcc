@@ -1465,7 +1465,7 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 		$(DAT)\nightmar.des $(DAT)\ranger.des 	$(DAT)\pirate.des 	$(DAT)\convict.des \
 		$(DAT)\Lunatic.des $(DAT)\Drunk.des \
 		$(DAT)\Firef.des $(DAT)\Locks.des $(DAT)\Offic.des $(DAT)\Zooke.des \
-		$(DAT)\Music.des $(DAT)\Ninja.des $(DAT)\Under.des $(DAT)\Gradu.des \
+		$(DAT)\Music.des $(DAT)\Ninja.des $(DAT)\Under.des $(DAT)\Geek.des \
 		$(DAT)\Bard.des
         
 	lev_comp $(DDAT)/beholder.des
@@ -1547,7 +1547,7 @@ sp_lev.tag:     utility.tag         $(DAT)\beholder.des $(DAT)\bigroom.des \
 	lev_comp $(DDAT)/Music.des
 	lev_comp $(DDAT)/Ninja.des
 	lev_comp $(DDAT)/Under.des
-	lev_comp $(DDAT)/Gradu.des
+	lev_comp $(DDAT)/Geek.des
 	lev_comp $(DDAT)/Bard.des
 	lev_comp $(DDAT)/frnknstn.des
 	lev_comp $(DDAT)/nightmar.des

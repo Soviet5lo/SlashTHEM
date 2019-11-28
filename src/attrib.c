@@ -91,7 +91,7 @@ const struct innate {
 		     {  15, &(HWarning), "sensitive", "careless" },
 		     {   0, 0, 0, 0, } },
 
-	gra_abil[] = { {   1, &(HAggravate_monster), "", "" },
+	gee_abil[] = { {   1, &(HAggravate_monster), "", "" },
 		     {   1, &(HFast), "", "" },
 		     {   1, &(HSleep_resistance), "", "" },
 		     {   0, 0, 0, 0 } },
@@ -806,7 +806,7 @@ int oldlevel, newlevel;
 	case PM_FIREFIGHTER:	abil = fir_abil;	break;
 	case PM_ACID_MAGE:	abil = aci_abil;	break;
 	case PM_HACKER:		abil = hac_abil;	break;
-	case PM_GRADUATE:	abil = gra_abil;	break;
+	case PM_GEEK:		abil = gee_abil;	break;
 #if 0 /* Deferred roles */
 	case PM_POKEMON:	abil = pok_abil;	break;
 	case PM_PSION:           abil = psi_abil;	break;
