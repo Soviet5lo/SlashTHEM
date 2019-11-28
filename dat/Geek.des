@@ -46,14 +46,14 @@ DOOR:locked,(52,12)
 
 MONSTER:'@',"Upper Graduate",(38,12)
 
-MONSTER:'@',"hacker",(37,11)
-MONSTER:'@',"hacker",(38,11)
-MONSTER:'@',"hacker",(39,11)
-MONSTER:'@',"hacker",(37,12)
-MONSTER:'@',"hacker",(39,12)
-MONSTER:'@',"hacker",(37,13)
-MONSTER:'@',"hacker",(38,13)
-MONSTER:'@',"hacker",(39,13)
+MONSTER:'@',"intern",(37,11)
+MONSTER:'@',"intern",(38,11)
+MONSTER:'@',"intern",(39,11)
+MONSTER:'@',"intern",(37,12)
+MONSTER:'@',"intern",(39,12)
+MONSTER:'@',"intern",(37,13)
+MONSTER:'@',"intern",(38,13)
+MONSTER:'@',"intern",(39,13)
 
 # For the textwork care has to be exercised that there are no
 # rock moles, dwarves with pick-axes etc. to break the walls.
