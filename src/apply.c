@@ -3612,7 +3612,7 @@ void use_floppies(struct obj *obj)
 	};
 	int x;
 
-	if (!Role_if(PM_GEEK)) {
+	if (!Role_if(PM_HACKER)) {
 		pline("If only you knew what the heck this is ... ");
 		return;
 	}
@@ -4179,7 +4179,7 @@ doapply()
 		if (obj->oartifact == ART_BURNED_MOTH_RELAY) {	
 			pline("There's a little badly burned moth in that relay!");
 			makeknown(RELAY);
-			if (Role_if(PM_GEEK)) {
+			if (Role_if(PM_HACKER)) {
 				You("feel remembered of %s.",Hallucination ? "when the net was flat" : "the old times");
 				break;
 			}

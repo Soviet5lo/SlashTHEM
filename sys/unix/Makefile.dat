@@ -313,7 +313,7 @@ quest_levs: ../util/lev_comp \
 	Caveman.des Paladin.des Convict.des \
 	Diver.des Drunk.des \
 	Electric.des Chef.des Firef.des Flame.des \
-	Gladia.des Geek.des Gradu.des \
+	Gladia.des Hacker.des Gradu.des \
 	Healer.des Ice.des Jedi.des Knight.des Corsair.des \
 	Locks.des Lunatic.des Monk.des Music.des \
 	Necro.des Ninja.des Noble.des Offic.des \
@@ -335,7 +335,7 @@ quest_levs: ../util/lev_comp \
 	../util/lev_comp Chef.des
 	../util/lev_comp Firef.des
 	../util/lev_comp Flame.des
-	../util/lev_comp Geek.des
+	../util/lev_comp Hacker.des
 	../util/lev_comp Gladia.des
 	../util/lev_comp Gradu.des
 	../util/lev_comp Healer.des

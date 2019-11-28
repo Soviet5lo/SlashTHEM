@@ -170,7 +170,7 @@ register boolean special;
 		case PM_CONVICT:
 		    weapon = HEAVY_IRON_BALL;
 		    break;
-		case PM_GEEK:
+		case PM_HACKER:
 		    weapon = ELECTRIC_SWORD;
 		    break;
 		case PM_GRADUATE:

@@ -930,7 +930,7 @@ register struct monst *mtmp;
 		    verbl_msg = "Aloha.";
 		    break;
 #endif
-		case PM_GEEK:
+		case PM_HACKER:
 		    verbl_msg = "Enematzu memalezu!";
 		    break;
 #if 0 /* 5lo: Deferred */

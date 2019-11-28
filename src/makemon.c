@@ -575,7 +575,7 @@ register struct monst *mtmp;
 		     mkmonmoney(mtmp, (long) d(mtmp->m_lev, 15));
 #endif
 		   break;
-		   case PM_GEEK:
+		   case PM_HACKER:
 		     (void)mongets(mtmp, SILVER_DAGGER);
 		   break;
 		   case PM_ELF:

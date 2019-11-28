@@ -34,7 +34,7 @@ MONSTER: '@', "convict", random, hostile
 MONSTER: '@', "doppelganger", random, hostile
 MONSTER: '@', "elf", random, hostile
 MONSTER: '@', "flame mage", random, hostile
-MONSTER: '@', "geek", random, hostile
+MONSTER: '@', "hacker", random, hostile
 MONSTER: '@', "healer", random, hostile
 MONSTER: '@', "ice mage", random, hostile
 MONSTER: '@', "jedi", random, hostile

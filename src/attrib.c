@@ -85,7 +85,7 @@ const struct innate {
 		     {   7, &(HCold_resistance), "warm", "cooler" },
 		     {   0, 0, 0, 0 } },
 
-	gee_abil[] = { {   1, &(HPoison_resistance), "", "" },
+	hac_abil[] = { {   1, &(HPoison_resistance), "", "" },
 		     {   1, &(HShock_resistance), "", "" },
 		     {   8, &(HTeleport_control), "controlled", "helpless" },
 		     {  15, &(HWarning), "sensitive", "careless" },
@@ -805,7 +805,7 @@ int oldlevel, newlevel;
 	case PM_FLAME_MAGE:	abil = fla_abil;	break;
 	case PM_FIREFIGHTER:	abil = fir_abil;	break;
 	case PM_ACID_MAGE:	abil = aci_abil;	break;
-	case PM_GEEK:	abil = gee_abil;	break;
+	case PM_HACKER:		abil = hac_abil;	break;
 	case PM_GRADUATE:	abil = gra_abil;	break;
 #if 0 /* Deferred roles */
 	case PM_POKEMON:	abil = pok_abil;	break;

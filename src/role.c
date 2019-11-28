@@ -408,36 +408,6 @@ const struct Role roles[] = {
 	2, 10, A_INT, SPE_FIREBALL,        -4 /* From old role.c */
 },
 
-{	{"Geek", 0}, {
-	{"Newbie",    0},
-	{"BASIC Programmer",        "BASIC Programmeress"},
-	{"C Programmer",        "C Programmeress"},
-	{"Hacker",        "Hackeress"},
-	{"NetHacker", "NetHackeress"},
-	{"Nethack Programmer",      "Nethack Programmeress"},
-	{"he who uses",       "she who uses"},
-	{"he who knows",      "she who knows"},
-	{"he who learns",     "she who learns"} },
-	"UNIX", "the PDP-7", "VMS", /* Computerian */
-	"Gee", "the Development Team's location", "the Microsoft headquarter",
-	PM_GEEK, NON_PM, NON_PM,
-	PM_THE_DEV_TEAM, PM_HACKER, PM_BILL_GATES,
-	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
-#if 0
-	ART_DELUDER, ART_MIRRORBRIGHT,
-#endif
-	ART_NETHACK_SOURCES,
-	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT | ROLE_MALE|ROLE_FEMALE |
-	ROLE_NEUTRAL,
-	/* Str Int Wis Dex Con Cha */
-	{  10, 10, 10,  8,  9, 7 },
-	{  30, 15, 15, 10, 20, 10 },
-	/* Init   Lower  Higher */
-	{ 18, 0,  0, 8,  1, 0 },	/* Hit points */
-	{ 20, 4,  0, 1,  0, 2 },20,	/* Energy */
-	10, 3,-3, 2, 10, A_WIS, SPE_CURE_SICKNESS,   -4
-},
-
 {	{"Gladiator", 0}, {
 	{"Velite",  0},
 	{"Thraex",        	0},
@@ -491,6 +461,36 @@ const struct Role roles[] = {
 	{ 18, 0,  0, 8,  1, 0 },	/* Hit points */
 	{ 20, 4,  0, 1,  0, 2 },20,	/* Energy */
 	10, 3,-3, 2, 10, A_WIS, SPE_CURE_HALLUCINATION,   -4
+},
+
+{	{"Hacker", 0}, {
+	{"Newbie",    0},
+	{"BASIC Programmer",        "BASIC Programmeress"},
+	{"C Programmer",        "C Programmeress"},
+	{"Hacker",        "Hackeress"},
+	{"NetHacker", "NetHackeress"},
+	{"Nethack Programmer",      "Nethack Programmeress"},
+	{"he who uses",       "she who uses"},
+	{"he who knows",      "she who knows"},
+	{"he who learns",     "she who learns"} },
+	"UNIX", "the PDP-7", "VMS", /* Computerian */
+	"Hac", "the Development Team's location", "the Microsoft headquarter",
+	PM_HACKER, NON_PM, NON_PM,
+	PM_THE_DEV_TEAM, PM_HACKER, PM_BILL_GATES,
+	PM_BUG, PM_HEISENBUG, S_XAN, S_PUDDING,
+#if 0
+	ART_DELUDER, ART_MIRRORBRIGHT,
+#endif
+	ART_NETHACK_SOURCES,
+	MRACE_HUMAN|MRACE_ELF|MRACE_GNOME|MRACE_HOBBIT | ROLE_MALE|ROLE_FEMALE |
+	ROLE_NEUTRAL,
+	/* Str Int Wis Dex Con Cha */
+	{  10, 10, 10,  8,  9, 7 },
+	{  30, 15, 15, 10, 20, 10 },
+	/* Init   Lower  Higher */
+	{ 18, 0,  0, 8,  1, 0 },	/* Hit points */
+	{ 20, 4,  0, 1,  0, 2 },20,	/* Energy */
+	10, 3,-3, 2, 10, A_WIS, SPE_CURE_SICKNESS,   -4
 },
 
 {	{"Healer", 0}, {

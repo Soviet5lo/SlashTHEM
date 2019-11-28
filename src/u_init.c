@@ -240,9 +240,9 @@ static struct trobj Pokemon[] = {
 };
 #endif
 
-static struct trobj Geek[] = {
+static struct trobj Hacker[] = {
 	{ ELECTRIC_SWORD, 1, WEAPON_CLASS, 1, 1},
-#define G_IC 1
+#define H_IC 1
 	{ IC, 0, TOOL_CLASS, 7, UNDEF_BLESS },	/* quan is var. */
 	{ GAUNTLETS_OF_TYPING, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ POT_JOLT_COLA, 0, POTION_CLASS, 4, UNDEF_BLESS },
@@ -2440,9 +2440,9 @@ u_init()
 		skill_init(Skill_Aci);
 		break;
 
-	case PM_GEEK:
-		Geek[G_IC].trquan = rn2(7) + 1;
-		ini_inv(Geek);
+	case PM_HACKER:
+		Hacker[H_IC].trquan = rn2(7) + 1;
+		ini_inv(Hacker);
 		skill_init(Skill_G);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
@@ -3125,7 +3125,7 @@ int otyp;
      case PM_ELECTRIC_MAGE:		skills = Skill_Ele; break;
      case PM_ACID_MAGE:		skills = Skill_Aci; break;
      case PM_FLAME_MAGE:		skills = Skill_F; break;
-     case PM_GEEK:		skills = Skill_G; break;
+     case PM_HACKER:		skills = Skill_Hack; break;
      case PM_HEALER:		skills = Skill_H; break;
      case PM_JEDI:		skills = Skill_J; break;
      case PM_KNIGHT:		skills = Skill_K; break;
