@@ -445,6 +445,23 @@ register struct monst *mtmp;
 			obj = mksobj_at(LEATHER_ARMOR, x, y, TRUE, FALSE);
 		mtmp->mnamelth = 0;
 		break;
+	    case PM_ROPE_GOLEM:
+		num = d(2,4);
+		while(num--)
+		    obj = mksobj_at(LEASH, x, y, TRUE, FALSE);
+		mtmp->mnamelth = 0;
+		break;
+	    case PM_STRAW_GOLEM:
+		if (rn2(2)){
+		    obj = mksobj_at(FEDORA, x, y, TRUE, FALSE);
+		    obj->oeroded2=rnd(MAX_ERODE);
+		}
+		num = rn2(3);
+		while(num--) /* should be reduced if killed by force bolt or fire */
+		    obj = mksobj_at(SHEAF_OF_STRAW, x, y, TRUE, FALSE);
+		mtmp->mnamelth = 0;
+		if (!obj) return (struct obj *)0;
+		break;
 	    case PM_BUG:
 	    	num = (!rn2(6) ? 0 : 1);
 		while (num--) {

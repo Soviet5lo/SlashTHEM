@@ -4152,7 +4152,8 @@ boolean u_caused;
 
 	for (obj = level.objects[x][y]; obj; obj = obj2) {
 	    obj2 = obj->nexthere;
-	    if (obj->oclass == SCROLL_CLASS || obj->oclass == SPBOOK_CLASS) {
+	    if (obj->oclass == SCROLL_CLASS || obj->oclass == SPBOOK_CLASS ||
+			    obj->otyp == SHEAF_OF_STRAW) {
 		if (obj->otyp == SCR_FIRE || obj->otyp == SPE_FIREBALL ||
 			obj_resists(obj, 2, 100))
 		    continue;
@@ -4913,7 +4914,8 @@ const char * const destroy_strings[] = {	/* also used in trap.c */
 	"catches fire and burns", "catch fire and burn", "burning scroll",
 	"catches fire and burns", "catch fire and burn", "burning book",
 	"turns to dust and vanishes", "turn to dust and vanish", "",
-	"breaks apart and explodes", "break apart and explode", "exploding wand"
+	"breaks apart and explodes", "break apart and explode", "exploding wand",
+	"catches fire and burns", "catch fire and burn", "burning straw"
 };
 
 void
@@ -4925,6 +4927,7 @@ register int osym, dmgtyp;
 	register long i, cnt, quan;
 	register int dindx;
 	const char *mult;
+	int started_fire = 0;
 	/*
 	 * [ALI] Because destroy_item() can call wand_explode() which can
 	 * call explode() which can call destroy_item() again, we need to
@@ -4997,6 +5000,12 @@ register int osym, dmgtyp;
 			    dindx = 3;
 			    dmg = 1;
 			    break;
+			case FOOD_CLASS:
+			    if (obj->otyp == SHEAF_OF_STRAW){
+				dindx = 6;
+				dmg = rnd(3);
+				break;
+			    }
 			default:
 			    skip++;
 			    break;
@@ -5024,6 +5033,14 @@ register int osym, dmgtyp;
 			    dindx = 5;
 			    dmg = rnd(10);
 			    break;
+			case FOOD_CLASS:
+			    if (obj->otyp == SHEAF_OF_STRAW){
+				xresist = (Fire_resistance);
+				dindx = 6;
+				dmg = rnd(3);
+				++started_fire;
+				break;
+			    }
 			default:
 			    skip++;
 			    break;
@@ -5089,6 +5106,12 @@ register int osym, dmgtyp;
 	    }
 	}
 	destroy_item_stack = frame.next_frame;
+	if (started_fire){
+		if (rn2(started_fire) > rn2(3)) destroy_item(POTION_CLASS, AD_FIRE);
+		if (rn2(started_fire) > rn2(3)) destroy_item(SCROLL_CLASS, AD_FIRE);
+		if (rn2(started_fire) > rn2(5)) destroy_item(SPBOOK_CLASS, AD_FIRE);
+		if (rn2(started_fire) > rn2(5)) destroy_item(FOOD_CLASS, AD_FIRE);
+	}
 	return;
 }
 

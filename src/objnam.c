@@ -2208,6 +2208,7 @@ struct alt_spellings {
 	{ "can opener", TIN_OPENER },
 	{ "kelp", KELP_FROND },
 	{ "eucalyptus", EUCALYPTUS_LEAF },
+	{ "straw", SHEAF_OF_STRAW },
 	{ "grapple", GRAPPLING_HOOK },
 	/* KMH, balance patch -- new items */
 	{ "amulet versus stoning", AMULET_VERSUS_STONE },

@@ -184,6 +184,10 @@ register struct obj *obj;
 		  has_blood(&mons[obj->corpsenm]) && (!obj->odrained ||
 		  obj->oeaten > drainlevel(obj)));
 
+	/* 5lo: Biodiversity - Sheaf of Straw for herbivores */
+	if (obj->otyp == SHEAF_OF_STRAW)
+		return (herbivorous(youmonst.data) && !carnivorous(youmonst.data));
+
      /* return((boolean)(!!index(comestibles, obj->oclass))); */
 	return (boolean)(obj->oclass == FOOD_CLASS);
 }
@@ -2044,6 +2048,11 @@ struct obj *otmp;
 		   case 9:
 			break;
 		}
+		break;
+	    case SHEAF_OF_STRAW:
+		if (herbivorous(youmonst.data) && !carnivorous(youmonst.data))
+			pline("That %s was tasty!", xname(otmp));
+		/* else should be revented by is_edible check earlier */
 		break;
 	    case MEATBALL:
 	    case MEAT_STICK:

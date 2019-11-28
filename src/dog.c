@@ -886,6 +886,9 @@ register struct obj *obj;
 		case BANANA:
 		    return ((mon->data->mlet == S_YETI) ? DOGFOOD :
 			    ((herbi || starving) ? ACCFOOD : MANFOOD));
+		case SHEAF_OF_STRAW:
+		    return ((herbi && !carni) ? DOGFOOD : UNDEF);
+		    break;
 		default:
 		    if (starving) return ACCFOOD;
 		    return (obj->otyp > SLIME_MOLD ?
