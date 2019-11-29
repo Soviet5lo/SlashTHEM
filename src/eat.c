@@ -354,7 +354,7 @@ register struct obj *food;
 		You("absorb too much energy and explode.");
 		killer = Hallucination ? "amateur-hour horseshit" : "absorbing too much energy and exploding"; //8-bit theater
 		You("die...");
-		done(DIED); /* We don't have DISINTEGRATED here */
+		done(DISINTEGRATED);
 		explode(u.ux, u.uy, 0, u.uhpmax/2, MON_EXPLODE, EXPL_MAGICAL);
 		u.uhp = u.uhpmax/2;
 		pline("You reform!");
