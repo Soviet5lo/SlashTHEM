@@ -165,8 +165,10 @@ static struct trobj Officer[] = {
 	{ PISTOL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ BULLET, 0, WEAPON_CLASS, 40, 0 },
 	{ LEATHER_ARMOR, 0, ARMOR_SYM, 1, UNDEF_BLESS },
+#if 0 /* 5lo: Removed as these were to simulate firearms in Nethack-- */
 	{ WAN_MAGIC_MISSILE, UNDEF_SPE, WAND_SYM, 1, UNDEF_BLESS },
 	{ WAN_STRIKING, UNDEF_SPE, WAND_SYM, 1, UNDEF_BLESS },
+#endif
 	{ DOUGHNUT, 0, FOOD_SYM, 6, 0 },
 	{ 0, 0, 0, 0, 0, }
 };
