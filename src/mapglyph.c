@@ -164,12 +164,10 @@ unsigned *ospecial;
 				color = CLR_ORANGE;
 			} else if(Is_stronghold(&u.uz)) {
 				color = CLR_RED;
-			} else if(In_hell(&u.uz) && !Is_valley(&u.uz) && !In_sheol(&u.uz)) {
+			} else if(In_hell(&u.uz) && !Is_valley(&u.uz)) {
 				color = CLR_RED;
 			} else if(Is_valley(&u.uz)) {
 				color = CLR_BLACK;
-			} else if(In_sheol(&u.uz)) {
-				color = CLR_BRIGHT_CYAN;
 			} else if(Is_knox(&u.uz)) {
 				color = CLR_YELLOW;
 			} else if(In_sokoban(&u.uz)) {

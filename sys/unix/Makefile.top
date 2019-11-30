@@ -137,7 +137,6 @@ SPEC_LEVS = asmodeus.lev baalz.lev bigrm-*.lev castle-?.lev fakewiz?.lev \
 	mtemple.lev nymph.lev rats.lev sea.lev spiders.lev stor-?.lev \
 	tomb.lev yeenoghu.lev frnknstn.lev nightmar.lev \
 	heck-*.lev \
-	sheolfil.lev sheolmid.lev palace_e.lev palace_f.lev \
 	town-?.lev village.lev \
 	compu.lev key.lev hitch.lev school.lev forge.lev
 

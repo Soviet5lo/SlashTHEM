@@ -1543,8 +1543,8 @@ coord *tm;
 			    if (lvl < 16) kind = NO_TRAP; break;
 		    case FIRE_TRAP:
 			    if (!Inhell) kind = NO_TRAP; break;
-		    case ICE_TRAP:
-			    if (!Insheol) kind = NO_TRAP; break;
+		    case ICE_TRAP: /* 5lo: quest exclusive for now */
+			    if (!In_quest(&u.uz)) kind = NO_TRAP; break;
 		    case TELEP_TRAP:
 			    if (level.flags.noteleport) kind = NO_TRAP; break;
 		    case HOLE:

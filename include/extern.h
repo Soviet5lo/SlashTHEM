@@ -568,7 +568,6 @@ E boolean FDECL(Can_dig_down, (d_level *));
 E boolean FDECL(Can_rise_up, (int,int,d_level *));
 E boolean FDECL(In_quest, (d_level *));
 E boolean FDECL(In_mines, (d_level *));
-E boolean FDECL(In_sheol, (d_level *));
 E boolean FDECL(In_spiders, (d_level *));
 E branch *FDECL(dungeon_branch, (const char *));
 E boolean FDECL(at_dgn_entrance, (const char *));

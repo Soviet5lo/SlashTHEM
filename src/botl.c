@@ -493,8 +493,6 @@ int verbose;
 		Sprintf(buf, "Vlad Tower:%d ", depth(&u.uz));
 	else if (!strcmp(dungeons[u.uz.dnum].dname, "Frankenstein's Lab"))
 		Sprintf(buf, "Lab:%d ", depth(&u.uz));
-	else if (!strcmp(dungeons[u.uz.dnum].dname, "Sheol"))
-		Sprintf(buf, "Sheol:%d ", depth(&u.uz));
 	else {
 		if (verbose)
 			Sprintf(buf, "%s, level %d ",

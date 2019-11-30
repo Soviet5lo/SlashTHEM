@@ -155,7 +155,6 @@ LEVEL:          "baalz" "B" @ (2, 22) 95
 LEVEL:          "geryon" "R" @ (2, 22) 95
 LEVEL:          "dispater" "S" @ (2, 22) 95
 LEVEL:          "asmodeus" "A" @ (2, 22) 95
-BRANCH:         "Sheol" @ (3, 20) down
 
 # 5lo: Removed a few heck levels and reduced probability to stop
 # too many levels from being generated, causing a game freeze.
@@ -297,18 +296,6 @@ DUNGEON:        "Frankenstein's Lab" "none" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
 LEVEL:          "frnknstn" "none" @ (1, 0)
-
-
-DUNGEON:        "Sheol" "V" (6, 2)
-ALIGNMENT:      noalign
-DESCRIPTION:    hellish
-LEVEL:          "sheolfil" "A" @ (1, 0)
-LEVEL:          "sheolmid" "H" @ (2, 0)
-LEVEL:          "sheolfil" "B" @ (3, 0)
-LEVEL:          "sheolfil" "C" @ (4, 0)
-LEVEL:          "palace_f" "P" @ (-2, 0)
-LEVEL:          "palace_e" "U" @ (-1, 0)
-
 
 ### The Endgame levels ###
 #
