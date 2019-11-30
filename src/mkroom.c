@@ -363,7 +363,8 @@ struct mkroom *sroom;
 		if(type == COURT && IS_THRONE(levl[sx][sy].typ))
 		    continue;
                /* armories (and clinics) don't contain as many monsters */
-		if ((type != ARMORY && type != CLINIC) || rn2(2)) mon = makemon(
+		if (((type != ARMORY && type != CLINIC) || rn2(2)) &&
+				!(Role_if(PM_NOBLEMAN) && In_quest(&u.uz))){ mon = makemon(
 		    (type == COURT) ? courtmon() :
 		    (type == BARRACKS) ? squadmon() :
 		    (type == CLINIC) ?
@@ -399,7 +400,7 @@ struct mkroom *sroom;
 		    (type == GIANTCOURT) ? mkclass(S_GIANT,0) :
 		    (struct permonst *) 0,
 		   sx, sy, NO_MM_FLAGS);
-               else mon = ((struct monst *)0);
+		} else mon = ((struct monst *)0);
 /* some rooms can spawn new monster variants now --Amy */
 		if(mon) {
 			mon->msleeping = 1;
@@ -424,6 +425,7 @@ struct mkroom *sroom;
 			(void) mkgold((long) rn1(i, 10), sx, sy);
 			break;
 		    case MORGUE:
+			if(!(Role_if(PM_NOBLEMAN) && In_quest(&u.uz) )){
 			if(!rn2(5))
 			    (void) mk_tt_object(CORPSE, sx, sy);
 			if(!rn2(10))	/* lots of treasure buried with dead */
@@ -431,6 +433,7 @@ struct mkroom *sroom;
 					     sx, sy, TRUE, FALSE);
 			if (!rn2(5))
 			    make_grave(sx, sy, (char *)0);
+			} else if(rn2(2)) make_grave(sx, sy, (char *)0);
 			break;
 		    case BEEHIVE:
 			if(!rn2(3))

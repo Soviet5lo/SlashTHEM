@@ -52,6 +52,8 @@ STATIC_OVL int artidisco[NROFARTIFACTS];
 STATIC_DCL void NDECL(hack_artifacts);
 STATIC_DCL boolean FDECL(attacks, (int,struct obj *));
 
+int FDECL(dolordsmenu, (const char *,struct obj *));
+
 boolean
 CountsAgainstGifts(x)
 int x;
@@ -96,7 +98,12 @@ hack_artifacts()
 		artilist[urole.gift2arti].role = Role_switch;
 	}
 #endif
+	artilist[ART_MANTLE_OF_HEAVEN].otyp = find_cope();
+	artilist[ART_VESTMENT_OF_HELL].otyp = find_opera_cloak();
 	/* Fix up the quest artifact */
+	if(Role_if(PM_NOBLEMAN) && Race_if(PM_VAMPIRE)){
+		urole.questarti = ART_VESTMENT_OF_HELL;
+	}
 	if (urole.questarti) {
 	    artilist[urole.questarti].alignment = alignmnt;
 	    artilist[urole.questarti].role = Role_switch;
@@ -271,7 +278,9 @@ aligntyp alignment;	/* target alignment, or A_NONE */
 	    a = &artilist[m];
 
 	    /* make an appropriate object if necessary, then christen it */
-make_artif: if (by_align) otmp = mksobj((int)a->otyp, TRUE, FALSE);
+make_artif: if (by_align) {
+		    otmp = mksobj((int)a->otyp, TRUE, FALSE);
+	    }
 	    otmp = oname(otmp, a->name);
 	    otmp->oartifact = m;
 	    artiexist[m] = TRUE;
@@ -1727,7 +1736,8 @@ arti_invoke(obj)
 
     if(oart->inv_prop > LAST_PROP) {
 	/* It's a special power, not "just" a property */
-	if(obj->age > monstermoves) {
+	if(obj->age > monstermoves &&
+		oart->inv_prop != LORDLY) {
 	    /* the artifact is tired :-) */
 	    You_feel("that %s %s ignoring you.",
 		     the(xname(obj)), otense(obj, "are"));
@@ -1735,7 +1745,8 @@ arti_invoke(obj)
 	    obj->age += (long) d(3,10);
 	    return 1;
 	}
-	obj->age = monstermoves + rnz(100);
+	if (oart->inv_prop != LORDLY)
+	    obj->age = monstermoves + rnz(100);
 
 	switch(oart->inv_prop) {
 	case TAMING: {
@@ -2153,6 +2164,131 @@ arti_invoke(obj)
 	    break;
 	}
 
+	case LORDLY: {
+		if(uwep && uwep == obj){
+			//struct obj *otmp;
+			int lordlydictum = dolordsmenu("What is your command, my Lord?", obj);
+			switch(lordlydictum){
+				case 0:
+				break;
+				/*These effects can be used at any time*/
+				case COMMAND_RAPIER:
+					uwep->otyp = RAPIER;
+				break;
+				case COMMAND_AXE:
+					uwep->otyp = AXE;
+				break;
+				case COMMAND_MACE:
+					uwep->otyp = MACE;
+				break;
+				case COMMAND_SPEAR:
+					uwep->otyp = SPEAR;
+				break;
+				case COMMAND_LANCE:
+					uwep->otyp = LANCE;
+				break;
+				/*These effects are limited by timeout*/
+				case COMMAND_LADDER:
+					if(u.uswallow){
+						mtmp = u.ustuck;
+						if (!is_whirly(mtmp->data)) {
+							if (is_animal(mtmp->data))
+								pline("The Rod quickly lengthens and pierces %s %s wall!",
+								s_suffix(mon_nam(mtmp)), mbodypart(mtmp, STOMACH));
+							if(mtmp->data == &mons[PM_JUIBLEX])
+							  mtmp->mhp = (int)(.75*mtmp->mhp + 1);
+							else mtmp->mhp = 1;		/* almost dead */
+							expels(mtmp, mtmp->data, !is_animal(mtmp->data));
+						} else{
+							pline("The Rod quickly lengthens and pierces %s %s",
+								s_suffix(mon_nam(mtmp)), mbodypart(mtmp, STOMACH));
+							pline("However, %s is unfazed", mon_nam(mtmp));
+						}
+				break;
+					} else if(!u.uhave.amulet){
+						if(Can_rise_up(u.ux, u.uy, &u.uz)) {
+							int newlev = depth(&u.uz)-1;
+							d_level newlevel;
+							
+							pline("The Rod extends quickly, reaching for the %s",ceiling(u.ux,u.uy));
+							
+							get_level(&newlevel, newlev);
+							if(on_level(&newlevel, &u.uz)) {
+								pline("However, it is unable to pierce the %s.",ceiling(u.ux,u.uy));
+				break;
+							} else pline("The %s obediently yields before the Rod, and you climb to the level above.",ceiling(u.ux,u.uy));
+							goto_level(&newlevel, FALSE, FALSE, FALSE);
+						}
+					} else{
+						if (!Is_airlevel(&u.uz) && !Is_waterlevel(&u.uz) && !Underwater) {
+							pline("The Rod begins to extend quickly upwards.");
+							pline("However, a mysterious force slams it back into the %s below.", surface(u.ux, u.uy));
+							watch_dig((struct monst *)0, u.ux, u.uy, TRUE);
+							(void) dighole(FALSE);
+						}
+					}
+				break;
+				case COMMAND_CLAIRVOYANCE:
+//					do_vicinity_map(u.ux,u.uy); /*Note that this is not blocked by pointy hats*/
+					do_vicinity_map();
+				break;
+				case COMMAND_FEAR:
+					You("thrust the Rod into the air, that all may know of your Might.");
+					for(mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
+						if (DEADMONSTER(mtmp)) continue;
+						if(mtmp->mcansee && couldsee(mtmp->mx,mtmp->my)) {
+//								if (! resist(mtmp, sobj->oclass, 0, NOTELL))
+							monflee(mtmp, 0, FALSE, FALSE);
+						}
+					}
+				break;
+				case COMMAND_LIFE:
+					if(!getdir((char *)0) ||
+						(!u.dx && !u.dy) ||
+						((mtmp = m_at(u.ux+u.dx,u.uy+u.dy)) == 0)
+					){
+						pline("The Rod glows and then fades.");
+					} else {
+						int dmg = d(2,8);
+						int rcvr;
+						if (resists_drli(mtmp)){
+							shieldeff(mtmp->mx, mtmp->my);
+				break;
+						} else {
+							mtmp->mhp -= 2*dmg;
+							mtmp->mhpmax -= dmg;
+							mtmp->m_lev -= 2;
+							if (mtmp->mhp <= 0 || mtmp->mhpmax <= 0 || mtmp->m_lev < 1)
+								xkilled(mtmp, 1);
+							else {
+							if (canseemon(mtmp))
+								pline("%s suddenly seems weaker!", Monnam(mtmp));
+							}
+							healup(2*dmg, 0, FALSE, TRUE);
+							You_feel("better.");
+						}
+					}
+				break;
+				case COMMAND_KNEEL:
+					if(!getdir((char *)0) ||
+						(!u.dx && !u.dy) ||
+						((mtmp = m_at(u.ux+u.dx,u.uy+u.dy)) == 0)
+					){
+						pline("The Rod glows and then fades.");
+					} else{
+						mtmp->mcanmove = 0;
+						mtmp->mfrozen = max(1, u.ulevel - ((int)(mtmp->m_lev)));
+						pline("%s kneels before you.",Monnam(mtmp));
+					}
+				break;
+				default:
+					pline("What is this strange command!?");
+				break;
+			}
+			if(lordlydictum >= COMMAND_LADDER) obj->age = monstermoves + (long)(rnz(100)*(Role_if(PM_PRIEST) ? .8 : 1)); 
+		} else You_feel("that you should be wielding %s", the(xname(obj)));;
+	    break;
+	     }
 	  }
 	}
     } else {
@@ -2391,6 +2527,110 @@ arti_poly_contents(obj)
 	}
 }
 
+int
+dolordsmenu(prompt, obj)
+const char *prompt;
+struct obj *obj;
+{
+	winid tmpwin;
+	int n, how;
+	char buf[BUFSZ];
+	menu_item *selected;
+	anything any;
+
+	tmpwin = create_nhwindow(NHW_MENU);
+	start_menu(tmpwin);
+	any.a_void = 0;		/* zero out all bits */
+
+	Sprintf(buf, "What do you command?");
+	add_menu(tmpwin, NO_GLYPH, &any, 0, 0, ATR_BOLD, buf, MENU_UNSELECTED);
+	
+	if(obj->otyp != RAPIER){
+		Sprintf(buf, "Become a rapier");
+		any.a_int = COMMAND_RAPIER;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			'r', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+	}
+	
+	if(obj->otyp != AXE){
+		Sprintf(buf, "Become an axe");
+		any.a_int = COMMAND_AXE;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			'a', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+	}
+	
+	if(obj->otyp != MACE){
+		Sprintf(buf, "Become a mace");
+		any.a_int = COMMAND_MACE;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			'm', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+	}
+	
+	if(obj->otyp != SPEAR){
+		Sprintf(buf, "Become a spear");
+		any.a_int = COMMAND_SPEAR;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			's', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+	}
+	
+	if(obj->otyp != LANCE){
+		Sprintf(buf, "Become a lance");
+		any.a_int = COMMAND_LANCE;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			'l', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+	}
+	
+	if(obj->age < monstermoves){
+		if(obj->otyp == MACE && (
+		   u.uswallow || 
+		   (!u.uhave.amulet && Can_rise_up(u.ux, u.uy, &u.uz)) || 
+		   (u.uhave.amulet && !Is_airlevel(&u.uz) && !Is_waterlevel(&u.uz) && !Underwater) 
+		  )){
+			Sprintf(buf, "Become a ladder");
+			any.a_int = COMMAND_LADDER;	/* must be non-zero */
+			add_menu(tmpwin, NO_GLYPH, &any,
+				'L', 0, ATR_NONE, buf,
+				MENU_UNSELECTED);
+		}
+		
+		Sprintf(buf, "Show me my surroundings");
+		any.a_int = COMMAND_CLAIRVOYANCE;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			'S', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+		
+		Sprintf(buf, "Inspire fear");
+		any.a_int = COMMAND_FEAR;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			'F', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+		
+		if(obj->otyp == SPEAR){
+			Sprintf(buf, "Give me your life");
+			any.a_int = COMMAND_LIFE;	/* must be non-zero */
+			add_menu(tmpwin, NO_GLYPH, &any,
+				'G', 0, ATR_NONE, buf,
+				MENU_UNSELECTED);
+		}
+		
+		Sprintf(buf, "Kneel");
+		any.a_int = COMMAND_KNEEL;	/* must be non-zero */
+		add_menu(tmpwin, NO_GLYPH, &any,
+			'K', 0, ATR_NONE, buf,
+			MENU_UNSELECTED);
+	}
+	end_menu(tmpwin, prompt);
+
+	how = PICK_ONE;
+	n = select_menu(tmpwin, how, &selected);
+	destroy_nhwindow(tmpwin);
+	return (n > 0) ? selected[0].item.a_int : 0;
+}
 
 #endif /* OVLB */
 

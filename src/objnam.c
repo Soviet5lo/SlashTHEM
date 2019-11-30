@@ -379,6 +379,10 @@ register struct obj *obj;
 			Sprintf(buf, "set of %s", actualn);
 			break;
 		}
+		if (typ == VICTORIAN_UNDERWEAR) {
+			Sprintf(buf, "set of %s", actualn);
+			break;
+		}
 		if(is_boots(obj) || is_gloves(obj)) Strcpy(buf,"pair of ");
 
 		if(obj->otyp >= ELVEN_SHIELD && obj->otyp <= ORCISH_SHIELD
@@ -966,6 +970,9 @@ plus:
 		}
 # endif
 #endif	/* FIREARMS */
+		if(obj->known && obj->oartifact == ART_ROD_OF_LORDLY_MIGHT){
+			Sprintf(eos(bp), " (%s)", OBJ_NAME(objects[obj->otyp]));
+		}
 		break;
 	case ARMOR_CLASS:
 		if(obj->owornmask & W_ARMOR)
@@ -2563,6 +2570,7 @@ boolean from_user;
 	 */
 	if (!strstri(bp, "wand ")
 	 && !strstri(bp, "spellbook ")
+	 && !strstri(bp, "rod ")
          && !strstri(bp, "hand ")
          && !strstri(bp, "eye ")
          && !strstri(bp, "medallion ")
@@ -2580,6 +2588,7 @@ boolean from_user;
 	if (strncmpi(bp, "wizard lock", 11)) /* not the "wizard" monster! */
 	if (strncmpi(bp, "ninja-to", 8)) /* not the "ninja" rank */
 	if (strncmpi(bp, "master key", 10)) /* not the "master" rank */
+	if (strncmpi(bp, "rod of lordly might", 19)) /* not the "lord" rank */
 	if (strncmpi(bp, "magenta", 7)) /* not the "mage" rank */
         if (strncmpi(bp, "Thiefbane", 9)) /* not the "thief" rank */
         if (strncmpi(bp, "Ogresmasher", 11)) /* not the "ogre" monster */

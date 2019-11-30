@@ -476,7 +476,7 @@ register struct monst *mtmp;
 		    if (w1) (void)mongets(mtmp, w1);
 		    if (!w2 && w1 != DAGGER && !rn2(4)) w2 = KNIFE;
 		    if (w2) (void)mongets(mtmp, w2);
-		} else if (is_elf(ptr)) {
+		} else if (is_elf(ptr) && ptr != &mons[PM_HALF_ELF_RANGER]) {
 		    if (mm == PM_DROW) {
 			(void) mongets(mtmp, DARK_ELVEN_MITHRIL_COAT);
 			(void) mongets(mtmp, DARK_ELVEN_SHORT_SWORD);
@@ -903,6 +903,69 @@ register struct monst *mtmp;
 		     mkmonmoney(mtmp, (long) d(mtmp->m_lev, 15));
 #endif
 		   break;
+			case PM_REBEL_RINGLEADER:
+				(void) mongets(mtmp, SILVER_SABER);
+				(void) mongets(mtmp, GRAY_DRAGON_SCALE_MAIL);
+				(void) mongets(mtmp, SMALL_SHIELD);
+				(void) mongets(mtmp, HIGH_BOOTS);
+			break;
+			case PM_ADVENTURING_WIZARD:
+				(void) mongets(mtmp, QUARTERSTAFF);
+				(void) mongets(mtmp, LEATHER_ARMOR);
+				(void) mongets(mtmp, ROBE);
+				(void) mongets(mtmp, LOW_BOOTS);
+				/* 5lo: Since we don't have specific spells for monsters */
+				(void) mongets(mtmp, WAN_SLEEP);
+				(void) mongets(mtmp, WAN_MAGIC_MISSILE);
+			break;
+			case PM_MILITANT_CLERIC:
+				(void) mongets(mtmp, MACE);
+				(void) mongets(mtmp, PLATE_MAIL);
+				(void) mongets(mtmp, LARGE_SHIELD);
+				(void) mongets(mtmp, IRON_SHOES);
+				/* 5lo: Same here */
+				(void) mongets(mtmp, WAN_HEALING);
+				(void) mongets(mtmp, WAN_EXTRA_HEALING);
+				(void) mongets(mtmp, WAN_FIREBALL);
+			break;
+			case PM_HALF_ELF_RANGER:
+				otmp = mksobj(SILVER_ARROW, TRUE, FALSE);
+				otmp->blessed = FALSE;
+				otmp->cursed = FALSE;
+				otmp->quan += 10;
+				(void) mongets(mtmp, ELVEN_SHORT_SWORD);
+				(void) mongets(mtmp, ELVEN_SHORT_SWORD);
+				(void) mongets(mtmp, ELVEN_MITHRIL_COAT);
+				(void) mongets(mtmp, ELVEN_LEATHER_HELM);
+				(void) mongets(mtmp, ELVEN_CLOAK);
+				(void) mongets(mtmp, HIGH_BOOTS);
+				(void) mongets(mtmp, ELVEN_BOW);
+				(void) mpickobj(mtmp,otmp);
+			break;
+			case PM_PEASANT:
+				switch(rn2(4)){
+#if 0 /* none of these are implemented */
+					case 0:
+						(void)mongets(mtmp, SICKLE);
+					break;
+					case 1:
+						(void)mongets(mtmp, SCYTHE);
+					break;
+#endif
+					case 0:
+						(void)mongets(mtmp, KNIFE);
+					break;
+					case 1:
+						(void)mongets(mtmp, CLUB);
+					break;
+					case 2:
+						(void)mongets(mtmp, AXE);
+					break;
+					case 3:
+						(void)mongets(mtmp, VOULGE);
+					break;
+				}
+			break;
 		   default:
 		   break;
 		  } 

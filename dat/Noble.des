@@ -89,24 +89,6 @@ MONSTER: '@',"peasant",(27,02),peaceful
 MONSTER: '@',"peasant",(28,09),peaceful
 MONSTER: '@',"peasant",(29,11),peaceful
 
-# Sorry guys and girls, but this level just screams for some water monsters, so I will add some. --Amy
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"giant eel",random,hostile
-MONSTER: ';',"kraken",random,hostile
-MONSTER: ';',"kraken",random,hostile
-MONSTER: ';',"kraken",random,hostile
-MONSTER: ';',"electric eel",random,hostile
-MONSTER: ';',"electric eel",random,hostile
 #
 #	The "locate" level for the quest.
 #
@@ -209,7 +191,6 @@ REGION:(39,10,47,13),lit,"morgue"
 # Objects
 # Notes: This will be replaced when the object is created
 OBJECT:'[',"leather cloak",(25,03),blessed,0,"The Mantle of Heaven"
-OBJECT:'[',"leather cloak",(25,03),blessed,0,"The Vestment of Hell"
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random

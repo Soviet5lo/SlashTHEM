@@ -200,6 +200,9 @@ register boolean special;
 		case PM_NOBLEMAN:
 		case PM_NOBLEWOMAN:
 		    weapon = RAPIER;
+		    armor = CHAIN_MAIL;
+		    cloak = find_opera_cloak();
+		    shield = STRANGE_OBJECT;
 		    break;
 #if 0
 		case PM_POKEMON:

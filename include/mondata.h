@@ -90,6 +90,10 @@
 #define metallivorous(ptr)	(((ptr)->mflags1 & M1_METALLIVORE) != 0L)
 #define monpolyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L) /* monsters may poly into this */
 #define polyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L) /* players may poly into this */
+#define is_Rebel(ptr)		(ptr == &mons[PM_REBEL_RINGLEADER] ||\
+							 ptr == &mons[PM_ADVENTURING_WIZARD] ||\
+							 ptr == &mons[PM_MILITANT_CLERIC] ||\
+							 ptr == &mons[PM_HALF_ELF_RANGER])
 #define is_undead(ptr)		(((ptr)->mflags2 & M2_UNDEAD) != 0L)
 #if 0 /* Unused now - note that the M2 flags still are used
 	 for backwards compat reasons (artifacts that rely on them */

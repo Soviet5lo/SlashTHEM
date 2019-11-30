@@ -1953,7 +1953,12 @@ find_ac()
 	int uac = mons[u.umonnum].ac;
 
 	if(uarm) uac -= ARM_BONUS(uarm);
-	if(uarmc) uac -= ARM_BONUS(uarmc);
+	if(uarmc){
+		if(uarmc->oartifact == ART_MANTLE_OF_HEAVEN || 
+			uarmc->oartifact == ART_VESTMENT_OF_HELL
+		) uac -= 2*ARM_BONUS(uarmc);
+		else uac -= ARM_BONUS(uarmc);
+	}
 	if(uarmh) uac -= ARM_BONUS(uarmh);
 	if(uarmf) uac -= ARM_BONUS(uarmf);
 	if(uarms) uac -= ARM_BONUS(uarms);

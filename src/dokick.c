@@ -905,7 +905,7 @@ dokick()
 			}
 			exercise(A_DEX, TRUE);
 			return(1);
-		    } else if(Luck > 0 && !rn2(3) && !maploc->looted) {
+		    } else if(Luck > 0 && !rn2(3) && !(maploc->looted&T_LOOTED)) {
 			(void) mkgold((long) rn1(201, 300), x, y);
 			i = Luck + 1;
 			if(i > 6) i = 6;
@@ -920,7 +920,7 @@ dokick()
 			    newsym(x, y);
 			}
 			/* prevent endless milking */
-			maploc->looted = T_LOOTED;
+			maploc->looted &= T_LOOTED;
 			return(1);
 		    } else if (!rn2(4)) {
 			if(dunlev(&u.uz) < dunlevs_in_dungeon(&u.uz)) {

@@ -165,7 +165,7 @@ A("Holy Spear of Light",        SILVER_SPEAR,
 A("Rod of Lordly Might", MACE, /*needs quote*/
 	(SPFX_RESTR|SPFX_DEFN), 0, 0,
 	PHYS(3,0),	NO_DFNS,	NO_CARY,
-	LEADERSHIP,	A_LAWFUL, PM_NOBLEMAN, NON_PM, 4000L ),
+	LORDLY,	A_LAWFUL, PM_NOBLEMAN, NON_PM, 4000L ),
 
 A("Itlachiayaque",             SHIELD_OF_REFLECTION,
 	(SPFX_RESTR), (SPFX_HSPDAM), 0,

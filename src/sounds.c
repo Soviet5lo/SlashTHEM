@@ -624,6 +624,7 @@ register struct monst *mtmp;
 	case MS_LEADER:
 	case MS_NEMESIS:
 	case MS_GUARDIAN:
+asGuardian:
 	    quest_chat(mtmp);
 	    break;
 	case MS_SELL: /* pitch, pay, total */
@@ -877,6 +878,15 @@ register struct monst *mtmp;
 	    }
 	    /* else FALLTHRU */
 	case MS_HUMANOID:
+		if(Role_if(PM_NOBLEMAN) && 
+			(mtmp->data == &mons[PM_KNIGHT] 
+				|| mtmp->data == &mons[PM_MAID]) && 
+			mtmp->mpeaceful
+		) goto asGuardian; /* Jump up to a different case in this switch statment */
+		else if(Role_if(PM_KNIGHT) && 
+			mtmp->data == &mons[PM_KNIGHT] && 
+			mtmp->mpeaceful
+		) goto asGuardian; /* Jump up to a different case in this switch statment */
 	    if (!mtmp->mpeaceful) {
 		if (In_endgame(&u.uz) && is_mplayer(ptr)) {
 		    mplayer_talk(mtmp);
