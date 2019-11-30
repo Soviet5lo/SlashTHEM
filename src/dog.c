@@ -63,30 +63,6 @@ pet_type()
 		case 4: return (PM_MONKEY);
 		case 5: return (PM_BABY_CROCODILE);
 		}
-	else if (Role_if(PM_LUNATIC))
-		switch (rnd(7)) {   
-		case 1: return (PM_WOLF);
-		case 2: return (PM_JACKAL);
-		case 3: return (PM_SEWER_RAT);
-		case 4: return (PM_PANTHER);
-		case 5: return (PM_TIGER);
-		case 6: return (PM_PIT_VIPER);
-		case 7: return (PM_GIANT_SPIDER);
-		}
-	else if (Role_if(PM_WARRIOR))
-		switch (rnd(11)) {   
-		case 1: return (PM_BABY_YELLOW_DRAGON);
-		case 2: return (PM_BABY_GREEN_DRAGON);
-		case 3: return (PM_BABY_BLUE_DRAGON);
-		case 4: return (PM_BABY_BLACK_DRAGON);
-		case 5: return (PM_BABY_ORANGE_DRAGON);
-		case 6: return (PM_BABY_WHITE_DRAGON);
-		case 7: return (PM_BABY_RED_DRAGON);
-		case 8: return (PM_BABY_DEEP_DRAGON);
-		case 9: return (PM_BABY_SHIMMERING_DRAGON);
-		case 10: return (PM_BABY_SILVER_DRAGON);
-		case 11: return (PM_BABY_GRAY_DRAGON);
-		}
 	else
 	    return (rn2(2) ? PM_KITTEN : PM_LITTLE_DOG);
 }
@@ -264,20 +240,10 @@ makedog()
 	if (!*petname && pettype == PM_SEWER_RAT) {
 	    if(Role_if(PM_CONVICT)) petname = "Nicodemus"; /* Rats of NIMH */
     }
+#endif /* CONVICT */
 	if (pettype == PM_MONKEY) petname = "Ugga-Ugga";
 	if (pettype == PM_PARROT) petname = "Squawks";
 	if (pettype == PM_BABY_CROCODILE) petname = "Snappy"; /* in Germany it would be called Schnappi */
-
-	if (pettype == PM_GREEN_ELF) petname = "Dray Harp";
-	if (pettype == PM_OFFICER) petname = "Officer O'Brian";
-
-	if (pettype == PM_PANTHER) petname = "Tomcat Karlo";
-	if (pettype == PM_TIGER) petname = "Simba";
-	if (pettype == PM_PIT_VIPER) petname = "Lukas";
-	if (pettype == PM_GIANT_SPIDER) petname = "Andreas";
-
-	if (pettype == PM_BABY_YELLOW_DRAGON || pettype == PM_BABY_GREEN_DRAGON || pettype == PM_BABY_BLUE_DRAGON || pettype == PM_BABY_RED_DRAGON || pettype == PM_BABY_ORANGE_DRAGON || pettype == PM_BABY_WHITE_DRAGON || pettype == PM_BABY_BLACK_DRAGON || pettype == PM_BABY_DEEP_DRAGON || pettype == PM_BABY_SHIMMERING_DRAGON || pettype == PM_BABY_GRAY_DRAGON || pettype == PM_BABY_SILVER_DRAGON) petname = "Odahviing";
-#endif /* CONVICT */
 
 	mtmp = makemon(&mons[pettype], u.ux, u.uy, MM_EDOG);
 

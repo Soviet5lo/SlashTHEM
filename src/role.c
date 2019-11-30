@@ -658,7 +658,7 @@ const struct Role roles[] = {
 	{"Master Shapeshifter",  0} },
 	"Eluvian", "Moon", "Lycanthus",	/* from an old SLASH version without extended magic */
 	"Lun", "the Calerin Forest", "the Nightmare Forest",
-	PM_LUNATIC, NON_PM, NON_PM,
+	PM_LUNATIC, NON_PM, PM_WOLF,
 	PM_HIGH_LYCANTHROPE, PM_FIEND, PM_SIR_LORIMAR,
 	PM_WOODLAND_ELF, PM_FOREST_CENTAUR, S_HUMAN, S_CENTAUR,
 	ART_STAFF_OF_WITHERING,
