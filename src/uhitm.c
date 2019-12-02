@@ -2222,7 +2222,7 @@ register struct attack *mattk;
 			 * biting if they might have trouble getting it down */
 			if (maybe_polyd(is_vampire(youmonst.data), 
 			    Race_if(PM_VAMPIRE)) && mattk->aatyp == AT_BITE &&
-			    has_blood(pd) && u.uhunger <= 2300 ) {
+			    has_blood(pd) && u.uhunger <= 1420 ) {
 				/* For the life of a creature is in the blood
 				   (Lev 17:11) */
 				if (flags.verbose)

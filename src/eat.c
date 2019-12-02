@@ -194,9 +194,9 @@ void
 init_uhunger()
 {
 	if(Race_if(PM_INCANTIFIER)){
-	    u.uenmax += 1200;
+	    u.uenmax += 900;
 	    u.uen = u.uenmax/2;
-	} else u.uhunger = 1200;
+	} else u.uhunger = 900;
 	u.uhs = NOT_HUNGRY;
 }
 
@@ -3074,7 +3074,7 @@ bite()
 {
 	if(victual.canchoke && 
 		((Race_if(PM_INCANTIFIER) && u.uen >= u.uenmax) ||
-		 (!Race_if(PM_INCANTIFIER)&& u.uhunger >= 3000) )
+		 (!Race_if(PM_INCANTIFIER)&& u.uhunger >= 2000) )
 	) {
 		choke(victual.piece);
 		return 1;
@@ -3146,7 +3146,7 @@ windclock()
 	    stop_occupation();
 	    victual.piece = 0;
 	    return 0;
-	} else if(victual.canchoke && u.uhunger >= 3000) {
+	} else if(victual.canchoke && u.uhunger >= 2000) {
 	    Your("mainspring is wound too tight!");
 	    Your("clockwork breaks apart!");
 	    killer_format = KILLED_BY;
@@ -3154,7 +3154,7 @@ windclock()
 	    done(DIED);
 	    victual.piece = 0;
 	    return 0;
-	} else if (u.uhunger >= 2500 && !victual.fullwarn) {
+	} else if (u.uhunger >= 1500 && !victual.fullwarn) {
 	    pline("You're having a hard time cranking the key.");
 	    victual.fullwarn = TRUE;
 	    if (yn_function("Stop winding?",ynchars,'y')=='y') {
@@ -3253,7 +3253,7 @@ register int num;
 	if(Race_if(PM_INCANTIFIER)) u.uen += num;
 	else u.uhunger += num;
 	if(((Race_if(PM_INCANTIFIER) && u.uen >= u.uenmax) ||
-		 (!Race_if(PM_INCANTIFIER)&& u.uhunger >= 3000) )
+		 (!Race_if(PM_INCANTIFIER)&& u.uhunger >= 2000) )
 		) {
 	    if (!iseating || victual.canchoke) {
 		if (iseating) {
@@ -3268,7 +3268,7 @@ register int num;
 	     * warns when you're about to choke.
 	     */
 	    if ((Race_if(PM_INCANTIFIER) && u.uen >= u.uenmax * 3/4) ||
-			(!Race_if(PM_INCANTIFIER) && u.uhunger >= 2500)) {
+			(!Race_if(PM_INCANTIFIER) && u.uhunger >= 1500)) {
 		if (!victual.eating || (victual.eating && !victual.fullwarn)) {
 		    pline("You're having a hard time getting all of it down.");
 		    nomovemsg = "You're finally finished.";
@@ -3341,7 +3341,7 @@ boolean incr;
 	boolean clockwork = ((Race_if(PM_CLOCKWORK_AUTOMATON)) || Upolyd &&
 			youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]);
 
-	newhs = (h > (Race_if(PM_INCANTIFIER) ? max(u.uenmax/2,200) : 1500) ) ? SATIATED :
+	newhs = (h > (Race_if(PM_INCANTIFIER) ? max(u.uenmax/2,200) : 1000) ) ? SATIATED :
 		(h > 150) ? NOT_HUNGRY :
 		(h > 50) ? HUNGRY :
 		(h > 0) ? WEAK : FAINTING;
@@ -3384,33 +3384,35 @@ boolean incr;
 
 	if(newhs == FAINTING) {
 		if(is_fainted()) newhs = FAINTED;
-		if(u.uhs <= WEAK || rn2(50-YouHunger/50) >= 49) {
+		if(u.uhs <= WEAK || rn2(20-u.uhunger/10) >= 19) {
 			if(!is_fainted() && multi >= 0 /* %% */) {
 				/* stop what you're doing, then faint */
 				stop_occupation();
 			if (clockwork){
 				Your("clockwork comes to a complete stop.");
+#if 0
 				/* 5lo: TODO - Better message */
 			        if(u.uhunger < -(int)(800 + 50*ACURR(A_CON))) You("are close to stopping.");
+#endif
 				flags.soundok=0;
 				nomul(-5,"immobilized by slipping gears.");
 				nomovemsg = "Your clockwork catches again.";
 				afternmv = unfaint;
 			} else {
 				You("faint from lack of food.");
-
+#if 0
 	/* warn player if starvation will happen soon, that is, less than 200 nutrition remaining --Amy */
 			if(u.uhunger < -(int)(800 + 50*ACURR(A_CON))) You("are close to starvation.");
-
+#endif
 				flags.soundok = 0;
-				nomul(-3+(YouHunger/200), "fainted from lack of food");
+				nomul(-10+(YouHunger/10), "fainted from lack of food");
 				nomovemsg = "You regain consciousness.";
 				afternmv = unfaint;
 			      }
 				newhs = FAINTED;
 			}
 		} else
-		if(YouHunger < -(int)(1000 + 50*ACURR(A_CON))) {
+		if(YouHunger < -(int)(200 + 20*ACURR(A_CON))) {
 			if (clockwork){
 			    Your("clockwork comes to a complete stop.");
 			    killer_format = KILLED_BY_AN;
