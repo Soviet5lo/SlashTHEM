@@ -329,7 +329,7 @@ register struct obj *food;
 
 	exercise(A_CON, FALSE);
 
-	if ((Breathless && !Race_if(PM_INCANTIFIER)) || (!Strangled && !rn2(2))) { /* much higher chance to survive --Amy */
+	if ((Breathless && !Race_if(PM_INCANTIFIER)) || (!Strangled && !rn2(20))) {
 		/* choking by eating AoS doesn't involve stuffing yourself */
 		/* ALI - nor does other non-food nutrition (eg., life-blood) */
 		if (!food || food->otyp == AMULET_OF_STRANGULATION) {
