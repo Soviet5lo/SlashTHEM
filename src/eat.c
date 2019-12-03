@@ -2864,22 +2864,12 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 		/* Note: gold weighs 1 pt. for each 1000 pieces (see */
 		/* pickup.c) so gold and non-gold is consistent. */
 	    if (otmp->oclass == COIN_CLASS)
-		basenutrit = ((otmp->quan > 20000L) ? 2000
-			: (int)(otmp->quan/10L));
+		basenutrit = ((otmp->quan > 200000L) ? 2000
+			: (int)(otmp->quan/100L));
 	    else if(otmp->oclass == BALL_CLASS || otmp->oclass == CHAIN_CLASS)
 		basenutrit = weight(otmp);
 	    /* oc_nutrition is usually weight anyway */
 	    else basenutrit = objects[otmp->otyp].oc_nutrition;
-
-		/* Let's throw metallivores a bone here, considering most metal items weigh less now. --Amy
-		   also lithivores, which have to eat low-weight rocks and gems. */
-
-		if (otmp->oclass != COIN_CLASS) {
-			if (basenutrit && basenutrit < 500) {basenutrit *= 3;}
-			if (basenutrit && basenutrit < 10) {basenutrit = 10;}
-			if (basenutrit < 3) {basenutrit = 3;}
-		}
-
 	    victual.nmod = basenutrit;
 	    victual.eating = TRUE; /* needed for lesshungry() */
 
