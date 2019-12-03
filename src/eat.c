@@ -549,7 +549,7 @@ boolean message;
 		  "eating", food_xname(victual.piece, TRUE));
 
 	if(victual.piece->otyp == CORPSE) {
-		if (!victual.piece->odrained || /*Race_if(PM_VAMPIRE) &&*/ !rn2(5))
+		if (!victual.piece->odrained || Race_if(PM_VAMPIRE) && !rn2(5))
 		cpostfx(victual.piece->corpsenm);
 	} else
 		fpostfx(victual.piece);
@@ -1821,8 +1821,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 		tp++;
 		pline("Ecch - that must have been poisonous!");
 		if(!Poison_resistance) {
-			if (!rn2(3)) losestr(rnd(2)); /* tone down strength loss, since you have to eat many more poisonous */
-			if (!rn2(60)) losestr(rnd(2)); /* corpses in order to get poison resistance --Amy */
+			losestr(rnd(4));
 			losehp(rnd(15), "poisonous corpse", KILLED_BY_AN);
 		} else	You("seem unaffected by the poison.");
 	/* now any corpse left too long will make you mildly ill */
@@ -2128,7 +2127,7 @@ struct obj *otmp;
 	    if (u.uhp <= 0) return; /* died from sink fall */
 	}
 	otmp->known = otmp->dknown = 1; /* by taste */
-	if (!rn2(otmp->oclass == RING_CLASS ? 5 : 10)) { /* lower chance, due to existence of sickness resistance etc --Amy */
+	if (!rn2(otmp->oclass == RING_CLASS ? 3 : 5)) {
 	  switch (otmp->otyp) {
 	    default:
 	        if (!objects[typ].oc_oprop) break; /* should never happen */
@@ -2263,11 +2262,11 @@ struct obj *otmp;
 		(void)uunstone();
 		break;
 	    case RIN_SUSTAIN_ABILITY:
-	    /*case AMULET_OF_FLYING:*/ /* Intrinsic flying not supported --ALI */
+	    case AMULET_OF_FLYING: /* Intrinsic flying not supported --ALI */
 	    case AMULET_OF_LIFE_SAVING:
 	    case AMULET_OF_SECOND_CHANCE:
-	    /*case AMULET_OF_REFLECTION:*/ /* nice try */
-	    /*case AMULET_OF_DRAIN_RESISTANCE:*/
+	    case AMULET_OF_REFLECTION: /* nice try */
+	    case AMULET_OF_DRAIN_RESISTANCE:
 	    /* can't eat Amulet of Yendor or fakes,
 	     * and no oc_prop even if you could -3.
 	     */
