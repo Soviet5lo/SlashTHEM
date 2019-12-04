@@ -1031,9 +1031,6 @@ register struct monst *mtmp;
 			(void)mongets(mtmp, WAND_OF_BUGGING);
 			(void)mongets(mtmp, WAND_OF_BUGGING);
 			(void)mongets(mtmp, WAND_OF_BUGGING);
-			(void)mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-			(void)mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
-			(void)mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
 #endif
 
 		} else if (mm == PM_MAYOR_CUMMERBUND){
@@ -1619,7 +1616,6 @@ register struct	monst	*mtmp;
 	            if(!rn2(2)) (void) mongets(mtmp, POT_BOOZE);
 	                (void) mongets(mtmp, WOODEN_FLUTE);
 		    }
-		if (mtmp->data == &mons[PM_APHRODITE]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
 		if(!rn2(2)) (void) mongets(mtmp, MIRROR);
 		if(!rn2(2)) (void) mongets(mtmp, POT_OBJECT_DETECTION);
 		if (ptr == &mons[PM_NYMPH_QUEEN]) {
@@ -1629,7 +1625,6 @@ register struct	monst	*mtmp;
 		}
 		break;
           case S_RODENT:
-		if (mtmp->data == &mons[PM_THE_RAT_KING]) (void) mongets(mtmp, SCR_ROOT_PASSWORD_DETECTION);
 		break;
 	    case S_GIANT:
 		if (ptr == &mons[PM_MINOTAUR]) {

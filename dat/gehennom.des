@@ -216,7 +216,6 @@ MONSTER:'m',"giant mimic",place[2],m_feature "fountain"
 MONSTER:'m',"giant mimic",place[3],m_feature "fountain"
 # The demon of the swamp
 MONSTER:'&',"Juiblex",(25,08)
-OBJECT:'?',"root password detection",(25,08)
 # And a couple demons
 MONSTER:'i',"lemure",(43,08)
 MONSTER:'i',"lemure",(44,08)
@@ -371,7 +370,6 @@ OBJECT:random,random,random
 OBJECT:random,random,random
 # The resident nasty
 MONSTER:'&',"Orcus",(33,15)
-OBJECT:'?',"root password detection",(33,15)
 # And its preferred companions
 MONSTER:'Z',"human zombie",(32,15)
 MONSTER:'8',"shade",(32,14)
@@ -447,7 +445,6 @@ NON_DIGGABLE:(00,00,20,11)
 REGION:(01,01,20,10),unlit,"ordinary"
 # The fellow in residence
 MONSTER:'&',"Asmodeus",(12,07)
-OBJECT:'?',"root password detection",(12,07)
 # Some random weapons and armor.
 OBJECT:'[',random,random
 OBJECT:'[',random,random
@@ -524,7 +521,6 @@ MAZEWALK:(00,06),west
 STAIR:(44,06),down
 # The fellow in residence
 MONSTER:'&',"Baalzebub",(35,06)
-OBJECT:'?',"root password detection",(35,06)
 # Some random weapons and armor.
 OBJECT:'[',random,random
 OBJECT:'[',random,random
@@ -583,7 +579,6 @@ MAZEWALK:(00,06),west
 STAIR:(44,06),down
 # The fellow in residence
 MONSTER:'&',"Yeenoghu",(35,06)
-OBJECT:'?',"root password detection",(35,06)
 # Some random weapons and armor.
 OBJECT:'[',random,random
 OBJECT:'[',random,random
@@ -664,7 +659,6 @@ MAZEWALK:(00,06),west
 STAIR:(44,06),down
 # The fellow in residence
 MONSTER:'&',"Geryon",(35,06)
-OBJECT:'?',"root password detection",(35,06)
 # Some random weapons and armor.
 OBJECT:'[',random,random
 OBJECT:'[',random,random
@@ -731,7 +725,6 @@ MAZEWALK:(00,06),west
 STAIR:(44,06),down
 # The fellow in residence
 MONSTER:'&',"Demogorgon",(06,06)
-OBJECT:'?',"root password detection",(06,06)
 # Some random weapons and armor.
 OBJECT:'*',random,random
 OBJECT:'!',random,random
@@ -811,7 +804,6 @@ MAZEWALK:(00,06),west
 STAIR:(44,06),down
 # The fellow in residence
 MONSTER:'&',"Dispater",(18,06)
-OBJECT:'?',"root password detection",(18,06)
 # Some random weapons and armor.
 OBJECT:'[',random,random
 OBJECT:'[',random,random
@@ -1018,7 +1010,6 @@ MONSTER:'&',"marilith",(15,04),hostile
 MONSTER:'&',"nalfeshnee",(27,08),hostile
 # Moloch's horde
 MONSTER:'&',"Cthulhu",(18,09),asleep,hostile
-OBJECT:'?',"root password detection",(18,09)
 MONSTER:'@',"aligned priest",(20,03),noalign,hostile
 MONSTER:'@',"aligned priest",(15,04),noalign,hostile
 MONSTER:'@',"aligned priest",(11,05),noalign,hostile

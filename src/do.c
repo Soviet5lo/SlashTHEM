@@ -77,8 +77,6 @@ lose_comp_objects()
 	}
 }
 
-
-
 /* Called when a boulder is dropped, thrown, or pushed.  If it ends up
  * in a pool, it either fills the pool up or sinks away.  In either case,
  * it's gone for good...  If the destination is not a pool, returns FALSE.

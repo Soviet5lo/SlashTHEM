@@ -366,7 +366,6 @@ CONTAINER:'`',"statue",(16,10),"harpy",0
 
 # throneroom
 MONSTER:'o',"Grund the Orc King",(02,10),hostile
-OBJECT:'?',"root password detection",(02,10)
 OBJECT:'/',random,(02,10)
 OBJECT:'"',random,(02,10)
 OBJECT:'[',random,(02,10)
@@ -868,7 +867,6 @@ CONTAINER:'`',"statue",(16,10),"harpy",0
 
 # throneroom
 MONSTER:'o',"Grund the Orc King",(02,10),hostile
-OBJECT:'?',"root password detection",(02,10)
 OBJECT:'/',random,(02,10)
 OBJECT:'"',random,(02,10)
 OBJECT:'[',random,(02,10)
@@ -1370,7 +1368,6 @@ CONTAINER:'`',"statue",(16,10),"harpy",0
 
 # throneroom
 MONSTER:'o',"Grund the Orc King",(02,10),hostile
-OBJECT:'?',"root password detection",(02,10)
 OBJECT:'/',random,(02,10)
 OBJECT:'"',random,(02,10)
 OBJECT:'[',random,(02,10)

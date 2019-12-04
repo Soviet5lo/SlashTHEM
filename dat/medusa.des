@@ -90,7 +90,6 @@ TRAP:"board",(38,07)
 TRAP:"board",(38,12)
 # Random monsters
 MONSTER:'@',"Medusa",(36,10),asleep
-OBJECT:'?',"root password detection",(36,10)
 MONSTER:';',"giant eel",(11,06)
 MONSTER:';',"giant eel",(23,13)
 MONSTER:';',"giant eel",(29,02)
@@ -191,7 +190,6 @@ TRAP:"statue",random
 TRAP:"statue",random
 # Monsters.
 MONSTER:'@',"Medusa",(68,10),asleep
-OBJECT:'?',"root password detection",(68,10)
 MONSTER:'g',"gremlin",(02,14)
 MONSTER:'H',"titan",(02,05)
 MONSTER:';',"electric eel",(10,13)
@@ -305,7 +303,6 @@ TRAP:"statue",random
 TRAP:"statue",random
 #
 MONSTER:'@',"Medusa",place[0]
-OBJECT:'?',"root password detection",place[0]
 MONSTER:';',"giant eel",random
 MONSTER:';',"giant eel",random
 MONSTER:';',"jellyfish",random
@@ -434,7 +431,6 @@ TRAP:"statue",random
 TRAP:"statue",random
 #
 MONSTER:'@',"Medusa",place[0]
-OBJECT:'?',"root password detection",place[0]
 MONSTER:';',"kraken",(07,07)
 #
 # the nesting dragon
