@@ -324,12 +324,14 @@ static struct trobj Knight[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Warrior[] = {
-	{ MACE, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ BROADSWORD, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ CROSSBOW, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ CROSSBOW_BOLT, 0, WEAPON_CLASS, 50, 1 },
-	{ LARGE_SHIELD, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ APPLE, 0, FOOD_CLASS, 15, 0 },
-	{ CARROT, 0, FOOD_CLASS, 15, 0 },
+	{ CROSSBOW_BOLT, 0, WEAPON_CLASS, 25, 1 },
+	{ SCALE_MAIL, 0, ARMOR_CLASS, 1, 0 },
+	{ LOW_BOOTS, 0, ARMOR_CLASS, 1, 0},
+	{ SMALL_SHIELD, 0, ARMOR_CLASS, 1, 0 },
+	{ APPLE, 0, FOOD_CLASS, 7, 0 },
+	{ CARROT, 0, FOOD_CLASS, 7, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Monk[] = {
@@ -348,7 +350,7 @@ static struct trobj Monk[] = {
 	{ FORTUNE_COOKIE, 0, FOOD_CLASS, 3, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#if 0 /* Deferred */
 static struct trobj Psion[] = {
 #define PS_BOOK		2
 	{ LEATHER_GLOVES, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -365,7 +367,7 @@ static struct trobj Psion[] = {
 	{ FORTUNE_COOKIE, 0, FOOD_CLASS, 3, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#endif
 static struct trobj Noble[] = {
 #define NOB_SHIRT	1
 	{ RAPIER, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
@@ -798,88 +800,6 @@ static struct trobj Money[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 #endif
-
-static struct trobj WarXtrA[] = {
-	{ PLATE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrB[] = {
-	{ PLASTEEL_ARMOR, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrC[] = {
-	{ CRYSTAL_PLATE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrD[] = {
-	{ BRONZE_PLATE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrE[] = {
-	{ SPLINT_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrF[] = {
-	{ BANDED_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrG[] = {
-	{ CHAIN_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrH[] = {
-	{ SCALE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrI[] = {
-	{ RING_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrJ[] = {
-	{ YELLOW_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrK[] = {
-	{ GREEN_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrL[] = {
-	{ BLUE_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrM[] = {
-	{ BLACK_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrN[] = {
-	{ ORANGE_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrO[] = {
-	{ WHITE_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrP[] = {
-	{ RED_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrQ[] = {
-	{ DEEP_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrR[] = {
-	{ SHIMMERING_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrS[] = {
-	{ SILVER_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrT[] = {
-	{ GRAY_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 
 /* race-based substitutions for initial inventory;
    the weaker cloak for elven rangers is intentional--they shoot better */
@@ -1386,7 +1306,7 @@ static const struct def_skill Skill_K[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_War[] = { /*master of all weapons*/
+static const struct def_skill Skill_War[] = {
     /* 5lo: uses Dwarf skills from Slash'EM 0.0.6 with modifications */
     { P_PICK_AXE, P_SKILLED},     { P_AXE, P_SKILLED },
     { P_SHORT_SWORD, P_EXPERT },  { P_SCIMITAR, P_SKILLED },
@@ -1399,7 +1319,7 @@ static const struct def_skill Skill_War[] = { /*master of all weapons*/
     /* Warriors avoid magic */
     { P_DIVINATION_SPELL, P_BASIC },
 #ifdef STEED
-    { P_RIDING, P_BASIC },
+    { P_RIDING, P_SKILLED },
 #endif
     { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_EXPERT },  { P_NONE, 0 }
@@ -2585,29 +2505,6 @@ u_init()
 		skill_init(Skill_N);
 		break;
 	case PM_WARRIOR:
-		switch (rnd(20)) {   
-                    case 1: ini_inv(WarXtrA); break;
-                    case 2: ini_inv(WarXtrB); break;
-                    case 3: ini_inv(WarXtrC); break;
-                    case 4: ini_inv(WarXtrD); break;
-                    case 5: ini_inv(WarXtrE); break;
-                    case 6: ini_inv(WarXtrF); break;
-                    case 7: ini_inv(WarXtrG); break;
-                    case 8: ini_inv(WarXtrH); break;
-                    case 9: ini_inv(WarXtrI); break;
-                    case 10: ini_inv(WarXtrJ); break;
-                    case 11: ini_inv(WarXtrK); break;
-                    case 12: ini_inv(WarXtrL); break;
-                    case 13: ini_inv(WarXtrM); break;
-                    case 14: ini_inv(WarXtrN); break;
-                    case 15: ini_inv(WarXtrO); break;
-                    case 16: ini_inv(WarXtrP); break;
-                    case 17: ini_inv(WarXtrQ); break;
-                    case 18: ini_inv(WarXtrR); break;
-                    case 19: ini_inv(WarXtrS); break;
-                    case 20: ini_inv(WarXtrT); break;
-		    default: break;
-		}
 		ini_inv(Warrior);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
