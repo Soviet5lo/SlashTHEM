@@ -1223,9 +1223,9 @@ const struct Role roles[] = {
 },
 
 {	{"Warrior", 0}, {
-	{"Swordsman",     0},
-	{"Longswordsman",     0},
-	{"Two-Handed Swordsman",    0},
+	{"Swordsman",     "Swordswoman"},
+	{"Longswordsman",     "Longswordswoman"},
+	{"Two-Handed Swordsman",    "Two-Handed Swordswoman"},
 	{"Legionnaire",    0},
 	{"Crusader",      0},
 	{"Baron",    "Baroness"},
