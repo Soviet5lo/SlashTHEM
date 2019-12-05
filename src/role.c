@@ -859,7 +859,7 @@ const struct Role roles[] = {
 	{"Annihilator", 0} },
 	0, 0, 0,	/* randomly chosen from other roles */
 	"Pal", "Ancient Temple", "the World-Eater's domain",
-	PM_PALADIN, NON_PM, NON_PM,
+	PM_PALADIN, NON_PM, PM_PONY,
 	PM_EREC, PM_ACOLYTE, PM_ALDUIN,
 	PM_HUMAN_ZOMBIE, PM_WRAITH, S_ZOMBIE, S_WRAITH,
 	ART_CUDGEL_OF_CUTHBERT,
