@@ -1788,8 +1788,30 @@ register struct obj	*sobj;
 	/* KMH, balance patch -- removed */
 	case SCR_TRAP_DETECTION:
 		if (!sobj->cursed) return(trap_detect(sobj));
+		else {
+		    You_feel("unsafe");
+			{
+			int rtrap;
+		    	int i, j, bd = confused ? 5 : 1;
+
+		      	for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
+				if (!isok(u.ux + i, u.uy + j)) continue;
+				if ((levl[u.ux + i][u.uy + j].typ != ROOM && levl[u.ux + i][u.uy + j].typ != CORR) || MON_AT(u.ux + i, u.uy + j)) continue;
+				if (t_at(u.ux + i, u.uy + j)) continue;
+			      	rtrap = rnd(TRAPNUM-1);
+				if (rtrap == HOLE) rtrap = PIT;
+				if (rtrap == MAGIC_PORTAL) rtrap = PIT;
+				if (rtrap == TRAPDOOR && !Can_dig_down(&u.uz)) rtrap = PIT;
+				if (rtrap == LEVEL_TELEP && level.flags.noteleport) rtrap = SQKY_BOARD;
+				if (rtrap == TELEP_TRAP && level.flags.noteleport) rtrap = SQKY_BOARD;
+				if (rtrap == ROLLING_BOULDER_TRAP) rtrap = ROCKTRAP;
+				if (rtrap == NO_TRAP) rtrap = ARROW_TRAP;
+
+				(void) maketrap(u.ux + i, u.uy + j, rtrap);
+			}
+		    }
+		}
 	      break;
-		/*what the hell? */
 	case SCR_REMOVE_CURSE:
 	case SPE_REMOVE_CURSE:
 	    {	register struct obj *obj;
