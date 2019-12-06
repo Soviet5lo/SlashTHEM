@@ -1785,29 +1785,62 @@ register struct obj	*sobj;
 		pline("This scroll seems to be blank.");
 	    known = TRUE;
 	    break;
-	/* KMH, balance patch -- removed */
+	/* KMH, balance patch -- removed
+	 * Re-enabled via SlashEM-Extended */
 	case SCR_TRAP_DETECTION:
 		if (!sobj->cursed) return(trap_detect(sobj));
 		else {
-		    You_feel("unsafe");
+		    You_feel("%s", (confused) ? "extremely unsafe" : "unsafe");
 			{
-			int rtrap;
-		    	int i, j, bd = confused ? 5 : 1;
+			int kind;
+		    	int i, j, bd = confused ? 2 : 1;
 
 		      	for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
 				if (!isok(u.ux + i, u.uy + j)) continue;
 				if ((levl[u.ux + i][u.uy + j].typ != ROOM && levl[u.ux + i][u.uy + j].typ != CORR) || MON_AT(u.ux + i, u.uy + j)) continue;
 				if (t_at(u.ux + i, u.uy + j)) continue;
-			      	rtrap = rnd(TRAPNUM-1);
-				if (rtrap == HOLE) rtrap = PIT;
-				if (rtrap == MAGIC_PORTAL) rtrap = PIT;
-				if (rtrap == TRAPDOOR && !Can_dig_down(&u.uz)) rtrap = PIT;
-				if (rtrap == LEVEL_TELEP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == TELEP_TRAP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == ROLLING_BOULDER_TRAP) rtrap = ROCKTRAP;
-				if (rtrap == NO_TRAP) rtrap = ARROW_TRAP;
 
-				(void) maketrap(u.ux + i, u.uy + j, rtrap);
+			      	kind = rnd(TRAPNUM-1);
+				unsigned lvl = level_difficulty();
+				/* 5lo: let's reject too hard traps like normal */
+				switch (kind) {
+				    case MAGIC_PORTAL:
+					    kind = NO_TRAP; break;
+				    case ROLLING_BOULDER_TRAP:
+					    kind = ROCKTRAP;
+					    /* fall-through... */
+				    case SLP_GAS_TRAP:
+					    if (lvl < 2) kind = NO_TRAP; break;
+				    case LEVEL_TELEP:
+					    if (lvl < 5 || level.flags.noteleport)
+						kind = SQKY_BOARD; break;
+				    case SPIKED_PIT:
+					    if (lvl < 5) kind = PIT; break;
+				    case LANDMINE:
+				    case SPEAR_TRAP:
+					    if (lvl < 6) kind = DART_TRAP; break;
+				    case WEB:
+					    if (lvl < 7) kind = DART_TRAP; break;
+				    case STATUE_TRAP:
+				    case POLY_TRAP:
+					    if (lvl < 8) kind = NO_TRAP; break;
+				    case COLLAPSE_TRAP:
+				    case MAGIC_BEAM_TRAP:
+					    if (lvl < 16) kind = NO_TRAP; break;
+				    case TELEP_TRAP:
+					    if (level.flags.noteleport) kind = SQKY_BOARD; break;
+				    case FIRE_TRAP:
+				    case ICE_TRAP:
+					    if (lvl < 10) kind = ARROW_TRAP; break;
+				    case HOLE:
+					/* make these much less often than other traps */
+					    if (rn2(7)) kind = PIT; break;
+				    case TRAPDOOR:
+					    if (!Can_dig_down(&u.uz)) kind = PIT; break;
+
+				}
+				/* Only a 50% chance of generating any given trap */
+				if(!rn2(2)) (void) maketrap(u.ux + i, u.uy + j, kind);
 			}
 		    }
 		}
