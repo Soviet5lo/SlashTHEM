@@ -223,6 +223,7 @@ static struct trobj Locksmith[] = {
 };
 
 static struct trobj Ninja[] = {
+#define NIN_SHURIKEN 1
 	{ SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },      /* the wakizashi */
 	{ SHURIKEN, 0, WEAPON_CLASS, 9, UNDEF_BLESS },        /* quan is variable */
 	{ LEATHER_CLOAK, 1, ARMOR_CLASS, 1, 0 },
@@ -269,7 +270,7 @@ static struct trobj Healer[] = {
 	{ POT_HEALING, 0, POTION_CLASS, 4, UNDEF_BLESS },
 	{ POT_EXTRA_HEALING, 0, POTION_CLASS, 4, UNDEF_BLESS },
 	{ WAN_SLEEP, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
-	/* [Tom] they might as well have a wand of healing, too */        
+	/* [Tom] they might as well have a wand of healing, too */
 	{ WAN_HEALING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	/* always blessed, so it's guaranteed readable */
 	{ SPE_HEALING, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
@@ -2575,6 +2576,7 @@ u_init()
 
 	case PM_NINJA:
 		knows_class(WEAPON_CLASS);
+		Ninja[NIN_SHURIKEN].trquan = rn1(9, 6);
 		ini_inv(Ninja);
 		skill_init(Skill_Nin);
 		break;
