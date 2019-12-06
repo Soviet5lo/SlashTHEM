@@ -33,7 +33,6 @@ register struct obj *otmp;
 	case SCR_FIRE:
 	case SCR_SLEEP:
 	case SCR_EARTH:
-	case SCR_ROOT_PASSWORD_DETECTION:
 		return(8);
 /*		break; */
 	case SCR_DESTROY_ARMOR:

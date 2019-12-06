@@ -347,11 +347,10 @@ struct obj *otmp;
 #define MUSE_WAN_CREATE_HORDE 22
 #define MUSE_POT_VAMPIRE_BLOOD 23
 #define MUSE_WAN_FULL_HEALING 24
-#define MUSE_SCR_ROOT_PASSWORD_DETECTION 25
-#define MUSE_RIN_TIMELY_BACKUP 26
-#define MUSE_SCR_SUMMON_UNDEAD 27
-#define MUSE_WAN_SUMMON_UNDEAD 28
-#define MUSE_SCR_HEALING 29
+#define MUSE_RIN_TIMELY_BACKUP 25
+#define MUSE_SCR_SUMMON_UNDEAD 26
+#define MUSE_WAN_SUMMON_UNDEAD 27
+#define MUSE_SCR_HEALING 28
 /*
 #define MUSE_INNATE_TPT 9999
  * We cannot use this.  Since monsters get unlimited teleportation, if they
@@ -611,13 +610,6 @@ struct monst *mtmp;
 		    }
 		}
 
-		nomore(MUSE_SCR_ROOT_PASSWORD_DETECTION);
-		if(obj->otyp == SCR_ROOT_PASSWORD_DETECTION
-		   && (!(mtmp->isshk && inhishop(mtmp))
-			    && !mtmp->isgd && !mtmp->ispriest)) {
-			m.defensive = obj;
-			m.has_defense = MUSE_SCR_ROOT_PASSWORD_DETECTION;
-		}
 		nomore(MUSE_RIN_TIMELY_BACKUP);
 		if(obj->otyp == RIN_TIMELY_BACKUP) {
 			m.defensive = obj;
@@ -834,37 +826,6 @@ mon_tele:
 				(coord *)0);
 			if (oseen) makeknown(SCR_TELEPORTATION);
 		} else goto mon_tele;
-		return 2;
-	    }
-	case MUSE_SCR_ROOT_PASSWORD_DETECTION:
-	    {
-		if (mtmp->isshk || mtmp->isgd || mtmp->ispriest) return 2;
-		m_flee(mtmp);
-		mreadmsg(mtmp, otmp);
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-		how = SCR_ROOT_PASSWORD_DETECTION;
-
-			int nlev;
-			d_level flev;
-
-			if (mon_has_amulet(mtmp) || In_endgame(&u.uz)) {
-			    if (vismon)
-				pline("%s seems very disoriented for a moment.",
-					Monnam(mtmp));
-			    return 2;
-			}
-			nlev = random_teleport_level();
-			if (nlev == depth(&u.uz)) {
-			    if (vismon)
-				pline("%s shudders for a moment.",
-								Monnam(mtmp));
-			    return 2;
-			}
-			get_level(&flev, nlev);
-			migrate_to_level(mtmp, ledger_no(&flev), MIGR_RANDOM,
-				(coord *)0);
-			if (oseen) makeknown(SCR_ROOT_PASSWORD_DETECTION);
-
 		return 2;
 	    }
 	case MUSE_WAN_DIGGING:
@@ -1399,10 +1360,9 @@ struct monst *mtmp;
 		case 13: return WAN_CREATE_HORDE;
 		case 14: return POT_VAMPIRE_BLOOD;
 		case 15: return WAN_FULL_HEALING;
-		case 16: return SCR_ROOT_PASSWORD_DETECTION;
-		case 17: return RIN_TIMELY_BACKUP;
-		case 18: return WAN_SUMMON_UNDEAD;
-		case 19: return SCR_HEALING;
+		case 16: return RIN_TIMELY_BACKUP;
+		case 17: return WAN_SUMMON_UNDEAD;
+		case 18: return SCR_HEALING;
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -2811,7 +2771,7 @@ struct obj *obj;
 	    break;
 	case SCROLL_CLASS:
 	    if (typ == SCR_TELEPORTATION || typ == SCR_HEALING 
-		|| typ == SCR_ROOT_PASSWORD_DETECTION || typ == SCR_CREATE_MONSTER 
+		|| typ == SCR_CREATE_MONSTER 
 		|| typ == SCR_SUMMON_UNDEAD || typ == SCR_FLOOD || typ == SCR_ICE 
 		|| typ == SCR_CLOUDS ||typ == SCR_EARTH)
 		return TRUE;
