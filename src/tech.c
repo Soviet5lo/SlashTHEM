@@ -105,18 +105,6 @@ static const struct innate_tech
 	/* Roles */
 	arc_tech[] = { {   1, T_RESEARCH, 1},
 		       {   0, 0, 0} },
-	gof_tech[] = { {   1, T_DRAW_BLOOD, 1},
-		       {   1, T_CALM_STEED, 1},
-		       {   1, T_DAZZLE, 1},
-		       {   1, T_TURN_UNDEAD, 1},
-		       {   1, T_CREATE_AMMO, 1},
-		       {   5, T_VANISH, 1},
-		       {   10, T_FLURRY, 1},
-		       {   15, T_REVIVE, 1},
-		       {   20, T_RAISE_ZOMBIES, 1},
-		       {   25, T_BOOZE, 1},
-		       {   30, T_TELEKINESIS, 1},
-		       {   0, 0, 0} },
 	dru_tech[] = { {   1, T_BOOZE, 1},
 		       {   0, 0, 0} },
 	bar_tech[] = { {   1, T_BERSERK, 1},
@@ -1878,7 +1866,6 @@ int tech_no;
 
 		t_timeout = rn1(1500,500);
 		break;
-#endif
 	    case T_WORLD_FALL:
 
 		You("scream \"EYGOORTS-TOGAAL, JEZEHH!\"");
@@ -1915,7 +1902,6 @@ int tech_no;
 
 	      t_timeout = rn1(250,250);
 	      break;
-#if 0
 	    case T_EGG_BOMB:
 
 	    You("create some stoning grenades.");
