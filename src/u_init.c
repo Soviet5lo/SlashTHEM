@@ -604,7 +604,7 @@ static struct trobj ExtraBook[] = {
 
 
 static struct trobj KoboldItem[] = {
-	{ DART, 0, WEAPON_CLASS, 15, 0 },
+	{ DART, 0, WEAPON_CLASS, 10, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -2866,7 +2866,8 @@ u_init()
 	    break;
 	case PM_KOBOLD:
 	    if(!Role_if(PM_CONVICT)) {
-		ini_inv(KoboldItem);		
+		KoboldItem[0].trquan = rn1(10, 5);
+		ini_inv(KoboldItem);
 		if(rn2(2)) ini_inv(KoboldItemB);		
 		else ini_inv(KoboldItemC);
 	    }
@@ -2884,11 +2885,11 @@ u_init()
 		break;
 	case PM_TROLL:
 		if(!Role_if(PM_CONVICT)) switch (rnd(4)) {
-                case 1: ini_inv(TrollItemA); break;
-                case 2: ini_inv(TrollItemB); break;
-                case 3: ini_inv(TrollItemC); break;
-                case 4: ini_inv(TrollItemD); break;
-		default: break;
+			case 1: ini_inv(TrollItemA); break;
+			case 2: ini_inv(TrollItemB); break;
+			case 3: ini_inv(TrollItemC); break;
+			case 4: ini_inv(TrollItemD); break;
+			default: break;
 		}
 //		skill_add(Skill_Troll);
 		augment_skill_cap(P_POLEARMS, 1, P_SKILLED, P_EXPERT);
@@ -2899,7 +2900,7 @@ u_init()
 //		skill_add(Skill_Ogre);
 		break;
 	case PM_GIANT:
-         if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
+		if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
 		break;
 	case PM_HOBBIT:
 		augment_skill_cap(P_SLING, 1, P_SKILLED, P_EXPERT);
