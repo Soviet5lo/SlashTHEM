@@ -36,3 +36,5 @@ util/lev_yacc.c
 util/makedefs
 
 tags
+
+.vscode/
