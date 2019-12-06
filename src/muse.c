@@ -1433,11 +1433,10 @@ struct monst *mtmp;
 #define MUSE_POT_CYANIDE 22
 #define MUSE_POT_RADIUM 23
 #define MUSE_WAN_ACID 24
-#define MUSE_SCR_TRAP_CREATION 25
-#define MUSE_SCR_FLOOD 26
-#define MUSE_SCR_ICE 27
-#define MUSE_SCR_CLOUDS 28
-#define MUSE_WAN_SOLAR_BEAM 29
+#define MUSE_SCR_FLOOD 25
+#define MUSE_SCR_ICE 26
+#define MUSE_SCR_CLOUDS 27
+#define MUSE_WAN_SOLAR_BEAM 28
 /* Select an offensive item/action for a monster.  Returns TRUE iff one is
  * found.
  */
@@ -1583,11 +1582,6 @@ struct monst *mtmp;
 		if(obj->otyp == POT_ACID) {
 			m.offensive = obj;
 			m.has_offense = MUSE_POT_ACID;
-		}
-		nomore(MUSE_SCR_TRAP_CREATION);
-		if(obj->otyp == SCR_TRAP_CREATION) {
-			m.offensive = obj;
-			m.has_offense = MUSE_SCR_TRAP_CREATION;
 		}
 		nomore(MUSE_SCR_FLOOD);
 		if(obj->otyp == SCR_FLOOD) {
@@ -1913,38 +1907,6 @@ struct monst *mtmp;
 		mbhit(mtmp,rn1(8,6),mbhitm,bhito,otmp);
 		m_using = FALSE;
 		return 2;
-	case MUSE_SCR_TRAP_CREATION:
-
-		mreadmsg(mtmp, otmp);
-		makeknown(otmp->otyp);
-	      You_feel("endangered!!");
-		{
-			int rtrap;
-		    int i, j, bd;
-			bd = 1;
-			if (!rn2(5)) bd += rnd(1);
-
-		      for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
-				if (!isok(u.ux + i, u.uy + j)) continue;
-				if ((levl[u.ux + i][u.uy + j].typ != ROOM && levl[u.ux + i][u.uy + j].typ != CORR) || MON_AT(u.ux + i, u.uy + j)) continue;
-				if (t_at(u.ux + i, u.uy + j)) continue;
-
-			      rtrap = rnd(TRAPNUM-1);
-				if (rtrap == HOLE) rtrap = PIT;
-				if (rtrap == MAGIC_PORTAL) rtrap = PIT;
-				if (rtrap == TRAPDOOR && !Can_dig_down(&u.uz)) rtrap = PIT;
-				if (rtrap == LEVEL_TELEP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == TELEP_TRAP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == ROLLING_BOULDER_TRAP) rtrap = ROCKTRAP;
-				if (rtrap == NO_TRAP) rtrap = ARROW_TRAP;
-
-				(void) maketrap(u.ux + i, u.uy + j, rtrap);
-			}
-		}
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		return 2;
-
 	case MUSE_SCR_FLOOD:
 
 		mreadmsg(mtmp, otmp);
@@ -2316,11 +2278,10 @@ struct monst *mtmp;
 		case 20: return POT_CYANIDE;
 		case 21: return POT_RADIUM;
 		case 22: return WAN_ACID;
-		case 23: return SCR_TRAP_CREATION;
-		case 24: return SCR_FLOOD;
-		case 25: return SCR_ICE;
-		case 26: return SCR_CLOUDS;
-		case 27: return WAN_SOLAR_BEAM;
+		case 23: return SCR_FLOOD;
+		case 24: return SCR_ICE;
+		case 25: return SCR_CLOUDS;
+		case 26: return WAN_SOLAR_BEAM;
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -2852,7 +2813,7 @@ struct obj *obj;
 	    if (typ == SCR_TELEPORTATION || typ == SCR_HEALING 
 		|| typ == SCR_ROOT_PASSWORD_DETECTION || typ == SCR_CREATE_MONSTER 
 		|| typ == SCR_SUMMON_UNDEAD || typ == SCR_FLOOD || typ == SCR_ICE 
-		|| typ == SCR_CLOUDS ||typ == SCR_EARTH || typ == SCR_TRAP_CREATION)
+		|| typ == SCR_CLOUDS ||typ == SCR_EARTH)
 		return TRUE;
 	    break;
 	case AMULET_CLASS:

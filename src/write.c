@@ -58,7 +58,6 @@ register struct obj *otmp;
 	case SCR_ICE:
 	case SCR_CLOUDS:
 	case SCR_MASS_MURDER:
-	case SCR_TRAP_CREATION:
 	case SCR_UNDO_GENOCIDE:
 		return(20);
 /*		break; */
