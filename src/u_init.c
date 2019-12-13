@@ -1148,13 +1148,14 @@ static const struct def_skill Skill_Dru[] = {
     /* 5lo: A focus on short, one handed bladed weapons */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
     { P_WHIP, P_EXPERT },		{ P_CLUB, P_SKILLED },    
+    { P_SHORT_SWORD, P_SKILLED },
     { P_DART, P_SKILLED },		{ P_FLAIL, P_BASIC },
     { P_SLING, P_SKILLED },    		{ P_UNICORN_HORN, P_BASIC },
 #ifdef FIREARMS
     { P_FIREARM, P_BASIC },
 #endif
     { P_DIVINATION_SPELL, P_BASIC },	{ P_BODY_SPELL, P_BASIC },
-    { P_MUSICALIZE, P_BASIC },
+    { P_MUSICALIZE, P_BASIC }, /* Drunken singing */
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_RIDING, P_BASIC },
     { P_NONE, 0 }
@@ -1185,7 +1186,7 @@ static const struct def_skill Skill_Hack[] = {
 };
 
 static const struct def_skill Skill_Gee[] = {
-    /* 5lo: Effectively a much more limited Geek */
+    /* 5lo: Effectively a much more limited Hacker */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
     { P_LONG_SWORD, P_SKILLED },	{ P_CLUB, P_EXPERT },
     { P_PADDLE, P_SKILLED },		{ P_MACE, P_BASIC },
