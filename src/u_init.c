@@ -259,6 +259,7 @@ static struct trobj Geek[] = {
 	{ CANDY_BAR, 0, FOOD_CLASS, 5, 0 },
 	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
 	{ UGLY_BACKPACK, 0, TOOL_CLASS, 1, 0 },
+	{ LENSES, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -2378,6 +2379,12 @@ u_init()
 		break;
 
 	case PM_GEEK:
+		/* 5lo: Give them some lunch money */
+#ifndef GOLDOBJ
+		u.ugold = u.ugold0 = rn1(100, 101);
+#else
+		u.umoney0 = rn1(100, 101);
+#endif
 		ini_inv(Geek);
 		skill_init(Skill_Gee);
 		break;
