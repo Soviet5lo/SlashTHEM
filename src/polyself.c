@@ -1656,7 +1656,8 @@ int part;
 	if (mptr->mlet == S_CENTAUR || mptr->mlet == S_UNICORN ||
 		((mptr == &mons[PM_SATYR] || mptr == &mons[PM_ROTHE]) && part != HAIR))
 	    return horse_parts[part];
-	if (mptr->mlet == S_LIGHT) {
+	if (mptr->mlet == S_LIGHT ||
+			mptr == &mons[PM_QUARK]) { /* rays of gluons */
 		if (part == HANDED) return "rayed";
 		else if (part == ARM || part == FINGER ||
 				part == FINGERTIP || part == HAND) return "ray";
