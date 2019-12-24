@@ -747,7 +747,7 @@ boolean polyspot;
 	if (!has_head(mdat) || verysmall(mdat) || has_horns(mdat)) {
 	    if ((otmp = which_armor(mon, W_ARMH)) != 0 &&
 		    /* flimsy test for horns matches polyself handling */
-		    (handless_or_tiny || !is_flimsy(otmp))) {
+		    ((!has_head(mdat) || verysmall(mdat)) || !is_flimsy(otmp))) {
 		if (vis)
 		    pline("%s helmet falls to the %s!",
 			  s_suffix(Monnam(mon)), surface(mon->mx, mon->my));

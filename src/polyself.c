@@ -814,6 +814,14 @@ break_armor()
 	    }
 	}
     }
+    if (!has_head(youmonst.data)) {
+	if ((otmp = uarmh) !=0) {
+	    if (donning(otmp)) cancel_don();
+	    Your("helmet falls to the %s!", surface(u.ux, u.uy));
+	    (void) Helmet_off();
+	    dropx(otmp);
+	}
+    }
 #ifdef JEDI
     if ((otmp = uarmh) != 0 && (youmonst.data == &mons[PM_MIND_FLAYER] ||
 	youmonst.data == &mons[PM_MASTER_MIND_FLAYER])){
