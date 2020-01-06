@@ -3142,7 +3142,7 @@ char *buf;
 	else if (IS_GRAVE(ltyp))
 	    cmap = S_grave;				/* "grave" */
 	else if (ltyp == TREE)
-	    dfeature = rmname(lev);				/* "tree" */
+	    dfeature = rmname(lev);			/* "tree" */
 	else if (ltyp == IRONBARS)
 	    dfeature = "set of iron bars";
 

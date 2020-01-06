@@ -1658,8 +1658,9 @@ struct obj *obj;
 {
 	if(Race_if(PM_GHOUL) || youmonst.data == &mons[PM_OTYUGH]){
 	    pline("Yum!  Rotten %s!", foodword(obj));
-	    if(Race_if(PM_GHOUL)) healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
-	return(1);
+	    /* Inspired by DCSS, give ghouls a minor health boost */
+	    if(Race_if(PM_GHOUL)) healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE);
+	    return(1);
 	}
 	pline("Blecch!  Rotten %s!",
 		is_vampire(youmonst.data) ? "blood" : foodword(obj));

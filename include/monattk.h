@@ -28,7 +28,7 @@
 #define AT_TENT		16	/* tentacles */
 #define AT_TRAM		17	/* trample */
 #define AT_MULTIPLY	18	/* RJ - multiplies (yes, it's an attack) */
-#define AT_NTCH         19      /* adjacent, no touching */
+#define AT_NTCH 	19 	/* adjacent, no touching */
 #if 0 /* 5lo: Doesn't work currently, implement fully later? */
 #define AT_RIDL		20
 #endif

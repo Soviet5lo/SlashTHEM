@@ -3447,6 +3447,7 @@ assign_sym:
 	mtmp->mappearance = appear;
 }
 
+/* 5lo: TODO: see if some Slash'EM monsters fit here */
 static int friendlies[] = {
     PM_ACID_BLOB,  PM_HOBBIT,     PM_BUGBEAR,     PM_GNOME,
     PM_GNOME_LORD, PM_GNOME_KING, PM_DWARF,       PM_DWARF_LORD,
@@ -3465,18 +3466,18 @@ static int very_friendlies[] = {
 int
 pick_friendly()
 {
-  int pm, i=8;
-  do{ 
-  if (rn2(3))
-    pm = very_friendlies[rn2(SIZE(very_friendlies))];
-  else
-    pm = friendlies[rn2(SIZE(friendlies))];
-  if (!rn2(20))
-    pm = PM_GUIDE;
-  if (!peace_minded(&mons[pm]))
-    pm = NON_PM;
-  }while (pm == NON_PM || !(--i));
-  return pm;
+    int pm, i=8;
+    do { 
+	if (rn2(3))
+	    pm = very_friendlies[rn2(SIZE(very_friendlies))];
+	else
+	    pm = friendlies[rn2(SIZE(friendlies))];
+	if (!rn2(20))
+	    pm = PM_GUIDE;
+	if (!peace_minded(&mons[pm]))
+	    pm = NON_PM;
+    } while (pm == NON_PM || !(--i));
+    return pm;
 }
 
 /* Bag of Tricks now trickier ... nda 5/13/2003 */

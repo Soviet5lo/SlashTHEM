@@ -1299,19 +1299,19 @@ int
 Blemmye_blindness(mon)
 register struct monst * mon;
 {
-	/* 5lo: TODO: Fill with extra objects from Slash'EM/SlashTHEM */
-  struct obj * otmp;
-  if (mon->data != &mons[PM_BLEMMYE]) return 0;
+    /* 5lo: TODO: Fill with extra objects from Slash'EM/SlashTHEM */
+    struct obj * otmp;
+    if (mon->data != &mons[PM_BLEMMYE]) return 0;
 #ifdef TOURIST
-  otmp = (mon == &youmonst) ? uarmu : which_armor(mon, W_ARMU);
-  if (otmp && otmp->otyp == T_SHIRT) return 1;
+    otmp = (mon == &youmonst) ? uarmu : which_armor(mon, W_ARMU);
+    if (otmp && otmp->otyp == T_SHIRT) return 1;
 #endif
-  otmp = (mon == &youmonst) ? uarm : which_armor(mon, W_ARM);
-  if (otmp && (otmp->otyp != CRYSTAL_PLATE_MAIL)) return 1;
-  otmp = (mon == &youmonst) ? uarmc : which_armor(mon, W_ARMC);
-  if (otmp && (otmp->otyp == ROBE || otmp->otyp == LAB_COAT	/* 5lo: was Alchemy Smock */
-        || strcmp(OBJ_NAME(objects[otmp->otyp]), "ornamental cope"))) return 1;
-  return 0;
+    otmp = (mon == &youmonst) ? uarm : which_armor(mon, W_ARM);
+    if (otmp && (otmp->otyp != CRYSTAL_PLATE_MAIL)) return 1;
+    otmp = (mon == &youmonst) ? uarmc : which_armor(mon, W_ARMC);
+    if (otmp && (otmp->otyp == ROBE || otmp->otyp == LAB_COAT	/* 5lo: was Alchemy Smock */
+      || strcmp(OBJ_NAME(objects[otmp->otyp]), "ornamental cope"))) return 1;
+    return 0;
 }
 
 

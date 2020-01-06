@@ -840,7 +840,7 @@ movemon()
 	}
 
 	if (mtmp->data == & mons[PM_WILL_O__WISP])
-	  refakem(mtmp);
+	    refakem(mtmp);
 
 	/* continue if the monster died fighting */
 	if (Conflict && !mtmp->iswiz && mtmp->mcansee) {
@@ -2967,18 +2967,17 @@ int
 refakem(mtmp)
 struct monst * mtmp;
 {
-  if ((cansee(mtmp->mx, mtmp->my) || mtmp->mcan) ||
+    if ((cansee(mtmp->mx, mtmp->my) || mtmp->mcan) ||
       ((mtmp->m_ap_type == M_AP_MONSTER) && rn2(8)))
-    return FALSE;
-  if ((mtmp->mappearance = pick_friendly()) != NON_PM ){
-    mtmp->m_ap_type = M_AP_MONSTER;
-    return TRUE;
-  } else {
-    mtmp->m_ap_type = M_AP_NOTHING;
-    return FALSE;
-  }
+	return FALSE;
+    if ((mtmp->mappearance = pick_friendly()) != NON_PM ){
+      mtmp->m_ap_type = M_AP_MONSTER;
+	return TRUE;
+    } else {
+	mtmp->m_ap_type = M_AP_NOTHING;
+	return FALSE;
+    }
 }
-
 
 short *animal_list = 0;		/* list of PM values for animal monsters */
 int animal_list_count;

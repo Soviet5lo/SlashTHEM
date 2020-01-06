@@ -432,7 +432,7 @@ use_natural:
 		if (strike) 
 		    res[i] = hitmm(magr, mdef, mattk);
 		else		    
-			missmm(magr, mdef, tmp, dieroll, mattk);
+		    missmm(magr, mdef, tmp, dieroll, mattk);
 		break;
 
 	    case AT_HUGS:	/* automatic if prev two attacks succeed */
@@ -798,7 +798,7 @@ hitmm(magr, mdef, mattk)
 			pline("%s %s %s.", buf, mon_nam(mdef),
 				compat == 2 ?
 					"engagingly" :
-              !humanoid(mdef->data)? "real friendly-like" : "seductively");
+		!humanoid(mdef->data)? "real friendly-like" : "seductively");
 		} else {
 		    char magr_name[BUFSZ];
 
@@ -1031,136 +1031,134 @@ explmm(magr, mdef, mattk)
 	return result;
 }
 
-/* TODO: Tab realignment */
 STATIC_OVL int
 defdisintagr(magr, mdef, mattk)
 	register struct monst	*magr, *mdef;
 	register struct attack	*mattk;
 {
-  int tmp=-1; /* -1 a miss, -MM_AGR_DIED aggre died, -2 do nothing,
-                 >=0 store as tmp. */
+    int tmp=-1; /* -1 a miss, -MM_AGR_DIED aggre died, -2 do nothing,
+		   >=0 store as tmp. */
 
-  if (mdef->mhp>6 && !mdef->mcan){
-    int touched = 0;
-    int mass = 0;
-    struct obj * otch = 0;
-    switch (attk_protection((int)mattk->aatyp)){
-      /* this is in dire need of optimization */
-      case (W_ARMC|W_ARMG):
-        if (otch = which_armor(magr, W_ARMG)){ 
-          if(!oresist_disintegration(otch)){
-            if(canseemon(magr))
-              pline("%s %s disintegrates!",
-                  s_suffix(Monnam(magr)), distant_name(otch, xname));
-            mass += otch->owt;
-            m_useup(magr,otch);
-            otch = 0;
-            touched = 1;
-          }
-        } else touched = 1;
-        if (otch = which_armor(magr, W_ARMC)) {
-          if(!oresist_disintegration(otch)) {
-            if(canseemon(magr))
-              pline("%s %s disintegrates!",
-                  s_suffix(Monnam(magr)), distant_name(otch, xname));
-            mass += otch->owt;
-            m_useup(magr,otch);
-            touched = 1;
-          }
-        } else touched = 1;
-        if (!(magr->misc_worn_check & W_ARMC) &&
-            (otch = which_armor(magr,W_ARM)) &&
-            (!oresist_disintegration(otch))) {
-          if (canseemon(magr))
-            pline("%s %s disintegrates!",
-                s_suffix(Monnam(magr)), distant_name(otch, xname));
-          mass += otch->owt;
-          m_useup(magr,otch);
-        } 
+    if (mdef->mhp>6 && !mdef->mcan) {
+	int touched = 0;
+	int mass = 0;
+	struct obj * otch = 0;
+	switch (attk_protection((int)mattk->aatyp)) {
+	    /* this is in dire need of optimization */
+	    case (W_ARMC|W_ARMG):
+		if (otch = which_armor(magr, W_ARMG)) { 
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			otch = 0;
+			touched = 1;
+		    }
+		} else touched = 1;
+		if (otch = which_armor(magr, W_ARMC)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		if (!(magr->misc_worn_check & W_ARMC) &&
+		   (otch = which_armor(magr,W_ARM)) &&
+		   (!oresist_disintegration(otch))) {
+		    if (canseemon(magr))
+			pline("%s %s disintegrates!",
+			  s_suffix(Monnam(magr)), distant_name(otch, xname));
+		    mass += otch->owt;
+		    m_useup(magr,otch);
+		} 
 #ifdef TOURIST
-        if (!(magr->misc_worn_check & (W_ARMC|W_ARM)) &&
-            (otch = which_armor(magr,W_ARMU)) && 
-            (!oresist_disintegration(otch))) {
-          if (canseemon(magr))
-            pline("%s %s disintegrates!",
-                s_suffix(Monnam(magr)), distant_name(otch, xname));
-          mass += otch->owt;
-          m_useup(magr,otch);
-        }
+		if (!(magr->misc_worn_check & (W_ARMC|W_ARM)) &&
+		   (otch = which_armor(magr,W_ARMU)) && 
+		   (!oresist_disintegration(otch))) {
+		    if (canseemon(magr))
+			pline("%s %s disintegrates!",
+			  s_suffix(Monnam(magr)), distant_name(otch, xname));
+		    mass += otch->owt;
+		    m_useup(magr,otch);
+		}
 #endif 
-         break;
-       case (W_ARMG):
-         if(otmp){
-           if(!oresist_disintegration(otmp)){
-             if (canseemon(magr))
-               pline("%s %s disintegrates!",
-                   s_suffix(Monnam(magr)), distant_name(otmp, xname));
-             mass += otmp->owt;
-             m_useup(magr,otmp);
-             tmp = 0;
-           }
-         } else if (otch = which_armor(magr,W_ARMG)){
-           if(!oresist_disintegration(otch)){
-             if(canseemon(magr))
-               pline("%s %s disintegrates!",
-                   s_suffix(Monnam(magr)), distant_name(otch, xname));
-             mass += otch->owt;
-             m_useup(magr,otch);
-             touched = 1;
-           }
-         } else touched = 1;
-         break;
-       case (W_ARMH):
-         if (otch = which_armor(magr,W_ARMH)){
-           if(!oresist_disintegration(otch)){
-             if(canseemon(magr))
-               pline("%s %s disintegrates!",
-                   s_suffix(Monnam(magr)), distant_name(otch, xname));
-             mass += otch->owt;
-             m_useup(magr,otch);
-             touched = 1;
-           }
-         } else touched = 1;
-         break;
-       case (W_ARMF):
-         if (otch = which_armor(magr,W_ARMF)){
-           if(!oresist_disintegration(otch)){
-             if(canseemon(magr))
-               pline("%s %s disintegrates!",
-                   s_suffix(Monnam(magr)), distant_name(otch, xname));
-             mass += otch->owt;
-             m_useup(magr,otch);
-             touched = 1;
-           }
-         } else touched = 1;
-         break;
-       case (0L):
-         touched = 1;
-         break;
-       default:
-         break;      
-     }      
-     if (!touched || resists_disint(magr)) {
-       if(mass)
-         weight_dmg(mass);
-         tmp = mass; 
-     } else {
-       struct obj * lifesave = mlifesaver(magr);
-       mass += magr->data->cwt;
-       weight_dmg(mass);
-       if(mass)
-         mdef->mhp -= mass ;
-       if (vis) pline("%s disintegrates!", Monnam(magr));
-       mondead_helper(magr,mattk->adtyp);
-       if (magr->mhp > 0) return -1;
-       else if (magr->mtame && !vis)
-         You(brief_feeling, "peculiarly sad");
-       return -MM_AGR_DIED;
-     }
-  }
-  return tmp;
+		break;
+	    case (W_ARMG):
+		if(otmp) {
+		    if(!oresist_disintegration(otmp)) {
+			if (canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otmp, xname));
+			mass += otmp->owt;
+			m_useup(magr,otmp);
+			tmp = 0;
+		    }
+		} else if (otch = which_armor(magr,W_ARMG)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		break;
+	    case (W_ARMH):
+		if (otch = which_armor(magr,W_ARMH)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		break;
+	    case (W_ARMF):
+		if (otch = which_armor(magr,W_ARMF)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		break;
+	    case (0L):
+		touched = 1;
+		break;
+	    default:
+		break;      
+	}      
+	if (!touched || resists_disint(magr)) {
+	    if(mass)
+		weight_dmg(mass);
+	    tmp = mass; 
+	} else {
+	    struct obj * lifesave = mlifesaver(magr);
+	    mass += magr->data->cwt;
+	    weight_dmg(mass);
+	    if(mass)
+		mdef->mhp -= mass ;
+	    if (vis) pline("%s disintegrates!", Monnam(magr));
+	    mondead_helper(magr,mattk->adtyp);
+	    if (magr->mhp > 0) return -1;
+	    else if (magr->mtame && !vis)
+		You(brief_feeling, "peculiarly sad");
+	    return -MM_AGR_DIED;
+	}
+    }
+    return tmp;
 }
-
 
 /*
  *  See comment at top of mattackm(), for return values.

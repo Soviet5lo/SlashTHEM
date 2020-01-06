@@ -1438,52 +1438,52 @@ char *
 rmname(lev)
 struct rm * lev;
 {
-  int ttyp = lev->flags & TREE_TYPE_MASK;
-  if (lev->typ != TREE)
-    return "";
-  if (Hallucination)
-    switch (rn2(8)){
-      case 0:
-        return "shrubbery"; /* Monty Python */
-      case 1:
-        return "binary tree"; /* data structure */
-      case 2:
-        return "truffula tree"; /* Dr. Seuss' The Lorax */
-      case 3:
-        return "Tannenbaum"; /* Christmas song */
-      case 4:
-        return "spaghetti and meatball tree"; /* Tom Glazer */
-      case 5:
-        return "bonsai tree"; 
-      case 6:
-        return "gumdrop tree"; /* lyric variation from "Kookaburra" */
-      case 7:
-        {
-          char * buf = fruitname(1);
-          sprintf(buf+strlen(buf)-5, "tree");
-          return buf;
-        }
-    }
+    int ttyp = lev->flags & TREE_TYPE_MASK;
+    if (lev->typ != TREE)
+	return "";
+    if (Hallucination)
+	switch (rn2(8)) {
+	    case 0:
+		return "shrubbery"; /* Monty Python */
+	    case 1:
+		return "binary tree"; /* data structure */
+	    case 2:
+		return "truffula tree"; /* Dr. Seuss' The Lorax */
+	    case 3:
+		return "Tannenbaum"; /* Christmas song */
+	    case 4:
+		return "spaghetti and meatball tree"; /* Tom Glazer */
+	    case 5:
+		return "bonsai tree"; 
+	    case 6:
+		return "gumdrop tree"; /* lyric variation from "Kookaburra" */
+	    case 7:
+		{
+		    char * buf = fruitname(1);
+		    sprintf(buf+strlen(buf)-5, "tree");
+		    return buf;
+		}
+	}
             
-  switch (ttyp){
-    case 0:
-      return "tree";
-    case TREE_GUM:
-      return "eucalyptus tree";
-    case TREE_OAK:
-      return "oak tree";
-    case TREE_IRONWD:
-        return "elven dogwood";
-    case TREE_APPLE:
-      return "apple tree";
-    case TREE_ORANGE:
-      return "orange tree";
-    case TREE_PEAR:
-      return "pear tree";
-    case TREE_BANANA:
-      return "banana tree";
-  }
-  return "bad tree type";
+    switch (ttyp) {
+	case 0:
+	    return "tree";
+	case TREE_GUM:
+	    return "eucalyptus tree";
+	case TREE_OAK:
+	    return "oak tree";
+	case TREE_IRONWD:
+	    return "elven dogwood";
+	case TREE_APPLE:
+	    return "apple tree";
+	case TREE_ORANGE:
+	    return "orange tree";
+	case TREE_PEAR:
+	    return "pear tree";
+	case TREE_BANANA:
+	    return "banana tree";
+    }
+    return "bad tree type";
 }
 
 #endif /* OVL2 */
