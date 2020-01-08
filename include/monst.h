@@ -100,6 +100,8 @@ struct monst {
 	Bitfield(mfrozen,7);
 
 	Bitfield(msleeping,1);	/* asleep until woken */
+	Bitfield(mpeacetim,7);  /* if non-zero, peacefulness times out, 
+				   if 127, expires at monster's choice */
 	Bitfield(mstun,1);	/* stunned (off balance) */
 	Bitfield(mconf,1);	/* confused */
 	Bitfield(mpeaceful,1);	/* does not attack unprovoked */

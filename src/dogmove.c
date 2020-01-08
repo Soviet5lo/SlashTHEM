@@ -183,6 +183,7 @@ boolean devour;
 	    edog->mhpmax_penalty = 0;
 	}
 	if (mtmp->mflee && mtmp->mfleetim > 1) mtmp->mfleetim /= 2;
+	if (mtmp->mpeacetim) mtmp->mpeacetim = 0;
 	if (mtmp->mtame < 20) mtmp->mtame++;
 	if (x != mtmp->mx || y != mtmp->my) {	/* moved & ate on same turn */
 	    newsym(x, y);
@@ -897,6 +898,8 @@ register int after;	/* this is extra fast monster movement */
 		  	  || (Role_if(PM_KNIGHT) && (mtmp->data == &mons[PM_KNIGHT]) && mtmp->mpeaceful)
 			  ) &&
 			 mtmp2->mpeaceful && !Conflict) ||
+			   (touch_disintegrates(mtmp2->data) &&
+				!resists_disint(mtmp)) ||
 			   (touch_petrifies(mtmp2->data) &&
 				!resists_ston(mtmp)))
 			continue;

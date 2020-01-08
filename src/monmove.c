@@ -185,7 +185,8 @@ struct monst *mtmp;
 	 * where Elbereth is completely useless.
 	 */
 	if (mtmp->isshk || mtmp->isgd || mtmp->iswiz || !mtmp->mcansee ||
-			mtmp->mpeaceful || mtmp->data->mlet == S_HUMAN ||
+	    (mtmp->mpeaceful && !mtmp->mpeacetim) ||
+  	     mtmp->data->mlet == S_HUMAN ||
 	    is_lminion(mtmp) || mtmp->data == &mons[PM_ANGEL] ||
 	    mtmp->data == &mons[PM_CTHULHU] ||
 	    is_rider(mtmp->data) || mtmp->data == &mons[PM_MINOTAUR])
@@ -378,6 +379,20 @@ register struct monst *mtmp;
 	/* update quest status flags */
 	quest_stat_check(mtmp);
 
+	if (mdat == &mons[PM_LABYRINTH_TRAPPER] &&
+	   (mtmp->m_ap_type || mtmp->mundetected)
+	   && distmin(mtmp->mx, mtmp->my, u.ux, u.uy)<=1){
+	    if (mtmp->mundetected){
+		mtmp->mundetected=0;
+		newsym(mtmp->mx, mtmp->my);
+	    } 
+	    if (mtmp->m_ap_type)
+		seemimic(mtmp);
+          
+	    if (cansee(mtmp->mx, mtmp->my))
+		pline("The wall beside you comes alive!");
+	}
+
 	if (!mtmp->mcanmove || (mtmp->mstrategy & STRAT_WAITMASK)) {
 	    if (Hallucination) newsym(mtmp->mx,mtmp->my);
 	    if (mtmp->mcanmove && (mtmp->mstrategy & STRAT_CLOSE) &&
@@ -416,6 +431,22 @@ register struct monst *mtmp;
 	/* fleeing monsters might regain courage */
 	if (mtmp->mflee && !mtmp->mfleetim
 	   && mtmp->mhp == mtmp->mhpmax && !rn2(25)) mtmp->mflee = 0;
+
+	/* charming monster might decide to hate you again */
+	if (mtmp->mpeaceful && mtmp->mpeacetim && mtmp->data != &mons[PM_SATYR] &&
+	  (mtmp->mhp >= mtmp->mhpmax*0.8)) { 
+	    int bias = Wounded_legs?1:0 + Confusion?2:0 + Sleeping?4:0 
+	      + (Hallucination||Blinded)?2:0 + Punished?2:0 + Aggravate_monster?2:0 
+	      - Adornment - (Half_spell_damage||Half_physical_damage)?3:0 
+	      - Regeneration?1:0 - Fast?1:0 - Very_fast?2:0 + near_capacity();
+	    if (mtmp->m_lev + bias > u.ulevel){
+		mtmp->malign = mtmp->data->maligntyp;
+		mtmp->mpeaceful = 0;
+		mtmp->mpeacetim = 0;
+		if(canseemon(mtmp))
+		    pline("%s seems less friendly.", Monnam(mtmp));
+	    }
+	}
 
 	set_apparxy(mtmp);
 	/* Must be done after you move and before the monster does.  The
@@ -541,7 +572,7 @@ toofar:
 	/* If monster is nearby you, and has to wield a weapon, do so.   This
 	 * costs the monster a move, of course.
 	 */
-	if((!mtmp->mpeaceful || Conflict) && inrange &&
+	if((!mtmp->mpeaceful || Conflict || mtmp->mpeacetim) && inrange &&
 	   dist2(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy) <= 8
 	   && attacktype(mdat, AT_WEAP)) {
 	    struct obj *mw_tmp;
@@ -604,6 +635,49 @@ toofar:
 		    }
 		}
 
+	if (Conflict && mtmp->data == &mons[PM_SATYR] &&
+	    !mtmp->mspec_used && !mtmp->mcan && 
+	    distmin(mtmp->mx, mtmp->my, u.ux, u.uy) <= 6 ) {
+
+	    int spec_used;
+	    struct obj * inst = mon_has_item(mtmp, WOODEN_FLUTE, 1);
+	    if (inst){
+		int i,j;
+		struct monst * mdef;
+		if canseemon(mtmp)
+		    pline("%s plays %s %s.", Monnam(mtmp),
+		    mhis(mtmp), distant_name(inst, xname));
+		else
+		    You_hear("%s music.", Hallucination ? "organ grinder" : "panpipe");
+		mcharmu(mtmp, d(2,6), TRUE);
+		spec_used = mtmp->mspec_used;
+		mtmp->mspec_used = 0;
+		for(i = mtmp->mx - 5; i <= mtmp->mx + 5; ++i){
+		    for(j = mtmp->my - 5; j <= mtmp->my + 5; ++j){
+			if(!isok(i,j)) continue;
+			if((mdef = m_at(i,j)) != 0) 
+			    spec_used += mcharmm(mtmp, mdef, d(2,6));
+		    }
+		}
+		mtmp->mspec_used = max(spec_used/(mtmp->m_lev),10);
+	    }
+	}
+
+	if(mtmp->data == &mons[PM_UMBRAL_HULK] && 
+          !mtmp->mcan && !mtmp->mspec_used && levl[mtmp->mx][mtmp->my].lit){
+		litroom_mon(0, 0, mtmp->mx, mtmp->my);
+		mtmp->mspec_used = 5 + rn2(11);
+   	}
+	if (mtmp->data == &mons[PM_WILL_O__WISP] && 
+	   !mtmp->mcan && !mtmp->mspec_used && !rn2(10)){
+		struct rm * there = &levl[mtmp->mx][mtmp->my];
+		if (cansee(mtmp->mx, mtmp->my)){
+		    if(there->typ == ROOM){
+			maketrap(mtmp->mx, mtmp->my, rn2(3)?SPIKED_PIT:RUST_TRAP); /* was WATER_TRAP */
+		    }
+		mtmp->mspec_used += rn1(15,15);
+		} 
+	}
 		tmp = m_move(mtmp, 0);
 		distfleeck(mtmp,&inrange,&nearby,&scared);	/* recalc */
 		switch (tmp) {
@@ -964,7 +1038,9 @@ not_special:
 
 		    if(((likegold && otmp->oclass == COIN_CLASS) ||
 		       (likeobjs && index(practical, otmp->oclass) &&
-			(otmp->otyp != CORPSE || (ptr->mlet == S_NYMPH
+			(otmp->otyp != CORPSE || ((ptr->mlet == S_NYMPH
+					      || ptr == &mons[PM_POLTERGEIST])
+						  /* poltergeist throws anything */
 			   && !is_rider(&mons[otmp->corpsenm])))) ||
 		       (likemagic && index(magical, otmp->oclass)) ||
 		       (uses_items && searches_for_item(mtmp, otmp)) ||
@@ -1299,6 +1375,22 @@ postmov:
 		} else
 		newsym(mtmp->mx,mtmp->my);
 	    }
+		/* eat golden items its carrying, if gold bug..*/
+		if(ptr==&mons[PM_GOLD_BUG] && mtmp->mcanmove){
+		    struct obj * geatme;
+		    if ((geatme = ochain_has_material(mtmp->minvent, GOLD, 0)) &&
+		      geatme->otyp != AMULET_OF_STRANGULATION &&
+		      geatme->otyp != RIN_SLOW_DIGESTION){
+			if (meatmetal_effects(mtmp, geatme) == 2) return 2;
+			mtmp->meating = geatme->owt/2 + 1;
+#ifndef GOLDOBJ
+		    } else if (mtmp->mgold){
+			mtmp->meating = 1;
+			mtmp->mgold -= 5;
+			if (mtmp->mgold < 0) mtmp->mgold = 0;
+#endif
+		    }
+		}
 	    if(OBJ_AT(mtmp->mx, mtmp->my) && mtmp->mcanmove) {
 		/* recompute the likes tests, in case we polymorphed
 		 * or if the "likegold" case got taken above */
@@ -1365,6 +1457,22 @@ postmov:
 			OBJ_AT(mtmp->mx, mtmp->my) :
 			(is_pool(mtmp->mx, mtmp->my) && !Is_waterlevel(&u.uz));
 		newsym(mtmp->mx, mtmp->my);
+	    }
+	    if (ptr == &mons[PM_LESHY]) {
+		struct rm * there = &levl[mtmp->mx][mtmp->my];
+		if (there->typ == TREE){
+		    if (!(there->flags & TREE_LOOTED)){
+			struct obj * otmp = rnd_treefruit_at(mtmp->mx, mtmp->my);
+			otmp->quan = rnd(3);
+			otmp->owt  = weight(otmp);
+			there->flags |= TREE_LOOTED;
+			obj_extract_self(otmp);
+			(void) mpickobj(mtmp, otmp);
+			return 2;
+		    }/* 
+			if (mmoved == 1)
+			mtmp->mundetected = TRUE;*/
+		}
 	    }
 	    if (mtmp->isshk) {
 		after_shk_move(mtmp);

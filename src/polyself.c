@@ -413,6 +413,10 @@ boolean forcecontrol;
 	if (!uarmg) selftouch("No longer petrify-resistant, you");
 
  made_change:
+	if(youmonst.data == &mons[PM_BANDERSNATCH]) {
+	    HUnchanging=-1L;
+	    pline("You have a feeling of permanency.");
+	}
 	new_light = Upolyd ? emits_light(youmonst.data) : 0;
 	if (old_light != new_light) {
 	    if (old_light)
@@ -637,10 +641,20 @@ int	mntmp;
 	    static const char monsterc[] = "monster";
 	    if (can_breathe(youmonst.data))
 		pline(use_thec,monsterc,"use your breath weapon");
-	    if (attacktype(youmonst.data, AT_SPIT))
-		pline(use_thec,monsterc,"spit venom");
-	    if (youmonst.data->mlet == S_NYMPH)
+	    if (attacktype(youmonst.data, AT_SPIT)){
+		if (u.umonnum == PM_WATERSPOUT_GARGOYLE){
+		    pline(use_thec,monsterc,"spit water");
+		} else {
+		    pline(use_thec,monsterc,"spit venom");
+		}
+	    }
+	    if (youmonst.data->mlet == S_NYMPH && youmonst.data != &mons[PM_SATYR])
 		pline(use_thec,monsterc,"remove an iron ball");
+	    if (attacktype_fordmg(youmonst.data, AT_ANY, AD_CHRM)) 
+		pline(use_thec,monsterc,"charm monsters");
+	    if (youmonst.data == &mons[PM_JUBJUB_BIRD])
+		pline(use_thec,monsterc,"screech at monsters");
+	    else
 	    if (attacktype(youmonst.data, AT_GAZE))
 		pline(use_thec,monsterc,"gaze at monsters");
 	    if (is_hider(youmonst.data))
@@ -800,6 +814,14 @@ break_armor()
 	    }
 	}
     }
+    if (!has_head(youmonst.data)) {
+	if ((otmp = uarmh) !=0) {
+	    if (donning(otmp)) cancel_don();
+	    Your("helmet falls to the %s!", surface(u.ux, u.uy));
+	    (void) Helmet_off();
+	    dropx(otmp);
+	}
+    }
 #ifdef JEDI
     if ((otmp = uarmh) != 0 && (youmonst.data == &mons[PM_MIND_FLAYER] ||
 	youmonst.data == &mons[PM_MASTER_MIND_FLAYER])){
@@ -834,7 +856,7 @@ break_armor()
 	}
     }
     if (nohands(youmonst.data) || verysmall(youmonst.data) ||
-		slithy(youmonst.data) || youmonst.data->mlet == S_CENTAUR) {
+		slithy(youmonst.data) || youmonst.data->mlet == S_CENTAUR || youmonst.data == &mons[PM_SATYR]) {
 	if ((otmp = uarmf) != 0) {
 	    if (donning(otmp)) cancel_don();
 	    if (is_whirly(youmonst.data))
@@ -945,6 +967,7 @@ rehumanize()
 int
 dogaze()
 {
+	/* TODO: Implement Jubjub Bird screeches properly */
 	coord cc;
 	struct monst *mtmp;
 
@@ -969,7 +992,35 @@ dogaze()
 		You("don't see a monster there!");
 		return (0);
 	}
-
+#if 0 /* Original code from Biodiversity patch, but Slash'EM uses a different dogaze() */
+	if (adtyp == AD_DRIN && couldsee(mtmp->mx, mtmp->my)){
+	    looked++;
+	    mtmp->msleeping = 0;
+	    if(mindless(mtmp->data))
+		pline("%s doesn't seems to care about your squawk.", Monnam(mtmp));
+	    else if (flags.safe_dog && !Confusion && !Hallucination &&
+	      mtmp->mtame)
+		You("avoid squaking too loudly at %s.", y_monnam(mtmp));
+	    else {
+		if(flags.confirm && mtmp->mpeaceful && !Confusion
+		  && !Hallucination) {
+		    Sprintf(qbuf, "Really screech at %s?", mon_nam(mtmp));
+		    if (yn(qbuf) != 'y') continue;
+		    setmangry(mtmp);
+		    if (!mtmp->mconf)
+			Your("screech confuses %s!", mon_nam(mtmp));
+		    else
+			pline("%s is getting more and more confused.",
+			  Monnam(mtmp));
+		    mtmp->mconf = 1;
+		    if (! resist(mtmp, SPBOOK_CLASS, 0, NOTELL))
+			monflee(mtmp, 0, FALSE, FALSE);
+		    else pline("But %s is not afraid.", mon_nam(mtmp));
+		}
+	    }
+	continue;
+	}
+#endif
 
 	if ((flags.safe_dog && !Confusion && !Hallucination
 		  && mtmp->mtame) || (flags.confirm && mtmp->mpeaceful 
@@ -1067,6 +1118,18 @@ dospit()
 	struct attack *mattk;
 
 	if (!getdir((char *)0)) return(0);
+	switch (u.umonnum){
+	    case (PM_COBRA):
+		otmp = mksobj( BLINDING_VENOM, TRUE, FALSE);
+		break;
+	    case (PM_WATERSPOUT_GARGOYLE):
+		otmp = mksobj( WATER_VENOM, TRUE, FALSE);
+		break;
+	    default:
+		otmp = mksobj( ACID_VENOM, TRUE, FALSE);
+		break;
+	} 
+#if 0 /* 5lo: replaced by biodiversity code */
 	mattk = attacktype_fordmg(youmonst.data, AT_SPIT, AD_ANY);
 	if (!mattk)
 	    impossible("bad spit attack?");
@@ -1086,6 +1149,9 @@ dospit()
 	    otmp->spe = 1; /* to indicate it's yours */
 	    throwit(otmp, 0L, FALSE, 0);
 	}
+#endif
+	otmp->spe = 1; /* to indicate it's yours */
+	throwit(otmp, 0L, FALSE, 0);
 	return(1);
 }
 
@@ -1241,6 +1307,40 @@ dosummon()
 	return(1);
 }
 
+int 
+docharm()
+{
+	uchar aatyp=0; 
+	struct obj * pseudo;
+	int charisma = ACURR(A_CHA);
+	int energy = (objects[SPE_CHARM_MONSTER].oc_level * ((charisma>10)?7:10) )/2
+	  - ((charisma>15)?(charisma-15):0);  
+  
+	if (Confusion){
+	  pline("What? You're too confused for that.");
+	  return 0;
+	}
+	if (u.uen<energy) { 
+	  You("lack the energy for that.");
+	  return 0; 
+	}
+	if (youmonst.data == &mons[PM_SATYR]){
+	    struct obj * inst;
+	    if (inst = carrying(WOODEN_FLUTE))
+		You("play your %s.", xname(inst));
+	    else {
+		You("hum an unenchanting melody.");
+		return 0;
+	    }
+	}
+	pseudo = mksobj(SPE_CHARM_MONSTER, FALSE, FALSE);
+	if (charisma<6+rn2(3)) curse(pseudo);
+	u.uen-=energy;
+	flags.botl=1;
+	(void) seffects(pseudo);
+	obfree(pseudo, (struct obj *)0);	/* now, get rid of it */
+	return 1;
+}
 
 #if 0
 /* WAC supplanted by dogaze (). */
@@ -1259,7 +1359,12 @@ dogaze()
 		break;
 	    }
 	}
-	if (adtyp != AD_CONF && adtyp != AD_FIRE) {
+   	if (adtyp == AD_HNGY) adtyp = AD_CONF;
+
+	if (adtyp != AD_CONF && adtyp != AD_FIRE
+       	    && adtyp != AD_PLYS
+	    && adtyp != AD_DRIN
+           ) {
 	    impossible("gaze attack %d?", adtyp);
 	    return 0;
 	}
@@ -1366,7 +1471,8 @@ dogaze()
 		}
 	    }
 	}
-	if (!looked) You("gaze at no place in particular.");
+	if (!looked) You("%s at no place in particular.", 
+	(adtyp == AD_DRIN) ? "squawk" : "gaze");
 	return 1;
 }
 #endif
@@ -1516,11 +1622,18 @@ int part;
 		    mptr->mlet == S_YETI)
 		return part == HAND ? "paw" : "pawed";
 	    if (humanoid(mptr) && attacktype(mptr, AT_CLAW) &&
-		    !index(not_claws, mptr->mlet) &&
+		    (!index(not_claws, mptr->mlet) || mptr == &mons[PM_NOSFERATU]) &&
 		    mptr != &mons[PM_STONE_GOLEM] &&
+		    mptr != &mons[PM_BLEMMYE] &&
 		    mptr != &mons[PM_INCUBUS] && mptr != &mons[PM_SUCCUBUS])
 		return part == HAND ? "claw" : "clawed";
 	}
+	if (mptr == &mons[PM_BLEMMYE] ){
+	    if (part == HEAD) return "shoulders";
+	    else if (part == NECK) return "torso";
+	    else if (part == LIGHT_HEADED) return "addlebrained";
+	}
+
 	if ((mptr == &mons[PM_MUMAK] || mptr == &mons[PM_MASTODON]) &&
 		part == NOSE)
 	    return "trunk";
@@ -1541,9 +1654,10 @@ int part;
         if (has_beak(mptr) && part == NOSE)
             return "beak";
 	if (mptr->mlet == S_CENTAUR || mptr->mlet == S_UNICORN ||
-		(mptr == &mons[PM_ROTHE] && part != HAIR))
+		((mptr == &mons[PM_SATYR] || mptr == &mons[PM_ROTHE]) && part != HAIR))
 	    return horse_parts[part];
-	if (mptr->mlet == S_LIGHT) {
+	if (mptr->mlet == S_LIGHT ||
+			mptr == &mons[PM_QUARK]) { /* rays of gluons */
 		if (part == HANDED) return "rayed";
 		else if (part == ARM || part == FINGER ||
 				part == FINGERTIP || part == HAND) return "ray";

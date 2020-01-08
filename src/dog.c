@@ -523,6 +523,10 @@ long nmv;		/* number of moves */
 	    if (imv >= (int) mtmp->mfleetim) mtmp->mfleetim = 1;
 	    else mtmp->mfleetim -= imv;
 	}
+	if (mtmp->mpeacetim && (mtmp->mpeacetim!=0x7f)) {
+	    if (imv >= (int) mtmp->mpeacetim) mtmp->mpeacetim = 1;
+	    else mtmp->mpeacetim -= imv;
+	}
 
 	/* might recover from temporary trouble */
 	if (mtmp->mtrapped && rn2(imv + 1) > 40/2) mtmp->mtrapped = 0;
@@ -828,6 +832,7 @@ register struct obj *obj;
 		    else
 		    if ((peek_at_iced_corpse_age(obj) + 50L <= monstermoves
 					    && !corpse_never_rots(&mons[obj->corpsenm])
+					    && mon->data != &mons[PM_OTYUGH]
 					    && mon->data->mlet != S_FUNGUS) ||
 			(acidic(&mons[obj->corpsenm]) && !resists_acid(mon)) ||
 			(poisonous(&mons[obj->corpsenm]) &&
@@ -840,13 +845,16 @@ register struct obj *obj;
 		    return (is_undead(mon->data) ? TABU :
 			    ((herbi || starving) ? ACCFOOD : MANFOOD));
 		case TIN:
-		    return (metallivorous(mon->data) ? ACCFOOD : MANFOOD);
+		    return (metallivorous(mon->data) && !(mon->data == &mons[PM_GOLD_BUG]) ? ACCFOOD : MANFOOD);
 		case APPLE:
 		case CARROT:
 		    return (herbi ? DOGFOOD : starving ? ACCFOOD : MANFOOD);
 		case BANANA:
 		    return ((mon->data->mlet == S_YETI) ? DOGFOOD :
 			    ((herbi || starving) ? ACCFOOD : MANFOOD));
+		case SHEAF_OF_STRAW:
+		    return ((herbi && !carni) ? DOGFOOD : UNDEF);
+		    break;
 		default:
 		    if (starving) return ACCFOOD;
 		    return (obj->otyp > SLIME_MOLD ?
@@ -866,6 +874,8 @@ register struct obj *obj;
 		mon->data == &mons[PM_GIANT_SHOGGOTH] ||
 	    	mon->data == &mons[PM_TASMANIAN_DEVIL]) && is_organic(obj))
 		return(ACCFOOD);
+	    if (mon->data == &mons[PM_GOLD_BUG] && is_golden(obj))
+		return (ACCFOOD);
 	    if (metallivorous(mon->data) && is_metallic(obj) && (is_rustprone(obj) || mon->data != &mons[PM_RUST_MONSTER])) {
 		/* Non-rustproofed ferrous based metals are preferred. */
 		return((is_rustprone(obj) && !obj->oerodeproof) ? DOGFOOD :
@@ -905,6 +915,7 @@ register struct obj *obj;
 	/* worst case, at least it'll be peaceful. */
 	if(!obj || !is_instrument(obj)){
 	mtmp->mpeaceful = 1;
+	mtmp->mpeacetim = 0;
 	mtmp->mtraitor  = 0;	/* No longer a traitor */
 	set_malign(mtmp);
 	}

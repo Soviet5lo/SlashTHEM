@@ -298,10 +298,18 @@ Cloak_off()
 {
     int otyp = uarmc->otyp;
     long oldprop = u.uprops[objects[otyp].oc_oprop].extrinsic & ~WORN_CLOAK;
+    int was_blind = Blemmye_blindness(&youmonst);
 
     takeoff_mask &= ~W_ARMC;
 	/* For mummy wrapping, taking it off first resets `Invisible'. */
     setworn((struct obj *)0, W_ARMC);
+    if (!Blind && was_blind) {
+	if (flags.verbose) You("can see again.");
+	if (Blind_telepat || Infravision) see_monsters();
+	vision_full_recalc = 1;	/* recalc vision limits */
+	flags.botl = 1;
+    }
+
     switch (otyp) {
 	case ELVEN_CLOAK:
 	case ORCISH_CLOAK:
@@ -702,9 +710,18 @@ Armor_on()
 int
 Armor_off()
 {
+    int was_blind = Blemmye_blindness(&youmonst);
+
     takeoff_mask &= ~W_ARM;
     setworn((struct obj *)0, W_ARM);
     cancelled_don = FALSE;
+    if (!Blind && was_blind) {
+	if (flags.verbose) You("can see again.");
+	if (Blind_telepat || Infravision) see_monsters();
+	vision_full_recalc = 1;	/* recalc vision limits */
+	flags.botl = 1;
+    }
+
     return 0;
 }
 
@@ -714,9 +731,17 @@ Armor_off()
 int
 Armor_gone()
 {
+    int was_blind = Blemmye_blindness(&youmonst);
+
     takeoff_mask &= ~W_ARM;
     setnotworn(uarm);
     cancelled_don = FALSE;
+    if (!Blind && was_blind) {
+	if (flags.verbose) You("can see again.");
+	if (Blind_telepat || Infravision) see_monsters();
+	vision_full_recalc = 1;	/* recalc vision limits */
+	flags.botl = 1;
+    }
     return 0;
 }
 
@@ -1270,6 +1295,25 @@ register struct obj *otmp;
 	}
 }
 
+int 
+Blemmye_blindness(mon)
+register struct monst * mon;
+{
+    /* 5lo: TODO: Fill with extra objects from Slash'EM/SlashTHEM */
+    struct obj * otmp;
+    if (mon->data != &mons[PM_BLEMMYE]) return 0;
+#ifdef TOURIST
+    otmp = (mon == &youmonst) ? uarmu : which_armor(mon, W_ARMU);
+    if (otmp && otmp->otyp == T_SHIRT) return 1;
+#endif
+    otmp = (mon == &youmonst) ? uarm : which_armor(mon, W_ARM);
+    if (otmp && (otmp->otyp != CRYSTAL_PLATE_MAIL)) return 1;
+    otmp = (mon == &youmonst) ? uarmc : which_armor(mon, W_ARMC);
+    if (otmp && (otmp->otyp == ROBE || otmp->otyp == LAB_COAT	/* 5lo: was Alchemy Smock */
+      || strcmp(OBJ_NAME(objects[otmp->otyp]), "ornamental cope"))) return 1;
+    return 0;
+}
+
 
 /* called in main to set intrinsics of worn start-up items */
 void
@@ -1615,6 +1659,9 @@ boolean noisy;
 		pline_The("%s won't fit over your horn%s.",
 			  c_helmet, plur(num_horns(youmonst.data)));
 	    err++;
+	} else if (Upolyd && !has_head(youmonst.data)) {
+	    if (noisy) You("cannot wear a %s, because you have no head.", c_helmet);
+	    err++;
 	} else if (uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
 			!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
 				"hooded cloak")) {
@@ -1741,6 +1788,7 @@ dowear()
 	struct obj *otmp;
 	int delay;
 	long mask = 0;
+	int was_blind = Blemmye_blindness(&youmonst);
 
 	/* cantweararm checks for suits of armor */
 	/* verysmall or nohands checks for shields, gloves, etc... */
@@ -1787,7 +1835,10 @@ dowear()
 		if(is_cloak(otmp)) afternmv = Cloak_on;
 		if (is_shield(otmp)) afternmv = Shield_on;
 		if (is_shirt(otmp)) afternmv = Shirt_on;
-		nomovemsg = "You finish your dressing maneuver.";
+		if (!was_blind && Blemmye_blindness(&youmonst))
+		    nomovemsg = "You finish your dressing maneuver. You can no longer see.";
+		else
+		    nomovemsg = "You finish your dressing maneuver.";
 		on_msgdel(otmp); /* the game is supposed to tell you what exactly you are wearing! --Amy */
 	} else {
 		if(is_cloak(otmp)) (void) Cloak_on();
@@ -1800,6 +1851,8 @@ dowear()
 #endif
 		if (is_helmet(otmp)) (void) Helmet_on();	/* fedoras */
 		on_msg(otmp);
+		if (!was_blind && Blemmye_blindness(&youmonst))
+		    You("can no longer see.");
 	}
 	takeoff_mask = taking_off = 0L;
 	return(1);
@@ -2338,7 +2391,16 @@ do_takeoff()
 #ifdef TOURIST
 	} else if (taking_off == WORN_SHIRT) {
 	  otmp = uarmu;
-	  if (!cursed(otmp)) (void) Shirt_off();
+	  if (!cursed(otmp)) {
+		  int was_blind = Blind;
+		  (void) Shirt_off();
+		  if (!Blind && was_blind) {
+			  if (flags.verbose) You("can see again.");
+			  if (Blind_telepat || Infravision) see_monsters();
+			  vision_full_recalc = 1;	/* recalc vision limits */
+			  flags.botl = 1;
+		  }
+	  }
 #endif
 	} else if (taking_off == WORN_AMUL) {
 	  otmp = uamul;

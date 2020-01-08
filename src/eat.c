@@ -152,7 +152,8 @@ register struct obj *obj;
 	if(Race_if(PM_INCANTIFIER)) return incantifier_edible(obj);
 	
 	if (metallivorous(youmonst.data) && is_metallic(obj) &&
-	    (youmonst.data != &mons[PM_RUST_MONSTER] || is_rustprone(obj)))
+	    (youmonst.data != &mons[PM_RUST_MONSTER] || is_rustprone(obj))
+	     && (youmonst.data != &mons[PM_GOLD_BUG] || is_golden(obj)))
 		return TRUE;
 
 	if (lithivorous(youmonst.data) && is_lithic(obj) )
@@ -182,6 +183,10 @@ register struct obj *obj;
 		return (boolean)(obj->otyp == CORPSE &&
 		  has_blood(&mons[obj->corpsenm]) && (!obj->odrained ||
 		  obj->oeaten > drainlevel(obj)));
+
+	/* 5lo: Biodiversity - Sheaf of Straw for herbivores */
+	if (obj->otyp == SHEAF_OF_STRAW)
+		return (herbivorous(youmonst.data) && !carnivorous(youmonst.data));
 
      /* return((boolean)(!!index(comestibles, obj->oclass))); */
 	return (boolean)(obj->oclass == FOOD_CLASS);
@@ -349,7 +354,7 @@ register struct obj *food;
 		You("absorb too much energy and explode.");
 		killer = Hallucination ? "amateur-hour horseshit" : "absorbing too much energy and exploding"; //8-bit theater
 		You("die...");
-		done(DIED); /* We don't have DISINTEGRATED here */
+		done(DISINTEGRATED);
 		explode(u.ux, u.uy, 0, u.uhpmax/2, MON_EXPLODE, EXPL_MAGICAL);
 		u.uhp = u.uhpmax/2;
 		pline("You reform!");
@@ -1300,8 +1305,8 @@ register int pm;
 		register struct permonst *ptr = &mons[pm];
 		int i, count;
 
-		if (dmgtype(ptr, AD_STUN) || dmgtype(ptr, AD_HALU) ||
-		    pm == PM_VIOLET_FUNGUS) {
+		if ((dmgtype(ptr, AD_STUN) || dmgtype(ptr, AD_HALU) ||
+		     pm == PM_VIOLET_FUNGUS) && (pm != PM_BANDERSNATCH)) {
 			pline ("Oh wow!  Great stuff!");
 			make_hallucinated(HHallucination + 200,FALSE,0L);
 		}
@@ -1458,6 +1463,8 @@ opentin()		/* called during each move whilst opening a tin */
 		r = HOMEMADE_TIN;		/* lizards don't rot */
 	    else if (tin.tin->spe == -1 && !tin.tin->blessed && !rn2(7))
 		r = ROTTEN_TIN;			/* some homemade tins go bad */
+	    else if(tin.tin->corpsenm == PM_OTYUGH)
+		r = ROTTEN_TIN;
 	    which = 0;	/* 0=>plural, 1=>as-is, 2=>"the" prefix */
 	    if (Hallucination) {
 		what = rndmonnam();
@@ -1649,10 +1656,11 @@ STATIC_OVL int
 rottenfood(obj)
 struct obj *obj;
 {
-	if(Race_if(PM_GHOUL)){
-	pline("Yum!  Rotten %s!", foodword(obj));
-	healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE); /* Inspired by DCSS, give a minor health boost */
-	return(0);
+	if(Race_if(PM_GHOUL) || youmonst.data == &mons[PM_OTYUGH]){
+	    pline("Yum!  Rotten %s!", foodword(obj));
+	    /* Inspired by DCSS, give ghouls a minor health boost */
+	    if(Race_if(PM_GHOUL)) healup(d(2,2) + rnd(u.ulevel), 0, TRUE, TRUE);
+	    return(1);
 	}
 	pline("Blecch!  Rotten %s!",
 		is_vampire(youmonst.data) ? "blood" : foodword(obj));
@@ -1774,7 +1782,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	    otmp->odrained = 0;
 
 	/* Very rotten corpse will make you sick unless you are a ghoul or a ghast */
-	if (mnum != PM_ACID_BLOB && !stoneable && rotted > 5L) {
+	if (mnum != PM_ACID_BLOB && !stoneable && rotted > 5L && youmonst.data != &mons[PM_OTYUGH]) {
 	    boolean cannibal = maybe_cannibal(mnum, FALSE);
 	    if (u.umonnum == PM_GHOUL || u.umonnum == PM_GHAST	||(Race_if(PM_GHOUL) && !Upolyd) ) {
 	    	pline("Yum - that %s was well aged%s!",
@@ -1825,6 +1833,11 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 			losehp(rnd(15), "poisonous corpse", KILLED_BY_AN);
 		} else	You("seem unaffected by the poison.");
 	/* now any corpse left too long will make you mildly ill */
+	} else if (rotted && youmonst.data == &mons[PM_OTYUGH]){
+	    tp++;
+	    pline("Yum - that %s was tainted!",
+	    mons[mnum].mlet == S_FUNGUS ? "fungoid vegetation" :
+	    !vegetarian(&mons[mnum]) ? "meat" : "protoplasm");
 	} else if ((rotted > 5L || (rotted > 3L && rn2(5)))
 					&& !Sick_resistance) {
 		tp++;
@@ -2036,10 +2049,38 @@ struct obj *otmp;
 			break;
 		}
 		break;
+	    case SHEAF_OF_STRAW:
+		if (herbivorous(youmonst.data) && !carnivorous(youmonst.data))
+			pline("That %s was tasty!", xname(otmp));
+		/* else should be revented by is_edible check earlier */
+		break;
 	    case MEATBALL:
 	    case MEAT_STICK:
 	    case HUGE_CHUNK_OF_MEAT:
 	    case MEAT_RING:
+		if(otmp->otyp == HUGE_CHUNK_OF_MEAT) {
+		    int rotted = (monstermoves - peek_at_iced_corpse_age(otmp))/10L + 
+		      (otmp->cursed)?2L:(otmp->blessed)?-2L:0; 
+		    if ((rotted > 5L || (rotted >3L && rn2(5)))){
+			pline("%s - that meat was tainted!",
+			  (Upolyd && youmonst.data == &mons[PM_OTYUGH])?
+			  "Yum":"Ulch");
+			    if (Sick_resistance) {
+				pline("It doesn't seem at all sickening, though...");
+			    } else {
+				char buf[BUFSZ];
+				long sick_time = (long) rn1(10, 10);
+				/* make sure new ill doesn't result in improvement */
+				if (Sick && (sick_time > Sick))
+				sick_time = (Sick > 1L) ? Sick - 1L : 1L;
+				Sprintf(buf, "rotten %s", xname(otmp));
+				make_sick(sick_time, buf, TRUE, SICK_VOMITABLE);
+			    }
+			if (carried(otmp)) useup(otmp);
+			else useupf(otmp, 1L);
+			return;
+		    }
+		}
 		goto give_feedback;
 	     /* break; */
 	    case CLOVE_OF_GARLIC:
@@ -3006,7 +3047,8 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 
 		if (rottenfood(otmp)) {
 		    otmp->orotten = TRUE;
-		    dont_start = TRUE;
+		    if (youmonst.data != &mons[PM_OTYUGH])
+		      dont_start = TRUE;
 		}
 		if (otmp->oeaten < 2) {
 		    victual.piece = (struct obj *)0;

@@ -28,7 +28,10 @@
 #define AT_TENT		16	/* tentacles */
 #define AT_TRAM		17	/* trample */
 #define AT_MULTIPLY	18	/* RJ - multiplies (yes, it's an attack) */
-
+#define AT_NTCH 	19 	/* adjacent, no touching */
+#if 0 /* 5lo: Doesn't work currently, implement fully later? */
+#define AT_RIDL		20
+#endif
 #define AT_WEAP		254	/* uses weapon */
 #define AT_MAGC		255	/* uses magic spell(s) */
 
@@ -91,6 +94,15 @@
 #define AD_WTHR		49	/* withers items */
 #define AD_LUCK		50	/* reduces luck */
 #define AD_ENDS		51	/* placeholder */
+
+/* Biodiversity attacks here */
+#define AD_CHRM         60      /* monster charms you and other monsters */
+#define AD_SHOE         61      /* boggart damages, steals, or fixes shoes */
+#define AD_SCLD         62      /* scald, similar to AD_FIRE */
+#define AD_EGLD         63      /* eats gold (gold bug) */
+#define AD_FLVR         64      /* quark flavour attacks */
+#define AD_HNGY         65      /* a mini version of FAMN, should fake a higher 
+				   hunger rating instead	*/
 
 #define AD_CLRC		240	/* random clerical spell */
 #define AD_SPEL		241	/* random magic spell */

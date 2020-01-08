@@ -390,6 +390,7 @@ gotobj:
 			/* can't charm you without first waking you */
 			if (multi < 0 && is_fainted()) unmul((char *)0);
 			slowly = (armordelay >= 1 || multi < 0);
+#if 0
 			if (do_charm) {
 			    char action[15];
 			    if (curssv)
@@ -412,6 +413,24 @@ gotobj:
 				if (mtmp->female) (void) adjattrib(A_CHA, -1, FALSE);
 				if (!mtmp->female) (void) adjattrib(A_WIS, -1, FALSE);
 				}
+#endif
+			if( mtmp->data->mlet == S_NYMPH &&
+			  ((!flags.female) ^ (!mtmp->female))) 
+			  pline("%s seduces you and %s off your %s.",
+			  !seen ? mtmp->female?"She":"He" :
+			  Adjmonnam(mtmp, mtmp->female?"beautiful":"hansome"),
+			  curssv ? "helps you to take" :
+			  slowly ? "you start taking" : "you take",
+			  equipname(otmp));
+			else {
+			  pline("%s charms you.  You gladly %s your %s.",
+				!seen ? mtmp->female?"She":"He" : Monnam(mtmp),
+				curssv ? mtmp->female?"let her take":"let him take" :
+				  slowly ? "start removing" : "hand over",
+				  equipname(otmp));
+				if (mtmp->female) (void) adjattrib(A_CHA, -1, FALSE);
+				if (!mtmp->female) (void) adjattrib(A_WIS, -1, FALSE);
+			}
 			named++;
 			/* the following is to set multi for later on */
 			nomul(-armordelay, "being seduced into taking off your clothes");
@@ -447,7 +466,9 @@ gotobj:
 	mtmp->mavenge = 1;
 
 	freeinv(otmp);
-	pline("%s stole %s.", named ? "It" : Monnam(mtmp), doname(otmp));
+	pline("%s %s %s.", 
+	named ? mtmp->female ? "She" : "He" : Monnam(mtmp),
+	(mtmp->data == &mons[PM_SATYR]) ? "took" : "stole", doname(otmp)); 
 	could_petrify = (otmp->otyp == CORPSE &&
 			 touch_petrifies(&mons[otmp->corpsenm]));
 //	if (rn2(1000) && !(metallivorous(mtmp->data) && is_metallic(otmp) && !rn2(10) ) && !(lithivorous(mtmp->data) && is_lithic(otmp) && !rn2(10) ) ) (void) mpickobj(mtmp,otmp);	/* may free otmp */

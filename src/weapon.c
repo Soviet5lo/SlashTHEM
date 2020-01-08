@@ -377,7 +377,7 @@ struct monst *mon;
 	}
 
 /*	Put weapon vs. monster type damage bonuses in below:	*/
-	if (Is_weapon || otmp->oclass == GEM_CLASS ||
+	if (Is_weapon || otmp->oclass == GEM_CLASS || throwable_nut(otmp) ||
 		otmp->oclass == BALL_CLASS || otmp->oclass == CHAIN_CLASS) {
 	    int bonus = 0;
 
@@ -544,8 +544,9 @@ register struct monst *mtmp;
 	    if (rwep[i] == DART && !likes_gems(mtmp->data) &&
 		    m_carrying(mtmp, SLING)) {		/* propellor */
 		for (otmp = mtmp->minvent; otmp; otmp = otmp->nobj)
-		    if (otmp->oclass == GEM_CLASS &&
-			    (otmp->otyp != LOADSTONE || !otmp->cursed)) {
+		    if ((otmp->oclass == GEM_CLASS &&
+			    (otmp->otyp != LOADSTONE || !otmp->cursed))
+			     || throwable_nut(otmp)) {
 			propellor = m_carrying(mtmp, SLING);
 			return otmp;
 		    }
@@ -557,7 +558,7 @@ register struct monst *mtmp;
 
 	    /* KMH, balance patch -- now using skills */
 	    prop = (objects[rwep[i]]).oc_skill;
-	    if (prop < 0) {
+	    if (prop < 0 && mtmp->data != &mons[PM_POLTERGEIST]) {
 		switch (-prop) {
 			/* WAC NOTE: remember to always start the 1st item in 
 			 *   a list of propellors with a
@@ -626,6 +627,9 @@ register struct monst *mtmp;
 		}
 	    }
 	  }
+
+	if (mtmp->data == &mons[PM_POLTERGEIST]) 
+	    return oselect(mtmp, STRANGE_OBJECT); 
 
 	/* failure */
 	return (struct obj *)0;
@@ -1500,7 +1504,7 @@ struct obj *obj;
         return objects[obj->otyp].oc_skill;
 #endif /* CONVICT */
 	if (obj->oclass != WEAPON_CLASS && obj->oclass != TOOL_CLASS &&
-	    obj->oclass != GEM_CLASS)
+	    obj->oclass != GEM_CLASS && !throwable_nut(obj))
 		/* Not a weapon, weapon-tool, or ammo */
 		return (P_NONE);
 	type = objects[obj->otyp].oc_skill;

@@ -1445,6 +1445,10 @@ struct obj *instr;
 	case WOODEN_FLUTE:		/* May charm snakes */
 	/* KMH, balance patch -- removed
 	case PAN_PIPE: */
+	    if (youmonst.data == &mons[PM_SATYR]) {
+		docharm();
+		break;
+	    }
 	    do_spec &= (rn2(ACURR(A_DEX)) + u.ulevel > 25);
 	    pline("%s.", Tobjnam(instr, do_spec ? "trill" : "toot"));
 	    if (do_spec) charm_snakes(u.ulevel * 3);

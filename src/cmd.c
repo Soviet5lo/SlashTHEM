@@ -509,6 +509,7 @@ domonability()
 	if (can_breathe(youmonst.data) && yn("Do you want to use your breath attack?")=='y' ) return dobreathe();
 	else if (attacktype(youmonst.data, AT_SPIT) && yn("Do you want to use your spit attack?")=='y' ) return dospit();
 	else if (youmonst.data->mlet == S_NYMPH && yn("Do you want to remove an iron ball?")=='y' ) return doremove();
+	else if (attacktype_fordmg(youmonst.data, AT_ANY, AD_CHRM) && yn("Do you want to charm a monster?")=='y' ) return docharm();
 	else if (attacktype(youmonst.data, AT_GAZE) && yn("Do you want to use your gaze attack?")=='y' ) return dogaze();
 	else if (is_were(youmonst.data) && yn("Do you want to summon help?")=='y' ) return dosummon();
 	else if (webmaker(youmonst.data) && yn("Do you want to spin webs?")=='y' ) return dospinweb();

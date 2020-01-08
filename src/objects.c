@@ -1165,6 +1165,13 @@ FOOD("mushroom",             5, 1,  5, 0, VEGGY, 130, CLR_BLACK),
 FOOD("melon",               19, 1,  5, 0, VEGGY, 175, CLR_BRIGHT_GREEN),
 FOOD("slime mold",          75, 1,  5, 0, VEGGY, 250, HI_ORGANIC),
 FOOD("peanut bag",	     5, 3, 10, 0, VEGGY, 800, HI_ORGANIC),
+FOOD("sheaf of straw",	     0, 2,  8, 0, VEGGY, 200, CLR_YELLOW),
+# define NUT(name,desc,prob,kn,delay,wt,gval,nutr,sdam,ldam,color) \
+OBJECT( OBJ(name,desc), \
+    BITS(kn, 1, 0, 0,0,0,0,0,0,0,0,-P_SLING,VEGGY), 0, \
+    FOOD_CLASS, /*prob*/ 0, delay, wt, gval, sdam, ldam, 0, 0, nutr, color)
+NUT("acorn", (char *) 0,     0, 1, 1, 10, 0,  5, 2, 0, HI_WOOD),
+#undef NUT
 
 /* People food */
 FOOD("lump of royal jelly",  1, 1,  2, 0, VEGGY, 200, CLR_YELLOW),
@@ -1697,7 +1704,10 @@ OBJECT(OBJ("iron chain", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON
 
 OBJECT(OBJ("blinding venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
-		VENOM_CLASS,  500, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
+		VENOM_CLASS,  499, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
+OBJECT(OBJ("water venom", "splash of water"),
+		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
+		VENOM_CLASS,    1, 0,    1,  0,  0,  0, 0, 0,    0, CLR_BLUE),
 OBJECT(OBJ("acid venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
 		VENOM_CLASS,  500, 0,	 1,  0,  6,  6, 0, 0,	 0, HI_ORGANIC),

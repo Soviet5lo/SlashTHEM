@@ -820,10 +820,20 @@ mkswamp()	/* Michiel Huisjes & Fred de Wilde */
 						sx, sy, NO_MM_FLAGS);
 			    eelct++;
 			}
-		    } else
+		    } else {
 			if(!rn2(4))	/* swamps tend to be moldy */
 			    (void) makemon(mkclass(S_FUNGUS,0),
 						sx, sy, NO_MM_FLAGS);
+		    else if(!rn2(16)){
+			struct monst * mtmp = makemon(rn2(3) ? &mons[PM_WILL_O__WISP] 
+			  : &mons[PM_GUIDE],
+			  sx, sy, NO_MM_FLAGS);
+			if (mtmp->data == &mons[PM_GUIDE]){
+			    mongets(mtmp, WATER_WALKING_BOOTS);
+			    m_dowear(mtmp, TRUE);
+			}
+		    }
+		    } 
 		}
 		level.flags.has_swamp = 1;
 	}

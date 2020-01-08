@@ -1011,10 +1011,21 @@ skip0:
 		if(!rn2(60)) mkaltar(croom);
 
 		/* put statues inside */
-		if(!rn2(20))
+		if(!rn2(20)) {
+		    struct obj * otmp;
+		    otmp = mkcorpstat(STATUE, (struct monst *)0,
+					(struct permonst *)0,
+					somex(croom), somey(croom), TRUE);
+		    if(otmp->corpsenm==PM_WATERSPOUT_GARGOYLE){
+			levl[otmp->ox][otmp->oy].typ = FOUNTAIN;
+			level.flags.nfountains++;
+		    }
+		}
+#if 0
 		    (void) mkcorpstat(STATUE, (struct monst *)0,
 				      (struct permonst *)0,
 				      somex(croom), somey(croom), TRUE);
+#endif
 		/* put box/chest inside;
 		 *  40% chance for at least 1 box, regardless of number
 		 *  of rooms; about 5 - 7.5% for 2 boxes, least likely
