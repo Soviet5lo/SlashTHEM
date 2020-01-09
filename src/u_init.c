@@ -197,7 +197,9 @@ static struct trobj Undertaker[] = {
 
 static struct trobj Zookeeper[] = {
 	{ BULLWHIP, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ TRIPE_RATION, 0, TOOL_CLASS, 5, UNDEF_BLESS },
+	{ TRIPE_RATION, 0, FOOD_CLASS, 5, UNDEF_BLESS },
+	{ ASIAN_PEAR, 0, FOOD_CLASS, 3, 0 },
+	{ EUCALYPTUS_LEAF, 0, FOOD_CLASS, 1, 0 },
 	{ SCR_TAMING, UNDEF_SPE, SCROLL_CLASS, 3, 1 },
 	{ LEASH, 0, TOOL_CLASS, 3, 0 },
 	{ 0, 0, 0, 0, 0, }
