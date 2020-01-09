@@ -1110,7 +1110,8 @@ int thrown;
 #endif
 		    if (!valid_weapon_attack || mon == u.ustuck) {
 			;	/* no special bonuses */
-		    } else if (mon->mflee && (Role_if(PM_ROGUE) || Role_if(PM_NINJA)) && !Upolyd) {
+		    } else if (mon->mflee && (Role_if(PM_ROGUE) || Role_if(PM_NINJA) ||
+					obj->oartifact == ART_SPINESEEKER) && !Upolyd) {
 			You("strike %s from behind!", mon_nam(mon));
 			tmp += rnd(u.ulevel);
 			hittxt = TRUE;
