@@ -2984,6 +2984,8 @@ dodip()
 	char allowall[2], qbuf[QBUFSZ], Your_buf[BUFSZ];
 	short mixture;
 	int res;
+	/* 5lo: let's make player alchemy more difficult - from slashem-up */
+	int prob = (uarmc && uarmc->otyp == LAB_COAT) ? 10 : 3;
 
 	allowall[0] = ALL_CLASSES; allowall[1] = '\0';
 	if(!(obj = getobj(allowall, "dip")))
@@ -3186,7 +3188,7 @@ dodip()
 		pline_The("potions mix...");
 		/* KMH, balance patch -- acid is particularly unstable */
 		if (obj->cursed || obj->otyp == POT_ACID ||
-		    potion->cursed || potion->otyp == POT_ACID || !rn2(10)) {
+		    potion->cursed || potion->otyp == POT_ACID || !rn2(prob)) {
 			pline("BOOM!  They explode!");
 			exercise(A_STR, FALSE);
 			if (!breathless(youmonst.data) || haseyes(youmonst.data))
@@ -3206,7 +3208,9 @@ dodip()
 		 * potion of amnesia always produces potion of amnesia */
 		if (obj->otyp == POT_AMNESIA || potion->otyp == POT_AMNESIA)
 			obj->otyp = POT_AMNESIA;
-		else if ((mixture = mixtype(obj, potion, FALSE)) != 0) {
+		else if ((mixture = mixtype(obj, potion, FALSE)) != 0 &&
+				uarmc &&
+				uarmc->otyp == LAB_COAT) {
 			obj->otyp = mixture;
 		} else {
 		    switch (obj->odiluted ? 1 : rnd(8)) {
@@ -3456,7 +3460,7 @@ dodip()
 		    singlegem->in_use = TRUE;
 		    if (potion->otyp == POT_ACID && 
 		      (obj->otyp == DILITHIUM_CRYSTAL || 
-		       potion->cursed || !rn2(10))) {
+		       potion->cursed || !rn2(prob))) {
 			/* Just to keep them on their toes */
 
 			singlepotion->in_use = TRUE;
