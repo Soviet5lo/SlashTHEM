@@ -2806,8 +2806,9 @@ u_init()
 	    knows_object(DARK_ELVEN_DAGGER);
 	    knows_object(DARK_ELVEN_MITHRIL_COAT);
 //	    skill_add(Skill_Drow);
-	    augment_skill_cap(P_MUSICALIZE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_MUSICALIZE, 1, P_BASIC, P_SKILLED);
 	    augment_skill_cap(P_BOW, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_SABER, 1, P_BASIC, P_SKILLED);
 	    break;
 
 	case PM_DWARF:
@@ -2822,6 +2823,7 @@ u_init()
 //	    skill_add(Skill_Dwarf);
 	    augment_skill_cap(P_PICK_AXE, 1, P_SKILLED, P_EXPERT);
 	    augment_skill_cap(P_AXE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_HAMMER, 1, P_SKILLED, P_EXPERT);
 	    break;
 
 	case PM_GNOME:
@@ -2831,6 +2833,7 @@ u_init()
 //	    skill_add(Skill_Gnome);
 	    augment_skill_cap(P_CROSSBOW, 1, P_BASIC, P_SKILLED);
 	    augment_skill_cap(P_CLUB, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_PICK_AXE, 1, P_BASIC, P_BASIC);
 	    break;
 	case PM_HUMAN_WEREWOLF:
 	    if (!Role_if(PM_LUNATIC)) u.ulycn = PM_WEREWOLF;
@@ -2839,6 +2842,7 @@ u_init()
 	    ini_inv(Lycanthrope);*/
 //	    skill_add(Skill_Lycanthrope);
 	    augment_skill_cap(P_BARE_HANDED_COMBAT, 2, P_EXPERT, P_MASTER);
+	    augment_skill_cap(P_SHORT_SWORD, 1, P_SKILLED, P_EXPERT);
 	    break;
 
 	case PM_ORC:
@@ -2863,6 +2867,7 @@ u_init()
 	    knows_object(ORCISH_SHIELD);
 	    knows_object(URUK_HAI_SHIELD);
 	    knows_object(ORCISH_CLOAK);
+	    augment_skill_cap(P_SCIMITAR, 1, P_SKILLED, P_EXPERT);
 	    break;
 	case PM_VAMPIRE:
 	    /* Vampires start off with gods not as pleased, luck penalty */
@@ -2874,6 +2879,9 @@ u_init()
 	    }
 	    knows_object(POT_BLOOD);
 	    knows_object(POT_VAMPIRE_BLOOD);
+	    augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_KNIFE, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_BARE_HANDED_COMBAT, 1, P_BASIC, P_SKILLED);
 	    break;
 	case PM_KOBOLD:
 	    if(!Role_if(PM_CONVICT)) {
@@ -2888,12 +2896,15 @@ u_init()
 	    augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
 	    break;
 	case PM_GHOUL:
-		knows_object(POT_BLOOD);
-		knows_object(POT_VAMPIRE_BLOOD);
-		break;
+	    knows_object(POT_BLOOD);
+	    knows_object(POT_VAMPIRE_BLOOD);
+	    augment_skill_cap(P_BARE_HANDED_COMBAT, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_ATTACK_SPELL, 1, P_BASIC, P_SKILLED);
+	    break;
 	case PM_CLOCKWORK_AUTOMATON:
-          if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
-		break;
+            if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);
+	    augment_skill_cap(P_LONG_SWORD, 1, P_BASIC, P_SKILLED);
+	    break;
 	case PM_TROLL:
 		if(!Role_if(PM_CONVICT)) switch (rnd(4)) {
 			case 1: ini_inv(TrollItemA); break;
@@ -2912,6 +2923,8 @@ u_init()
 		break;
 	case PM_GIANT:
 		if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
+		augment_skill_cap(P_TWO_WEAPON_COMBAT, 1, P_SKILLED, P_EXPERT);
+		augment_skill_cap(P_TWO_HANDED_SWORD, 1, P_SKILLED, P_EXPERT);
 		break;
 	case PM_HOBBIT:
 		augment_skill_cap(P_SLING, 1, P_SKILLED, P_EXPERT);
@@ -2919,7 +2932,18 @@ u_init()
 		break;
 	case PM_NYMPH:
 		augment_skill_cap(P_MUSICALIZE, 1, P_SKILLED, P_EXPERT);
+		augment_skill_cap(P_HEALING_SPELL, 1, P_BASIC, P_SKILLED);
 //		skill_add(Skill_Nymph);
+		break;
+	case PM_DOPPELGANGER:
+		augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+		augment_skill_cap(P_BODY_SPELL, 1, P_SKILLED, P_EXPERT);
+		break;
+	case PM_ILLITHID:
+		augment_skill_cap(P_ATTACK_SPELL, 1, P_EXPERT, P_EXPERT);
+		augment_skill_cap(P_MATTER_SPELL, 1, P_EXPERT, P_EXPERT);
+		augment_skill_cap(P_ENCHANTMENT_SPELL, 1, P_SKILLED, P_EXPERT);
+		augment_skill_cap(P_DIVINATION_SPELL, 1, P_SKILLED, P_EXPERT);
 		break;
 	default:	/* impossible */
 		break;
