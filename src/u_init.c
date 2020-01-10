@@ -2384,9 +2384,9 @@ u_init()
 	case PM_GEEK:
 		/* 5lo: Give them some lunch money */
 #ifndef GOLDOBJ
-		u.ugold = u.ugold0 = rn1(100, 101);
+		u.ugold = u.ugold0 = rnd(50);
 #else
-		u.umoney0 = rn1(100, 101);
+		u.umoney0 = rn1(50);
 #endif
 		ini_inv(Geek);
 		skill_init(Skill_Gee);
