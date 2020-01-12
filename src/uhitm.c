@@ -1079,8 +1079,10 @@ int thrown;
 			tmp = rnd(2);
 
 		    /* 5lo: Jedi know how to use an unlit lightsaber as a weapon */
-		    if (is_lightsaber(obj) && !obj->lamplit && Role_if(PM_JEDI))
+		    if (is_lightsaber(obj) && !obj->lamplit && Role_if(PM_JEDI)) {
 		    	tmp = d(1,4) + obj->spe + (P_SKILL(P_BARE_HANDED_COMBAT) - P_UNSKILLED);
+			use_skill(P_BARE_HANDED_COMBAT, 1); // throw them a bone
+		    }
 
 		    if (!thrown && (obj == uwep || obj == uswapwep) && 
 				obj->otyp == BOOMERANG && !rnl(4) == 4-1) {
