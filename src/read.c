@@ -2267,10 +2267,6 @@ register struct obj	*sobj;
 		goto id;
 	case SCR_IDENTIFY:
 		/* known = TRUE; */
-		if (sobj->cursed) {
-			pline("You fall below the bottom of the page! You die...");
-			pline("Do you want your possessions identified? DYWYPI? [ynq] (n) _");
-		}
 		if(confused)
 			You("identify this as an identify scroll.");
 		else
