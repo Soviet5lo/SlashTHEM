@@ -59,8 +59,8 @@ const struct innate {
 		     {  13, &(HCold_resistance), "warm", "cooler" },
 		     {   0, 0, 0, 0 } },
 
-	fir_abil[] = { {   1, &(HFire_resistance), "", "" },
-		     {  10, &(HSearching), "perceptive", "unaware" },
+	fir_abil[] = { {   10, &(HSearching), "perceptive", "unaware" },
+		     {  15, &(HFire_resistance), "cool", "warmer" },
 		     {   0, 0, 0, 0 } },
 
 	nin_abil[] = { {   1, &(HStealth), "", ""  },
