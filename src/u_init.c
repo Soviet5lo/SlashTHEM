@@ -2386,7 +2386,7 @@ u_init()
 #ifndef GOLDOBJ
 		u.ugold = u.ugold0 = rnd(50);
 #else
-		u.umoney0 = rn1(50);
+		u.umoney0 = rnd(50);
 #endif
 		ini_inv(Geek);
 		skill_init(Skill_Gee);
