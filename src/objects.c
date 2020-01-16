@@ -519,6 +519,8 @@ ARMOR("orcish ring mail", "crude ring mail",
 	0, 0, 0, 0,	20, 5, 250,  80,  8, 1, ARM_SUIT, IRON, CLR_BLACK),
 ARMOR("leather armor", (char *)0,
 	1, 0, 0, 0,	75, 3, 150,   5,  8, 0, ARM_SUIT, LEATHER, HI_LEATHER),
+ARMOR("asbestos jacket", "silver jacket",
+	1, 0, 0, FIRE_RES, 5, 0, 30, 100, 9, 0, ARM_SUIT, MITHRIL, HI_SILVER),
 ARMOR("leather jacket", (char *)0,
 	1, 0, 0, 0,	11, 0,	30,  10,  9, 0, ARM_SUIT, LEATHER, CLR_BLACK),
 
@@ -632,7 +634,7 @@ HELM("dented pot", (char *)0,
 		1, 0, 0,			2, 0, 10,   8, 9, 0, IRON, CLR_BLACK),
 /* 5lo: Fire Helmet from SLASH 6, grants Fire Resistance */
 HELM("fire helmet", "red shiny helmet",
-		0, 0, FIRE_RES,			10, 1, 25, 50, 9, 0, IRON, CLR_RED), /* 10 prob, temp, to be split between this and asbestos cloak */
+		0, 0, FIRE_RES,			5, 1, 25, 50, 9, 0, IRON, CLR_RED),
 #ifdef JEDI
 HELM("plasteel helm", (char *)0,
 		1, 0, 0,                        1, 1,  6,  20, 7, 0, PLASTIC, CLR_WHITE),
