@@ -533,7 +533,7 @@ ARMOR("robe of protection", "blue robe",
 ARMOR("robe of power", "orange robe",
 	0, 1, 0, 0,		2, 1,  40,  50,  9, 0, ARM_SUIT, CLOTH, CLR_ORANGE),
 ARMOR("robe of weakness", "green robe",
-	0, 1, 0, STUNNED,		2, 1,  40,  50,  9, 0, ARM_SUIT, CLOTH, CLR_GREEN),
+	0, 1, 0, STUNNED,	2, 1,  40,  50,  9, 0, ARM_SUIT, CLOTH, CLR_GREEN),
 
 /*
  * Dragon suits
@@ -611,8 +611,8 @@ CLOAK("cloak of invisibility", "opera cloak",
 		0, 1,	INVIS,	   9, 0, 10, 60,  9, 2, CLOTH, CLR_BRIGHT_MAGENTA),
 CLOAK("cloak of magic resistance", "ornamental cope",
 		0, 1,	ANTIMAGIC,  4, 0, 10, 60,  9, 3, CLOTH, CLR_WHITE),
-CLOAK("manacloak", "dragonhide cloak",
-		0, 1,	ENERGY_REGENERATION,  4, 0, 10, 50,  9, 3, DRAGON_HIDE, CLR_BRIGHT_BLUE),
+CLOAK("mana cloak", "funeral shroud",
+		0, 1,	ENERGY_REGENERATION,  4, 0, 10, 50,  9, 3, CLOTH, CLR_BLACK),
 CLOAK("cloak of displacement", "piece of cloth",
 		0, 1,	DISPLACED, 7, 0, 10, 50,  9, 2, CLOTH, HI_CLOTH),
 /* Helmets */

@@ -229,7 +229,7 @@ Cloak_on()
 	case CLOAK_OF_MAGIC_RESISTANCE:
 	case ROBE:
 	case LEATHER_CLOAK:
-	case MANACLOAK:
+	case MANA_CLOAK:
 	/* KMH, balance patch -- removed
 	case CLOAK_OF_DRAIN_RESISTANCE: */               
 		break;
@@ -302,7 +302,7 @@ Cloak_off()
 	case CLOAK_OF_PROTECTION:
 	case CLOAK_OF_MAGIC_RESISTANCE:
 	case CLOAK_OF_DISPLACEMENT:
-	case MANACLOAK:
+	case MANA_CLOAK:
 	case POISONOUS_CLOAK:
 	case OILSKIN_CLOAK:
 	case ROBE:
