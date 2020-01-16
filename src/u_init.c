@@ -739,10 +739,6 @@ static struct trobj UberLostSoulItemR[] = {
 	{ UNDEF_TYP, UNDEF_SPE, RANDOM_CLASS, 1, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-static struct trobj GiantItem[] = {
-	{ BOULDER, 0, ROCK_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
 static struct trobj OgreItem[] = {
 	{ CLUB, 0, WEAPON_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -2924,7 +2920,6 @@ u_init()
 //		skill_add(Skill_Ogre);
 		break;
 	case PM_GIANT:
-		if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
 		augment_skill_cap(P_TWO_WEAPON_COMBAT, 1, P_SKILLED, P_EXPERT);
 		augment_skill_cap(P_TWO_HANDED_SWORD, 1, P_SKILLED, P_EXPERT);
 		break;
