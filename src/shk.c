@@ -5417,7 +5417,7 @@ shk_charge(slang, shkp)
 	if (obj->oclass == WAND_CLASS)
 	{
 		/* Wand of wishing? */
-		if (obj->otyp == WAN_WISHING || obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT)
+		if (obj->otyp == WAN_WISHING || obj->otyp == WAN_ACQUIREMENT)
 		{
 			/* Premier gives you ONE more charge */
 			/* KMH -- Okay, but that's pretty generous */

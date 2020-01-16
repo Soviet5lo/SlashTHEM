@@ -674,9 +674,7 @@ boolean artif;
 		if (otmp->otyp == AMULET_OF_YENDOR) flags.made_amulet = TRUE;
 		if(rn2(10) && (otmp->otyp == AMULET_OF_STRANGULATION ||
 		   otmp->otyp == AMULET_OF_CHANGE ||
-		   otmp->otyp == AMULET_OF_FUMBLING ||
 		   otmp->otyp == AMULET_OF_HUNGER ||
-		   otmp->otyp == AMULET_OF_BLINDNESS ||
 		   otmp->otyp == AMULET_OF_RESTFUL_SLEEP)) {
 			curse(otmp);
 		} else	blessorcurse(otmp, 10);
@@ -716,7 +714,6 @@ boolean artif;
 	case ARMOR_CLASS:
 		if(rn2(10) && (otmp->otyp == FUMBLE_BOOTS ||
 		   otmp->otyp == LEVITATION_BOOTS ||
-		   otmp->otyp == ZIPPER_BOOTS ||
 		   otmp->otyp == HELM_OF_OPPOSITE_ALIGNMENT ||
 		   otmp->otyp == GAUNTLETS_OF_FUMBLING ||
 		   otmp->otyp == ROBE_OF_WEAKNESS ||

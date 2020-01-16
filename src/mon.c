@@ -2389,7 +2389,7 @@ xkilled(mtmp, dest)
 
 #ifdef EASY_MODE
 		if (!rn2(100)) otmp = mksobj_at(SCR_IDENTIFY, x, y, TRUE, FALSE);
-		if (!rn2(40)) otmp = mksobj_at(SCR_HEALING, x, y, TRUE, FALSE);
+		if (!rn2(40)) otmp = mksobj_at(POT_HEALING, x, y, TRUE, FALSE);
 #endif /* EASY_MODE */
 		if (!rn2(6) && !(mvitals[mndx].mvflags & G_NOCORPSE) && !(nohands(mdat))
 #ifdef KOPS
@@ -3521,7 +3521,7 @@ short otyp;
 	    case M_AP_MONSTER:
 		break;
 	    case M_AP_OBJECT:
-		if (otyp == SPE_HEALING || otyp == SPE_EXTRA_HEALING || otyp == SPE_FULL_HEALING) {
+		if (otyp == SPE_HEALING || otyp == SPE_EXTRA_HEALING) {
 		    pline("%s seems a more vivid %s than before.",
 				The(simple_typename(ap)),
 				c_obj_colors[objects[ap].oc_color]);

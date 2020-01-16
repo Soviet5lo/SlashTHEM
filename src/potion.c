@@ -1049,26 +1049,6 @@ peffects(otmp)
 			exercise(A_WIS, TRUE);
 		}
 		break;
-	case POT_GAIN_HEALTH:			/* Amy */
-		{       register int num , num2;
-			if(otmp->cursed)
-			    You_feel("drained.");
-			else
-			    pline("The essence of life flows through your body.");
-			num = rnd(25) + 5 * otmp->blessed + 10;                        
-			num2 = rnd(2) + 2 * otmp->blessed + 1;
-			u.uhpmax += (otmp->cursed) ? -num2 : num2;
-			u.uhp += (otmp->cursed) ? -num : num;
-			if(u.uhpmax <= 0) u.uhpmax = 0;
-			if(u.uhp <= 0) u.uhp = 0;
-			if(u.uhp > u.uhpmax) {
-				u.uhpmax += ((u.uhp - u.uhpmax) / 2);
-				u.uhp = u.uhpmax;
-			}
-			flags.botl = 1;
-			exercise(A_WIS, TRUE);
-		}
-		break;
 	case POT_OIL:				/* P. Winner */
 		{
 			boolean good_for_you = FALSE;
@@ -2343,7 +2323,7 @@ boolean amnesia;
 		used = TRUE;
 		break;
 	    case SCROLL_CLASS:
-		if (obj->otyp != SCR_BLANK_PAPER  && !obj->oartifact && obj->otyp != SCR_HEALING
+		if (obj->otyp != SCR_BLANK_PAPER  && !obj->oartifact
 #ifdef MAIL
 		    && obj->otyp != SCR_MAIL
 #endif

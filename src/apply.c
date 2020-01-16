@@ -3343,24 +3343,18 @@ wand_explode(obj, hero_broke)
     case WAN_LOCKING:
     case WAN_PROBING:
     case WAN_ENLIGHTENMENT:
-    case WAN_ENTRAPPING:
     case WAN_MAGIC_MAPPING:
     case WAN_DARKNESS:
-    case WAN_OBJECTION:
-    case WAN_DETECT_MONSTERS:
     case WAN_IDENTIFY:
-    case WAN_REMOVE_CURSE:
     case WAN_OPENING:
     case WAN_WONDER:
     case WAN_BUGGING:
     case WAN_CLONE_MONSTER:
-    case WAN_SUMMON_UNDEAD:
     case WAN_SECRET_DOOR_DETECTION:
 	pline(nothing_else_happens);
 	goto discard_broken_wand;
     case WAN_DEATH:
     case WAN_LIGHTNING:
-    case WAN_CHARGING:
 	dmg *= 4;
 	goto wanexpl;
     case WAN_COLD:
@@ -3421,7 +3415,6 @@ wand_explode(obj, hero_broke)
 	        break;
     case WAN_HEALING:
     case WAN_EXTRA_HEALING:
-    case WAN_FULL_HEALING:
 		dmg = 0;
 		break;
     default:

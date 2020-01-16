@@ -1004,7 +1004,6 @@ boolean atme;
 	case SPE_DETECT_UNSEEN:
 	case SPE_HEALING:
 	case SPE_EXTRA_HEALING:
-	case SPE_FULL_HEALING:
 	case SPE_DRAIN_LIFE:
 	case SPE_STONE_TO_FLESH:
 	case SPE_FINGER:
@@ -1040,7 +1039,6 @@ boolean atme;
 	case SPE_IDENTIFY:
 	case SPE_COMMAND_UNDEAD:                
 	case SPE_SUMMON_UNDEAD:
-	case SPE_CHARGING:
 		(void) seffects(pseudo);
 		break;
 
@@ -1057,11 +1055,9 @@ boolean atme;
 		    Your("enchantment failed!");
 		break;
 
-	case SPE_ENTRAPPING:
-
+	case SPE_TRAP_DETECTION:
 		trap_detect((struct obj *)0);
 		exercise(A_WIS, TRUE);
-
 		break;
 	/* these are all duplicates of potion effects */
 	case SPE_HASTE_SELF:
@@ -1126,35 +1122,10 @@ boolean atme;
 				spell_damage_bonus(spellid(spell))*100);
 		} else pline(nothing_happens);	/* Already have as intrinsic */
 		break;
-	case SPE_ANTI_DISINTEGRATION:
-		if(!(HDisint_resistance & INTRINSIC)) {
-			You("feel quite firm for a while.");
-			incr_itimeout(&HDisint_resistance, rn1(1000, 500) +
-				spell_damage_bonus(spellid(spell))*100);
-		} else pline(nothing_happens);	/* Already have as intrinsic */
-		break;
-	case SPE_BOTOX_RESIST:
-		if(!(HSick_resistance & INTRINSIC)) {
-			You("feel resistant to sickness.");
-			incr_itimeout(&HSick_resistance, rn1(1000, 500) +
-				spell_damage_bonus(spellid(spell))*100);
-		} else pline(nothing_happens);	/* Already have as intrinsic */
-		break;
-	case SPE_GODMODE:
-		incr_itimeout(&Invulnerable, rn1(3, 5) +	spell_damage_bonus(spellid(spell)) );
-		You_feel("invincible!");
-		break;
 	case SPE_ACIDSHIELD:
 		if(!(HAcid_resistance & INTRINSIC)) {
 			You("are resistant to acid now. Your items, however, are not.");
 			incr_itimeout(&HAcid_resistance, rn1(1000, 500) +
-				spell_damage_bonus(spellid(spell))*100);
-		} else pline(nothing_happens);	/* Already have as intrinsic */
-		break;
-	case SPE_RESIST_PETRIFICATION:
-		if(!(HStone_resistance & INTRINSIC)) {
-			You("feel more limber. Let's eat some cockatrice meat!");
-			incr_itimeout(&HStone_resistance, rn1(200, 100) +
 				spell_damage_bonus(spellid(spell))*100);
 		} else pline(nothing_happens);	/* Already have as intrinsic */
 		break;

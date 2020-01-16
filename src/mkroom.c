@@ -479,21 +479,15 @@ struct mkroom *sroom;
 			if(!rn2(20))
 			    (void) mksobj_at(POT_FULL_HEALING,sx,sy,TRUE,FALSE);
 			if(!rn2(30))
-			    (void) mksobj_at(POT_GAIN_HEALTH,sx,sy,TRUE,FALSE);
-			if(!rn2(30))
 			    (void) mksobj_at(POT_RECOVERY,sx,sy,TRUE,FALSE);
 			/* Now some wands... */
 			if(!rn2(10))
 			    (void) mksobj_at(WAN_HEALING,sx,sy,TRUE,FALSE);
 			if(!rn2(20))
 			    (void) mksobj_at(WAN_EXTRA_HEALING,sx,sy,TRUE,FALSE);
-			if(!rn2(40))
-			    (void) mksobj_at(WAN_FULL_HEALING,sx,sy,TRUE,FALSE);
 			/* And for misc healing objects */
 			if(!rn2(10))
 			    (void) mksobj_at(PILL,sx,sy,TRUE,FALSE);
-			if(!rn2(10))
-			    (void) mksobj_at(SCR_HEALING,sx,sy,TRUE,FALSE);
 			if(!rn2(40))
 			    (void) mksobj_at(MEDICAL_KIT,sx,sy,TRUE,FALSE);
 			break;
@@ -647,31 +641,6 @@ int mm_flags;
 		tt_mname(nmonst);
 	}
 }*/
-
-/* make a swarm of undead around mm but less, for zap.c WAN_SUMMON_UNDEAD */
-void
-mkundeadX(mm, revive_corpses, mm_flags)
-coord *mm;
-boolean revive_corpses;
-int mm_flags;
-{
-	int cnt = 1;
-	struct permonst *mdat;
-	struct obj *otmp;
-	coord cc;
-
-	if (!rn2(10)) cnt += rnd(2);
-
-	while (cnt--) {
-	    mdat = morguemon();
-	    if (enexto(&cc, mm->x, mm->y, mdat) &&
-		    (!revive_corpses ||
-		     !(otmp = sobj_at(CORPSE, cc.x, cc.y)) ||
-		     !revive(otmp)))
-		(void) makemon(mdat, cc.x, cc.y, mm_flags);
-	}
-	level.flags.graveyard = TRUE;	/* reduced chance for undead corpse */
-}
 
 STATIC_OVL struct permonst *
 morguemon()

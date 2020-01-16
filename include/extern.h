@@ -1268,7 +1268,6 @@ E boolean FDECL(inside_room, (struct mkroom *,XCHAR_P,XCHAR_P));
 E boolean FDECL(somexy, (struct mkroom *,coord *));
 E void FDECL(mkundead, (coord *,BOOLEAN_P,int));
 /*E void FDECL(mkundeadboo, (coord *,BOOLEAN_P,int));*/
-E void FDECL(mkundeadX, (coord *,BOOLEAN_P,int));
 E struct permonst *NDECL(courtmon);
 E struct permonst *NDECL(antholemon);
 E struct permonst *NDECL(realzoomon);

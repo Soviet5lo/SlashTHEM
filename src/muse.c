@@ -346,11 +346,8 @@ struct obj *otmp;
 #define MUSE_WAN_EXTRA_HEALING 21
 #define MUSE_WAN_CREATE_HORDE 22
 #define MUSE_POT_VAMPIRE_BLOOD 23
-#define MUSE_WAN_FULL_HEALING 24
-#define MUSE_RIN_TIMELY_BACKUP 25
-#define MUSE_SCR_SUMMON_UNDEAD 26
-#define MUSE_WAN_SUMMON_UNDEAD 27
-#define MUSE_SCR_HEALING 28
+#define MUSE_RIN_TIMELY_BACKUP 24
+
 /*
 #define MUSE_INNATE_TPT 9999
  * We cannot use this.  Since monsters get unlimited teleportation, if they
@@ -433,11 +430,6 @@ struct monst *mtmp;
 		m.has_defense = MUSE_POT_HEALING;
 		return TRUE;
 	    }
-	    if ((obj = m_carrying(mtmp, SCR_HEALING)) != 0) {
-		m.defensive = obj;
-		m.has_defense = MUSE_SCR_HEALING;
-		return TRUE;
-	    }
 	    if ((obj = m_carrying(mtmp, POT_FULL_HEALING)) !=0) {
 		m.defensive = obj;
 		m.has_defense = MUSE_POT_FULL_HEALING;
@@ -466,11 +458,6 @@ struct monst *mtmp;
 		if ((obj = m_carrying(mtmp, POT_HEALING)) != 0) {
 		    m.defensive = obj;
 		    m.has_defense = MUSE_POT_HEALING;
-		    return TRUE;
-		}
-		if ((obj = m_carrying(mtmp, SCR_HEALING)) != 0) {
-		    m.defensive = obj;
-		    m.has_defense = MUSE_SCR_HEALING;
 		    return TRUE;
 		}
 		if (is_vampire(mtmp->data) &&
@@ -616,12 +603,6 @@ struct monst *mtmp;
 			m.has_defense = MUSE_RIN_TIMELY_BACKUP;
 		}
 
-		nomore(MUSE_SCR_SUMMON_UNDEAD);
-		if(obj->otyp == SCR_SUMMON_UNDEAD) {
-			m.defensive = obj;
-			m.has_defense = MUSE_SCR_SUMMON_UNDEAD;
-		}
-
 	    if (mtmp->data != &mons[PM_PESTILENCE]) {
 		nomore(MUSE_POT_FULL_HEALING);
 		if(obj->otyp == POT_FULL_HEALING) {
@@ -638,11 +619,6 @@ struct monst *mtmp;
 			m.defensive = obj;
 			m.has_defense = MUSE_WAN_CREATE_MONSTER;
 		}
-		nomore(MUSE_WAN_SUMMON_UNDEAD);
-		if(obj->otyp == WAN_SUMMON_UNDEAD && obj->spe > 0) {
-			m.defensive = obj;
-			m.has_defense = MUSE_WAN_SUMMON_UNDEAD;
-		}
 		nomore(MUSE_WAN_CREATE_HORDE);
 		if(obj->otyp == WAN_CREATE_HORDE && obj->spe > 0) {
 			m.defensive = obj;
@@ -653,11 +629,6 @@ struct monst *mtmp;
 			m.defensive = obj;
 			m.has_defense = MUSE_POT_HEALING;
 		}
-		nomore(MUSE_SCR_HEALING);
-		if(obj->otyp == SCR_HEALING) {
-			m.defensive = obj;
-			m.has_defense = MUSE_SCR_HEALING;
-		}
 		nomore(MUSE_WAN_HEALING);
 		if(obj->otyp == WAN_HEALING && obj->spe > 0) {
 			m.defensive = obj;
@@ -667,11 +638,6 @@ struct monst *mtmp;
 		if(obj->otyp == WAN_EXTRA_HEALING && obj->spe > 0) {
 			m.defensive = obj;
 			m.has_defense = MUSE_WAN_EXTRA_HEALING;
-		}
-		nomore(MUSE_WAN_FULL_HEALING);
-		if(obj->otyp == WAN_FULL_HEALING && obj->spe > 0) {
-			m.defensive = obj;
-			m.has_defense = MUSE_WAN_FULL_HEALING;
 		}
 		nomore(MUSE_POT_VAMPIRE_BLOOD);
 		if(is_vampire(mtmp->data) && obj->otyp == POT_VAMPIRE_BLOOD) {
@@ -688,11 +654,6 @@ struct monst *mtmp;
 		if (obj->otyp == WAN_CREATE_MONSTER && obj->spe > 0) {
 			m.defensive = obj;
 			m.has_defense = MUSE_WAN_CREATE_MONSTER;
-		}
-		nomore(MUSE_WAN_SUMMON_UNDEAD);
-		if (obj->otyp == WAN_SUMMON_UNDEAD && obj->spe > 0) {
-			m.defensive = obj;
-			m.has_defense = MUSE_WAN_SUMMON_UNDEAD;
 		}
 	    }
 		nomore(MUSE_SCR_CREATE_MONSTER);
@@ -932,105 +893,6 @@ mon_tele:
 		return 2;
 	    }
 
-	case MUSE_WAN_SUMMON_UNDEAD:
-	    {	coord cc;
-		    /* pm: 0 => random, eel => aquatic, croc => amphibious */
-		struct permonst *pm = 0;
-		struct monst *mon;
-
-		if (!enexto(&cc, mtmp->mx, mtmp->my, pm)) return 0;
-		mzapmsg(mtmp, otmp, FALSE);
-		otmp->spe--;
-
-		    switch (rn2(10)+1) {
-		    case 1:
-			mon = makemon(mkclass(S_VAMPIRE,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 2:
-		    case 3:
-		    case 4:
-		    case 5:
-			mon = makemon(mkclass(S_ZOMBIE,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 6:
-		    case 7:
-		    case 8:
-			mon = makemon(mkclass(S_MUMMY,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 9:
-			mon = makemon(mkclass(S_GHOST,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 10:
-			mon = makemon(mkclass(S_WRAITH,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    }
-
-		/*mon = makemon((struct permonst *)0, cc.x, cc.y, NO_MM_FLAGS);*/
-		if (mon && canspotmon(mon) && oseen)
-		    makeknown(WAN_SUMMON_UNDEAD);
-		return 2;
-	    }
-
-	case MUSE_SCR_SUMMON_UNDEAD:
-
-	    {	coord cc;
-		struct permonst *pm = 0, *fish = 0;
-		int cnt = 1;
-		struct monst *mon;
-		boolean known = FALSE;
-
-		if (rn2(2)) cnt += rnd(2);
-		if (!rn2(73)) cnt += rnd(4);
-		if (mtmp->mconf || otmp->cursed) cnt += 12;
-		if (mtmp->mconf) pm = fish = &mons[PM_ACID_BLOB];
-		else if (is_pool(mtmp->mx, mtmp->my))
-		    fish = &mons[u.uinwater ? PM_GIANT_EEL : PM_CROCODILE];
-		mreadmsg(mtmp, otmp);
-		while(cnt--) {
-		    /* `fish' potentially gives bias towards water locations;
-		       `pm' is what to actually create (0 => random) */
-		    if (!enexto(&cc, mtmp->mx, mtmp->my, fish)) break;
-
-		    /*mon = makemon(pm, cc.x, cc.y, NO_MM_FLAGS);*/
-
-		    switch (rn2(10)+1) {
-		    case 1:
-			mon = makemon(mkclass(S_VAMPIRE,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 2:
-		    case 3:
-		    case 4:
-		    case 5:
-			mon = makemon(mkclass(S_ZOMBIE,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 6:
-		    case 7:
-		    case 8:
-			mon = makemon(mkclass(S_MUMMY,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 9:
-			mon = makemon(mkclass(S_GHOST,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    case 10:
-			mon = makemon(mkclass(S_WRAITH,0), cc.x, cc.y, NO_MM_FLAGS);
-			break;
-		    }
-		    if (mon && canspotmon(mon)) known = TRUE;
-		}
-		/* The only case where we don't use oseen.  For wands, you
-		 * have to be able to see the monster zap the wand to know
-		 * what type it is.  For teleport scrolls, you have to see
-		 * the monster to know it teleported.
-		 */
-		if (known)
-		    makeknown(SCR_SUMMON_UNDEAD);
-		else if (!objects[SCR_SUMMON_UNDEAD].oc_name_known
-			&& !objects[SCR_SUMMON_UNDEAD].oc_uname)
-		    docall(otmp);
-		m_useup(mtmp, otmp);
-		return 2;
-	    }
-
 	case MUSE_TRAPDOOR:
 		/* trap doors on "bottom" levels of dungeons are rock-drop
 		 * trap doors, not holes in the floor.  We check here for
@@ -1169,37 +1031,6 @@ mon_tele:
 		if (vismon) pline("%s begins to look better.", Monnam(mtmp));
 		if (oseen) makeknown(WAN_EXTRA_HEALING);
 		return 2;
-	case MUSE_WAN_FULL_HEALING:
-		mzapmsg(mtmp, otmp, TRUE);
-		otmp->spe--;
-		i = d(5,8) + 20 * !!bcsign(otmp);
-		mtmp->mhp += i;
-		if (mtmp->mhp > mtmp->mhpmax) mtmp->mhp = ++mtmp->mhpmax;
-		if (!otmp->cursed) mtmp->mcansee = 1;
-		if (vismon) pline("%s begins to look better.", Monnam(mtmp));
-		if (oseen) makeknown(WAN_FULL_HEALING);
-		return 2;
-
-	case MUSE_SCR_HEALING:
-
-		mreadmsg(mtmp, otmp);
-		m_useup(mtmp, otmp);	/* otmp might be free'ed */
-
-		if (!rn2(20)) i = mtmp->mhpmax;
-		else if (!rn2(5)) i = d(8, 8);
-		else i = d(8, 4);
-		mtmp->mhp += i;
-		if (mtmp->mhp > mtmp->mhpmax) mtmp->mhp = mtmp->mhpmax;
-
-		if (vismon) pline("%s looks better.", Monnam(mtmp));
-		if (oseen) makeknown(SCR_HEALING);
-		/*m_useup(mtmp, otmp); */
-		/* the wrong dual use of m_useup caused the game to destabilize!!! --Amy
-		 * I'm sure nobody wants to know how much headache and nausea this bug has caused to me.
-		 * But I mean, why the motherfucking hell does the game just close, with no error message???
-		 * Actually there's the panic code for a reason! */
-		return 2;
-
 	case MUSE_POT_HEALING:
 		mquaffmsg(mtmp, otmp);
 		i = d(6 + 2 * bcsign(otmp), 4);
@@ -1342,8 +1173,7 @@ struct monst *mtmp;
 			|| pm->mlet == S_KOP
 # endif
 		) return 0;
-	switch (rn2(20)) {
-
+	switch (rn2(15)) {
 		case 0: return SCR_TELEPORTATION;
 		case 1: return POT_HEALING;
 		case 2: return POT_EXTRA_HEALING;
@@ -1354,15 +1184,11 @@ struct monst *mtmp;
 		case 7: return BUGLE;
 		case 8: return UNICORN_HORN;
 		case 9: return POT_FULL_HEALING;
-		case 10: return SCR_SUMMON_UNDEAD;
-		case 11: return WAN_HEALING;
-		case 12: return WAN_EXTRA_HEALING;
-		case 13: return WAN_CREATE_HORDE;
-		case 14: return POT_VAMPIRE_BLOOD;
-		case 15: return WAN_FULL_HEALING;
-		case 16: return RIN_TIMELY_BACKUP;
-		case 17: return WAN_SUMMON_UNDEAD;
-		case 18: return SCR_HEALING;
+		case 10: return WAN_HEALING;
+		case 11: return WAN_EXTRA_HEALING;
+		case 12: return WAN_CREATE_HORDE;
+		case 13: return POT_VAMPIRE_BLOOD;
+		case 14: return RIN_TIMELY_BACKUP;
 	}
 	/*NOTREACHED*/
 	return 0;
@@ -2775,13 +2601,11 @@ struct obj *obj;
 		    typ == WAN_STRIKING ||
 		    typ == WAN_TELEPORTATION ||
 		    typ == WAN_CREATE_MONSTER ||
-		    typ == WAN_SUMMON_UNDEAD ||
 		    typ == WAN_CREATE_HORDE ||
 		    typ == WAN_DRAINING	||
 		    typ == WAN_HEALING ||
 		    typ == WAN_CLONE_MONSTER ||
 		    typ == WAN_EXTRA_HEALING ||
-		    typ == WAN_FULL_HEALING ||
 		    typ == WAN_CANCELLATION)
 		return TRUE;
 	    break;
@@ -2805,9 +2629,9 @@ struct obj *obj;
 		return TRUE;
 	    break;
 	case SCROLL_CLASS:
-	    if (typ == SCR_TELEPORTATION || typ == SCR_HEALING 
+	    if (typ == SCR_TELEPORTATION
 		|| typ == SCR_CREATE_MONSTER 
-		|| typ == SCR_SUMMON_UNDEAD || typ == SCR_FLOOD || typ == SCR_ICE 
+		|| typ == SCR_FLOOD || typ == SCR_ICE 
 		|| typ == SCR_CLOUDS ||typ == SCR_EARTH)
 		return TRUE;
 	    break;
@@ -2885,13 +2709,6 @@ const char *str;
 		if (str) {
 		    pline(str, s_suffix(mon_nam(mon)), "gauntlets");
 		    makeknown(GAUNTLETS_OF_REFLECTION);
-	    }
-	    return TRUE;
-	} else if ((orefl = which_armor(mon, W_ARMC)) &&
-				orefl->otyp == CLOAK_OF_REFLECTION) {
-	    if (str) {
-		pline(str, s_suffix(mon_nam(mon)), "cloak");
-		makeknown(CLOAK_OF_REFLECTION);
 	    }
 	    return TRUE;
 	} else if (mon->data == &mons[PM_NIGHTMARE]) {

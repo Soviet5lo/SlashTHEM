@@ -115,10 +115,6 @@ Boots_on()
 	case FLYING_BOOTS:
 	case KICKING_BOOTS:
 		break;
-	case ZIPPER_BOOTS:
-		pline("While putting on this pair of boots, their zippers try to scratch your legs!");
-		losehp(rnd(20), "foolishly putting on a zipper boot", KILLED_BY);
-		break;
 	case WATER_WALKING_BOOTS:
 		if (u.uinwater) spoteffects(TRUE);
 		break;
@@ -199,12 +195,6 @@ Boots_off()
 			makeknown(otyp);
 		}
 		break;
-	case ZIPPER_BOOTS:
-		pline("While taking off this pair of boots, you scratch open your legs at their zippers!");
-		losehp(rnd(20), "foolishly taking off a zipper boot", KILLED_BY);
-		    set_wounded_legs(LEFT_SIDE, rn1(35, 41));
-		    set_wounded_legs(RIGHT_SIDE, rn1(35, 41));
-		break;
 	case LOW_BOOTS:
 	case GNOMISH_BOOTS:
 	case IRON_SHOES:
@@ -237,14 +227,9 @@ Cloak_on()
 	case ORCISH_CLOAK:
 	case DWARVISH_CLOAK:
 	case CLOAK_OF_MAGIC_RESISTANCE:
-	case CLOAK_OF_REFLECTION:
 	case ROBE:
 	case LEATHER_CLOAK:
-	case CLOAK_OF_WARMTH:
-	case CLOAK_OF_GROUNDING:
-	case CLOAK_OF_QUENCHING:
 	case MANACLOAK:
-	case PLASTEEL_CLOAK:
 	/* KMH, balance patch -- removed
 	case CLOAK_OF_DRAIN_RESISTANCE: */               
 		break;
@@ -316,17 +301,12 @@ Cloak_off()
 	case DWARVISH_CLOAK:
 	case CLOAK_OF_PROTECTION:
 	case CLOAK_OF_MAGIC_RESISTANCE:
-	case CLOAK_OF_REFLECTION:
 	case CLOAK_OF_DISPLACEMENT:
 	case MANACLOAK:
 	case POISONOUS_CLOAK:
 	case OILSKIN_CLOAK:
 	case ROBE:
-	case PLASTEEL_CLOAK:
 	case LEATHER_CLOAK:
-	case CLOAK_OF_WARMTH:
-	case CLOAK_OF_GROUNDING:
-	case CLOAK_OF_QUENCHING:
 	/* KMH, balance patch -- removed
 	case CLOAK_OF_DRAIN_RESISTANCE: */
 		break;
@@ -760,7 +740,6 @@ Amulet_on()
 	case AMULET_VERSUS_POISON:
 	case AMULET_OF_DRAIN_RESISTANCE:
 	case AMULET_OF_REFLECTION:
-	case AMULET_OF_DEPETRIFY:
 	case AMULET_OF_MAGICAL_BREATHING:
 	/* KMH, balance patch -- removed
 	case AMULET_OF_REGENERATION:
@@ -776,10 +755,6 @@ Amulet_on()
 		    Slimed = 0;
 		    flags.botl = 1;
 		}
-		break;
-	case AMULET_OF_FUMBLING:
-		if (!oldprop && !(HFumbling & ~TIMEOUT))
-			incr_itimeout(&HFumbling, rnd(20));
 		break;
 	case AMULET_OF_CHANGE:
 	    {
@@ -884,17 +859,11 @@ Amulet_off()
 	case AMULET_VERSUS_STONE:
 	case AMULET_OF_REFLECTION:
 	case AMULET_OF_SECOND_CHANCE:
-	case AMULET_OF_DEPETRIFY:
 	case AMULET_OF_CHANGE:
 	case AMULET_OF_UNCHANGING:
 	case FAKE_AMULET_OF_YENDOR:
 		break;
 	case AMULET_OF_UNDEAD_WARNING:
-		break;
-
-	case AMULET_OF_FUMBLING:
-		if (!oldprop && !(HFumbling & ~TIMEOUT))
-			HFumbling = EFumbling = 0;
 		break;
 	case AMULET_OF_MAGICAL_BREATHING:
 		if (Underwater) {

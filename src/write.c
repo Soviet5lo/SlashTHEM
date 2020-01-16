@@ -23,7 +23,6 @@ register struct obj *otmp;
 		return(2);
 /*		break; */
 # endif
-	case SCR_HEALING:
 	case SCR_LIGHT:
 	case SCR_GOLD_DETECTION:
 	case SCR_FOOD_DETECTION:
@@ -37,7 +36,6 @@ register struct obj *otmp;
 /*		break; */
 	case SCR_DESTROY_ARMOR:
 	case SCR_CREATE_MONSTER:
-	case SCR_SUMMON_UNDEAD:
 	case SCR_PUNISHMENT:
 	case SCR_PROOF_ARMOR:
 	case SCR_PROOF_WEAPON:
@@ -71,11 +69,7 @@ register struct obj *otmp;
 	case SCR_GENOCIDE:
 		return(30);
 /*		break; */
-	case SCR_GAIN_MANA:
-		return(40);
-/*		break; */
 	case SCR_CONSECRATION:
-	case SCR_INVENTORY_ID:
 		return(50);
 /*		break; */
 	case SCR_BLANK_PAPER:

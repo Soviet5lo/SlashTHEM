@@ -1243,20 +1243,14 @@ doengrave()
 		    case WAN_LIGHT:
 		    case WAN_SECRET_DOOR_DETECTION:
 		    case WAN_CREATE_MONSTER:
-		    case WAN_SUMMON_UNDEAD:
 		    case WAN_CREATE_HORDE:
 		    case WAN_ENLIGHTENMENT:
-		    case WAN_ENTRAPPING:
 		    case WAN_MAGIC_MAPPING:
 		    case WAN_DARKNESS:
-		    case WAN_DETECT_MONSTERS:
-		    case WAN_OBJECTION:
 		    case WAN_IDENTIFY:
-		    case WAN_REMOVE_CURSE:
 		    case WAN_WISHING:
 		    case WAN_ACQUIREMENT:
 		    case WAN_BUGGING:
-		    case WAN_CHARGING:
 			zapnodir(otmp);
 			break;
 
@@ -1306,7 +1300,6 @@ doengrave()
 			break;
 		    case WAN_HEALING:
 		    case WAN_EXTRA_HEALING:
-		    case WAN_FULL_HEALING:
 			if (!Blind) {
 			   Sprintf(post_engr_text,
 				   "The bugs on the %s look healthier!",

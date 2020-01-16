@@ -840,7 +840,7 @@ int curse_bless;
 	     *	7 : 100     100
 	     */
 	    n = (int)obj->recharged;
-	    if (n > 0 && (obj->otyp == WAN_WISHING || obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT ||
+	    if (n > 0 && (obj->otyp == WAN_WISHING || obj->otyp == WAN_ACQUIREMENT ||
 		    (n * n * n > rn2(7*7*7)))) {	/* recharge_limit */
 		Your("%s vibrates violently, and explodes!",xname(obj));
 		wand_explode(obj, FALSE);
@@ -853,7 +853,7 @@ int curse_bless;
 	    if (is_cursed) {
 		stripspe(obj);
 	    } else {
-		int lim = (obj->otyp == WAN_WISHING) ? 2 : (obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT) ? 3 :
+		int lim = (obj->otyp == WAN_WISHING) ? 2 : (obj->otyp == WAN_ACQUIREMENT) ? 3 :
 			(objects[obj->otyp].oc_dir != NODIR) ? 8 : 15;
 		n = (lim == 3) ? 3 : rn1(5, lim + 1 - 5);
 		if (!is_blessed) n = rnd(n);
@@ -1916,7 +1916,6 @@ register struct obj	*sobj;
 	     * monsters are not visible
 	     */
 	    break;
-	case SCR_SUMMON_UNDEAD:        
 	case SPE_SUMMON_UNDEAD:        
 	    {
 		int cnt = 1, oldmulti = multi;
@@ -2290,30 +2289,7 @@ register struct obj	*sobj;
 		    identify_pack(cval);
 		}
 		return(1);
-	case SCR_INVENTORY_ID: /* always identifies the player's entire inventory --Amy */
-		makeknown(SCR_INVENTORY_ID);
-		if(confused)
-			You("identify this as an inventory id scroll.");
-		else
-			pline("This is an inventory id scroll.");
-
-		if(!objects[sobj->otyp].oc_name_known) more_experienced(0,10);
-		if (carried(sobj)) useup(sobj);
-		else useupf(sobj, 1L);
-
-		if(invent && !confused) {
-		    identify_pack(0);
-		}
-		return(1);
-	case SCR_HEALING: /* a basic healing item that can be used to - who would have guessed? - cure wounds! --Amy */
-		makeknown(SCR_HEALING);
-		You("feel healthier!");
-			if (!rn2(20)) healup(400 + rnd(u.ulevel), 0, FALSE, FALSE);
-			else if (!rn2(5)) healup(d(6,8) + rnd(u.ulevel), 0, FALSE, FALSE);
-			else healup(d(5,6) + rnd(u.ulevel), 0, FALSE, FALSE);
-		break;
 	case SCR_CHARGING:
-	case SPE_CHARGING:
 		if (confused) {
 		    You_feel("charged up!");
 		    if (u.uen < u.uenmax)
@@ -2329,15 +2305,6 @@ register struct obj	*sobj;
 		if (!otmp) break;
 		recharge(otmp, sobj->cursed ? -1 : (sobj->blessed ? 1 : 0));
 		break;
-	case SCR_GAIN_MANA:
-		    You_feel("full of mystic power!");
-		    if (u.uen < u.uenmax)
-			u.uen = u.uenmax;
-		    else
-			u.uen = (u.uenmax += d(5,4));
-		    flags.botl = 1;
-		    known = TRUE;
-		    break;
 	case SCR_MAGIC_MAPPING:
 		if (level.flags.nommap) {
 		    Your("mind is filled with crazy lines!");

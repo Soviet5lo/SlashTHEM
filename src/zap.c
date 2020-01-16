@@ -309,10 +309,8 @@ struct obj *otmp;
 		break;
 	case WAN_HEALING:
 	case WAN_EXTRA_HEALING:
-	case WAN_FULL_HEALING:
 	case SPE_HEALING:
 	case SPE_EXTRA_HEALING:
-	case SPE_FULL_HEALING:
 		reveal_invis = TRUE;
 	    if (mtmp->data != &mons[PM_PESTILENCE]) {
 		wake = FALSE;		/* wakeup() makes the target angry */
@@ -323,7 +321,6 @@ struct obj *otmp;
 		   */
 		  otyp == WAN_HEALING ?  d(5,2) + rnd(u.ulevel) + 5 * !!bcsign(otmp) :
 		  otyp == WAN_EXTRA_HEALING ?  d(5,4) + rnd(u.ulevel) + 10 * !!bcsign(otmp) :
-		  otyp == WAN_FULL_HEALING ?  d(5,8) + rnd(u.ulevel) + 20 * !!bcsign(otmp) :
 		  otyp == SPE_HEALING ? rnd(10) +4 + rnd(u.ulevel) : d(3,8)+6 + rnd(u.ulevel);
 		if (mtmp->mhp > mtmp->mhpmax) {
 		    if (otmp->oclass == WAND_CLASS)
@@ -1197,8 +1194,6 @@ polyuse(objhdr, mat, minwt)
 #ifdef MAIL
 	if (otmp->otyp == SCR_MAIL) continue;
 #endif
-	if (otmp->otyp == SCR_HEALING) continue;
-
 	if (((int) objects[otmp->otyp].oc_material == mat) ==
 		(rn2(minwt + 1) != 0)) {
 	    /* appropriately add damage to bill */
@@ -1323,8 +1318,6 @@ struct obj *obj;
 #ifdef MAIL
 	if (obj->otyp == SCR_MAIL) return;
 #endif
-	if (obj->otyp == SCR_HEALING) return;
-
 	obj_zapped = TRUE;
 
 	if(poly_zapped < 0) {
@@ -1482,13 +1475,6 @@ poly_obj(obj, id)
 #endif
 	}
 #endif
-
-	if (obj->otyp == SCR_HEALING) {
-		otmp->otyp = SCR_HEALING;
-#ifdef UNPOLYPILE
-		unpoly = FALSE;	/* WAC -- no change! */
-#endif
-	}
 
 	/* avoid abusing eggs laid by you */
 	if (obj->otyp == EGG && obj->spe) {
@@ -1951,11 +1937,9 @@ struct obj *obj, *otmp;
 	case WAN_NOTHING:
 	case SPE_HEALING:
 	case SPE_EXTRA_HEALING:
-	case SPE_FULL_HEALING:
 	case WAN_HEALING:
 	case WAN_EXTRA_HEALING:
 	case WAN_CLONE_MONSTER:
-	case WAN_FULL_HEALING:
 	case SPE_FINGER:
 	case WAN_FEAR:
 	case WAN_FIREBALL:
@@ -2154,14 +2138,6 @@ register struct obj *obj;
 			known = create_critters(rn2(23) ? 1 : rn1(7,2),
 					(struct permonst *)0);
 			break;
-		case WAN_SUMMON_UNDEAD:
-			known = TRUE;
-			coord mm;   
-			mm.x = u.ux;   
-			mm.y = u.uy;   
-			pline("You summon some undead creatures!");   
-			mkundeadX(&mm, FALSE, NO_MINVENT);   
-			break;
 		case WAN_CREATE_HORDE:
 			known = create_critters(rn1(7,6), (struct permonst *)0);
 			break;
@@ -2189,33 +2165,6 @@ register struct obj *obj;
 			pline_The("feeling subsides.");
 			exercise(A_WIS, TRUE);
 			break;
-		case WAN_DETECT_MONSTERS:
-			known = TRUE;
-			    int x, y;
-	
-			    /* after a while, repeated uses become less effective */
-			    if (HDetect_monsters >= 300L)
-				i = 10;
-			    else
-				i = rn1(20,11);
-			    incr_itimeout(&HDetect_monsters, i);
-			    for (x = 1; x < COLNO; x++) {
-				for (y = 0; y < ROWNO; y++) {
-				    if (memory_is_invisible(x, y)) {
-					unmap_object(x, y);
-					newsym(x,y);
-				    }
-				}
-			    }
-			    see_monsters();
-
-			exercise(A_WIS, TRUE);
-			break;
-		case WAN_OBJECTION:
-			known = TRUE;
-			object_detect((struct obj *)0, 0);
-			exercise(A_WIS, TRUE);
-			break;
 		case WAN_DARKNESS:
 			if (!Blind) known = TRUE;
 			litroom(FALSE,obj);
@@ -2225,11 +2174,6 @@ register struct obj *obj;
 			pline("You grasp some bits from the current map!");
 			do_partial_mapping();
 			break;
-		case WAN_ENTRAPPING:
-			known = TRUE;
-			trap_detect((struct obj *)0);
-			exercise(A_WIS, TRUE);
-			break;
 		case WAN_IDENTIFY:
 			known = TRUE;
 			You_feel("insightful!");
@@ -2238,22 +2182,6 @@ register struct obj *obj;
 			    identify_pack(1);
 			}
 			exercise(A_WIS, TRUE);
-			break;
-		case WAN_REMOVE_CURSE:
-			known = TRUE;
-			You_feel("like someone is helping you!");
-			register struct obj *obj;
-
-			for(obj = invent; obj ; obj = obj->nobj)
-				if (!rn2(5) && obj->cursed)	uncurse(obj);
-
-			break;
-		case WAN_CHARGING:
-			known = TRUE;
-			pline("This is a charging wand.");
-			otmp = getobj(all_count, "charge");
-			if (!otmp) break;
-			recharge(otmp, 1);
 			break;
 		case WAN_WONDER: /* supposed to have a random effect, may be implemented in future */
 
@@ -2775,13 +2703,6 @@ boolean ordinary;
 		   exercise(A_STR, TRUE);
 		   exercise(A_CON, TRUE);
 		   makeknown(WAN_EXTRA_HEALING);
-		case WAN_FULL_HEALING:
-		   You("feel restored to health.");
-		   healup(d(10,20) + rnd(u.ulevel),0,0,0);
-		   make_hallucinated(0L,TRUE,0L);
-		   exercise(A_STR, TRUE);
-		   exercise(A_CON, TRUE);
-		   makeknown(WAN_FULL_HEALING);
 		break;
 
 		case WAN_FEAR:
@@ -2856,11 +2777,6 @@ boolean ordinary;
 			obj->otyp == SPE_EXTRA_HEALING ? "much " : "");
 		    break;
 
-		case SPE_FULL_HEALING:
-		    healup(d(10,10) + rnd(u.ulevel),
-			   0, FALSE, FALSE);
-		    You_feel("restored to health.");
-		    break;
 		case WAN_LIGHT:	/* (broken wand) */
 		 /* assert( !ordinary ); */
 		    damage = d(obj->spe, 25);
@@ -2979,10 +2895,8 @@ struct obj *obj;	/* wand or spell */
 		case WAN_SPEED_MONSTER:
 		case SPE_HEALING:
 		case SPE_EXTRA_HEALING:
-		case SPE_FULL_HEALING:
 		case WAN_HEALING:
 		case WAN_EXTRA_HEALING:
-		case WAN_FULL_HEALING:
 		case WAN_DRAINING:
 		case SPE_DRAIN_LIFE:
 		case WAN_OPENING:

@@ -2293,11 +2293,6 @@ struct obj *otmp;
 		    accessory_has_effect(otmp);
 		HSleeping = FROMOUTSIDE | rnd(1000);
 		break;
-	    case AMULET_OF_FUMBLING: /* another bad idea! */
-		if (!(HFumbling & FROMOUTSIDE))
-		    accessory_has_effect(otmp);
-		HFumbling = FROMOUTSIDE | rnd(100);
-		break;
 	    case AMULET_VERSUS_STONE:
 		/* no message--this gives no permanent effect */
 		(void)uunstone();

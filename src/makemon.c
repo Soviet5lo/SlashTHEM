@@ -240,7 +240,7 @@ register struct monst *mtmp;
 			}
 
 	if (!rn2(60)) {
-			struct obj *otmpW = mksobj(SCR_HEALING, TRUE, FALSE);
+			struct obj *otmpW = mksobj(POT_HEALING, TRUE, FALSE);
 			otmpW->quan = 1;
 			otmpW->owt = weight(otmpW);
 			(void) mpickobj(mtmp, otmpW);
@@ -780,8 +780,6 @@ register struct monst *mtmp;
 
 		   case PM_NECROMANCER:
 		     (void)mongets(mtmp, ATHAME);
-		     (void)mongets(mtmp, SCR_SUMMON_UNDEAD);
-		     if (!rn2(10)) (void)mongets(mtmp, WAN_SUMMON_UNDEAD);
 		     if (!rn2(4)) (void)mongets(mtmp, PICK_AXE);
 		     (void) mongets(mtmp, rnd_offensive_item(mtmp));
 		     (void) mongets(mtmp, rnd_defensive_item(mtmp));
@@ -1022,7 +1020,6 @@ register struct monst *mtmp;
 			(void)mongets(mtmp, SCR_CREATE_MONSTER);
 			(void)mongets(mtmp, SCR_CREATE_MONSTER);
 			(void)mongets(mtmp, WAN_CREATE_HORDE);
-			(void)mongets(mtmp, WAN_SUMMON_UNDEAD);
 #if 0 /* 5lo: for Graduate quest - eventually */
 		} else if (mm == PM_STALLMAN){
 			(void)mongets(mtmp, PACK_OF_FLOPPIES);

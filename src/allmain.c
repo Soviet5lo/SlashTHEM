@@ -173,8 +173,6 @@ moveloop()
 			}
 #endif /* MORE_SPAWNS */
 
-			if (uarmf && uarmf->otyp == ZIPPER_BOOTS && !EWounded_legs) EWounded_legs = 1;
-
 		    if(!rn2(u.uevent.udemigod ? 25 :
 			    (depth(&u.uz) > depth(&stronghold_level)) ? 50 : 70))
 
