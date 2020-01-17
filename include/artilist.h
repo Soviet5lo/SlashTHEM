@@ -312,7 +312,7 @@ A("David's Sling",                SLING,
 
 A("Tesla's Coat", LAB_COAT,
     (SPFX_RESTR|SPFX_DEFN), 0, 0,
-    NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, NON_PM, NON_PM, 3000L ),
+    NO_ATTK,    ELEC(0,0),  NO_CARY,    0,  A_NEUTRAL, PM_GEEK, NON_PM, 2000L ),
 
 A("Musa-Shiya", HAWAIIAN_SHIRT, 	/* Musa-Shiya the Shirtmaker */
 	(SPFX_RESTR|SPFX_HALRES|SPFX_PROTEC), 0, 0,
