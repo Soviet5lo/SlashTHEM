@@ -941,25 +941,20 @@ register struct monst *mtmp;
 				(void) mpickobj(mtmp,otmp);
 			break;
 			case PM_PEASANT:
-				switch(rn2(4)){
-#if 0 /* none of these are implemented */
+				switch(rn2(5)){
 					case 0:
-						(void)mongets(mtmp, SICKLE);
+						(void)mongets(mtmp, GRAIN_SCYTHE);
 					break;
 					case 1:
-						(void)mongets(mtmp, SCYTHE);
-					break;
-#endif
-					case 0:
 						(void)mongets(mtmp, KNIFE);
 					break;
-					case 1:
+					case 2:
 						(void)mongets(mtmp, CLUB);
 					break;
-					case 2:
+					case 3:
 						(void)mongets(mtmp, AXE);
 					break;
-					case 3:
+					case 4:
 						(void)mongets(mtmp, VOULGE);
 					break;
 				}
