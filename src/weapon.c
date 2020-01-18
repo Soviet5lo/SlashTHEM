@@ -193,6 +193,10 @@ struct monst *mon;
 	   else if (ptr->mlet == S_EEL || ptr->mlet == S_SNAKE) tmp += 2;
 	}
 
+	/* grain scythe is very effective against straw golems */
+	if (otmp->otyp == GRAIN_SCYTHE && ptr == &mons[PM_STRAW_GOLEM])
+		tmp += 6;
+
 	/* pick-axe used against xorns and earth elementals */
 	/* WAC made generic against "rock people" */
 	/* KMH, balance patch -- allow all picks */
@@ -366,6 +370,8 @@ struct monst *mon;
 	if (ptr == &mons[PM_SHADE] && objects[otyp].oc_material != SILVER)
 		tmp = 0;
 
+
+
 	/* "very heavy iron ball"; weight increase is in increments of 300 */
 	if (otyp == HEAVY_IRON_BALL && tmp > 0) {
 	    int wt = (int)objects[HEAVY_IRON_BALL].oc_weight;
@@ -417,6 +423,10 @@ struct monst *mon;
 	       this bonus so that effectively it's added after the doubling */
 	    if (bonus > 1 && otmp->oartifact && spec_dbon(otmp, mon, 25) >= 25)
 		bonus = (bonus + 1) / 2;
+
+	    /* grain scythe is very effective against straw golems */
+	    if (otmp->otyp == GRAIN_SCYTHE && ptr == &mons[PM_STRAW_GOLEM])
+		bonus += 20;
 
 	    tmp += bonus;
 	}
