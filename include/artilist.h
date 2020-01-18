@@ -156,7 +156,7 @@ A("Ogresmasher",		WAR_HAMMER,
 
 A("Reaper",                     HALBERD,
 	SPFX_RESTR, 0, 0,
-	PHYS(5,20),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_PALADIN, NON_PM, 1000L ),
+	PHYS(5,20),      NO_DFNS,        NO_CARY,        0, A_LAWFUL, PM_YEOMAN, NON_PM, 1000L ),
 
 A("Holy Spear of Light",        SILVER_SPEAR,
        (SPFX_RESTR|SPFX_INTEL|SPFX_DFLAG2), 0, M2_UNDEAD,
@@ -188,6 +188,10 @@ A("Peacekeeper",		CLUB,
 A("Icebiter",			AXE,
 	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
 	COLD(6,6),	COLD(0,0),	NO_CARY,	0, A_LAWFUL, PM_FIREFIGHTER, NON_PM, 1500L ),
+
+A("Silverstar", 		SILVER_MACE, 
+	(SPFX_RESTR|SPFX_ATTK|SPFX_DEFN|SPFX_REFLECT), 	0, 	0,
+	PHYS(4,10),	DRLI(0,0),	NO_CARY,	0, A_LAWFUL, PM_PALADIN, NON_PM, 1500L ),
 
 A("Vampire Killer",        LONG_BULLWHIP,
 	(SPFX_RESTR|SPFX_DFLAG2), 0, (M2_UNDEAD|M2_DEMON|M2_WERE),
@@ -322,6 +326,8 @@ A("Musa-Shiya", HAWAIIAN_SHIRT, 	/* Musa-Shiya the Shirtmaker */
 A("Dirk", 		DAGGER, 
 	SPFX_RESTR, 	0, 	0,
 	PHYS(5,5),	NO_DFNS,	NO_CARY,	0, A_NEUTRAL, NON_PM, NON_PM, 1500L ),
+
+
 
 A("Tenderizer",                   MALLET,           
 	(SPFX_RESTR|SPFX_ATTK),  0, 0,
