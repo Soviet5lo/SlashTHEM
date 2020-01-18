@@ -461,7 +461,6 @@ static struct trobj Paladin[] = {
 	{ SPRIG_OF_WOLFSBANE, 0, FOOD_CLASS, 2, 1 },
 	{ SPE_HEALING, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ UNDEF_TYP, UNDEF_SPE, SCROLL_CLASS, 1, 1 },
-	{ SADDLE, 0, TOOL_CLASS, 1, 1 },
 	{ 0, 0, 0, 0, 0 }
 };
 
