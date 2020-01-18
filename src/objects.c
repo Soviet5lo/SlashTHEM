@@ -298,6 +298,8 @@ WEAPON("guisarme", "pruning hook",
 WEAPON("bill-guisarme", "hooked polearm",
 	0, 0, 1,  2,120,  7,  4, 10, 0, P|S, P_POLEARMS, IRON, HI_METAL),
 						/* +1d4 small */
+WEAPON("grain scythe", "scythe",
+	0, 0, 1,  0, 60,  5,  8, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
 /* other */
 WEAPON("lucern hammer", "pronged polearm",
 	0, 0, 1,  3,150,  7,  4,  6, 0, B|P, P_POLEARMS, IRON, HI_METAL),

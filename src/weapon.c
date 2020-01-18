@@ -273,7 +273,8 @@ struct monst *mon;
 
 		case FLAIL:
 		case RANSEUR:
-		case VOULGE:		tmp += rnd(4); break;
+		case VOULGE:
+		case GRAIN_SCYTHE: 	tmp += rnd(4); break;
 
 		case ACID_VENOM:
 		case HALBERD:
