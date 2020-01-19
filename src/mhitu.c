@@ -4059,7 +4059,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		}
 		break;
 	    case AD_PLYS:
-		if(!mtmp->mcan && mtmp->mcansee && !mtmp->mspec_used && rn2(4) && 
+		if(!mtmp->mcan && mtmp->mcansee && canseemon(mtmp) && !mtmp->mspec_used && rn2(4) && 
 		  multi>=0 && !((is_undead(youmonst.data)||is_demon(youmonst.data)) 
 		  && is_undead(mtmp->data))){
 			pline("%s aberrant stare frightens you to the %s!", 
