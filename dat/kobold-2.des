@@ -102,6 +102,10 @@ OBJECT: '[',random,(18,14)
 OBJECT: '[',random,(18,14)
 OBJECT: '!',random,(18,14)
 OBJECT: '!',random,(18,14)
+OBJECT: ')',random,(18,15)
+OBJECT: '/',random,(18,15)
+OBJECT: '[',random,(18,15)
+OBJECT: '!',random,(18,15)
 MONSTER: 'k', "kobold", random, hostile
 MONSTER: 'k', "kobold", random, hostile
 MONSTER: 'k', "kobold", random, hostile
@@ -149,6 +153,7 @@ MONSTER: 'k', random, (21,13), hostile
 MONSTER: 'k', "swamp kobold", (15,14), hostile
 MONSTER: 'k', "swamp kobold", (17,14), hostile
 MONSTER: 'k', "Kroo the Kobold King", (18,14), hostile
+MONSTER: 'k', "Krooella the Kobold Queen", (18,15), hostile
 MONSTER: 'k', "rock kobold", (20,14), hostile
 MONSTER: 'k', "kobold shaman", (15,15), hostile
 MONSTER: 'k', "kobold shaman", (16,15), hostile
