@@ -648,8 +648,10 @@ morguemon()
 	register int i = rn2(100), hd = rn2(level_difficulty());
 
 	if(hd > 10 && i < 10)
-		return((Inhell || In_endgame(&u.uz)) ? mkclass(S_DEMON,0) :
-						       &mons[ndemon(A_NONE)]);
+		/* 5lo: Generate liches instead of demons for chaotic quest */
+		return(Is_chaotic_quest(&u.uz) ? mkclass(S_LICH,0) :
+			(Inhell || In_endgame(&u.uz)) ? mkclass(S_DEMON,0) :
+					&mons[ndemon(A_NONE)]);
 	if(hd > 8 && i > 85)
 		return(mkclass(S_VAMPIRE,0));
 
