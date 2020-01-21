@@ -91,10 +91,11 @@ DOOR:locked,(54,17)
 DOOR:random,(52,13)
 DOOR:random,(52,15)
 # Monsters in the garden
-MONSTER:'a',"tsetse fly",(03,15),hostile
-MONSTER:'a',"tsetse fly",(04,15),hostile
-MONSTER:'a',"tsetse fly",(03,16),hostile 
-MONSTER:'a',"tsetse fly",(04,16),hostile 
+# 5lo: Changed the flies to be more interesting ghosts
+MONSTER:'8',"poltergeist",(03,15),hostile
+MONSTER:'8',"shadow",(04,15),hostile
+MONSTER:'8',"poltergeist",(03,16),hostile 
+MONSTER:'8',"shadow",(04,16),hostile 
 MONSTER:'Z',random,(06,03),hostile 
 MONSTER:'Z',random,(18,07),hostile 
 MONSTER:'M',random,(30,02),hostile 
