@@ -258,6 +258,7 @@ E int FDECL(trap_detect, (struct obj *));
 E const char *FDECL(level_distance, (d_level *));
 E void FDECL(use_crystal_ball, (struct obj *));
 E void NDECL(do_mapping);
+E void NDECL(do_partial_mapping);
 E void NDECL(do_vicinity_map);
 E void FDECL(cvt_sdoor_to_door, (struct rm *));
 #ifdef USE_TRAMPOLI
@@ -806,9 +807,9 @@ E void FDECL(gypsy_chat, (struct monst *));
 
 /* ### hack.c ### */
 
-#ifdef OVL1
+//#ifdef OVL1
 E void NDECL(maybe_wail);
-#endif /*OVL1*/
+//#endif /*OVL1*/
 
 #ifdef DUNGEON_GROWTH
 E void FDECL(catchup_dgn_growths, (int));
@@ -1024,6 +1025,9 @@ E int NDECL(doforce);
 E boolean FDECL(boxlock, (struct obj *,struct obj *));
 E boolean FDECL(doorlock, (struct obj *,int,int));
 E int NDECL(doopen);
+#ifdef AUTO_OPEN
+E int FDECL(doopen_indir, (int,int));
+#endif
 E int NDECL(doclose);
 E int FDECL(artifact_door, (int,int));
 
@@ -1283,6 +1287,7 @@ E int FDECL(pm_to_cham, (int));
 E int FDECL(minliquid, (struct monst *));
 E int NDECL(movemon);
 E int FDECL(meatmetal, (struct monst *));
+E int FDECL(meatlithic, (struct monst *));
 E int FDECL(meatmetal_effects, (struct monst *, struct obj *));
 E void FDECL(meatcorpse, (struct monst *));
 E int FDECL(meatobj, (struct monst *));

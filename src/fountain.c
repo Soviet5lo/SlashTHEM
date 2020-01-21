@@ -89,7 +89,7 @@ dowaternymph() /* Water Nymph */
 
 void
 dogushforth(drinking, x, y) /* Gushing forth along LOS from (x, y) */
-int drinking;
+int drinking, x, y;
 {
 	int madepool = 0;
 
