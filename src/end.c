@@ -420,7 +420,7 @@ panic VA_DECL(const char *, str)
 		  "Program initialization has failed." :
 		  "Suddenly, the dungeon collapses.");
 
-	    raw_print("\r\nReport this error to Amy (Bluescreenofdeath at Nethackwiki) so it can be fixed.");
+	    raw_print("\r\nReport this error to Soviet5lo at Github so it can be fixed.");
 
 #if defined(WIZARD) && !defined(MICRO)
 # if defined(NOTIFY_NETHACK_BUGS)
