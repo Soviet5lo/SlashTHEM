@@ -91,7 +91,7 @@ RNDLEVEL:	"stor" "S" @ (19, 21) 66 3
 #   Rounding out the bottom levels
 LEVEL:		"guild" "G" @ (26, 14) 20
 
-LEVEL:          "forge" "F" @ (15, 5) 50
+LEVEL:          "forge" "F" @ (20, 0) 50
 
 # The famous Fort Ludios...
 BRANCH:			"Fort Ludios" @ (23, 4) portal
