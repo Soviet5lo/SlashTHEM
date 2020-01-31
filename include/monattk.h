@@ -50,7 +50,7 @@
 #define AD_ELEC		6	/* shock damage */
 #define AD_DRST		7	/* drains str (poison) */
 #define AD_ACID		8	/* acid damage */
-#define AD_LITE		9		/* KMH -- light ray */
+#define AD_LITE		9	/* KMH -- light ray */
 #define AD_SPC2		10	/* for extension of buzz() */
 #define AD_BLND		11	/* blinds (yellow light) */
 #define AD_STUN		12	/* stuns */

@@ -684,6 +684,11 @@ Armor_on()
 			makeknown(uarm->otyp);
 			break;
 	}
+	if(uarm->otyp == GOLDEN_DRAGON_SCALE_MAIL || uarm->otyp == GOLDEN_DRAGON_SCALES) {
+		begin_burn(uarm,FALSE);
+		if(!Blind)
+			pline("%s to glow.", Tobjnam(uarm,"begin"));
+	}
     return 0;
 }
 
@@ -691,6 +696,12 @@ int
 Armor_off()
 {
     int was_blind = Blemmye_blindness(&youmonst);
+
+    if(uarm->otyp == GOLDEN_DRAGON_SCALE_MAIL || uarm->otyp == GOLDEN_DRAGON_SCALES) {
+	end_burn(uarm,FALSE);
+	if(!Blind)
+		pline("%s glowing.", Tobjnam(uarm,"stop"));
+    }
 
     takeoff_mask &= ~W_ARM;
     setworn((struct obj *)0, W_ARM);
@@ -713,6 +724,8 @@ Armor_gone()
 {
     int was_blind = Blemmye_blindness(&youmonst);
 
+    if(uarm->otyp == GOLDEN_DRAGON_SCALE_MAIL || uarm->otyp == GOLDEN_DRAGON_SCALES)
+	    end_burn(uarm,FALSE);
     takeoff_mask &= ~W_ARM;
     setnotworn(uarm);
     cancelled_don = FALSE;

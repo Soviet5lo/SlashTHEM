@@ -1664,8 +1664,11 @@ begin_burn(obj, already_lit)
 	switch (obj->otyp) {
 	    case MAGIC_LAMP:
 	    case MAGIC_CANDLE:
+	    case GOLDEN_DRAGON_SCALE_MAIL:
+	    case GOLDEN_DRAGON_SCALES:
 		obj->lamplit = 1;
 		do_timer = FALSE;
+		if (obj->otyp == GOLDEN_DRAGON_SCALES) radius = 2;
 		if (obj->otyp == MAGIC_CANDLE) obj->age = 300L;
 		break;
 #ifdef LIGHTSABERS

@@ -1875,6 +1875,7 @@ uchar adtyp;
 {
 	struct permonst *mptr;
 	int tmp;
+	struct obj* otmp;
 
 	/* WAC just in case caller forgot to...*/
 	if (mtmp->mhp) mtmp->mhp = -1;
@@ -1899,6 +1900,10 @@ uchar adtyp;
 	if (mtmp == u.usteed)
 		dismount_steed(DISMOUNT_GENERIC);
 #endif
+	/* extinguish monster's armor */
+	if ((otmp = which_armor(mtmp, W_ARM)) &&
+	   (otmp->otyp==GOLDEN_DRAGON_SCALE_MAIL || otmp->otyp == GOLDEN_DRAGON_SCALES))
+		end_burn(otmp,FALSE);
 
 	mptr = mtmp->data;		/* save this for m_detach() */
 	/* restore chameleon, lycanthropes to true form at death */
