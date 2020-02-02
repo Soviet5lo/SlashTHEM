@@ -5,10 +5,12 @@ SlashTHEM is a another Nethack variant.  In particular, it takes after Slash'EM 
 
 A changelog of SlashTHEM can be found [here] (https://github.com/Soviet5lo/SlashTHEM/blob/master/CHANGELOG.md).  A changelog of the current codebase can be found [here](CHANGELOG-NG.md) although it's a tad out of date.
 
+If you want the last stable release for whatever reason, you can download the source code from the master branch.  More than likely if you're reading this, you're looking at the develop branch which contains every change since the last stable.
+
 Current Status
 --------------
 
-I very rarely come back to this project. Only times I work on it now is when I get the urge to play it, honestly.  There's plenty of bugs that exist, but for the most part there _shouldn't_ be any crashes or the like.  Consider it dormant, essentially.  Plus, there's plenty of other (better) variants out there to play.  If you must play Slash'EM you could go vanilla, or:
+I very rarely come back to this project. Only times I work on it now is when I get the urge to play it, honestly.  There's plenty of bugs that exist and things that haven't been properly worked on, but there shouldn't be too many signifigant segfaults hopefully.  Consider it dormant, essentially. I don't necessarily consider this stable, but its playable.   Plus, there's plenty of other (better) variants out there to play.  If you must play Slash'EM you could go vanilla, or:
 
 - [Slash'EM Next](https://github.com/moon-chilled/slashem-next), if you want Slash'EM + Curses Interface + Unicode + a much more coherient codebase.
 - [Slash'EM Extended](https://github.com/SLASHEM-Extended/SLASHEM-Extended), if you want a variant that includes absolutely everything and every possible idea, good and bad.
