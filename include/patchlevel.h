@@ -10,16 +10,16 @@
 
 /* Version */
 #define VERSION_MAJOR   0
-#define VERSION_MINOR   8
+#define VERSION_MINOR   9
 /*
  * PATCHLEVEL is updated for each release.
  */
-#define PATCHLEVEL      0
+#define PATCHLEVEL      3
 /*#define EDITLEVEL	0*/
 /*#define FIXLEVEL        0*/
 
 #define COPYRIGHT_BANNER_A \
-"This is SuperLotsaAddedStuffHack-The Heavily Extended Mod 2014-2015"
+"This is SuperLotsaAddedStuffHack-The Heavily Extended Mod 2014-2020"
 
 #define COPYRIGHT_BANNER_B \
 "NetHack, Copyright 1985-2003 Stichting Mathematisch Centrum, M. Stephenson."
