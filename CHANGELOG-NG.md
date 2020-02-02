@@ -178,6 +178,8 @@ Version 1.0 (XXXX-XX-XX)
     - Rope golems drop leashes upon death.
     - Readded Krooella the Kobold Queen from Nethack--.
     - Baby Liches can cast spells like other liches.
+    - Golden Dragons and their scales now emit light.
+
 - Object changes
     - Chemistry set no longer works randomly without knowing the spell of Chemistry.
     - Chemistry set will only work if you know the spell of Chemistry, or have an intelligence stat above 18.
@@ -215,6 +217,7 @@ Version 1.0 (XXXX-XX-XX)
     - Manacloak renamed to Mana Cloak.  It's also given a new default appearance (funeral shroud) and is considered cloth instead of dragonhide.
     - Implemented the Grain Scythe from SpliceHack.
         - Grain Scythe has +6 to-hit and +20 damage when applied against straw golems.
+    - Icebiter has been renamed to Frostbite.  In addition its base object is now a battle axe.
 - Role Changes
     - Renamed Korsair to Corsair
     - Renamed Chevalier to Paladin
@@ -250,6 +253,7 @@ Version 1.0 (XXXX-XX-XX)
     - Zookeepers start with asian pears and an eucalyptus leaf.
     - Firefighters no longer start with intrinsic fire resistance, instead they gain it at level 15.
     - Tesla's Coat is given to Geeks as their first sacrifice gift.
+    - Zookeepers start with a Long Bullwhip instead of a Bullwhip.
 - Race Changes
     - Renamed a lot of the Slash'EM Extended races.
         - Ghastly renamed to Ghoul
@@ -300,6 +304,7 @@ Version 1.0 (XXXX-XX-XX)
     - Songs are now sorted by level.
     - Drunks, Monks, Noblemen, Priests and Samurai can reach Basic in Music.
     - Tourists can reach Skilled in Music.
+    - Renamed the Song of Drowsiness to the Song of Lethargy (change from dNethack)
 
 - enhance menu now shows the max skill level for an available skill.
 - Added more Hallucination gods, and now denote female Hallucination gods.
@@ -320,6 +325,7 @@ Version 1.0 (XXXX-XX-XX)
 - Player alchemy is more difficult.  Unless you're wearing a lab coat, there's a 1/3 chance the mixture will explode.
 - Thrown objects no longer do backstab damage (from NH3.6).
 - Added a scroll of consecration to moloch's temple (from dNethack).
+- If the forge is generated in the dungeon it is always generated at dungeon level 20.
 
 #### Bugfixes
 - Fixed some compiler warnings.
