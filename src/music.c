@@ -110,7 +110,7 @@ NEARDATA const struct songspell songs[] = {
 	{ SPE_CONFUSE_MONSTER,	"Cacophony",	2, 5,	LEATHER_DRUM,	TOOLED_HORN },
 	{ SPE_HASTE_SELF,	"Charge", 	2, 5, 	LEATHER_DRUM,	BUGLE },
 	{ SPE_CANCELLATION,	"Disruption",   2, 5,	BUGLE,		TOOLED_HORN },
-	{ SPE_SLOW_MONSTER,	"Drowsiness",	2, 5,	WOODEN_FLUTE,	WOODEN_HARP },
+	{ SPE_SLOW_MONSTER,	"Lethargy",	2, 5,	WOODEN_FLUTE,	WOODEN_HARP },
 	{ SPE_CAUSE_FEAR,	"Despair",	3, 6,	LEATHER_DRUM,	TOOLED_HORN },
 	{ SPE_CHARM_MONSTER,	"Friendship",	3, 6,	WOODEN_FLUTE,	WOODEN_HARP },
 	{ SPE_CAUSE_FEAR,	"Inspire Courage",3,6,	LEATHER_DRUM,	BUGLE }
