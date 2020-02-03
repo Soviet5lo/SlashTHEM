@@ -193,7 +193,7 @@ static const char * const shkguns[] = {
     /* Vice City */
     "Tommy", "Ken", "Lance", "Sonny", "Ricardo",
     /* San Andreas */
-    "Carl", "Sean", "Melvin", "Lance",
+    "Carl", "Sean", "Melvin", "Ryder",
     /* 4 */
     "Niko", "Dimitri", "Mikhail", "Vlad",
     /* Chinatown Wars */
