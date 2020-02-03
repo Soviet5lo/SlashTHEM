@@ -378,7 +378,9 @@ register struct monst *mtmp;
 		u.ugrave_arise = urace.mummynum;
 	else if (is_vampire(mtmp->data) && Race_if(PM_HUMAN)
 		  	&& mtmp->data != &mons[PM_FIRE_VAMPIRE]
-		  	&& mtmp->data != &mons[PM_STAR_VAMPIRE])
+		  	&& mtmp->data != &mons[PM_STAR_VAMPIRE]
+			&& mtmp->data != &mons[PM_VOGON]
+			&& mtmp->data != &mons[PM_VOGON_LORD])
 		u.ugrave_arise = PM_VAMPIRE;
 	else if (mtmp->data == &mons[PM_GHOUL])
 		u.ugrave_arise = PM_GHOUL;
