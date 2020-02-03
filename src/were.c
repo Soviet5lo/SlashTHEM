@@ -127,7 +127,7 @@ char *genbuf;
 			break;
 		case PM_WEREJACKAL:
 		case PM_HUMAN_WEREJACKAL:
-			typ = PM_JACKAL;
+			typ = rn2(7) ? PM_JACKAL: rn2(3) ? PM_COYOTE: PM_FOX;
 			if (genbuf) Strcpy(genbuf, "jackal");
 			break;
 		case PM_WEREWOLF:
