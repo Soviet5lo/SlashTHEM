@@ -382,6 +382,8 @@ register struct monst *mtmp;
 		u.ugrave_arise = PM_VAMPIRE;
 	else if (mtmp->data == &mons[PM_GHOUL])
 		u.ugrave_arise = PM_GHOUL;
+	else if (mtmp->data == &mons[PM_SPECTRE] || u.ulevel > 15)
+		u.ugrave_arise = PM_SPECTRE;
 	if (u.ugrave_arise >= LOW_PM &&
 				(mvitals[u.ugrave_arise].mvflags & G_GENOD))
 		u.ugrave_arise = NON_PM;
