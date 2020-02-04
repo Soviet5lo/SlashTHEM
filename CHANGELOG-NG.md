@@ -179,6 +179,7 @@ Version 1.0 (XXXX-XX-XX)
     - Readded Krooella the Kobold Queen from Nethack--.
     - Baby Liches can cast spells like other liches.
     - Golden Dragons and their scales now emit light.
+    - Werejackals can now also summon foxes and coyotes. (from Nethack 3.6)
 
 - Object changes
     - Chemistry set no longer works randomly without knowing the spell of Chemistry.
@@ -326,6 +327,7 @@ Version 1.0 (XXXX-XX-XX)
 - Thrown objects no longer do backstab damage (from NH3.6).
 - Added a scroll of consecration to moloch's temple (from dNethack).
 - If the forge is generated in the dungeon it is always generated at dungeon level 20.
+- Spectres are created in place of Ghosts for bones files if the player is above exp level 15.
 
 #### Bugfixes
 - Fixed some compiler warnings.
@@ -362,3 +364,4 @@ Version 1.0 (XXXX-XX-XX)
 - Fixed various dungeon features occasionally being rendered in gray (from Slashem Extended)
 - Fixed player monster monks spawning with wrong weapons.
 - Fix a weirdly worded message when killed by drinking a potion of cyanide
+- Fix death via vogons creating a vampire in bones files.

@@ -3583,11 +3583,9 @@ register boolean force, here;
 
 		    switch (obj->oclass) {
 		    case SCROLL_CLASS:
-			if  (
 #ifdef MAIL
-		    obj->otyp != SCR_MAIL
+		    if (obj->otyp != SCR_MAIL)
 #endif
-			)
 		    {
 			    /* The Lethe sometimes does a little rewrite */
 			    obj->otyp = (level.flags.lethe && !rn2(10)) ?
