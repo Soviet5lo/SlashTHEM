@@ -119,6 +119,7 @@ char *genbuf;
 	for(i = rnd(2); i > 0; i--) {
 	   switch(pm) {
 
+		case PM_NOSFERATU: /* the rats _should_ appear around the Nosferatu */
 		case PM_WERERAT:
 		case PM_HUMAN_WERERAT:
 			typ = rn2(3) ? PM_SEWER_RAT : rn2(3) ? PM_GIANT_RAT : PM_RABID_RAT ;
@@ -126,7 +127,7 @@ char *genbuf;
 			break;
 		case PM_WEREJACKAL:
 		case PM_HUMAN_WEREJACKAL:
-			typ = PM_JACKAL;
+			typ = rn2(7) ? PM_JACKAL: rn2(3) ? PM_COYOTE: PM_FOX;
 			if (genbuf) Strcpy(genbuf, "jackal");
 			break;
 		case PM_WEREWOLF:

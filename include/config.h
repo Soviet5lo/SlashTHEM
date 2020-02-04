@@ -538,7 +538,7 @@ typedef long glyph_t;
 /* #define EXTENDED_INFO */ /* 5lo: Show full information of monsters
                                when using farlook */
 #define USER_DUNGEONCOLOR
-
+#define SORTLOOT	    /* 5lo: Sortloot patch */
 /*#define GOLDOBJ */	/* Gold is kept on obj chains - Helge Hafting */
 #define AUTOPICKUP_EXCEPTIONS /* exceptions to autopickup */
 /*#define UNDERGROUND_RIVERS */ /* 5lo: Wrapped these into a define, currently a bit buggy. */
@@ -549,6 +549,8 @@ typedef long glyph_t;
 #define DUMPMSGS 20
 
 /*#define SIMPLE_MAIL */ /* dgamelaunch simple mail */
+
+#define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
 
 /* End of Section 5 */
 

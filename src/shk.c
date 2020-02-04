@@ -79,6 +79,8 @@ static void FDECL(shk_appraisal, (char *, struct monst *));
 static void FDECL(shk_weapon_works, (char *, struct monst *));
 static void FDECL(shk_armor_works, (char *, struct monst *));
 static void FDECL(shk_charge, (char *, struct monst *));
+static void FDECL(shk_brew, (char *, struct monst *));
+static void FDECL(shk_food_examination, (char *, struct monst *));
 static boolean FDECL(shk_obj_match, (struct obj *, struct monst *));
 /*static int FDECL(shk_class_match, (long class, struct monst *shkp));*/
 static boolean FDECL(shk_offer_price, (char *, long, struct monst *));
@@ -1566,6 +1568,7 @@ proceed:
 		 
 #ifdef OTHER_SERVICES
 /*		    else */
+		    if (!eshkp->pbanned)
 			shk_other_services();
 #endif                
 		
@@ -1895,6 +1898,23 @@ shk_other_services()
 				"Charge", MENU_UNSELECTED);
 	}
 
+	/* Cadaver appraisal */
+	/* SPECIAL_B is unused for future features.  Maybe cooking? */
+	if ((ESHK(shkp)->services & (SHK_SPECIAL_A)) &&
+			(shk_class_match(FOOD_CLASS, shkp) == SHK_MATCH)) {
+		any.a_int = 7;
+		add_menu(tmpwin, NO_GLYPH, &any, 'e', 0, ATR_NONE,
+				"Examine", MENU_UNSELECTED);
+	}
+
+	/* Brewing */
+	if ((ESHK(shkp)->services & (SHK_SPECIAL_A|SHK_SPECIAL_B)) &&
+			(shk_class_match(POTION_CLASS, shkp) == SHK_MATCH)) {
+		any.a_int = 8;
+		add_menu(tmpwin, NO_GLYPH, &any, 'b', 0, ATR_NONE,
+				"Brew", MENU_UNSELECTED);
+	}
+
 	end_menu(tmpwin, "Services Available:");
 	n = select_menu(tmpwin, PICK_ONE, &selected);
 	destroy_nhwindow(tmpwin);
@@ -1924,6 +1944,12 @@ shk_other_services()
 	        case 6:
 	                shk_charge(slang, shkp);
 	                break;
+		case 7:
+			shk_food_examination(slang, shkp);
+			break;
+		case 8:
+			shk_brew(slang, shkp);
+			break;
 	        default:
 	                pline ("Unknown Service");
 	                break;
@@ -5391,7 +5417,7 @@ shk_charge(slang, shkp)
 	if (obj->oclass == WAND_CLASS)
 	{
 		/* Wand of wishing? */
-		if (obj->otyp == WAN_WISHING || obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT)
+		if (obj->otyp == WAN_WISHING || obj->otyp == WAN_ACQUIREMENT)
 		{
 			/* Premier gives you ONE more charge */
 			/* KMH -- Okay, but that's pretty generous */
@@ -5420,6 +5446,380 @@ shk_charge(slang, shkp)
 			else if (obj->spe < 20) obj->spe += 1;
 		}
 	}
+}
+
+
+/*
+ * FUNCTION shk_brew
+ *
+ * Brew potions from either gems or two potions
+ */
+
+static NEARDATA const char potion_types[] = { POTION_CLASS, 0 };
+static NEARDATA const char gem_types[] = { GEM_CLASS, 0 };
+
+static void
+shk_brew(slang, shkp)
+	char *slang;
+	struct monst *shkp;
+{
+	char buf[BUFSZ];
+	struct obj *o1, *o2, *onew = NULL;
+	int n;
+	int otyp;
+	int charge;
+	boolean fail;
+
+	winid tmpwin;
+	anything any;
+	menu_item *selected;
+
+	/* Let the hero choose whether he want to mix or synthesize */
+	any.a_void = 0;
+	tmpwin = create_nhwindow(NHW_MENU);
+	start_menu(tmpwin);
+	any.a_int = 1;
+	if (ESHK(shkp)->services & (SHK_SPECIAL_A))
+		add_menu(tmpwin, NO_GLYPH, &any, 'm', 0, ATR_NONE, "Mix", MENU_UNSELECTED);
+	any.a_int = 2;
+	if (ESHK(shkp)->services & (SHK_SPECIAL_B))
+		add_menu(tmpwin, NO_GLYPH, &any, 's', 0, ATR_NONE, "Synthesize", MENU_UNSELECTED);
+	end_menu(tmpwin, "Brew:");
+	n = select_menu(tmpwin, PICK_ONE, &selected);
+	destroy_nhwindow(tmpwin);
+
+	if (n > 0) {
+		switch(selected[0].item.a_int) {
+		case 1:
+			/* 
+			 * Mixing potions.
+			 * Always successful, even with acid.
+			 * Yields uncursed, undiluted potion.
+			 */
+
+			if (!(o1 = getobj(potion_types, "mix into"))) return;
+			if (!(o2 = getobj(potion_types, "add"))) return;
+
+			if (o1 == o2) {
+				verbalize("Mind you, I'm not good at topology.");
+				return;
+			}
+			
+			if (o1->otyp == o2->otyp) {
+				verbalize("What do you expect from mixing the *same* kind of potions?");
+				return;
+			}
+
+			if (o1->otyp == POT_WATER || o1->otyp == POT_AMNESIA ||
+			    o2->otyp == POT_WATER || o2->otyp == POT_AMNESIA) {
+				verbalize("What? Mix them yourself!");
+				return;
+			}
+			
+			if (o1->otyp == POT_BLOOD || o1->otyp == POT_VAMPIRE_BLOOD ||
+			    o2->otyp == POT_BLOOD || o2->otyp == POT_VAMPIRE_BLOOD) {
+				verbalize("I don't feel like playing with those bloody stuff.");
+				return;
+			}
+
+			/* Chemistry is dangerous, so charge higher */
+			charge = 600;
+			shk_smooth_charge(&charge, 300, 2000);
+
+			if (shk_offer_price(slang, charge, shkp) == FALSE) return;
+
+			otyp = mixtype(o1, o2, TRUE);
+			useup(o1);
+			useup(o2);
+
+			onew = mksobj(otyp, FALSE, FALSE);
+			onew->blessed = 0;
+			onew->cursed = 0;
+			onew->odiluted = 0;
+
+			break;
+		case 2:
+			/*
+			 * Synthesize
+			 *
+			 * Only works on identified gems.
+			 */
+
+			if (!(o1 = getobj(gem_types, "synthesize"))) return;
+
+			if (!objects[o1->otyp].oc_name_known) {
+				verbalize("I'm not dissolving something you don't know about!");
+				return;
+			}
+
+			if (objects[o1->otyp].oc_material == MINERAL) {
+				verbalize("You certainly won't get anything from rocks.");
+				return;
+			}
+
+			if (objects[o1->otyp].oc_name_known && !Hallucination) {
+				/* If you know what a glass piece looks
+				 * like, fail immediately.
+				 * Also applies to diamonds and dilithiums. */
+				if (objects[o1->otyp].oc_material == GLASS) {
+					verbalize("What do you expect from a piece of glass?");
+					return;
+				}
+				switch (o1->otyp) {
+				case DILITHIUM_CRYSTAL:
+					verbalize("It's dangerous, trust me.");
+					return;
+				case DIAMOND:
+					verbalize("It won't dissolve!");
+					return;
+				}
+				/* fall through */
+			}
+
+			otyp = mixtype(o1, NULL, TRUE);
+
+			charge = 600;
+			shk_smooth_charge(&charge, 300, 2000);
+
+			if (!shk_offer_price(slang, charge, shkp)) return;
+
+			if (otyp == POT_WATER	/* see mixtype() for dilithium */
+				|| otyp == 0) {
+				verbalize("Well, that's hard to play with.");
+				/* "I took the risk of dying!" */
+			} else {
+				useup(o1);
+				onew = mksobj(otyp, FALSE, FALSE);
+				onew->blessed = 0;
+				onew->cursed = 0;
+				onew->odiluted = 0;
+			}
+			break;
+		}
+	}
+
+	if (onew) {
+		onew = hold_another_object(onew,
+			"Oops!  %s out of your grasp!",
+			The(aobjnam(onew, "slip")),
+			NULL);
+		if (Hallucination)
+			pline("Wow! New drug!");
+	}
+}
+
+static NEARDATA const char food_class[] = { FOOD_CLASS, 0 };
+
+#define MAXNDESCR	30
+
+/*
+ * TODO:
+ * This function is tightly coupled to eat.c.  Someday I'll try to
+ * fix this.
+ */
+static void
+shk_food_examination(slang, shkp)
+	char *slang;
+	struct monst *shkp;
+{
+	struct obj *obj;
+	int mnum, charge;
+	char buf[BUFSZ];
+	static char *descr[MAXNDESCR + 1];
+	int ndescr = 0, i;
+
+	if (!(obj = getobj(food_class, "examine"))) return;
+
+	if (obj->otyp != CORPSE && obj->otyp != TIN) {
+		verbalize("We only check cadavers here.");
+		return;
+	}
+
+	charge = 50;
+	shk_smooth_charge(&charge, 30, 80);
+
+	if (!shk_offer_price(slang, charge, shkp)) return;
+
+	if (obj->otyp == TIN && obj->spe == 1) {
+		/* spinach */
+		verbalize("Spinach is always good for your health.");
+		obj->known = obj->dknown = TRUE;
+		return;
+	} else if (obj->otyp == TIN && obj->corpsenm == NON_PM) {
+		verbalize("This tin is empty.");
+		obj->known = obj->dknown = TRUE;
+		return;
+	}
+
+	mnum = obj->corpsenm;
+
+	if (mnum >= NUMMONS || mnum < 0) {
+		/* NOTREACHED */
+		verbalize("What did you gave me just now?");
+		return;
+	}
+
+	if (corpse_never_rots(&mons[mnum])) {
+		descr[ndescr++] = "never rots";
+	} else {
+		long age = peek_at_iced_corpse_age(obj);
+		if ((monstermoves - age) / 10 > 5 && mnum != PM_ACID_BLOB &&
+		    obj->otyp == CORPSE) {
+			Sprintf(buf, "This corpse may be tainted!");
+			/* TODO: allow ghoul characters to eat rotten tins? */
+			if (youmonst.data == &mons[PM_GHOUL] ||
+			    youmonst.data == &mons[PM_GHAST]) {
+				Sprintf(eos(buf), " Maybe you like it, though.");
+				verbalize(buf);
+			} else {
+				verbalize(buf);
+				return;
+			}
+		}
+	}
+
+	if (vegan(&mons[mnum]))
+		descr[ndescr++] = "is vegan to eat";
+	else if (vegetarian(&mons[mnum]))
+		descr[ndescr++] = "is vegetarian to eat";
+
+	if (!CANNIBAL_ALLOWED()) {
+		if (your_race(&mons[mnum])) {
+			verbalize("Do you really want to become a cannibal?");
+			return;
+		}
+	}
+
+	if (acidic(&mons[mnum]))
+		descr[ndescr++] = "is acidic";
+	if (poisonous(&mons[mnum]))
+		descr[ndescr++] = "is poisonous";
+
+	if (touch_petrifies(&mons[mnum]) || mnum == PM_MEDUSA) {
+		verbalize("Eat that and you will become a statue.");
+		return;
+	}
+
+	/* see cprefx() and cpostfx() in eat.c */
+	switch (mnum) {
+	case PM_LITTLE_DOG:
+	case PM_DOG:
+	case PM_LARGE_DOG:
+	case PM_KITTEN:
+	case PM_HOUSECAT:
+	case PM_LARGE_CAT:
+		if (!CANNIBAL_ALLOWED()) {
+			verbalize("Eating this corpse is probably not a good idea for you.");
+			return;
+		}
+		break;
+	case PM_LIZARD:
+		descr[ndescr++] = "fixes petrification";
+		descr[ndescr++] = "fixes stunning";
+		descr[ndescr++] = "fixes confusion";
+		break;
+	case PM_DEATH:
+	case PM_PESTILENCE:
+	case PM_FAMINE:
+		/* usually NOTREACHED, but for sanity anyway. */
+		verbalize("I absolutely won't eat that!");
+		return;
+	case PM_GREEN_SLIME:
+		verbalize("Eat that and you will become slimy.");
+		return;
+	case PM_NEWT:
+		descr[ndescr++] = "charges you slightly";
+		break;
+	case PM_WRAITH:
+		verbalize("Occasionally I would eat a wraith corpse.");
+		return;
+	case PM_HUMAN_WERERAT:
+	case PM_HUMAN_WEREJACKAL:
+	case PM_HUMAN_WEREWOLF:
+	case PM_HUMAN_WEREPANTHER:
+	case PM_HUMAN_WERETIGER:
+	case PM_HUMAN_WERESNAKE:
+	case PM_HUMAN_WERESPIDER:
+		verbalize("You would catch lycanthropy!");
+		if (Race_if(PM_HUMAN_WEREWOLF))
+			verbalize("Oh wait... You are already one.");
+		return;
+	case PM_NURSE:
+		verbalize("I used to eat a tinned nurse corpse to save my life.");
+		return;
+	case PM_STALKER:
+		descr[ndescr++] = "makes you invisible";
+		descr[ndescr++] = "sometimes make you see invisible";
+		/* fallthru */
+	case PM_YELLOW_LIGHT:
+	case PM_GIANT_BAT:
+	case PM_BAT:
+		descr[ndescr++] = "stuns you";
+		break;
+	case PM_GIANT_MIMIC:
+	case PM_LARGE_MIMIC:
+	case PM_SMALL_MIMIC:
+		verbalize("You would have a funny experience.");
+		return;
+	case PM_QUANTUM_MECHANIC:
+		descr[ndescr++] = "switches your speed";
+		break;
+	case PM_CHAMELEON:
+	case PM_DOPPELGANGER:
+	case PM_SANDESTIN:
+	case PM_GENETIC_ENGINEER:
+		verbalize("You would change.");
+		return;
+	case PM_MIND_FLAYER:
+	case PM_MASTER_MIND_FLAYER:
+		descr[ndescr++] = "makes you smarter";
+		/* fallthru */
+	default:
+		if (dmgtype(&mons[mnum], AD_STUN)
+		    || dmgtype(&mons[mnum], AD_HALU)
+		    || mnum == PM_VIOLET_FUNGUS)
+			descr[ndescr++] = "gets you high";
+		if (is_giant(&mons[mnum]))
+			descr[ndescr++] = "makes you stronger";
+
+		if (mons[mnum].mconveys & MR_FIRE)
+			descr[ndescr++] = "makes you resist fire";
+		if (mons[mnum].mconveys & MR_COLD)
+			descr[ndescr++] = "makes you resist cold";
+		if (mons[mnum].mconveys & MR_SLEEP)
+			descr[ndescr++] = "makes you resist sleep";
+		if (mons[mnum].mconveys & MR_DISINT)
+			descr[ndescr++] = "makes you resist disintegration";
+		if (mons[mnum].mconveys & MR_ELEC)
+			descr[ndescr++] = "makes you resist electricity";
+		if (mons[mnum].mconveys & MR_POISON)
+			descr[ndescr++] = "makes you resist poison";
+		if (can_teleport(&mons[mnum]))
+			descr[ndescr++] = "makes you teleport often";
+		if (control_teleport(&mons[mnum]))
+			descr[ndescr++] = "makes you control your teleport";
+		if (telepathic(&mons[mnum]))
+			descr[ndescr++] = "makes you telepathic";
+		break;
+	}
+
+	Sprintf(buf, "This ");
+
+	if (ndescr == 0) {
+		Sprintf(eos(buf), "conveys nothing special.");
+	} else {
+		for (i = 0; i < ndescr; ++i) {
+			Sprintf(eos(buf), "%s%s%s",
+			    (i == ndescr - 1 && i != 0) ? "and " : "",
+			    descr[i],
+			    i == ndescr - 1 ? "." : ", ");
+		}
+	}
+
+	verbalize(buf);
+	if (obj->otyp == TIN &&
+	    (acidic(&mons[mnum]) || poisonous(&mons[mnum])))
+		verbalize("The tin is safe to consume, however.");
 }
 
 

@@ -36,6 +36,7 @@ STATIC_DCL void FDECL(use_trap, (struct obj *));
 STATIC_DCL void FDECL(use_stone, (struct obj *));
 STATIC_PTR int NDECL(set_trap);		/* occupation callback */
 STATIC_DCL int FDECL(use_whip, (struct obj *));
+STATIC_DCL int FDECL(use_longwhip, (struct obj *));
 STATIC_DCL int FDECL(use_pole, (struct obj *));
 STATIC_DCL int FDECL(use_cream_pie, (struct obj *));
 STATIC_DCL int FDECL(use_grapple, (struct obj *));
@@ -1468,7 +1469,7 @@ int magic; /* 0=Physical, otherwise skill level */
 	} else if (!magic && near_capacity() > UNENCUMBERED) {
 		You("are carrying too much to jump!");
 		return 0;
-	} else if (!magic && (u.uhunger <= 100 || ACURR(A_STR) < 6)) {
+	} else if (!magic && (YouHunger <= 100 || ACURR(A_STR) < 6)) {
 		You("lack the strength to jump!");
 		return 0;
 	} else if (Wounded_legs) {
@@ -1606,7 +1607,7 @@ STATIC_OVL void
 use_tinning_kit(obj)
 register struct obj *obj;
 {
-	register struct obj *corpse, *can;
+	register struct obj *corpse, *can, *bld;
 /*
 	char *badmove;
  */
@@ -1651,7 +1652,36 @@ register struct obj *obj;
 		return;
 	}
 	consume_obj_charge(obj, TRUE);
+	if((Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) || 
+		Race_if(PM_GHOUL)) 
+				&& mons[corpse->corpsenm].cnutrit 
+				&& !(mvitals[corpse->corpsenm].mvflags & G_NOCORPSE)
+				&& has_blood(&mons[corpse->corpsenm])
+		){
+		if ((bld = mksobj(POT_BLOOD, FALSE, FALSE)) != 0) {
+			static const char you_buy_it[] = "You bottle it, you bought it!";
 
+			bld->corpsenm = corpse->corpsenm;
+			bld->cursed = obj->cursed;
+			bld->blessed = obj->blessed;
+			bld->known = 1;
+			bld->selfmade = TRUE;
+			if (carried(corpse)) {
+				if (corpse->unpaid)
+					verbalize(you_buy_it);
+				useup(corpse);
+			} else {
+			if (costly_spot(corpse->ox, corpse->oy) && !corpse->no_charge)
+				verbalize(you_buy_it);
+			useupf(corpse, 1L);
+			}
+			bld = hold_another_object(bld, "You make, but cannot pick up, %s.",
+						  doname(bld), (const char *)0);
+		} else impossible("Bottling failed.");
+	} else {
+		if(!(Race_if(PM_VAMPIRE) || Race_if(PM_INCANTIFIER) ||
+					Race_if(PM_GHOUL))
+			|| yn("This corpse does not have blood.  Tin it?") == 'y') {
 	if ((can = mksobj(TIN, FALSE, FALSE)) != 0) {
 	    static const char you_buy_it[] = "You tin it, you bought it!";
 
@@ -1681,6 +1711,8 @@ register struct obj *obj;
 	    can = hold_another_object(can, "You make, but cannot pick up, %s.",
 				      doname(can), (const char *)0);
 	} else impossible("Tinning failed.");
+	}
+	}
 }
 
 
@@ -2562,7 +2594,7 @@ struct obj *obj;
     struct monst *mtmp;
     struct obj *otmp;
     int rx, ry, proficient, res = 0;
-    const char *msg_slipsfree = "The bullwhip slips free.";
+    const char *msg_slipsfree = "The whip slips free.";
     const char *msg_snap = "Snap!";
 
     if (obj != uwep) {
@@ -2582,14 +2614,16 @@ struct obj *obj;
     if (ACURR(A_DEX) < 6) proficient--;
     else if (ACURR(A_DEX) >= 14) proficient += (ACURR(A_DEX) - 14);
     if (Fumbling) --proficient;
+    /* it's hard snatching things with chains. */
+    if (obj->otyp == CHAINWHIP) --proficient;
     if (proficient > 3) proficient = 3;
     if (proficient < 0) proficient = 0;
 
     if (u.uswallow && attack(u.ustuck)) {
-	There("is not enough room to flick your bullwhip.");
+	There("is not enough room to flick your whip.");
 
     } else if (Underwater) {
-	There("is too much resistance to flick your bullwhip.");
+	There("is too much resistance to flick your whip.");
 
     } else if (u.dz < 0) {
 	You("flick a bug off of the %s.",ceiling(u.ux,u.uy));
@@ -2617,7 +2651,8 @@ struct obj *obj;
 		return 1;
 	    }
 	    if (otmp && proficient) {
-		You("wrap your bullwhip around %s on the %s.",
+		You("wrap your %s around %s on the %s.",
+			obj_descr[obj->otyp].oc_name,
 		    an(singular(otmp, xname)), surface(u.ux, u.uy));
 		if (rnl(6) || pickup_object(otmp, 1L, TRUE) < 1)
 		    pline(msg_slipsfree);
@@ -2626,14 +2661,14 @@ struct obj *obj;
 	}
 	dam = rnd(2) + dbon() + obj->spe;
 	if (dam <= 0) dam = 1;
-	You("hit your %s with your bullwhip.", body_part(FOOT));
-	Sprintf(buf, "killed %sself with %s bullwhip", uhim(), uhis());
+	You("hit your %s with your %s.", body_part(FOOT), obj_descr[obj->otyp].oc_name);
+	Sprintf(buf, "killed %sself with %s %s", uhim(), uhis(), obj_descr[obj->otyp].oc_name);
 	losehp(dam, buf, NO_KILLER_PREFIX);
 	flags.botl = 1;
 	return 1;
 
     } else if ((Fumbling || IsGlib) && !rn2(5)) {
-	pline_The("bullwhip slips out of your %s.", body_part(HAND));
+	pline_The("%s slips out of your %s.", obj_descr[obj->otyp].oc_name, body_part(HAND));
 	dropx(obj);
 
     } else if (u.utrap && u.utraptype == TT_PIT) {
@@ -2674,7 +2709,7 @@ struct obj *obj;
 	    coord cc;
 
 	    cc.x = rx; cc.y = ry;
-	    You("wrap your bullwhip around %s.", wrapped_what);
+	    You("wrap your %s around %s.", obj_descr[obj->otyp].oc_name, wrapped_what);
 	    if (proficient && rn2(proficient + 2)) {
 		if (!mtmp || enexto(&cc, rx, ry, youmonst.data)) {
 		    You("yank yourself out of the pit!");
@@ -2707,7 +2742,8 @@ struct obj *obj;
 	    } else
 		mon_hand = 0;	/* lint suppression */
 
-	    You("wrap your bullwhip around %s %s.",
+	    You("wrap your %s around %s %s.",
+		obj_descr[obj->otyp].oc_name,
 		s_suffix(mon_nam(mtmp)), onambuf);
 	    if (gotit && otmp->cursed) {
 		pline("%s welded to %s %s%c",
@@ -2785,7 +2821,8 @@ struct obj *obj;
 	    if (mtmp->m_ap_type &&
 		!Protection_from_shape_changers && !sensemon(mtmp))
 		stumble_onto_mimic(mtmp);
-	    else You("flick your bullwhip towards %s.", mon_nam(mtmp));
+	    else You("flick your %s towards %s.", obj_descr[obj->otyp].oc_name,
+				 mon_nam(mtmp));
 	    if (proficient) {
 		if (attack(mtmp)) return 1;
 		else pline(msg_snap);
@@ -2794,7 +2831,7 @@ struct obj *obj;
 
     } else if (Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)) {
 	    /* it must be air -- water checked above */
-	    You("snap your whip through thin air.");
+	    You("snap your %s through thin air.", obj_descr[obj->otyp].oc_name);
 
     } else {
 	pline(msg_snap);
@@ -3012,6 +3049,94 @@ struct obj *obj;
 }
 
 STATIC_OVL int
+use_longwhip (obj)
+struct obj *obj;
+{
+     int res = 0, typ, min_range = 1, max_range = 4, tohit;
+     coord cc;
+     struct monst *mtmp;
+     struct obj *otmp;
+     
+     /* Are you allowed to use the whip? */
+     if (u.uswallow) {
+	  pline(not_enough_room);
+	  return (0);
+     }
+     if (obj != uwep) {
+	  if (!wield_tool(obj, "cast")) return(0);
+	  else res = 1;
+     }
+     /* assert(obj == uwep); */
+     
+     /* Prompt for a location */
+     pline(where_to_hit);
+     cc.x = u.ux;
+     cc.y = u.uy;
+     if (getpos(&cc, TRUE, "the spot to hit") < 0)
+	  return 0;	/* user pressed ESC */
+     
+     /* Calculate range */
+     typ = uwep_skill_type();
+     if (typ == P_NONE || P_SKILL(typ) <= P_BASIC) max_range = 4;
+     else if (P_SKILL(typ) == P_SKILLED) max_range = 5;
+     else max_range = 8;
+     if (distu(cc.x, cc.y) > max_range) {
+	  pline("Too far!");
+	  return (res);
+     } else if (distu(cc.x, cc.y) <= min_range) {
+	  pline("Too close!");
+	  return (res);
+     } else if (!cansee(cc.x, cc.y)) {
+	  You(cant_see_spot);
+	  return (res);
+     }
+
+     if (mtmp = m_at(cc.x, cc.y)) {
+       /* monster */
+       if (!Levitation && is_flyer(mtmp->data)) {
+	 if (unsolid(mtmp->data)) {
+	   You("try to pull in %s, but the whip passes through %s!",
+		 mon_nam(mtmp), mhim(mtmp));
+	   return (1);
+	 } else if (((mtmp->data->msize == MZ_GIGANTIC && ACURR(A_STR) == 25)
+		    || (mtmp->data->msize >= MZ_LARGE && ACURR(A_STR) > STR18(50))
+		    || (mtmp->data->msize == MZ_MEDIUM && ACURR(A_STR) > 17)
+		    || (mtmp->data->msize < MZ_MEDIUM))
+		    && P_SKILL(P_WHIP) > P_BASIC) {
+	   You("pull in %s!", mon_nam(mtmp));
+	   mtmp->mundetected = 0;
+	   mhurtle(mtmp, u.ux - mtmp->mx, u.uy - mtmp->my, 1);
+	   /* mhurtle(mtmp, u.ux - mtmp->mx, u.uy - mtmp->my, 1); */
+	   /*  distu(mtmp->mx, mtmp->my)); */
+	   return (1);
+	 } else {
+	   You("try to pull in %s, but %s's too big!",
+		 mon_nam(mtmp), mhe(mtmp));
+	   return (1);
+	 }
+       } else {
+	 (void) thitmonst(mtmp, obj, 1);
+	 return (1);
+       }
+     } else if (otmp = level.objects[cc.x][cc.y]) {
+       /* object */
+       if (P_SKILL(P_WHIP) < P_SKILLED)
+	 pline("The whip slips free.");
+       else {
+	 You("snag an object from the %s!", surface(cc.x, cc.y));
+	 (void) pickup_object(otmp, 1L, FALSE);
+	 /* If pickup fails, leave it alone */
+	 newsym(cc.x, cc.y);
+       }
+       return (1);
+     }
+
+     pline("Snap!");
+     return (1);
+}
+
+
+STATIC_OVL int
 use_grapple (obj)
 	struct obj *obj;
 {
@@ -3218,24 +3343,18 @@ wand_explode(obj, hero_broke)
     case WAN_LOCKING:
     case WAN_PROBING:
     case WAN_ENLIGHTENMENT:
-    case WAN_ENTRAPPING:
     case WAN_MAGIC_MAPPING:
     case WAN_DARKNESS:
-    case WAN_OBJECTION:
-    case WAN_DETECT_MONSTERS:
     case WAN_IDENTIFY:
-    case WAN_REMOVE_CURSE:
     case WAN_OPENING:
     case WAN_WONDER:
     case WAN_BUGGING:
     case WAN_CLONE_MONSTER:
-    case WAN_SUMMON_UNDEAD:
     case WAN_SECRET_DOOR_DETECTION:
 	pline(nothing_else_happens);
 	goto discard_broken_wand;
     case WAN_DEATH:
     case WAN_LIGHTNING:
-    case WAN_CHARGING:
 	dmg *= 4;
 	goto wanexpl;
     case WAN_COLD:
@@ -3296,7 +3415,6 @@ wand_explode(obj, hero_broke)
 	        break;
     case WAN_HEALING:
     case WAN_EXTRA_HEALING:
-    case WAN_FULL_HEALING:
 		dmg = 0;
 		break;
     default:
@@ -3487,7 +3605,7 @@ void use_floppies(struct obj *obj)
 	};
 	int x;
 
-	if (!Role_if(PM_GEEK)) {
+	if (!Role_if(PM_HACKER)) {
 		pline("If only you knew what the heck this is ... ");
 		return;
 	}
@@ -3564,6 +3682,10 @@ use_chemistry_set(struct obj *chemset)
 
 	if (!new_obj || new_obj->oclass != POTION_CLASS) {
 		goto blast_him;
+	}
+	if (new_obj->otyp == POT_VAMPIRE_BLOOD || new_obj->otyp == POT_BLOOD) {
+		You("can't create such a potion via chemistry.");
+		return;
 	}
 	if (!(objects[new_obj->otyp].oc_name_known) && 
 	    !(objects[new_obj->otyp].oc_uname)) {
@@ -3658,7 +3780,12 @@ doapply()
 		res = use_cream_pie(obj);
 		break;
 	case BULLWHIP:
+	case CHAINWHIP:
 		res = use_whip(obj);
+		break;
+	case LONG_BULLWHIP:
+	case LONG_THORNED_CHAINWHIP:
+		res = use_longwhip(obj);
 		break;
 	case GRAPPLING_HOOK:
 		res = use_grapple(obj);
@@ -4045,7 +4172,7 @@ doapply()
 		if (obj->oartifact == ART_BURNED_MOTH_RELAY) {	
 			pline("There's a little badly burned moth in that relay!");
 			makeknown(RELAY);
-			if (Role_if(PM_GEEK)) {
+			if (Role_if(PM_HACKER)) {
 				You("feel remembered of %s.",Hallucination ? "when the net was flat" : "the old times");
 				break;
 			}

@@ -88,13 +88,13 @@ dowaternymph() /* Water Nymph */
 }
 
 void
-dogushforth(drinking) /* Gushing forth along LOS from (u.ux, u.uy) */
-int drinking;
+dogushforth(drinking, x, y) /* Gushing forth along LOS from (x, y) */
+int drinking, x, y;
 {
 	int madepool = 0;
 
-	do_clear_area(u.ux, u.uy, 7, gush, (genericptr_t)&madepool);
-	if (!madepool) {
+	do_clear_area(x, y, 7, gush, (genericptr_t)&madepool);
+	if (!madepool && u.ux == x && u.uy == y) {
 	    if (drinking)
 		Your("thirst is quenched.");
 	    else
@@ -231,7 +231,9 @@ drinkfountain()
 	if (fate < 10) {
 		pline_The("cool draught refreshes you.");
 		if (!((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON)))
-		u.uhunger += rnd(10); /* don't choke on water */
+			/* 5lo: TODO: Bug? */
+		if(Race_if(PM_INCANTIFIER)) u.uen += rnd(10); /* don't choke on water */
+		else u.uhunger += rnd(10); /* don't choke on water */
 		newuhs(FALSE);
 		if(mgkftn) return;
 	} else {
@@ -337,7 +339,7 @@ drinkfountain()
 
 		case 30: /* Gushing forth in this room */
 
-			dogushforth(TRUE);
+			dogushforth(TRUE, u.ux, u.uy);
 			break;
 
 		default:
@@ -439,7 +441,7 @@ register struct obj *obj;
 			}
 		case 24:
 		case 25: /* Water gushes forth */
-			dogushforth(FALSE);
+			dogushforth(FALSE, u.ux, u.uy);
 			break;
 		case 26: /* Strange feeling */
 			pline("A strange tingling runs up your %s.",
@@ -765,7 +767,7 @@ register struct obj *obj;
 			}
 		case 24:
 		case 25: /* Water gushes forth */
-			dogushforth(FALSE);
+			dogushforth(FALSE, u.ux, u.uy);
 			break;
 		case 26: /* Strange feeling */
 			pline("A strange tingling runs up your %s.",

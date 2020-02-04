@@ -509,6 +509,7 @@ domonability()
 	if (can_breathe(youmonst.data) && yn("Do you want to use your breath attack?")=='y' ) return dobreathe();
 	else if (attacktype(youmonst.data, AT_SPIT) && yn("Do you want to use your spit attack?")=='y' ) return dospit();
 	else if (youmonst.data->mlet == S_NYMPH && yn("Do you want to remove an iron ball?")=='y' ) return doremove();
+	else if (attacktype_fordmg(youmonst.data, AT_ANY, AD_CHRM) && yn("Do you want to charm a monster?")=='y' ) return docharm();
 	else if (attacktype(youmonst.data, AT_GAZE) && yn("Do you want to use your gaze attack?")=='y' ) return dogaze();
 	else if (is_were(youmonst.data) && yn("Do you want to summon help?")=='y' ) return dosummon();
 	else if (webmaker(youmonst.data) && yn("Do you want to spin webs?")=='y' ) return dospinweb();
@@ -1311,10 +1312,6 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 	if (wizard || (!rn2(10)) || final >= 1 ) { Sprintf(buf, " %d", nartifact_exist() );
 		enl_msg("Number of artifacts generated ", "is", "was", buf);
 	}
-
-	if (u.legscratching > 1) { Sprintf(buf, " %d", u.legscratching - 1);
-		enl_msg("Your leg damage ", "is", "was", buf);
-	}
 #ifdef MORE_SPAWNS
 	if (wizard || (!rn2(10)) || final >= 1 ) { Sprintf(buf, " turn %d", u.monstertimeout);
 		enl_msg("Monster spawn increase ", "start at", "would have started at", buf);
@@ -1527,7 +1524,7 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 
 	if (u.umconf) you_are("going to confuse monsters");
 
-	Sprintf(buf, "%d points of nutrition remaining", u.uhunger); you_have(buf);
+	Sprintf(buf, "%d points of nutrition remaining", YouHunger); you_have(buf);
 
 	/*** Appearance and behavior ***/
 	if (Adornment) {
@@ -1830,10 +1827,6 @@ int final;
 		dump("  Number of artifacts generated was", buf);
 	}
 
-	if (wizard || final >= 1) {
-		Sprintf(buf, " %d", u.legscratching - 1);
-		dump("  Your leg damage was", buf);
-	}
 #ifdef MORE_SPAWNS
 	if (wizard || final >= 1) {
 		Sprintf(buf, " turn %d", u.monstertimeout);
@@ -1957,7 +1950,7 @@ int final;
 	if (Detect_monsters)
 	  dump(youwere, "sensing the presence of monsters");
 	if (u.umconf) dump(youwere, "going to confuse monsters");
-	Sprintf(buf, "%d points of nutrition remaining", u.uhunger); dump(youhad, buf);
+	Sprintf(buf, "%d points of nutrition remaining", YouHunger); dump(youhad, buf);
 
 	/*** Appearance and behavior ***/
 	if (Adornment) {

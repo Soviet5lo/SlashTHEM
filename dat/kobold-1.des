@@ -18,6 +18,10 @@ OBJECT: '[',random,(4,4)
 OBJECT: '[',random,(4,4)
 OBJECT: '!',random,(4,4)
 OBJECT: '!',random,(4,4)
+OBJECT: ')',random,(4,5)
+OBJECT: '/',random,(4,5)
+OBJECT: '[',random,(4,5)
+OBJECT: '!',random,(4,5)
 MONSTER: 'k', random, random, hostile
 MONSTER: 'k', random, random, hostile
 MONSTER: 'k', random, random, hostile
@@ -35,7 +39,7 @@ MONSTER: 'k', "rock kobold", random, hostile
 MONSTER: 'k', "rock kobold", random, hostile
 MONSTER: 'k', "rock kobold", random, hostile
 MONSTER: 'k', "Kroo the Kobold King", (4,4), hostile
-OBJECT:'?',"root password detection",(4,4)
+MONSTER: 'k', "Krooella the Kobold Queen", (4,5), hostile
 
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, up

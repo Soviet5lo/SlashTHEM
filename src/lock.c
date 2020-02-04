@@ -789,25 +789,35 @@ doforce()		/* try to force a chest with your weapon */
 int
 doopen()		/* try to open a door */
 {
+#ifdef AUTO_OPEN
+	return doopen_indir(0, 0);
+}
+ int
+doopen_indir(x, y)		/* try to open a door in direction u.dx/u.dy */
+	int x, y;		/* if true, prompt for direction */
+{
+#endif /* AUTO_OPEN */
 	coord cc;
 	register struct rm *door;
 	struct monst *mtmp;
 
 	if (nohands(youmonst.data)) {
 	    You_cant("open anything -- you have no hands!");
-
-		if (yn("Try to open it with another part of your body instead?") == 'y') {
-			if (rn2(3)) { 			make_blinded(Blinded + rnd(50),TRUE);
-			pline("Off - you just blinded yourself!");
-		    return 1;}
-		}
-		else {return(0);}
+	    return 0;
 	}
 
 	if (u.utrap && u.utraptype == TT_PIT) {
 	    You_cant("reach over the edge of the pit.");
 	    return 0;
 	}
+
+#ifdef AUTO_OPEN
+	if (x > 0 && y > 0) {
+	    cc.x = x;
+	    cc.y = y;
+	}
+	else
+#endif
 
 	if(!get_adjacent_loc((char *)0, (char *)0, u.ux, u.uy, &cc)) return(0);
 
@@ -907,13 +917,7 @@ doclose()		/* try to close a door */
 
 	if (nohands(youmonst.data)) {
 	    You_cant("close anything -- you have no hands!");
-
-		if (yn("Try to close it with another part of your body instead?") == 'y') {
-			if (rn2(3)) { 			make_blinded(Blinded + rnd(50),TRUE);
-			pline("Something got in your face! You can't see!");
-		    return 1;}
-		}
-		else {return(0);}
+	    return 0;
 	}
 
 	if (u.utrap && u.utraptype == TT_PIT) {

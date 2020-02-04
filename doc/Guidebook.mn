@@ -1785,6 +1785,8 @@ Cannot be set with the `O' command.
 .lp autodig
 Automatically dig if you are wielding a digging tool and moving into a place
 that can be dug (default false).
+.lp autoopen
+Walking into a door attempts to open it (default true).
 .lp "autopickup  "
 Automatically pick up things onto which you move (default on). 
 See
@@ -2228,6 +2230,18 @@ enough to quantify their damage.
 Show total weight in inventory on bottom line (default off).
 .lp "silent  "
 Suppress terminal beeps (default on).
+.lp sortloot
+Controls the behavior of the sortloot patch that sorts pickup lists for
+inventory and #loot commands and some others.
+The possible values are:
+.sd
+.si
+full - always sort the lists;
+loot - only sort the lists that don't use inventory
+       letters, like with the #loot and pickup commands;
+none - show lists the traditional way without sorting.
+.ei
+.ed
 .lp sortpack
 Sort the pack contents by type when displaying inventory (default on).
 .lp sound

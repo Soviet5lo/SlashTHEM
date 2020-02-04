@@ -37,6 +37,17 @@
 
 #define SPFX_DBONUS 0x1F00000L	/* attack bonus mask */
 
+#define COMMAND_RAPIER		1
+#define COMMAND_AXE		2
+#define COMMAND_MACE		3
+#define COMMAND_SPEAR		4
+#define COMMAND_LANCE		5
+#define COMMAND_LADDER		6
+#define COMMAND_CLAIRVOYANCE	7
+#define COMMAND_FEAR		8
+#define COMMAND_LIFE		9
+#define COMMAND_KNEEL		10
+
 struct artifact {
 	int	otyp;
 	const char  *name;
@@ -81,5 +92,6 @@ struct artifact {
 #define BLESS		(LAST_PROP+25)
 #define LEADERSHIP 	(LAST_PROP+26)
 #define MAP_LEVEL	(LAST_PROP+27)
+#define LORDLY		(LAST_PROP+28)
  
 #endif /* ARTIFACT_H */

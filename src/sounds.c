@@ -4,6 +4,7 @@
 
 #include "hack.h"
 #include "edog.h"
+#include "epri.h"
 #ifdef USER_SOUNDS
 # ifdef USER_SOUNDS_REGEX
 #include <regex.h>
@@ -63,6 +64,22 @@ dosounds()
     int xx;
 #endif
     struct monst *mtmp;
+
+    if(!rn2(200) && !u.uswallow && !Underwater && !Hearing_muffled ){
+	for (mtmp = fmon; mtmp; mtmp = mtmp->nmon){
+	    if (mtmp->data == &mons[PM_JUBJUB_BIRD] && 
+	    !mtmp->mcan && !mtmp->mspec_used && 
+	    !couldsee(mtmp->mx, mtmp->my)){
+		if(flags.soundok)
+		    You_hear("a sound like a pencil that squeaks on a slate!");
+		else
+		    You("are befuddled by a terrifying shriek!");
+	    make_confused(HConfusion + rn1(8,8), FALSE);
+	    mtmp->mspec_used += 8;
+	    break;
+	    }
+	}
+    }
 
     if (!flags.soundok || u.uswallow || Underwater) return;
 
@@ -353,6 +370,55 @@ dosounds()
 	}
 	return;
     }
+    if (level.flags.has_temple && !rn2(200)
+        && !(Is_astralevel(&u.uz) || Is_sanctum(&u.uz))) {
+        for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
+            if (DEADMONSTER(mtmp))
+                continue;
+            if (mtmp->ispriest && inhistemple(mtmp)
+                /* priest must be active */
+                && mtmp->mcanmove && !mtmp->msleeping
+                /* hero must be outside this temple */
+                && temple_occupied(u.urooms) != EPRI(mtmp)->shroom)
+                break;
+        }
+        if (mtmp) {
+            /* Generic temple messages; no attempt to match topic or tone
+               to the pantheon involved, let alone to the specific deity.
+               These are assumed to be coming from the attending priest;
+               asterisk means that the priest must be capable of speech;
+               pound sign (octathorpe,&c--don't go there) means that the
+               priest and the altar must not be directly visible (we don't
+               care if telepathy or extended detection reveals that the
+               priest is not currently standing on the altar; he's mobile). */
+            static const char *const temple_msg[] = {
+                "*someone praising %s.", "*someone beseeching %s.",
+                "#an animal carcass being offered in sacrifice.",
+                "*a strident plea for donations.",
+            };
+            const char *msg;
+            int trycount = 0, ax = EPRI(mtmp)->shrpos.x,
+                ay = EPRI(mtmp)->shrpos.y;
+            boolean speechless = (mtmp->data->msound <= MS_ANIMAL),
+                    in_sight = canseemon(mtmp) || cansee(ax, ay);
+
+            do {
+                msg = temple_msg[rn2(SIZE(temple_msg) - 1 + hallu)];
+                if (index(msg, '*') && speechless)
+                    continue;
+                if (index(msg, '#') && in_sight)
+                    continue;
+                break; /* msg is acceptable */
+            } while (++trycount < 50);
+            while (!letter(*msg))
+                ++msg; /* skip control flags */
+            if (index(msg, '%'))
+                You_hear(msg, halu_gname(EPRI(mtmp)->shralign));
+            else
+                You_hear1(msg);
+            return;
+        }
+    }
 #ifdef BLACKMARKET
     if (!Is_blackmarket(&u.uz) && at_dgn_entrance("One-eyed Sam's Market") &&
         !rn2(200)) {
@@ -574,6 +640,7 @@ register struct monst *mtmp;
 	case MS_LEADER:
 	case MS_NEMESIS:
 	case MS_GUARDIAN:
+asGuardian:
 	    quest_chat(mtmp);
 	    break;
 	case MS_SELL: /* pitch, pay, total */
@@ -585,6 +652,7 @@ register struct monst *mtmp;
 		boolean isnight = night();
 		boolean kindred = maybe_polyd(u.umonnum == PM_VAMPIRE ||
 				    u.umonnum == PM_VAMPIRE_LORD ||
+				    u.umonnum == PM_NOSFERATU ||
 				    u.umonnum == PM_VAMPIRE_MAGE,
 				    Race_if(PM_VAMPIRE));
 		boolean nightchild = (Upolyd && (u.umonnum == PM_WOLF ||
@@ -827,6 +895,15 @@ register struct monst *mtmp;
 	    }
 	    /* else FALLTHRU */
 	case MS_HUMANOID:
+		if(Role_if(PM_NOBLEMAN) && 
+			(mtmp->data == &mons[PM_KNIGHT] 
+				|| mtmp->data == &mons[PM_MAID]) && 
+			mtmp->mpeaceful
+		) goto asGuardian; /* Jump up to a different case in this switch statment */
+		else if(Role_if(PM_KNIGHT) && 
+			mtmp->data == &mons[PM_KNIGHT] && 
+			mtmp->mpeaceful
+		) goto asGuardian; /* Jump up to a different case in this switch statment */
 	    if (!mtmp->mpeaceful) {
 		if (In_endgame(&u.uz) && is_mplayer(ptr)) {
 		    mplayer_talk(mtmp);
@@ -880,10 +957,7 @@ register struct monst *mtmp;
 		    verbl_msg = "Aloha.";
 		    break;
 #endif
-		case PM_GANGSTER:
-	    pline_msg = "talks about doing a drive-by.";
-		    break;
-		case PM_GEEK:
+		case PM_HACKER:
 		    verbl_msg = "Enematzu memalezu!";
 		    break;
 #if 0 /* 5lo: Deferred */
@@ -891,13 +965,6 @@ register struct monst *mtmp;
 		    verbl_msg = "Little strawberry me baby!";
 		    break;
 #endif
-		case PM_BLEEDER:
-		    verbl_msg = "*sigh* If only I could make this bleeding stop...";
-		    break;
-		case PM_ROCKER:
-	    pline_msg = "talks about groovy music.";
-		    break;
-
 		default:
 		    pline_msg = "discusses dungeon exploration.";
 		    break;

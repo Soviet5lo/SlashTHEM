@@ -161,14 +161,6 @@ register boolean special;
 		    if (rn2(2)) armor = rnd_class(PLATE_MAIL, CHAIN_MAIL);
 		    if (helm == HELM_OF_BRILLIANCE) helm = STRANGE_OBJECT;
 		    break;
-		case PM_BLEEDER:
-			weapon = KNIFE;
-		    break;
-		case PM_BINDER:
-			weapon = RANSEUR;
-			armor = ELVEN_MITHRIL_COAT;
-			cloak = LEATHER_CLOAK;
-		    break;
 		case PM_CAVEMAN:
 		case PM_CAVEWOMAN:
 		    if (rn2(4)) weapon = MACE;
@@ -178,14 +170,11 @@ register boolean special;
 		case PM_CONVICT:
 		    weapon = HEAVY_IRON_BALL;
 		    break;
-		case PM_GEEK:
+		case PM_HACKER:
 		    weapon = ELECTRIC_SWORD;
 		    break;
-		case PM_GRADUATE:
+		case PM_GEEK:
 		    weapon = FLY_SWATTER;
-		    break;
-		case PM_GANGSTER:
-		    weapon = KNIFE;
 		    break;
 		case PM_PIRATE:
 		    weapon = SCIMITAR;
@@ -211,6 +200,9 @@ register boolean special;
 		case PM_NOBLEMAN:
 		case PM_NOBLEWOMAN:
 		    weapon = RAPIER;
+		    armor = CHAIN_MAIL;
+		    cloak = find_opera_cloak();
+		    shield = STRANGE_OBJECT;
 		    break;
 #if 0
 		case PM_POKEMON:
@@ -219,12 +211,20 @@ register boolean special;
 		    weapon = CLUB;
 		    break;
 		case PM_HEALER:
-		case PM_SCIENTIST:
 		    if (rn2(4)) weapon = QUARTERSTAFF;
 		    else if (rn2(2)) weapon = rn2(2) ? UNICORN_HORN : SCALPEL;
 		    if (rn2(4)) helm = rn2(2) ? HELM_OF_BRILLIANCE : HELM_OF_TELEPATHY;
 		    if (rn2(2)) shield = STRANGE_OBJECT;
 		    break;
+		case PM_INCANTIFIER:
+		    if (rn2(4)) weapon = rn2(2) ? QUARTERSTAFF : ATHAME;
+	    	armor = rn2(2) ? BLACK_DRAGON_SCALE_MAIL :
+	    			SILVER_DRAGON_SCALE_MAIL;
+	    	cloak = ROBE;
+		    if (rn2(4)) helm = HELM_OF_BRILLIANCE;
+		    shield = STRANGE_OBJECT;
+		break;
+
 #ifdef YEOMAN
 		case PM_YEOMAN:
 #endif
@@ -238,12 +238,12 @@ register boolean special;
 		case PM_MONK:
 #if 0 /* Deferred */
 		case PM_PSION:
+#endif
 		    weapon = STRANGE_OBJECT;
 		    armor = STRANGE_OBJECT;
 		    cloak = ROBE;
 		    if (rn2(2)) shield = STRANGE_OBJECT;
 		    break;
-#endif
 		case PM_PALADIN:
 		    weapon = SILVER_SHORT_SWORD;
 		    break;
@@ -276,11 +276,8 @@ register boolean special;
 		case PM_RANGER:
 		    if (rn2(2)) weapon = ELVEN_DAGGER;
 		    break;
-		case PM_ZYBORG:
-		    weapon = RED_LIGHTSABER;
-		    break;
 		case PM_LUNATIC:
-		    weapon = STEEL_WHIP;
+		    weapon = CHAINWHIP;
 		    break;
 		case PM_ROGUE:
 		    weapon = SHORT_SWORD;
@@ -294,9 +291,6 @@ register boolean special;
 		    /* Defaults are just fine */
 		    break;
 #endif
-		case PM_ROCKER:
-			weapon = HEAVY_HAMMER;
-
 		case PM_UNDEAD_SLAYER:
 		    if (rn2(2)) weapon = SILVER_SPEAR;
 		    if (rn2(2)) armor = rnd_class(PLATE_MAIL, CHAIN_MAIL);
@@ -441,36 +435,6 @@ boolean special;
 		num--;
 	}
 }
-
-void
-create_umplayers(num, special)
-register int num;
-boolean special;
-{
-	int pm, x, y;
-	struct monst fakemon;
-
-	while(num) {
-		int tryct = 0;
-
-		/* roll for character class */
-		pm = PM_UNDEAD_ARCHEOLOGIST + rn2(PM_UNDEAD_WIZARD - PM_UNDEAD_ARCHEOLOGIST + 1);
-		fakemon.data = &mons[pm];
-
-		/* roll for an available location */
-		do {
-		    x = rn1(COLNO-4, 2);
-		    y = rnd(ROWNO-2);
-		} while(!goodpos(x, y, &fakemon, 0) && tryct++ <= 50);
-
-		/* if pos not found in 50 tries, don't bother to continue */
-		if(tryct > 50) return;
-
-		(void) makemon(&mons[pm], (xchar)x, (xchar)y, NO_MM_FLAGS);
-		num--;
-	}
-}
-
 void
 mplayer_talk(mtmp)
 register struct monst *mtmp;

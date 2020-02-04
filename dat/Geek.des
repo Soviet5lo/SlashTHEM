@@ -4,7 +4,7 @@
 
 # --- start level ---
 
-MAZE: "Gee-strt",' '
+MAZE: "Gra-strt",' '
 FLAGS: noteleport,hardfloor
 GEOMETRY: center,center
 
@@ -44,16 +44,16 @@ DOOR:locked,(40,04)
 DOOR:locked,(54,12)
 DOOR:locked,(52,12)
 
-MONSTER:'@',"The Dev Team",(38,12)
+MONSTER:'@',"Upper Graduate",(38,12)
 
-MONSTER:'@',"hacker",(37,11)
-MONSTER:'@',"hacker",(38,11)
-MONSTER:'@',"hacker",(39,11)
-MONSTER:'@',"hacker",(37,12)
-MONSTER:'@',"hacker",(39,12)
-MONSTER:'@',"hacker",(37,13)
-MONSTER:'@',"hacker",(38,13)
-MONSTER:'@',"hacker",(39,13)
+MONSTER:'@',"intern",(37,11)
+MONSTER:'@',"intern",(38,11)
+MONSTER:'@',"intern",(39,11)
+MONSTER:'@',"intern",(37,12)
+MONSTER:'@',"intern",(39,12)
+MONSTER:'@',"intern",(37,13)
+MONSTER:'@',"intern",(38,13)
+MONSTER:'@',"intern",(39,13)
 
 # For the textwork care has to be exercised that there are no
 # rock moles, dwarves with pick-axes etc. to break the walls.
@@ -94,6 +94,17 @@ MONSTER:'O',random,(53,12),hostile
 MONSTER:'M',random,(53,13),hostile
 MONSTER:'E',random,(53,14),hostile
 
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+MONSTER:random,random,random,hostile
+
 # To ensure that the player can see the artwork 
 OBJECT:'"',"amulet of ESP",random
 OBJECT:'(',"blindfold",random
@@ -120,7 +131,7 @@ TRAP:random,random
 
 # looks harmless but *IS* tough!!!
 
-MAZE: "Gee-loca",' '
+MAZE: "Gra-loca",' '
 FLAGS: hardfloor
 GEOMETRY: center,center
 
@@ -160,6 +171,16 @@ OBJECT:'"',"amulet of life saving",place[1]
 OBJECT:'"',"amulet of strangulation",place[2]
 MONSTER:'m',"giant mimic",place[3], m_feature "staircase down"
 MONSTER:'m',"giant mimic",place[4], m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
+MONSTER:'m',random,random, m_feature "staircase down"
 TRAP:"polymorph",place[5]
 
 STAIR:random,up
@@ -201,7 +222,7 @@ TRAP:random,random
 
 # --- the goal level ---
 
-MAZE: "Gee-goal", ' '
+MAZE: "Gra-goal", ' '
 GEOMETRY:center,center
 
 #         1         2         3         4         5         6         7
@@ -237,8 +258,8 @@ STAIR:(75,19),up
 DOOR:locked,(12,06)
 
 # that's what's this all about :-)
-OBJECT:'(',"pack of floppies",(37,09),blessed,0,"The Nethack Sources"
-MONSTER:'@',"Bill Gates",(37,09),hostile
+OBJECT:'(',"pack of floppies",(37,09),blessed,0,"Master Boot Disk"
+MONSTER:'@',"Student Leader",(37,09),hostile
 
 MONSTER:random,random,random
 MONSTER:random,random,random
@@ -248,6 +269,26 @@ MONSTER:random,random,random
 MONSTER:random,random,random
 MONSTER:random,random,random
 MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
 
 OBJECT:'(',"pack of floppies",random
 OBJECT:'(',"pack of floppies",random
@@ -262,10 +303,31 @@ OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
 OBJECT:random,random,random
+
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
 
 # --- fill a ---
 
-LEVEL: "Gee-fila"
+LEVEL: "Gra-fila"
 
 ROOM: "ordinary", random, random, random, random
 STAIR: random,up
@@ -310,13 +372,15 @@ RANDOM_CORRIDORS
 
 # --- fill b ---
 
-LEVEL: "Gee-filb"
+LEVEL: "Gra-filb"
 
 ROOM: "ordinary", random, random, random, random
 STAIR: random,up
 OBJECT:random,random,random
 OBJECT:random,random,random
 MONSTER:random,random,random
+MONSTER:random,random,random
+TRAP:random,random
 TRAP:random,random
 
 ROOM: "ordinary", random, random, random, random
@@ -324,30 +388,40 @@ STAIR: random,down
 OBJECT:random,random,random
 OBJECT:random,random,random
 MONSTER:random,random,random
+MONSTER:random,random,random
+TRAP:random,random
 TRAP:random,random
 
 ROOM: "ordinary", random, random, random, random
 OBJECT:random,random,random
 OBJECT:random,random,random
 MONSTER:random,random,random
+MONSTER:random,random,random
+TRAP:random,random
+TRAP:random,random
+
+ROOM: "terrorhall", random, random, random, random
+OBJECT:random,random,random
+OBJECT:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+TRAP:random,random
+TRAP:random,random
+
+ROOM: "dougroom", random, random, random, random
+OBJECT:random,random,random
+OBJECT:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+TRAP:random,random
 TRAP:random,random
 
 ROOM: "ordinary", random, random, random, random
 OBJECT:random,random,random
 OBJECT:random,random,random
 MONSTER:random,random,random
-TRAP:random,random
-
-ROOM: "ordinary", random, random, random, random
-OBJECT:random,random,random
-OBJECT:random,random,random
 MONSTER:random,random,random
 TRAP:random,random
-
-ROOM: "ordinary", random, random, random, random
-OBJECT:random,random,random
-OBJECT:random,random,random
-MONSTER:random,random,random
 TRAP:random,random
 
 RANDOM_CORRIDORS

@@ -363,7 +363,8 @@ struct mkroom *sroom;
 		if(type == COURT && IS_THRONE(levl[sx][sy].typ))
 		    continue;
                /* armories (and clinics) don't contain as many monsters */
-		if ((type != ARMORY && type != CLINIC) || rn2(2)) mon = makemon(
+		if (((type != ARMORY && type != CLINIC) || rn2(2)) &&
+				!(Role_if(PM_NOBLEMAN) && In_quest(&u.uz))){ mon = makemon(
 		    (type == COURT) ? courtmon() :
 		    (type == BARRACKS) ? squadmon() :
 		    (type == CLINIC) ?
@@ -399,7 +400,7 @@ struct mkroom *sroom;
 		    (type == GIANTCOURT) ? mkclass(S_GIANT,0) :
 		    (struct permonst *) 0,
 		   sx, sy, NO_MM_FLAGS);
-               else mon = ((struct monst *)0);
+		} else mon = ((struct monst *)0);
 /* some rooms can spawn new monster variants now --Amy */
 		if(mon) {
 			mon->msleeping = 1;
@@ -424,19 +425,15 @@ struct mkroom *sroom;
 			(void) mkgold((long) rn1(i, 10), sx, sy);
 			break;
 		    case MORGUE:
+			if(!(Role_if(PM_NOBLEMAN) && In_quest(&u.uz) )){
 			if(!rn2(5))
 			    (void) mk_tt_object(CORPSE, sx, sy);
-			if(!rn2(5) && (level_difficulty() > 10+rnd(200) )) { /* real player ghosts --Amy */
-				coord mmm;
-				mmm.x = sx;   
-				mmm.y = sy;
-			    (void) tt_mname(&mmm, FALSE, 0);
-				}
 			if(!rn2(10))	/* lots of treasure buried with dead */
 			    (void) mksobj_at((rn2(3)) ? LARGE_BOX : CHEST,
 					     sx, sy, TRUE, FALSE);
 			if (!rn2(5))
 			    make_grave(sx, sy, (char *)0);
+			} else if(rn2(2)) make_grave(sx, sy, (char *)0);
 			break;
 		    case BEEHIVE:
 			if(!rn2(3))
@@ -482,21 +479,15 @@ struct mkroom *sroom;
 			if(!rn2(20))
 			    (void) mksobj_at(POT_FULL_HEALING,sx,sy,TRUE,FALSE);
 			if(!rn2(30))
-			    (void) mksobj_at(POT_GAIN_HEALTH,sx,sy,TRUE,FALSE);
-			if(!rn2(30))
 			    (void) mksobj_at(POT_RECOVERY,sx,sy,TRUE,FALSE);
 			/* Now some wands... */
 			if(!rn2(10))
 			    (void) mksobj_at(WAN_HEALING,sx,sy,TRUE,FALSE);
 			if(!rn2(20))
 			    (void) mksobj_at(WAN_EXTRA_HEALING,sx,sy,TRUE,FALSE);
-			if(!rn2(40))
-			    (void) mksobj_at(WAN_FULL_HEALING,sx,sy,TRUE,FALSE);
 			/* And for misc healing objects */
 			if(!rn2(10))
 			    (void) mksobj_at(PILL,sx,sy,TRUE,FALSE);
-			if(!rn2(10))
-			    (void) mksobj_at(SCR_HEALING,sx,sy,TRUE,FALSE);
 			if(!rn2(40))
 			    (void) mksobj_at(MEDICAL_KIT,sx,sy,TRUE,FALSE);
 			break;
@@ -651,39 +642,16 @@ int mm_flags;
 	}
 }*/
 
-/* make a swarm of undead around mm but less, for zap.c WAN_SUMMON_UNDEAD */
-void
-mkundeadX(mm, revive_corpses, mm_flags)
-coord *mm;
-boolean revive_corpses;
-int mm_flags;
-{
-	int cnt = 1;
-	struct permonst *mdat;
-	struct obj *otmp;
-	coord cc;
-
-	if (!rn2(10)) cnt += rnd(2);
-
-	while (cnt--) {
-	    mdat = morguemon();
-	    if (enexto(&cc, mm->x, mm->y, mdat) &&
-		    (!revive_corpses ||
-		     !(otmp = sobj_at(CORPSE, cc.x, cc.y)) ||
-		     !revive(otmp)))
-		(void) makemon(mdat, cc.x, cc.y, mm_flags);
-	}
-	level.flags.graveyard = TRUE;	/* reduced chance for undead corpse */
-}
-
 STATIC_OVL struct permonst *
 morguemon()
 {
 	register int i = rn2(100), hd = rn2(level_difficulty());
 
 	if(hd > 10 && i < 10)
-		return((Inhell || In_endgame(&u.uz)) ? mkclass(S_DEMON,0) :
-						       &mons[ndemon(A_NONE)]);
+		/* 5lo: Generate liches instead of demons for chaotic quest */
+		return(Is_chaotic_quest(&u.uz) ? mkclass(S_LICH,0) :
+			(Inhell || In_endgame(&u.uz)) ? mkclass(S_DEMON,0) :
+					&mons[ndemon(A_NONE)]);
 	if(hd > 8 && i > 85)
 		return(mkclass(S_VAMPIRE,0));
 
@@ -823,10 +791,20 @@ mkswamp()	/* Michiel Huisjes & Fred de Wilde */
 						sx, sy, NO_MM_FLAGS);
 			    eelct++;
 			}
-		    } else
+		    } else {
 			if(!rn2(4))	/* swamps tend to be moldy */
 			    (void) makemon(mkclass(S_FUNGUS,0),
 						sx, sy, NO_MM_FLAGS);
+		    else if(!rn2(16)){
+			struct monst * mtmp = makemon(rn2(3) ? &mons[PM_WILL_O__WISP] 
+			  : &mons[PM_GUIDE],
+			  sx, sy, NO_MM_FLAGS);
+			if (mtmp->data == &mons[PM_GUIDE]){
+			    mongets(mtmp, WATER_WALKING_BOOTS);
+			    m_dowear(mtmp, TRUE);
+			}
+		    }
+		    } 
 		}
 		level.flags.has_swamp = 1;
 	}

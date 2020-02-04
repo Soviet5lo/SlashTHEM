@@ -271,6 +271,17 @@ boolean verbose;  /* give message(s) even when you can't see what happened */
 	    if (vis) hit(distant_name(otmp,mshot_xname), mtmp, exclam(damage));
 	    else if (verbose) pline("%s is hit%s", Monnam(mtmp), exclam(damage));
 
+	    if (touch_disintegrates(mtmp->data) && !mtmp->mcan && mtmp->mhp>6 &&
+	      !oresist_disintegration(otmp)){
+		damage = otmp->owt;
+		weight_dmg(damage);
+		mtmp->mhp-=damage;
+		if(vis)
+		    pline("It disintegrates!"); 
+		obfree(otmp, (struct obj*) 0);
+		return 1;
+	    }
+
 	    if (otmp->opoisoned && is_poisonable(otmp)) {
 		if (resists_poison(mtmp)) {
 		    if (vis) pline_The("poison doesn't seem to affect %s.",
@@ -299,6 +310,15 @@ boolean verbose;  /* give message(s) even when you can't see what happened */
 		    if (vis) pline_The("acid burns %s!", mon_nam(mtmp));
 		    else if (verbose) pline("It is burned!");
 		}
+	    }
+	    else if (otmp->otyp == WATER_VENOM){
+		if (mtmp->data == &mons[PM_IRON_GOLEM]){
+		    if (canseemon(mtmp)) pline("%s rusts.", Monnam(mtmp));
+		    damage=d(1,6);
+		} else if(mtmp->data == &mons[PM_GREMLIN]){
+		    (void)split_mon(mtmp,(struct monst *)0);
+		}
+		hurtmarmor(mtmp,AD_RUST);
 	    }
 	    mtmp->mhp -= damage;
 	    if (mtmp->mhp < 1) {
@@ -472,6 +492,7 @@ m_throw(mon, x, y, dx, dy, range, obj)
 			    /* fall through */
 			case CREAM_PIE:
 			case BLINDING_VENOM:
+			case WATER_VENOM:
 			    hitu = thitu(8, 0, singleobj, (char *)0);
 			    break;
 			default:
@@ -519,7 +540,15 @@ m_throw(mon, x, y, dx, dy, range, obj)
 				      (num_eyes == 1) ? "s" : "");
 			}
 		    }
-
+		    if (hitu && singleobj->otyp == WATER_VENOM) {
+			if (u.umonnum == PM_GREMLIN){
+			    (void)split_mon(&youmonst, (struct monst *)0);
+			} else if (u.umonnum == PM_IRON_GOLEM){
+			    You("rust!");
+			    rehumanize();
+			}
+			(void)hurtarmor(AD_RUST);
+		    } 
 		    if (hitu && singleobj->otyp == EGG) {
 			if (!Stone_resistance
 			    && !(poly_when_stoned(youmonst.data) &&
@@ -606,7 +635,8 @@ struct monst *mtmp;
 	int chance;
 
 	/* Rearranged beginning so monsters can use polearms not in a line */
-	if (mtmp->weapon_check == NEED_WEAPON || !MON_WEP(mtmp)) {
+	if (mtmp->data != &mons[PM_POLTERGEIST] &&
+		(mtmp->weapon_check == NEED_WEAPON || !MON_WEP(mtmp))) {
 	    mtmp->weapon_check = NEED_RANGED_WEAPON;
 	    /* mon_wield_item resets weapon_check as appropriate */
 	    if(mon_wield_item(mtmp) != 0) return;
@@ -614,9 +644,12 @@ struct monst *mtmp;
 
 	/* Pick a weapon */
 	otmp = select_rwep(mtmp);
-	if (!otmp) return;
+	if (!otmp){
+	    if (mtmp->data == &mons[PM_POLTERGEIST]) monflee(mtmp, 3, TRUE, FALSE);
+	    return;
+	}
 
-	if ((MON_WEP(mtmp) == otmp) && is_pole(otmp)) {
+	if ((MON_WEP(mtmp) == otmp) && is_pole(otmp) && mtmp->data != &mons[PM_POLTERGEIST]) {
 	    int dam, hitv;
 
 	    if (dist2(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy) > POLE_LIM ||
@@ -651,7 +684,8 @@ struct monst *mtmp;
 	/* WAC Catch this since rn2(0) is illegal */
 	chance = (BOLT_LIM - distmin(x,y,mtmp->mux,mtmp->muy) > 0) ?
 		BOLT_LIM - distmin(x,y,mtmp->mux,mtmp->muy) : 1;
-	if (!lined_up(mtmp) || (URETREATING(x,y) && rn2(chance)))
+	if (!lined_up(mtmp) || (URETREATING(x,y) &&
+	    mtmp->data != &mons[PM_POLTERGEIST] && rn2(chance)))
 	    return;
 
 	skill = objects[otmp->otyp].oc_skill;
@@ -687,7 +721,6 @@ struct monst *mtmp;
 
 	    switch (monsndx(mtmp->data)) {
 	    case PM_RANGER:
-	    case PM_ROCKER:
 		    multishot++;
 		    break;
 	    case PM_ROGUE:
@@ -710,6 +743,8 @@ struct monst *mtmp;
 		    otmp->otyp == ORCISH_ARROW &&
 		    mwep && mwep->otyp == ORCISH_BOW))
 		multishot++;
+	    if( mtmp->data == &mons[PM_POLTERGEIST]) 
+		multishot += (curr_mon_load(mtmp) * 2) / max_mon_load(mtmp);
 
 	    if ((long)multishot > otmp->quan) multishot = (int)otmp->quan;
 	    if (multishot < 1) multishot = 1;
@@ -776,6 +811,9 @@ register struct attack *mattk;
 		    case AD_DRST:
 			otmp = mksobj(BLINDING_VENOM, TRUE, FALSE);
 			break;
+		    case AD_RUST:
+			otmp = mksobj(WATER_VENOM, TRUE, FALSE);
+			break;
 		    default:
 			pline("bad attack type in spitmu");
 				/* fall through */
@@ -785,7 +823,7 @@ register struct attack *mattk;
 		}
 		if(!rn2(BOLT_LIM-distmin(mtmp->mx,mtmp->my,mtmp->mux,mtmp->muy))) {
 		    if (canseemon(mtmp))
-			pline("%s spits venom!", Monnam(mtmp));
+			pline("%s spits %s!", Monnam(mtmp),(mattk->adtyp==AD_RUST?"water":"venom"));
 		    m_throw(mtmp, mtmp->mx, mtmp->my, sgn(tbx), sgn(tby),
 			distmin(mtmp->mx,mtmp->my,mtmp->mux,mtmp->muy), otmp);
 		    nomul(0, 0);

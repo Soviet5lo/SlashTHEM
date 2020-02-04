@@ -358,11 +358,23 @@ quest_chat(mtmp)
 	chat_with_leader();
 	return;
     }
+	if(
+		(Role_if(PM_NOBLEMAN) && 
+		(mtmp->data == &mons[PM_KNIGHT] 
+			|| mtmp->data == &mons[PM_MAID]) && 
+		mtmp->mpeaceful) ||
+		(Role_if(PM_NOBLEMAN) && 
+		mtmp->data == &mons[PM_KNIGHT] && 
+		mtmp->mpeaceful)
+	){
+		chat_with_guardian();
+	} else {
     switch(mtmp->data->msound) {
 	    case MS_NEMESIS:	chat_with_nemesis(); break;
 	    case MS_GUARDIAN:	chat_with_guardian(); break;
 	    default:	impossible("quest_chat: Unknown quest character %s.",
 				   mon_nam(mtmp));
+    		}
 	}
 }
 

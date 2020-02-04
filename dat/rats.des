@@ -48,7 +48,6 @@ MONSTER: 'r', "sewer rat", random, hostile
 MONSTER: 'r', "sewer rat", random, hostile
 MONSTER: 'r', "rabid rat", random, hostile
 MONSTER: 'r', "the Rat King", (8,8), hostile
-OBJECT:'?',"root password detection",(8,8)
   
 ROOM: "ordinary" , random, random, random, random
 STAIR: random, up

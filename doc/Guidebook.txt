@@ -2918,6 +2918,17 @@
           silent
             Suppress terminal beeps (default on).
 
+	    sortloot
+	    Controls the behavior of the sortloot patch that sorts
+	    pickup lists for inventory and #loot commands and some
+	    others.
+	    The possible values are:
+	    full - always sort the lists
+	    loot - only sort the lists that don't use inventory
+		    letters, like with the #loot and pickup commands
+	    none - show lists the traditional way without sorting
+	    The default is 'none', the way an unpatched game works.
+
           sortpack
             Sort  the  pack contents by type when displaying inventory (de-
             fault on).

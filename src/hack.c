@@ -17,6 +17,8 @@ STATIC_DCL boolean FDECL(monstinroom, (struct permonst *,int));
 
 STATIC_DCL void FDECL(move_update, (BOOLEAN_P));
 
+static boolean door_opened;	/* set to true if door was opened during test_move */
+
 #define IS_SHOP(x)	(rooms[x].rtype >= SHOPBASE)
 
 #ifdef OVL2
@@ -664,7 +666,7 @@ still_chewing(x,y)
 
     if (!boulder && IS_ROCK(lev->typ) && !may_dig(x,y)) {
 	You("hurt your teeth on the %s.",
-	    IS_TREE(lev->typ) ? "tree" : "hard stone");
+	    IS_TREE(lev->typ) ? rmname(lev) : "hard stone");
 	nomul(0, 0);
 	return 1;
     } else if (digging.pos.x != x || digging.pos.y != y ||
@@ -677,7 +679,9 @@ still_chewing(x,y)
 	assign_level(&digging.level, &u.uz);
 	/* solid rock takes more work & time to dig through */
 	digging.effort =
-	    (IS_ROCK(lev->typ) && !IS_TREE(lev->typ) ? 30 : 60) + u.udaminc;
+	    (IS_ROCK(lev->typ) && 
+		(!IS_TREE(lev->typ) || (lev->flags & TREE_TYPE_MASK == TREE_IRONWD))
+		? 30 : 60) + u.udaminc;
 	You("start chewing %s %s.",
 	    (boulder || IS_TREE(lev->typ)) ? "on a" : "a hole in the",
 	    boulder ? "boulder" :
@@ -689,7 +693,7 @@ still_chewing(x,y)
 	    You("%s chewing on the %s.",
 		digging.chew ? "continue" : "begin",
 		boulder ? "boulder" :
-		IS_TREE(lev->typ) ? "tree" :
+		IS_TREE(lev->typ) ? rmname(lev) :
 		IS_ROCK(lev->typ) ? "rock" : "door");
 	digging.chew = TRUE;
 	watch_dig((struct monst *)0, x, y, FALSE);
@@ -698,7 +702,8 @@ still_chewing(x,y)
 
     /* Okay, you've chewed through something */
     u.uconduct.food++;
-    u.uhunger += rnd(20);
+	if(Race_if(PM_INCANTIFIER)) u.uen += rnd(20);
+	else u.uhunger += rnd(20);
 
     if (boulder) {
 	delobj(boulder);		/* boulder goes bye-bye */
@@ -970,6 +975,12 @@ int mode;
 		if (mode == DO_MOVE) {
 		    if (amorphous(youmonst.data))
 			You("try to ooze under the door, but can't squeeze your possessions through.");
+#ifdef AUTO_OPEN
+		    else if (iflags.autoopen
+				&& !Confusion && !Stunned && !Fumbling) {
+			    door_opened = flags.move = doopen_indir(x, y);
+		    }
+#endif
 		    else if (x == ux || y == uy) {
 			if (Blind || Stunned || ACURR(A_DEX) < 10 || Fumbling) {
 #ifdef STEED
@@ -1708,9 +1719,13 @@ domove()
 	}
 
 	if (!test_move(u.ux, u.uy, x-u.ux, y-u.uy, DO_MOVE)) {
-	    flags.move = 0;
-	    nomul(0, 0);
-	    return;
+		if (!door_opened) {
+			flags.move = 0;
+			nomul(0,0);
+		} else {
+			door_opened = 0;
+		}
+		return;
 	}
 
 	/* warn player before walking into known traps */
@@ -2011,7 +2026,7 @@ struct monst *mon;
 
 	/* Able to detect wounds? */
 	if (!(canseemon(mon) || (u.ustuck == mon && u.uswallow && !Blind))
-		 || !Role_if(PM_HEALER) && !Role_if(PM_SCIENTIST) && !Role_if(PM_NECROMANCER) && !Role_if(PM_UNDERTAKER))
+		 || !Role_if(PM_HEALER) && !Role_if(PM_NECROMANCER) && !Role_if(PM_UNDERTAKER))
 		/* 5lo: Expanded for more roles */
 	    return (char *)0;
 	if (mon->mhp == mon->mhpmax || mon->mhp < 1)
@@ -2940,7 +2955,6 @@ int k_format; /* WAC k_format is an int */
 	if (!rn2(20) && n >= 1 && u.ulevel >= 20) {n = n / 5; if (n < 1) n = 1;}
 	if (!rn2(50) && n >= 1 && u.ulevel >= 30) {n = n / 10; if (n < 1) n = 1;}
 #endif /* EASY_MODE */
-	if (Role_if(PM_BLEEDER)) n = n * 2; /* bleeders are harder than hard mode */
 
 	/* [max] Invulnerable no dmg */
 	if (Invulnerable) {
@@ -2988,16 +3002,16 @@ weight_cap()
 {
 	register long carrcap;
 
-	carrcap = 50*(ACURRSTR + ACURR(A_CON)) + 50 + 50*(u.ulevel);
+	carrcap = 50*(ACURRSTR + ACURR(A_CON)) + 50 + 50;
 	if (Upolyd) {
 		/* consistent with can_carry() in mon.c */
 		if (youmonst.data->mlet == S_NYMPH)
 			carrcap = MAX_CARR_CAP;
 		else if (!youmonst.data->cwt)
-			carrcap = ((carrcap * (long)youmonst.data->msize) / MZ_HUMAN) + 50*(u.ulevel);
+			carrcap = ((carrcap * (long)youmonst.data->msize) / MZ_HUMAN) + 50;
 		else if (!strongmonst(youmonst.data)
 			|| (strongmonst(youmonst.data) && (youmonst.data->cwt > WT_HUMAN)))
-			carrcap = ((carrcap * (long)youmonst.data->cwt / WT_HUMAN)) + 50*(u.ulevel);
+			carrcap = ((carrcap * (long)youmonst.data->cwt / WT_HUMAN)) + 50;
 	if (carrcap < 500) carrcap = 500;
 	}
 
@@ -3033,16 +3047,15 @@ inv_weight()
 	   of invent for easier manipulation by askchain & co, but it's also
 	   retained in u.ugold in order to keep the status line accurate; we
 	   mustn't add its weight in twice under that circumstance */
-	/* tried to make gold lighter --Amy */
 	wt = (otmp && otmp->oclass == COIN_CLASS) ? 0 :
-		(int)((u.ugold + 50L) / /*100L*/10000L);
+		(int)((u.ugold + 50L) / 100L);
 #endif
 	while (otmp) {
 #ifndef GOLDOBJ
 		if (otmp->otyp != BOULDER || !throws_rocks(youmonst.data))
 #else
 		if (otmp->oclass == COIN_CLASS)
-			wt += (int)(((long)otmp->quan + 50L) / /*100L*/10000L);
+			wt += (int)(((long)otmp->quan + 50L) / 100L);
 		else if (otmp->otyp != BOULDER || !throws_rocks(youmonst.data))
 #endif
 			wt += otmp->owt;

@@ -189,7 +189,12 @@ struct obj {
 			 (otmp)->oclass == GEM_CLASS) && \
 			 objects[(otmp)->otyp].oc_skill >= -P_CROSSBOW && \
 			 objects[(otmp)->otyp].oc_skill <= -P_BOW)
+# define throwable_nut(otmp)    ((otmp->oclass == FOOD_CLASS) && \
+				objects[(otmp)->otyp].oc_skill == -P_SLING && \
+				!(otmp)->oeaten)
+
 #define is_missile(otmp)	(((otmp)->oclass == WEAPON_CLASS || \
+			 throwable_nut(otmp) || \
 			 (otmp)->oclass == TOOL_CLASS) && \
 			 objects[(otmp)->otyp].oc_skill >= -P_BOOMERANG && \
 			 objects[(otmp)->otyp].oc_skill <= -P_DART)
@@ -268,7 +273,9 @@ struct obj {
 				|| (otmp)->otyp == DWARVISH_MITHRIL_COAT\
 				|| (otmp)->otyp == DWARVISH_CLOAK\
 				|| (otmp)->otyp == DWARVISH_ROUNDSHIELD)
-#define is_gnomish_armor(otmp)	(FALSE)
+#define is_gnomish_armor(otmp)	((otmp)->otyp == GNOMISH_HELM\
+				|| (otmp)->otyp == GNOMISH_BOOTS\
+				|| (otmp)->otyp == GNOMISH_SUIT)
 
 				
 /* Eggs and other food */
@@ -377,6 +384,15 @@ struct obj {
 #else
 #define is_flimsy(otmp)		(objects[(otmp)->otyp].oc_material <= LEATHER)
 #endif
+
+# define oresist_disintegration(obj) \
+		(objects[obj->otyp].oc_oprop == DISINT_RES || \
+		 obj_resists(obj, 5, 50) || is_quest_artifact(obj) )
+# define weight_dmg(i) {  \
+	i = (i<=100)?1:i/100; \
+	i = rnd(i); \
+	if(i > 6) i = 6; \
+}
 
 /* helpers, simple enough to be macros */
 #define is_plural(o)	((o)->quan > 1 || \

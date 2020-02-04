@@ -44,6 +44,7 @@ static void FDECL(maybe_tame, (struct monst *,struct obj *));
 static void FDECL(undo_genocide,(void));
 
 STATIC_PTR void FDECL(set_lit, (int,int,genericptr_t));
+STATIC_PTR void FDECL(set_dark, (int,int,genericptr_t));
 
 int
 doread()
@@ -578,7 +579,7 @@ doread()
             pline("\"Magic Marker(TM) Red Ink Marker Pen. Water Soluble.\"");
              u.uconduct.literate++;
              return 1;
-#if 0 /* We'll get back to this later... */
+
 	} else if (scroll->oclass == COIN_CLASS) {
 	   if (Blind)
                 You("feel the embossed words:");
@@ -586,10 +587,12 @@ doread()
                 You("read:");
 	    pline("\"1 Zorkmid. 857 GUE. In Frobs We Trust.\"");
             u.uconduct.literate++;
+#if 0 /* 5lo: This causes a segfault, but its not needed anyway */
 #ifndef GOLDOBJ 
 	    /* Give it back to them, then */
 	    u.ugold = scroll->quan;
 	    dealloc_obj(scroll);
+#endif
 #endif
 	    return 1;
 	} else if (scroll->oartifact == ART_ORB_OF_FATE) {
@@ -599,7 +602,6 @@ doread()
 	    pline("\"Odin.\"");
             u.uconduct.literate++;
 	    return 1;
-#endif
 	} else if (OBJ_DESCR(objects[scroll->otyp]) &&
 		!strncmp(OBJ_DESCR(objects[scroll->otyp]), "runed", 5)) {
 	    if (scroll->otyp == RUNESWORD) {
@@ -838,7 +840,7 @@ int curse_bless;
 	     *	7 : 100     100
 	     */
 	    n = (int)obj->recharged;
-	    if (n > 0 && (obj->otyp == WAN_WISHING || obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT ||
+	    if (n > 0 && (obj->otyp == WAN_WISHING || obj->otyp == WAN_ACQUIREMENT ||
 		    (n * n * n > rn2(7*7*7)))) {	/* recharge_limit */
 		Your("%s vibrates violently, and explodes!",xname(obj));
 		wand_explode(obj, FALSE);
@@ -851,7 +853,7 @@ int curse_bless;
 	    if (is_cursed) {
 		stripspe(obj);
 	    } else {
-		int lim = (obj->otyp == WAN_WISHING) ? 2 : (obj->otyp == WAN_CHARGING || obj->otyp == WAN_ACQUIREMENT) ? 3 :
+		int lim = (obj->otyp == WAN_WISHING) ? 2 : (obj->otyp == WAN_ACQUIREMENT) ? 3 :
 			(objects[obj->otyp].oc_dir != NODIR) ? 8 : 15;
 		n = (lim == 3) ? 3 : rn1(5, lim + 1 - 5);
 		if (!is_blessed) n = rnd(n);
@@ -1784,11 +1786,66 @@ register struct obj	*sobj;
 		pline("This scroll seems to be blank.");
 	    known = TRUE;
 	    break;
-	/* KMH, balance patch -- removed */
+	/* KMH, balance patch -- removed
+	 * Re-enabled via SlashEM-Extended */
 	case SCR_TRAP_DETECTION:
 		if (!sobj->cursed) return(trap_detect(sobj));
+		else {
+		    You_feel("%s", (confused) ? "extremely unsafe" : "unsafe");
+			{
+			int kind;
+		    	int i, j, bd = confused ? 2 : 1;
+
+		      	for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
+				if (!isok(u.ux + i, u.uy + j)) continue;
+				if ((levl[u.ux + i][u.uy + j].typ != ROOM && levl[u.ux + i][u.uy + j].typ != CORR) || MON_AT(u.ux + i, u.uy + j)) continue;
+				if (t_at(u.ux + i, u.uy + j)) continue;
+
+			      	kind = rnd(TRAPNUM-1);
+				unsigned lvl = level_difficulty();
+				/* 5lo: let's reject too hard traps like normal */
+				switch (kind) {
+				    case MAGIC_PORTAL:
+					    kind = NO_TRAP; break;
+				    case ROLLING_BOULDER_TRAP:
+					    kind = ROCKTRAP;
+					    /* fall-through... */
+				    case SLP_GAS_TRAP:
+					    if (lvl < 2) kind = NO_TRAP; break;
+				    case LEVEL_TELEP:
+					    if (lvl < 5 || level.flags.noteleport)
+						kind = SQKY_BOARD; break;
+				    case SPIKED_PIT:
+					    if (lvl < 5) kind = PIT; break;
+				    case LANDMINE:
+				    case SPEAR_TRAP:
+					    if (lvl < 6) kind = DART_TRAP; break;
+				    case WEB:
+					    if (lvl < 7) kind = DART_TRAP; break;
+				    case STATUE_TRAP:
+				    case POLY_TRAP:
+					    if (lvl < 8) kind = NO_TRAP; break;
+				    case COLLAPSE_TRAP:
+				    case MAGIC_BEAM_TRAP:
+					    if (lvl < 16) kind = NO_TRAP; break;
+				    case TELEP_TRAP:
+					    if (level.flags.noteleport) kind = SQKY_BOARD; break;
+				    case FIRE_TRAP:
+				    case ICE_TRAP:
+					    if (lvl < 10) kind = ARROW_TRAP; break;
+				    case HOLE:
+					/* make these much less often than other traps */
+					    if (rn2(7)) kind = PIT; break;
+				    case TRAPDOOR:
+					    if (!Can_dig_down(&u.uz)) kind = PIT; break;
+
+				}
+				/* Only a 50% chance of generating any given trap */
+				if(!rn2(2)) (void) maketrap(u.ux + i, u.uy + j, kind);
+			}
+		    }
+		}
 	      break;
-		/*what the hell? */
 	case SCR_REMOVE_CURSE:
 	case SPE_REMOVE_CURSE:
 	    {	register struct obj *obj;
@@ -1859,7 +1916,6 @@ register struct obj	*sobj;
 	     * monsters are not visible
 	     */
 	    break;
-	case SCR_SUMMON_UNDEAD:        
 	case SPE_SUMMON_UNDEAD:        
 	    {
 		int cnt = 1, oldmulti = multi;
@@ -1994,31 +2050,6 @@ register struct obj	*sobj;
 			else if (sobj->blessed) fall_asleep(-10, FALSE);
 			else {fall_asleep(-20, FALSE);}
 				}
-		}
-		break;
-	case SCR_TRAP_CREATION:
-		known = TRUE;
-		    You_feel("endangered!!");
-		{
-			int rtrap;
-		    int i, j, bd = confused ? 5 : 1;
-
-		      for (i = -bd; i <= bd; i++) for(j = -bd; j <= bd; j++) {
-				if (!isok(u.ux + i, u.uy + j)) continue;
-				if ((levl[u.ux + i][u.uy + j].typ != ROOM && levl[u.ux + i][u.uy + j].typ != CORR) || MON_AT(u.ux + i, u.uy + j)) continue;
-				if (t_at(u.ux + i, u.uy + j)) continue;
-
-			      rtrap = rnd(TRAPNUM-1);
-				if (rtrap == HOLE) rtrap = PIT;
-				if (rtrap == MAGIC_PORTAL) rtrap = PIT;
-				if (rtrap == TRAPDOOR && !Can_dig_down(&u.uz)) rtrap = PIT;
-				if (rtrap == LEVEL_TELEP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == TELEP_TRAP && level.flags.noteleport) rtrap = SQKY_BOARD;
-				if (rtrap == ROLLING_BOULDER_TRAP) rtrap = ROCKTRAP;
-				if (rtrap == NO_TRAP) rtrap = ARROW_TRAP;
-
-				(void) maketrap(u.ux + i, u.uy + j, rtrap);
-			}
 		}
 		break;
 	case SCR_TAMING:
@@ -2236,10 +2267,6 @@ register struct obj	*sobj;
 		goto id;
 	case SCR_IDENTIFY:
 		/* known = TRUE; */
-		if (sobj->cursed) {
-			pline("You fall below the bottom of the page! You die...");
-			pline("Do you want your possessions identified? DYWYPI? [ynq] (n) _");
-		}
 		if(confused)
 			You("identify this as an identify scroll.");
 		else
@@ -2258,30 +2285,7 @@ register struct obj	*sobj;
 		    identify_pack(cval);
 		}
 		return(1);
-	case SCR_INVENTORY_ID: /* always identifies the player's entire inventory --Amy */
-		makeknown(SCR_INVENTORY_ID);
-		if(confused)
-			You("identify this as an inventory id scroll.");
-		else
-			pline("This is an inventory id scroll.");
-
-		if(!objects[sobj->otyp].oc_name_known) more_experienced(0,10);
-		if (carried(sobj)) useup(sobj);
-		else useupf(sobj, 1L);
-
-		if(invent && !confused) {
-		    identify_pack(0);
-		}
-		return(1);
-	case SCR_HEALING: /* a basic healing item that can be used to - who would have guessed? - cure wounds! --Amy */
-		makeknown(SCR_HEALING);
-		You("feel healthier!");
-			if (!rn2(20)) healup(400 + rnd(u.ulevel), 0, FALSE, FALSE);
-			else if (!rn2(5)) healup(d(6,8) + rnd(u.ulevel), 0, FALSE, FALSE);
-			else healup(d(5,6) + rnd(u.ulevel), 0, FALSE, FALSE);
-		break;
 	case SCR_CHARGING:
-	case SPE_CHARGING:
 		if (confused) {
 		    You_feel("charged up!");
 		    if (u.uen < u.uenmax)
@@ -2297,15 +2301,6 @@ register struct obj	*sobj;
 		if (!otmp) break;
 		recharge(otmp, sobj->cursed ? -1 : (sobj->blessed ? 1 : 0));
 		break;
-	case SCR_GAIN_MANA:
-		    You_feel("full of mystic power!");
-		    if (u.uen < u.uenmax)
-			u.uen = u.uenmax;
-		    else
-			u.uen = (u.uenmax += d(5,4));
-		    flags.botl = 1;
-		    known = TRUE;
-		    break;
 	case SCR_MAGIC_MAPPING:
 		if (level.flags.nommap) {
 		    Your("mind is filled with crazy lines!");
@@ -2598,69 +2593,14 @@ revid_end:
 	case SCR_ACQUIREMENT: 
 		known = TRUE;
 
-		int acquireditem;
-		acquireditem = 0;
 		pline("You have found a scroll of acquirement!");
 		if (sobj->cursed || (!sobj->blessed && Luck+rn2(5) < 0)) {
 			pline("Unfortuantely, nothing happens.");
 			break;
 		}
-
-		while (acquireditem == 0) { /* ask the player what they want --Amy */
-
-		/* Yeah, I know this is less elegant than DCSS. But hey, it's a scroll of acquirement! */
-
-			if (yn("Do you want to acquire a random item?")=='y') {
-				    acqo = mkobj_at(RANDOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a weapon?")=='y') {
-				    acqo = mkobj_at(WEAPON_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire an armor?")=='y') {
-				    acqo = mkobj_at(ARMOR_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a ring?")=='y') {
-				    acqo = mkobj_at(RING_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire an amulet?")=='y') {
-				    acqo = mkobj_at(AMULET_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a tool?")=='y') {
-				    acqo = mkobj_at(TOOL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire some food?")=='y') {
-				    acqo = mkobj_at(FOOD_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a potion?")=='y') {
-				    acqo = mkobj_at(POTION_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a scroll?")=='y') {
-				    acqo = mkobj_at(SCROLL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a spellbook?")=='y') {
-				    acqo = mkobj_at(SPBOOK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a wand?")=='y') {
-				    acqo = mkobj_at(WAND_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire some coins?")=='y') {
-				    acqo = mkobj_at(COIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a gem?")=='y') {
-				    acqo = mkobj_at(GEM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a boulder or statue?")=='y') {
-				    acqo = mkobj_at(ROCK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a heavy iron ball?")=='y') {
-				    acqo = mkobj_at(BALL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire an iron chain?")=='y') {
-				    acqo = mkobj_at(CHAIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-			else if (yn("Do you want to acquire a splash of venom?")=='y') {
-				    acqo = mkobj_at(VENOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-
-		}
-
-		/* special handling to prevent wands of wishing or similarly overpowered items --Amy */
-
-		if (acqo->otyp == GOLD_PIECE) acqo->quan = rnd(1000);
-		if (acqo->otyp == MAGIC_LAMP) { acqo->otyp = OIL_LAMP; acqo->age = 1500L; }
-		if (acqo->otyp == MAGIC_MARKER) acqo->recharged = 1;
-	    while(acqo->otyp == WAN_WISHING || acqo->otyp == WAN_POLYMORPH || acqo->otyp == WAN_ACQUIREMENT)
-		acqo->otyp = rnd_class(WAN_LIGHT, WAN_SOLAR_BEAM);
-	    while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT || acqo->otyp == SCR_ENTHRONIZATION || acqo->otyp == SCR_FOUNTAIN_BUILDING || acqo->otyp == SCR_SINKING || acqo->otyp == SCR_WC)
-		acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
-
-		pline("Something appeared on the ground just beneath you!");
-
+		do_acquirement();
 		break;
-
+#if 0
 	case SCR_ENTHRONIZATION:
 
 		if (levl[u.ux][u.uy].typ != ROOM) {
@@ -2708,7 +2648,7 @@ revid_end:
 		levl[u.ux][u.uy].typ = TOILET;
 
 		break;
-
+#endif
 	case SCR_CONSECRATION:
 	{
 		aligntyp al,ual;
@@ -2963,6 +2903,111 @@ register boolean on;
 	}
 
 	vision_full_recalc = 1;	/* delayed vision recalculation */
+}
+
+STATIC_PTR void
+set_dark(x,y,val)
+int x, y;
+genericptr_t val;
+/* 5lo: TODO: Use this for scroll of darkness? */
+/* *val comes in as 0 if blind, -1, 1, or 2 otherwise 
+ *val leaves as 0 if blind
+               -1 if darkness hit you at sometime
+                2 if you saw darkness, but it hasn't
+                1 if you haven't seen darkness yet 
+                     yet hit you */
+{
+    char * nblind = (char *) val;
+    register struct obj *otmp;
+    if (u.ux == x && u.uy == y) {
+	if (* nblind) {
+	    *nblind = -1;
+	    if (uwep && artifact_light(uwep) && uwep->lamplit)
+		pline("Suddenly, the only light left comes from %s!",
+		 the(xname(uwep)));
+	    else
+		You("are surrounded by darkness!");
+	} 
+    /* the magic douses lamps, et al, too */
+    for(otmp = invent; otmp; otmp = otmp->nobj)
+	if (otmp->lamplit)
+	    (void) snuff_lit(otmp);
+	} else {
+	    struct monst * mlit = m_at(x,y);
+	    if (*nblind == 1 && levl[x][y].lit && cansee(x,y))
+		*nblind = 2; 
+	    if (mlit)
+		for(otmp = mlit->minvent; otmp; otmp = otmp->nobj)
+		    if (otmp->lamplit)
+			(void) snuff_lit(otmp);
+	}
+    levl[x][y].lit = 0;
+    snuff_light_source(x, y);
+}
+
+/* can be used even if no mon is at xx, yy */
+void
+litroom_mon(on,obj, xx, yy)
+register boolean on;
+struct obj *obj;
+int xx, yy;
+{
+    struct monst * mlit = m_at(xx,yy);
+    char u_see_effects = !Blind;
+  
+    /*
+     *  If we are darkening the room and the hero is punished but not
+     *  blind, then we have to pick up and replace the ball and chain so
+     *  that we don't remember them if they are out of sight.
+     */
+    if (Punished && !on && !Blind)
+	move_bc(1, 0, uball->ox, uball->oy, uchain->ox, uchain->oy);
+
+#ifdef REINCARNATION
+    if (Is_rogue_level(&u.uz)) {
+	/* Can't use do_clear_area because MAX_RADIUS is too small */
+	/* rogue lighting must light the entire room */
+	int rnum = levl[xx][yy].roomno - ROOMOFFSET;
+	int rx, ry;
+	if(rnum >= 0) {
+	    for(rx = rooms[rnum].lx-1; rx <= rooms[rnum].hx+1; rx++)
+		for(ry = rooms[rnum].ly-1; ry <= rooms[rnum].hy+1; ry++){
+		    if (on)
+			set_lit(rx, ry, (genericptr_t)(&u_see_effects));
+		    else
+			set_dark(rx, ry, (genericptr_t)(&u_see_effects));
+		}
+	    rooms[rnum].rlit = on;
+	}
+	/* hallways remain dark on the rogue level */
+    } else
+#endif
+    do_clear_area(xx,yy,
+	(obj && obj->oclass==SCROLL_CLASS && obj->blessed) ? 5 : 3,
+	(on)?set_lit:set_dark, (genericptr_t)&u_see_effects );
+
+    /*
+     *  If we are not blind, then force a redraw on all positions in sight
+     *  by temporarily blinding the hero.  The vision recalculation will
+     *  correctly update all previously seen positions *and* correctly
+     *  set the waslit bit [could be messed up from above].
+     */
+    if (!Blind) {
+	vision_recalc(2);
+
+	/* replace ball&chain */
+	if (Punished && !on)
+	    move_bc(0, 0, uball->ox, uball->oy, uchain->ox, uchain->oy);
+    }
+    if (on && canseemon(mlit)) {
+	pline("A lit field surrounds %s!", mon_nam(mlit));
+    }
+    if (!on && u_see_effects==2){
+	pline("A shroud of darkness settles %s!", 
+	  (distu(xx,yy) > 15)?"in the distance":"nearby");
+    }
+
+    vision_full_recalc = 1;	/* delayed vision recalculation */
 }
 
 static void
@@ -3350,12 +3395,6 @@ void undo_genocide(void)
 			pline("This creature has not been genocided.");
 			continue;
 		}
-		if (mn == PM_UNGENOMOLD) {
-
-			pline("For some reason, you cannot ungenocide this species!");
-			continue;
-		}
-
 		/*mons[mn].geno*/mvitals[mn].mvflags &= ~G_GENOD;
 		pline("The race of %s now exist again.",makeplural(buf));
 		break;

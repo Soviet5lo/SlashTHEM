@@ -288,15 +288,8 @@ boolean prompt_for_obj;
 	/* May we attempt this? */
 	multi = 0;
 	if (cantwield(youmonst.data)) {
-		pline("Don't be ridiculous! Your current form cannot realistically wield a weapon!");
-
-		if (yn("Try anyway?") == 'y') {
-			if (rn2(3)) { 		make_confused(HConfusion + rnd(40),FALSE);
-			pline("Uhh... that didn't seem to work.");
-		    return 1;}
-		}
-		else {return(0);}
-
+		pline("Don't be ridiculous!");
+		return(0);
 	}
 
 	/* Prompt for a new weapon */
@@ -323,7 +316,7 @@ boolean prompt_for_obj;
 		return (doswapweapon());
 	else if (wep == uquiver)
 		setuqwep((struct obj *) 0);
-	else if (wep->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL
+	else if (wep->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL | W_CHAIN
 #ifdef STEED
 			| W_SADDLE
 #endif
@@ -332,6 +325,14 @@ boolean prompt_for_obj;
 		return (0);
 	}
 
+	/* it's a chain? 
+	 * 5lo: And you're not restricted */
+	if (wep && wep->otyp == IRON_CHAIN && P_MAX_SKILL(P_WHIP) > P_ISRESTRICTED) {
+	        pline("You figure out your iron chain can be used as a chainwhip!");
+		wep->oclass = WEAPON_CLASS;
+		wep->otyp = CHAINWHIP;
+	        result = ready_weapon(wep, TRUE);
+	} else {
 	/* Set your new primary weapon */
 	oldwep = uwep;
 	result = ready_weapon(wep, TRUE);
@@ -339,7 +340,7 @@ boolean prompt_for_obj;
 		setuswapwep(oldwep, TRUE);
 	untwoweapon();
 	(void)doredraw();
-
+	}
 	return (result);
 }
 
@@ -353,15 +354,8 @@ doswapweapon()
 	/* May we attempt this? */
 	multi = 0;
 	if (cantwield(youmonst.data)) {
-
-		pline("Don't be ridiculous! Your current form cannot realistically wield a weapon!");
-
-		if (yn("Try anyway?") == 'y') {
-			if (rn2(3)) { 		make_confused(HConfusion + rnd(40),FALSE);
-			pline("Uhh... that didn't seem to work.");
-		    return 1;}
-		}
-		else {return(0);}
+		pline("Don't be ridiculous!");
+		return(0);
 	}
 	if (welded(uwep)) {
 		weldmsg(uwep);
@@ -770,7 +764,7 @@ boolean fade_scrolls;
 	if (target->greased) {
 	    grease_protect(target,(char *)0,victim);
 	} else if (target->oclass == SCROLL_CLASS) {
-	    if(fade_scrolls && target->otyp != SCR_BLANK_PAPER && !target->oartifact && target->otyp != SCR_HEALING
+	    if(fade_scrolls && target->otyp != SCR_BLANK_PAPER && !target->oartifact
 #ifdef MAIL
 	    && target->otyp != SCR_MAIL
 #endif

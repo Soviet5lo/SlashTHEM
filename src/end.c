@@ -47,6 +47,7 @@ STATIC_DCL boolean FDECL(list_vanquished, (CHAR_P, BOOLEAN_P));
 #  include <sys/stat.h>
 # endif
 extern char msgs[][BUFSZ];
+extern int msgs_count[];
 extern int lastmsg;
 extern void NDECL(dump_spells);
 extern void NDECL(dump_techniques);
@@ -86,7 +87,7 @@ static NEARDATA const char *deaths[] = {		/* the array of death */
 	"died", "betrayed", "choked", "poisoned", "starvation", "drowning",
 	"burning", "dissolving under the heat and pressure",
 	"crushed", "turned to stone", "turned into slime",
-	"genocided", "panic", "trickery",
+	"disintegrated", "genocided", "panic", "trickery",
 	"quit", "escaped", "ascended"
 };
 
@@ -94,7 +95,7 @@ static NEARDATA const char *ends[] = {		/* "when you..." */
 	"died", "were betrayed", "choked", "were poisoned", "starved", 
 	"drowned", "burned", "dissolved in the lava",
 	"were crushed", "turned to stone", "turned into slime",
-	"were genocided", "panicked", "were tricked",
+	"were disintegrated", "were genocided", "panicked", "were tricked",
 	"quit", "escaped", "ascended"
 };
 
@@ -377,10 +378,14 @@ register struct monst *mtmp;
 		u.ugrave_arise = urace.mummynum;
 	else if (is_vampire(mtmp->data) && Race_if(PM_HUMAN)
 		  	&& mtmp->data != &mons[PM_FIRE_VAMPIRE]
-		  	&& mtmp->data != &mons[PM_STAR_VAMPIRE])
+		  	&& mtmp->data != &mons[PM_STAR_VAMPIRE]
+			&& mtmp->data != &mons[PM_VOGON]
+			&& mtmp->data != &mons[PM_VOGON_LORD])
 		u.ugrave_arise = PM_VAMPIRE;
 	else if (mtmp->data == &mons[PM_GHOUL])
 		u.ugrave_arise = PM_GHOUL;
+	else if (mtmp->data == &mons[PM_SPECTRE] || u.ulevel > 15)
+		u.ugrave_arise = PM_SPECTRE;
 	if (u.ugrave_arise >= LOW_PM &&
 				(mvitals[u.ugrave_arise].mvflags & G_GENOD))
 		u.ugrave_arise = NON_PM;
@@ -419,7 +424,7 @@ panic VA_DECL(const char *, str)
 		  "Program initialization has failed." :
 		  "Suddenly, the dungeon collapses.");
 
-	    raw_print("\r\nReport this error to Amy (Bluescreenofdeath at Nethackwiki) so it can be fixed.");
+	    raw_print("\r\nReport this error to Soviet5lo at Github so it can be fixed.");
 
 #if defined(WIZARD) && !defined(MICRO)
 # if defined(NOTIFY_NETHACK_BUGS)
@@ -599,8 +604,9 @@ int how;
 		u.uhp = u.uhpmax;
 	}
 	u.uhplast = u.uhp;
-	if (u.uhunger < 500) {
-	    u.uhunger = 500;
+	if (YouHunger < 500) {
+		if(Race_if(PM_INCANTIFIER)) u.uen = u.uenmax/4;
+		else u.uhunger = 500;
 	    newuhs(FALSE);
 	}
 	/* cure impending doom of sickness hero won't have time to fix */
@@ -813,7 +819,9 @@ int how;
 		Your("%s %s!", Lifesaved ? "medallion" : "amulet",
 		      !Blind ? "begins to glow" : "feels warm");
 		if (how == CHOKING) You("vomit ...");
-		You_feel("much better!");
+		if (how == DISINTEGRATED) You("reconstitute!");
+		else
+		    You_feel("much better!", how);
 		pline_The("medallion crumbles to dust!");
 		/* KMH -- Bullet-proofing */
 		if (uamul)
@@ -991,6 +999,7 @@ die:
 		disclose(how, taken);
 	/* finish_paybill should be called after disclosure but before bones */
 #if defined(DUMP_LOG) && defined(DUMPMSGS)
+	/*
 		if (lastmsg >= 0) {
 		  dump ("", "Latest messages");
 		  for (i = lastmsg + 1; i < DUMPMSGS; i++) {
@@ -1001,6 +1010,22 @@ die:
 		    if (msgs[i] && strcmp(msgs[i], "") )
 		      dump ("  ", msgs[i]);
 		  } 
+		  */
+		char tmpbuf[BUFSZ];
+		int i, j;
+		if (lastmsg >= 0) {
+		  dump ("", "Latest messages");
+		for (j = lastmsg + 1; j < DUMPMSGS + lastmsg + 1; j++) {
+		  i = j % DUMPMSGS;
+		  if (msgs[i] && strcmp(msgs[i], "") ) {
+		    if (msgs_count[i] == 1) {
+		      dump ("  ", msgs[i]);
+		    } else {
+		      Sprintf(tmpbuf, "%s (%dx)", msgs[i], msgs_count[i]);
+		      dump ("  ", tmpbuf);
+		    }
+		  }
+		}
 		  dump ("","");
 		}
 #endif
@@ -1295,6 +1320,11 @@ boolean identified, all_containers, want_dump;
 /* The original container_contents function */
 {
 	register struct obj *box, *obj;
+#ifdef SORTLOOT
+        struct obj **oarray;
+        int i,j,n;
+        char *invlet;
+#endif /* SORTLOOT */
 	char buf[BUFSZ];
 
 	for (box = list; box; box = box->nobj) {
@@ -1305,13 +1335,52 @@ boolean identified, all_containers, want_dump;
 		    continue;	/* bag of tricks with charges can't contain anything */
 		} else if (box->cobj) {
 		    winid tmpwin = create_nhwindow(NHW_MENU);
+#ifdef SORTLOOT
+                   /* count the number of items */
+                   for (n = 0, obj = box->cobj; obj; obj = obj->nobj) n++;
+                   /* Make a temporary array to store the objects sorted */
+                   oarray = (struct obj **) alloc(n*sizeof(struct obj*));
+
+                   /* Add objects to the array */
+                   i = 0;
+                   invlet = flags.inv_order;
+               nextclass:
+                   for (obj = box->cobj; obj; obj = obj->nobj) {
+                      if (!flags.sortpack || obj->oclass == *invlet) {
+                       if (iflags.sortloot == 'f'
+                           || iflags.sortloot == 'l') {
+                         /* Insert object at correct index */
+                         for (j = i; j; j--) {
+                           if (strcmpi(cxname2(obj), cxname2(oarray[j-1]))>0
+                           || (flags.sortpack &&
+                               oarray[j-1]->oclass != obj->oclass))
+                             break;
+                           oarray[j] = oarray[j-1];
+                         }
+                         oarray[j] = obj;
+                         i++;
+                       } else {
+                         /* Just add it to the array */
+                         oarray[i++] = obj;
+                       }
+                     }
+                   } /* for loop */
+                   if (flags.sortpack) {
+                     if (*++invlet) goto nextclass;
+                   }
+#endif /* SORTLOOT */
 		    Sprintf(buf, "Contents of %s:", the(xname(box)));
 		    putstr(tmpwin, 0, buf);
 		    putstr(tmpwin, 0, "");
 #ifdef DUMP_LOG
 		    if (dump_fp) dump("", buf);
 #endif
+#ifdef SORTLOOT
+                   for (i = 0; i < n; i++) {
+                       obj = oarray[i];
+#else
 		    for (obj = box->cobj; obj; obj = obj->nobj) {
+#endif
 			putstr(tmpwin, 0, doname(obj));
 #ifdef DUMP_LOG
 			if (want_dump)  dump("  ", doname(obj));

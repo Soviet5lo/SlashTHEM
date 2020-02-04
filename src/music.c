@@ -110,7 +110,7 @@ NEARDATA const struct songspell songs[] = {
 	{ SPE_CONFUSE_MONSTER,	"Cacophony",	2, 5,	LEATHER_DRUM,	TOOLED_HORN },
 	{ SPE_HASTE_SELF,	"Charge", 	2, 5, 	LEATHER_DRUM,	BUGLE },
 	{ SPE_CANCELLATION,	"Disruption",   2, 5,	BUGLE,		TOOLED_HORN },
-	{ SPE_SLOW_MONSTER,	"Drowsiness",	2, 5,	WOODEN_FLUTE,	WOODEN_HARP },
+	{ SPE_SLOW_MONSTER,	"Lethargy",	2, 5,	WOODEN_FLUTE,	WOODEN_HARP },
 	{ SPE_CAUSE_FEAR,	"Despair",	3, 6,	LEATHER_DRUM,	TOOLED_HORN },
 	{ SPE_CHARM_MONSTER,	"Friendship",	3, 6,	WOODEN_FLUTE,	WOODEN_HARP },
 	{ SPE_CAUSE_FEAR,	"Inspire Courage",3,6,	LEATHER_DRUM,	BUGLE }
@@ -144,7 +144,7 @@ static NEARDATA char msgbuf[BUFSZ];
  * We cannot check song_played directly because if the song was interrupted,
  * we have no means to reset song_played.
  */
-int inline
+STATIC_DCL int
 song_being_played()
 {
     if (occupation != play_song)
@@ -152,14 +152,13 @@ song_being_played()
     return song_played;
 }
 
-STATIC_PTR int
+STATIC_DCL void
 reset_song()
 {
     song_played = SNG_NONE;
     song_delay = 0;
     song_penalty = 0;
 /*	song_lastturn = 0L;*/
-    return 0;
 }
 
 /* music being played is at its last turn? */
@@ -1446,6 +1445,10 @@ struct obj *instr;
 	case WOODEN_FLUTE:		/* May charm snakes */
 	/* KMH, balance patch -- removed
 	case PAN_PIPE: */
+	    if (youmonst.data == &mons[PM_SATYR]) {
+		docharm();
+		break;
+	    }
 	    do_spec &= (rn2(ACURR(A_DEX)) + u.ulevel > 25);
 	    pline("%s.", Tobjnam(instr, do_spec ? "trill" : "toot"));
 	    if (do_spec) charm_snakes(u.ulevel * 3);

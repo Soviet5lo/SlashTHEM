@@ -91,8 +91,6 @@ struct Role {
 	/*** Indices of important monsters and objects ***/
 	short malenum,		/* index (PM_) as a male (botl.c) */
 	      femalenum,	/* ...or as a female (NON_PM == same) */
-		undeadmalenum,	/* index (PM_) as an undead */
-		undeadfemalenum,	/* mainly for bones files --Amy */
 	      petnum,		/* PM_ of preferred pet (NON_PM == random) */
 	      ldrnum,		/* PM_ of quest leader (questpgr.c) */
 	      guardnum,		/* PM_ of quest guardians (questpgr.c) */
@@ -153,6 +151,10 @@ extern const struct Role roles[];	/* table of available roles */
 extern struct Role urole;
 #define Role_if(X)	(urole.malenum == (X))
 #define Role_switch	(urole.malenum)
+
+#define CANNIBAL_ALLOWED() (Role_if(PM_CAVEMAN) || Role_if(PM_LUNATIC) || Race_if(PM_ORC) || \
+Race_if(PM_TROLL) ||  Race_if(PM_OGRE) ||Race_if(PM_HUMAN_WEREWOLF) || Race_if(PM_VAMPIRE)|| \
+Race_if(PM_GHOUL))
 
 /* used during initialization for race, gender, and alignment
    as well as for character class */
@@ -271,6 +273,7 @@ struct you {
 	char	ushops_left[5]; /* ditto, shops exited this turn */
 
 	int	 uhunger;	/* refd only in eat.c and shk.c */
+#define YouHunger	(Race_if(PM_INCANTIFIER) ? u.uen : u.uhunger)
 	unsigned uhs;		/* hunger state - see eat.c */
 
 	boolean ukinghill; /* records if you are carying the pirate treasure (and are therefor king of the hill) */
@@ -358,12 +361,8 @@ struct you {
 	int monstertimeout; 	/* when monster spawns are increasing in frequency */
 	int monstertimefinish; 	/* point in time when monster spawns are at their maximum */
 #endif
-	int legscratching; 	/* for special AT_KICK attacks */
 	int next_check; 	/* attrib.c check */
 
-	int urmaxlvlB;		/* for cyborg role */
-	int urmaxlvlC;		/* for binder role */
-	int urmaxlvlD;		/* for bard role */
 	int urealedibility;	/* no longer a boolean --Amy */
 
 	int eeveelution;		/* mainly for pokemon role but might be useful for others */

@@ -92,6 +92,55 @@ register struct obj *otmp;
 #endif /* OVLB */
 #ifdef OVL1
 
+struct obj * 
+mon_has_item(mtmp, item, which)
+struct monst * mtmp;
+int item, which;
+{
+	struct obj * otmp;
+	int quant = 0;
+	for(otmp = mtmp->minvent; otmp; otmp = otmp->nobj)
+	    if (otmp->otyp == item) 
+		if (++quant == which)
+		    return otmp;
+	    if (which)
+		which = quant;
+	    else
+		which = rnd(quant);
+	    for(otmp = mtmp->minvent; otmp; otmp = otmp->nobj)
+		if (otmp->otyp == item) 
+		    if (++quant == which)
+		    return otmp;
+	return 0;
+}
+
+struct obj *
+ochain_has_material(ochain, material, which)
+struct obj * ochain;
+unsigned int material, which;
+{
+	struct obj * otmp;
+	unsigned int quant = 0;
+	if (!ochain) return (struct obj *) 0;
+	for(otmp = ochain; otmp; otmp = otmp->nobj)
+	    if (objects[otmp->otyp].oc_material == material) 
+		if (++quant == which)
+		    return otmp;
+	if (!quant)
+	    return 0;
+	if (which)
+	    which = quant;
+	else
+	    which = rnd(quant);
+	quant = 0;
+	for(otmp = ochain; otmp; otmp = otmp->nobj)
+	    if (objects[otmp->otyp].oc_material == material) 
+		if (++quant == which){
+		    return otmp;
+		}
+	return 0;
+}
+
 /* note: assumes ASCII; toggling a bit puts lowercase in front of uppercase */
 #define inv_rank(o) ((o)->invlet ^ 040)
 
@@ -971,6 +1020,10 @@ struct obj *otmp;
 #ifdef TOURIST
 		     || (otmp==uarmu && (uarm || uarmc))
 #endif
+		     || (otmp==uarmh && uarmc &&
+			     OBJ_DESCR(objects[uarmc->otyp]) &&
+			     !strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+				     "hooded cloak"))
 		    ))
 		|| (putting_on(word) &&
 		     (otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL)))
@@ -2514,6 +2567,10 @@ long* out_cnt;
 #endif
 {
 	struct obj *otmp;
+#ifdef SORTLOOT
+	struct obj **oarray;
+	int i, j;
+#endif
 	char ilet, ret;
 	char *invlet = flags.inv_order;
 	int n, classcount;
@@ -2605,10 +2662,67 @@ long* out_cnt;
 	    return ret;
 	}
 
+#ifdef SORTLOOT
+       /* count the number of items */
+       for (n = 0, otmp = invent; otmp; otmp = otmp->nobj)
+         if(!lets || !*lets || index(lets, otmp->invlet)) n++;
+
+       /* Make a temporary array to store the objects sorted */
+       oarray = (struct obj **)alloc(n*sizeof(struct obj*));
+
+       /* Add objects to the array */
+       i = 0;
+       for(otmp = invent; otmp; otmp = otmp->nobj)
+         if(!lets || !*lets || index(lets, otmp->invlet)) {
+           if (iflags.sortloot == 'f') {
+             /* Insert object at correct index */
+             for (j = i; j; j--) {
+               if (strcmpi(cxname2(otmp), cxname2(oarray[j-1]))>0) break;
+               oarray[j] = oarray[j-1];
+             }
+             oarray[j] = otmp;
+             i++;
+           } else {
+             /* Just add it to the array */
+             oarray[i++] = otmp;
+           }
+         }
+#endif /* SORTLOOT */
+
 	start_menu(win);
 nextclass:
 	classcount = 0;
 	any.a_void = 0;		/* set all bits to zero */
+#ifdef SORTLOOT
+       for(i = 0; i < n; i++) {
+         otmp = oarray[i];
+         ilet = otmp->invlet;
+         if (!flags.sortpack || otmp->oclass == *invlet) {
+           if (flags.sortpack && !classcount) {
+             any.a_void = 0;             /* zero */
+             add_menu(win, NO_GLYPH, &any, 0, 0, iflags.menu_headings,
+                      let_to_name(*invlet, FALSE), MENU_UNSELECTED);
+#ifdef DUMP_LOG
+             if (want_dump)
+               dump("  ", let_to_name(*invlet, FALSE));
+#endif
+             classcount++;
+           }
+           any.a_char = ilet;
+           add_menu(win, obj_to_glyph(otmp),
+                    &any, ilet, 0, ATR_NONE, doname(otmp),
+                    MENU_UNSELECTED);
+#ifdef DUMP_LOG
+           if (want_dump) {
+             char letbuf[7];
+             sprintf(letbuf, "  %c - ", ilet);
+             dump(letbuf, doname(otmp));
+           }
+#endif
+         }
+       }
+#else /* SORTLOOT */
+
 	for(otmp = invent; otmp; otmp = otmp->nobj) {
 		ilet = otmp->invlet;
 		if(!lets || !*lets || index(lets, ilet)) {
@@ -2637,6 +2751,7 @@ nextclass:
 			}
 		}
 	}
+#endif /* SORTLOOT */
 	if (flags.sortpack) {
 		if (*++invlet) goto nextclass;
 #ifdef WIZARD
@@ -2646,6 +2761,9 @@ nextclass:
 		}
 #endif
 	}
+#ifdef SORTLOOT
+       free(oarray);
+#endif
 	end_menu(win, (char *) 0);
 
 	n = select_menu(win, want_reply ? PICK_ONE : PICK_NONE, &selected);
@@ -3024,7 +3142,7 @@ char *buf;
 	else if (IS_GRAVE(ltyp))
 	    cmap = S_grave;				/* "grave" */
 	else if (ltyp == TREE)
-	    cmap = S_tree;				/* "tree" */
+	    dfeature = rmname(lev);			/* "tree" */
 	else if (ltyp == IRONBARS)
 	    dfeature = "set of iron bars";
 
@@ -3253,7 +3371,7 @@ mergable(otmp, obj)	/* returns TRUE if obj  & otmp can be merged */
 	  obj->odrained != otmp->odrained || obj->orotten != otmp->orotten))
 	    return(FALSE);
 
-	if (obj->otyp == CORPSE || obj->otyp == EGG || obj->otyp == TIN) {
+	if (obj->otyp == CORPSE || obj->otyp == EGG || obj->otyp == TIN || obj->otyp == POT_BLOOD) {
 		if (obj->corpsenm != otmp->corpsenm)
 				return FALSE;
 	}

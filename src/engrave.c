@@ -1126,16 +1126,7 @@ doengrave()
 	}
 	if (cantwield(youmonst.data)) {
 		You_cant("even hold anything!");
-
-		if (yn("Do you want to try engraving anyway?") == 'y') {
-			if (rn2(3)) { 		
-			pline("You failed to engrave anything.");
-		    return 1;}
-		}
-
-		/* Just make them lose that turn. If they're surrounded by 20 killer bees and 10 large cats,
-		   losing a turn while engraving might be enough to kill them anyway. No need for further penalties. --Amy */
-		else {return(0);}
+		return(0);
 	}
 	if (check_capacity((char *)0)) return (0);
 
@@ -1252,20 +1243,14 @@ doengrave()
 		    case WAN_LIGHT:
 		    case WAN_SECRET_DOOR_DETECTION:
 		    case WAN_CREATE_MONSTER:
-		    case WAN_SUMMON_UNDEAD:
 		    case WAN_CREATE_HORDE:
 		    case WAN_ENLIGHTENMENT:
-		    case WAN_ENTRAPPING:
 		    case WAN_MAGIC_MAPPING:
 		    case WAN_DARKNESS:
-		    case WAN_DETECT_MONSTERS:
-		    case WAN_OBJECTION:
 		    case WAN_IDENTIFY:
-		    case WAN_REMOVE_CURSE:
 		    case WAN_WISHING:
 		    case WAN_ACQUIREMENT:
 		    case WAN_BUGGING:
-		    case WAN_CHARGING:
 			zapnodir(otmp);
 			break;
 
@@ -1315,7 +1300,6 @@ doengrave()
 			break;
 		    case WAN_HEALING:
 		    case WAN_EXTRA_HEALING:
-		    case WAN_FULL_HEALING:
 			if (!Blind) {
 			   Sprintf(post_engr_text,
 				   "The bugs on the %s look healthier!",

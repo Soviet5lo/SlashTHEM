@@ -1,46 +1,28 @@
 SlashTHEM
 =====================
 
-SlashTHEM is a fork of Slash'EM Extended version 75.  It's primary goals are to add more flavor to the game, flesh out and create unique quests for most of the new roles, and apply some much needed balance changes.
+SlashTHEM is a another Nethack variant.  In particular, it takes after Slash'EM and an earlier version of Slash'EM Extended.  I consider it more of a Slash'EM variant at this point since it's far more in line with that rather than Extended.
 
-A current changelog of SlashTHEM can be found [here] (https://github.com/Soviet5lo/SlashTHEM/blob/master/CHANGELOG.md)
+A changelog of SlashTHEM can be found [here](CHANGELOG.md).  A changelog of the current develop branch can be found [here](CHANGELOG-NG.md)
 
-SlashTHEM is also playable online at https://nethack.xd.cm.
+If you want the last stable release for whatever reason, you can download the source code from the master branch.  More than likely if you're reading this, you're looking at the develop branch which contains every change since the last stable.
 
 Current Status
 --------------
 
-Currently considered a beta release.  Most of the new role quests haven't been touched so may be a bit more difficult than Vanilla/Slash'EM/Patch roles.
+I very rarely come back to this project. Only times I work on it now is when I get the urge to play it, honestly.  There's plenty of bugs that exist and things that haven't been properly worked on, but there shouldn't be too many signifigant segfaults hopefully.  Consider it dormant, essentially. I don't necessarily consider this stable, but its playable.   Plus, there's plenty of other (better) variants out there to play.  If you must play Slash'EM you could go vanilla, or:
 
-It's difficulty at the current moment should be much, much easier than Slash'EM Extended.  However there are still a few mechanics that need to be worked on, as well as the eventual monster cleanup (to reduce the amount of stealing monsters, monsters with very minor differences, etc)
+- [Slash'EM 9](https://github.com/moon-chilled/slashem9), if you want Slash'EM + Curses Interface + Unicode + a much more coherient codebase, as well as balance tweaks and changes/ports from Nethack 3.6.
+- [Slash'EM Extended](https://github.com/SLASHEM-Extended/SLASHEM-Extended), if you want a variant that includes absolutely everything and every possible idea, good and bad.
+- [Slash'EM-Upgrades and Patches](https://github.com/BarclayII/slashem-up/tree/develop), if you want Slash'EM + Balance changes, a few backports from Nethack 3.6, various upgrades and integrated patches.
 
-This should compile fine on Windows (with MinGW) and Unix systems.  I haven't done any testing on other platforms.
+The source code builds fine on Windows using MinGW, as well as Linux.  Other Operating Systems are untested.  I highly doubt it runs on legacy systems however (VMS, Amiga, etc.)
 
-Windows (x64) builds are available on the [releases] (https://github.com/Soviet5lo/SlashTHEM/releases) page.
-
-Todo
-----
-
-- Fix new and old bugs.
-- Clean up compiler warnings.
-- Finish giving every role a sacrifice gift.
-- Overhaul a few of the lazily done quests.
-- More balance changes. (Weapon skills, weapon damage balancing, buff/nerf techniques)
-- A massive clean-up of monsters, objects and roles.
-- Update the Guidebook.
-- Plenty of stuff not yet listed here.
-
-Bugs
-----
-- Some roles do not get the quest dialogue when picking up the quest artifact (Lunatics, Locksmiths, a few others).
-- Unicode support is terribly broken, causing the game to not function at all under windows and breaking Pokedex under Unix.
-- Vault teleporters to aquariums teleport the player to a random location in the level, not the aquarium.
-- Artifact protection isn't correctly calculated upon save and load, adding -2 to AC upon every load.
-- Probably a ton of others.
+Windows (x64) builds are available on the [releases](https://github.com/Soviet5lo/SlashTHEM/releases) page, but these are very much out of date compared to the current code.
 
 Credits
 -------
-Credits go to Chris for dNethack (Used a few artifacts), Grunt for Grunthack, BarclayII for Slashem-up (some balance changes come from this), and of course AmyBSOD for Slash'EM Extended.
+Credits go to Chris for dNetHack (Used a few artifacts), Grunt for GruntHack, BarclayII for SlashEM-up (some balance changes come from this), Patric Mueller (bhaak) for UnNethack, and of course AmyBSOD for Slash'EM Extended.
 
 Credits also go to Percival Tiglao for the minor sling upgrade patch, Mikael Lind for Rubber Gloves and Gauntlets of Reflection patches, Paxed for the "highlight object piles/hidden stairs" patch, André Bertelli Araújo for the music code for bards, Chris-plus-alphanumericgibberish (Chris) for additions and fixes to the music code, and L for various patches implemented in this fork.
 

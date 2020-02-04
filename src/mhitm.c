@@ -30,6 +30,8 @@ STATIC_DCL int FDECL(gazemm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(gulpmm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(explmm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(mdamagem, (struct monst *,struct monst *,struct attack *));
+STATIC_DCL int FDECL(defdisintagr,
+    (struct monst *,struct monst *,struct attack *));
 STATIC_DCL void FDECL(mswingsm, (struct monst *, struct monst *, struct obj *));
 STATIC_DCL void FDECL(noises,(struct monst *,struct attack *));
 STATIC_DCL void FDECL(missmm,(struct monst *,struct monst *, int, int, struct attack *));
@@ -149,7 +151,9 @@ fightm(mtmp)		/* have monsters fight each other */
 	nmon = 0;
 #endif
 	/* perhaps the monster will resist Conflict */
-	if(resist(mtmp, RING_CLASS, 0, 0))
+	if(resist(mtmp, RING_CLASS, 0, 0)
+	/* if a monster is charmed by a baddie, it's immune to conflict */  
+		|| (!mtmp->mpeaceful && mtmp->mpeacetim))
 	    return(0);
 
 	if(u.ustuck == mtmp) {
@@ -381,6 +385,7 @@ mattackm(magr, mdef)
 	    case AT_TRAM:
 	    case AT_SCRA:
 	    case AT_TENT:
+use_natural:
 		/* Nymph that teleported away on first attack? */
 		if (distmin(magr->mx,magr->my,mdef->mx,mdef->my) > 1)
 		    return MM_MISS;
@@ -388,8 +393,10 @@ mattackm(magr, mdef)
 		 * have a weapon instead.  This instinct doesn't work for
 		 * players, or under conflict or confusion. 
 		 */
-		if (!magr->mconf && !Conflict && otmp &&
-		    mattk->aatyp != AT_WEAP && touch_petrifies(mdef->data)) {
+		if (!magr->mconf && !Conflict && otmp && (
+		    (touch_disintegrates(mdef->data) &&
+		    (mattk->aatyp == AT_WEAP || !(resists_disint(magr))) ) ||
+		    mattk->aatyp != AT_WEAP && touch_petrifies(mdef->data))) {
 		    strike = 0;
 		    break;
 		}
@@ -415,6 +422,17 @@ mattackm(magr, mdef)
 		/* KMH -- don't accumulate to-hit bonuses */
 		if (otmp)
 		    tmp -= hitval(otmp, mdef);
+		break;
+	    case AT_NTCH: /* generic adjacent non-touching attack */
+		dieroll = rnd(20 + i);
+		strike = (tmp > dieroll);
+		/* KMH -- don't accumulate to-hit bonuses */
+		if (otmp)
+		    tmp -= hitval(otmp, mdef);
+		if (strike) 
+		    res[i] = hitmm(magr, mdef, mattk);
+		else		    
+		    missmm(magr, mdef, tmp, dieroll, mattk);
 		break;
 
 	    case AT_HUGS:	/* automatic if prev two attacks succeed */
@@ -448,6 +466,14 @@ mattackm(magr, mdef)
 		/* Engulfing attacks are directed at the hero if
 		 * possible. -dlc
 		 */
+		if((magr->data == &mons[PM_BANDERSNATCH]) && 
+		    !yeasty_food(mdef->data)) {
+		    mattk->aatyp = AT_BITE;
+		    mattk->adtyp = AD_PHYS;
+		    mattk->damn  = 1;
+		    mattk->damd  = 5;
+		    goto use_natural;
+		}
 		if (u.uswallow && magr == u.ustuck)
 		    strike = 0;
 		else {
@@ -771,14 +797,19 @@ hitmm(magr, mdef, mattk)
 				mdef->mcansee ? "smiles at" : "talks to");
 			pline("%s %s %s.", buf, mon_nam(mdef),
 				compat == 2 ?
-					"engagingly" : "seductively");
+					"engagingly" :
+		!humanoid(mdef->data)? "real friendly-like" : "seductively");
 		} else {
 		    char magr_name[BUFSZ];
 
 		    Strcpy(magr_name, Monnam(magr));
 		    switch (mattk->aatyp) {
 			case AT_BITE:
-				Sprintf(buf,"%s bites", magr_name);
+                               	Sprintf(buf,"%s %ss", magr_name, has_beak(magr->data) ?
+                                    "peck" : "bite");
+                               break;
+                       	case AT_KICK:
+                               	Sprintf(buf,"%s kicks", magr_name);
 				break;
 			case AT_STNG:
 				Sprintf(buf,"%s stings", magr_name);
@@ -807,6 +838,20 @@ hitmm(magr, mdef, mattk)
 				    Sprintf(buf,"%s squeezes", magr_name);
 				    break;
 				}
+                        case AT_WEAP:
+                                if (MON_WEP(magr)) {
+                                    if (is_launcher(MON_WEP(magr)) ||
+                                        is_missile(MON_WEP(magr)) ||
+                                        is_ammo(MON_WEP(magr)) ||
+                                        is_pole(MON_WEP(magr)))
+                                            Sprintf(buf,"%s hits", magr_name);
+                                    else Sprintf(buf,"%s %s", magr_name,
+                                        makeplural(weaphitmsg(MON_WEP(magr),FALSE)));
+                                    break;
+                                } /*fallthrough*/
+                        case AT_CLAW:
+                                Sprintf(buf,"%s %s", magr_name, makeplural(barehitmsg(magr)));
+                                break;
 			case AT_MULTIPLY:
 				/* No message. */
 				break;
@@ -826,6 +871,21 @@ gazemm(magr, mdef, mattk)
 	struct attack *mattk;
 {
 	char buf[BUFSZ];
+
+	if (mattk->adtyp == AD_DRIN){
+	    if(canseemon(magr)){
+		Sprintf(buf, "%s screeches at", Monnam(magr));
+		pline("%s %s...",buf, mon_nam(mdef));
+	    } else if (!u.uswallow && !Underwater && flags.soundok) {
+		You_hear("screeching.");
+	    } 
+	    mdef->msleeping = 0;
+	    if(!mindless(mdef->data)){
+		mattk->adtyp = AD_CONF;
+		return(mdamagem(magr, mdef, mattk));
+	    } 
+	    return 0;
+	}
 
 	if(vis) {
 		Sprintf(buf,"%s gazes at", Monnam(magr));
@@ -971,6 +1031,135 @@ explmm(magr, mdef, mattk)
 	return result;
 }
 
+STATIC_OVL int
+defdisintagr(magr, mdef, mattk)
+	register struct monst	*magr, *mdef;
+	register struct attack	*mattk;
+{
+    int tmp=-1; /* -1 a miss, -MM_AGR_DIED aggre died, -2 do nothing,
+		   >=0 store as tmp. */
+
+    if (mdef->mhp>6 && !mdef->mcan) {
+	int touched = 0;
+	int mass = 0;
+	struct obj * otch = 0;
+	switch (attk_protection((int)mattk->aatyp)) {
+	    /* this is in dire need of optimization */
+	    case (W_ARMC|W_ARMG):
+		if (otch = which_armor(magr, W_ARMG)) { 
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			otch = 0;
+			touched = 1;
+		    }
+		} else touched = 1;
+		if (otch = which_armor(magr, W_ARMC)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		if (!(magr->misc_worn_check & W_ARMC) &&
+		   (otch = which_armor(magr,W_ARM)) &&
+		   (!oresist_disintegration(otch))) {
+		    if (canseemon(magr))
+			pline("%s %s disintegrates!",
+			  s_suffix(Monnam(magr)), distant_name(otch, xname));
+		    mass += otch->owt;
+		    m_useup(magr,otch);
+		} 
+#ifdef TOURIST
+		if (!(magr->misc_worn_check & (W_ARMC|W_ARM)) &&
+		   (otch = which_armor(magr,W_ARMU)) && 
+		   (!oresist_disintegration(otch))) {
+		    if (canseemon(magr))
+			pline("%s %s disintegrates!",
+			  s_suffix(Monnam(magr)), distant_name(otch, xname));
+		    mass += otch->owt;
+		    m_useup(magr,otch);
+		}
+#endif 
+		break;
+	    case (W_ARMG):
+		if(otmp) {
+		    if(!oresist_disintegration(otmp)) {
+			if (canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otmp, xname));
+			mass += otmp->owt;
+			m_useup(magr,otmp);
+			tmp = 0;
+		    }
+		} else if (otch = which_armor(magr,W_ARMG)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		break;
+	    case (W_ARMH):
+		if (otch = which_armor(magr,W_ARMH)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		break;
+	    case (W_ARMF):
+		if (otch = which_armor(magr,W_ARMF)) {
+		    if(!oresist_disintegration(otch)) {
+			if(canseemon(magr))
+			    pline("%s %s disintegrates!",
+			      s_suffix(Monnam(magr)), distant_name(otch, xname));
+			mass += otch->owt;
+			m_useup(magr,otch);
+			touched = 1;
+		    }
+		} else touched = 1;
+		break;
+	    case (0L):
+		touched = 1;
+		break;
+	    default:
+		break;      
+	}      
+	if (!touched || resists_disint(magr)) {
+	    if(mass)
+		weight_dmg(mass);
+	    tmp = mass; 
+	} else {
+	    struct obj * lifesave = mlifesaver(magr);
+	    mass += magr->data->cwt;
+	    weight_dmg(mass);
+	    if(mass)
+		mdef->mhp -= mass ;
+	    if (vis) pline("%s disintegrates!", Monnam(magr));
+	    mondead_helper(magr,mattk->adtyp);
+	    if (magr->mhp > 0) return -1;
+	    else if (magr->mtame && !vis)
+		You(brief_feeling, "peculiarly sad");
+	    return -MM_AGR_DIED;
+	}
+    }
+    return tmp;
+}
+
 /*
  *  See comment at top of mattackm(), for return values.
  */
@@ -986,6 +1175,21 @@ mdamagem(magr, mdef, mattk)
 	boolean cancelled;
 	int canhitmon, objenchant;        
         boolean nohit = FALSE;
+
+	int def_disintegrated;
+	if (touch_disintegrates(pd) &&
+	  (def_disintegrated = defdisintagr(magr, mdef, mattk)) != -2 )
+	    switch (def_disintegrated){
+		case -MM_AGR_DIED:
+		    return MM_AGR_DIED;
+		    break;
+		case -1:
+		    return 0;
+		    break;
+		default:
+		    tmp = def_disintegrated;
+		    break;
+	    }
 
 	if (magr->mtame && !magr->isminion && EDOG(magr)) {
 		tmp += EDOG(magr)->encouraged;
@@ -1044,6 +1248,14 @@ mdamagem(magr, mdef, mattk)
 	if (hit_as_two(magr))    objenchant = 2;
 	if (hit_as_three(magr))  objenchant = 3;
 	if (hit_as_four(magr))   objenchant = 4;
+
+	/* Experienced spell-being exploders receive hit-as bonus */
+	if (mattk->aatyp == AT_EXPL && magr->uexp) {
+		if (P_SKILL(P_MATTER_SPELL) == P_SKILLED)
+			objenchant = (objenchant > 2) ? objenchant : 2;
+		if (P_SKILL(P_MATTER_SPELL) == P_EXPERT)
+			objenchant = 4;
+	}
 
 	if (objenchant < canhitmon) nohit = TRUE;
 
@@ -1379,6 +1591,8 @@ physical:
 			    pline("May %s rust in peace.", mon_nam(mdef));
 			return (MM_DEF_DIED | (grow_up(magr,mdef) ?
 							0 : MM_AGR_DIED));
+		} else if (mattk->aatyp == AT_SPIT && pd == &mons[PM_GREMLIN]){
+		    (void)split_mon(mdef, (struct monst *) 0);
 		}
 		hurtmarmor(mdef, AD_RUST);
 		mdef->mstrategy &= ~STRAT_WAITFORU;
@@ -1577,7 +1791,9 @@ physical:
 	    case AD_BLND:
 		if (nohit) break;                
 	       
-		if (can_blnd(magr, mdef, mattk->aatyp, (struct obj*)0)) {
+		if (can_blnd(magr, mdef, mattk->aatyp, (struct obj*)0) 
+          	    && (magr->data != &mons[PM_UMBRAL_HULK] || !magr->mspec_used)){
+
 		    register unsigned rnd_tmp;
 
 		    if (vis && mdef->mcansee)
@@ -1659,6 +1875,106 @@ physical:
 			pline("%s suddenly disappears!", buf);
 		}
 		break;
+	    case AD_EGLD:
+		if (pd ==  &mons[PM_GOLD_GOLEM]){
+		    Strcpy(buf, Monnam(magr));
+		    if (vis) pline("%s %s %s.", buf,
+		      (magr->mcan)?"gnaws on":"chews through",mon_nam(mdef));
+		    (magr->mcan)?mdef->mhp-=tmp:mondied(mdef);
+		    if (mdef->mhp > 0) return 0;
+		    else if (mdef->mtame && !vis)
+			pline("May %s rest in (gold)peices.", mon_nam(mdef));
+		    return (MM_DEF_DIED | (grow_up(magr,mdef) ? 
+		      0 : MM_AGR_DIED));
+		} else {
+		struct obj * geatme;
+		int how = 0;
+		tmp = 0;
+#ifndef GOLDOBJ
+		geatme = g_at(mdef->mx, mdef->my);
+		if (geatme){
+		    if(magr->mcan){
+			magr->mgold += geatme->quan;
+		    } else {
+			int metab_time = magr->mhpmax - magr->mhp;
+			if (geatme->quan < metab_time) metab_time = geatme->quan; 
+			magr->mspec_used += metab_time/2 + 1;  /* instead of meating */
+		    }
+		    if (meatmetal_effects(magr, geatme) == 3) return MM_AGR_DIED;
+		    newsym(mdef->mx, mdef->my);
+		    if(cansee(mdef->mx, mdef->my)){
+			if (canseemon(mdef))
+			    Sprintf(buf, "from under %s", mon_nam(mdef));
+			pline("%s quickly %s some gold%s!",
+			  Monnam(magr), (magr->mcan)?"nabs":"gnoshes on", buf);
+			break;
+		    } 
+		}
+#endif /*GOLDOBJ */
+		if (geatme =
+		   ochain_has_material(level.objects[mdef->mx][mdef->my], GOLD, 0)){
+		    obj_extract_self(geatme);
+		    if (canseemon(mdef))
+			Sprintf(buf, "from under %s", mon_nam(mdef));
+		} else if ( geatme = ochain_has_material(mdef->minvent, GOLD, 0)){
+#ifdef GOLDOBJ
+		    if (geatme->otyp == GOLD_PIECE){
+			int tmp;
+			const int gold_price = objects[GOLD_PIECE].oc_cost;
+			Strcpy(buf, s_suffix(mon_nam(mdef)));
+			if (mdef->data == &mons[PM_LEPRECHAUN] ){
+			    pline("%s tries to get %s money, but fails...",
+			      Monnam(magr), buf);
+			    break;
+			}
+			tmp = (somegold(money_cnt(mdef->minvent)) + gold_price - 1)
+			      / gold_price;
+			tmp = min(tmp, geatme->quan);
+			if (tmp < geatme->quan) geatme = splitobj(geatme, tmp);
+			obj_extract_self(geatme);
+		    } else 
+#endif
+		    obj_extract_self(geatme); 
+		}
+		if (geatme){
+		    if (!(magr->mcan || geatme->otyp == AMULET_OF_STRANGULATION ||
+		       geatme->otyp == RIN_SLOW_DIGESTION)){
+			magr->mspec_used += geatme->owt/2 + 1;  /* instead of meating */
+			how = 1;
+		    }
+		    pline("%s %s %s%s!",
+		      Monnam(magr), (how)?"gobbles":"nabs", yname(geatme), buf);
+		    if (how){
+			if (meatmetal_effects(magr, geatme) == 3) return MM_AGR_DIED;
+		    } else
+			mpickobj(magr, geatme);
+
+		    break;
+		} 
+#ifndef GOLDOBJ
+		if (mdef->mgold) {
+		    int tmp = mdef->mgold;
+		    if (mdef->data == &mons[PM_LEPRECHAUN] ){
+			Strcpy(buf, s_suffix(mon_nam(mdef)));
+			pline("%s tries to get %s money, but fails...",
+			  Monnam(magr), buf);
+			break;
+		    }
+		    mdef->mgold = 0;
+		    Your("purse feels lighter.");
+		    if (magr->mcan){
+			magr->mgold += tmp;
+			break;
+		    } else if (tmp > magr->mhpmax - magr->mhp){
+			tmp = magr->mhpmax - magr->mhp;
+			magr->mspec_used = tmp;
+			magr->mhp+=tmp;
+			break;
+		    }
+		}
+#endif /*GOLDOBJ */
+	    }
+	    break;
 	    case AD_DRLI:
 		if (nohit) break;                
 
@@ -1685,6 +2001,16 @@ physical:
 	    case AD_SEDU:
 		if (magr->mcan) break;
 		/* find an object to steal, non-cursed if magr is tame */
+		else if(magr->data == &mons[PM_SATYR]){
+		    if (obj = mon_has_item(magr, WOODEN_FLUTE, 1)){
+			Strcpy(buf, Monnam(magr));
+			pline("%s plays the %s for %s.", buf, 
+			    distant_name(obj, xname), mon_nam(mdef));
+			mcharmm(magr, mdef, tmp);
+		    }
+		    tmp = 0;
+		    break;
+		}
 		for (obj = mdef->minvent; obj; obj = obj->nobj)
 		    if (!magr->mtame || !obj->cursed)
 			break;
@@ -1844,6 +2170,125 @@ physical:
 		    tmp = 0;
 		}
 		break;
+	    case AD_CHRM:
+		magr->mspec_used += mcharmm(magr, mdef, tmp);
+		tmp = 0;
+		break;
+	    case AD_FLVR:
+		if (cancelled){ tmp = 0; break;}
+		switch (rn2(6)){
+		    case 0: /* up, copied from muse: MUSE_POT_GAIN_LEVEL */
+			if (Can_rise_up(mdef->mx, mdef->my, &u.uz)){
+			    register int tolev=depth(&u.uz)-1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if(on_level(&tolevel, &u.uz)) goto mhitm_flvr_strange;
+			    if (vis)
+			        pline("%s rises up, through the %s!",
+				  Monnam(mdef), ceiling(mdef->mx, mdef->my));
+			    migrate_to_level(mdef, ledger_no(&tolevel),
+			      MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else{goto mhitm_flvr_strange;}
+			break;
+		    case 1: /* down */
+			if (Can_fall_thru(&u.uz) /* && !In_sokoban(&u.uz)*/ ){
+			    register int tolev=depth(&u.uz)+1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if (mon_has_amulet(mdef) || In_endgame(&u.uz) 
+			       || on_level(&tolevel, &u.uz))
+				goto mhitm_flvr_strange;
+			    if (vis)
+				pline("%s sinks down, through the %s!", 
+				  Monnam(mdef), surface(mdef->mx, mdef->my));
+			    migrate_to_level(mdef,ledger_no(&tolevel),
+			      MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else goto mhitm_flvr_strange;
+		    case 2: /* top, teleport to dlev1, top level of branch? */
+		    case 3: /* bottom, teleport to Moloch's sanctum, bot lev of branch? */ 
+		    case 4: /* strange */
+mhitm_flvr_strange:
+			if (vis) pline("%s reacts strangely.", Monnam(mdef));
+			mdef->mconf = 1;
+			mdef->mstrategy &= ~STRAT_WAITFORU;
+			break;
+         	    case 5: /* charm, fall through */ 
+			magr->mspec_used += mcharmm(magr, mdef, tmp);
+			tmp = 0;
+		}
+	    break; 
+	    case AD_DISN: /* only hit torso aromor */
+		if (!magr->mcan && magr->mhp > 6){
+		    struct obj * otch = 0;
+		    int recip_dam = 0;
+		    if (otch = which_armor(mdef, W_ARMS)){ 
+			if(oresist_disintegration(otch))
+			    otch = 0;
+		    } else if (otch = which_armor(mdef, W_ARMC)) {
+			if (oresist_disintegration(otch))
+			    otch = 0;
+		    } else if (otch = which_armor(mdef, W_ARM)) {
+			if (oresist_disintegration(otch))
+			    otch = 0;
+#ifdef TOURIST
+		    } else if (otch = which_armor(mdef, W_ARMU)) {
+			if (oresist_disintegration(otch))
+			    otch = 0;
+#endif
+		    } else {
+			recip_dam = minstadisintegrate(mdef);
+		    }
+		    if (recip_dam) {
+			tmp = 0;
+		    } else if (otch) {
+			recip_dam = otch->owt;
+			weight_dmg(recip_dam);
+			if(canseemon(mdef))
+			    pline("%s %s disintegrates!", 
+			      s_suffix(Monnam(mdef)), distant_name(otch, xname));
+			    m_useup(mdef,otch);
+			tmp = 0;
+		    }
+		    magr->mhp -= recip_dam;
+		    if (!mdef->mhp)
+			return (MM_DEF_DIED | (grow_up(magr,mdef) ?
+			  0 : MM_AGR_DIED));
+		}
+		break;
+	    case AD_SCLD:
+		if (cancelled) {
+		    tmp = 0;
+		    break;
+		}
+		if (vis)
+		    pline("%s is %s!", Monnam(mdef),
+			  on_fire(mdef->data, mattk));
+		if (resists_fire(mdef)) {
+		    if (vis)
+			pline_The("steam doesn't seem to burn %s much!",
+								mon_nam(mdef));
+		    shieldeff(mdef->mx, mdef->my);
+		    tmp = 0;
+		}
+		/* only potions damage resistant players in destroy_item */
+		tmp += destroy_mitem(mdef, POTION_CLASS, AD_FIRE);
+		if(!rn2(10)) hurtmarmor(mdef, AD_RUST);
+		break;
+	    case AD_HNGY:
+		tmp = 0;
+		if (cancelled || !mdef->mtame) break;
+		EDOG(mdef)->hungrytime -= 50;
+
+		magr->mspec_used = magr->mspec_used + 50;
+		if (canseemon(mdef))
+		    pline("%s %s rumbles.",
+		    s_suffix(Monnam(mdef)), mbodypart(mdef,STOMACH));
+		break;
+
 	    default:	/*tmp = 0;*/ 
 			break; /* necessary change to make pets more viable --Amy */
 	}
@@ -2122,6 +2567,9 @@ int mdead;
 		}
 		tmp = 0;
 		break;
+	    case AD_SCLD:
+		if(!rn2(3)) hurtmarmor(mdef, AD_RUST);
+		/* fall through */
 	    case AD_FIRE:
 		if (resists_fire(magr)) {
 		    if (canseemon(magr)) {
@@ -2206,6 +2654,55 @@ int aatyp;
 	break;
     }
     return w_mask;
+}
+
+/* the return value represents how much value to add to the mspec_used of
+   the agressor */
+int
+mcharmm(magr, mdef, tmp)
+struct monst * magr, * mdef;
+int tmp;
+{
+	if (magr->mcan || magr->mspec_used) { 
+	    return 0; 
+	} else {
+	    int mresistm = resist(mdef, -(char)magr->m_lev, 0, 0);
+	    char mdef_Name[BUFSZ]; 
+	    Strcpy(mdef_Name, Monnam(mdef));
+	    if (Conflict && (magr->mpeaceful || !(magr->mpeacetim))){
+		if (!mresistm){
+		    mdef->mtame = mdef->mpeaceful = 0;
+		    if (mdef->mpeacetim < 0x7e){ 
+			if (canseemon(mdef))
+			    pline("%s is charmed by %s.", mdef_Name, mon_nam(magr));
+		    }  
+		    if (mdef->mpeacetim != 0x7f){
+			int p = mdef->mpeacetim+rnd(magr->m_lev)*20;
+			mdef->mpeacetim = min(0x7e,p);
+		    }
+		    return 10 + rnd(10);
+		}
+	    } else if (mdef->mtame){
+		if (!mresistm){
+		    mdef->mtame = 0;
+		    if (canseemon(mdef))
+			pline("%s finds %s more charming than you.", 
+			  mdef_Name, mon_nam(magr));
+		    return 10+rnd(10);
+		}
+	    } else if (magr->mtame){
+		if (!mresistm){
+		    if (mdef->mpeacetim) {
+			mdef->mpeacetim = 0;
+			if (mdef->mpeaceful && canseemon(mdef))
+			    pline("%s is charmed by %s.", 
+			      mdef_Name, mon_nam(magr));
+			return 10+rnd(10);
+		    }  
+		}
+	    }  
+	}
+	return 0;
 }
 
 #endif /* OVLB */

@@ -84,13 +84,13 @@ E struct dgn_topology {		/* special dungeon levels for speed */
     xchar	d_tower_dnum;
     xchar	d_sokoban_dnum;
     xchar	d_mines_dnum, d_quest_dnum;
-    xchar	d_sheol_dnum;
     xchar       d_spiders_dnum;
     d_level	d_lawful_quest_level;
     d_level	d_neutral_quest_level;
     d_level	d_chaotic_quest_level;
     d_level	d_qstart_level, d_qlocate_level, d_nemesis_level;
     d_level	d_knox_level;
+    d_level	d_town_level;
 #ifdef BLACKMARKET
     d_level     d_blackmarket_level;
 #endif /* BLACKMARKET */
@@ -136,7 +136,6 @@ E struct dgn_topology {		/* special dungeon levels for speed */
 #define tower_dnum		(dungeon_topology.d_tower_dnum)
 #define sokoban_dnum		(dungeon_topology.d_sokoban_dnum)
 #define mines_dnum		(dungeon_topology.d_mines_dnum)
-#define sheol_dnum		(dungeon_topology.d_sheol_dnum)
 #define quest_dnum		(dungeon_topology.d_quest_dnum)
 #define qstart_level		(dungeon_topology.d_qstart_level)
 #define qlocate_level		(dungeon_topology.d_qlocate_level)
@@ -149,6 +148,7 @@ E struct dgn_topology {		/* special dungeon levels for speed */
 #ifdef BLACKMARKET
 #define blackmarket_level	(dungeon_topology.d_blackmarket_level)
 #endif /* BLACKMARKET */
+#define town_level 		(dungeon_topology.d_town_level)
 #ifdef RECORD_ACHIEVE
 #define mineend_level           (dungeon_topology.d_mineend_level)
 #define sokoend_level           (dungeon_topology.d_sokoend_level)
@@ -183,6 +183,9 @@ E NEARDATA int current_fruit;
 E NEARDATA struct fruit *ffruit;
 
 E NEARDATA char tune[6];
+
+/* quite ugly, but i can't think of a better way yet */
+E NEARDATA short alchemy_table[35][35]; /* POT_WATER - POT_BOOZE */
 
 #define MAXLINFO (MAXDUNGEON * MAXLEVEL)
 E struct linfo level_info[MAXLINFO];
@@ -434,6 +437,9 @@ E NEARDATA struct c_color_names {
 
 E NEARDATA winid WIN_MESSAGE, WIN_STATUS;
 E NEARDATA winid WIN_MAP, WIN_INVEN;
+
+#define You_hear1(cstr) You_hear("%s", cstr)
+
 E char toplines[];
 #ifndef TCAP_H
 E struct tc_gbl_data {	/* also declared in tcap.h */

@@ -187,6 +187,24 @@ static const char * const shkmusic[] = {
     0
 };
 
+static const char * const shkguns[] = {
+    /* GTA 3 */
+    "Claude", "_Catalina", "8-Ball", "Salvatore",
+    /* Vice City */
+    "Tommy", "Ken", "Lance", "Sonny", "Ricardo",
+    /* San Andreas */
+    "Carl", "Sean", "Melvin", "Ryder",
+    /* 4 */
+    "Niko", "Dimitri", "Mikhail", "Vlad",
+    /* Chinatown Wars */
+    "Huang", "Wu",
+    /* GTAV */
+    "Michael", "Franklin", "Trevor", "Steve",
+    "Weston",
+    0
+};
+
+
 #ifdef BLACKMARKET
 static const char *shkblack[] = {
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
@@ -281,17 +299,16 @@ const struct shclass shtypes[] = {
 	    {{90, SPBOOK_CLASS}, {10, SCROLL_CLASS}, {0, 0}}, shkbooks},
 #ifdef FIREARMS	/* KMH -- no longer "antique" */
 
-	{"gun shop", WEAPON_CLASS, 3, D_SHOP, {
-	    {30, -PISTOL}, {10, -SUBMACHINE_GUN}, {10, -HEAVY_MACHINE_GUN}, {10, -RIFLE}, 
-            {10, -ASSAULT_RIFLE}, {5, -SNIPER_RIFLE}, {10, -SHOTGUN}, {5, -AUTO_SHOTGUN},
-            {5, -ROCKET_LAUNCHER}, {5, -GRENADE_LAUNCHER},
-          {0, 0}}, shkweapons},
+	{"gun store", WEAPON_CLASS, 4, D_SHOP, {
+	    {20, -PISTOL}, {8, -SUBMACHINE_GUN}, {5, -HEAVY_MACHINE_GUN}, {4, -RIFLE},
+	    {3, -ASSAULT_RIFLE}, {3, -SNIPER_RIFLE}, {8, -SHOTGUN}, {5, -AUTO_SHOTGUN},
+	    {1, -ROCKET_LAUNCHER}, {1, -GRENADE_LAUNCHER},
+	    /* ammo */
+	    {15, -BULLET}, {6, -SILVER_BULLET}, {8, -SHOTGUN_SHELL}, {1, -ROCKET},
+	    {5, -FRAG_GRENADE}, {5, -GAS_GRENADE}, {2, -STICK_OF_DYNAMITE},
+          {0, 0}}, shkguns},
 
-	{"ammo shop", WEAPON_CLASS, 3, D_SHOP, {
-	    {15, -BULLET}, {15, -SILVER_BULLET}, {14, -SHOTGUN_SHELL}, {14, -ROCKET},
-	    {14, -FRAG_GRENADE}, {14, -GAS_GRENADE}, {14, -STICK_OF_DYNAMITE}, {0, 0}}, shkweapons},
-
-	{"rare instruments", TOOL_CLASS, 3, D_SHOP, 
+	{"rare instruments", TOOL_CLASS, 5, D_SHOP, 
 #else
 	{"rare instruments", TOOL_CLASS, 9, D_SHOP, 
 #endif
@@ -549,6 +566,10 @@ struct mkroom	*sroom;
     shkmoney = 7*shkmoney + rn2(3*shkmoney);
 #endif
 
+	/* it's a poor town */
+	if (Is_town_level(&u.uz))
+		shkmoney /= 4;
+
 #ifndef GOLDOBJ
 	shk->mgold = shkmoney;	
 #else
@@ -755,7 +776,7 @@ register int sh;
 	  if (typ==MAGIC_LAMP) {
 	    otmp->spe = 0;
 	  }
-	  if (typ==SCR_WISHING || typ==SCR_ACQUIREMENT || typ==SCR_ENTHRONIZATION || typ==SCR_FOUNTAIN_BUILDING || typ==SCR_SINKING || typ==SCR_WC) {
+	  if (typ==SCR_WISHING || typ==SCR_ACQUIREMENT) {
 	    typ = SCR_BLANK_PAPER;
 	  }
 
@@ -811,7 +832,9 @@ struct monst *shk;
 	(shk_class_match(WAND_CLASS, shk) == SHK_MATCH) ||
 	(shk_class_match(TOOL_CLASS, shk) == SHK_MATCH) ||
 	(shk_class_match(SPBOOK_CLASS, shk) == SHK_MATCH) ||
-	(shk_class_match(RING_CLASS, shk) == SHK_MATCH)) {
+	(shk_class_match(RING_CLASS, shk) == SHK_MATCH) ||
+	(shk_class_match(FOOD_CLASS, shk) == SHK_MATCH) ||
+	(shk_class_match(POTION_CLASS, shk) == SHK_MATCH)) {
 		if (!rn2(3/*5*/)) ESHK(shk)->services |= SHK_SPECIAL_A;
 		if (!rn2(3/*5*/)) ESHK(shk)->services |= SHK_SPECIAL_B;
 	}

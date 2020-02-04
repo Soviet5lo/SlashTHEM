@@ -115,10 +115,6 @@ Boots_on()
 	case FLYING_BOOTS:
 	case KICKING_BOOTS:
 		break;
-	case ZIPPER_BOOTS:
-		pline("While putting on this pair of boots, their zippers try to scratch your legs!");
-		losehp(rnd(20), "foolishly putting on a zipper boot", KILLED_BY);
-		break;
 	case WATER_WALKING_BOOTS:
 		if (u.uinwater) spoteffects(TRUE);
 		break;
@@ -199,12 +195,6 @@ Boots_off()
 			makeknown(otyp);
 		}
 		break;
-	case ZIPPER_BOOTS:
-		pline("While taking off this pair of boots, you scratch open your legs at their zippers!");
-		losehp(rnd(20), "foolishly taking off a zipper boot", KILLED_BY);
-		    set_wounded_legs(LEFT_SIDE, rn1(35, 41));
-		    set_wounded_legs(RIGHT_SIDE, rn1(35, 41));
-		break;
 	case LOW_BOOTS:
 	case GNOMISH_BOOTS:
 	case IRON_SHOES:
@@ -237,14 +227,9 @@ Cloak_on()
 	case ORCISH_CLOAK:
 	case DWARVISH_CLOAK:
 	case CLOAK_OF_MAGIC_RESISTANCE:
-	case CLOAK_OF_REFLECTION:
 	case ROBE:
 	case LEATHER_CLOAK:
-	case CLOAK_OF_WARMTH:
-	case CLOAK_OF_GROUNDING:
-	case CLOAK_OF_QUENCHING:
-	case MANACLOAK:
-	case PLASTEEL_CLOAK:
+	case MANA_CLOAK:
 	/* KMH, balance patch -- removed
 	case CLOAK_OF_DRAIN_RESISTANCE: */               
 		break;
@@ -298,27 +283,30 @@ Cloak_off()
 {
     int otyp = uarmc->otyp;
     long oldprop = u.uprops[objects[otyp].oc_oprop].extrinsic & ~WORN_CLOAK;
+    int was_blind = Blemmye_blindness(&youmonst);
 
     takeoff_mask &= ~W_ARMC;
 	/* For mummy wrapping, taking it off first resets `Invisible'. */
     setworn((struct obj *)0, W_ARMC);
+    if (!Blind && was_blind) {
+	if (flags.verbose) You("can see again.");
+	if (Blind_telepat || Infravision) see_monsters();
+	vision_full_recalc = 1;	/* recalc vision limits */
+	flags.botl = 1;
+    }
+
     switch (otyp) {
 	case ELVEN_CLOAK:
 	case ORCISH_CLOAK:
 	case DWARVISH_CLOAK:
 	case CLOAK_OF_PROTECTION:
 	case CLOAK_OF_MAGIC_RESISTANCE:
-	case CLOAK_OF_REFLECTION:
 	case CLOAK_OF_DISPLACEMENT:
-	case MANACLOAK:
+	case MANA_CLOAK:
 	case POISONOUS_CLOAK:
 	case OILSKIN_CLOAK:
 	case ROBE:
-	case PLASTEEL_CLOAK:
 	case LEATHER_CLOAK:
-	case CLOAK_OF_WARMTH:
-	case CLOAK_OF_GROUNDING:
-	case CLOAK_OF_QUENCHING:
 	/* KMH, balance patch -- removed
 	case CLOAK_OF_DRAIN_RESISTANCE: */
 		break;
@@ -696,15 +684,35 @@ Armor_on()
 			makeknown(uarm->otyp);
 			break;
 	}
+	if(uarm && (uarm->otyp == GOLDEN_DRAGON_SCALE_MAIL || uarm->otyp == GOLDEN_DRAGON_SCALES)) {
+		begin_burn(uarm,FALSE);
+		if(!Blind)
+			pline("%s to glow.", Tobjnam(uarm,"begin"));
+	}
     return 0;
 }
 
 int
 Armor_off()
 {
+    int was_blind = Blemmye_blindness(&youmonst);
+
+    if(uarm && (uarm->otyp == GOLDEN_DRAGON_SCALE_MAIL || uarm->otyp == GOLDEN_DRAGON_SCALES)) {
+	end_burn(uarm,FALSE);
+	if(!Blind)
+		pline("%s glowing.", Tobjnam(uarm,"stop"));
+    }
+
     takeoff_mask &= ~W_ARM;
     setworn((struct obj *)0, W_ARM);
     cancelled_don = FALSE;
+    if (!Blind && was_blind) {
+	if (flags.verbose) You("can see again.");
+	if (Blind_telepat || Infravision) see_monsters();
+	vision_full_recalc = 1;	/* recalc vision limits */
+	flags.botl = 1;
+    }
+
     return 0;
 }
 
@@ -714,9 +722,19 @@ Armor_off()
 int
 Armor_gone()
 {
+    int was_blind = Blemmye_blindness(&youmonst);
+
+    if(uarm && (uarm->otyp == GOLDEN_DRAGON_SCALE_MAIL || uarm->otyp == GOLDEN_DRAGON_SCALES))
+	    end_burn(uarm,FALSE);
     takeoff_mask &= ~W_ARM;
     setnotworn(uarm);
     cancelled_don = FALSE;
+    if (!Blind && was_blind) {
+	if (flags.verbose) You("can see again.");
+	if (Blind_telepat || Infravision) see_monsters();
+	vision_full_recalc = 1;	/* recalc vision limits */
+	flags.botl = 1;
+    }
     return 0;
 }
 
@@ -735,7 +753,6 @@ Amulet_on()
 	case AMULET_VERSUS_POISON:
 	case AMULET_OF_DRAIN_RESISTANCE:
 	case AMULET_OF_REFLECTION:
-	case AMULET_OF_DEPETRIFY:
 	case AMULET_OF_MAGICAL_BREATHING:
 	/* KMH, balance patch -- removed
 	case AMULET_OF_REGENERATION:
@@ -751,10 +768,6 @@ Amulet_on()
 		    Slimed = 0;
 		    flags.botl = 1;
 		}
-		break;
-	case AMULET_OF_FUMBLING:
-		if (!oldprop && !(HFumbling & ~TIMEOUT))
-			incr_itimeout(&HFumbling, rnd(20));
 		break;
 	case AMULET_OF_CHANGE:
 	    {
@@ -859,17 +872,11 @@ Amulet_off()
 	case AMULET_VERSUS_STONE:
 	case AMULET_OF_REFLECTION:
 	case AMULET_OF_SECOND_CHANCE:
-	case AMULET_OF_DEPETRIFY:
 	case AMULET_OF_CHANGE:
 	case AMULET_OF_UNCHANGING:
 	case FAKE_AMULET_OF_YENDOR:
 		break;
 	case AMULET_OF_UNDEAD_WARNING:
-		break;
-
-	case AMULET_OF_FUMBLING:
-		if (!oldprop && !(HFumbling & ~TIMEOUT))
-			HFumbling = EFumbling = 0;
 		break;
 	case AMULET_OF_MAGICAL_BREATHING:
 		if (Underwater) {
@@ -1270,6 +1277,25 @@ register struct obj *otmp;
 	}
 }
 
+int 
+Blemmye_blindness(mon)
+register struct monst * mon;
+{
+    /* 5lo: TODO: Fill with extra objects from Slash'EM/SlashTHEM */
+    struct obj * otmp;
+    if (mon->data != &mons[PM_BLEMMYE]) return 0;
+#ifdef TOURIST
+    otmp = (mon == &youmonst) ? uarmu : which_armor(mon, W_ARMU);
+    if (otmp && otmp->otyp == T_SHIRT) return 1;
+#endif
+    otmp = (mon == &youmonst) ? uarm : which_armor(mon, W_ARM);
+    if (otmp && (otmp->otyp != CRYSTAL_PLATE_MAIL)) return 1;
+    otmp = (mon == &youmonst) ? uarmc : which_armor(mon, W_ARMC);
+    if (otmp && (otmp->otyp == ROBE || otmp->otyp == LAB_COAT	/* 5lo: was Alchemy Smock */
+      || strcmp(OBJ_NAME(objects[otmp->otyp]), "ornamental cope"))) return 1;
+    return 0;
+}
+
 
 /* called in main to set intrinsics of worn start-up items */
 void
@@ -1349,7 +1375,10 @@ dotakeoff()
 	int armorpieces = 0;
 
 #define MOREARM(x) if (x) { armorpieces++; otmp = x; }
-	MOREARM(uarmh);
+	if (!uarmc || ( OBJ_DESCR(objects[uarmc->otyp]) && 
+				strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+					"hooded cloak") ) )
+		MOREARM(uarmh);
 	MOREARM(uarms);
 	MOREARM(uarmg);
 	MOREARM(uarmf);
@@ -1390,6 +1419,10 @@ dotakeoff()
 #ifdef TOURIST
 			  || ((otmp == uarmu) && (uarmc || uarm))
 #endif
+			  || ((otmp == uarmh) && uarmc && 
+				  OBJ_DESCR(objects[uarmc->otyp]) &&
+				  !strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+					  "hooded cloak"))
 		) {
 	    You_cant("take that off.");
 	    return 0;
@@ -1579,19 +1612,8 @@ boolean noisy;
 	    /* same exception for cloaks as used in m_dowear() */
 	    (which != c_cloak || youmonst.data->msize != MZ_SMALL) &&
 	    (racial_exception(&youmonst, otmp) < 1)) {
-	if (noisy) { pline_The("%s will not fit on your body.", which);
-
-		if (yn("Try to put it on anyway?") == 'y') {
-			if (rn2(2)) { 	u.ublesscnt += rnd(5);
-			pline("Feeling uncomfortable, you decide to stop trying.");
-		    return 0;}
-			}
-
-		else {return(0);}
-
-		}
-
-
+	if (noisy) pline_The("%s will not fit on your body.", which);
+	return 0;
     } else if (otmp->owornmask & W_ARMOR) {
 	if (noisy) already_wearing(c_that_);
 	return 0;
@@ -1618,6 +1640,14 @@ boolean noisy;
 	    if (noisy)
 		pline_The("%s won't fit over your horn%s.",
 			  c_helmet, plur(num_horns(youmonst.data)));
+	    err++;
+	} else if (Upolyd && !has_head(youmonst.data)) {
+	    if (noisy) You("cannot wear a %s, because you have no head.", c_helmet);
+	    err++;
+	} else if (uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
+			!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+				"hooded cloak")) {
+	    if (noisy) You_cant("wear that over your hood.");
 	    err++;
 #ifdef JEDI
 	} else if (Upolyd && (youmonst.data == &mons[PM_MIND_FLAYER] ||
@@ -1740,19 +1770,13 @@ dowear()
 	struct obj *otmp;
 	int delay;
 	long mask = 0;
+	int was_blind = Blemmye_blindness(&youmonst);
 
 	/* cantweararm checks for suits of armor */
 	/* verysmall or nohands checks for shields, gloves, etc... */
 	if ((verysmall(youmonst.data) || nohands(youmonst.data))) {
-		pline("Don't even bother. Your current form can't realistically wear armor!");
-
-		if (yn("But you may try to wear something anyway. Do it?") == 'y') {
-			if (rn2(3)) { 		make_stunned(HStun + rnd(40),FALSE);
-			pline("Damn! You just stagger around aimlessly!");
-		    return 1;}
-		}
-		else {return(0);}
-
+		pline("Don't even bother.");
+		return(0);
 	}
 
 	otmp = getobj(clothes, "wear");
@@ -1793,7 +1817,10 @@ dowear()
 		if(is_cloak(otmp)) afternmv = Cloak_on;
 		if (is_shield(otmp)) afternmv = Shield_on;
 		if (is_shirt(otmp)) afternmv = Shirt_on;
-		nomovemsg = "You finish your dressing maneuver.";
+		if (!was_blind && Blemmye_blindness(&youmonst))
+		    nomovemsg = "You finish your dressing maneuver. You can no longer see.";
+		else
+		    nomovemsg = "You finish your dressing maneuver.";
 		on_msgdel(otmp); /* the game is supposed to tell you what exactly you are wearing! --Amy */
 	} else {
 		if(is_cloak(otmp)) (void) Cloak_on();
@@ -1806,6 +1833,8 @@ dowear()
 #endif
 		if (is_helmet(otmp)) (void) Helmet_on();	/* fedoras */
 		on_msg(otmp);
+		if (!was_blind && Blemmye_blindness(&youmonst))
+		    You("can no longer see.");
 	}
 	takeoff_mask = taking_off = 0L;
 	return(1);
@@ -1959,7 +1988,12 @@ find_ac()
 	int uac = mons[u.umonnum].ac;
 
 	if(uarm) uac -= ARM_BONUS(uarm);
-	if(uarmc) uac -= ARM_BONUS(uarmc);
+	if(uarmc){
+		if(uarmc->oartifact == ART_MANTLE_OF_HEAVEN || 
+			uarmc->oartifact == ART_VESTMENT_OF_HELL
+		) uac -= 2*ARM_BONUS(uarmc);
+		else uac -= ARM_BONUS(uarmc);
+	}
 	if(uarmh) uac -= ARM_BONUS(uarmh);
 	if(uarmf) uac -= ARM_BONUS(uarmf);
 	if(uarms) uac -= ARM_BONUS(uarms);
@@ -2112,9 +2146,14 @@ struct obj *
 some_armor(victim)
 struct monst *victim;
 {
-	register struct obj *otmph, *otmp;
+	register struct obj *otmph, *otmp, *hood;
 
 	otmph = (victim == &youmonst) ? uarmc : which_armor(victim, W_ARMC);
+	if (otmph && OBJ_DESCR(objects[otmph->otyp])
+			&& !strcmp(OBJ_DESCR(objects[otmph->otyp]),
+				"hooded cloak") )
+		hood = otmph;
+	else hood = NULL;
 	if (!otmph)
 	    otmph = (victim == &youmonst) ? uarm : which_armor(victim, W_ARM);
 #ifdef TOURIST
@@ -2122,7 +2161,8 @@ struct monst *victim;
 	    otmph = (victim == &youmonst) ? uarmu : which_armor(victim, W_ARMU);
 #endif
 	
-	otmp = (victim == &youmonst) ? uarmh : which_armor(victim, W_ARMH);
+	if (hood) otmp = hood;
+	else otmp = (victim == &youmonst) ? uarmh : which_armor(victim, W_ARMH);
 	if(otmp && (!otmph || !rn2(4))) otmph = otmp;
 	otmp = (victim == &youmonst) ? uarmg : which_armor(victim, W_ARMG);
 	if(otmp && (!otmph || !rn2(4))) otmph = otmp;
@@ -2333,7 +2373,16 @@ do_takeoff()
 #ifdef TOURIST
 	} else if (taking_off == WORN_SHIRT) {
 	  otmp = uarmu;
-	  if (!cursed(otmp)) (void) Shirt_off();
+	  if (!cursed(otmp)) {
+		  int was_blind = Blind;
+		  (void) Shirt_off();
+		  if (!Blind && was_blind) {
+			  if (flags.verbose) You("can see again.");
+			  if (Blind_telepat || Infravision) see_monsters();
+			  vision_full_recalc = 1;	/* recalc vision limits */
+			  flags.botl = 1;
+		  }
+	  }
 #endif
 	} else if (taking_off == WORN_AMUL) {
 	  otmp = uamul;

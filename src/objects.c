@@ -127,7 +127,7 @@ WEAPON("worm tooth", (char *)0,
 WEAPON("knife", (char *)0,
 	1, 1, 0, 7,  5,  4,  3,  2, 0, P|S, P_KNIFE, IRON, HI_METAL),
 WEAPON("stiletto", (char *)0,
-	1, 1, 0,  5,  5,  4,  3,  2, 0, P|S, P_KNIFE, IRON, HI_METAL),
+	1, 1, 0,  5,  5,  4,  3,  2, 0, P, P_KNIFE, IRON, HI_METAL),
 WEAPON("scalpel", (char *)0,
 	1, 1, 0,  2,  5,  4,  3,  3, 2, S,   P_KNIFE, METAL, HI_METAL),
 WEAPON("crysknife", (char *)0,
@@ -298,6 +298,8 @@ WEAPON("guisarme", "pruning hook",
 WEAPON("bill-guisarme", "hooked polearm",
 	0, 0, 1,  2,120,  7,  4, 10, 0, P|S, P_POLEARMS, IRON, HI_METAL),
 						/* +1d4 small */
+WEAPON("grain scythe", "scythe",
+	0, 0, 1,  0, 60,  5,  8, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
 /* other */
 WEAPON("lucern hammer", "pronged polearm",
 	0, 0, 1,  3,150,  7,  4,  6, 0, B|P, P_POLEARMS, IRON, HI_METAL),
@@ -406,13 +408,19 @@ WEAPON("boomerang", (char *)0,
 
 WEAPON("bullwhip", (char *)0,
 	1, 0, 0,  9, 20,  4,  2,  1, 0, 0,   P_WHIP, LEATHER, CLR_BROWN),
-
-WEAPON("steel whip", (char *)0,
-	1, 0, 0,  2, 25,  4,  6,  6, 0, 0,   P_WHIP, METAL, HI_METAL),
+/* 5lo: New whips from the nh342 whips patch */
+WEAPON("long bullwhip", (char *)0,
+	1, 0, 0,  1, 20,  4,  2,  2, 0, 0,   P_WHIP, LEATHER, CLR_BROWN),
+WEAPON("chainwhip", (char *)0,
+	1, 0, 0,  0,120, 10,  4,  2,-1, 0,   P_WHIP, IRON, HI_METAL),
+WEAPON("thorned chainwhip", (char *)0,
+	1, 0, 0,  1, 60, 20,  7,  5,-1, S,   P_WHIP, MITHRIL, HI_METAL),
+WEAPON("long thorned chainwhip", (char *)0,
+	1, 0, 0,  0, 60, 20,  7,  7, 0, S,   P_WHIP, MITHRIL, HI_METAL),
 
 #ifdef KOPS
 WEAPON("rubber hose", (char *)0,
-	1, 0, 0,  3, 20,  3,  4,  3, 0, B,   P_WHIP, PLASTIC, CLR_BROWN),
+	1, 0, 0,  3, 20,  3,  4,  3, 0, 0,   P_WHIP, PLASTIC, CLR_BROWN),
 #endif
 
 /* With shuffled appearances... */
@@ -513,6 +521,8 @@ ARMOR("orcish ring mail", "crude ring mail",
 	0, 0, 0, 0,	20, 5, 250,  80,  8, 1, ARM_SUIT, IRON, CLR_BLACK),
 ARMOR("leather armor", (char *)0,
 	1, 0, 0, 0,	75, 3, 150,   5,  8, 0, ARM_SUIT, LEATHER, HI_LEATHER),
+ARMOR("asbestos jacket", "silver jacket",
+	1, 0, 0, FIRE_RES, 5, 0, 30, 100, 9, 0, ARM_SUIT, MITHRIL, HI_SILVER),
 ARMOR("leather jacket", (char *)0,
 	1, 0, 0, 0,	11, 0,	30,  10,  9, 0, ARM_SUIT, LEATHER, CLR_BLACK),
 
@@ -525,7 +535,7 @@ ARMOR("robe of protection", "blue robe",
 ARMOR("robe of power", "orange robe",
 	0, 1, 0, 0,		2, 1,  40,  50,  9, 0, ARM_SUIT, CLOTH, CLR_ORANGE),
 ARMOR("robe of weakness", "green robe",
-	0, 1, 0, STUNNED,		2, 1,  40,  50,  9, 0, ARM_SUIT, CLOTH, CLR_GREEN),
+	0, 1, 0, STUNNED,	2, 1,  40,  50,  9, 0, ARM_SUIT, CLOTH, CLR_GREEN),
 
 /*
  * Dragon suits
@@ -550,7 +560,7 @@ DRGN_ARMR("orange dragon scale mail", 1, SLEEP_RES,  0,  900, 1, CLR_ORANGE),
 DRGN_ARMR("black dragon scale mail",  1, DISINT_RES, 0, 1200, 1, CLR_BLACK),
 DRGN_ARMR("blue dragon scale mail",   1, SHOCK_RES,  0,  900, 1, CLR_BRIGHT_BLUE),
 DRGN_ARMR("green dragon scale mail",  1, POISON_RES, 0,  900, 1, CLR_GREEN),
-DRGN_ARMR("golden dragon scale mail", 1, SICK_RES,   0,  900, 1, CLR_YELLOW),
+DRGN_ARMR("golden dragon scale mail", 1, SICK_RES,   0,  900, 1, HI_GOLD),
 DRGN_ARMR("stone dragon scale mail",  1, STONE_RES,  0,  900, 1, CLR_GRAY),
 DRGN_ARMR("yellow dragon scale mail", 1, ACID_RES,   0,  900, 1, CLR_YELLOW),
 
@@ -567,7 +577,7 @@ DRGN_ARMR("orange dragon scales", 0, SLEEP_RES,  1, 500, 7, CLR_ORANGE),
 DRGN_ARMR("black dragon scales",  0, DISINT_RES, 1, 700, 7, CLR_BLACK),
 DRGN_ARMR("blue dragon scales",   0, SHOCK_RES,  1, 500, 7, CLR_BRIGHT_BLUE),
 DRGN_ARMR("green dragon scales",  0, POISON_RES, 1, 500, 7, CLR_GREEN),
-DRGN_ARMR("golden dragon scales",   0, SICK_RES, 1, 500, 7, CLR_YELLOW),
+DRGN_ARMR("golden dragon scales", 0, SICK_RES,   1, 500, 7, HI_GOLD),
 DRGN_ARMR("stone dragon scales",  0, STONE_RES,  1, 500, 7, CLR_GRAY),
 DRGN_ARMR("yellow dragon scales", 0, ACID_RES,   1, 500, 7, CLR_YELLOW),
 #undef DRGN_ARMR
@@ -588,15 +598,6 @@ CLOAK("lab coat", "white coat",
 		0, 1,   POISON_RES,10, 0, 10, 60,  9, 3, CLOTH, CLR_WHITE),
 CLOAK("leather cloak", (char *)0,
 		1, 0,	0,	    8, 0, 15, 40,  9, 1, LEATHER, CLR_BROWN),
-CLOAK("plasteel cloak", (char *)0,
-		1, 0,	0,	    1, 0, 10, 70,  8, 2, PLASTIC, CLR_WHITE),
-CLOAK("cloak of warmth", "metal cloak",
-		0, 1,	COLD_RES,  2, 0, 15, 50,  9, 2, METAL, CLR_GRAY),
-CLOAK("cloak of grounding", "granite cloak",
-		0, 1,	SHOCK_RES,  2, 0, 15, 50,  9, 2, MINERAL, CLR_GRAY),
-CLOAK("cloak of quenching", "asbestos cloak",
-		0, 1,	FIRE_RES,  2, 0, 15, 50,  9, 2, MITHRIL, CLR_ORANGE),
-
 #if 0
 CLOAK("robe", (char *)0,
 		1, 1,	0,	    3, 0, 15, 50,  8, 3, CLOTH, CLR_RED),
@@ -612,10 +613,8 @@ CLOAK("cloak of invisibility", "opera cloak",
 		0, 1,	INVIS,	   9, 0, 10, 60,  9, 2, CLOTH, CLR_BRIGHT_MAGENTA),
 CLOAK("cloak of magic resistance", "ornamental cope",
 		0, 1,	ANTIMAGIC,  4, 0, 10, 60,  9, 3, CLOTH, CLR_WHITE),
-CLOAK("cloak of reflection", "funeral cloak",
-		0, 1,	REFLECTING,  2, 0, 10, 60,  9, 3, CLOTH, CLR_BRIGHT_GREEN),
-CLOAK("manacloak", "dragonhide cloak",
-		0, 1,	ENERGY_REGENERATION,  2, 0, 10, 50,  9, 3, DRAGON_HIDE, CLR_BRIGHT_BLUE),
+CLOAK("mana cloak", "funeral shroud",
+		0, 1,	ENERGY_REGENERATION,  4, 0, 10, 50,  9, 3, CLOTH, CLR_BLACK),
 CLOAK("cloak of displacement", "piece of cloth",
 		0, 1,	DISPLACED, 7, 0, 10, 50,  9, 2, CLOTH, HI_CLOTH),
 /* Helmets */
@@ -637,7 +636,7 @@ HELM("dented pot", (char *)0,
 		1, 0, 0,			2, 0, 10,   8, 9, 0, IRON, CLR_BLACK),
 /* 5lo: Fire Helmet from SLASH 6, grants Fire Resistance */
 HELM("fire helmet", "red shiny helmet",
-		0, 0, FIRE_RES,			3, 1, 25, 50, 9, 0, IRON, CLR_RED),
+		0, 0, FIRE_RES,			5, 1, 25, 50, 9, 0, IRON, CLR_RED),
 #ifdef JEDI
 HELM("plasteel helm", (char *)0,
 		1, 0, 0,                        1, 1,  6,  20, 7, 0, PLASTIC, CLR_WHITE),
@@ -696,7 +695,7 @@ SHIELD("shield of reflection", "polished silver shield",
 
 /* Boots */
 #ifdef JEDI
-BOOTS("plasteel boots", "white boots", /* these things were crashing the game for binders and certain other chars! */
+BOOTS("plasteel boots", "white boots",
 		0, 0,  0,          1, 2, 8,  25,  8, 0, PLASTIC, CLR_WHITE),
 #endif
 BOOTS("low boots", "walking shoes",
@@ -716,15 +715,13 @@ BOOTS("water walking boots", "jungle boots",
 BOOTS("jumping boots", "hiking boots",
 		0, 1,  JUMPING,   11, 2, 20, 50,  9, 0, LEATHER, HI_LEATHER),
 BOOTS("flying boots", "battle boots",
-		0, 1,  FLYING,   5, 2, 20,  100,  9, 0, SILVER, CLR_GRAY),
+		0, 1,  FLYING,    10, 2, 20,  100,  9, 0, SILVER, CLR_GRAY),
 BOOTS("elven boots", "mud boots",
 		0, 1,  STEALTH,   12, 2, 15,  8,  9, 0, LEATHER, HI_LEATHER),
 BOOTS("kicking boots", "steel boots",
 		0, 1,  0,         12, 2, 15,  8,  9, 0, IRON, CLR_BROWN),
 BOOTS("fumble boots", "riding boots",
 		0, 1,  FUMBLING,  11, 2, 20, 30,  9, 0, LEATHER, HI_LEATHER),
-BOOTS("zipper boots", "persian boots",
-		0, 1,  WOUNDED_LEGS,  5, 2, 20, 30,  9, 3, DRAGON_HIDE, CLR_YELLOW),
 BOOTS("levitation boots", "snow boots",
 		0, 1,  LEVITATION,12, 2, 20, 30,  9, 0, LEATHER, HI_LEATHER),
 
@@ -825,41 +822,29 @@ RING((char *)0, 0,  "zircon", 0, 0, 0, 0, 5, GEMSTONE, CLR_BRIGHT_CYAN),
 #undef RING
 
 /* amulets ... - THE Amulet comes last because it is special */
-#define AMULET(name,desc,power,prob,metal,color) OBJECT( \
-		OBJ(name,desc), BITS(0,0,0,0,1,0,0,0,0,0,0,0,metal), power, \
-		AMULET_CLASS, prob, 0, 20, 150, 0, 0, 0, 0, 20, color )
-AMULET("amulet of change",            "square",     0,          110, IRON,	CLR_BLACK),
-AMULET("amulet of drain resistance",  "warped",     DRAIN_RES,   60, IRON,	CLR_GRAY),
-AMULET("amulet of ESP",               "circular",   TELEPAT,    110, IRON,	CLR_WHITE),
-AMULET("amulet of undead warning",    "occult",     WARN_UNDEAD,  5, MITHRIL,   CLR_BLACK),
-AMULET("amulet of own race warning",  "cabbalist",  0,            5, PLASTIC,	CLR_CYAN),
-AMULET("amulet of poison warning",    "semicircular",0,           5, IRON,	CLR_BRIGHT_GREEN),
-AMULET("amulet of covetous warning",  "egyptian",   0,            5, GOLD,	CLR_MAGENTA),
-AMULET("amulet of flying",            "convex",     FLYING,      50, MINERAL,	CLR_RED),
-AMULET("amulet of life saving",       "spherical",  LIFESAVED,   60, GLASS,	CLR_BRIGHT_BLUE),
-AMULET("amulet of magical breathing", "octagonal",  MAGICAL_BREATHING, 50, GEMSTONE,	CLR_GREEN),
-AMULET("amulet of reflection",        "hexagonal",  REFLECTING,  60, GEMSTONE,	CLR_BRIGHT_GREEN),
-AMULET("amulet of restful sleep",     "triangular", SLEEPING,   100, GEMSTONE,	CLR_MAGENTA),
-AMULET("amulet of blindness",         "radiant",    BLINDED,     10, DRAGON_HIDE,	CLR_WHITE),
-AMULET("amulet of strangulation",     "oval",       STRANGLED,   90, PLASTIC,	CLR_BRIGHT_MAGENTA),
-AMULET("amulet of unchanging",        "concave",    UNCHANGING,	 50, MINERAL,	CLR_CYAN),
-AMULET("amulet versus poison",        "pyramidal",  POISON_RES, 105, GEMSTONE,	CLR_BRIGHT_CYAN),
-AMULET("amulet versus stone",         "lunate",   /*STONE_RES*/0,50, COPPER,	CLR_BRIGHT_MAGENTA),
-AMULET("amulet of depetrify",         "charmed",    STONE_RES,   10, BONE,	CLR_RED),
-AMULET("amulet of magic resistance",  "rare",       ANTIMAGIC,    1, PAPER,	CLR_ORANGE),
-AMULET("amulet of sickness resistance",
-		                      "sparkling",  SICK_RES,     9, GLASS,	CLR_BRIGHT_GREEN),
-AMULET("amulet of swimming",          "hemispherical",SWIMMING,  10, IRON,	CLR_BRIGHT_BLUE),
-AMULET("amulet of disintegration resistance",
-		                      "hardrock",   DISINT_RES,   5, MINERAL,	CLR_BLACK),
-AMULET("amulet of acid resistance",   "deltoid",    ACID_RES,     5, IRON,	CLR_GREEN),
-AMULET("amulet of regeneration",      "vivid",      REGENERATION, 5, CLOTH,	CLR_BRIGHT_CYAN),
-AMULET("amulet of conflict",          "sounding",   CONFLICT,     5, METAL,	CLR_WHITE),
-AMULET("amulet of fumbling",          "clumsy",     FUMBLING,     5, LEATHER,	CLR_ORANGE),
-AMULET("amulet of second chance",     "tetraedical",SECOND_CHANCE,5, GEMSTONE,	CLR_BRIGHT_BLUE),
-AMULET("amulet of data storage",      "icosaedrical", KEEN_MEMORY,5, GEMSTONE,	CLR_BRIGHT_GREEN),
-AMULET("amulet of waterwalking",      "rubber",     WWALKING,     5, PLASTIC,	CLR_BRIGHT_BLUE),
-AMULET("amulet of hunger",            "gleaming",   HUNGER,       5, WAX,	CLR_BRIGHT_MAGENTA),
+#define AMULET(name,desc,power,prob) OBJECT( \
+		OBJ(name,desc), BITS(0,0,0,0,1,0,0,0,0,0,0,0,IRON), power, \
+		AMULET_CLASS, prob, 0, 20, 150, 0, 0, 0, 0, 20, HI_METAL)
+AMULET("amulet of change",            "square",     0,           50),
+AMULET("amulet of drain resistance",  "warped",     DRAIN_RES,   50),
+AMULET("amulet of ESP",               "circular",   TELEPAT,     50),
+AMULET("amulet of undead warning",    "occult",     WARN_UNDEAD, 50),
+AMULET("amulet of own race warning",  "cabbalist",  0,           50),
+AMULET("amulet of poison warning",    "semicircular",0,          50),
+AMULET("amulet of covetous warning",  "egyptian",   0,           50),
+AMULET("amulet of flying",            "convex",     FLYING,      50),
+AMULET("amulet of life saving",       "spherical",  LIFESAVED,   50),
+AMULET("amulet of magical breathing", "octagonal",  MAGICAL_BREATHING, 50),
+AMULET("amulet of reflection",        "hexagonal",  REFLECTING,  50),
+AMULET("amulet of restful sleep",     "triangular", SLEEPING,    50),
+AMULET("amulet of strangulation",     "oval",       STRANGLED,   50),
+AMULET("amulet of unchanging",        "concave",    UNCHANGING,	 50),
+AMULET("amulet versus poison",        "pyramidal",  POISON_RES,  50),
+AMULET("amulet versus stone",         "lunate",   /*STONE_RES*/0,50),
+AMULET("amulet of magic resistance",  "rare",       ANTIMAGIC,    50),
+AMULET("amulet of second chance",     "tetraedical",SECOND_CHANCE,50),
+AMULET("amulet of data storage",      "icosaedrical", KEEN_MEMORY,50),
+AMULET("amulet of hunger",            "gleaming",   HUNGER,       50),
 #if 0 /* 5lo: Extended appearances */
 AMULET((char *)0,                     "rotated",    0, 0, METAL,	CLR_ORANGE),
 AMULET((char *)0,                     "rounded",    0, 0, METAL,	CLR_YELLOW),
@@ -1159,6 +1144,13 @@ FOOD("mushroom",             5, 1,  5, 0, VEGGY, 130, CLR_BLACK),
 FOOD("melon",               19, 1,  5, 0, VEGGY, 175, CLR_BRIGHT_GREEN),
 FOOD("slime mold",          75, 1,  5, 0, VEGGY, 250, HI_ORGANIC),
 FOOD("peanut bag",	     5, 3, 10, 0, VEGGY, 800, HI_ORGANIC),
+FOOD("sheaf of straw",	     0, 2,  8, 0, VEGGY, 200, CLR_YELLOW),
+# define NUT(name,desc,prob,kn,delay,wt,gval,nutr,sdam,ldam,color) \
+OBJECT( OBJ(name,desc), \
+    BITS(kn, 1, 0, 0,0,0,0,0,0,0,0,-P_SLING,VEGGY), 0, \
+    FOOD_CLASS, /*prob*/ 0, delay, wt, gval, sdam, ldam, 0, 0, nutr, color)
+NUT("acorn", (char *) 0,     0, 1, 1, 10, 0,  5, 2, 0, HI_WOOD),
+#undef NUT
 
 /* People food */
 FOOD("lump of royal jelly",  1, 1,  2, 0, VEGGY, 200, CLR_YELLOW),
@@ -1200,9 +1192,8 @@ POTION("restore ability", "pink",       1, 0,          40, 100, CLR_BRIGHT_MAGEN
 POTION("blindness", "yellow",           1, BLINDED,    33, 150, CLR_YELLOW),
 POTION("ESP", "muddy",                  1, TELEPAT,    20, 150, CLR_BROWN),
 POTION("gain energy", "cloudy",         1, 0,          35, 150, CLR_WHITE),
-POTION("gain health", "iridescent",     1, 0,           5, 150, CLR_ORANGE),
 POTION("invisibility", "brilliant blue",1, INVIS,      40, 150, CLR_BRIGHT_BLUE),
-POTION("monster detection", "bubbly",   1, 0,          38, 150, CLR_WHITE),
+POTION("monster detection", "bubbly",   1, 0,          39, 150, CLR_WHITE),
 POTION("object detection", "smoky",     1, 0,          38, 150, CLR_GRAY),
 POTION("enlightenment", "swirly",       1, 0,          20, 200, CLR_BROWN),
 POTION("full healing",  "black",        1, 0,          35, 200, CLR_BLACK),
@@ -1263,100 +1254,107 @@ POTION((char *)0, "red",                0, 0,           0,   0, CLR_RED),
 POTION((char *)0, "tangerine",          0, 0,           0,   0, CLR_ORANGE),
 POTION((char *)0, "topaz",              0, 0,           0,   0, CLR_YELLOW),
 POTION((char *)0, "violet",             0, 0,           0,   0, CLR_BRIGHT_MAGENTA),
+POTION((char *)0, "iridescent", 	0, 0, 		0,   0, CLR_ORANGE),
 #endif
 POTION("water", "clear",                0, 0,          55, 300, CLR_CYAN),
-POTION("blood", "blood-red",            0, 0,           5, 300, CLR_RED),
+POTION("blood", "blood-red",            0, 0,           5,  50, CLR_RED),
 POTION("vampire blood", "blood-red",    1, 0,           5, 300, CLR_RED),
-POTION("amnesia", "sparkling",          1, 0,          16, 300, CLR_CYAN),
+POTION("amnesia", "sparkling",          1, 0,          20, 300, CLR_CYAN),
 #undef POTION
 
 /* scrolls ... */
-#define SCROLL(name,text,sub,mgc,prob,cost,color) OBJECT( \
+#define SCROLL(name,text,sub,mgc,prob,cost) OBJECT( \
 		OBJ(name,text), BITS(0,1,0,0,mgc,0,0,0,0,0,0,sub,PAPER), 0, \
-		SCROLL_CLASS, prob, 0, 5, cost, 0, 0, 0, 0, 6, color )
+		SCROLL_CLASS, prob, 0, 5, cost, 0, 0, 0, 0, 6, HI_PAPER )
 /* Attack */
-SCROLL("create monster",        "LEP GEX VEN ZEA",      P_ATTACK_SPELL, 1,  30, 200, CLR_RED),
-SCROLL("summon undead",         "VAS CORP BET MANI",    P_ATTACK_SPELL, 1,   5, 250, CLR_WHITE),
+SCROLL("create monster",        "LEP GEX VEN ZEA",      P_ATTACK_SPELL, 1,  30, 200),
 /* Enchantment */
-SCROLL("taming",                "PRIRUTSENIE",          P_ENCHANTMENT_SPELL, 1,  35, 200, CLR_WHITE),
+SCROLL("taming",                "PRIRUTSENIE",          P_ENCHANTMENT_SPELL, 1,  35, 200),
 /* Divination */
-SCROLL("light",                 "VERR YED HORRE",       P_DIVINATION_SPELL, 1,  20,  50, CLR_BLACK),
-SCROLL("food detection",        "YUM YUM",              P_DIVINATION_SPELL, 1,  15, 100, CLR_YELLOW),
-SCROLL("gold detection",        "THARR",                P_DIVINATION_SPELL, 1,  23, 100, CLR_BROWN),
-SCROLL("identify",              "KERNOD WEL",           P_DIVINATION_SPELL, 1, 200,  20, CLR_GREEN),
-SCROLL("inventory id",          "MAPIRO MAHAMA DIROMAT",P_DIVINATION_SPELL, 1,   5, 250, CLR_YELLOW),
-SCROLL("magic mapping",         "ELAM EBOW",            P_DIVINATION_SPELL, 1,  35, 100, CLR_CYAN),
-SCROLL("flood",                 "AQUE BRAGH",           P_DIVINATION_SPELL, 1,   5, 200, CLR_BRIGHT_BLUE),
-SCROLL("gain mana",             "GHOTI",                P_DIVINATION_SPELL, 1,   5, 150, CLR_BRIGHT_MAGENTA),
+SCROLL("light",                 "VERR YED HORRE",       P_DIVINATION_SPELL, 1,  20,  50),
+SCROLL("food detection",        "YUM YUM",              P_DIVINATION_SPELL, 1,  15, 100),
+SCROLL("gold detection",        "THARR",                P_DIVINATION_SPELL, 1,  23, 100),
+SCROLL("identify",              "KERNOD WEL",           P_DIVINATION_SPELL, 1, 200,  20),
+SCROLL("magic mapping",         "ELAM EBOW",            P_DIVINATION_SPELL, 1,  35, 100),
+SCROLL("flood",                 "AQUE BRAGH",           P_DIVINATION_SPELL, 1,  10, 200),
 /* Enchantment */
-SCROLL("confuse monster",       "NR 9",                 P_ENCHANTMENT_SPELL,  1,  27, 100, CLR_MAGENTA),
-SCROLL("scare monster",         "XIXAXA XOXAXA XUXAXA", P_ENCHANTMENT_SPELL,  1,  35, 100, CLR_BRIGHT_BLUE),
-SCROLL("enchant weapon",        "DAIYEN FOOELS",        P_ENCHANTMENT_SPELL,  1,  75,  60, CLR_RED),
-SCROLL("enchant armor",         "ZELGO MER",            P_ENCHANTMENT_SPELL,  1,  63,  80, CLR_GREEN),
+SCROLL("confuse monster",       "NR 9",                 P_ENCHANTMENT_SPELL,  1,  27, 100),
+SCROLL("scare monster",         "XIXAXA XOXAXA XUXAXA", P_ENCHANTMENT_SPELL,  1,  35, 100),
+SCROLL("enchant weapon",        "DAIYEN FOOELS",        P_ENCHANTMENT_SPELL,  1,  75,  60),
+SCROLL("enchant armor",         "ZELGO MER",            P_ENCHANTMENT_SPELL,  1,  63,  80),
 /* Protection */
-SCROLL("remove curse",          "PRATYAVAYAH",          P_PROTECTION_SPELL, 1,  60,  80, CLR_BRIGHT_MAGENTA),
+SCROLL("remove curse",          "PRATYAVAYAH",          P_PROTECTION_SPELL, 1,  60,  80),
 /* Body */
-SCROLL("teleportation",         "VENZAR BORGAVVE",      P_BODY_SPELL, 1,  55, 100, CLR_BROWN),
+SCROLL("teleportation",         "VENZAR BORGAVVE",      P_BODY_SPELL, 1,  55, 100),
 /* Matter */
-SCROLL("fire",                  "ANDOVA BEGARIN",       P_MATTER_SPELL, 1,  33, 100, CLR_WHITE),
-SCROLL("earth",                 "KIRJE",                P_MATTER_SPELL, 1,  20, 200, CLR_CYAN),
+SCROLL("fire",                  "ANDOVA BEGARIN",       P_MATTER_SPELL, 1,  33, 100),
+SCROLL("earth",                 "KIRJE",                P_MATTER_SPELL, 1,  20, 200),
 
-SCROLL("destroy armor",         "JUYED AWK YACC",       P_NONE, 1,  20, 100, CLR_YELLOW),
-SCROLL("amnesia",               "DUAM XNAHT",           P_NONE, 1,  15, 200, CLR_BRIGHT_BLUE),
-SCROLL("healing",               "PHOL ENDE WODAN",      P_NONE, 1,  15, 300, CLR_BRIGHT_CYAN),
-SCROLL("charging",              "HACKEM MUCHE",         P_NONE, 1,  25, 300, CLR_GREEN),
-SCROLL("genocide",              "ELBIB YLOH",           P_NONE, 1,  15, 300, CLR_MAGENTA),
-SCROLL("punishment",            "VE FORBRYDERNE",       P_NONE, 1,  15, 300, CLR_GRAY),
-SCROLL("stinking cloud",	"VELOX NEB",            P_NONE, 1,  15, 300, CLR_GRAY),
-SCROLL("trap detection",	"HOYO HOYO",            P_NONE, 1,   5, 300, CLR_YELLOW),
-SCROLL("acquirement",	        "HZLRC KSTSBD MPFNG",   P_NONE, 1,   5, 300, CLR_GRAY),
-SCROLL("proof armor",           "HAPAX LEGOMENON",      P_NONE, 1,   5, 100, CLR_ORANGE),
-SCROLL("proof weapon",          "GNIK SISI VLE",        P_NONE, 1,   5, 100, CLR_GRAY),
-SCROLL("mass murder",		"ENEMATZU MEMALEZU",	P_NONE, 1,   5, 200, CLR_BLACK),
-SCROLL("undo genocide",		"42",			P_NONE, 1,   5, 500, CLR_ORANGE),
-SCROLL("reverse identify",	"OH CAPTAIN MY CAPTAIN",P_NONE, 1,   5,  30, CLR_RED),
-SCROLL("wishing",		"TRICK 13",		P_NONE, 1,   1, 400, CLR_WHITE),
+SCROLL("destroy armor",         "JUYED AWK YACC",       P_NONE, 1,  20, 100),
+SCROLL("amnesia",               "DUAM XNAHT",           P_NONE, 1,  15, 200),
+SCROLL("charging",              "HACKEM MUCHE",         P_NONE, 1,  25, 300),
+SCROLL("genocide",              "ELBIB YLOH",           P_NONE, 1,  10, 300),
+SCROLL("punishment",            "VE FORBRYDERNE",       P_NONE, 1,  15, 300),
+SCROLL("stinking cloud",	"VELOX NEB",            P_NONE, 1,  15, 300),
+SCROLL("trap detection",	"HOYO HOYO",            P_NONE, 1,  10, 300),
+SCROLL("acquirement",	        "HZLRC KSTSBD MPFNG",   P_NONE, 1,  10, 300),
+SCROLL("proof armor",           "HAPAX LEGOMENON",      P_NONE, 1,  15, 100),
+SCROLL("proof weapon",          "GNIK SISI VLE",        P_NONE, 1,  15, 100),
+SCROLL("mass murder",		"ENEMATZU MEMALEZU",	P_NONE, 1,  15, 200),
+SCROLL("undo genocide",		"42",			P_NONE, 1,  10, 500),
+SCROLL("reverse identify",	"OH CAPTAIN MY CAPTAIN",P_NONE, 1,  10,  30),
+SCROLL("wishing",		"TRICK 13",		P_NONE, 1,   1, 400),
 SCROLL("consecration",		"MAY THE FORCE BE WITH YOU",
-							P_NONE, 1,   5, 300, CLR_BRIGHT_CYAN),
-SCROLL("enthronization",        "ZLORFIK",	        P_NONE, 1,   5, 300, CLR_BLACK),
-SCROLL("fountain building",     "SODALG",	        P_NONE, 1,   5, 300, CLR_YELLOW),
-SCROLL("sinking",		"ASHPD",	        P_NONE, 1,   5, 250, CLR_CYAN),
+							P_NONE, 1,  10, 300),
+#if 0 /* 5lo: removed, not needed */
+SCROLL("enthronization",        "ZLORFIK",	        P_NONE, 1,   5, 300),
+SCROLL("fountain building",     "SODALG",	        P_NONE, 1,   5, 300),
+SCROLL("sinking",		"ASHPD",	        P_NONE, 1,   5, 250),
 SCROLL("WC",		        "ACHAT SHTAYIM SHALOSH", 
-		                                        P_NONE, 1,   5, 250, CLR_WHITE),
-SCROLL("ice",		        "KO BATE",	        P_NONE, 1,  10, 200, CLR_GREEN),
-SCROLL("clouds",		"FNORD",	        P_NONE, 1,  10, 200, CLR_BRIGHT_BLUE),
-SCROLL("root password detection","XYZZY",	        P_NONE, 1,   5, 200, CLR_GRAY),
-SCROLL("trap creation",         "LOREM IPSUM",          P_NONE, 1,  10, 200, CLR_BLACK),
-SCROLL("sleep",                 "ETAOIN SHRDLU",        P_NONE, 1,  10, 200, CLR_BRIGHT_MAGENTA),
-SCROLL((char *)0,		"FOOBIE BLETCH",        P_NONE, 1,   0, 100, CLR_CYAN),
-SCROLL((char *)0,		"TEMOV",                P_NONE, 1,   0, 100, CLR_BLACK),
-SCROLL((char *)0,		"GARVEN DEH",           P_NONE, 1,   0, 100, CLR_GREEN),
-SCROLL((char *)0,		"READ ME",              P_NONE, 1,   0, 100, CLR_WHITE),
-SCROLL((char *)0,               "EIRIS SAZUN IDISI",    P_NONE, 1,   0, 100, CLR_ORANGE),
+		                                        P_NONE, 1,   5, 250),
+#endif
+SCROLL("ice",		        "KO BATE",	        P_NONE, 1,  10, 200),
+SCROLL("clouds",		"FNORD",	        P_NONE, 1,  10, 200),
+SCROLL("root password detection","XYZZY",	        P_NONE, 1,   5, 200),
+SCROLL("sleep",                 "ETAOIN SHRDLU",        P_NONE, 1,  15, 200),
+SCROLL((char *)0,		"FOOBIE BLETCH",        P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"TEMOV",                P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"GARVEN DEH",           P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"READ ME",              P_NONE, 1,   0, 100),
+SCROLL((char *)0,               "EIRIS SAZUN IDISI",    P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"ZLORFIK",              P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"SODALG",           	P_NONE, 1,   0, 100),
+SCROLL((char *)0,		"ASHPD",              	P_NONE, 1,   0, 100),
+SCROLL((char *)0, 		"ACHAT SHTAYIM SHALOSH",P_NONE, 1,   0, 100),
+SCROLL((char *)0,         	"LOREM IPSUM",          P_NONE, 1,   0, 100),
+SCROLL((char *)0, 		"VAS CORP BET MANI",    P_NONE, 1,   0, 100),
+SCROLL((char *)0, 		"MAPIRO MAHAMA DIROMAT",P_NONE, 1,   0, 100),
+SCROLL((char *)0, 		"PHOL ENDE WODAN", 	P_NONE, 1,   0, 100),
+SCROLL((char *)0, 		"GHOTI", 		P_NONE, 1,   0, 100),
 
 #if 0 /* 5lo: Unnethack appearances were used for scrolls above */
-SCROLL((char *)0,               "ETAOIN SHRDLU",   P_NONE,      1,   0, 100, CLR_BRIGHT_CYAN),
-SCROLL((char *)0,               "LOREM IPSUM",     P_NONE,      1,   0, 100, CLR_BRIGHT_BLUE),
-SCROLL((char *)0,               "FNORD",           P_NONE,      1,   0, 100, CLR_BROWN), /* Illuminati */
-SCROLL((char *)0,               "KO BATE",         P_NONE,      1,   0, 100, CLR_RED), /* Kurd Lasswitz */
-SCROLL((char *)0,               "ACHAT SHTAYIM SHALOSH",P_NONE, 1,   0, 100, CLR_BRIGHT_BLUE), /* Uri Geller */
-SCROLL((char *)0,               "ABRA KA DABRA",     P_NONE,    1,   0, 100, CLR_BLACK), /* traditional incantation */
-SCROLL((char *)0,               "ASHPD",          P_NONE,       1,   0, 100, CLR_BLACK), /* Portal */
-SCROLL((char *)0,               "SODALG",          P_NONE,      1,   0, 100, CLR_RED), /* Portal */
-SCROLL((char *)0,               "ZLORFIK",         P_NONE,      1,   0, 100, CLR_ORANGE), /* Zak McKracken */
-SCROLL((char *)0,               "GNIK SISI VLE",     P_NONE,    1,   0, 100, CLR_GREEN), /* Zak McKracken */
-SCROLL((char *)0,               "HAPAX LEGOMENON",  P_NONE,     1,   0, 100, CLR_BRIGHT_BLUE),
-SCROLL((char *)0,               "HZLRC KSTSBD MPFNG", P_NONE,   1,   0, 100, CLR_YELLOW),
-SCROLL((char *)0,               "EIRIS SAZUN IDISI",  P_NONE,   1,   0, 100, CLR_BRIGHT_GREEN), /* Merseburg Incantations */
-SCROLL((char *)0,               "PHOL ENDE WODAN",   P_NONE,    1,   0, 100, CLR_GRAY), /* Merseburg Incantations */
-SCROLL((char *)0,               "GHOTI",             P_NONE,    1,   0, 100, CLR_BRIGHT_BLUE), /* pronounced as 'fish', George Bernard Shaw */
-SCROLL((char *)0,               "MAPIRO MAHAMA DIROMAT",P_NONE, 1,   0, 100, CLR_BRIGHT_MAGENTA), /* Wizardry */
+SCROLL((char *)0,               "ETAOIN SHRDLU",   P_NONE,      1,   0, 100),
+SCROLL((char *)0,               "LOREM IPSUM",     P_NONE,      1,   0, 100),
+SCROLL((char *)0,               "FNORD",           P_NONE,      1,   0, 100), /* Illuminati */
+SCROLL((char *)0,               "KO BATE",         P_NONE,      1,   0, 100), /* Kurd Lasswitz */
+SCROLL((char *)0,               "ACHAT SHTAYIM SHALOSH",P_NONE, 1,   0, 100), /* Uri Geller */
+SCROLL((char *)0,               "ABRA KA DABRA",     P_NONE,    1,   0, 100), /* traditional incantation */
+SCROLL((char *)0,               "ASHPD",          P_NONE,       1,   0, 100), /* Portal */
+SCROLL((char *)0,               "SODALG",          P_NONE,      1,   0, 100), /* Portal */
+SCROLL((char *)0,               "ZLORFIK",         P_NONE,      1,   0, 100), /* Zak McKracken */
+SCROLL((char *)0,               "GNIK SISI VLE",     P_NONE,    1,   0, 100), /* Zak McKracken */
+SCROLL((char *)0,               "HAPAX LEGOMENON",  P_NONE,     1,   0, 100),
+SCROLL((char *)0,               "HZLRC KSTSBD MPFNG", P_NONE,   1,   0, 100),
+SCROLL((char *)0,               "EIRIS SAZUN IDISI",  P_NONE,   1,   0, 100), /* Merseburg Incantations */
+SCROLL((char *)0,               "PHOL ENDE WODAN",   P_NONE,    1,   0, 100), /* Merseburg Incantations */
+SCROLL((char *)0,               "GHOTI",             P_NONE,    1,   0, 100), /* pronounced as 'fish', George Bernard Shaw */
+SCROLL((char *)0,               "MAPIRO MAHAMA DIROMAT",P_NONE, 1,   0, 100), /* Wizardry */
 #endif
 /* these must come last because they have special descriptions */
 #ifdef MAIL
-SCROLL("mail",                  "stamped",              P_NONE, 0,   0,   0, CLR_BRIGHT_BLUE),
+SCROLL("mail",                  "stamped",              P_NONE, 0,   0,   0),
 #endif
-SCROLL("blank paper",           "unlabeled",            P_NONE, 0,  28,  60, CLR_GRAY),
+SCROLL("blank paper",           "unlabeled",            P_NONE, 0,  28,  60),
 #undef SCROLL
 
 /* spell books ... */
@@ -1380,20 +1378,19 @@ SPELL("cure hallucination", "crimson",  P_HEALING_SPELL, 15,  3, 3, 1, NODIR,   
 SPELL("cure confusion",  "glossy",      P_HEALING_SPELL, 15,  3, 3, 1, NODIR,     HI_PAPER),
 SPELL("cure stun",       "notepaper",   P_HEALING_SPELL, 15,  3, 3, 1, NODIR,     HI_PAPER),
 SPELL("extra healing",   "plaid",       P_HEALING_SPELL, 15,  5, 3, 1, IMMEDIATE, CLR_GREEN),
-SPELL("full healing",    "creased",     P_HEALING_SPELL, 5,   8, 6, 1, IMMEDIATE, HI_PAPER),
 SPELL("restore ability", "light brown", P_HEALING_SPELL, 15,  5, 4, 1, NODIR,     CLR_BROWN),
 SPELL("create familiar", "glittering",  P_HEALING_SPELL, 10,  7, 6, 1, NODIR,     CLR_WHITE),
 /* Divination spells */
 SPELL("light",           "cloth",       P_DIVINATION_SPELL, 15,  1, 1, 1, NODIR,     HI_CLOTH),
 SPELL("detect monsters", "leather",     P_DIVINATION_SPELL, 15,  1, 1, 1, NODIR,     HI_LEATHER),
-SPELL("detect food",     "cyan",        P_DIVINATION_SPELL,  5,  3, 2, 1, NODIR,     CLR_CYAN),
+SPELL("detect food",     "cyan",        P_DIVINATION_SPELL, 10,  3, 2, 1, NODIR,     CLR_CYAN),
 SPELL("clairvoyance",    "dark blue",   P_DIVINATION_SPELL, 15,  3, 3, 1, NODIR,     CLR_BRIGHT_BLUE),
 SPELL("detect unseen",   "violet",      P_DIVINATION_SPELL, 15,  4, 3, 1, NODIR,     CLR_MAGENTA),
 SPELL("identify",        "bronze",      P_DIVINATION_SPELL, 30,  8, 5, 1, NODIR,     HI_COPPER),
 SPELL("detect treasure", "gray",        P_DIVINATION_SPELL, 15,  5, 4, 1, NODIR,     CLR_GRAY),
 SPELL("magic mapping",   "dusty",       P_DIVINATION_SPELL, 15,  7, 5, 1, NODIR,     HI_PAPER),
-SPELL("entrapping",      "foolscap",    P_DIVINATION_SPELL,  5,  7, 6, 1, NODIR,     HI_PAPER),
-SPELL("finger",		 "old",	        P_DIVINATION_SPELL,  5,  3, 2, 1, IMMEDIATE, HI_PAPER),
+SPELL("trap detection",      "foolscap",P_DIVINATION_SPELL, 10,  7, 6, 1, NODIR,     HI_PAPER),
+SPELL("finger",		 "old",	        P_DIVINATION_SPELL, 10,  3, 2, 1, IMMEDIATE, HI_PAPER),
 SPELL("chemistry",	 "brand-new",   P_DIVINATION_SPELL, 10, 10, 1, 1, NODIR,     HI_PAPER),
 SPELL("detect foot",	 "chartreuse",  P_DIVINATION_SPELL,  5,  2, 7, 1, NODIR, CLR_GREEN),
 /* Enchantment spells */
@@ -1403,9 +1400,8 @@ SPELL("cause fear",      "light blue",  P_ENCHANTMENT_SPELL, 10,  3, 3, 1, NODIR
 SPELL("charm monster",   "magenta",     P_ENCHANTMENT_SPELL, 10,  3, 3, 1, IMMEDIATE, CLR_MAGENTA),
 SPELL("enchant weapon",  "dull",        P_ENCHANTMENT_SPELL, 15,  8, 7, 1, NODIR,     CLR_WHITE),
 SPELL("enchant armor",   "thin",        P_ENCHANTMENT_SPELL, 15,  8, 7, 1, NODIR,     CLR_WHITE),
-SPELL("charging",        "bookmarked",  P_ENCHANTMENT_SPELL, 5,   8, 7, 1, NODIR,     HI_PAPER),
 /* Protection spells */
-SPELL("protection",      "wide",        P_PROTECTION_SPELL,  5,  3, 1, 1, NODIR,     HI_PAPER),
+SPELL("protection",      "wide",        P_PROTECTION_SPELL, 10,  3, 1, 1, NODIR,     HI_PAPER),
 SPELL("resist poison",   "big",         P_PROTECTION_SPELL, 10,  2, 1, 1, NODIR,     CLR_GRAY),
 SPELL("resist sleep",    "fuzzy",       P_PROTECTION_SPELL, 15,  2, 1, 1, NODIR,     CLR_BROWN),
 SPELL("endure cold",     "deep",        P_PROTECTION_SPELL, 10,  3, 2, 1, NODIR,     HI_PAPER),
@@ -1413,11 +1409,7 @@ SPELL("endure heat",     "spotted",     P_PROTECTION_SPELL, 10,  3, 2, 1, NODIR,
 SPELL("insulate",        "long",        P_PROTECTION_SPELL, 10,  3, 2, 1, NODIR,     HI_PAPER),
 SPELL("remove curse",    "wrinkled",    P_PROTECTION_SPELL, 25,  5, 5, 1, NODIR,     HI_PAPER),
 SPELL("turn undead",     "copper",      P_PROTECTION_SPELL, 15,  8, 6, 1, IMMEDIATE, HI_COPPER),
-SPELL("anti disintegration","string-bound",P_PROTECTION_SPELL,5, 6, 6, 1, NODIR,     HI_PAPER),
-SPELL("botox resist",    "fan-fold",    P_PROTECTION_SPELL, 5,  6, 6, 1, NODIR,      HI_PAPER),
-SPELL("acidshield",      "typewritten", P_PROTECTION_SPELL, 5,  6, 6, 1, NODIR,      HI_PAPER),
-SPELL("godmode",         "legal pad",   P_PROTECTION_SPELL, 5,  8, 7, 1, NODIR,      CLR_YELLOW),
-SPELL("resist petrification","crayon",  P_PROTECTION_SPELL, 5,  8, 7, 1, NODIR,      HI_PAPER),
+SPELL("acidshield",      "typewritten", P_PROTECTION_SPELL, 15,  6, 6, 1, NODIR,      HI_PAPER),
 /* Body spells */
 SPELL("jumping",         "torn",        P_BODY_SPELL, 15,  3, 1, 1, IMMEDIATE, HI_PAPER),
 SPELL("haste self",      "purple",      P_BODY_SPELL,  5,  4, 3, 1, NODIR,     CLR_MAGENTA),
@@ -1436,7 +1428,7 @@ SPELL("acid sphere",     "scrawled",    P_MATTER_SPELL, 5,   2, 1, 1, NODIR,    
 SPELL("wizard lock",     "dark green",  P_MATTER_SPELL, 25,  3, 2, 1, IMMEDIATE, CLR_GREEN),
 SPELL("dig",             "parchment",   P_MATTER_SPELL, 20,  6, 5, 1, RAY,       HI_PAPER),
 SPELL("cancellation",    "shining",     P_MATTER_SPELL,  5,  8, 7, 1, IMMEDIATE, CLR_WHITE),
-SPELL("reflection",	 "scribbled",   P_MATTER_SPELL,  5,  7, 6, 1, IMMEDIATE, HI_PAPER),
+SPELL("reflection", 	 "scribbled",   P_MATTER_SPELL,  5,  7, 6, 1, IMMEDIATE, HI_PAPER),
 SPELL("repair armor",	 "illuminated", P_MATTER_SPELL,  5,  6, 3, 1, IMMEDIATE, HI_PAPER),
 /* Ray type spells are all here.  Kludge for zap.c */
 SPELL("magic missile",   "vellum",      P_ATTACK_SPELL, 40,  3, 2, 1, RAY,       HI_PAPER),
@@ -1459,6 +1451,14 @@ SPELL((char *)0,	 "ancient",     P_NONE, 0, 0, 0, 1, 0, CLR_BRIGHT_GREEN),
 SPELL((char *)0,         "decrepit",    P_NONE, 0, 0, 0, 1, 0, CLR_BROWN),
 SPELL((char *)0,         "paperback",   P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
 SPELL((char *)0,         "cryptic",     P_NONE, 0, 0, 0, 1, 0, CLR_BLACK),
+SPELL((char *)0, 	 "creased", 	P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
+SPELL((char *)0, 	 "bookmarked",  P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
+#if 0 /* extras if we never need these */
+SPELL((char *)0, 	 "string-bound",P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
+SPELL((char *)0, 	 "fan-fold", 	P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
+SPELL((char *)0, 	 "legal pad", 	P_NONE, 0, 0, 0, 1, 0, CLR_YELLOW),
+SPELL((char *)0, 	 "crayon", 	P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
+#endif
 SPELL("blank paper",	 "plain",	P_NONE, 15,0, 0, 0, 0, HI_PAPER),
 	/* ...Blank spellbook must come last because it retains its description */
 OBJECT(OBJ("Book of the Dead", "papyrus"),
@@ -1472,22 +1472,18 @@ OBJECT(OBJ("Book of the Dead", "papyrus"),
 		OBJ(name,typ), BITS(0,0,1,0,mgc,1,0,0,0,0,dir,0,metal), 0, \
 		WAND_CLASS, prob, 0, 7, cost, 0, 0, 0, 0, 30, color )
 WAND("light",          "glass",    35, 100, 1, NODIR,     GLASS,    HI_GLASS),
-WAND("nothing",        "oak",      15, 100, 0, IMMEDIATE, WOOD,     HI_WOOD),
+WAND("nothing",        "oak",      10, 100, 0, IMMEDIATE, WOOD,     HI_WOOD),
 WAND("enlightenment",  "crystal",  30, 150, 1, NODIR,     GLASS,    HI_GLASS),
 WAND("healing",        "bamboo",   50, 150, 1, IMMEDIATE, WOOD,     CLR_YELLOW),
 WAND("locking",        "aluminum", 25, 150, 1, IMMEDIATE, METAL,    HI_METAL),
 WAND("make invisible", "marble",   25, 150, 1, IMMEDIATE, MINERAL,  HI_MINERAL),
-WAND("identify",       "birch",     5, 250, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("remove curse",   "redwood",   5, 150, 1, NODIR,     WOOD,     HI_WOOD),
+WAND("identify",       "birch",    10, 250, 1, NODIR,     WOOD,     HI_WOOD),
 WAND("opening",        "zinc",     25, 150, 1, IMMEDIATE, METAL,    HI_METAL),
 WAND("probing",        "uranium",  20, 150, 1, IMMEDIATE, METAL,    HI_METAL),
 WAND("secret door detection", "balsa",
                                    20, 150, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("entrapping",     "mahogany",  5, 150, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("darkness",       "cedar",     5, 150, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("magic mapping",  "palmwood", 10, 150, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("detect monsters","yew",       5, 150, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("objection",      "chrome",    5, 150, 1, NODIR,     METAL,    HI_SILVER),
+WAND("darkness",       "cedar",    15, 150, 1, NODIR,     WOOD,     HI_WOOD),
+WAND("magic mapping",  "palmwood", 15, 150, 1, NODIR,     WOOD,     HI_WOOD),
 WAND("slow monster",   "tin",      45, 150, 1, IMMEDIATE, METAL,    HI_METAL),
 WAND("speed monster",  "brass",    35, 150, 1, IMMEDIATE, COPPER,   HI_COPPER),
 WAND("striking",       "ebony",    60, 150, 1, IMMEDIATE, WOOD,     HI_WOOD),
@@ -1496,22 +1492,18 @@ WAND("draining",       "ceramic",  25, 175, 1, IMMEDIATE, MINERAL,  HI_MINERAL),
 		/* KMH -- 15/1000 probability from light */
 WAND("cancellation",   "platinum", 35, 200, 1, IMMEDIATE, PLATINUM, CLR_WHITE),
 WAND("create monster", "maple",    30, 200, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("summon undead",  "nickel",    5, 200, 1, NODIR,     METAL,    HI_METAL),
 WAND("fear",           "rusty",    20, 200, 1, IMMEDIATE, IRON,     CLR_RED),
-WAND("wind",           "mithril",   5, 200, 1, IMMEDIATE, MITHRIL,  HI_METAL),
+WAND("wind",           "mithril",  10, 200, 1, IMMEDIATE, MITHRIL,  HI_METAL),
 WAND("polymorph",      "silver",   45, 200, 1, IMMEDIATE, SILVER,   HI_SILVER),
 WAND("teleportation",  "iridium",  45, 200, 1, IMMEDIATE, METAL,    CLR_BRIGHT_CYAN),
-/*WAND("banishment",   "cocky",     5, 500, 1, IMMEDIATE, METAL,    CLR_BRIGHT_GREEN),*/
 WAND("create horde",   "black",     5, 300, 1, NODIR,     PLASTIC,  CLR_BLACK),
 WAND("extra healing",  "bronze",   30, 300, 1, IMMEDIATE, COPPER,   CLR_YELLOW),
-WAND("full healing",   "silicon",  10, 300, 1, IMMEDIATE, MINERAL,  HI_MINERAL),
 WAND("wonder",	       "elven-lettered",
-		                    5, 150, 1, NODIR,     IRON,	    HI_METAL),
-WAND("bugging",	       "wooden",    5, 200, 1, NODIR,     WOOD,	    HI_METAL),
+		                   10, 150, 1, NODIR,     IRON,	    HI_METAL),
+WAND("bugging",	       "wooden",   10, 200, 1, NODIR,     WOOD,	    HI_METAL),
 WAND("wishing",        "pine",      5, 500, 1, NODIR,     WOOD,     HI_WOOD),
 WAND("acquirement",    "grooved",   5, 400, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("clone monster",  "bent",      5, 500, 1, IMMEDIATE, IRON,     HI_METAL),
-WAND("charging",       "cracked",   5, 400, 1, NODIR,     WOOD,     HI_WOOD),
+WAND("clone monster",  "bent",     10, 500, 1, IMMEDIATE, IRON,     HI_METAL),
 /* Ray wands have to come last, and in this order. */
 /* This is extremely kludgy, but that's what zap.c expects. */
 WAND("digging",        "iron",     50, 150, 1, RAY,       IRON,     HI_METAL),
@@ -1522,7 +1514,7 @@ WAND("sleep",          "runed",    50, 175, 1, RAY,       IRON,     HI_METAL),
 WAND("death",          "long",      5, 500, 1, RAY,       IRON,     HI_METAL),
 WAND("lightning",      "curved",   20, 175, 1, RAY,       IRON,     HI_METAL),
 WAND("fireball",       "octagonal", 5, 300, 1, RAY,       IRON,     HI_METAL),
-WAND("acid",	       "gnarled",   5, 200, 1, RAY,       WOOD,	    HI_WOOD),
+WAND("acid",	       "gnarled",  10, 200, 1, RAY,       WOOD,	    HI_WOOD),
 WAND("solar beam",     "plastic",   5, 400, 1, RAY,       PLASTIC,  CLR_BLACK),
 WAND((char *)0,        "forked",    0, 150, 1, 0,         WOOD,     HI_WOOD),
 WAND((char *)0,        "spiked",    0, 150, 1, 0,         IRON,     HI_METAL),
@@ -1597,6 +1589,14 @@ WAND((char *)0,        "magnesium", 0, 150, 1, 0,         MINERAL,  CLR_WHITE),
 WAND((char *)0,        "mercury",   0, 150, 1, 0,         COPPER,   CLR_GRAY),
 WAND((char *)0,        "pewter",    0, 150, 1, 0,         IRON,     CLR_GRAY),
 WAND((char *)0,        "tungsten",  0, 150, 1, 0,         METAL,    CLR_BLACK),
+WAND((char *)0,        "redwood",   0, 150, 1, 0, 	  WOOD,     HI_WOOD),
+WAND((char *)0,        "mahogany",  0, 150, 1, 0, 	  WOOD,     HI_WOOD),
+WAND((char *)0,        "yew", 	    0, 150, 1, 0, 	  WOOD,     HI_WOOD),
+WAND((char *)0,        "chrome",    0, 150, 1, 0, 	  METAL,    HI_SILVER),
+WAND((char *)0,        "nickel",    0, 150, 1, 0, 	  METAL,    HI_METAL),
+WAND((char *)0,        "cocky",     0, 150, 1, 0,         METAL,    CLR_BRIGHT_GREEN),
+WAND((char *)0,        "silicon",   0, 150, 1, 0,        MINERAL,  HI_MINERAL),
+WAND((char *)0,        "cracked",   0, 150, 1, 0,         WOOD,     HI_WOOD),
 #endif
 
 #undef WAND
@@ -1684,7 +1684,10 @@ OBJECT(OBJ("iron chain", (char *)0), BITS(1,0,0,0,0,0,0,0,0,0,WHACK,P_FLAIL,IRON
 
 OBJECT(OBJ("blinding venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
-		VENOM_CLASS,  500, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
+		VENOM_CLASS,  499, 0,	 1,  0,  0,  0, 0, 0,	 0, HI_ORGANIC),
+OBJECT(OBJ("water venom", "splash of water"),
+		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
+		VENOM_CLASS,    1, 0,    1,  0,  0,  0, 0, 0,    0, CLR_BLUE),
 OBJECT(OBJ("acid venom", "splash of venom"),
 		BITS(0,1,0,0,0,0,0,1,0,0,0,P_NONE,LIQUID), 0,
 		VENOM_CLASS,  500, 0,	 1,  0,  6,  6, 0, 0,	 0, HI_ORGANIC),

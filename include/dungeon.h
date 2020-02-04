@@ -142,6 +142,7 @@ typedef struct branch {
 #ifdef BLACKMARKET
 #define Is_blackmarket(x)       (on_level(x, &blackmarket_level))
 #endif /* BLACKMARKET */
+#define Is_town_level(x)	(on_level(x, &town_level))
 #ifdef RECORD_ACHIEVE
 #define Is_mineend_level(x)     (on_level(x, &mineend_level))
 #define Is_sokoend_level(x)     (on_level(x, &sokoend_level))
@@ -149,7 +150,6 @@ typedef struct branch {
 
 #define In_sokoban(x)		((x)->dnum == sokoban_dnum)
 #define Inhell			In_hell(&u.uz)	/* now gehennom */
-#define Insheol		In_sheol(&u.uz)	/* now sheol */
 #define In_endgame(x)		((x)->dnum == astral_level.dnum)
 
 #define within_bounded_area(X,Y,LX,LY,HX,HY) \
@@ -233,7 +233,8 @@ typedef struct mapseen_feat {
 	/* calculated from rooms array */
 	Bitfield(nshop, 2);
 	Bitfield(ntemple, 2);
-	Bitfield(shoptype, 5);
+	/* [BarclayII] SLASH'EM added some shop types */
+	Bitfield(shoptype, 6);
 
 	Bitfield(forgot, 1); /* player has forgotten about this level? */
 } mapseen_feat;

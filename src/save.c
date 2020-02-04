@@ -386,7 +386,6 @@ register int fd, mode;
 				sizeof(struct spell) * (MAXSPELL + 1));
 	bwrite(fd, (genericptr_t) tech_list,
 			sizeof(struct tech) * (MAXTECH + 1));
-	save_artifacts(fd);
 	save_oracles(fd, mode);
 	if(ustuck_id)
 	    bwrite(fd, (genericptr_t) &ustuck_id, sizeof ustuck_id);
@@ -397,8 +396,10 @@ register int fd, mode;
 	bwrite(fd, (genericptr_t) pl_character, sizeof pl_character);
 	bwrite(fd, (genericptr_t) pl_fruit, sizeof pl_fruit);
 	bwrite(fd, (genericptr_t) &current_fruit, sizeof current_fruit);
+	bwrite(fd, (genericptr_t) &alchemy_table, sizeof(alchemy_table));
 	savefruitchn(fd, mode);
 	savenames(fd, mode);
+	save_artifacts(fd);
 	save_waterlevel(fd, mode);
 #ifdef RECORD_ACHIEVE
         bwrite(fd, (genericptr_t) &achieve, sizeof achieve);

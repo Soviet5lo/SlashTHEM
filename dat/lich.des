@@ -1,153 +1,218 @@
 #
-# Vecna's dungeon
+#	Vecna's Manse - from the Lethe patch slightly modified.
+# 	Vecna deserves something better than a standard room
+# 	and corridor level...
 #
 
-LEVEL: "lich"
+MAZE: "lich",' '
+FLAGS: hardfloor,lethe
 MESSAGE: "You feel deathly cold."
+GEOMETRY:center,center
+#         1         2         3         4         5         6         7    7
+#123456789012345678901234567890123456789012345678901234567890123456789012345
+MAP
+ ------------------------------------                     -----             
+ |.............T...........T........|                     |...|             
+ |TTTT..TTTTT..TTT..TTTTT..TTT..TT..|  ........           |...|             
+ |......T...T...........T..T.....T..| ..}}}}}}..          --+--         ..  
+ |..TTTTTT..T..TTTTTTT..T........T..|..}}}}}}}}..|  -----   #          .... 
+ |..........T..T.....TTTT..T.....T..|..}}}}}}}}..|  |...|   #        ##.... 
+ |TTTT..TTTTT..TTTT..T..T..TTT..TT..+..}}}}}}}}..+##S...+####        # .... 
+ |..........T........T.....T........|...}}}}}}...|  |...|            #  ..  
+ |.T......T.-----------------------S|............|  -----            ##     
+ |....}}....|.........|..|.|..|.....-------------------  ....         ##    
+ |....}}....|.........|+--+--+|.....|..........|.|....| ..}}}}}}       H    
+ |....}}....|.........|.......|.....|........\...|....S#.}}}}}}}}}}}   ..   
+ |.T..}}..T.|.........|.......|.....|..........|.S....| .}}}}}}}}}}}} ....  
+ |....}}....-----+--------+------+---..........-----+--  }}}}}}}}}}}}}..}}}}
+ |.T..}}..T.+.......................+.........\..| |.|    }}}}}}.......}}}}}
+ |....}}....-----+--------+------+---..........-----+--      .......}}}}}}}}
+ |....}}....|.........|.......|.....|..........|.S....|          #          
+ |.T..}}..T.|.........|.......|.....|........\...|....S###########          
+ |..........|.........|.......|.....|..........|.|....|                     
+ ------------------------------------------------------                     
+ENDMAP
+#123456789012345678901234567890123456789012345678901234567890123456789012345
+#         1         2         3         4         5         6         7    7
 RANDOM_MONSTERS: 'L','W','V'
-
-ROOM: "ordinary" , unlit, random, random, (05,05)
-STAIR: random, up
-OBJECT: random,random,random
-
-ROOM: "ordinary" , unlit, random, random, (20,10)
-NAME: "central"
-OBJECT:'(',"chest",random
-OBJECT:'(',"chest",random
-OBJECT:'(',"chest",random
-OBJECT:'(',"chest",random
-OBJECT:'(',"chest",random
-OBJECT:'(',"chest",random
-OBJECT:'(',"chest",random
-OBJECT:'(',"chest",random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: '*', random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '!', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '?', random, random
-OBJECT: '+', random, random
-OBJECT: '+', random, random
-OBJECT: '+', random, random
-OBJECT: '+', random, random
-OBJECT: '+', random, random
-OBJECT: '+', random, random
-TRAP: random, random
-TRAP: random, random
-TRAP: random, random
-TRAP: random, random
-MONSTER: 'L', "Vecna", random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'L', random, random, hostile
-MONSTER: 'W', random, random, hostile
-MONSTER: 'W', random, random, hostile
-MONSTER: 'W', random, random, hostile
-MONSTER: 'W', random, random, hostile
-MONSTER: 'W', random, random, hostile
-MONSTER: 'V', random, random, hostile
-MONSTER: 'V', random, random, hostile
-MONSTER: 'V', random, random, hostile
-MONSTER: 'V', random, random, hostile
-MONSTER: 'V', random, random, hostile
-MONSTER: 'V', random, random, hostile
-MONSTER: 'V', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-  
-ROOM: "ordinary" , random, random, random, random
-#STAIR: random, down
-OBJECT: random, random, random
-TRAP: random, random
-MONSTER: 'L', random, random, hostile
-MONSTER: 'V', random, random, hostile
-
-ROOM: "ordinary" , random, random, random, random
-OBJECT: random, random, random
-OBJECT: random, random, random
-MONSTER: 'L', random, random, hostile
-MONSTER: 'W', random, random, hostile
-
-ROOM: "ordinary" , random, random, random, random
-OBJECT: random, random, random
-TRAP: random, random
-MONSTER: 'L', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-
-ROOM: "ordinary" , random, random, random, random
-OBJECT: random, random, random
-TRAP: random, random
-MONSTER: 'L', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-MONSTER: 'Z', random, random, hostile
-
-RANDOM_CORRIDORS
+# Dungeon Description
+REGION:(02,01,35,07),lit,"ordinary"
+REGION:(02,08,11,18),lit,"ordinary"
+REGION:(37,01,48,08),lit,"ordinary"
+REGION:(53,05,55,07),lit,"ordinary"
+REGION:(59,01,61,02),lit,"ordinary"
+REGION:(13,09,21,11),lit,"morgue"
+REGION:(13,16,21,18),lit,"morgue"
+REGION:(23,11,29,12),unlit,"ordinary"
+REGION:(23,09,24,09),unlit,"ordinary"
+REGION:(26,09,26,09),unlit,"ordinary"
+REGION:(28,09,29,09),unlit,"ordinary"
+REGION:(23,16,29,18),lit,"ordinary"
+REGION:(31,09,35,12),lit,"ordinary"
+REGION:(31,16,35,18),lit,"ordinary"
+REGION:(13,14,35,14),lit,"ordinary"
+# Throne Room, in two parts
+REGION:(38,10,45,13),lit,"morgue"
+REGION:(38,15,45,18),lit,"morgue"
+REGION:(48,10,48,12),lit,"ordinary"
+REGION:(47,14,48,14),lit,"ordinary"
+REGION:(48,16,48,18),lit,"ordinary"
+REGION:(50,10,53,12),unlit,"ordinary"
+REGION:(50,16,53,18),unlit,"ordinary"
+REGION:(52,14,52,14),unlit,"ordinary"
+REGION:(56,09,75,15),lit,"ordinary"
+REGION:(71,03,74,07),unlit,"ordinary"
+# Branch portal
+BRANCH:(60,01,60,01),(00,00,00,00)
+# Fountain in the last area - replacing the nonexistant stairs
+FOUNTAIN:(73,05)
+# Doors
+DOOR:locked,(60,03)
+DOOR:locked,(56,06)
+DOOR:locked,(52,06)
+DOOR:locked,(49,06)
+DOOR:locked,(36,06)
+DOOR:locked,(35,08)
+DOOR:random,(12,14)
+DOOR:random,(17,13)
+DOOR:random,(17,15)
+DOOR:random,(26,13)
+DOOR:random,(26,15)
+DOOR:random,(23,10)
+DOOR:random,(26,10)
+DOOR:random,(29,10)
+DOOR:locked,(33,13)
+DOOR:random,(33,15)
+DOOR:locked,(36,14)
+DOOR:locked,(49,16)
+DOOR:locked,(49,12)
+DOOR:locked,(54,11)
+DOOR:locked,(54,17)
+DOOR:random,(52,13)
+DOOR:random,(52,15)
+# Monsters in the garden
+# 5lo: Changed the flies to be more interesting ghosts
+MONSTER:'8',"poltergeist",(03,15),hostile
+MONSTER:'8',"shadow",(04,15),hostile
+MONSTER:'8',"poltergeist",(03,16),hostile 
+MONSTER:'8',"shadow",(04,16),hostile 
+MONSTER:'Z',random,(06,03),hostile 
+MONSTER:'Z',random,(18,07),hostile 
+MONSTER:'M',random,(30,02),hostile 
+MONSTER:'M',random,(26,07),hostile 
+MONSTER:'M',"giant mummy",(10,13),hostile
+MONSTER:'M',"giant mummy",(10,15),hostile 
+# Traps
+TRAP:"polymorph",(35,09)
+TRAP:"board",(35,14)
+TRAP:"board",(35,14)
+TRAP:"magic",(34,06)
+TRAP:"magic",(53,17)
+# Fishes in the pond...
+MONSTER:';',"giant eel",(44,06) 
+MONSTER:';',"shark",(41,07) 
+MONSTER:';',"giant eel",(59,12) 
+MONSTER:';',"electric eel",(66,12) 
+MONSTER:';',random,(71,15) 
+# One security guard
+MONSTER:'V',"nosferatu",(26,11),hostile
+# Treasure
+OBJECT:'(',"chest",(24,09)
+OBJECT:'(',"chest",(26,09)
+OBJECT:'(',"chest",(28,09)
+# Throne Room Extras
+MONSTER:'L',"lich",(45,11),hostile
+OBJECT:'/',"lightning",(45,11)
+OBJECT:'(',"chest",(48,12)
+MONSTER:'L',"Vecna",(46,14),hostile
+OBJECT:'/',"cancellation",(46,14)       
+TRAP[75%]:"magic",(47,14)
+OBJECT:'(',"chest",(48,14)
+MONSTER:'L',"demilich",(46,13),hostile
+MONSTER:'L',"demilich",(46,15),hostile
+MONSTER:'L',"lich",(45,17),hostile
+OBJECT:'/',"sleep",(45,17)
+OBJECT:'(',"chest",(48,16)
+# Decorations
+CONTAINER:'`',"statue",(47,08)
+CONTAINER:'`',"statue",(38,08)
+CONTAINER:'`',"statue",(26,18)
+# Monsters
+MONSTER:'L',random,random
+MONSTER:'L',random,random
+MONSTER:'L',random,random
+MONSTER:'L',random,random
+MONSTER:'L',random,random
+MONSTER:'L',random,random
+MONSTER:'L',random,random
+MONSTER:'L',random,random
+MONSTER:'V',random,random
+MONSTER:'V',random,random
+MONSTER:'V',random,random
+MONSTER:'V',random,random
+MONSTER:'V',random,random
+MONSTER:'V',random,random
+MONSTER:'V',random,random
+MONSTER:'W',random,random
+MONSTER:'W',random,random
+MONSTER:'W',random,random
+MONSTER:'W',random,random
+MONSTER:'W',random,random
+MONSTER:'W',random,random
+MONSTER:'Z',random,random
+MONSTER:'Z',random,random
+MONSTER:'Z',random,random
+MONSTER:'M',random,random
+MONSTER:'M',random,random
+MONSTER:'M',random,random
+# Objects
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT: '!', random, (23,18)
+OBJECT: '!', random, (24,18)
+OBJECT: '!', random, (25,18)
+OBJECT: '!', random, (27,18)
+OBJECT: '!', random, (28,18)
+OBJECT: '!', random, (29,18)
+OBJECT: '!', random, (23,17)
+OBJECT: '!', random, (24,17)
+OBJECT: '!', random, (28,17)
+OBJECT: '!', random, (29,17)
+OBJECT: '?', random, (31,18)
+OBJECT: '?', random, (32,18)
+OBJECT: '?', random, (34,18)
+OBJECT: '?', random, (35,18)
+OBJECT: '?', random, (31,17)
+OBJECT: '?', random, (32,17)
+OBJECT: '?', random, (34,17)
+OBJECT: '?', random, (35,17)
+OBJECT: '?', random, (33,18)
+OBJECT: '+', random, (50,10)
+OBJECT: '+', random, (50,11)
+OBJECT: '+', random, (50,12)
+OBJECT: '+', random, (51,10)
+OBJECT: '+', random, (51,11)
+OBJECT: '+', random, (51,12)
+OBJECT: '*', random, (50,16)
+OBJECT: '*', random, (50,17)
+OBJECT: '*', random, (50,18)
+OBJECT: '*', random, (51,16)
+OBJECT: '*', random, (51,17)
+OBJECT: '*', random, (51,18)
+OBJECT: '*', random, (52,16)
+OBJECT: '*', random, (52,17)
+OBJECT: '*', random, (52,18)
+# Random traps
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random

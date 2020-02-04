@@ -63,30 +63,6 @@ pet_type()
 		case 4: return (PM_MONKEY);
 		case 5: return (PM_BABY_CROCODILE);
 		}
-	else if (Role_if(PM_LUNATIC))
-		switch (rnd(7)) {   
-		case 1: return (PM_WOLF);
-		case 2: return (PM_JACKAL);
-		case 3: return (PM_SEWER_RAT);
-		case 4: return (PM_PANTHER);
-		case 5: return (PM_TIGER);
-		case 6: return (PM_PIT_VIPER);
-		case 7: return (PM_GIANT_SPIDER);
-		}
-	else if (Role_if(PM_WARRIOR))
-		switch (rnd(11)) {   
-		case 1: return (PM_BABY_YELLOW_DRAGON);
-		case 2: return (PM_BABY_GREEN_DRAGON);
-		case 3: return (PM_BABY_BLUE_DRAGON);
-		case 4: return (PM_BABY_BLACK_DRAGON);
-		case 5: return (PM_BABY_ORANGE_DRAGON);
-		case 6: return (PM_BABY_WHITE_DRAGON);
-		case 7: return (PM_BABY_RED_DRAGON);
-		case 8: return (PM_BABY_DEEP_DRAGON);
-		case 9: return (PM_BABY_SHIMMERING_DRAGON);
-		case 10: return (PM_BABY_SILVER_DRAGON);
-		case 11: return (PM_BABY_GRAY_DRAGON);
-		}
 	else
 	    return (rn2(2) ? PM_KITTEN : PM_LITTLE_DOG);
 }
@@ -264,22 +240,10 @@ makedog()
 	if (!*petname && pettype == PM_SEWER_RAT) {
 	    if(Role_if(PM_CONVICT)) petname = "Nicodemus"; /* Rats of NIMH */
     }
+#endif /* CONVICT */
 	if (pettype == PM_MONKEY) petname = "Ugga-Ugga";
 	if (pettype == PM_PARROT) petname = "Squawks";
-	if (pettype == PM_SPEEDHORSE) petname = "Harley Davidson";
 	if (pettype == PM_BABY_CROCODILE) petname = "Snappy"; /* in Germany it would be called Schnappi */
-
-	if (pettype == PM_GREEN_ELF) petname = "Dray Harp";
-	if (pettype == PM_OFFICER) petname = "Officer O'Brian";
-	if (pettype == PM_PLATYPUS) petname = "Donald Duck";
-
-	if (pettype == PM_PANTHER) petname = "Tomcat Karlo";
-	if (pettype == PM_TIGER) petname = "Simba";
-	if (pettype == PM_PIT_VIPER) petname = "Lukas";
-	if (pettype == PM_GIANT_SPIDER) petname = "Andreas";
-
-	if (pettype == PM_BABY_YELLOW_DRAGON || pettype == PM_BABY_GREEN_DRAGON || pettype == PM_BABY_BLUE_DRAGON || pettype == PM_BABY_RED_DRAGON || pettype == PM_BABY_ORANGE_DRAGON || pettype == PM_BABY_WHITE_DRAGON || pettype == PM_BABY_BLACK_DRAGON || pettype == PM_BABY_DEEP_DRAGON || pettype == PM_BABY_SHIMMERING_DRAGON || pettype == PM_BABY_GRAY_DRAGON || pettype == PM_BABY_SILVER_DRAGON) petname = "Odahviing";
-#endif /* CONVICT */
 
 	mtmp = makemon(&mons[pettype], u.ux, u.uy, MM_EDOG);
 
@@ -287,7 +251,7 @@ makedog()
 
 #ifdef STEED
 	/* Horses already wear a saddle */
-	if ((pettype == PM_PONY || pettype == PM_SPEEDHORSE) && !!(otmp = mksobj(SADDLE, TRUE, FALSE))) {
+	if (pettype == PM_PONY && !!(otmp = mksobj(SADDLE, TRUE, FALSE))) {
 	    if (mpickobj(mtmp, otmp))
 		panic("merged saddle?");
 	    mtmp->misc_worn_check |= W_SADDLE;
@@ -558,6 +522,10 @@ long nmv;		/* number of moves */
 	if (mtmp->mfleetim) {
 	    if (imv >= (int) mtmp->mfleetim) mtmp->mfleetim = 1;
 	    else mtmp->mfleetim -= imv;
+	}
+	if (mtmp->mpeacetim && (mtmp->mpeacetim!=0x7f)) {
+	    if (imv >= (int) mtmp->mpeacetim) mtmp->mpeacetim = 1;
+	    else mtmp->mpeacetim -= imv;
 	}
 
 	/* might recover from temporary trouble */
@@ -863,8 +831,8 @@ register struct obj *obj;
 			return (starving && carni ? ACCFOOD : TABU);
 		    else
 		    if ((peek_at_iced_corpse_age(obj) + 50L <= monstermoves
-					    && obj->corpsenm != PM_LIZARD
-					    && obj->corpsenm != PM_LICHEN
+					    && !corpse_never_rots(&mons[obj->corpsenm])
+					    && mon->data != &mons[PM_OTYUGH]
 					    && mon->data->mlet != S_FUNGUS) ||
 			(acidic(&mons[obj->corpsenm]) && !resists_acid(mon)) ||
 			(poisonous(&mons[obj->corpsenm]) &&
@@ -877,13 +845,16 @@ register struct obj *obj;
 		    return (is_undead(mon->data) ? TABU :
 			    ((herbi || starving) ? ACCFOOD : MANFOOD));
 		case TIN:
-		    return (metallivorous(mon->data) ? ACCFOOD : MANFOOD);
+		    return (metallivorous(mon->data) && !(mon->data == &mons[PM_GOLD_BUG]) ? ACCFOOD : MANFOOD);
 		case APPLE:
 		case CARROT:
 		    return (herbi ? DOGFOOD : starving ? ACCFOOD : MANFOOD);
 		case BANANA:
 		    return ((mon->data->mlet == S_YETI) ? DOGFOOD :
 			    ((herbi || starving) ? ACCFOOD : MANFOOD));
+		case SHEAF_OF_STRAW:
+		    return ((herbi && !carni) ? DOGFOOD : UNDEF);
+		    break;
 		default:
 		    if (starving) return ACCFOOD;
 		    return (obj->otyp > SLIME_MOLD ?
@@ -903,6 +874,8 @@ register struct obj *obj;
 		mon->data == &mons[PM_GIANT_SHOGGOTH] ||
 	    	mon->data == &mons[PM_TASMANIAN_DEVIL]) && is_organic(obj))
 		return(ACCFOOD);
+	    if (mon->data == &mons[PM_GOLD_BUG] && is_golden(obj))
+		return (ACCFOOD);
 	    if (metallivorous(mon->data) && is_metallic(obj) && (is_rustprone(obj) || mon->data != &mons[PM_RUST_MONSTER])) {
 		/* Non-rustproofed ferrous based metals are preferred. */
 		return((is_rustprone(obj) && !obj->oerodeproof) ? DOGFOOD :
@@ -942,6 +915,7 @@ register struct obj *obj;
 	/* worst case, at least it'll be peaceful. */
 	if(!obj || !is_instrument(obj)){
 	mtmp->mpeaceful = 1;
+	mtmp->mpeacetim = 0;
 	mtmp->mtraitor  = 0;	/* No longer a traitor */
 	set_malign(mtmp);
 	}

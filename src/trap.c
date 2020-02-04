@@ -866,6 +866,13 @@ int *fail_reason;
 	    You("find %s posing as a statue.",
 		canspotmon(mon) ? a_monnam(mon) : something);
 	    stop_occupation();
+	    if (mon->data == &mons[PM_WATERSPOUT_GARGOYLE] && 
+	      levl[x][y].typ == FOUNTAIN){
+		pline("%s breaks free from the fountain.", 
+		canspotmon(mon) ? Monnam(mon) : something);
+		dogushforth(FALSE,x,y);
+		dryup(x,y, (cause == ANIMATE_SHATTER || cause == ANIMATE_SPELL));
+	    }
 	}
 	/* avoid hiding under nothing */
 	if (x == u.ux && y == u.uy &&
@@ -1202,7 +1209,14 @@ unsigned trflags;
 		    case 0:
 			pline("%s you on the %s!", A_gush_of_water_hits,
 				    body_part(HEAD));
-			(void) rust_dmg(uarmh, "helmet", 1, TRUE, &youmonst);
+			if (uarmc && OBJ_DESCR(objects[uarmc->otyp]) &&
+					!strcmp(OBJ_DESCR(objects[uarmc->otyp]),
+						"hooded cloak"))
+				(void) rust_dmg(uarmc, cloak_simple_name(uarmc),
+						1, TRUE, &youmonst);
+			else
+				(void) rust_dmg(uarmh, "helmet",
+						1, TRUE, &youmonst);
 			break;
 		    case 1:
 			pline("%s your left %s!", A_gush_of_water_hits,
@@ -1466,7 +1480,7 @@ glovecheck:		(void) rust_dmg(uarmg, "gauntlets", 1, TRUE, &youmonst);
 
 	    case ANTI_MAGIC:
 		seetrap(trap);
-		if(Antimagic) {
+		if(Antimagic && !(Race_if(PM_INCANTIFIER))) {
 		    shieldeff(u.ux, u.uy);
 		    You_feel("momentarily lethargic.");
 		} else drain_en(rnd(u.ulevel) + 1 + rnd(level_difficulty() + 1));
@@ -2167,6 +2181,9 @@ register struct monst *mtmp;
 	boolean trapkilled = FALSE;
 	struct permonst *mptr = mtmp->data;
 	struct obj *otmp;
+	boolean can_disint =(touch_disintegrates(mtmp->data) && 
+	  !mtmp->mcan && mtmp->mhp>6 && rn2(20));
+
 
 	if (!trap) {
 	    mtmp->mtrapped = 0;	/* perhaps teleported? */
@@ -2211,6 +2228,7 @@ register struct monst *mtmp;
 	} else {
 	    register int tt = trap->ttyp;
 	    boolean in_sight, tear_web, see_it,
+		    trap_visible = (trap->tseen && cansee(trap->tx,trap->ty)),
 		    inescapable = ((tt == HOLE || tt == PIT) &&
 				   In_sokoban(&u.uz) && !trap->madeby_u);
 	    const char *fallverb;
@@ -2308,6 +2326,17 @@ register struct monst *mtmp;
 			if(mptr->msize > MZ_SMALL &&
 				!amorphous(mptr) && !is_flyer(mptr) &&
 				!is_whirly(mptr) && !unsolid(mptr)) {
+			    if (can_disint){
+				if (in_sight)
+				    pline("%s beartrap disintegrates on %s leg!",
+				      A_Your[trap->madeby_u], s_suffix(mon_nam(mtmp)));
+				else if(trap_visible)
+				    pline("%s beartrap disintegrates!",
+				      A_Your[trap->madeby_u]);
+			    deltrap(trap);
+			    newsym(mtmp->mx,mtmp->my);
+			    mtmp->mhp -= rnd(2); /* beartrap weighs 200 */
+			    } else {
 			    mtmp->mtrapped = 1;
 			    if(in_sight) {
 				pline("%s is caught in %s bear trap!",
@@ -2318,6 +2347,7 @@ register struct monst *mtmp;
 				    || mptr == &mons[PM_BUGBEAR])
 				   && flags.soundok)
 				    You_hear("the roaring of an angry bear!");
+			    	}
 			    }
 			}
 			break;
@@ -2407,6 +2437,8 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
 				mondied(mtmp);
 				if (mtmp->mhp <= 0)
 					trapkilled = TRUE;
+			} else if (can_disint){
+				pline("The water vanishes in a green twinkling.");
 			} else if (mptr == &mons[PM_GREMLIN] && rn2(3)) {
 				(void)split_mon(mtmp, (struct monst *)0);
 			}
@@ -2510,6 +2542,12 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
 				pline("How pitiful.  Isn't that the pits?");
 			    seetrap(trap);
 			}
+			if(can_disint && tt == SPIKED_PIT){
+			    trap->ttyp = PIT;
+			    if(trap_visible){
+				pline("Some spikes dinsintegrate.");
+			    }
+			}
 			mselftouch(mtmp, "Falling, ", FALSE);
 			if (mtmp->mhp <= 0 ||
 				thitm(0, mtmp, (struct obj *)0,
@@ -2559,7 +2597,18 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
 		case WEB:
 			/* Monster in a web. */
 			if (webmaker(mptr)) break;
-			if (amorphous(mptr) || is_whirly(mptr) || unsolid(mptr)){
+			if (can_disint){
+			    if (in_sight){
+				pline("%s dissolves %s spider web!", Monnam(mtmp),
+				  a_your[trap->madeby_u]);
+			    } else if (trap_visible){
+				pline("%s spider web disintegrates in a green twinkling!", 
+				  A_Your[trap->madeby_u]);
+			    }
+			    deltrap(trap);
+			    newsym(mtmp->mx, mtmp->my);
+			    break;
+			} else if (amorphous(mptr) || is_whirly(mptr) || unsolid(mptr)){
 			    if(acidic(mptr) ||
 			       mptr == &mons[PM_GELATINOUS_CUBE] ||
 			       mptr == &mons[PM_FIRE_ELEMENTAL]) {
@@ -2852,6 +2901,49 @@ boolean byplayer;
 		stoned = TRUE;
 		xkilled(mon,0);
 	} else monstone(mon);
+}
+
+int
+instadisintegrate(str)
+const char * str;
+{
+	int result;
+	if(Disint_resistance || !rn2(20))
+	    return 0;
+	You("disintegrate!");
+	result = (youmonst.data->cwt);
+	weight_dmg(result);
+	result = min(6, result); 
+	killer_format = KILLED_BY;
+	killer = str;
+	u.ugrave_arise = -3;
+	done(DISINTEGRATED);
+	    
+	return (result);
+}
+
+int
+minstadisintegrate(mon)
+struct monst *mon;
+{
+	int result = mon->data->cwt;
+	if (resists_disint(mon) || !rn2(20)) return 0;
+	weight_dmg(result); 
+	if (canseemon(mon))
+	    pline("%s disintegrates!", Monnam(mon));
+	if (is_rider(mon->data)){
+	    if (canseemon(mon)){
+		pline("%s body reintegrates before your %s!",
+		  s_suffix(Monnam(mon)),
+		  (eyecount(youmonst.data) == 1)?
+		  body_part(EYE) : makeplural(body_part(EYE)));
+		mon->mhp = mon->mhpmax;
+	    }
+	    return result;
+	} else {
+	    mondead_helper(mon, AD_DISN);
+	    return result;
+	}
 }
 
 void
@@ -3491,9 +3583,9 @@ register boolean force, here;
 
 		    switch (obj->oclass) {
 		    case SCROLL_CLASS:
-			if  (obj->otyp != SCR_HEALING
+			if  (
 #ifdef MAIL
-		    && obj->otyp != SCR_MAIL
+		    obj->otyp != SCR_MAIL
 #endif
 			)
 		    {
@@ -4193,6 +4285,22 @@ struct trap *ttmp;
 	return 1;
 }
 
+int
+disarm_magic_trap(ttmp)	/* Paul Sonier */
+struct trap *ttmp;
+{
+	xchar trapx = ttmp->tx, trapy = ttmp->ty;
+	if(!Race_if(PM_INCANTIFIER)){
+		You("cannot disable %s trap.", (u.dx || u.dy) ? "that" : "this");
+	} /* else */
+	You("drain the trap's magical energy!");
+	lesshungry(50);
+	deltrap(ttmp);
+	newsym(trapx, trapy);
+	return 1;
+}
+
+
 /* getobj will filter down to cans of grease and known potions of oil */
 
 static NEARDATA const char oil[] = { ALL_CLASSES, TOOL_CLASS, POTION_CLASS, 0 };
@@ -4314,6 +4422,10 @@ struct trap *ttmp;
 	int wt;
 	struct obj *otmp;
 	boolean uprob;
+	boolean udied;
+	boolean can_disint =(touch_disintegrates(mtmp->data) && 
+	  !mtmp->mcan && mtmp->mhp>6);
+
 
 	/*
 	 * This works when levitating too -- consistent with the ability
@@ -4364,6 +4476,18 @@ struct trap *ttmp;
 	}
 	/* need to do cockatrice check first if sleeping or paralyzed */
 	if (uprob) {
+	    if(can_disint && (!(uarmg) || !oresist_disintegration(uarmg))){
+		char kbuf[BUFSZ];
+		Sprintf(kbuf, "trying to help %s out of a pit",
+		  an(mtmp->data->mname));
+		You("try to grab %s, but...", mon_nam(mtmp));
+		if (uarmg) {
+		    destroy_arm(uarmg);
+		} else {
+		    if (!instadisintegrate(kbuf))
+			You("cannot get a firm grasp.");
+		}
+	    } else
 	    You("try to grab %s, but cannot get a firm grasp.",
 		mon_nam(mtmp));
 	    if (mtmp->msleeping) {
@@ -4376,6 +4500,19 @@ struct trap *ttmp;
 	You("reach out your %s and grab %s.",
 	    makeplural(body_part(ARM)), mon_nam(mtmp));
 
+	if(can_disint){
+	    char kbuf[BUFSZ];
+	    Sprintf(kbuf, "trying to help %s out of a pit",
+	      an(mtmp->data->mname));
+	    if(uarmg){
+		if(!oresist_disintegration(uarmg)){
+		    destroy_arm(uarmg);
+		    udied = (instadisintegrate(kbuf))?1:0;
+		}
+	    } else
+		udied = (instadisintegrate(kbuf))?1:0;
+	}
+
 	if (mtmp->msleeping) {
 	    mtmp->msleeping = 0;
 	    pline("%s awakens.", Monnam(mtmp));
@@ -4385,6 +4522,8 @@ struct trap *ttmp;
 	    mtmp->mfrozen = 0;
 	    pline("%s stirs.", Monnam(mtmp));
 	}
+
+	if (udied) return 1;
 
 	/* is the monster too heavy? */
 	wt = inv_weight() + mtmp->data->cwt;
@@ -4487,6 +4626,12 @@ boolean force;
 				    return 0;
 				}
 				return help_monster_out(mtmp, ttmp);
+			case TELEP_TRAP:
+			case LEVEL_TELEP:
+			case MAGIC_TRAP:
+			case POLY_TRAP:
+			case MAGIC_BEAM_TRAP:
+				return disarm_magic_trap(ttmp);
 			default:
 				You("cannot disable %s trap.", (u.dx || u.dy) ? "that" : "this");
 				return 0;
@@ -4906,6 +5051,17 @@ boolean nocorpse;
 			dam = dmgval(obj, mon);
 			if (dam < 1) dam = 1;
 		}
+
+		if(obj && touch_disintegrates(mon->data) && 
+		  !mon->mcan && (mon->mhp > 6) && !oresist_disintegration(obj)){
+		    dam = obj->owt;
+		    weight_dmg(dam);
+		    if (cansee(mon->mx, mon->my))
+			pline("It disintegrates!");
+		    dealloc_obj(obj);
+		    obj = 0;
+		}
+
 		if ((mon->mhp -= dam) <= 0) {
 			int xx = mon->mx;
 			int yy = mon->my;

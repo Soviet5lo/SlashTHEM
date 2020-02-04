@@ -2774,6 +2774,7 @@ tty_print_glyph(window, x, y, glyph)
     if (!reverse_on && (special & (MG_STAIRS|MG_OBJPILE))) {
 	    term_end_bgcolor();
 	    term_end_color();
+	    ttyDisplay->color = NO_COLOR;
     }
 #endif
     wins[window]->curx++;	/* one character over */

@@ -29,15 +29,21 @@ struct objclass {
 #define oc_bulky	oc_big	/* for armor */
 	Bitfield(oc_tough,1);	/* hard gems/rings */
 
-	Bitfield(oc_dir,3);
+	Bitfield(oc_dir,4);
 #define NODIR		1	/* for wands/spells: non-directional */
 #define IMMEDIATE	2	/*		     directional */
 #define RAY		3	/*		     zap beams */
-
+#if 0
 #define PIERCE		1	/* for weapons & tools used as weapons */
 #define SLASH		2	/* (latter includes iron ball & chain) */
 #define EXPLOSION	4	/* (rockets,  grenades) */
-#define WHACK		0
+#define WHACK		8
+#endif
+
+#define PIERCE		0x1	/* for weapons & tools used as weapons */
+#define SLASH		0x2	/* (latter includes iron ball & chain) */
+#define EXPLOSION	0x4	/* (rockets,  grenades) */
+#define WHACK		0x8
 
 	Bitfield(oc_material,5);
 #define LIQUID		1	/* currently only for venom */
@@ -63,6 +69,7 @@ struct objclass {
 #define MINERAL		21
 
 #define is_organic(otmp)	(objects[(otmp)->otyp].oc_material <= WOOD)
+#define is_golden(otmp)		(objects[otmp->otyp].oc_material == GOLD)
 #define is_metallic(otmp)	(objects[(otmp)->otyp].oc_material >= IRON && \
 				 objects[(otmp)->otyp].oc_material <= MITHRIL)
 #define is_lithic(otmp)		(objects[(otmp)->otyp].oc_material == BONE || objects[(otmp)->otyp].oc_material == GLASS || objects[(otmp)->otyp].oc_material == GEMSTONE || objects[(otmp)->otyp].oc_material == MINERAL  )

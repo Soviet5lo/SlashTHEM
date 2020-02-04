@@ -1599,10 +1599,6 @@ Polymorphed items will display 'hazy' with their name, but this is purely cosmet
 You can wish for scrolls of wishing, effectively gaining unlimited amounts of wishes.
 Artifact wishes can't fail unless at least 5 artifacts have been created in the current game.
 They say that Slash'EM Extended limits the player's knapsack by only allowing a maximum of 26 items in main inventory.
-Moulds, including ungenomolds, have uncurable polymorphitis and aren't resistant to bad polymorphs.
-The chance of system shock is doubled for moulds and ungenomolds.
-Moulds used to be way overpowered, so their polymorph time has been cut in half.
-Moulds and ungenomolds cannot polymorph at will. The dev team doesn't want those races to be totally overpowered.
 In Slash'EM Extended, uncursed potions of gain ability will increase every stat by one point.
 In Slash'EM Extended, blessed potions of gain ability will increase every stat by two or three points.
 In Slash'EM Extended, cursed potions of gain ability will set a random stat to 3 with no way to restore it.
@@ -1635,32 +1631,22 @@ They say that eating a gecko is like eating a cursed eucalyptus leaf.
 They say that eating a gecko is like applying a cursed unicorn horn.
 They say that inducing vomiting will make your sickness much worse, dividing your turns-to-live timer by three.
 They say that inducing vomiting will make a non-vomitable sickness even worse, dividing your turns-to-live timer by ten.
-They say that rockers don't fear Jubilex and Pestilence.
 They say that acid mages have the easiest quest of all roles.
-They say that binders are unable to successfully read spellbooks.
-They say that binders who get skilled are penalized by harmful intrinsics.
-They say that expert binders lose the ability to use techniques.
 They say that convicts are inediate; thus, they cannot starve.
 They say that convicts start with a +3 luck bonus and an increased starting max alignment.
 They say that convicts can tame every monster by chatting with it. This is especially true for the watchmen in Minetown.
-They say that gangsters can create rockets from thin air. They also start with a blessed +5 rocket launcher.
 They say that geeks may fight Suicune, Ho-oh and Arceus.
 They say that jedi don't get a penalty for killing a peaceful human.
 They say that female noblewomen should always wear their victorian underwear for the AC bonus.
 They say that pirates are mainly good at fighting two-handed, and they're speaking French for some obscure reason.
 They say that pokemon can easily catch any human monsters. Throw them at shopkeepers to get your own tame shopkeeper pet!
 They say that warriors suck at melee, but excel at spellcasting. A Warrior may advance any spellcasting skill to Expert.
-They say that zyborgs cannot use techniques at all. Shame, Slash'EM Extended has some bloody good ones...
-They say that aliens are like humans, only better.
 They say that gastlies cannot eat corpses. They may eat fruits though, making it much easier for them to attempt the vegetarian conduct.
 They say that giants can pick up and throw boulders, but they'll still be weighed down by the boulder's massive weight.
 They say that kobolds start with sleep resistance but are restricted in all throwing weapon skills.
-They say that moulds cannot polymorph. No longer do you have to fear those pesky polytraps with your polyselfless conduct character!
 They say that ogre are masters at moving stealthily, and they also get multishot and backstab bonuses when using daggers or knives.
 They say that snakemen can swim in water without blanking or rusting their stuff.
 They say that trolls get more hit points on leveling up than any other race.
-They say that ungenomolds suffer from unsuccessful polymorphs more often.
-They say that ungenomolds polymorphed into something else will unpolymorph much more quickly than other races.
 The electric sword is a weaker version of the katana.
 They say that wearing a blessed victorian underwear grants 25% chance of life saving.
 They say that wearing stone dragon scale mail enables you to eat rock.
@@ -1676,4 +1662,3 @@ Spam the rec.games.roguelike.nethack newsgroup with posts about Slash'EM Extende
 There are people out there who don't like Slash'EM Extended. One thing is for sure: they didn't even play it yet.
 They say that Slash'EM Extended is not a well-designed game. I think "they" have no idea what they are talking about.
 They say that adding more things to the kitchen sink is a waste of time. But "they" have proven in the past that their opinions are often wrong.
-They say that ungenomolds will not lose their amulet of life saving if their polymorphed form is killed, so they basically have unlimited lives.

@@ -647,6 +647,7 @@ struct level_map {
 #ifdef BLACKMARKET        
 	{ "blkmar",     &blackmarket_level },
 #endif /* BLACKMARKET */
+	{ "town",     &town_level },
 	{ "medusa",	&medusa_level },
 	{ "mtemple",	&mtemple_level },
 	{ "mine_end",   &mineend_level },        
@@ -924,7 +925,6 @@ init_dungeons()
 	quest_dnum = dname_to_dnum("The Quest");
 	sokoban_dnum = dname_to_dnum("Sokoban");
 	mines_dnum = dname_to_dnum("The Gnomish Mines");
-	sheol_dnum = dname_to_dnum("Sheol");
 	spiders_dnum = dname_to_dnum("The Spider Caves");        
 	tower_dnum = dname_to_dnum("Vlad's Tower");
 /*
@@ -1346,13 +1346,6 @@ In_mines(lev)	/* are you in the mines dungeon? */
 d_level	*lev;
 {
 	return((boolean)(lev->dnum == mines_dnum));
-}
-
-boolean
-In_sheol(lev)	/* are you in the sheol dungeon? */
-d_level	*lev;
-{
-	return((boolean)(lev->dnum == sheol_dnum));
 }
 
 boolean
@@ -2336,9 +2329,7 @@ int rtype;
 		case BOOKSHOP:
 			return "bookstore";
 		case GUNSHOP:
-			return "gun shop";
-		case AMMOSHOP:
-			return "ammo shop";
+			return "gun store";
 		case INSTRUMENTSHOP:
 			return "music shop";
 		case CANDLESHOP:

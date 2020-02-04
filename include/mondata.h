@@ -58,6 +58,20 @@
 #define notake(ptr)		(((ptr)->mflags1 & M1_NOTAKE) != 0L)
 #define has_head(ptr)		(((ptr)->mflags1 & M1_NOHEAD) == 0L)
 #define has_horns(ptr)		(num_horns(ptr) > 0)
+/* 5lo: The next 3 are introduced by Biodiversity */
+# define does_rust(ptr)    ((ptr) == &mons[PM_IRON_GOLEM] || \
+                            ((ptr) == &mons[PM_CLOCKWORK_AUTOMATON] && rn2(2)))
+# define is_insect(ptr)    ((ptr)->mlet == S_ANT || (ptr)->mlet == S_SPIDER ||\
+                            (ptr)->mlet == S_XAN)
+
+# define has_bones(ptr)   (has_head(ptr) && !(noncorporeal(ptr) || \
+                           is_insect(ptr) || (ptr)->mlet == S_PIERCER || \
+                           (ptr)->mlet == S_WORM || (ptr)->mlet == S_WORM_TAIL \
+                           || (ptr)->mlet == S_XORN || ((ptr)->mlet == S_GOLEM \
+                           && (ptr) != &mons[PM_FLESH_GOLEM])|| \
+                           (ptr) == &mons[PM_JELLYFISH] || \
+                           (ptr) == &mons[PM_KRAKEN]))
+
 #define is_whirly(ptr)		((ptr)->mlet == S_VORTEX || \
 				 (ptr) == &mons[PM_AIR_ELEMENTAL] || (ptr) == &mons[PM_GREATER_AIR_ELEMENTAL])
 #define is_fire(ptr)		((ptr) == &mons[PM_FIRE_VORTEX] || \
@@ -90,6 +104,10 @@
 #define metallivorous(ptr)	(((ptr)->mflags1 & M1_METALLIVORE) != 0L)
 #define monpolyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L) /* monsters may poly into this */
 #define polyok(ptr)		(((ptr)->mflags2 & M2_NOPOLY) == 0L) /* players may poly into this */
+#define is_Rebel(ptr)		(ptr == &mons[PM_REBEL_RINGLEADER] ||\
+							 ptr == &mons[PM_ADVENTURING_WIZARD] ||\
+							 ptr == &mons[PM_MILITANT_CLERIC] ||\
+							 ptr == &mons[PM_HALF_ELF_RANGER])
 #define is_undead(ptr)		(((ptr)->mflags2 & M2_UNDEAD) != 0L)
 #if 0 /* Unused now - note that the M2 flags still are used
 	 for backwards compat reasons (artifacts that rely on them */
@@ -119,13 +137,15 @@
 #define is_nymph(ptr)		(((ptr)->mflagsr & MRACE_NYMPH) != 0L)
 #define is_ogre(ptr)		(((ptr)->mflagsr & MRACE_OGRE) != 0L)
 #define is_troll(ptr)		(((ptr)->mflagsr & MRACE_TROLL) != 0L)
-#define is_mould(ptr)		(((ptr)->mflagsr & MRACE_MOULD) != 0L)
 #define your_race(ptr)		(((ptr)->mflagsr & urace.selfmask) != 0L)
 /* Back to normal */
 #define is_bat(ptr)		((ptr) == &mons[PM_BAT] || \
 				 (ptr) == &mons[PM_GIANT_BAT] || \
 				 (ptr) == &mons[PM_VAMPIRE_BAT])
 #define is_bird(ptr)		((ptr)->mlet == S_BAT && !is_bat(ptr))
+#define has_beak(ptr)           (is_bird(ptr) || \
+                                 (ptr) == &mons[PM_TENGU] || \
+                                 (ptr) == &mons[PM_VROCK])
 //#define is_giant(ptr)		(((ptr)->mflags2 & M2_GIANT) != 0L)
 #define is_golem(ptr)		((ptr)->mlet == S_GOLEM)
 #define is_domestic(ptr)	(((ptr)->mflags2 & M2_DOMESTIC) != 0L)
@@ -187,8 +207,6 @@
 #define is_pokemon(ptr)	((ptr->mflags3 & M3_POKEMON))
 #define is_mplayer(ptr)		(((ptr) >= &mons[PM_ARCHEOLOGIST]) && \
 				 ((ptr) <= &mons[PM_WIZARD]))
-#define is_umplayer(ptr)		(((ptr) >= &mons[PM_UNDEAD_ARCHEOLOGIST]) && \
-				 ((ptr) <= &mons[PM_UNDEAD_WIZARD]))
 #define is_rider(ptr)		((ptr) == &mons[PM_DEATH] || \
 				 (ptr) == &mons[PM_FAMINE] || \
 				 (ptr) == &mons[PM_PESTILENCE])
@@ -208,8 +226,10 @@
 				 ((ptr) == &mons[PM_FIRE_ELEMENTAL]) ? 2 : \
 				 ((ptr) == &mons[PM_GREATER_FIRE_ELEMENTAL]) ? 3 : \
 				 ((ptr) == &mons[PM_FIRE_VAMPIRE])? 2 : \
+				 ((ptr) == &mons[PM_GOLDEN_DRAGON])? 3 : \
 				 ((ptr) == &mons[PM_FLAMING_SPHERE]) ? 1 : \
 				 ((ptr) == &mons[PM_SHOCKING_SPHERE]) ? 1 : \
+				 ((ptr) == &mons[PM_BABY_GOLDEN_DRAGON])? 2 : \
 				 ((ptr) == &mons[PM_WAX_GOLEM]) ? 1 : 0)
 /*	[note: the light ranges above were reduced to 1 for performance...] */
 /*  WAC increased to 3 and 2?*/
@@ -245,6 +265,9 @@
 				 ptr == &mons[PM_BASILISK] || \
 				 ptr == &mons[PM_CHICKATRICE] || \
 				 ptr == &mons[PM_ASPHYNX])
+
+# define touch_disintegrates(ptr) ((ptr) == &mons[PM_DISINTEGRATOR])
+
 /* 5lo: Now a racial flag.
 #define is_mind_flayer(ptr)	((ptr) == &mons[PM_MIND_FLAYER] || \
 				 (ptr) == &mons[PM_ILLITHID] || \
@@ -274,12 +297,20 @@
 #define vegetarian(ptr)		(vegan(ptr) || \
 				((ptr)->mlet == S_PUDDING &&         \
 				 (ptr) != &mons[PM_BLACK_PUDDING]))
+#define yeasty_food(ptr)  	((ptr)->mlet == S_BLOB || \
+                  		 (ptr)->mlet == S_JELLY ||           \
+                  		 (ptr)->mlet == S_FUNGUS ||          \
+                  		 (ptr)->mlet == S_PUDDING ||         \
+                  		 (ptr) == &mons[PM_JUIBLEX])
 /* For vampires */
 #define has_blood(ptr)		(!vegetarian(ptr) && \
 				   (ptr)->mlet != S_GOLEM && \
 				  ((ptr)->mlet != S_BAD_FOOD || \
 				   (ptr) == &mons[PM_KILLER_TRIPE_RATION]) && \
-				   (!is_undead(ptr) || is_vampire(ptr)))
+				   (!nonliving(ptr) || is_vampire(ptr)))
+
+#define corpse_never_rots(ptr)	((ptr) == &mons[PM_LIZARD] || \
+				 (ptr) == &mons[PM_LICHEN])
 
 #define befriend_with_obj(ptr, obj) ((obj)->oclass == FOOD_CLASS && ( \
 		is_domestic(ptr) || (is_rat(ptr) && Role_if(PM_CONVICT)) || \

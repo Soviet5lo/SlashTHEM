@@ -1,0 +1,364 @@
+
+Version 1.0 (XXXX-XX-XX)
+==========================
+
+## NOTICE: This is a massive release that changes a lot of things.  I'll probably forget a few things.
+
+#### Highlights
+
+###### "The Great Cleanup" (tl;dr a ton of slash'em extended weirdness was reverted or removed - much, much closer to vanilla Slash'EM now.)
+- Completely removed the Transvestite, Topmodel, Activistor, Goff, Death Eater, Courier, Spacewars Fighter, Gangster, Bleeder, Rocker, Scientist, Binder and Zyborg roles
+- Completely removed the Albae, Maia, Navi, Heretic, Fenek, Spiderman, Snakeman, Insectoid, Moulds, Ungenomolds, Aliens and the Elder Scrolls races
+- The monster list was entirely redone from scratch.
+    - monst.c is basically Slash'EM 0.0.7E7F3's with some modifications made to the dragons, xorn, mind flayers, mugger, rock mole and floating eyes.  Various monsters from Nethack Minus Minus, Nethack: The Next Generation, UnNetHack, the Pirate patch, the Jedi patch, the Biodiversity patch and the role/racial monsters from Slash'EM Extended were added.  A few other extras were included as well.
+- Removed an absolute ton of objects (mostly those introduced by Slash'EM Extended)
+- Removed multiple Slash'EM Extended special rooms
+    - Removed: Elemental Halls, Angel Halls, Mimic Halls, Nymph Halls, Tension Rooms, Spider Halls, Troll Halls, Human Halls, Golemm Halls, Statue Rooms, Grue Rooms.
+- Removed the Grue, Wall Monster, Rub Monster, Nemese and Archfiend monster classes.
+- Removed some techniques from the game.
+    - Removed: Poke Ball, Attire Charm, Summon Team Ant, Egg Bomb, Invoke Deity.
+- Reverted all of the extra rnz calls added by Slash'EM Extended
+    - This applies to HP/EP loss/gain on level up/drain, technique timeouts, all healing, Striking and Magic Missile damage calculation, and a ton of other things.
+    - Artifact timeout reverted back to vanilla (from rnz(1000) to rnz(100))
+- Player properties and resistances now work 100% (like vanilla)
+- Random objects are no longer generated inside walls.
+- Monster generation mechanics reverted back to Vanilla (no more super high level monsters generated early game, or extremely weak monsters generated end game)
+- Shit trap was removed.
+- Removed a ton of extra random rn2 calls (various mechanics will now no longer randomly fail for no reason)
+- Removed the "Go Team Ant!" message when killed by an insect.
+- Removed the Hell Mall and Ex-Mall levels.
+- Removed corpses being randomly generated in the dungeon like other objects.
+- AC functions as it does in Vanilla: Damage Reduction starts at -11 AC instead of -1, and its no longer possible to have 11+ AC.
+- Player properties and resistances now work 100% (like vanilla)
+- Random objects are no longer generated inside walls.
+- Re-enabled the riding limitations from Vanilla
+    - No longer able to saddle and ride all monsters
+    - No longer able to ride a saddled monster while not in humanoid form, or too small or too large.
+    - No longer able to properly ride a monster while hallucinating.
+- Restored the original distance for rolling bolder traps
+- Reverted spellcasting chances back to vanilla.
+- Reverted Strength and Dexterity bonuses to damage and to-hit back to Slash'EM.
+- Reverted the randomization of luck boosts from unicorns back to Slash'EM levels.
+- Reverted the way Summon Nasties works (now it only summons nasties again
+- Reverted the way Fungus Farms, Courts, Lemure Pits and Real Zoos function. (back to Slash'EM)
+- Reverted all object weights back to Vanilla.
+- Reverted all object small damage, large damage, hit bonus and AC values to Slash'EM.
+    - Items that didn't exist in Slash'EM either use values from their respective variants or "normalized"
+- Reverted monster death drops to Slash'EM.
+- Monstertimeout and monstertimeoutfinish functions the same way it does in Sporkhack.
+- Reverted stair levitation level loss from Slash'EM Extended.
+- Reverted picking up and dropping items acting as a free action.
+- Reverted _all_ objects showing their weight (chests, grey stones, statues, boulders)
+- Removed the Antibar flag
+- Reverted Role and Racial alignments and choices back to Slash'EM with a few from other variants.
+- Removed all of the weird extra maledictions from Slash'EM Extended. (also removed all of the extra filthy names the wizard could call you)
+- Antholes now only generate ants like they do in Vanilla.
+- Ctrice nests only generate Chickatrice and Cockatrices like they do in vanilla.
+- Monster generation mechanics reverted back to Vanilla (no more super high level monsters generated early game, or extremely weak monsters generated end game)
+- Reverted natural regeneration back to Vanilla
+- Reverted gold pile generation back to Vanilla.
+- B/U/C enchantment is no longer applied to generated rocks.
+- Reverted the backstab nerf from Slash'EM Extended.
+- Kops no longer have random death drops.
+- Impossible eggtypes are no longer generated.
+- Riding skill no longer influences healing speed
+- Luckbonus will always give a flat bonus/penalty to luck.
+- Reverted unicorn horn success rates to Slash'EM.
+- Listening to eggs no longer return an invalid monster.
+- Luckstones no longer give two bonuses (reverted to Vanilla)
+- Reverted the odds of gaining intrisics via corpses back to Vanilla
+    - Illithids still have a 4x lower chance of gaining intrinsics from corpses.
+- Removed the 12 extra objects generated in all Minetown variants added in Slash'EM Extended.
+- Non-convict roles using a heavy iron ball as a weapon incur a -4 penalty to-hit
+- "Do not pass go." only appears if killed on the first turn, like in Vanilla.
+- AC functions as it does in Vanilla: Damage Reduction starts at -11 AC instead of -1, and its no longer possible to have 11+ AC.
+- Convicts are the only role that train the flail skill while using a heavy iron ball
+- Shopkeeper charging reverted to Vanilla.
+- Pool room changes (they function the same as Sporkhack)
+    - Pool rooms will now only choose between Water and Lava pools.
+    - Pool rooms will never place a water or lava tile adjacent to a door.
+    - Pool rooms will never randomly skip tiles.
+- Trap Rooms function exactly the same as they do in Sporkhack.
+- Armories function exactly the way they do in Unnethack (spawn with a Brown Pudding, not a random pudding)
+- Removed the random_room_colors option.
+- Undefined tools and the contents of medical kits are no longer generated blessed or cursed.
+- No longer have a chance of being able to use hands or wearing armor while polymorphed in an unsuitable form.
+- Gold weight returned to vanilla values.
+- Removed Unheck levels completely.
+- Scrolls are colored white again.
+- Weapons/Armor no longer blessed with negative enchantment or cursed with positive enchantment.
+- Ring default enchantment reverted to vanilla (no longer capped at +/- 3)
+- blessorcurse function is 50/50 again.
+- No longer have a chance of dealing full damage when bashing with bows, arrows, darts or lightsabers.
+- Completely remove the undead player monsters.
+- Appraisal tech is no longer given to every role/race by default.
+- Vampires don't start with extra potions of blood, or an extra ring
+- Removed the Sheol branch. (it's un-needed here).
+- Reverted starting/max nutrition values to Vanilla.
+- Also reverted gold piece nutrition changes.
+- Restored the original chance of choking to death via overeating.
+- No longer arbitrarily difficult gaining resistances from corpses.
+- Strength loss via eating a poisonous corpse restored to vanilla amount.
+- Chances of gaining an intrinsic via eating rings and amulets restored to vanilla.
+- Removed a bunch of extra Scrolls of Root Password Detection being generated in special levels.
+- Removed the extra bonus to the carrying cap via levelup.
+- Removed the misleading message when reading a cursed scroll of identify.
+###### Other Highlights
+- Implemented Gardens from Unnethack.
+- Implemented the DYWYPISI patch. (this also applies to dumplogs.)
+- Implemented the Inventory Usage Menu from Unnethack and Acehack.
+- Implemented the Hitpointbar patch. (ported from Slash'EM Extended)
+- Implemented "Display Items in Inventory List" from Unnethack.
+    - Adds a new option that allows you enable or disable this feature: showobj_inv
+    - Removed showsym patch as its not needed anymore.
+- Implemented the Bag of Tricks Enhancement patch.
+- Implemented the Sortloot Patch.
+- Implemented the Descriptive Hit Messages patch by L.
+- Implemented the Auto-open doors patch.
+- Implemented the Whips patch minus the artifact chainwhip.
+- Added two new Fort Ludios levels from Patric Mueller.
+- Added various Biodiversity improvements
+    - Fully implemented Satyr, Pooka, Waterspout Gargoyle, Boggart, Labyrinth Trapper, Bannik, Gold Bugs, Bandersnatch, Jubjub bird, Quark, Disintegrator, Umbral Hulk, Hunger Hulk, Nosferatu, Will O Wisp, Blemmye, Otyugh, Poltergeist and Leshy monsters from the Biodiversity patch.  They now function the same way they do in the original patch for the most part.
+- Several Dumplog enhancements.
+    - Output the Dungeon Overview info into the Dumplog. (ported from Unnethack)
+    - Dump filename formatting options pulled from Unnethack (Start time, First char of player name, Player's name)
+    - Techniques are listed in the Dumplog (ported from Slash'EM Extended)
+    - Supressed "Unknown Command" from shoring up in dumplogs
+    - Condense same events in dumplogs
+- Gnomish Mines expansion pack.
+    - A new Minetown variant: Mini Castle Town.  Includes a wall and moat surrounding the town, and two drawbridges lowered to allow entry.
+    - Three additional Mines' End levels.
+        - Gnome King's Apiary: a level containing a lot of insects, fungi, and a few elementals.
+        - Boulder Bonanza: full of stones and boulders, as well as a few zombies.
+        - Orc Temple: a large orcish temple with a randomly generated maze at the bottom.
+    - Ruggo's level is entirely overhauled, much more fitting for a King.  More challenging, with greater rewards that await anyone who can clear it successfully.
+- Implemented Racial Skills: Races now have particular skill(s) that they can become trained in, independent from Role. Uses augment_skill_cap from dNethack with a minor modification.
+    - Incantifiers: Expert in all Spellcasting
+    - Elves: Skilled in Bow and Expert
+    - Drow: Basic in Music and Saber, Skilled in Bow.
+    - Dwarves: Skilled in Pickaxe, Axe and Hammer
+    - Gnomes: Basic in Pickaxe, Club and Crossbow
+    - Orcs: Skilled in Scimitar.
+    - Vampires: Basic in Bare-Handed Combat, Dagger and Knife.
+    - Ghouls: Basic in Attack Spells, Skilled in Bare Handed Combat.
+    - Clockworks: Basic in Long Sword.
+    - Hobbits: Expert in Slings
+    - Kobolds: Basic in Spear, Dagger and Dart.
+    - Giants: Skilled in Two-Handed Sword
+    - Lycanthropes: Skilled in Short Sword and Expert in Bare Handed Combat
+    - Nymphs: Skilled in Music, Basic in Healing Spells
+    - Ogres: Skilled in Clubs
+    - Trolls: Skilled in Polearms
+    - Doppelganger: Basic in Dagger, Skilled in Body Spells
+    - Illithids: Skilled in Enchantment and Divination spells, Expert in Attack and Matter spells.
+	- Most skills listed will be bumped up a level if the role you're playing as also have that skill.
+- Added Potion Brewing and Corpse Appraisal shopkeeper services from slashem-up
+- Added in temple sounds from NH3.6/Slashem-up
+- Added in a random alchemy table generated upon game start, used for shopkeeper potion brewing and by the player in some circumstances.
+- A few new artifacts
+    - Bugzapper, neutral aligned Fly Swatter.  +3 to-hit and +10 electric damage to all monsters.
+    - Musa-Shiya, neutral aligned Hawaiian Shirt.  Grants +2 to AC and Hallucination Resistance while warn.  Invoke for Enlightenment, first sacrifice gift for Musicians.
+    - Silverstar, lawful aligned Silver Mace.  +4 to-hit and +10 damage to all monsters.  Grants Drain Resistance and Reflection while wielded.  First sacrifice gift for Yeomen.
+- Redesigned the Chaotic Quest level.  It's now a modification of the Lich's Manse level from Lethe.
+
+#### Changes
+- Monster changes
+    - Monsters marked with G_HELL are exclusive to Gehennom again.
+    - Muggers now steal Gold.
+    - Muggers and Bandits are now marked with M2_GREEDY
+    - Restored the original behavior of eating newt corpses.
+    - Lizard corpses no longer have extra nutrition
+    - Sea monsters have low generation rates (fixes whales being the only thing generated in pools)
+    - Clockwork Automaton attacks reduced from 6 to 3.  They also spawn with a skeleton key in their inventory.
+    - Vogons no longer spawn with vampire objects like potions of blood and opera cloaks.
+    - Stormtroopers are set to G_NOGEN.
+    - Hobbit thieves are always hostile.
+    - Monsters no longer use scrolls of root password detection.
+    - Straw Golems drop Sheafs of Straw upon death, or a damaged fedora.
+    - Rope golems drop leashes upon death.
+    - Readded Krooella the Kobold Queen from Nethack--.
+    - Baby Liches can cast spells like other liches.
+    - Golden Dragons and their scales now emit light.
+
+- Object changes
+    - Chemistry set no longer works randomly without knowing the spell of Chemistry.
+    - Chemistry set will only work if you know the spell of Chemistry, or have an intelligence stat above 18.
+    - Dragon Scale Mail is no longer generated in the dungeon randomly
+    - Dragon scales are generated at a 1/1000 probability in the dungeon.
+    - Slightly boosted the probability rates of some extremely rare armors
+    - The Storm Whistle now either generates an Ice Vortex (3/4 chance) or an Ice Elemental (1/4 chance)
+    - Wand of Identify only identifies one object per zap.
+    - Unicorn Horns and Mummy Wrappings are no longer generated in the dungeon.
+    - Uncursed pencils have a chance of breaking when used as engraving tools, depending on your luck value.
+    - Blessed pencils never break, cursed pencils degrade like cursed athames.
+    - Electric swords have a chance of "sparking to life", dealing an additional d3 electric damage to a creature.
+    - Lightsabers can be used to cut through iron bars. (ported from dNethack)
+        - Cutting iron bars will produce 2d4-1 metal clubs, with each club having a 25% of being replaced with a battle staff.
+    - Dwarvish cloaks now cover and protect helmets against rust traps.
+    - Wand/Scroll of Acquirement is now menu driven instead of several y/n prompts.
+    - Fly swatters instakill small insects (a/x/s class monsters).  From slashem-up.
+    - Potions of Jolt Cola now also grant temporary sleep resistance.  Timeout values are the same as the potion of speed.
+    - Cursed potions of jolt cola have a 1/6 chance of making the player belch, waking nearby monsters.
+    - Potions of Blood are no longer generic, now they're associated with a particular creature (from dNethack).
+        - Potions of Vampire Blood function as they do in Unnethack (blessed polymorphs into vampire lord, cursed polymorphs into vampire bat).
+        - Vampires, Incantifiers, Clockworks and Ghouls create potions of blood when using tinning kits on a meaty corpse.
+        - Potions of blood are now cheaper as a result.
+	- All strict carnivores gain nutrition from potions of blood.
+	- Cannot make potions of (vampire) blood via chemistry.
+	- Potions of blood polymorph into potions of blood.
+    - Various projectiles and firearm ammo are no longer found in massive piles (50+ bullets)
+    - Vampire Killer is now a Long Bullwhip
+    - Dipping potions into a potion of amnesia always produces a potion of amnesia.
+    - Cursed scroll of trap detection functions as the former scroll of trap creation.
+    - Swapped the probability of the scrolls of genocide and scrolls of mas murder.
+    - Stilettos only pierce/stab.
+    - Spineseeker can deal backstab damage with any role.
+    - Reintroduced the Asbestos Jacket from SLASH.  Same stats as the leather jacket, but mithril and grants fire resistance while worn.
+    - Manacloak renamed to Mana Cloak.  It's also given a new default appearance (funeral shroud) and is considered cloth instead of dragonhide.
+    - Implemented the Grain Scythe from SpliceHack.
+        - Grain Scythe has +6 to-hit and +20 damage when applied against straw golems.
+    - Icebiter has been renamed to Frostbite.  In addition its base object is now a battle axe.
+- Role Changes
+    - Renamed Korsair to Corsair
+    - Renamed Chevalier to Paladin
+    - Renamed Geek to Hacker
+        - Renamed the quest guardian to intern as a result.
+    - Renamed Graduate to Geek
+    - Nobles properly implemented like early dNethack.
+        - Rod of Lordly Might's invoke effect implemented
+        - The throne in the noble quest home level works the same way it does in dNethack.
+        - Mantle of Heaven and Vestment of Hell are now properly used, with the Vestment of Hell being the quest artifact if the player is a vampire noble.
+        - Mantle of Heaven and Vestment of Hell both grant double the usual AC.
+        - Knights and Maids in the noble quest speak like quest guardians.
+        - Rebel Ringleader, Adventuring Wizard, Militant Cleric, Half-elf Ranger and Peasants now spawn with an inventory.
+    - Paladins no longer get Baby Dragons as pets: instead they gain a pony.
+    - Warriors start with a baby dragon as a pet.
+    - Electric Mages now get a third book: Spellbook of Light or Slow Monster
+    - Acid Mages now get a third book: Spellbook of Sleep or Confuse Monster
+    - Zookeepers start with a tame dingo pup as a pet.
+    - Jedi exclusively gain a damage bonus when attacking with an unlit lightsaber.  Damage is calculated via d4 + lightsaber enchantment + (skill in bare handed combat).
+        - Jedi train bare handed combat when attacking with an unlit lightsaber.
+    - Barbarians gain the Rage technique at level 5. (from slashem-up).
+    - Priests gain the Healing Hands tech at level 10, and Revivication tech at level 30. (from slashem-up)
+    - Officers no longer start with wands of magic missile or striking
+    - Undertakers only start with one wand of undead turning.
+    - Lunatics always start with a tame wolf as a pet.
+    - Warrior init changed, now they start with a broadsword, scale mail, low boots and a small shield.  They also only start with 25 crossbow bolts, instead of 50.
+    - Warrior skill in riding boosted to skilled.
+    - Added female rank names for warrior.
+    - Ninja start with a variable quantity of shuriken (from 9 to rn1(9,6))
+    - Drunks can gain skilled in Short Sword.
+    - Geeks start with a pair of lenses, as well as rnd(50) gold
+    - Orcish Bards start with either a bugle or a tooled horn, instead of a flute or harp (from dNethack).
+    - Zookeepers start with asian pears and an eucalyptus leaf.
+    - Firefighters no longer start with intrinsic fire resistance, instead they gain it at level 15.
+    - Tesla's Coat is given to Geeks as their first sacrifice gift.
+    - Zookeepers start with a Long Bullwhip instead of a Bullwhip.
+- Race Changes
+    - Renamed a lot of the Slash'EM Extended races.
+        - Ghastly renamed to Ghoul
+        - Kobolt renamed to Kobold
+        - Ogro renamed to Ogre
+        - Gigant renamed to Giant
+        - Trollor renamed to Troll.
+    - Implemented Racial Flags: this allows all of the Slash'EM Extended races to be more unique instead of all of them sharing the same flag.
+        - Set up the alignments for the Extended Races
+            - Clockworks are always Neutral
+            - Ghouls are always Chaotic
+            - Giants can be Lawful, Neutral, or Chaotic
+            - Illithids are always Chaotic
+            - Incantifiers can be Lawful, Neutral, or Chaotic
+            - Kobolds can be Neutral or Chaotic (Neutral because of Dwarf Fortress "Cutebolds")
+            - Nymphs can be Neutral or Chaotic
+            - Ogres are always Chaotic
+            - Trolls are always Chaotic
+        - Orcs, Trolls, Ogres, Lycanthropes, Vampires and Ghouls are the only races that can commit cannibalism with no penalty.
+    - Clockwork Automaton Overhaul
+        - Clockworks nutrition is now in the form of clockwork winding.  Requires a skeleton key to wind yourself, and every turn spent winding is equal to 10 nutrition.  Winding can be interrupted like normal eating.
+        - Clockworks can also gain nutrition from drinking potions of oil.  Uncursed and Blessed potions of oil have 50 nutrition, while cursed potions only have 10.  Non-cursed potions also heal clockworks a fair amount.
+        - Clockworks start the game with 2 potions of oil, with food rations, cram rations, bananas, oranges, potions of booze and fruit juice and tripe rations all replaced with potions of oil
+        - Clockworks no longer have 3 attacks per turn and no longer throw 3 objects at a time.
+	- Clockworks now only start with the Tinker technique.
+    - Completely redid the Incantifier.  Now they function similarly to the way they functioned in early builds of dNethack.  Incantifiers also gain the Draw Energy technique at level 1.
+    - Various racial stat init changes
+        - Kobold, Giant and Ogre HP/Energy values changed to Grunthack's Values.  (Kobolds are frail, Giants and Ogres have slightly less health, Giants have sligtly more Energy, and Ogres have slightly less Energy)
+        - Illithids have high energy.
+        - Nymphs are more frail but have more energy.
+        - Ghouls have sligtly more starting energy.
+   - Ghouls start with potions of blood instead of corpses, food rations and potions of fruit juice.
+   - Vampires don't feed on lifeblood if close to full.
+       - No longer get a y/n prompt every time vampire bite attack activates as a result.
+   - Ogres only get the Primal Roar and Berserk techniques.
+   - Kobolds start with a variable amount of darts (rn1(10,5))
+   - Giants no longer start with a bolder in inventory.
+- Music changes
+    - More monsters can now sing along with a bard (from dNethack)
+    - magical instruments can now be used as their non-magical equivalents for music spells.
+    - Creatures can now counter music.
+    - Friendship song now also raises the tameness of normal pets.
+    - Encouragement song now has a longer duration
+    - Encouragement song causes pets to be more bold about attacking strong targets
+    - Encouragement song adds to-hit and damage to pets.
+    - Rally song raises pet HP to at least the pet's current Level if played while Skilled, and raises apport if lower than 10 if Expert.
+    - the 20 roll is adjusted to give the same average as the flat score, rather than added as a bonus.
+    - Songs are now sorted by level.
+    - Drunks, Monks, Noblemen, Priests and Samurai can reach Basic in Music.
+    - Tourists can reach Skilled in Music.
+    - Renamed the Song of Drowsiness to the Song of Lethargy (change from dNethack)
+
+- enhance menu now shows the max skill level for an available skill.
+- Added more Hallucination gods, and now denote female Hallucination gods.
+- Reduced the chances of monsters spawning in pools and moats
+- Branch stairs are colored yellow if using dungeon_colors (from Unnethack)
+- Rust damage changes
+    - Tell the player exactly what was destroyed via rust or withering.
+    - Prevent objects not in the inventory from being destroyed via rust. (fixes a segfault associated with this)
+- Clinics are generated with about half as many monsters as they used to.
+- Clinics are generated with a lot of healing objects.
+- Monster evolution/growing up message edited.
+- Re-enabled coin and Orb of Fate reading.
+- Summoned spheres gain a hit-as bonus depending on spell skill level (from slashem-up)
+- Merged the Gun shops and Ammo shops into one shop: the gun store.
+    - Added shopkeeper names for the Gun Store, all from various Grand Theft Auto titles.
+- Player cannot use shopkeeper services if banned from that shop.
+- Town level shopkeepers have 1/4th the usual amount of gold. (from Unnethack)
+- Player alchemy is more difficult.  Unless you're wearing a lab coat, there's a 1/3 chance the mixture will explode.
+- Thrown objects no longer do backstab damage (from NH3.6).
+- Added a scroll of consecration to moloch's temple (from dNethack).
+- If the forge is generated in the dungeon it is always generated at dungeon level 20.
+
+#### Bugfixes
+- Fixed some compiler warnings.
+- Fixed extremely stupid bug that made pets never attack.
+- Fixed armor destroyed by rust not recalculating attributes.
+- Fixed nymphs never losing nutrition.
+- Friendship song no longer makes monsters peaceful when it fails (from dNethack)
+- Encouragement song no longer overflows to 0 bonus (from dNethack)
+- Actually apply countersinging penalties instead of just printing a message (from dNethack)
+- Check for isminion before trying to retrieve EDOG structs (from dNethack)
+- Correctly handle the killing of non-hostile humans (from Slash'EM Extended)
+- Fixed drums not working at all when being used by roles restricted in music.
+- Fixed drums being used to play the passtune (from dNethack)
+- Warforger is SPFX_NOGEN as intended.
+- Fixed statuscolors causing colorbleed on the bottom line, and segfaulting when doing so. (from Unnethack)
+- Fixed magic lamps creating empty bottles when being used for a wish.
+- Fixed game using 100% of CPU when it didn't have a connected session in server play.
+- Fixed dumplogs from hiding part of the bottom status line (from Slash'EM Extended)
+- Fixed dug locations in certain areas not having the same color when dungeon_colors was enabled (notable in Gnomish Mines)
+- Fixed a typo that gave Troll characters a club.
+- Fixed bug where gods would unpoly and ungenomold
+- Fixed a bug that caused quests to not be finishable.
+- Fixed one (un)heck level from having two up stairs.
+- Fixed Cthulhu having the Amulet (which spawned two amulets of yendor)
+- Fixed certain artifacts crashing the discoveries screan (from Slash'EM Extended.)
+- Replaced instances of SPFX_SEEK in artifacts with SPFX_SEARCH (as SPFX_SEEK doesn't do anything)
+- Prevent a recursion loop in shorten_botl
+- Fixed capitalization errors in README.md (pull request from Elronnd)
+- Fixed hallucination segfault panic. (pull request from AmyBSOD)
+- Fixed the Artifact Protection AC Stacking bug.
+- Fixed a segfault in botl_player (ported from Slash'EM Extended).
+- Fixed some shop types not being reported correctly in overview (from slashem-up)
+- Fixed bottles being reported as an odd object when shattering.
+- Fixed various dungeon features occasionally being rendered in gray (from Slashem Extended)
+- Fixed player monster monks spawning with wrong weapons.
+- Fix a weirdly worded message when killed by drinking a potion of cyanide

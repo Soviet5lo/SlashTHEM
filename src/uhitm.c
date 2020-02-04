@@ -772,8 +772,11 @@ int thrown;
 	/* Giants instakiilled with sling + stone */
 	boolean giantkill = FALSE;
 	boolean silvermsg = FALSE, silverobj = FALSE;
+	boolean needrustmsg = FALSE;
+	boolean disint_obj = FALSE;
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
+	boolean not_melee_weapon = FALSE;
 #ifdef STEED
 	int jousting = 0;
 #endif
@@ -869,6 +872,36 @@ int thrown;
 		    tmp += rnd(20);
 		    silvermsg = TRUE;
 		}
+
+		if (touch_disintegrates(mdat) && !mon->mcan && (mon->mhp>6)){
+		    int dis_dmg;
+		    valid_weapon_attack =0;
+		    Sprintf(unconventional,"barehandedly striking %s", 
+		      an(mdat->mname));
+		    if (!flags.verbose) You("hit it.");
+		    else You("%s %s%s", Role_if(PM_BARBARIAN) ? "smite" : "hit",
+		      mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
+		    dis_dmg = instadisintegrate(unconventional);
+		    tmp = min( dis_dmg, tmp);
+		    unconventional[0] = '\0';
+		    disint_obj = TRUE;
+		    hittxt = TRUE;
+		}
+	  } else {
+		if(touch_disintegrates(mdat) && !mon->mcan && (mon->mhp>6) &&
+		  !oresist_disintegration(uarmg)){
+		    int dis_dmg = uarmg->owt;
+		    weight_dmg(dis_dmg);
+		    if (!flags.verbose) You("hit it.");
+		    else You("%s %s%s", Role_if(PM_BARBARIAN) ? "smite" : "hit",
+		      mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
+		    hittxt = TRUE;
+		    destroy_arm(uarmg);
+		    tmp = min( dis_dmg, tmp);
+		    disint_obj = TRUE;
+		    valid_weapon_attack =0;
+		}
+
 	    }
 
 	    /* WAC - Hand-to-Hand Combat Techniques */
@@ -949,7 +982,13 @@ int thrown;
 		    tmp += dmgbonus;
 	    } /* Techinuse Elemental Fist */		
 
-	} else {
+	  } else if (touch_disintegrates(mdat) && !oresist_disintegration(obj) &&
+	    mon->mhp>6 && !mon->mcan){
+	    disint_obj = TRUE;
+	    valid_weapon_attack = FALSE;
+	    tmp = obj->owt;
+	    weight_dmg(tmp);
+	  } else {
 	    if (obj->oartifact == ART_MAGICBANE) objenchant = 4;
 	    else if (obj->oartifact) objenchant += 2;
 
@@ -1033,18 +1072,18 @@ int thrown;
 		    (thrown == 2 && is_ammo(obj) && 
 		    	!ammo_and_launcher(obj, launcher))) {
 		    /* then do only 1-2 points of damage */
+                    not_melee_weapon = TRUE;
 		    if (mdat == &mons[PM_SHADE] && obj->otyp != SILVER_ARROW)
 			tmp = 0;
 		    else
 			tmp = rnd(2);
 
-		/* Bashing with bows, darts, ranseurs or inactive lightsabers might not be completely useless... --Amy */
+		    /* 5lo: Jedi know how to use an unlit lightsaber as a weapon */
+		    if (is_lightsaber(obj) && !obj->lamplit && Role_if(PM_JEDI)) {
+		    	tmp = d(1,4) + obj->spe + (P_SKILL(P_BARE_HANDED_COMBAT) - P_UNSKILLED);
+			use_skill(P_BARE_HANDED_COMBAT, 1); // throw them a bone
+		    }
 
-		    if (is_launcher(obj) || is_missile(obj) || is_pole(obj) || (is_lightsaber(obj) && !obj->lamplit) ) 			{
-			if ((wtype = uwep_skill_type()) != P_NONE &&  P_SKILL(wtype) >= P_SKILLED) tmp += rnd(2);
-			if ((wtype = uwep_skill_type()) != P_NONE &&  P_SKILL(wtype) >= P_EXPERT) tmp += rnd(4);
-			valid_weapon_attack = (tmp > 0);
-		}
 		    if (!thrown && (obj == uwep || obj == uswapwep) && 
 				obj->otyp == BOOMERANG && !rnl(4) == 4-1) {
 			boolean more_than_1 = (obj->quan > 1L);
@@ -1073,7 +1112,8 @@ int thrown;
 #endif
 		    if (!valid_weapon_attack || mon == u.ustuck) {
 			;	/* no special bonuses */
-		    } else if (mon->mflee && (Role_if(PM_ROGUE) || Role_if(PM_NINJA)) && !Upolyd) {
+		    } else if (mon->mflee && (Role_if(PM_ROGUE) || Role_if(PM_NINJA) ||
+					obj->oartifact == ART_SPINESEEKER) && !Upolyd && !thrown) {
 			You("strike %s from behind!", mon_nam(mon));
 			tmp += rnd(u.ulevel);
 			hittxt = TRUE;
@@ -1183,11 +1223,6 @@ int thrown;
 					&& tech_inuse(T_FLURRY)) {
 				tmp++;
 				}
-			    } /*else */
-			      if (Role_if(PM_ROCKER)) {
-				if ((obj->otyp == SLING) && tech_inuse(T_FLURRY)) tmp += 2;
-				tmp++;
-				
 			    } /*else */
 				if (Race_if(PM_DROW)) {
 				if (obj->otyp == DARK_ELVEN_ARROW &&
@@ -1429,6 +1464,13 @@ int thrown;
 			hittxt = TRUE;
 			get_dmg_bonus = FALSE;
 			break;
+		    case WATER_VENOM: /* thrown (or spit) */
+			tmp = 0;
+			if(does_rust(mdat)){
+			    tmp = d(1,6);
+			} 
+			needrustmsg = TRUE;
+			break;
 		    default:
 			/* non-weapons can damage because of their weight */
 			/* (but not too much) */
@@ -1494,7 +1536,7 @@ int thrown;
 
 	if (uslinging() && ammo_and_launcher(obj, uwep)
 	   		&& (P_SKILL(wtype) >= P_EXPERT ||
-			uwep->oartifact == ART_SLING_OF_DAVID)
+			uwep->oartifact == ART_DAVID_S_SLING)
 			&& mdat->mlet == S_GIANT)
 	{
 		giantkill = TRUE;
@@ -1516,7 +1558,8 @@ int thrown;
 		Your("%s %s no longer poisoned.", xname(obj),
 		     otense(obj, "are"));
 	    }
-	    if (resists_poison(mon))
+	    if (disint_obj) ;
+	    else if (resists_poison(mon))
 		needpoismsg = TRUE;
 	    else if (rn2(100))
 		tmp += rnd(6);
@@ -1539,6 +1582,25 @@ int thrown;
 		if (get_dmg_bonus) tmp = 1;
 	    }
 	}
+
+	if(disint_obj && obj){ /* all the hit msgs, no object destruction */
+	    if(obj->oclass == POTION_CLASS || obj->oclass == VENOM_CLASS ||
+	       obj->otyp == EGG || obj->otyp == CREAM_PIE){
+		if (cansee(mon->mx, mon->my))
+		    pline_The("%s %s in a %s of green light!", 
+		      xname(obj), vtense(xname(obj),"vanish"), 
+		      (obj->oclass == VENOM_CLASS)?"twinkle":"flash");
+		else
+		    pline("Vip!");
+		hittxt=TRUE;
+	    } else if (u.usteed && !thrown && tmp > 0 &&
+	      weapon_type(obj) == P_LANCE && mon != u.ustuck && joust(mon,obj)) {
+		You("joust %s%s",
+		  mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
+		Your("%s vanishes on impact!", xname(obj));
+		hittxt = TRUE;
+	   }
+	} else
 
 #ifdef STEED
 	if (jousting) {
@@ -1674,7 +1736,8 @@ int thrown;
 	  (!destroyed || (thrown && m_shot.n > 1 && m_shot.o == obj->otyp))) {
 		if (thrown) hit(mshot_xname(obj), mon, exclam(tmp));
 		else if (!flags.verbose) You("hit it.");
-		else You("%s %s%s", Role_if(PM_BARBARIAN) ? "smite" : "hit",
+                else You("%s %s%s", !obj ? barehitmsg(&youmonst) :
+                          not_melee_weapon ? "hit" : weaphitmsg(obj,TRUE),
 			 mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
 	}
 
@@ -1724,6 +1787,26 @@ int thrown;
 	  }
 	}
 
+	if (disint_obj && obj) {
+	    if(!hittxt){
+		if(cansee(mon->mx,mon->my)){
+		    pline_The("%s %s!", mshot_xname(obj),
+		      (obj->oartifact)?"dissolves":"disintegrates");
+		} else {
+		    pline("Vip!%s", 
+		       (!thrown) ? "  Your weapon vanishes from your grip!":"");
+		}
+	    }
+	    if (!thrown) {
+		u.twoweap = FALSE;	/* untwoweapon() is too verbose here */
+		if (obj == uwep) uwepgone();		/* set unweapon */
+		useupall(obj);
+		obj = 0;
+	    } else {
+		/*obfree(obj, (struct obj *) 0 ); handled: elsewhere */
+	    }
+	} 
+
 	if (silvermsg) {
 		const char *fmt;
 		char *whom = mon_nam(mon);
@@ -1759,7 +1842,16 @@ int thrown;
 			xkilled(mon, 1);
 		}
 	}
-
+	if (needrustmsg){
+	    hurtmarmor(mon,AD_RUST);
+	    if(mdat == &mons[PM_GREMLIN]){
+		(void)split_mon(mon, (struct monst *)0);
+	    } else if ( mdat == &mons[PM_IRON_GOLEM] ) {
+		if (canseemon(mon))pline("%s rusts.", Monnam(mon));
+		setmangry(mon);
+		abuse_dog(mon);
+	    } 
+	}
 	if (needpoismsg)
 		pline_The("poison doesn't seem to affect %s.", mon_nam(mon));
 	if (poiskilled) {
@@ -1791,6 +1883,7 @@ int thrown;
 #endif
 	return((boolean)(destroyed ? FALSE : TRUE));
 }
+
 
 STATIC_OVL boolean
 shade_aware(obj)
@@ -2153,12 +2246,13 @@ register struct attack *mattk;
 		if (!rn2(4)) steal_it(mdef, mattk);
 		tmp = 0;
 		break;
+	    case AD_EGLD:
 	    case AD_SGLD:
 #ifndef GOLDOBJ
 		if (mdef->mgold) {
 		    u.ugold += mdef->mgold;
 		    mdef->mgold = 0;
-		    Your("purse feels heavier.");
+		    (mattk->adtyp) ? You("nab some gold.") : Your("purse feels heavier.");
 		}
 #else
                 /* This you as a leprechaun, so steal
@@ -2169,7 +2263,7 @@ register struct attack *mattk;
 		        obj_extract_self(mongold);  
 		        if (merge_choice(invent, mongold) || inv_cnt() < 52) {
 			    addinv(mongold);
-			    Your("purse feels heavier.");
+			    (mattk->adtyp) ? You("nab some gold.") : Your("purse feels heavier.");
 			} else {
                             You("grab %s's gold, but find no room in your knapsack.", mon_nam(mdef));
 			    dropy(mongold);
@@ -2223,10 +2317,11 @@ register struct attack *mattk;
 		if (!negated && !rn2(3) && !resists_drli(mdef)) {
 			int xtmp = d(2,6);
 			if (mdef->mhp < xtmp) xtmp = mdef->mhp;
+			/* Player vampires are smart enough not to feed while
+			 * biting if they might have trouble getting it down */
 			if (maybe_polyd(is_vampire(youmonst.data), 
 			    Race_if(PM_VAMPIRE)) && mattk->aatyp == AT_BITE &&
-			    has_blood(pd) && (yn_function("Drink blood?", ynchars, 'y') == 'y') ) {
-				/* fixing stupid overeating issues --Amy */
+			    has_blood(pd) && u.uhunger <= 1420 ) {
 				/* For the life of a creature is in the blood
 				   (Lev 17:11) */
 				if (flags.verbose)
@@ -2236,12 +2331,6 @@ register struct attack *mattk;
 				   considered to be primarily a non-physical
 				   effect */
 				lesshungry(xtmp * 12);
-				if (Role_if(PM_BLEEDER)) { /* Bleeders get better from drinking blood */
-
-					pline("This tastes good.");
-					healup(d(5,5) + rnd(u.ulevel), 0, FALSE, FALSE);
-					exercise(A_CON, TRUE);
-				}
 			}
 			pline("%s suddenly seems weaker!", Monnam(mdef));
 			mdef->mhpmax -= xtmp;
@@ -2321,6 +2410,11 @@ register struct attack *mattk;
 		    killer_format = KILLED_BY_AN;
 		    delayed_killer = mdef->data->mname;
 		}
+          	/*		handled in tohit
+
+                  } else if (touch_disintegrates(mdef->data)) {
+                  tmp += instadisintegrate(mdef->data->mname); */
+
 		if (!vegan(mdef->data))
 		    u.uconduct.unvegan++;
 		if (!vegetarian(mdef->data))
@@ -2525,6 +2619,73 @@ register struct attack *mattk;
 		    tmp = 0;
 		}
 		break;
+	    case AD_SCLD:
+	    if (negated) {
+		tmp = 0;
+		break;
+	    }
+	    if (!Blind)
+		pline("%s is being steamed!", Monnam(mdef));
+		if (resists_fire(mdef)) {
+		    if (!Blind)
+			pline_The("steam doesn't scald %s!", mon_nam(mdef));
+		    shieldeff(mdef->mx, mdef->my);
+		    tmp = 0;
+		}
+		/* only potions damage resistant players in destroy_item */
+		tmp += destroy_mitem(mdef, POTION_CLASS, AD_FIRE);
+		if(!rn2(10)) hurtmarmor(mdef, AD_RUST);
+		break;
+	    /* this should be #monster-able, not attack */
+	    case AD_FLVR:
+		if (negated){ tmp = 0; break;}
+		switch (rn2(6)){
+		    case 0: /* up, copied from muse: MUSE_POT_GAIN_LEVEL */
+			if (Can_rise_up(mdef->mx, mdef->my, &u.uz)){
+			    register int tolev=depth(&u.uz)-1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if(on_level(&tolevel, &u.uz)) goto uhitm_flvr_strange;
+			    if (canseemon(mdef))
+				pline("%s rises up, through the %s!",
+				  Monnam(mdef), ceiling(mdef->mx, mdef->my));
+			    migrate_to_level(mdef, ledger_no(&tolevel),
+			    MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else{goto uhitm_flvr_strange;}
+			break;
+		    case 1: /* down */
+			if (Can_fall_thru(&u.uz) /* && !In_sokoban(&u.uz)*/ ){
+			    register int tolev=depth(&u.uz)+1;
+			    d_level tolevel;
+			    get_level(&tolevel, tolev);
+			    if (mon_has_amulet(mdef) || In_endgame(&u.uz) 
+			      || on_level(&tolevel, &u.uz))
+				goto uhitm_flvr_strange;
+			    if (canseemon(mdef))
+				pline("%s sinks down, through the %s!", 
+				  Monnam(mdef), surface(mdef->mx, mdef->my));
+			    migrate_to_level(mdef,ledger_no(&tolevel),
+			      MIGR_RANDOM, (coord *)0);
+			    break;
+			}
+			else goto uhitm_flvr_strange;
+		    case 2: /* top, teleport to dlev1, top level of branch? */
+		    case 3: /* bottom, teleport to Moloch's sanctum, bot lev of branch? */ 
+		    case 4: /* strange */
+uhitm_flvr_strange:
+			if (canseemon(mdef)) pline("%s reacts strangely.", Monnam(mdef));
+			mdef->mconf = 1;
+			mdef->mstrategy &= ~STRAT_WAITFORU;
+			break;
+		    case 5: /* charm, fall through */ 
+			(void)docharm(); 
+		} 
+		break;
+	    case AD_CHRM:
+		tmp=0;
+		break;
 	    default:	/*tmp = 0;*/ /*making uncommon polymorph forms with weird attacks like AD_DARK stronger. --Amy*/
 		break;
 	}
@@ -2588,6 +2749,7 @@ register struct attack *mattk;
 		resistance = resists_cold(mdef);
 		goto common;
 	    case AD_FIRE:
+	    case AD_SCLD:
 		resistance = resists_fire(mdef);
 		goto common;
 	    case AD_ELEC:
@@ -2656,11 +2818,12 @@ register struct attack *mattk;
 
 	if(mdef->data->msize >= MZ_HUGE) return 0;
 
-	if(u.uhunger < 1500 && !u.uswallow) {
+	if(YouHunger < (Race_if(PM_INCANTIFIER) ? u.uenmax*3/4 : 1500) && !u.uswallow) {
 	    for (otmp = mdef->minvent; otmp; otmp = otmp->nobj)
 		(void) snuff_lit(otmp);
 
-	    if(!touch_petrifies(mdef->data) || Stone_resistance) {
+	    if((!touch_petrifies(mdef->data) || Stone_resistance)
+		&& (!touch_disintegrates(mdef->data) || Disint_resistance)){
 #ifdef LINT	/* static char msgbuf[BUFSZ]; */
 		char msgbuf[BUFSZ];
 #else
@@ -2707,7 +2870,8 @@ register struct attack *mattk;
 				!(mvitals[monsndx(mdef->data)].mvflags &
 				  G_NOCORPSE)) {
 				/* nutrition only if there can be a corpse */
-				u.uhunger += (mdef->data->cnutrit+1) / 2;
+				if(Race_if(PM_INCANTIFIER)) u.uen += mdef->m_lev;
+				else u.uhunger += (mdef->data->cnutrit+1) / 2;
 			    } else tmp = 0;
 			    Sprintf(msgbuf, "You totally digest %s.",
 					    mon_nam(mdef));
@@ -2796,6 +2960,16 @@ register struct attack *mattk;
 			    golemeffects(mdef,(int)mattk->adtyp,dam);
 			} else dam = 0;
 			break;
+		    case AD_SCLD:
+			if (rn2(2)) {
+			    if (resists_fire(mdef)) {
+				pline("%s seems mildly hot.", Monnam(mdef));
+				dam = 0;
+			    } else
+				pline("%s is severly scalded!", Monnam(mdef));
+				if(!rn2(3)) hurtmarmor(mdef, AD_RUST);
+			} else dam=0;
+			break;
 		}
 		end_engulf();
 		if ((mdef->mhp -= dam) <= 0) {
@@ -2815,6 +2989,7 @@ register struct attack *mattk;
 		You("bite into %s.", mon_nam(mdef));
 		Sprintf(kbuf, "swallowing %s whole", an(mdef->data->mname));
 		instapetrify(kbuf);
+		instadisintegrate(kbuf);
 	    }
 	}
 	return(0);
@@ -3041,6 +3216,11 @@ use_weapon:
 		case AT_TRAM:
 		case AT_SCRA:
 		case AT_TENT:
+		case AT_NTCH: /* currently stopped at "compat", so no touching 
+				 may require moving if non-tempting monsters
+				 get the non-touching attack */
+use_natural:
+
 			if (i==0 && uwep && (youmonst.data->mlet==S_LICH)) goto use_weapon;
 			if ((uwep || u.twoweap && uswapwep) &&
 				(touch_petrifies(mon->data) ||
@@ -3073,7 +3253,8 @@ use_weapon:
 			    if (mattk->aatyp == AT_KICK)
 				    You("kick %s.", mon_nam(mon));
 			    else if (mattk->aatyp == AT_BITE)
-				    You("bite %s.", mon_nam(mon));
+                                    You("%s %s.", has_beak(youmonst.data) ?
+                                        "peck" : "bite", mon_nam(mon));
 			    else if (mattk->aatyp == AT_STNG)
 				    You("sting %s.", mon_nam(mon));
 			    else if (mattk->aatyp == AT_BUTT)
@@ -3088,7 +3269,40 @@ use_weapon:
 				    You("touch %s.", mon_nam(mon));
 			    else if (mattk->aatyp == AT_TENT)
 				    Your("tentacles suck %s.", mon_nam(mon));
+                            else if (mattk->aatyp == AT_CLAW) {
+                                    You("%s %s.", barehitmsg(&youmonst),mon_nam(mon));
+                            }
 			    else You("hit %s.", mon_nam(mon));
+			    if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>1){
+				int dis_dmg = 0;
+				if(mattk->aatyp == AT_KICK && uarmf){
+				    if(!oresist_disintegration(uarmf)){
+					dis_dmg += uarmf->owt;
+					destroy_arm(uarmf);
+				    }
+				} else if(uarmg && (mattk->aatyp == AT_WEAP ||
+				  mattk->aatyp == AT_CLAW || mattk->aatyp == AT_TUCH)){
+				    if(!oresist_disintegration(uarmg)){
+					dis_dmg += uarmg->owt;
+					destroy_arm(uarmg);
+				    } 
+				} else if(mattk->aatyp == AT_BUTT && uarmh) {
+				    if(!oresist_disintegration(uarmh)){
+					dis_dmg += (uarmh->owt);
+					destroy_arm(uarmh);
+				    }
+				} else {
+				    char kbuf[BUFSZ];
+				    Sprintf(kbuf, "touching %s", an(mon->data->mname));
+				    mon->mhp -= instadisintegrate(kbuf);
+				}
+				sum[i] = 1;
+				if(dis_dmg){
+				    weight_dmg(dis_dmg);
+				}
+				mon->mhp -= dis_dmg;
+				if (mon->mhp < 1) mon->mhp = 1;
+			} else
 			    sum[i] = hit_touch[damageum(mon, mattk)];
 			} else
 			    missum(mon, tmp, dieroll, mattk);
@@ -3125,6 +3339,14 @@ use_weapon:
 			break;
 
 		case AT_ENGL:
+			if((youmonst.data == &mons[PM_BANDERSNATCH]) && 
+			  !yeasty_food(mon->data)) {
+			    mattk->aatyp = AT_BITE;
+			    mattk->adtyp = AD_PHYS;
+			    mattk->damn  = 1;
+			    mattk->damd  = 5;
+			    goto use_natural;
+			}
 			if((dhit = (tmp > (dieroll = rnd(20+i))))) {
 				wakeup(mon);
 				if (mon->data == &mons[PM_SHADE])
@@ -3752,6 +3974,9 @@ uchar aatyp;
 			 You("sniff some psychoactive substances!");
 		    make_hallucinated(HHallucination + (long)tmp, TRUE, 0L);
 		break;
+	      case AD_SCLD:
+		if(!rn2(10)) hurtmarmor(mon, AD_RUST);
+		/* fall through */
 	      case AD_FIRE:
 		if(monnear(mon, u.ux, u.uy)) {
 		    if(Fire_resistance) {

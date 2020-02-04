@@ -17,6 +17,7 @@ static char *FDECL(You_buf, (int));
 
 #if defined(DUMP_LOG) && defined(DUMPMSGS)
 char msgs[DUMPMSGS][BUFSZ];
+int msgs_count[DUMPMSGS];
 int lastmsg = -1;
 #endif
 
@@ -105,8 +106,14 @@ pline VA_DECL(const char *, line)
 	}
 #if defined(DUMP_LOG) && defined(DUMPMSGS)
 	if (DUMPMSGS > 0 && !program_state.gameover) {
-	  lastmsg = (lastmsg + 1) % DUMPMSGS;
-	  strncpy(msgs[lastmsg], line, BUFSZ);
+		/* count identical messages */
+		if (!strncmp(msgs[lastmsg], line, BUFSZ)) {
+			msgs_count[lastmsg] += 1;
+		} else if (strncmp(line, "Unknown command", 15) ) {
+			lastmsg = (lastmsg + 1) % DUMPMSGS;
+			strncpy(msgs[lastmsg], line, BUFSZ);
+			msgs_count[lastmsg] = 1;
+		}
 	}
 #endif
 
@@ -396,7 +403,7 @@ impossible VA_DECL(const char *, s)
 	    paniclog("impossible", pbuf);
 	}
 	vpline(s,VA_ARGS);
-	pline("Program in disorder. Please file an issue at https://github.com/Soviet5lo/slashthem/issues.");
+	pline("Program in disorder - you should probably S)ave and reload the game.");
 	program_state.in_impossible = 0;
 	VA_END();
 }

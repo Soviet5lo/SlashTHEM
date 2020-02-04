@@ -23,7 +23,6 @@ register struct obj *otmp;
 		return(2);
 /*		break; */
 # endif
-	case SCR_HEALING:
 	case SCR_LIGHT:
 	case SCR_GOLD_DETECTION:
 	case SCR_FOOD_DETECTION:
@@ -33,12 +32,10 @@ register struct obj *otmp;
 	case SCR_FIRE:
 	case SCR_SLEEP:
 	case SCR_EARTH:
-	case SCR_ROOT_PASSWORD_DETECTION:
 		return(8);
 /*		break; */
 	case SCR_DESTROY_ARMOR:
 	case SCR_CREATE_MONSTER:
-	case SCR_SUMMON_UNDEAD:
 	case SCR_PUNISHMENT:
 	case SCR_PROOF_ARMOR:
 	case SCR_PROOF_WEAPON:
@@ -58,7 +55,6 @@ register struct obj *otmp;
 	case SCR_ICE:
 	case SCR_CLOUDS:
 	case SCR_MASS_MURDER:
-	case SCR_TRAP_CREATION:
 	case SCR_UNDO_GENOCIDE:
 		return(20);
 /*		break; */
@@ -73,20 +69,12 @@ register struct obj *otmp;
 	case SCR_GENOCIDE:
 		return(30);
 /*		break; */
-	case SCR_GAIN_MANA:
-		return(40);
-/*		break; */
 	case SCR_CONSECRATION:
-	case SCR_INVENTORY_ID:
 		return(50);
 /*		break; */
 	case SCR_BLANK_PAPER:
 	case SCR_WISHING:
 	case SCR_ACQUIREMENT:
-	case SCR_ENTHRONIZATION:
-	case SCR_FOUNTAIN_BUILDING:
-	case SCR_SINKING:
-	case SCR_WC:
 	default:
 		/*impossible*/pline("You can't write such a weird scroll!");
 	}
@@ -176,7 +164,7 @@ found:
 	} else if (i == SPE_BOOK_OF_THE_DEAD) {
 		pline("No mere dungeon adventurer could write that.");
 		return 1;
-	} else if (i == SCR_WISHING || i == SCR_ACQUIREMENT || i == SCR_ENTHRONIZATION || i == SCR_FOUNTAIN_BUILDING || i == SCR_SINKING || i == SCR_WC) {
+	} else if (i == SCR_WISHING || i == SCR_ACQUIREMENT) {
 		pline("This scroll refuses to be written.");
 		return 1;
 	} else if (by_descr && paper->oclass == SPBOOK_CLASS &&

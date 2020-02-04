@@ -450,7 +450,6 @@ unsigned int *stuckid, *steedid;	/* STEED */
 				sizeof(struct spell) * (MAXSPELL + 1));
 	mread(fd, (genericptr_t) tech_list,
 			sizeof(struct tech) * (MAXTECH + 1));
-	restore_artifacts(fd);
 	restore_oracles(fd);
 	if (u.ustuck)
 		mread(fd, (genericptr_t) stuckid, sizeof (*stuckid));
@@ -462,10 +461,12 @@ unsigned int *stuckid, *steedid;	/* STEED */
 
 	mread(fd, (genericptr_t) pl_fruit, sizeof pl_fruit);
 	mread(fd, (genericptr_t) &current_fruit, sizeof current_fruit);
+	mread(fd, (genericptr_t) &alchemy_table, sizeof (alchemy_table));
 	freefruitchn(ffruit);	/* clean up fruit(s) made by initoptions() */
 	ffruit = loadfruitchn(fd);
 
 	restnames(fd);
+	restore_artifacts(fd);
 	restore_waterlevel(fd);
 
 #ifdef RECORD_ACHIEVE

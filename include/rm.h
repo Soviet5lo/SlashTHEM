@@ -269,10 +269,27 @@ extern uchar showsymcolors[MAXPCHARS];
  * Thrones should only be looted once.
  */
 #define T_LOOTED	1
+/*
+ * Flags for special throne in the noble quest.
+ */
+#define NOBLE_GENO	2
+#define NOBLE_KNOW	4
+#define NOBLE_PETS	8
+#define NOBLE_WISH	16
 
 /*
  * Trees have more than one kick result.
  */
+# define TREE_TYPE_MASK   0x1C
+# define TREE_NONE   0x00 
+# define TREE_APPLE  0x04
+# define TREE_ORANGE 0x08
+# define TREE_PEAR   0x0C
+# define TREE_BANANA 0x10
+# define TREE_GUM    0x14 /* eucalyptus */
+# define TREE_OAK    0x18
+# define TREE_IRONWD 0x1C /* elven iron wood for elven blades */
+
 #define TREE_LOOTED	1
 #define TREE_SWARM	2
 

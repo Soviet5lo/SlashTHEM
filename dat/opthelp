@@ -3,6 +3,7 @@ Boolean options not under specific compile flags (with default values in []):
 option setting, which is reached via the 'O' cmd.)
 
 autodig        dig if moving and wielding digging tool            [FALSE]
+autoopen       walking into a door attempts to open it            [TRUE]
 autopickup     automatically pick up objects you move over        [TRUE]
 autoquiver     when firing with an empty quiver, select some
                suitable inventory weapon to fill the quiver       [FALSE]
@@ -144,6 +145,12 @@ runmode       controls how often the map window is updated when performing
 scores        the parts of the score list you wish to see when the game ends
               You choose a combination of top scores, scores around the top
               scores, and all of your own scores.  [!own/3 top/2 around]
+sortloot      controls the sortloot patch [none]:
+              full -- All pickup lists of items are sorted by item description
+              loot -- When inventory letters are shown, has no effect.
+                      Otherwise sorts by description
+              none -- Works the traditional way, like without the patch
+
 suppress_alert disable various version-specific warnings about changes
               in game play or the user interface, such as notification given
               for engravings that reading is now done via 'r.'

@@ -22,7 +22,6 @@ extern boolean notonhead;	/* for long worms */
 /* kludge to use mondied instead of killed */
 extern boolean m_using;
 
-STATIC_DCL void FDECL(costly_cancel, (struct obj *));
 STATIC_DCL void FDECL(polyuse, (struct obj*, int, int));
 STATIC_DCL void FDECL(create_polymon, (struct obj *, int));
 STATIC_DCL boolean FDECL(zap_updown, (struct obj *));
@@ -216,7 +215,7 @@ struct obj *otmp;
 	case WAN_POLYMORPH:
 	case SPE_POLYMORPH:
 	case POT_POLYMORPH:
-		if (resists_magm(mtmp)) {
+		if (resists_magm(mtmp) || (mtmp->data == &mons[PM_BANDERSNATCH])) {
 		    /* magic resistance protects from polymorph traps, so make
 		       it guard against involuntary polymorph attacks too... */
 		    shieldeff(mtmp->mx, mtmp->my);
@@ -310,10 +309,8 @@ struct obj *otmp;
 		break;
 	case WAN_HEALING:
 	case WAN_EXTRA_HEALING:
-	case WAN_FULL_HEALING:
 	case SPE_HEALING:
 	case SPE_EXTRA_HEALING:
-	case SPE_FULL_HEALING:
 		reveal_invis = TRUE;
 	    if (mtmp->data != &mons[PM_PESTILENCE]) {
 		wake = FALSE;		/* wakeup() makes the target angry */
@@ -324,7 +321,6 @@ struct obj *otmp;
 		   */
 		  otyp == WAN_HEALING ?  d(5,2) + rnd(u.ulevel) + 5 * !!bcsign(otmp) :
 		  otyp == WAN_EXTRA_HEALING ?  d(5,4) + rnd(u.ulevel) + 10 * !!bcsign(otmp) :
-		  otyp == WAN_FULL_HEALING ?  d(5,8) + rnd(u.ulevel) + 20 * !!bcsign(otmp) :
 		  otyp == SPE_HEALING ? rnd(10) +4 + rnd(u.ulevel) : d(3,8)+6 + rnd(u.ulevel);
 		if (mtmp->mhp > mtmp->mhpmax) {
 		    if (otmp->oclass == WAND_CLASS)
@@ -690,18 +686,6 @@ register struct obj *obj;
 		int montype = obj->corpsenm;
 		xchar x, y;
 
-		if (montype == PM_UNFORTUNATE_VICTIM) { /* very bad! */
-
-			pline("You get a strong feeling that the gods don't like your actions...");
-			change_luck(-5);
-			u.ualign.sins += 10; 
-			adjalign(-50);
-			u.ugangr++; u.ugangr++; u.ugangr++;
-			prayer_done();
-
-
-		}
-
 		if (obj->where == OBJ_CONTAINED) {
 			/* deal with corpses in [possibly nested] containers */
 			struct monst *carrier;
@@ -902,7 +886,7 @@ struct monst *mon;
 static const char charged_objs[] = { WAND_CLASS, WEAPON_CLASS, ARMOR_CLASS,
 				     SPBOOK_CLASS, 0 };
 
-STATIC_OVL void
+void
 costly_cancel(obj)
 register struct obj *obj;
 {
@@ -1210,8 +1194,6 @@ polyuse(objhdr, mat, minwt)
 #ifdef MAIL
 	if (otmp->otyp == SCR_MAIL) continue;
 #endif
-	if (otmp->otyp == SCR_HEALING) continue;
-
 	if (((int) objects[otmp->otyp].oc_material == mat) ==
 		(rn2(minwt + 1) != 0)) {
 	    /* appropriately add damage to bill */
@@ -1336,8 +1318,6 @@ struct obj *obj;
 #ifdef MAIL
 	if (obj->otyp == SCR_MAIL) return;
 #endif
-	if (obj->otyp == SCR_HEALING) return;
-
 	obj_zapped = TRUE;
 
 	if(poly_zapped < 0) {
@@ -1454,6 +1434,9 @@ poly_obj(obj, id)
 	if (!otmp)
 #endif
 	if (id == STRANGE_OBJECT) { /* preserve symbol */
+	    if(obj->otyp == POT_BLOOD){
+		    otmp = mksobj(POT_BLOOD, FALSE, FALSE);
+	    }
 	    int try_limit = 3;
 	    /* Try up to 3 times to make the magic-or-not status of
 	       the new item be the same as it was for the old one. */
@@ -1492,13 +1475,6 @@ poly_obj(obj, id)
 #endif
 	}
 #endif
-
-	if (obj->otyp == SCR_HEALING) {
-		otmp->otyp = SCR_HEALING;
-#ifdef UNPOLYPILE
-		unpoly = FALSE;	/* WAC -- no change! */
-#endif
-	}
 
 	/* avoid abusing eggs laid by you */
 	if (obj->otyp == EGG && obj->spe) {
@@ -1610,7 +1586,7 @@ poly_obj(obj, id)
 	    break;
 
 	case SCROLL_CLASS:
-	    while (otmp->otyp == SCR_WISHING || otmp->otyp == SCR_ACQUIREMENT || otmp->otyp == SCR_ENTHRONIZATION || otmp->otyp == SCR_FOUNTAIN_BUILDING || otmp->otyp == SCR_SINKING || otmp->otyp == SCR_WC)
+	    while (otmp->otyp == SCR_WISHING || otmp->otyp == SCR_ACQUIREMENT)
 		otmp->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
 	    break;
 
@@ -1961,11 +1937,9 @@ struct obj *obj, *otmp;
 	case WAN_NOTHING:
 	case SPE_HEALING:
 	case SPE_EXTRA_HEALING:
-	case SPE_FULL_HEALING:
 	case WAN_HEALING:
 	case WAN_EXTRA_HEALING:
 	case WAN_CLONE_MONSTER:
-	case WAN_FULL_HEALING:
 	case SPE_FINGER:
 	case WAN_FEAR:
 	case WAN_FIREBALL:
@@ -2164,14 +2138,6 @@ register struct obj *obj;
 			known = create_critters(rn2(23) ? 1 : rn1(7,2),
 					(struct permonst *)0);
 			break;
-		case WAN_SUMMON_UNDEAD:
-			known = TRUE;
-			coord mm;   
-			mm.x = u.ux;   
-			mm.y = u.uy;   
-			pline("You summon some undead creatures!");   
-			mkundeadX(&mm, FALSE, NO_MINVENT);   
-			break;
 		case WAN_CREATE_HORDE:
 			known = create_critters(rn1(7,6), (struct permonst *)0);
 			break;
@@ -2185,66 +2151,11 @@ register struct obj *obj;
 			break;
 		case WAN_ACQUIREMENT:
 			known = TRUE;
-			int acquireditem;
-			acquireditem = 0;
 			if(Luck + rn2(5) < 0) {
 				pline("Unfortunately, nothing happens.");
 				break;
 			}
-
-			while (acquireditem == 0) { /* ask the player what they want --Amy */
-
-			/* Yeah, I know this is less elegant than DCSS. But hey, it's a wand of acquirement! */
-
-				if (yn("Do you want to acquire a random item?")=='y') {
-					    acqo = mkobj_at(RANDOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a weapon?")=='y') {
-					    acqo = mkobj_at(WEAPON_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire an armor?")=='y') {
-					    acqo = mkobj_at(ARMOR_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a ring?")=='y') {
-					    acqo = mkobj_at(RING_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire an amulet?")=='y') {
-					    acqo = mkobj_at(AMULET_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a tool?")=='y') {
-					    acqo = mkobj_at(TOOL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire some food?")=='y') {
-					    acqo = mkobj_at(FOOD_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a potion?")=='y') {
-					    acqo = mkobj_at(POTION_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a scroll?")=='y') {
-					    acqo = mkobj_at(SCROLL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a spellbook?")=='y') {
-					    acqo = mkobj_at(SPBOOK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a wand?")=='y') {
-					    acqo = mkobj_at(WAND_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire some coins?")=='y') {
-					    acqo = mkobj_at(COIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a gem?")=='y') {
-					    acqo = mkobj_at(GEM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a boulder or statue?")=='y') {
-					    acqo = mkobj_at(ROCK_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a heavy iron ball?")=='y') {
-					    acqo = mkobj_at(BALL_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire an iron chain?")=='y') {
-					    acqo = mkobj_at(CHAIN_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-				else if (yn("Do you want to acquire a splash of venom?")=='y') {
-					    acqo = mkobj_at(VENOM_CLASS, u.ux, u.uy, FALSE);	acquireditem = 1; }
-	
-			}
-	
-			/* special handling to prevent wands of wishing or similarly overpowered items --Amy */
-	
-			if (acqo->otyp == GOLD_PIECE) acqo->quan = rnd(1000);
-			if (acqo->otyp == MAGIC_LAMP) { acqo->otyp = OIL_LAMP; acqo->age = 1500L; }
-			if (acqo->otyp == MAGIC_MARKER) acqo->recharged = 1;
-		    while(acqo->otyp == WAN_WISHING || acqo->otyp == WAN_POLYMORPH || acqo->otyp == WAN_ACQUIREMENT)
-			acqo->otyp = rnd_class(WAN_LIGHT, WAN_SOLAR_BEAM);
-		    while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT || acqo->otyp == SCR_ENTHRONIZATION || acqo->otyp == SCR_FOUNTAIN_BUILDING || acqo->otyp == SCR_SINKING || acqo->otyp == SCR_WC)
-			acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
-	
-			pline("Something appeared on the ground just beneath you!");
-
+			do_acquirement();
 			break;
 		case WAN_ENLIGHTENMENT:
 			known = TRUE;
@@ -2252,33 +2163,6 @@ register struct obj *obj;
 			display_nhwindow(WIN_MESSAGE, FALSE);
 			enlightenment(FALSE);
 			pline_The("feeling subsides.");
-			exercise(A_WIS, TRUE);
-			break;
-		case WAN_DETECT_MONSTERS:
-			known = TRUE;
-			    int x, y;
-	
-			    /* after a while, repeated uses become less effective */
-			    if (HDetect_monsters >= 300L)
-				i = 10;
-			    else
-				i = rn1(20,11);
-			    incr_itimeout(&HDetect_monsters, i);
-			    for (x = 1; x < COLNO; x++) {
-				for (y = 0; y < ROWNO; y++) {
-				    if (memory_is_invisible(x, y)) {
-					unmap_object(x, y);
-					newsym(x,y);
-				    }
-				}
-			    }
-			    see_monsters();
-
-			exercise(A_WIS, TRUE);
-			break;
-		case WAN_OBJECTION:
-			known = TRUE;
-			object_detect((struct obj *)0, 0);
 			exercise(A_WIS, TRUE);
 			break;
 		case WAN_DARKNESS:
@@ -2290,11 +2174,6 @@ register struct obj *obj;
 			pline("You grasp some bits from the current map!");
 			do_partial_mapping();
 			break;
-		case WAN_ENTRAPPING:
-			known = TRUE;
-			trap_detect((struct obj *)0);
-			exercise(A_WIS, TRUE);
-			break;
 		case WAN_IDENTIFY:
 			known = TRUE;
 			You_feel("insightful!");
@@ -2303,22 +2182,6 @@ register struct obj *obj;
 			    identify_pack(1);
 			}
 			exercise(A_WIS, TRUE);
-			break;
-		case WAN_REMOVE_CURSE:
-			known = TRUE;
-			You_feel("like someone is helping you!");
-			register struct obj *obj;
-
-			for(obj = invent; obj ; obj = obj->nobj)
-				if (!rn2(5) && obj->cursed)	uncurse(obj);
-
-			break;
-		case WAN_CHARGING:
-			known = TRUE;
-			pline("This is a charging wand.");
-			otmp = getobj(all_count, "charge");
-			if (!otmp) break;
-			recharge(otmp, 1);
 			break;
 		case WAN_WONDER: /* supposed to have a random effect, may be implemented in future */
 
@@ -2840,13 +2703,6 @@ boolean ordinary;
 		   exercise(A_STR, TRUE);
 		   exercise(A_CON, TRUE);
 		   makeknown(WAN_EXTRA_HEALING);
-		case WAN_FULL_HEALING:
-		   You("feel restored to health.");
-		   healup(d(10,20) + rnd(u.ulevel),0,0,0);
-		   make_hallucinated(0L,TRUE,0L);
-		   exercise(A_STR, TRUE);
-		   exercise(A_CON, TRUE);
-		   makeknown(WAN_FULL_HEALING);
 		break;
 
 		case WAN_FEAR:
@@ -2921,11 +2777,6 @@ boolean ordinary;
 			obj->otyp == SPE_EXTRA_HEALING ? "much " : "");
 		    break;
 
-		case SPE_FULL_HEALING:
-		    healup(d(10,10) + rnd(u.ulevel),
-			   0, FALSE, FALSE);
-		    You_feel("restored to health.");
-		    break;
 		case WAN_LIGHT:	/* (broken wand) */
 		 /* assert( !ordinary ); */
 		    damage = d(obj->spe, 25);
@@ -3044,10 +2895,8 @@ struct obj *obj;	/* wand or spell */
 		case WAN_SPEED_MONSTER:
 		case SPE_HEALING:
 		case SPE_EXTRA_HEALING:
-		case SPE_FULL_HEALING:
 		case WAN_HEALING:
 		case WAN_EXTRA_HEALING:
-		case WAN_FULL_HEALING:
 		case WAN_DRAINING:
 		case SPE_DRAIN_LIFE:
 		case WAN_OPENING:
@@ -4143,7 +3992,7 @@ xchar sx, sy;
 	    killer = fltxt;
 	    /* when killed by disintegration breath, don't leave corpse */
 	    u.ugrave_arise = (type == -ZT_BREATH(ZT_DEATH)) ? -3 : NON_PM;
-	    done(DIED);
+	    done((type== -ZT_BREATH(ZT_DEATH)) ? DISINTEGRATED : DIED);
 	    return; /* lifesaved */
 		}
 		else
@@ -4217,7 +4066,8 @@ boolean u_caused;
 
 	for (obj = level.objects[x][y]; obj; obj = obj2) {
 	    obj2 = obj->nexthere;
-	    if (obj->oclass == SCROLL_CLASS || obj->oclass == SPBOOK_CLASS) {
+	    if (obj->oclass == SCROLL_CLASS || obj->oclass == SPBOOK_CLASS ||
+			    obj->otyp == SHEAF_OF_STRAW) {
 		if (obj->otyp == SCR_FIRE || obj->otyp == SPE_FIREBALL ||
 			obj_resists(obj, 2, 100))
 		    continue;
@@ -4488,14 +4338,9 @@ register int dx,dy;
 #endif
 
 /* note: worn amulet of life saving must be preserved in order to operate */
-#define oresist_disintegration(obj) \
-		(objects[obj->otyp].oc_oprop == DISINT_RES || \
-		 obj_resists(obj, 5, 50) || is_quest_artifact(obj) || \
-		 obj == m_amulet)
-
 			for (otmp = mon->minvent; otmp; otmp = otmp2) {
 			    otmp2 = otmp->nobj;
-			    if (!oresist_disintegration(otmp)) {
+			    if (!oresist_disintegration(otmp) || otmp == m_amulet) {
 				if (Has_contents(otmp)) delete_contents(otmp);
 				obj_extract_self(otmp);
 				obfree(otmp, (struct obj *)0);
@@ -4978,7 +4823,8 @@ const char * const destroy_strings[] = {	/* also used in trap.c */
 	"catches fire and burns", "catch fire and burn", "burning scroll",
 	"catches fire and burns", "catch fire and burn", "burning book",
 	"turns to dust and vanishes", "turn to dust and vanish", "",
-	"breaks apart and explodes", "break apart and explode", "exploding wand"
+	"breaks apart and explodes", "break apart and explode", "exploding wand",
+	"catches fire and burns", "catch fire and burn", "burning straw"
 };
 
 void
@@ -4990,6 +4836,7 @@ register int osym, dmgtyp;
 	register long i, cnt, quan;
 	register int dindx;
 	const char *mult;
+	int started_fire = 0;
 	/*
 	 * [ALI] Because destroy_item() can call wand_explode() which can
 	 * call explode() which can call destroy_item() again, we need to
@@ -5062,6 +4909,12 @@ register int osym, dmgtyp;
 			    dindx = 3;
 			    dmg = 1;
 			    break;
+			case FOOD_CLASS:
+			    if (obj->otyp == SHEAF_OF_STRAW){
+				dindx = 6;
+				dmg = rnd(3);
+				break;
+			    }
 			default:
 			    skip++;
 			    break;
@@ -5089,6 +4942,14 @@ register int osym, dmgtyp;
 			    dindx = 5;
 			    dmg = rnd(10);
 			    break;
+			case FOOD_CLASS:
+			    if (obj->otyp == SHEAF_OF_STRAW){
+				xresist = (Fire_resistance);
+				dindx = 6;
+				dmg = rnd(3);
+				++started_fire;
+				break;
+			    }
 			default:
 			    skip++;
 			    break;
@@ -5154,6 +5015,12 @@ register int osym, dmgtyp;
 	    }
 	}
 	destroy_item_stack = frame.next_frame;
+	if (started_fire){
+		if (rn2(started_fire) > rn2(3)) destroy_item(POTION_CLASS, AD_FIRE);
+		if (rn2(started_fire) > rn2(3)) destroy_item(SCROLL_CLASS, AD_FIRE);
+		if (rn2(started_fire) > rn2(5)) destroy_item(SPBOOK_CLASS, AD_FIRE);
+		if (rn2(started_fire) > rn2(5)) destroy_item(FOOD_CLASS, AD_FIRE);
+	}
 	return;
 }
 
@@ -5270,7 +5137,9 @@ int damage, tell;
 	int alev, dlev;
 
 	/* attack level */
-	switch (oclass) {
+	if (oclass<=0)
+	    alev = -oclass;
+	else switch (oclass) {
 	    case WAND_CLASS:	alev = 12;	 break;
 	    case TOOL_CLASS:	alev = 10;	 break;	/* instrument */
 	    case WEAPON_CLASS:	alev = 10;	 break;	/* artifact */
@@ -5369,6 +5238,102 @@ retry:
 	}
 }
 
+
+/* 5lo: A menu for acquirement instead of the awful, terrible way
+ * SlashEM-Extended handles this.
+ */
+void
+do_acquirement()
+{
+	struct obj *otmp, *acqo;
+	menu_item *pick_list = (menu_item *)0;
+	winid win;
+	anything any;
+	char	ch = 'q';
+
+	win = create_nhwindow(NHW_MENU);
+	start_menu(win);
+	any.a_void = 0; any.a_char = 'r';
+	add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE, "Random item", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = ')';
+	add_menu(win, NO_GLYPH, &any, ')', 0, ATR_NONE, "Weapon", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '[';
+	add_menu(win, NO_GLYPH, &any, '[', 0, ATR_NONE, "Armor", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '%';
+	add_menu(win, NO_GLYPH, &any, '%', 0, ATR_NONE, "Comestible", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '?';
+	add_menu(win, NO_GLYPH, &any, '?', 0, ATR_NONE, "Scroll", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '+';
+	add_menu(win, NO_GLYPH, &any, '+', 0, ATR_NONE, "Spellbook", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '!';
+	add_menu(win, NO_GLYPH, &any, '!', 0, ATR_NONE, "Potion", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '"';
+	add_menu(win, NO_GLYPH, &any, '"', 0, ATR_NONE, "Amulet", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '=';
+	add_menu(win, NO_GLYPH, &any, '=', 0, ATR_NONE, "Ring", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '/';
+	add_menu(win, NO_GLYPH, &any, '/', 0, ATR_NONE, "Wand", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '(';
+	add_menu(win, NO_GLYPH, &any, '(', 0, ATR_NONE, "Tool", MENU_UNSELECTED);
+	any.a_void = 0; any.a_char = '*';
+	add_menu(win, NO_GLYPH, &any, '*', 0, ATR_NONE, "Gem", MENU_UNSELECTED);
+	end_menu(win, "Select a type of item to create:");
+	/* No chains, iron balls, venom, boulders or gold */
+	if (select_menu(win, PICK_ONE, &pick_list) > 0) {
+			ch = pick_list->item.a_char;
+			free((genericptr_t)pick_list);
+			}
+	destroy_nhwindow(win);
+
+	switch(ch) {
+		default:
+		case 'r':
+			acqo = mkobj_at(RANDOM_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case ')':
+			acqo = mkobj_at(WEAPON_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '[':
+			acqo = mkobj_at(ARMOR_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '%':
+			acqo = mkobj_at(FOOD_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '?':
+			acqo = mkobj_at(SCROLL_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '+':
+			acqo = mkobj_at(SPBOOK_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '!':
+			acqo = mkobj_at(POTION_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '"':
+			acqo = mkobj_at(AMULET_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '=':
+			acqo = mkobj_at(RING_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '/':
+			acqo = mkobj_at(WAND_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '(':
+			acqo = mkobj_at(TOOL_CLASS, u.ux, u.uy, FALSE);
+			break;
+		case '*':
+			acqo = mkobj_at(GEM_CLASS, u.ux, u.uy, FALSE);
+			break;
+	}
+	if (acqo->otyp == GOLD_PIECE) acqo->quan = rnd(1000);
+	if (acqo->otyp == MAGIC_LAMP) { acqo->otyp = OIL_LAMP; acqo->age = 1500L; }
+	if (acqo->otyp == MAGIC_MARKER) acqo->recharged = 1;
+	while(acqo->otyp == WAN_WISHING || acqo->otyp == WAN_POLYMORPH || acqo->otyp == WAN_ACQUIREMENT)
+	      acqo->otyp = rnd_class(WAN_LIGHT, WAN_SOLAR_BEAM);
+	while (acqo->otyp == SCR_WISHING || acqo->otyp == SCR_ACQUIREMENT)
+	       acqo->otyp = rnd_class(SCR_CREATE_MONSTER, SCR_BLANK_PAPER);
+
+	pline("An item has appeared on the ground just beneath you.");
+}
 
 /* LSZ/WWA Wizard Patch June '96 Choose location where spell takes effect.*/
 /* WAC made into a void */

@@ -124,6 +124,7 @@ register struct obj *obj;
 {
 	register const struct worn *wp;
 	register int p;
+	int was_blind = Blemmye_blindness(&youmonst);
 
 	if (!obj) return;
 	if (obj == uwep || obj == uswapwep) {
@@ -142,6 +143,13 @@ register struct obj *obj;
 		if ((p = w_blocks(obj,wp->w_mask)) != 0)
 		    u.uprops[p].blocked &= ~wp->w_mask;
 	    }
+	if ( was_blind && !Blind){
+	    You("can see again.");
+	    /* blindness has just been toggled */
+	    if (Blind_telepat || Infravision) see_monsters();
+	    vision_full_recalc = 1;	/* recalc vision limits */
+	    flags.botl = 1;
+	}
 	update_inventory();
 }
 
@@ -236,6 +244,15 @@ boolean on, silently;
     int which = (int) objects[obj->otyp].oc_oprop;
 
     unseen = !canseemon(mon);
+    if(obj->otyp == GOLDEN_DRAGON_SCALE_MAIL || obj->otyp == GOLDEN_DRAGON_SCALES) {
+	    if(on)
+		begin_burn(obj,FALSE);
+	    else
+		end_burn(obj,FALSE);
+	    if(!unseen && !silently)
+		if(on) pline("%s begins to glow.", The(xname(obj)));
+    }
+
     if (!which) goto maybe_blocks;
 
     if (on) {
@@ -411,7 +428,8 @@ boolean creation;
 	if (!MON_WEP(mon) || !bimanual(MON_WEP(mon)))
 	    m_dowear_type(mon, W_ARMS, creation, FALSE);
 	m_dowear_type(mon, W_ARMG, creation, FALSE);
-	if (!slithy(mon->data) && mon->data->mlet != S_CENTAUR)
+	if (!slithy(mon->data) && mon->data->mlet != S_CENTAUR &&
+	   mon->data != &mons[PM_SATYR])
 	    m_dowear_type(mon, W_ARMF, creation, FALSE);
 	if (!cantweararm(mon->data))
 	    m_dowear_type(mon, W_ARM, creation, FALSE);
@@ -474,6 +492,7 @@ boolean racialexception;
 		    if (!is_helmet(obj)) continue;
 		    /* (flimsy exception matches polyself handling) */
 		    if (has_horns(mon->data) && !is_flimsy(obj)) continue;
+		    if (!has_head(mon->data)) continue;
 		    break;
 		case W_ARMS:
 		    if (!is_shield(obj)) continue;
@@ -487,6 +506,7 @@ boolean racialexception;
 		case W_ARM:
 		    if (!is_suit(obj)) continue;
 		    if (racialexception && (racial_exception(mon, obj) < 1)) continue;
+		    if (!has_head(mon->data)) continue;
 		    break;
 	    }
 	    if (obj->owornmask) continue;
@@ -733,10 +753,10 @@ boolean polyspot;
 		m_lose_armor(mon, otmp);
 	    }
 	}
-	if (handless_or_tiny || has_horns(mdat)) {
+	if (!has_head(mdat) || verysmall(mdat) || has_horns(mdat)) {
 	    if ((otmp = which_armor(mon, W_ARMH)) != 0 &&
 		    /* flimsy test for horns matches polyself handling */
-		    (handless_or_tiny || !is_flimsy(otmp))) {
+		    ((!has_head(mdat) || verysmall(mdat)) || !is_flimsy(otmp))) {
 		if (vis)
 		    pline("%s helmet falls to the %s!",
 			  s_suffix(Monnam(mon)), surface(mon->mx, mon->my));
@@ -746,7 +766,7 @@ boolean polyspot;
 		m_lose_armor(mon, otmp);
 	    }
 	}
-	if (handless_or_tiny || slithy(mdat) || mdat->mlet == S_CENTAUR) {
+	if (handless_or_tiny || slithy(mdat) || mdat->mlet == S_CENTAUR || mdat == &mons[PM_SATYR]) {
 	    if ((otmp = which_armor(mon, W_ARMF)) != 0) {
 		if (vis) {
 		    if (is_whirly(mon->data))

@@ -91,11 +91,7 @@ RNDLEVEL:	"stor" "S" @ (19, 21) 66 3
 #   Rounding out the bottom levels
 LEVEL:		"guild" "G" @ (26, 14) 20
 
-RNDLEVEL:          "unhck" "X" @ (20, 20) 30 84
-RNDLEVEL:          "unhck" "X" @ (20, 20) 30 84
-RNDLEVEL:          "unhck" "X" @ (20, 20) 30 84
-LEVEL:          "forge" "F" @ (15, 5) 50
-
+LEVEL:          "forge" "F" @ (20, 0) 50
 
 # The famous Fort Ludios...
 BRANCH:			"Fort Ludios" @ (23, 4) portal
@@ -159,7 +155,6 @@ LEVEL:          "baalz" "B" @ (2, 22) 95
 LEVEL:          "geryon" "R" @ (2, 22) 95
 LEVEL:          "dispater" "S" @ (2, 22) 95
 LEVEL:          "asmodeus" "A" @ (2, 22) 95
-BRANCH:         "Sheol" @ (3, 20) down
 
 # 5lo: Removed a few heck levels and reduced probability to stop
 # too many levels from being generated, causing a game freeze.
@@ -244,7 +239,7 @@ RNDLEVEL:       "grund" "Z" @ (1, 0) 3
 DUNGEON:        "Fort Ludios" "K" (1, 0)
 DESCRIPTION:    mazelike
 ALIGNMENT:      unaligned
-LEVEL:          "knox" "K" @ (-1, 0)
+RNDLEVEL:       "knox" "K" @ (-1, 0) 3
 
 ### The Wyrm Caves ###
 DUNGEON:        "The Wyrm Caves" "D" (1, 0)
@@ -301,18 +296,6 @@ DUNGEON:        "Frankenstein's Lab" "none" (1, 0)
 ALIGNMENT:      chaotic
 DESCRIPTION:    mazelike
 LEVEL:          "frnknstn" "none" @ (1, 0)
-
-
-DUNGEON:        "Sheol" "V" (6, 2)
-ALIGNMENT:      noalign
-DESCRIPTION:    hellish
-LEVEL:          "sheolfil" "A" @ (1, 0)
-LEVEL:          "sheolmid" "H" @ (2, 0)
-LEVEL:          "sheolfil" "B" @ (3, 0)
-LEVEL:          "sheolfil" "C" @ (4, 0)
-LEVEL:          "palace_f" "P" @ (-2, 0)
-LEVEL:          "palace_e" "U" @ (-1, 0)
-
 
 ### The Endgame levels ###
 #

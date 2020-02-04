@@ -379,6 +379,10 @@ register struct obj *obj;
 			Sprintf(buf, "set of %s", actualn);
 			break;
 		}
+		if (typ == VICTORIAN_UNDERWEAR) {
+			Sprintf(buf, "set of %s", actualn);
+			break;
+		}
 		if(is_boots(obj) || is_gloves(obj)) Strcpy(buf,"pair of ");
 
 		if(obj->otyp >= ELVEN_SHIELD && obj->otyp <= ORCISH_SHIELD
@@ -460,7 +464,11 @@ register struct obj *obj;
 	    case POTION_CLASS:
 		if (obj->dknown && obj->odiluted)
 			Strcpy(buf, "diluted ");
-		if(nn || un || !obj->dknown) {
+		if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
+			Strcat(buf, "potion");
+			Sprintf(eos(buf), " of %s blood", mons[obj->corpsenm].mname);
+		}
+		else if(nn || un || !obj->dknown) {
 			Strcat(buf, "potion");
 			if(!obj->dknown) break;
 			if(nn) {
@@ -469,6 +477,12 @@ register struct obj *obj;
 				obj->bknown && (obj->blessed || obj->cursed)) {
 				Strcat(buf, obj->blessed ? "holy " : "unholy ");
 			    }
+#if 0
+			    if (typ == POT_BLOOD && (obj->known || is_vampire(youmonst.data))) {
+				Sprintf(eos(buf), "%s ",
+					mons[obj->corpsenm].mname);
+			    }
+#endif
 			    Strcat(buf, actualn);
 			} else {
 				Strcat(buf, " called ");
@@ -581,6 +595,8 @@ register struct obj *obj;
 		hobj->quan = obj->quan;
 		/* WAC clean up */
 		buf = xname2(hobj);
+		if (Has_contents(hobj))
+			delete_contents(hobj);
 		obj_extract_self(hobj);                
 		dealloc_obj(hobj);
 
@@ -696,7 +712,10 @@ register struct obj *obj;
 	else if(obj->otyp == EGG && obj->corpsenm >= LOW_PM &&
 			!(obj->known || mvitals[obj->corpsenm].mvflags & MV_KNOWS_EGG))
 		Sprintf(bp, "[%s] egg%s", mons[obj->corpsenm].mname, obj->quan>1? "s" : "");
-	
+
+	else if(obj->otyp == POT_BLOOD && do_known) {
+		Sprintf(eos(bp), " [of %s blood]", mons[obj->corpsenm].mname);
+	}
 	else if(do_ID || do_dknown) {
 		char *cp = nextobuf();
 
@@ -925,7 +944,7 @@ plus:
 		add_erosion_words(obj, prefix);
 		if (Hallucination)
 			break;
-		if(obj->known || do_known)
+		if(obj->known || do_known || Race_if(PM_INCANTIFIER))
 			Sprintf(eos(prefix), "%s%s%s ",
 			  do_known? "[" : "", sitoa(obj->spe), do_known? "]" : "");
 //		}
@@ -951,6 +970,9 @@ plus:
 		}
 # endif
 #endif	/* FIREARMS */
+		if(obj->known && obj->oartifact == ART_ROD_OF_LORDLY_MIGHT){
+			Sprintf(eos(bp), " (%s)", OBJ_NAME(objects[obj->otyp]));
+		}
 		break;
 	case ARMOR_CLASS:
 		if(obj->owornmask & W_ARMOR)
@@ -1011,7 +1033,7 @@ plus:
 		    break;
 		} else
 #endif
-#define MAX_SPELL_STUDY 3 /* spell.c */
+//#define MAX_SPELL_STUDY 3 /* spell.c */
 		if(dump_ID_flag && obj->spestudied > MAX_SPELL_STUDY / 2)
 			Strcat(prefix, "[faint] ");
 
@@ -1042,7 +1064,7 @@ ring:
 		}
 		if (Hallucination)
 			break;
-		if((obj->known || do_known) && objects[obj->otyp].oc_charged)
+		if((obj->known || do_known || Race_if(PM_INCANTIFIER)) && objects[obj->otyp].oc_charged)
 			Sprintf(eos(prefix), "%s%s%s ",
 			  do_known? "[" : "", sitoa(obj->spe), do_known? "]" : "");
 		break;
@@ -1248,6 +1270,16 @@ struct obj *obj;
 	    return corpse_xname(obj, FALSE);
 	return xname(obj);
 }
+#ifdef SORTLOOT
+char *
+cxname2(obj)
+struct obj *obj;
+{
+       if (obj->otyp == CORPSE)
+           return corpse_xname(obj, TRUE);
+       return xname2(obj);
+}
+#endif /* SORTLOOT */
 
 /* treat an object as fully ID'd when it might be used as reason for death */
 char *
@@ -2183,6 +2215,7 @@ struct alt_spellings {
 	{ "can opener", TIN_OPENER },
 	{ "kelp", KELP_FROND },
 	{ "eucalyptus", EUCALYPTUS_LEAF },
+	{ "straw", SHEAF_OF_STRAW },
 	{ "grapple", GRAPPLING_HOOK },
 	/* KMH, balance patch -- new items */
 	{ "amulet versus stoning", AMULET_VERSUS_STONE },
@@ -2538,6 +2571,7 @@ boolean from_user;
 	 */
 	if (!strstri(bp, "wand ")
 	 && !strstri(bp, "spellbook ")
+	 && !strstri(bp, "rod ")
          && !strstri(bp, "hand ")
          && !strstri(bp, "eye ")
          && !strstri(bp, "medallion ")
@@ -2555,6 +2589,7 @@ boolean from_user;
 	if (strncmpi(bp, "wizard lock", 11)) /* not the "wizard" monster! */
 	if (strncmpi(bp, "ninja-to", 8)) /* not the "ninja" rank */
 	if (strncmpi(bp, "master key", 10)) /* not the "master" rank */
+	if (strncmpi(bp, "rod of lordly might", 19)) /* not the "lord" rank */
 	if (strncmpi(bp, "magenta", 7)) /* not the "mage" rank */
         if (strncmpi(bp, "Thiefbane", 9)) /* not the "thief" rank */
         if (strncmpi(bp, "Ogresmasher", 11)) /* not the "ogre" monster */
@@ -3031,7 +3066,7 @@ typfnd:
 	    typ = OIL_LAMP;
 
 	/* obviously don't allow wishing for scrolls of wishing --Amy */
-	if ((typ == SCR_WISHING || typ == SCR_ACQUIREMENT || typ == SCR_ENTHRONIZATION || typ == SCR_FOUNTAIN_BUILDING)
+	if ((typ == SCR_WISHING || typ == SCR_ACQUIREMENT)
 #ifdef WIZARD
 				&& !wizard
 #endif
@@ -3129,11 +3164,13 @@ typfnd:
 		switch (typ) {
 		case TIN:
 			otmp->spe = 0; /* No spinach */
+		case POT_BLOOD:
 			if (dead_species(mntmp, FALSE)) {
 			    otmp->corpsenm = NON_PM;	/* it's empty */
 			} else if (!(mons[mntmp].geno & G_UNIQ) &&
 				   !(mvitals[mntmp].mvflags & G_NOCORPSE) &&
-				   mons[mntmp].cnutrit != 0) {
+				   mons[mntmp].cnutrit != 0 &&
+				   !(typ==POT_BLOOD && !has_blood(&mons[mntmp]))) {
 			    otmp->corpsenm = mntmp;
 			}
 			break;

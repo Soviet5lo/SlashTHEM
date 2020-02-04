@@ -153,7 +153,23 @@ register xchar x, y;
 		/* we only care about kicking attacks here */
 		if (uattk->aatyp != AT_KICK) continue;
 
-		if (mon->data == &mons[PM_SHADE] &&
+		if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>6) {
+		    if(uarmf) {
+			if(!oresist_disintegration(uarmf)) {
+			    tmp = uarmf->owt;
+			    weight_dmg(tmp);
+			    destroy_arm(uarmf);
+			    break;
+			}
+		    } else {
+			char kbuf[BUFSZ];
+			int dis_dmg;
+			Sprintf(kbuf, "barefootedly kicking %s",
+			  an(mon->data->mname));
+			dis_dmg = instadisintegrate(kbuf);
+			break;
+		    }
+		} else if (mon->data == &mons[PM_SHADE] &&
 			(!uarmf || !uarmf->blessed)) {
 		    /* doesn't matter whether it would have hit or missed,
 		       and shades have no passive counterattack */
@@ -268,6 +284,19 @@ register struct monst *mtmp;
 register struct obj *gold;
 {
 	boolean msg_given = FALSE;
+
+	if(touch_disintegrates(mtmp->data) && !mtmp->mcan && mtmp->mhp >6 &&
+# ifdef GOLDOBJ
+	  !oresist_disintegration(gold)
+# else
+	  rn2(20)
+# endif
+	) {
+	    if(cansee(mtmp->mx, mtmp->my))
+		pline_The("%s %s!", xname(gold), vtense(xname(gold),"disintegrate"));
+	    dealloc_obj(gold);
+	    return 1;
+	}
 
 	if(!likes_gold(mtmp->data) && !mtmp->isshk && !mtmp->ispriest
 			&& !is_mercenary(mtmp->data)) {
@@ -688,20 +717,10 @@ dokick()
 
 	if (nolimbs(youmonst.data) || slithy(youmonst.data)) {
 		You("have no legs to kick with.");
-		if (yn("Try a full-body tackle instead?") == 'y') {
-			if (rn2(3)) {set_wounded_legs(LEFT_SIDE, rnd(60-ACURR(A_DEX)));
-			pline("Argh! That didn't work!");
-		    return 1;}
-		}
-		else {no_kick = TRUE;}
+		no_kick = TRUE;
 	} else if (verysmall(youmonst.data)) {
 		You("are too small to do any kicking.");
-		if (yn("Try it anyway?") == 'y') {
-			if (rn2(3)) {set_wounded_legs(LEFT_SIDE, rnd(60-ACURR(A_DEX)));
-			pline("You hurt your muscles!");
-		    return 1;}
-		}
-		else {no_kick = TRUE;}
+		no_kick = TRUE;
 #ifdef STEED
 	} else if (u.usteed) {
 		if (yn_function("Kick your steed?", ynchars, 'n') == 'y') {
@@ -915,7 +934,7 @@ dokick()
 			}
 			exercise(A_DEX, TRUE);
 			return(1);
-		    } else if(Luck > 0 && !rn2(3) && !maploc->looted) {
+		    } else if(Luck > 0 && !rn2(3) && !(maploc->looted&T_LOOTED)) {
 			(void) mkgold((long) rn1(201, 300), x, y);
 			i = Luck + 1;
 			if(i > 6) i = 6;
@@ -930,7 +949,7 @@ dokick()
 			    newsym(x, y);
 			}
 			/* prevent endless milking */
-			maploc->looted = T_LOOTED;
+			maploc->looted &= T_LOOTED;
 			return(1);
 		    } else if (!rn2(4)) {
 			if(dunlev(&u.uz) < dunlevs_in_dungeon(&u.uz)) {

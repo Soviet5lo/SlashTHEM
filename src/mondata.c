@@ -37,7 +37,8 @@ int atyp, dtyp;
     struct attack *a;
 
     for (a = &ptr->mattk[0]; a < &ptr->mattk[NATTK]; a++)
-	if (a->aatyp == atyp && (dtyp == AD_ANY || a->adtyp == dtyp))
+	if ((atyp == AT_ANY || a->aatyp == atyp)
+	  && (dtyp == AD_ANY || a->adtyp == dtyp))
 	    return a;
 
     return (struct attack *)0;
@@ -581,6 +582,7 @@ static const short grownups[][2] = {
 	{PM_LICH, PM_DEMILICH}, {PM_DEMILICH, PM_MASTER_LICH},
 	{PM_MASTER_LICH, PM_ARCH_LICH},
 	{PM_VAMPIRE, PM_VAMPIRE_LORD}, {PM_VAMPIRE_LORD, PM_VAMPIRE_MAGE}, 
+	{PM_VAMPIRE_LORD, PM_NOSFERATU},
 	{PM_BAT, PM_GIANT_BAT},
 	{PM_CHICKATRICE, PM_COCKATRICE},
 	{PM_BABY_GRAY_DRAGON, PM_GRAY_DRAGON},

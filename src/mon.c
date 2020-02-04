@@ -22,6 +22,7 @@ STATIC_DCL boolean FDECL(restrap,(struct monst *));
 STATIC_DCL long FDECL(mm_aggression, (struct monst *,struct monst *));
 #ifdef OVL2
 STATIC_DCL int NDECL(pick_animal);
+STATIC_DCL int FDECL(refakem, (struct monst *));
 STATIC_DCL int FDECL(select_newcham_form, (struct monst *));
 STATIC_DCL void FDECL(kill_eggs, (struct obj *));
 #endif
@@ -57,7 +58,7 @@ STATIC_VAR short cham_to_pm[];
 #else
 STATIC_DCL struct obj *FDECL(make_corpse,(struct monst *));
 STATIC_DCL void FDECL(m_detach, (struct monst *, struct permonst *));
-STATIC_DCL void FDECL(lifesaved_monster, (struct monst *));
+STATIC_DCL void FDECL(lifesaved_monster, (struct monst *, uchar));
 static void FDECL(unpoly_monster, (struct monst *));
 
 /* convert the monster index of an undead to its living counterpart */
@@ -82,6 +83,7 @@ int mndx;
 	case PM_ELF_MUMMY:	mndx = PM_ELF;  break;
 	case PM_VAMPIRE:
 	case PM_VAMPIRE_LORD:
+	case PM_NOSFERATU:
 	case PM_VAMPIRE_MAGE:
 	case PM_HUMAN_ZOMBIE:
 	case PM_HUMAN_MUMMY:	mndx = PM_HUMAN;  break;
@@ -112,7 +114,6 @@ int mndx, mode;
 	case PM_CHIEFTAIN:   mndx = mode ? PM_BARBARIAN : PM_HUMAN; break;
 	case PM_NEANDERTHAL: mndx = mode ? PM_CAVEMAN   : PM_HUMAN; break;
 	case PM_ATTENDANT:   mndx = mode ? PM_HEALER    : PM_HUMAN; break;
-	case PM_UNFORTUNATE_VICTIM:   mndx = mode ? PM_BLEEDER    : PM_HUMAN; break;
 	case PM_PAGE:        mndx = mode ? PM_KNIGHT    : PM_HUMAN; break;
 	case PM_RHYMER:      mndx = mode ? PM_BARD   : PM_HUMAN; break;
 	case PM_ABBOT:       mndx = mode ? PM_MONK      : PM_HUMAN; break;
@@ -239,6 +240,7 @@ register struct monst *mtmp;
 		return (struct obj *)0;
 	    case PM_VAMPIRE:
 	    case PM_VAMPIRE_LORD:
+	    case PM_NOSFERATU:
 	    case PM_VAMPIRE_MAGE:
 		/* include mtmp in the mkcorpstat() call */
 		num = undead_to_corpse(mndx);
@@ -277,60 +279,6 @@ register struct monst *mtmp;
 	    case PM_GHAST:
 	    case PM_CREEPING___:
 	    case PM_FRANKENSTEIN_S_MONSTER:
-	    case PM_UNDEAD_ARCHEOLOGIST:
-	    case PM_UNDEAD_BARBARIAN:
-	    case PM_UNDEAD_BINDER:
-	    case PM_UNDEAD_BLEEDER:
-	    case PM_UNDEAD_BARD:
-	    case PM_UNDEAD_CAVEMAN:
-	    case PM_UNDEAD_CAVEWOMAN:
-	    case PM_UNDEAD_PALADIN:
-	    case PM_UNDEAD_CHEF:
-	    case PM_UNDEAD_ZYBORG:
-	    case PM_UNDEAD_GANGSTER:
-	    case PM_UNDEAD_POKEMON:
-	    case PM_UNDEAD_ELECTRIC_MAGE:
-	    case PM_UNDEAD_ACID_MAGE:
-	    case PM_UNDEAD_FLAME_MAGE:
-	    case PM_UNDEAD_CONVICT:
-	    case PM_UNDEAD_LUNATIC:
-	    case PM_UNDEAD_GEEK:
-	    case PM_UNDEAD_GRADUATE:
-	    case PM_UNDEAD_SCIENTIST:
-	    case PM_UNDEAD_ROCKER:
-	    case PM_UNDEAD_HEALER:
-	    case PM_UNDEAD_ICE_MAGE:
-	    case PM_UNDEAD_KNIGHT:
-	    case PM_UNDEAD_WARRIOR:
-	    case PM_UNDEAD_MONK:
-	    case PM_UNDEAD_PSION:
-	    case PM_UNDEAD_NECROMANCER:
-	    case PM_UNDEAD_NOBLEMAN:
-	    case PM_UNDEAD_NOBLEWOMAN:
-	    case PM_UNDEAD_PIRATE:
-	    case PM_UNDEAD_CORSAIR:
-	    case PM_UNDEAD_DIVER:
-	    case PM_UNDEAD_GLADIATOR:
-	    case PM_UNDEAD_PRIEST:
-	    case PM_UNDEAD_PRIESTESS:
-	    case PM_UNDEAD_RANGER:
-	    case PM_UNDEAD_ROGUE:
-	    case PM_UNDEAD_SAMURAI:
-	    case PM_UNDEAD_TOURIST:
-	    case PM_UNDEAD_DRUNK:
-	    case PM_UNDEAD_FIREFIGHTER:
-	    case PM_UNDEAD_LOCKSMITH:
-	    case PM_UNDEAD_MUSICIAN:
-	    case PM_UNDEAD_NINJA:
-	    case PM_UNDEAD_OFFICER:
-	    case PM_UNDEAD_UNDERTAKER:
-	    case PM_UNDEAD_ZOOKEEPER:
-	    case PM_NON_UNDEAD_SLAYER:
-	    case PM_UNDEAD_VALKYRIE:
-	    case PM_UNDEAD_YEOMAN:
-	    /*case PM_UNDEAD_PADAWAN:*/
-	    case PM_UNDEAD_JEDI:
-	    case PM_UNDEAD_WIZARD:
 		obj = mkcorpstat(CORPSE, (struct monst *)0, &mons[mndx], x, y, TRUE);
 		obj->age -= 100;                /* this is an *OLD* corpse */
 		break;
@@ -443,6 +391,23 @@ register struct monst *mtmp;
 		while(num--)
 			obj = mksobj_at(LEATHER_ARMOR, x, y, TRUE, FALSE);
 		mtmp->mnamelth = 0;
+		break;
+	    case PM_ROPE_GOLEM:
+		num = d(2,4);
+		while(num--)
+		    obj = mksobj_at(LEASH, x, y, TRUE, FALSE);
+		mtmp->mnamelth = 0;
+		break;
+	    case PM_STRAW_GOLEM:
+		if (rn2(2)){
+		    obj = mksobj_at(FEDORA, x, y, TRUE, FALSE);
+		    obj->oeroded2=rnd(MAX_ERODE);
+		}
+		num = rn2(3);
+		while(num--) /* should be reduced if killed by force bolt or fire */
+		    obj = mksobj_at(SHEAF_OF_STRAW, x, y, TRUE, FALSE);
+		mtmp->mnamelth = 0;
+		if (!obj) return (struct obj *)0;
 		break;
 	    case PM_BUG:
 	    	num = (!rn2(6) ? 0 : 1);
@@ -755,6 +720,11 @@ mcalcdistress()
 	    mtmp->mcanmove = 1;
 	if (mtmp->mfleetim && !--mtmp->mfleetim)
 	    mtmp->mflee = 0;
+	if (mtmp->mpeacetim && (mtmp->mpeacetim != 0x7f) 
+	  && !--mtmp->mpeacetim){
+	    if(mtmp->mpeaceful) mtmp->malign = mtmp->data->maligntyp;
+	    mtmp->mpeaceful = 0;
+	}
 
 	/* FIXME: mtmp->mlstmv ought to be updated here */
     }
@@ -815,6 +785,9 @@ movemon()
 		    continue;
 	    if(mtmp->mundetected) continue;
 	}
+
+	if (mtmp->data == & mons[PM_WILL_O__WISP])
+	    refakem(mtmp);
 
 	/* continue if the monster died fighting */
 	if (Conflict && !mtmp->iswiz && mtmp->mcansee) {
@@ -899,8 +872,9 @@ meatmetal(mtmp)
 			      Monnam(mtmp), distant_name(otmp,doname));
 		    }
 		/* KMH -- Don't eat indigestible/choking objects */
-		} else if (otmp->otyp != AMULET_OF_STRANGULATION &&
-				otmp->otyp != RIN_SLOW_DIGESTION) {
+ 		  else if ((otmp->otyp != AMULET_OF_STRANGULATION &&
+ 				otmp->otyp != RIN_SLOW_DIGESTION) &&
+ 				(mtmp->data != &mons[PM_GOLD_BUG] || is_golden(otmp))) {   /*if a gold bug, then only eats goldenthings -Webb */
 		    if (cansee(mtmp->mx,mtmp->my) && flags.verbose)
 			pline("%s eats %s!", Monnam(mtmp),
 				distant_name(otmp,doname));
@@ -954,6 +928,7 @@ meatmetal(mtmp)
 		    return 1;
 		}
 	    }
+	}
 	}
 	return 0;
 }
@@ -1063,7 +1038,53 @@ meatcorpse(mtmp)
 		  }
       newsym(mtmp->mx, mtmp->my);
 }
- 
+
+int
+meatmetal_effects(mtmp, otmp)
+register struct monst * mtmp;
+register struct obj * otmp;
+{
+	int poly, grow, heal, mstone;
+	struct permonst *ptr;
+	if (mtmp->mhp < mtmp->mhpmax) {
+	    mtmp->mhp += objects[otmp->otyp].oc_weight;
+	    if (mtmp->mhp > mtmp->mhpmax) mtmp->mhp = mtmp->mhpmax;
+	}
+	if(otmp == uball) {
+	    unpunish();
+	    delobj(otmp);
+	} else if (otmp == uchain) {
+	    unpunish();	/* frees uchain */
+	} else {
+	    poly = polyfodder(otmp);
+	    grow = mlevelgain(otmp);
+	    heal = mhealup(otmp);
+	    mstone = mstoning(otmp);
+	    delobj(otmp);
+	    ptr = mtmp->data;
+	    if (poly) {
+		if (newcham(mtmp, (struct permonst *)0, FALSE, FALSE))
+		  ptr = mtmp->data;
+	    } else if (grow) {
+		ptr = grow_up(mtmp, (struct monst *)0);
+	    } else if (mstone) {
+		if (poly_when_stoned(ptr)) {
+		    mon_to_stone(mtmp);
+		    ptr = mtmp->data;
+		} else if (!resists_ston(mtmp)) {
+		    if (canseemon(mtmp))
+		      pline("%s turns to stone!", Monnam(mtmp));
+		    monstone(mtmp);
+		    ptr = (struct permonst *)0;
+		}
+	    } else if (heal) {
+		mtmp->mhp = mtmp->mhpmax;
+	    }
+	    if (!ptr) return 2;		 /* it died */
+  	}
+	return 1;
+}
+
 int
 meatobj(mtmp)		/* for gelatinous cubes */
 	register struct monst *mtmp;
@@ -1299,7 +1320,7 @@ struct obj *otmp;
 	if (mtmp == u.usteed) return (FALSE);
 #endif
 	if (mtmp->isshk) return(TRUE); /* no limit */
-	if (mtmp->mpeaceful && !mtmp->mtame) return(FALSE);
+	if (mtmp->mpeaceful && !mtmp->mtame && !mtmp->mpeacetim) return(FALSE);
 	/* otherwise players might find themselves obligated to violate
 	 * their alignment if the monster takes something they need
 	 */
@@ -1384,6 +1405,14 @@ nexttry:	/* eels prefer the water, but if there is no water nearby,
 	for(nx = max(1,x-1); nx <= maxx; nx++)
 	  for(ny = max(0,y-1); ny <= maxy; ny++) {
 	    if(nx == x && ny == y) continue;
+	    if (mon->data == &mons[PM_LESHY]) {
+		treeok = 1;
+		rockok = 0;
+		if (IS_TREE(levl[nx][ny].typ))
+		    flag |= ALLOW_WALL;
+		else
+		    flag &= ~ALLOW_WALL;
+	    }
 	    if(IS_ROCK(ntyp = levl[nx][ny].typ) &&
 	       !((flag & ALLOW_WALL) && may_passwall(nx,ny)) &&
 	       !((IS_TREE(ntyp) ? treeok : rockok) && may_dig(nx,ny))) continue;
@@ -1754,8 +1783,9 @@ struct monst *mon;
 }
 
 STATIC_OVL void
-lifesaved_monster(mtmp)
+lifesaved_monster(mtmp,adtyp)
 struct monst *mtmp;
+uchar adtyp;
 {
 	int visible;
 	struct obj *lifesave = mlifesaver(mtmp);
@@ -1775,7 +1805,8 @@ struct monst *mtmp;
 				s_suffix(Monnam(mtmp)));
 			makeknown(AMULET_OF_LIFE_SAVING);
 			if (attacktype(mtmp->data, AT_EXPL)
-			    || attacktype(mtmp->data, AT_BOOM))
+			    || attacktype(mtmp->data, AT_BOOM)
+			    || adtyp == AD_DISN)
 				pline("%s reconstitutes!", Monnam(mtmp));
 			else
 				pline("%s looks much better!", Monnam(mtmp));
@@ -1834,8 +1865,17 @@ void
 mondead(mtmp)
 register struct monst *mtmp;
 {
+	mondead_helper(mtmp, 0); /* mmm... default parameter values */
+}
+
+void
+mondead_helper(mtmp, adtyp)
+register struct monst * mtmp;
+uchar adtyp; 
+{
 	struct permonst *mptr;
 	int tmp;
+	struct obj* otmp;
 
 	/* WAC just in case caller forgot to...*/
 	if (mtmp->mhp) mtmp->mhp = -1;
@@ -1852,7 +1892,7 @@ register struct monst *mtmp;
 	unpoly_monster(mtmp);
 	if (mtmp->mhp > 0) return;
 
-	lifesaved_monster(mtmp);
+	lifesaved_monster(mtmp, adtyp);
 	if (mtmp->mhp > 0) return;
 
 #ifdef STEED
@@ -1860,6 +1900,10 @@ register struct monst *mtmp;
 	if (mtmp == u.usteed)
 		dismount_steed(DISMOUNT_GENERIC);
 #endif
+	/* extinguish monster's armor */
+	if ((otmp = which_armor(mtmp, W_ARM)) &&
+	   (otmp->otyp==GOLDEN_DRAGON_SCALE_MAIL || otmp->otyp == GOLDEN_DRAGON_SCALES))
+		end_burn(otmp,FALSE);
 
 	mptr = mtmp->data;		/* save this for m_detach() */
 	/* restore chameleon, lycanthropes to true form at death */
@@ -1971,7 +2015,7 @@ boolean was_swallowed;			/* digestion */
 	struct permonst *mdat = mon->data;
 	int i, tmp;
 
-	if (mdat == &mons[PM_VLAD_THE_IMPALER] || mdat->mlet == S_LICH) {
+	if (mdat == &mons[PM_VLAD_THE_IMPALER] || mdat->mlet == S_LICH || mdat == &mons[PM_DISINTEGRATOR]) {
 	    if (cansee(mon->mx, mon->my) && !was_swallowed)
 		pline("%s body crumbles into dust.", s_suffix(Monnam(mon)));
 	    /* KMH -- make_corpse() handles Vecna */
@@ -2039,7 +2083,6 @@ boolean was_swallowed;			/* digestion */
 	if (bigmonst(mdat) || mdat == &mons[PM_LIZARD]
 		   || is_golem(mdat)
 		   || is_mplayer(mdat)
-		   || is_umplayer(mdat)
 		   || is_rider(mdat))
 		return TRUE;
 	return (boolean) (!rn2((int)
@@ -2095,7 +2138,7 @@ register struct monst *mdef;
 	 * put inventory in it, and we have to check for lifesaving before
 	 * making the statue....
 	 */
-	lifesaved_monster(mdef);
+	lifesaved_monster(mdef, AD_STON);
 	if (mdef->mhp > 0) return;
 
 	mdef->mtrapped = 0;	/* (see m_detach) */
@@ -2189,8 +2232,8 @@ int how;
 	    be_sad = (mdef->mtame != 0 && !mdef->isspell);
 
 	/* no corpses if digested or disintegrated */
-	if(how == AD_DGST || how == -AD_RBRE)
-	    mondead(mdef);
+	if(how == AD_DGST || how == -AD_RBRE || how == AD_DISN)
+	    mondead_helper(mdef, how);
 	else
 	    mondied(mdef);
 
@@ -2351,7 +2394,7 @@ xkilled(mtmp, dest)
 
 #ifdef EASY_MODE
 		if (!rn2(100)) otmp = mksobj_at(SCR_IDENTIFY, x, y, TRUE, FALSE);
-		if (!rn2(40)) otmp = mksobj_at(SCR_HEALING, x, y, TRUE, FALSE);
+		if (!rn2(40)) otmp = mksobj_at(POT_HEALING, x, y, TRUE, FALSE);
 #endif /* EASY_MODE */
 		if (!rn2(6) && !(mvitals[mndx].mvflags & G_NOCORPSE) && !(nohands(mdat))
 #ifdef KOPS
@@ -2667,6 +2710,7 @@ register struct monst *mtmp;
 	if(!mtmp->mpeaceful) return;
 	if(mtmp->mtame) return;
 	mtmp->mpeaceful = 0;
+	mtmp->mpeacetim = 0;
 	if(mtmp->ispriest) {
 		if(p_coaligned(mtmp)) adjalign(-50); /* very bad */
 		else adjalign(2);
@@ -2857,7 +2901,8 @@ register struct monst *mtmp;
 	   (sensemon(mtmp) && distu(mtmp->mx, mtmp->my) <= 2))
 		return(FALSE);
 
-	if(mtmp->data->mlet == S_MIMIC) {
+	if (mtmp->data->mlet == S_MIMIC ||
+	    mtmp->data == &mons[PM_LABYRINTH_TRAPPER]){
 		set_mimic_sym(mtmp);
 		return(TRUE);
 	} else
@@ -2867,6 +2912,22 @@ register struct monst *mtmp;
 	    }
 
 	return(FALSE);
+}
+
+int 
+refakem(mtmp)
+struct monst * mtmp;
+{
+    if ((cansee(mtmp->mx, mtmp->my) || mtmp->mcan) ||
+      ((mtmp->m_ap_type == M_AP_MONSTER) && rn2(8)))
+	return FALSE;
+    if ((mtmp->mappearance = pick_friendly()) != NON_PM ){
+      mtmp->m_ap_type = M_AP_MONSTER;
+	return TRUE;
+    } else {
+	mtmp->m_ap_type = M_AP_NOTHING;
+	return FALSE;
+    }
 }
 
 short *animal_list = 0;		/* list of PM values for animal monsters */
@@ -2994,7 +3055,7 @@ boolean msg;
 		   select_newcham_form might deliberately pick a player
 		   character type, so we can't arbitrarily rule out all
 		   human forms any more */
-		if (is_mplayer(mdat) || is_umplayer(mdat) || (!is_human(mdat) && monpolyok(mdat)))
+		if (is_mplayer(mdat) || (!is_human(mdat) && monpolyok(mdat)))
 		    break;
 	    }
 	    if (tryct > 100) return 0;	/* Should never happen */
@@ -3408,6 +3469,7 @@ register boolean silent;
 			}
 			mtmp->mpeaceful = 0;
 		}
+	    mtmp->mpeacetim =0;
 	}
 	if(ct) {
 	    if(!silent) { /* do we want pline msgs? */
@@ -3437,6 +3499,7 @@ pacify_guards()
 	    if (mtmp->data == &mons[PM_WATCHMAN] || mtmp->data == &mons[PM_WATCH_LIEUTENANT] ||
 		mtmp->data == &mons[PM_WATCH_CAPTAIN] || mtmp->data == &mons[PM_WATCH_LEADER])
 	    mtmp->mpeaceful = 1;
+	    mtmp->mpeacetim = 0;
 	}
 }
 
@@ -3463,7 +3526,7 @@ short otyp;
 	    case M_AP_MONSTER:
 		break;
 	    case M_AP_OBJECT:
-		if (otyp == SPE_HEALING || otyp == SPE_EXTRA_HEALING || otyp == SPE_FULL_HEALING) {
+		if (otyp == SPE_HEALING || otyp == SPE_EXTRA_HEALING) {
 		    pline("%s seems a more vivid %s than before.",
 				The(simple_typename(ap)),
 				c_obj_colors[objects[ap].oc_color]);

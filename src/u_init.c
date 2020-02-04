@@ -15,6 +15,7 @@ struct trobj {
 STATIC_DCL void FDECL(ini_inv, (struct trobj *));
 STATIC_DCL void FDECL(knows_object,(int));
 STATIC_DCL void FDECL(knows_class,(CHAR_P));
+STATIC_DCL void FDECL(augment_skill_cap,(int, int, int, int));
 STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 
 #define UNDEF_TYP	0
@@ -47,31 +48,6 @@ static struct trobj Barbarian[] = {
 	{ AXE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ RING_MAIL, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ FOOD_RATION, 0, FOOD_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Binder[] = {
-	{ VOULGE, 0, WEAPON_CLASS, 1, 0 },
-	{ KNIFE, 0, WEAPON_CLASS, 1, 0 },
-	{ ROCK, 0, GEM_CLASS, 5, 0 }, 
-	{ FLINT, 0, GEM_CLASS, 1, 0 },
-	{ LEATHER_CLOAK, 0, ARMOR_CLASS, 1, 0 },
-	{ CRAM_RATION, 0, FOOD_CLASS, 1, 0 },
-	{ APPLE, 0, FOOD_CLASS, 2, 0 },
-	{ TRIPE_RATION, 0, FOOD_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Bleeder[] = {
-	{ KNIFE, 0, WEAPON_CLASS, 1, 0 },
-	{ POT_VAMPIRE_BLOOD, 0, POTION_CLASS, 2, 0 },
-	{ LAB_COAT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ MIRROR, 0, TOOL_CLASS, 1, 0 },
-	{ CAN_OF_GREASE, UNDEF_SPE, TOOL_CLASS, 1, 0 },
-	{ FOOD_RATION, 0, FOOD_CLASS, 2, 0 },
-	{ SPE_PROTECTION, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ SPE_RESIST_POISON, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ SPE_BOTOX_RESIST, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -168,28 +144,6 @@ static struct trobj Convict[] = {
 };
 #endif  /* CONVICT */
 
-static struct trobj Rocker[] = {
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ ROCK, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ FLINT, UNDEF_SPE, GEM_CLASS, 1, UNDEF_BLESS },
-	{ SLING, 2, WEAPON_CLASS, 1, 1 },
-	{ WOODEN_HARP, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ PICK_AXE, 1, TOOL_CLASS, 1, 1 },
-	{ SPE_FORCE_BOLT, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Zyborg[] = {
-	{ PLATE_MAIL, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ GREEN_LIGHTSABER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ DIODE, UNDEF_SPE, TOOL_CLASS, 20, UNDEF_BLESS },
-	{ WAN_SOLAR_BEAM, UNDEF_SPE, WAND_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 static struct trobj Lunatic[] = { /* 5lo: Changing to starting objects from Slash 6 Lycanthrope role */
 	{ ORCISH_SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ POT_SICKNESS, 0, POTION_CLASS, 2, 0 },
@@ -211,8 +165,10 @@ static struct trobj Officer[] = {
 	{ PISTOL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ BULLET, 0, WEAPON_CLASS, 40, 0 },
 	{ LEATHER_ARMOR, 0, ARMOR_SYM, 1, UNDEF_BLESS },
+#if 0 /* 5lo: Removed as these were to simulate firearms in Nethack-- */
 	{ WAN_MAGIC_MISSILE, UNDEF_SPE, WAND_SYM, 1, UNDEF_BLESS },
 	{ WAN_STRIKING, UNDEF_SPE, WAND_SYM, 1, UNDEF_BLESS },
+#endif
 	{ DOUGHNUT, 0, FOOD_SYM, 6, 0 },
 	{ 0, 0, 0, 0, 0, }
 };
@@ -232,7 +188,7 @@ static struct trobj Undertaker[] = {
 	{ SCALPEL, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ EXPENSIVE_SUIT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ WAN_UNDEAD_TURNING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
-	{ WAN_UNDEAD_TURNING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
+//	{ WAN_UNDEAD_TURNING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
 	{ BRASS_LANTERN, 1, TOOL_CLASS, 1, 0 }, /* Graveyards are dark places */
 	{ PICK_AXE, 0, TOOL_CLASS, 1, UNDEF_BLESS }, /* They dig graves after all */
@@ -240,8 +196,10 @@ static struct trobj Undertaker[] = {
 };
 
 static struct trobj Zookeeper[] = {
-	{ BULLWHIP, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ TRIPE_RATION, 0, TOOL_CLASS, 5, UNDEF_BLESS },
+	{ LONG_BULLWHIP, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ TRIPE_RATION, 0, FOOD_CLASS, 5, UNDEF_BLESS },
+	{ ASIAN_PEAR, 0, FOOD_CLASS, 3, 0 },
+	{ EUCALYPTUS_LEAF, 0, FOOD_CLASS, 1, 0 },
 	{ SCR_TAMING, UNDEF_SPE, SCROLL_CLASS, 3, 1 },
 	{ LEASH, 0, TOOL_CLASS, 3, 0 },
 	{ 0, 0, 0, 0, 0, }
@@ -249,7 +207,7 @@ static struct trobj Zookeeper[] = {
 static struct trobj Firefighter[] = {
 	{ AXE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ FIRE_HELMET, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ CLOAK_OF_QUENCHING, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
+	{ ASBESTOS_JACKET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ POT_WATER, 0, POTION_CLASS, 5, 0 },
 	{ SCR_FIRE, UNDEF_SPE, SCROLL_CLASS, 4, UNDEF_BLESS },
 	{ WAN_FIRE, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
@@ -267,6 +225,7 @@ static struct trobj Locksmith[] = {
 };
 
 static struct trobj Ninja[] = {
+#define NIN_SHURIKEN 1
 	{ SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },      /* the wakizashi */
 	{ SHURIKEN, 0, WEAPON_CLASS, 9, UNDEF_BLESS },        /* quan is variable */
 	{ LEATHER_CLOAK, 1, ARMOR_CLASS, 1, 0 },
@@ -278,14 +237,6 @@ static struct trobj Ninja[] = {
 	{ 0, 0, 0, 0, 0, }
 };
 
-static struct trobj Gangster[] = {
-	{ KNIFE, 0, WEAPON_CLASS, 1, UNDEF_BLESS }, /* That ammo won't carry them far.  Give them a knife.  */
-	{ SUBMACHINE_GUN, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BULLET, 0, WEAPON_CLASS, 30, 0 },
-	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
 #if 0 /* Deferred */
 static struct trobj Pokemon[] = {
 	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 5, 0 },
@@ -294,9 +245,9 @@ static struct trobj Pokemon[] = {
 };
 #endif
 
-static struct trobj Geek[] = {
+static struct trobj Hacker[] = {
 	{ ELECTRIC_SWORD, 1, WEAPON_CLASS, 1, 1},
-#define G_IC 1
+#define H_IC 1
 	{ IC, 0, TOOL_CLASS, 7, UNDEF_BLESS },	/* quan is var. */
 	{ GAUNTLETS_OF_TYPING, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ POT_JOLT_COLA, 0, POTION_CLASS, 4, UNDEF_BLESS },
@@ -305,27 +256,12 @@ static struct trobj Geek[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 
-static struct trobj Graduate[] = {
+static struct trobj Geek[] = {
 	{ SHARPENED_PENCIL, 3, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ CANDY_BAR, 0, FOOD_CLASS, 5, 0 },
 	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
 	{ UGLY_BACKPACK, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-static struct trobj Scientist[] = {
-	{ SCALPEL, 1, WEAPON_CLASS, 1, 1},
-	{ RUBBER_GLOVES, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ LAB_COAT, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ POT_RADIUM, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_CYANIDE, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_PARALYSIS, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_ACID, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ POT_SICKNESS, 0, POTION_CLASS, 1, UNDEF_BLESS },
-	{ BOTTLE, 0, TOOL_CLASS, 3, 0 },
-	{ SANDWICH, 0, FOOD_CLASS, 2, UNDEF_BLESS },
-	{ SPE_CHEMISTRY, 5, SPBOOK_CLASS, 1, UNDEF_BLESS },
-	{ CHEMISTRY_SET, 40, TOOL_CLASS, 1, 0 },
+	{ LENSES, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -337,7 +273,7 @@ static struct trobj Healer[] = {
 	{ POT_HEALING, 0, POTION_CLASS, 4, UNDEF_BLESS },
 	{ POT_EXTRA_HEALING, 0, POTION_CLASS, 4, UNDEF_BLESS },
 	{ WAN_SLEEP, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
-	/* [Tom] they might as well have a wand of healing, too */        
+	/* [Tom] they might as well have a wand of healing, too */
 	{ WAN_HEALING, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	/* always blessed, so it's guaranteed readable */
 	{ SPE_HEALING, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
@@ -392,12 +328,14 @@ static struct trobj Knight[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Warrior[] = {
-	{ MACE, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ BROADSWORD, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ CROSSBOW, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ CROSSBOW_BOLT, 0, WEAPON_CLASS, 50, 1 },
-	{ LARGE_SHIELD, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ APPLE, 0, FOOD_CLASS, 15, 0 },
-	{ CARROT, 0, FOOD_CLASS, 15, 0 },
+	{ CROSSBOW_BOLT, 0, WEAPON_CLASS, 25, 1 },
+	{ SCALE_MAIL, 0, ARMOR_CLASS, 1, 0 },
+	{ LOW_BOOTS, 0, ARMOR_CLASS, 1, 0},
+	{ SMALL_SHIELD, 0, ARMOR_CLASS, 1, 0 },
+	{ APPLE, 0, FOOD_CLASS, 7, 0 },
+	{ CARROT, 0, FOOD_CLASS, 7, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Monk[] = {
@@ -416,7 +354,7 @@ static struct trobj Monk[] = {
 	{ FORTUNE_COOKIE, 0, FOOD_CLASS, 3, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#if 0 /* Deferred */
 static struct trobj Psion[] = {
 #define PS_BOOK		2
 	{ LEATHER_GLOVES, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -433,7 +371,7 @@ static struct trobj Psion[] = {
 	{ FORTUNE_COOKIE, 0, FOOD_CLASS, 3, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-
+#endif
 static struct trobj Noble[] = {
 #define NOB_SHIRT	1
 	{ RAPIER, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
@@ -523,7 +461,6 @@ static struct trobj Paladin[] = {
 	{ SPRIG_OF_WOLFSBANE, 0, FOOD_CLASS, 2, 1 },
 	{ SPE_HEALING, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
 	{ UNDEF_TYP, UNDEF_SPE, SCROLL_CLASS, 1, 1 },
-	{ SADDLE, 0, TOOL_CLASS, 1, 1 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -653,8 +590,24 @@ static struct trobj Yeoman[] = {
  *	Optional extra inventory items.
  */
 
+static struct trobj HealingBook[] = {
+	{ SPE_HEALING, 0, SPBOOK_CLASS, 1, 1 },
+	{ 0, 0, 0, 0, 0 }
+};
+
+static struct trobj ForceBook[] = {
+	{ SPE_FORCE_BOLT, 0, SPBOOK_CLASS, 1, 1 },
+	{ 0, 0, 0, 0, 0 }
+};
+
+static struct trobj ExtraBook[] = {
+	{ UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
+	{ 0, 0, 0, 0, 0 }
+};
+
+
 static struct trobj KoboldItem[] = {
-	{ DART, 0, WEAPON_CLASS, 15, 0 },
+	{ DART, 0, WEAPON_CLASS, 10, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 
@@ -705,7 +658,7 @@ static struct trobj LostSoulItemY[] = {
 };
 #ifdef EASY_MODE
 static struct trobj AlwaysStartItem[] = {
-	{ SCR_HEALING, 0, SCROLL_CLASS, 5, 0 },
+	{ POT_HEALING, 0, POTION_CLASS, 5, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj AlwaysStartItemB[] = {
@@ -785,10 +738,6 @@ static struct trobj UberLostSoulItemR[] = {
 	{ UNDEF_TYP, UNDEF_SPE, RANDOM_CLASS, 1, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-static struct trobj GiantItem[] = {
-	{ BOULDER, 0, ROCK_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
 static struct trobj OgreItem[] = {
 	{ CLUB, 0, WEAPON_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -851,88 +800,6 @@ static struct trobj Money[] = {
 };
 #endif
 
-static struct trobj WarXtrA[] = {
-	{ PLATE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrB[] = {
-	{ PLASTEEL_ARMOR, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrC[] = {
-	{ CRYSTAL_PLATE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrD[] = {
-	{ BRONZE_PLATE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrE[] = {
-	{ SPLINT_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrF[] = {
-	{ BANDED_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrG[] = {
-	{ CHAIN_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrH[] = {
-	{ SCALE_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrI[] = {
-	{ RING_MAIL, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrJ[] = {
-	{ YELLOW_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrK[] = {
-	{ GREEN_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrL[] = {
-	{ BLUE_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrM[] = {
-	{ BLACK_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrN[] = {
-	{ ORANGE_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrO[] = {
-	{ WHITE_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrP[] = {
-	{ RED_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrQ[] = {
-	{ DEEP_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrR[] = {
-	{ SHIMMERING_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrS[] = {
-	{ SILVER_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj WarXtrT[] = {
-	{ GRAY_DRAGON_SCALES, 1, ARMOR_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-
-
 /* race-based substitutions for initial inventory;
    the weaker cloak for elven rangers is intentional--they shoot better */
 static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
@@ -977,7 +844,20 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_DROW,		ARROW,			DARK_ELVEN_ARROW      },
     { PM_VAMPIRE,	POT_FRUIT_JUICE,	POT_BLOOD	      },
     { PM_VAMPIRE,	FOOD_RATION,		POT_VAMPIRE_BLOOD     },
-    { PM_GHOUL,		FOOD_RATION,		CORPSE     	      },
+    { PM_INCANTIFIER,CLOAK_OF_MAGIC_RESISTANCE,	ROBE  },
+    { PM_INCANTIFIER,CLOAK_OF_DISPLACEMENT,	ROBE  },
+    { PM_INCANTIFIER,	LEATHER_ARMOR,		ROBE  },
+    { PM_INCANTIFIER,	LEATHER_JACKET,		ROBE  },
+    { PM_INCANTIFIER,	RING_MAIL,		ROBE  },
+    { PM_INCANTIFIER,	SPLINT_MAIL,		ROBE  },
+    { PM_INCANTIFIER,	FOOD_RATION,	SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	CRAM_RATION, 	SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	POT_FRUIT_JUICE,SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	BANANA,		SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	ORANGE,		SCR_FOOD_DETECTION	},
+    { PM_INCANTIFIER,	POT_BOOZE,	SCR_FOOD_DETECTION	},
+    { PM_GHOUL,		FOOD_RATION,		POT_BLOOD     	      },
+    { PM_GHOUL,		POT_FRUIT_JUICE,	POT_BLOOD	      },
     { PM_CLOCKWORK_AUTOMATON,	FOOD_RATION,	POT_OIL    	      },
     { PM_CLOCKWORK_AUTOMATON,	CRAM_RATION, 	POT_OIL 	      },
     { PM_CLOCKWORK_AUTOMATON,	POT_FRUIT_JUICE,POT_OIL		      },
@@ -1107,37 +987,6 @@ static const struct def_skill Skill_Chef[] = {
     { P_NONE, 0 }
 };
 
-
-static const struct def_skill Skill_Roc[] = {
-    /* 5lo: Let's use the Gnome skills from Slash 0.0.6 - they fit well enough */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-/* WAC added Pickaxe, Axe */
-    { P_PICK_AXE, P_EXPERT },
-    { P_AXE, P_EXPERT },                { P_SHORT_SWORD, P_EXPERT },
-    /* { P_BROAD_SWORD, P_SKILLED },*/
-/*WAC removed twohanded sword,  broadsword!*/
-    { P_LONG_SWORD, P_SKILLED },      /*  { P_TWO_HANDED_SWORD, P_BASIC },*/
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_CLUB, P_SKILLED },              { P_PADDLE, P_SKILLED },
-    { P_MACE, P_SKILLED },
-    { P_MORNING_STAR, P_BASIC },        { P_FLAIL, P_BASIC },
-/* WAC made hammer expert*/
-    { P_HAMMER, P_EXPERT },             { P_POLEARMS, P_BASIC },
-    { P_SPEAR, P_BASIC },               { P_BOW, P_SKILLED },
-/* WAC added Sling Expert */
-    { P_SLING, P_EXPERT },              { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },               { P_SHURIKEN, P_SKILLED },
-    { P_DIVINATION_SPELL, P_BASIC }, { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_MUSICALIZE, P_EXPERT }, /* Rock music, of course */
-/*WAC - G must be good at enchant,  since his class skill is fear.
-        also added a basic divination (from id gems) */
-#ifdef STEED
-    { P_RIDING, P_BASIC },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT },  { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_F[] = {
 /*Style: small-med edged weapons, blunt weapons*/
     { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_SKILLED },
@@ -1193,31 +1042,6 @@ static const struct def_skill Skill_Fir[] = {
     { P_NONE, 0 }
 };
 
-
-static const struct def_skill Skill_Zyb[] = {
-    /* 5lo: Still a very heavy work in progress... */
-    { P_DAGGER, P_SKILLED },		{ P_KNIFE, P_EXPERT },
-    { P_LONG_SWORD, P_EXPERT },		{ P_CLUB, P_SKILLED },
-    { P_PADDLE, P_EXPERT },		{ P_MACE, P_BASIC },
-    { P_FLAIL, P_BASIC },		{ P_HAMMER, P_SKILLED },
-    { P_POLEARMS, P_SKILLED },		{ P_TRIDENT, P_BASIC },
-    { P_LANCE, P_BASIC },		{ P_SLING, P_BASIC },
-    { P_CROSSBOW, P_SKILLED },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT }, /* Mechanical beings have very deadly aim */
-#endif
-    { P_DART, P_EXPERT },
-    { P_LIGHTSABER, P_SKILLED }, /* Technological beings, after all */
-
-    { P_PROTECTION_SPELL, P_SKILLED },    { P_BODY_SPELL, P_SKILLED },
-    { P_MATTER_SPELL, P_SKILLED },
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_BARE_HANDED_COMBAT, P_SKILLED },
-    { P_NONE, 0 }
-};
-
 static const struct def_skill Skill_Lun[] = {
     /* Directly taken from Slash'EM 0.0.6 sources - Lycanthrope role */
     { P_DAGGER, P_BASIC },              { P_KNIFE,  P_SKILLED },
@@ -1236,54 +1060,6 @@ static const struct def_skill Skill_Lun[] = {
 /*WAC - added skilled body spells (he polymorphs), expert heal
         - regeneration and create familiar*/
     { P_BARE_HANDED_COMBAT, P_GRAND_MASTER },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Bin[] = {
-    /* 5lo: Copy of the Wizard for now... */
-    { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_SKILLED },
-    { P_AXE, P_SKILLED },		{ P_SHORT_SWORD, P_BASIC },
-    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
-    { P_MACE, P_BASIC },
-    { P_QUARTERSTAFF, P_EXPERT },	{ P_POLEARMS, P_SKILLED },
-    { P_SPEAR, P_BASIC },		{ P_JAVELIN, P_BASIC },
-    { P_TRIDENT, P_BASIC },		{ P_SLING, P_SKILLED },
-    { P_DART, P_EXPERT },		{ P_SHURIKEN, P_BASIC },
-
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_SKILLED },
-    { P_DIVINATION_SPELL, P_SKILLED },  { P_ENCHANTMENT_SPELL, P_SKILLED },
-    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
-    { P_MATTER_SPELL, P_SKILLED },
-/*      added matter spell skilled,  as fireball and cone of cold are
-        matter spells, but now specialty of F/I Mages*/
-#ifdef STEED
-    { P_RIDING, P_BASIC },
-#endif
-    { P_BARE_HANDED_COMBAT, P_BASIC },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Ble[] = {
-    /* Mainly uses edged weapons. --Amy */
-    /* 5lo: Normalized the skills from Slash'EM Extended */
-    { P_DAGGER, P_SKILLED },            { P_KNIFE,  P_EXPERT },
-    { P_AXE, P_BASIC },                 
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_BASIC },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_POLEARMS, P_BASIC },
-    { P_BOW, P_BASIC },                 { P_CROSSBOW, P_BASIC },
-    { P_UNICORN_HORN, P_BASIC },	/* Because of it's healing properties */
-
-    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_SKILLED },  { P_BODY_SPELL, P_SKILLED },
-    { P_MATTER_SPELL, P_BASIC },
-
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_TWO_WEAPON_COMBAT, P_EXPERT }, { P_MARTIAL_ARTS, P_EXPERT },
     { P_NONE, 0 }
 };
 
@@ -1370,65 +1146,20 @@ static const struct def_skill Skill_Dru[] = {
     /* 5lo: A focus on short, one handed bladed weapons */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_EXPERT },
     { P_WHIP, P_EXPERT },		{ P_CLUB, P_SKILLED },    
+    { P_SHORT_SWORD, P_SKILLED },
     { P_DART, P_SKILLED },		{ P_FLAIL, P_BASIC },
     { P_SLING, P_SKILLED },    		{ P_UNICORN_HORN, P_BASIC },
 #ifdef FIREARMS
     { P_FIREARM, P_BASIC },
 #endif
     { P_DIVINATION_SPELL, P_BASIC },	{ P_BODY_SPELL, P_BASIC },
-    { P_MUSICALIZE, P_BASIC },
+    { P_MUSICALIZE, P_BASIC }, /* Drunken singing */
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_RIDING, P_BASIC },
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Gan[] = {
-    /* 5lo: Effectively a slight modification of the Courier above */
-    { P_KNIFE,  P_EXPERT },		{ P_DAGGER, P_EXPERT },
-    { P_SHORT_SWORD, P_BASIC },		{ P_LONG_SWORD, P_BASIC },
-    { P_HAMMER, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
-    { P_CLUB, P_EXPERT },		{ P_MACE, P_BASIC },
-    { P_CROSSBOW, P_SKILLED },		{ P_FLAIL, P_BASIC },
-    { P_SHORT_SWORD, P_EXPERT },	{ P_SLING, P_BASIC },
-#ifdef FIREARMS
-    { P_FIREARM, P_EXPERT },
-#endif
-#ifdef STEED
-    { P_RIDING, P_EXPERT },
-#endif
-    { P_BARE_HANDED_COMBAT, P_EXPERT },
-    { P_NONE, 0 }
-};
-
-static const struct def_skill Skill_Sci[] = {
-    /* 5lo: Doppelganger skills from Slash'EM 0.0.6 + Healer magic */
-    { P_DAGGER, P_EXPERT },             { P_KNIFE,  P_EXPERT },
-    { P_SHORT_SWORD, P_EXPERT },        { P_BROAD_SWORD, P_SKILLED },
-    { P_LONG_SWORD, P_SKILLED },        { P_TWO_HANDED_SWORD, P_BASIC },
-    { P_SCIMITAR, P_SKILLED },          { P_SABER, P_SKILLED },
-    { P_CLUB, P_SKILLED },              { P_PADDLE, P_BASIC },
-    { P_MACE, P_SKILLED },              { P_MORNING_STAR, P_SKILLED },
-    { P_FLAIL, P_BASIC },               { P_HAMMER, P_BASIC },
-    { P_POLEARMS, P_BASIC },            { P_SPEAR, P_BASIC },
-#ifdef FIREARMS
-    { P_FIREARM, P_BASIC },
-#endif
-    { P_CROSSBOW, P_EXPERT },
-    { P_DART, P_EXPERT },               { P_SHURIKEN, P_SKILLED },
-
-    { P_ATTACK_SPELL, P_BASIC },        { P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_BASIC },    { P_ENCHANTMENT_SPELL, P_BASIC },
-    { P_PROTECTION_SPELL, P_BASIC },    { P_BODY_SPELL, P_BASIC },
-    { P_MATTER_SPELL, P_BASIC },
-#ifdef STEED
-    { P_RIDING, P_BASIC },
-#endif
-    { P_BARE_HANDED_COMBAT, P_BASIC },
-    { P_NONE, 0 }
-};
-
-
-static const struct def_skill Skill_G[] = {
+static const struct def_skill Skill_Hack[] = {
     /* 5lo: They've mostly learned by movies and video games */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
     { P_LONG_SWORD, P_EXPERT },		{ P_CLUB, P_EXPERT },
@@ -1452,8 +1183,8 @@ static const struct def_skill Skill_G[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_Gra[] = {
-    /* 5lo: Effectively a much more limited Geek */
+static const struct def_skill Skill_Gee[] = {
+    /* 5lo: Effectively a much more limited Hacker */
     { P_DAGGER, P_EXPERT },		{ P_KNIFE, P_EXPERT },
     { P_LONG_SWORD, P_SKILLED },	{ P_CLUB, P_EXPERT },
     { P_PADDLE, P_SKILLED },		{ P_MACE, P_BASIC },
@@ -1542,6 +1273,14 @@ static const struct def_skill Skill_J[] = {
 };
 #endif
 
+static const struct def_skill Skill_Incantifier[] = {
+    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
+    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
+    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
+    { P_MATTER_SPELL, P_EXPERT },
+    { P_NONE, 0 }
+};
+
 static const struct def_skill Skill_K[] = {
     { P_DAGGER, P_BASIC },		{ P_KNIFE, P_BASIC },
     { P_AXE, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
@@ -1567,7 +1306,7 @@ static const struct def_skill Skill_K[] = {
     { P_NONE, 0 }
 };
 
-static const struct def_skill Skill_War[] = { /*master of all weapons*/
+static const struct def_skill Skill_War[] = {
     /* 5lo: uses Dwarf skills from Slash'EM 0.0.6 with modifications */
     { P_PICK_AXE, P_SKILLED},     { P_AXE, P_SKILLED },
     { P_SHORT_SWORD, P_EXPERT },  { P_SCIMITAR, P_SKILLED },
@@ -1580,7 +1319,7 @@ static const struct def_skill Skill_War[] = { /*master of all weapons*/
     /* Warriors avoid magic */
     { P_DIVINATION_SPELL, P_BASIC },
 #ifdef STEED
-    { P_RIDING, P_BASIC },
+    { P_RIDING, P_SKILLED },
 #endif
     { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_EXPERT },  { P_NONE, 0 }
@@ -2113,15 +1852,8 @@ static const struct def_skill Skill_Y[] = {
 };
 #endif
 
+#if 0 /* 5lo: No longer used */
 /* Racial Skills here */
-
-static const struct def_skill Skill_Incantifier[] = {
-    { P_ATTACK_SPELL, P_EXPERT },	{ P_HEALING_SPELL, P_EXPERT },
-    { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_EXPERT },
-    { P_PROTECTION_SPELL, P_EXPERT },	{ P_BODY_SPELL, P_EXPERT },
-    { P_MATTER_SPELL, P_EXPERT },
-    { P_NONE, 0 }
-};
 
 static const struct def_skill Skill_Drow[] = {
     { P_MUSICALIZE, P_SKILLED },	{ P_BOW, P_SKILLED },
@@ -2185,7 +1917,7 @@ static const struct def_skill Skill_Troll[] = {
     { P_POLEARMS, P_EXPERT },
     { P_NONE, 0 }
 };
-
+#endif
 STATIC_OVL void
 knows_object(obj)
 register int obj;
@@ -2205,6 +1937,21 @@ register char sym;
 	for (ct = 1; ct < NUM_OBJECTS; ct++)
 		if (objects[ct].oc_class == sym && !objects[ct].oc_magic)
 			knows_object(ct);
+}
+
+/* Raise the player character's skill cap for a particular skill. */
+void
+augment_skill_cap(int skill, int augment, int minimum, int maximum)
+{
+	int count = 0;
+	if (P_SKILL(skill) == P_ISRESTRICTED)
+		P_SKILL(skill) = P_UNSKILLED;
+	else if (P_SKILL(skill) != P_ISRESTRICTED)
+		P_SKILL(skill) = P_BASIC;	
+	while (count++ < augment && P_MAX_SKILL(skill) < maximum)
+		P_MAX_SKILL(skill) = P_MAX_SKILL(skill) + 1;
+	if (P_MAX_SKILL(skill) < minimum)
+		P_MAX_SKILL(skill) = minimum;
 }
 
 /* [ALI] Raise one spell skill by one level. Priorities:
@@ -2386,7 +2133,7 @@ u_init()
 
 	u.umoved = FALSE;
 	u.umortality = 0;
-	u.ugrave_arise = Role_if(PM_PIRATE) ? PM_SKELETAL_PIRATE : Role_if(PM_BINDER) ? PM_SHADE : NON_PM;
+	u.ugrave_arise = Role_if(PM_PIRATE) ? PM_SKELETAL_PIRATE : NON_PM;
 	
 	u.ukinghill = 0;
 	u.protean = 0;
@@ -2409,6 +2156,7 @@ u_init()
 	adjabil(0,1);
 	u.ulevel = u.ulevelmax = 1;
 
+//	if(Race_if(PM_INCANTIFIER)) u.uenmax += 1200;
 	init_uhunger();
 	u.ublesscnt = 300;			/* no prayers just yet */
 
@@ -2418,12 +2166,7 @@ u_init()
 	u.monstertimeout = rnd(10000)+15000;
 	u.monstertimefinish = 70000L-u.monstertimeout;
 #endif
-	u.legscratching = (Role_if(PM_BLEEDER) ? 3 : 1); /*must also be set here; this may increase over time*/
 	u.next_check = 600; /* 5lo: Different method of doing attribute checks in attrib.c */
-
-	u.urmaxlvlB = 1; /* will go up if a cyborg role player levels up */
-	u.urmaxlvlC = 1; /* will go up if a binder role player levels up */
-	u.urmaxlvlD = 1; /* will go up if a bard role player levels up */
 
 /* In order to make the game even more interesting for lost souls, they cannot level teleport or branchport at all. */
 
@@ -2478,18 +2221,9 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_B);
 		break;
-	case PM_BINDER:
-		ini_inv(Binder);
-		skill_init(Skill_Bin);
-	  u.ualign.sins += 16; /*One transgression is all it takes*/
-	    change_luck(-1); /*One resurection or two rehumanizations is all it takes*/
-		break;
-	case PM_BLEEDER:
-		ini_inv(Bleeder);
-		skill_init(Skill_Ble);
-		break;
 	case PM_BARD:
-		if (rn2(100) >= 50) Bard[BARD_INSTR].trotyp = WOODEN_FLUTE;
+		if (Race_if(PM_ORC)) Bard[BARD_INSTR].trotyp = (rn2(100) >= 50) ? BUGLE : TOOLED_HORN;
+		else if (rn2(100) >= 50) Bard[BARD_INSTR].trotyp = WOODEN_FLUTE;
 		if (rn2(100) >= 85) Bard[BARD_WHISTLE].trotyp = BELL;
 		Bard[BARD_BOOZE].trquan = rn1(2, 5);
 		ini_inv(Bard);
@@ -2517,10 +2251,6 @@ u_init()
 		ini_inv(Chef);
 		skill_init(Skill_Chef);
 		break;
-	case PM_GANGSTER:
-		ini_inv(Gangster);
-		skill_init(Skill_Gan);
-		break;
 #if 0
 	case PM_POKEMON:
 		ini_inv(Pokemon);
@@ -2538,16 +2268,6 @@ u_init()
 		else if(!rn2(5)) ini_inv(Blindfold);
 		else if(!rn2(5)) ini_inv(Magicmarker);
 		skill_init(Skill_F);
-		break;
-
-	case PM_ROCKER:
-        ini_inv(Rocker);
-        skill_init(Skill_Roc);
-		break;
-
-	case PM_ZYBORG:
-        ini_inv(Zyborg);
-        skill_init(Skill_Zyb);
 		break;
 
 	case PM_LUNATIC:
@@ -2573,7 +2293,11 @@ u_init()
         knows_object(GRAPPLING_HOOK);
         skill_init(Skill_Con);
 	u.ualign.sins += 16; /* You have sinned */
-        u.uhunger = 200;  /* On the verge of hungry */
+        /* On the verge of hungry */
+		if(Race_if(PM_INCANTIFIER)){
+			u.uen = 200;
+		}
+		else u.uhunger = 200;
     	u.ualignbase[A_CURRENT] = u.ualignbase[A_ORIGINAL] =
         u.ualign.type = A_CHAOTIC; /* Override racial alignment */
         urace.hatemask |= urace.lovemask;   /* Hated by the race's allies */
@@ -2639,10 +2363,10 @@ u_init()
 		skill_init(Skill_Aci);
 		break;
 
-	case PM_GEEK:
-		Geek[G_IC].trquan = rn2(7) + 1;
-		ini_inv(Geek);
-		skill_init(Skill_G);
+	case PM_HACKER:
+		Hacker[H_IC].trquan = rn2(7) + 1;
+		ini_inv(Hacker);
+		skill_init(Skill_Hack);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
 		knows_object(PACK_OF_FLOPPIES);
@@ -2652,16 +2376,15 @@ u_init()
 		knows_object(IC);
 		break;
 
-	case PM_GRADUATE:
-		ini_inv(Graduate);
-		skill_init(Skill_Gra);
-		break;
-
-	case PM_SCIENTIST:
-		ini_inv(Scientist);
-		skill_init(Skill_Sci);
-		knows_object(CHEMISTRY_SET);
-		knows_class(POTION_CLASS);
+	case PM_GEEK:
+		/* 5lo: Give them some lunch money */
+#ifndef GOLDOBJ
+		u.ugold = u.ugold0 = rnd(50);
+#else
+		u.umoney0 = rnd(50);
+#endif
+		ini_inv(Geek);
+		skill_init(Skill_Gee);
 		break;
 
 #ifdef JEDI
@@ -2789,29 +2512,6 @@ u_init()
 		skill_init(Skill_N);
 		break;
 	case PM_WARRIOR:
-		switch (rnd(20)) {   
-                    case 1: ini_inv(WarXtrA); break;
-                    case 2: ini_inv(WarXtrB); break;
-                    case 3: ini_inv(WarXtrC); break;
-                    case 4: ini_inv(WarXtrD); break;
-                    case 5: ini_inv(WarXtrE); break;
-                    case 6: ini_inv(WarXtrF); break;
-                    case 7: ini_inv(WarXtrG); break;
-                    case 8: ini_inv(WarXtrH); break;
-                    case 9: ini_inv(WarXtrI); break;
-                    case 10: ini_inv(WarXtrJ); break;
-                    case 11: ini_inv(WarXtrK); break;
-                    case 12: ini_inv(WarXtrL); break;
-                    case 13: ini_inv(WarXtrM); break;
-                    case 14: ini_inv(WarXtrN); break;
-                    case 15: ini_inv(WarXtrO); break;
-                    case 16: ini_inv(WarXtrP); break;
-                    case 17: ini_inv(WarXtrQ); break;
-                    case 18: ini_inv(WarXtrR); break;
-                    case 19: ini_inv(WarXtrS); break;
-                    case 20: ini_inv(WarXtrT); break;
-		    default: break;
-		}
 		ini_inv(Warrior);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
@@ -2882,6 +2582,7 @@ u_init()
 
 	case PM_NINJA:
 		knows_class(WEAPON_CLASS);
+		Ninja[NIN_SHURIKEN].trquan = rn1(9, 6);
 		ini_inv(Ninja);
 		skill_init(Skill_Nin);
 		break;
@@ -3046,12 +2747,22 @@ u_init()
 	case PM_HUMAN:
 	    /* Nothing special */
 	    break;
+
 	case PM_INCANTIFIER:
-	    skill_add(Skill_Incantifier);
-//	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
-//	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
-//	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
-        break;
+//	    skill_add(Skill_Incantifier);
+	    if (!Role_if(PM_HEALER)) ini_inv(HealingBook);
+	    if (!Role_if(PM_WIZARD)) ini_inv(ForceBook);
+	    if (Role_if(PM_WIZARD) || Role_if(PM_HEALER)) ini_inv(ExtraBook);
+	    augment_skill_cap(P_ATTACK_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_HEALING_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_DIVINATION_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_ENCHANTMENT_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_PROTECTION_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_BODY_SPELL, 1, P_EXPERT, P_EXPERT);
+	    augment_skill_cap(P_MATTER_SPELL, 1, P_EXPERT, P_EXPERT);
+	    knows_object(SCR_BLANK_PAPER);
+	    knows_object(SPE_BLANK_PAPER);
+    	    break;
 
 	case PM_ELF:
 	    /*
@@ -3080,7 +2791,9 @@ u_init()
 	    knows_object(ELVEN_SHIELD);
 	    knows_object(ELVEN_BOOTS);
 	    knows_object(ELVEN_CLOAK);
-	    skill_add(Skill_Elf);
+//	    skill_add(Skill_Elf);
+	    augment_skill_cap(P_MUSICALIZE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_BOW, 1, P_SKILLED, P_EXPERT);
 	    break;
 	case PM_DROW:
 	    /* Drows can recognize all droven objects */
@@ -3089,7 +2802,10 @@ u_init()
 	    knows_object(DARK_ELVEN_BOW);
 	    knows_object(DARK_ELVEN_DAGGER);
 	    knows_object(DARK_ELVEN_MITHRIL_COAT);
-	    skill_add(Skill_Drow);
+//	    skill_add(Skill_Drow);
+	    augment_skill_cap(P_MUSICALIZE, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_BOW, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_SABER, 1, P_BASIC, P_SKILLED);
 	    break;
 
 	case PM_DWARF:
@@ -3101,21 +2817,29 @@ u_init()
 	    knows_object(DWARVISH_MITHRIL_COAT);
 	    knows_object(DWARVISH_CLOAK);
 	    knows_object(DWARVISH_ROUNDSHIELD);
-	    skill_add(Skill_Dwarf);
+//	    skill_add(Skill_Dwarf);
+	    augment_skill_cap(P_PICK_AXE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_AXE, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_HAMMER, 1, P_SKILLED, P_EXPERT);
 	    break;
 
 	case PM_GNOME:
 	    knows_object(GNOMISH_HELM);
 	    knows_object(GNOMISH_BOOTS);
 	    knows_object(GNOMISH_SUIT);
-	    skill_add(Skill_Gnome);
+//	    skill_add(Skill_Gnome);
+	    augment_skill_cap(P_CROSSBOW, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_CLUB, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_PICK_AXE, 1, P_BASIC, P_BASIC);
 	    break;
 	case PM_HUMAN_WEREWOLF:
 	    if (!Role_if(PM_LUNATIC)) u.ulycn = PM_WEREWOLF;
 /*	    u.nv_range = 2;
 	    u.uen = u.uenmax += 6;
 	    ini_inv(Lycanthrope);*/
-	    skill_add(Skill_Lycanthrope);
+//	    skill_add(Skill_Lycanthrope);
+	    augment_skill_cap(P_BARE_HANDED_COMBAT, 2, P_EXPERT, P_MASTER);
+	    augment_skill_cap(P_SHORT_SWORD, 1, P_SKILLED, P_EXPERT);
 	    break;
 
 	case PM_ORC:
@@ -3140,6 +2864,7 @@ u_init()
 	    knows_object(ORCISH_SHIELD);
 	    knows_object(URUK_HAI_SHIELD);
 	    knows_object(ORCISH_CLOAK);
+	    augment_skill_cap(P_SCIMITAR, 1, P_SKILLED, P_EXPERT);
 	    break;
 	case PM_VAMPIRE:
 	    /* Vampires start off with gods not as pleased, luck penalty */
@@ -3149,64 +2874,72 @@ u_init()
 	    u.ualign.sins += 5;
 	    change_luck(-1);
 	    }
-		{
-		static int trotyp[] = {POT_BLOOD, POT_VAMPIRE_BLOOD};
-		Xtra_food[0].trotyp = trotyp[rn2(SIZE(trotyp))];
-		ini_inv(Xtra_food);
-	    }
-		ini_inv(XtraRing);
-
-		if(!rn2(5))
-		{
-		static int trotyp[] = {POT_BLOOD, POT_VAMPIRE_BLOOD};
-		Xtra_fopod[0].trotyp = trotyp[rn2(SIZE(trotyp))];
-		ini_inv(Xtra_fopod);
-	    }
+	    knows_object(POT_BLOOD);
+	    knows_object(POT_VAMPIRE_BLOOD);
+	    augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_KNIFE, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_BARE_HANDED_COMBAT, 1, P_BASIC, P_SKILLED);
 	    break;
-	case PM_ALIEN: /* this is the harder than hard race, combine it with convict role for maximum torture */
-	    adjalign(-10); 
-	    change_luck(-3);
-	    /*ini_inv(AlienItem);*/
-	    	break;
 	case PM_KOBOLD:
 	    if(!Role_if(PM_CONVICT)) {
-		ini_inv(KoboldItem);		
+		KoboldItem[0].trquan = rn1(10, 5);
+		ini_inv(KoboldItem);
 		if(rn2(2)) ini_inv(KoboldItemB);		
 		else ini_inv(KoboldItemC);
 	    }
-	    skill_add(Skill_Kobold);
-		break;
+//	    skill_add(Skill_Kobold);
+	    augment_skill_cap(P_DART, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_SPEAR, 1, P_BASIC, P_SKILLED);
+	    augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+	    break;
 	case PM_GHOUL:
-          /*ini_inv(GhastFood);*/
-		break;
-	case PM_UNGENOMOLD:
-          if(!Role_if(PM_CONVICT)) ini_inv(UngMoldWand);		
-		break;
+	    knows_object(POT_BLOOD);
+	    knows_object(POT_VAMPIRE_BLOOD);
+	    augment_skill_cap(P_BARE_HANDED_COMBAT, 1, P_SKILLED, P_EXPERT);
+	    augment_skill_cap(P_ATTACK_SPELL, 1, P_BASIC, P_SKILLED);
+	    break;
 	case PM_CLOCKWORK_AUTOMATON:
-          if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);		
-		break;
+            if(!Role_if(PM_CONVICT)) ini_inv(AutomatonItem);
+	    augment_skill_cap(P_LONG_SWORD, 1, P_BASIC, P_SKILLED);
+	    break;
 	case PM_TROLL:
 		if(!Role_if(PM_CONVICT)) switch (rnd(4)) {
-                case 1: ini_inv(TrollItemA); break;
-                case 2: ini_inv(TrollItemB); break;
-                case 3: ini_inv(TrollItemC); break;
-                case 4: ini_inv(TrollItemD); break;
-		default: break;
+			case 1: ini_inv(TrollItemA); break;
+			case 2: ini_inv(TrollItemB); break;
+			case 3: ini_inv(TrollItemC); break;
+			case 4: ini_inv(TrollItemD); break;
+			default: break;
 		}
-		skill_add(Skill_Troll);
+//		skill_add(Skill_Troll);
+		augment_skill_cap(P_POLEARMS, 1, P_SKILLED, P_EXPERT);
 		break;
 	case PM_OGRE:
          	if(!Role_if(PM_CONVICT)) ini_inv(OgreItem);
-		skill_add(Skill_Ogre);
+		augment_skill_cap(P_CLUB, 1, P_SKILLED, P_EXPERT);
+//		skill_add(Skill_Ogre);
 		break;
 	case PM_GIANT:
-         if(!Role_if(PM_CONVICT)) ini_inv(GiantItem);		
+		augment_skill_cap(P_TWO_WEAPON_COMBAT, 1, P_SKILLED, P_EXPERT);
+		augment_skill_cap(P_TWO_HANDED_SWORD, 1, P_SKILLED, P_EXPERT);
 		break;
 	case PM_HOBBIT:
-		skill_add(Skill_Hobbit);
+		augment_skill_cap(P_SLING, 1, P_SKILLED, P_EXPERT);
+//		skill_add(Skill_Hobbit);
 		break;
 	case PM_NYMPH:
-		skill_add(Skill_Nymph);
+		augment_skill_cap(P_MUSICALIZE, 1, P_SKILLED, P_EXPERT);
+		augment_skill_cap(P_HEALING_SPELL, 1, P_BASIC, P_SKILLED);
+//		skill_add(Skill_Nymph);
+		break;
+	case PM_DOPPELGANGER:
+		augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+		augment_skill_cap(P_BODY_SPELL, 1, P_SKILLED, P_EXPERT);
+		break;
+	case PM_ILLITHID:
+		augment_skill_cap(P_ATTACK_SPELL, 1, P_EXPERT, P_EXPERT);
+		augment_skill_cap(P_MATTER_SPELL, 1, P_EXPERT, P_EXPERT);
+		augment_skill_cap(P_ENCHANTMENT_SPELL, 1, P_SKILLED, P_EXPERT);
+		augment_skill_cap(P_DIVINATION_SPELL, 1, P_SKILLED, P_EXPERT);
 		break;
 	default:	/* impossible */
 		break;
@@ -3314,22 +3047,16 @@ int otyp;
      case PM_ARCHEOLOGIST:	skills = Skill_A; break;
      case PM_BARBARIAN:		skills = Skill_B; break;
      case PM_BARD:		skills = Skill_Bard; break;
-     case PM_BINDER:			skills = Skill_Bin; break;
-     case PM_BLEEDER:			skills = Skill_Ble; break;
      case PM_CAVEMAN:		skills = Skill_C; break;
 #ifdef CONVICT
      case PM_CONVICT:		skills = Skill_Con; break;
 #endif  /* CONVICT */
-     case PM_ROCKER:		skills = Skill_Roc; break;
-     case PM_ZYBORG:		skills = Skill_Zyb; break;
      case PM_LUNATIC:		skills = Skill_Lun; break;
      case PM_PALADIN:		skills = Skill_Pal; break;
      case PM_ELECTRIC_MAGE:		skills = Skill_Ele; break;
      case PM_ACID_MAGE:		skills = Skill_Aci; break;
      case PM_FLAME_MAGE:		skills = Skill_F; break;
-     case PM_GEEK:		skills = Skill_G; break;
-     case PM_SCIENTIST:		skills = Skill_Sci; break;
-     case PM_GANGSTER:		skills = Skill_Gan; break;
+     case PM_HACKER:		skills = Skill_Hack; break;
      case PM_HEALER:		skills = Skill_H; break;
      case PM_JEDI:		skills = Skill_J; break;
      case PM_KNIGHT:		skills = Skill_K; break;
@@ -3361,7 +3088,7 @@ int otyp;
      case PM_ZOOKEEPER:		skills = Skill_Zoo; break;
      case PM_NINJA:		skills = Skill_Nin; break;
      case PM_UNDERTAKER:		skills = Skill_Unt; break;
-     case PM_GRADUATE:		skills = Skill_Gra; break;
+     case PM_GEEK:		skills = Skill_Gee; break;
 
      default:			skills = 0; break;	/* lint suppression */
     }
@@ -3399,11 +3126,16 @@ register struct trobj *trop;
 				break;
 			    }
 			obj = mksobj(otyp, TRUE, FALSE);
+			if(obj->otyp == POT_BLOOD)
+				obj->corpsenm = PM_HUMAN;
 		} else {	/* UNDEF_TYP */
 			static NEARDATA short nocreate = STRANGE_OBJECT;
 			static NEARDATA short nocreate2 = STRANGE_OBJECT;
 			static NEARDATA short nocreate3 = STRANGE_OBJECT;
 			static NEARDATA short nocreate4 = STRANGE_OBJECT;
+			static NEARDATA short nocreate5 = STRANGE_OBJECT;
+			static NEARDATA short nocreate6 = STRANGE_OBJECT;
+			static NEARDATA short nocreate7 = STRANGE_OBJECT;
 		/*
 		 * For random objects, do not create certain overly powerful
 		 * items: wand of wishing, ring of levitation, or the
@@ -3420,17 +3152,14 @@ register struct trobj *trop;
 				|| otyp == WAN_ACQUIREMENT
 				|| otyp == SCR_WISHING
 				|| otyp == SCR_ACQUIREMENT
-				|| otyp == SCR_ENTHRONIZATION
-				|| otyp == SCR_FOUNTAIN_BUILDING
-				|| otyp == SCR_SINKING
-				|| otyp == SCR_WC
 				|| otyp == nocreate
 				|| otyp == nocreate2
 				|| otyp == nocreate3
 				|| otyp == nocreate4
-#ifdef ELBERETH
+				|| otyp == nocreate5
+				|| otyp == nocreate6
+				|| otyp == nocreate7
 				|| otyp == RIN_LEVITATION
-#endif
 				|| ((Role_if(PM_FLAME_MAGE) || Role_if(PM_ICE_MAGE))
 						&&
 				    (otyp == RIN_FIRE_RESISTANCE || 
@@ -3484,7 +3213,9 @@ register struct trobj *trop;
 				    Role_if(PM_MONK))
 				/* wizard patch -- they already have one */
 				|| (otyp == SPE_FORCE_BOLT &&
-				    Role_if(PM_WIZARD))
+				    (Role_if(PM_WIZARD) || Race_if(PM_INCANTIFIER)))
+				|| (otyp == SPE_HEALING &&
+				    Race_if(PM_INCANTIFIER))
 				/* powerful spells are either useless to
 				   low level players or unbalancing; also
 				   spells in restricted skill categories */
@@ -3533,7 +3264,10 @@ register struct trobj *trop;
 			/* Don't have 2 of the same ring or spellbook */
 			if (obj->oclass == RING_CLASS ||
 			    obj->oclass == SPBOOK_CLASS)
-				nocreate4 = otyp;
+				if(nocreate4 == STRANGE_OBJECT) nocreate4 = otyp;
+				else if(nocreate5 == STRANGE_OBJECT) nocreate5 = otyp;
+				else if(nocreate6 == STRANGE_OBJECT) nocreate6 = otyp;
+				else if(nocreate7 == STRANGE_OBJECT) nocreate7 = otyp;
 		}
 
 #ifdef GOLDOBJ
@@ -3561,9 +3295,6 @@ register struct trobj *trop;
             }
 #endif /* CONVICT */
             if (obj->otyp == LOADSTONE ) {
-                obj->cursed = TRUE;
-            }
-            if (obj->otyp == WAN_DEATH && (Race_if(PM_UNGENOMOLD))) {
                 obj->cursed = TRUE;
             }
 			if (trop->trspe != UNDEF_SPE)

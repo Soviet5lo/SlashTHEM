@@ -112,7 +112,6 @@ struct color_option color_option;
 			term_end_attr(i);
 }
 
-static
 void
 apply_color_option(color_option, newbot2, statusline)
 struct color_option color_option;
@@ -131,7 +130,7 @@ add_colored_text(text, newbot2)
 const char *text;
 char *newbot2;
 {
-	char *nb;
+	register char *nb;
 	struct color_option color_option;
 
 	if (*text == '\0') return;
@@ -311,7 +310,7 @@ botl_player()
 {
     static char player[MAXCO];
     char *nb;
-    int i=0,k;
+    int i=0,k=0;
     char mbot[MAXCO - 15];
 
     Strcpy(player, "");
@@ -494,8 +493,6 @@ int verbose;
 		Sprintf(buf, "Vlad Tower:%d ", depth(&u.uz));
 	else if (!strcmp(dungeons[u.uz.dnum].dname, "Frankenstein's Lab"))
 		Sprintf(buf, "Lab:%d ", depth(&u.uz));
-	else if (!strcmp(dungeons[u.uz.dnum].dname, "Sheol"))
-		Sprintf(buf, "Sheol:%d ", depth(&u.uz));
 	else {
 		if (verbose)
 			Sprintf(buf, "%s, level %d ",
@@ -677,10 +674,18 @@ bot2str(char *newbot2)
         if (bot2_abbrev >= 2) {
 		if (hu_abbrev_stat[u.uhs][0]!='\0') {
 			Sprintf(nb = eos(nb), " ");
+#if defined(STATUS_COLORS) && defined(TEXTCOLOR)
+			if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
+			    add_colored_text(cahu_abbrev_stat[u.uhs], newbot2);
+			else
+			    add_colored_text(hu_abbrev_stat[u.uhs], newbot2);
+
+#else
 			if((Upolyd && youmonst.data == &mons[PM_CLOCKWORK_AUTOMATON]) || Race_if(PM_CLOCKWORK_AUTOMATON))
 			    Strcat(newbot2, cahu_abbrev_stat[u.uhs]);
 			else
 			    Strcat(newbot2, hu_abbrev_stat[u.uhs]);
+#endif
 		}
 	}
 	else if(strcmp(hu_stat[u.uhs], "        ")){
@@ -841,6 +846,7 @@ const char *str;
 unsigned int len;
 {
     static char cbuf[MAXCO];
+    if (bot2_abbrev) return str; /* no recursion! */
     for(bot2_abbrev = 1; bot2_abbrev <= 4; bot2_abbrev++) {
 	bot2str(cbuf);
 	if (strlen(cbuf) <= len)

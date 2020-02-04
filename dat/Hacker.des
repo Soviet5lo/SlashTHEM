@@ -1,10 +1,10 @@
-# Geek.des
-# The Geek quest
+# Hacker.des
+# The Hacker quest
 # 03/19/94 by Sebastian Klein
 
 # --- start level ---
 
-MAZE: "Sci-strt",' '
+MAZE: "Gee-strt",' '
 FLAGS: noteleport,hardfloor
 GEOMETRY: center,center
 
@@ -44,16 +44,16 @@ DOOR:locked,(40,04)
 DOOR:locked,(54,12)
 DOOR:locked,(52,12)
 
-MONSTER:'@',"Gordon Freeman",(38,12)
+MONSTER:'@',"The Dev Team",(38,12)
 
-MONSTER:'@',"hacker",(37,11)
-MONSTER:'@',"hacker",(38,11)
-MONSTER:'@',"hacker",(39,11)
-MONSTER:'@',"hacker",(37,12)
-MONSTER:'@',"hacker",(39,12)
-MONSTER:'@',"hacker",(37,13)
-MONSTER:'@',"hacker",(38,13)
-MONSTER:'@',"hacker",(39,13)
+MONSTER:'@',"developer",(37,11)
+MONSTER:'@',"developer",(38,11)
+MONSTER:'@',"developer",(39,11)
+MONSTER:'@',"developer",(37,12)
+MONSTER:'@',"developer",(39,12)
+MONSTER:'@',"developer",(37,13)
+MONSTER:'@',"developer",(38,13)
+MONSTER:'@',"developer",(39,13)
 
 # For the textwork care has to be exercised that there are no
 # rock moles, dwarves with pick-axes etc. to break the walls.
@@ -120,7 +120,7 @@ TRAP:random,random
 
 # looks harmless but *IS* tough!!!
 
-MAZE: "Sci-loca",' '
+MAZE: "Gee-loca",' '
 FLAGS: hardfloor
 GEOMETRY: center,center
 
@@ -201,7 +201,7 @@ TRAP:random,random
 
 # --- the goal level ---
 
-MAZE: "Sci-goal", ' '
+MAZE: "Gee-goal", ' '
 GEOMETRY:center,center
 
 #         1         2         3         4         5         6         7
@@ -237,8 +237,8 @@ STAIR:(75,19),up
 DOOR:locked,(12,06)
 
 # that's what's this all about :-)
-OBJECT:')',"scalpel",(37,09),blessed,0,"Operational Scalpel"
-MONSTER:'b',"Nihilanth",(37,09),hostile
+OBJECT:'(',"pack of floppies",(37,09),blessed,0,"The Nethack Sources"
+MONSTER:'@',"Bill Gates",(37,09),hostile
 
 MONSTER:random,random,random
 MONSTER:random,random,random
@@ -265,7 +265,7 @@ OBJECT:random,random,random
 
 # --- fill a ---
 
-LEVEL: "Sci-fila"
+LEVEL: "Gee-fila"
 
 ROOM: "ordinary", random, random, random, random
 STAIR: random,up
@@ -310,7 +310,7 @@ RANDOM_CORRIDORS
 
 # --- fill b ---
 
-LEVEL: "Sci-filb"
+LEVEL: "Gee-filb"
 
 ROOM: "ordinary", random, random, random, random
 STAIR: random,up

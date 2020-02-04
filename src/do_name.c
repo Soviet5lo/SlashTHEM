@@ -3,6 +3,12 @@
 /* NetHack may be freely redistributed.  See license for details. */
 
 #include "hack.h"
+#include "artifact.h"
+#ifdef OVLB
+#include "artilist.h"
+#else
+STATIC_DCL struct artifact artilist[];
+#endif
 
 #ifdef OVLB
 
@@ -420,6 +426,23 @@ const char *name;
 	if (obj->oartifact || (lth && exist_artifact(obj->otyp, name)))
 		return obj;
 
+	if(!strcmp((&artilist[ART_MANTLE_OF_HEAVEN])->name,name) &&
+	   obj && obj->otyp == LEATHER_CLOAK){
+		if(!Race_if(PM_VAMPIRE)) obj = poly_obj(obj,find_cope());
+		else{
+			obj = poly_obj(obj,find_opera_cloak());
+			name = "The Vestment of Hell";
+		}
+	}
+	else if(!strcmp((&artilist[ART_VESTMENT_OF_HELL])->name,name) &&
+	   obj && obj->otyp == LEATHER_CLOAK){
+		if(Race_if(PM_VAMPIRE)) obj = poly_obj(obj,find_opera_cloak());
+		else{
+			obj = poly_obj(obj,find_cope());
+			name = "The Mantle of Heaven";
+		}
+	}
+
 	if (lth == obj->onamelth) {
 		/* no need to replace entire object */
 		if (lth) Strcpy(ONAME(obj), name);
@@ -548,54 +571,6 @@ const char *
 rndghostname()
 {
     return rn2(7) ? ghostnames[rn2(SIZE(ghostnames))] : (const char *)plname;
-}
-
-/* undead player monsters with names --Amy */
-
-static const char * const plrmonnames[] = {
-
-	"Wolf", "Big Bear", "Ryu", "Tacitus", "Urbaldi", "Pete", "Lex", "Denshi Gasu",
-	"Mr. Black", "Tiger's Claw", "Katzou", "Mohmar Deathstrike", "Ingo", "Septimus",
-	"Martius", "Faster-Than-All-Others", "Senator Antius", "H.", "Pokoh", "Davide",
-	"Aee", "Doctor Maex", "Marc", "Arno", "Hailbush", "Romann", "Siegfried", "Roy",
-	"G-cheater", "Bastian", "Nicyan", "Queelix", "Miesael", "Honno", "Robin", "JNR",
-	"Lars", "Tommy", "Giglio", "Kastortransport", "Larry", "Morton", "Iggy", "Lemmy",
-	"Ludwig", "Oberdan", "Len-kind", "Ilie", "Till", "Tomas", "Nikolob", "Tillbull"
-};
-
-/* it's obvious that I seem to be better at making up female names ;) */
-
-static const char * const plrmonnamesfemale[] = {
-
-	"JoJo", "Jyllia", "Sabrina", "Sabine", "Yvara", "Lenka", "Evita", "Liebea", "Isolde",
-	"Elli", "Vilja", "Sunija", "Rhea", "Jasmin", "Erosina", "Irmina", "Melirija", "Larissa",
-	"Sysette", "Miss Haskill", "Elenya", "Golden Mary", "Lara", "Sandrina", "Tonilia", "Claire",
-	"Lumia", "Lahira", "Estrella", "Maricia", "Sontaire", "Marje", "Jill", "Trycja", "Kersey",
-	"Sally", "Hannya", "Svantje", "Jynnifyr", "Elke", "Rinka", "Nicoletta", "Betti", "Ina",
-	"Heikipa", "Jora", "Maitine", "Esruth", "Verene", "Lousie", "Irinella", "Amandina", "Lillie",
-	"Leodoch", "Mirella", "Fisoa", "Suesska", "Ann", "Nurisha", "Desiree", "Birgit", "Elsbeth",
-	"Lamy", "Lissie", "Arabella", "Anastasia", "Henrietta", "Katrin", "Jana", "Aniya", "Yasni",
-	"Almina", "Xeni", "Mirri", "Eleanor", "Kirja", "Inge", "Helli", "Lucia", "Viktorija", "Simona",
-	"Natalyana", "Krista", "Nellina", "Raidara", "Vera", "Noko", "Jasajeen", "Marika", "Merbek",
-	"Marianna", "Sinja", "Rodotha", "Natinya", "Aline", "Michaela", "Mare", "Noenoe", "Tschulia",
-	"Lea", "Sarah", "Charravalga", "Fridrika", "Great Jaguar Claw", "Lynette", "Celina", "Irya",
-	"Mariya", "Wendy", "Katia", "Tanja", "Vanessa", "Anne", "Lena", "Jeanetta", "Rungud", "Melissa",
-	"Everella", "Madeleine", "Anita", "Nina", "Natascha", "Manola", "Litta", "Kiwi", "Maja", "Natalje",
-	"Little Marie" 
-};
-
-/* the following functions are used by makemon.c */
-
-const char *
-rndplrmonname()
-{
-    return plrmonnames[rn2(SIZE(plrmonnames))];
-}
-
-const char *
-rndplrmonnamefemale()
-{
-    return plrmonnamesfemale[rn2(SIZE(plrmonnamesfemale))];
 }
 
 /* Monster naming functions:
@@ -1431,6 +1406,61 @@ char *buf;
     }
     return buf;
 }
+
+extern const int treefruits[];
+
+char * 
+rmname(lev)
+struct rm * lev;
+{
+    int ttyp = lev->flags & TREE_TYPE_MASK;
+    if (lev->typ != TREE)
+	return "";
+    if (Hallucination)
+	switch (rn2(8)) {
+	    case 0:
+		return "shrubbery"; /* Monty Python */
+	    case 1:
+		return "binary tree"; /* data structure */
+	    case 2:
+		return "truffula tree"; /* Dr. Seuss' The Lorax */
+	    case 3:
+		return "Tannenbaum"; /* Christmas song */
+	    case 4:
+		return "spaghetti and meatball tree"; /* Tom Glazer */
+	    case 5:
+		return "bonsai tree"; 
+	    case 6:
+		return "gumdrop tree"; /* lyric variation from "Kookaburra" */
+	    case 7:
+		{
+		    char * buf = fruitname(1);
+		    sprintf(buf+strlen(buf)-5, "tree");
+		    return buf;
+		}
+	}
+            
+    switch (ttyp) {
+	case 0:
+	    return "tree";
+	case TREE_GUM:
+	    return "eucalyptus tree";
+	case TREE_OAK:
+	    return "oak tree";
+	case TREE_IRONWD:
+	    return "elven dogwood";
+	case TREE_APPLE:
+	    return "apple tree";
+	case TREE_ORANGE:
+	    return "orange tree";
+	case TREE_PEAR:
+	    return "pear tree";
+	case TREE_BANANA:
+	    return "banana tree";
+    }
+    return "bad tree type";
+}
+
 #endif /* OVL2 */
 
 /*do_name.c*/

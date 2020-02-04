@@ -85,7 +85,7 @@
 
 #define HStone_resistance	u.uprops[STONE_RES].intrinsic
 #define EStone_resistance	u.uprops[STONE_RES].extrinsic
-#define Stone_resistance	(HStone_resistance || EStone_resistance || resists_ston(&youmonst) || Role_if(PM_ROCKER) )
+#define Stone_resistance	(HStone_resistance || EStone_resistance || resists_ston(&youmonst))
 
 
 /*** Troubles ***/
@@ -106,11 +106,13 @@
 #define EBlinded			u.uprops[BLINDED].extrinsic
 #define Blindfolded		(ublindf && ublindf->otyp != LENSES)
 		/* ...means blind because of a cover */
-#define Blind	((Blinded || EBlinded || Blindfolded || flags.blindfox || !haseyes(youmonst.data)) && \
+#define Blind	((Blinded || EBlinded || Blindfolded || flags.blindfox || !haseyes(youmonst.data) \
+			|| Blemmye_blindness(&youmonst)) && \
 		 !(ublindf && ublindf->oartifact == ART_EYES_OF_THE_OVERWORLD && !flags.blindfox ))
 		/* ...the Eyes operate even when you really are blind
 		    or don't have any eyes */
 /* added possibility of playing the entire game blind --Amy*/
+#define Hearing_muffled ((ublindf && ublindf->otyp == TOWEL))
 
 #define Sick			u.uprops[SICK].intrinsic
 #define Stoned			u.uprops[STONED].intrinsic
@@ -335,15 +337,15 @@
 
 #define HPolymorph		u.uprops[POLYMORPH].intrinsic
 #define EPolymorph		u.uprops[POLYMORPH].extrinsic
-#define Polymorph		(HPolymorph || EPolymorph || Race_if(PM_MOULD) || Race_if(PM_UNGENOMOLD))
+#define Polymorph		(HPolymorph || EPolymorph)
 
 #define HPolymorph_control	u.uprops[POLYMORPH_CONTROL].intrinsic
 #define EPolymorph_control	u.uprops[POLYMORPH_CONTROL].extrinsic
-#define Polymorph_control	((HPolymorph_control || EPolymorph_control) && !Race_if(PM_MOULD) && !Race_if(PM_UNGENOMOLD))
+#define Polymorph_control	(HPolymorph_control || EPolymorph_control)
 
 #define HUnchanging		u.uprops[UNCHANGING].intrinsic
 #define EUnchanging		u.uprops[UNCHANGING].extrinsic
-#define Unchanging		((HUnchanging || EUnchanging) && !Race_if(PM_MOULD) && !Race_if(PM_UNGENOMOLD))	/* KMH */
+#define Unchanging		(HUnchanging || EUnchanging)	/* KMH */
 
 #define HFast			u.uprops[FAST].intrinsic
 #define EFast			u.uprops[FAST].extrinsic

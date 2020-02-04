@@ -228,7 +228,8 @@ shuffle_all()
 				oclass != TOOL_CLASS &&
 				oclass != WEAPON_CLASS &&
 				oclass != ARMOR_CLASS &&
-				oclass != GEM_CLASS) {
+				oclass != GEM_CLASS &&
+				oclass != VENOM_CLASS) {
 			int j = last-1;
 
 			if (oclass == POTION_CLASS)
@@ -278,6 +279,36 @@ find_skates()
 	    return i;
 
     impossible("snow boots not found?");
+    return -1;	/* not 0, or caller would try again each move */
+}
+
+/* find the object index for the ornamental cope */
+int
+find_cope()
+{
+    register int i;
+    register const char *s;
+
+    for (i = CLOAK_OF_PROTECTION; i <= CLOAK_OF_DISPLACEMENT; i++)
+		if ((s = OBJ_DESCR(objects[i])) != 0 && !strcmp(s, "ornamental cope"))
+			return i;
+
+    impossible("ornamental cope not found?");
+    return -1;	/* not 0, or caller would try again each move */
+}
+
+/* find the object index for the opera cloak */
+int
+find_opera_cloak()
+{
+    register int i;
+    register const char *s;
+
+    for (i = CLOAK_OF_PROTECTION; i <= CLOAK_OF_DISPLACEMENT; i++)
+		if ((s = OBJ_DESCR(objects[i])) != 0 && !strcmp(s, "opera cloak"))
+			return i;
+
+    impossible("opera cloak not found?");
     return -1;	/* not 0, or caller would try again each move */
 }
 
