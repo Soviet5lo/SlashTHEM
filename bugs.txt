@@ -1,0 +1,12 @@
+All known bugs
+
+* Character selection menu doesn't allow selecting some roles (letters being used improperly)
+* Some letters bleed over into the sidelines while maximized?
+* HP/PW don't show when not using classic_status (instead its just ---)
+* Any status effects remain on screen even after they expire.
+* Immediate segfault when saving and then restoring in an attempt to fix the above problem.
+* Hitpointbar works really wonky with curses.
+
+Helpful enhancements
+
+* Any/all fixes from the ports in SlashEM9/Nethack36/Unnethack.  This might not be easy considering the original patch for Slash'EM remained in alpha and these three projects have deviated quite a bit from what's being used here.
