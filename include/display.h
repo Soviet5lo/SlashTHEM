@@ -190,16 +190,18 @@
 
 #define DISP_BEAM    (-1)  /* Keep all glyphs showing & clean up at end. */
 #define DISP_BEAM_ALWAYS (-2)  /* Like beam, but still displayed if not visible. */
-#define DISP_FLASH   (-3)  /* Clean up each glyph before displaying new one. */
-#define DISP_ALWAYS  (-4)  /* Like flash, but still displayed if not visible. */
-#define DISP_CHANGE  (-5)  /* Change glyph. */
-#define DISP_END     (-6)  /* Clean up. */
-#define DISP_FREEMEM (-7)  /* Free all memory during exit only. */
+#define DISP_TETHER  (-3)  /* Clean up each glyph before displaying new one */
+#define DISP_FLASH   (-4)  /* Clean up each glyph before displaying new one. */
+#define DISP_ALWAYS  (-5)  /* Like flash, but still displayed if not visible. */
+#define DISP_CHANGE  (-6)  /* Change glyph. */
+#define DISP_END     (-7)  /* Clean up. */
+#define DISP_FREEMEM (-8)  /* Free all memory during exit only. */
 
 
 /* Total number of cmap indices in the sheild_static[] array. */
 /* #define SHIELD_COUNT 21 */
 #define SHIELD_COUNT 7
+#define BACKTRACK (-1) 	/* flag for DISP_END to display each prior location */
 
 /*
  * display_self()

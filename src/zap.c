@@ -3387,7 +3387,7 @@ register struct monst *mtmp;
 struct monst *
 bhit(ddx,ddy,range,weapon,fhitm,fhito,obj_p)
 register int ddx,ddy,range;		/* direction and range */
-int weapon;				/* see values in hack.h */
+enum bhit_call_types weapon;		/* defined in hack.h */
 int FDECL((*fhitm), (MONST_P, OBJ_P)),	/* fns called when mon/obj hit */
     FDECL((*fhito), (OBJ_P, OBJ_P));
 struct obj **obj_p;			/* object tossed/used */
@@ -3396,6 +3396,7 @@ struct obj **obj_p;			/* object tossed/used */
 	struct obj *obj = *obj_p;
 	uchar typ;
 	boolean shopdoor = FALSE, point_blank = TRUE;
+	boolean tethered_weapon = FALSE;
 #ifdef LIGHT_SRC_SPELL
         int lits = 0;
         boolean use_lights = FALSE;
@@ -3416,6 +3417,10 @@ struct obj **obj_p;			/* object tossed/used */
 	    use_lights = TRUE;
 #endif
 	    tmp_at(DISP_BEAM, cmap_to_glyph(S_flashbeam));
+	} else if (weapon == THROWN_TETHERED_WEAPON && obj) {
+		tethered_weapon = TRUE;
+		weapon = THROWN_WEAPON; /* simplify if that follow below */
+		tmp_at(DISP_TETHER, obj_to_glyph(obj));
 	} else if (weapon != ZAPPED_WAND && weapon != INVIS_BEAM) {
 #ifdef LIGHT_SRC_SPELL
 	    use_lights = obj->lamplit;
@@ -3488,7 +3493,8 @@ struct obj **obj_p;			/* object tossed/used */
 		if (weapon != FLASHED_LIGHT) {
 			if(weapon != ZAPPED_WAND) {
 			    if(weapon != INVIS_BEAM) {
-				tmp_at(DISP_END, 0);
+				if (!tethered_weapon)
+				    tmp_at(DISP_END, 0);
 #ifdef LIGHT_SRC_SPELL
 				if (use_lights) {
 				    while (lits) {
@@ -3636,7 +3642,7 @@ struct obj **obj_p;			/* object tossed/used */
 	    point_blank = FALSE;	/* affects passing through iron bars */
 	}
 
-        if (weapon != ZAPPED_WAND && weapon != INVIS_BEAM) {
+        if (weapon != ZAPPED_WAND && weapon != INVIS_BEAM && !tethered_weapon) {
                 tmp_at(DISP_END, 0);
 #ifdef LIGHT_SRC_SPELL
                 while (lits) {

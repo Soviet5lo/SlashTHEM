@@ -100,11 +100,22 @@
 NEARDATA extern coord bhitpos;	/* place where throw or zap hits or stops */
 
 /* types of calls to bhit() */
+#if 0
 #define ZAPPED_WAND	0
 #define THROWN_WEAPON	1
-#define KICKED_WEAPON	2
-#define FLASHED_LIGHT	3
-#define INVIS_BEAM	4
+#define THROWN_TETHERED_WEAPON 2
+#define KICKED_WEAPON	3
+#define FLASHED_LIGHT	4
+#define INVIS_BEAM	5
+#endif
+enum bhit_call_types {
+	ZAPPED_WAND = 0,
+	THROWN_WEAPON = 1,
+	THROWN_TETHERED_WEAPON = 2,
+	KICKED_WEAPON = 3,
+	FLASHED_LIGHT = 4,
+	INVIS_BEAM = 5
+};
 
 #define MATCH_WARN_OF_MON(mon)	 ((Warn_of_mon && flags.warntype && \
 		   		 (flags.warntype & (mon)->data->mflags2)) || \

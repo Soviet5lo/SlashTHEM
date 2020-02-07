@@ -931,6 +931,15 @@ shieldeff(x,y)
     }
 }
 
+int
+tether_glyph(x,y)
+int x, y;
+{
+    int tdx, tdy;
+    tdx = u.ux - x;
+    tdy = u.uy - y;
+    return zapdir_to_glyph(sgn(tdx),sgn(tdy), 2);
+}
 
 /*
  * tmp_at()
@@ -955,13 +964,18 @@ shieldeff(x,y)
  *		any until the close call.
  * WAC added beam_always for lightning strikes
  * DISP_BEAM_ALWAYS- Like DISP_BEAM, but vision is not taken into account.
+ * DISP_TETHER- Display a tether glyph at each location, and the tethered
+ * 		object at the farthest location, but do not erase any
+ * 		until the return trip or close.
  * DISP_FLASH - Display the given glyph at each location, but erase the
  *		previous location's glyph.
  * DISP_ALWAYS- Like DISP_FLASH, but vision is not taken into account.
  */
 
+#define TMP_AT_MAX_GLYPHS (COLNO * 2)
+
 static struct tmp_glyph {
-    coord saved[COLNO];	/* previously updated positions */
+    coord saved[TMP_AT_MAX_GLYPHS];	/* previously updated positions */
     int sidx;		/* index of next unused slot in saved[] */
     int style;		/* either DISP_BEAM or DISP_FLASH or DISP_ALWAYS */
     int glyph;		/* glyph to use when printing */
@@ -979,6 +993,7 @@ tmp_at(x, y)
     switch (x) {
 	case DISP_BEAM:
         case DISP_BEAM_ALWAYS:
+	case DISP_TETHER:
 	case DISP_FLASH:
 	case DISP_ALWAYS:
 	    if (!tglyph)
@@ -1034,6 +1049,22 @@ tmp_at(x, y)
 		    cont = tmp;
 		}
 	     /* tglyph->cont = (struct tmp_glyph *)0; */
+	    } else if (tglyph->style == DISP_TETHER) {
+		int i;
+
+		if (y == BACKTRACK && tglyph->sidx > 1) {
+		    /* backtrack */
+		    for (i = tglyph->sidx - 1; i > 0; i--) {
+			newsym(tglyph->saved[i].x, tglyph->saved[i].y);
+			show_glyph(tglyph->saved[i - 1].x,
+				   tglyph->saved[i - 1].y, tglyph->glyph);
+			flush_screen(0); /* make sure it shows up */
+			delay_output();
+		    }
+		    tglyph->sidx = 1;
+		}
+		for (i = 0; i < tglyph->sidx; i++)
+		    newsym(tglyph->saved[i].x, tglyph->saved[i].y);
 	    } else {		/* DISP_FLASH or DISP_ALWAYS */
 		if (tglyph->sidx)	/* been called at least once */
 		    newsym(tglyph->saved[0].x, tglyph->saved[0].y);
@@ -1056,6 +1087,20 @@ tmp_at(x, y)
 		    tglyph = tmp;
 		    tglyph->sidx = 0;
 		}
+		tglyph->saved[tglyph->sidx].x = x;
+		tglyph->saved[tglyph->sidx].y = y;
+		tglyph->sidx += 1;
+	    } else if (tglyph->style == DISP_TETHER) {
+		if (tglyph->sidx >= TMP_AT_MAX_GLYPHS)
+		    break; /* too many locations */
+		if (tglyph->sidx) {
+		    int px, py;
+
+		    px = tglyph->saved[tglyph->sidx-1].x;
+		    py = tglyph->saved[tglyph->sidx-1].y;
+		    show_glyph(px, py, tether_glyph(px, py));
+		}
+		/* save pos for later use or erasure */
 		tglyph->saved[tglyph->sidx].x = x;
 		tglyph->saved[tglyph->sidx].y = y;
 		tglyph->sidx += 1;

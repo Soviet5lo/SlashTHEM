@@ -1212,7 +1212,8 @@ int thrown;
 
 		if (Underwater) range = 1;
 
-		mon = bhit(u.dx,u.dy,range,THROWN_WEAPON,
+		mon = bhit(u.dx,u.dy,range,
+			tethered_weapon ? THROWN_TETHERED_WEAPON : THROWN_WEAPON,
 			   (int FDECL((*),(MONST_P,OBJ_P)))0,
 			   (int FDECL((*),(OBJ_P,OBJ_P)))0,
 			   &obj);
@@ -1222,6 +1223,11 @@ int thrown;
 		    hurtle(-u.dx, -u.dy, urange, TRUE);
 
 		if (!obj) {
+		    /* bhit display cleanup was left with this caller
+		     * for tethered_weapon, but clean it up now since
+		     * we're about to return */
+		    if (tethered_weapon)
+			tmp_at(DISP_END, 0);
 		    thrownobj = (struct obj *)0;
 		    return;
 		}
@@ -1295,7 +1301,10 @@ int thrown;
 		      if (Role_if(PM_JEDI))
 			u.uen -= 5;
 #endif
-		    sho_obj_return_to_u(obj);	    /* display its flight */
+		    if (tethered_weapon)
+			tmp_at(DISP_END, BACKTRACK);
+		    else
+		        sho_obj_return_to_u(obj);	    /* display its flight */
 
 		    if (!impaired && rn2(100)) {
 			pline("%s to your hand!", Tobjnam(obj, "return"));
@@ -1340,6 +1349,7 @@ int thrown;
 		    }
 #endif
 		} else {
+		    if (tethered_weapon) tmp_at(DISP_END, 0);
 		    /* when this location is stepped on, the weapon will be
 		     * auto-picked up due to 'obj->was_thrown' of 1;
 		     * addinv() prevents thrown Mjollnir from being placed
@@ -1347,10 +1357,7 @@ int thrown;
 		     * that slot is empty at the time; since hero will need to
 		     * explicitly rewield the weapon to get throw-and-return
 		     * capability back anyway, quivered or not shouldn't matter */
-			pline("%s fails to return!",
-				upstart(obj->oartifact ? ONAME(obj)
-//						       : thesimpleoname(obj)));
-						       : doname(obj)));
+			pline("%s to return!", Tobjnam(obj, "fail"));
 			/* continue with placing 'obj' at target location */
 		}
 
