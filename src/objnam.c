@@ -1134,7 +1134,8 @@ ring:
 			const char *hand_s = body_part(HAND);
 
 			if (bimanual(obj)) hand_s = makeplural(hand_s);
-			Sprintf(eos(bp), " (weapon in %s)", hand_s);
+			Sprintf(eos(bp), " (%sweapon in %s)",
+				(obj->otyp == AKLYS) ? "tethered " : "", hand_s);
 		}
 	}
 	if(obj->owornmask & W_SWAPWEP) {

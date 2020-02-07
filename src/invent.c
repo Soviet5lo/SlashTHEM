@@ -602,6 +602,7 @@ const char *drop_fmt, *drop_arg, *hold_msg;
 		dropx(obj);
 	    } else {
 		if (flags.autoquiver && !uquiver && !obj->owornmask &&
+		    obj->oartifact != ART_MJOLLNIR &&
 			(is_missile(obj) ||
 			    ammo_and_launcher(obj, uwep) ||
 			    ammo_and_launcher(obj, uswapwep)))
@@ -689,6 +690,7 @@ const char *drop_fmt, *drop_arg, *hold_msg;
 		dropx(obj);
 	    } else {
 		if (flags.autoquiver && !uquiver && !obj->owornmask &&
+		    obj->oartifact != ART_MJOLLNIR &&
 			(is_missile(obj) ||
 			    ammo_and_launcher(obj, uwep) ||
 			    ammo_and_launcher(obj, uswapwep)))

@@ -1030,6 +1030,7 @@ int thrown;
 	struct obj *launcher = (struct obj*) 0;
 	boolean impaired = (Confusion || Stunned || Blind ||
 			   Hallucination || Fumbling);
+	boolean tethered_weapon = (obj->otyp == AKLYS && (wep_mask & W_WEP) != 0);
 
 	if (thrown == 1) launcher = uwep;
 	else if (thrown == 2) launcher = uswapwep;
@@ -1080,12 +1081,17 @@ int thrown;
 		bhitpos.x = mon->mx;
 		bhitpos.y = mon->my;
 	} else if(u.dz) {
-	    if (u.dz < 0 && Role_if(PM_VALKYRIE) &&
-		    obj->oartifact == ART_MJOLLNIR && !impaired) {
+	    if (u.dz < 0
+		/* Mjnollnir must be wielded to be thrown--caller verifies this;
+		 * aklys must be wielded as primary to return when thrown */
+		&& ((Role_if(PM_VALKYRIE) && obj->oartifact == ART_MJOLLNIR) || tethered_weapon)
+		&& !impaired) {
 		pline("%s the %s and returns to your hand!",
 		      Tobjnam(obj, "hit"), ceiling(u.ux,u.uy));
 		obj = addinv(obj);
 		(void) encumber_msg();
+		if (obj->owornmask & W_QUIVER) /* in case addinv() autoquivered */
+			setuqwep((struct obj *) 0);
 		setuwep(obj, TRUE);
 		u.twoweap = twoweap;
 /*            if (!fire_weapon) setuwep(obj);                
@@ -1197,6 +1203,10 @@ int thrown;
 		    range = 20;		/* you must be giant */
 		else if (obj->oartifact == ART_MJOLLNIR)
 		    range = (range + 1) / 2;	/* it's heavy */
+		else if (tethered_weapon)
+		    /* if an aklys is going to return, range is limited by the
+		     * length of the attached cord [implicit aspect of item] */
+		    range = min(range, BOLT_LIM / 2);
 		else if (obj == uball && u.utrap && u.utraptype == TT_INFLOOR)
 		    range = 1;
 
@@ -1265,15 +1275,18 @@ int thrown;
 		if (obj != uball) (void) mpickobj(u.ustuck,obj);
 	} else {
 		/* the code following might become part of dropy() */
+		/* Mjnollnir must be wielded to be thrown--caller verifies this;
+		 * aklys must be wielded as primary to return when thrown */
 #ifndef JEDI
-		if (obj->oartifact == ART_MJOLLNIR &&
-			Role_if(PM_VALKYRIE) && rn2(100)) {
+		if ((obj->oartifact == ART_MJOLLNIR && Role_if(PM_VALKYRIE))
+		    || (tethered_weapon)) {
+			if (rn2(100)) {
 		    /* we must be wearing Gauntlets of Power to get here */
 #else
-		if ((obj->oartifact == ART_MJOLLNIR &&
-			Role_if(PM_VALKYRIE) && rn2(100)) ||
-		    (is_lightsaber(obj) && obj->lamplit && Role_if(PM_JEDI) &&
-		     P_SKILL(weapon_type(obj)) >= P_SKILLED)){
+		if ((((obj->oartifact == ART_MJOLLNIR && Role_if(PM_VALKYRIE))
+			|| (tethered_weapon))
+			&& rn2(100)) || (is_lightsaber(obj) && obj->lamplit && 
+		       Role_if(PM_JEDI) && P_SKILL(weapon_type(obj)) >= P_SKILLED)){
 		    /* we must be wearing Gauntlets of Power to get here */
 		    /* or a Jedi with a lightsaber */
 		    if (Role_if(PM_JEDI) && u.uen < 5){
@@ -1288,6 +1301,10 @@ int thrown;
 			pline("%s to your hand!", Tobjnam(obj, "return"));
 			obj = addinv(obj);
 			(void) encumber_msg();
+			/* addinv autoquivers an aklys if quiver is empty;
+			 * if obj is quivered, remove it before wielding */
+			if (obj->owornmask & W_QUIVER)
+			    setuqwep((struct obj *) 0);
 			setuwep(obj, TRUE);
 			u.twoweap = twoweap;
 			if(cansee(bhitpos.x, bhitpos.y))
@@ -1308,7 +1325,7 @@ int thrown;
 				  body_part(ARM));
 			    (void) artifact_hit((struct monst *)0,
 						&youmonst, obj, &dmg, 0);
-			    losehp(dmg, xname(obj),
+			    losehp(dmg, killer_xname(obj),
 				obj_is_pname(obj) ? KILLED_BY : KILLED_BY_AN);
 			}
 			if (ship_object(obj, u.ux, u.uy, FALSE)) {
@@ -1322,6 +1339,19 @@ int thrown;
 #ifdef JEDI
 		    }
 #endif
+		} else {
+		    /* when this location is stepped on, the weapon will be
+		     * auto-picked up due to 'obj->was_thrown' of 1;
+		     * addinv() prevents thrown Mjollnir from being placed
+		     * into the quiver slot, but an aklys will end up there if
+		     * that slot is empty at the time; since hero will need to
+		     * explicitly rewield the weapon to get throw-and-return
+		     * capability back anyway, quivered or not shouldn't matter */
+			pline("%s fails to return!",
+				upstart(obj->oartifact ? ONAME(obj)
+//						       : thesimpleoname(obj)));
+						       : doname(obj)));
+			/* continue with placing 'obj' at target location */
 		}
 
 		if (!IS_SOFT(levl[bhitpos.x][bhitpos.y].typ) &&
