@@ -208,9 +208,9 @@ register struct monst *mtmp;
 		/* dragons is the same as the order of the scales.	   */
 		if (!rn2(mtmp->mrevived ? 20 : 3)) {
 		    num = GRAY_DRAGON_SCALES + monsndx(mdat) - PM_GRAY_DRAGON;
-		    obj = mksobj_at(num, x, y, TRUE, FALSE); /* allow random enchantment and BUC --Amy */
-		    /*obj->spe = 0;
-		    obj->cursed = obj->blessed = FALSE;*/
+		    obj = mksobj_at(num, x, y, FALSE, FALSE);
+		    obj->spe = 0;
+		    obj->cursed = obj->blessed = FALSE;
 		}
 		goto default_1;
 
