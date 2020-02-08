@@ -1350,6 +1350,7 @@ int thrown;
 #endif
 		} else {
 		    if (tethered_weapon) tmp_at(DISP_END, 0);
+#if 0 /* 5lo - Disabled for now */
 		    /* when this location is stepped on, the weapon will be
 		     * auto-picked up due to 'obj->was_thrown' of 1;
 		     * addinv() prevents thrown Mjollnir from being placed
@@ -1359,6 +1360,7 @@ int thrown;
 		     * capability back anyway, quivered or not shouldn't matter */
 			pline("%s to return!", Tobjnam(obj, "fail"));
 			/* continue with placing 'obj' at target location */
+#endif
 		}
 
 		if (!IS_SOFT(levl[bhitpos.x][bhitpos.y].typ) &&
