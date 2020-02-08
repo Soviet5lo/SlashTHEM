@@ -1295,10 +1295,10 @@ int thrown;
 		       Role_if(PM_JEDI) && P_SKILL(weapon_type(obj)) >= P_SKILLED)){
 		    /* we must be wearing Gauntlets of Power to get here */
 		    /* or a Jedi with a lightsaber */
-		    if (Role_if(PM_JEDI) && u.uen < 5){
+		    if (Role_if(PM_JEDI) && u.uen < 5 && obj->otyp != AKLYS){
 			You("don't have enough force to call %s. You need at least 5 points of mana!", the(xname(obj)));
 		    } else {
-		      if (Role_if(PM_JEDI))
+		      if (Role_if(PM_JEDI) && obj->otyp != AKLYS)
 			u.uen -= 5;
 #endif
 		    if (tethered_weapon)
