@@ -2193,6 +2193,11 @@ struct obj *obj;
 	else if (Is_container(obj) || obj->otyp == BAG_OF_TRICKS)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Open this container", MENU_UNSELECTED);
+#ifdef NEPHI_PHOTOGRAPHY
+	else if (obj->otyp == SPE_PHOTO_ALBUM)
+		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
+				"Open this photo album", MENU_UNSELECTED);
+#endif
 	else if (obj->otyp == CAN_OF_GREASE)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Use the can to grease an item", MENU_UNSELECTED);
@@ -2399,6 +2404,11 @@ struct obj *obj;
 	else if (obj->oclass == SCROLL_CLASS)
 		add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE,
 				"Cast the spell on this scroll", MENU_UNSELECTED);
+#ifdef NEPHI_PHOTOGRAPHY
+	else if (obj->otyp == SCR_PHOTOGRAPH)
+		add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE,
+				"Examine this photograph", MENU_UNSELECTED);
+#endif
 	else if (obj->oclass == SPBOOK_CLASS)
 		add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE,
 				"Study this spellbook", MENU_UNSELECTED);
@@ -2493,6 +2503,11 @@ struct obj *obj;
 	if (obj->oclass == WAND_CLASS)
 		add_menu(win, NO_GLYPH, &any, 'z', 0, ATR_NONE,
 				"Zap this wand to release its magic", MENU_UNSELECTED);
+#if defined(TOURIST) && defined(NEPHI_PHOTOGRAPHY)
+	else if (obj->otyp == EXPENSIVE_CAMERA)
+		add_menu(win, NO_GLYPH, &any, 'z', 0, ATR_NONE,
+				"Utilize the flash on this camera", MENU_UNSELECTED);
+#endif
 
 	Sprintf(prompt, "Do what with %s?", the(cxname(obj)));
 	end_menu(win, prompt);
