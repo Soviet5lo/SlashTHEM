@@ -385,6 +385,7 @@ mattackm(magr, mdef)
 	    case AT_TRAM:
 	    case AT_SCRA:
 	    case AT_TENT:
+	    case AT_TALK:
 use_natural:
 		/* Nymph that teleported away on first attack? */
 		if (distmin(magr->mx,magr->my,mdef->mx,mdef->my) > 1)
@@ -2131,6 +2132,12 @@ physical:
 	    case AD_WRAP: /* monsters cannot grab one another, it's too hard */
 		if (magr->mcan) tmp = 0;
 		break;
+	    case AD_DEPR:
+		pline("%s talks to %s!", Monnam(magr), mon_nam(mdef));
+		if (!rn2(5)) {
+			pline("%s is depressed!", Monnam(mdef));
+			tmp = rn1(10,6);
+		}
 	    case AD_ENCH:
 		/* There's no msomearmor() function, so just do damage */
 	     /* if (cancelled) break; */

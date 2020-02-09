@@ -2471,6 +2471,9 @@ register struct attack *mattk;
 		    mdef->mfrozen = rnd(10);
 		}
 		break;
+	    case AD_DEPR:
+		pline("%s seems vaguely bored.", Monnam(mdef));
+		break;
 	    case AD_TCKL:
 		if (!negated && mdef->mcanmove && !rn2(3) && tmp < mdef->mhp) {
 		    if (!Blind) You("mercilessly tickle %s!", mon_nam(mdef));
@@ -3376,7 +3379,9 @@ use_natural:
 				|| youmonst.data->mlet==S_ORC
 				|| youmonst.data->mlet==S_GNOME
 				)) goto use_weapon;
-
+		case AT_TALK:
+			You("talk to %s.  But you don't seem to be too convincing.", mon_nam(mon));
+			break;
 		case AT_NONE:
 		case AT_BOOM:
 			continue;

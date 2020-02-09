@@ -29,6 +29,7 @@
 #define AT_TRAM		17	/* trample */
 #define AT_MULTIPLY	18	/* RJ - multiplies (yes, it's an attack) */
 #define AT_NTCH 	19 	/* adjacent, no touching */
+#define AT_TALK 	42 	/* talks to you, i.e. Marvin */
 #if 0 /* 5lo: Doesn't work currently, implement fully later? */
 #define AT_RIDL		20
 #endif
@@ -93,7 +94,8 @@
 #define AD_DARK		48	/* acts similar to cursed scroll of light, making an area unlit */
 #define AD_WTHR		49	/* withers items */
 #define AD_LUCK		50	/* reduces luck */
-#define AD_ENDS		51	/* placeholder */
+#define AD_DEPR 	51 	/* depression --- random bad effect */
+#define AD_ENDS		52	/* placeholder */
 
 /* Biodiversity attacks here */
 #define AD_CHRM         60      /* monster charms you and other monsters */

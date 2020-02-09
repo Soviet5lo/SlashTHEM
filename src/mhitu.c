@@ -144,6 +144,9 @@ register struct attack *mattk;
 		case AT_BOOM:
 			pline("%s explodes!", Monnam(mtmp));
 			break;
+		case AT_TALK:
+			pline("%s talks to you!", Monnam(mtmp));
+			break;
                 case AT_WEAP:
                         if (MON_WEP(mtmp)) {
  			   Sprintf(buf, weaphitmsg(MON_WEP(mtmp),FALSE));
@@ -886,6 +889,12 @@ use_natural:
 			if (!range2 && (!rn2(5)) ) /* greatly reduced chance --Amy */
 			    clone_mon(mtmp, 0, 0);
 			break;
+		case AT_TALK:
+			if (!ranged) {
+				pline("%s talks to you!", youseeit ? Monnam(mtmp) : "It");
+				sum[i] = hitmu(mtmp,mattk);
+			}
+			break;
 		case AT_WEAP:
 			if(range2 || mtmp->data == &mons[PM_POLTERGEIST]) {
 #ifdef REINCARNATION
@@ -1579,6 +1588,7 @@ hitmu(mtmp, mattk)
 	    case AD_SLEE:
 		hitmsg(mtmp, mattk);
 		if (uncancelled && multi >= 0 && !rn2(5)) {
+		    if (is_educator(mtmp) && rn2(5)) break;
 		    if (Sleep_resistance) break;
 		    fall_asleep(-rnd(10), TRUE);
 		    if (Blind) You("are put to sleep!");
@@ -1707,6 +1717,7 @@ dopois:
 		}
 		break;
 	    case AD_DRLI:
+drain_life:
 		hitmsg(mtmp, mattk);
 		/* if vampire biting (and also a pet) */
 		if (is_vampire(mtmp->data) && mattk->aatyp == AT_BITE &&
@@ -2377,6 +2388,38 @@ dopois:
 		exercise(A_CON, FALSE);
 		if (!is_fainted()) morehungry(rn1(40,40));
 		/* plus the normal damage */
+		break;
+	    case AD_DEPR:
+		You("feel depressed.");
+		switch(rn2(6) + u.uluck) {
+			case 0:
+				goto drain_life;
+				break;
+			case 1:
+				(void) adjattrib(A_CON, -1, FALSE);
+				if (ABASE(A_CON) < ATTRMIN(A_CON)) {
+					killer = "depression";
+					killer_format = KILLED_BY;
+					done(DIED);
+					/* lifesaved */
+					ABASE(A_CON) = ATTRMIN(A_CON);
+				}
+				break;
+			case 2:
+				(void) adjattrib(A_INT, -1, FALSE);
+				if (ABASE(A_INT) < ATTRMIN(A_INT)) {
+					killer = "depression";
+					killer_format = KILLED_BY;
+					done(DIED);
+					/* lifesaved */
+					ABASE(A_INT) = ATTRMIN(A_INT);
+				}
+				break;
+			default:
+				pline("But the feeling subsides.");
+				break;
+		}
+		dmg = 0;
 		break;
 	    case AD_CALM:	/* KMH -- koala attack */
 		hitmsg(mtmp, mattk);
