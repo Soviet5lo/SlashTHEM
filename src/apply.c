@@ -3355,6 +3355,7 @@ wand_explode(obj, hero_broke)
 	goto discard_broken_wand;
     case WAN_DEATH:
     case WAN_LIGHTNING:
+    case WAN_SOLAR_BEAM: /* maybe make this wand do more in the future? */
 	dmg *= 4;
 	goto wanexpl;
     case WAN_COLD:
@@ -3376,6 +3377,12 @@ wand_explode(obj, hero_broke)
 	if (obj->dknown && !objects[obj->otyp].oc_name_known &&
 		!objects[obj->otyp].oc_uname)
         docall(obj);
+	goto discard_broken_wand;
+    case WAN_ACID:
+	expltype = EXPL_NOXIOUS;
+	dmg *= 2;
+	explode(u.ux, u.uy, ZT_ACID, dmg, WAND_CLASS, expltype);
+	makeknown(obj->otyp); /* explosion described the effect */
 	goto discard_broken_wand;
     case WAN_STRIKING:
 	/* we want this before the explosion instead of at the very end */
