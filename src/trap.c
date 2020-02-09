@@ -3555,7 +3555,11 @@ register boolean force, here;
 			continue;
 		} else if(obj->greased) {
 			if (force || !rn2(2)) obj->greased = 0;
-		} else if(Is_container(obj) && !Is_box(obj) &&
+		} else if((Is_container(obj) 
+#ifdef NEPHI_PHOTOGRAPHY
+			|| obj->otyp==SPE_PHOTO_ALBUM
+#endif
+			) && !Is_box(obj) &&
 			(obj->otyp != OILSKIN_SACK || (obj->cursed && !rn2(3)))) {
 			water_damage(obj->cobj, force, FALSE);
 		} else if (!force && (Luck - luckpenalty + 5) > rn2(20)) {
@@ -3586,6 +3590,10 @@ register boolean force, here;
 #ifdef MAIL
 		    if (obj->otyp != SCR_MAIL)
 #endif
+#ifdef NEPHI_PHOTOGRAPHY
+		    if (obj->otyp != SCR_PHOTOGRAPH)
+#endif
+
 		    {
 			    /* The Lethe sometimes does a little rewrite */
 			    obj->otyp = (level.flags.lethe && !rn2(10)) ?

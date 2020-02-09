@@ -1562,6 +1562,16 @@ mbodypart(mon, part)
 struct monst *mon;
 int part;
 {
+#ifdef NEPHI_PHOTOGRAPHY 
+	return pmbodypart(mon->data,part);
+}
+
+const char *
+pmbodypart(mptr, part)
+struct permonst *mptr;
+int part;
+{
+#endif
 	static NEARDATA const char
 	*humanoid_parts[] = { "arm", "eye", "face", "finger",
 		"fingertip", "foot", "hand", "handed", "head", "leg",
@@ -1615,7 +1625,9 @@ int part;
 		S_ORC, S_GIANT,		/* quest nemeses */
 		'\0'		/* string terminator; assert( S_xxx != 0 ); */
 	};
+#ifndef NEPHI_PHOTOGRAPHY
 	struct permonst *mptr = mon->data;
+#endif
 
 	if (part == HAND || part == HANDED) {	/* some special cases */
 	    if (mptr->mlet == S_DOG || mptr->mlet == S_FELINE ||

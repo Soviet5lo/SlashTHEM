@@ -668,7 +668,11 @@ struct obj *obj;
 {
 	if (!obj) {
 	    return;
-	} else if ((Is_container(obj) || obj->otyp == STATUE) && obj->cobj) {
+	} else if ((Is_container(obj) || obj->otyp == STATUE
+#ifdef NEPHI_PHOTOGRAPHY
+		|| obj->otyp == SPE_PHOTO_ALBUM
+#endif
+		) && obj->cobj) {
 	    struct obj *contents;
 	    for(contents=obj->cobj; contents; contents=contents->nobj)
 		obj_no_longer_held(contents);

@@ -1476,6 +1476,15 @@ poly_obj(obj, id)
 	}
 #endif
 
+#ifdef NEPHI_PHOTOGRAPHY
+	/* likewise for photographs */
+	if (obj->otyp == SCR_PHOTOGRAPH) {
+		otmp->otyp = SCR_PHOTOGRAPH;
+		otmp->spe = 1;
+		otmp = gen_random_photo(otmp);
+	}
+#endif
+
 	/* avoid abusing eggs laid by you */
 	if (obj->otyp == EGG && obj->spe) {
 		int mnum, tryct = 100;
@@ -1859,7 +1868,11 @@ struct obj *obj, *otmp;
 		res = !obj->dknown;
 		/* target object has now been "seen (up close)" */
 		obj->dknown = 1;
-		if (Is_container(obj) || obj->otyp == STATUE) {
+		if (Is_container(obj) || obj->otyp == STATUE
+#ifdef NEPHI_PHOTOGRAPHY
+		    || obj->otyp == SPE_PHOTO_ALBUM
+#endif
+		) {
 		    if (!obj->cobj)
 			pline("%s empty.", Tobjnam(obj, "are"));
 		    else {
@@ -2307,7 +2320,11 @@ struct obj *otmp;
 	wand_explode (otmp, FALSE);
 }
 
+#ifdef NEPHI_PHOTOGRAPHY
+static NEARDATA const char zap_syms[] = { TOOL_CLASS, WAND_CLASS, 0 };
+#else
 static NEARDATA const char zap_syms[] = { WAND_CLASS, 0 };
+#endif
 
 int
 dozap()
@@ -2318,6 +2335,15 @@ dozap()
 	if(check_capacity((char *)0)) return(0);
 	obj = getobj(zap_syms, "zap");
 	if(!obj) return(0);
+
+#ifdef NEPHI_PHOTOGRAPHY
+	if(obj->otyp==EXPENSIVE_CAMERA) {
+		return use_camera(obj,TRUE);
+	} else if(obj->oclass != WAND_CLASS) {
+		silly_thing("zap",obj);
+		return(0);
+	}
+#endif
 
 	check_unpaid(obj);
 

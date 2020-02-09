@@ -528,6 +528,13 @@ register struct obj *obj;
 	    /* kludge, meaning it's sink water */
 	    Sprintf(qbuf,"Call a stream of %s fluid:",
 		    OBJ_DESCR(objects[otemp.otyp]));
+#ifdef NEPHI_PHOTOGRAPHY
+	/* kludge on a kludge to prevent "Call an overexposed photograph:" */
+	else if(otemp.otyp==SCR_PHOTOGRAPH) {
+		otemp.dknown = 0;
+		Sprintf(qbuf, "Call %s:", an(distant_name(&otemp,xname)));
+	}
+#endif
 	else
 	    Sprintf(qbuf, "Call %s:", an(xname(&otemp)));
 	getlin(qbuf, buf);

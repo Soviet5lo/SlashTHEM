@@ -523,6 +523,9 @@ static struct trobj Tourist[] = {
 	{ SCR_MAGIC_MAPPING, 0, SCROLL_CLASS, 6, UNDEF_BLESS },
 	{ HAWAIIAN_SHIRT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
+#ifdef NEPHI_PHOTOGRAPHY
+	{ SPE_PHOTO_ALBUM, 0, SPBOOK_CLASS, 1, 0 },
+#endif
 	{ CREDIT_CARD, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
@@ -3200,6 +3203,10 @@ register struct trobj *trop;
 				|| otyp == SCR_FIRE
 				|| otyp == SCR_BLANK_PAPER
 				|| otyp == SPE_BLANK_PAPER
+#ifdef NEPHI_PHOTOGRAPHY
+				|| otyp == SCR_PHOTOGRAPH
+				|| otyp == SPE_PHOTO_ALBUM
+#endif
 				|| otyp == RIN_AGGRAVATE_MONSTER
 				|| otyp == RIN_HUNGER
 				|| otyp == RIN_SLEEPING
@@ -3304,6 +3311,17 @@ register struct trobj *trop;
 #ifdef GOLDOBJ
 		}
 #endif
+#ifdef NEPHI_PHOTOGRAPHY
+		/* for a touch of color, put predefined photo in photo album */
+		/* do before calculating weight */
+		if(obj->otyp == SPE_PHOTO_ALBUM) {
+			struct obj *photo;
+			photo = make_special_photo(PHOTO_SPECIAL_FAM);
+			bless(photo);
+			photo->bknown = 1;
+			(void)add_to_container(obj,photo);
+		}
+#endif
 		/* defined after setting otyp+quan + blessedness */
 		obj->owt = weight(obj);
 				
@@ -3344,7 +3362,11 @@ register struct trobj *trop;
 		    else if (!uswapwep) setuswapwep(obj, FALSE);
 		}
 		if (obj->oclass == SPBOOK_CLASS &&
-				obj->otyp != SPE_BLANK_PAPER)
+				obj->otyp != SPE_BLANK_PAPER
+#ifdef NEPHI_PHOTOGRAPHY
+				&& obj->otyp != SPE_PHOTO_ALBUM
+#endif
+				)
 		    initialspell(obj);
 
 #if !defined(PYRAMID_BUG) && !defined(MAC)

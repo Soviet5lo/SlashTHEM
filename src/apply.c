@@ -10,11 +10,17 @@
 static const char tools[] = { TOOL_CLASS, WEAPON_CLASS, WAND_CLASS, 0 };
 static const char all_count[] = { ALLOW_COUNT, ALL_CLASSES, 0 };
 static const char tools_too[] = { COIN_CLASS, ALL_CLASSES, TOOL_CLASS, POTION_CLASS,
-				  WEAPON_CLASS, WAND_CLASS, GEM_CLASS, 0 };
+				  WEAPON_CLASS, WAND_CLASS, GEM_CLASS, 
+#ifdef NEPHI_PHOTOGRAPHY
+      SPBOOK_CLASS,
+#endif
+				  0 };
 static const char tinnables[] = { ALLOW_FLOOROBJ, FOOD_CLASS, 0 };
 
 #ifdef TOURIST
+#ifndef NEPHI_PHOTOGRAPHY
 STATIC_DCL int FDECL(use_camera, (struct obj *));
+#endif /* NEPHI_PHOTOGRAPHY */
 #endif
 STATIC_DCL int FDECL(use_towel, (struct obj *));
 STATIC_DCL boolean FDECL(its_dead, (int,int,int *));
@@ -54,12 +60,20 @@ void FDECL( amii_speaker, ( struct obj *, char *, int ) );
 const char no_elbow_room[] = "don't have enough elbow-room to maneuver.";
 
 #ifdef TOURIST
+#ifdef NEPHI_PHOTOGRAPHY
+int
+use_camera(obj,brightflash)
+	struct obj *obj;
+	boolean brightflash;
+#else
 STATIC_OVL int
 use_camera(obj)
 	struct obj *obj;
+#endif
 {
+#ifndef NEPHI_PHOTOGRAPHY
 	register struct monst *mtmp;
-
+#endif
 	if(Underwater) {
 		pline("Using your camera underwater would void the warranty.");
 		return(0);
@@ -70,6 +84,11 @@ use_camera(obj)
 		pline(nothing_happens);
 		return (1);
 	}
+#ifdef NEPHI_PHOTOGRAPHY
+	obj_stop_timers(obj);
+	take_picture2(obj,u.dx,u.dy,u.dz,brightflash,FALSE);
+	return (1);
+#else
 	consume_obj_charge(obj, TRUE);
 
 	if (obj->cursed && !rn2(2)) {
@@ -90,8 +109,9 @@ use_camera(obj)
 		(void) flash_hits_mon(mtmp, obj);
 	}
 	return 1;
+#endif /* NEPHI_PHOTOGRAPHY */
 }
-#endif
+#endif /* TOURIST */
 
 STATIC_OVL int
 use_towel(obj)
@@ -3752,7 +3772,11 @@ doapply()
 #else
 	money_cnt(invent)
 #endif
-	|| uhave_graystone())
+	|| uhave_graystone()
+#ifdef NEPHI_PHOTOGRAPHY
+		|| carrying(SPE_PHOTO_ALBUM)
+#endif	
+	)
 		Strcpy(class_list, tools_too);
 	else
 		Strcpy(class_list, tools);
@@ -3805,6 +3829,9 @@ doapply()
 	case OILSKIN_SACK:
 	case BAG_OF_DIGESTION:
 	case UGLY_BACKPACK:
+#ifdef NEPHI_PHOTOGRAPHY
+	case SPE_PHOTO_ALBUM:
+#endif
 		res = use_container(&obj, 1);
 		break;
 	case BAG_OF_TRICKS:
@@ -3918,7 +3945,11 @@ doapply()
 		break;
 #ifdef TOURIST
 	case EXPENSIVE_CAMERA:
+#ifdef NEPHI_PHOTOGRAPHY
+		res = use_camera(obj,FALSE);
+#else
 		res = use_camera(obj);
+#endif /* NEPHI_PHOTOGRAPHY */
 		break;
 #endif
 	case TOWEL:
