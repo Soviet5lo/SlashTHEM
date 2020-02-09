@@ -649,7 +649,7 @@ A("The Deluxe Yendorian Knife", KNIFE,
 
 A("The Staff of Aesculapius",	QUARTERSTAFF,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_ATTK|SPFX_INTEL|SPFX_DRLI|SPFX_REGEN), 0,0,
-	DRLI(3,0),      NO_DFNS,        NO_CARY,
+	DRLI(3,0),      DRLI(0,0),        NO_CARY,
 	HEALING,	A_NEUTRAL, PM_HEALER, NON_PM, 5000L ),
 /* STEPHEN WHITE'S NEW CODE */
 A("The Storm Whistle",          MAGIC_WHISTLE,
