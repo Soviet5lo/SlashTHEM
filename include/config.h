@@ -544,7 +544,7 @@ typedef long glyph_t;
 /*#define SIMPLE_MAIL */ /* dgamelaunch simple mail */
 
 #define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
-#define NEPHI_PHOTOGRAPHY
+//#define NEPHI_PHOTOGRAPHY
 
 /* End of Section 5 */
 

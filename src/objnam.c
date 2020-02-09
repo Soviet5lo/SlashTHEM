@@ -844,7 +844,12 @@ register struct obj *obj;
 		}
 	    /* end post-processing */
 		
-		if(strlen(cp)) {
+		if(strlen(cp)
+#ifdef NEPHI_PHOTOGRAPHY
+				&& /* 5lo: Don't double identify albums or photographs */
+				obj->otyp != SPE_PHOTO_ALBUM && obj->otyp != SCR_PHOTOGRAPH
+#endif
+		  ){
 			if(obj->oclass == POTION_CLASS || obj->oclass == SCROLL_CLASS
 			|| (obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BOOK_OF_THE_DEAD)
 			|| obj->oclass == WAND_CLASS || obj->oclass == RING_CLASS)
