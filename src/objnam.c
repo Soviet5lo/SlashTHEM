@@ -1040,6 +1040,10 @@ plus:
 		break;
 	case SPBOOK_CLASS: /* WAC spellbooks have charges now */
 #ifdef WIZARD
+#ifdef NEPHI_PHOTOGRAPHY
+		/* photo albums don't have charges */
+		if (obj->otyp == SPE_PHOTO_ALBUM) break;
+#endif
 		if (wizard) {
 		    if (Hallucination)
 			break;
