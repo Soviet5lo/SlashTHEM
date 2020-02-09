@@ -27,7 +27,7 @@ scc out_of_focus[] = "blurry";
 scc invalid_photo[] = "unexposed photograph";
 scc invalid_photo_hallu[] = "photograph of the inside of your head";
 scc the_inside_of[] = "the inside of ";
-
+/* dungeon features */
 scc TREE_STR[] = "tree";
 scc POOL_STR[] = "pool";
 scc MOAT_STR[] = "moat";
@@ -43,6 +43,7 @@ scc LADDER_STR[] = "ladder";
 scc FOUNTAIN_STR[] = "fountain";
 scc THRONE_STR[] = "throne";
 scc SINK_STR[] = "sink";
+scc TOILET_STR[] = "toilet";
 scc GRAVE_STR[] = "grave";
 scc ALTAR_STR[] = "altar";
 scc ICE_STR[] = "patch of ice";
@@ -50,10 +51,10 @@ scc DRAWBRIDGE_DOWN_STR[] = "lowered drawbridge";
 scc AIR_STR[] = "empty air";
 scc CLOUD_STR[] = "cloud";
 scc PHOTO_FLOOR_STR[] = "floor";
-
+/* ceilings */
 scc CEILING_CEIL_STR[] = "ceiling";
 scc CEILING_ROCK_STR[] = "rocky ceiling";
-
+/* traps */
 scc ARROW_TRAP_STR[] = "arrow trap";
 scc DART_TRAP_STR[] = "dart trap";
 scc ROCKTRAP_STR[] = "falling rock trap";
@@ -76,6 +77,11 @@ scc STATUE_TRAP_STR[] = "statue";
 scc MAGIC_TRAP_STR[] = "magic trap";
 scc ANTI_MAGIC_STR[] = "anti-magic trap";
 scc POLY_TRAP_STR[] = "polymorph trap";
+scc ICE_TRAP_STR[] = "ice trap";
+scc SPEAR_TRAP_STR[] = "spear trap";
+scc COLLAPSE_TRAP_STR[] = "ceiling collapse trap";
+scc MAGIC_BEAM_TRAP_STR[] = "magic beam trap";
+/* special rooms */
 scc COURT_STR[] = "throneroom";
 scc SWAMP_STR[] = "swamp";
 scc VAULT_STR[] = "magic memory vault";
@@ -85,9 +91,24 @@ scc BARRACKS_STR[] = "military barracks";
 scc ZOO_STR[] = "zoo";
 scc DELPHI_STR[] = "Delphi";
 scc TEMPLE_STR[] = "temple";
+scc REALZOO_STR[] = "real zoo";
+scc GIANTCOURT_STR[] = "giant court";
 scc LEPREHALL_STR[] = "leprechaun hall";
+scc DRAGONLAIR_STR[] = "dragon lair";
+scc BADFOODSHOP_STR[] = "bad food shop";
 scc COCKNEST_STR[] = "disgusting nest";
 scc ANTHOLE_STR[] = "giant ant-hole";
+scc LEMUREPIT_STR[] = "lemure pit";
+scc MIGOHIVE_STR[] = "migo hive";
+scc FUNGUSFARM_STR[] = "fungus farm";
+scc CLINIC_STR[] = "clinic";
+scc TERRORHALL_STR[] = "terror hall";
+scc COINHALL_STR[] = "coin hall";
+scc DOUGROOM_STR[] = "42 room";
+scc ARMORY_STR[] = "abandoned armory";
+scc GARDEN_STR[] = "beautiful garden";
+scc TRAPROOM_STR[] = "trap room";
+scc POOLROOM_STR[] = "pool room";
 scc UNKNOWN_DUNGEON_STR[] = "an unfamiliar location";
 
 scc * const autograph_text[] = {
@@ -178,6 +199,7 @@ char* FDECL((*article_func), (const char*));
 		case FOUNTAIN:		tmp = FOUNTAIN_STR;break;
 		case THRONE:		tmp = THRONE_STR;break;
 		case SINK:			tmp = SINK_STR;break;
+		case TOILET:		tmp = TOILET_STR;break;
 		case GRAVE:			tmp = GRAVE_STR;break;
 		case ALTAR:			tmp = ALTAR_STR;break;
 		case ICE:			tmp = ICE_STR;break;
@@ -207,6 +229,10 @@ char* FDECL((*article_func), (const char*));
 		case PHOTO_TRAP_MASK|MAGIC_TRAP:		tmp = MAGIC_TRAP_STR;break;
 		case PHOTO_TRAP_MASK|ANTI_MAGIC:		tmp = ANTI_MAGIC_STR;break;
 		case PHOTO_TRAP_MASK|POLY_TRAP:			tmp = POLY_TRAP_STR;break;
+		case PHOTO_TRAP_MASK|ICE_TRAP:			tmp = ICE_TRAP_STR;break;
+		case PHOTO_TRAP_MASK|SPEAR_TRAP:		tmp = SPEAR_TRAP_STR;break;
+		case PHOTO_TRAP_MASK|COLLAPSE_TRAP:		tmp = COLLAPSE_TRAP_STR;break;
+		case PHOTO_TRAP_MASK|MAGIC_BEAM_TRAP:		tmp = MAGIC_BEAM_TRAP_STR;break;
 		default:
 			Sprintf(str,"strange feature: %d",photo->feature);
 			return(str);
@@ -235,9 +261,24 @@ char* FDECL((*article_func), (const char*));
 		case ZOO:		tmp = ZOO_STR;break;
 		case DELPHI:	tmp = DELPHI_STR;wants_article=FALSE;break;
 		case TEMPLE:	tmp = TEMPLE_STR;break;
+		case REALZOO:	tmp = REALZOO_STR;break;
+		case GIANTCOURT: tmp = GIANTCOURT_STR;break;
 		case LEPREHALL:	tmp = LEPREHALL_STR;break;
+		case DRAGONLAIR: tmp = DRAGONLAIR_STR;break;
+		case BADFOODSHOP: tmp = BADFOODSHOP_STR;break;
 		case COCKNEST:	tmp = COCKNEST_STR;break;
 		case ANTHOLE:	tmp = ANTHOLE_STR;break;
+		case LEMUREPIT: tmp = LEMUREPIT_STR;break;
+		case MIGOHIVE: tmp = MIGOHIVE_STR;break;
+		case FUNGUSFARM: tmp = FUNGUSFARM_STR;break;
+		case CLINIC: tmp = CLINIC_STR;break;
+		case TERRORHALL: tmp = TERRORHALL_STR;break;
+		case COINHALL: tmp = COINHALL_STR;break;
+		case DOUGROOM: tmp = DOUGROOM_STR;break;
+		case ARMORY:	tmp = ARMORY_STR;break;
+		case GARDEN:	tmp = GARDEN_STR;break;
+		case TRAPROOM: tmp = TRAPROOM_STR;break;
+		case POOLROOM:	tmp = POOLROOM_STR;break;
 		case ARMORSHOP:	
 		case SCROLLSHOP:
 		case POTIONSHOP:
@@ -246,8 +287,14 @@ char* FDECL((*article_func), (const char*));
 		case RINGSHOP:
 		case WANDSHOP:
 		case TOOLSHOP:
+		case PETSHOP:
+		case TINSHOP:
 		case BOOKSHOP:
+		case GUNSHOP:
+		case INSTRUMENTSHOP:
 		case CANDLESHOP:
+		case BLACKSHOP:
+
 			tmp = shtypes[photo->special_room - SHOPBASE].name;
 			break;
 		case OROOM:
