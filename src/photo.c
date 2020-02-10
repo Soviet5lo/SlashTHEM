@@ -1519,7 +1519,9 @@ boolean flash,timer_invoked;
 	}
 
 	/* Tourists are better photographers */
-	skill = ACURR(A_DEX) + (Role_if(PM_TOURIST) ? 4: 0) 
+	/* 5lo: Geeks are pretty decent too */
+	skill = ACURR(A_DEX) + (Role_if(PM_TOURIST) ? 4:
+			       (Role_if(PM_GEEK) ? 2: 0)) 
 		- (photo->cursed ? 8:0) + (photo->blessed ? 4:0);
 	if(!timer_invoked)
 		skill -= (Confusion ? 4:0)+(Stunned ? 4:0);
