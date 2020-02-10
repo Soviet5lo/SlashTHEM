@@ -4272,6 +4272,7 @@ struct obj *otmp;	/* source of flash */
 		    }
 		}
 #ifdef NEPHI_PHOTOGRAPHY
+		}
 		amt = tmp==0 ? rnd(100) : rnd(1 + 50/tmp);
 		if(isyou) {
 		    make_blinded((long)amt, FALSE);
@@ -4298,9 +4299,6 @@ struct obj *otmp;	/* source of flash */
 		}
 	    }
 	}
-#ifdef NEPHI_PHOTOGRAPHY
-	    }
-#endif
 	return res;
 }
 /*uhitm.c*/
