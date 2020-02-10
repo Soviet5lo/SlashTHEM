@@ -4218,8 +4218,8 @@ struct monst *mtmp;
 struct obj *otmp;	/* source of flash */
 {
 	int tmp, amt, res = 0;
-#ifdef NEPHI_PHOTOGRAPHY
 	boolean isyou = (mtmp==&youmonst);
+#ifdef NEPHI_PHOTOGRAPHY
 	boolean useeit = canseemon(mtmp) && !isyou;
 #else
 	int useeit = canseemon(mtmp);
@@ -4254,7 +4254,7 @@ struct obj *otmp;	/* source of flash */
 		    /* Rule #1: Keep them out of the light. */
 		    amt = otmp->otyp == WAN_LIGHT ? d(1 + otmp->spe, 4) :
 		          rn2(min(mtmp->mhp,4));
-#ifndef NEPHI_PHOTOGRAPHY
+#ifdef NEPHI_PHOTOGRAPHY
 		    if(isyou) {
 			You("writhe in agony!");
 			losehp(amt, "flash of light", KILLED_BY_AN);
@@ -4290,10 +4290,17 @@ struct obj *otmp;	/* source of flash */
 			    monflee(mtmp, 0, FALSE, TRUE);
 		    }
 		    mtmp->mcansee = 0;
+#ifdef NEPHI_PHOTOGRAPHY
 		    mtmp->mblinded = amt;
+#else
+		    mtmp->mblinded = (tmp < 3) ? 0 : rnd(1 + 50/tmp);
+#endif
 		}
 	    }
 	}
+#ifdef NEPHI_PHOTOGRAPHY
+	    }
+#endif
 	return res;
 }
 /*uhitm.c*/
