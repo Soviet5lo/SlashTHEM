@@ -75,7 +75,7 @@ SRCOBJ = allmain.o alloc.o apply.o artifact.o attrib.o ball.o bones.o	\
  sit.o smith.o sounds.o sp_lev.o spell.o steal.o steed.o tech.o		\
  teleport.o timeout.o topten.o track.o trap.o u_init.o uhitm.o		\
  vault.o version.o vision.o weapon.o were.o wield.o windows.o		\
- wizard.o worm.o worn.o write.o zap.o livelog.o
+ wizard.o worm.o worn.o write.o zap.o livelog.o photo.o
 SYSUNIXOBJ = unixmain.o unixres.o unixunix.o
 SYSSHAREOBJ = ioctl.o unixtty.o
 WINTTYOBJ = getline.o termcap.o topl.o wintty.o
