@@ -177,8 +177,8 @@ static const char * const shkgeneral[] = {
 };
 
 static const char * const shkmusic[] = {
-    "John", "Paul", "George", "Ringo"
-    "Elvis", "Mick", "Keith", "Ron", "Charlie"
+    "John", "Paul", "George", "Ringo",
+    "Elvis", "Mick", "Keith", "Ron", "Charlie",
     "Joseph", "Franz", "Richard", "Ludwig", "Wolfgang Amadeus",
     "Johann Sebastian",
     "Karlheinz", "Gyorgy",
