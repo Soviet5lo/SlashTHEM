@@ -329,6 +329,7 @@ dosit()
 			make_confused(HConfusion + rn1(7,16),FALSE);
 			break;
 		    case 14:
+			/* TODO: Make this menu driven, this is just annoying to flip through */
 			You("are granted some new skills!"); /* new effect that unrestricts skills --Amy */
 
 			int acquiredskill;

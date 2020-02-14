@@ -833,7 +833,8 @@ boolean new_game;	/* false => restoring an old game */
     boolean currentgend = Upolyd ? u.mfemale : flags.female;
 
     if (Hallucination)
-	    pline("SlashTHEM is filmed in front of a %s studio audience.", midnight() ? "undead" : "live");
+	    pline("SlashTHEM is filmed in front of a %s studio audience.",
+			midnight() ? "undead" : "live");
 
     /*
      * The "welcome back" message always describes your innate form
