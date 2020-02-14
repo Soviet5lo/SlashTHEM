@@ -571,343 +571,85 @@ rndcurse()			/* curse a few inventory items at random! */
 void
 attrcurse()			/* remove a random INTRINSIC ability */
 {
-	switch(rnd(170)) {
-	case 1 : 
-	case 2 : 
-	case 3 : 
-	case 4 : 
-	case 5 : 
-	case 6 : 
-	case 7 : 
-	case 8 : 
-	case 9 : 
-	case 10 : if (HFire_resistance & INTRINSIC) {
+	switch(rnd(15)) {
+	case 1 : if (HFire_resistance & INTRINSIC) {
 			HFire_resistance &= ~INTRINSIC;
 			You_feel("warmer.");
+			break;
 		}
-		break;
-	case 11 : 
-	case 12 : 
-	case 13 : 
-	case 14 : 
-	case 15 : 
-	case 16 : if (HTeleportation & INTRINSIC) {
+	case 2 : if (HTeleportation & INTRINSIC) {
 			HTeleportation &= ~INTRINSIC;
 			You_feel("less jumpy.");
+			break;
 		}
-		break;
-	case 17 : 
-	case 18 : 
-	case 19 : 
-	case 20 : 
-	case 21 : 
-	case 22 : 
-	case 23 : 
-	case 24 : 
-	case 25 : 
-	case 26 : if (HPoison_resistance & INTRINSIC) {
+	case 3 : if (HPoison_resistance & INTRINSIC) {
 			HPoison_resistance &= ~INTRINSIC;
 			You_feel("a little sick!");
+			break;
 		}
-		break;
-	case 27 : 
-	case 28 : 
-	case 29 : 
-	case 30 : 
-	case 31 : 
-	case 32 : 
-	case 33 : 
-	case 34 : 
-	case 35 : 
-	case 36 : if (HTelepat & INTRINSIC) {
+	case 4 : if (HTelepat & INTRINSIC) {
 			HTelepat &= ~INTRINSIC;
 			if (Blind && !Blind_telepat)
 			    see_monsters();	/* Can't sense mons anymore! */
 			Your("senses fail!");
+			break;
 		}
-		break;
-	case 37 : 
-	case 38 : 
-	case 39 : 
-	case 40 : 
-	case 41 : 
-	case 42 : 
-	case 43 : 
-	case 44 : 
-	case 45 : 
-	case 46 : if (HCold_resistance & INTRINSIC) {
+	case 5 : if (HCold_resistance & INTRINSIC) {
 			HCold_resistance &= ~INTRINSIC;
 			You_feel("cooler.");
+			break;
 		}
-		break;
-	case 47 : 
-	case 48 : 
-	case 49 : 
-	case 50 : 
-	case 51 : 
-	case 52 : 
-	case 53 : 
-	case 54 : 
-	case 55 : 
-	case 56 : if (HInvis & INTRINSIC) {
+	case 6 : if (HInvis & INTRINSIC) {
 			HInvis &= ~INTRINSIC;
 			You_feel("paranoid.");
+			break;
 		}
-		break;
-	case 57 : 
-	case 58 : 
-	case 59 : 
-	case 60 : 
-	case 61 : 
-	case 62 : 
-	case 63 : 
-	case 64 : 
-	case 65 : 
-	case 66 : if (HSee_invisible & INTRINSIC) {
+	case 7 : if (HSee_invisible & INTRINSIC) {
 			HSee_invisible &= ~INTRINSIC;
 			You("%s!", Hallucination ? "tawt you taw a puttie tat"
 						: "thought you saw something");
+			break;
 		}
-		break;
-	case 67 : 
-	case 68 : 
-	case 69 : 
-	case 70 : 
-	case 71 : 
-	case 72 : 
-	case 73 : 
-	case 74 : 
-	case 75 : 
-	case 76 : if (HFast & INTRINSIC) {
+	case 8 : if (HFast & INTRINSIC) {
 			HFast &= ~INTRINSIC;
 			You_feel("slower.");
+			break;
 		}
-		break;
-	case 77 : 
-	case 78 : 
-	case 79 : 
-	case 80 : 
-	case 81 : 
-	case 82 : 
-	case 83 : 
-	case 84 : 
-	case 85 : 
-	case 86 : if (HStealth & INTRINSIC) {
+	case 9 : if (HStealth & INTRINSIC) {
 			HStealth &= ~INTRINSIC;
 			You_feel("clumsy.");
+			break;
 		}
-		break;
-	case 87: if (HProtection & INTRINSIC) {
+	case 10: if (HProtection & INTRINSIC) {
 			HProtection &= ~INTRINSIC;
 			You_feel("vulnerable.");
+			break;
 		}
-		break;
-	case 88 : 
-	case 89 : 
-	case 90 : 
-	case 91 : 
-	case 92: if (HAggravate_monster & INTRINSIC) {
+	case 11: if (HAggravate_monster & INTRINSIC) {
 			HAggravate_monster &= ~INTRINSIC;
 			You_feel("less attractive.");
+			break;
 		}
-		break;
-	case 93 : 
-	case 94 : 
-	case 95 : 
-	case 96 : 
-	case 97 : 
-	case 98 : 
-	case 99 : 
-	case 100 : 
-	case 101 : 
-	case 102: if (HSleep_resistance & INTRINSIC) {
-			HSleep_resistance &= ~INTRINSIC;
-			You_feel("tired all of a sudden.");
-		}
-		break;
-	case 103 : 
-	case 104 : 
-	case 105 : 
-	case 106 : 
-	case 107 : 
-	case 108 : 
-	case 109 : 
-	case 110 : 
-	case 111 : 
-	case 112: if (HDisint_resistance & INTRINSIC) {
-			HDisint_resistance &= ~INTRINSIC;
-			You_feel("like you're going to break apart.");
-		}
-		break;
-	case 113 : 
-	case 114 : 
-	case 115 : 
-	case 116 : 
-	case 117 : 
-	case 118 : 
-	case 119 : 
-	case 120 : 
-	case 121 : 
-	case 122: if (HShock_resistance & INTRINSIC) {
-			HShock_resistance &= ~INTRINSIC;
-			You_feel("like someone has zapped you.");
-		}
-		break;
-	case 123: if (HDrain_resistance & INTRINSIC) {
-			HDrain_resistance &= ~INTRINSIC;
-			You_feel("like someone is sucking out your life-force.");
-		}
-		break;
-	case 124: if (HSick_resistance & INTRINSIC) {
-			HSick_resistance &= ~INTRINSIC;
-			You_feel("no longer immune to diseases!");
-		}
-		break;
-	case 125 : 
-	case 126 : 
-	case 127: if (HWarning & INTRINSIC) {
-			HWarning &= ~INTRINSIC;
-			You_feel("that your radar has just stopped working!");
-		}
-		break;
-	case 128 : 
-	case 129 : 
-	case 130 : 
-	case 131 : 
-	case 132 : 
-	case 133 : 
-	case 134: if (HSearching & INTRINSIC) {
-			HSearching &= ~INTRINSIC;
-			You_feel("unable to find something you lost!");
-		}
-		break;
-	case 135: if (HClairvoyant & INTRINSIC) {
-			HClairvoyant &= ~INTRINSIC;
-			You_feel("a loss of mental capabilities!");
-		}
-		break;
-	case 136: if (HInfravision & INTRINSIC) {
-			HInfravision &= ~INTRINSIC;
-			You_feel("shrouded in darkness.");
-		}
-		break;
-	case 137: if (HDetect_monsters & INTRINSIC) {
-			HDetect_monsters &= ~INTRINSIC;
-			You_feel("that you can no longer sense monsters.");
-		}
-		break;
-	case 138: if (HJumping & INTRINSIC) {
-			HJumping &= ~INTRINSIC;
-			You_feel("your legs shrinking.");
-		}
-		break;
-	case 139 : 
-	case 140 : 
-	case 141 : 
-	case 142 : 
-	case 143 : 
-	case 144 : 
-	case 145 : 
-	case 146 : 
-	case 147 : 
-	case 148: if (HTeleport_control & INTRINSIC) {
-			HTeleport_control &= ~INTRINSIC;
-			You_feel("unable to control where you're going.");
-		}
-		break;
-	case 149: if (HMagical_breathing & INTRINSIC) {
-			HMagical_breathing &= ~INTRINSIC;
-			You_feel("you suddenly need to breathe!");
-		}
-		break;
-	case 150: if (HRegeneration & INTRINSIC) {
-			HRegeneration &= ~INTRINSIC;
-			You_feel("your wounds are healing slower!");
-		}
-		break;
-	case 151: if (HEnergy_regeneration & INTRINSIC) {
-			HEnergy_regeneration &= ~INTRINSIC;
-			You_feel("a loss of mystic power!");
-		}
-		break;
-	case 152: if (HPolymorph & INTRINSIC) {
-			HPolymorph &= ~INTRINSIC;
-			You_feel("unable to change form!");
-		}
-		break;
-	case 153: if (HPolymorph_control & INTRINSIC) {
-			HPolymorph_control &= ~INTRINSIC;
-			You_feel("less control over your own body.");
-		}
-		break;
-	case 154 : 
-	case 155 : 
-	case 156 : 
-	case 157: if (HAcid_resistance & INTRINSIC) {
-			HAcid_resistance &= ~INTRINSIC;
-			You_feel("worried about corrosion!");
-		}
-		break;
-	case 158: if (HFumbling & INTRINSIC) {
-			HFumbling &= ~INTRINSIC;
-			You_feel("less clumsy.");
-		}
-		break;
-	case 159: if (HSleeping & INTRINSIC) {
-			HSleeping &= ~INTRINSIC;
-			You_feel("like you just had some coffee.");
-		}
-		break;
-	case 160: if (HHunger & INTRINSIC) {
-			HHunger &= ~INTRINSIC;
-			You_feel("like you just ate a chunk of meat.");
-		}
-		break;
-	case 161: if (HConflict & INTRINSIC) {
-			HConflict &= ~INTRINSIC;
-			You_feel("more acceptable.");
-		}
-		break;
-	case 162: if (HSlow_digestion & INTRINSIC) {
-			HSlow_digestion &= ~INTRINSIC;
-			You_feel("like you're burning calories faster.");
-		}
-		break;
-	case 163: if (HFlying & INTRINSIC) {
-			HFlying &= ~INTRINSIC;
-			You_feel("like you just lost your wings!");
-		}
-		break;
-	case 164: if (HPasses_walls & INTRINSIC) {
-			HPasses_walls &= ~INTRINSIC;
-			You_feel("less ethereal!");
-		}
-		break;
-	case 165: if (HAntimagic & INTRINSIC) {
-			HAntimagic &= ~INTRINSIC;
-			You_feel("less protected from magic!");
-		}
-		break;
-	case 166: if (HReflecting & INTRINSIC) {
-			HReflecting &= ~INTRINSIC;
-			You_feel("less reflexive!");
-		}
-		break;
-	case 167: if (Blinded & INTRINSIC) {
-			Blinded &= ~INTRINSIC;
-			You_feel("visually clear!");
-		}
-		break;
-	case 168: if (Glib & INTRINSIC) {
-			Glib &= ~INTRINSIC;
-			You_feel("heavy-handed!");
-		}
-		break;
-	case 169: if (HSwimming & INTRINSIC) {
-			HSwimming &= ~INTRINSIC;
-			You_feel("less aquatic!");
-		}
-		break;
+	case 12: if (HSleep_resistance & INTRINSIC) {
+			 HSleep_resistance &= ~INTRINSIC;
+			 You_feel("tired all of a sudden.");
+			 break;
+		 }
+	case 13: if (HDisint_resistance & INTRINSIC) {
+			 HDisint_resistance &= ~INTRINSIC;
+			 You_feel("less firm.");
+			 break;
+		 }
+	case 14: if (HShock_resistance & INTRINSIC) {
+			 HShock_resistance &= ~INTRINSIC;
+			 You_feel("more conductive.");
+			 break;
+		 }
+	case 15: if (HAcid_resistance & INTRINSIC) {
+			 HAcid_resistance &= ~INTRINSIC;
+			 You_feel("more vulnerable to acid.");
+			 break;
+		 }
 	default: break;
 	}
 }
