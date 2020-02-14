@@ -1627,39 +1627,6 @@ random_teleport_level()
 	return nlev;
 }
 
-/* Banishment level decision */
-int
-random_banish_level()
-{
-	int nlev, max_depth, min_depth, cur_depth = (int)depth(&u.uz);
-;
-
-	if (Is_knox(&u.uz) ||
-#ifdef BLACKMARKET
-		Is_blackmarket(&u.uz) ||
-#endif
-		Is_aligned_quest(&u.uz))
-	    return cur_depth;
-
-	min_depth = In_quest(&u.uz) ? dungeons[u.uz.dnum].depth_start : 1;
-	max_depth = dunlevs_in_dungeon(&u.uz) +
-		(dungeons[u.uz.dnum].depth_start - 1);
-	/* can't reach the Sanctum, no matter if invocation or not */
-	if (Inhell) max_depth -= 1;
-
-	/* Get a random value relative to the current dungeon */
-
-	nlev = rn2(max_depth - min_depth) + min_depth;
-
-	if (nlev > max_depth) nlev = max_depth;
-
-	if (nlev < min_depth) nlev = min_depth;
-
-	return nlev;
-}
-
-
-
 /* you teleport a monster (via wand, spell, or poly'd q.mechanic attack);
    return false iff the attempt fails */
 boolean
@@ -1714,30 +1681,3 @@ boolean give_feedback;
 	return TRUE;
 }
 /*teleport.c*/
-
-boolean
-u_teleport_monB(mtmp, give_feedback)
-struct monst *mtmp;
-boolean give_feedback;
-{
-
-			int nlev;
-			d_level flev;
-
-			if (mon_has_amulet(mtmp) || In_endgame(&u.uz)) {
-			   pline("%s seems very disoriented for a moment.", Monnam(mtmp));
-			    return 2;
-			}
-			nlev = random_banish_level();
-			if (nlev == depth(&u.uz)) {
-			    pline("%s shudders for a moment.", Monnam(mtmp));
-			    return 2;
-			}
-			get_level(&flev, nlev);
-			migrate_to_level(mtmp, ledger_no(&flev), MIGR_RANDOM,
-				(coord *)0);
-
-	return TRUE;
-}
-/*teleport.c*/
-

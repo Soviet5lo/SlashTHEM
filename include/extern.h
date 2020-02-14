@@ -2223,10 +2223,8 @@ E void FDECL(mtele_trap, (struct monst *, struct trap *,int));
 E int FDECL(mlevel_tele_trap, (struct monst *, struct trap *,BOOLEAN_P,int));
 E void FDECL(rloco, (struct obj *));
 E int NDECL(random_teleport_level);
-E int NDECL(random_banish_level);
 E void NDECL(teleX);
 E boolean FDECL(u_teleport_mon, (struct monst *,BOOLEAN_P));
-E boolean FDECL(u_teleport_monB, (struct monst *,BOOLEAN_P));
 
 /* ### tile.c ### */
 #ifdef USE_TILES
