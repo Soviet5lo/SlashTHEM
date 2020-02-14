@@ -369,7 +369,8 @@ exercise_steed()
 
 	/* It takes many turns of riding to exercise skill */
 	/* but not THAT godawfully many - used to be 100, now it's 33 --Amy */
-	if (u.urideturns++ >= 33) {
+	/* 5lo: Reduced further to 24 */
+	if (u.urideturns++ >= 24) {
 	    u.urideturns = 0;
 	    use_skill(P_RIDING, 1);
 	}
