@@ -448,190 +448,24 @@ register int x, y, typ;
 				ttmp->launch.x = lx;
 				ttmp->launch.y = ly;
 				/* no AD_DISN, thanks */
-				/* edit by Amy - wimp! I'll allow this trap to zap death and disintegration rays. :P */
-
-				switch (rnd(96)) {
-
-				case 1: 
-				case 2: 
-				case 3: 
-				case 4: 
-				case 5: 
 				ttmp->launch_otyp = -10-(AD_MAGM-1);
-				break;
-				case 6: 
-				case 7: 
-				case 8: 
-				case 9: 
-				case 10: 
-				ttmp->launch_otyp = -20-(AD_MAGM-1);
-				break;
-				case 11: 
-				case 12: 
-				case 13: 
-				case 14: 
-				case 15: 
-				ttmp->launch_otyp = -30-(AD_MAGM-1);
-				break;
-				case 16: 
-				case 17: 
-				case 18: 
-				case 19: 
-				case 20: 
-				ttmp->launch_otyp = -40-(AD_MAGM-1);
-				break;
-				case 21: 
-				case 22: 
-				case 23: 
-				case 24: 
-				ttmp->launch_otyp = -10-(AD_SLEE-1);
-				break;
-				case 25: 
-				case 26: 
-				case 27: 
-				case 28: 
-				ttmp->launch_otyp = -20-(AD_SLEE-1);
-				break;
-				case 29: 
-				case 30: 
-				case 31: 
-				case 32: 
-				ttmp->launch_otyp = -30-(AD_SLEE-1);
-				break;
-				case 33: 
-				case 34: 
-				case 35: 
-				case 36: 
-				ttmp->launch_otyp = -40-(AD_SLEE-1);
-				break;
-				case 37: 
-				case 38: 
-				case 39: 
-				ttmp->launch_otyp = -10-(AD_ELEC-1);
-				break;
-				case 40: 
-				case 41: 
-				case 42: 
-				ttmp->launch_otyp = -20-(AD_ELEC-1);
-				break;
-				case 43: 
-				case 44: 
-				case 45: 
-				ttmp->launch_otyp = -30-(AD_ELEC-1);
-				break;
-				case 46: 
-				case 47: 
-				case 48: 
-				ttmp->launch_otyp = -40-(AD_ELEC-1);
-				break;
-				case 49: 
-				case 50: 
-				case 51: 
-				ttmp->launch_otyp = -10-(AD_FIRE-1);
-				break;
-				case 52: 
-				case 53: 
-				case 54: 
-				ttmp->launch_otyp = -20-(AD_FIRE-1);
-				break;
-				case 55: 
-				case 56: 
-				case 57: 
-				ttmp->launch_otyp = -30-(AD_FIRE-1);
-				break;
-				case 58: 
-				case 59: 
-				case 60: 
-				ttmp->launch_otyp = -40-(AD_FIRE-1);
-				break;
-				case 61: 
-				case 62: 
-				case 63: 
-				ttmp->launch_otyp = -10-(AD_COLD-1);
-				break;
-				case 64: 
-				case 65: 
-				case 66: 
-				ttmp->launch_otyp = -20-(AD_COLD-1);
-				break;
-				case 67: 
-				case 68: 
-				case 69: 
-				ttmp->launch_otyp = -30-(AD_COLD-1);
-				break;
-				case 70: 
-				case 71: 
-				case 72: 
-				ttmp->launch_otyp = -40-(AD_COLD-1);
-				break;
-				case 73: 
-				case 74: 
-				ttmp->launch_otyp = -10-(AD_DRST-1);
-				break;
-				case 75: 
-				case 76: 
-				ttmp->launch_otyp = -20-(AD_DRST-1);
-				break;
-				case 77: 
-				case 78: 
-				ttmp->launch_otyp = -30-(AD_DRST-1);
-				break;
-				case 79: 
-				case 80: 
-				ttmp->launch_otyp = -40-(AD_DRST-1);
-				break;
-				case 81: 
-				case 82: 
-				ttmp->launch_otyp = -10-(AD_ACID-1);
-				break;
-				case 83: 
-				case 84: 
-				ttmp->launch_otyp = -20-(AD_ACID-1);
-				break;
-				case 85: 
-				case 86: 
-				ttmp->launch_otyp = -30-(AD_ACID-1);
-				break;
-				case 87: 
-				case 88: 
-				ttmp->launch_otyp = -40-(AD_ACID-1);
-				break;
-				case 89: 
-				ttmp->launch_otyp = -10-(AD_LITE-1);
-				break;
-				case 90: 
-				ttmp->launch_otyp = -20-(AD_LITE-1);
-				break;
-				case 91:
-				ttmp->launch_otyp = -30-(AD_LITE-1);
-				break;
-				case 92: 
-				ttmp->launch_otyp = -40-(AD_LITE-1);
-				break;
-				case 93: 
-				ttmp->launch_otyp = -10-(AD_DISN-1);
-				break;
-				case 94: 
-				ttmp->launch_otyp = -20-(AD_DISN-1);
-				break;
-				case 95:
-				ttmp->launch_otyp = -30-(AD_DISN-1);
-				break;
-				case 96: 
-				ttmp->launch_otyp = -40-(AD_DISN-1);
-				break;
-
-				default:
-				ttmp->launch_otyp = -10-(AD_MAGM-1);
-				break;
-				}
-
+				if (!rn2(15))
+				    ttmp->launch_otyp = -20-(AD_ELEC-1);
+				else if (!rn2(10))
+				    ttmp->launch_otyp = -20-(AD_FIRE-1);
+				else if (!rn2(10))
+				    ttmp->launch_otyp = -10-(AD_COLD-1);
+				else if (!rn2(7))
+				    ttmp->launch_otyp = -20-(AD_DRST-1);
+				else if (!rn2(7))
+				    ttmp->launch_otyp = -20-(AD_ACID-1);
+				else if (!rn2(5))
+				    ttmp->launch_otyp = -10-(AD_SLEE-1);
 				ok = 1;
 			    }
 			}
 		}
 		break;
-
 	    case ROLLING_BOULDER_TRAP:	/* boulder will roll towards trigger */
 		(void) mkroll_launch(ttmp, x, y, BOULDER, 1L);
 		break;
