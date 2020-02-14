@@ -2138,6 +2138,7 @@ physical:
 			pline("%s is depressed!", Monnam(mdef));
 			tmp = rn1(10,6);
 		}
+		break;
 	    case AD_ENCH:
 		/* There's no msomearmor() function, so just do damage */
 	     /* if (cancelled) break; */
