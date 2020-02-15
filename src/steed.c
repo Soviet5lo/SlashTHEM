@@ -239,14 +239,7 @@ mount_steed(mtmp, force)
 	if (Upolyd && (!humanoid(youmonst.data) || verysmall(youmonst.data) ||
 			bigmonst(youmonst.data) || slithy(youmonst.data))) {
 	    You("won't fit on a saddle.");
-
-		if (yn("But you can try to get on your steed anyway. Do it?") == 'y') {
-			if (rn2(3)) { losehp(rn1(10,20), "trying an illegal ride", NO_KILLER_PREFIX);
-			pline("Ouch! You slip and hurt yourself a lot!");
-		    /*return 1;*/}
-		}
-		else {return(FALSE);}
-
+	    return (FALSE);
 	}
 	if(!force && (near_capacity() > SLT_ENCUMBER)) {
 	    You_cant("do that while carrying so much stuff.");
