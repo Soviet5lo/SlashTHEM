@@ -4,6 +4,7 @@
 
 #include "hack.h"
 #include "func_tab.h"
+#include "eshk.h"
 /* #define DEBUG */	/* uncomment for debugging */
 
 /*
@@ -560,22 +561,29 @@ enter_explore_mode()
 STATIC_PTR int
 playersteal()
 {
-	register int x, y;
-        int temp, chanch, base, dexadj, statbonus = 0;
+	int x, y;
+	int chanch, base, dexadj, intadj, statbonus;
+	long gstolen = 0;
+	struct monst *mtmp, *mwatch;
 	boolean no_steal = FALSE;
+	boolean found = FALSE;
+	boolean failed = FALSE;
+	char *verb = "steal";
 
 	if (nohands(youmonst.data)) {
-		pline("Could be hard without hands ...");
-		no_steal = TRUE;
-	} else
-	if (near_capacity() > SLT_ENCUMBER) {
-		Your("load is too heavy to attempt to steal.");
-		no_steal = TRUE;
+	    pline("Could be hard without hands ...");
+	    no_steal = TRUE;
+	} else if (near_capacity() > SLT_ENCUMBER) {
+	    Your("load is too heavy to attempt to steal.");
+	    no_steal = TRUE;
+	} else if (Blinded) {
+	    You("must be able to see to steal.");
+	    no_steal = TRUE;
 	}
 	if (no_steal) {
-		/* discard direction typeahead, if any */
-		display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
-		return(0);
+	    /* discard direction typeahead, if any */
+	    display_nhwindow(WIN_MESSAGE, TRUE);    /* --More-- */
+	    return 0;
 	}
 
 	if(!getdir(NULL)) return(0);
@@ -583,101 +591,187 @@ playersteal()
 
 	x = u.ux + u.dx;
 	y = u.uy + u.dy;
-	
+
 	if(u.uswallow) {
-		pline("You search around but don't find anything.");
-		return(1);
+	    You("search around but don't find anything.");
+	    return(1);
 	}
 
 	u_wipe_engr(2);
 
-	maploc = &levl[x][y];
-
 	if(MON_AT(x, y)) {
-		register struct monst *mdat = m_at(x, y);
+	    mtmp = m_at(x, y);
 
-		/* calculate chanch of sucess */
-		base = 5;
-		dexadj = 1;
-		if (Role_if(PM_ROGUE)) {
+	    if (Role_if(PM_KNIGHT)) {
+			You_feel("like a common thief.");
+			adjalign(-sgn(u.ualign.type));
+	    }
+
+	    if (!mtmp->mpeaceful &&
+		(!mtmp->mcansee || !u.uundetected ||
+		 (mtmp->mux == u.ux && mtmp->muy == u.uy)))
+			verb = "rob";
+
+	    /* calculate chanch of sucess */
+	    if (Role_if(PM_ROGUE)) {
 			base = 5 + (u.ulevel * 2);
 			dexadj = 3;
+			intadj = 15;
+	    } else {
+			base = 5;
+			dexadj = 1;
+			intadj = 3;
+	    }        
+		 if (ACURR(A_DEX) < 10) statbonus = (ACURR(A_DEX) - 10) * dexadj;
+	    else if (ACURR(A_DEX) > 14) statbonus = (ACURR(A_DEX) - 14) * dexadj;
+
+		 if (ACURR(A_INT) < 10) statbonus += (ACURR(A_INT) - 10) * intadj / 10;
+	    else if (ACURR(A_INT) > 14) statbonus += (ACURR(A_INT) - 14) * intadj / 10;
+
+	    chanch = base + statbonus;
+
+	    if (uarmg && !uarmg->otyp == GAUNTLETS_OF_DEXTERITY) 
+			chanch -= 5;
+	    if (!uarmg) chanch += 5;
+	    if (uarms)	chanch -= 10;
+	    if (!uarm || weight(uarm) < 75) chanch += 10;
+	    else chanch += ((175 - weight(uarm)) / 10);
+	    if (chanch < 5) chanch = 5;
+	    if (chanch > 95) chanch = 95;
+#ifdef WIZARD
+	    if (wizard) pline("[%d%]",chanch);
+#endif /*WIZARD*/
+	    if (rnd(100) < chanch || mtmp->mtame) {
+		struct obj *otmp, *otmp2;
+#ifndef GOLDOBJ
+		/* temporalily change mgold to obj */
+		if (mtmp->mgold) {
+		    otmp = mksobj(GOLD_PIECE, FALSE, FALSE);
+		    otmp->quan = mtmp->mgold;
+		    add_to_minv(mtmp, otmp);
+		    mtmp->mgold = 0;
 		}
-		if (ACURR(A_DEX) < 10) statbonus = (ACURR(A_DEX) - 10) * dexadj;
-		else 
-		if (ACURR(A_DEX) > 14) statbonus = (ACURR(A_DEX) - 14) * dexadj;
-
-		chanch = base + statbonus;
-
-		if (uarmg && uarmg->otyp != GAUNTLETS_OF_DEXTERITY)
-				chanch -= 5;
-		if (!uarmg)     chanch += 5;
-		if (uarms)      chanch -= 10;
-		if (uarm && uarm->owt < 75)       chanch += 10;
-		else if (uarm && uarm->owt < 125) chanch += 5;
-		else if (uarm && uarm->owt < 175) chanch += 0;
-		else if (uarm && uarm->owt < 225) chanch -= 5;
-		else if (uarm && uarm->owt < 275) chanch -= 10;
-		else if (uarm && uarm->owt < 325) chanch -= 15;
-		else if (uarm && uarm->owt < 375) chanch -= 20;
-		else if (uarm)                    chanch -= 25;
-		if (chanch < 5) chanch = 5;
-		if (chanch > 95) chanch = 95;
-		if (rnd(100) < chanch || mdat->mtame) {
-
-#ifdef GOLDOBJ
-			/* [CWC] This will steal money from the monster from the
-			 * first found goldobj - we could be really clever here and
-			 * then move onwards to the next goldobj in invent if we
-			 * still have coins left to steal, but lets leave that until
-			 * we actually have other coin types to test it on.
-			 */
-			struct obj *gold = findgold(mdat->minvent);
-			if (gold) {
-				int mongold;
-				int coinstolen;
-				coinstolen = (u.ulevel * rn1(25,25));
-				mongold = (int)gold->quan;
-				if (coinstolen > mongold) coinstolen = mongold;
-				if (coinstolen > 0)	{
-					if (coinstolen != mongold) 
-						gold = splitobj(gold, coinstolen);
-					obj_extract_self(gold);
-		      if (merge_choice(invent, gold) || inv_cnt() < 52) {
-				    addinv(gold);
-						You("steal %s.", doname(gold));
-					} else {
-            You("grab %s, but find no room in your knapsack.", doname(gold));
-			    	dropy(gold);
-					}
-				}
-				else
-				impossible("cmd.c:playersteal() stealing negative money");
-#else
-			if (mdat->mgold) {
-				temp = (u.ulevel * rn1(25,25));
-				if (temp > mdat->mgold) temp = mdat->mgold;
-				u.ugold += temp;
-				mdat->mgold -= temp;
-				You("steal %d gold.",temp);
 #endif
-			} else
-				You("don't find anything to steal.");
-
-			if (!mdat->mtame) exercise(A_DEX, TRUE);
-			return(1);
+		if (!mtmp->minvent) {
+		    You("don't find anything to %s.", verb);
+		    goto cleanup;
+		}
+		otmp = display_minventory(mtmp, MINV_ALL,
+			"Which item do you want to steal?");
+		if (!otmp) {
+		    You("%s nothing.", verb);
+		    goto cleanup;
 		} else {
-			You("failed to steal anything.");
-			setmangry(mdat);
-			return(1);
-	       }
-	} else {
-		pline("I don't see anybody to rob there!");
-		return(0);
+		    int ch;
+		    int owt = weight(otmp);
+		    if (otmp->owornmask) owt *= 2;
+		    if (otmp->oclass == COIN_CLASS) owt *= 2; /* balance... */
+		    if (otmp->oclass == ARMOR_CLASS && objects[otmp->otyp].oc_delay)
+			owt *= objects[otmp->otyp].oc_delay;
+		    if (((otmp->owornmask & W_ARM) && (mtmp->misc_worn_check & W_ARMC))
+#ifdef TOURIST
+			|| ((otmp->owornmask & W_ARMU) && (mtmp->misc_worn_check & (W_ARMC|W_ARM)))
+#endif
+		       ) failed = TRUE;
+		    ch = rn2(200);
+#ifdef WIZARD
+		    if (wizard) pline("[%d/%d]",owt,ch);
+#endif /*WIZARD*/
+		    if (owt > 190) owt = 190;
+		    if (ch < owt*2 ||
+			(!mtmp->mpeaceful && !mtmp->msleeping &&
+			 !mtmp->mfrozen && mtmp->mcanmove)) found = TRUE;
+		    if (ch < owt) failed = TRUE;
+		    if (failed) {
+			You("fail to %s it.", verb);
+		    } else {
+			obj_extract_self(otmp);
+			if (otmp->owornmask) {
+			    mtmp->misc_worn_check &= ~otmp->owornmask;
+			    if (otmp->owornmask & W_WEP)
+				setmnotwielded(mtmp,otmp);
+			    otmp->owornmask = 0L;
+			    update_mon_intrinsics(mtmp, otmp, FALSE, FALSE);
+			    possibly_unwield(mtmp, FALSE);
+			}
+#ifndef GOLDOBJ
+			if (otmp->oclass == COIN_CLASS) {
+			    u.ugold += otmp->quan;
+			    gstolen = otmp->quan;
+			    obfree(otmp, (struct obj *)0);
+			    You("%s %d gold piece%s from %s.", verb, gstolen,
+				(gstolen == 1) ? "" : "s", mon_nam(mtmp));
+			} else /* continues to the next block */
+#endif
+			{
+			    static const char *stealmsg = "%s %s from %s%s";
+							      
+			    gstolen = getprice(otmp, FALSE);
+			    otmp = hold_another_object(otmp, (const char *)0,
+					(const char *)0, (const char *)0);
+			    You(stealmsg, verb, doname(otmp), mon_nam(mtmp),
+				(otmp->where == OBJ_INVENT) ? "." : ", but cannot hold it!");
+			    if (otmp->where != OBJ_INVENT)
+				found = TRUE;
+			}
+		    }
+		}
+cleanup:
+#ifndef GOLDOBJ
+		/* restore temporal goldobj to mgold */
+		for (otmp = mtmp->minvent; otmp; otmp = otmp2) {
+		    otmp2 = otmp->nobj;
+		    if (otmp->oclass == COIN_CLASS) {
+			obj_extract_self(otmp);
+			mtmp->mgold += otmp->quan;
+			obfree(otmp, (struct obj *)0);
+		    }
+		}
+#endif
+		if (!found && !failed) exercise(A_DEX, TRUE);
+	    } else {
+		You("fail to %s anything.", verb);
+		if (mtmp->isshk || rn2(3)) found = TRUE;
+	    }
+	    if (found) {
+		boolean waspeaceful = mtmp->mpeaceful;
+		wakeup(mtmp);
+		if (mtmp->isshk) {
+		    if (gstolen > 1000)
+			ESHK(mtmp)->robbed += gstolen;
+		    if (waspeaceful && in_town(u.ux+u.dx, u.uy+u.dy)) {
+			pline("%s yells:", shkname(mtmp));
+			verbalize("Guards! Guards!");
+			(void) angry_guards(!(flags.soundok));
+		    }
+		} else if (mtmp->data == &mons[PM_WATCHMAN] ||
+			   mtmp->data == &mons[PM_WATCH_CAPTAIN])
+			(void) angry_guards(!(flags.soundok));
+	    }
+	    if (!found && in_town(u.ux+u.dx, u.uy+u.dy) &&
+		mtmp->mpeaceful && !mtmp->mtame) {
+		for(mwatch = fmon; mwatch; mwatch = mwatch->nmon) {
+		    if (!DEADMONSTER(mwatch) &&
+			!mwatch->msleeping && !mwatch->mfrozen &&
+			mwatch->mcanmove &&
+			(mwatch->data == &mons[PM_WATCHMAN] ||
+			 mwatch->data == &mons[PM_WATCH_CAPTAIN]) &&
+			cansee(mwatch->mx, mwatch->my) &&
+			(rnd(100) >= chanch)) {
+			    pline("%s yells:", Amonnam(mwatch));
+			    verbalize("Halt, thief!  You're under arrest!");
+			    (void) angry_guards(!(flags.soundok));
+			    setmangry(mtmp);
+			    break;
+		    }
+		}
+	    }
+	} else { 
+	    pline("I don't see anybody to rob there!");
+	    return(0);
 	}
-
-	return(0);
-} 
+	return(1);
+}
 
 STATIC_PTR int
 dooverview_or_wiz_where()
