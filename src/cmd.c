@@ -563,6 +563,8 @@ playersteal()
 {
 	int x, y;
 	int chanch, base, dexadj, intadj, statbonus;
+	/* 5lo: for the nymph role */
+	int chradj = 1;
 	long gstolen = 0;
 	struct monst *mtmp, *mwatch;
 	boolean no_steal = FALSE;
@@ -613,10 +615,24 @@ playersteal()
 			verb = "rob";
 
 	    /* calculate chanch of sucess */
-	    if (Role_if(PM_ROGUE)) {
+	    /* Rogues are masters of thievary and nymphs are really good at seduction,
+	     * using their high charisma to loot objects */
+	    if (Role_if(PM_ROGUE) || Race_if(PM_NYMPH)) {
 			base = 5 + (u.ulevel * 2);
 			dexadj = 3;
 			intadj = 15;
+			if (Race_if(PM_NYMPH)) chradj = 15;
+	    /* Pirates tend to steal from whatever ships they raid
+	     * Ninja are masters of stealth and are trained in thievary */
+	    } else if (Role_if(PM_PIRATE) || Role_if(PM_NINJA)) {
+			base = 5 + (u.ulevel);
+			dexadj = 2;
+			intadj = 10;
+	    /* "plunderer" but they're not very good at it - brute force is better */
+	    } else if (Role_if(PM_BARBARIAN)) {
+			base = 5;
+			dexadj = 2;
+			intadj = 5;
 	    } else {
 			base = 5;
 			dexadj = 1;
@@ -627,6 +643,10 @@ playersteal()
 
 		 if (ACURR(A_INT) < 10) statbonus += (ACURR(A_INT) - 10) * intadj / 10;
 	    else if (ACURR(A_INT) > 14) statbonus += (ACURR(A_INT) - 14) * intadj / 10;
+
+	    if (Race_if(PM_NYMPH)) {
+	    	 if (ACURR(A_CHA) > 14) statbonus += (ACURR(A_CHA) - 14) * chradj / 10;
+	    }
 
 	    chanch = base + statbonus;
 
