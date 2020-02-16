@@ -695,7 +695,7 @@ playersteal()
 		       ) failed = TRUE;
 		    ch = rn2(200);
 #ifdef WIZARD
-		    if (wizard) pline("[%d/%d]",owt,ch);
+		    if (wizard) pline("[%d/%d]",ch,owt);
 #endif /*WIZARD*/
 		    if (owt > 190) owt = 190;
 		    if (ch < owt*2 ||
