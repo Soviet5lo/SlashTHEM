@@ -2050,7 +2050,7 @@ struct attack *mattk;
 	}
 
 	while ((otmp = mdef->minvent) != 0) {
-	    if (!Upolyd && !Race_if(PM_NYMPH) ) break;		/* no longer have ability to steal, unless nymph --Amy */
+	    if (!Upolyd) break;		/* no longer have ability to steal */
 	    /* take the object away from the monster */
 	    obj_extract_self(otmp);
 	    if ((unwornmask = otmp->owornmask) != 0L) {
@@ -2066,8 +2066,8 @@ struct attack *mattk;
 		    pline("%s finishes taking off %s suit.",
 			  Monnam(mdef), mhis(mdef));
 	    }
-	    /* give the object to the character, new function by Amy - see invent.c */
-	    otmp = hold_another_objectX(otmp, "You snatched but dropped %s.",
+	    /* give the object to the character */
+	    otmp = hold_another_object(otmp, "You snatched but dropped %s.",
 				       doname(otmp), "You steal: ");
 	    if (otmp->where != OBJ_INVENT) continue;
 	    if (otmp->otyp == CORPSE &&
