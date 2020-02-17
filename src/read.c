@@ -564,10 +564,8 @@ doread()
             return 1;
 #endif /* TOURIST */
         } else if ((scroll->otyp == TIN) ||
-                  (scroll->otyp == CAN_OF_GREASE) ||
-                  (scroll->otyp == CANDY_BAR)) {
-            pline("This %s has no %s.", singular(scroll, xname),
-                (scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
+                  (scroll->otyp == CAN_OF_GREASE)) {
+            pline("This %s has no label.", singular(scroll, xname));
             return(0);
         } else if (scroll->otyp == MAGIC_MARKER) {
             if (Blind) {
@@ -579,6 +577,24 @@ doread()
             pline("\"Magic Marker(TM) Red Ink Marker Pen. Water Soluble.\"");
              u.uconduct.literate++;
              return 1;
+	} else if (scroll->otyp == CANDY_BAR) {
+	    static const char *wrapper_msgs[] = {
+		"Apollo",       /* Lost */
+		"Moon Crunchy", /* South Park */
+		"Snacky Cake",    "Chocolate Nuggie", "The Small Bar",
+		"Crispy Yum Yum", "Nilla Crunchie",   "Berry Bar",
+		"Choco Nummer",   "Om-nom", /* Cat Macro */
+		"Fruity Oaty",              /* Serenity */
+		"Wonka Bar" /* Charlie and the Chocolate Factory */
+        };
+	    if (Blind) {
+		You_cant("feel any Braille writing.");
+		return 0;
+	    }
+	    pline("The wrapper reads: \"%s\".",
+		wrapper_msgs[scroll->o_id % SIZE(wrapper_msgs)]);
+	    u.uconduct.literate++;
+	    return 1;
 
 	} else if (scroll->oclass == COIN_CLASS) {
 	   if (Blind)
@@ -587,13 +603,6 @@ doread()
                 You("read:");
 	    pline("\"1 Zorkmid. 857 GUE. In Frobs We Trust.\"");
             u.uconduct.literate++;
-#if 0 /* 5lo: This causes a segfault, but its not needed anyway */
-#ifndef GOLDOBJ 
-	    /* Give it back to them, then */
-	    u.ugold = scroll->quan;
-	    dealloc_obj(scroll);
-#endif
-#endif
 	    return 1;
 	} else if (scroll->oartifact == ART_ORB_OF_FATE) {
 	    if (Blind)
