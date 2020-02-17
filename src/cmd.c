@@ -562,9 +562,7 @@ STATIC_PTR int
 playersteal()
 {
 	int x, y;
-	int chanch, base, dexadj, intadj, statbonus;
-	/* 5lo: for the nymph role */
-	int chradj = 1;
+	int chanch, base, dexadj, intadj, statbonus, chradj;
 	long gstolen = 0;
 	struct monst *mtmp, *mwatch;
 	boolean no_steal = FALSE;
@@ -604,7 +602,7 @@ playersteal()
 	if(MON_AT(x, y)) {
 	    mtmp = m_at(x, y);
 
-	    if (Role_if(PM_KNIGHT)) {
+	    if (Role_if(PM_KNIGHT) || Role_if(PM_PALADIN)) {
 			You_feel("like a common thief.");
 			adjalign(-sgn(u.ualign.type));
 	    }
