@@ -514,6 +514,40 @@ A("Houchou",                SPOON,
 
 /*** Special Artifacts ***/
 
+#if 0 /* 5lo: Deferred, to be used as racial crowning gifts */
+A("The Medallion of Shifters",  AMULET_OF_ESP,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), 0, 0,
+	NO_ATTK,        NO_DFNS,        NO_CARY,
+	PROT_POLY,      A_NEUTRAL, PM_DOPPELGANGER, NON_PM, 50000L ),
+
+A("The Arkenstone",       DIAMOND,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_LUCK), 0, 0,
+	NO_ATTK,      NO_DFNS,    CARY(AD_MAGM),
+	OBJ_DETECTION,            A_LAWFUL, NON_PM, PM_DWARF, 50000L),
+
+A("The Palantir of Westernesse",        CRYSTAL_BALL,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL),
+		(SPFX_ESP|SPFX_REGEN|SPFX_HSPDAM), 0,
+	NO_ATTK,        NO_DFNS,        NO_CARY,
+	TAMING,		A_CHAOTIC, NON_PM , PM_ELF, 50000L),
+
+A("The Tentacle Staff",  QUARTERSTAFF,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK|SPFX_DRLI), (SPFX_EREGEN|SPFX_HSPDAM), 0,
+	DRLI(8,5),        NO_DFNS,        CARY(AD_MAGM),
+	LEV_TELE,         A_CHAOTIC, NON_PM, PM_DROW, 50000L),
+
+A("The Pick of Flandal Steelskin",       PICK_AXE,
+	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_DALIGN), (SPFX_WARN), 0,
+	FIRE(5,20),     NO_DFNS,        CARY(AD_FIRE),
+	CONFLICT,       A_NEUTRAL, NON_PM, PM_GNOME, 50000L),
+
+A("The One Ring", RIN_INVISIBILITY,
+    (SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL), (SPFX_HSPDAM|SPFX_WARN), 0,
+    NO_ATTK,        NO_DFNS,        CARY(AD_DRLI),
+	CONFLICT,       A_LAWFUL,       NON_PM, PM_HOBBIT, 50000L),
+
+#endif
+
 # ifdef WALLET_O_P
 /* KMH -- made it a bag of holding */
 A("Wallet of Perseus",       BAG_OF_HOLDING,
