@@ -562,7 +562,9 @@ STATIC_PTR int
 playersteal()
 {
 	int x, y;
-	int chanch, base, dexadj, intadj, statbonus, chradj;
+	int base, dexadj, intadj, chradj;
+	int chanch = 0;
+	int statbonus = 0; // just in case
 	long gstolen = 0;
 	struct monst *mtmp, *mwatch;
 	boolean no_steal = FALSE;
@@ -645,8 +647,9 @@ playersteal()
 	    if (Race_if(PM_NYMPH)) {
 	    	 if (ACURR(A_CHA) > 14) statbonus += (ACURR(A_CHA) - 14) * chradj / 10;
 	    }
-
+//	    if (wizard) pline("PRE chanch %d - base %d - statbonus %d", chanch, base, statbonus);
 	    chanch = base + statbonus;
+//	    if (wizard) pline("POST chanch %d", chanch);
 
 	    if (uarmg && !uarmg->otyp == GAUNTLETS_OF_DEXTERITY) 
 			chanch -= 5;
