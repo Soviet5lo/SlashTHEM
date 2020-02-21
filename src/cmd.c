@@ -645,7 +645,7 @@ playersteal()
 	    else if (ACURR(A_INT) > 14) statbonus += (ACURR(A_INT) - 14) * intadj / 10;
 
 	    if (Race_if(PM_NYMPH)) {
-	    	 if (ACURR(A_CHA) > 14) statbonus += (ACURR(A_CHA) - 14) * chradj / 10;
+	    	 if (ACURR(A_CHA) > 14) statbonus += (ACURR(A_CHA) - 14) * chradj / 4;
 	    }
 //	    if (wizard) pline("PRE chanch %d - base %d - statbonus %d", chanch, base, statbonus);
 	    chanch = base + statbonus;
