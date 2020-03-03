@@ -103,6 +103,13 @@ Version 1.0 (XXXX-XX-XX)
 - Removed a bunch of extra Scrolls of Root Password Detection being generated in special levels.
 - Removed the extra bonus to the carrying cap via levelup.
 - Removed the misleading message when reading a cursed scroll of identify.
+- Dragon scales are no longer generated with random enchantment or BUC status.
+- Reverted murder punishment back to vanilla (neutrals still get a lower luck penalty however).
+- Removed all of the added rumors as they don't apply anymore.
+- Restored how the magic beam trap functions from Sporkhack.
+- Reverted attrcurse() back to vanilla with the possibility of removing sleep, shock, acid and disintegration resistance.
+- Reverted a change that allowed sea monsters to generate on bare floor.
+
 ###### Other Highlights
 - Implemented Gardens from Unnethack.
 - Implemented the DYWYPISI patch. (this also applies to dumplogs.)
@@ -160,6 +167,7 @@ Version 1.0 (XXXX-XX-XX)
     - Musa-Shiya, neutral aligned Hawaiian Shirt.  Grants +2 to AC and Hallucination Resistance while warn.  Invoke for Enlightenment, first sacrifice gift for Musicians.
     - Silverstar, lawful aligned Silver Mace.  +4 to-hit and +10 damage to all monsters.  Grants Drain Resistance and Reflection while wielded.  First sacrifice gift for Yeomen.
 - Redesigned the Chaotic Quest level.  It's now a modification of the Lich's Manse level from Lethe.
+- Enhanced the #borrow command by porting Nethack Brass's "bereave" command, allowing it to steal objects from monsters instead of just gold.
 
 #### Changes
 - Monster changes
@@ -180,6 +188,7 @@ Version 1.0 (XXXX-XX-XX)
     - Baby Liches can cast spells like other liches.
     - Golden Dragons and their scales now emit light.
     - Werejackals can now also summon foxes and coyotes. (from Nethack 3.6)
+    - Restored Talking and Depression attacks from Nethack: The Next Generation
 
 - Object changes
     - Chemistry set no longer works randomly without knowing the spell of Chemistry.
@@ -219,6 +228,9 @@ Version 1.0 (XXXX-XX-XX)
     - Implemented the Grain Scythe from SpliceHack.
         - Grain Scythe has +6 to-hit and +20 damage when applied against straw golems.
     - Icebiter has been renamed to Frostbite.  In addition its base object is now a battle axe.
+    - Backported the Aklys enhancements from Nethack 3.6.1.  Now if wielded they return when thrown.
+    - Staff of Aesculapius protects against draining like it does in Nethack.
+    - Backported the Candy Bar Wrapper enhancement from Nethack 3.6
 - Role Changes
     - Renamed Korsair to Corsair
     - Renamed Chevalier to Paladin
@@ -255,6 +267,7 @@ Version 1.0 (XXXX-XX-XX)
     - Firefighters no longer start with intrinsic fire resistance, instead they gain it at level 15.
     - Tesla's Coat is given to Geeks as their first sacrifice gift.
     - Zookeepers start with a Long Bullwhip instead of a Bullwhip.
+    - Paladins learn Blessing at level 5, and Healing Hands at level 10
 - Race Changes
     - Renamed a lot of the Slash'EM Extended races.
         - Ghastly renamed to Ghoul
@@ -292,6 +305,7 @@ Version 1.0 (XXXX-XX-XX)
    - Ogres only get the Primal Roar and Berserk techniques.
    - Kobolds start with a variable amount of darts (rn1(10,5))
    - Giants no longer start with a bolder in inventory.
+   - Nymphs no longer have a natural stealing attack (instead they gain a bonus to #borrowing).
 - Music changes
     - More monsters can now sing along with a bard (from dNethack)
     - magical instruments can now be used as their non-magical equivalents for music spells.
@@ -328,6 +342,7 @@ Version 1.0 (XXXX-XX-XX)
 - Added a scroll of consecration to moloch's temple (from dNethack).
 - If the forge is generated in the dungeon it is always generated at dungeon level 20.
 - Spectres are created in place of Ghosts for bones files if the player is above exp level 15.
+- Training the riding skill now only takes 25 turns per point.
 
 #### Bugfixes
 - Fixed some compiler warnings.
@@ -365,3 +380,5 @@ Version 1.0 (XXXX-XX-XX)
 - Fixed player monster monks spawning with wrong weapons.
 - Fix a weirdly worded message when killed by drinking a potion of cyanide
 - Fix death via vogons creating a vampire in bones files.
+- Fixed "What an interesting effect" message when breaking wands of solar beam or acid.
+- Fixed some music shopkeeper names not being properly separated.
