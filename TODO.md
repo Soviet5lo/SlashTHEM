@@ -5,6 +5,7 @@ NOTE: This is not a complete list, just something to note down into a file.
     * Bottom status bar (mostly) disappears upon death with dump enabled.
     * Segfault when using raise zombies on a human corpse (issue #29 on github)
     * Plenty of potion of blood weirdness in relation to the DYWYPISI patch.
+    * #borrowing a wielded weapon from a monster sometimes results in the monster attacking with the stolen weapon.
 * Put the added throne skill enhancement perk into a menu like do_acquirement instead of several y/n prompts.
 * Update upgrade_obj in potion.c for any new objects added.
 
@@ -18,6 +19,8 @@ NOTE: This is not a complete list, just something to note down into a file.
 * Remove several old defines (FIREARMS, TOURIST, YEOMAN).
 * Port over blasters from dNethack for Stormtroopers to use in the Jedi quest.
 * Update the info on the Nethack Wiki as its completely out of date at this point.
+* Update menucolors on windows to use regex instead of basic globbing.
+* Better windows default config.
 
 === Probably won't be done unless someone assists with this
 * GTK/Win32 window ports that utilize tiles.
