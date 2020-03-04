@@ -52,6 +52,7 @@ STATIC_OVL int artidisco[NROFARTIFACTS];
 STATIC_DCL void NDECL(hack_artifacts);
 STATIC_DCL boolean FDECL(attacks, (int,struct obj *));
 
+int FDECL(dopetmenu, (const char *,struct obj *));
 int FDECL(dolordsmenu, (const char *,struct obj *));
 
 boolean
@@ -2163,6 +2164,70 @@ arti_invoke(obj)
 	    (void)do_mapping();
 	    break;
 	}
+    case PETMASTER:{
+	    int pet_effect = 0;
+	    if(uarm && uarm == obj && yn("Take something out of your pockets?") == 'y'){
+		pet_effect = dopetmenu("Take what out of your pockets?", obj);
+		switch(pet_effect){
+		    case 0:
+			break;
+		    case SELECT_WHISTLE:
+			otmp = mksobj(MAGIC_WHISTLE, TRUE, FALSE);
+			otmp->blessed = obj->blessed;
+			otmp->cursed = obj->cursed;
+			otmp->bknown = obj->bknown;
+			hold_another_object(otmp, "You fumble and %s.",
+			  aobjnam(otmp, "fall"), (const char *)0);
+			break;
+		    case SELECT_LEASH:
+			otmp = mksobj(LEASH, TRUE, FALSE);
+			otmp->blessed = obj->blessed;
+			otmp->cursed = obj->cursed;
+			otmp->bknown = obj->bknown;
+			hold_another_object(otmp, "You fumble and %s.",
+			  aobjnam(otmp, "fall"), (const char *)0);
+			break;
+		    case SELECT_SADDLE:
+			otmp = mksobj(SADDLE, TRUE, FALSE);
+			otmp->blessed = obj->blessed;
+			otmp->cursed = obj->cursed;
+			otmp->bknown = obj->bknown;
+			hold_another_object(otmp, "You fumble and %s.",
+			  aobjnam(otmp, "fall"), (const char *)0);
+			break;
+		    case SELECT_TRIPE:
+			otmp = mksobj(TRIPE_RATION, TRUE, FALSE);
+			otmp->blessed = obj->blessed;
+			otmp->cursed = obj->cursed;
+			otmp->bknown = obj->bknown;
+			hold_another_object(otmp, "You fumble and %s.",
+			  aobjnam(otmp, "fall"), (const char *)0);
+			break;
+		    case SELECT_APPLE:
+			otmp = mksobj(APPLE, TRUE, FALSE);
+			otmp->blessed = obj->blessed;
+			otmp->cursed = obj->cursed;
+			otmp->bknown = obj->bknown;
+			hold_another_object(otmp, "You fumble and %s.",
+			  aobjnam(otmp, "fall"), (const char *)0);
+			break;
+		    case SELECT_BANANA:
+			otmp = mksobj(BANANA, TRUE, FALSE);
+			otmp->blessed = obj->blessed;
+			otmp->cursed = obj->cursed;
+			otmp->bknown = obj->bknown;
+			hold_another_object(otmp, "You fumble and %s.",
+			  aobjnam(otmp, "fall"), (const char *)0);
+			break;
+		}
+	    }else if(uarm && uarm == obj && yn("Restore discipline?") == 'y'){
+		(void) pet_detect_and_tame(obj);
+	    }else{
+		if(!(uarm && uarm == obj)) You_feel("that you should be wearing the %s", xname(obj));
+		obj->age = 0; //didn't invoke
+	    }
+	    break;
+	}
 
 	case LORDLY: {
 		if(uwep && uwep == obj){
@@ -2526,6 +2591,80 @@ arti_poly_contents(obj)
 		dobj = 0;
 	}
 }
+
+int
+dopetmenu(prompt, obj)
+const char *prompt;
+struct obj *obj;
+{
+	winid tmpwin;
+	int n, how;
+	char buf[BUFSZ];
+	char incntlet = 'a';
+	menu_item *selected;
+	anything any;
+
+	tmpwin = create_nhwindow(NHW_MENU);
+	start_menu(tmpwin);
+	any.a_void = 0;		/* zero out all bits */
+
+	Sprintf(buf, "What will you take out?");
+	add_menu(tmpwin, NO_GLYPH, &any, 0, 0, ATR_BOLD, buf, MENU_UNSELECTED);
+	
+	Sprintf(buf, "Magic whistle");
+	any.a_int = SELECT_WHISTLE;	/* must be non-zero */
+	add_menu(tmpwin, NO_GLYPH, &any,
+		incntlet, 0, ATR_NONE, buf,
+		MENU_UNSELECTED);
+	incntlet = (incntlet != 'z') ? (incntlet+1) : 'A';
+	
+	Sprintf(buf, "Leash");
+	any.a_int = SELECT_LEASH;	/* must be non-zero */
+	add_menu(tmpwin, NO_GLYPH, &any,
+		incntlet, 0, ATR_NONE, buf,
+		MENU_UNSELECTED);
+	incntlet = (incntlet != 'z') ? (incntlet+1) : 'A';
+	
+	
+	Sprintf(buf, "Saddle");
+	any.a_int = SELECT_SADDLE;	/* must be non-zero */
+	add_menu(tmpwin, NO_GLYPH, &any,
+		incntlet, 0, ATR_NONE, buf,
+		MENU_UNSELECTED);
+	incntlet = (incntlet != 'z') ? (incntlet+1) : 'A';
+	
+	
+	Sprintf(buf, "Tripe");
+	any.a_int = SELECT_TRIPE;	/* must be non-zero */
+	add_menu(tmpwin, NO_GLYPH, &any,
+		incntlet, 0, ATR_NONE, buf,
+		MENU_UNSELECTED);
+	incntlet = (incntlet != 'z') ? (incntlet+1) : 'A';
+	
+	
+	Sprintf(buf, "Apple");
+	any.a_int = SELECT_APPLE;	/* must be non-zero */
+	add_menu(tmpwin, NO_GLYPH, &any,
+		incntlet, 0, ATR_NONE, buf,
+		MENU_UNSELECTED);
+	incntlet = (incntlet != 'z') ? (incntlet+1) : 'A';
+	
+	
+	Sprintf(buf, "Banana");
+	any.a_int = SELECT_BANANA;	/* must be non-zero */
+	add_menu(tmpwin, NO_GLYPH, &any,
+		incntlet, 0, ATR_NONE, buf,
+		MENU_UNSELECTED);
+	incntlet = (incntlet != 'z') ? (incntlet+1) : 'A';
+	
+	end_menu(tmpwin, prompt);
+
+	how = PICK_ONE;
+	n = select_menu(tmpwin, how, &selected);
+	destroy_nhwindow(tmpwin);
+	return (n > 0) ? selected[0].item.a_int : 0;
+}
+
 
 int
 dolordsmenu(prompt, obj)

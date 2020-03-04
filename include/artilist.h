@@ -144,7 +144,7 @@ A("Skullcrusher",               CLUB,
 
 A("Liontamer",                BULLWHIP, /* 5lo: was quest artifact */
 	(SPFX_RESTR|SPFX_DCLAS), 0, S_FELINE,
-	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, PM_ZOOKEEPER, NON_PM, 800L ),
+	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_LAWFUL, NON_PM, NON_PM, 800L ), // was for zookeepers
 
 A("Trollsbane",                 MORNING_STAR,
 	(SPFX_RESTR|SPFX_DCLAS), 0, S_TROLL,
@@ -378,6 +378,11 @@ A("Bugzapper",			FLY_SWATTER,
 	(SPFX_RESTR|SPFX_ATTK), 0, 0,
 	ELEC(3,10),	NO_DFNS,	NO_CARY,
 	0, A_NEUTRAL, NON_PM, NON_PM, 2000L ),
+
+A("The Beastmaster's Duster",		LEATHER_JACKET,
+	(SPFX_RESTR|SPFX_PROTEC), 0, 0,
+	NO_ATTK,	NO_DFNS,	NO_CARY,
+	PETMASTER,  A_NEUTRAL, PM_ZOOKEEPER, NON_PM, 9000L ),
 
 /*** Chaotic artifacts ***/
 A("Grimtooth",                  ORCISH_DAGGER,

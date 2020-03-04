@@ -48,6 +48,13 @@
 #define COMMAND_LIFE		9
 #define COMMAND_KNEEL		10
 
+#define SELECT_WHISTLE 		1
+#define SELECT_LEASH 		SELECT_WHISTLE + 1
+#define SELECT_SADDLE 		SELECT_LEASH + 1
+#define SELECT_TRIPE 		SELECT_SADDLE + 1
+#define SELECT_APPLE 		SELECT_TRIPE + 1
+#define SELECT_BANANA 		SELECT_APPLE + 1
+
 struct artifact {
 	int	otyp;
 	const char  *name;
@@ -93,5 +100,6 @@ struct artifact {
 #define LEADERSHIP 	(LAST_PROP+26)
 #define MAP_LEVEL	(LAST_PROP+27)
 #define LORDLY		(LAST_PROP+28)
- 
+#define PETMASTER 	(LAST_PROP+29)
+
 #endif /* ARTIFACT_H */
