@@ -3370,7 +3370,9 @@ use_natural:
 			} else
 				missum(mon, tmp, dieroll, mattk);
 			break;
-
+		case AT_TALK:
+			You("talk to %s.  But you don't seem to be too convincing.", mon_nam(mon));
+			break;
 		case AT_MAGC:
 			/* No check for uwep; if wielding nothing we want to
 			 * do the normal 1-2 points bare hand damage...
@@ -3379,9 +3381,6 @@ use_natural:
 				|| youmonst.data->mlet==S_ORC
 				|| youmonst.data->mlet==S_GNOME
 				)) goto use_weapon;
-		case AT_TALK:
-			You("talk to %s.  But you don't seem to be too convincing.", mon_nam(mon));
-			break;
 		case AT_NONE:
 		case AT_BOOM:
 			continue;
