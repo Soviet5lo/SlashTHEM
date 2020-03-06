@@ -23,8 +23,10 @@ NOTE: This is not a complete list, just something to note down into a file.
 * Update menucolors on windows to use regex instead of basic globbing.
 * Better windows default config.
 * If playing as a ghoul, give a message when a corpse in inventory/line of sight becomes edible.
+* Full update of database and guidebook.
 
 ### Probably won't be done unless someone assists with this
+* New level compiler from Sporkhack/Unnethack.
 * GTK/Win32 window ports that utilize tiles.
 
 ### Don't count on it
