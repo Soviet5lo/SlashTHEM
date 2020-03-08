@@ -284,6 +284,10 @@ struct monst *mon;
 		case HALBERD:
 		case SPETUM:		tmp += rnd(6); break;
 
+		case WAR_HAMMER: 	tmp += rnd(8); break;
+
+		case HEAVY_HAMMER: 	tmp += rnd(10); break;
+
 		case BATTLE_AXE:
 		case BARDICHE:
 		case TRIDENT:		tmp += d(2,4); break;
@@ -319,7 +323,6 @@ struct monst *mon;
 		case CROSSBOW_BOLT:
 		case MACE:
 		case SILVER_MACE:
-		case WAR_HAMMER:
 		case MALLET:
 		case FLAIL:
 		case SPETUM:
@@ -353,9 +356,11 @@ struct monst *mon;
 		case RED_LIGHTSABER: 	tmp +=6; break;
 #endif
 
+		case WAR_HAMMER:
 		case ACID_VENOM:	tmp += rnd(6); break;
 		case SCIMITAR:
 			if(otmp->oartifact == ART_REAVER) tmp += d(1,8); break;
+		case HEAVY_HAMMER: 	tmp += rnd(8); break;
 	    }
 	}
 	if (Is_weapon) {

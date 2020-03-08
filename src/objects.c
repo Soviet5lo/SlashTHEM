@@ -247,12 +247,13 @@ WEAPON("flail", (char *)0,
 
 /* Hammers */
 WEAPON("war hammer", (char *)0,
-	1, 0, 0, 24, 50,  5,  4,  4, 0, B,   P_HAMMER, IRON, HI_METAL),
-	/* +1 small */
+	1, 0, 1, 24, 50,  5,  6, 8, 0, B,   P_HAMMER, IRON, HI_METAL),
+	/* +d6 small, +d8 large */
 WEAPON("heavy hammer", (char *)0,
-	1, 0, 0,  2, 60,500,  6, 6, 0, B,   P_HAMMER, METAL, HI_METAL),
+	1, 0, 1,  2, 125,500, 8, 10, 0, B,   P_HAMMER, METAL, HI_METAL),
 	/* STEPHEN WHITE'S NEW CODE */
 	/* Base for artifact */
+ 	/* 5lo: +d8 small, +d10 large, two-handed */
 
 WEAPON("mallet", (char *)0,
 	1, 0, 0,  3, 25,500, 4, 4, 0, B,   P_HAMMER, WOOD, HI_WOOD),
