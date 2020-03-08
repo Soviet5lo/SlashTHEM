@@ -84,7 +84,7 @@ BRANCH: 	"The Giant Caverns" @ (32, 4)
 
 #   And the levels...
 LEVEL:		"nymph" "N" @ (23, 2) 35
-RNDLEVEL:	"bigrm" "B" @ (20, 20) 75 22
+RNDLEVEL:	"bigrm" "B" @ (20, 20) 75 20
 #   Storage room (treasure) on levels 19-26, 66% of the time
 #   "Unused 'cause they suck"?
 RNDLEVEL:	"stor" "S" @ (19, 21) 66 3
