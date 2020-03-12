@@ -3226,8 +3226,7 @@ register struct trobj *trop;
 				dealloc_obj(obj);
 				obj = mkobj(trop->trclass, FALSE);
 				otyp = obj->otyp;
-			} /* re-enabled a lot of stuff. Startscum if you really have to. --Amy */
-			/* 5lo: Re-disabled everything from above.  Wastes spots in inventory for some roles. */
+			}
 
 #ifdef JEDI
 			if (is_lightsaber(obj))
