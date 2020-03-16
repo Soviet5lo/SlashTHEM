@@ -152,7 +152,7 @@ static struct trobj Lunatic[] = { /* 5lo: Changing to starting objects from Slas
 };
 
 static struct trobj Drunk[] = {
-	{ RUBBER_HOSE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },    /* quan is variable */
+	{ RUBBER_HOSE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ POT_BOOZE, UNDEF_SPE, POTION_CLASS, 5, UNDEF_BLESS },
 	{ UNDEF_TYP, UNDEF_SPE, POTION_CLASS, 5, UNDEF_BLESS },
 	{ UNDEF_TYP, UNDEF_SPE, POTION_CLASS, 5, UNDEF_BLESS },
@@ -163,6 +163,7 @@ static struct trobj Drunk[] = {
 static struct trobj Officer[] = {
 	{ CLUB, 0, WEAPON_SYM, 1, UNDEF_BLESS },
 	{ PISTOL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
+#define COP_BULLET 2
 	{ BULLET, 0, WEAPON_CLASS, 40, 0 },
 	{ LEATHER_ARMOR, 0, ARMOR_SYM, 1, UNDEF_BLESS },
 #if 0 /* 5lo: Removed as these were to simulate firearms in Nethack-- */
@@ -330,6 +331,7 @@ static struct trobj Knight[] = {
 static struct trobj Warrior[] = {
 	{ BROADSWORD, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ CROSSBOW, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
+#define WAR_BOLT 2
 	{ CROSSBOW_BOLT, 0, WEAPON_CLASS, 25, 1 },
 	{ SCALE_MAIL, 0, ARMOR_CLASS, 1, 0 },
 	{ LOW_BOOTS, 0, ARMOR_CLASS, 1, 0},
@@ -388,6 +390,7 @@ static struct trobj Pirate[] = {
 #define PIR_SNACK 7
 #define PIR_JEWELRY 9
 #define PIR_TOOL 10
+#define PIR_BULLET 3
 	{ SCIMITAR, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ KNIFE, 1, WEAPON_CLASS, 2, 0 },
 	{ PISTOL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
@@ -620,10 +623,6 @@ static struct trobj KoboldItemC[] = {
 	{ ORCISH_SPEAR, 0, WEAPON_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-static struct trobj UngMoldWand[] = {
-	{ WAN_DEATH, 10, WAND_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
 static struct trobj AutomatonItem[] = {
 	{ POT_OIL, 0, POTION_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -772,10 +771,6 @@ static struct trobj Instrument[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Xtra_food[] = {
-	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Xtra_fopod[] = {
 	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
@@ -2455,6 +2450,8 @@ u_init()
 		skill_init(Skill_Nob);
 		break;
 	case PM_PIRATE:
+		Pirate[PIR_BULLET].trquan = rn1(10, 25);
+
 #ifndef GOLDOBJ
 		u.ugold = u.ugold0 = rnd(300);
 #else
@@ -2512,6 +2509,7 @@ u_init()
 		skill_init(Skill_N);
 		break;
 	case PM_WARRIOR:
+		Warrior[WAR_BOLT].trquan = rn1(20, 26);
 		ini_inv(Warrior);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
@@ -2593,6 +2591,7 @@ u_init()
 		break;
 
 	case PM_OFFICER:
+		Officer[COP_BULLET].trquan = rn1(10, 30);
 		ini_inv(Officer);
 		skill_init(Skill_Off);
 		break;
