@@ -3387,6 +3387,13 @@ void undo_genocide(void)
 	int i;
 	char buf[BUFSZ];
 	int mn;
+	int genonum;
+
+	genonum = num_genocides();
+	if (genonum == 0) {
+		pline("However, no creatures have been genocided.");
+		return;
+	}
 
 	for (i=0;i<5;i++) {
 		if (i >= 5) {
