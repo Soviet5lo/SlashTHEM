@@ -1588,7 +1588,7 @@ E const char *FDECL(mimic_obj_name, (struct monst *));
 
 E boolean FDECL(match_optname, (const char *,const char *,int,BOOLEAN_P));
 E void NDECL(initoptions);
-E void FDECL(parseoptions, (char *,BOOLEAN_P,BOOLEAN_P));
+E void FDECL(parseoptions, (char *,BOOLEAN_P,BOOLEAN_P,unsigned));
 E void FDECL(parsetileset, (char *));
 E int NDECL(doset);
 E int NDECL(dotogglepickup);

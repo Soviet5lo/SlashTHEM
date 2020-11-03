@@ -719,7 +719,7 @@ initoptions()
 			/* let the total length of options be long;
 			 * parseoptions() will check each individually
 			 */
-			parseoptions(opts, TRUE, FALSE);
+			parseoptions(opts, TRUE, FALSE, 0);
 		}
 	} else
 #endif
@@ -766,64 +766,96 @@ nmcpy(dest, src, maxlen)
 }
 
 /*
- * escapes: escape expansion for showsyms. C-style escapes understood include
- * \n, \b, \t, \r, \xnnn (hex), \onnn (octal), \nnn (decimal). The ^-prefix
- * for control characters is also understood, and \[mM] followed by any of the
- * previous forms or by a character has the effect of 'meta'-ing the value (so
- * that the alternate character set will be enabled).
+ * escapes(): escape expansion for showsyms.  C-style escapes understood
+ * include \n, \b, \t, \r, \xnnn (hex), \onnn (octal), \nnn (decimal).
+ * (Note: unlike in C, leading digit 0 is not used to indicate octal;
+ * the letter o (either upper or lower case) is used for that.
+ * The ^-prefix for control characters is also understood, and \[mM]
+ * has the effect of 'meta'-ing the value which follows (so that the
+ * alternate character set will be enabled).
+ *
+ * X     normal key X
+ * ^X    control-X
+ * \mX   meta-X
+ *
+ * For 3.4.3 and earlier, input ending with "\M", backslash, or caret
+ * prior to terminating '\0' would pull that '\0' into the output and then
+ * keep processing past it, potentially overflowing the output buffer.
+ * Now, trailing \ or ^ will act like \\ or \^ and add '\\' or '^' to the
+ * output and stop there; trailing \M will fall through to \<other> and
+ * yield 'M', then stop.  Any \X or \O followed by something other than
+ * an appropriate digit will also fall through to \<other> and yield 'X'
+ * or 'O', plus stop if the non-digit is end-of-string.
  */
 STATIC_OVL void
 escapes(cp, tp)
-const char	*cp;
-char *tp;
+const char *cp; /* might be 'tp', updating in place */
+char *tp; /* result is never longer than 'cp' */
 {
-    while (*cp)
-    {
-	int	cval = 0, meta = 0;
+    static NEARDATA const char oct[] = "01234567", dec[] = "0123456789",
+                               hex[] = "00112233445566778899aAbBcCdDeEfF";
+    const char *dp;
+    int cval, meta, dcount;
 
-	if (*cp == '\\' && index("mM", cp[1])) {
-		meta = 1;
-		cp += 2;
-	}
-	if (*cp == '\\' && index("0123456789xXoO", cp[1]))
-	{
-	    const char *dp, *hex = "00112233445566778899aAbBcCdDeEfF";
-	    int dcount = 0;
+    while (*cp) {
+        /* \M has to be followed by something to do meta conversion,
+           otherwise it will just be \M which ultimately yields 'M' */
+        meta = (*cp == '\\' && (cp[1] == 'm' || cp[1] == 'M') && cp[2]);
+        if (meta)
+            cp += 2;
 
-	    cp++;
-	    if (*cp == 'x' || *cp == 'X')
-		for (++cp; (dp = index(hex, *cp)) && (dcount++ < 2); cp++)
-		    cval = (cval * 16) + (dp - hex) / 2;
-	    else if (*cp == 'o' || *cp == 'O')
-		for (++cp; (index("01234567",*cp)) && (dcount++ < 3); cp++)
-		    cval = (cval * 8) + (*cp - '0');
-	    else
-		for (; (index("0123456789",*cp)) && (dcount++ < 3); cp++)
-		    cval = (cval * 10) + (*cp - '0');
-	}
-	else if (*cp == '\\')		/* C-style character escapes */
-	{
-	    switch (*++cp)
-	    {
-	    case '\\': cval = '\\'; break;
-	    case 'n': cval = '\n'; break;
-	    case 't': cval = '\t'; break;
-	    case 'b': cval = '\b'; break;
-	    case 'r': cval = '\r'; break;
-	    default: cval = *cp;
-	    }
-	    cp++;
-	}
-	else if (*cp == '^')		/* expand control-character syntax */
-	{
-	    cval = (*++cp & 0x1f);
-	    cp++;
-	}
-	else
-	    cval = *cp++;
-	if (meta)
-	    cval |= 0x80;
-	*tp++ = cval;
+        cval = dcount = 0; /* for decimal, octal, hexadecimal cases */
+        if ((*cp != '\\' && *cp != '^') || !cp[1]) {
+            /* simple character, or nothing left for \ or ^ to escape */
+            cval = *cp++;
+        } else if (*cp == '^') { /* expand control-character syntax */
+            cval = (*++cp & 0x1f);
+            ++cp;
+
+        /* remaining cases are all for backslash; we know cp[1] is not \0 */
+        } else if (index(dec, cp[1])) {
+            ++cp; /* move past backslash to first digit */
+            do {
+                cval = (cval * 10) + (*cp - '0');
+            } while (*++cp && index(dec, *cp) && ++dcount < 3);
+        } else if ((cp[1] == 'o' || cp[1] == 'O') && cp[2]
+                   && index(oct, cp[2])) {
+            cp += 2; /* move past backslash and 'O' */
+            do {
+                cval = (cval * 8) + (*cp - '0');
+            } while (*++cp && index(oct, *cp) && ++dcount < 3);
+        } else if ((cp[1] == 'x' || cp[1] == 'X') && cp[2]
+                   && (dp = index(hex, cp[2])) != 0) {
+            cp += 2; /* move past backslash and 'X' */
+            do {
+                cval = (cval * 16) + ((int) (dp - hex) / 2);
+            } while (*++cp && (dp = index(hex, *cp)) != 0 && ++dcount < 2);
+        } else { /* C-style character escapes */
+            switch (*++cp) {
+            case '\\':
+                cval = '\\';
+                break;
+            case 'n':
+                cval = '\n';
+                break;
+            case 't':
+                cval = '\t';
+                break;
+            case 'b':
+                cval = '\b';
+                break;
+            case 'r':
+                cval = '\r';
+                break;
+            default:
+                cval = *cp;
+            }
+            ++cp;
+        }
+
+        if (meta)
+            cval |= 0x80;
+        *tp++ = (char) cval;
     }
     *tp = '\0';
 }
@@ -1488,9 +1520,10 @@ char *start;
 #endif /* STATUS_COLORS */
 
 void
-parseoptions(opts, tinitial, tfrom_file)
+parseoptions(opts, tinitial, tfrom_file, recur)
 register char *opts;
 boolean tinitial, tfrom_file;
+unsigned recur;
 {
 	register char *op;
 	unsigned num;
@@ -1502,7 +1535,12 @@ boolean tinitial, tfrom_file;
 	from_file = tfrom_file;
 	if ((op = index(opts, ',')) != 0) {
 		*op++ = 0;
-		parseoptions(op, initial, from_file);
+#define MAX_OPT_PER_LN 256U
+		if (recur < MAX_OPT_PER_LN)
+			parseoptions(op, initial, from_file, recur+1);
+		else
+			badoption("too many options on one line; ignoring remainder");
+#undef MAX_OPT_PER_LN
 	}
 	if (strlen(opts) > BUFSZ/2) {
 		badoption("option too long");
@@ -3348,7 +3386,7 @@ doset()
 		    /* boolean option */
 		    Sprintf(buf, "%s%s", *boolopt[opt_indx].addr ? "!" : "",
 			    boolopt[opt_indx].name);
-		    parseoptions(buf, setinitial, fromfile);
+		    parseoptions(buf, setinitial, fromfile, 0);
 		    if (wc_supported(boolopt[opt_indx].name) ||
 		    	wc2_supported(boolopt[opt_indx].name))
 			preference_update(boolopt[opt_indx].name);
@@ -3364,7 +3402,7 @@ doset()
 			    continue;
 			Sprintf(buf, "%s:%s", compopt[opt_indx].name, buf2);
 			/* pass the buck */
-			parseoptions(buf, setinitial, fromfile);
+			parseoptions(buf, setinitial, fromfile, 0);
 		    }
 		    if (wc_supported(compopt[opt_indx].name) ||
 			wc2_supported(compopt[opt_indx].name))
@@ -3445,7 +3483,7 @@ boolean setinitial,setfromfile;
 	retval = TRUE;
     } else if (!strcmp("pickup_types", optname)) {
 	/* parseoptions will prompt for the list of types */
-	parseoptions(strcpy(buf, "pickup_types"), setinitial, setfromfile);
+	parseoptions(strcpy(buf, "pickup_types"), setinitial, setfromfile, 0);
 	retval = TRUE;
     } else if (!strcmp("disclose", optname)) {
 	int pick_cnt, pick_idx, opt_idx;

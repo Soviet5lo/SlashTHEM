@@ -1965,7 +1965,7 @@ char		*tmp_levels;
 	 * appropriate fqn_prefix[] rather than specialized variables
 	 */
 	if (match_varname(buf, "OPTIONS", 4)) {
-		parseoptions(bufp, TRUE, TRUE);
+		parseoptions(bufp, TRUE, TRUE, 0);
 		if (plname[0])		/* If a name was given */
 			plnamesuffix();	/* set the character class */
 	} else if (match_varname(buf, "TILESETS", 7)) {
