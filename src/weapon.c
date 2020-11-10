@@ -323,6 +323,7 @@ struct monst *mon;
 		case CROSSBOW_BOLT:
 		case MACE:
 		case SILVER_MACE:
+		case ORNATE_MACE:
 		case MALLET:
 		case FLAIL:
 		case SPETUM:
@@ -658,7 +659,7 @@ static const NEARDATA short hwep[] = {
 	  CORPSE,  /* cockatrice corpse */
 	HEAVY_IRON_BALL,
 	IRON_CHAIN,
-	  TSURUGI, RUNESWORD, MALLET, HEAVY_HAMMER, 
+	  TSURUGI, RUNESWORD, ORNATE_MACE, MALLET, HEAVY_HAMMER, 
 	  DWARVISH_MATTOCK,
 #ifdef LIGHTSABERS
 	  RED_DOUBLE_LIGHTSABER, RED_LIGHTSABER,

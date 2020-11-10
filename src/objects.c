@@ -235,6 +235,9 @@ WEAPON("silver mace", (char *)0,
 WEAPON("mace", (char *)0,
 	1, 0, 0, 35, 30,  5,  6,  6, 0, B,   P_MACE, IRON, HI_METAL),
 	/* +1 small */
+WEAPON("ornate mace", (char *)0,
+	1, 0, 0,  0, 30,500,  6,  6, 0, B,   P_MACE, GOLD, HI_GOLD),
+	/* +1 small */
 
 /* Morning stars */
 WEAPON("morning star", (char *)0,
@@ -257,6 +260,7 @@ WEAPON("heavy hammer", (char *)0,
 
 WEAPON("mallet", (char *)0,
 	1, 0, 0,  3, 25,500, 4, 4, 0, B,   P_HAMMER, WOOD, HI_WOOD),
+	/* +1 small */
 
 /* Quarterstaves */
 WEAPON("quarterstaff", "staff",
