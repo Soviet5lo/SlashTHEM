@@ -223,8 +223,8 @@ RNDLEVEL:		"soko4" "none" @ (4, 0) 7
 #
 DUNGEON:	"Town" "A" (3, 0)
 LEVALIGN:       lawful
-RNDLEVEL:       "town" "T" @ (1, 0) 2
-LEVEL:          "village" "none" @ (2, 0) 
+LEVEL:          "village" "none" @ (1, 0) 
+RNDLEVEL:       "town" "T" @ (2, 0) 2
 LEVELDESC:      town
 
 ### Grund's Stronghold ###

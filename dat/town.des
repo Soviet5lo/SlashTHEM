@@ -9,6 +9,7 @@ MESSAGE: "You step into the sunlight. You hear the sounds of civilization."
 ROOM: "ordinary", lit, random, random, (76,17)
 NAME: "town"
 STAIR: random, down
+STAIR: random, up
 ENGRAVING: random, mark, "Welcome to the town of Angband!"
 FOUNTAIN: ( 6,12)
 FOUNTAIN: (39, 9)
@@ -82,6 +83,7 @@ MESSAGE: "You reach the surface.  You hear the sounds of civilization."
 ROOM: "ordinary", lit, random, random, (76,17)
 NAME: "town"
 STAIR: random, down
+STAIR: random, up
 FOUNTAIN: (55,9)
 FOUNTAIN: (22,8)
 ENGRAVING: random, mark, "Welcome to the city of Angband!"

@@ -64,7 +64,6 @@ REGION:(03,14,09,17),unlit,"ordinary"
 REGION:(11,18,15,18),unlit,"ordinary"
 REGION:(17,17,19,18),unlit,"ordinary"
 # Stairs and Branch
-STAIR:(13,18),up
 STAIR:(03,02),down
 # Doors
 DOOR:locked,(16,15)
