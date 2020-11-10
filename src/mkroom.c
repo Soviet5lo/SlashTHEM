@@ -290,7 +290,7 @@ int x,y;
         mon->mpeaceful = 0;
         set_malign(mon);
         /* Give him a sceptre to pound in judgment */
-        (void) mongets(mon, MACE);
+        (void) mongets(mon, ORNATE_MACE);
     }
 }
 
