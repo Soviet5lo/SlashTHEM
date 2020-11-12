@@ -3028,6 +3028,11 @@ weight_cap()
 		}
 		if (carrcap < 0) carrcap = 0;
 	}
+  /* 5lo: Giants, Trolls and Ogres can carry more than normal because of size. */
+  if (Race_if(PM_GIANT))
+     carrcap *= 2;
+  if ((Race_if(PM_TROLL)) || Race_if(PM_OGRE))
+     carrcap *= 1.5;
 	return((int) carrcap);
 }
 
