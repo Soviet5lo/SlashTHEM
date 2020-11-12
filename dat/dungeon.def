@@ -50,7 +50,7 @@ CHAINBRANCH:	"Sokoban" "oracle" + (1, 0) up -1
 
 # Levels between the Oracle and the Quest.
 #   There's no guarantee that all will be created.
-BRANCH:	        "Town" @ (10, 3) up -1
+CHAINBRANCH:	"Town" "oracle" + (2, 0) up -1
 LEVEL:		"rats" "R" @ (10, 2) 50
 RNDLEVEL:	"kobold" "K" @ (11, 2) 50 2
 BRANCH: 	"Grund's Stronghold" @ (12, 2)
