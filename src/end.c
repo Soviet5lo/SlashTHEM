@@ -795,7 +795,7 @@ int how;
 	}
 
 	/* Troll characters have a chance of reviving. --Amy */
-	if (Race_if(PM_TROLL) && how <= GENOCIDED && u.ulevel > 2 && rn2(4) ) {
+	if (Race_if(PM_TROLL) && (how <= GENOCIDED && how != STARVING) && u.ulevel > 2 && rn2(4) ) {
 		pline("But wait...");
 	    	losexp("failed troll revival", TRUE);
 		if (u.uexp > 0)
