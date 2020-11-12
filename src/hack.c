@@ -3002,17 +3002,16 @@ weight_cap()
 {
 	register long carrcap;
 
-	carrcap = 50*(ACURRSTR + ACURR(A_CON)) + 50 + 50;
+	carrcap = 35*(ACURRSTR + ACURR(A_CON)) + 50;
 	if (Upolyd) {
 		/* consistent with can_carry() in mon.c */
 		if (youmonst.data->mlet == S_NYMPH)
 			carrcap = MAX_CARR_CAP;
 		else if (!youmonst.data->cwt)
-			carrcap = ((carrcap * (long)youmonst.data->msize) / MZ_HUMAN) + 50;
+			carrcap = (carrcap * (long)youmonst.data->msize) / MZ_HUMAN;
 		else if (!strongmonst(youmonst.data)
 			|| (strongmonst(youmonst.data) && (youmonst.data->cwt > WT_HUMAN)))
-			carrcap = ((carrcap * (long)youmonst.data->cwt / WT_HUMAN)) + 50;
-	if (carrcap < 500) carrcap = 500;
+			carrcap = (carrcap * (long)youmonst.data->cwt / WT_HUMAN);
 	}
 
 	if (Levitation || Is_airlevel(&u.uz)    /* pugh@cornell */
@@ -3024,8 +3023,8 @@ weight_cap()
 	else {
 		if(carrcap > MAX_CARR_CAP) carrcap = MAX_CARR_CAP;
 		if (!Flying) {
-			if(EWounded_legs & LEFT_SIDE) carrcap -= 250;
-			if(EWounded_legs & RIGHT_SIDE) carrcap -= 250;
+			if(EWounded_legs & LEFT_SIDE) carrcap -= 100;
+			if(EWounded_legs & RIGHT_SIDE) carrcap -= 100;
 		}
 		if (carrcap < 0) carrcap = 0;
 	}
