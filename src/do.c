@@ -18,7 +18,9 @@ STATIC_DCL void FDECL(dosinkring, (struct obj *));
 
 STATIC_PTR int FDECL(drop, (struct obj *));
 STATIC_PTR int NDECL(wipeoff);
+#if 0 /* unused */
 STATIC_PTR void NDECL(lose_comp_objects);
+#endif
 
 #ifdef OVL0
 STATIC_DCL int FDECL(menu_drop, (int));
@@ -55,6 +57,7 @@ dodrop()
 #endif /* OVLB */
 #ifdef OVL0
 
+#if 0 /* Unused, but carried over from Nethack: The Next Generation */
 STATIC_PTR void
 lose_comp_objects()
 {
@@ -76,6 +79,7 @@ lose_comp_objects()
 		otmp = on;
 	}
 }
+#endif
 
 /* Called when a boulder is dropped, thrown, or pushed.  If it ends up
  * in a pool, it either fills the pool up or sinks away.  In either case,
