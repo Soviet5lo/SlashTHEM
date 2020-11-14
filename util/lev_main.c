@@ -596,6 +596,7 @@ char c;
 		  case 'L'  : return(LAVAPOOL);
 		  case 'I'  : return(ICE);
 		  case 'W'  : return(WATER);
+			case 'w' 	: return(PUDDLE);
 		  case 'T'	: return (TREE);
 		  case 'F'	: return (IRONBARS);	/* Fe = iron */
 		  case 'Z'  :	/* Kazi */
