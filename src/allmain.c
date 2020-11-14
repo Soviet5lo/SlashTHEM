@@ -271,7 +271,7 @@ moveloop()
 		    if (u.uinvulnerable) {
 			/* for the moment at least, you're in tiptop shape */
 			wtcap = UNENCUMBERED;
-		    } else if (Upolyd && youmonst.data->mlet == S_EEL && !is_pool(u.ux,u.uy) && !Is_waterlevel(&u.uz)) {
+		    } else if (Upolyd && youmonst.data->mlet == S_EEL && !is_pool(u.ux,u.uy, FALSE) && !Is_waterlevel(&u.uz)) {
 			if (u.mh > 1) {
 			    u.mh--;
 			    flags.botl = 1;

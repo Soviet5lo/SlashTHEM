@@ -59,7 +59,7 @@ unsigned gpflags;
 		is_badpos = 1;
 
 	    mdat = mtmp->data;
-	    pool = is_pool(x,y);
+	    pool = is_pool(x,y, FALSE); // ?????
 	    if (mdat->mlet == S_EEL && !pool && rn2(13) && !ignorewater)
 		is_badpos = 1;
 
@@ -79,7 +79,7 @@ unsigned gpflags;
 	    if (passes_walls(mdat) && may_passwall(x,y)) return is_badpos;
 	}
 	if (!ACCESSIBLE(levl[x][y].typ)) {
-		if (!(is_pool(x,y) && ignorewater)) return -1;
+		if (!(is_pool(x,y, FALSE) && ignorewater)) return -1;
 	}
 
 	if (closed_door(x, y) && (!mdat || !amorphous(mdat)))
@@ -531,7 +531,7 @@ boolean allow_drag;
 	if (hides_under(youmonst.data))
 		u.uundetected = OBJ_AT(nux, nuy);
 	else if (youmonst.data->mlet == S_EEL)
-		u.uundetected = is_pool(nux, nuy);
+		u.uundetected = is_pool(nux, nuy, FALSE);
 	else {
 		u.uundetected = 0;
 		/* mimics stop being unnoticed */

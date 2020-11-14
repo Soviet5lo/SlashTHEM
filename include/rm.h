@@ -67,8 +67,9 @@
 #define DRAWBRIDGE_DOWN 34
 #define AIR             35
 #define CLOUD           36
+#define PUDDLE 					37
 
-#define MAX_TYPE		37
+#define MAX_TYPE		38
 #define INVALID_TYPE	127
 
 /*
@@ -99,6 +100,8 @@
 #define IS_FURNITURE(typ) ((typ) >= STAIRS && (typ) <= ALTAR)
 #define IS_AIR(typ)	((typ) == AIR || (typ) == CLOUD)
 #define IS_SOFT(typ)	((typ) == AIR || (typ) == CLOUD || IS_POOL(typ))
+#define IS_PUDDLE(typ) ((typ) == PUDDLE)
+#define IS_PUDDLE_OR_POOL(typ) (IS_PUDDLE(typ) || IS_POOL(typ))
 
 /*
  * The screen symbols may be the default or defined at game startup time.
@@ -151,76 +154,77 @@
 #define S_air		40
 #define S_cloud		41
 #define S_water		42
+#define S_puddle  43
 
 /* end dungeon characters, begin traps */
 
-#define S_arrow_trap		43
-#define S_dart_trap		44
-#define S_falling_rock_trap	45
-#define S_squeaky_board		46
-#define S_bear_trap		47
-#define S_land_mine		48
-#define S_rolling_boulder_trap	49
-#define S_sleeping_gas_trap	50
-#define S_rust_trap		51
-#define S_fire_trap		52
-#define S_pit			53
-#define S_spiked_pit		54
-#define S_hole			55
-#define S_trap_door		56
-#define S_teleportation_trap	57
-#define S_level_teleporter	58
-#define S_magic_portal		59
-#define S_web			60
-#define S_statue_trap		61
-#define S_magic_trap		62
-#define S_anti_magic_trap	63
-#define S_polymorph_trap	64
-#define S_ice_trap		65
-#define S_spear_trap		66
-#define S_falling_rocks_trap	67
-#define S_magic_beam_trap	68
+#define S_arrow_trap	44
+#define S_dart_trap		45
+#define S_falling_rock_trap	46
+#define S_squeaky_board		47
+#define S_bear_trap		48
+#define S_land_mine		49
+#define S_rolling_boulder_trap	50
+#define S_sleeping_gas_trap	51
+#define S_rust_trap		52
+#define S_fire_trap		53
+#define S_pit			54
+#define S_spiked_pit		55
+#define S_hole			56
+#define S_trap_door		57
+#define S_teleportation_trap	58
+#define S_level_teleporter	59
+#define S_magic_portal		60
+#define S_web			61
+#define S_statue_trap		62
+#define S_magic_trap		63
+#define S_anti_magic_trap	64
+#define S_polymorph_trap	65
+#define S_ice_trap		66
+#define S_spear_trap		67
+#define S_falling_rocks_trap	68
+#define S_magic_beam_trap	69
 
 /* end traps, begin special effects */
 
-#define S_vbeam		69	/* The 4 zap beam symbols.  Do NOT separate. */
-#define S_hbeam		70	/* To change order or add, see function     */
-#define S_lslant	71	/* zapdir_to_glyph() in display.c.	    */
-#define S_rslant	72
-#define S_digbeam	73	/* dig beam symbol */
-#define S_flashbeam	74	/* camera flash symbol */
-#define S_boomleft	75	/* thrown boomerang, open left, e.g ')'    */
-#define S_boomright	76	/* thrown boomerand, open right, e.g. '('  */
-#define S_ss1		77	/* 4 magic shield glyphs */
-#define S_ss2		78
-#define S_ss3		79
-#define S_ss4		80
+#define S_vbeam		70	/* The 4 zap beam symbols.  Do NOT separate. */
+#define S_hbeam		71	/* To change order or add, see function     */
+#define S_lslant	72	/* zapdir_to_glyph() in display.c.	    */
+#define S_rslant	73
+#define S_digbeam	74	/* dig beam symbol */
+#define S_flashbeam	75	/* camera flash symbol */
+#define S_boomleft	76	/* thrown boomerang, open left, e.g ')'    */
+#define S_boomright	77	/* thrown boomerand, open right, e.g. '('  */
+#define S_ss1		78	/* 4 magic shield glyphs */
+#define S_ss2		79
+#define S_ss3		80
+#define S_ss4		81
 
 /* The 8 swallow symbols.  Do NOT separate.  To change order or add, see */
 /* the function swallow_to_glyph() in display.c.			 */
-#define S_sw_tl		81	/* swallow top left [1]			*/
-#define S_sw_tc		82	/* swallow top center [2]	Order:	*/
-#define S_sw_tr		83	/* swallow top right [3]		*/
-#define S_sw_ml		84	/* swallow middle left [4]	1 2 3	*/
-#define S_sw_mr		85	/* swallow middle right [6]	4 5 6	*/
-#define S_sw_bl		86	/* swallow bottom left [7]	7 8 9	*/
-#define S_sw_bc		87	/* swallow bottom center [8]		*/
-#define S_sw_br		88	/* swallow bottom right [9]		*/
+#define S_sw_tl		82	/* swallow top left [1]			*/
+#define S_sw_tc		83	/* swallow top center [2]	Order:	*/
+#define S_sw_tr		84	/* swallow top right [3]		*/
+#define S_sw_ml		85	/* swallow middle left [4]	1 2 3	*/
+#define S_sw_mr		86	/* swallow middle right [6]	4 5 6	*/
+#define S_sw_bl		87	/* swallow bottom left [7]	7 8 9	*/
+#define S_sw_bc		88	/* swallow bottom center [8]		*/
+#define S_sw_br		89	/* swallow bottom right [9]		*/
 
-#define S_explode1	89	/* explosion top left			*/
-#define S_explode2	90	/* explosion top center			*/
-#define S_explode3	91	/* explosion top right		 Ex.	*/
-#define S_explode4	92	/* explosion middle left		*/
-#define S_explode5	93	/* explosion middle center	 /-\	*/
-#define S_explode6	94	/* explosion middle right	 |@|	*/
-#define S_explode7	95	/* explosion bottom left	 \-/	*/
-#define S_explode8	96	/* explosion bottom center		*/
-#define S_explode9	97	/* explosion bottom right		*/
+#define S_explode1	90	/* explosion top left			*/
+#define S_explode2	91	/* explosion top center			*/
+#define S_explode3	92	/* explosion top right		 Ex.	*/
+#define S_explode4	93	/* explosion middle left		*/
+#define S_explode5	94	/* explosion middle center	 /-\	*/
+#define S_explode6	95	/* explosion middle right	 |@|	*/
+#define S_explode7	96	/* explosion bottom left	 \-/	*/
+#define S_explode8	97	/* explosion bottom center		*/
+#define S_explode9	98	/* explosion bottom right		*/
   
 /* end effects */
   
-#define MAXPCHARS	98	/* maximum number of mapped characters */
-#define MAXDCHARS	43	/* maximum of mapped dungeon characters */
+#define MAXPCHARS	99	/* maximum number of mapped characters */
+#define MAXDCHARS	44	/* maximum of mapped dungeon characters */
 #define MAXTCHARS	26	/* maximum of mapped trap characters */
 #define MAXECHARS       29      /* maximum of mapped effects characters */
 #define MAXEXPCHARS	9	/* number of explosion characters */
@@ -352,6 +356,7 @@ extern uchar showsymcolors[MAXPCHARS];
 /*
  * Room areas may be iced pools
  */
+#define ICED_PUDDLE 4
 #define ICED_POOL	8
 #define ICED_MOAT	16
 

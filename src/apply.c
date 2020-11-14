@@ -1954,7 +1954,7 @@ long timeout;
 			    Sprintf(carriedby, "%s pack",
 				     s_suffix(a_monnam(mon)));
 			}
-			else if (is_pool(mon->mx, mon->my))
+			else if (is_pool(mon->mx, mon->my, FALSE))
 			    Strcpy(carriedby, "empty water");
 			else
 			    Strcpy(carriedby, "thin air");
@@ -2038,7 +2038,7 @@ struct obj **optr;
 	You("%s and it transforms.",
 	    (u.dx||u.dy) ? "set the figurine beside you" :
 	    (Is_airlevel(&u.uz) || Is_waterlevel(&u.uz) ||
-	     is_pool(cc.x, cc.y)) ?
+	     is_pool(cc.x, cc.y, TRUE)) ?
 		"release the figurine" :
 	    (u.dz < 0 ?
 		"toss the figurine into the air" :
@@ -2234,7 +2234,7 @@ struct obj *stone, *obj;
 		obj->quan > 1 ? "s" : "");
 	} else
 #endif
-	if (!is_pool(u.ux, u.uy) && !IS_FOUNTAIN(levl[u.ux][u.uy].typ)
+	if (!is_pool(u.ux, u.uy, TRUE) && !IS_FOUNTAIN(levl[u.ux][u.uy].typ)
 #ifdef SINKS
 	    && !IS_SINK(levl[u.ux][u.uy].typ) && !IS_TOILET(levl[u.ux][u.uy].typ)
 #endif
@@ -2471,7 +2471,7 @@ struct obj *otmp;
 	    what = "underwater";
 	else if (Levitation)
 	    what = "while levitating";
-	else if (is_pool(u.ux, u.uy))
+	else if (is_pool(u.ux, u.uy, TRUE))
 	    what = "in water";
 	else if (is_lava(u.ux, u.uy))
 	    what = "in lava";
@@ -2906,7 +2906,7 @@ use_pole (obj)
 	mtmp = m_at(cc.x, cc.y);
 
 	if (obj->otyp == FISHING_POLE) {
-	    fishing = is_pool(cc.x, cc.y);
+	    fishing = is_pool(cc.x, cc.y, FALSE);
 	    /* Try a random effect */
 	    switch (rnd(6))
 	    {
@@ -3236,7 +3236,7 @@ use_grapple (obj)
 	    }
 	    /* FALL THROUGH */
 	case 3:	/* Surface */
-	    if (IS_AIR(levl[cc.x][cc.y].typ) || is_pool(cc.x, cc.y))
+	    if (IS_AIR(levl[cc.x][cc.y].typ) || is_pool(cc.x, cc.y, TRUE))
 		pline_The("hook slices through the %s.", surface(cc.x, cc.y));
 	    else {
 		You("are yanked toward the %s!", surface(cc.x, cc.y));
@@ -3533,7 +3533,7 @@ struct obj *obj;
 	(obj->quan > 1)
 #endif
 	? "a" : "the");
-    land_in = ((is_pool(u.ux, u.uy) || (is_lava(u.ux, u.uy))));
+    land_in = ((is_pool(u.ux, u.uy, TRUE) || (is_lava(u.ux, u.uy))));
     if (Fumbling || Glib || Blind || ((ACURR(A_DEX) + Luck) <= 0) ||
 					!rn2((ACURR(A_DEX) + Luck))) {
 	struct obj *gold;
@@ -3546,7 +3546,7 @@ struct obj *obj;
 	} else if (t_at(u.ux, u.uy) && t_at(u.ux, u.uy)->ttyp == HOLE)
 	    land = FALSE;
 	else {
-            if (Blind && is_pool(u.ux, u.uy))
+            if (Blind && is_pool(u.ux, u.uy, TRUE))
 	        You_hear("a tiny %s.", Hallucination ? "meow" : "plop");
 	    else {
                 pline("It lands %s the %s.", land_in ? "in" : "on", surface(u.ux,u.uy));

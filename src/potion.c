@@ -2983,7 +2983,7 @@ dodip()
 			diptoilet(obj);
 			return(1);
 		}
-	} else if (is_pool(u.ux,u.uy)) {
+	} else if (is_pool(u.ux,u.uy, TRUE)) {
 		tmp = waterbody_name(u.ux,u.uy);
 		Sprintf(qbuf, "Dip it into the %s?", tmp);
 		if (yn(qbuf) == 'y') {

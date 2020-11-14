@@ -2168,7 +2168,7 @@ register int	mmflags;
 			}
 			break;
 		case S_EEL:
-			if (is_pool(x, y))
+			if (is_pool(x, y, FALSE))
 			    mtmp->mundetected = TRUE;
 			break;
 		case S_LEPRECHAUN:
