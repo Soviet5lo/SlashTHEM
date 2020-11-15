@@ -4146,7 +4146,7 @@ struct trap *ttmp;
 	if (fails < 2) return fails;
 	You("disarm the water trap!");
 	deltrap(ttmp);
-	levl[trapx][trapy].typ = FOUNTAIN;
+	levl[trapx][trapy].typ = rn2(2) ? PUDDLE : FOUNTAIN;
 	newsym(trapx, trapy);
 	level.flags.nfountains++;
 	return 1;
