@@ -59,7 +59,7 @@ unsigned gpflags;
 		is_badpos = 1;
 
 	    mdat = mtmp->data;
-	    pool = is_pool(x,y, FALSE); // ?????
+	    pool = is_pool(x,y, TRUE);
 	    if (mdat->mlet == S_EEL && !pool && rn2(13) && !ignorewater)
 		is_badpos = 1;
 
