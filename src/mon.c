@@ -662,8 +662,12 @@ register struct monst *mtmp;
     } else {
 	/* but eels have a difficult time outside */
 	if (mtmp->data->mlet == S_EEL && !Is_waterlevel(&u.uz)) {
-	    if(mtmp->mhp > 1) mtmp->mhp--;
-	    monflee(mtmp, 2, FALSE, FALSE);
+		/* Puddles can sustain a tiny sea creature, or lessen the burdens of a larger one */
+		if (!(inshallow && mtmp->data->msize == MZ_TINY))
+		{
+			if (mtmp->mhp > 1 && rn2(mtmp->data->msize)) mtmp->mhp--;
+			monflee(mtmp, 2, FALSE, FALSE);
+		}
 	}
     }
     return (0);
@@ -1373,7 +1377,7 @@ mfndpos(mon, poss, info, flag)
 	register int cnt = 0;
 	register uchar ntyp;
 	uchar nowtyp;
-	boolean wantpool,poolok,lavaok,nodiag;
+	boolean wantpool,wantpuddle,poolok,lavaok,nodiag;
 	boolean rockok = FALSE, treeok = FALSE, thrudoor;
 	int maxx, maxy;
 
@@ -1383,6 +1387,7 @@ mfndpos(mon, poss, info, flag)
 
 	nodiag = (mdat == &mons[PM_GRID_BUG] || mdat == &mons[PM_GRID_XORN]);
 	wantpool = mdat->mlet == S_EEL;
+	wantpuddle = wantpool && mdat->msize == MZ_TINY;
 	poolok = is_flyer(mdat) || is_clinger(mdat) ||
 		 (is_swimmer(mdat) && !wantpool);
 	lavaok = is_flyer(mdat) || is_clinger(mdat) || likes_lava(mdat);
@@ -1455,7 +1460,7 @@ nexttry:	/* eels prefer the water, but if there is no water nearby,
 #endif
 	       ))
 		continue;
-	    if((is_pool(nx,ny, FALSE) == wantpool || poolok) &&
+	    if((is_pool(nx,ny, wantpuddle) == wantpool || poolok) &&
 	       (lavaok || !is_lava(nx,ny))) {
 		int dispx, dispy;
 		boolean monseeu = (mon->mcansee && (!Invis || perceives(mdat)));
@@ -1578,7 +1583,7 @@ impossible("A monster looked at a very strange trap of type %d.", ttmp->ttyp);
 		cnt++;
 	    }
 	}
-	if(!cnt && wantpool && !is_pool(x,y, FALSE)) {
+	if(!cnt && wantpool && !is_pool(x,y, wantpuddle)) {
 		wantpool = FALSE;
 		goto nexttry;
 	}
