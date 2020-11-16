@@ -910,7 +910,7 @@ boolean read_it; /* Read any sensed engraving */
 		if(!Blind) {
 			sensed = 1;
 			pline("%s is written here in the %s.", Something,
-				is_ice(x,y) ? "frost" : "dust");
+				is_ice(x,y) ? "frost" : is_pool(x,y, TRUE) ? "mud" : "dust");
 		}
 		break;
 	    case ENGRAVE:
@@ -1676,7 +1676,7 @@ doengrave()
 	    case DUST:
 		everb = (oep && !eow ? "add to the writing in" :
 				       "write in");
-		eloc = (is_ice(u.ux,u.uy) ? "frost" : "dust");
+		eloc = (is_ice(u.ux,u.uy) ? "frost" : is_pool(u.ux,u.uy, TRUE) ? "mud" : "dust");
 		break;
 	    case HEADSTONE:
 		everb = (oep && !eow ? "add to the epitaph on" :
