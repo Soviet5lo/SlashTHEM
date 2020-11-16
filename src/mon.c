@@ -599,7 +599,7 @@ register struct monst *mtmp;
 				return (1);
 			}
 	}
-	if(inpool) water_damage(which_armor(mtmp, W_ARMF), FALSE, FALSE);
+	if(inshallow) water_damage(which_armor(mtmp, W_ARMF), FALSE, FALSE);
 	else water_damage(mtmp->minvent, FALSE, FALSE);
 	return (0);
     }
