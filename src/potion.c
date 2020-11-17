@@ -376,6 +376,7 @@ dodrink()
 			    IS_SINK(levl[u.ux][u.uy].typ) ||
 			    IS_TOILET(levl[u.ux][u.uy].typ) ||
 #endif
+					IS_PUDDLE(levl[u.ux][u.uy].typ) ||
 			    Underwater || IS_POOL(levl[u.ux][u.uy].typ)))
 	    *qp++ = ALLOW_THISPLACE;
 	Strcpy(qp, beverages);
@@ -396,6 +397,18 @@ dodrink()
 		return 1;
 	    }
 #endif
+			else if (IS_PUDDLE(levl[u.ux][u.uy].typ)) {
+				if (lithivorous(youmonst.data)) {
+					/* Lithivores can stomach the mud
+					 * but its not very nutritious
+					 */
+					You("take a sip of the muddy water.");
+					u.uhunger += rnd(5);
+					return 1;
+				} else
+					pline("This water is far too muddy to drink.");
+					return 1;
+			}
 	    pline("Do you know what lives in this water!");
 	    return 1;
 	}
