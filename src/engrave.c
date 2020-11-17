@@ -772,7 +772,7 @@ register int x, y;
 	    return "maw";
 	else if (IS_AIR(lev->typ) && Is_airlevel(&u.uz))
 	    return "air";
-	else if (is_pool(x,y, TRUE))
+	else if (is_pool(x,y, FALSE))
 	    return (Underwater && !Is_waterlevel(&u.uz)) ? "bottom" : "water";
 	else if (is_ice(x,y))
 	    return "ice";
@@ -910,7 +910,7 @@ boolean read_it; /* Read any sensed engraving */
 		if(!Blind) {
 			sensed = 1;
 			pline("%s is written here in the %s.", Something,
-				is_ice(x,y) ? "frost" : is_pool(x,y, TRUE) ? "mud" : "dust");
+				is_ice(x,y) ? "frost" : IS_PUDDLE(levl[x][y].typ) ? "mud" : "dust");
 		}
 		break;
 	    case ENGRAVE:
@@ -1420,6 +1420,8 @@ doengrave()
 				"Chips fly out from the headstone." :
 				is_ice(u.ux,u.uy) ?
 				"Ice chips fly up from the ice surface!" :
+				IS_PUDDLE(levl[u.ux][u.uy].typ) ?
+				"Mud and water fly up from the puddle." :
 				"Gravel flies up from the floor.");
 			else
 			    Strcpy(post_engr_text, "You hear drilling!");
@@ -1676,7 +1678,7 @@ doengrave()
 	    case DUST:
 		everb = (oep && !eow ? "add to the writing in" :
 				       "write in");
-		eloc = (is_ice(u.ux,u.uy) ? "frost" : is_pool(u.ux,u.uy, TRUE) ? "mud" : "dust");
+		eloc = (is_ice(u.ux,u.uy) ? "frost" : IS_PUDDLE(levl[u.ux][u.uy].typ) ? "mud" : "dust");
 		break;
 	    case HEADSTONE:
 		everb = (oep && !eow ? "add to the epitaph on" :
