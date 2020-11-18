@@ -1044,7 +1044,7 @@ int mode;
 	if ((t && t->tseen) ||
 	    (!Levitation && !Flying &&
 	     !is_clinger(youmonst.data) &&
-	     (is_pool(x, y) || is_lava(x, y)) && levl[x][y].seenv))
+	     (is_pool(x, y, TRUE) || is_lava(x, y)) && levl[x][y].seenv))
 	    return FALSE;
     }
 
@@ -1283,9 +1283,9 @@ ask_about_trap(int x, int y)
 boolean
 ask_about_water(int x, int y)
 {
-	if (is_pool(u.ux, u.uy)) return FALSE;
+	if (is_pool(u.ux, u.uy, FALSE)) return FALSE;
 
-	if (is_pool(x, y) && !Levitation && !Flying && !Confusion && !Stunned && levl[x][y].seenv) return TRUE; 
+	if (is_pool(x, y, FALSE) && !Levitation && !Flying && !Confusion && !Stunned && levl[x][y].seenv) return TRUE; 
 
 	return FALSE;
 }
@@ -1421,7 +1421,7 @@ domove()
 		if (((trap = t_at(x, y)) && trap->tseen) ||
 		    (Blind && !Levitation && !Flying &&
 		     !is_clinger(youmonst.data) &&
-		     (is_pool(x, y) || is_lava(x, y)) && levl[x][y].seenv)) {
+		     (is_pool(x, y, TRUE) || is_lava(x, y)) && levl[x][y].seenv)) {
 			if(flags.run >= 2) {
 				nomul(0, 0);
 				flags.move = 0;
@@ -1560,7 +1560,7 @@ domove()
 		You("%s %s.",
 		    expl ? "explode at" : "attack",
 		    !Underwater ? "thin air" :
-		    is_pool(x,y) ? "empty water" : buf);
+		    is_pool(x,y, FALSE) ? "empty water" : buf);
 		unmap_object(x, y); /* known empty -- remove 'I' if present */
 		newsym(x, y);
 		nomul(0, 0);
@@ -1919,7 +1919,7 @@ domove()
 	if (hides_under(youmonst.data))
 	    u.uundetected = OBJ_AT(u.ux, u.uy);
 	else if (youmonst.data->mlet == S_EEL)
-	    u.uundetected = is_pool(u.ux, u.uy) && !Is_waterlevel(&u.uz);
+	    u.uundetected = is_pool(u.ux, u.uy, FALSE) && !Is_waterlevel(&u.uz);
 	else if (u.dx || u.dy)
 	    u.uundetected = 0;
 
@@ -2065,7 +2065,7 @@ boolean pick;
 	if(u.uinwater) {
 		int was_underwater;
 
-		if (!is_pool(u.ux,u.uy)) {
+		if (!is_pool(u.ux,u.uy, FALSE)) {
 			if (Is_waterlevel(&u.uz))
 				You("pop into an air bubble.");
 			else if (is_lava(u.ux, u.uy))
@@ -2097,7 +2097,7 @@ boolean pick;
 stillinwater:;
 	if (!Levitation && !u.ustuck && !Flying) {
 	    /* limit recursive calls through teleds() */
-	    if (is_pool(u.ux, u.uy) || is_lava(u.ux, u.uy)) {
+	    if (is_pool(u.ux, u.uy, FALSE) || is_lava(u.ux, u.uy)) {
 #ifdef STEED
 		if (u.usteed && !is_flyer(u.usteed->data) &&
 			!is_floater(u.usteed->data) &&
@@ -2113,7 +2113,33 @@ stillinwater:;
 		    if (lava_effects()) return;
 		} else if (!Wwalking && drown())
 		    return;
-	    }
+    } else if (IS_PUDDLE(levl[u.ux][u.uy].typ) && !Wwalking) {
+
+      /*You*(%s through the shallow water.",
+         verysmall(youmonst.data) ? "wade" : "splash");
+         if (!verysmall(youmonst.data) && !rn2(4)) wake_nearby();*/
+
+      if(u.umonnum == PM_GREMLIN)
+         (void)split_mon(&youmonst, (struct monst *)0);
+      else if (u.umonnum == PM_IRON_GOLEM &&
+               /* mud boots keep the feet dry */
+               (!uarmf || strncmp(OBJ_DESCR(objects[uarmf->otyp]), "mud ", 4))) {
+         int dam = rnd(6);
+         Your("%s rust!", makeplural(body_part(FOOT)));
+         if (u.mhmax > dam) u.mhmax -= dam;
+         losehp(dam, "rusting away", KILLED_BY);
+//    } else if (is_longworm(youmonst.data)) { /* water is lethal to Shai-Hulud */
+//       int dam = d(3,12);
+//       if (u.mhmax > dam) u.mhmax -= (dam+1) / 2;
+//       pline_The("water burns your flesh!");
+//       losehp(dam, "contact with water", KILLED_BY);
+      }
+      if (verysmall(youmonst.data)) water_damage(invent, FALSE,FALSE);
+#ifdef STEED
+      if (!u.usteed)
+#endif
+         (void)rust_dmg(uarmf, "boots", 1, TRUE, &youmonst);
+	  }
 	}
 	check_special_room(FALSE);
 #ifdef SINKS
@@ -2624,7 +2650,7 @@ dopickup()
 		return loot_mon(u.ustuck, &tmpcount, (boolean *)0);
 	    }
 	}
-	if(is_pool(u.ux, u.uy)) {
+	if(is_pool(u.ux, u.uy, FALSE)) {
 	    if (Wwalking || is_floater(youmonst.data) || is_clinger(youmonst.data)
 			|| (Flying && !Breathless)) {
 		You("cannot dive into the water to pick things up.");
@@ -2752,7 +2778,7 @@ bcorr:
 	    if(flags.run == 1) goto bcorr;	/* if you must */
 	    if(x == u.ux+u.dx && y == u.uy+u.dy) goto stop;
 	    continue;
-	} else if (is_pool(x,y) || is_lava(x,y)) {
+	} else if (is_pool(x,y, TRUE) || is_lava(x,y)) {
 	    /* water and lava only stop you if directly in front, and stop
 	     * you even if you are running
 	     */

@@ -301,7 +301,7 @@ lookat(x, y, buf, monbuf)
 	    Strcat(buf, " embedded in a wall");
 	else if (closed_door(x,y))
 	    Strcat(buf, " embedded in a door");
-	else if (is_pool(x,y))
+	else if (is_pool(x,y, FALSE))
 	    Strcat(buf, " in water");
 	else if (is_lava(x,y))
 	    Strcat(buf, " in molten lava");	/* [can this ever happen?] */
@@ -690,6 +690,7 @@ do_look(quick)
 		/* avoid "an air", "a water", or "a floor of a room" */
 		int article = ((i == S_room)||(i == S_darkroom)) ? 2 :		/* 2=>"the" */
 			      !(strcmp(x_str, "air") == 0 ||	/* 1=>"an"  */
+				strcmp(x_str, "shallow water") == 0 || /*0>(none)*/
 				strcmp(x_str, "water") == 0);	/* 0=>(none)*/
 
 		if (!found) {

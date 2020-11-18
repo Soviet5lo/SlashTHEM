@@ -594,7 +594,7 @@ feel_location(x, y)
     if (memory_is_invisible(x,y) && m_at(x,y)) return;
 
     /* The hero can't feel non pool locations while under water. */
-    if (Underwater && !Is_waterlevel(&u.uz) && ! is_pool(x,y))
+    if (Underwater && !Is_waterlevel(&u.uz) && ! is_pool(x,y, TRUE))
 	return;
 
     /* Set the seen vector as if the hero had seen it.  It doesn't matter */
@@ -624,7 +624,7 @@ feel_location(x, y)
 	    map_object(boulder, 1);
 	} else if (IS_DOOR(lev->typ)) {
 	    map_background(x, y, 1);
-	} else if (IS_ROOM(lev->typ) || IS_POOL(lev->typ)) {
+	} else if (IS_ROOM(lev->typ) || IS_PUDDLE_OR_POOL(lev->typ)) {
 	    /*
 	     * An open room or water location.  Normally we wouldn't touch
 	     * this, but we have to get rid of remembered boulder symbols.
@@ -768,7 +768,7 @@ newsym(x,y)
     if (Underwater && !Is_waterlevel(&u.uz)) {
 	/* don't do anything unless (x,y) is an adjacent underwater position */
 	int dx, dy;
-	if (!is_pool(x,y)) return;
+	if (!is_pool(x,y, TRUE)) return;
 	dx = x - u.ux;	if (dx < 0) dx = -dx;
 	dy = y - u.uy;	if (dy < 0) dy = -dy;
 	if (dx > 1 || dy > 1) return;
@@ -1234,7 +1234,7 @@ under_water(mode)
     }
     for (x = u.ux-1; x <= u.ux+1; x++)
 	for (y = u.uy-1; y <= u.uy+1; y++)
-	    if (isok(x,y) && is_pool(x,y)) {
+	    if (isok(x,y) && is_pool(x,y, TRUE)) {
 		if (Blind && !(x == u.ux && y == u.uy))
 		    show_glyph(x,y,cmap_to_glyph(S_stone));
 		else	
@@ -1797,6 +1797,7 @@ back_to_cmap(x,y)
 	case AIR:		idx = S_air;	  break;
 	case CLOUD:		idx = S_cloud;	  break;
 	case WATER:		idx = S_water;	  break;
+	case PUDDLE:  idx = S_puddle;  break;
 	case DBWALL:
 	    idx = (ptr->horizontal) ? S_hcdbridge : S_vcdbridge;
 	    break;
@@ -1915,7 +1916,7 @@ static const char *type_names[MAX_TYPE] = {
 	"DOOR",		"CORR",		"ROOM",		"STAIRS",
 	"LADDER",	"FOUNTAIN",	"THRONE",	"SINK",
 	"ALTAR",	"ICE",		"DRAWBRIDGE_DOWN","AIR",
-	"CLOUD"
+	"CLOUD", "PUDDLE"
 };
 
 

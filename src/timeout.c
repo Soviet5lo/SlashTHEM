@@ -814,7 +814,7 @@ long timeout;
 		    	losehp(d(2,5), "carrying live explosives", KILLED_BY);
 		    	break;
 		    case OBJ_FLOOR:
-			underwater = is_pool(x, y);
+			underwater = is_pool(x, y, FALSE);
 			if (!silent) {
 			    if (x == u.ux && y == u.uy) {
 				if (underwater && (Flying || Levitation))
@@ -1029,7 +1029,7 @@ long timeout;
 				     s_suffix(a_monnam(egg->ocarry)));
 			    knows_egg = TRUE;
 			}
-			else if (is_pool(mon->mx, mon->my))
+			else if (is_pool(mon->mx, mon->my, FALSE))
 			    Strcpy(carriedby, "empty water");
 			else
 			    Strcpy(carriedby, "thin air");
@@ -1112,7 +1112,7 @@ slip_or_trip()
 	if (u.usteed) on_foot = FALSE;
 #endif
 
-	if (otmp && on_foot && !u.uinwater && is_pool(u.ux, u.uy)) otmp = 0;
+	if (otmp && on_foot && !u.uinwater && is_pool(u.ux, u.uy, FALSE)) otmp = 0;
 
 	if (otmp && on_foot) {		/* trip over something in particular */
 	    /*

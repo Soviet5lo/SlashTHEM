@@ -537,7 +537,7 @@ fixup_special()
 	    for(y = croom->ly; y <= croom->hy; y++) {
 		if (!is_solid(x,y)) {
 			(void) mkgold((long) rn1(300, 600), x, y);
-			if (!rn2(3) && !is_pool(x,y))
+			if (!rn2(3) && !is_pool(x,y, TRUE))
 			    (void)maketrap(x, y, rn2(3) ? LANDMINE : SPIKED_PIT);
 		}
 	    }
@@ -1166,7 +1166,7 @@ water_friction()
 		do {
 		    dy = rn2(3) - 1;		/* -1, 0, 1 */
 		    y = u.uy + dy;
-		} while (dy && (!isok(x,y) || !is_pool(x,y)));
+		} while (dy && (!isok(x,y) || !is_pool(x,y, TRUE))); // can be tossed to shore
 		u.dx = 0;
 		u.dy = dy;
 		eff = TRUE;
@@ -1176,7 +1176,7 @@ water_friction()
 		do {
 		    dx = rn2(3) - 1;		/* -1 .. 1 */
 		    x = u.ux + dx;
-		} while (dx && (!isok(x,y) || !is_pool(x,y)));
+		} while (dx && (!isok(x,y) || !is_pool(x,y, TRUE)));
 		u.dy = 0;
 		u.dx = dx;
 		eff = TRUE;
@@ -1258,11 +1258,11 @@ xchar x,y;
 		 (ltyp == DRAWBRIDGE_UP &&
 		  (levl[x][y].drawbridgemask & DB_UNDER) == DB_ICE))
 		return "ice";
-	else if (((ltyp != POOL) && (ltyp != WATER) &&
+	else if (((ltyp != POOL) && (ltyp != WATER) && (ltyp != PUDDLE) &&
 	  !Is_medusa_level(&u.uz) && !Is_waterlevel(&u.uz) && !Is_juiblex_level(&u.uz)) ||
 	   (ltyp == DRAWBRIDGE_UP && (levl[x][y].drawbridgemask & DB_UNDER) == DB_MOAT))
 		return "moat";
-	else if ((ltyp != POOL) && (ltyp != WATER) && Is_juiblex_level(&u.uz))
+	else if ((ltyp != POOL) && (ltyp != WATER) && (ltyp != PUDDLE) && Is_juiblex_level(&u.uz))
 		return "swamp";
 	else if (ltyp == POOL)
 		return "pool of water";

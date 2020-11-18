@@ -203,7 +203,7 @@ boolean barehanded;
 	    if (!(Blind ? Blind_telepat : Unblind_telepat)) {
 		struct obj *obj;
 
-		if (Blind || (is_pool(mtmp->mx,mtmp->my) && !Underwater))
+		if (Blind || (is_pool(mtmp->mx,mtmp->my, FALSE) && !Underwater))
 		    pline("Wait!  There's a hidden monster there!");
 		else if ((obj = level.objects[mtmp->mx][mtmp->my]) != 0)
 		    pline("Wait!  There's %s hiding under %s!",
@@ -2449,7 +2449,7 @@ register struct attack *mattk;
 			}
 		    } else if(u.ustuck == mdef) {
 			/* Monsters don't wear amulets of magical breathing */
-			if (is_pool(u.ux,u.uy) && !is_swimmer(mdef->data) &&
+			if (is_pool(u.ux,u.uy, FALSE) && !is_swimmer(mdef->data) &&
 			    !amphibious(mdef->data)) {
 			    You("drown %s...", mon_nam(mdef));
 			    tmp = mdef->mhp;

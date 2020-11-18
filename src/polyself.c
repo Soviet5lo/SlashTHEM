@@ -132,7 +132,7 @@ const char *fmt, *arg;
 	}
 
 	if(!Levitation && !u.ustuck &&
-	   (is_pool(u.ux,u.uy) || is_lava(u.ux,u.uy)))
+	   (is_pool(u.ux,u.uy, TRUE) || is_lava(u.ux,u.uy)))
 		spoteffects(TRUE);
 
 	see_monsters();
@@ -426,7 +426,7 @@ boolean forcecontrol;
 		new_light_source(u.ux, u.uy, new_light,
 				 LS_MONSTER, (genericptr_t)&youmonst);
 	}
-	if (is_pool(u.ux,u.uy) && was_floating && !(Levitation || Flying) &&
+	if (is_pool(u.ux,u.uy, FALSE) && was_floating && !(Levitation || Flying) &&
 		!breathless(youmonst.data) && !amphibious(youmonst.data) &&
 		!Swimming) drown();
 }
@@ -602,7 +602,7 @@ int	mntmp;
 	if (hides_under(youmonst.data))
 		u.uundetected = OBJ_AT(u.ux, u.uy);
 	else if (youmonst.data->mlet == S_EEL)
-		u.uundetected = is_pool(u.ux, u.uy);
+		u.uundetected = is_pool(u.ux, u.uy, FALSE);
 	else
 		u.uundetected = 0;
 
@@ -681,7 +681,7 @@ int	mntmp;
 	}
 	find_ac();
 	if((!Levitation && !u.ustuck && !Flying &&
-	    (is_pool(u.ux,u.uy) || is_lava(u.ux,u.uy))) ||
+	    (is_pool(u.ux,u.uy, TRUE) || is_lava(u.ux,u.uy))) ||
 	   (Underwater && !Swimming))
 	    spoteffects(TRUE);
 	if (Passes_walls && u.utrap && u.utraptype == TT_INFLOOR) {

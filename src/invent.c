@@ -3027,8 +3027,10 @@ char *buf;
 	    cmap = S_lava;				/* "molten lava" */
 	else if (is_ice(x,y))
 	    cmap = S_ice;				/* "ice" */
-	else if (is_pool(x,y))
+	else if (is_pool(x,y, FALSE))
 	    dfeature = "pool of water";
+	else if (IS_PUDDLE(ltyp))
+			dfeature = "puddle of shallow water";
 #ifdef SINKS
 	else if (IS_SINK(ltyp))
 	    cmap = S_sink;				/* "sink" */
@@ -3140,7 +3142,7 @@ boolean picked_some;
 		    Strcat(fbuf, "  Use \"q.\" to drink from it.");
 	}
 
-	if (!otmp || is_lava(u.ux,u.uy) || (is_pool(u.ux,u.uy) && !Underwater)) {
+	if (!otmp || is_lava(u.ux,u.uy) || (is_pool(u.ux,u.uy, FALSE) && !Underwater)) {
 		if (dfeature) pline(fbuf);
 		sense_engr_at(u.ux, u.uy, FALSE); /* Eric Backus */
 		if (!skip_objects && (Blind || !dfeature))

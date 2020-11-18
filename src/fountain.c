@@ -122,8 +122,8 @@ genericptr_t poolcnt;
 	if (!((*(int *)poolcnt)++))
 	    pline("Water gushes forth from the overflowing fountain!");
 
-	/* Put a pool at x, y */
-	levl[x][y].typ = POOL;
+	/* Put a puddle at x, y */
+	levl[x][y].typ = PUDDLE;
 	/* No kelp! */
 	del_engr_at(x, y);
 	water_damage(level.objects[x][y], FALSE, TRUE);

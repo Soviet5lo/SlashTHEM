@@ -93,7 +93,7 @@ boolean pushing;
 {
 	if (!otmp || otmp->otyp != BOULDER)
 	    impossible("Not a boulder?");
-	else if (!Is_waterlevel(&u.uz) && (is_pool(rx,ry) || is_lava(rx,ry))) {
+	else if (!Is_waterlevel(&u.uz) && (is_pool(rx,ry, FALSE) || is_lava(rx,ry))) {
 	    boolean lava = is_lava(rx,ry), fills_up;
 	    const char *what = waterbody_name(rx,ry);
 	    schar ltyp = levl[rx][ry].typ;
@@ -225,7 +225,7 @@ const char *verb;
 		return TRUE;
 	} else if (is_lava(x, y)) {
 		return fire_damage(obj, FALSE, FALSE, x, y);
-	} else if (is_pool(x, y)) {
+	} else if (is_pool(x, y, TRUE)) {
 		/* Reasonably bulky objects (arbitrary) splash when dropped.
 		 * If you're floating above the water even small things make noise.
 		 * Stuff dropped near fountains always misses */
@@ -1752,7 +1752,7 @@ long timeout;
      * check for iceboxes here as well.
      */
     if ((body->where == OBJ_FLOOR || body->where==OBJ_BURIED) &&
-      (is_pool(body->ox, body->oy) || is_lava(body->ox, body->oy) ||
+      (is_pool(body->ox, body->oy, FALSE) || is_lava(body->ox, body->oy) ||
       is_ice(body->ox, body->oy)))
 	pmtype = -1;
 

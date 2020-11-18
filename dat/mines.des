@@ -1035,6 +1035,127 @@ MONSTER:'h',"dwarf",random
 MONSTER:'h',"dwarf lord",random
 MONSTER:'G',"gnome lord",random
 
+# "Creek Town" by L.
+# No fountains in this town, for obvious reasons.
+#
+MAZE: "mintn-11",' '
+GEOMETRY:left,center
+#         1         2         3         4         5         6         7
+#123456789012345678901234567890123456789012345678901234567890123456789012345
+MAP
+                ----            ---         |www|                 ---       
+                |..----         |.-----  ----www|                --.--  --- 
+     ----  ---- |.....----------|.....-- |..www--                |...----.--
+ ----|..|  |..|------..................---.www--        ---      --...||...|
+ |...+..----..|.....|---...................ww.| ---------.-----   |...-|..--
+ |...|....|...+.....|..|.-----------+-....w.w.---.............|   --...|..| 
+ |...|........|.....|..|.|..|..|.....|....ww......--------+--.--------....| 
+ |---|........-------+--.|F+-F+|.....|...wwww.....|.....|...|..--..| --...--
+ |  |....................|.....|-----|..wwPww.....|.....|...|......----....|
+ | --...........-+-----+-|.....| |...|.wwPPww.....|.....|---|.|...........--
+ ---...---+---..|..|..|..|.....| |...|.wwPPw......--+---|...|.|--.......--- 
+|--....|.....|..|..|..|..--+-----|...|..wPPww...........|...|.|...--....|   
+|......|.....|..----+-----.......|...|.wwwPPww..........--+--.|.----.|..--  
+|.T....|.....|..................--+---.wwwwPww-+---+-...........|  ----..|  
+|......|.....|...------...............ww..wPww|..|..|.........------- --.-- 
+--..T..--------..+....|.....------...ww..wwPw.|..|..|....----.......|  ---  
+ --.........-----|....|.....+..| |..w.w..wwww.-------...--..--......---     
+---.----.....----------.....|..| |.www....www................|........--    
+|...| |.....................|-----www.....www.----------.----.....--...|    
+----- -----------------------  --www.---.wwww.| |      ---  --.|..|-----    
+                               |www--- ---wwww| |            ------         
+ENDMAP
+REGION:(01,01,75,20),lit,"ordinary"
+REGION:(2,4,4,6),lit,"candle shop"
+REGION:(15,4,19,6),lit,"shop"
+REGION:(34,9,36,12),lit,"scroll shop"
+REGION:(51,07,55,09),lit,"food shop"
+REGION:(8,11,12,14),lit,"temple"
+ALTAR:(10,13),align[0],shrine
+
+# Protect the watch-house walls
+NON_DIGGABLE:(25,5,31,11)
+
+# Stairs
+STAIR:levregion(60,12,75,19),(0,0,15,20),up
+STAIR:levregion(60,03,75,11),(0,0,15,20),down
+
+# Doors
+DOOR:closed,(5,4)
+DOOR:closed,(14,5)
+DOOR:closed,(10,10)
+DOOR:locked,(17,9)
+DOOR:locked,(20,12)
+DOOR:locked,(21,7)
+DOOR:locked,(23,9)
+DOOR:locked,(17,15)
+DOOR:locked,(27,7)
+DOOR:locked,(30,7)
+DOOR:open,(27,11)
+DOOR:locked,(28,16)
+DOOR:locked,(36,5)
+DOOR:closed,(34,13)
+DOOR:locked,(47,13)
+DOOR:closed,(52,10)
+DOOR:closed,(51,13)
+DOOR:locked,(58,6)
+DOOR:locked,(58,12)
+
+# Traps
+# Loose floorboard
+# TRAP:"board",random
+
+# Furniture
+OBJECT:'(',"chest",(18,11)
+OBJECT:'(',"chest",(20,10)
+OBJECT:'(',"chest",(21,15)
+OBJECT:'`',"statue",(8,7),"gnome king",1
+OBJECT: '(',"chest",(47,15)
+
+# Junk
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+
+# Guards
+MONSTER:'@',"watch captain",random,peaceful
+MONSTER:'@',"watchman",(27,9),peaceful
+MONSTER:'@',"watchman",(8,7),peaceful
+MONSTER:'@',"watchman",(25,14),peaceful
+MONSTER:'@',"watchman",(50,15),peaceful
+
+# Watchdog
+MONSTER:'d',"large dog",(30,8),peaceful,asleep
+
+# Citizens
+MONSTER:'G',"gnome",(17,10),hostile
+MONSTER:'G',"gnome king",(20,16),hostile
+MONSTER:'G',random,(47,14)
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome",random
+MONSTER:'G',"gnome lord",random
+MONSTER:'G',"gnome lord",random
+MONSTER:'G',"gnome lord",random
+MONSTER:'h',"dwarf lord",random
+MONSTER:'h',"gnome thief",random
+MONSTER:'h',"dwarf thief",random
+MONSTER:'h',"hobbit",random
+MONSTER:'h',"bugbear",random
+MONSTER:'h',"bugbear",random
+MONSTER:'h',"dwarf",random
+
+# River feeders
+MONSTER[75%]:';',"jellyfish",random
+MONSTER[75%]:';',"jellyfish",random
+MONSTER[75%]:';',"jellyfish",random
+MONSTER[75%]:';',"jellyfish",random
+MONSTER[75%]:';',"jellyfish",random
+MONSTER[25%]:';',"piranha",random
+MONSTER[25%]:';',"piranha",random
+MONSTER[25%]:';',"piranha",random
+MONSTER[25%]:';',"piranha",random
+MONSTER[25%]:';',"piranha",random
+
 # Mine end level variant 1
 # "Mimic of the Mines"
 #
@@ -1684,9 +1805,9 @@ MAP
 4                       -|...F..........|     |.....|                        
 5                        -|..|..........|     |.....|                        
 6                         ---------------     |.....|                        
-7                                             -------                     ..}
-8                                                                         .}}
-9                                                                        .}}{
+7                                             -------                     ..w
+8                                                                         .ww
+9                                                                        .ww{
 ENDMAP
 
 RANDOM_PLACES:(0,18),(0,12),(2,18),(12,14),(20,12),(16,16),(22,14),(72,18),(52,14),(44,14)
@@ -1804,7 +1925,7 @@ GEOMETRY: center,center
 #1234567890123456789012345678901234567890123456789012345678901234567890
 MAP
 -------------------------------------------------------------------------
-|............+....||.....|..+......+...........+.......}|...............|
+|............+....||.....|..+......+...........+......w}|...............|
 |............|--.---.---.|..|-+--+-|...........|......}}--..--------....|
 |............|........||...-|......|-----------|......}}}}}....|...|....|
 |............|...|||.....|..|.....|-...........-|..............|...|....|
@@ -1815,10 +1936,10 @@ MAP
  ----S-......{......----.......|......|-|....---.......|---|-.....----|.|
     |.|----.....----|..........|......|.|..--|.........S....|..-..|...--|
 |----------..|-------------------------S---|....-------------..--.......|
-|............|}}}}}}}}}}}.}}}}}}}}|-...........-|}}}}.............|.....|
-|............|}}...}}}}}}.....}}}}}|--S--------|}}}}..}}}......}}}------|
-|............|}}...}}}}}}}}}......}}}}......|}}}}}}..}}}}}.......}}.....|
-|............|}}...}}}}}}}}}}}}}}......}}}}}|}}}}}}}}}}}.............}..|
+|............|}}}}}}}}}}}w}}}}}}}}|-...........-|}}}}ww...........|.....|
+|............|}}...}}}}}}wwwww}}}}}|--S--------|}}}}ww}}}......}}}------|
+|............|}}...}}}}}}}}}wwwwww}}}}......|}}}}}}ww}}}}}......w}}.....|
+|............|}}...}}}}}}}}}}}}}}wwwwww}}}}}|}}}}}}}}}}}............w}w.|
 --------------}}}}}}}}--------------------------------------------------|
 ENDMAP
 RANDOM_OBJECTS:'*','(','%'
