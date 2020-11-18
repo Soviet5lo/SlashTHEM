@@ -2968,7 +2968,7 @@ srch:
 			newsym(u.ux, u.uy);
 			return &zeroobj;
 		}
-		if (!BSTRCMP(bp, p-13, "shallow water")) {
+		if (!BSTRCMP(bp, p-13, "shallow water") || !BSTRCMP(bp, p-6, "puddle")) {
 			levl[u.ux][u.uy].typ = PUDDLE;
 			del_engr_at(u.ux, u.uy);
 			pline("Shallow water.");
