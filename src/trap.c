@@ -4159,6 +4159,7 @@ struct trap *ttmp;
 	xchar trapx = ttmp->tx, trapy = ttmp->ty;
 	if(!Race_if(PM_INCANTIFIER)){
 		You("cannot disable %s trap.", (u.dx || u.dy) ? "that" : "this");
+		return 0;
 	} /* else */
 	You("drain the trap's magical energy!");
 	lesshungry(50);
