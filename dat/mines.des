@@ -1137,7 +1137,7 @@ MONSTER:'G',"gnome lord",random
 MONSTER:'G',"gnome lord",random
 MONSTER:'G',"gnome lord",random
 MONSTER:'h',"dwarf lord",random
-MONSTER:'h',"gnome thief",random
+MONSTER:'G',"gnome thief",random
 MONSTER:'h',"dwarf thief",random
 MONSTER:'h',"hobbit",random
 MONSTER:'h',"bugbear",random
