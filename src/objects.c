@@ -207,8 +207,6 @@ WEAPON("rapier", (char *)0,
 	/* Base for artifact (Scalpel) */
 WEAPON("silver saber", (char *)0,
 	1, 0, 0, 24, 40, 75,  8,  8, 0, S,   P_SABER, SILVER, HI_SILVER),
-WEAPON("golden saber", (char *)0,
-	1, 0, 0,  2, 35, 75,  10,  10, 0, S,   P_SABER, GOLD, CLR_YELLOW),
 
 /* Clubs */
 WEAPON("club", (char *)0,
@@ -259,7 +257,7 @@ WEAPON("heavy hammer", (char *)0,
  	/* 5lo: +d8 small, +d10 large, two-handed */
 
 WEAPON("mallet", (char *)0,
-	1, 0, 0,  3, 25,500, 4, 4, 0, B,   P_HAMMER, WOOD, HI_WOOD),
+	1, 0, 0,  4, 25,500, 4, 4, 0, B,   P_HAMMER, WOOD, HI_WOOD),
 	/* +1 small */
 
 /* Quarterstaves */
@@ -304,7 +302,7 @@ WEAPON("bill-guisarme", "hooked polearm",
 	0, 0, 1,  2,120,  7,  4, 10, 0, P|S, P_POLEARMS, IRON, HI_METAL),
 						/* +1d4 small */
 WEAPON("grain scythe", "scythe",
-	0, 0, 1,  0, 60,  5,  8, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
+	0, 0, 1,  1, 60,  5,  8, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
 /* other */
 WEAPON("lucern hammer", "pronged polearm",
 	0, 0, 1,  3,150,  7,  4,  6, 0, B|P, P_POLEARMS, IRON, HI_METAL),
