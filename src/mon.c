@@ -215,6 +215,7 @@ register struct monst *mtmp;
 		goto default_1;
 
 			case PM_WATER_ELEMENTAL:
+		  case PM_GREATER_WATER_ELEMENTAL:
 				if (levl[mtmp->mx][mtmp->my].typ == ROOM) {
 					  levl[mtmp->mx][mtmp->my].typ = PUDDLE;
 						water_damage(level.objects[mtmp->mx][mtmp->my], FALSE, TRUE);
