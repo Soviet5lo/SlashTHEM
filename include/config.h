@@ -545,6 +545,12 @@ typedef long glyph_t;
 
 #define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
 
+#define ITEMCAT     /* Additional Item Categories Patch - Unidentified and Rustprone */
+#define ITEMCAT_JP  /* Item Categories - Items just picked up/taken out */
+#define ITEMCAT_AP  /* Item categories - Auto-picked */
+#define ITEMCAT_NEG /* Item Categories - Inverse Selection */
+// #define ITEMCAT_OLDSTYLE /* Item Categories - Pre-5.0 style unidentified */
+
 /* End of Section 5 */
 
 #include "global.h"	/* Define everything else according to choices above */

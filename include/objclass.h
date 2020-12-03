@@ -77,6 +77,14 @@ struct objclass {
 /* primary damage: fire/rust/--- */
 /* is_flammable(otmp), is_rottable(otmp) in mkobj.c */
 #define is_rustprone(otmp)	(objects[otmp->otyp].oc_material == IRON)
+#ifdef ITEMCAT
+/* is rustprone, and rust matters (is displayed in inventory listing) */
+#define is_rustprone2(otmp)     (is_rustprone(otmp) && (otmp->oclass==WEAPON_CLASS || otmp->oclass==ARMOR_CLASS || otmp->oclass==TOOL_CLASS || otmp->oclass==WAND_CLASS || otmp->oclass==RING_CLASS || otmp->oclass==BALL_CLASS || otmp->oclass==CHAIN_CLASS))
+/* rustproneness should not be immediately visible */
+#define hide_rust(otmp)         ((otmp->otyp==GAUNTLETS_OF_POWER || otmp->otyp==KICKING_BOOTS) && !otmp->oeroded)
+/* object is known to be rustprone and is NOT known to be rustproof */
+#define is_known_rustprone(otmp)	(is_rustprone2(otmp) && !(otmp->rknown && otmp->oerodeproof) && (!hide_rust(otmp) || objects[otmp->otyp].oc_name_known))
+#endif /* ITEMCAT */
 
 /* secondary damage: rot/acid/acid */
 #define is_corrodeable(otmp)	(objects[otmp->otyp].oc_material == COPPER || objects[otmp->otyp].oc_material == IRON)

@@ -1992,6 +1992,8 @@ after you restore,  making death permanent.  This option can allow you to
 restore from the last save. (default off).
 .lp legacy
 Display an introductory message when starting the game (default on).
+.lp like_swimming
+Allow category ``Items known to be Rustprone'' in selection menus.
 .lp lit_corridor
 Show corridor squares seen by night vision or a light source held by your
 character as lit (default off).

@@ -402,4 +402,21 @@ struct obj {
 #define CONTAINED_TOO	0x1
 #define BURIED_TOO	0x2
 
+#ifdef ITEMCAT
+#ifdef ITEMCAT_OLDSTYLE
+#   ifdef MAIL
+#   define BKNOWN(otmp) (otmp->bknown || otmp->otyp == SCR_MAIL)
+#   else
+#   define BKNOWN(otmp) (otmp->bknown)
+#   endif
+#else
+#   define BKNOWN(otmp) (1)
+#endif
+
+/* faster version of not_fully_identified() for item selection
+ * (invent.c/pickup.c) */
+#define NOT_IDENTIFIED_ITEMCAT(otmp) (otmp->oclass != COIN_CLASS && !(otmp->known && otmp->dknown && BKNOWN(otmp) && objects[otmp->otyp].oc_name_known) || (otmp->oartifact && undiscovered_artifact(otmp->oartifact)) || (!otmp->rknown && ((otmp->oclass == ARMOR_CLASS || otmp->oclass == WEAPON_CLASS || is_weptool(otmp) || otmp->oclass == BALL_CLASS)) && (is_rustprone(otmp) || is_corrodeable(otmp) || is_flammable(otmp))))
+
+#endif /* ITEMCAT */
+
 #endif /* OBJ_H */

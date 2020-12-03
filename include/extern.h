@@ -1693,6 +1693,13 @@ E int FDECL(ck_bag, (struct obj *));
 E int FDECL(in_container, (struct obj *));
 E int FDECL(out_container, (struct obj *));
 #endif
+#ifdef ITEMCAT_JP
+E void FDECL(jpick_free, (struct obj *));
+#endif
+#ifdef ITEMCAT_AP
+E int FDECL(is_autopicked, (struct obj *));
+#endif
+
 E int FDECL(pickup, (int));
 E int FDECL(pickup_object, (struct obj *, long, BOOLEAN_P));
 E int FDECL(query_category, (const char *, struct obj *, int,

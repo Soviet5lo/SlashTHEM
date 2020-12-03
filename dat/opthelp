@@ -60,6 +60,10 @@ uberlostsoul   you start at invocation depth instead of dlvl1     [FALSE]
 
 There are further boolean options controlled by compilation flags.
 
+Boolean option if ITEMCAT was set at compile time:
+like_swimming   allow category "Items known to be Rustprone" in
+                selection menus                                   [FALSE]
+
 Boolean option if INSURANCE was set at compile time:
 checkpoint save game state after each level change, for possible  [TRUE]
            recovery after program crash

@@ -40,6 +40,14 @@ STATIC_DCL boolean FDECL(able_to_loot, (int, int));
 STATIC_DCL boolean FDECL(mon_beside, (int, int));
 STATIC_DCL int FDECL(dump_container, (struct obj*, BOOLEAN_P));
 
+#ifdef ITEMCAT_JP
+char *ctg_justpicked="Items just Picked up";
+char *ctg_justremoved="Items just taken out";
+char **jpick_ctg=&ctg_justpicked;
+STATIC_PTR int FDECL(is_justpicked,(struct obj *));
+#define DESTROY_JPICK(j) while(*(j)) { struct jpick *next=(*(j))->next_pick; free((genericptr_t) *(j)); *(j)=next; }
+#endif
+
 /* define for query_objlist() and autopickup() */
 #define FOLLOW(curr, flags) \
     (((flags) & BY_NEXTHERE) ? (curr)->nexthere : (curr)->nobj)
@@ -94,6 +102,61 @@ boolean here;		/* flag for type of obj list linkage */
 	    destroy_nhwindow(tmpwin);
 	}
 }
+
+#ifdef ITEMCAT_AP
+int
+is_autopicked(obj)
+register struct obj *obj;
+{
+        const char *otypes = flags.pickup_types;
+#ifndef AUTOPICKUP_EXCEPTIONS
+        if (!*otypes || index(otypes, obj->oclass))
+#else
+        if ((!*otypes || index(otypes, obj->oclass) ||
+                        is_autopickup_exception(obj, TRUE)) &&
+                        !is_autopickup_exception(obj, FALSE))
+#endif
+                return 1;
+        return 0;
+}
+#endif /* ITEMCAT_AP */
+#ifdef ITEMCAT_JP
+/* just picked items llist */
+struct jpick {
+        struct obj *o;
+        struct jpick *next_pick;
+};
+static NEARDATA struct jpick *jpick_head=(struct jpick *)0;
+STATIC_PTR int
+is_justpicked(obj)
+register struct obj *obj;
+{
+        struct jpick *list=jpick_head;
+        while(list) {
+                if(obj==list->o)
+                        return 1;
+                list=list->next_pick;
+        }
+        return 0;
+}
+void
+jpick_free(obj)
+register struct obj *obj;
+{
+        struct jpick **p=&jpick_head;
+        struct jpick *next;
+
+        while(*p) {
+                next=(*p)->next_pick;
+                if(obj==(*p)->o) {
+                        free((genericptr_t) *p);
+                        *p=next;
+                        break;
+                }
+                p=&(*p)->next_pick;
+        }
+}
+#endif /* ITEMCAT_JP */
 
 #ifndef GOLDOBJ
 int
@@ -332,24 +395,53 @@ boolean
 allow_category(obj)
 struct obj *obj;
 {
+#ifdef ITEMCAT_NEG
+    int result=0;
+    int itemcat_negate=(index(valid_menu_classes,'Z') != (char *)0);
+#define Return result = 
+#else
+#define Return return
+#endif
     if (Role_if(PM_PRIEST)) obj->bknown = TRUE;
     if (((index(valid_menu_classes,'u') != (char *)0) && obj->unpaid) ||
 	(index(valid_menu_classes, obj->oclass) != (char *)0))
-	return TRUE;
+	Return TRUE;
     else if (((index(valid_menu_classes,'U') != (char *)0) &&
 	(obj->oclass != COIN_CLASS && obj->bknown && !obj->blessed && !obj->cursed)))
-	return TRUE;
+	Return TRUE;
     else if (((index(valid_menu_classes,'B') != (char *)0) &&
 	(obj->oclass != COIN_CLASS && obj->bknown && obj->blessed)))
-	return TRUE;
+	Return TRUE;
     else if (((index(valid_menu_classes,'C') != (char *)0) &&
 	(obj->oclass != COIN_CLASS && obj->bknown && obj->cursed)))
-	return TRUE;
+	Return TRUE;
     else if (((index(valid_menu_classes,'X') != (char *)0) &&
 	(obj->oclass != COIN_CLASS && !obj->bknown)))
-	return TRUE;
+	Return TRUE;
+#ifdef ITEMCAT
+    else if (((index(valid_menu_classes,'I') != (char *)0) &&
+        NOT_IDENTIFIED_ITEMCAT(obj)))
+        Return TRUE;
+    else if (((index(valid_menu_classes,'r') != (char *)0) &&
+        (obj->oclass != COIN_CLASS && is_known_rustprone(obj))))
+        Return TRUE;
+#endif /* ITEMCAT */
+#ifdef ITEMCAT_JP
+    else if (((index(valid_menu_classes,'P') != (char *)0) &&
+        (is_justpicked(obj))))
+        Return TRUE;
+#endif
+#ifdef ITEMCAT_AP
+    else if (((index(valid_menu_classes,'Q') != (char *)0) &&
+        (is_autopicked(obj))))
+        Return TRUE;
+#endif
     else
-	return FALSE;
+	Return FALSE;
+#ifdef ITEMCAT_NEG
+    return itemcat_negate?(!result):result;
+#undef Return
+#endif
 }
 
 #if 0 /* not used */
@@ -398,6 +490,9 @@ int what;		/* should be a long */
 	boolean autopickup = what > 0;
 	struct obj *objchain;
 	int traverse_how;
+#ifdef ITEMCAT_JP
+        struct jpick *jtmp=jpick_head;
+#endif
 
 	if (what < 0)		/* pick N of something */
 	    count = -what;
@@ -451,6 +546,10 @@ int what;		/* should be a long */
 		/* if there's anything here, stop running */
 		if (OBJ_AT(u.ux,u.uy) && flags.run && flags.run != 8 && !flags.nopick) nomul(0, 0);
 	}
+
+#ifdef ITEMCAT_JP
+        jpick_head=(struct jpick *) 0;
+#endif
 
 	add_valid_menu_class(0);	/* reset */
 	if (!u.uswallow) {
@@ -537,7 +636,19 @@ menu_pickup:
 				   FALSE,
 #endif
 				   &via_menu)) {
-		    if (!via_menu) return (0);
+		    if (!via_menu)
+#ifdef ITEMCAT_JP
+                    {
+                            if(jpick_head) {
+                                    jpick_ctg=&ctg_justpicked;
+                                    DESTROY_JPICK(&jtmp)
+                            } else
+                                    jpick_head=jtmp;
+                            return (0);
+                    }
+#else
+                            return (0);
+#endif /* ITEMCAT_JP */
 		    n = query_objlist("Pick up what?",
 				  objchain,
 				  traverse_how|(selective ? 0 : INVORDER_SORT),
@@ -601,6 +712,13 @@ end_query:
 		/* see whether there's anything else here, after auto-pickup is done */
 		if (autopickup) check_here(n_picked > 0);
 	}
+#ifdef ITEMCAT_JP
+        if(jpick_head) {
+                jpick_ctg=&ctg_justpicked;
+                DESTROY_JPICK(&jtmp)
+        } else
+                jpick_head=jtmp;
+#endif
 	return (n_tried > 0);
 }
 
@@ -852,6 +970,19 @@ int how;			/* type of query */
 	boolean collected_type_name;
 	char invlet;
 	int ccount;
+#ifdef ITEMCAT
+        boolean do_unident = FALSE;
+        boolean do_rustprone = FALSE;
+#endif
+#ifdef ITEMCAT_JP
+        boolean do_justpicked = FALSE;
+#endif
+#ifdef ITEMCAT_AP
+        boolean do_autopicked = FALSE;
+#endif
+#ifdef ITEMCAT_NEG
+        boolean do_invsel = FALSE;
+#endif
 	boolean do_unpaid = FALSE;
 	boolean do_blessed = FALSE, do_cursed = FALSE, do_uncursed = FALSE,
 	    do_buc_unknown = FALSE;
@@ -876,6 +1007,27 @@ int how;			/* type of query */
 	    do_buc_unknown = TRUE;
 	    num_buc_types++;
 	}
+
+#ifdef ITEMCAT
+        if ((qflags & UNIDENTIFIED) && count_buc(olist, UNIDENTIFIED))
+            do_unident = TRUE;
+
+        if (iflags.like_swimming && (qflags & RUSTPRONE) && count_buc(olist, RUSTPRONE))
+            do_rustprone = TRUE;
+
+#endif
+#ifdef ITEMCAT_JP
+        if ((qflags & JUSTPICKED) && jpick_head!=(struct jpick *) 0)
+            do_justpicked = TRUE;
+#endif
+#ifdef ITEMCAT_AP
+        if ((qflags & AUTOPICKED) && count_buc(olist, AUTOPICKED))
+            do_autopicked = TRUE;
+#endif
+#ifdef ITEMCAT_NEG
+        if (how!=PICK_ONE)
+            do_invsel = TRUE;
+#endif
 
 	ccount = count_categories(olist, qflags);
 	/* no point in actually showing a menu for a single category */
@@ -961,6 +1113,48 @@ int how;			/* type of query */
 			"Auto-select every item being worn" :
 			"Auto-select every item", MENU_UNSELECTED);
 	}
+#ifdef ITEMCAT_JP
+        if (do_justpicked) {
+		invlet = 'P';
+		any.a_void = 0;
+		any.a_int = 'P';
+		add_menu(win, NO_GLYPH, &any, invlet, 0, ATR_NONE,
+			*jpick_ctg,
+			MENU_UNSELECTED);
+        }
+#endif /*ITEMCAT_JP*/
+#ifdef ITEMCAT
+	if (do_unident) {
+		invlet = 'I';
+		any.a_void = 0;
+		any.a_int = 'I';
+		add_menu(win, NO_GLYPH, &any, invlet, 0, ATR_NONE,
+			"Unidentified Items",
+			MENU_UNSELECTED);
+	}
+#endif /* ITEMCAT */
+#ifdef ITEMCAT_AP
+	if (do_autopicked) {
+		invlet = 'Q';
+		any.a_void = 0;
+		any.a_int = 'Q';
+		add_menu(win, NO_GLYPH, &any, invlet, 0, ATR_NONE,
+			"Auto-picked items",
+			MENU_UNSELECTED
+                        );
+	}
+#endif /* ITEMCAT_AP */
+#ifdef ITEMCAT_NEG
+	if (do_invsel) {
+		invlet = 'Z';
+		any.a_void = 0;
+		any.a_int = 'Z';
+		add_menu(win, NO_GLYPH, &any, invlet, 0, ATR_NONE,
+			"Inverse selection",
+			MENU_UNSELECTED
+                        );
+	}
+#endif /* ITEMCAT_AP */
 	/* items with b/u/c/unknown if there are any */
 	if (do_blessed) {
 		invlet = 'B';
@@ -991,6 +1185,16 @@ int how;			/* type of query */
 			"Items of unknown B/C/U status",
 			MENU_UNSELECTED);
 	}
+#ifdef ITEMCAT
+	if (iflags.like_swimming && do_rustprone) {
+		invlet = 'r';
+		any.a_void = 0;
+		any.a_int = 'r';
+		add_menu(win, NO_GLYPH, &any, invlet, 0, ATR_NONE,
+			"Items known to be Rustprone",
+			MENU_UNSELECTED);
+	}
+#endif /* ITEMCAT */
 	end_menu(win, qstr);
 	n = select_menu(win, how, pick_list);
 	destroy_nhwindow(win);
@@ -1445,6 +1649,9 @@ struct obj *
 pick_obj(otmp)
 struct obj *otmp;
 {
+#ifdef ITEMCAT_JP
+        struct jpick *pick;
+#endif
 	obj_extract_self(otmp);
 	if (!u.uswallow && otmp != uball && costly_spot(otmp->ox, otmp->oy)) {
 	    char saveushops[5], fakeshop[2];
@@ -1468,7 +1675,18 @@ struct obj *otmp;
 	if (otmp->was_thrown)	/* likewise */
 	    otmp->was_thrown = 0;
 	newsym(otmp->ox, otmp->oy);
-	return addinv(otmp);	/* might merge it with other objects */
+#ifdef ITEMCAT_JP
+        otmp=addinv(otmp); /* might merge it with other objects */
+        if(otmp->oclass!=COIN_CLASS) {
+                pick=(struct jpick *) alloc(sizeof(struct jpick));
+                pick->next_pick=jpick_head;
+                pick->o=otmp;
+                jpick_head=pick;
+        }
+	return otmp;
+#else
+	return addinv(otmp);
+#endif /* ITEMCAT_JP */
 }
 
 /*
@@ -2149,6 +2367,9 @@ register struct obj *obj;
 	boolean is_gold = (obj->oclass == COIN_CLASS);
 	int res, loadlev;
 	long count;
+#ifdef ITEMCAT_JP
+        struct jpick *pick;
+#endif
 
 	if (!current_container) {
 		impossible("<out> no current_container?");
@@ -2221,6 +2442,14 @@ register struct obj *obj;
 		verbalize("You sneaky cad! Get out of here with that pick!");
 
 	otmp = addinv(obj);
+#ifdef ITEMCAT_JP
+        if(!is_gold) {
+                pick=(struct jpick *) alloc(sizeof(struct jpick));
+                pick->next_pick=jpick_head;
+                pick->o=otmp;
+                jpick_head=pick;
+        }
+#endif
 	loadlev = near_capacity();
 	prinv(loadlev ?
 	      (loadlev < MOD_ENCUMBER ?
@@ -2466,6 +2695,14 @@ ask_again2:
 				      FALSE,
 #endif
 				      &menu_on_request)) {
+#ifdef ITEMCAT_JP
+                        /* normally one wouldn't use traditional + itemcat_jp,
+                         * so we don't make extra checks whether something
+                         * relevant was in fact picked up, just destroy the
+                         * list for consistency. */
+                        jpick_ctg=&ctg_justremoved;
+                        DESTROY_JPICK(&jpick_head)
+#endif
 			if (askchain((struct obj **)&current_container->cobj,
 				     (one_by_one ? (char *)0 : select),
 				     allflag, out_container,
@@ -2595,14 +2832,33 @@ boolean put_in;
     menu_item *pick_list;
     int mflags, res;
     long count;
+#ifdef ITEMCAT_JP
+    struct jpick *jtmp;
+#endif
 
     if (retry) {
 	all_categories = (retry == -2);
     } else if (flags.menu_style == MENU_FULL) {
 	all_categories = FALSE;
 	Sprintf(buf,"%s what type of objects?", put_in ? putin : takeout);
-	mflags = put_in ? ALL_TYPES | BUC_ALLBKNOWN | BUC_UNKNOWN :
-		          ALL_TYPES | CHOOSE_ALL | BUC_ALLBKNOWN | BUC_UNKNOWN;
+	mflags = put_in ? ALL_TYPES | BUC_ALLBKNOWN | BUC_UNKNOWN
+#ifdef ITEMCAT_JP
+                | JUSTPICKED
+#endif
+#ifdef ITEMCAT_AP
+                | AUTOPICKED
+#endif
+#ifdef ITEMCAT
+                | UNIDENTIFIED | RUSTPRONE
+#endif
+                        : ALL_TYPES | CHOOSE_ALL | BUC_ALLBKNOWN | BUC_UNKNOWN
+#ifdef ITEMCAT
+                | UNIDENTIFIED | RUSTPRONE
+#endif
+#ifdef ITEMCAT_AP
+                | AUTOPICKED
+#endif
+        ;
 	n = query_category(buf, put_in ? invent : container->cobj,
 			   mflags, &pick_list, PICK_ANY);
 	if (!n) return 0;
@@ -2618,11 +2874,26 @@ boolean put_in;
     }
 
     if (loot_everything) {
+#ifdef ITEMCAT_NEG
+        if(index(valid_menu_classes,'Z') != (char *)0)
+            return 0;
+#endif
+#ifdef ITEMCAT_JP
+        jtmp=jpick_head;
+        jpick_head=(struct jpick *) 0;
+#endif
 	for (otmp = container->cobj; otmp; otmp = otmp2) {
 	    otmp2 = otmp->nobj;
 	    res = out_container(otmp);
 	    if (res < 0) break;
 	}
+#ifdef ITEMCAT_JP
+        if(jpick_head) {
+                jpick_ctg=&ctg_justremoved;
+                DESTROY_JPICK(&jtmp)
+        } else
+                jpick_head=jtmp;
+#endif
     } else {
 	mflags = INVORDER_SORT;
 	if (put_in && flags.invlet_constant) mflags |= USE_INVLET;
@@ -2632,6 +2903,12 @@ boolean put_in;
 			  all_categories ? allow_all : allow_category);
 	if (n) {
 		n_looted = n;
+#ifdef ITEMCAT_JP
+                if(!put_in) {
+                        jtmp=jpick_head;
+                        jpick_head=(struct jpick *) 0;
+                }
+#endif
 		for (i = 0; i < n; i++) {
 		    otmp = pick_list[i].item.a_obj;
 		    count = pick_list[i].count;
@@ -2652,6 +2929,15 @@ boolean put_in;
 			break;
 		    }
 		}
+#ifdef ITEMCAT_JP
+                if(!put_in) {
+                        if(jpick_head) {
+                                jpick_ctg=&ctg_justremoved;
+                                DESTROY_JPICK(&jtmp)
+                        } else
+                                jpick_head=jtmp;
+                }
+#endif
 		free((genericptr_t)pick_list);
 	}
     }

@@ -714,6 +714,11 @@ void
 freeinv(obj)
 register struct obj *obj;
 {
+#ifdef ITEMCAT_JP
+/* this is a very uncritical thing so we do it here. if the jpicklist was
+ * persistent, this should have been in extract_nobj() itself */
+        jpick_free(obj);
+#endif /* ITEMCAT_JP */
 	extract_nobj(obj, &invent);
 	freeinv_core(obj);
 	update_inventory();
@@ -2777,6 +2782,21 @@ count_buc(list, type)
 		if (list->oclass != COIN_CLASS && !list->bknown)
 		    count++;
 		break;
+#ifdef ITEMCAT
+            case UNIDENTIFIED:
+                if (NOT_IDENTIFIED_ITEMCAT(list))
+                    count++;
+                break;
+            case RUSTPRONE:
+                if (list->oclass != COIN_CLASS && is_known_rustprone(list))
+                    count++;
+                break;
+#endif /* ITEMCAT */
+#ifdef ITEMCAT_AP
+            case AUTOPICKED:
+                count+=is_autopicked(list);
+                break;
+#endif
 	    default:
 		impossible("need count of curse status %d?", type);
 		return 0;

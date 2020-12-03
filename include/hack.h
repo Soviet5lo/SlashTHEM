@@ -188,6 +188,16 @@ enum bhit_call_types {
 #define BUC_UNCURSED 0x200
 #define BUC_UNKNOWN  0x400
 #define BUC_ALLBKNOWN (BUC_BLESSED|BUC_CURSED|BUC_UNCURSED)
+#ifdef ITEMCAT
+#define UNIDENTIFIED 0x800
+#define RUSTPRONE    0x1000
+#endif
+#ifdef ITEMCAT_JP
+#define JUSTPICKED   0x2000
+#endif
+#ifdef ITEMCAT_AP
+#define AUTOPICKED   0x4000
+#endif
 #define ALL_TYPES_SELECTED -2
 
 /* Flags to control find_mid() */

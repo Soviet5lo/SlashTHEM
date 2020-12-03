@@ -719,7 +719,11 @@ int retry;
 #endif
     menu_item *pick_list;
     boolean all_categories = TRUE;
+#ifndef ITEMCAT_NEG
     boolean drop_everything = FALSE;
+#else
+    int drop_everything = 0;
+#endif
 
 #ifndef GOLDOBJ
     if (u.ugold) {
@@ -739,18 +743,43 @@ int retry;
 	all_categories = FALSE;
 	n = query_category("Drop what type of items?",
 			invent,
-			UNPAID_TYPES | ALL_TYPES | CHOOSE_ALL |
-			BUC_BLESSED | BUC_CURSED | BUC_UNCURSED | BUC_UNKNOWN,
+			UNPAID_TYPES | ALL_TYPES | CHOOSE_ALL
+#ifdef ITEMCAT_JP
+                        | JUSTPICKED
+#endif
+#ifdef ITEMCAT_AP
+                        | AUTOPICKED
+#endif
+#ifdef ITEMCAT
+                        | UNIDENTIFIED | RUSTPRONE
+#endif
+			| BUC_BLESSED | BUC_CURSED | BUC_UNCURSED | BUC_UNKNOWN,
 			&pick_list, PICK_ANY);
 	if (!n) goto drop_done;
 	for (i = 0; i < n; i++) {
+#ifdef ITEMCAT_NEG
+	    if (pick_list[i].item.a_int == 'Z')
+                drop_everything|=2;
+#endif
 	    if (pick_list[i].item.a_int == ALL_TYPES_SELECTED)
 		all_categories = TRUE;
 	    else if (pick_list[i].item.a_int == 'A')
+#ifndef ITEMCAT_NEG
 		drop_everything = TRUE;
+#else
+		drop_everything|=1;
+#endif
 	    else
 		add_valid_menu_class(pick_list[i].item.a_int);
 	}
+#ifdef ITEMCAT_NEG
+        switch(drop_everything) {
+                case 3:
+                        return 0;
+                case 2:
+                        drop_everything=0;
+        }
+#endif
 	free((genericptr_t) pick_list);
     } else if (flags.menu_style == MENU_COMBINATION) {
 	unsigned ggoresults = 0;
