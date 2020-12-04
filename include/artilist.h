@@ -449,9 +449,9 @@ A("Slow Blade",                ORCISH_SHORT_SWORD, /* 5lo: Now opposite of Quick
 	SPFX_RESTR, 0, 0,
 	PHYS(2,9),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 1000L ),
 
-A("Black Death",                     HALBERD,
+A("Thanatos",                     GRAIN_SCYTHE,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL|SPFX_ATTK), 0, 0,
-	DRLI(5,5),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 2000L ),
+	DRLI(10,10),      NO_DFNS,        NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 2000L ),
 
 A("Spineseeker",	STILETTO,
 	SPFX_RESTR, 0, 0,
