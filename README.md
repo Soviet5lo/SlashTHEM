@@ -1,7 +1,7 @@
 SlashTHEM
 =====================
 
-SlashTHEM is a another Nethack variant.  In particular, it takes after Slash'EM and an earlier version of Slash'EM Extended.  I consider it more of a Slash'EM variant at this point since it's far more in line with that rather than Extended.
+SlashTHEM is yet another Nethack variant.  In particular, it takes after Slash'EM and an earlier version of Slash'EM Extended.  I consider it more of a Slash'EM variant at this point since it's far more in line with that rather than Extended.
 
 A changelog of SlashTHEM can be found [here](CHANGELOG.md).  A changelog of the current develop branch can be found [here](CHANGELOG-NG.md)
 
@@ -27,7 +27,7 @@ Dependencies should be the same as Nethack, Slash'EM, and any other variant.  On
 
 For Linux users its as simple as modifying config.h to your liking, copying GNUmakefile from sys/unix into the project root directory and renaming it Makefile, and running make install.  It'll be installed in ~/slashthem/slashthem-$VERSION.  BSD users should run gmake install instead.
 
-For Windows users, modify config.h to your desire, followed by navigating to the sys/winnt directory, running both nhsetup.bat and setup.bat, followed by navigating into the src/ folder from the root directory, opening a terminal and running 'make -f makefile.gcc install'.  It should produce a build in C:\games\slashthem-win\ if everything worked correctly.
+For Windows users, modify config.h to your desire, followed by navigating to the sys/winnt directory, running both nhsetup.bat and setup.bat, followed by opening a command line in the src/ directory and running 'make -f makefile.gcc install'.  It should produce a build in C:\games\slashthem-win\ if everything worked correctly.
 
 Credits
 -------
@@ -36,3 +36,5 @@ Credits go to Chris for dNetHack (Used a few artifacts), Grunt for GruntHack, Ba
 Credits also go to Percival Tiglao for the minor sling upgrade patch, Mikael Lind for Rubber Gloves and Gauntlets of Reflection patches, Paxed for the "highlight object piles/hidden stairs" patch, André Bertelli Araújo for the music code for bards, Chris-plus-alphanumericgibberish (Chris) for additions and fixes to the music code, and L for various patches implemented in this fork.
 
 Credit also goes to Edoardo Spadolini for adding server specific code.
+
+There's a lot of missing mentions here due to SlashTHEM mostly being a hodgepodge of code from other patches and variants, if I've missed any I do apologise.
