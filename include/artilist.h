@@ -282,7 +282,7 @@ A("Debugger",       ATHAME,
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
     ELEC(5,5),  ELEC(0,0), NO_CARY,     0, A_NEUTRAL, PM_ELECTRIC_MAGE, NON_PM, 400L ),
     
-A("Acidtester",       ATHAME, /* temp name */
+A("Acidfall",       ATHAME,
     (SPFX_RESTR|SPFX_ATTK|SPFX_DEFN), 0, 0,
     ACID(5,5),  ACID(0,0), NO_CARY,     0, A_NEUTRAL, PM_ACID_MAGE, NON_PM, 400L ),
 
