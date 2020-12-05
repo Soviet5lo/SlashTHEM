@@ -1357,7 +1357,13 @@ SCROLL((char *)0,               "MAPIRO MAHAMA DIROMAT",P_NONE, 1,   0, 100), /*
 #ifdef MAIL
 SCROLL("mail",                  "stamped",              P_NONE, 0,   0,   0),
 #endif
-SCROLL("blank paper",           "unlabeled",            P_NONE, 0,  28,  60),
+#ifdef NEPHI_PHOTOGRAPHY
+	OBJECT(OBJ("photograph","photograph"),BITS(0,0,0,0,0,0,0,0,0,0,0,P_NONE,PLASTIC),0,
+		SCROLL_CLASS,3,0,1,0,0,0,0,0,0,CLR_GREEN),
+	SCROLL("blank paper",           "unlabeled",        P_NONE, 0,  25,  60),
+#else
+	SCROLL("blank paper",           "unlabeled",        P_NONE, 0,  28,  60),
+#endif
 #undef SCROLL
 
 /* spell books ... */
@@ -1462,8 +1468,14 @@ SPELL((char *)0, 	 "fan-fold", 	P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
 SPELL((char *)0, 	 "legal pad", 	P_NONE, 0, 0, 0, 1, 0, CLR_YELLOW),
 SPELL((char *)0, 	 "crayon", 	P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
 #endif
+#ifdef NEPHI_PHOTOGRAPHY
+OBJECT(OBJ("photo album","photo album"), BITS(0,0,0,0,0,0,0,0,0,0,0,P_NONE,LEATHER), 0,
+	   SPBOOK_CLASS,5,0,20,90,0,0,0,0,15,CLR_ORANGE),
+SPELL("blank paper",     "plain",       P_NONE, 10,0, 0, 0, 0, HI_PAPER),
+#else
 SPELL("blank paper",	 "plain",	P_NONE, 15,0, 0, 0, 0, HI_PAPER),
 	/* ...Blank spellbook must come last because it retains its description */
+#endif
 OBJECT(OBJ("Book of the Dead", "papyrus"),
 	BITS(0,0,1,0,1,0,1,1,0,0,0,0,PAPER), 0,
 	SPBOOK_CLASS, 0, 0,20, 10000, 0, 0, 0, 7, 20, HI_PAPER),

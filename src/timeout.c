@@ -1996,6 +1996,9 @@ static const ttable timeout_funcs[NUM_TIME_FUNCS] = {
     TTAB(hatch_egg,	(timeout_proc)0,	"hatch_egg"),
     TTAB(fig_transform, (timeout_proc)0,	"fig_transform"),
     TTAB(unpoly_mon,    (timeout_proc)0,	"unpoly_mon"),
+#ifdef NEPHI_PHOTOGRAPHY
+    TTAB(take_picture,	(timeout_proc)0,	"take_picture"),
+#endif
 #ifdef FIREARMS
     TTAB(bomb_blow,     (timeout_proc)0,	"bomb_blow"),
 #endif

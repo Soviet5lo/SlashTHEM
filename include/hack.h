@@ -130,6 +130,10 @@ enum bhit_call_types {
 #include "rect.h"
 #include "region.h"
 
+#ifdef NEPHI_PHOTOGRAPHY
+#include "photo.h"
+#endif
+
 #ifdef USE_TRAMPOLI /* This doesn't belong here, but we have little choice */
 #undef NDECL
 #define NDECL(f) f()

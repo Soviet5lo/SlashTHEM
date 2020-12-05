@@ -1330,7 +1330,11 @@ boolean identified, all_containers, want_dump;
 	for (box = list; box; box = box->nobj) {
 	    int saveknown = objects[box->otyp].oc_name_known;
 	    objects[box->otyp].oc_name_known = 1;
-	    if (Is_container(box) || box->otyp == STATUE) {
+	    if (Is_container(box) || box->otyp == STATUE
+#ifdef NEPHI_PHOTOGRAPHY
+			|| box->otyp==SPE_PHOTO_ALBUM
+#endif			
+			) {
 		if (box->otyp == BAG_OF_TRICKS && box->spe) {
 		    continue;	/* bag of tricks with charges can't contain anything */
 		} else if (box->cobj) {

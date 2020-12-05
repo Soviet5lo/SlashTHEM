@@ -704,6 +704,11 @@ boolean artif;
 		if (otmp->otyp != SCR_MAIL)
 #endif
 			blessorcurse(otmp, 4);
+#ifdef NEPHI_PHOTOGRAPHY
+		if (otmp->otyp == SCR_PHOTOGRAPH) {
+		otmp = gen_random_photo(otmp);
+		}
+#endif
 		break;
 	case SPBOOK_CLASS:
 		/* WAC charged books are easier to read */
@@ -1028,7 +1033,11 @@ register struct obj *obj;
 
 	if (obj->otyp == LARGE_BOX && obj->spe == 1) /* Schroedinger's Cat */
 		wt += mons[PM_HOUSECAT].cwt;
-	if (Is_container(obj) || obj->otyp == STATUE) {
+	if (Is_container(obj) || obj->otyp == STATUE
+#ifdef NEPHI_PHOTOGRAPHY
+		|| obj->otyp == SPE_PHOTO_ALBUM
+#endif
+		) {
 		struct obj *contents;
 		register int cwt = 0;
 

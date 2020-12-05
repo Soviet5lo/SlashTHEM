@@ -118,8 +118,15 @@ register struct obj *obj;
 #ifdef MAIL
 		obj->otyp != SCR_MAIL && 
 #endif
+#ifdef NEPHI_PHOTOGRAPHY
+		obj->otyp != SCR_PHOTOGRAPH &&
+#endif
 		!obj->oartifact) return TRUE;
-	if(obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BLANK_PAPER && !obj->oartifact) return TRUE;
+	if(obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BLANK_PAPER &&
+#ifdef NEPHI_PHOTOGRAPHY
+		obj->otyp != SPE_PHOTO_ALBUM &&
+#endif
+		!obj->oartifact) return TRUE;
 	if(obj->oclass == AMULET_CLASS && obj->spe >=0 && !obj->oartifact) return TRUE;
 	if(obj->oclass == RING_CLASS && obj->spe >= 0 && !obj->oartifact) return TRUE;
 	if(obj->oclass == WAND_CLASS && obj->spe > 0 && obj->otyp != WAN_NOTHING) return TRUE;

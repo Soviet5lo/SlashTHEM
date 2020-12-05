@@ -19,6 +19,9 @@ STATIC_DCL boolean FDECL(query_classes, (char *,boolean *,boolean *,
 STATIC_DCL void FDECL(check_here, (BOOLEAN_P));
 STATIC_DCL boolean FDECL(n_or_more, (struct obj *));
 STATIC_DCL boolean FDECL(all_but_uchain, (struct obj *));
+#ifdef NEPHI_PHOTOGRAPHY
+STATIC_DCL boolean FDECL(allow_only_photo, (struct obj *));
+#endif
 #if 0 /* not used */
 STATIC_DCL boolean FDECL(allow_cat_no_uchain, (struct obj *));
 #endif
@@ -381,6 +384,16 @@ struct obj *obj;
 {
     return (obj != uchain);
 }
+
+#ifdef NEPHI_PHOTOGRAPHY
+/* query_objlist callback: return TRUE iff photograph */
+STATIC_OVL boolean
+allow_only_photo(obj)
+struct obj *obj;
+{
+    return (obj->otyp == SCR_PHOTOGRAPH);
+}
+#endif
 
 /* query_objlist callback: return TRUE */
 /*ARGSUSED*/
@@ -2175,6 +2188,13 @@ boolean invobj;
 	} else if (obj == current_container) {
 		pline("That would be an interesting topological exercise.");
 		return 0;
+#ifdef NEPHI_PHOTOGRAPHY
+	} else if(current_container->otyp==SPE_PHOTO_ALBUM && 
+		obj->otyp!=SCR_PHOTOGRAPH) {
+		pline("This is %s, not %s album!",
+			an(xname(current_container)),an(simple_typename(obj->otyp)));
+		return 0;
+#endif
 	} else if (obj->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL)) {
 		Norep("You cannot %s %s you are wearing.",
 			Icebox ? "refrigerate" : "stash", something);
@@ -2839,6 +2859,10 @@ boolean put_in;
     if (retry) {
 	all_categories = (retry == -2);
     } else if (flags.menu_style == MENU_FULL) {
+#ifdef NEPHI_PHOTOGRAPHY
+		if(current_container->otyp!=SPE_PHOTO_ALBUM)
+#endif
+	{
 	all_categories = FALSE;
 	Sprintf(buf,"%s what type of objects?", put_in ? putin : takeout);
 	mflags = put_in ? ALL_TYPES | BUC_ALLBKNOWN | BUC_UNKNOWN
@@ -2871,8 +2895,8 @@ boolean put_in;
 		add_valid_menu_class(pick_list[i].item.a_int);
 	}
 	free((genericptr_t) pick_list);
+      }
     }
-
     if (loot_everything) {
 #ifdef ITEMCAT_NEG
         if(index(valid_menu_classes,'Z') != (char *)0)
@@ -2900,6 +2924,9 @@ boolean put_in;
 	Sprintf(buf,"%s what?", put_in ? putin : takeout);
 	n = query_objlist(buf, put_in ? invent : container->cobj,
 			  mflags, &pick_list, PICK_ANY,
+#ifdef NEPHI_PHOTOGRAPHY
+			  current_container->otyp==SPE_PHOTO_ALBUM ? allow_only_photo :
+#endif
 			  all_categories ? allow_all : allow_category);
 	if (n) {
 		n_looted = n;

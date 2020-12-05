@@ -1986,7 +1986,15 @@ uchar adtyp;
 	    }
 	}
 #endif
-	if(mtmp->iswiz) wizdead();
+	if(mtmp->iswiz) {
+#ifdef NEPHI_PHOTOGRAPHY
+		if(!u.uevent.udemigod) {
+			place_object(make_special_photo(PHOTO_SPECIAL_WIZ), 
+				mtmp->mx, mtmp->my);
+		}
+#endif
+		wizdead();
+	}
 	if(mtmp->data->msound == MS_NEMESIS) nemdead();
 #ifdef RECORD_ACHIEVE
         if(mtmp->data == &mons[PM_MEDUSA])

@@ -980,6 +980,10 @@ struct obj *otmp;
 		     (!is_lightsaber(otmp) || !otmp->lamplit) &&
 #endif
 		     otyp != MAGIC_MARKER && otyp != TOWEL))
+#ifdef NEPHI_PHOTOGRAPHY
+		|| (!strcmp(word, "write on") &&
+			(otyp==SCR_PHOTOGRAPH || otyp==SPE_PHOTO_ALBUM))
+#endif
 		|| (!strcmp(word, "tin") &&
 		    (otyp != CORPSE || !tinnable(otmp)))
 		|| (!strcmp(word, "rub") &&
@@ -1017,6 +1021,9 @@ struct obj *otmp;
 		      !objects[POT_WATER].oc_name_known)) ||
 		     (otmp->oclass == FOOD_CLASS &&
 		      otyp != CREAM_PIE && otyp != EUCALYPTUS_LEAF) ||
+#ifdef NEPHI_PHOTOGRAPHY
+			(otmp->oclass==SPBOOK_CLASS && otyp!=SPE_PHOTO_ALBUM) || 
+#endif
 		     (otmp->oclass == GEM_CLASS && !is_graystone(otmp))))
 		|| (!strcmp(word, "invoke") &&
 		    (!otmp->oartifact && !objects[otyp].oc_unique &&
@@ -1030,6 +1037,11 @@ struct obj *otmp;
 		|| (!strcmp(word, "untrap with") &&
 		    (otmp->oclass == TOOL_CLASS && otyp != CAN_OF_GREASE))
 		|| (!strcmp(word, "charge") && !is_chargeable(otmp))
+#ifdef NEPHI_PHOTOGRAPHY
+		|| (!strcmp(word, "zap") &&
+			otmp->oclass==TOOL_CLASS && otyp!=EXPENSIVE_CAMERA)
+		|| (!strcmp(word, "set the timer on") && otyp!=EXPENSIVE_CAMERA)
+#endif
 		|| (!strcmp(word, "poison") && !is_poisonable(otmp))
 		|| ((!strcmp(word, "draw blood with") ||
 			!strcmp(word, "bandage your wounds with")) &&
@@ -2098,6 +2110,11 @@ struct obj *obj;
 	else if (Is_container(obj) || obj->otyp == BAG_OF_TRICKS)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Open this container", MENU_UNSELECTED);
+#ifdef NEPHI_PHOTOGRAPHY
+	else if (obj->otyp == SPE_PHOTO_ALBUM)
+		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
+				"Open this photo album", MENU_UNSELECTED);
+#endif
 	else if (obj->otyp == CAN_OF_GREASE)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Use the can to grease an item", MENU_UNSELECTED);
@@ -2304,6 +2321,11 @@ struct obj *obj;
 	else if (obj->oclass == SCROLL_CLASS)
 		add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE,
 				"Cast the spell on this scroll", MENU_UNSELECTED);
+#ifdef NEPHI_PHOTOGRAPHY
+	else if (obj->otyp == SCR_PHOTOGRAPH)
+		add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE,
+				"Examine this photograph", MENU_UNSELECTED);
+#endif
 	else if (obj->oclass == SPBOOK_CLASS)
 		add_menu(win, NO_GLYPH, &any, 'r', 0, ATR_NONE,
 				"Study this spellbook", MENU_UNSELECTED);
@@ -2398,6 +2420,11 @@ struct obj *obj;
 	if (obj->oclass == WAND_CLASS)
 		add_menu(win, NO_GLYPH, &any, 'z', 0, ATR_NONE,
 				"Zap this wand to release its magic", MENU_UNSELECTED);
+#if defined(TOURIST) && defined(NEPHI_PHOTOGRAPHY)
+	else if (obj->otyp == EXPENSIVE_CAMERA)
+		add_menu(win, NO_GLYPH, &any, 'z', 0, ATR_NONE,
+				"Utilize the flash on this camera", MENU_UNSELECTED);
+#endif
 
 	Sprintf(prompt, "Do what with %s?", the(cxname(obj)));
 	end_menu(win, prompt);
@@ -3569,7 +3596,14 @@ long numused;
  */
 STATIC_VAR NEARDATA const char *names[] = { 0,
 	"Illegal objects", "Weapons", "Armor", "Rings", "Amulets",
-	"Tools", "Comestibles", "Potions", "Scrolls", "Spellbooks",
+	"Tools", "Comestibles", "Potions",
+#ifdef NEPHI_PHOTOGRAPHY
+	"Scrolls/Photos", 
+	"Books",
+#else
+	"Scrolls", 
+	"Spellbooks",
+#endif
 	"Wands", "Coins", "Gems", "Boulders/Statues", "Iron balls",
 	"Chains", "Venoms"
 };

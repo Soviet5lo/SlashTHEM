@@ -195,6 +195,10 @@
 #define dosh()       dosh_()
 #endif /* SHELL */
 
+/* ### photo.c ### */
+#ifdef NEPHI_PHOTOGRAPHY
+#define use_camera_timer()	use_camera_timer_()
+#endif
 
 /* ### pickup.c ### */
 #define ck_bag(x)        ck_bag_(x)

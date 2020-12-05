@@ -136,6 +136,44 @@ doread()
 	    if (carried(scroll)) useup(scroll);
 	    else useupf(scroll, 1L);
 	    return(1);
+#ifdef NEPHI_PHOTOGRAPHY
+	} else if (scroll->otyp == SCR_PHOTOGRAPH) {
+		if(Blind
+#ifdef INVISIBLE_OBJECTS
+			|| cant_see
+#endif
+			)
+			You_cant("see the photograph.");
+		else
+			examine_photo(PHOTOGRAPH(scroll));
+		return(1);
+	} else if (scroll->otyp == SPE_PHOTO_ALBUM) {
+		if(Blind)
+			You_cant("see anything in %s.",the(xname(scroll)));
+		else if(Has_contents(scroll)) {
+			int n;
+		    menu_item *pick_list;
+			struct obj *otmp;
+
+			n = query_objlist("Which photograph do you want to examine?", scroll->cobj,
+					  INVORDER_SORT, &pick_list, PICK_ONE,allow_all);
+			if (n) {
+				otmp = pick_list[0].item.a_obj;
+				if(otmp->otyp!=SCR_PHOTOGRAPH)	impossible("A non-photograph in a photo album");
+#ifdef INVISIBLE_OBJECTS
+				if(otmp->oinvis)
+					You_cant("see the photograph.");
+				else
+#endif
+				examine_photo(PHOTOGRAPH(otmp));
+			}
+			free((genericptr_t)pick_list);
+		}
+		else {
+			pline("%s is empty.",The(xname(scroll)));
+		}
+		return(1);
+#endif
 #ifdef TOURIST
 	} else if (scroll->otyp == T_SHIRT) {
 	    static const char *shirt_msgs[] = { /* Scott Bigham */

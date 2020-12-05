@@ -85,6 +85,18 @@ boolean restore;
 			otmp->no_charge = 0;
 			otmp->was_thrown = 0;
 
+#ifdef NEPHI_PHOTOGRAPHY
+			if(otmp->otyp == SCR_PHOTOGRAPH) {
+				struct photograph* photo;
+					if(photo = PHOTOGRAPH(otmp)) {
+					photo->special_name = 0;
+					photo->onamelen = photo->mnamelen = 0;
+					memset(PHOTO_MNAME(photo),0,2);
+					otmp->oxlth = sizeof(struct photograph)+2;
+				}
+			}
+#endif
+
 			if (otmp->otyp == SLIME_MOLD) goodfruit(otmp->spe);
 #ifdef MAIL
 			else if (otmp->otyp == SCR_MAIL) otmp->spe = 1;

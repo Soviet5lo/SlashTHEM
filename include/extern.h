@@ -31,6 +31,11 @@ E time_t NDECL(get_realtime);
 
 /* ### apply.c ### */
 
+#ifdef TOURIST
+#ifdef NEPHI_PHOTOGRAPHY
+E int FDECL(use_camera, (struct obj *,boolean));
+#endif
+#endif
 E int NDECL(doapply);
 E int NDECL(dorub);
 E int NDECL(dojump);
@@ -1673,6 +1678,19 @@ E void FDECL(regularize, (char *));
 E void NDECL(getlock);
 #endif
 
+/* ### photo.c ### */
+#ifdef NEPHI_PHOTOGRAPHY
+E char *FDECL(glance_photo, (struct photograph *));
+E void FDECL(examine_photo, (struct photograph *));
+E struct obj *FDECL(expose_film,  (struct obj *,struct obj*,int,int,int,int,int,int,boolean,int));
+E struct obj *FDECL(gen_random_photo, (struct obj*));
+E struct obj *FDECL(make_special_photo, (int));
+E int NDECL(use_camera_timer);
+E void FDECL(take_picture, (genericptr_t, long));
+E void FDECL(take_picture2,(struct obj*,int,int,int,boolean,boolean));
+E struct monst* FDECL(flash_beam, (int,int,int,int,int,struct obj*));
+#endif
+
 /* ### pickup.c ### */
 
 #ifdef GOLDOBJ
@@ -1757,6 +1775,9 @@ E int NDECL(docharm);
 E int NDECL(dohide);
 E int NDECL(domindblast);
 E void FDECL(skinback, (BOOLEAN_P));
+#ifdef NEPHI_PHOTOGRAPHY
+E const char *FDECL(pmbodypart, (struct permonst *,int));
+#endif
 E const char *FDECL(mbodypart, (struct monst *,int));
 E const char *FDECL(body_part, (int));
 E int NDECL(poly_gender);

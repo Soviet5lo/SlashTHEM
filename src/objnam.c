@@ -494,6 +494,12 @@ register struct obj *obj;
 		}
 		break;
 	case SCROLL_CLASS:
+#ifdef NEPHI_PHOTOGRAPHY
+		if(typ == SCR_PHOTOGRAPH) {
+			Strcpy(buf, obj->dknown ? glance_photo(PHOTOGRAPH(obj)):"photograph");
+			break;
+		}
+#endif
 		Strcpy(buf, "scroll");
 		if(!obj->dknown) break;
 		if(nn) {
@@ -522,7 +528,17 @@ register struct obj *obj;
 		break;
 	case SPBOOK_CLASS:
 		if (!obj->dknown) {
+#ifdef NEPHI_PHOTOGRAPHY
+			Strcpy(buf, "book");
+		} else if(typ == SPE_PHOTO_ALBUM) {
+			if(nn || !un) {
+				Strcpy(buf, nn ? actualn:dn);
+			} else {
+				Sprintf(buf, "book called %s",un);
+			}
+#else
 			Strcpy(buf, "spellbook");
+#endif
 		} else if (nn) {
 			if (typ != SPE_BOOK_OF_THE_DEAD)
 			    Strcpy(buf, "spellbook of ");
@@ -828,7 +844,12 @@ register struct obj *obj;
 		}
 	    /* end post-processing */
 		
-		if(strlen(cp)) {
+		if(strlen(cp)
+#ifdef NEPHI_PHOTOGRAPHY
+				&& /* 5lo: Don't double identify albums or photographs */
+				obj->otyp != SPE_PHOTO_ALBUM && obj->otyp != SCR_PHOTOGRAPH
+#endif
+		  ){
 			if(obj->oclass == POTION_CLASS || obj->oclass == SCROLL_CLASS
 			|| (obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BOOK_OF_THE_DEAD)
 			|| obj->oclass == WAND_CLASS || obj->oclass == RING_CLASS)
@@ -1024,6 +1045,10 @@ plus:
 		break;
 	case SPBOOK_CLASS: /* WAC spellbooks have charges now */
 #ifdef WIZARD
+#ifdef NEPHI_PHOTOGRAPHY
+		/* photo albums don't have charges */
+		if (obj->otyp == SPE_PHOTO_ALBUM) break;
+#endif
 		if (wizard) {
 		    if (Hallucination)
 			break;

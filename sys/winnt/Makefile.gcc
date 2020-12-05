@@ -483,7 +483,7 @@ VOBJ10 = mkobj.o    mkroom.o   mon.o	  mondata.o  monmove.o
 VOBJ11 = monst.o    monstr.o   mplayer.o  mthrowu.o  muse.o
 VOBJ12 = music.o    o_init.o   objects.o  objnam.o   options.o
 VOBJ13 = pickup.o   pline.o    polyself.o potion.o   quest.o
-VOBJ14 = questpgr.o pager.o    pray.o	  priest.o   read.o
+VOBJ14 = questpgr.o pager.o    photo.o    pray.o      priest.o   read.o
 VOBJ15 = rect.o	    restore.o  rip.o	  rnd.o	     role.o
 VOBJ16 = rumors.o   save.o     school.o   shk.o      shknam.o
 VOBJ17 = sit.o      smith.o    sounds.o   sp_lev.o   spell.o
@@ -2006,6 +2006,7 @@ options.o: options.c $(CONFIG_H) $(INCL)/objclass.h $(INCL)/flag.h \
 		$(HACK_H) $(INCL)/tcap.h $(INCL)/winGL.h \
 		$(INCL)/filename.h
 pager.o: pager.c $(HACK_H) $(INCL)/dlb.h
+$(O)photo.o: photo.c $(HACK_H)
 pickup.o: pickup.c $(HACK_H)
 pline.o: pline.c $(HACK_H) $(INCL)/epri.h $(INCL)/edog.h
 polyself.o: polyself.c $(HACK_H)

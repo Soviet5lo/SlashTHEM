@@ -1,4 +1,3 @@
-/*	SCCS Id: @(#)cmd.c	3.4	2003/02/06	*/
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* NetHack may be freely redistributed.  See license for details. */
 
@@ -3085,6 +3084,9 @@ struct ext_func_tab extcmdlist[] = {
 	{"shout", "say something loud", doyell, TRUE}, /* jrn */
 #endif
 	{"technique", "perform a technique", dotech, TRUE},
+#ifdef NEPHI_PHOTOGRAPHY
+	{"timer", "set timer on a camera", use_camera_timer, FALSE},
+#endif
 	{"turn", "turn undead", doturn, TRUE},
 	{"twoweapon", "toggle two-weapon combat", dotwoweapon, FALSE},
 	{"untrap", "untrap something", dountrap, FALSE},
