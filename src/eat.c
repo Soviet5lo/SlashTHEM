@@ -3221,9 +3221,9 @@ gethungry()	/* as time goes by - called by moveloop() and domove() */
         /* Convicts can last twice as long at hungry and below */
         && (!Role_if(PM_CONVICT) || (moves % 2) || (u.uhs < HUNGRY))
 #endif /* CONVICT */
-		/* 5lo: So can vampires, since they're undead and can sometimes be
+		/* 5lo: So can vampires and ghouls, since they're undead and can sometimes be
 		 * forced to go long periods of time without feeding */
-		&& (!Race_if(PM_VAMPIRE) || (moves % 2) || (u.uhs < HUNGRY))
+		&& (!(Race_if(PM_VAMPIRE) || Race_if(PM_GHOUL)) || (moves % 2) || (u.uhs < HUNGRY))
 		&& !((Slow_digestion && (!Race_if(PM_INCANTIFIER) || moves%2) ||
 			Race_if(PM_INCANTIFIER) && moves%10)))
 			(Race_if(PM_INCANTIFIER) ? u.uen-- : u.uhunger--);		/* ordinary food consumption */
