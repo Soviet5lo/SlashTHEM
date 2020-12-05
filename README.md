@@ -20,6 +20,15 @@ The source code builds fine on Windows using MinGW, as well as Linux.  Other Ope
 
 Windows (x64) builds are available on the [releases](https://github.com/Soviet5lo/SlashTHEM/releases) page.  I attempt to make a new build based on the current code at the beginning of the month, assuming there's enough changes worth building.
 
+Installation
+------------
+
+Dependencies should be the same as Nethack, Slash'EM, and any other variant.  On Windows an installation of MinGW is necessary.  I particularly use [Nuwen's](https://nuwen.net/mingw.html) distro of MinGW.
+
+For Linux users its as simple as modifying config.h to your liking, copying GNUmakefile from sys/unix into the project root directory and renaming it Makefile, and running make install.  It'll be installed in ~/slashthem/slashthem-$VERSION.  BSD users should run gmake install instead.
+
+For Windows users, modify config.h to your desire, followed by navigating to the sys/winnt directory, running both nhsetup.bat and setup.bat, followed by navigating into the src/ folder from the root directory, opening a terminal and running 'make -f makefile.gcc install'.  It should produce a build in C:\games\slam32d\ if everything worked correctly.
+
 Credits
 -------
 Credits go to Chris for dNetHack (Used a few artifacts), Grunt for GruntHack, BarclayII for SlashEM-up (some balance changes come from this), Patric Mueller (bhaak) for UnNethack, and of course AmyBSOD for Slash'EM Extended.
