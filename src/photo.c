@@ -31,6 +31,7 @@ scc the_inside_of[] = "the inside of ";
 scc TREE_STR[] = "tree";
 scc POOL_STR[] = "pool";
 scc MOAT_STR[] = "moat";
+scc PUDDLE_STR[] = "shallow pool";
 scc WATER_STR[] = "water";
 scc DRAWBRIDGE_UP_STR[] = "raised drawbridge";
 scc LAVAPOOL_STR[] = "pool of lava";
@@ -187,6 +188,7 @@ char* FDECL((*article_func), (const char*));
 		case TREE:			tmp = TREE_STR;break;
 		case POOL:			tmp = POOL_STR;break;
 		case MOAT:			tmp = MOAT_STR;break;
+		case PUDDLE:    tmp = PUDDLE_STR;break;
 		case WATER:			tmp = WATER_STR;wants_article=FALSE;break;
 		case DRAWBRIDGE_UP:	tmp = DRAWBRIDGE_UP_STR;break;
 		case LAVAPOOL:		tmp = LAVAPOOL_STR;break;
@@ -507,6 +509,7 @@ struct photograph* photo;
 		case ALTAR:			surface = ALTAR_STR;break;
 		case ICE:			surface = ICE_STR;break;
 		case AIR:			surface = AIR_STR;break;
+		case PUDDLE:	surface = PUDDLE_STR;break;
 		case PHOTO_TRAP_MASK|PIT:
 		case PHOTO_TRAP_MASK|SPIKED_PIT:		surface = "floor of the pit";break;
 		default:
@@ -515,7 +518,8 @@ struct photograph* photo;
 		switch(photo->ph_engr_type) {
 	    case DUST:
 			Sprintf(buf,"You see %s written in the %s.", something,
-				photo->feature==ICE ? "frost" : "dust");
+				photo->feature==ICE ? "frost" :
+				photo->feature==PUDDLE ? "mud" : "dust");
 		break;
 	    case ENGRAVE:
 	    case HEADSTONE:
@@ -634,7 +638,7 @@ boolean flash;
 
 		film->special_room = rooms[r->roomno - ROOMOFFSET].rtype;
 		
-		here = is_pool(x,y) || dz<0 ? (struct obj*)0 : level.objects[x][y];
+		here = is_pool(x,y,FALSE) || dz<0 ? (struct obj*)0 : level.objects[x][y];
 #ifdef INVISIBLE_OBJECTS
 		while(here && here->oinvis)
 			here=here->nexthere;
@@ -708,7 +712,7 @@ film_mon:
 				film->subject_type = PHOTO_MON;
 				film->feature = typ;
 				film->range = range-trange;
-				if(is_pool(x,y) && !is_flyer(mtmp->data))
+				if(is_pool(x,y,FALSE) && !is_flyer(mtmp->data))
 					film->out_of_focus=1;
 				pbuff.oname[0] = '\0';
 				/* see if there is some interesting object along with monster */
@@ -761,7 +765,7 @@ film_obj:
 			film->subject_type = PHOTO_CEILING;
 			if (IS_AIR(typ)) {
 				film->feature = PHOTO_CEILING_AIR;
-			} else if (is_pool(x,y)) {
+			} else if (is_pool(x,y,FALSE)) {
 				if(where==OBJ_FLOOR)
 					film->feature = PHOTO_CEILING_WATER;
 				else
@@ -992,6 +996,8 @@ unsigned appearance;
 		return POOL;
 	case S_ice:
 		return ICE;
+	case S_puddle:
+		return PUDDLE;
 	case S_lava:
 		return LAVAPOOL;
 	case S_vodbridge:
@@ -1073,6 +1079,7 @@ boolean trapped;
 	case MOAT:
 	case WATER:
 	case LAVAPOOL:
+	case PUDDLE:
 		return preps[1];
 	/* on */
 	case ICE:
@@ -1412,9 +1419,9 @@ boolean flash,timer_invoked;
 	}
 
 	/* see if camera is being used underwater */
-	if((where==OBJ_FLOOR && is_pool(x,y))
+	if((where==OBJ_FLOOR && is_pool(x,y,FALSE))
 		|| (where==OBJ_INVENT && Underwater)
-		|| (where==OBJ_MINVENT && is_pool(x,y) && !is_flyer(camera->ocarry->data)))
+		|| (where==OBJ_MINVENT && is_pool(x,y,FALSE) && !is_flyer(camera->ocarry->data)))
 	{
 		/* "Using your camera underwater would void the warranty." */
 		if(distu(x,y)<=PHOTO_MAX_RANGE*PHOTO_MAX_RANGE)

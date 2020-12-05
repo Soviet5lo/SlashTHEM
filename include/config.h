@@ -544,7 +544,7 @@ typedef long glyph_t;
 /*#define SIMPLE_MAIL */ /* dgamelaunch simple mail */
 
 #define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
-#define NEPHI_PHOTOGRAPHY /* Nephi's photography patch */
+/* #define NEPHI_PHOTOGRAPHY */ /* Nephi's photography patch */
 
 #define ITEMCAT     /* Additional Item Categories Patch - Unidentified and Rustprone */
 #define ITEMCAT_JP  /* Item Categories - Items just picked up/taken out */

@@ -4241,6 +4241,10 @@ struct obj *otmp;	/* source of flash */
 	    }
 	} else if (mtmp->data->mlet != S_LIGHT) {
 	    if (!resists_blnd(mtmp)) {
+		/* BUG: If NEPHI_PHOTOGRAPHY is defined dist2 returns
+		 * an improper result, causing monsters to never penic
+		 * and blinding to last only 1 turn.
+		 */
 		tmp = dist2(otmp->ox, otmp->oy, mtmp->mx, mtmp->my);
 		if (useeit) {
 		    pline("%s is %s", Monnam(mtmp),blinded_by_the_flash);
