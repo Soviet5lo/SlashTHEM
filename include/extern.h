@@ -1733,6 +1733,7 @@ E int FDECL(loot_mon, (struct monst *,int *,boolean *));
 E const char *FDECL(safe_qbuf, (const char *,unsigned,
 				const char *,const char *,const char *));
 E boolean FDECL(is_autopickup_exception, (struct obj *, BOOLEAN_P));
+E int NDECL(dotip);
 
 /* ### pline.c ### */
 

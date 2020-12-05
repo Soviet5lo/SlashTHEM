@@ -3087,6 +3087,7 @@ struct ext_func_tab extcmdlist[] = {
 #ifdef NEPHI_PHOTOGRAPHY
 	{"timer", "set timer on a camera", use_camera_timer, FALSE},
 #endif
+	{"tip", "tip objects out of a container", dotip, FALSE},
 	{"turn", "turn undead", doturn, TRUE},
 	{"twoweapon", "toggle two-weapon combat", dotwoweapon, FALSE},
 	{"untrap", "untrap something", dountrap, FALSE},
