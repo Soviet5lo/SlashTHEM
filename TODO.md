@@ -15,7 +15,6 @@ NOTE: This is not a complete list, just something to note down into a file.
 * Android port, utilizing the code from [here.](https://github.com/gurrhack/SlashEM-Android/)
 * Redo all of the remaining slash'em extended role quests (except Jedi, Bard, and Noble?) so they're not copies of existing quests.  Unique dialog in quest.txt as well.
 * Backporting Dumplog and Overview enhancements from NetHack 3.6.
-* Implement the #tip command from Nethack 3.6.
 * #give command, to act as sort of a reverse #borrow for pets.
 * Remove several old defines (FIREARMS, TOURIST, YEOMAN).
 * Port over blasters from dNethack for Stormtroopers to use in the Jedi quest.
@@ -23,6 +22,7 @@ NOTE: This is not a complete list, just something to note down into a file.
 * Update menucolors on windows to use regex instead of basic globbing.
 * Better windows default config.
 * If playing as a ghoul, give a message when a corpse in inventory/line of sight becomes edible.
+* Allow pets to use ranged weapons, maybe ranged attacks as well.
 * Full update of database and guidebook.
 
 ### Probably won't be done unless someone assists with this
@@ -31,3 +31,4 @@ NOTE: This is not a complete list, just something to note down into a file.
 
 ### Don't count on it
 * A complete rebase onto Nethack-Current.
+* Ports to legacy platforms (Amiga, VAX, etc.)
