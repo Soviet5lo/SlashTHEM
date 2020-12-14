@@ -694,9 +694,10 @@ char *prefix;
 			obj->rknown? "" : "]");
 }
 
-char *
-doname(obj)
+static char *
+doname_base(obj, with_price)
 register struct obj *obj;
+boolean with_price;
 {
 	boolean ispoisoned = FALSE;
 	char prefix[PREFIX];
@@ -1183,6 +1184,11 @@ ring:
 			quotedprice += contained_cost(obj, shkp, 0L, FALSE, TRUE);
 		Sprintf(eos(bp), " (unpaid, %ld %s)",
 			quotedprice, currency(quotedprice));
+	} else if (with_price) {
+		long price = get_cost_of_shop_item(obj);
+		if (price > 0) {
+			Sprintf(eos(bp), " (%ld %s)", price, currency(price));
+		}
 	}
 #ifdef WIZARD
 	if (wizard && obj->in_use)	/* Can't use "(in use)", see leashes */
@@ -1229,6 +1235,22 @@ ring:
 	}
 
 	return(bp);
+}
+
+/** Wrapper function for vanilla behaviour. */
+char *
+doname(obj)
+register struct obj *obj;
+{
+	return doname_base(obj, FALSE);
+}
+
+/** Name of object including price. */
+char *
+doname_with_price(obj)
+register struct obj *obj;
+{
+	return doname_base(obj, TRUE);
 }
 
 #endif /* OVL0 */
