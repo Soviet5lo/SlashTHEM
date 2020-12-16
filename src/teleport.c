@@ -63,7 +63,7 @@ unsigned gpflags;
 	    if (mdat->mlet == S_EEL && !pool && rn2(13) && !ignorewater)
 		is_badpos = 1;
 
-	    if (pool && !ignorewater) {
+	    if (is_pool(x,y,FALSE) && !ignorewater) { /* exclude puddles here */
 		if (mtmp == &youmonst)
 			return (HLevitation || Flying || Wwalking ||
 				    Swimming || Amphibious) ? is_badpos : -1;
