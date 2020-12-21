@@ -17,6 +17,7 @@ STATIC_DCL void FDECL(dosinkring, (struct obj *));
 #endif /* SINKS */
 
 STATIC_PTR int FDECL(drop, (struct obj *));
+STATIC_PTR int FDECL(give, (struct monst *, struct obj *));
 STATIC_PTR int NDECL(wipeoff);
 #if 0 /* unused */
 STATIC_PTR void NDECL(lose_comp_objects);
@@ -35,6 +36,117 @@ STATIC_DCL void NDECL(final_level);
 
 static NEARDATA const char drop_types[] =
 	{ ALLOW_COUNT, COIN_CLASS, ALL_CLASSES, 0 };
+
+/* #give: give another creature an item */
+/* based on / copied from dochat */
+int
+dogive()
+{
+
+    struct monst *mtmp;
+    int tx, ty, i;
+    struct obj *otmp;
+
+    if (u.uswallow) {
+        pline("The only thing you can give right now is your best effort.");
+        return 0;
+    }
+    if (!getdir("Give an item to whom? (in what direction)")) {
+        return 0;
+    }
+    if (u.usteed && u.dz > 0) {
+        if (!u.usteed->mcanmove || u.usteed->msleeping) {
+            pline("%s seems not to notice you.", Monnam(u.usteed));
+            return 0;
+        } else {
+            pline("It's a little hard to give a gift from here.");
+            return 0;
+        }
+    }
+    if (u.dz) {
+        pline("Don't give up!");
+        return 0;
+    }
+    if (u.dx == 0 && u.dy == 0) {
+        pline("You give yourself a pat on the back.");
+        return 0;
+    }
+
+    tx = u.ux + u.dx;
+    ty = u.uy + u.dy;
+
+    if (!isok(tx, ty))
+        return 0;
+
+    mtmp = m_at(tx, ty);
+    if (!mtmp)
+        return 0;
+
+    if (!mtmp->mpeaceful && !mtmp->mtame) {
+        pline("%s probably does not want any gifts from you.", Monnam(mtmp));
+        return 0;
+    }
+    if (mtmp->data->msound == MS_PRIEST) {
+        priest_talk(mtmp);
+        return 0;
+    }
+
+    if ((!mtmp || mtmp->mundetected)
+        && (otmp = vobj_at(tx, ty)) != 0 && otmp->otyp == STATUE) {
+        /* Talking to a statue */
+        if (!Blind) {
+            pline_The("%s seems not to notice you.",
+                      /* if hallucinating, you can't tell it's a statue */
+                      Hallucination ? rndmonnam() : "statue");
+        }
+        return 0;
+    }
+
+    if (!mtmp || mtmp->mundetected || mtmp->m_ap_type == M_AP_FURNITURE
+        || mtmp->m_ap_type == M_AP_OBJECT)
+        return 0;
+
+    /* sleeping monsters won't talk, except priests (who wake up) */
+    if ((!mtmp->mcanmove || mtmp->msleeping) && !mtmp->ispriest) {
+        /* If it is unseen, the player can't tell the difference between
+           not noticing him and just not existing, so skip the message. */
+        if (canspotmon(mtmp))
+            pline("%s seems not to notice you.", Monnam(mtmp));
+        return 0;
+    }
+
+    /* if this monster is waiting for something, prod it into action */
+    mtmp->mstrategy &= ~STRAT_WAITMASK;
+
+    if (mtmp->mtame && mtmp->meating) {
+        if (!canspotmon(mtmp))
+            map_invisible(mtmp->mx, mtmp->my);
+        pline("%s is eating noisily.", Monnam(mtmp));
+        return 0;
+    }
+
+    /* giving code */
+    i = (invent) ? 0 : (SIZE(drop_types) - 1);
+    otmp = getobj(&drop_types[i], "give away");
+    if (!otmp)
+        return 0;
+    /* how does our monster respond? */
+    if (monsndx(mtmp->data) == PM_SHOPKEEPER) {
+        if (!otmp->unpaid) {
+            pline("%s thanks you for your contribution to the store.",
+                  mon_nam(mtmp));
+        } else {
+            pline("%s seems confused, but thanks you anyway.", mon_nam(mtmp));
+        }
+    } else if (otmp->unpaid && inside_shop(u.ux, u.uy)) {
+        /* refine this later */
+        pline("That's not yours to give away!");
+        return 0;
+    }
+    /* actually give the object */
+    give(mtmp, otmp);
+    return 1;
+}
 
 /* 'd' command: drop one inventory item */
 int
@@ -563,6 +675,12 @@ register struct obj *obj;
 	    }
 #endif
 	    if (!can_reach_floor()) {
+		/* we might be levitating due to #invoke Heart of Ahriman;
+		   if so, levitation would end during call to freeinv()
+		   and we want hitfloor() to happen before float_down() */
+		boolean levhack = finesse_ahriman(obj);
+
+		if (levhack) ELevitation = W_ART; /* other than W_ARTI */
 		if(flags.verbose) You("drop %s.", doname(obj));
 #ifndef GOLDOBJ
 		if (obj->oclass != COIN_CLASS || obj == invent) freeinv(obj);
@@ -572,6 +690,7 @@ register struct obj *obj;
 		freeinv(obj);
 #endif
 		hitfloor(obj);
+		if (levhack) float_down(I_SPECIAL|TIMEOUT, W_ARTI|W_ART);
 		return(1);
 	    }
 	    if (!IS_ALTAR(levl[u.ux][u.uy].typ) && flags.verbose)
@@ -1848,6 +1967,64 @@ donull()
 
 #endif /* OVL3 */
 #ifdef OVLB
+
+/* based on drop() since the two are very similar actions */
+STATIC_PTR int
+give(mon, obj)
+register struct monst *mon;
+register struct obj *obj;
+{
+    if (!obj)
+        return 0;
+    if (!mon)
+        return 0;
+    if (!canletgo(obj, "give away"))
+        return 0;
+    if (obj == uwep) {
+        if (welded(uwep)) {
+            weldmsg(obj);
+            return 0;
+        }
+        setuwep((struct obj *) 0, FALSE);
+    }
+    if (obj == uquiver) {
+        setuqwep((struct obj *) 0);
+    }
+    if (obj == uswapwep) {
+        setuswapwep((struct obj *) 0, FALSE);
+    }
+
+    if (u.uswallow) {
+        pline("You aren't really in a position to give things away.");
+        return 0;
+    } else {
+        if (!can_reach_floor) {
+            /* we might be levitating due to #invoke Heart of Ahriman;
+               if so, levitation would end during call to freeinv()
+               and we want hitfloor() to happen before float_down() */
+            boolean levhack = finesse_ahriman(obj);
+
+            if (levhack)
+                ELevitation = W_ART; /* other than W_ARTI */
+            if (flags.verbose)
+                You("give %s to %s.", doname(obj), mon_nam(mon));
+            /* Ensure update when we drop gold objects */
+            if (obj->oclass == COIN_CLASS)
+                flags.botl = 1;
+            freeinv(obj);
+            (void) mpickobj(mon, obj);
+            if (levhack)
+                float_down(I_SPECIAL | TIMEOUT, W_ARTI | W_ART);
+            return 1;
+        }
+    }
+    if (flags.verbose)
+        You("give %s to %s.", doname(obj), mon_nam(mon));
+    freeinv(obj);
+    (void) mpickobj(mon, obj);
+    m_dowear(mon, FALSE);
+    return 1;
+}
 
 STATIC_PTR int
 wipeoff()

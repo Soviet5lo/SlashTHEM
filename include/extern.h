@@ -89,6 +89,7 @@ E int FDECL(disp_artifact_discoveries, (winid));
 E boolean FDECL(artifact_hit, (struct monst *,struct monst *,
 				struct obj *,int *,int));
 E int NDECL(doinvoke);
+E boolean FDECL(finesse_ahriman, (struct obj *));
 E boolean FDECL(nogen_nrartifact,(int artino)); /* 5lo: Functions for Forge */
 E boolean FDECL(exists_nrartifact,(int artino));
 E int FDECL(nrartifact_obtype,(int artino));
@@ -358,6 +359,7 @@ E int FDECL(drop, (struct obj *));
 E int NDECL(wipeoff);
 #endif
 E int NDECL(dodrop);
+E int NDECL(dogive);
 E boolean FDECL(boulder_hits_pool, (struct obj *,int,int,BOOLEAN_P));
 E boolean FDECL(flooreffects, (struct obj *,int,int,const char *));
 E void FDECL(doaltarobj, (struct obj *));
