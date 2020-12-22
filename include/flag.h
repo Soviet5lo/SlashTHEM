@@ -320,7 +320,7 @@ struct instance_flags {
 
 	boolean dungeon_colors; /* Branch stairs, branches and special rooms are colored */
 
-	boolean showobj_inv; /* Display items in inventory (Unnethack) */
+	boolean use_menu_glyphs; /* Display items in inventory (Unnethack) */
 
 #ifdef AUTOPICKUP_EXCEPTIONS
 	struct autopickup_exception *autopickup_exceptions[2];

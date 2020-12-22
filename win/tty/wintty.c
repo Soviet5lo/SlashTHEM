@@ -1410,7 +1410,7 @@ struct WinDesc *cw;
 			    putchar(' '); ttyDisplay->curx++;
  		    }
 #ifndef WIN32CON
-		    if (curr->glyph != NO_GLYPH && iflags.showobj_inv) {
+		    if (curr->glyph != NO_GLYPH && iflags.use_menu_glyphs) {
 			    int glyph_color = NO_COLOR;
 			    glyph_t character;
 			    unsigned special; /* unused */
@@ -2382,7 +2382,7 @@ tty_end_menu(window, prompt)
 		/* extra space for keyboard accelerator */
 		len += 4;
 		if (curr->glyph != NO_GLYPH &&
-		    iflags.showobj_inv) {
+		    iflags.use_menu_glyphs) {
 			/* extra space for glyph */
 			len += 2;
 		}
