@@ -16,11 +16,11 @@ I very rarely come back to this project. Only times I work on it now is when I g
 - [Slash'EM Extended](https://github.com/SLASHEM-Extended/SLASHEM-Extended), if you want a variant that includes absolutely everything and every possible idea, good and bad.
 - [Slash'EM-Upgrades and Patches](https://github.com/BarclayII/slashem-up/tree/develop), if you want Slash'EM + Balance changes, a few backports from Nethack 3.6, various upgrades and integrated patches.
 
-The source code builds fine on Windows using MinGW, as well as Linux.  Other Operating Systems are untested.  I highly doubt it runs on legacy systems however (VMS, Amiga, etc.).  Pull requests are indeed looked at.
+The source code builds fine on Windows using MinGW, as well as Linux.  Other Operating Systems are untested.  I highly doubt it runs on legacy systems however (VMS, Amiga, etc.).  If you want to assist, feel free to look at the active Issues as well as the [TODO](TODO.md) doc, or submit a pull request, those are also looked at.
 
 Windows (x64) builds are available on the [releases](https://github.com/Soviet5lo/SlashTHEM/releases) page.  I attempt to make a new build based on the current code at the beginning of the month, assuming there's enough changes worth building.
 
-Installation
+Build Instructions
 ------------
 
 Dependencies should be the same as Nethack, Slash'EM, and any other variant.  On Windows an installation of MinGW is necessary.  I particularly use [Nuwen's](https://nuwen.net/mingw.html) distro of MinGW.
