@@ -404,6 +404,11 @@ dodrink()
 					 */
 					You("take a sip of the muddy water.");
 					u.uhunger += rnd(5);
+					if (!rn2(10)) {
+						/* You've drank it all - turn back to floor */
+						levl[u.ux][u.uy].typ = ROOM;
+						if (cansee(u.ux,u.uy)) pline("The puddle dries up.");
+					}
 					return 1;
 				} else
 					pline("This water is far too muddy to drink.");
