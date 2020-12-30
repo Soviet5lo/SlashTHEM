@@ -75,8 +75,7 @@ struct monst {
 #define CHAM_CHAMELEON		1	/* animal */
 #define CHAM_DOPPELGANGER	2	/* demi-human */
 #define CHAM_SANDESTIN		3	/* demon */
-#define CHAM_GIANT_CHAMELEON		4	/* animal */
-#define CHAM_MAX_INDX		CHAM_GIANT_CHAMELEON
+#define CHAM_MAX_INDX		CHAM_SANDESTIN
 	Bitfield(mundetected,1);	/* not seen in present hiding place */
 				/* implies one of M1_CONCEAL or M1_HIDE,
 				 * but not mimic (that is, snake, spider,
