@@ -19,10 +19,10 @@
 /*#define FIXLEVEL        0*/
 
 #define COPYRIGHT_BANNER_A \
-"This is SuperLotsaAddedStuffHack-The Heavily Extended Mod 2014-2020"
+"This is SuperLotsaAddedStuffHack-The Heavily Extended Mod 2014-2021"
 
 #define COPYRIGHT_BANNER_B \
-"NetHack, Copyright 1985-2003 Stichting Mathematisch Centrum, M. Stephenson."
+"NetHack, Copyright 1985-2021 Stichting Mathematisch Centrum, M. Stephenson."
 
 #define COPYRIGHT_BANNER_C \
 "Slash'EM by the Slash'EM Dev Team.  Slash'EM Extended by AmyBSOD at Github."
