@@ -1803,3 +1803,93 @@ MONSTER:'e',random,(45,11),hostile
 MONSTER:'n',random,(46,11),hostile
 MONSTER:'t',random,(47,11),hostile
 OBJECT:'.',random,(48,11)
+
+# Some kind of sewer system
+
+MAZE:"bigrm-21",' '
+GEOMETRY:center,center
+MAP
+---------------------------------------------------------------------------
+|.......||..............||..............||..............||................|
+|.......||..............||..............||..............||................|
+Fwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww....|
+Fwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...ww......ww......ww......ww......ww......ww......ww......ww......ww....|
+|...wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwF
+|...wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwwwww..||..wwwwwwF
+|...............||..............||..............||..............||........|
+|...............||..............||..............||..............||........|
+---------------------------------------------------------------------------
+ENDMAP
+# Dungeon Description
+REGION:(01,01,73,16),lit,"ordinary"
+# Stairs
+STAIR:random,up
+STAIR:random,down
+# Non diggable walls
+NON_DIGGABLE:(00,00,74,17)
+# Random broken pipes
+FOUNTAIN:random
+FOUNTAIN:random
+FOUNTAIN:random
+FOUNTAIN:random
+# Objects
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+OBJECT:random,random,random
+# Random traps
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+TRAP:random,random
+# Random monsters.
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+MONSTER:random,random,random
+
