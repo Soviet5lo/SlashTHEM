@@ -3168,6 +3168,15 @@ int dotip(void) {
 void tipcontainer(struct obj *box) {
 	boolean empty_it = FALSE;
 
+	/* Temporary workaround since tipping containers
+	 * in shops results in the contained objects 
+	 * becoming free for taking and use.
+	 */
+	if (*u.ushops && shop_keeper(*u.ushops) &&
+		inhishop(shop_keeper(*u.ushops))) {
+		verbalize("No tipping the merchandise!");
+		return;
+	}
 	if (box->olocked) {
 		pline("It's locked.");
 	} else if (box->otrapped) {
