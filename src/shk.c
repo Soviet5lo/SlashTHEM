@@ -3783,6 +3783,11 @@ register struct monst *shkp;
 	omx = shkp->mx;
 	omy = shkp->my;
 
+	/* Random advertising to passersby. */
+	if (!ANGRY(shkp) && inhishop(shkp) && !*u.ushops && !rn2(10)) {
+	    shk_holler(shkp);
+	}
+
 	if (inhishop(shkp))
 	    remove_damage(shkp, FALSE);
 
@@ -6051,5 +6056,134 @@ wiz_debug_cmd()	/* in this case, display your bill(s) */
     return 0;
 }
 #endif	/* DEBUG */
+
+#define CRYNUMBER 5
+
+/* TODO: Handle the following shops:
+ * General store
+ * Pet Store
+ * Frozen Food Store
+ * Instrument Shop
+ * Gun store
+ * Black Market
+ * Lighting Store (since these are different from the minetown level)
+ *
+ * The "Bugger off!" message should only happen if you're banned from a shop.
+ */
+
+const char* armor_wares[] = {
+	"Any %s would love these!  Finest quality!",
+	"Fit for a Knight, but they'll last for weeks!",
+	"It's dangerous 'round here these days... better wear something safe!",
+	"Hey, %s, I've got something here that'll fit you perfectly!",
+	"Guaranteed safety or double your money back!"
+};
+const char* scroll_wares[] = {
+	"Large print available!",
+	"'ere now, this isn't a library; get lost, you freeloader!",
+	"Waterproof ink upon request!  ... for a small surcharge.",
+	"Curses removed, gold detected, and weapons enchanted, at your whim!",
+	"If you can read, %s, you'll want some of these!"
+};
+const char* potion_wares[] = {
+	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"Booze on ice!  Getcher booze on ice!",
+	"Come on, %s.  You know you're thirsty.",
+	"Ahhh, it'll put hair on yer chest!",
+	"Lowest percentage of cursed items around!"
+};
+const char* weapon_wares[] = {
+	"Sharpest weapons around! On sale, today only!",
+	"We sell 'em, you stab 'em!",
+	"Guaranteed to not dull for ten fights or your money back!",
+	"Look, %s, with a face like that you'll be in a lot of fights.  Better buy something now.",
+	"You'll never slash the same again after one of ours!"
+};
+const char* food_wares[] = {
+	"Gitchore luvverly orinjes!",
+	"Fresh fish! So fresh it'll grab yer naughty bits!",
+	"Sausage inna bun!  Hot sausage!",
+	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"Genuine pig parts, these. So good most pigs don't even know they got 'em."
+};
+const char* ring_wares[] = {
+	"Well, you seem like a fine, discerning young %s; come look at this.",
+	"Special sparklies for a special %s, perhaps?",
+	"Once you put one of ours on, you'll never want to take it off!",
+	"Our bands never break or melt!",
+	"Shiny, isn't it?"
+};
+const char* wand_wares[] = {
+	"Credit available for valued customers!",
+	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"Straightest zaps anywhere!  100%% money back guarantee (less usage)!",
+	"Our wands explode less than all others!",
+	"New EZ-BREAK feature on these in case of emergency!"
+};
+const char* tool_wares[] = {
+	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"Tins opened, faces wiped, gazes reflected; your one-stop shop!",
+	"How you gonna carry all your stuff without a bag, %s?",
+	"Must be hard kickin' all those doors down, I bet a key would help...",
+	"Only tools wouldn't buy our tools!"
+};
+const char* book_wares[] = {
+	"Large print available!",
+	"'ere now, this isn't a library; get lost, you freeloader!",
+	"Mental magnificence for the scholarly IN-clined!",
+	"Credit available for valued customers!",
+	"'Banned' section now open! (I.D. required)"
+};
+const char* candle_wares[] = {
+	"Hey, %s! Best candles in Minetown! You'll need 'em later, count on it!",
+	"You've got a long way down yet, %s.  Be sure you're ready.",
+	"Let us be the light in your darkness!",
+	"You know, I hear some of these old lamps might be... magic.",
+	"Be a shame if you missed anything because you didn't see it!"
+};
+
+void
+shk_holler(shkp)
+struct monst* shkp;
+{
+
+	/* Don't yell from too far away... */
+	if (distu(shkp->mx,shkp->my)<=9) {
+		switch (ESHK(shkp)->shoptype) {
+			default:
+			case ARMORSHOP:
+				verbalize(armor_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case SCROLLSHOP:
+				verbalize(scroll_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case POTIONSHOP:
+				verbalize(potion_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case WEAPONSHOP:
+				verbalize(weapon_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case FOODSHOP:
+				verbalize(food_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case RINGSHOP:
+				verbalize(ring_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case WANDSHOP:
+				verbalize(wand_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case TOOLSHOP:
+				verbalize(tool_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case BOOKSHOP:
+				verbalize(book_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case CANDLESHOP:
+				verbalize(candle_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+		}
+	}
+}
+
 
 /*shk.c*/
