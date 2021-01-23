@@ -651,6 +651,7 @@ struct level_map {
 	{ "medusa",	&medusa_level },
 	{ "mtemple",	&mtemple_level },
 	{ "mine_end",   &mineend_level },        
+	{ "mintn",   &minetown_level },        
 	{ "nymph",   &nymph_level },        
 	{ "forge",   &forge_level },        
 	{ "hitch",   &hitch_level },        

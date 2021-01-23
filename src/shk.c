@@ -6059,18 +6059,6 @@ wiz_debug_cmd()	/* in this case, display your bill(s) */
 
 #define CRYNUMBER 5
 
-/* TODO: Handle the following shops:
- * General store
- * Pet Store
- * Frozen Food Store
- * Instrument Shop
- * Gun store
- * Black Market
- * Lighting Store (since these are different from the minetown level)
- *
- * The "Bugger off!" message should only happen if you're banned from a shop.
- */
-
 const char* armor_wares[] = {
 	"Any %s would love these!  Finest quality!",
 	"Fit for a Knight, but they'll last for weeks!",
@@ -6086,7 +6074,7 @@ const char* scroll_wares[] = {
 	"If you can read, %s, you'll want some of these!"
 };
 const char* potion_wares[] = {
-	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"All drinks locally brewed.",
 	"Booze on ice!  Getcher booze on ice!",
 	"Come on, %s.  You know you're thirsty.",
 	"Ahhh, it'll put hair on yer chest!",
@@ -6103,7 +6091,7 @@ const char* food_wares[] = {
 	"Gitchore luvverly orinjes!",
 	"Fresh fish! So fresh it'll grab yer naughty bits!",
 	"Sausage inna bun!  Hot sausage!",
-	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"C'mon, you don't want to explore on an empty stomach, do ya?",
 	"Genuine pig parts, these. So good most pigs don't even know they got 'em."
 };
 const char* ring_wares[] = {
@@ -6115,13 +6103,13 @@ const char* ring_wares[] = {
 };
 const char* wand_wares[] = {
 	"Credit available for valued customers!",
-	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"Crafted out of only the finest materials.",
 	"Straightest zaps anywhere!  100%% money back guarantee (less usage)!",
 	"Our wands explode less than all others!",
 	"New EZ-BREAK feature on these in case of emergency!"
 };
 const char* tool_wares[] = {
-	"Bugger off, you filthy little %s. Don't come begging around here!",
+	"Lifetime warrenty on all of our products!",
 	"Tins opened, faces wiped, gazes reflected; your one-stop shop!",
 	"How you gonna carry all your stuff without a bag, %s?",
 	"Must be hard kickin' all those doors down, I bet a key would help...",
@@ -6135,11 +6123,67 @@ const char* book_wares[] = {
 	"'Banned' section now open! (I.D. required)"
 };
 const char* candle_wares[] = {
-	"Hey, %s! Best candles in Minetown! You'll need 'em later, count on it!",
+	"We'll light the way for you.",
 	"You've got a long way down yet, %s.  Be sure you're ready.",
 	"Let us be the light in your darkness!",
 	"You know, I hear some of these old lamps might be... magic.",
-	"Be a shame if you missed anything because you didn't see it!"
+	"Be a shame if you missed anything because you didn't see it!",
+	/* The below only appears if you're in minetown. */
+	"Hey, %s! Best candles in Minetown! You'll need 'em later, count on it!"
+};
+
+const char* tin_wares[] = {
+	/* Some of these may have to change assuming we ever
+	 * add the health food store added in Nethack 3.7
+	 */
+	"All corpses naturally sourced.",
+	"100%% Organic and perservative free!",
+	"Guaranteed fresh!",
+	"Corpses kept cool by our patented ice boxes.",
+	"Botulism free or your gold back...maybe."
+};
+
+const char* black_market_wares[] = {
+	/* Good chance nobody will hear these, but doing them
+	 * anyway
+	 */
+	"No cheapskates.",
+	"Best to heed the warnings outside.",
+	"Only criminals get a discount here.  Otherwise, pay up.",
+	"Unless you have a death wish, don't even bother stealing.",
+	"You might need to rob Fort Ludios to afford things here."
+};
+
+const char* music_wares[] = {
+	"All instruments cleaned and tuned!",
+	"We only carry the finest of instruments.",
+	"The favorite store of bards and musicians!",
+	"Practice perfect pitch with this powerful paraphernalia.",
+	"Become your own one %s band with our selection!"
+};
+
+const char* pet_wares[] = {
+	"Find your new companion here!",
+	"Remember to keep your pet on a leash!",
+	"Fresh snacks for your pet!",
+	"Pet had an unfortunate accident? Get a new one here!",
+	"Don't explore the dungeon alone, take a friend with you!"
+};
+
+const char* general_wares[] = {
+	"We buy and sell nearly anything.",
+	"Feel free to browse our wares, %s.",
+	"You'll find anything here!",
+	"Feel free to unload your old equipment here for gold.",
+	"We'll take what you don't want!"
+};
+
+const char* gun_wares[] = { /* GTA Ammunation quotes */
+	"Best not to mention where you got these, okay?",
+	"I didn't sell you these, right?",
+	"No ID Required, friend.",
+	"The choice of the professional.",
+	"Guns and ammo, all top quality!"
 };
 
 void
@@ -6149,8 +6193,15 @@ struct monst* shkp;
 
 	/* Don't yell from too far away... */
 	if (distu(shkp->mx,shkp->my)<=9) {
+		/* You're either banned from the store or you're going to be banned because of the shirt */
+		if ((ESHK(shkp)->pbanned || (uarmu && (uarmu->otyp == STRIPED_SHIRT)) && !uarm && !uarmc)) {
+			verbalize("Bugger off, you filthy little %s. Don't come begging around here!",urace.noun);
+			return;
+		}
 		switch (ESHK(shkp)->shoptype) {
 			default:
+				verbalize(general_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
 			case ARMORSHOP:
 				verbalize(armor_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
@@ -6179,7 +6230,22 @@ struct monst* shkp;
 				verbalize(book_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case CANDLESHOP:
-				verbalize(candle_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(candle_wares[rn2(Is_minetown_level(&u.uz) ? CRYNUMBER+1 : CRYNUMBER)],urace.noun);
+				break;
+			case INSTRUMENTSHOP:
+				verbalize(music_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case BLACKSHOP:
+				verbalize(black_market_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case TINSHOP:
+				verbalize(tin_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case PETSHOP:
+				verbalize(pet_wares[rn2(CRYNUMBER)],urace.noun);
+				break;
+			case GUNSHOP:
+				verbalize(gun_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 		}
 	}
