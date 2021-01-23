@@ -673,7 +673,7 @@ register char *enterstring;
 
 #ifdef CONVICT
 	/* Visible striped prison shirt */
-	if ((uarmu && (uarmu->otyp == STRIPED_SHIRT)) && !uarm && !uarmc) {
+	if (((uarmu && (uarmu->otyp == STRIPED_SHIRT)) && !uarm && !uarmc) && !Is_blackmarket(&u.uz)) {
 	    eshkp->pbanned = TRUE;
 	}
 #endif /* CONVICT */
