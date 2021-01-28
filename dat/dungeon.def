@@ -173,7 +173,7 @@ LEVEL:		"key" "L" @ (2, 22) 50
 DUNGEON:	"The Gnomish Mines" "M" (8, 2)
 ALIGNMENT:	lawful
 DESCRIPTION:	mazelike
-RNDLEVEL:	"mintn" "T" @ (3, 2) 11
+RNDLEVEL:	"mintn" "T" @ (3, 2) 12
 LEVELDESC:	town
 RNDLEVEL:	"minend" "E" @ (-2, 0) 6
 LEVEL:		"mineking" "M" @ (-1, 0)

@@ -1156,6 +1156,99 @@ MONSTER[25%]:';',"piranha",random
 MONSTER[25%]:';',"piranha",random
 MONSTER[25%]:';',"piranha",random
 
+#
+# Ruined & Dangerous Town
+#
+MAZE: "mintn-12",' '
+INIT_MAP:'.','-',true,true,unlit,true
+GEOMETRY:center,top
+MAP
+.--------..--.----.--.----..----.
+.|-----...{....---------.----.-|.
+..|...|........|..||...|......|..
+..|...|.------....||...|......||.
+..|...+.|....|....||...|.|....||.
+.||...+.|....|...--|...|.--..--..
+.||...|.|....+.....--+--.......|.
+.||...|.------...........}..}}}|.
+.|-----..........--.+-.....}}}.|.
+.------------------..-----------.
+.................................
+ENDMAP
+ENGRAVING:(19,9),burn,"BEWARE"
+ENGRAVING:(23,7),mark,"DANGER"
+NON_DIGGABLE:(0,0,32,10)
+REGION:(0,0,32,10),unlit,"ordinary"
+REGION:(3,2,5,7),lit,"temple"
+REGION:(9,4,12,6),lit,"candle shop"
+REGION:(16,2,17,4),lit,"food shop"
+REGION:(20,2,22,5),lit,"shop"
+REGION:(26,2,29,4),lit,"tool shop"
+STAIR:(24,1),down
+STAIR:levregion(01,02,75,20),(0,1,32,10),up
+DOOR:open,(20,8)
+DOOR:locked,(6,4)
+DOOR:locked,(6,5)
+DOOR:closed,(13,6)
+DOOR:closed,(21,6)
+ALTAR:(4,2),random,altar
+OBJECT:'`',"boulder",(25,2)
+OBJECT:'`',"boulder",(25,3)
+OBJECT:'`',"boulder",(27,5)
+OBJECT:'`',"boulder",(28,5)
+OBJECT:'`',"boulder",(31,5)
+OBJECT:'`',"boulder",(31,2)
+OBJECT:'`',"boulder",(1,2)
+OBJECT:'`',"boulder",(1,3)
+OBJECT:'`',"boulder",(1,4)
+OBJECT:'`',"boulder",(9,0)
+OBJECT:'`',"boulder",(10,0)
+OBJECT:'`',"boulder",(13,0)
+OBJECT:'`',"boulder",(18,0)
+OBJECT:'`',"boulder",(21,0)
+OBJECT:'`',"boulder",(26,0)
+OBJECT:'`',"boulder",(27,0)
+OBJECT:'`',"boulder",(15,3)
+OBJECT:'`',"boulder",(15,4)
+OBJECT:'`',"boulder",(15,5)
+OBJECT:'`',"boulder",(16,5)
+OBJECT:'`',"boulder",(16,8)
+OBJECT:'`',"boulder",(19,8)
+OBJECT:'`',"boulder",(20,9)
+OBJECT:'%',"corpse",(27,2),"shopkeeper",0
+OBJECT:'(',random,(28,2)
+OBJECT:'(',random,(28,2)
+CONTAINER:'`',"statue",(30,8),uncursed,"gnome king",1
+OBJECT[50%]:'(',"bag of holding",contained,cursed,0
+MONSTER: 'G', "gnome", (3,2), hostile
+MONSTER: 'G', "gnome", (4,2), hostile
+MONSTER: 'G', "gnome", (5,2), hostile
+MONSTER: 'G', "gnome", (3,3), hostile
+MONSTER: 'G', "gnome", (4,3), hostile
+MONSTER: 'G', "gnome", (5,3), hostile
+MONSTER: 'G', "gnome", (3,4), hostile
+MONSTER: 'G', "gnome", (4,4), hostile
+MONSTER: 'G', "gnome", (5,4), hostile
+MONSTER: 'G', "gnome thief", random
+MONSTER: 'G', "gnomish wizard",(3,5), hostile
+MONSTER: 'G', "gnomish wizard",(4,5), hostile
+MONSTER: 'G', "gnome king",(5,5), hostile
+MONSTER: 'G', "gnome lord", random, hostile
+MONSTER: 'h', "dwarf thief", random
+MONSTER:';',"giant eel",(29,7), hostile
+MONSTER:'D',"white dragon",(29,2), hostile
+
+NOMAP
+MONSTER:'o',random,random
+MONSTER:'o',random,random
+MONSTER:'o',random,random
+MONSTER:'h',random,random
+MONSTER:'h',random,random
+OBJECT:')',random,random
+OBJECT:')',random,random
+OBJECT:'(',random,random
+OBJECT:'(',random,random
+
 # Mine end level variant 1
 # "Mimic of the Mines"
 #
