@@ -912,6 +912,16 @@ register struct obj *obj;
 		{
 		return((struct monst *)0);
 		}
+
+	/* Cavemen get a special case to tame mastodons with food,
+	 * as they're a domestic to that class.  OK, a really big
+	 * domestic, but think Flintstone, awright already?  :) */
+	if (Role_if(PM_CAVEMAN)) {
+		if (mtmp->data == &mons[PM_MASTODON]) {
+			mtmp->mtame = 1;
+		}
+	}
+
 	/* worst case, at least it'll be peaceful. */
 	if(!obj || !is_instrument(obj)){
 	mtmp->mpeaceful = 1;

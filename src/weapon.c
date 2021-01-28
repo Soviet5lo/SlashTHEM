@@ -1420,6 +1420,14 @@ void
 unrestrict_weapon_skill(skill)
 int skill;
 {
+
+    /* Cavemen are good at what they know how to use,
+     * but not much on advanced fencing or combat tactics.
+     * So never unrestrict an edged weapon for them. */
+    if (Role_if(PM_CAVEMAN) && (skill >= P_DAGGER && skill <= P_SABER)) {
+	return;
+    }
+
     if (skill < P_NUM_SKILLS && P_RESTRICTED(skill)) {
 	P_SKILL(skill) = P_UNSKILLED;
 	P_MAX_SKILL(skill) = P_BASIC;

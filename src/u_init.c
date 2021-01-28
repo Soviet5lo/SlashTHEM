@@ -954,7 +954,7 @@ static const struct def_skill Skill_Bard[] = {
 };
 
 static const struct def_skill Skill_C[] = {
-    { P_DAGGER, P_BASIC },		{ P_KNIFE,  P_SKILLED },
+    { P_KNIFE,  P_SKILLED },
     { P_AXE, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
     { P_CLUB, P_EXPERT },               { P_PADDLE, P_EXPERT },
     { P_MACE, P_EXPERT },
@@ -963,8 +963,9 @@ static const struct def_skill Skill_C[] = {
     { P_POLEARMS, P_SKILLED },		{ P_SPEAR, P_EXPERT },
     { P_JAVELIN, P_SKILLED },		{ P_TRIDENT, P_SKILLED },
     { P_BOW, P_EXPERT },                { P_SLING, P_SKILLED },
-    { P_BOOMERANG, P_EXPERT },		{ P_UNICORN_HORN, P_BASIC },
+    { P_BOOMERANG, P_EXPERT },
     { P_MATTER_SPELL, P_SKILLED },      { P_ENCHANTMENT_SPELL, P_BASIC },
+    { P_BODY_SPELL, P_SKILLED },
 
 /*WAC - 'C' is at one with the elements - matter spells, as well as
         basic enchantments - removed attack spell basic skill as

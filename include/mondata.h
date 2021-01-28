@@ -321,6 +321,7 @@
 		    (ptr) == &mons[PM_PACK_RAT]) || \
 		(obj)->otyp == CARROT && ((ptr) == &mons[PM_RABBIT] || \
 		    (ptr) == &mons[PM_RABID_RABBIT]) || \
+		(Role_if(PM_CAVEMAN) && (ptr) == &mons[PM_MASTODON]) || \
 		(obj)->otyp == KELP_FROND && (ptr->mflags3 & M3_PETTY) || \
 		(obj)->otyp == BANANA && (ptr)->mlet == S_YETI))
 

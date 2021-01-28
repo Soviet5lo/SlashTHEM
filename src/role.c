@@ -160,10 +160,10 @@ const struct Role roles[] = {
 	{"Rover",       0},
 	{"Pioneer",     0} },
 	"Anu", "_Ishtar", "Anshar", /* Babylonian */
-	"Cav", "the Caves of the Ancestors", "the Dragon's Lair",
+	"Cav", "the Deep Jungle", "the Dragon's Lair",
 	PM_CAVEMAN, PM_CAVEWOMAN, PM_LITTLE_DOG,
 	PM_SHAMAN_KARNOV, PM_NEANDERTHAL, PM_CHROMATIC_DRAGON,
-	PM_BUGBEAR, PM_HILL_GIANT, S_HUMANOID, S_GIANT,
+	PM_TIGER, PM_APE, S_SNAKE, S_FELINE,
 #if 0
 	ART_GIANTKILLER, ART_SKULLCRUSHER,
 #endif

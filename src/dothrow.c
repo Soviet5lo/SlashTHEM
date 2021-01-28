@@ -198,6 +198,11 @@ int thrown;
 	    case PM_SAMURAI:
 		if (obj->otyp == YA && launcher && launcher->otyp == YUMI) multishot++;
 		break;
+	    case PM_CAVEMAN:
+		if (uslinging()) {		/* give an extra rock to cavies */
+		    multishot++;
+		}
+		break;
 	    default:
 		break;	/* No bonus */
 	    }

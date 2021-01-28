@@ -40,6 +40,7 @@ STATIC_DCL void FDECL(use_figurine, (struct obj **));
 STATIC_DCL void FDECL(use_grease, (struct obj *));
 STATIC_DCL void FDECL(use_trap, (struct obj *));
 STATIC_DCL void FDECL(use_stone, (struct obj *));
+STATIC_DCL void FDECL(apply_flint, (struct obj *));
 STATIC_PTR int NDECL(set_trap);		/* occupation callback */
 STATIC_DCL int FDECL(use_whip, (struct obj *));
 STATIC_DCL int FDECL(use_longwhip, (struct obj *));
@@ -2327,6 +2328,51 @@ struct obj *stone, *obj;
 	    (IS_POOL(levl[u.ux][u.uy].typ) && Underwater) ? "water" : "air");
 }
 
+/* creating flint arrows - DSR */
+
+STATIC_OVL void
+apply_flint(flint)
+struct obj* flint;
+{
+	struct obj* obj;
+	char szwork[QBUFSZ];
+	int flints, arrows, i;
+	static const char menulist[2] = {WEAPON_CLASS,0};
+
+	flints = flint->quan;
+
+	Sprintf(szwork, "affix the stone%s to", plur(flints));
+	if ((obj = getobj(menulist,szwork)) == 0) {
+		return;
+	}
+
+	/* can only stick flint to arrows */
+	if (obj->otyp < ARROW || obj->otyp > YA) {
+		You("aren't really sure what good that will do.");
+		return;
+	}
+
+	/* can't make MIRV arrows; if they're +1, leave it be */
+	if (obj->spe > 0) {
+		You("don't think you can make these any better than they are.");
+		return;
+	}
+
+	arrows = obj->quan;
+
+	/* One flint stone will do 10 arrows. */
+	if (flints*10 > arrows) {
+		(obj->spe)++;
+		You("lash flint tips to the arrows.");
+		for (i = 0;i <= arrows/10;i++) {
+			useup(flint);
+		}
+	} else {
+		You("don't have enough flint to re-tip all of these.");
+	}
+	return;
+}
+
 /* touchstones - by Ken Arnold */
 STATIC_OVL void
 use_stone(tstone)
@@ -2334,6 +2380,9 @@ struct obj *tstone;
 {
     struct obj *obj;
     boolean do_scratch;
+    boolean make_sparks;
+    int i, j;
+    struct monst* mtmp;
     const char *streak_color, *choices;
     char stonebuf[QBUFSZ];
     static const char scritch[] = "\"scritch, scritch\"";
@@ -2392,6 +2441,7 @@ struct obj *tstone;
     }
 
     do_scratch = FALSE;
+    make_sparks = FALSE;
     streak_color = 0;
 
     switch (obj->oclass) {
@@ -2402,6 +2452,9 @@ struct obj *tstone;
     case GEM_CLASS:	/* these have class-specific handling below */
     case RING_CLASS:
 	if (tstone->otyp != TOUCHSTONE) {
+		if (tstone->otyp == FLINT && objects[obj->otyp].oc_material == IRON) {
+			make_sparks = TRUE;	/* we'll catch it later */
+		} 
 	    do_scratch = TRUE;
 	} else if (obj->oclass == GEM_CLASS && (tstone->blessed ||
 		(!tstone->cursed &&
@@ -2445,6 +2498,10 @@ struct obj *tstone;
 	    do_scratch = TRUE;	/* scratching and streaks */
 	    streak_color = "silvery";
 	    break;
+	case IRON:
+	    if (tstone->otyp != TOUCHSTONE) {
+		make_sparks = TRUE;
+	    }
 	default:
 	    /* Objects passing the is_flimsy() test will not
 	       scratch a stone.  They will leave streaks on
@@ -2459,11 +2516,61 @@ struct obj *tstone;
     }
 
     Sprintf(stonebuf, "stone%s", plur(tstone->quan));
-    if (do_scratch)
+    if (do_scratch) {
+	if (!make_sparks) {
 	pline("You make %s%sscratch marks on the %s.",
 	      streak_color ? streak_color : (const char *)"",
 	      streak_color ? " " : "", stonebuf);
-    else if (streak_color)
+		} else {
+			/* Iron and flint make sparks. Non-intelligent creatures
+			 * fear fire.  So anything next to Our Hero(tm) that isn't
+			 * intelligent should have a chance of becoming afraid. */
+			 makeknown(tstone->otyp);
+			 if (u.uinwater) {
+			 	pline("You'd need a flamethrower to make fire here.");
+				return;
+			 }
+			 You("strike a few sparks from the flint stone!");
+			 if (u.uswallow) {
+				/* Not even the thing you're inside can see your piddly spark. */
+			 	pline("That's not going to make it any brighter in here.");
+				if (!rn2(3)) {
+					Your("flint stone crumbles!");
+					useup(tstone);
+				}
+				return;
+			 }
+
+			 for (i = u.ux-1;i < u.ux+2;i++) {
+			 	for (j = u.uy-1;j < u.uy+2;j++) {
+					if (!isok(i,j)) {
+						continue;
+					}
+					mtmp = m_at(i,j);
+					/* blind monsters can't see it */
+					if (!mtmp || mtmp->mblinded || !haseyes(mtmp->data)) {
+						continue;
+					}
+					/* only some things will be scared:
+					 * animals and undead fear fire, but
+					 * not if they're fire resistant, sufficiently powerful,
+					 * gigantic (purple worm), or currently in water */
+					if ((is_animal(mtmp->data) || is_undead(mtmp->data)) &&
+						!(resists_fire(mtmp) || mtmp->data->mcolor == CLR_MAGENTA ||
+							mtmp->data->msize == MZ_GIGANTIC || is_pool(i,j,TRUE))) {
+						if (rn2(3)) {
+							monflee(mtmp,rnd(10), TRUE, TRUE);
+						}
+					}	
+				}
+			}
+			if (!rn2(3)) {
+				Your("flint stone crumbles!");
+				useup(tstone);
+			}
+			return;
+		}
+	 } else if (streak_color)
 	pline("You see %s streaks on the %s.", streak_color, stonebuf);
     else
 	pline(scritch);
@@ -3773,6 +3880,7 @@ doapply()
 	money_cnt(invent)
 #endif
 	|| uhave_graystone()
+	|| carrying(FLINT)
 #ifdef NEPHI_PHOTOGRAPHY
 		|| carrying(SPE_PHOTO_ALBUM)
 #endif	
@@ -4153,6 +4261,12 @@ doapply()
 		use_trap(obj);
 		break;
 	case FLINT:
+		if (Role_if(PM_CAVEMAN)) {
+			apply_flint(obj);
+		} else {
+			use_stone(obj);
+		}
+		break;
 	case LUCKSTONE:
 	case LOADSTONE:
 	case TOUCHSTONE:

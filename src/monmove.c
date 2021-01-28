@@ -184,12 +184,17 @@ struct monst *mtmp;
 	 * level, higher level monsters being more resistant than lower level monsters, but not to the point
 	 * where Elbereth is completely useless.
 	 */
+
+	/* Some monsters don't scare from Elbereth or SCARE_MONSTER.
+	 * Finally, your quest nemesis is now included in this :P  */
+
 	if (mtmp->isshk || mtmp->isgd || mtmp->iswiz || !mtmp->mcansee ||
 	    (mtmp->mpeaceful && !mtmp->mpeacetim) ||
   	     mtmp->data->mlet == S_HUMAN ||
 	    is_lminion(mtmp) || mtmp->data == &mons[PM_ANGEL] ||
 	    mtmp->data == &mons[PM_CTHULHU] ||
-	    is_rider(mtmp->data) || mtmp->data == &mons[PM_MINOTAUR])
+	    is_rider(mtmp->data) || mtmp->data == &mons[PM_MINOTAUR] ||
+		 (mtmp->data->msound == MS_NEMESIS))
 		return(FALSE);
 
 	return (boolean)(sobj_at(SCR_SCARE_MONSTER, x, y)
