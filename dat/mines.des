@@ -1170,8 +1170,8 @@ MAP
 ..|...+.|....|....||...|.|....||.
 .||...+.|....|...--|...|.--..--..
 .||...|.|....+.....--+--.......|.
-.||...|.------...........}..}}}|.
-.|-----..........--.+-.....}}}.|.
+.||...|.------...........}ww}}}|.
+.|-----..........--.+-...ww}}}w|.
 .------------------..-----------.
 .................................
 ENDMAP
@@ -1236,7 +1236,8 @@ MONSTER: 'G', "gnome king",(5,5), hostile
 MONSTER: 'G', "gnome lord", random, hostile
 MONSTER: 'h', "dwarf thief", random
 MONSTER:';',"giant eel",(29,7), hostile
-MONSTER:'D',"white dragon",(29,2), hostile
+# White dragon is a bit too sadistic...let's do a bugbear chieftain instead
+MONSTER:'h',"bugbear chieftain",(29,2), hostile
 
 NOMAP
 MONSTER:'o',random,random
