@@ -2887,7 +2887,7 @@ u_init()
 	    augment_skill_cap(P_BARE_HANDED_COMBAT, 1, P_BASIC, P_SKILLED);
 	    break;
 	case PM_KOBOLD:
-	    if(!Role_if(PM_CONVICT)) {
+	    if(!Role_if(PM_CONVICT) && !Role_if(PM_CAVEMAN)) {
 		KoboldItem[0].trquan = rn1(10, 5);
 		ini_inv(KoboldItem);
 		if(rn2(2)) ini_inv(KoboldItemB);		
