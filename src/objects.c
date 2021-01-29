@@ -1674,7 +1674,7 @@ ROCK("healthstone", "gray",	0,  8, 10, 60, 3, 3, 1, 10, 7, MINERAL, CLR_GRAY),
 ROCK("loadstone", "gray",	0, 10, 1200,  60, 3, 3, 1, 1200, 6, MINERAL, CLR_GRAY),
 ROCK("touchstone", "gray",	0,  4, 10, 60, 3, 3, 1, 10, 6, MINERAL, CLR_GRAY),
 ROCK("whetstone", "gray",	0,  3, 10, 60, 3, 3, 1, 10, 7, MINERAL, CLR_GRAY),
-ROCK("flint", "gray",		0, 10, 10, 60, 6, 6, 0, 10, 7, MINERAL, CLR_GRAY),
+ROCK("flint", "gray",		0, 10,  2, 60, 6, 6, 0, 10, 7, MINERAL, CLR_GRAY),
 ROCK("rock", (char *)0,		1,100, 10,  0, 3, 3, 0, 10, 7, MINERAL, CLR_GRAY),
 #undef GEM
 #undef ROCK
