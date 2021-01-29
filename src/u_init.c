@@ -2834,7 +2834,7 @@ u_init()
 	    knows_object(GNOMISH_BOOTS);
 	    knows_object(GNOMISH_SUIT);
 //	    skill_add(Skill_Gnome);
-	    augment_skill_cap(P_CROSSBOW, 1, P_BASIC, P_SKILLED);
+	    if(!Role_if(PM_CAVEMAN)) augment_skill_cap(P_CROSSBOW, 1, P_BASIC, P_SKILLED);
 	    augment_skill_cap(P_CLUB, 1, P_BASIC, P_SKILLED);
 	    augment_skill_cap(P_PICK_AXE, 1, P_BASIC, P_BASIC);
 	    break;
@@ -2896,7 +2896,7 @@ u_init()
 //	    skill_add(Skill_Kobold);
 	    augment_skill_cap(P_DART, 1, P_BASIC, P_SKILLED);
 	    augment_skill_cap(P_SPEAR, 1, P_BASIC, P_SKILLED);
-	    augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+	    if(!Role_if(PM_CAVEMAN)) augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
 	    break;
 	case PM_GHOUL:
 	    knows_object(POT_BLOOD);
@@ -2926,7 +2926,7 @@ u_init()
 		break;
 	case PM_GIANT:
 		augment_skill_cap(P_TWO_WEAPON_COMBAT, 1, P_SKILLED, P_EXPERT);
-		augment_skill_cap(P_TWO_HANDED_SWORD, 1, P_SKILLED, P_EXPERT);
+		if(!Role_if(PM_CAVEMAN)) augment_skill_cap(P_TWO_HANDED_SWORD, 1, P_SKILLED, P_EXPERT);
 		break;
 	case PM_HOBBIT:
 		augment_skill_cap(P_SLING, 1, P_SKILLED, P_EXPERT);
@@ -2938,7 +2938,7 @@ u_init()
 //		skill_add(Skill_Nymph);
 		break;
 	case PM_DOPPELGANGER:
-		augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
+		if(!Role_if(PM_CAVEMAN)) augment_skill_cap(P_DAGGER, 1, P_BASIC, P_SKILLED);
 		augment_skill_cap(P_BODY_SPELL, 1, P_SKILLED, P_EXPERT);
 		break;
 	case PM_ILLITHID:
