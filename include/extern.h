@@ -279,6 +279,7 @@ E int NDECL(dosearch);
 E void NDECL(sokoban_detect);
 /* KMH -- Sokoban levels */
 E void NDECL(sokoban_detect);
+E void FDECL(reveal_terrain, (int, int));
 
 /* ### dig.c ### */
 
