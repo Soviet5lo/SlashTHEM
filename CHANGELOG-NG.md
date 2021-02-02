@@ -1,7 +1,58 @@
 
-Version 1.0 (XXXX-XX-XX)
+Version 0.9.5 (2021-02-01)
 ==========================
 
+#### Highlights
+- Added the Beastmaster's Duster from dNethack as the sacrifice gift for Zookeepers.  Neutral aligned, +2 to AC, #invoke for Petmaster effect (opens a menu that allows creation of petfood, leashes, saddles, whistles, and can increase tameness of pets.  Liontamer is still in the game, but now isn't associated with any role.
+- Added shallow pools of water from L's terrain patch/dNethack.  This also introduces a new Minetown variant: Creek Town.  Shallow pools can be generated in the dungeon, and may contain a few piranhas.  Walking through shallow pools can rust boots if they're made of metal.
+- Added Nephi's Photography Patch.  Cameras will now create photographs that can be placed inside of a photo album.  (NOTE: This patch is not active by default.  Uncomment #define NEPHI_PHOTOGRAPHY in config.h and recompile to enable.)
+- Gave the Rat King a new level to replace the old room-and-corridor layout.  It's very similar to Ruggo's old level, but with heavy amounts of water and shallow pools included.
+- Added the Ornate Mace from Splicehack.  Only generated on throne room kings (see in changes below).  Same as the regular Mace, but a higher base value (500) and made of Gold.  Replaces the now removed Golden Saber.
+- Carrying capacity changed to be mostly similar to vanilla.  Overall this results in a lower carrying capacity compared to previous versions, but a slightly higher carrying capacity compared to Vanilla.  The cap is still 4000, so having high strength and constitution will still give a benefit instead of having a cap of 1000.
+- Added a new minetown variant: Ruined & Dangerous Town.  Empty temple, a couple of destroyed shops and plenty of boulders.
+- Implemented most of the Less Boring Cavemen patch from Derek Ray.
+- Implemented the Additional Item Categories Patch from Stanislav Traykov.
+- Backported the #tip command from Nethack 3.6/Slashem 9.
+- Ported over the #give command from Evilhack/Splicehack.
+- Ported over the #terrain command from Slash'EM-Up.
+- Renamed showobj_inv to menu_glyphs to be more consistent with other variants that include this.
+
+#### Changes & Other Additions
+- Flame/Ice/Electric/Acid mages gain a +1 bonus to charisma when wearing a Cornuthaum.  Wizards gain a +2 bonus instead.
+- Removed two extremely difficult to navigate big rooms carried over from Slash'EM Extended.  Added a big room level that utilizes shallow water to compensate.
+- Buffed War Hammers and Heavy Hammers.  Both are now two-handed and the Heavy Hammer had its weight increased (from 60 to 125), but War Hammers now do 2d6 damage to small monsters and 2d8 damage to large monsters.  Heavy Hammer does 2d8 and 2d10 instead.  (xNethack)
+- Neutral sacrifices disappear in a cloud of smoke. (Nethack 3.7)
+- Warriors, Pirates and Officers now start with a variable amount of their ammunition (Crossbow bolts and bullets).
+- Scrolls of Undo Genocide automatically fail of no creatures have been genocided.
+- Slightly reorganized the Town branch.  Town is now the second level, and Village is the final level.  Town branch staircase will also always appear two levels below the oracle level.
+- Thrones in a throne room are always occupied by a (Ogre/Elven/Dwarf/Gnome) King, whom are always given an Ornate Mace.
+- Diplomat base object has been changed to an Ornate Mace.
+- Trolls, Ogres and Giants have a higher carrying cap compared to other races.  Trolls and Ogres have a carrying cap thats 50% higher than normal, while giants have theirs multipled by 2.
+- Troll characters will no longer revive after starving.
+- Shallow pools of water are now utilized in the Chaotic Quest, the village, the "Orc Temple" variant of Mine's End, and the Mine King level.
+- Piranha's and Jellyfish have been changed from MZ_SMALL to MZ_TINY.
+- Paladins can reach expert in Quarterstaff and Club.
+- Greater Water Elementals will spit water instead of gazing for a rust attack.
+- Replaced Black Death with Thanatos, a Chaotic aligned Grain Scythe with +10 to-hit and +10 damage in addition to draining life.
+- Ghouls last twice as long at hungry and below (similar to Vampires and Convicts)
+- Changed Acidtester's name to Acidfall.  Name comes from Splicehack.
+- Walking over items in a shop will display the price of the item (Unnethack).
+- Szechuan tins may contain a fortune cookie inside.
+- Shopkeepers will now shout messages about their store whenever you're nearby and not inside of their shop (from Sporkhack).
+- Wearing a striped shirt no longer blocks access to the black market.
+- Nerfed Ninja starting armor: Both the cloak and boots are now +0 instead of +1.
+- Races no longer receive certain racial skills if they are cavemen (specifically, Kobolds and Doppelgangers will remain restricted in Dagger, Gnomes will remain restricted with Crossbow and Giants will remain restricted in Two-Handed Swords)
+- Additionally, Kobolds don't receive racial weapons at all if they're a caveman.
+- Reduced the weight of flint stones from 10 to 2 (Change from xNethack)
+
+#### Bugfixes
+- Fixed bad placement of AT_TALK in uhitm.c
+- Fixed two security vulnerabilities reported and patched by David Mendenhall back in April of 2020.
+- Fixed non-incantifiers being able to disable magical traps.
+
+Version 0.9.3 (2020-02-03) & 0.9.4 (2020-03-03)
+==========================
+<!-- TODO: Separate the 0.9.3 content from 0.9.4 content -->
 ## NOTICE: This is a massive release that changes a lot of things.  I'll probably forget a few things.
 
 #### Highlights

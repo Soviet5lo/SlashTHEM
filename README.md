@@ -10,13 +10,13 @@ If you want the last stable release for whatever reason, you can download the so
 Current Status
 --------------
 
-I very rarely come back to this project. Only times I work on it now is when I get the urge to play it, honestly.  There's plenty of bugs that exist and things that haven't been properly worked on, but there shouldn't be too many signifigant segfaults hopefully.  Consider it dormant, essentially. I don't necessarily consider this stable, but its playable.   Plus, there's plenty of other (better) variants out there to play.  If you must play Slash'EM you could go vanilla, or:
+Only times I work on it now is when I get the urge to play it, honestly.  There's plenty of bugs that exist and things that haven't been properly worked on, but there shouldn't be too many segfaults/crashes, hopefully.  Consider it a perpetual work in progress. Plus, there's plenty of other (better) variants out there to play.  If you must play Slash'EM you could go vanilla, or:
 
 - [Slash'EM 9](https://github.com/moon-chilled/slashem9), if you want Slash'EM + Curses Interface + Unicode + a much more coherient codebase, as well as balance tweaks and changes/ports from Nethack 3.6.
 - [Slash'EM Extended](https://github.com/SLASHEM-Extended/SLASHEM-Extended), if you want a variant that includes absolutely everything and every possible idea, good and bad.
 - [Slash'EM-Upgrades and Patches](https://github.com/BarclayII/slashem-up/tree/develop), if you want Slash'EM + Balance changes, a few backports from Nethack 3.6, various upgrades and integrated patches.
 
-The source code builds fine on Windows using MinGW, as well as Linux.  Other Operating Systems are untested.  I highly doubt it runs on legacy systems however (VMS, Amiga, etc.).  If you want to assist, feel free to look at the active Issues as well as the [TODO](TODO.md) doc, or submit a pull request, those are also looked at.
+The source code builds fine on Windows using MinGW, as well as Linux.  Other Operating Systems are untested.  I highly doubt it runs on legacy systems however (VMS, Amiga, etc.).  If you want to assist/contribute, feel free to look at the active Issues as well as the [TODO](TODO.md) doc, or submit a pull request, or you can even send it via [git send-email](https://git-send-email.io/).
 
 Windows (x64) builds are available on the [releases](https://github.com/Soviet5lo/SlashTHEM/releases) page.  I attempt to make a new build based on the current code at the beginning of the month, assuming there's enough changes worth building.
 
@@ -37,4 +37,4 @@ Credits also go to Percival Tiglao for the minor sling upgrade patch, Mikael Lin
 
 Credit also goes to Edoardo Spadolini for adding server specific code.
 
-There's a lot of missing mentions here due to SlashTHEM mostly being a hodgepodge of code from other patches and variants, if I've missed any I do apologise.
+There's a lot of missing mentions here due to SlashTHEM mostly being a hodgepodge of code from other patches and variants, if I've missed any I do apologize.
