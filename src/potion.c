@@ -3012,6 +3012,14 @@ dodip()
 			    P_SKILL(P_RIDING) < P_BASIC) {
 			rider_cant_reach(); /* not skilled enough to reach */
 #endif
+		    } else if (IS_PUDDLE(here) && !rn2(3)) {
+			/* shallow water isn't an endless resource like a pool/moat */
+			levl[u.ux][u.uy].typ = ROOM;
+			newsym(u.ux, u.uy);
+			if (cansee(u.ux, u.uy)) {
+			    pline("There isn't enough water left to use.");
+			    pline_The("puddle dries up.");
+			}
 		    } else {
 			(void) get_wet(obj, level.flags.lethe);
 			if (obj->otyp == POT_ACID) useup(obj);
