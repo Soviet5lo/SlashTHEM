@@ -707,6 +707,7 @@ playersteal()
 			You("fail to %s it.", verb);
 		    } else {
 			obj_extract_self(otmp);
+			addtobill(otmp, FALSE, FALSE, FALSE);
 			if (otmp->owornmask) {
 			    mtmp->misc_worn_check &= ~otmp->owornmask;
 			    if (otmp->owornmask & W_WEP)
