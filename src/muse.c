@@ -2719,6 +2719,12 @@ const char *str;
 	    if (str)
 		pline(str, s_suffix(mon_nam(mon)), "armor");
 	    return TRUE;
+	} else if (EReflecting & W_ART) {
+		/* Due to the Magic Mirrir, which shows as W_ART */
+		if (str) {
+			pline(str, s_suffix(mon_nam(mon)), "mirror");
+		}
+		return TRUE;
 	} else if (mon->data == &mons[PM_SILVER_DRAGON] ||
 		mon->data == &mons[PM_CHROMATIC_DRAGON]) {
 	    /* Silver dragons only reflect when mature; babies do not */

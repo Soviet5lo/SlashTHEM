@@ -122,6 +122,9 @@ boolean quietly;
 	    chance = rn2(10);	/* 0==tame, 1==peaceful, 2==hostile */
 	    if (chance > 2) chance = otmp->blessed ? 0 : !otmp->cursed ? 1 : 2;
 	    /* 0,1,2:  b=80%,10,10; nc=10%,80,10; c=10%,10,80 */
+	    if (Role_if(PM_KNIGHT) && mtmp->data->mlet == S_DRAGON) {
+		    chance = 2;
+	    }
 	    if (chance > 0) {
 		mtmp->mtame = 0;	/* not tame after all */
 		if (chance == 2) { /* hostile (cursed figurine) */
@@ -201,6 +204,7 @@ makedog()
 		petname = ghoulname;
 	else if (pettype == PM_PONY)
 		petname = horsename;
+	/* Chaotic knights normally get "Nightmare" but we already have that... */
 #ifdef CONVICT
 	else if (pettype == PM_SEWER_RAT)
 		petname = ratname;
@@ -922,6 +926,10 @@ register struct obj *obj;
 		}
 	}
 
+	/* Knights can never tame dragons.  Natural enemies, y'see. */
+	if (Role_if(PM_KNIGHT) && mtmp->data->mlet == S_DRAGON) {
+		return ((struct monst *)0);
+	}
 	/* worst case, at least it'll be peaceful. */
 	if(!obj || !is_instrument(obj)){
 	mtmp->mpeaceful = 1;

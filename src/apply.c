@@ -1607,7 +1607,12 @@ int magic; /* 0=Physical, otherwise skill level */
 
 	    nomul(-1, "jumping around");
 	    nomovemsg = "";
-	    morehungry(rnd(25));
+	    /* Knights get it for cheaper */
+	    if (Role_if(PM_KNIGHT)) {
+		    morehungry(rnd(10));
+	    } else {
+		    morehungry(rnd(25));
+	    }
 	    if (!magic) u.uen -= 10;
 	    return 1;
 	}
