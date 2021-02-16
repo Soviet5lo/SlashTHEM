@@ -419,10 +419,16 @@ A("Nightingale",                KATANA,
 /*
  * The Knight needed a chaotic logsword to obtain, since Excalibur
  * will be restricted for them...
+ * 5lo: Dirge turned into chaotic counterpart to Clarent, Dark Knights get
+ * Soulthief from Nethack-- instead
  */
-A("Dirge",                     LONG_SWORD,
-       (SPFX_ATTK|SPFX_NOGEN|SPFX_RESTR|SPFX_DEFN|SPFX_INTEL),0,0,
-       DRST(5,0),      DRLI(0,0),      NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 3000L ),
+A("Dirge",                     SHORT_SWORD,
+       (SPFX_ATTK|SPFX_RESTR|SPFX_DEFN|SPFX_INTEL),0,0,
+       DRST(5,0),      DRST(0,0),      NO_CARY,        0, A_CHAOTIC, PM_KNIGHT, NON_PM, 4000L ),
+
+A("Soulthief",                     LONG_SWORD,
+       (SPFX_ATTK|SPFX_RESTR|SPFX_DEFN|SPFX_INTEL|SPFX_DRLI),0,0,
+       DRLI(5,6),      DRLI(0,0),      NO_CARY,        0, A_CHAOTIC, NON_PM, NON_PM, 4000L ),
 
 
 /*

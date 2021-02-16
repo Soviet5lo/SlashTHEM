@@ -1404,6 +1404,10 @@ const struct Role roles[] = {
  * sometimes in the future, if we feel like it
  *
  * ideally we'd just properly expand roles[] but the hack is easier for a patch
+ *
+ * Potential concepts for alternate alignment roles:
+ * Dark Paladin: Chaotic version of Paladin, perhaps gets a bonus for using cursed equipment
+ * Sith: Chaotic counterpart to Jedi, always start with a red lightsaber, quest artifact being double-sided lightsaber instead?
  */
 
 const struct Role align_roles[] = {
