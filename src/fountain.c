@@ -379,7 +379,8 @@ register struct obj *obj;
 		} else {
 			/* The lady of the lake acts! - Eric Backus */
 			/* Be *REAL* nice */
-	  pline("From the murky depths, a hand reaches up to bless the sword.");
+			pline("From the murky depths, a hand reaches up to %s the sword.",
+			  u.ualign.type == A_CHAOTIC ? "foul" : "bless");
 			pline("As the hand retreats, the fountain disappears!");
 			if (u.ualign.type == A_CHAOTIC && Role_if(PM_KNIGHT)) {
 				obj = oname(obj, artiname(ART_SOULTHIEF));

@@ -631,7 +631,7 @@ const struct Role roles[] = {
 	PM_KING_ARTHUR, PM_PAGE, PM_IXOTH,
 	PM_QUASIT, PM_OCHRE_JELLY, S_IMP, S_JELLY,
 #if 0
-	ART_CLARENT, ART_DEMONBANE,
+	ART_CLARENT, ART_EXCALIBUR,
 #endif
 	ART_MAGIC_MIRROR_OF_MERLIN,
 	MRACE_HUMAN|MRACE_DWARF|MRACE_CLOCK | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_CHAOTIC,
@@ -1420,12 +1420,15 @@ const struct Role align_roles[] = {
        {"Turncoat", 0},
        {"Knave", 0},
        {"Dark Baron", 0}, 
-       {"Dark Paladin", 0} },
+       {"Dark Paladin", 0} }, /* This should probably be changed */
        "Lugh", "_Brigit", "Manannan Mac Lir", /* Celtic */
        "Kni", "Camelot Castle", "the Isle of Glass",
        PM_KNIGHT, NON_PM, PM_PONY,
        PM_KING_ARTHUR, PM_PAGE, PM_IXOTH,
        PM_QUASIT, PM_OCHRE_JELLY, S_IMP, S_JELLY,
+#if 0
+	ART_DIRGE, ART_SOULTHIEF,
+#endif
        ART_MAGIC_MIRROR_OF_MERLIN,
        MRACE_HUMAN | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_CHAOTIC,
        /* Str Int Wis Dex Con Cha */

@@ -1530,16 +1530,16 @@ dosacrifice()
 	    else useupf(otmp, 1L);
 	    return(1);
 
-                /* create Dirge from player's longsword here if possible */
+                /* create Soulthief from player's longsword here if possible */
                 if (u.ualign.type == A_CHAOTIC && Role_if(PM_KNIGHT) && 
                                 uwep->otyp == LONG_SWORD && !uwep->oartifact &&
-                                !exist_artifact(LONG_SWORD, artiname(ART_DIRGE))) {
+                                !exist_artifact(LONG_SWORD, artiname(ART_SOULTHIEF))) {
 
-                        uwep = oname(uwep, artiname(ART_DIRGE));
+                        uwep = oname(uwep, artiname(ART_SOULTHIEF));
                         bless(uwep);
                         uwep->oeroded = uwep->oeroded2 = 0;
                         uwep->oerodeproof = TRUE;
-                        discover_artifact(ART_DIRGE);
+                        discover_artifact(ART_SOULTHIEF);
                         exercise(A_WIS,TRUE);
                         pline("Your sword slithers in your hand and seems to change!");
                 }
