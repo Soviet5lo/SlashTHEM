@@ -604,7 +604,7 @@ playersteal()
 	if(MON_AT(x, y)) {
 	    mtmp = m_at(x, y);
 
-	    if (Role_if(PM_KNIGHT) || Role_if(PM_PALADIN)) {
+	    if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_PALADIN)) {
 			You_feel("like a common thief.");
 			adjalign(-sgn(u.ualign.type));
 	    }
