@@ -323,8 +323,9 @@ mount_steed(mtmp, force)
 	}
 	/* A knight should be able to ride his own horse!
 	 * So we get a bonus for all horse-like things */
-	/* TODO: Handle Warrior, Yeoman, and Paladin */
-	role_modifier = (Role_if(PM_KNIGHT) && mtmp->data->mlet == S_UNICORN) ? 10 : 0;
+	/* 5lo: Same for every other role that starts with a steed */
+	role_modifier = ((Role_if(PM_KNIGHT) || Role_if(PM_YEOMAN) ||
+			  Role_if(PM_WARRIOR) || Role_if(PM_PALADIN)) && mtmp->data->mlet == S_UNICORN) ? 10 : 0;
 	if (!force && (Confusion || Fumbling || IsGlib || Wounded_legs ||
 		otmp->cursed || (u.ulevel+mtmp->mtame+role_modifier < rnd(MAXULEV/2+5)))) {
 	    if (Levitation) {
