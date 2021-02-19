@@ -85,10 +85,10 @@ hack_artifacts()
 		art->alignment = alignmnt;
 
 	/* Excalibur can be used by any lawful character, not just knights
-	 * So can Dirge, for that matter */
+	 * So can Soulthief for chaotic characters, for that matter */
 	if (!Role_if(PM_KNIGHT)) {
 	    artilist[ART_EXCALIBUR].role = NON_PM;
-	    artilist[ART_DIRGE].role = NON_PM;
+	    artilist[ART_SOULTHIEF].role = NON_PM;
 	}
 
 #if 0
