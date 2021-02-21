@@ -2019,6 +2019,7 @@ arti_invoke(obj)
  #ifdef BLACKMARKET           
 	    if (Is_blackmarket(&u.uz) && *u.ushops) {
 		You("feel very disoriented for a moment.");
+		destroy_nhwindow(tmpwin);
 		break;
 	    }
  #endif
