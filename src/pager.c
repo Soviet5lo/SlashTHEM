@@ -1239,6 +1239,14 @@ get_description_of_attack_type(uchar id)
 		case AT_SCRA: return "scratch";
 		case AT_LASH: return "lash";
 		case AT_TRAM: return "trample";
+		/* AT_NTCH isn't entirely accurate but works good
+		 * enough for now
+		 */
+		case AT_NTCH: return "plays music";
+		case AT_TALK: return "talks";
+#if 0 /* Deferred */
+		case AT_RIDL: return "asks a riddle";
+#endif
 		case AT_WEAP: return "uses weapon";
 		case AT_MAGC: return "uses magic spell(s)";
 		case AT_MULTIPLY: return "multiplies";
@@ -1306,6 +1314,13 @@ get_description_of_damage_type(uchar id)
 		case AD_DARK: return "causes darkness around you";
 		case AD_WTHR: return "withers items";
 		case AD_LUCK: return "drains luck";
+		case AD_DEPR: return "causes depression";
+		case AD_CHRM: return "charms you or other monster";
+		case AD_SHOE: return "damages, steals or fixes shoes";
+		case AD_SCLD: return "scalds you (similar to AD_FIRE)";
+		case AD_EGLD: return "eats gold objects";
+		case AD_FLVR: return "random quark effects";
+		case AD_HNGY: return "causes hunger (similar to AD_FAMN)";
 		case AD_ENDS: return "placeholder attack";
 		default: impossible("bug in get_description_of_damage_type(%d)", id); return "<MISSING DESCRIPTION, THIS IS A BUG>";
 	}
@@ -1353,7 +1368,7 @@ get_description_of_monster_type(struct permonst * ptr, char * description)
 	char main_temp_buf[BUFSZ] = "";
 
 	temp_buf[0]='\0';
-	sprintf(temp_buf, "Accessing Pokedex entry for %s... ", ptr->mname);
+	sprintf(temp_buf, "Accessing %s entry for %s... ", Hallucination ? "Pokedex" : "Datalog", ptr->mname);
 	strcat(description, temp_buf);
 	append_newline_to_pline_string(description);
 	strcat(description, " ");
