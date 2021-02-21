@@ -524,7 +524,7 @@ boolean taken;
 	    ask = should_query_disclose_option('i', &defquery);
 	    if (!done_stopprint) {
 		c = ask ? yn_function(qbuf, ynqchars, defquery) : defquery;
-		if (c != 'q') {
+		if (c == 'y') {
 			if (Hallucination) {
 			    make_hallucinated(0L, FALSE, 0L);
 			    hallu = TRUE;
@@ -548,7 +548,7 @@ boolean taken;
 	if (!done_stopprint) {
 	    c = ask ? yn_function("Do you want to see your attributes?",
 				  ynqchars, defquery) : defquery;
-	    if (c != 'q')
+	    if (c == 'y')
 		enlightenment(how >= PANICKED ? 1 : 2); /* final */
 	    if (c == 'q') done_stopprint++;
 	}
@@ -580,7 +580,7 @@ boolean taken;
 	if (!done_stopprint) {
 	    c = ask ? yn_function("Do you want to see your conduct?",
 				  ynqchars, defquery) : defquery;
-	    if (c != 'q')
+	    if (c == 'y')
 		show_conduct(how >= PANICKED ? 1 : 2);
 	    if (c == 'q') done_stopprint++;
 	}
@@ -1486,7 +1486,7 @@ boolean want_dump;
 	c = ask ? yn_function("Do you want an account of creatures vanquished?",
 			      ynqchars, defquery) : defquery;
 	if (c == 'q') done_stopprint++;
-	if (c != 'q') {
+	if (c == 'y') {
 	    klwin = create_nhwindow(NHW_MENU);
 	    putstr(klwin, 0, "Vanquished creatures:");
 	    putstr(klwin, 0, "");
@@ -1605,7 +1605,7 @@ boolean ask;
 	c = ask ? yn_function("Do you want a list of species genocided?",
 			      ynqchars, defquery) : defquery;
 	if (c == 'q') done_stopprint++;
-	if (c != 'q') {
+	if (c == 'y') {
 	    klwin = create_nhwindow(NHW_MENU);
 	    Sprintf(buf, "Genocided species:");
 	    putstr(klwin, 0, buf);
