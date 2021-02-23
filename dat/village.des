@@ -144,15 +144,15 @@ MONSTER[50%]:'@',"bard",(29,04),peaceful
 # Loot in the cache room, gold/gems and random junk from villagers
 CONTAINER:'(',"chest",(19,18)
 # Potential easter eggs hidden within the chest...
-OBJECT[10%]:')',"silver long sword",contained,blessed,+3,"The Master Sword"
-OBJECT[10%]:'[',"plate mail",contained,blessed,+5,"Erdrick's Armor"
-OBJECT[10%]:')',"mallet",contained,blessed,+4,"Mallet of Akane Tendo"
-OBJECT[10%]:')',"broadsword",contained,blessed,+2,"Grandleon"
-OBJECT[10%]:')',"katana",contained,blessed,+3,"Kusanagi Blade"
-OBJECT[20%]:'[',"plate mail",contained,cursed,-5,"Alucart Mail"
-OBJECT[20%]:')',"submachine gun",contained,cursed,-6,"Klobb"
-OBJECT[20%]:')',"runesword",contained,cursed,-9,"Excalipoor"
-OBJECT[20%]:')',"broadsword",contained,cursed,+3,"Soul Edge"
+OBJECT[5%]:')',"silver long sword",contained,blessed,+3,"The Master Sword"
+OBJECT[5%]:'[',"plate mail",contained,blessed,+5,"Erdrick's Armor"
+OBJECT[5%]:')',"mallet",contained,blessed,+4,"Tendo Mallet"
+OBJECT[5%]:')',"broadsword",contained,blessed,+2,"Grandleon"
+OBJECT[5%]:')',"katana",contained,blessed,+3,"Kusanagi Blade"
+OBJECT[15%]:'[',"plate mail",contained,cursed,-5,"Alucart Mail"
+OBJECT[15%]:')',"submachine gun",contained,cursed,-6,"Klobb"
+OBJECT[15%]:')',"runesword",contained,cursed,-9,"Excalipoor"
+OBJECT[10%]:')',"broadsword",contained,cursed,+3,"Soul Edge"
 GOLD: random,(19,18)
 GOLD: random,(19,18)
 GOLD: random,(19,18)
