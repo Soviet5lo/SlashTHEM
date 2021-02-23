@@ -2347,7 +2347,7 @@ struct obj* flint;
 	}
 
 	/* can only stick flint to arrows */
-	if (obj->otyp < ARROW || obj->otyp > YA) {
+	if (obj->otyp < ORCISH_ARROW || obj->otyp > YA) {
 		You("aren't really sure what good that will do.");
 		return;
 	}
@@ -2447,8 +2447,10 @@ struct obj *tstone;
     switch (obj->oclass) {
     case WEAPON_CLASS:
     case TOOL_CLASS:
-	use_whetstone(tstone, obj);
-	return;
+	if (tstone->otyp == WHETSTONE) {
+	    use_whetstone(tstone, obj);
+	    return;
+	} // Otherwise fall-through
     case GEM_CLASS:	/* these have class-specific handling below */
     case RING_CLASS:
 	if (tstone->otyp != TOUCHSTONE) {
@@ -2499,7 +2501,7 @@ struct obj *tstone;
 	    streak_color = "silvery";
 	    break;
 	case IRON:
-	    if (tstone->otyp != TOUCHSTONE) {
+	    if (tstone->otyp == FLINT) {
 		make_sparks = TRUE;
 	    }
 	default:
@@ -2521,56 +2523,56 @@ struct obj *tstone;
 	pline("You make %s%sscratch marks on the %s.",
 	      streak_color ? streak_color : (const char *)"",
 	      streak_color ? " " : "", stonebuf);
-		} else {
-			/* Iron and flint make sparks. Non-intelligent creatures
-			 * fear fire.  So anything next to Our Hero(tm) that isn't
-			 * intelligent should have a chance of becoming afraid. */
-			 makeknown(tstone->otyp);
-			 if (u.uinwater) {
-			 	pline("You'd need a flamethrower to make fire here.");
-				return;
-			 }
-			 You("strike a few sparks from the flint stone!");
-			 if (u.uswallow) {
-				/* Not even the thing you're inside can see your piddly spark. */
-			 	pline("That's not going to make it any brighter in here.");
-				if (!rn2(3)) {
-					Your("flint stone crumbles!");
-					useup(tstone);
-				}
-				return;
-			 }
-
-			 for (i = u.ux-1;i < u.ux+2;i++) {
-			 	for (j = u.uy-1;j < u.uy+2;j++) {
-					if (!isok(i,j)) {
-						continue;
-					}
-					mtmp = m_at(i,j);
-					/* blind monsters can't see it */
-					if (!mtmp || mtmp->mblinded || !haseyes(mtmp->data)) {
-						continue;
-					}
-					/* only some things will be scared:
-					 * animals and undead fear fire, but
-					 * not if they're fire resistant, sufficiently powerful,
-					 * gigantic (purple worm), or currently in water */
-					if ((is_animal(mtmp->data) || is_undead(mtmp->data)) &&
-						!(resists_fire(mtmp) || mtmp->data->mcolor == CLR_MAGENTA ||
-							mtmp->data->msize == MZ_GIGANTIC || is_pool(i,j,TRUE))) {
-						if (rn2(3)) {
-							monflee(mtmp,rnd(10), TRUE, TRUE);
-						}
-					}	
-				}
-			}
-			if (!rn2(3)) {
-				Your("flint stone crumbles!");
-				useup(tstone);
-			}
-			return;
+	} else if (tstone->otyp == FLINT) {
+	    /* Iron and flint make sparks. Non-intelligent creatures
+	     * fear fire.  So anything next to Our Hero(tm) that isn't
+	     * intelligent should have a chance of becoming afraid. */
+	    makeknown(tstone->otyp);
+	    if (u.uinwater) {
+		pline("You'd need a flamethrower to make fire here.");
+		return;
+	    }
+	    You("strike a few sparks from the flint stone!");
+	    if (u.uswallow) {
+		/* Not even the thing you're inside can see your piddly spark. */
+		pline("That's not going to make it any brighter in here.");
+		if (!rn2(3)) {
+		    Your("flint stone crumbles!");
+		    useup(tstone);
 		}
-	 } else if (streak_color)
+		return;
+	    }
+
+	    for (i = u.ux-1;i < u.ux+2;i++) {
+		for (j = u.uy-1;j < u.uy+2;j++) {
+		    if (!isok(i,j)) {
+			continue;
+		    }
+		mtmp = m_at(i,j);
+		/* blind monsters can't see it */
+		if (!mtmp || mtmp->mblinded || !haseyes(mtmp->data)) {
+		    continue;
+		}
+		/* only some things will be scared:
+		 * animals and undead fear fire, but
+		 * not if they're fire resistant, sufficiently powerful,
+		 * gigantic (purple worm), or currently in water */
+		if ((is_animal(mtmp->data) || is_undead(mtmp->data)) &&
+		  !(resists_fire(mtmp) || mtmp->data->mcolor == CLR_MAGENTA ||
+		  mtmp->data->msize == MZ_GIGANTIC || is_pool(i,j,TRUE))) {
+			if (rn2(3)) {
+			    monflee(mtmp,rnd(10), TRUE, TRUE);
+			}
+		    }	
+	        }
+	    }
+	    if (!rn2(3)) {
+		Your("flint stone crumbles!");
+		useup(tstone);
+	    }
+	    return;
+	}
+    } else if (streak_color)
 	pline("You see %s streaks on the %s.", streak_color, stonebuf);
     else
 	pline(scritch);
@@ -4261,7 +4263,7 @@ doapply()
 		use_trap(obj);
 		break;
 	case FLINT:
-		if (Role_if(PM_CAVEMAN)) {
+		if (Role_if(PM_CAVEMAN) && yn("Affix your flint to some arrows?") == 'y') {
 			apply_flint(obj);
 		} else {
 			use_stone(obj);
