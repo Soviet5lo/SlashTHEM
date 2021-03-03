@@ -378,6 +378,7 @@ register struct monst *mtmp;
 	/* special class effect uses... */
 	if (tech_inuse(T_KIII)) tmp += 4;
 	if (tech_inuse(T_BERSERK)) tmp += 2;
+	if (tech_inuse(T_SOULEATER)) tmp += 2;
 
 /*	with a lot of luggage, your agility diminishes */
 	if ((tmp2 = near_capacity()) != 0) tmp -= (tmp2*2) - 1;
@@ -1517,6 +1518,12 @@ int thrown;
 
 	if (tech_inuse(T_KIII)) tmp *= 2;
 	if (tech_inuse(T_BERSERK)) tmp += 4;
+	if (tech_inuse(T_SOULEATER)) {
+		tmp += d((u.ulevel / 4), 8);
+		/* Unholy damage, not ignored from fire resistance */
+		pline("Dark flames envelop %s!", mon_nam(mon));
+		hittxt = TRUE;
+	}
 	if (tech_inuse(T_EVISCERATE)) {
 		tmp += rnd((int) (u.ulevel/2 + 1)) + (u.ulevel/2); /* [max] was only + u.ulevel */
                 You("slash %s!", mon_nam(mon));
