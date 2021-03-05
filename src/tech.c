@@ -1771,10 +1771,10 @@ int tech_no;
 	      num = (u.uhpmax / 2);
 
 	      if (u.uhp <= num) {
-		    You("don't have the strength to invoke Souleater!");
+		    You("don't have the strength to invoke Souleater! Requires at least %i HP!", num+1);
 		    return 0;
 	      }
-	      You("drink the souls of creatures around you!");
+	      You("unleash a burst of dark energy!");
 	      /* Works against anything in line of sight...except flan */
 	      for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
 		if (couldsee(mtmp->mx, mtmp->my) && !is_flan(mtmp->data)) {
