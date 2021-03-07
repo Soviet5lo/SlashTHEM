@@ -1768,10 +1768,14 @@ int tech_no;
 	      t_timeout = rn1(1000,1000);
 	      break;
 	    case T_SOULEATER:
-	      num = (u.uhpmax / 2);
+	      num = Upolyd ? (u.mhmax / 2) : (u.uhpmax / 2);
 
-	      if (u.uhp <= num) {
+	      if ((!Upolyd && u.uhp <= num) || (Upolyd && u.mh <= num)) {
 		    You("don't have the strength to invoke Souleater! Requires at least %i HP!", num+1);
+		    return 0;
+	      }
+	      if (!uwep) {
+		    You("need a weapon to channel your dark energy into!");
 		    return 0;
 	      }
 	      You("unleash a burst of dark energy!");
@@ -1786,7 +1790,8 @@ int tech_no;
 	      techt_inuse(tech_no) = (techlev(tech_no) / 2) + 1;
 	      /* See uhitm.c in particular for the extra damage */
 	      pline("Dark flames flow from %s.", doname(uwep));
-	      u.uhp -= num;
+	      if (Upolyd) u.mh -= num;
+	      else u.uhp -= num;
 	      flags.botl = TRUE;
 	      t_timeout = rn1(1000,1000);
 	      break;
@@ -1988,7 +1993,7 @@ tech_timeout()
 			You("feel the healing power dissipate.");
 			break;
 		    case T_SOULEATER:
-			pline_The("dark flames surrounding %s dissipate.", doname(uwep));
+			if (uwep) pline_The("dark flames surrounding %s dissipate.", doname(uwep));
 			break;
 	            default:
 	            	break;
