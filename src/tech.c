@@ -1787,7 +1787,8 @@ int tech_no;
 		    if (mtmp->mhp < 1) mtmp->mhp = 1;
 		}
 	      }
-	      techt_inuse(tech_no) = (techlev(tech_no) / 2) + 1;
+	      int weapon_modifier = (uwep && uwep->otyp == LONG_SWORD && uwep->oartifact == ART_SOULTHIEF) ? 5 : 1;
+	      techt_inuse(tech_no) = (techlev(tech_no) / 2) + weapon_modifier;
 	      /* See uhitm.c in particular for the extra damage */
 	      pline("Dark flames flow from %s.", doname(uwep));
 	      if (Upolyd) u.mh -= num;
