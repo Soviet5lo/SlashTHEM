@@ -203,6 +203,7 @@ mount_steed(mtmp, force)
 {
 	struct obj *otmp;
 	char buf[BUFSZ];
+	int role_modifier;
 	struct permonst *ptr;
 
 	/* Sanity checks */
@@ -320,8 +321,14 @@ mount_steed(mtmp, force)
 			mon_nam(mtmp));
 	    return (FALSE);
 	}
+	/* A knight should be able to ride his own horse!
+	 * So we get a bonus for all horse-like things 
+	 * 5lo: Same for every other role that starts with a steed */
+	role_modifier = ((Role_if(PM_KNIGHT) || Role_if(PM_YEOMAN) ||
+			  Role_if(PM_WARRIOR) || Role_if(PM_PALADIN) ||
+			  Role_if(PM_NOBLEMAN)) && mtmp->data->mlet == S_UNICORN) ? 10 : 0;
 	if (!force && (Confusion || Fumbling || IsGlib || Wounded_legs ||
-		otmp->cursed || (u.ulevel+mtmp->mtame < rnd(MAXULEV/2+5)))) {
+		otmp->cursed || (u.ulevel+mtmp->mtame+role_modifier < rnd(MAXULEV/2+5)))) {
 	    if (Levitation) {
 		pline("%s slips away from you.", Monnam(mtmp));
 		return FALSE;

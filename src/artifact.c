@@ -84,9 +84,12 @@ hack_artifacts()
 	    if (art->role == Role_switch && art->alignment != A_NONE)
 		art->alignment = alignmnt;
 
-	/* Excalibur can be used by any lawful character, not just knights */
-	if (!Role_if(PM_KNIGHT))
+	/* Excalibur can be used by any lawful character, not just knights
+	 * So can Soulthief for chaotic characters, for that matter */
+	if (!Role_if(PM_KNIGHT)) {
 	    artilist[ART_EXCALIBUR].role = NON_PM;
+	    artilist[ART_SOULTHIEF].role = NON_PM;
+	}
 
 #if 0
 	/* Fix up the gifts */
@@ -664,11 +667,20 @@ long wp_mask;
 	    vision_full_recalc = 1;
 	}
 	/* KMH -- Reflection when wielded */
-	if ((spfx & SPFX_REFLECT) && (wp_mask & W_WEP)) {
-	    if (on) EReflecting |= wp_mask;
-	    else EReflecting &= ~wp_mask;
-	}
+	if (spfx & SPFX_REFLECT) {
+		/* Knights only have to carry the mirror; everyone else must wield it */
+		if (Role_if(PM_KNIGHT)) {
+			if (on) {
+				EReflecting |= wp_mask;
+			} else {
+				EReflecting &= ~wp_mask;
+			}
+		} else if (wp_mask & W_WEP) {
+	    		if (on) EReflecting |= wp_mask;
+			else EReflecting &= ~wp_mask;
 
+		}
+	}
 	if(wp_mask == W_ART && !on && oart->inv_prop) {
 	    /* might have to turn off invoked power too */
 	    if (oart->inv_prop <= LAST_PROP &&
@@ -1319,6 +1331,14 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 			  hittee, !spec_dbon_applies ? '.' : '!');
 	    return realizes_damage;
 	}
+       /* the fifth basic attack: poison */
+       if (attacks(AD_DRST, otmp)) {
+               if (realizes_damage) {
+                       pline_The("venomous blade %s %s%c",spec_dbon_applies ? "strikes" : "nicks",
+                               hittee, spec_dbon_applies ? '!' : '.');
+                       return realizes_damage;
+               }
+       }
 
 	if (attacks(AD_STUN, otmp) && dieroll <= MB_MAX_DIEROLL) {
 	    /* Magicbane's special attacks (possibly modifies hittee[]) */

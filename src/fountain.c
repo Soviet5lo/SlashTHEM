@@ -365,9 +365,10 @@ register struct obj *obj;
 
 	if (obj->otyp == LONG_SWORD && obj->quan == 1L
 	    && u.ulevel > 4 && !rn2(8) && !obj->oartifact
-	    && !exist_artifact(LONG_SWORD, artiname(ART_EXCALIBUR))) {
+	    && !exist_artifact(LONG_SWORD, artiname(ART_EXCALIBUR))
+	    && !exist_artifact(LONG_SWORD, artiname(ART_SOULTHIEF))) {
 
-		if (u.ualign.type != A_LAWFUL) {
+		if (u.ualign.type != A_LAWFUL && !Role_if(PM_KNIGHT)) {
 			/* Ha!  Trying to cheat her. */
 			pline("A freezing mist rises from the water and envelopes the sword.");
 			pline_The("fountain disappears!");
@@ -378,10 +379,16 @@ register struct obj *obj;
 		} else {
 			/* The lady of the lake acts! - Eric Backus */
 			/* Be *REAL* nice */
-	  pline("From the murky depths, a hand reaches up to bless the sword.");
+			pline("From the murky depths, a hand reaches up to %s the sword.",
+			  u.ualign.type == A_CHAOTIC ? "corrupt" : "bless");
 			pline("As the hand retreats, the fountain disappears!");
-			obj = oname(obj, artiname(ART_EXCALIBUR));
-			discover_artifact(ART_EXCALIBUR);
+			if (u.ualign.type == A_CHAOTIC && Role_if(PM_KNIGHT)) {
+				obj = oname(obj, artiname(ART_SOULTHIEF));
+				discover_artifact(ART_SOULTHIEF);
+			} else {
+				obj = oname(obj, artiname(ART_EXCALIBUR));
+				discover_artifact(ART_EXCALIBUR);
+			}
 			bless(obj);
 			obj->oeroded = obj->oeroded2 = 0;
 			obj->oerodeproof = TRUE;

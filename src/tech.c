@@ -84,15 +84,13 @@ STATIC_OVL NEARDATA const char *tech_names[] = {
 	"power surge",
 	"spirit bomb",
 	"draw blood",
+	/* SLEX techs */
 	"world fall",
 	"create ammo",
-//	"poke ball",
-//	"attire charm",
-//	"summon team ant",
 	"appraisal",
-//	"egg bomb",
 	"booze",
-//	"invoke deity",
+	/* SlashTHEM techs */
+	"souleater",
 #ifdef JEDI
 	"jedi jump",
 	"charge saber",
@@ -157,6 +155,9 @@ static const struct innate_tech
 #endif
 	kni_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_HEAL_HANDS, 1},
+		       {   0, 0, 0} },
+		       /* 5lo: for Dark Knights */
+	drk_tech[] = { {   1, T_SOULEATER, 1},
 		       {   0, 0, 0} },
 
 	mon_tech[] = { {   1, T_PUMMEL, 1},
@@ -1737,197 +1738,6 @@ int tech_no;
 		u.uen -= 25;
 		t_timeout = 50;
 		break;
-#if 0
-	    case T_POKE_BALL:
-
-		if (u.uswallow) {
-		    You("don't have enough free space to throw the ball!");
-			return 0;
-		}
-
-		int i, j, caught, catchrate;
-		struct monst *mtmp;
-		register struct monst *mtmp2;
-		caught = 0;
-		pline("%s used Poke Ball!", plname);
-
-		    for (i = -1; i <= 1; i++) for(j = -1; j <= 1; j++) {
-			if (!isok(u.ux + i, u.uy + j)) continue;
-			if ( ((mtmp = m_at(u.ux + i, u.uy + j)) != 0) && mtmp->mtame == 0 
-			&& mtmp->mnum != quest_info(MS_NEMESIS) && !(mtmp->data->geno & G_UNIQ) && caught == 0)
-
-				/* using the M3_PETTY attribute now --Amy */
-
-			{
-
-				if (is_petty(mtmp->data))
-
-				{
-			      maybe_tameX(mtmp);
-				pline("Gotcha! %s was caught!", mon_nam(mtmp));
-				caught++;
-				t_timeout = rn1(500,500);
-				}
-
-			else if ( (mtmp->m_lev > (2 * techlev(tech_no)) || rn2(4) ) && mtmp->m_lev > techlev(tech_no) && caught == 0 && (!is_pokemon(mtmp->data) || rn2(2) ) )
-				{
-				pline("You missed the Pokemon!");
-				}
-
-			else if (caught == 0) /* other monster that can be caught */
-
-				{
-				/* If catchrate is a higher numeric value, the chance of catching the monster is lower. */
-
-				catchrate = (60 + mtmp->m_lev - techlev(tech_no));
-				if (!rn2(4)) catchrate -= techlev(tech_no);
-				if (is_pokemon(mtmp->data)) catchrate = (catchrate / 2);
-				if (catchrate < 3) catchrate = 3;
-				if (rnd(100) < catchrate) pline("Oh, no! The Pokemon broke free!");
-				else if (rnd(100) < catchrate) pline("Aww! It appeared to be caught!");
-				else if (rnd(100) < catchrate) pline("Arrgh! Almost had it!");
-				else if (rnd(100) < catchrate) pline("Shit! It was so close too!");
-				else {
-				      maybe_tameX(mtmp);
-					pline("Gotcha! %s was caught!", mon_nam(mtmp));
-					caught++;
-					t_timeout = rn1(500,500);
-
-					}
-				}
-
-			} /* monster is catchable loop */
-		    } /* for loop */
-
-		if (caught == 0) pline("The ball expodes in midair!");
-/* This is an intentional typo, derived from another roguelike. Do you know which one it is? --Amy*/
-
-		t_timeout = rn1(500,500);
-		break;
-	    case T_SUMMON_TEAM_ANT:
-
-		    pline("Go Team Ant!");
-
-		int caughtY;
-		caughtY = 0;
-
-		while (caughtY == 0) {
-		/*mtmp = make_helper(S_ANT, u.ux, u.uy); */
- 	      mtmp = makemon(mkclass(S_ANT,0), u.ux, u.uy, NO_MM_FLAGS);
-		if (!mtmp) break;
-		/*mtmp->mtame = 10;*/
-	      maybe_tameX(mtmp);
-		if (techlev(tech_no) < rnd(50)) caughtY++;
-		}
-
-		/* A high level Insectoid character can create quite the army of insects sometimes. --Amy */
-
-		t_timeout = rn1(500,500);
-		break;
-	    case T_ATTIRE_CHARM:
-
-		if (u.uswallow) {
-		    pline("The monster can't see its inside anyway!");
-			return 0;
-		}
-#if 0
-		if (!uarmf || (uarmf && uarmf->otyp != WEDGE_SANDALS && uarmf->otyp != FEMININE_PUMPS && uarmf->otyp != LEATHER_PEEP_TOES && uarmf->otyp != COMBAT_STILETTOS && uarmf->otyp != HIPPIE_HEELS) ) {
-		    pline("You must be wearing high heels for that.");
-			return 0;
-		}
-#endif
-		int k, l, caughtX;
-		struct monst *mtmp3;
-		register struct monst *mtmp4;
-		caughtX = 0;
-		pline("You strike a sexy pose with your heels!");
-
-		    for (k = -1; k <= 1; k++) for(l = -1; l <= 1; l++) {
-			if (!isok(u.ux + k, u.uy + l)) continue;
-			if ( ((mtmp3 = m_at(u.ux + k, u.uy + l)) != 0) && mtmp3->mtame == 0 && mtmp3->isshk == 0 && mtmp3->isgd 			== 0 && mtmp3->ispriest == 0 && mtmp3->isminion == 0 && mtmp3->isgyp == 0
-&& mtmp3->data != &mons[PM_SHOPKEEPER] && mtmp3->data != &mons[PM_BLACK_MARKETEER] && mtmp3->data != &mons[PM_ALIGNED_PRIEST] && mtmp3->data != &mons[PM_HIGH_PRIEST] && mtmp3->data != &mons[PM_GUARD]
-			&& mtmp3->mnum != quest_info(MS_NEMESIS) && !(mtmp3->data->geno & G_UNIQ) && caughtX == 0)
-
-				/* gotta write a huge function for this now --Amy */
-
-			{
-
-				if ( humanoid(mtmp3->data) || mtmp3->data->mlet == S_HUMAN) {
-			      maybe_tameX(mtmp3);
-				pline("%s is charmed, and wants to be your friend!", mon_nam(mtmp3));
-				if (techlev(tech_no) < rnd(100)) caughtX++;
-				t_timeout = rn1(1500,500);
-				}
-
-			else pline("%s is too stupid to fully appreciate you!", mon_nam(mtmp3));
-
-			} /* monster is catchable loop */
-		    } /* for loop */
-
-		t_timeout = rn1(1500,500);
-		break;
-	    case T_WORLD_FALL:
-
-		You("scream \"EYGOORTS-TOGAAL, JEZEHH!\"");
-/* Actually, it's "To win the game you must kill me, John Romero" recorded backwards.
-   When I was little, I always thought it said "Eygoorts-togaal, jezehh". --Amy */
-				{
-			    register struct monst *mtmp, *mtmp2;
-
-				num = 0;
-
-			    for (mtmp = fmon; mtmp; mtmp = mtmp2) {
-				mtmp2 = mtmp->nmon;
-				if ( ((mtmp->m_lev < techlev(tech_no)) || (!rn2(4) && mtmp->m_lev < (2 * techlev(tech_no)))) && mtmp->mnum != quest_info(MS_NEMESIS) && !(mtmp->data->geno & G_UNIQ) ) { mondead(mtmp);
-						num++;
-						}
-			    }
-	pline("Eliminated %d monster%s.", num, plur(num));
-			}
-
-		t_timeout = rn1(10000,10000);
-		break;
-	    case T_CREATE_AMMO:
-
-	    You("make some ammo for your gun.");
-		for (i = 0; i <= techlev(tech_no); i++) {
-
-		if ( inv_cnt() < 52 && (otmp = mksobj(BULLET, TRUE, FALSE)) != (struct obj *)0) {
-				if (pickup_object(otmp, 1, FALSE) <= 0) {
-					obj_extract_self(otmp);
-					place_object(otmp, u.ux, u.uy);
-					newsym(u.ux, u.uy); }
-		};
-		}
-
-	      t_timeout = rn1(250,250);
-	      break;
-	    case T_EGG_BOMB:
-
-	    You("create some stoning grenades.");
-
-		int caughtZ;
-		caughtZ = 0;
-		struct obj *uegg;
-
-		while (caughtZ == 0) {
-
-			uegg = mksobj(EGG, FALSE, FALSE);
-			uegg->spe = 0;
-			uegg->quan = 1;
-			uegg->owt = weight(uegg);
-			uegg->corpsenm = egg_type_from_parent(PM_COCKATRICE, FALSE);
-			uegg->known = uegg->dknown = 1;
-			attach_egg_hatch_timeout(uegg);
-			kill_egg(uegg); /* make sure they're stale --Amy */
-			dropy(uegg);
-			stackobj(uegg);
-			if (techlev(tech_no) < rnd(100)) caughtZ++;
-
-		}
-
-	      t_timeout = rn1(1000,1000);
-	      break;
 #endif
 	    case T_BOOZE:
 
@@ -1957,7 +1767,36 @@ int tech_no;
 
 	      t_timeout = rn1(1000,1000);
 	      break;
+	    case T_SOULEATER:
+	      num = Upolyd ? (u.mhmax / 2) : (u.uhpmax / 2);
 
+	      if ((!Upolyd && u.uhp <= num) || (Upolyd && u.mh <= num)) {
+		    You("don't have the strength to invoke Souleater! Requires at least %i HP!", num+1);
+		    return 0;
+	      }
+	      if (!uwep) {
+		    You("need a weapon to channel your dark energy into!");
+		    return 0;
+	      }
+	      You("unleash a burst of dark energy!");
+	      /* Works against anything in line of sight...except flan */
+	      for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
+		if (couldsee(mtmp->mx, mtmp->my) && !is_flan(mtmp->data)) {
+		    pline("%s screams in agony!", Monnam(mtmp));
+		    mtmp->mhp /= 4;
+		    if (mtmp->mhp < 1) mtmp->mhp = 1;
+		}
+	      }
+	      int weapon_modifier = (uwep && uwep->otyp == LONG_SWORD && uwep->oartifact == ART_SOULTHIEF) ? 5 : 1;
+	      techt_inuse(tech_no) = (techlev(tech_no) / 2) + weapon_modifier;
+	      /* See uhitm.c in particular for the extra damage */
+	      pline("Dark flames flow from %s.", doname(uwep));
+	      if (Upolyd) u.mh -= num;
+	      else u.uhp -= num;
+	      flags.botl = TRUE;
+	      t_timeout = rn1(1000,1000);
+	      break;
+#ifdef JEDI
 	    case T_TELEKINESIS:
 	      {
 		coord cc;
@@ -2154,6 +1993,9 @@ tech_timeout()
 		    case T_CHI_HEALING:
 			You("feel the healing power dissipate.");
 			break;
+		    case T_SOULEATER:
+			if (uwep) pline_The("dark flames surrounding %s dissipate.", doname(uwep));
+			break;
 	            default:
 	            	break;
 	        } else switch (techid(i)) {
@@ -2224,7 +2066,9 @@ role_tech()
 #ifdef JEDI
 		case PM_JEDI:		return (jed_tech);
 #endif
-		case PM_KNIGHT:		return (kni_tech);
+		case PM_KNIGHT:
+					if (u.ualign.type == A_CHAOTIC) return (drk_tech);
+					else return (kni_tech);
 		case PM_MONK: 		return (mon_tech);
 #if 0 /* 5lo: Deferred for now */
 		case PM_POKEMON: 		return (pok_tech);

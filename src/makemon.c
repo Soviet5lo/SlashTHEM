@@ -2224,6 +2224,13 @@ register int	mmflags;
 			if (((Inhell) || flags.gehenna) && is_bat(ptr))
 			    mon_adjust_speed(mtmp, 2, (struct obj *)0);
 			break;
+		case S_DRAGON:
+			/* Dragons are always generated awake and pissed for Knights. */
+			if (Role_if(PM_KNIGHT)) {
+				mtmp->mpeaceful = mtmp->mtame = FALSE;
+				mtmp->msleeping = 0;
+			}
+			break;
 		case S_VAMPIRE:
 			/* [DS] Star vampires are invisible until they feed */
 			if (mndx == PM_STAR_VAMPIRE) {

@@ -1376,6 +1376,7 @@ int
 dosacrifice()
 {
     register struct obj *otmp;
+    struct obj* wtmp;
     int value = 0;
     int pm;
     aligntyp altaralign = a_align(u.ux,u.uy);
@@ -1528,6 +1529,22 @@ dosacrifice()
 	    if (carried(otmp)) useup(otmp);
 	    else useupf(otmp, 1L);
 	    return(1);
+
+                /* create Soulthief from player's longsword here if possible */
+                if (u.ualign.type == A_CHAOTIC && Role_if(PM_KNIGHT) && 
+                                uwep->otyp == LONG_SWORD && !uwep->oartifact &&
+                                !exist_artifact(LONG_SWORD, artiname(ART_SOULTHIEF))) {
+
+                        uwep = oname(uwep, artiname(ART_SOULTHIEF));
+                        bless(uwep);
+                        uwep->oeroded = uwep->oeroded2 = 0;
+                        uwep->oerodeproof = TRUE;
+                        discover_artifact(ART_SOULTHIEF);
+                        exercise(A_WIS,TRUE);
+                        pline("Your sword slithers in your hand and seems to change!");
+                }
+
+
 	} else if (otmp->oxlth && otmp->oattached == OATTACHED_MONST
 		    && ((mtmp = get_mtraits(otmp, FALSE)) != (struct monst *)0)
 		    && mtmp->mtame) {

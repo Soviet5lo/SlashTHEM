@@ -93,15 +93,17 @@ struct blitz_tab {
 #define T_CREATE_AMMO	43
 #define T_APPRAISAL	44
 #define T_BOOZE		45
-
+/* Added by SlashTHEM */
+#define T_SOULEATER 	46
+/* Jedi Patch additions */
 #ifdef JEDI
-#define T_JEDI_JUMP	46
-#define T_CHARGE_SABER	47
-#define T_TELEKINESIS	48
+#define T_JEDI_JUMP	47
+#define T_CHARGE_SABER	48
+#define T_TELEKINESIS	49
  
-#define MAXTECH 49
+#define MAXTECH 50
 #else /* JEDI */
-#define MAXTECH 46
+#define MAXTECH 47
 #endif /* JEDI */
 
 

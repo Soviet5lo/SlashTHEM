@@ -631,10 +631,11 @@ const struct Role roles[] = {
 	PM_KING_ARTHUR, PM_PAGE, PM_IXOTH,
 	PM_QUASIT, PM_OCHRE_JELLY, S_IMP, S_JELLY,
 #if 0
-	ART_CLARENT, ART_DEMONBANE,
+	ART_CLARENT, ART_EXCALIBUR,
 #endif
 	ART_MAGIC_MIRROR_OF_MERLIN,
-	MRACE_HUMAN|MRACE_DWARF|MRACE_CLOCK | ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL,
+	MRACE_HUMAN|MRACE_DWARF|MRACE_CLOCK|MRACE_VAMPIRE |
+	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_CHAOTIC,
 	/* Str Int Wis Dex Con Cha */
 	{  13,  7, 14,  8, 10, 17 },
 	{  30, 15, 15, 10, 20, 10 },
@@ -1395,6 +1396,52 @@ const struct Role roles[] = {
 },
 
 /* Array terminator */
+{{0, 0}}
+};
+
+/* 
+ * Realistically we don't need to build another structure array just for this
+ * but this does leave us a framework to do more crossaligned roles
+ * sometimes in the future, if we feel like it
+ *
+ * ideally we'd just properly expand roles[] but the hack is easier for a patch
+ *
+ * Potential concepts for alternate alignment roles:
+ * Dark Paladin: Chaotic version of Paladin, perhaps gets a bonus for using cursed equipment
+ * Sith: Chaotic counterpart to Jedi, always start with a red lightsaber, quest artifact being double-sided lightsaber instead?
+ */
+
+const struct Role align_roles[] = {
+{      {"Dark Knight", 0}, {
+       {"Sniveler", 0},
+       {"Pawn", 0},
+       {"Brute", 0},
+       {"Mercenary", 0},
+       {"Blackguard", 0},
+       {"Turncoat", 0},
+       {"Knave", 0},
+       {"Dark Baron", 0}, 
+       {"Dark Paladin", 0} }, /* This should probably be changed */
+       "Lugh", "_Brigit", "Manannan Mac Lir", /* Celtic */
+       "Kni", "Camelot Castle", "the Isle of Glass",
+       PM_KNIGHT, NON_PM, PM_PONY,
+       PM_KING_ARTHUR, PM_PAGE, PM_IXOTH,
+       PM_QUASIT, PM_OCHRE_JELLY, S_IMP, S_JELLY,
+#if 0
+	ART_DIRGE, ART_SOULTHIEF,
+#endif
+       ART_MAGIC_MIRROR_OF_MERLIN,
+       MRACE_HUMAN|MRACE_DWARF|MRACE_CLOCK|MRACE_VAMPIRE |
+	ROLE_MALE|ROLE_FEMALE | ROLE_LAWFUL|ROLE_CHAOTIC,
+       /* Str Int Wis Dex Con Cha */
+       {  13,  7, 14,  8, 10, 17 },
+       {  30, 15, 15, 10, 20, 10 },
+       /* Init   Lower  Higher */
+       { 14, 0,  0, 8,  2, 0 },        /* Hit points */
+       {  1, 4,  0, 1,  0, 2 },10,     /* Energy */
+       10, 8,-2, 0,  9, A_WIS, SPE_TURN_UNDEAD,     -4
+},
+/* new terminator, though we don't need it here */
 {{0, 0}}
 };
 
@@ -2650,6 +2697,11 @@ role_init()
 	/* Initialize urole and urace */
 	urole = roles[flags.initrole];
 	urace = races[flags.initrace];
+
+	/* kick it over to alternate-alignment role */
+	if (alignmnt == A_CHAOTIC && Role_if(PM_KNIGHT)) {
+		urole = align_roles[0];
+	}
 
 	/* Fix up the quest leader */
 	if (urole.ldrnum != NON_PM) {

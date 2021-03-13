@@ -378,6 +378,7 @@ register struct monst *mtmp;
 	/* special class effect uses... */
 	if (tech_inuse(T_KIII)) tmp += 4;
 	if (tech_inuse(T_BERSERK)) tmp += 2;
+	if (tech_inuse(T_SOULEATER)) tmp += 2;
 
 /*	with a lot of luggage, your agility diminishes */
 	if ((tmp2 = near_capacity()) != 0) tmp -= (tmp2*2) - 1;
@@ -779,6 +780,7 @@ int thrown;
 	boolean not_melee_weapon = FALSE;
 #ifdef STEED
 	int jousting = 0;
+	int joustdmg;
 #endif
 	boolean vapekilled = FALSE; /* WAC added boolean for vamps vaporize */
 	boolean burnmsg = FALSE;
@@ -1516,6 +1518,12 @@ int thrown;
 
 	if (tech_inuse(T_KIII)) tmp *= 2;
 	if (tech_inuse(T_BERSERK)) tmp += 4;
+	if (tech_inuse(T_SOULEATER)) {
+		tmp += d((u.ulevel / 4), 8);
+		/* Unholy damage, not ignored from fire resistance */
+		pline("Dark flames envelop %s!", mon_nam(mon));
+		hittxt = TRUE;
+	}
 	if (tech_inuse(T_EVISCERATE)) {
 		tmp += rnd((int) (u.ulevel/2 + 1)) + (u.ulevel/2); /* [max] was only + u.ulevel */
                 You("slash %s!", mon_nam(mon));
@@ -1542,7 +1550,7 @@ int thrown;
 		giantkill = TRUE;
 	}
 
-	if (ispoisoned) {
+	if (ispoisoned || (obj && obj->oartifact == ART_DIRGE)) {
 	    int nopoison = (10 - (obj->owt/10));            
 	    if(nopoison < 2) nopoison = 2;
 	    if Role_if(PM_SAMURAI) {
@@ -1551,9 +1559,9 @@ int thrown;
 		u.ualign.sins++;
 	    } else if ((u.ualign.type == A_LAWFUL) && (u.ualign.record > -10)) {
 		You_feel("like an evil coward for using a poisoned weapon.");
-		adjalign(-5);
+		adjalign(Role_if(PM_KNIGHT) ? -10 : -5);
 	    }
-	    if (obj && !rn2(nopoison)) {
+	    if (obj && !rn2(nopoison) && obj->oartifact != ART_DIRGE) {
 		obj->opoisoned = FALSE;
 		Your("%s %s no longer poisoned.", xname(obj),
 		     otense(obj, "are"));
@@ -1604,7 +1612,19 @@ int thrown;
 
 #ifdef STEED
 	if (jousting) {
-	    tmp += d(2, (obj == uwep) ? 10 : 2);        /* [was in dmgval()] */
+               /*
+                * jousting damage is a bit too strong in the early game
+                * ...another change necessitated by making the Knight 100%
+                * to ride his starting pony.
+                *
+                * While it's appropriate to consider that a fully-armored Knight
+                * on a horse would be able to completely mop up the Mines,
+                * game balance says there should be at least SOME effort
+                * involved in getting to the luckstone.... 
+                */
+                joustdmg = 5 + u.ulevel/3;      /* 2d5 -> 2d15 */
+           tmp += d(2, (obj == uwep) ? joustdmg : 2);  /* [was in dmgval()] */
+
 	    You("joust %s%s",
 			 mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
 	    if (jousting < 0) {
