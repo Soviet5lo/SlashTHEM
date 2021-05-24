@@ -653,6 +653,8 @@ playersteal()
 
 	    if (uarmg && !uarmg->otyp == GAUNTLETS_OF_DEXTERITY) 
 			chanch -= 5;
+	    if (uarmg && uarmg->otyp == GAUNTLETS_OF_DEXTERITY && uarmg->oartifact == ART_PICKPOCKET_S_GLOVES) 
+			chanch += 20;
 	    if (!uarmg) chanch += 5;
 	    if (uarms)	chanch -= 10;
 	    if (!uarm || weight(uarm) < 75) chanch += 10;
