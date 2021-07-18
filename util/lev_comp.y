@@ -633,6 +633,7 @@ room_door_info	: ',' string
 			}
 			else if (tmprdoor[ndoor])
 			    tmprdoor[ndoor]->arti_key = token;
+			free($2);
 		  }
 		;
 
@@ -1086,6 +1087,7 @@ door_info	: ',' string
 			}
 			else
 			    tmpdoor[ndoor]->arti_key = token;
+			free($2);
 		  }
 		;
 
