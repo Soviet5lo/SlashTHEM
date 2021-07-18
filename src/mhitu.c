@@ -2041,7 +2041,7 @@ drain_life:
 				mcharmu(mtmp, dmg, TRUE);
 				dmg = 0;
 			    }
-			} else if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
+			} else if (!tele_restrict(mtmp)) (void) rloc(mtmp, TRUE);
 			return 3;
 		} else if (mtmp->mcan) {
 		    if (!Blind) {
@@ -2058,7 +2058,7 @@ drain_life:
 			    (!flags.female)^(!mtmp->female) ? "uninterested" : "unaffected");
 		    }
 		    if(rn2(3) && mtmp->data != &mons[PM_SATYR]) {
-			if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
+			if (!tele_restrict(mtmp)) (void) rloc(mtmp, TRUE);
 			return 3;
 		    }
 		    break;
@@ -2086,7 +2086,7 @@ drain_life:
 			    break;
 			}
 			if (!is_animal(mtmp->data) && !tele_restrict(mtmp))
-			    (void) rloc(mtmp, FALSE);
+			    (void) rloc(mtmp, TRUE);
 			if (is_animal(mtmp->data) && *buf) {
 			    if (canseemon(mtmp))
 				pline("%s tries to %s away with %s.",
@@ -4685,7 +4685,7 @@ register struct monst *mon;
 	if (uarm || uarmc) {
 		verbalize("You're such a %s; I wish...",
 				flags.female ? "sweet lady" : "nice guy");
-		if (!tele_restrict(mon)) (void) rloc(mon, FALSE);
+		if (!tele_restrict(mon)) (void) rloc(mon, TRUE);
 		return 1;
 	}
 	if (u.ualign.type == A_CHAOTIC)
@@ -4820,7 +4820,7 @@ register struct monst *mon;
 #endif
 	}
 	if (!rn2(10)) mon->mcan = 1; /* monster is worn out; chance is much higher now --Amy */
-	if (!tele_restrict(mon)) (void) rloc(mon, FALSE);
+	if (!tele_restrict(mon)) (void) rloc(mon, TRUE);
 	return 1;
 }
 
