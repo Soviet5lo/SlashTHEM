@@ -262,7 +262,7 @@ E int FDECL(monster_detect, (struct obj *,int));
 E int FDECL(pet_detect_and_tame, (struct obj *));
 E int FDECL(trap_detect, (struct obj *));
 E const char *FDECL(level_distance, (d_level *));
-E void FDECL(use_crystal_ball, (struct obj *));
+E void FDECL(use_crystal_ball, (struct obj **));
 E void NDECL(do_mapping);
 E void NDECL(do_partial_mapping);
 E void NDECL(do_vicinity_map);
