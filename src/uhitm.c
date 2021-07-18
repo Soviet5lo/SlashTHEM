@@ -1282,6 +1282,7 @@ int thrown;
 		}
 		freeinv(obj);
 		potionhit(mon, obj, TRUE);
+		obj = (struct obj *)0; /* The object has been free'd */
 		if (mon->mhp <= 0) return FALSE;	/* killed */
 		hittxt = TRUE;
 		/* in case potion effect causes transformation */
@@ -1446,8 +1447,12 @@ int thrown;
 			    pline(obj->otyp==CREAM_PIE ? "Splat!" : "Splash!");
 			    setmangry(mon);
 			}
-			if (thrown) obfree(obj, (struct obj *)0);
-			else useup(obj);
+			{
+				boolean more_than_1 = (obj->quan > 1L);
+				if (thrown) obfree(obj, (struct obj *)0);
+				else useup(obj);
+				if(!more_than_1 || thrown) obj = (struct obj *)0; /* obj has been free'd */
+			}
 			hittxt = TRUE;
 			get_dmg_bonus = FALSE;
 			tmp = 0;
@@ -1461,8 +1466,12 @@ int thrown;
 				Your("venom burns %s!", mon_nam(mon));
 				tmp = dmgval(obj, mon);
 			}
-			if (thrown) obfree(obj, (struct obj *)0);
-			else useup(obj);
+			{
+				boolean more_than_1 = (obj->quan > 1L);
+				if (thrown) obfree(obj, (struct obj *)0);
+				else useup(obj);
+				if(!more_than_1 || thrown) obj = (struct obj *)0; /* obj has been free'd */
+			}
 			hittxt = TRUE;
 			get_dmg_bonus = FALSE;
 			break;
