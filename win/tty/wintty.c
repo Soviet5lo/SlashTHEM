@@ -2548,11 +2548,6 @@ docorner(xmin, ymax)
     register int y;
     register struct WinDesc *cw = wins[WIN_MAP];
 
-    if (u.uswallow) {	/* Can be done more efficiently */
-	swallowed(1);
-	return;
-    }
-
 #if defined(SIGWINCH) && defined(CLIPPING)
     if(ymax > LI) ymax = LI;		/* can happen if window gets smaller */
 #endif
