@@ -403,6 +403,9 @@ use_natural:
 		}
 		dieroll = rnd(20 + i);
 		strike = (tmp > dieroll);
+		/* KMH -- don't accumulate to-hit bonuses */
+		if (otmp)
+		    tmp -= hitval(otmp, mdef);
 		if (strike) {
 		    res[i] = hitmm(magr, mdef, mattk);
 		    if((mdef->data == &mons[PM_BLACK_PUDDING] || mdef->data == &mons[PM_BROWN_PUDDING])
@@ -420,9 +423,6 @@ use_natural:
 		    }
 		} else
 		    missmm(magr, mdef, tmp, dieroll, mattk);
-		/* KMH -- don't accumulate to-hit bonuses */
-		if (otmp)
-		    tmp -= hitval(otmp, mdef);
 		break;
 	    case AT_NTCH: /* generic adjacent non-touching attack */
 		dieroll = rnd(20 + i);
