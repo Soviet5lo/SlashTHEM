@@ -380,7 +380,7 @@ doborgtoggle()
 #endif
 
 #if defined(TTY_GRAPHICS) || defined(GL_GRAPHICS) || defined(SDL_GRAPHICS)
-#define MAX_EXT_CMD 40		/* Change if we ever have > 40 ext cmds */
+#define MAX_EXT_CMD 200		/* Change if we ever have > 40 ext cmds */
 /*
  * This is currently used only by the tty port and is
  * controlled via runtime option 'extmenu'
@@ -393,7 +393,7 @@ extcmd_via_menu()	/* here after # - now show pick-list of possible commands */
     menu_item *pick_list = (menu_item *)0;
     winid win;
     anything any;
-    const struct ext_func_tab *choices[MAX_EXT_CMD];
+    const struct ext_func_tab *choices[MAX_EXT_CMD + 1];
     char buf[BUFSZ];
     char cbuf[QBUFSZ], prompt[QBUFSZ], fmtstr[20];
     int i, n, nchoices, acount;
@@ -411,18 +411,19 @@ extcmd_via_menu()	/* here after # - now show pick-list of possible commands */
 	    /* populate choices */
 	    for(efp = extcmdlist; efp->ef_txt; efp++) {
 		if (!matchlevel || !strncmp(efp->ef_txt, cbuf, matchlevel)) {
-			choices[i++] = efp;
+			choices[i] = efp;
 			if ((int)strlen(efp->ef_desc) > biggest) {
 				biggest = strlen(efp->ef_desc);
 				Sprintf(fmtstr,"%%-%ds", biggest + 15);
 			}
+			if (++i > MAX_EXT_CMD) {
 #ifdef DEBUG
-			if (i >= MAX_EXT_CMD - 2) {
 			    impossible("Exceeded %d extended commands in doextcmd() menu",
-					MAX_EXT_CMD - 2);
+					MAX_EXT_CMD);
+#endif
+			    iflags.extmenu = 0;
 			    return 0;
 			}
-#endif
 		}
 	    }
 	    choices[i] = (struct ext_func_tab *)0;
