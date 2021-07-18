@@ -5031,7 +5031,7 @@ register int osym, dmgtyp;
 		     * any "next" pointers that would otherwise become invalid.
 		     */
 		    struct destroy_item_frame *fp;
-		    for(fp = frame.next_frame; fp; fp = fp->next_frame) {
+		    for(fp = &frame; fp; fp = fp->next_frame) {
 			if (fp->next_obj == obj)
 			    fp->next_obj = frame.next_obj;
 		    }
