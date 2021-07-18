@@ -1047,6 +1047,10 @@ int tech_no;
 		}
 		break;
 	    case T_CUTTHROAT:
+		if (!uwep) {
+		    You("can't perform that without a weapon.");
+		    return 0;
+		}
 		if (!is_blade(uwep)) {
 		    You("need a blade to perform cutthroat!");
 		    return 0;
