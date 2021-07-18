@@ -914,7 +914,7 @@ register int after;
 	if(ptr == &mons[PM_TENGU] && !rn2(5) && !mtmp->mcan &&
 	   !tele_restrict(mtmp)) {
 	    if(mtmp->mhp < 7 || mtmp->mpeaceful || rn2(2))
-		(void) rloc(mtmp, FALSE);
+		(void) rloc(mtmp, TRUE);
 	    else
 		mnexto(mtmp);
 	    mmoved = 1;
@@ -1261,7 +1261,7 @@ not_special:
 	    if (mtmp->wormno) worm_move(mtmp);
 	} else {
 	    if(is_unicorn(ptr) && ptr != &mons[PM_YOUNG_UNICORN] && rn2(2) && !tele_restrict(mtmp)) {
-		(void) rloc(mtmp, FALSE);
+		(void) rloc(mtmp, TRUE);
 		return(1);
 	    }
 	    if(mtmp->wormno) worm_nomove(mtmp);
