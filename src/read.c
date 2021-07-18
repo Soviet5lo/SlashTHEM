@@ -1591,11 +1591,12 @@ register struct obj	*sobj;
 
 		otmp = some_armor(&youmonst);
 		if(!otmp) {
+			boolean iscursed = sobj->cursed;
 			strange_feeling(sobj,
 					!Blind ? "Your skin glows then fades." :
 					"Your skin feels warm for a moment.");
-			exercise(A_CON, !sobj->cursed);
-			exercise(A_STR, !sobj->cursed);
+			exercise(A_CON, !iscursed);
+			exercise(A_STR, !iscursed);
 			return(1);
 		}
 		if(confused) {
