@@ -1989,13 +1989,18 @@ register int	mmflags;
 	if(x == 0 && y == 0) {
 		int tryct = 0;	/* careful with bigrooms */
 		struct monst fakemon;
+		boolean invalid_position;
 
 		fakemon.data = ptr;	/* set up for goodpos */
 		do {
 			x = rn1(COLNO-3,2);
 			y = rn2(ROWNO);
-		} while(!goodpos(x, y, ptr ? &fakemon : (struct monst *)0, gpflags) ||
-			(!in_mklev && tryct++ < 50 && cansee(x, y)));
+
+			invalid_position = (!goodpos(x, y, ptr ? &fakemon : (struct monst *)0, gpflags) ||
+			    (!in_mklev && cansee(x, y)));
+		} while(tryct++ < 50 && invalid_position);
+
+		if (invalid_position) return (struct monst *)0;
 	} else if (byyou && !in_mklev) {
 		coord bypos;
 
