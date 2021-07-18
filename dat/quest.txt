@@ -5116,7 +5116,7 @@ brave, could never hope to defeat the foul %n.
 Our presence when thou hast attained the title of %R."
 %E
 %Cc Kni 00020
-"Thou dishonourest Us, %p!  Thou hast strayed from thine chosen 
+"Thou dishonourest Us, %p!  Thou hast strayed from thy chosen 
 path!  Go from Our presence and do penance.  Only when thou 
 hast regained thy soul's direction mayst thou return hence."
 %E
