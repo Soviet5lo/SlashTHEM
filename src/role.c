@@ -1283,7 +1283,7 @@ const struct Role roles[] = {
 	{"Count",   "Countess"},
 	{"Duke",   "Duchess"},
 	{"Patriarch",     "Matriarch"} },
-	"Talos", "_Meridia", "Clavicus Vile", /* The Elder Scrolls */
+	"Dazhbog", "Yarovit-Yarilo", "Svarozhits", /* Slavic */
 	"War", "Acro Castle", "the Isle of the Damned",
 	PM_WARRIOR, NON_PM, PM_PONY,
 	PM_SIR_LANCELOT, PM_PAGE, PM_ARCHNEMESIS,
