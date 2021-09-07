@@ -184,6 +184,10 @@ struct obj {
 #define is_launcher(otmp)	((otmp)->oclass == WEAPON_CLASS && \
 			 objects[(otmp)->otyp].oc_skill >= P_BOW && \
 			 objects[(otmp)->otyp].oc_skill <= P_CROSSBOW)
+/* 5lo: Should also add 2-handed firearms? */
+#define is_2h_launcher(otmp) 	((otmp->oclass == WEAPON_CLASS && \
+			 (objects[otmp->otyp].oc_skill == P_BOW \
+			  || objects [otmp->otyp].oc_skill == P_CROSSBOW)))
 #define is_ammo(otmp)	(((otmp)->oclass == WEAPON_CLASS || \
 			 (otmp)->oclass == GEM_CLASS) && \
 			 objects[(otmp)->otyp].oc_skill >= -P_CROSSBOW && \
@@ -226,7 +230,8 @@ struct obj {
 			(is_ammo(otmp) && (ltmp) && \
 			objects[(otmp)->otyp].oc_skill == -objects[(ltmp)->otyp].oc_skill && \
 			  objects[(otmp)->otyp].w_ammotyp == objects[(ltmp)->otyp].w_ammotyp)
-#define bimanual(otmp)	(!Race_if(PM_GIANT) && ((otmp)->oclass == WEAPON_CLASS || \
+#define bimanual(otmp)	((!Race_if(PM_GIANT) || Race_if(PM_GIANT) && is_2h_launcher(otmp)) \
+			 && ((otmp)->oclass == WEAPON_CLASS || \
 			  (otmp)->oclass == TOOL_CLASS) && \
 			 objects[(otmp)->otyp].oc_bimanual)
 
