@@ -23,6 +23,7 @@ STATIC_DCL void FDECL(kops_gone, (BOOLEAN_P));
 
 #define IS_SHOP(x)	(rooms[x].rtype >= SHOPBASE)
 #define no_cheat      ((ACURR(A_CHA) - rnl(3)) > 7)
+#define visible_bad_shirt 	((uarmu && (uarmu->otyp == STRIPED_SHIRT)) && !uarm  && !uarmc)
 
 extern const struct shclass shtypes[];	/* defined in shknam.c */
 extern struct obj *thrownobj;		/* defined in dothrow.c */
@@ -673,7 +674,7 @@ register char *enterstring;
 
 #ifdef CONVICT
 	/* Visible striped prison shirt */
-	if (((uarmu && (uarmu->otyp == STRIPED_SHIRT)) && !uarm && !uarmc) && !Is_blackmarket(&u.uz)) {
+	if (visible_bad_shirt && !Is_blackmarket(&u.uz)) {
 	    eshkp->pbanned = TRUE;
 	}
 #endif /* CONVICT */
@@ -3784,7 +3785,7 @@ register struct monst *shkp;
 	omy = shkp->my;
 
 	/* Random advertising to passersby. */
-	if (!ANGRY(shkp) && inhishop(shkp) && !*u.ushops && !rn2(10)) {
+	if (!ANGRY(shkp) && inhishop(shkp) && !*u.ushops && !rn2(7) && m_canseeu(shkp)) {
 	    shk_holler(shkp);
 	}
 
@@ -6192,9 +6193,9 @@ struct monst* shkp;
 {
 
 	/* Don't yell from too far away... */
-	if (distu(shkp->mx,shkp->my)<=9) {
+	if (distu(shkp->mx,shkp->my)<=12) {
 		/* You're either banned from the store or you're going to be banned because of the shirt */
-		if ((ESHK(shkp)->pbanned || (uarmu && (uarmu->otyp == STRIPED_SHIRT)) && !uarm && !uarmc)) {
+		if (ESHK(shkp)->shoptype != BLACKSHOP && (ESHK(shkp)->pbanned || visible_bad_shirt)) {
 			verbalize("Bugger off, you filthy little %s. Don't come begging around here!",urace.noun);
 			return;
 		}
