@@ -2715,6 +2715,12 @@ revid_end:
 		}
 		known = TRUE;
 		pline("You build an altar.");
+		if (confused) {
+			pline("Pronouncing arcane forumlas, you consecrate the altar to the Porcelain God.");
+			levl[u.ux][u.uy].typ = TOILET;
+			You("feel relief.");
+			break;
+		}
 		ual = u.ualign.type;
 		if (is_demon(youmonst.data)) {
 			al = A_CHAOTIC;
