@@ -2172,17 +2172,51 @@ register struct obj	*sobj;
 	break;
 
 	case SCR_CLOUDS:
-		known = TRUE;
 		if (confused) {
-			/* remove lava from vicinity of player */
-			int maderoom = 0;
-			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
-					undo_cloudflood, (genericptr_t)&maderoom);
-			if (maderoom) {
-				known = TRUE;
-				You("feel the fog disappearing.");
+			/* 5lo: Scroll of Air effect from Splicehack in addition to cloud removal */
+			int i;
+			struct monst *mtmp, *mtmp2;
+			if (sobj->cursed) {
+				if (!breathless(youmonst.data)) {
+					pline_The("air is sucked from your lungs!");
+					losehp(d(3,4), "cursed scroll of clouds while confused", KILLED_BY_AN);
+				} else {
+					pline("You feel oddly breathless.");
+					sobj = 0;
+				}
+				break;
+			} else if (sobj->blessed)
+				i = 4;
+			else
+				i = 2;
+			pline("A tornado whips up around you!");
+			known = TRUE;
+			for (mtmp = fmon; mtmp; mtmp = mtmp2) {
+				mtmp2 = mtmp->nmon;
+				if (distu(mtmp->mx, mtmp->my) <= 2) {
+					mhurtle(mtmp, mtmp->mx - u.ux, mtmp->my - u.uy, i + rn2(4));
+					setmangry(mtmp);
+				}
+			}
+			/* clear some clouds if there are any around
+			 * unless we're on the Plane of Air */
+			if (!Is_airlevel(&u.uz)) {
+				int maderoom = 0;
+				do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
+						undo_cloudflood, (genericptr_t)&maderoom);
+				if (maderoom) {
+					known = TRUE;
+					You("see nearby clouds being blown away!");
+				}
 			}
 		} else {
+			if (sobj->cursed) {
+				(void) create_gas_cloud(u.ux,u.uy,2,4);
+				pline("Noxius fumes burst from the scroll!");
+				if (breathless(youmonst.data))
+					pline("But you completely ignore them.");
+				break;
+			}
 			int madepool = 0;
 			int stilldry = -1;
 			int x,y,safe_pos=0;
@@ -2209,7 +2243,6 @@ register struct obj	*sobj;
 			known = TRUE;
 			break;
 		}
-
 	break;
 
 	case SCR_FLOOD:
@@ -2720,39 +2753,40 @@ revid_end:
 			levl[u.ux][u.uy].typ = TOILET;
 			You("feel relief.");
 			break;
-		}
-		ual = u.ualign.type;
-		if (is_demon(youmonst.data)) {
-			al = A_CHAOTIC;
-		} else if (sobj->cursed) {
-			al = A_NONE;
-		} else if (sobj->blessed) {
-//			ual = u.ualign.type;
-			a = (ual==A_LAWFUL) ? 'l' : ((ual==A_NEUTRAL) ? 'n' : 'c');
-			c = yn_function("Which alignment do you want to consecrate the altar to?","lncm",a);
-			al = A_NONE;
-			switch (c) {
-				case 'l':
-					al = A_LAWFUL;		break;
-				case 'n':
-					al = A_NEUTRAL;		break;
-				case 'c':
-					al = A_CHAOTIC;		break;
-				case 'm':
-					al = A_NONE;		break;
-			}
 		} else {
-			al = u.ualign.type;
+			ual = u.ualign.type;
+			if (is_demon(youmonst.data)) {
+				al = A_CHAOTIC;
+			} else if (sobj->cursed) {
+				al = A_NONE;
+			} else if (sobj->blessed) {
+//				ual = u.ualign.type;
+				a = (ual==A_LAWFUL) ? 'l' : ((ual==A_NEUTRAL) ? 'n' : 'c');
+				c = yn_function("Which alignment do you want to consecrate the altar to?","lncm",a);
+				al = A_NONE;
+				switch (c) {
+					case 'l':
+						al = A_LAWFUL;		break;
+					case 'n':
+						al = A_NEUTRAL;		break;
+					case 'c':
+						al = A_CHAOTIC;		break;
+					case 'm':
+						al = A_NONE;		break;
+				}
+			} else {
+				al = u.ualign.type;
+			}
+			pline("Pronouncing arcane formulas, you consecrate the altar to %s.",(al == A_NONE) ? "Moloch" : align_gname(al));
+			levl[u.ux][u.uy].typ = ALTAR;
+			levl[u.ux][u.uy].altarmask = Align2amask(al);
+			x = (al == ual) ? 1 : ((al == A_NONE) ? -3 : -1);
+//			y = -rn2(x * 100);
+			u.ualign.record += x;
+//			u.ublesscnt += y;
+//			if (u.ublesscnt < 0) u.ublesscnt = 0;
+			pline("You feel %s%scomfortable.",(abs(x)>1) ? "very " : "", (x<0) ? "un" : "");
 		}
-		pline("Pronouncing arcane formulas, you consecrate the altar to %s.",(al == A_NONE) ? "Moloch" : align_gname(al));
-		levl[u.ux][u.uy].typ = ALTAR;
-		levl[u.ux][u.uy].altarmask = Align2amask(al);
-		x = (al == ual) ? 1 : ((al == A_NONE) ? -3 : -1);
-//		y = -rn2(x * 100);
-		u.ualign.record += x;
-//		u.ublesscnt += y;
-//		if (u.ublesscnt < 0) u.ublesscnt = 0;
-		pline("You feel %s%scomfortable.",(abs(x)>1) ? "very " : "", (x<0) ? "un" : "");
 	} break;
 
 	case SCR_ROOT_PASSWORD_DETECTION:
