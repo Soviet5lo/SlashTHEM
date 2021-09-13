@@ -392,6 +392,7 @@ register int fd, mode;
 	bwrite(fd, (genericptr_t) pl_fruit, sizeof pl_fruit);
 	bwrite(fd, (genericptr_t) &current_fruit, sizeof current_fruit);
 	bwrite(fd, (genericptr_t) &alchemy_table, sizeof(alchemy_table));
+	savesmithstate(fd, mode);
 	savefruitchn(fd, mode);
 	savenames(fd, mode);
 	save_artifacts(fd);
