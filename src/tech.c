@@ -1341,7 +1341,11 @@ int tech_no;
 			    if (mtmp) {
 				if (!resist(mtmp, SPBOOK_CLASS, 0, TELL)) {
 				   mtmp = tamedog(mtmp, (struct obj *) 0);
-				   You("dominate %s!", mon_nam(mtmp));
+				   if (mtmp) {
+				       You("dominate %s!", mon_nam(mtmp));
+				   } else {
+				       You("fail to dominate the reviving corpse.");
+				   }
 				} else setmangry(mtmp);
 			    }
 			}
