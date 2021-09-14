@@ -3,6 +3,7 @@
 /* Copyright 1994, Sebastian Klein */
 
 #include "hack.h"
+#include "lev.h"
 #include <stdio.h>
 #include <ctype.h>
 
@@ -363,6 +364,30 @@ void smith_selling(struct monst *smith)
 	} else {
 		verbalize("I'm working. Please don't disturb me again!");
 		time_finished += 5;	/* he was interrupted */
+	}
+}
+
+/* used in save.c */
+void savesmithstate(register int fd, register int mode) {
+	if (!perform_bwrite(mode))
+		return;
+	bwrite(fd, (genericptr_t) &time_finished, sizeof (int));
+	if (time_finished != -1) {
+		unsigned int xl;
+		xl = weapon->oxlth + weapon->onamelth;
+		bwrite(fd, (genericptr_t) &xl, sizeof(unsigned int));
+		bwrite(fd, (genericptr_t) weapon, xl + sizeof(struct obj));
+	}
+}
+
+/* used in restore.c */
+void restsmithstate(int fd) {
+	mread(fd, (genericptr_t) &time_finished, sizeof(int));
+	if (time_finished != -1) {
+		unsigned int xl;
+		mread(fd, (genericptr_t) &xl, sizeof (unsigned int));
+		weapon = newobj(xl);
+		mread(fd, (genericptr_t) weapon, xl + sizeof (struct obj));
 	}
 }
 

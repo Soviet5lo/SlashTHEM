@@ -2127,6 +2127,8 @@ E void NDECL(attrcurse);
 /* ### smith.c ### */
 
 E void FDECL(smith_selling, (struct monst *));
+E void FDECL(savesmithstate, (register int, register int));
+E void FDECL(restsmithstate, (int));
 
 /* ### sounds.c ### */
 
