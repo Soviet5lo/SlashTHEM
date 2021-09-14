@@ -3,7 +3,6 @@ NOTE: This is not a complete list, just something to note down into a file.
 ### Must be done before an actual "1.0" release.
 * Extensive testing and bugfixing, there's still plenty of things here.
     * Bottom status bar (mostly) disappears upon death with dump enabled.
-    * Segfault when using raise zombies on a human corpse (issue #29 on github)
     * Plenty of potion of blood weirdness in relation to the DYWYPISI patch.
     * #borrowing a wielded weapon from a monster sometimes results in the monster attacking with the stolen weapon.
     * Figure out and solve why monster blinding via camera is completely broken with NEPHI_PHOTOGRAPHY defined.
@@ -28,6 +27,7 @@ NOTE: This is not a complete list, just something to note down into a file.
 * Full update of database, guidebook and rumor files.
 * Somehow during the addition of statuscolors I broke shorten_bot2.  Fix it so it works again and functions with statuscolors enabled.
 * Port over Sphinx riddle attacks from [the Biodiversity patch.](https://nethackwiki.com/wiki/Biodiversity_patch)
+* Clean up build warnings; these almost certainly are causing issues.
 
 ### Probably won't be done unless someone assists with this
 * New level compiler from Sporkhack/Unnethack.

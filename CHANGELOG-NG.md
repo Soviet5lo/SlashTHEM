@@ -1,3 +1,85 @@
+Version 0.9.6 (2021-09-14)
+==========================
+Smaller release, and wanted to do some racial changes before bumping this up, but bug reports and fixes from the community resolved some glaring issues.  A few changes made their way in as well.
+
+#### Highlights
+- Implemented the Less Boring Knights patch from Sporkhack
+    - Knights can now be Chaotic (Human, Incantifier, Doppelganger, or Vampire) complete with their own role ranks, sacrifice gift and fountain dipping/crowning artifact.
+    - The Magic Mirror of Merlin grants reflection if it's carried by Knights only; for all other roles it must be wielded instead.  In addition, it now grants Half Spell Damage when carried
+    - Lances are no longer considered a polearm; they can no longer be 'a'pplied to pound a monster from afar.  The extra jousting damage formula has changed as well, going from 2d10 to 2d(5+level / 3).
+    - Knight jumping burns less hunger (from rnd(25) to rnd(10))
+    - Dragons are considered the natural enemy of Knights; they are always generated awake and hostile, and in addition can never be tamed by a Knight.
+    - The Riding skill saw a few changes.  All roles that start with a steed (Knight, Warrior, Paladin, Yeoman, Noble) get a bonus to mounting their starting steeds allowing them to reliably use them at the start of the game.  However any character riding will not be able to use their steed's full speed until they've reached at least Skilled in Riding.
+    - Knights saw a few skill changes: Can now reach Expert in Broadsword and Two-Handed Sword, however Mace and Javelin have been reduced to Basic.
+    - Two new artifacts have been introduced for chaotic Knights:
+        - Dirge: Chaotic Intelligent Short Sword.  +5 to-hit and 2x Poison Damage.  Grants Poison Resistance while wielded.  First Sacrifice gift for Dark Knights.
+        - Soulthief: Chaotic Intelligent Long Sword.  +5 to-hit and +6 Damage + Draining.  Grants Drain Resistance while wielded.  Crowning/Fountain Dipping artifact for Dark Knights.
+    - Chaotic knights do not get the Healing Hands or Turn Undead technique.  Instead they get a new tech: Souleater.  Requires the user to be wielding a weapon and be at above half of their max HP.  Upon use, inflicts half of your max HP as damage to yourself and reduces all non-flan (puddings, jellies and blobs) monsters in line of sight to 1/4th of their remaining HP (never below 1).  In addition, it increases the player's to-hit by +2 and all weapon damage by (level/4)d8 for (techleevel/2 + 1) turns.  If wielding Soulthief upon use the user gains an additional 4 turns for the extra damage effect.  Inspired by the Darkness/Souleater technique from Final Fantasy IV.
+
+#### Other Changes
+- Shallow water is now a finite resource when dipping objects into it (from Evilhack)
+- Added newer missing attack types to the Datalog when farlooking a creature with EXTENDED_INFO defined in config.h (Issue #34 on Github)
+- Slightly adjusted the spawn rates of the goodies in the chest in the Village (Good items 10% -> 5%, Bad items 20% -> 15%, one item in particular went from 20% to 10%)
+- Added shallow water to some levels that originally contained some in the original patch (Barbarian, Healer, Knight, Samurai, Tourist and Wizard quests, some Medusa levels, Juiblex's Swamp)
+- Randomized creator dieties in the intro text (from Unnethack)
+- Candle light radius is now square root instead of logarithmically.
+- Changed the Warrior deities from Elder Scrolls to Slavic.
+- Multiple Shopkeeper wares crying tweaks (tl;dr, will bark wares more often, won't bark wares through doors/walls, slightly larger range)
+    - Slightly increased the range that shopkeepers will bark their wares from
+    - Black Market will no longer shout the "Bugger off" message if the player is wearing a striped shirt (as the player will never be banned from the black market by wearing one anyway)
+    - Slightly increased the chance of shopkeepers barking their wares per turn (1/10 -> 1/7)
+    - Shopkeepers will only bark their wares if they can see the player (prevents them from barking wares through walls and closed doors)
+- Added a new artifact: The Pickpocket's Gloves.  Chaotic aligned Gauntlets of Dexterity, grants Searching and Stealth while worn.  Also increases the bonus for #borrowing from a monster by 20.
+- Several Giant changes
+    - Giants can use Two-Handed Weapons (except bows and crossbows) with one hand.
+    - Giants can now properly two-weapon (this was intended previously, but because the giant monster didn't have two weapon attacks, never worked properly).
+        - This change also allows all giants to have Two-Handed Combat as a racial skill.
+- Reading a scroll of consecration while confused creates a toilet (an altar to the Porcelain God)
+- Scroll of Clouds saw two changes
+    - Reading a cursed scroll of clouds creates a poison cloud centered on the player
+    - Reading a scroll of clouds while confused causes it to function as the scroll of air from Splicehack
+        - Cursed sucks the air from your lunghs (does nothing if you're breathless)
+        - Uncursed/Blessed creates a tornado around the player, pushing around creatures and clearing clouds from the area
+- Necromancers digging into graves have a chance of automatically taming/pacifying the resulting zombie/mummy
+
+#### Bugfixes
+- Added a missing addtobill call in playersteal (Previously a player could steal from a shop by luring a pet inside, letting the pet pick up an object and #borrowing the object from the pet, as the game wouldn't recognize the item as being store owned still)
+- Fixed DYWYPI at the end of the game always defaulting to yes (Issue #33 on Github)
+- Fixed bad logic in artifact.c that could lead to a panic (Issue #32 on Github)
+- Fixed Cave(wo)men not being able to rub flint stones against objects to create sparks as they would always attempt to lash them against arrows instead
+- Fixed Cave(wo)men not being able to lash flint stones onto orcish arrows
+- Fixed grey stones other than flint being able to create sparks
+- Fixed not being able to rub weapons or tools against flint to make sparks, as it would always default to attempt to use them as a whetstone.
+- Multiple fixes from the Hardfought server.
+    - Fixed possible buffer overflow when saving fruit + traps
+    - Fixed a small memory leak when compiling levels
+    - Fixed a missing check for is_ok() in m_at()
+    - Prevent buffer overflow setting up extended cmd menu
+    - Fixed a couple of out of bounds string comparisons
+    - Fixed a possible Cutthroat tech crash
+    - Prevent blowing the stack when engulfed
+    - Prevent out of bounds on fruit name
+    - Prevent read after free on shopkeeper bill
+    - Prevent overflow in movement strings
+    - Prevent read after free engraving with an exploding wand
+    - Prevent read after free from a MvM attack
+    - Guard against potion use after free
+    - Fix use after free from monsters reading/quaffing
+    - Fix read after free with monster reading a scroll of earth
+    - Prevent cutworm segfault
+    - Ensure item destruction doesn't read freed obj
+    - Prevent unwinnable game via unlightable candelabrum
+    - Break infinite loop in makemon
+    - Prevent impossible when visiting full floor
+    - Suppress impossibles for unicorn/tengu teleport
+    - Suppress impossibles for seduction teleportation
+    - Prevent read after free from crystal ballsplosion
+    - Guard against returning negative techval
+- Fixed cancelling monsters removing intrinsics from a player as if they were by a gremlin attack (Pull request from Nero)
+- Fixed a panic involving wielding a cursed torch (from Slash'EM Extended)
+- Fixed two tiles of a Castle variant (castle-5) counting as the Throneroom despite being located in one of the store rooms
+- Fixed a crash when attempting to raise a human as a zombie (Pull request from gebulmer)
+- Fixed an oversight where saving after ordering an artifact in the Forge caused the info to not be saved, wasting the gold spent (Pull request from gebulmer)
 
 Version 0.9.5 (2021-02-01)
 ==========================

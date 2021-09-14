@@ -20,6 +20,8 @@ The source code builds fine on Windows using MinGW, as well as Linux.  Other Ope
 
 Windows (x64) builds are available on the [releases](https://github.com/Soviet5lo/SlashTHEM/releases) page.  I attempt to make a new build based on the current code at the beginning of the month, assuming there's enough changes worth building.
 
+SlashTHEM is also hosted on the public [Hardfought](https://www.hardfought.org/nethack/) server.
+
 Build Instructions
 ------------
 
