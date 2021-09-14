@@ -1344,7 +1344,7 @@ int tech_no;
 				   if (mtmp) {
 				       You("dominate %s!", mon_nam(mtmp));
 				   } else {
-				       You("fail to dominate the reviving corpse.");
+				       impossible("null/missing monster?");
 				   }
 				} else setmangry(mtmp);
 			    }
