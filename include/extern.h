@@ -180,6 +180,7 @@ E const char * FDECL(shorten_bot2, (const char *, unsigned int));
 
 /* ### cmd.c ### */
 
+E char NDECL(randomkey);
 #ifdef USE_TRAMPOLI
 E int NDECL(doextcmd);
 E int NDECL(domonability);

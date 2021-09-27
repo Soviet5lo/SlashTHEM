@@ -339,6 +339,7 @@ char *argv[];
 			  int uid;
 			  struct passwd *pw = (struct passwd *)0;
 
+			  wizard = TRUE;
 			  uid = getuid();
 			  user = getlogin();
 			  if (user) {
@@ -356,12 +357,17 @@ char *argv[];
 			      }
 			  }
 			  if (pw && !strcmp(pw->pw_name,WIZARD)) {
+#if 0 /* Unused now via fuzzer */
 			      wizard = TRUE;
 			      break;
+#endif
 			  }
 			}
 			/* otherwise fall thru to discover */
+#if 0 /* Unused due to fuzzer */
 			wiz_error_flag = TRUE;
+#endif
+			wizard = TRUE;
 # endif /* PUBLIC_SERVER */
 #endif
 		case 'X':

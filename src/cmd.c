@@ -287,6 +287,8 @@ popch() {
 char
 pgetchar() {		/* curtesy of aeb@cwi.nl */
 	register int ch;
+	if (iflags.debug_fuzzer)
+		return randomkey();
 
 	if(!(ch = popch()))
 		ch = nhgetch();
@@ -1219,6 +1221,11 @@ wiz_level_change()
 STATIC_PTR int
 wiz_panic()
 {
+	if (iflags.debug_fuzzer) {
+		u.uhp = u.uhpmax = 1000;
+		u.uen = u.uenmax = 1000;
+		return 0;
+	}
 	if (yn("Do you want to call panic() and end your game?") == 'y')
 		panic("crash test.");
         return 0;
@@ -3554,6 +3561,58 @@ wiz_migrate_mons()
 #define unctrl(c)	((c) <= C('z') ? (0x60 | (c)) : (c))
 #define unmeta(c)	(0x7f & (c))
 
+char
+randomkey()
+{
+    static unsigned i = 0;
+    char c;
+
+    switch (rn2(16)) {
+    default:
+        c = '\033';
+        break;
+    case 0:
+        c = '\n';
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        c = (char) rn1('~' - ' ' + 1, ' ');
+        break;
+    case 5:
+        c = (char) (rn2(2) ? '\t' : ' ');
+        break;
+    case 6:
+        c = (char) rn1('z' - 'a' + 1, 'a');
+        break;
+    case 7:
+        c = (char) rn1('Z' - 'A' + 1, 'A');
+        break;
+    //case 8:
+        //c = extcmdlist[i++ % SIZE(extcmdlist)].key;
+      //  break;
+    case 9:
+        c = '#';
+        break;
+    /*case 10:
+    case 11:
+    case 12:
+        c = Cmd.dirchars[rn2(8)];
+        if (!rn2(7))
+            c = !Cmd.num_pad ? (!rn2(3) ? C(c) : (c + 'A' - 'a')) : M(c);
+        break;*/
+    case 13:
+        c = (char) rn1('9' - '0' + 1, '0');
+        break;
+    case 14:
+        /* any char, but avoid '\0' because it's used for mouse click */
+        c = (char) rnd(iflags.wc_eight_bit_input ? 255 : 127);
+        break;
+    }
+
+    return c;
+}
 
 void
 rhack(cmd)
@@ -4218,6 +4277,8 @@ readchar()
 {
 	register int sym;
 	int x = u.ux, y = u.uy, mod = 0;
+	if (iflags.debug_fuzzer)
+	        return randomkey();
 
 	if ( *readchar_queue )
 	    sym = *readchar_queue++;

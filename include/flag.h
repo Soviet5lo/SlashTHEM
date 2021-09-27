@@ -187,6 +187,7 @@ struct instance_flags {
 #ifdef ITEMCAT
         boolean  like_swimming; /* category r - Items known to be Rustprone */
 #endif /* ITEMCAT */
+	boolean  debug_fuzzer;  /* fuzz testing */
 	boolean  cbreak;	/* in cbreak mode, rogue format */
 	boolean  DECgraphics;	/* use DEC VT-xxx extended character set */
 	boolean  echo;		/* 1 to echo characters */

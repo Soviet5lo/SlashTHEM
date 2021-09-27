@@ -425,6 +425,8 @@ give_up:
 void
 ckmailstatus()
 {
+	if (iflags.debug_fuzzer)
+		return;
 	if (u.uswallow || !flags.biff) return;
 	if (mustgetmail < 0) {
 #if defined(AMIGA) || defined(MSDOS) || defined(TOS) || defined(OS2)

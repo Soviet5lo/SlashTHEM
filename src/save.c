@@ -62,6 +62,8 @@ static unsigned ustuck_id = 0, usteed_id = 0;
 int
 dosave()
 {
+	if (iflags.debug_fuzzer)
+		return 0;
 #ifdef KEEP_SAVE
 	/*WAC for reloading*/
 	register int fd;
