@@ -1031,11 +1031,15 @@ boolean twoweap; /* used to restore twoweapon mode if wielded weapon returns */
 int thrown;
 {
 	register struct monst *mon;
-	register int range, urange;
+	int range, urange;
 	struct obj *launcher = (struct obj*) 0;
-	boolean impaired = (Confusion || Stunned || Blind ||
-			   Hallucination || Fumbling);
-	boolean tethered_weapon = (obj->otyp == AKLYS && (wep_mask & W_WEP) != 0);
+	boolean clear_thrownobj = FALSE,
+		impaired = (Confusion || Stunned || Blind ||
+				Hallucination || Fumbling),
+		tethered_weapon = (obj->otyp == AKLYS && (wep_mask & W_WEP) != 0),
+	/* 5lo: This gets used a lot, so put it here */
+		jedi_forcethrow = (Role_if(PM_JEDI) && is_lightsaber(obj) && obj->lamplit
+			&& !impaired && P_SKILL(weapon_type(obj)) >= P_SKILLED);
 
 	if (thrown == 1) launcher = uwep;
 	else if (thrown == 2) launcher = uswapwep;
@@ -1046,6 +1050,10 @@ int thrown;
 		obj->opoisoned = 1;
 
 	obj->was_thrown = 1;
+	iflags.returning_missile = ((obj->oartifact == ART_MJOLLNIR
+				     && Role_if(PM_VALKYRIE)) ||
+				    jedi_forcethrow || tethered_weapon) ?
+				     (genericptr_t) obj : (genericptr_t) 0;
 	if ((obj->cursed || obj->greased) && (u.dx || u.dy) && !rn2(7)) {
 	    boolean slipok = TRUE;
 	    if (ammo_and_launcher(obj, launcher))
@@ -1085,11 +1093,13 @@ int thrown;
 		mon = u.ustuck;
 		bhitpos.x = mon->mx;
 		bhitpos.y = mon->my;
+		if (tethered_weapon)
+			tmp_at(DISP_TETHER, obj_to_glyph(obj));
 	} else if(u.dz) {
 	    if (u.dz < 0
 		/* Mjnollnir must be wielded to be thrown--caller verifies this;
 		 * aklys must be wielded as primary to return when thrown */
-		&& ((Role_if(PM_VALKYRIE) && obj->oartifact == ART_MJOLLNIR) || tethered_weapon)
+		&& iflags.returning_missile
 		&& !impaired) {
 		pline("%s the %s and returns to your hand!",
 		      Tobjnam(obj, "hit"), ceiling(u.ux,u.uy));
@@ -1104,9 +1114,7 @@ int thrown;
 		return;
 	    }
 #ifdef JEDI
-	    if (u.dz < 0 && Role_if(PM_JEDI) &&
-		    is_lightsaber(obj) && obj->lamplit && !impaired &&
-		    P_SKILL(weapon_type(obj)) >= P_SKILLED) {
+	    if (u.dz < 0 && jedi_forcethrow) {
 		pline("%s the %s and returns to your hand!",
 		      Tobjnam(obj, "hit"), ceiling(u.ux,u.uy));
 		obj = addinv(obj);
@@ -1147,7 +1155,8 @@ int thrown;
 	    } else {
 		hitfloor(obj);
 	    }
-	    thrownobj = (struct obj*)0;
+	    clear_thrownobj = TRUE;
+	    goto throwit_return;
 	    return;
 
 	} else if(obj->otyp == BOOMERANG && !Underwater) {
@@ -1162,8 +1171,8 @@ int thrown;
 			    setworn(obj, wep_mask);
 			    u.twoweap = twoweap;
 			}
-			thrownobj = (struct obj*)0;
-			return;
+			clear_thrownobj = TRUE;
+			goto throwit_return;
 		}
 	} else {
 		urange = (int)(ACURRSTR)/2;
@@ -1233,8 +1242,7 @@ int thrown;
 		     * we're about to return */
 		    if (tethered_weapon)
 			tmp_at(DISP_END, 0);
-		    thrownobj = (struct obj *)0;
-		    return;
+		    goto throwit_return;
 		}
 	}
 
@@ -1243,8 +1251,8 @@ int thrown;
 
 		if (mon->isshk &&
 		    obj->where == OBJ_MINVENT && obj->ocarry == mon) {
-		    thrownobj = (struct obj*)0;
-		    return;		/* alert shk caught it */
+			clear_thrownobj = TRUE;
+			goto throwit_return; /* alert shk caught it */
 		}
 		(void) snuff_candle(obj);
 		notonhead = (bhitpos.x != mon->mx || bhitpos.y != mon->my);
@@ -1258,7 +1266,8 @@ int thrown;
 			 !index(in_rooms(mon->mx, mon->my, SHOPBASE), *u.ushops)))
 		    hot_pursuit(mon);
 
-		if (obj_gone) return;
+		if (obj_gone)
+			thrownobj = (struct obj *) 0;
 	}
 
 #ifdef FIREARMS
@@ -1281,9 +1290,16 @@ int thrown;
 	}
 #endif
 
-	if (u.uswallow) {
+	if (!thrownobj) {
+		/* missile has already been handled */
+		if (tethered_weapon)
+		    tmp_at(DISP_END, 0);
+	} else if (u.uswallow && !iflags.returning_missile) {
+swallowit:
 		/* ball is not picked up by monster */
-		if (obj != uball) (void) mpickobj(u.ustuck,obj);
+		if (obj != uball)
+			(void) mpickobj(u.ustuck,obj); /* clears 'thrownobj' */
+		goto throwit_return;
 	} else {
 		/* the code following might become part of dropy() */
 		/* Mjnollnir must be wielded to be thrown--caller verifies this;
@@ -1295,9 +1311,8 @@ int thrown;
 		    /* we must be wearing Gauntlets of Power to get here */
 #else
 		if ((((obj->oartifact == ART_MJOLLNIR && Role_if(PM_VALKYRIE))
-			|| (tethered_weapon))
-			&& rn2(100)) || (is_lightsaber(obj) && obj->lamplit && 
-		       Role_if(PM_JEDI) && P_SKILL(weapon_type(obj)) >= P_SKILLED)){
+			|| (tethered_weapon || jedi_forcethrow))
+			&& rn2(100))){
 		    /* we must be wearing Gauntlets of Power to get here */
 		    /* or a Jedi with a lightsaber */
 		    if (Role_if(PM_JEDI) && u.uen < 5 && obj->otyp != AKLYS){
@@ -1342,14 +1357,13 @@ int thrown;
 			    losehp(dmg, killer_xname(obj),
 				obj_is_pname(obj) ? KILLED_BY : KILLED_BY_AN);
 			}
-			if (ship_object(obj, u.ux, u.uy, FALSE)) {
-		    	    thrownobj = (struct obj*)0;
-			    return;
-			}
-			dropy(obj);
+			if (u.uswallow)
+				goto swallowit;
+			if (!ship_object(obj, u.ux, u.uy, FALSE))
+				dropy(obj);
 		    }
-		    thrownobj = (struct obj*)0;
-		    return;
+		    clear_thrownobj = TRUE;
+		    goto throwit_return;
 #ifdef JEDI
 		    }
 #endif
@@ -1364,6 +1378,9 @@ int thrown;
 		     * explicitly rewield the weapon to get throw-and-return
 		     * capability back anyway, quivered or not shouldn't matter */
 			pline("%s to return!", Tobjnam(obj, "fail"));
+
+			if (u.uswallow)
+				goto swallowit;
 			/* continue with placing 'obj' at target location */
 #endif
 		}
@@ -1387,13 +1404,13 @@ int thrown;
 		    if(*u.ushops)
 			check_shop_obj(obj, bhitpos.x, bhitpos.y, FALSE);
 		    (void) mpickobj(mon, obj);	/* may merge and free obj */
-		    thrownobj = (struct obj*)0;
-		    return;
+		    clear_thrownobj = TRUE;
+		    goto throwit_return;
 		}
 		(void) snuff_candle(obj);
 		if (!mon && ship_object(obj, bhitpos.x, bhitpos.y, FALSE)) {
-		    thrownobj = (struct obj*)0;
-		    return;
+			clear_thrownobj = TRUE;
+			goto throwit_return;
 		}
 		thrownobj = (struct obj*)0;
 		place_object(obj, bhitpos.x, bhitpos.y);
@@ -1410,6 +1427,11 @@ int thrown;
 		if (!IS_SOFT(levl[bhitpos.x][bhitpos.y].typ))
 		    container_impact_dmg(obj);
 	}
+throwit_return:
+	iflags.returning_missile = (genericptr_t) 0;
+	if (clear_thrownobj)
+		thrownobj = (struct obj *) 0;
+	return;
 }
 
 /* an object may hit a monster; various factors adjust the chance of hitting */
