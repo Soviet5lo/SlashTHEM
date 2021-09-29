@@ -1470,6 +1470,7 @@ boolean your_fault;
 	}
     } else {
 	boolean angermon = TRUE;
+	boolean monlive = TRUE; /* Cyanide/Radium */
 
 	if (!your_fault) angermon = FALSE;
 	if (!disint) {
@@ -1524,21 +1525,28 @@ boolean your_fault;
 		if (!resist(mon,POTION_CLASS,0,NOTELL)) {
 			if (mon->mhp < 10) {
 				killed(mon);
+				monlive = FALSE;
 			} else {
 				mon->mhp /= 5;
-				if (mon->mhp < 1) killed(mon);
+				if (mon->mhp < 1) {
+					killed(mon);
+					monlive = FALSE;
+				}
 			}
 		}
-		if (canseemon(mon)) {
+		if (canseemon(mon) && monlive) {
 			pline("%s looks deathly sick.", Monnam(mon));
 		}
 		break;
 	case POT_RADIUM:
 		if (!resist(mon,POTION_CLASS,0,NOTELL)) {
 			mon->mhp /= 4;
-			if (mon->mhp < 1) killed(mon);
+			if (mon->mhp < 1) {
+				killed(mon);
+				monlive = FALSE;
+			}
 		}
-		if (canseemon(mon)) pline("%s looks very sick.",Monnam(mon));
+		if (canseemon(mon) && monlive) pline("%s looks very sick.",Monnam(mon));
 		break;
 	case POT_CONFUSION:
 	case POT_BOOZE:
