@@ -4298,7 +4298,7 @@ struct trap *ttmp;
 	int wt;
 	struct obj *otmp;
 	boolean uprob;
-	boolean udied;
+	boolean udied = FALSE;
 	boolean can_disint =(touch_disintegrates(mtmp->data) && 
 	  !mtmp->mcan && mtmp->mhp>6);
 
