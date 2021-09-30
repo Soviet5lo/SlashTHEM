@@ -787,7 +787,7 @@ register int x, y;
 	else if(IS_FOUNTAIN(levl[x][y].typ))
 	    return "fountain";
 	else if(IS_PUDDLE(levl[x][y].typ))
-			return "muddy floor";
+	    return "muddy floor";
 	else if ((IS_ROOM(lev->typ) && !Is_earthlevel(&u.uz)) ||
 		 IS_WALL(lev->typ) || IS_DOOR(lev->typ) || lev->typ == SDOOR)
 	    return "floor";

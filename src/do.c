@@ -2032,6 +2032,13 @@ register struct obj *obj;
     }
     if (flags.verbose)
         You("give %s to %s.", doname(obj), mon_nam(mon));
+    if (obj->oclass == COIN_CLASS) {
+        /* if given to a shopkeeper this should probably give credit */
+	mon->mgold += obj->quan;
+	obfree(obj, (struct obj *)0);
+        flags.botl = 1;
+        return 1;
+    }
     freeinv(obj);
     (void) mpickobj(mon, obj);
     m_dowear(mon, FALSE);
