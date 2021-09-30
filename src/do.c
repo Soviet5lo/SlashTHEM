@@ -137,6 +137,8 @@ dogive()
                   mon_nam(mtmp));
         } else {
             pline("%s seems confused, but thanks you anyway.", mon_nam(mtmp));
+            /* TODO: Shk should drop object onto floor for sale? */
+            subfrombill(otmp, shop_keeper(*u.ushops));
         }
     } else if (otmp->unpaid && inside_shop(u.ux, u.uy)) {
         /* refine this later */
