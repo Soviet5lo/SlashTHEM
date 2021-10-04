@@ -1521,12 +1521,16 @@ int thrown;
 	 * In this case, we do twice damage! Wow!
 	 *
 	 * Berserk special ability only does +4 damage. - SW
+	 * 5lo: Berserk time gets extended with every active hit
 	 */
 	/*Lycanthrope claws do +level bare hands dmg
                 (multi-hit, stun/freeze)..- WAC*/
 
 	if (tech_inuse(T_KIII)) tmp *= 2;
-	if (tech_inuse(T_BERSERK)) tmp += 4;
+	if (tech_inuse(T_BERSERK)) {
+		tmp += 4;
+		extend_tech_time(T_BERSERK, rnd(4));
+	}
 	if (tech_inuse(T_SOULEATER)) {
 		tmp += d((u.ulevel / 4), 8);
 		/* Unholy damage, not ignored from fire resistance */
