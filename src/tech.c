@@ -91,6 +91,7 @@ STATIC_OVL NEARDATA const char *tech_names[] = {
 	"booze",
 	/* SlashTHEM techs */
 	"souleater",
+	"shield block",
 #ifdef JEDI
 	"jedi jump",
 	"charge saber",
@@ -155,9 +156,11 @@ static const struct innate_tech
 #endif
 	kni_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_HEAL_HANDS, 1},
+		       {   1, T_SHIELD_BLOCK, 1},
 		       {   0, 0, 0} },
 		       /* 5lo: for Dark Knights */
 	drk_tech[] = { {   1, T_SOULEATER, 1},
+		       {   1, T_SHIELD_BLOCK, 1},
 		       {   0, 0, 0} },
 
 	mon_tech[] = { {   1, T_PUMMEL, 1},
@@ -216,10 +219,12 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	pri_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_BLESSING, 1},
+		       {   7, T_SHIELD_BLOCK, 1},
 		       {   10, T_HEAL_HANDS, 1},
 		       {   30, T_REVIVE, 1},
 		       {   0, 0, 0} },
 	pal_tech[] = { {   1, T_TURN_UNDEAD, 1},
+		       {   3, T_SHIELD_BLOCK, 1},
 		       {   5, T_BLESSING, 1},
 		       {   10, T_HEAL_HANDS, 1},
 		       {   0, 0, 0} },
@@ -234,10 +239,15 @@ static const struct innate_tech
 		       {   0, 0, 0} },
 	und_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   1, T_PRACTICE, 1},
+		       {   7, T_SHIELD_BLOCK, 1},
 		       {   0, 0, 0} },
 	unt_tech[] = { {   1, T_TURN_UNDEAD, 1},
 		       {   0, 0, 0} },
 	val_tech[] = { {   1, T_PRACTICE, 1},
+		       {   1, T_SHIELD_BLOCK, 1},
+		       {   0, 0, 0} },
+	war_tech[] = { {   1, T_PRACTICE, 1},
+		       {   1, T_SHIELD_BLOCK, 1},
 		       {   0, 0, 0} },
 	lun_tech[] = { {   1, T_EVISCERATE, 1},
 		       {  10, T_BERSERK, 1},
@@ -1810,6 +1820,15 @@ int tech_no;
 	      flags.botl = TRUE;
 	      t_timeout = rn1(1000,1000);
 	      break;
+	    case T_SHIELD_BLOCK:
+	      if (!uarms) {
+		      You_cant("block attacks without a shield.");
+		      return 0;
+	      }
+	      You("inject your energy into your shield.");
+	      techt_inuse(tech_no) = d(3,4) + techlev(tech_no);
+	      t_timeout = rn1(1000,500);
+	      break;
 #ifdef JEDI
 	    case T_TELEKINESIS:
 	      {
@@ -1923,6 +1942,72 @@ int tech_no;
 	return(1);
 }
 
+void
+shield_block(dam)
+int dam;
+{
+	int i;
+	for (i = 0; i < MAXTECH; ++i)
+		if (techid(i) == T_SHIELD_BLOCK)
+			break;
+	if (i == MAXTECH) {
+		impossible("no shield block tech");
+		return;
+	}
+	if (tech_inuse(T_SHIELD_BLOCK)) {
+		u.uen -= dam;
+		if (u.uen <= 0) {
+			u.uen = 0;
+			You("can no longer block damage with your shield.");
+			for (i = 0; i < MAXTECH; ++i) {
+				if (techid(i) == T_SHIELD_BLOCK) {
+					techt_inuse(i) = 0;
+					break;
+				}
+			}
+		}
+		flags.botl = 1;
+	}
+}
+
+boolean
+shield_blockable(mtmp, mattk)
+struct monst *mtmp;
+struct attack *mattk;
+{
+	if (!tech_inuse(T_SHIELD_BLOCK) ||
+		/* Additional restrictions:
+		 * not weak, swallowed, can sense mon
+		 * and not under abonormal status effects
+		 */
+		!canspotmon(mtmp) ||
+		u.uhs >= 3 ||
+		u.uswallow ||
+		u.usleep ||
+		Fumbling ||
+		Stunned ||
+		Confusion ||
+		Blind ||
+		Vomiting)
+		return FALSE;
+	/* Assuming you took it off or had it stolen while tech is active */
+	if (!uarms)
+		return FALSE;
+	switch(mattk->aatyp) {
+		case AT_CLAW:
+		case AT_KICK:
+		case AT_BITE:
+		case AT_STNG:
+		case AT_TUCH:
+		case AT_BUTT:
+		case AT_TENT:
+		case AT_WEAP:
+			return TRUE;
+		default:
+			return FALSE;
+	}
+}
+
 /* Whether or not a tech is in use.
  * 0 if not in use, turns left if in use. Tech is done when techinuse == 1
  */
@@ -2010,6 +2095,9 @@ tech_timeout()
 		    case T_SOULEATER:
 			if (uwep) pline_The("dark flames surrounding %s dissipate.", doname(uwep));
 			break;
+		    case T_SHIELD_BLOCK:
+			if (uarms) You("release the energy from your shield.");
+			break;
 	            default:
 	            	break;
 	        } else switch (techid(i)) {
@@ -2032,6 +2120,19 @@ tech_timeout()
 	    if (techtout(i) == 1) pline("Your %s technique is ready to be used!", techname(i));
 	    if (techtout(i) > 0) techtout(i)--;
         }
+}
+
+void
+extend_tech_time(tid, t)
+int tid;
+int t;
+{
+	int i;
+	for (i = 0; i < MAXTECH; ++i)
+		if (techid(i) == tid) {
+			techt_inuse(i) += t;
+			break;
+		}
 }
 
 void
@@ -2067,16 +2168,17 @@ role_tech()
 {
 	switch (Role_switch) {
 		case PM_ARCHEOLOGIST:	return (arc_tech);
-		case PM_DRUNK:	return (dru_tech);
+		case PM_DRUNK:		return (dru_tech);
 		case PM_BARBARIAN:	return (bar_tech);
 		case PM_CAVEMAN:	return (cav_tech);
-		case PM_BARD:	return (brd_tech);
+		case PM_BARD:		return (brd_tech);
 		case PM_FLAME_MAGE:	return (fla_tech);
 		case PM_ACID_MAGE:	return (aci_tech);
 		case PM_LUNATIC:	return (lun_tech);
 		case PM_ELECTRIC_MAGE:	return (ele_tech);
 		case PM_HEALER:		return (hea_tech);
 		case PM_ICE_MAGE:	return (ice_tech);
+		case PM_WARRIOR:        return (war_tech);
 #ifdef JEDI
 		case PM_JEDI:		return (jed_tech);
 #endif

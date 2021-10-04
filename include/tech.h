@@ -88,22 +88,24 @@ struct blitz_tab {
 #define T_POWER_SURGE 	39
 #define T_SPIRIT_BOMB 	40
 #define T_DRAW_BLOOD	41
-/* Added by Slash'EM Extended */
+/* Added by Slash'EM Extended
+ * TODO: Remove at some point? */
 #define T_WORLD_FALL	42
 #define T_CREATE_AMMO	43
 #define T_APPRAISAL	44
 #define T_BOOZE		45
 /* Added by SlashTHEM */
 #define T_SOULEATER 	46
+#define T_SHIELD_BLOCK  47
 /* Jedi Patch additions */
 #ifdef JEDI
-#define T_JEDI_JUMP	47
-#define T_CHARGE_SABER	48
-#define T_TELEKINESIS	49
+#define T_JEDI_JUMP	48
+#define T_CHARGE_SABER	49
+#define T_TELEKINESIS	50
  
-#define MAXTECH 50
+#define MAXTECH 51
 #else /* JEDI */
-#define MAXTECH 47
+#define MAXTECH 48
 #endif /* JEDI */
 
 

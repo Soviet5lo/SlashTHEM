@@ -1320,7 +1320,7 @@ hitmu(mtmp, mattk)
 			    dmg = 1;
 			    pline("%s hits you with the %s corpse.",
 				Monnam(mtmp), mons[otmp->corpsenm].mname);
-			    if (!Stoned) goto do_stone;
+			    if (!Stoned && !shield_blockable(mtmp, mattk)) goto do_stone;
 			}
 
 			/* MRKR: If hit with a burning torch,     */
@@ -1374,6 +1374,11 @@ hitmu(mtmp, mattk)
 			    }
 #endif
 			} else dmg += dmgval(otmp, &youmonst);
+
+                        /* While blocking all side effects are ignored */
+
+                        if (shield_blockable(mtmp, mattk))
+                                break;
 
 			if (objects[otmp->otyp].oc_material == SILVER &&
 				hates_silver(youmonst.data)) {
@@ -1484,7 +1489,7 @@ hitmu(mtmp, mattk)
 	    case AD_DISE:
 		hitmsg(mtmp, mattk);
 		if (rn2(3)) break;
-                if (!diseasemu(mdat) || Invulnerable) dmg = 0;
+                if (!shield_blockable(mtmp, mattk) && !diseasemu(mdat) || Invulnerable) dmg = 0;
 		break;
 	    case AD_NGRA:
 		hitmsg(mtmp, mattk);
@@ -1499,6 +1504,8 @@ hitmu(mtmp, mattk)
 		break;
 	    case AD_GLIB:
 		hitmsg(mtmp, mattk);
+                if (!shield_blockable(mtmp, mattk))
+                        break;
 
 		/* hurt the player's hands --Amy */
 		pline("Your hands got hit hard!");
@@ -1514,7 +1521,7 @@ hitmu(mtmp, mattk)
 		break;
 	    case AD_FIRE:
 		hitmsg(mtmp, mattk);
-		if (uncancelled) {
+		if (!shield_blockable(mtmp, mattk) && uncancelled) {
 		    pline("You're %s!", on_fire(youmonst.data, mattk));
 		    if (youmonst.data == &mons[PM_STRAW_GOLEM] ||
 		        youmonst.data == &mons[PM_PAPER_GOLEM]) {
@@ -1558,7 +1565,7 @@ hitmu(mtmp, mattk)
 		break;
 	    case AD_COLD:
 		hitmsg(mtmp, mattk);
-		if (uncancelled) {
+		if (!shield_blockable(mtmp, mattk) && uncancelled) {
 		    pline("You're covered in frost!");
 		    if (Cold_resistance) {
 			pline_The("frost doesn't seem cold!");
@@ -1571,7 +1578,7 @@ hitmu(mtmp, mattk)
 		break;
 	    case AD_ELEC:
 		hitmsg(mtmp, mattk);
-		if (uncancelled) {
+		if (!shield_blockable(mtmp, mattk) && uncancelled) {
 		    You("get zapped!");
 		    if (Shock_resistance) {
 			pline_The("zap doesn't shock you!");
@@ -1587,7 +1594,7 @@ hitmu(mtmp, mattk)
 		break;
 	    case AD_SLEE:
 		hitmsg(mtmp, mattk);
-		if (uncancelled && multi >= 0 && !rn2(5)) {
+		if (!shield_blockable(mtmp, mattk) && uncancelled && multi >= 0 && !rn2(5)) {
 		    if (is_educator(mtmp) && rn2(5)) break;
 		    if (Sleep_resistance) break;
 		    fall_asleep(-rnd(10), TRUE);
@@ -1597,7 +1604,7 @@ hitmu(mtmp, mattk)
 		break;
 	    case AD_BLND:
 		hitmsg(mtmp, mattk);
-		if (can_blnd(mtmp, &youmonst, mattk->aatyp, (struct obj*)0)) {
+		if (!shield_blockable(mtmp, mattk) && can_blnd(mtmp, &youmonst, mattk->aatyp, (struct obj*)0)) {
 		    if (!Blind) pline("%s blinds you!", Monnam(mtmp));
 		    make_blinded(Blinded+(long)dmg,FALSE);
 		    if (!Blind) Your(vision_clears);
@@ -1614,7 +1621,7 @@ hitmu(mtmp, mattk)
 		ptmp = A_CON;
 dopois:
 		hitmsg(mtmp, mattk);
-		if (uncancelled && !rn2(8)) {
+		if (!shield_blockable(mtmp, mattk) && uncancelled && !rn2(8)) {
 		    Sprintf(buf, "%s %s",
 			    s_suffix(Monnam(mtmp)), mpoisons_subj(mtmp, mattk));
 		    poisoned(buf, ptmp, mdat->mname, 30);
@@ -1622,6 +1629,8 @@ dopois:
 		break;
 	    case AD_DRIN:
 		hitmsg(mtmp, mattk);
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		if (defends(AD_DRIN, uwep) || !has_head(youmonst.data)) {
 		    You("don't seem harmed.");
 		    /* Not clear what to do for green slimes */
@@ -1689,7 +1698,7 @@ dopois:
 		break;
 	    case AD_PLYS:
 		hitmsg(mtmp, mattk);
-		if (uncancelled && multi >= 0 && !rn2(3)) {
+		if (!shield_blockable(mtmp, mattk) && uncancelled && multi >= 0 && !rn2(3)) {
 		    if (Free_action) {
 			You("momentarily stiffen.");            
 		    } else {
@@ -1703,7 +1712,7 @@ dopois:
 		break;
 	    case AD_TCKL:
 		hitmsg(mtmp, mattk);
-		if (uncancelled && multi >= 0 && !rn2(3)) {
+		if (!shield_blockable(mtmp, mattk) && uncancelled && multi >= 0 && !rn2(3)) {
 		    if (Free_action)
 			You_feel("horrible tentacles probing your flesh!");
 		    else {
@@ -1719,6 +1728,8 @@ dopois:
 	    case AD_DRLI:
 drain_life:
 		hitmsg(mtmp, mattk);
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		/* if vampire biting (and also a pet) */
 		if (is_vampire(mtmp->data) && mattk->aatyp == AT_BITE &&
 			has_blood(youmonst.data)) {
@@ -1737,6 +1748,8 @@ drain_life:
 	    case AD_LEGS:
 		{ register long side = rn2(2) ? RIGHT_SIDE : LEFT_SIDE;
 		  const char *sidestr = (side == RIGHT_SIDE) ? "right" : "left";
+                  if (shield_blockable(mtmp, mattk))
+                      break;
 
 		/* This case is too obvious to ignore, but Nethack is not in
 		 * general very good at considering height--most short monsters
@@ -1780,6 +1793,8 @@ drain_life:
 		}
 	    case AD_STON:	/* cockatrice */
 		hitmsg(mtmp, mattk);
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		if(!rn2(3)) {
 		    if (mtmp->mcan) {
 			if (flags.soundok)
@@ -1815,10 +1830,14 @@ drain_life:
 		break;
 	    case AD_STCK:
 		hitmsg(mtmp, mattk);
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		if (uncancelled && !u.ustuck && !sticks(youmonst.data))
 			setustuck(mtmp);
 		break;
 	    case AD_WRAP:
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		if ((!mtmp->mcan || u.ustuck == mtmp) && !sticks(youmonst.data)) {
 		    if (!u.ustuck && !rn2(10)) {
 			if (u_slip_free(mtmp, mattk)) {
@@ -1905,6 +1924,8 @@ drain_life:
 		break;
 	    case AD_WERE:
 		hitmsg(mtmp, mattk);
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		if (uncancelled && !rn2(4) && u.ulycn == NON_PM &&
 			!Protection_from_shape_changers &&
 			!is_were(youmonst.data) &&
@@ -1924,6 +1945,8 @@ drain_life:
 		break;
 	    case AD_SGLD:
 		hitmsg(mtmp, mattk);
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		/* 5lo: Allow an exception for Muggers */
 		if ((youmonst.data->mlet == mdat->mlet) && mdat != &mons[PM_MUGGER]) break;
 		if(!mtmp->mcan) stealgold(mtmp);
@@ -2448,6 +2471,8 @@ drain_life:
 	    case AD_SLIM:    
 		hitmsg(mtmp, mattk);
 		if (!uncancelled) break;
+                if (shield_blockable(mtmp, mattk))
+                    break;
 		if (flaming(youmonst.data)) {
 		    pline_The("slime burns away!");
 		    dmg = 0;
@@ -2801,8 +2826,11 @@ mhitu_flvr_strange:
 		    ;	/* already at or below minimum threshold; do nothing */
 		flags.botl = 1;
 	    }
-
-	    mdamageu(mtmp, dmg);
+            if (shield_blockable(mtmp, mattk)) {
+                You("block the attack with your shield.");
+                shield_block(dmg);
+            } else
+	        mdamageu(mtmp, dmg);
 	}
 
 	if (DEADMONSTER(mtmp))

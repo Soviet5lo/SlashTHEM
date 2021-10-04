@@ -69,6 +69,11 @@ const char *name;	/* if null, then format `obj' */
 		if(Blind || !flags.verbose) pline("It misses.");
 		else You("are almost hit by %s.", onm);
 		return(0);
+	} else if (tech_inuse(T_SHIELD_BLOCK)) {
+		if (Blind || !flags.verbose) pline("You block it with your shield");
+		else You("block %s with your shield", onm);
+		shield_block(dam);
+		return (0);
 	} else if ( u.uac < 0 && rn2(2) && (rnd(50) < (-(u.uac))) )    {
 		/* more negative AC means a higher chance to deflect projectiles with armor --Amy */
 		if(Blind || !flags.verbose) pline("Your armor deflects a projectile.");
