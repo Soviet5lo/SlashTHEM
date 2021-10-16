@@ -418,6 +418,8 @@ E struct obj *FDECL(realloc_obj,
 		(struct obj *, int, genericptr_t, int, const char *));
 E char *FDECL(coyotename, (struct monst *,char *));
 E char *FDECL(rmname, (struct rm *));
+E char *FDECL(mon_wounds, (struct monst *));
+E void FDECL(print_mon_wounded, (struct monst *, int));
 
 /* ### do_wear.c ### */
 
@@ -1377,6 +1379,7 @@ E const char *FDECL(locomotion, (const struct permonst *,const char *));
 E const char *FDECL(stagger, (const struct permonst *,const char *));
 E const char *FDECL(on_fire, (struct permonst *,struct attack *));
 E const struct permonst *FDECL(raceptr, (struct monst *));
+E boolean FDECL(is_fleshy, (const struct permonst *));
 
 /* ### monmove.c ### */
 

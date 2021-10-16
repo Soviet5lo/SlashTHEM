@@ -174,9 +174,10 @@ lookat(x, y, buf, monbuf)
 		    (EDOG(mtmp)->friend ? "friendly " : "tame ") :
 		    (mtmp->mpeaceful && accurate) ? "peaceful " : "",
 		    name);
-	    if (mon_wounds(mtmp)) {
+	    char *mwounds = mon_wounds(mtmp);
+	    if (mwounds) {
 		Strcat(buf, ", ");
-		Strcat(buf, mon_wounds(mtmp));
+		Strcat(buf, mwounds);
 	    } if (u.ustuck == mtmp)
 		Strcat(buf, (Upolyd && sticks(youmonst.data)) ?
 			", being held" : ", holding you");

@@ -1998,6 +1998,7 @@ invocation_message()
 	}
 }
 
+#if 0 /* No longer used, using Unnethack/Xnethack method now */
 static const char * const hallu_adverb[] = { /* 5lo: Wounds patch by L */
     "mildly", "mostly", "somewhat", "slightly", "probably", "massively", "extremely",
     "flagrantly", "flamboyantly", "supremely", "excessively", "truly", "terribly",
@@ -2051,7 +2052,7 @@ struct monst *mon;
 	}
 	return buf;
 }
-
+#endif /* Old wounds */
 
 #endif /* OVL3 */
 #ifdef OVL2

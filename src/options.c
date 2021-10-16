@@ -263,6 +263,7 @@ static struct Bool_Opt
 #else
 	{"use_inverse",   &iflags.wc_inverse, FALSE, SET_IN_GAME},		/*WC*/
 #endif
+	{"wound_message", &flags.wounds, TRUE, SET_IN_GAME},
 	{"verbose", &flags.verbose, TRUE, SET_IN_GAME},
 	{"wraptext", &iflags.wc2_wraptext, FALSE, SET_IN_GAME},
 

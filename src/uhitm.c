@@ -793,6 +793,7 @@ int thrown;
 	char yourbuf[BUFSZ];
 	char unconventional[BUFSZ];	/* substituted for word "attack" in msg */
 	char saved_oname[BUFSZ];
+	int saved_mhp = mon->mhp;
 
 	if (thrown == 1) launcher = uwep;
 	else if (thrown == 2) launcher = uswapwep;
@@ -1909,7 +1910,7 @@ int thrown;
 				canseemon(mon))
 			    pline("%s appears confused.", Monnam(mon));
 		}
-	} if (!destroyed) wounds_message(mon);
+	} if (!destroyed) print_mon_wounded(mon, saved_mhp);
 
 #ifdef SHOW_DMG
 	if (!destroyed) showdmg(tmp);

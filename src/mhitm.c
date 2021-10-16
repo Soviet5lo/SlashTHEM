@@ -241,7 +241,8 @@ mattackm(magr, mdef)
 		    strike,	/* hit this attack */
 		    attk,	/* attack attempted this time */
 		    struck = 0,	/* hit at least once */
-		    res[NATTK];	/* results of all attacks */
+		    res[NATTK],	/* results of all attacks */
+    		    saved_mhp = (mdef ? mdef->mhp : 0); /* for print_mon_wounded() */
     struct attack   *mattk, alt_attk;
     struct permonst *pa, *pd;
     /*
@@ -506,7 +507,12 @@ use_natural:
 	if (res[i] & MM_AGR_DIED)  return res[i];
 	/* return if aggressor can no longer attack */
 	if (!magr->mcanmove || magr->msleeping) return res[i];
-	if (res[i] & MM_HIT) struck = 1;	/* at least one hit */
+	if (res[i] & MM_HIT) {
+		struck = 1;	/* at least one hit */
+	}
+    }
+    if (struck && mdef->mtame) {
+        print_mon_wounded(mdef, saved_mhp);
     }
 
     return(struck ? MM_HIT : MM_MISS);

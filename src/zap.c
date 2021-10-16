@@ -4304,12 +4304,14 @@ register int dx,dy;
 	    range += zap_over_floor(sx, sy, type, &shopdamage);
 
 	if (mon) {
+	    int saved_mhp;
         /* WAC Player/Monster Fireball */
             if (abs(type) == ZT_SPELL(ZT_FIRE)) break;
 	    if (type >= 0) mon->mstrategy &= ~STRAT_WAITMASK;
 #ifdef STEED
 	    buzzmonst:
 #endif
+	    saved_mhp = mon->mhp; /* for print_mon_wounded() */
 	    if (zap_hit(find_mac(mon), spell_type)) {
 		if (mon_reflects(mon, (char *)0)) {
 		    if(cansee(mon->mx,mon->my)) {
@@ -4395,7 +4397,7 @@ register int dx,dy;
 			if (!otmp) {
 			    /* normal non-fatal hit */
 			    hit(fltxt, mon, exclam(tmp));
-			    wounds_message(mon);
+			    print_mon_wounded(mon, saved_mhp);
 			    if (mblamed && mblamed != mon &&
 				    !DEADMONSTER(mblamed) &&
 				    mon->movement >= NORMAL_SPEED && rn2(4)) {
@@ -5209,11 +5211,12 @@ int damage, tell;
 	}
 
 	if (damage) {
+	    int saved_mhp = mtmp->mhp;
 	    mtmp->mhp -= damage;
 	    if (mtmp->mhp < 1) {
 		if(m_using) monkilled(mtmp, "", AD_RBRE);
 		else killed(mtmp);
-	    } else wounds_message(mtmp);
+	    } else print_mon_wounded(mtmp, saved_mhp);
 	}
 	return(resisted);
 }
