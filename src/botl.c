@@ -573,7 +573,24 @@ struct monst *mon;
 	return armpro;
 }
 
+const char *
+encstat()
+{
+	int cap = near_capacity();
+	if(cap > UNENCUMBERED)
+		return enc_stat[cap];
+	else return "";
+}
 
+const char *
+hunstat()
+{
+	if (Race_if(PM_CLOCKWORK_AUTOMATON) && strcmp(cahu_stat[u.uhs], "        "))
+		return cahu_stat[u.uhs];
+	else if (strcmp(hu_stat[u.uhs], "        "))
+		return hu_stat[u.uhs];
+	else return "";
+}
 #ifdef DUMP_LOG
 void
 #else
