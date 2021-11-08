@@ -85,7 +85,12 @@
 #define TRICKED		14
 #define QUIT		15
 #define ESCAPED		16
-#define ASCENDED	17
+#ifdef ASTR_ESC
+# define DEFIED 	17
+# define ASCENDED 	18
+#else
+# define ASCENDED	17
+#endif
 
 #include "align.h"
 #include "dungeon.h"

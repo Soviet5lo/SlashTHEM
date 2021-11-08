@@ -88,7 +88,11 @@ static NEARDATA const char *deaths[] = {		/* the array of death */
 	"burning", "dissolving under the heat and pressure",
 	"crushed", "turned to stone", "turned into slime",
 	"disintegrated", "genocided", "panic", "trickery",
+#ifdef ASTR_ESC
+	"quit", "escaped", "defied the gods then escaped", "ascended"
+#else
 	"quit", "escaped", "ascended"
+#endif
 };
 
 static NEARDATA const char *ends[] = {		/* "when you..." */
@@ -96,7 +100,11 @@ static NEARDATA const char *ends[] = {		/* "when you..." */
 	"drowned", "burned", "dissolved in the lava",
 	"were crushed", "turned to stone", "turned into slime",
 	"were disintegrated", "were genocided", "panicked", "were tricked",
+#ifdef ASTR_ESC
+	"quit", "escaped", "defied the gods then escaped", "ascended"
+#else
 	"quit", "escaped", "ascended"
+#endif
 };
 
 #ifdef DUMP_LOG
@@ -1003,7 +1011,11 @@ die:
 			Strcpy(kilbuf, "quit while already on Charon's boat");
 		}
 	}
+#ifdef ASTR_ESC
+	if (how == ESCAPED || how == DEFIED || how == PANICKED)
+#else
 	if (how == ESCAPED || how == PANICKED)
+#endif
 		killer_format = NO_KILLER_PREFIX;
 
 	if (how != PANICKED) {
@@ -1078,7 +1090,11 @@ die:
 	    u.urexp += 50L * (long)(deepest - 1);
 	    if (deepest > 20)
 		u.urexp += 1000L * (long)((deepest > 30) ? 10 : deepest - 20);
+#ifdef ASTR_ESC
+	    if (how == ASCENDED || how == DEFIED) u.urexp *= 2L;
+#else
 	    if (how == ASCENDED) u.urexp *= 2L;
+#endif
 	    if (goexplore) {
 	      discover = FALSE; /* a kludge to fool the topten function.. */
 	      topten(how);
@@ -1166,8 +1182,11 @@ die:
 #ifdef DUMP_LOG
 	if (dump_fp) dump("", pbuf);
 #endif
-
+#ifdef ASTR_ESC
+	if (how == ESCAPED || how == DEFIED || how == ASCENDED) {
+#else
 	if (how == ESCAPED || how == ASCENDED) {
+#endif
 	    register struct monst *mtmp;
 	    register struct obj *otmp;
 	    register struct val_list *val;
@@ -1210,7 +1229,12 @@ die:
 	    }
 		Sprintf(eos(pbuf), "%s with %ld point%s,",
 			how==ASCENDED ? "went to your reward" :
+#ifdef ASTR_ESC
+					(how==DEFIED ? "defied the Gods then escaped from the dungeon" :
+					"escaped from the dungeon"),
+#else
 					"escaped from the dungeon",
+#endif
 			u.urexp, plur(u.urexp));
 #ifdef DUMP_LOG
 	    if (dump_fp) dump("", pbuf);

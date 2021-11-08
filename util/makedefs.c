@@ -716,6 +716,9 @@ static const char *build_opts[] = {
 #ifdef ANSI_DEFAULT
 		"ANSI default terminal",
 #endif
+#ifdef ASTR_ESC
+		"endgame escape",
+#endif
 #ifdef BLACKMARKET
 		"blackmarket level",
 #endif

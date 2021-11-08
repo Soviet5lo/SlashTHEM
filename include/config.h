@@ -514,6 +514,7 @@ typedef long glyph_t;
                         /* Originally added by zaga. */
 #define OTHER_SERVICES  /* shopkeeper services */
 #define DUNGEON_GROWTH
+#define ASTR_ESC        /* Allow escape from the Astral plane (with the Amulet) - CWC */
 
 /* #define SHOUT */ /* JRN -- shouting and petcommands - not implemented */
 

@@ -1640,7 +1640,9 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 	    if (!otmp->known) {
 		You("realize you have made a %s.",
 		    Hallucination ? "boo-boo" : "mistake");
+                makeknown(otmp->otyp);
 		otmp->known = TRUE;
+                update_inventory();
 		change_luck(-1);
 		return 1;
 	    } else {
@@ -2549,4 +2551,98 @@ aligntyp alignment;
 		}
 	}
 }
+
+#ifdef ASTR_ESC
+int
+invoke_amulet(otmp)
+struct obj *otmp;
+{
+	aligntyp altaralign = a_align(u.ux,u.uy);
+
+	if (!on_altar()) {
+		pline(nothing_happens);
+		return 1;
+	}
+
+	/* Since this is a potentially terminal effect on the game, confirm action */
+	if (yn("Are you sure you want to defy the Gods, and invoke the Amulet?") == 'n')
+		return 0;
+
+	if (otmp->otyp == AMULET_OF_YENDOR) {
+	    if (!Is_astralevel(&u.uz)) {
+                if (Hallucination)
+                    You_feel("homesick.");
+                else
+                    You_feel("an urge to return to the surface.");
+                /* trying to #invoke whilst not on Astral plane still annoys your god */
+                if (flags.soundok)
+                    You_hear("a nearby thunderclap.");
+                change_luck(-1);
+                adjalign(-10);
+                gods_upset(u.ualign.type);
+                return 1;
+            } else {
+            /* The final Test.	Did you win? */
+                You("invoke %s.",The(xname(otmp)));
+                /* No uevent.ascended, as we have spurned ascension */
+                if (u.ualign.type != altaralign) {
+                    /* Bad move! Your gambit fails as you are at the wrong altar */
+                    adjalign(-99);
+                    pline("%s is enraged...", u_gname());
+                    pline("Fortunately, the power of %s protects you...", The(xname(otmp)));
+                    if(!Blind) You("are surrounded by a shimmering %s sphere!",
+                                    hcolor((const char *)"orange"));
+                    else You_feel("weightless for a moment.");
+                    /*  Lose the Amulet in the journey home and so therefore 
+                        escape in celestial disgrace */
+                    if(uamul == otmp) Amulet_off();
+                    if (carried(otmp)) dropx(otmp);
+                    if (Blind)
+                        You_feel("%s fall from your pack!", The(xname(otmp)));
+                    else
+                        You("see %s fall out of your pack!", The(xname(otmp)));
+                    if(Hallucination)
+                        You("feel like Dorothy travelling back to Kansas!");
+                    else
+                        You("return home.");
+                    done(ESCAPED);
+                } else { /* stick the proverbial two fingers up at the Gods, and go home */
+                    adjalign(-99);
+                    pline("%s is enraged, but the power of %s protects you...",
+                           u_gname(), The(xname(otmp)));
+                    if(!Blind) You("are surrounded by a shimmering %s sphere!",
+                                    hcolor((const char *)"golden"));
+                    else You_feel("weightless for a moment.");
+                    display_nhwindow(WIN_MESSAGE, FALSE);
+                    You("return home, with %s still in your possession.",
+                         The(xname(otmp)));
+                    done(DEFIED);
+                }
+            }
+        } /* real Amulet */
+        if (otmp->otyp == FAKE_AMULET_OF_YENDOR) {
+            if (flags.soundok)
+                You_hear("a nearby thunderclap.");
+            if (!otmp->known) {
+                You("realize your gambit has failed.");
+                makeknown(otmp->otyp);
+                otmp->known = TRUE;
+                /* since we are willingly defying the Gods, this should cause extreme anger */
+                change_luck(-1);
+                adjalign(-10);
+                gods_upset(u.ualign.type);
+                return 1;
+            } else {
+                /* not very wise, to defy the Gods with a *known* fake */
+                You_feel("foolish!");
+                (void) adjattrib(A_WIS, -1, TRUE);
+                exercise(A_WIS, FALSE);
+                change_luck(-3);
+                adjalign(-12);
+                gods_upset(u.ualign.type);
+            }
+        } /* fake Amulet */
+}
+#endif
+
 /*pray.c*/
