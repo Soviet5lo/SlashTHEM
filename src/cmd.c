@@ -607,7 +607,7 @@ playersteal()
 	if(MON_AT(x, y)) {
 	    mtmp = m_at(x, y);
 
-	    if ((Role_if(PM_KNIGHT) && u.ualign.type == A_LAWFUL) || Role_if(PM_PALADIN)) {
+	    if ((Role_if(PM_KNIGHT) || Role_if(PM_PALADIN) && u.ualign.type == A_LAWFUL) && !mtmp->mtame) {
 			You_feel("like a common thief.");
 			adjalign(-sgn(u.ualign.type));
 	    }
@@ -616,6 +616,8 @@ playersteal()
 		(!mtmp->mcansee || !u.uundetected ||
 		 (mtmp->mux == u.ux && mtmp->muy == u.uy)))
 			verb = "rob";
+	    else if (mtmp->mtame)
+		    verb = "take";
 
 	    /* calculate chanch of sucess */
 	    /* Rogues are masters of thievary and nymphs are really good at seduction,
