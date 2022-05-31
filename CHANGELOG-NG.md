@@ -1,3 +1,35 @@
+Version 0.9.7 (2022-05-31)
+==========================
+Even smaller release compared to the previous version.  Primarily bugfixes for Junethack 2022, but once again a few changes/new things made their way in.
+
+#### Highlights
+- New Technique from Slash'EM-UP: Shield Block.  Requires a shield to be worn, but upon use it causes all physical attack types to be blocked by the worn shield, with the damage being subtracted from energy instead of HP.  Technique lasts for d(3,4) + TECHLEV turns.  Knights, Valkyries and Warriors gain this tech at level 1, Paladins and Gladiators at level 3, and Undead Slayers and Priests at level 7.
+- Implemented the Astral Escape patch by Chi.  Enabled in config.h by default.
+
+#### Other Changes
+- Implemented the Fuzzer from Nethack 3.6/Slash'EM on Hardfought
+- Implemented the Extra Status Attributes patch by Paxed
+- Refactored the Wounds Patch to utilize Unnethack's code
+    - New option that toggles the messages on/off - "wounds", enabled by default.
+    - Wounding messages are only printed when the damage level would change, to reduce message spam
+    - Wounding messages offer slightly more detail based on how much damage was done.
+        - from Lightly/Moderately/Heavily/Horribly (wounded/damaged) to Slightly/Moderately/Seriously/Badly/Critically (wounded/damaged)
+- Reverted a few changes to Hand of Vecna carried over from SLEX: Hand of Vecna now grants Half Physical Damage and HP Regeneration while being carried instead of while wielded.
+- Two minor changes to borrowing
+    - Borrowing from a tame creature as a lawful knight or paladin no longer carries a penalty
+    - Changed the verb used when borrowing from a tame creature to "take"
+- Landing hits while the Berserk technique is active extends its active time by rnd(4).
+
+#### Bugfixes
+- Fixed a crash caused when killing a monster while engulfed with a thrown aklys
+- Fixed a crash introduced by the fix above when killing a monster with a firearm
+- Changed end_burn impossible to only print obj name in wizard mode (temp fix)
+- Fixed pulling creatures out of a pit not working at all
+- Fixed an issue where "The <foo> looks deathly/very sick" message would occur after killing a monster with a thrown potion of cyanide/radium
+- Fixed shopkeepers charging the player for a store item you #give them
+- Fixed a crash that occurred when the player #gives gold to a monster
+- Fixed charging wands of wishing
+
 Version 0.9.6 (2021-09-14)
 ==========================
 Smaller release, and wanted to do some racial changes before bumping this up, but bug reports and fixes from the community resolved some glaring issues.  A few changes made their way in as well.
@@ -21,7 +53,7 @@ Smaller release, and wanted to do some racial changes before bumping this up, bu
 - Added newer missing attack types to the Datalog when farlooking a creature with EXTENDED_INFO defined in config.h (Issue #34 on Github)
 - Slightly adjusted the spawn rates of the goodies in the chest in the Village (Good items 10% -> 5%, Bad items 20% -> 15%, one item in particular went from 20% to 10%)
 - Added shallow water to some levels that originally contained some in the original patch (Barbarian, Healer, Knight, Samurai, Tourist and Wizard quests, some Medusa levels, Juiblex's Swamp)
-- Randomized creator dieties in the intro text (from Unnethack)
+- Randomized creator deities in the intro text (from Unnethack)
 - Candle light radius is now square root instead of logarithmically.
 - Changed the Warrior deities from Elder Scrolls to Slavic.
 - Multiple Shopkeeper wares crying tweaks (tl;dr, will bark wares more often, won't bark wares through doors/walls, slightly larger range)
@@ -38,7 +70,7 @@ Smaller release, and wanted to do some racial changes before bumping this up, bu
 - Scroll of Clouds saw two changes
     - Reading a cursed scroll of clouds creates a poison cloud centered on the player
     - Reading a scroll of clouds while confused causes it to function as the scroll of air from Splicehack
-        - Cursed sucks the air from your lunghs (does nothing if you're breathless)
+        - Cursed sucks the air from your lungs (does nothing if you're breathless)
         - Uncursed/Blessed creates a tornado around the player, pushing around creatures and clearing clouds from the area
 - Necromancers digging into graves have a chance of automatically taming/pacifying the resulting zombie/mummy
 

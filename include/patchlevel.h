@@ -14,15 +14,15 @@
 /*
  * PATCHLEVEL is updated for each release.
  */
-#define PATCHLEVEL      6
+#define PATCHLEVEL      7
 /*#define EDITLEVEL	0*/
 /*#define FIXLEVEL        0*/
 
 #define COPYRIGHT_BANNER_A \
-"This is SuperLotsaAddedStuffHack-The Heavily Extended Mod 2014-2021"
+"This is SuperLotsaAddedStuffHack-The Heavily Extended Mod 2014-2022"
 
 #define COPYRIGHT_BANNER_B \
-"NetHack, Copyright 1985-2021 Stichting Mathematisch Centrum, M. Stephenson."
+"NetHack, Copyright 1985-2022 Stichting Mathematisch Centrum, M. Stephenson."
 
 #define COPYRIGHT_BANNER_C \
 "Slash'EM by the Slash'EM Dev Team.  Slash'EM Extended by AmyBSOD at Github."
