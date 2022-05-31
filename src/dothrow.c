@@ -1266,8 +1266,10 @@ int thrown;
 			 !index(in_rooms(mon->mx, mon->my, SHOPBASE), *u.ushops)))
 		    hot_pursuit(mon);
 
-		if (obj_gone)
+		if (obj_gone) {
 			thrownobj = (struct obj *) 0;
+			return;
+		}
 	}
 
 #ifdef FIREARMS
