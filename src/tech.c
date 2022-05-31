@@ -148,6 +148,8 @@ static const struct innate_tech
 		       {  12, T_POWER_SURGE, 1},
 		       {  20, T_SIGIL_DISCHARGE, 1},
 		       {   0, 0, 0} },
+	gla_tech[] = { {   3, T_SHIELD_BLOCK, 1},
+		       {   0, 0, 0} },
 #ifdef JEDI
 	jed_tech[] = { {   1, T_JEDI_JUMP, 1},
 		       {   5, T_CHARGE_SABER, 1},
@@ -2179,6 +2181,7 @@ role_tech()
 		case PM_HEALER:		return (hea_tech);
 		case PM_ICE_MAGE:	return (ice_tech);
 		case PM_WARRIOR:        return (war_tech);
+		case PM_GLADIATOR: 	return (gla_tech);
 #ifdef JEDI
 		case PM_JEDI:		return (jed_tech);
 #endif
