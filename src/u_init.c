@@ -1317,6 +1317,7 @@ static const struct def_skill Skill_War[] = {
     { P_JAVELIN, P_BASIC },       { P_CLUB, P_BASIC },
     { P_LONG_SWORD, P_EXPERT },    { P_SABER, P_BASIC },
     { P_MACE, P_SKILLED }, { P_BROAD_SWORD, P_EXPERT },
+    { P_TWO_HANDED_SWORD, P_EXPERT },
     { P_CROSSBOW, P_EXPERT },
     /* Warriors avoid magic */
     { P_DIVINATION_SPELL, P_BASIC },
