@@ -543,7 +543,6 @@ long nmv;		/* number of moves */
 	if (imv > mtmp->mspec_used) mtmp->mspec_used = 0;
 	else mtmp->mspec_used -= imv;
 
-
 		   /*                    
 			*      M1_MINDLESS __
 			*      M2_UNDEAD     |
@@ -552,33 +551,26 @@ long nmv;		/* number of moves */
 			*      M1_ANIMAL   --
 			*/
  
-			if ((is_animal(mtmp->data) || mindless(mtmp->data) ||
+			if (is_animal(mtmp->data) || mindless(mtmp->data) ||
 			    is_demon(mtmp->data)  || is_undead(mtmp->data) ||
-			    is_were(mtmp->data)) && (monstermoves + 5000) > edog->hungrytime) { 
+			    is_were(mtmp->data)) { 
 				/* reduce tameness for every 
 				 * 150 moves you are away 
-				 Amy -- edit so that well-satiated pets can be on another level for much longer */
-			/*struct edog *edog = EDOG(mtmp);*/
-
-				if (mtmp->mtame > nmv/1000) /* increased by Amy */
-					mtmp->mtame -= nmv/1000;
+				 */
+				if (mtmp->mtame > nmv/150) 
+					mtmp->mtame -= nmv/150;
 				else mtmp->mtame = 0;
 	}
 	/* check to see if it would have died as a pet; if so, go wild instead
 	 * of dying the next time we call dog_move()
 	 */
 	if (mtmp->mtame && !mtmp->isminion &&
-			(carnivorous(mtmp->data) || herbivorous(mtmp->data) || metallivorous(mtmp->data) || lithivorous(mtmp->data))) {
+			(carnivorous(mtmp->data) || herbivorous(mtmp->data) ||
+			 metallivorous(mtmp->data) || lithivorous(mtmp->data))) {
 
 	    if ((monstermoves > edog->hungrytime + 500 && mtmp->mhp < 3) ||
-		    (monstermoves > edog->hungrytime + 750)) {
-
-	/* let's make a pet with high tameness resistant to becoming hostile. Give them a chance to be peaceful instead. */
-		if (mtmp->mtame >= 1 && rn2(2) && rn2(mtmp->mtame) )
-		mtmp->mtame = 0;
-		else mtmp->mtame = mtmp->mpeaceful = 0;
-
-		}
+		    (monstermoves > edog->hungrytime + 750))
+		mtmp->mtame = mtmp->mpeaceful = 0;
 	}
 
 	if (!mtmp->mtame && mtmp->mleashed) {
