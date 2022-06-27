@@ -967,8 +967,8 @@ get_generation_description_of_monster_type(struct permonst * ptr, char * temp_bu
 	if ((ptr->geno & G_NOGEN) == 0) {
 		strcat(temp_buf, "Normally appears ");
 		many = append(temp_buf, ((ptr->geno & G_NOHELL) == 0) && ((ptr->geno & G_HELL) == 0), "everywhere", many);
-		many = append(temp_buf, (ptr->geno & G_NOHELL), "outside Gehennon", many);
-		many = append(temp_buf, (ptr->geno & G_HELL), "in Gehennon", many);
+		many = append(temp_buf, (ptr->geno & G_NOHELL), "outside Gehennom", many);
+		many = append(temp_buf, (ptr->geno & G_HELL), "in Gehennom", many);
 	} else {
 		many = append(temp_buf, (ptr->geno & G_NOGEN), "Special generation", many);
 	}
