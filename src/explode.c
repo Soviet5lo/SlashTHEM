@@ -245,6 +245,8 @@ boolean yours; /* is it your fault (for killing monsters) */
 			case PM_FLAME_MAGE:
 			case PM_ICE_MAGE:
 			case PM_NECROMANCER:
+			case PM_ELECTRIC_MAGE:
+			case PM_ACID_MAGE:
 			case PM_WIZARD: damu /= 5;
 				  break;
 			case PM_HEALER:
