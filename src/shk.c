@@ -1207,6 +1207,12 @@ register struct monst *shkp;
 		register struct bill_x *bp = ESHK(shkp)->bill_p;
 		register int ct = ESHK(shkp)->billct;
 
+		/* Temp fix while we look for the root cause of this crash */
+		if (!bp) {
+			impossible("rile_shk: bp set to null?");
+			return;
+		}
+
 		ESHK(shkp)->surcharge = TRUE;
 		while (ct-- > 0) {
 			register long surcharge = (bp->price + 2L) / 3L;
