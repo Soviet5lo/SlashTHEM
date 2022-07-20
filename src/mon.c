@@ -484,6 +484,9 @@ register struct monst *mtmp;
 	}
 	/* All special cases should precede the G_NOCORPSE check */
 
+	/* One example of this: heisenbugs (hah!) */
+	if (!obj) return obj;
+
 	/* if polymorph or undead turning has killed this monster,
 	   prevent the same attack beam from hitting its corpse */
 	if (flags.bypasses) bypass_obj(obj);
