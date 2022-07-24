@@ -4,7 +4,7 @@
 
 # --- start level ---
 
-MAZE: "Gra-strt",' '
+MAZE: "Gee-strt",' '
 FLAGS: noteleport,hardfloor
 GEOMETRY: center,center
 
@@ -131,7 +131,7 @@ TRAP:random,random
 
 # looks harmless but *IS* tough!!!
 
-MAZE: "Gra-loca",' '
+MAZE: "Gee-loca",' '
 FLAGS: hardfloor
 GEOMETRY: center,center
 
@@ -222,7 +222,7 @@ TRAP:random,random
 
 # --- the goal level ---
 
-MAZE: "Gra-goal", ' '
+MAZE: "Gee-goal", ' '
 GEOMETRY:center,center
 
 #         1         2         3         4         5         6         7
@@ -327,7 +327,7 @@ TRAP:random,random
 
 # --- fill a ---
 
-LEVEL: "Gra-fila"
+LEVEL: "Gee-fila"
 
 ROOM: "ordinary", random, random, random, random
 STAIR: random,up
@@ -372,7 +372,7 @@ RANDOM_CORRIDORS
 
 # --- fill b ---
 
-LEVEL: "Gra-filb"
+LEVEL: "Gee-filb"
 
 ROOM: "ordinary", random, random, random, random
 STAIR: random,up
