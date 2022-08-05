@@ -1907,7 +1907,7 @@ physical:
 			if (geatme->quan < metab_time) metab_time = geatme->quan; 
 			magr->mspec_used += metab_time/2 + 1;  /* instead of meating */
 		    }
-		    if (meatmetal_effects(magr, geatme) == 3) return MM_AGR_DIED;
+		    if (meatmetal_effects(magr, geatme) == 2) return MM_AGR_DIED;
 		    newsym(mdef->mx, mdef->my);
 		    if(cansee(mdef->mx, mdef->my)){
 			if (canseemon(mdef))
@@ -1952,7 +1952,7 @@ physical:
 		    pline("%s %s %s%s!",
 		      Monnam(magr), (how)?"gobbles":"nabs", yname(geatme), buf);
 		    if (how){
-			if (meatmetal_effects(magr, geatme) == 3) return MM_AGR_DIED;
+			if (meatmetal_effects(magr, geatme) == 2) return MM_AGR_DIED;
 		    } else
 			mpickobj(magr, geatme);
 

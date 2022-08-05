@@ -1088,6 +1088,10 @@ register struct obj * otmp;
 {
 	int poly, grow, heal, mstone;
 	struct permonst *ptr;
+
+	/* failsafe */
+	if (evades_destruction(otmp)) return 0;
+
 	if (mtmp->mhp < mtmp->mhpmax) {
 	    mtmp->mhp += objects[otmp->otyp].oc_weight;
 	    if (mtmp->mhp > mtmp->mhpmax) mtmp->mhp = mtmp->mhpmax;
@@ -1102,6 +1106,10 @@ register struct obj * otmp;
 	    grow = mlevelgain(otmp);
 	    heal = mhealup(otmp);
 	    mstone = mstoning(otmp);
+	    if (otmp->owornmask) {
+		remove_worn_item(otmp, FALSE);
+	    }
+	    obj_extract_self(otmp);
 	    delobj(otmp);
 	    ptr = mtmp->data;
 	    if (poly) {
