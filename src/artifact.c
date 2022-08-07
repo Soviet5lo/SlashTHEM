@@ -375,12 +375,6 @@ register boolean mod;
 		    register int m = a - artilist;
 		    otmp->oartifact = (mod ? m : 0);
 		    if (mod) {
-			/* Light up Candle of Eternal Flame and
-			 * Holy Spear of Light on creation.
-			 */
-			if (!artiexist[m] && artifact_light(otmp) &&
-			  otmp->oartifact != ART_SUNSWORD)
-			    begin_burn(otmp, FALSE);
 			otmp->quan = 1; /* guarantee only one of this artifact */
 #ifdef UNPOLYPILE	/* Artifacts are immune to unpolypile --ALI */
 			if (is_hazy(otmp)) {

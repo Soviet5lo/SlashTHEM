@@ -1088,6 +1088,12 @@ struct mkroom	*croom;
 
 	if (named)
 	    otmp = oname(otmp, o->name.str);
+	/* Light up Candle of Eternal Flame and
+	 * Holy Spear of Light on creation.
+	 */
+	if (artifact_light(otmp) && otmp->oartifact != ART_SUNSWORD) {
+		begin_burn(otmp, FALSE);
+	}
 
 	switch(o->containment) {
 	    static struct obj *container = 0;
