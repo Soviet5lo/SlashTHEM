@@ -3055,7 +3055,10 @@ BOOLEAN_P destroy_after;
 
 		if (otmp->otyp == GOLD_PIECE) {
 #ifndef GOLDOBJ
-			dealloc_obj(otmp);
+			/* It feels like we don't really need this, */
+			/* the object has just been placed on the ground */
+			/* rather than being taken into the inventory */
+			/* dealloc_obj(otmp); */
 #endif
 			bot();	/* update character's gold piece count immediately */
 		}
