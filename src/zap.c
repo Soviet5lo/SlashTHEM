@@ -5283,6 +5283,11 @@ retry:
 					     Is_airlevel(&u.uz) || u.uinwater ?
 						   "slip" : "drop")),
 				       (const char *)0);
+			/* Light up Candle of Eternal Flame and
+			 * Holy Spear of Light on creation.
+			 */
+			if (artifact_light(otmp) && otmp->oartifact != ART_SUNSWORD)
+				begin_burn(otmp, FALSE);
 	    u.ublesscnt += rn1(100,50);  /* the gods take notice */
 	}
 }

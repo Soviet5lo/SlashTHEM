@@ -1867,6 +1867,11 @@ verbalize("In return for thy service, I grant thee the gift of Immortality!");
 		    dropy(otmp);
 		    at_your_feet("An object");
 		    godvoice(u.ualign.type, "Use my gift wisely!");
+		    /* Light up Candle of Eternal Flame and
+		     * Holy Spear of Light on creation.
+		     */
+		    if (artifact_light(otmp) && otmp->oartifact != ART_SUNSWORD)
+			begin_burn(otmp, FALSE);
 		    u.ugifts++;
 		    u.ublesscnt = rnz(300 + (50 * nartifacts));
 		    exercise(A_WIS, TRUE);
