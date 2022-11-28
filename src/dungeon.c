@@ -6,6 +6,7 @@
 #include "dgn_file.h"
 #include "dlb.h"
 #include "display.h"
+#include <ctype.h>
 
 #ifdef OVL1
 

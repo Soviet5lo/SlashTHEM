@@ -1627,6 +1627,9 @@ E boolean FDECL(parse_monster_color, (char *));
 E int FDECL(add_autopickup_exception, (const char *));
 E void NDECL(free_autopickup_exceptions);
 #endif /* AUTOPICKUP_EXCEPTIONS */
+#if defined(STATUS_COLORS) && defined(TEXTCOLOR)
+E boolean FDECL(parse_status_color_options, (char *));
+#endif
 
 /* ### pager.c ### */
 
@@ -2785,6 +2788,10 @@ E int NDECL(doshout);
 /* ### termcap.c ### */
 E void FDECL(term_start_bgcolor, (int));
 E void NDECL(term_end_bgcolor);
+E void FDECL (term_start_color, (int));
+E void NDECL(term_end_color);
+E void FDECL(term_start_attr, (int));
+E void FDECL(term_end_attr, (int));
 
 #endif /* !MAKEDEFS_C && !LEV_LEX_C */
 
