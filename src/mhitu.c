@@ -1975,7 +1975,7 @@ drain_life:
 			    pline("%s quickly %s some gold from %s your %s!",
 			      Monnam(mtmp), (mtmp->mcan)?"nabs":"gnoshes on", 
 			      (Levitation)?"beneath":"between", makeplural(body_part(FOOT)));
-			if (meatmetal_effects(mtmp, geatme) == 3) return 2;
+			if (meatmetal_effects(mtmp, geatme) == 2) return 2;
 			newsym(u.ux, u.uy);
 			break;
 		    } 
@@ -1983,7 +1983,7 @@ drain_life:
 		    if (geatme =
 		      ochain_has_material(level.objects[u.ux][u.uy], GOLD, 0)){
 			obj_extract_self(geatme);
-			Sprintf(buf, "from %s your %s",
+			Sprintf(buf, " from %s your %s",
 			  (Levitation)?"beneath":"between", makeplural(body_part(FOOT)));
 		    } else if ( geatme = ochain_has_material(invent, GOLD, 0)){
 #ifdef GOLDOBJ
@@ -2002,7 +2002,8 @@ drain_life:
 			    flags.botl = 1;
 			} else
 #endif
-			    obj_extract_self(geatme);
+				if(!evades_destruction(geatme))
+					obj_extract_self(geatme);
 		    }
 		    if (geatme){
 			if (!(mtmp->mcan || geatme->otyp == AMULET_OF_STRANGULATION ||
@@ -2014,7 +2015,7 @@ drain_life:
 			  Monnam(mtmp), (how)?"gobbles":"nabs", 
 			  yname(geatme), buf);
 			if (how) {
-			    if (meatmetal_effects(mtmp, geatme) == 3) return 2;
+			    if (meatmetal_effects(mtmp, geatme) == 2) return 2;
 			} else
 			    mpickobj(mtmp, geatme);
 			break;
