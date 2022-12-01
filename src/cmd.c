@@ -3875,9 +3875,9 @@ int
 movecmd(sym)	/* also sets u.dz, but returns false for <> */
 char sym;
 {
-	register const char *dp;
-	register const char *sdp;
-	if(iflags.num_pad) sdp = ndir; else sdp = sdir;	/* DICE workaround */
+	const char *dp;
+	const char *sdp;
+	if (iflags.num_pad) sdp = ndir; else sdp = sdir;	/* DICE workaround */
 
 	u.dz = 0;
 	dp = index(sdp, sym);
