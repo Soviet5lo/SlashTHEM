@@ -2641,7 +2641,7 @@ register struct obj	*sobj;
 					oldgold = u.ugold;
 					otmp = readobjnam(buf, (struct obj *)0, TRUE);
 					if (u.ugold != oldgold) {
-pline("Don't you date cheat me again! -- Your fault!");
+pline("Don't you dare cheat me again! -- Your fault!");
 						/* Make them pay */
 						u.ugold = oldgold / 2;
 						continue;
