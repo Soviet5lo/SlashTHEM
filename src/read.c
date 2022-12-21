@@ -1513,6 +1513,39 @@ genericptr_t poolcnt;
 }
 
 STATIC_PTR void
+do_puddleflood(x, y, poolcnt)
+int x, y;
+genericptr_t poolcnt;
+{
+	register struct monst *mtmp;
+	register struct trap *ttmp;
+
+	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
+	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM && levl[x][y].typ != CORR))
+		return;
+
+	if ((ttmp = t_at(x, y)) != 0 && !delfloortrap(ttmp))
+		return;
+
+	(*(int *)poolcnt)++;
+
+	if (!((*(int *)poolcnt) && (x == u.ux) && (y == u.uy))) {
+		/* Put a pool at x, y */
+		levl[x][y].typ = PUDDLE;
+		del_engr_at(x, y);
+
+		if ((mtmp = m_at(x, y)) != 0) {
+			(void) minliquid(mtmp);
+		} else {
+			newsym(x,y);
+		}
+	} else if ((x == u.ux) && (y == u.uy)) {
+		(*(int *)poolcnt)--;
+	}
+
+}
+
+STATIC_PTR void
 undo_cloudflood(x, y, roomcnt)
 int x, y;
 genericptr_t roomcnt;
@@ -2133,14 +2166,33 @@ register struct obj	*sobj;
 	case SCR_ICE:
 		known = TRUE;
 		if (confused) {
-			/* remove lava from vicinity of player */
-			int maderoom = 0;
-			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
-					undo_iceflood, (genericptr_t)&maderoom);
-			if (maderoom) {
-				known = TRUE;
-				You("stop feeling cold.");
+			/* Confused? Create an ice vortex */
+			struct monst *mtmp;
+			int chance;
+			mtmp = makemon(&mons[PM_ICE_VORTEX], u.ux, u.uy, NO_MM_FLAGS);
+			pline("Chilling vapors swirl and coalesce into a vortex!");
+			/* Same odds as genie/djinn */
+			chance = rn2(5);
+			if (sobj->blessed) chance = (chance == 4) ? rnd(4) : 0;
+			else if (sobj->cursed) chance = (chance == 0) ? rn2(4) : 4;
+			/* 0,1,2,3,4:  b=80%,5,5,5,5; nc=20%,20,20,20,20; c=5%,5,5,5,80 */
+			switch (chance) {
+			case 0: /* Blessed */
+				(void) tamedog(mtmp, (struct obj *)0);
+				pline("The vortex seems friendly.");
+				break;
+			case 1:
+			case 2:
+			case 3:
+				pline("The vortex wanders about.");
+				mtmp->mpeaceful = TRUE;
+				set_malign(mtmp);
+				break;
+			default: /* Cursed */
+				pline("You have a bad feeling about this...");
+				break;
 			}
+
 		} else {
 			int madepool = 0;
 			int stilldry = -1;
