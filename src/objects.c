@@ -257,7 +257,7 @@ WEAPON("heavy hammer", (char *)0,
  	/* 5lo: +d8 small, +d10 large, two-handed */
 
 WEAPON("mallet", (char *)0,
-	1, 0, 0,  4, 25,500, 4, 4, 0, B,   P_HAMMER, WOOD, HI_WOOD),
+	1, 0, 0,  4, 25,  2, 4, 4, 0, B,   P_HAMMER, WOOD, HI_WOOD),
 	/* +1 small */
 
 /* Quarterstaves */
