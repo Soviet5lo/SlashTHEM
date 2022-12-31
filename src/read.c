@@ -2166,11 +2166,19 @@ register struct obj	*sobj;
 	case SCR_ICE:
 		known = TRUE;
 		if (confused) {
-			/* Confused? Create an ice vortex */
+			/* Confused? Remove ice around the player and create an ice elemental
+			 * if we did remove ice, an ice vortex otherwise */
+			int clearice = 0;
+			do_clear_areaX(u.ux, u.uy, 4+2*bcsign(sobj),
+					undo_iceflood, (genericptr_t)&clearice);
+			/* Now create a monster based on the above */
 			struct monst *mtmp;
 			int chance;
-			mtmp = makemon(&mons[PM_ICE_VORTEX], u.ux, u.uy, NO_MM_FLAGS);
-			pline("Chilling vapors swirl and coalesce into a vortex!");
+			mtmp = makemon(clearice ? &mons[PM_ICE_ELEMENTAL] : &mons[PM_ICE_VORTEX], u.ux, u.uy, NO_MM_FLAGS);
+			if (clearice)
+				pline("Ice from the floor shatters and combine into an elemental!");
+			else
+				pline("Chilling vapors swirl and coalesce into a vortex!");
 			/* Same odds as genie/djinn */
 			chance = rn2(5);
 			if (sobj->blessed) chance = (chance == 4) ? rnd(4) : 0;
@@ -2179,12 +2187,12 @@ register struct obj	*sobj;
 			switch (chance) {
 			case 0: /* Blessed */
 				(void) tamedog(mtmp, (struct obj *)0);
-				pline("The vortex seems friendly.");
+				pline("The %s seems friendly.", clearice ? "elemental" : "vortex");
 				break;
 			case 1:
 			case 2:
-			case 3:
-				pline("The vortex wanders about.");
+			case 3: /* Uncursed */
+				pline("The %s wanders about.", clearice ? "elemental" : "vortex");
 				mtmp->mpeaceful = TRUE;
 				set_malign(mtmp);
 				break;
@@ -2220,7 +2228,6 @@ register struct obj	*sobj;
 			known = TRUE;
 			break;
 		}
-
 	break;
 
 	case SCR_CLOUDS:
