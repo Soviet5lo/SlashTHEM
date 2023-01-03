@@ -2202,11 +2202,16 @@ register struct obj	*sobj;
 			}
 
 		} else {
-			int madepool = 0;
+			int madeice = 0;
+			int madepuddle = 0;
 			int stilldry = -1;
 			int x,y,safe_pos=0;
+			if (sobj->blessed)
+				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_puddleflood,
+						(genericptr_t)&madepuddle);
+			else
 				do_clear_areaX(u.ux, u.uy, 5-2*bcsign(sobj), do_iceflood,
-						(genericptr_t)&madepool);
+						(genericptr_t)&madeice);
 
 			/* check if there are safe tiles around the player */
 			for (x = u.ux-1; x <= u.ux+1; x++) {
@@ -2219,12 +2224,16 @@ register struct obj	*sobj;
 			}
 
 			/* we do not put these on the player's position. */
-			if (!madepool && stilldry)
+			if (!madeice && !madepuddle && stilldry)
 				break;
-			if (madepool)
+			if (madeice)
 				pline(Hallucination ?
 						"Damn, this is giving you the chills!" :
 						"The floor crackles with ice!" );
+			else if (madepuddle)
+				pline(Hallucination ?
+						"The floor turns into an ogre's swamp!" :
+						"Ice forms on the floor and immediately melts!");
 			known = TRUE;
 			break;
 		}
