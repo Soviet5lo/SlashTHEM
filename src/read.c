@@ -1420,6 +1420,7 @@ genericptr_t roomcnt;
 	if ((levl[x][y].typ != POOL) &&
 	    (levl[x][y].typ != MOAT) &&
 	    (levl[x][y].typ != WATER) &&
+	    (levl[x][y].typ != PUDDLE) &&
 	    (levl[x][y].typ != FOUNTAIN))
 		return;
 
