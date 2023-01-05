@@ -275,7 +275,7 @@ WEAPON("partisan", "vulgar polearm",
 	0, 0, 1,  3, 80, 10,  6,  6, 0, P,   P_POLEARMS, IRON, HI_METAL),
 						/* +1 large */
 WEAPON("glaive", "single-edged polearm",
-	0, 0, 1,  4, 75,  6,  6, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
+	0, 0, 1,  3, 75,  6,  6, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
 WEAPON("spetum", "forked polearm",
 	0, 0, 1,  3, 50,  5,  6,  6, 0, P,   P_POLEARMS, IRON, HI_METAL),
 						/* +1 small, +d6 large */
@@ -290,7 +290,7 @@ WEAPON("voulge", "pole cleaver",
 	0, 0, 1,  2,125,  5,  4,  4, 0, S,   P_POLEARMS, IRON, HI_METAL),
 						/* +d4 both */
 WEAPON("halberd", "angled poleaxe",
-	0, 0, 1,  4,150, 10, 10,  6, 0, P|S, P_POLEARMS, IRON, HI_METAL),
+	0, 0, 1,  3,150, 10, 10,  6, 0, P|S, P_POLEARMS, IRON, HI_METAL),
 	/* +1d6 large */
 /* curved/hooked */
 WEAPON("fauchard", "pole sickle",
@@ -302,7 +302,7 @@ WEAPON("bill-guisarme", "hooked polearm",
 	0, 0, 1,  2,120,  7,  4, 10, 0, P|S, P_POLEARMS, IRON, HI_METAL),
 						/* +1d4 small */
 WEAPON("grain scythe", "scythe",
-	0, 0, 1,  1, 60,  5,  8, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
+	0, 0, 1,  3, 60,  5,  8, 10, 0, S,   P_POLEARMS, IRON, HI_METAL),
 /* other */
 WEAPON("lucern hammer", "pronged polearm",
 	0, 0, 1,  3,150,  7,  4,  6, 0, B|P, P_POLEARMS, IRON, HI_METAL),
